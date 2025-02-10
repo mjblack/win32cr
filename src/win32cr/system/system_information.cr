@@ -776,15 +776,21 @@ module Win32cr::System::SystemInformation
   end
 
   def globalMemoryStatusEx(lpBuffer : Win32cr::System::SystemInformation::MEMORYSTATUSEX*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GlobalMemoryStatusEx(lpBuffer)
+    {% end %}
   end
 
   def getSystemInfo(lpSystemInfo : Win32cr::System::SystemInformation::SYSTEM_INFO*) : Void
+    {% if !flag?(:docs) %}
     C.GetSystemInfo(lpSystemInfo)
+    {% end %}
   end
 
   def getSystemTime(lpSystemTime : Win32cr::Foundation::SYSTEMTIME*) : Void
+    {% if !flag?(:docs) %}
     C.GetSystemTime(lpSystemTime)
+    {% end %}
   end
 
   #def getSystemTimeAsFileTime(lpSystemTimeAsFileTime : Win32cr::Foundation::FILETIME*) : Void
@@ -792,67 +798,99 @@ module Win32cr::System::SystemInformation
   #end
 
   def getLocalTime(lpSystemTime : Win32cr::Foundation::SYSTEMTIME*) : Void
+    {% if !flag?(:docs) %}
     C.GetLocalTime(lpSystemTime)
+    {% end %}
   end
 
   def isUserCetAvailableInEnvironment(user_cet_environment : Win32cr::System::SystemInformation::USER_CET_ENVIRONMENT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsUserCetAvailableInEnvironment(user_cet_environment)
+    {% end %}
   end
 
   def getSystemLeapSecondInformation(enabled : Win32cr::Foundation::BOOL*, flags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSystemLeapSecondInformation(enabled, flags)
+    {% end %}
   end
 
   def getVersion : UInt32
+    {% if !flag?(:docs) %}
     C.GetVersion
+    {% end %}
   end
 
   def setLocalTime(lpSystemTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetLocalTime(lpSystemTime)
+    {% end %}
   end
 
   def getTickCount : UInt32
+    {% if !flag?(:docs) %}
     C.GetTickCount
+    {% end %}
   end
 
   def getTickCount64 : UInt64
+    {% if !flag?(:docs) %}
     C.GetTickCount64
+    {% end %}
   end
 
   def getSystemTimeAdjustment(lpTimeAdjustment : UInt32*, lpTimeIncrement : UInt32*, lpTimeAdjustmentDisabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSystemTimeAdjustment(lpTimeAdjustment, lpTimeIncrement, lpTimeAdjustmentDisabled)
+    {% end %}
   end
 
   def getSystemTimeAdjustmentPrecise(lpTimeAdjustment : UInt64*, lpTimeIncrement : UInt64*, lpTimeAdjustmentDisabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSystemTimeAdjustmentPrecise(lpTimeAdjustment, lpTimeIncrement, lpTimeAdjustmentDisabled)
+    {% end %}
   end
 
   def getSystemDirectoryA(lpBuffer : UInt8*, uSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemDirectoryA(lpBuffer, uSize)
+    {% end %}
   end
 
   def getSystemDirectoryW(lpBuffer : UInt16*, uSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemDirectoryW(lpBuffer, uSize)
+    {% end %}
   end
 
   def getWindowsDirectoryA(lpBuffer : UInt8*, uSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetWindowsDirectoryA(lpBuffer, uSize)
+    {% end %}
   end
 
   def getWindowsDirectoryW(lpBuffer : UInt16*, uSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetWindowsDirectoryW(lpBuffer, uSize)
+    {% end %}
   end
 
   def getSystemWindowsDirectoryA(lpBuffer : UInt8*, uSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemWindowsDirectoryA(lpBuffer, uSize)
+    {% end %}
   end
 
   def getSystemWindowsDirectoryW(lpBuffer : UInt16*, uSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemWindowsDirectoryW(lpBuffer, uSize)
+    {% end %}
   end
 
   def getComputerNameExA(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : UInt8*, nSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetComputerNameExA(name_type, lpBuffer, nSize)
+    {% end %}
   end
 
   #def getComputerNameExW(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : UInt16*, nSize : UInt32*) : Win32cr::Foundation::BOOL
@@ -860,27 +898,39 @@ module Win32cr::System::SystemInformation
   #end
 
   def setComputerNameExW(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetComputerNameExW(name_type, lpBuffer)
+    {% end %}
   end
 
   def setSystemTime(lpSystemTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetSystemTime(lpSystemTime)
+    {% end %}
   end
 
   def getVersionExA(lpVersionInformation : Win32cr::System::SystemInformation::OSVERSIONINFOA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetVersionExA(lpVersionInformation)
+    {% end %}
   end
 
   def getVersionExW(lpVersionInformation : Win32cr::System::SystemInformation::OSVERSIONINFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetVersionExW(lpVersionInformation)
+    {% end %}
   end
 
   def getLogicalProcessorInformation(buffer : Win32cr::System::SystemInformation::SYSTEM_LOGICAL_PROCESSOR_INFORMATION*, returned_length : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetLogicalProcessorInformation(buffer, returned_length)
+    {% end %}
   end
 
   def getLogicalProcessorInformationEx(relationship_type : Win32cr::System::SystemInformation::LOGICAL_PROCESSOR_RELATIONSHIP, buffer : Win32cr::System::SystemInformation::SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX*, returned_length : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetLogicalProcessorInformationEx(relationship_type, buffer, returned_length)
+    {% end %}
   end
 
   #def getNativeSystemInfo(lpSystemInfo : Win32cr::System::SystemInformation::SYSTEM_INFO*) : Void
@@ -892,140 +942,207 @@ module Win32cr::System::SystemInformation
   #end
 
   def getProductInfo(dwOSMajorVersion : UInt32, dwOSMinorVersion : UInt32, dwSpMajorVersion : UInt32, dwSpMinorVersion : UInt32, pdwReturnedProductType : Win32cr::System::SystemInformation::OS_PRODUCT_TYPE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetProductInfo(dwOSMajorVersion, dwOSMinorVersion, dwSpMajorVersion, dwSpMinorVersion, pdwReturnedProductType)
+    {% end %}
   end
 
   def verSetConditionMask(condition_mask : UInt64, type_mask : Win32cr::System::SystemInformation::VER_FLAGS, condition : UInt8) : UInt64
+    {% if !flag?(:docs) %}
     C.VerSetConditionMask(condition_mask, type_mask, condition)
+    {% end %}
   end
 
   def getOsSafeBootMode(flags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetOsSafeBootMode(flags)
+    {% end %}
   end
 
   def enumSystemFirmwareTables(firmware_table_provider_signature : Win32cr::System::SystemInformation::FIRMWARE_TABLE_PROVIDER, pFirmwareTableEnumBuffer : Win32cr::System::SystemInformation::FIRMWARE_TABLE_ID*, buffer_size : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.EnumSystemFirmwareTables(firmware_table_provider_signature, pFirmwareTableEnumBuffer, buffer_size)
+    {% end %}
   end
 
   def getSystemFirmwareTable(firmware_table_provider_signature : Win32cr::System::SystemInformation::FIRMWARE_TABLE_PROVIDER, firmware_table_id : Win32cr::System::SystemInformation::FIRMWARE_TABLE_ID, pFirmwareTableBuffer : Void*, buffer_size : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemFirmwareTable(firmware_table_provider_signature, firmware_table_id, pFirmwareTableBuffer, buffer_size)
+    {% end %}
   end
 
   def dnsHostnameToComputerNameExW(hostname : Win32cr::Foundation::PWSTR, computer_name : UInt16*, nSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DnsHostnameToComputerNameExW(hostname, computer_name, nSize)
+    {% end %}
   end
 
   def getPhysicallyInstalledSystemMemory(total_memory_in_kilobytes : UInt64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPhysicallyInstalledSystemMemory(total_memory_in_kilobytes)
+    {% end %}
   end
 
   def setComputerNameEx2W(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, flags : UInt32, lpBuffer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetComputerNameEx2W(name_type, flags, lpBuffer)
+    {% end %}
   end
 
   def setSystemTimeAdjustment(dwTimeAdjustment : UInt32, bTimeAdjustmentDisabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetSystemTimeAdjustment(dwTimeAdjustment, bTimeAdjustmentDisabled)
+    {% end %}
   end
 
   def setSystemTimeAdjustmentPrecise(dwTimeAdjustment : UInt64, bTimeAdjustmentDisabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetSystemTimeAdjustmentPrecise(dwTimeAdjustment, bTimeAdjustmentDisabled)
+    {% end %}
   end
 
   def getProcessorSystemCycleTime(group : UInt16, buffer : Win32cr::System::SystemInformation::SYSTEM_PROCESSOR_CYCLE_TIME_INFORMATION*, returned_length : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetProcessorSystemCycleTime(group, buffer, returned_length)
+    {% end %}
   end
 
   def getOsManufacturingMode(pbEnabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetOsManufacturingMode(pbEnabled)
+    {% end %}
   end
 
   def getIntegratedDisplaySize(sizeInInches : Float64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetIntegratedDisplaySize(sizeInInches)
+    {% end %}
   end
 
   def setComputerNameA(lpComputerName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetComputerNameA(lpComputerName)
+    {% end %}
   end
 
   def setComputerNameW(lpComputerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetComputerNameW(lpComputerName)
+    {% end %}
   end
 
   def setComputerNameExA(name_type : Win32cr::System::SystemInformation::COMPUTER_NAME_FORMAT, lpBuffer : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetComputerNameExA(name_type, lpBuffer)
+    {% end %}
   end
 
   def getSystemCpuSetInformation(information : Win32cr::System::SystemInformation::SYSTEM_CPU_SET_INFORMATION*, buffer_length : UInt32, returned_length : UInt32*, process : Win32cr::Foundation::HANDLE, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSystemCpuSetInformation(information, buffer_length, returned_length, process, flags)
+    {% end %}
   end
 
   def getSystemWow64DirectoryA(lpBuffer : UInt8*, uSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemWow64DirectoryA(lpBuffer, uSize)
+    {% end %}
   end
 
   def getSystemWow64DirectoryW(lpBuffer : UInt16*, uSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemWow64DirectoryW(lpBuffer, uSize)
+    {% end %}
   end
 
   def getSystemWow64Directory2A(lpBuffer : UInt8*, uSize : UInt32, image_file_machine_type : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemWow64Directory2A(lpBuffer, uSize, image_file_machine_type)
+    {% end %}
   end
 
   def getSystemWow64Directory2W(lpBuffer : UInt16*, uSize : UInt32, image_file_machine_type : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemWow64Directory2W(lpBuffer, uSize, image_file_machine_type)
+    {% end %}
   end
 
   def isWow64GuestMachineSupported(wow_guest_machine : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE, machine_is_supported : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.IsWow64GuestMachineSupported(wow_guest_machine, machine_is_supported)
+    {% end %}
   end
 
   def rtlGetProductInfo(os_major_version : UInt32, os_minor_version : UInt32, sp_major_version : UInt32, sp_minor_version : UInt32, returned_product_type : UInt32*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.RtlGetProductInfo(os_major_version, os_minor_version, sp_major_version, sp_minor_version, returned_product_type)
+    {% end %}
   end
 
   def rtlOsDeploymentState(flags : UInt32) : Win32cr::System::SystemInformation::OS_DEPLOYEMENT_STATE_VALUES
+    {% if !flag?(:docs) %}
     C.RtlOsDeploymentState(flags)
+    {% end %}
   end
 
   def rtlGetSystemGlobalData(data_id : Win32cr::System::SystemInformation::RTL_SYSTEM_GLOBAL_DATA_ID, buffer : Void*, size : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlGetSystemGlobalData(data_id, buffer, size)
+    {% end %}
   end
 
   def rtlGetDeviceFamilyInfoEnum(pullUAPInfo : UInt64*, pulDeviceFamily : Win32cr::System::SystemInformation::DEVICEFAMILYINFOENUM*, pulDeviceForm : Win32cr::System::SystemInformation::DEVICEFAMILYDEVICEFORM*) : Void
+    {% if !flag?(:docs) %}
     C.RtlGetDeviceFamilyInfoEnum(pullUAPInfo, pulDeviceFamily, pulDeviceForm)
+    {% end %}
   end
 
   def rtlConvertDeviceFamilyInfoToString(pulDeviceFamilyBufferSize : UInt32*, pulDeviceFormBufferSize : UInt32*, device_family : Win32cr::Foundation::PWSTR, device_form : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlConvertDeviceFamilyInfoToString(pulDeviceFamilyBufferSize, pulDeviceFormBufferSize, device_family, device_form)
+    {% end %}
   end
 
   def rtlSwitchedVVI(version_info : Win32cr::System::SystemInformation::OSVERSIONINFOEXW*, type_mask : UInt32, condition_mask : UInt64) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlSwitchedVVI(version_info, type_mask, condition_mask)
+    {% end %}
   end
 
   def globalMemoryStatus(lpBuffer : Win32cr::System::SystemInformation::MEMORYSTATUS*) : Void
+    {% if !flag?(:docs) %}
     C.GlobalMemoryStatus(lpBuffer)
+    {% end %}
   end
 
   def getSystemDEPPolicy : Win32cr::System::SystemInformation::DEP_SYSTEM_POLICY_TYPE
+    {% if !flag?(:docs) %}
     C.GetSystemDEPPolicy
+    {% end %}
   end
 
   def getFirmwareType(firmware_type : Win32cr::System::SystemInformation::FIRMWARE_TYPE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetFirmwareType(firmware_type)
+    {% end %}
   end
 
   def verifyVersionInfoA(lpVersionInformation : Win32cr::System::SystemInformation::OSVERSIONINFOEXA*, dwTypeMask : Win32cr::System::SystemInformation::VER_FLAGS, dwlConditionMask : UInt64) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.VerifyVersionInfoA(lpVersionInformation, dwTypeMask, dwlConditionMask)
+    {% end %}
   end
 
   def verifyVersionInfoW(lpVersionInformation : Win32cr::System::SystemInformation::OSVERSIONINFOEXW*, dwTypeMask : Win32cr::System::SystemInformation::VER_FLAGS, dwlConditionMask : UInt64) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.VerifyVersionInfoW(lpVersionInformation, dwTypeMask, dwlConditionMask)
+    {% end %}
   end
 
   @[Link("kernel32")]
   @[Link("ntdll")]
   @[Link("ntdllk")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun GlobalMemoryStatusEx(lpBuffer : Win32cr::System::SystemInformation::MEMORYSTATUSEX*) : Win32cr::Foundation::BOOL
@@ -1218,4 +1335,5 @@ module Win32cr::System::SystemInformation
     fun VerifyVersionInfoW(lpVersionInformation : Win32cr::System::SystemInformation::OSVERSIONINFOEXW*, dwTypeMask : Win32cr::System::SystemInformation::VER_FLAGS, dwlConditionMask : UInt64) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

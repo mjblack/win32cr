@@ -383,268 +383,399 @@ module Win32cr::NetworkManagement::WNet
   end
 
   def wNetAddConnectionA(lpRemoteName : Win32cr::Foundation::PSTR, lpPassword : Win32cr::Foundation::PSTR, lpLocalName : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetAddConnectionA(lpRemoteName, lpPassword, lpLocalName)
+    {% end %}
   end
 
   def wNetAddConnectionW(lpRemoteName : Win32cr::Foundation::PWSTR, lpPassword : Win32cr::Foundation::PWSTR, lpLocalName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetAddConnectionW(lpRemoteName, lpPassword, lpLocalName)
+    {% end %}
   end
 
   def wNetAddConnection2A(lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEA*, lpPassword : Win32cr::Foundation::PSTR, lpUserName : Win32cr::Foundation::PSTR, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetAddConnection2A(lpNetResource, lpPassword, lpUserName, dwFlags)
+    {% end %}
   end
 
   def wNetAddConnection2W(lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEW*, lpPassword : Win32cr::Foundation::PWSTR, lpUserName : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetAddConnection2W(lpNetResource, lpPassword, lpUserName, dwFlags)
+    {% end %}
   end
 
   def wNetAddConnection3A(hwndOwner : Win32cr::Foundation::HWND, lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEA*, lpPassword : Win32cr::Foundation::PSTR, lpUserName : Win32cr::Foundation::PSTR, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetAddConnection3A(hwndOwner, lpNetResource, lpPassword, lpUserName, dwFlags)
+    {% end %}
   end
 
   def wNetAddConnection3W(hwndOwner : Win32cr::Foundation::HWND, lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEW*, lpPassword : Win32cr::Foundation::PWSTR, lpUserName : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetAddConnection3W(hwndOwner, lpNetResource, lpPassword, lpUserName, dwFlags)
+    {% end %}
   end
 
   def wNetAddConnection4A(hwndOwner : Win32cr::Foundation::HWND, lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEA*, pAuthBuffer : Void*, cbAuthBuffer : UInt32, dwFlags : UInt32, lpUseOptions : UInt8*, cbUseOptions : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetAddConnection4A(hwndOwner, lpNetResource, pAuthBuffer, cbAuthBuffer, dwFlags, lpUseOptions, cbUseOptions)
+    {% end %}
   end
 
   def wNetAddConnection4W(hwndOwner : Win32cr::Foundation::HWND, lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEW*, pAuthBuffer : Void*, cbAuthBuffer : UInt32, dwFlags : UInt32, lpUseOptions : UInt8*, cbUseOptions : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetAddConnection4W(hwndOwner, lpNetResource, pAuthBuffer, cbAuthBuffer, dwFlags, lpUseOptions, cbUseOptions)
+    {% end %}
   end
 
   def wNetCancelConnectionA(lpName : Win32cr::Foundation::PSTR, fForce : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetCancelConnectionA(lpName, fForce)
+    {% end %}
   end
 
   def wNetCancelConnectionW(lpName : Win32cr::Foundation::PWSTR, fForce : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetCancelConnectionW(lpName, fForce)
+    {% end %}
   end
 
   def wNetCancelConnection2A(lpName : Win32cr::Foundation::PSTR, dwFlags : UInt32, fForce : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetCancelConnection2A(lpName, dwFlags, fForce)
+    {% end %}
   end
 
   def wNetCancelConnection2W(lpName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, fForce : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetCancelConnection2W(lpName, dwFlags, fForce)
+    {% end %}
   end
 
   def wNetGetConnectionA(lpLocalName : Win32cr::Foundation::PSTR, lpRemoteName : UInt8*, lpnLength : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetGetConnectionA(lpLocalName, lpRemoteName, lpnLength)
+    {% end %}
   end
 
   def wNetGetConnectionW(lpLocalName : Win32cr::Foundation::PWSTR, lpRemoteName : UInt16*, lpnLength : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetGetConnectionW(lpLocalName, lpRemoteName, lpnLength)
+    {% end %}
   end
 
   def wNetUseConnectionA(hwndOwner : Win32cr::Foundation::HWND, lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEA*, lpPassword : Win32cr::Foundation::PSTR, lpUserId : Win32cr::Foundation::PSTR, dwFlags : Win32cr::NetworkManagement::WNet::NET_USE_CONNECT_FLAGS, lpAccessName : UInt8*, lpBufferSize : UInt32*, lpResult : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetUseConnectionA(hwndOwner, lpNetResource, lpPassword, lpUserId, dwFlags, lpAccessName, lpBufferSize, lpResult)
+    {% end %}
   end
 
   def wNetUseConnectionW(hwndOwner : Win32cr::Foundation::HWND, lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEW*, lpPassword : Win32cr::Foundation::PWSTR, lpUserId : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::NetworkManagement::WNet::NET_USE_CONNECT_FLAGS, lpAccessName : UInt16*, lpBufferSize : UInt32*, lpResult : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetUseConnectionW(hwndOwner, lpNetResource, lpPassword, lpUserId, dwFlags, lpAccessName, lpBufferSize, lpResult)
+    {% end %}
   end
 
   def wNetUseConnection4A(hwndOwner : Win32cr::Foundation::HWND, lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEA*, pAuthBuffer : Void*, cbAuthBuffer : UInt32, dwFlags : UInt32, lpUseOptions : UInt8*, cbUseOptions : UInt32, lpAccessName : UInt8*, lpBufferSize : UInt32*, lpResult : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetUseConnection4A(hwndOwner, lpNetResource, pAuthBuffer, cbAuthBuffer, dwFlags, lpUseOptions, cbUseOptions, lpAccessName, lpBufferSize, lpResult)
+    {% end %}
   end
 
   def wNetUseConnection4W(hwndOwner : Win32cr::Foundation::HWND, lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEW*, pAuthBuffer : Void*, cbAuthBuffer : UInt32, dwFlags : UInt32, lpUseOptions : UInt8*, cbUseOptions : UInt32, lpAccessName : UInt16*, lpBufferSize : UInt32*, lpResult : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetUseConnection4W(hwndOwner, lpNetResource, pAuthBuffer, cbAuthBuffer, dwFlags, lpUseOptions, cbUseOptions, lpAccessName, lpBufferSize, lpResult)
+    {% end %}
   end
 
   def wNetConnectionDialog(hwnd : Win32cr::Foundation::HWND, dwType : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetConnectionDialog(hwnd, dwType)
+    {% end %}
   end
 
   def wNetDisconnectDialog(hwnd : Win32cr::Foundation::HWND, dwType : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetDisconnectDialog(hwnd, dwType)
+    {% end %}
   end
 
   def wNetConnectionDialog1A(lpConnDlgStruct : Win32cr::NetworkManagement::WNet::CONNECTDLGSTRUCTA*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetConnectionDialog1A(lpConnDlgStruct)
+    {% end %}
   end
 
   def wNetConnectionDialog1W(lpConnDlgStruct : Win32cr::NetworkManagement::WNet::CONNECTDLGSTRUCTW*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetConnectionDialog1W(lpConnDlgStruct)
+    {% end %}
   end
 
   def wNetDisconnectDialog1A(lpConnDlgStruct : Win32cr::NetworkManagement::WNet::DISCDLGSTRUCTA*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetDisconnectDialog1A(lpConnDlgStruct)
+    {% end %}
   end
 
   def wNetDisconnectDialog1W(lpConnDlgStruct : Win32cr::NetworkManagement::WNet::DISCDLGSTRUCTW*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetDisconnectDialog1W(lpConnDlgStruct)
+    {% end %}
   end
 
   def wNetOpenEnumA(dwScope : Win32cr::NetworkManagement::WNet::NET_RESOURCE_SCOPE, dwType : Win32cr::NetworkManagement::WNet::NET_RESOURCE_TYPE, dwUsage : Win32cr::NetworkManagement::WNet::WNET_OPEN_ENUM_USAGE, lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEA*, lphEnum : Win32cr::NetworkManagement::WNet::NetEnumHandle*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetOpenEnumA(dwScope, dwType, dwUsage, lpNetResource, lphEnum)
+    {% end %}
   end
 
   def wNetOpenEnumW(dwScope : Win32cr::NetworkManagement::WNet::NET_RESOURCE_SCOPE, dwType : Win32cr::NetworkManagement::WNet::NET_RESOURCE_TYPE, dwUsage : Win32cr::NetworkManagement::WNet::WNET_OPEN_ENUM_USAGE, lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEW*, lphEnum : Win32cr::NetworkManagement::WNet::NetEnumHandle*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetOpenEnumW(dwScope, dwType, dwUsage, lpNetResource, lphEnum)
+    {% end %}
   end
 
   def wNetEnumResourceA(hEnum : Win32cr::Foundation::HANDLE, lpcCount : UInt32*, lpBuffer : Void*, lpBufferSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetEnumResourceA(hEnum, lpcCount, lpBuffer, lpBufferSize)
+    {% end %}
   end
 
   def wNetEnumResourceW(hEnum : Win32cr::Foundation::HANDLE, lpcCount : UInt32*, lpBuffer : Void*, lpBufferSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetEnumResourceW(hEnum, lpcCount, lpBuffer, lpBufferSize)
+    {% end %}
   end
 
   def wNetCloseEnum(hEnum : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetCloseEnum(hEnum)
+    {% end %}
   end
 
   def wNetGetResourceParentA(lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEA*, lpBuffer : Void*, lpcbBuffer : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetGetResourceParentA(lpNetResource, lpBuffer, lpcbBuffer)
+    {% end %}
   end
 
   def wNetGetResourceParentW(lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEW*, lpBuffer : Void*, lpcbBuffer : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetGetResourceParentW(lpNetResource, lpBuffer, lpcbBuffer)
+    {% end %}
   end
 
   def wNetGetResourceInformationA(lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEA*, lpBuffer : Void*, lpcbBuffer : UInt32*, lplpSystem : Win32cr::Foundation::PSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetGetResourceInformationA(lpNetResource, lpBuffer, lpcbBuffer, lplpSystem)
+    {% end %}
   end
 
   def wNetGetResourceInformationW(lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEW*, lpBuffer : Void*, lpcbBuffer : UInt32*, lplpSystem : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetGetResourceInformationW(lpNetResource, lpBuffer, lpcbBuffer, lplpSystem)
+    {% end %}
   end
 
   def wNetGetUniversalNameA(lpLocalPath : Win32cr::Foundation::PSTR, dwInfoLevel : Win32cr::NetworkManagement::WNet::UNC_INFO_LEVEL, lpBuffer : Void*, lpBufferSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetGetUniversalNameA(lpLocalPath, dwInfoLevel, lpBuffer, lpBufferSize)
+    {% end %}
   end
 
   def wNetGetUniversalNameW(lpLocalPath : Win32cr::Foundation::PWSTR, dwInfoLevel : Win32cr::NetworkManagement::WNet::UNC_INFO_LEVEL, lpBuffer : Void*, lpBufferSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetGetUniversalNameW(lpLocalPath, dwInfoLevel, lpBuffer, lpBufferSize)
+    {% end %}
   end
 
   def wNetGetUserA(lpName : Win32cr::Foundation::PSTR, lpUserName : UInt8*, lpnLength : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetGetUserA(lpName, lpUserName, lpnLength)
+    {% end %}
   end
 
   def wNetGetUserW(lpName : Win32cr::Foundation::PWSTR, lpUserName : UInt16*, lpnLength : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetGetUserW(lpName, lpUserName, lpnLength)
+    {% end %}
   end
 
   def wNetGetProviderNameA(dwNetType : UInt32, lpProviderName : UInt8*, lpBufferSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetGetProviderNameA(dwNetType, lpProviderName, lpBufferSize)
+    {% end %}
   end
 
   def wNetGetProviderNameW(dwNetType : UInt32, lpProviderName : UInt16*, lpBufferSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetGetProviderNameW(dwNetType, lpProviderName, lpBufferSize)
+    {% end %}
   end
 
   def wNetGetNetworkInformationA(lpProvider : Win32cr::Foundation::PSTR, lpNetInfoStruct : Win32cr::NetworkManagement::WNet::NETINFOSTRUCT*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetGetNetworkInformationA(lpProvider, lpNetInfoStruct)
+    {% end %}
   end
 
   def wNetGetNetworkInformationW(lpProvider : Win32cr::Foundation::PWSTR, lpNetInfoStruct : Win32cr::NetworkManagement::WNet::NETINFOSTRUCT*) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetGetNetworkInformationW(lpProvider, lpNetInfoStruct)
+    {% end %}
   end
 
   def wNetGetLastErrorA(lpError : UInt32*, lpErrorBuf : UInt8*, nErrorBufSize : UInt32, lpNameBuf : UInt8*, nNameBufSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetGetLastErrorA(lpError, lpErrorBuf, nErrorBufSize, lpNameBuf, nNameBufSize)
+    {% end %}
   end
 
   def wNetGetLastErrorW(lpError : UInt32*, lpErrorBuf : UInt16*, nErrorBufSize : UInt32, lpNameBuf : UInt16*, nNameBufSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WNetGetLastErrorW(lpError, lpErrorBuf, nErrorBufSize, lpNameBuf, nNameBufSize)
+    {% end %}
   end
 
   def multinetGetConnectionPerformanceA(lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEA*, lpNetConnectInfoStruct : Win32cr::NetworkManagement::WNet::NETCONNECTINFOSTRUCT*) : UInt32
+    {% if !flag?(:docs) %}
     C.MultinetGetConnectionPerformanceA(lpNetResource, lpNetConnectInfoStruct)
+    {% end %}
   end
 
   def multinetGetConnectionPerformanceW(lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEW*, lpNetConnectInfoStruct : Win32cr::NetworkManagement::WNet::NETCONNECTINFOSTRUCT*) : UInt32
+    {% if !flag?(:docs) %}
     C.MultinetGetConnectionPerformanceW(lpNetResource, lpNetConnectInfoStruct)
+    {% end %}
   end
 
   def nPAddConnection(lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEW*, lpPassword : Win32cr::Foundation::PWSTR, lpUserName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NPAddConnection(lpNetResource, lpPassword, lpUserName)
+    {% end %}
   end
 
   def nPAddConnection3(hwndOwner : Win32cr::Foundation::HWND, lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEW*, lpPassword : Win32cr::Foundation::PWSTR, lpUserName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::NetworkManagement::WNet::NET_USE_CONNECT_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.NPAddConnection3(hwndOwner, lpNetResource, lpPassword, lpUserName, dwFlags)
+    {% end %}
   end
 
   def nPAddConnection4(hwndOwner : Win32cr::Foundation::HWND, lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEW*, lpAuthBuffer : Void*, cbAuthBuffer : UInt32, dwFlags : UInt32, lpUseOptions : UInt8*, cbUseOptions : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NPAddConnection4(hwndOwner, lpNetResource, lpAuthBuffer, cbAuthBuffer, dwFlags, lpUseOptions, cbUseOptions)
+    {% end %}
   end
 
   def nPCancelConnection(lpName : Win32cr::Foundation::PWSTR, fForce : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.NPCancelConnection(lpName, fForce)
+    {% end %}
   end
 
   def nPCancelConnection2(lpName : Win32cr::Foundation::PWSTR, fForce : Win32cr::Foundation::BOOL, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NPCancelConnection2(lpName, fForce, dwFlags)
+    {% end %}
   end
 
   def nPGetConnection(lpLocalName : Win32cr::Foundation::PWSTR, lpRemoteName : UInt16*, lpnBufferLen : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NPGetConnection(lpLocalName, lpRemoteName, lpnBufferLen)
+    {% end %}
   end
 
   def nPGetConnection3(lpLocalName : Win32cr::Foundation::PWSTR, dwLevel : UInt32, lpBuffer : Void*, lpBufferSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NPGetConnection3(lpLocalName, dwLevel, lpBuffer, lpBufferSize)
+    {% end %}
   end
 
   def nPGetUniversalName(lpLocalPath : Win32cr::Foundation::PWSTR, dwInfoLevel : Win32cr::NetworkManagement::WNet::UNC_INFO_LEVEL, lpBuffer : Void*, lpBufferSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NPGetUniversalName(lpLocalPath, dwInfoLevel, lpBuffer, lpBufferSize)
+    {% end %}
   end
 
   def nPGetConnectionPerformance(lpRemoteName : Win32cr::Foundation::PWSTR, lpNetConnectInfo : Win32cr::NetworkManagement::WNet::NETCONNECTINFOSTRUCT*) : UInt32
+    {% if !flag?(:docs) %}
     C.NPGetConnectionPerformance(lpRemoteName, lpNetConnectInfo)
+    {% end %}
   end
 
   def nPOpenEnum(dwScope : UInt32, dwType : UInt32, dwUsage : UInt32, lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEW*, lphEnum : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.NPOpenEnum(dwScope, dwType, dwUsage, lpNetResource, lphEnum)
+    {% end %}
   end
 
   def nPEnumResource(hEnum : Win32cr::Foundation::HANDLE, lpcCount : UInt32*, lpBuffer : Void*, lpBufferSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NPEnumResource(hEnum, lpcCount, lpBuffer, lpBufferSize)
+    {% end %}
   end
 
   def nPCloseEnum(hEnum : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.NPCloseEnum(hEnum)
+    {% end %}
   end
 
   def nPGetCaps(ndex : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NPGetCaps(ndex)
+    {% end %}
   end
 
   def nPGetUser(lpName : Win32cr::Foundation::PWSTR, lpUserName : UInt16*, lpnBufferLen : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NPGetUser(lpName, lpUserName, lpnBufferLen)
+    {% end %}
   end
 
   def nPGetPersistentUseOptionsForConnection(lpRemotePath : Win32cr::Foundation::PWSTR, lpReadUseOptions : UInt8*, cbReadUseOptions : UInt32, lpWriteUseOptions : UInt8*, lpSizeWriteUseOptions : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NPGetPersistentUseOptionsForConnection(lpRemotePath, lpReadUseOptions, cbReadUseOptions, lpWriteUseOptions, lpSizeWriteUseOptions)
+    {% end %}
   end
 
   def nPGetResourceParent(lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEW*, lpBuffer : Void*, lpBufferSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NPGetResourceParent(lpNetResource, lpBuffer, lpBufferSize)
+    {% end %}
   end
 
   def nPGetResourceInformation(lpNetResource : Win32cr::NetworkManagement::WNet::NETRESOURCEW*, lpBuffer : Void*, lpBufferSize : UInt32*, lplpSystem : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.NPGetResourceInformation(lpNetResource, lpBuffer, lpBufferSize, lplpSystem)
+    {% end %}
   end
 
   def nPFormatNetworkName(lpRemoteName : Win32cr::Foundation::PWSTR, lpFormattedName : UInt16*, lpnLength : UInt32*, dwFlags : Win32cr::NetworkManagement::WNet::NETWORK_NAME_FORMAT_FLAGS, dwAveCharPerLine : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NPFormatNetworkName(lpRemoteName, lpFormattedName, lpnLength, dwFlags, dwAveCharPerLine)
+    {% end %}
   end
 
   def wNetSetLastErrorA(err : UInt32, lpError : Win32cr::Foundation::PSTR, lpProviders : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.WNetSetLastErrorA(err, lpError, lpProviders)
+    {% end %}
   end
 
   def wNetSetLastErrorW(err : UInt32, lpError : Win32cr::Foundation::PWSTR, lpProviders : Win32cr::Foundation::PWSTR) : Void
+    {% if !flag?(:docs) %}
     C.WNetSetLastErrorW(err, lpError, lpProviders)
+    {% end %}
   end
 
   @[Link("mpr")]
   @[Link("davclnt")]
   @[Link("ntlanman")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WNetAddConnectionA(lpRemoteName : Win32cr::Foundation::PSTR, lpPassword : Win32cr::Foundation::PSTR, lpLocalName : Win32cr::Foundation::PSTR) : UInt32
@@ -842,4 +973,5 @@ module Win32cr::NetworkManagement::WNet
     fun WNetSetLastErrorW(err : UInt32, lpError : Win32cr::Foundation::PWSTR, lpProviders : Win32cr::Foundation::PWSTR) : Void
 
   end
+  {% end %}
 end

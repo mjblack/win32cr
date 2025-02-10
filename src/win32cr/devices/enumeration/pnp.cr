@@ -105,7 +105,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPDeviceFinderVtbl,
+  record IUPnPDeviceFinderVtable,
     query_interface : Proc(IUPnPDeviceFinder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPDeviceFinder*, UInt32),
     release : Proc(IUPnPDeviceFinder*, UInt32),
@@ -121,7 +121,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPDeviceFinder, lpVtbl : IUPnPDeviceFinderVtbl* do
+  record IUPnPDeviceFinder, lpVtbl : IUPnPDeviceFinderVtable* do
     GUID = LibC::GUID.new(0xadda3d55_u32, 0x6f72_u16, 0x4319_u16, StaticArray[0xbf_u8, 0xf9_u8, 0x18_u8, 0x60_u8, 0xa_u8, 0x53_u8, 0x9b_u8, 0x10_u8])
     def query_interface(this : IUPnPDeviceFinder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -163,7 +163,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPAddressFamilyControlVtbl,
+  record IUPnPAddressFamilyControlVtable,
     query_interface : Proc(IUPnPAddressFamilyControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPAddressFamilyControl*, UInt32),
     release : Proc(IUPnPAddressFamilyControl*, UInt32),
@@ -172,7 +172,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPAddressFamilyControl, lpVtbl : IUPnPAddressFamilyControlVtbl* do
+  record IUPnPAddressFamilyControl, lpVtbl : IUPnPAddressFamilyControlVtable* do
     GUID = LibC::GUID.new(0xe3bf6178_u32, 0x694e_u16, 0x459f_u16, StaticArray[0xa5_u8, 0xa6_u8, 0x19_u8, 0x1e_u8, 0xa0_u8, 0xff_u8, 0xa1_u8, 0xc7_u8])
     def query_interface(this : IUPnPAddressFamilyControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -193,7 +193,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPHttpHeaderControlVtbl,
+  record IUPnPHttpHeaderControlVtable,
     query_interface : Proc(IUPnPHttpHeaderControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPHttpHeaderControl*, UInt32),
     release : Proc(IUPnPHttpHeaderControl*, UInt32),
@@ -201,7 +201,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPHttpHeaderControl, lpVtbl : IUPnPHttpHeaderControlVtbl* do
+  record IUPnPHttpHeaderControl, lpVtbl : IUPnPHttpHeaderControlVtable* do
     GUID = LibC::GUID.new(0x405af4f_u32, 0x8b5c_u16, 0x447c_u16, StaticArray[0x80_u8, 0xf2_u8, 0xb7_u8, 0x59_u8, 0x84_u8, 0xa3_u8, 0x1f_u8, 0x3c_u8])
     def query_interface(this : IUPnPHttpHeaderControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -219,7 +219,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPDeviceFinderCallbackVtbl,
+  record IUPnPDeviceFinderCallbackVtable,
     query_interface : Proc(IUPnPDeviceFinderCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPDeviceFinderCallback*, UInt32),
     release : Proc(IUPnPDeviceFinderCallback*, UInt32),
@@ -229,7 +229,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPDeviceFinderCallback, lpVtbl : IUPnPDeviceFinderCallbackVtbl* do
+  record IUPnPDeviceFinderCallback, lpVtbl : IUPnPDeviceFinderCallbackVtable* do
     GUID = LibC::GUID.new(0x415a984a_u32, 0x88b3_u16, 0x49f3_u16, StaticArray[0x92_u8, 0xaf_u8, 0x5_u8, 0x8_u8, 0xbe_u8, 0xdf_u8, 0xd_u8, 0x6c_u8])
     def query_interface(this : IUPnPDeviceFinderCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -253,7 +253,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPServicesVtbl,
+  record IUPnPServicesVtable,
     query_interface : Proc(IUPnPServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPServices*, UInt32),
     release : Proc(IUPnPServices*, UInt32),
@@ -267,7 +267,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPServices, lpVtbl : IUPnPServicesVtbl* do
+  record IUPnPServices, lpVtbl : IUPnPServicesVtable* do
     GUID = LibC::GUID.new(0x3f8c8e9e_u32, 0x9a7a_u16, 0x4dc8_u16, StaticArray[0xbc_u8, 0x41_u8, 0xff_u8, 0x31_u8, 0xfa_u8, 0x37_u8, 0x49_u8, 0x56_u8])
     def query_interface(this : IUPnPServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -303,7 +303,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPServiceVtbl,
+  record IUPnPServiceVtable,
     query_interface : Proc(IUPnPService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPService*, UInt32),
     release : Proc(IUPnPService*, UInt32),
@@ -320,7 +320,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPService, lpVtbl : IUPnPServiceVtbl* do
+  record IUPnPService, lpVtbl : IUPnPServiceVtable* do
     GUID = LibC::GUID.new(0xa295019c_u32, 0xdc65_u16, 0x47dd_u16, StaticArray[0x90_u8, 0xdc_u8, 0x7f_u8, 0xe9_u8, 0x18_u8, 0xa1_u8, 0xab_u8, 0x44_u8])
     def query_interface(this : IUPnPService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -365,7 +365,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPAsyncResultVtbl,
+  record IUPnPAsyncResultVtable,
     query_interface : Proc(IUPnPAsyncResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPAsyncResult*, UInt32),
     release : Proc(IUPnPAsyncResult*, UInt32),
@@ -373,7 +373,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPAsyncResult, lpVtbl : IUPnPAsyncResultVtbl* do
+  record IUPnPAsyncResult, lpVtbl : IUPnPAsyncResultVtable* do
     GUID = LibC::GUID.new(0x4d65fd08_u32, 0xd13e_u16, 0x4274_u16, StaticArray[0x9c_u8, 0x8b_u8, 0xdd_u8, 0x8d_u8, 0x2_u8, 0x8c_u8, 0x86_u8, 0x44_u8])
     def query_interface(this : IUPnPAsyncResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -391,7 +391,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPServiceAsyncVtbl,
+  record IUPnPServiceAsyncVtable,
     query_interface : Proc(IUPnPServiceAsync*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPServiceAsync*, UInt32),
     release : Proc(IUPnPServiceAsync*, UInt32),
@@ -407,7 +407,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPServiceAsync, lpVtbl : IUPnPServiceAsyncVtbl* do
+  record IUPnPServiceAsync, lpVtbl : IUPnPServiceAsyncVtable* do
     GUID = LibC::GUID.new(0x98bdaf5_u32, 0x5ec1_u16, 0x49e7_u16, StaticArray[0xa2_u8, 0x60_u8, 0xb3_u8, 0xa1_u8, 0x1d_u8, 0xd8_u8, 0x68_u8, 0xc_u8])
     def query_interface(this : IUPnPServiceAsync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -449,7 +449,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPServiceCallbackVtbl,
+  record IUPnPServiceCallbackVtable,
     query_interface : Proc(IUPnPServiceCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPServiceCallback*, UInt32),
     release : Proc(IUPnPServiceCallback*, UInt32),
@@ -458,7 +458,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPServiceCallback, lpVtbl : IUPnPServiceCallbackVtbl* do
+  record IUPnPServiceCallback, lpVtbl : IUPnPServiceCallbackVtable* do
     GUID = LibC::GUID.new(0x31fadca9_u32, 0xab73_u16, 0x464b_u16, StaticArray[0xb6_u8, 0x7d_u8, 0x5c_u8, 0x1d_u8, 0xf_u8, 0x83_u8, 0xc8_u8, 0xb8_u8])
     def query_interface(this : IUPnPServiceCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -479,7 +479,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPServiceEnumPropertyVtbl,
+  record IUPnPServiceEnumPropertyVtable,
     query_interface : Proc(IUPnPServiceEnumProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPServiceEnumProperty*, UInt32),
     release : Proc(IUPnPServiceEnumProperty*, UInt32),
@@ -487,7 +487,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPServiceEnumProperty, lpVtbl : IUPnPServiceEnumPropertyVtbl* do
+  record IUPnPServiceEnumProperty, lpVtbl : IUPnPServiceEnumPropertyVtable* do
     GUID = LibC::GUID.new(0x38873b37_u32, 0x91bb_u16, 0x49f4_u16, StaticArray[0xb2_u8, 0x49_u8, 0x2e_u8, 0x8e_u8, 0xfb_u8, 0xb8_u8, 0xa8_u8, 0x16_u8])
     def query_interface(this : IUPnPServiceEnumProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -505,7 +505,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPServiceDocumentAccessVtbl,
+  record IUPnPServiceDocumentAccessVtable,
     query_interface : Proc(IUPnPServiceDocumentAccess*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPServiceDocumentAccess*, UInt32),
     release : Proc(IUPnPServiceDocumentAccess*, UInt32),
@@ -514,7 +514,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPServiceDocumentAccess, lpVtbl : IUPnPServiceDocumentAccessVtbl* do
+  record IUPnPServiceDocumentAccess, lpVtbl : IUPnPServiceDocumentAccessVtable* do
     GUID = LibC::GUID.new(0x21905529_u32, 0xa5e_u16, 0x4589_u16, StaticArray[0x82_u8, 0x5d_u8, 0x7e_u8, 0x6d_u8, 0x87_u8, 0xea_u8, 0x69_u8, 0x98_u8])
     def query_interface(this : IUPnPServiceDocumentAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -535,7 +535,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPDevicesVtbl,
+  record IUPnPDevicesVtable,
     query_interface : Proc(IUPnPDevices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPDevices*, UInt32),
     release : Proc(IUPnPDevices*, UInt32),
@@ -549,7 +549,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPDevices, lpVtbl : IUPnPDevicesVtbl* do
+  record IUPnPDevices, lpVtbl : IUPnPDevicesVtable* do
     GUID = LibC::GUID.new(0xfdbc0c73_u32, 0xbda3_u16, 0x4c66_u16, StaticArray[0xac_u8, 0x4f_u8, 0xf2_u8, 0xd9_u8, 0x6f_u8, 0xda_u8, 0xd6_u8, 0x8c_u8])
     def query_interface(this : IUPnPDevices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -585,7 +585,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPDeviceVtbl,
+  record IUPnPDeviceVtable,
     query_interface : Proc(IUPnPDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPDevice*, UInt32),
     release : Proc(IUPnPDevice*, UInt32),
@@ -615,7 +615,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPDevice, lpVtbl : IUPnPDeviceVtbl* do
+  record IUPnPDevice, lpVtbl : IUPnPDeviceVtable* do
     GUID = LibC::GUID.new(0x3d44d0d1_u32, 0x98c9_u16, 0x4889_u16, StaticArray[0xac_u8, 0xd1_u8, 0xf9_u8, 0xd6_u8, 0x74_u8, 0xbf_u8, 0x22_u8, 0x21_u8])
     def query_interface(this : IUPnPDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -699,7 +699,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPDeviceDocumentAccessVtbl,
+  record IUPnPDeviceDocumentAccessVtable,
     query_interface : Proc(IUPnPDeviceDocumentAccess*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPDeviceDocumentAccess*, UInt32),
     release : Proc(IUPnPDeviceDocumentAccess*, UInt32),
@@ -707,7 +707,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPDeviceDocumentAccess, lpVtbl : IUPnPDeviceDocumentAccessVtbl* do
+  record IUPnPDeviceDocumentAccess, lpVtbl : IUPnPDeviceDocumentAccessVtable* do
     GUID = LibC::GUID.new(0xe7772804_u32, 0x3287_u16, 0x418e_u16, StaticArray[0x90_u8, 0x72_u8, 0xcf_u8, 0x2b_u8, 0x47_u8, 0x23_u8, 0x89_u8, 0x81_u8])
     def query_interface(this : IUPnPDeviceDocumentAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -725,7 +725,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPDeviceDocumentAccessExVtbl,
+  record IUPnPDeviceDocumentAccessExVtable,
     query_interface : Proc(IUPnPDeviceDocumentAccessEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPDeviceDocumentAccessEx*, UInt32),
     release : Proc(IUPnPDeviceDocumentAccessEx*, UInt32),
@@ -733,7 +733,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPDeviceDocumentAccessEx, lpVtbl : IUPnPDeviceDocumentAccessExVtbl* do
+  record IUPnPDeviceDocumentAccessEx, lpVtbl : IUPnPDeviceDocumentAccessExVtable* do
     GUID = LibC::GUID.new(0xc4bc4050_u32, 0x6178_u16, 0x4bd1_u16, StaticArray[0xa4_u8, 0xb8_u8, 0x63_u8, 0x98_u8, 0x32_u8, 0x1f_u8, 0x32_u8, 0x47_u8])
     def query_interface(this : IUPnPDeviceDocumentAccessEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -751,7 +751,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPDescriptionDocumentVtbl,
+  record IUPnPDescriptionDocumentVtable,
     query_interface : Proc(IUPnPDescriptionDocument*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPDescriptionDocument*, UInt32),
     release : Proc(IUPnPDescriptionDocument*, UInt32),
@@ -769,7 +769,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPDescriptionDocument, lpVtbl : IUPnPDescriptionDocumentVtbl* do
+  record IUPnPDescriptionDocument, lpVtbl : IUPnPDescriptionDocumentVtable* do
     GUID = LibC::GUID.new(0x11d1c1b2_u32, 0x7daa_u16, 0x4c9e_u16, StaticArray[0x95_u8, 0x95_u8, 0x7f_u8, 0x82_u8, 0xed_u8, 0x20_u8, 0x6d_u8, 0x1e_u8])
     def query_interface(this : IUPnPDescriptionDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -817,7 +817,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPDeviceFinderAddCallbackWithInterfaceVtbl,
+  record IUPnPDeviceFinderAddCallbackWithInterfaceVtable,
     query_interface : Proc(IUPnPDeviceFinderAddCallbackWithInterface*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPDeviceFinderAddCallbackWithInterface*, UInt32),
     release : Proc(IUPnPDeviceFinderAddCallbackWithInterface*, UInt32),
@@ -825,7 +825,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPDeviceFinderAddCallbackWithInterface, lpVtbl : IUPnPDeviceFinderAddCallbackWithInterfaceVtbl* do
+  record IUPnPDeviceFinderAddCallbackWithInterface, lpVtbl : IUPnPDeviceFinderAddCallbackWithInterfaceVtable* do
     GUID = LibC::GUID.new(0x983dfc0b_u32, 0x1796_u16, 0x44df_u16, StaticArray[0x89_u8, 0x75_u8, 0xca_u8, 0x54_u8, 0x5b_u8, 0x62_u8, 0xe_u8, 0xe5_u8])
     def query_interface(this : IUPnPDeviceFinderAddCallbackWithInterface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -843,7 +843,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPDescriptionDocumentCallbackVtbl,
+  record IUPnPDescriptionDocumentCallbackVtable,
     query_interface : Proc(IUPnPDescriptionDocumentCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPDescriptionDocumentCallback*, UInt32),
     release : Proc(IUPnPDescriptionDocumentCallback*, UInt32),
@@ -851,7 +851,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPDescriptionDocumentCallback, lpVtbl : IUPnPDescriptionDocumentCallbackVtbl* do
+  record IUPnPDescriptionDocumentCallback, lpVtbl : IUPnPDescriptionDocumentCallbackVtable* do
     GUID = LibC::GUID.new(0x77394c69_u32, 0x5486_u16, 0x40d6_u16, StaticArray[0x9b_u8, 0xc3_u8, 0x49_u8, 0x91_u8, 0x98_u8, 0x3e_u8, 0x2_u8, 0xda_u8])
     def query_interface(this : IUPnPDescriptionDocumentCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -869,7 +869,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPEventSinkVtbl,
+  record IUPnPEventSinkVtable,
     query_interface : Proc(IUPnPEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPEventSink*, UInt32),
     release : Proc(IUPnPEventSink*, UInt32),
@@ -878,7 +878,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPEventSink, lpVtbl : IUPnPEventSinkVtbl* do
+  record IUPnPEventSink, lpVtbl : IUPnPEventSinkVtable* do
     GUID = LibC::GUID.new(0x204810b4_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
     def query_interface(this : IUPnPEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -899,7 +899,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPEventSourceVtbl,
+  record IUPnPEventSourceVtable,
     query_interface : Proc(IUPnPEventSource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPEventSource*, UInt32),
     release : Proc(IUPnPEventSource*, UInt32),
@@ -908,7 +908,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPEventSource, lpVtbl : IUPnPEventSourceVtbl* do
+  record IUPnPEventSource, lpVtbl : IUPnPEventSourceVtable* do
     GUID = LibC::GUID.new(0x204810b5_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
     def query_interface(this : IUPnPEventSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -929,7 +929,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPRegistrarVtbl,
+  record IUPnPRegistrarVtable,
     query_interface : Proc(IUPnPRegistrar*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPRegistrar*, UInt32),
     release : Proc(IUPnPRegistrar*, UInt32),
@@ -942,7 +942,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPRegistrar, lpVtbl : IUPnPRegistrarVtbl* do
+  record IUPnPRegistrar, lpVtbl : IUPnPRegistrarVtable* do
     GUID = LibC::GUID.new(0x204810b6_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
     def query_interface(this : IUPnPRegistrar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -975,7 +975,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPReregistrarVtbl,
+  record IUPnPReregistrarVtable,
     query_interface : Proc(IUPnPReregistrar*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPReregistrar*, UInt32),
     release : Proc(IUPnPReregistrar*, UInt32),
@@ -984,7 +984,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPReregistrar, lpVtbl : IUPnPReregistrarVtbl* do
+  record IUPnPReregistrar, lpVtbl : IUPnPReregistrarVtable* do
     GUID = LibC::GUID.new(0x204810b7_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
     def query_interface(this : IUPnPReregistrar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1005,7 +1005,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPDeviceControlVtbl,
+  record IUPnPDeviceControlVtable,
     query_interface : Proc(IUPnPDeviceControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPDeviceControl*, UInt32),
     release : Proc(IUPnPDeviceControl*, UInt32),
@@ -1014,7 +1014,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPDeviceControl, lpVtbl : IUPnPDeviceControlVtbl* do
+  record IUPnPDeviceControl, lpVtbl : IUPnPDeviceControlVtable* do
     GUID = LibC::GUID.new(0x204810ba_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
     def query_interface(this : IUPnPDeviceControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1035,7 +1035,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPDeviceControlHttpHeadersVtbl,
+  record IUPnPDeviceControlHttpHeadersVtable,
     query_interface : Proc(IUPnPDeviceControlHttpHeaders*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPDeviceControlHttpHeaders*, UInt32),
     release : Proc(IUPnPDeviceControlHttpHeaders*, UInt32),
@@ -1043,7 +1043,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPDeviceControlHttpHeaders, lpVtbl : IUPnPDeviceControlHttpHeadersVtbl* do
+  record IUPnPDeviceControlHttpHeaders, lpVtbl : IUPnPDeviceControlHttpHeadersVtable* do
     GUID = LibC::GUID.new(0x204810bb_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
     def query_interface(this : IUPnPDeviceControlHttpHeaders*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1061,7 +1061,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPDeviceProviderVtbl,
+  record IUPnPDeviceProviderVtable,
     query_interface : Proc(IUPnPDeviceProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPDeviceProvider*, UInt32),
     release : Proc(IUPnPDeviceProvider*, UInt32),
@@ -1070,7 +1070,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPDeviceProvider, lpVtbl : IUPnPDeviceProviderVtbl* do
+  record IUPnPDeviceProvider, lpVtbl : IUPnPDeviceProviderVtable* do
     GUID = LibC::GUID.new(0x204810b8_u32, 0x73b2_u16, 0x11d4_u16, StaticArray[0xbf_u8, 0x42_u8, 0x0_u8, 0xb0_u8, 0xd0_u8, 0x11_u8, 0x8b_u8, 0x56_u8])
     def query_interface(this : IUPnPDeviceProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1091,7 +1091,7 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   @[Extern]
-  record IUPnPRemoteEndpointInfoVtbl,
+  record IUPnPRemoteEndpointInfoVtable,
     query_interface : Proc(IUPnPRemoteEndpointInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUPnPRemoteEndpointInfo*, UInt32),
     release : Proc(IUPnPRemoteEndpointInfo*, UInt32),
@@ -1101,7 +1101,7 @@ module Win32cr::Devices::Enumeration::Pnp
 
 
   @[Extern]
-  record IUPnPRemoteEndpointInfo, lpVtbl : IUPnPRemoteEndpointInfoVtbl* do
+  record IUPnPRemoteEndpointInfo, lpVtbl : IUPnPRemoteEndpointInfoVtable* do
     GUID = LibC::GUID.new(0xc92eb863_u32, 0x269_u16, 0x4aff_u16, StaticArray[0x9c_u8, 0x72_u8, 0x75_u8, 0x32_u8, 0x1b_u8, 0xba_u8, 0x29_u8, 0x52_u8])
     def query_interface(this : IUPnPRemoteEndpointInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1125,42 +1125,61 @@ module Win32cr::Devices::Enumeration::Pnp
   end
 
   def swDeviceCreate(pszEnumeratorName : Win32cr::Foundation::PWSTR, pszParentDeviceInstance : Win32cr::Foundation::PWSTR, pCreateInfo : Win32cr::Devices::Enumeration::Pnp::SW_DEVICE_CREATE_INFO*, cPropertyCount : UInt32, pProperties : Win32cr::Devices::Properties::DEVPROPERTY*, pCallback : Win32cr::Devices::Enumeration::Pnp::SW_DEVICE_CREATE_CALLBACK, pContext : Void*, phSwDevice : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SwDeviceCreate(pszEnumeratorName, pszParentDeviceInstance, pCreateInfo, cPropertyCount, pProperties, pCallback, pContext, phSwDevice)
+    {% end %}
   end
 
   def swDeviceClose(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE) : Void
+    {% if !flag?(:docs) %}
     C.SwDeviceClose(hSwDevice)
+    {% end %}
   end
 
   def swDeviceSetLifetime(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, lifetime : Win32cr::Devices::Enumeration::Pnp::SW_DEVICE_LIFETIME) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SwDeviceSetLifetime(hSwDevice, lifetime)
+    {% end %}
   end
 
   def swDeviceGetLifetime(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, pLifetime : Win32cr::Devices::Enumeration::Pnp::SW_DEVICE_LIFETIME*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SwDeviceGetLifetime(hSwDevice, pLifetime)
+    {% end %}
   end
 
   def swDevicePropertySet(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, cPropertyCount : UInt32, pProperties : Win32cr::Devices::Properties::DEVPROPERTY*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SwDevicePropertySet(hSwDevice, cPropertyCount, pProperties)
+    {% end %}
   end
 
   def swDeviceInterfaceRegister(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, pInterfaceClassGuid : LibC::GUID*, pszReferenceString : Win32cr::Foundation::PWSTR, cPropertyCount : UInt32, pProperties : Win32cr::Devices::Properties::DEVPROPERTY*, fEnabled : Win32cr::Foundation::BOOL, ppszDeviceInterfaceId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SwDeviceInterfaceRegister(hSwDevice, pInterfaceClassGuid, pszReferenceString, cPropertyCount, pProperties, fEnabled, ppszDeviceInterfaceId)
+    {% end %}
   end
 
   def swMemFree(pMem : Void*) : Void
+    {% if !flag?(:docs) %}
     C.SwMemFree(pMem)
+    {% end %}
   end
 
   def swDeviceInterfaceSetState(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, pszDeviceInterfaceId : Win32cr::Foundation::PWSTR, fEnabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SwDeviceInterfaceSetState(hSwDevice, pszDeviceInterfaceId, fEnabled)
+    {% end %}
   end
 
   def swDeviceInterfacePropertySet(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, pszDeviceInterfaceId : Win32cr::Foundation::PWSTR, cPropertyCount : UInt32, pProperties : Win32cr::Devices::Properties::DEVPROPERTY*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SwDeviceInterfacePropertySet(hSwDevice, pszDeviceInterfaceId, cPropertyCount, pProperties)
+    {% end %}
   end
 
   @[Link("cfgmgr32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun SwDeviceCreate(pszEnumeratorName : Win32cr::Foundation::PWSTR, pszParentDeviceInstance : Win32cr::Foundation::PWSTR, pCreateInfo : Win32cr::Devices::Enumeration::Pnp::SW_DEVICE_CREATE_INFO*, cPropertyCount : UInt32, pProperties : Win32cr::Devices::Properties::DEVPROPERTY*, pCallback : Win32cr::Devices::Enumeration::Pnp::SW_DEVICE_CREATE_CALLBACK, pContext : Void*, phSwDevice : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
@@ -1190,4 +1209,5 @@ module Win32cr::Devices::Enumeration::Pnp
     fun SwDeviceInterfacePropertySet(hSwDevice : Win32cr::Devices::Enumeration::Pnp::HSWDEVICE, pszDeviceInterfaceId : Win32cr::Foundation::PWSTR, cPropertyCount : UInt32, pProperties : Win32cr::Devices::Properties::DEVPROPERTY*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

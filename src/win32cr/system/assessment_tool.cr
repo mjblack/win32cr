@@ -47,7 +47,7 @@ module Win32cr::System::AssessmentTool
   end
 
   @[Extern]
-  record IProvideWinSATAssessmentInfoVtbl,
+  record IProvideWinSATAssessmentInfoVtable,
     query_interface : Proc(IProvideWinSATAssessmentInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProvideWinSATAssessmentInfo*, UInt32),
     release : Proc(IProvideWinSATAssessmentInfo*, UInt32),
@@ -61,7 +61,7 @@ module Win32cr::System::AssessmentTool
 
 
   @[Extern]
-  record IProvideWinSATAssessmentInfo, lpVtbl : IProvideWinSATAssessmentInfoVtbl* do
+  record IProvideWinSATAssessmentInfo, lpVtbl : IProvideWinSATAssessmentInfoVtable* do
     GUID = LibC::GUID.new(0xcd1c380_u32, 0x52d3_u16, 0x4678_u16, StaticArray[0xac_u8, 0x6f_u8, 0xe9_u8, 0x29_u8, 0xe4_u8, 0x80_u8, 0xbe_u8, 0x9e_u8])
     def query_interface(this : IProvideWinSATAssessmentInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -97,7 +97,7 @@ module Win32cr::System::AssessmentTool
   end
 
   @[Extern]
-  record IProvideWinSATResultsInfoVtbl,
+  record IProvideWinSATResultsInfoVtable,
     query_interface : Proc(IProvideWinSATResultsInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProvideWinSATResultsInfo*, UInt32),
     release : Proc(IProvideWinSATResultsInfo*, UInt32),
@@ -113,7 +113,7 @@ module Win32cr::System::AssessmentTool
 
 
   @[Extern]
-  record IProvideWinSATResultsInfo, lpVtbl : IProvideWinSATResultsInfoVtbl* do
+  record IProvideWinSATResultsInfo, lpVtbl : IProvideWinSATResultsInfoVtable* do
     GUID = LibC::GUID.new(0xf8334d5d_u32, 0x568e_u16, 0x4075_u16, StaticArray[0x87_u8, 0x5f_u8, 0x9d_u8, 0xf3_u8, 0x41_u8, 0x50_u8, 0x66_u8, 0x40_u8])
     def query_interface(this : IProvideWinSATResultsInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -155,7 +155,7 @@ module Win32cr::System::AssessmentTool
   end
 
   @[Extern]
-  record IQueryRecentWinSATAssessmentVtbl,
+  record IQueryRecentWinSATAssessmentVtable,
     query_interface : Proc(IQueryRecentWinSATAssessment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IQueryRecentWinSATAssessment*, UInt32),
     release : Proc(IQueryRecentWinSATAssessment*, UInt32),
@@ -168,7 +168,7 @@ module Win32cr::System::AssessmentTool
 
 
   @[Extern]
-  record IQueryRecentWinSATAssessment, lpVtbl : IQueryRecentWinSATAssessmentVtbl* do
+  record IQueryRecentWinSATAssessment, lpVtbl : IQueryRecentWinSATAssessmentVtable* do
     GUID = LibC::GUID.new(0xf8ad5d1f_u32, 0x3b47_u16, 0x4bdc_u16, StaticArray[0x93_u8, 0x75_u8, 0x7c_u8, 0x6b_u8, 0x1d_u8, 0xa4_u8, 0xec_u8, 0xa7_u8])
     def query_interface(this : IQueryRecentWinSATAssessment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -201,7 +201,7 @@ module Win32cr::System::AssessmentTool
   end
 
   @[Extern]
-  record IProvideWinSATVisualsVtbl,
+  record IProvideWinSATVisualsVtable,
     query_interface : Proc(IProvideWinSATVisuals*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProvideWinSATVisuals*, UInt32),
     release : Proc(IProvideWinSATVisuals*, UInt32),
@@ -209,7 +209,7 @@ module Win32cr::System::AssessmentTool
 
 
   @[Extern]
-  record IProvideWinSATVisuals, lpVtbl : IProvideWinSATVisualsVtbl* do
+  record IProvideWinSATVisuals, lpVtbl : IProvideWinSATVisualsVtable* do
     GUID = LibC::GUID.new(0xa9f4ade0_u32, 0x871a_u16, 0x42a3_u16, StaticArray[0xb8_u8, 0x13_u8, 0x30_u8, 0x78_u8, 0xd2_u8, 0x51_u8, 0x62_u8, 0xc9_u8])
     def query_interface(this : IProvideWinSATVisuals*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -227,7 +227,7 @@ module Win32cr::System::AssessmentTool
   end
 
   @[Extern]
-  record IQueryAllWinSATAssessmentsVtbl,
+  record IQueryAllWinSATAssessmentsVtable,
     query_interface : Proc(IQueryAllWinSATAssessments*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IQueryAllWinSATAssessments*, UInt32),
     release : Proc(IQueryAllWinSATAssessments*, UInt32),
@@ -239,7 +239,7 @@ module Win32cr::System::AssessmentTool
 
 
   @[Extern]
-  record IQueryAllWinSATAssessments, lpVtbl : IQueryAllWinSATAssessmentsVtbl* do
+  record IQueryAllWinSATAssessments, lpVtbl : IQueryAllWinSATAssessmentsVtable* do
     GUID = LibC::GUID.new(0xb89ed1d_u32, 0x6398_u16, 0x4fea_u16, StaticArray[0x87_u8, 0xfc_u8, 0x56_u8, 0x7d_u8, 0x8d_u8, 0x19_u8, 0x17_u8, 0x6f_u8])
     def query_interface(this : IQueryAllWinSATAssessments*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -269,7 +269,7 @@ module Win32cr::System::AssessmentTool
   end
 
   @[Extern]
-  record IWinSATInitiateEventsVtbl,
+  record IWinSATInitiateEventsVtable,
     query_interface : Proc(IWinSATInitiateEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWinSATInitiateEvents*, UInt32),
     release : Proc(IWinSATInitiateEvents*, UInt32),
@@ -278,7 +278,7 @@ module Win32cr::System::AssessmentTool
 
 
   @[Extern]
-  record IWinSATInitiateEvents, lpVtbl : IWinSATInitiateEventsVtbl* do
+  record IWinSATInitiateEvents, lpVtbl : IWinSATInitiateEventsVtable* do
     GUID = LibC::GUID.new(0x262a1918_u32, 0xba0d_u16, 0x41d5_u16, StaticArray[0x92_u8, 0xc2_u8, 0xfa_u8, 0xb4_u8, 0x63_u8, 0x3e_u8, 0xe7_u8, 0x4f_u8])
     def query_interface(this : IWinSATInitiateEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -299,7 +299,7 @@ module Win32cr::System::AssessmentTool
   end
 
   @[Extern]
-  record IInitiateWinSATAssessmentVtbl,
+  record IInitiateWinSATAssessmentVtable,
     query_interface : Proc(IInitiateWinSATAssessment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInitiateWinSATAssessment*, UInt32),
     release : Proc(IInitiateWinSATAssessment*, UInt32),
@@ -309,7 +309,7 @@ module Win32cr::System::AssessmentTool
 
 
   @[Extern]
-  record IInitiateWinSATAssessment, lpVtbl : IInitiateWinSATAssessmentVtbl* do
+  record IInitiateWinSATAssessment, lpVtbl : IInitiateWinSATAssessmentVtable* do
     GUID = LibC::GUID.new(0xd983fc50_u32, 0xf5bf_u16, 0x49d5_u16, StaticArray[0xb5_u8, 0xed_u8, 0xcc_u8, 0xcb_u8, 0x18_u8, 0xaa_u8, 0x7f_u8, 0xc1_u8])
     def query_interface(this : IInitiateWinSATAssessment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -333,7 +333,7 @@ module Win32cr::System::AssessmentTool
   end
 
   @[Extern]
-  record IAccessibleWinSATVtbl,
+  record IAccessibleWinSATVtable,
     query_interface : Proc(IAccessibleWinSAT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAccessibleWinSAT*, UInt32),
     release : Proc(IAccessibleWinSAT*, UInt32),
@@ -366,7 +366,7 @@ module Win32cr::System::AssessmentTool
 
 
   @[Extern]
-  record IAccessibleWinSAT, lpVtbl : IAccessibleWinSATVtbl* do
+  record IAccessibleWinSAT, lpVtbl : IAccessibleWinSATVtable* do
     GUID = LibC::GUID.new(0x30e6018a_u32, 0x94a8_u16, 0x4ff8_u16, StaticArray[0xa6_u8, 0x9a_u8, 0x71_u8, 0xb6_u8, 0x74_u8, 0x13_u8, 0xf0_u8, 0x7b_u8])
     def query_interface(this : IAccessibleWinSAT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -459,7 +459,7 @@ module Win32cr::System::AssessmentTool
   end
 
   @[Extern]
-  record IQueryOEMWinSATCustomizationVtbl,
+  record IQueryOEMWinSATCustomizationVtable,
     query_interface : Proc(IQueryOEMWinSATCustomization*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IQueryOEMWinSATCustomization*, UInt32),
     release : Proc(IQueryOEMWinSATCustomization*, UInt32),
@@ -467,7 +467,7 @@ module Win32cr::System::AssessmentTool
 
 
   @[Extern]
-  record IQueryOEMWinSATCustomization, lpVtbl : IQueryOEMWinSATCustomizationVtbl* do
+  record IQueryOEMWinSATCustomization, lpVtbl : IQueryOEMWinSATCustomizationVtable* do
     GUID = LibC::GUID.new(0xbc9a6a9f_u32, 0xad4e_u16, 0x420e_u16, StaticArray[0x99_u8, 0x53_u8, 0xb3_u8, 0x46_u8, 0x71_u8, 0xe9_u8, 0xdf_u8, 0x22_u8])
     def query_interface(this : IQueryOEMWinSATCustomization*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

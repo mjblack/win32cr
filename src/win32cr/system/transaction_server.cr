@@ -73,7 +73,7 @@ module Win32cr::System::TransactionServer
   end
 
   @[Extern]
-  record ICatalogVtbl,
+  record ICatalogVtable,
     query_interface : Proc(ICatalog*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICatalog*, UInt32),
     release : Proc(ICatalog*, UInt32),
@@ -88,7 +88,7 @@ module Win32cr::System::TransactionServer
 
 
   @[Extern]
-  record ICatalog, lpVtbl : ICatalogVtbl* do
+  record ICatalog, lpVtbl : ICatalogVtable* do
     GUID = LibC::GUID.new(0x6eb22870_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
     def query_interface(this : ICatalog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -127,7 +127,7 @@ module Win32cr::System::TransactionServer
   end
 
   @[Extern]
-  record IComponentUtilVtbl,
+  record IComponentUtilVtable,
     query_interface : Proc(IComponentUtil*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IComponentUtil*, UInt32),
     release : Proc(IComponentUtil*, UInt32),
@@ -142,7 +142,7 @@ module Win32cr::System::TransactionServer
 
 
   @[Extern]
-  record IComponentUtil, lpVtbl : IComponentUtilVtbl* do
+  record IComponentUtil, lpVtbl : IComponentUtilVtable* do
     GUID = LibC::GUID.new(0x6eb22873_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
     def query_interface(this : IComponentUtil*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -181,7 +181,7 @@ module Win32cr::System::TransactionServer
   end
 
   @[Extern]
-  record IPackageUtilVtbl,
+  record IPackageUtilVtable,
     query_interface : Proc(IPackageUtil*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPackageUtil*, UInt32),
     release : Proc(IPackageUtil*, UInt32),
@@ -195,7 +195,7 @@ module Win32cr::System::TransactionServer
 
 
   @[Extern]
-  record IPackageUtil, lpVtbl : IPackageUtilVtbl* do
+  record IPackageUtil, lpVtbl : IPackageUtilVtable* do
     GUID = LibC::GUID.new(0x6eb22874_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
     def query_interface(this : IPackageUtil*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -231,7 +231,7 @@ module Win32cr::System::TransactionServer
   end
 
   @[Extern]
-  record IRemoteComponentUtilVtbl,
+  record IRemoteComponentUtilVtable,
     query_interface : Proc(IRemoteComponentUtil*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRemoteComponentUtil*, UInt32),
     release : Proc(IRemoteComponentUtil*, UInt32),
@@ -244,7 +244,7 @@ module Win32cr::System::TransactionServer
 
 
   @[Extern]
-  record IRemoteComponentUtil, lpVtbl : IRemoteComponentUtilVtbl* do
+  record IRemoteComponentUtil, lpVtbl : IRemoteComponentUtilVtable* do
     GUID = LibC::GUID.new(0x6eb22875_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
     def query_interface(this : IRemoteComponentUtil*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -277,7 +277,7 @@ module Win32cr::System::TransactionServer
   end
 
   @[Extern]
-  record IRoleAssociationUtilVtbl,
+  record IRoleAssociationUtilVtable,
     query_interface : Proc(IRoleAssociationUtil*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRoleAssociationUtil*, UInt32),
     release : Proc(IRoleAssociationUtil*, UInt32),
@@ -290,7 +290,7 @@ module Win32cr::System::TransactionServer
 
 
   @[Extern]
-  record IRoleAssociationUtil, lpVtbl : IRoleAssociationUtilVtbl* do
+  record IRoleAssociationUtil, lpVtbl : IRoleAssociationUtilVtable* do
     GUID = LibC::GUID.new(0x6eb22876_u32, 0x8a19_u16, 0x11d0_u16, StaticArray[0x81_u8, 0xb6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x23_u8, 0x1c_u8, 0x29_u8])
     def query_interface(this : IRoleAssociationUtil*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

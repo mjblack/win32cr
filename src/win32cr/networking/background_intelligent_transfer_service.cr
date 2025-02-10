@@ -441,7 +441,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyFileVtbl,
+  record IBackgroundCopyFileVtable,
     query_interface : Proc(IBackgroundCopyFile*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyFile*, UInt32),
     release : Proc(IBackgroundCopyFile*, UInt32),
@@ -451,7 +451,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyFile, lpVtbl : IBackgroundCopyFileVtbl* do
+  record IBackgroundCopyFile, lpVtbl : IBackgroundCopyFileVtable* do
     GUID = LibC::GUID.new(0x1b7bd23_u32, 0xfb88_u16, 0x4a77_u16, StaticArray[0x84_u8, 0x90_u8, 0x58_u8, 0x91_u8, 0xd3_u8, 0xe4_u8, 0x65_u8, 0x3a_u8])
     def query_interface(this : IBackgroundCopyFile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -475,7 +475,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IEnumBackgroundCopyFilesVtbl,
+  record IEnumBackgroundCopyFilesVtable,
     query_interface : Proc(IEnumBackgroundCopyFiles*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumBackgroundCopyFiles*, UInt32),
     release : Proc(IEnumBackgroundCopyFiles*, UInt32),
@@ -487,7 +487,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IEnumBackgroundCopyFiles, lpVtbl : IEnumBackgroundCopyFilesVtbl* do
+  record IEnumBackgroundCopyFiles, lpVtbl : IEnumBackgroundCopyFilesVtable* do
     GUID = LibC::GUID.new(0xca51e165_u32, 0xc365_u16, 0x424c_u16, StaticArray[0x8d_u8, 0x41_u8, 0x24_u8, 0xaa_u8, 0xa4_u8, 0xff_u8, 0x3c_u8, 0x40_u8])
     def query_interface(this : IEnumBackgroundCopyFiles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -517,7 +517,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyErrorVtbl,
+  record IBackgroundCopyErrorVtable,
     query_interface : Proc(IBackgroundCopyError*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyError*, UInt32),
     release : Proc(IBackgroundCopyError*, UInt32),
@@ -529,7 +529,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyError, lpVtbl : IBackgroundCopyErrorVtbl* do
+  record IBackgroundCopyError, lpVtbl : IBackgroundCopyErrorVtable* do
     GUID = LibC::GUID.new(0x19c613a0_u32, 0xfcb8_u16, 0x4f28_u16, StaticArray[0x81_u8, 0xae_u8, 0x89_u8, 0x7c_u8, 0x3d_u8, 0x7_u8, 0x8f_u8, 0x81_u8])
     def query_interface(this : IBackgroundCopyError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -559,7 +559,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyJobVtbl,
+  record IBackgroundCopyJobVtable,
     query_interface : Proc(IBackgroundCopyJob*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyJob*, UInt32),
     release : Proc(IBackgroundCopyJob*, UInt32),
@@ -598,7 +598,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyJob, lpVtbl : IBackgroundCopyJobVtbl* do
+  record IBackgroundCopyJob, lpVtbl : IBackgroundCopyJobVtable* do
     GUID = LibC::GUID.new(0x37668d37_u32, 0x507e_u16, 0x4160_u16, StaticArray[0x93_u8, 0x16_u8, 0x26_u8, 0x30_u8, 0x6d_u8, 0x15_u8, 0xb_u8, 0x12_u8])
     def query_interface(this : IBackgroundCopyJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -709,7 +709,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IEnumBackgroundCopyJobsVtbl,
+  record IEnumBackgroundCopyJobsVtable,
     query_interface : Proc(IEnumBackgroundCopyJobs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumBackgroundCopyJobs*, UInt32),
     release : Proc(IEnumBackgroundCopyJobs*, UInt32),
@@ -721,7 +721,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IEnumBackgroundCopyJobs, lpVtbl : IEnumBackgroundCopyJobsVtbl* do
+  record IEnumBackgroundCopyJobs, lpVtbl : IEnumBackgroundCopyJobsVtable* do
     GUID = LibC::GUID.new(0x1af4f612_u32, 0x3b71_u16, 0x466f_u16, StaticArray[0x8f_u8, 0x58_u8, 0x7b_u8, 0x6f_u8, 0x73_u8, 0xac_u8, 0x57_u8, 0xad_u8])
     def query_interface(this : IEnumBackgroundCopyJobs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -751,7 +751,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyCallbackVtbl,
+  record IBackgroundCopyCallbackVtable,
     query_interface : Proc(IBackgroundCopyCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyCallback*, UInt32),
     release : Proc(IBackgroundCopyCallback*, UInt32),
@@ -761,7 +761,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyCallback, lpVtbl : IBackgroundCopyCallbackVtbl* do
+  record IBackgroundCopyCallback, lpVtbl : IBackgroundCopyCallbackVtable* do
     GUID = LibC::GUID.new(0x97ea99c7_u32, 0x186_u16, 0x4ad4_u16, StaticArray[0x8d_u8, 0xf9_u8, 0xc5_u8, 0xb4_u8, 0xe0_u8, 0xed_u8, 0x6b_u8, 0x22_u8])
     def query_interface(this : IBackgroundCopyCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -785,7 +785,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record AsyncIBackgroundCopyCallbackVtbl,
+  record AsyncIBackgroundCopyCallbackVtable,
     query_interface : Proc(AsyncIBackgroundCopyCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(AsyncIBackgroundCopyCallback*, UInt32),
     release : Proc(AsyncIBackgroundCopyCallback*, UInt32),
@@ -798,7 +798,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record AsyncIBackgroundCopyCallback, lpVtbl : AsyncIBackgroundCopyCallbackVtbl* do
+  record AsyncIBackgroundCopyCallback, lpVtbl : AsyncIBackgroundCopyCallbackVtable* do
     GUID = LibC::GUID.new(0xca29d251_u32, 0xb4bb_u16, 0x4679_u16, StaticArray[0xa3_u8, 0xd9_u8, 0xae_u8, 0x80_u8, 0x6_u8, 0x11_u8, 0x9d_u8, 0x54_u8])
     def query_interface(this : AsyncIBackgroundCopyCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -831,7 +831,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyManagerVtbl,
+  record IBackgroundCopyManagerVtable,
     query_interface : Proc(IBackgroundCopyManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyManager*, UInt32),
     release : Proc(IBackgroundCopyManager*, UInt32),
@@ -842,7 +842,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyManager, lpVtbl : IBackgroundCopyManagerVtbl* do
+  record IBackgroundCopyManager, lpVtbl : IBackgroundCopyManagerVtable* do
     GUID = LibC::GUID.new(0x5ce34c0d_u32, 0xdc9_u16, 0x4c1f_u16, StaticArray[0x89_u8, 0x7c_u8, 0xda_u8, 0xa1_u8, 0xb7_u8, 0x8c_u8, 0xee_u8, 0x7c_u8])
     def query_interface(this : IBackgroundCopyManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -869,7 +869,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyJob2Vtbl,
+  record IBackgroundCopyJob2Vtable,
     query_interface : Proc(IBackgroundCopyJob2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyJob2*, UInt32),
     release : Proc(IBackgroundCopyJob2*, UInt32),
@@ -916,7 +916,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyJob2, lpVtbl : IBackgroundCopyJob2Vtbl* do
+  record IBackgroundCopyJob2, lpVtbl : IBackgroundCopyJob2Vtable* do
     GUID = LibC::GUID.new(0x54b50739_u32, 0x686f_u16, 0x45eb_u16, StaticArray[0x9d_u8, 0xff_u8, 0xd6_u8, 0xa9_u8, 0xa0_u8, 0xfa_u8, 0xa9_u8, 0xaf_u8])
     def query_interface(this : IBackgroundCopyJob2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1051,7 +1051,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyJob3Vtbl,
+  record IBackgroundCopyJob3Vtable,
     query_interface : Proc(IBackgroundCopyJob3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyJob3*, UInt32),
     release : Proc(IBackgroundCopyJob3*, UInt32),
@@ -1102,7 +1102,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyJob3, lpVtbl : IBackgroundCopyJob3Vtbl* do
+  record IBackgroundCopyJob3, lpVtbl : IBackgroundCopyJob3Vtable* do
     GUID = LibC::GUID.new(0x443c8934_u32, 0x90ff_u16, 0x48ed_u16, StaticArray[0xbc_u8, 0xde_u8, 0x26_u8, 0xf5_u8, 0xc7_u8, 0x45_u8, 0x0_u8, 0x42_u8])
     def query_interface(this : IBackgroundCopyJob3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1249,7 +1249,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyFile2Vtbl,
+  record IBackgroundCopyFile2Vtable,
     query_interface : Proc(IBackgroundCopyFile2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyFile2*, UInt32),
     release : Proc(IBackgroundCopyFile2*, UInt32),
@@ -1261,7 +1261,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyFile2, lpVtbl : IBackgroundCopyFile2Vtbl* do
+  record IBackgroundCopyFile2, lpVtbl : IBackgroundCopyFile2Vtable* do
     GUID = LibC::GUID.new(0x83e81b93_u32, 0x873_u16, 0x474d_u16, StaticArray[0x8a_u8, 0x8c_u8, 0xf2_u8, 0x1_u8, 0x8b_u8, 0x1a_u8, 0x93_u8, 0x9c_u8])
     def query_interface(this : IBackgroundCopyFile2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1291,7 +1291,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyJobHttpOptionsVtbl,
+  record IBackgroundCopyJobHttpOptionsVtable,
     query_interface : Proc(IBackgroundCopyJobHttpOptions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyJobHttpOptions*, UInt32),
     release : Proc(IBackgroundCopyJobHttpOptions*, UInt32),
@@ -1306,7 +1306,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyJobHttpOptions, lpVtbl : IBackgroundCopyJobHttpOptionsVtbl* do
+  record IBackgroundCopyJobHttpOptions, lpVtbl : IBackgroundCopyJobHttpOptionsVtable* do
     GUID = LibC::GUID.new(0xf1bd1079_u32, 0x9f01_u16, 0x4bdc_u16, StaticArray[0x80_u8, 0x36_u8, 0xf0_u8, 0x9b_u8, 0x70_u8, 0x9_u8, 0x50_u8, 0x66_u8])
     def query_interface(this : IBackgroundCopyJobHttpOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1345,7 +1345,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBitsPeerCacheRecordVtbl,
+  record IBitsPeerCacheRecordVtable,
     query_interface : Proc(IBitsPeerCacheRecord*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBitsPeerCacheRecord*, UInt32),
     release : Proc(IBitsPeerCacheRecord*, UInt32),
@@ -1359,7 +1359,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBitsPeerCacheRecord, lpVtbl : IBitsPeerCacheRecordVtbl* do
+  record IBitsPeerCacheRecord, lpVtbl : IBitsPeerCacheRecordVtable* do
     GUID = LibC::GUID.new(0x659cdeaf_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
     def query_interface(this : IBitsPeerCacheRecord*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1395,7 +1395,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IEnumBitsPeerCacheRecordsVtbl,
+  record IEnumBitsPeerCacheRecordsVtable,
     query_interface : Proc(IEnumBitsPeerCacheRecords*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumBitsPeerCacheRecords*, UInt32),
     release : Proc(IEnumBitsPeerCacheRecords*, UInt32),
@@ -1407,7 +1407,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IEnumBitsPeerCacheRecords, lpVtbl : IEnumBitsPeerCacheRecordsVtbl* do
+  record IEnumBitsPeerCacheRecords, lpVtbl : IEnumBitsPeerCacheRecordsVtable* do
     GUID = LibC::GUID.new(0x659cdea4_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
     def query_interface(this : IEnumBitsPeerCacheRecords*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1437,7 +1437,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBitsPeerVtbl,
+  record IBitsPeerVtable,
     query_interface : Proc(IBitsPeer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBitsPeer*, UInt32),
     release : Proc(IBitsPeer*, UInt32),
@@ -1447,7 +1447,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBitsPeer, lpVtbl : IBitsPeerVtbl* do
+  record IBitsPeer, lpVtbl : IBitsPeerVtable* do
     GUID = LibC::GUID.new(0x659cdea2_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
     def query_interface(this : IBitsPeer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1471,7 +1471,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IEnumBitsPeersVtbl,
+  record IEnumBitsPeersVtable,
     query_interface : Proc(IEnumBitsPeers*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumBitsPeers*, UInt32),
     release : Proc(IEnumBitsPeers*, UInt32),
@@ -1483,7 +1483,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IEnumBitsPeers, lpVtbl : IEnumBitsPeersVtbl* do
+  record IEnumBitsPeers, lpVtbl : IEnumBitsPeersVtable* do
     GUID = LibC::GUID.new(0x659cdea5_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
     def query_interface(this : IEnumBitsPeers*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1513,7 +1513,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBitsPeerCacheAdministrationVtbl,
+  record IBitsPeerCacheAdministrationVtable,
     query_interface : Proc(IBitsPeerCacheAdministration*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBitsPeerCacheAdministration*, UInt32),
     release : Proc(IBitsPeerCacheAdministration*, UInt32),
@@ -1534,7 +1534,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBitsPeerCacheAdministration, lpVtbl : IBitsPeerCacheAdministrationVtbl* do
+  record IBitsPeerCacheAdministration, lpVtbl : IBitsPeerCacheAdministrationVtable* do
     GUID = LibC::GUID.new(0x659cdead_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
     def query_interface(this : IBitsPeerCacheAdministration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1591,7 +1591,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyJob4Vtbl,
+  record IBackgroundCopyJob4Vtable,
     query_interface : Proc(IBackgroundCopyJob4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyJob4*, UInt32),
     release : Proc(IBackgroundCopyJob4*, UInt32),
@@ -1648,7 +1648,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyJob4, lpVtbl : IBackgroundCopyJob4Vtbl* do
+  record IBackgroundCopyJob4, lpVtbl : IBackgroundCopyJob4Vtable* do
     GUID = LibC::GUID.new(0x659cdeae_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
     def query_interface(this : IBackgroundCopyJob4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1813,7 +1813,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyFile3Vtbl,
+  record IBackgroundCopyFile3Vtable,
     query_interface : Proc(IBackgroundCopyFile3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyFile3*, UInt32),
     release : Proc(IBackgroundCopyFile3*, UInt32),
@@ -1829,7 +1829,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyFile3, lpVtbl : IBackgroundCopyFile3Vtbl* do
+  record IBackgroundCopyFile3, lpVtbl : IBackgroundCopyFile3Vtable* do
     GUID = LibC::GUID.new(0x659cdeaa_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
     def query_interface(this : IBackgroundCopyFile3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1871,7 +1871,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyCallback2Vtbl,
+  record IBackgroundCopyCallback2Vtable,
     query_interface : Proc(IBackgroundCopyCallback2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyCallback2*, UInt32),
     release : Proc(IBackgroundCopyCallback2*, UInt32),
@@ -1882,7 +1882,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyCallback2, lpVtbl : IBackgroundCopyCallback2Vtbl* do
+  record IBackgroundCopyCallback2, lpVtbl : IBackgroundCopyCallback2Vtable* do
     GUID = LibC::GUID.new(0x659cdeac_u32, 0x489e_u16, 0x11d9_u16, StaticArray[0xa9_u8, 0xcd_u8, 0x0_u8, 0xd_u8, 0x56_u8, 0x96_u8, 0x52_u8, 0x51_u8])
     def query_interface(this : IBackgroundCopyCallback2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1909,7 +1909,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBitsTokenOptionsVtbl,
+  record IBitsTokenOptionsVtable,
     query_interface : Proc(IBitsTokenOptions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBitsTokenOptions*, UInt32),
     release : Proc(IBitsTokenOptions*, UInt32),
@@ -1921,7 +1921,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBitsTokenOptions, lpVtbl : IBitsTokenOptionsVtbl* do
+  record IBitsTokenOptions, lpVtbl : IBitsTokenOptionsVtable* do
     GUID = LibC::GUID.new(0x9a2584c3_u32, 0xf7d2_u16, 0x457a_u16, StaticArray[0x9a_u8, 0x5e_u8, 0x22_u8, 0xb6_u8, 0x7b_u8, 0xff_u8, 0xc7_u8, 0xd2_u8])
     def query_interface(this : IBitsTokenOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1951,7 +1951,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyFile4Vtbl,
+  record IBackgroundCopyFile4Vtable,
     query_interface : Proc(IBackgroundCopyFile4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyFile4*, UInt32),
     release : Proc(IBackgroundCopyFile4*, UInt32),
@@ -1968,7 +1968,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyFile4, lpVtbl : IBackgroundCopyFile4Vtbl* do
+  record IBackgroundCopyFile4, lpVtbl : IBackgroundCopyFile4Vtable* do
     GUID = LibC::GUID.new(0xef7e0655_u32, 0x7888_u16, 0x4960_u16, StaticArray[0xb0_u8, 0xe5_u8, 0x73_u8, 0x8_u8, 0x46_u8, 0xe0_u8, 0x34_u8, 0x92_u8])
     def query_interface(this : IBackgroundCopyFile4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2013,7 +2013,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyJob5Vtbl,
+  record IBackgroundCopyJob5Vtable,
     query_interface : Proc(IBackgroundCopyJob5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyJob5*, UInt32),
     release : Proc(IBackgroundCopyJob5*, UInt32),
@@ -2072,7 +2072,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyJob5, lpVtbl : IBackgroundCopyJob5Vtbl* do
+  record IBackgroundCopyJob5, lpVtbl : IBackgroundCopyJob5Vtable* do
     GUID = LibC::GUID.new(0xe847030c_u32, 0xbbba_u16, 0x4657_u16, StaticArray[0xaf_u8, 0x6d_u8, 0x48_u8, 0x4a_u8, 0xa4_u8, 0x2b_u8, 0xf1_u8, 0xfe_u8])
     def query_interface(this : IBackgroundCopyJob5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2243,7 +2243,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyFile5Vtbl,
+  record IBackgroundCopyFile5Vtable,
     query_interface : Proc(IBackgroundCopyFile5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyFile5*, UInt32),
     release : Proc(IBackgroundCopyFile5*, UInt32),
@@ -2262,7 +2262,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyFile5, lpVtbl : IBackgroundCopyFile5Vtbl* do
+  record IBackgroundCopyFile5, lpVtbl : IBackgroundCopyFile5Vtable* do
     GUID = LibC::GUID.new(0x85c1657f_u32, 0xdafc_u16, 0x40e8_u16, StaticArray[0x88_u8, 0x34_u8, 0xdf_u8, 0x18_u8, 0xea_u8, 0x25_u8, 0x71_u8, 0x7e_u8])
     def query_interface(this : IBackgroundCopyFile5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2313,7 +2313,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyCallback3Vtbl,
+  record IBackgroundCopyCallback3Vtable,
     query_interface : Proc(IBackgroundCopyCallback3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyCallback3*, UInt32),
     release : Proc(IBackgroundCopyCallback3*, UInt32),
@@ -2325,7 +2325,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyCallback3, lpVtbl : IBackgroundCopyCallback3Vtbl* do
+  record IBackgroundCopyCallback3, lpVtbl : IBackgroundCopyCallback3Vtable* do
     GUID = LibC::GUID.new(0x98c97bd2_u32, 0xe32b_u16, 0x4ad8_u16, StaticArray[0xa5_u8, 0x28_u8, 0x95_u8, 0xfd_u8, 0x8b_u8, 0x16_u8, 0xbd_u8, 0x42_u8])
     def query_interface(this : IBackgroundCopyCallback3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2355,7 +2355,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyFile6Vtbl,
+  record IBackgroundCopyFile6Vtable,
     query_interface : Proc(IBackgroundCopyFile6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyFile6*, UInt32),
     release : Proc(IBackgroundCopyFile6*, UInt32),
@@ -2377,7 +2377,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyFile6, lpVtbl : IBackgroundCopyFile6Vtbl* do
+  record IBackgroundCopyFile6, lpVtbl : IBackgroundCopyFile6Vtable* do
     GUID = LibC::GUID.new(0xcf6784f7_u32, 0xd677_u16, 0x49fd_u16, StaticArray[0x93_u8, 0x68_u8, 0xcb_u8, 0x47_u8, 0xae_u8, 0xe9_u8, 0xd1_u8, 0xad_u8])
     def query_interface(this : IBackgroundCopyFile6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2437,7 +2437,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyJobHttpOptions2Vtbl,
+  record IBackgroundCopyJobHttpOptions2Vtable,
     query_interface : Proc(IBackgroundCopyJobHttpOptions2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyJobHttpOptions2*, UInt32),
     release : Proc(IBackgroundCopyJobHttpOptions2*, UInt32),
@@ -2454,7 +2454,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyJobHttpOptions2, lpVtbl : IBackgroundCopyJobHttpOptions2Vtbl* do
+  record IBackgroundCopyJobHttpOptions2, lpVtbl : IBackgroundCopyJobHttpOptions2Vtable* do
     GUID = LibC::GUID.new(0xb591a192_u32, 0xa405_u16, 0x4fc3_u16, StaticArray[0x83_u8, 0x23_u8, 0x4c_u8, 0x5c_u8, 0x54_u8, 0x25_u8, 0x78_u8, 0xfc_u8])
     def query_interface(this : IBackgroundCopyJobHttpOptions2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2499,7 +2499,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyServerCertificateValidationCallbackVtbl,
+  record IBackgroundCopyServerCertificateValidationCallbackVtable,
     query_interface : Proc(IBackgroundCopyServerCertificateValidationCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyServerCertificateValidationCallback*, UInt32),
     release : Proc(IBackgroundCopyServerCertificateValidationCallback*, UInt32),
@@ -2507,7 +2507,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyServerCertificateValidationCallback, lpVtbl : IBackgroundCopyServerCertificateValidationCallbackVtbl* do
+  record IBackgroundCopyServerCertificateValidationCallback, lpVtbl : IBackgroundCopyServerCertificateValidationCallbackVtable* do
     GUID = LibC::GUID.new(0x4cec0d02_u32, 0xdef7_u16, 0x4158_u16, StaticArray[0x81_u8, 0x3a_u8, 0xc3_u8, 0x2a_u8, 0x46_u8, 0x94_u8, 0x5f_u8, 0xf7_u8])
     def query_interface(this : IBackgroundCopyServerCertificateValidationCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2525,7 +2525,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyJobHttpOptions3Vtbl,
+  record IBackgroundCopyJobHttpOptions3Vtable,
     query_interface : Proc(IBackgroundCopyJobHttpOptions3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyJobHttpOptions3*, UInt32),
     release : Proc(IBackgroundCopyJobHttpOptions3*, UInt32),
@@ -2544,7 +2544,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyJobHttpOptions3, lpVtbl : IBackgroundCopyJobHttpOptions3Vtbl* do
+  record IBackgroundCopyJobHttpOptions3, lpVtbl : IBackgroundCopyJobHttpOptions3Vtable* do
     GUID = LibC::GUID.new(0x8a9263d3_u32, 0xfd4c_u16, 0x4eda_u16, StaticArray[0x9b_u8, 0x28_u8, 0x30_u8, 0x13_u8, 0x2a_u8, 0x4d_u8, 0x4e_u8, 0x3c_u8])
     def query_interface(this : IBackgroundCopyJobHttpOptions3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2595,7 +2595,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBITSExtensionSetupVtbl,
+  record IBITSExtensionSetupVtable,
     query_interface : Proc(IBITSExtensionSetup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBITSExtensionSetup*, UInt32),
     release : Proc(IBITSExtensionSetup*, UInt32),
@@ -2610,7 +2610,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBITSExtensionSetup, lpVtbl : IBITSExtensionSetupVtbl* do
+  record IBITSExtensionSetup, lpVtbl : IBITSExtensionSetupVtable* do
     GUID = LibC::GUID.new(0x29cfbbf7_u32, 0x9e4_u16, 0x4b97_u16, StaticArray[0xb0_u8, 0xbc_u8, 0xf2_u8, 0x28_u8, 0x7e_u8, 0x3d_u8, 0x8e_u8, 0xb3_u8])
     def query_interface(this : IBITSExtensionSetup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2649,7 +2649,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBITSExtensionSetupFactoryVtbl,
+  record IBITSExtensionSetupFactoryVtable,
     query_interface : Proc(IBITSExtensionSetupFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBITSExtensionSetupFactory*, UInt32),
     release : Proc(IBITSExtensionSetupFactory*, UInt32),
@@ -2661,7 +2661,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBITSExtensionSetupFactory, lpVtbl : IBITSExtensionSetupFactoryVtbl* do
+  record IBITSExtensionSetupFactory, lpVtbl : IBITSExtensionSetupFactoryVtable* do
     GUID = LibC::GUID.new(0xd5d2d542_u32, 0x5503_u16, 0x4e64_u16, StaticArray[0x8b_u8, 0x48_u8, 0x72_u8, 0xef_u8, 0x91_u8, 0xa3_u8, 0x2e_u8, 0xe1_u8])
     def query_interface(this : IBITSExtensionSetupFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2691,7 +2691,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyJob1Vtbl,
+  record IBackgroundCopyJob1Vtable,
     query_interface : Proc(IBackgroundCopyJob1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyJob1*, UInt32),
     release : Proc(IBackgroundCopyJob1*, UInt32),
@@ -2706,7 +2706,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyJob1, lpVtbl : IBackgroundCopyJob1Vtbl* do
+  record IBackgroundCopyJob1, lpVtbl : IBackgroundCopyJob1Vtable* do
     GUID = LibC::GUID.new(0x59f5553c_u32, 0x2031_u16, 0x4629_u16, StaticArray[0xbb_u8, 0x18_u8, 0x26_u8, 0x45_u8, 0xa6_u8, 0x97_u8, 0x9_u8, 0x47_u8])
     def query_interface(this : IBackgroundCopyJob1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2745,7 +2745,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IEnumBackgroundCopyJobs1Vtbl,
+  record IEnumBackgroundCopyJobs1Vtable,
     query_interface : Proc(IEnumBackgroundCopyJobs1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumBackgroundCopyJobs1*, UInt32),
     release : Proc(IEnumBackgroundCopyJobs1*, UInt32),
@@ -2757,7 +2757,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IEnumBackgroundCopyJobs1, lpVtbl : IEnumBackgroundCopyJobs1Vtbl* do
+  record IEnumBackgroundCopyJobs1, lpVtbl : IEnumBackgroundCopyJobs1Vtable* do
     GUID = LibC::GUID.new(0x8baeba9d_u32, 0x8f1c_u16, 0x42c4_u16, StaticArray[0xb8_u8, 0x2c_u8, 0x9_u8, 0xae_u8, 0x79_u8, 0x98_u8, 0xd_u8, 0x25_u8])
     def query_interface(this : IEnumBackgroundCopyJobs1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2787,7 +2787,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyGroupVtbl,
+  record IBackgroundCopyGroupVtable,
     query_interface : Proc(IBackgroundCopyGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyGroup*, UInt32),
     release : Proc(IBackgroundCopyGroup*, UInt32),
@@ -2809,7 +2809,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyGroup, lpVtbl : IBackgroundCopyGroupVtbl* do
+  record IBackgroundCopyGroup, lpVtbl : IBackgroundCopyGroupVtable* do
     GUID = LibC::GUID.new(0x1ded80a7_u32, 0x53ea_u16, 0x424f_u16, StaticArray[0x8a_u8, 0x4_u8, 0x17_u8, 0xfe_u8, 0xa9_u8, 0xad_u8, 0xc4_u8, 0xf5_u8])
     def query_interface(this : IBackgroundCopyGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2869,7 +2869,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IEnumBackgroundCopyGroupsVtbl,
+  record IEnumBackgroundCopyGroupsVtable,
     query_interface : Proc(IEnumBackgroundCopyGroups*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumBackgroundCopyGroups*, UInt32),
     release : Proc(IEnumBackgroundCopyGroups*, UInt32),
@@ -2881,7 +2881,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IEnumBackgroundCopyGroups, lpVtbl : IEnumBackgroundCopyGroupsVtbl* do
+  record IEnumBackgroundCopyGroups, lpVtbl : IEnumBackgroundCopyGroupsVtable* do
     GUID = LibC::GUID.new(0xd993e603_u32, 0x4aa4_u16, 0x47c5_u16, StaticArray[0x86_u8, 0x65_u8, 0xc2_u8, 0xd_u8, 0x39_u8, 0xc2_u8, 0xba_u8, 0x4f_u8])
     def query_interface(this : IEnumBackgroundCopyGroups*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2911,7 +2911,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyCallback1Vtbl,
+  record IBackgroundCopyCallback1Vtable,
     query_interface : Proc(IBackgroundCopyCallback1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyCallback1*, UInt32),
     release : Proc(IBackgroundCopyCallback1*, UInt32),
@@ -2921,7 +2921,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyCallback1, lpVtbl : IBackgroundCopyCallback1Vtbl* do
+  record IBackgroundCopyCallback1, lpVtbl : IBackgroundCopyCallback1Vtable* do
     GUID = LibC::GUID.new(0x84f6593_u32, 0x3800_u16, 0x4e08_u16, StaticArray[0x9b_u8, 0x59_u8, 0x99_u8, 0xfa_u8, 0x59_u8, 0xad_u8, 0xdf_u8, 0x82_u8])
     def query_interface(this : IBackgroundCopyCallback1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2945,7 +2945,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
   end
 
   @[Extern]
-  record IBackgroundCopyQMgrVtbl,
+  record IBackgroundCopyQMgrVtable,
     query_interface : Proc(IBackgroundCopyQMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBackgroundCopyQMgr*, UInt32),
     release : Proc(IBackgroundCopyQMgr*, UInt32),
@@ -2955,7 +2955,7 @@ module Win32cr::Networking::BackgroundIntelligentTransferService
 
 
   @[Extern]
-  record IBackgroundCopyQMgr, lpVtbl : IBackgroundCopyQMgrVtbl* do
+  record IBackgroundCopyQMgr, lpVtbl : IBackgroundCopyQMgrVtable* do
     GUID = LibC::GUID.new(0x16f41c69_u32, 0x9f5_u16, 0x41d2_u16, StaticArray[0x8c_u8, 0xd8_u8, 0x3c_u8, 0x8_u8, 0xc4_u8, 0x7b_u8, 0xc8_u8, 0xa8_u8])
     def query_interface(this : IBackgroundCopyQMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

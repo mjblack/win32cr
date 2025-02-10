@@ -2294,11 +2294,7 @@ module Win32cr::System::Wmi
     end
   end
 
-  @[Extern]
-  struct MI_Module_Self
-    def initialize()
-    end
-  end
+  alias MI_Module_Self = Void
 
   @[Extern]
   struct MI_ProviderFT
@@ -2916,7 +2912,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemPathKeyListVtbl,
+  record IWbemPathKeyListVtable,
     query_interface : Proc(IWbemPathKeyList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemPathKeyList*, UInt32),
     release : Proc(IWbemPathKeyList*, UInt32),
@@ -2933,7 +2929,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemPathKeyList, lpVtbl : IWbemPathKeyListVtbl* do
+  record IWbemPathKeyList, lpVtbl : IWbemPathKeyListVtable* do
     GUID = LibC::GUID.new(0x9ae62877_u32, 0x7544_u16, 0x4bb0_u16, StaticArray[0xaa_u8, 0x26_u8, 0xa1_u8, 0x38_u8, 0x24_u8, 0x65_u8, 0x9e_u8, 0xd6_u8])
     def query_interface(this : IWbemPathKeyList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2978,7 +2974,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemPathVtbl,
+  record IWbemPathVtable,
     query_interface : Proc(IWbemPath*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemPath*, UInt32),
     release : Proc(IWbemPath*, UInt32),
@@ -3011,7 +3007,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemPath, lpVtbl : IWbemPathVtbl* do
+  record IWbemPath, lpVtbl : IWbemPathVtable* do
     GUID = LibC::GUID.new(0x3bc15af2_u32, 0x736c_u16, 0x477e_u16, StaticArray[0x9e_u8, 0x51_u8, 0x23_u8, 0x8a_u8, 0xf8_u8, 0x66_u8, 0x7d_u8, 0xcc_u8])
     def query_interface(this : IWbemPath*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3104,7 +3100,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemQueryVtbl,
+  record IWbemQueryVtable,
     query_interface : Proc(IWbemQuery*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemQuery*, UInt32),
     release : Proc(IWbemQuery*, UInt32),
@@ -3118,7 +3114,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemQuery, lpVtbl : IWbemQueryVtbl* do
+  record IWbemQuery, lpVtbl : IWbemQueryVtable* do
     GUID = LibC::GUID.new(0x81166f58_u32, 0xdd98_u16, 0x11d3_u16, StaticArray[0xa1_u8, 0x20_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x51_u8, 0x5a_u8])
     def query_interface(this : IWbemQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3154,7 +3150,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemClassObjectVtbl,
+  record IWbemClassObjectVtable,
     query_interface : Proc(IWbemClassObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemClassObject*, UInt32),
     release : Proc(IWbemClassObject*, UInt32),
@@ -3185,7 +3181,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemClassObject, lpVtbl : IWbemClassObjectVtbl* do
+  record IWbemClassObject, lpVtbl : IWbemClassObjectVtable* do
     GUID = LibC::GUID.new(0xdc12a681_u32, 0x737f_u16, 0x11cf_u16, StaticArray[0x88_u8, 0x4d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0x2e_u8, 0x24_u8])
     def query_interface(this : IWbemClassObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3272,7 +3268,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemObjectAccessVtbl,
+  record IWbemObjectAccessVtable,
     query_interface : Proc(IWbemObjectAccess*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemObjectAccess*, UInt32),
     release : Proc(IWbemObjectAccess*, UInt32),
@@ -3313,7 +3309,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemObjectAccess, lpVtbl : IWbemObjectAccessVtbl* do
+  record IWbemObjectAccess, lpVtbl : IWbemObjectAccessVtable* do
     GUID = LibC::GUID.new(0x49353c9a_u32, 0x516b_u16, 0x11d1_u16, StaticArray[0xae_u8, 0xa6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemObjectAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3430,7 +3426,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemQualifierSetVtbl,
+  record IWbemQualifierSetVtable,
     query_interface : Proc(IWbemQualifierSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemQualifierSet*, UInt32),
     release : Proc(IWbemQualifierSet*, UInt32),
@@ -3444,7 +3440,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemQualifierSet, lpVtbl : IWbemQualifierSetVtbl* do
+  record IWbemQualifierSet, lpVtbl : IWbemQualifierSetVtable* do
     GUID = LibC::GUID.new(0xdc12a680_u32, 0x737f_u16, 0x11cf_u16, StaticArray[0x88_u8, 0x4d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0x2e_u8, 0x24_u8])
     def query_interface(this : IWbemQualifierSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3480,7 +3476,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemServicesVtbl,
+  record IWbemServicesVtable,
     query_interface : Proc(IWbemServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemServices*, UInt32),
     release : Proc(IWbemServices*, UInt32),
@@ -3510,7 +3506,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemServices, lpVtbl : IWbemServicesVtbl* do
+  record IWbemServices, lpVtbl : IWbemServicesVtable* do
     GUID = LibC::GUID.new(0x9556dc99_u32, 0x828c_u16, 0x11cf_u16, StaticArray[0xa3_u8, 0x7e_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x32_u8, 0x40_u8, 0xc7_u8])
     def query_interface(this : IWbemServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3594,7 +3590,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemLocatorVtbl,
+  record IWbemLocatorVtable,
     query_interface : Proc(IWbemLocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemLocator*, UInt32),
     release : Proc(IWbemLocator*, UInt32),
@@ -3602,7 +3598,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemLocator, lpVtbl : IWbemLocatorVtbl* do
+  record IWbemLocator, lpVtbl : IWbemLocatorVtable* do
     GUID = LibC::GUID.new(0xdc12a687_u32, 0x737f_u16, 0x11cf_u16, StaticArray[0x88_u8, 0x4d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0x2e_u8, 0x24_u8])
     def query_interface(this : IWbemLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3620,7 +3616,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemObjectSinkVtbl,
+  record IWbemObjectSinkVtable,
     query_interface : Proc(IWbemObjectSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemObjectSink*, UInt32),
     release : Proc(IWbemObjectSink*, UInt32),
@@ -3629,7 +3625,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemObjectSink, lpVtbl : IWbemObjectSinkVtbl* do
+  record IWbemObjectSink, lpVtbl : IWbemObjectSinkVtable* do
     GUID = LibC::GUID.new(0x7c857801_u32, 0x7381_u16, 0x11cf_u16, StaticArray[0x88_u8, 0x4d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0x2e_u8, 0x24_u8])
     def query_interface(this : IWbemObjectSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3650,7 +3646,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IEnumWbemClassObjectVtbl,
+  record IEnumWbemClassObjectVtable,
     query_interface : Proc(IEnumWbemClassObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumWbemClassObject*, UInt32),
     release : Proc(IEnumWbemClassObject*, UInt32),
@@ -3662,7 +3658,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IEnumWbemClassObject, lpVtbl : IEnumWbemClassObjectVtbl* do
+  record IEnumWbemClassObject, lpVtbl : IEnumWbemClassObjectVtable* do
     GUID = LibC::GUID.new(0x27947e1_u32, 0xd731_u16, 0x11ce_u16, StaticArray[0xa3_u8, 0x57_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x1_u8])
     def query_interface(this : IEnumWbemClassObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3692,7 +3688,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemCallResultVtbl,
+  record IWbemCallResultVtable,
     query_interface : Proc(IWbemCallResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemCallResult*, UInt32),
     release : Proc(IWbemCallResult*, UInt32),
@@ -3703,7 +3699,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemCallResult, lpVtbl : IWbemCallResultVtbl* do
+  record IWbemCallResult, lpVtbl : IWbemCallResultVtable* do
     GUID = LibC::GUID.new(0x44aca675_u32, 0xe8fc_u16, 0x11d0_u16, StaticArray[0xa0_u8, 0x7c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemCallResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3730,7 +3726,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemContextVtbl,
+  record IWbemContextVtable,
     query_interface : Proc(IWbemContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemContext*, UInt32),
     release : Proc(IWbemContext*, UInt32),
@@ -3746,7 +3742,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemContext, lpVtbl : IWbemContextVtbl* do
+  record IWbemContext, lpVtbl : IWbemContextVtable* do
     GUID = LibC::GUID.new(0x44aca674_u32, 0xe8fc_u16, 0x11d0_u16, StaticArray[0xa0_u8, 0x7c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3788,7 +3784,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IUnsecuredApartmentVtbl,
+  record IUnsecuredApartmentVtable,
     query_interface : Proc(IUnsecuredApartment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUnsecuredApartment*, UInt32),
     release : Proc(IUnsecuredApartment*, UInt32),
@@ -3796,7 +3792,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IUnsecuredApartment, lpVtbl : IUnsecuredApartmentVtbl* do
+  record IUnsecuredApartment, lpVtbl : IUnsecuredApartmentVtable* do
     GUID = LibC::GUID.new(0x1cfaba8c_u32, 0x1523_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x79_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
     def query_interface(this : IUnsecuredApartment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3814,7 +3810,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemUnsecuredApartmentVtbl,
+  record IWbemUnsecuredApartmentVtable,
     query_interface : Proc(IWbemUnsecuredApartment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemUnsecuredApartment*, UInt32),
     release : Proc(IWbemUnsecuredApartment*, UInt32),
@@ -3823,7 +3819,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemUnsecuredApartment, lpVtbl : IWbemUnsecuredApartmentVtbl* do
+  record IWbemUnsecuredApartment, lpVtbl : IWbemUnsecuredApartmentVtable* do
     GUID = LibC::GUID.new(0x31739d04_u32, 0x3471_u16, 0x4cf4_u16, StaticArray[0x9a_u8, 0x7c_u8, 0x57_u8, 0xa4_u8, 0x4a_u8, 0xe7_u8, 0x19_u8, 0x56_u8])
     def query_interface(this : IWbemUnsecuredApartment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3844,7 +3840,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemStatusCodeTextVtbl,
+  record IWbemStatusCodeTextVtable,
     query_interface : Proc(IWbemStatusCodeText*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemStatusCodeText*, UInt32),
     release : Proc(IWbemStatusCodeText*, UInt32),
@@ -3853,7 +3849,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemStatusCodeText, lpVtbl : IWbemStatusCodeTextVtbl* do
+  record IWbemStatusCodeText, lpVtbl : IWbemStatusCodeTextVtable* do
     GUID = LibC::GUID.new(0xeb87e1bc_u32, 0x3233_u16, 0x11d2_u16, StaticArray[0xae_u8, 0xc9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemStatusCodeText*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3874,7 +3870,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemBackupRestoreVtbl,
+  record IWbemBackupRestoreVtable,
     query_interface : Proc(IWbemBackupRestore*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemBackupRestore*, UInt32),
     release : Proc(IWbemBackupRestore*, UInt32),
@@ -3883,7 +3879,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemBackupRestore, lpVtbl : IWbemBackupRestoreVtbl* do
+  record IWbemBackupRestore, lpVtbl : IWbemBackupRestoreVtable* do
     GUID = LibC::GUID.new(0xc49e32c7_u32, 0xbc8b_u16, 0x11d2_u16, StaticArray[0x85_u8, 0xd4_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x83_u8, 0x4_u8])
     def query_interface(this : IWbemBackupRestore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3904,7 +3900,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemBackupRestoreExVtbl,
+  record IWbemBackupRestoreExVtable,
     query_interface : Proc(IWbemBackupRestoreEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemBackupRestoreEx*, UInt32),
     release : Proc(IWbemBackupRestoreEx*, UInt32),
@@ -3915,7 +3911,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemBackupRestoreEx, lpVtbl : IWbemBackupRestoreExVtbl* do
+  record IWbemBackupRestoreEx, lpVtbl : IWbemBackupRestoreExVtable* do
     GUID = LibC::GUID.new(0xa359dec5_u32, 0xe813_u16, 0x4834_u16, StaticArray[0x8a_u8, 0x2a_u8, 0xba_u8, 0x7f_u8, 0x1d_u8, 0x77_u8, 0x7d_u8, 0x76_u8])
     def query_interface(this : IWbemBackupRestoreEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3942,7 +3938,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemRefresherVtbl,
+  record IWbemRefresherVtable,
     query_interface : Proc(IWbemRefresher*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemRefresher*, UInt32),
     release : Proc(IWbemRefresher*, UInt32),
@@ -3950,7 +3946,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemRefresher, lpVtbl : IWbemRefresherVtbl* do
+  record IWbemRefresher, lpVtbl : IWbemRefresherVtable* do
     GUID = LibC::GUID.new(0x49353c99_u32, 0x516b_u16, 0x11d1_u16, StaticArray[0xae_u8, 0xa6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemRefresher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3968,7 +3964,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemHiPerfEnumVtbl,
+  record IWbemHiPerfEnumVtable,
     query_interface : Proc(IWbemHiPerfEnum*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemHiPerfEnum*, UInt32),
     release : Proc(IWbemHiPerfEnum*, UInt32),
@@ -3979,7 +3975,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemHiPerfEnum, lpVtbl : IWbemHiPerfEnumVtbl* do
+  record IWbemHiPerfEnum, lpVtbl : IWbemHiPerfEnumVtable* do
     GUID = LibC::GUID.new(0x2705c288_u32, 0x79ae_u16, 0x11d2_u16, StaticArray[0xb3_u8, 0x48_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x81_u8, 0x77_u8])
     def query_interface(this : IWbemHiPerfEnum*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4006,7 +4002,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemConfigureRefresherVtbl,
+  record IWbemConfigureRefresherVtable,
     query_interface : Proc(IWbemConfigureRefresher*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemConfigureRefresher*, UInt32),
     release : Proc(IWbemConfigureRefresher*, UInt32),
@@ -4018,7 +4014,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemConfigureRefresher, lpVtbl : IWbemConfigureRefresherVtbl* do
+  record IWbemConfigureRefresher, lpVtbl : IWbemConfigureRefresherVtable* do
     GUID = LibC::GUID.new(0x49353c92_u32, 0x516b_u16, 0x11d1_u16, StaticArray[0xae_u8, 0xa6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemConfigureRefresher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4048,7 +4044,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemObjectSinkExVtbl,
+  record IWbemObjectSinkExVtable,
     query_interface : Proc(IWbemObjectSinkEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemObjectSinkEx*, UInt32),
     release : Proc(IWbemObjectSinkEx*, UInt32),
@@ -4062,7 +4058,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemObjectSinkEx, lpVtbl : IWbemObjectSinkExVtbl* do
+  record IWbemObjectSinkEx, lpVtbl : IWbemObjectSinkExVtable* do
     GUID = LibC::GUID.new(0xe7d35cfa_u32, 0x348b_u16, 0x485e_u16, StaticArray[0xb5_u8, 0x24_u8, 0x25_u8, 0x27_u8, 0x25_u8, 0xd6_u8, 0x97_u8, 0xca_u8])
     def query_interface(this : IWbemObjectSinkEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4098,7 +4094,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemShutdownVtbl,
+  record IWbemShutdownVtable,
     query_interface : Proc(IWbemShutdown*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemShutdown*, UInt32),
     release : Proc(IWbemShutdown*, UInt32),
@@ -4106,7 +4102,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemShutdown, lpVtbl : IWbemShutdownVtbl* do
+  record IWbemShutdown, lpVtbl : IWbemShutdownVtable* do
     GUID = LibC::GUID.new(0xb7b31df9_u32, 0xd515_u16, 0x11d3_u16, StaticArray[0xa1_u8, 0x1c_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x51_u8, 0x5a_u8])
     def query_interface(this : IWbemShutdown*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4124,7 +4120,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemObjectTextSrcVtbl,
+  record IWbemObjectTextSrcVtable,
     query_interface : Proc(IWbemObjectTextSrc*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemObjectTextSrc*, UInt32),
     release : Proc(IWbemObjectTextSrc*, UInt32),
@@ -4133,7 +4129,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemObjectTextSrc, lpVtbl : IWbemObjectTextSrcVtbl* do
+  record IWbemObjectTextSrc, lpVtbl : IWbemObjectTextSrcVtable* do
     GUID = LibC::GUID.new(0xbfbf883a_u32, 0xcad7_u16, 0x11d3_u16, StaticArray[0xa1_u8, 0x1b_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x51_u8, 0x5a_u8])
     def query_interface(this : IWbemObjectTextSrc*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4154,7 +4150,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IMofCompilerVtbl,
+  record IMofCompilerVtable,
     query_interface : Proc(IMofCompiler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMofCompiler*, UInt32),
     release : Proc(IMofCompiler*, UInt32),
@@ -4164,7 +4160,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IMofCompiler, lpVtbl : IMofCompilerVtbl* do
+  record IMofCompiler, lpVtbl : IMofCompilerVtable* do
     GUID = LibC::GUID.new(0x6daf974e_u32, 0x2e37_u16, 0x11d2_u16, StaticArray[0xae_u8, 0xc9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IMofCompiler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4188,7 +4184,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemPropertyProviderVtbl,
+  record IWbemPropertyProviderVtable,
     query_interface : Proc(IWbemPropertyProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemPropertyProvider*, UInt32),
     release : Proc(IWbemPropertyProvider*, UInt32),
@@ -4197,7 +4193,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemPropertyProvider, lpVtbl : IWbemPropertyProviderVtbl* do
+  record IWbemPropertyProvider, lpVtbl : IWbemPropertyProviderVtable* do
     GUID = LibC::GUID.new(0xce61e841_u32, 0x65bc_u16, 0x11d0_u16, StaticArray[0xb6_u8, 0xbd_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x32_u8, 0x40_u8, 0xc7_u8])
     def query_interface(this : IWbemPropertyProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4218,7 +4214,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemUnboundObjectSinkVtbl,
+  record IWbemUnboundObjectSinkVtable,
     query_interface : Proc(IWbemUnboundObjectSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemUnboundObjectSink*, UInt32),
     release : Proc(IWbemUnboundObjectSink*, UInt32),
@@ -4226,7 +4222,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemUnboundObjectSink, lpVtbl : IWbemUnboundObjectSinkVtbl* do
+  record IWbemUnboundObjectSink, lpVtbl : IWbemUnboundObjectSinkVtable* do
     GUID = LibC::GUID.new(0xe246107b_u32, 0xb06e_u16, 0x11d0_u16, StaticArray[0xad_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
     def query_interface(this : IWbemUnboundObjectSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4244,7 +4240,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemEventProviderVtbl,
+  record IWbemEventProviderVtable,
     query_interface : Proc(IWbemEventProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemEventProvider*, UInt32),
     release : Proc(IWbemEventProvider*, UInt32),
@@ -4252,7 +4248,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemEventProvider, lpVtbl : IWbemEventProviderVtbl* do
+  record IWbemEventProvider, lpVtbl : IWbemEventProviderVtable* do
     GUID = LibC::GUID.new(0xe245105b_u32, 0xb06e_u16, 0x11d0_u16, StaticArray[0xad_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
     def query_interface(this : IWbemEventProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4270,7 +4266,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemEventProviderQuerySinkVtbl,
+  record IWbemEventProviderQuerySinkVtable,
     query_interface : Proc(IWbemEventProviderQuerySink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemEventProviderQuerySink*, UInt32),
     release : Proc(IWbemEventProviderQuerySink*, UInt32),
@@ -4279,7 +4275,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemEventProviderQuerySink, lpVtbl : IWbemEventProviderQuerySinkVtbl* do
+  record IWbemEventProviderQuerySink, lpVtbl : IWbemEventProviderQuerySinkVtable* do
     GUID = LibC::GUID.new(0x580acaf8_u32, 0xfa1c_u16, 0x11d0_u16, StaticArray[0xad_u8, 0x72_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
     def query_interface(this : IWbemEventProviderQuerySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4300,7 +4296,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemEventProviderSecurityVtbl,
+  record IWbemEventProviderSecurityVtable,
     query_interface : Proc(IWbemEventProviderSecurity*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemEventProviderSecurity*, UInt32),
     release : Proc(IWbemEventProviderSecurity*, UInt32),
@@ -4308,7 +4304,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemEventProviderSecurity, lpVtbl : IWbemEventProviderSecurityVtbl* do
+  record IWbemEventProviderSecurity, lpVtbl : IWbemEventProviderSecurityVtable* do
     GUID = LibC::GUID.new(0x631f7d96_u32, 0xd993_u16, 0x11d2_u16, StaticArray[0xb3_u8, 0x39_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x4a_u8, 0xaf_u8])
     def query_interface(this : IWbemEventProviderSecurity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4326,7 +4322,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemEventConsumerProviderVtbl,
+  record IWbemEventConsumerProviderVtable,
     query_interface : Proc(IWbemEventConsumerProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemEventConsumerProvider*, UInt32),
     release : Proc(IWbemEventConsumerProvider*, UInt32),
@@ -4334,7 +4330,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemEventConsumerProvider, lpVtbl : IWbemEventConsumerProviderVtbl* do
+  record IWbemEventConsumerProvider, lpVtbl : IWbemEventConsumerProviderVtable* do
     GUID = LibC::GUID.new(0xe246107a_u32, 0xb06e_u16, 0x11d0_u16, StaticArray[0xad_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
     def query_interface(this : IWbemEventConsumerProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4352,7 +4348,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemProviderInitSinkVtbl,
+  record IWbemProviderInitSinkVtable,
     query_interface : Proc(IWbemProviderInitSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemProviderInitSink*, UInt32),
     release : Proc(IWbemProviderInitSink*, UInt32),
@@ -4360,7 +4356,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemProviderInitSink, lpVtbl : IWbemProviderInitSinkVtbl* do
+  record IWbemProviderInitSink, lpVtbl : IWbemProviderInitSinkVtable* do
     GUID = LibC::GUID.new(0x1be41571_u32, 0x91dd_u16, 0x11d1_u16, StaticArray[0xae_u8, 0xb2_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemProviderInitSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4378,7 +4374,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemProviderInitVtbl,
+  record IWbemProviderInitVtable,
     query_interface : Proc(IWbemProviderInit*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemProviderInit*, UInt32),
     release : Proc(IWbemProviderInit*, UInt32),
@@ -4386,7 +4382,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemProviderInit, lpVtbl : IWbemProviderInitVtbl* do
+  record IWbemProviderInit, lpVtbl : IWbemProviderInitVtable* do
     GUID = LibC::GUID.new(0x1be41572_u32, 0x91dd_u16, 0x11d1_u16, StaticArray[0xae_u8, 0xb2_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemProviderInit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4404,7 +4400,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemHiPerfProviderVtbl,
+  record IWbemHiPerfProviderVtable,
     query_interface : Proc(IWbemHiPerfProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemHiPerfProvider*, UInt32),
     release : Proc(IWbemHiPerfProvider*, UInt32),
@@ -4417,7 +4413,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemHiPerfProvider, lpVtbl : IWbemHiPerfProviderVtbl* do
+  record IWbemHiPerfProvider, lpVtbl : IWbemHiPerfProviderVtable* do
     GUID = LibC::GUID.new(0x49353c93_u32, 0x516b_u16, 0x11d1_u16, StaticArray[0xae_u8, 0xa6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemHiPerfProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4450,7 +4446,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemDecoupledRegistrarVtbl,
+  record IWbemDecoupledRegistrarVtable,
     query_interface : Proc(IWbemDecoupledRegistrar*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemDecoupledRegistrar*, UInt32),
     release : Proc(IWbemDecoupledRegistrar*, UInt32),
@@ -4459,7 +4455,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemDecoupledRegistrar, lpVtbl : IWbemDecoupledRegistrarVtbl* do
+  record IWbemDecoupledRegistrar, lpVtbl : IWbemDecoupledRegistrarVtable* do
     GUID = LibC::GUID.new(0x1005cbcf_u32, 0xe64f_u16, 0x4646_u16, StaticArray[0xbc_u8, 0xd3_u8, 0x3a_u8, 0x8_u8, 0x9d_u8, 0x8a_u8, 0x84_u8, 0xb4_u8])
     def query_interface(this : IWbemDecoupledRegistrar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4480,7 +4476,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemProviderIdentityVtbl,
+  record IWbemProviderIdentityVtable,
     query_interface : Proc(IWbemProviderIdentity*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemProviderIdentity*, UInt32),
     release : Proc(IWbemProviderIdentity*, UInt32),
@@ -4488,7 +4484,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemProviderIdentity, lpVtbl : IWbemProviderIdentityVtbl* do
+  record IWbemProviderIdentity, lpVtbl : IWbemProviderIdentityVtable* do
     GUID = LibC::GUID.new(0x631f7d97_u32, 0xd993_u16, 0x11d2_u16, StaticArray[0xb3_u8, 0x39_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x4a_u8, 0xaf_u8])
     def query_interface(this : IWbemProviderIdentity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4506,7 +4502,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemDecoupledBasicEventProviderVtbl,
+  record IWbemDecoupledBasicEventProviderVtable,
     query_interface : Proc(IWbemDecoupledBasicEventProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemDecoupledBasicEventProvider*, UInt32),
     release : Proc(IWbemDecoupledBasicEventProvider*, UInt32),
@@ -4517,7 +4513,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemDecoupledBasicEventProvider, lpVtbl : IWbemDecoupledBasicEventProviderVtbl* do
+  record IWbemDecoupledBasicEventProvider, lpVtbl : IWbemDecoupledBasicEventProviderVtable* do
     GUID = LibC::GUID.new(0x86336d20_u32, 0xca11_u16, 0x4786_u16, StaticArray[0x9e_u8, 0xf1_u8, 0xbc_u8, 0x8a_u8, 0x94_u8, 0x6b_u8, 0x42_u8, 0xfc_u8])
     def query_interface(this : IWbemDecoupledBasicEventProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4544,7 +4540,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemEventSinkVtbl,
+  record IWbemEventSinkVtable,
     query_interface : Proc(IWbemEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemEventSink*, UInt32),
     release : Proc(IWbemEventSink*, UInt32),
@@ -4557,7 +4553,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemEventSink, lpVtbl : IWbemEventSinkVtbl* do
+  record IWbemEventSink, lpVtbl : IWbemEventSinkVtable* do
     GUID = LibC::GUID.new(0x3ae0080a_u32, 0x7e3a_u16, 0x4366_u16, StaticArray[0xbf_u8, 0x89_u8, 0xf_u8, 0xee_u8, 0xdc_u8, 0x93_u8, 0x16_u8, 0x59_u8])
     def query_interface(this : IWbemEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4590,7 +4586,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemServicesVtbl,
+  record ISWbemServicesVtable,
     query_interface : Proc(ISWbemServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemServices*, UInt32),
     release : Proc(ISWbemServices*, UInt32),
@@ -4620,7 +4616,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemServices, lpVtbl : ISWbemServicesVtbl* do
+  record ISWbemServices, lpVtbl : ISWbemServicesVtable* do
     GUID = LibC::GUID.new(0x76a6415c_u32, 0xcb41_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x2_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4704,7 +4700,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemLocatorVtbl,
+  record ISWbemLocatorVtable,
     query_interface : Proc(ISWbemLocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemLocator*, UInt32),
     release : Proc(ISWbemLocator*, UInt32),
@@ -4717,7 +4713,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemLocator, lpVtbl : ISWbemLocatorVtbl* do
+  record ISWbemLocator, lpVtbl : ISWbemLocatorVtable* do
     GUID = LibC::GUID.new(0x76a6415b_u32, 0xcb41_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x2_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4750,7 +4746,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemObjectVtbl,
+  record ISWbemObjectVtable,
     query_interface : Proc(ISWbemObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemObject*, UInt32),
     release : Proc(ISWbemObject*, UInt32),
@@ -4786,7 +4782,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemObject, lpVtbl : ISWbemObjectVtbl* do
+  record ISWbemObject, lpVtbl : ISWbemObjectVtable* do
     GUID = LibC::GUID.new(0x76a6415a_u32, 0xcb41_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x2_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4888,7 +4884,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemObjectSetVtbl,
+  record ISWbemObjectSetVtable,
     query_interface : Proc(ISWbemObjectSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemObjectSet*, UInt32),
     release : Proc(ISWbemObjectSet*, UInt32),
@@ -4904,7 +4900,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemObjectSet, lpVtbl : ISWbemObjectSetVtbl* do
+  record ISWbemObjectSet, lpVtbl : ISWbemObjectSetVtable* do
     GUID = LibC::GUID.new(0x76a6415f_u32, 0xcb41_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x2_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemObjectSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4946,7 +4942,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemNamedValueVtbl,
+  record ISWbemNamedValueVtable,
     query_interface : Proc(ISWbemNamedValue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemNamedValue*, UInt32),
     release : Proc(ISWbemNamedValue*, UInt32),
@@ -4960,7 +4956,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemNamedValue, lpVtbl : ISWbemNamedValueVtbl* do
+  record ISWbemNamedValue, lpVtbl : ISWbemNamedValueVtable* do
     GUID = LibC::GUID.new(0x76a64164_u32, 0xcb41_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x2_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemNamedValue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4996,7 +4992,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemNamedValueSetVtbl,
+  record ISWbemNamedValueSetVtable,
     query_interface : Proc(ISWbemNamedValueSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemNamedValueSet*, UInt32),
     release : Proc(ISWbemNamedValueSet*, UInt32),
@@ -5014,7 +5010,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemNamedValueSet, lpVtbl : ISWbemNamedValueSetVtbl* do
+  record ISWbemNamedValueSet, lpVtbl : ISWbemNamedValueSetVtable* do
     GUID = LibC::GUID.new(0xcf2376ea_u32, 0xce8c_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x5_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemNamedValueSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5062,7 +5058,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemQualifierVtbl,
+  record ISWbemQualifierVtable,
     query_interface : Proc(ISWbemQualifier*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemQualifier*, UInt32),
     release : Proc(ISWbemQualifier*, UInt32),
@@ -5084,7 +5080,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemQualifier, lpVtbl : ISWbemQualifierVtbl* do
+  record ISWbemQualifier, lpVtbl : ISWbemQualifierVtable* do
     GUID = LibC::GUID.new(0x79b05932_u32, 0xd3b7_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x6_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemQualifier*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5144,7 +5140,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemQualifierSetVtbl,
+  record ISWbemQualifierSetVtable,
     query_interface : Proc(ISWbemQualifierSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemQualifierSet*, UInt32),
     release : Proc(ISWbemQualifierSet*, UInt32),
@@ -5160,7 +5156,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemQualifierSet, lpVtbl : ISWbemQualifierSetVtbl* do
+  record ISWbemQualifierSet, lpVtbl : ISWbemQualifierSetVtable* do
     GUID = LibC::GUID.new(0x9b16ed16_u32, 0xd3df_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x8_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemQualifierSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5202,7 +5198,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemPropertyVtbl,
+  record ISWbemPropertyVtable,
     query_interface : Proc(ISWbemProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemProperty*, UInt32),
     release : Proc(ISWbemProperty*, UInt32),
@@ -5221,7 +5217,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemProperty, lpVtbl : ISWbemPropertyVtbl* do
+  record ISWbemProperty, lpVtbl : ISWbemPropertyVtable* do
     GUID = LibC::GUID.new(0x1a388f98_u32, 0xd4ba_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x9_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5272,7 +5268,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemPropertySetVtbl,
+  record ISWbemPropertySetVtable,
     query_interface : Proc(ISWbemPropertySet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemPropertySet*, UInt32),
     release : Proc(ISWbemPropertySet*, UInt32),
@@ -5288,7 +5284,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemPropertySet, lpVtbl : ISWbemPropertySetVtbl* do
+  record ISWbemPropertySet, lpVtbl : ISWbemPropertySetVtable* do
     GUID = LibC::GUID.new(0xdea0a7b2_u32, 0xd4ba_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x9_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemPropertySet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5330,7 +5326,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemMethodVtbl,
+  record ISWbemMethodVtable,
     query_interface : Proc(ISWbemMethod*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemMethod*, UInt32),
     release : Proc(ISWbemMethod*, UInt32),
@@ -5346,7 +5342,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemMethod, lpVtbl : ISWbemMethodVtbl* do
+  record ISWbemMethod, lpVtbl : ISWbemMethodVtable* do
     GUID = LibC::GUID.new(0x422e8e90_u32, 0xd955_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x9_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemMethod*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5388,7 +5384,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemMethodSetVtbl,
+  record ISWbemMethodSetVtable,
     query_interface : Proc(ISWbemMethodSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemMethodSet*, UInt32),
     release : Proc(ISWbemMethodSet*, UInt32),
@@ -5402,7 +5398,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemMethodSet, lpVtbl : ISWbemMethodSetVtbl* do
+  record ISWbemMethodSet, lpVtbl : ISWbemMethodSetVtable* do
     GUID = LibC::GUID.new(0xc93ba292_u32, 0xd955_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x9_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemMethodSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5438,7 +5434,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemEventSourceVtbl,
+  record ISWbemEventSourceVtable,
     query_interface : Proc(ISWbemEventSource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemEventSource*, UInt32),
     release : Proc(ISWbemEventSource*, UInt32),
@@ -5451,7 +5447,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemEventSource, lpVtbl : ISWbemEventSourceVtbl* do
+  record ISWbemEventSource, lpVtbl : ISWbemEventSourceVtable* do
     GUID = LibC::GUID.new(0x27d54d92_u32, 0xebe_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x22_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemEventSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5484,7 +5480,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemObjectPathVtbl,
+  record ISWbemObjectPathVtable,
     query_interface : Proc(ISWbemObjectPath*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemObjectPath*, UInt32),
     release : Proc(ISWbemObjectPath*, UInt32),
@@ -5518,7 +5514,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemObjectPath, lpVtbl : ISWbemObjectPathVtbl* do
+  record ISWbemObjectPath, lpVtbl : ISWbemObjectPathVtable* do
     GUID = LibC::GUID.new(0x5791bc27_u32, 0xce9c_u16, 0x11d1_u16, StaticArray[0x97_u8, 0xbf_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x1e_u8, 0x84_u8, 0x9c_u8])
     def query_interface(this : ISWbemObjectPath*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5614,7 +5610,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemLastErrorVtbl,
+  record ISWbemLastErrorVtable,
     query_interface : Proc(ISWbemLastError*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemLastError*, UInt32),
     release : Proc(ISWbemLastError*, UInt32),
@@ -5650,7 +5646,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemLastError, lpVtbl : ISWbemLastErrorVtbl* do
+  record ISWbemLastError, lpVtbl : ISWbemLastErrorVtable* do
     GUID = LibC::GUID.new(0xd962db84_u32, 0xd4bb_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x9_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemLastError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5752,7 +5748,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemSinkEventsVtbl,
+  record ISWbemSinkEventsVtable,
     query_interface : Proc(ISWbemSinkEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemSinkEvents*, UInt32),
     release : Proc(ISWbemSinkEvents*, UInt32),
@@ -5763,7 +5759,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemSinkEvents, lpVtbl : ISWbemSinkEventsVtbl* do
+  record ISWbemSinkEvents, lpVtbl : ISWbemSinkEventsVtable* do
     GUID = LibC::GUID.new(0x75718ca0_u32, 0xf029_u16, 0x11d1_u16, StaticArray[0xa1_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xc2_u8, 0x23_u8])
     def query_interface(this : ISWbemSinkEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5790,7 +5786,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemSinkVtbl,
+  record ISWbemSinkVtable,
     query_interface : Proc(ISWbemSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemSink*, UInt32),
     release : Proc(ISWbemSink*, UInt32),
@@ -5802,7 +5798,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemSink, lpVtbl : ISWbemSinkVtbl* do
+  record ISWbemSink, lpVtbl : ISWbemSinkVtable* do
     GUID = LibC::GUID.new(0x75718c9f_u32, 0xf029_u16, 0x11d1_u16, StaticArray[0xa1_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xc2_u8, 0x23_u8])
     def query_interface(this : ISWbemSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5832,7 +5828,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemSecurityVtbl,
+  record ISWbemSecurityVtable,
     query_interface : Proc(ISWbemSecurity*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemSecurity*, UInt32),
     release : Proc(ISWbemSecurity*, UInt32),
@@ -5848,7 +5844,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemSecurity, lpVtbl : ISWbemSecurityVtbl* do
+  record ISWbemSecurity, lpVtbl : ISWbemSecurityVtable* do
     GUID = LibC::GUID.new(0xb54d66e6_u32, 0x2287_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x33_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemSecurity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5890,7 +5886,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemPrivilegeVtbl,
+  record ISWbemPrivilegeVtable,
     query_interface : Proc(ISWbemPrivilege*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemPrivilege*, UInt32),
     release : Proc(ISWbemPrivilege*, UInt32),
@@ -5906,7 +5902,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemPrivilege, lpVtbl : ISWbemPrivilegeVtbl* do
+  record ISWbemPrivilege, lpVtbl : ISWbemPrivilegeVtable* do
     GUID = LibC::GUID.new(0x26ee67bd_u32, 0x5804_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x4a_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemPrivilege*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5948,7 +5944,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemPrivilegeSetVtbl,
+  record ISWbemPrivilegeSetVtable,
     query_interface : Proc(ISWbemPrivilegeSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemPrivilegeSet*, UInt32),
     release : Proc(ISWbemPrivilegeSet*, UInt32),
@@ -5966,7 +5962,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemPrivilegeSet, lpVtbl : ISWbemPrivilegeSetVtbl* do
+  record ISWbemPrivilegeSet, lpVtbl : ISWbemPrivilegeSetVtable* do
     GUID = LibC::GUID.new(0x26ee67bf_u32, 0x5804_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x4a_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x6_u8, 0xd9_u8, 0xb6_u8])
     def query_interface(this : ISWbemPrivilegeSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6014,7 +6010,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemServicesExVtbl,
+  record ISWbemServicesExVtable,
     query_interface : Proc(ISWbemServicesEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemServicesEx*, UInt32),
     release : Proc(ISWbemServicesEx*, UInt32),
@@ -6046,7 +6042,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemServicesEx, lpVtbl : ISWbemServicesExVtbl* do
+  record ISWbemServicesEx, lpVtbl : ISWbemServicesExVtable* do
     GUID = LibC::GUID.new(0xd2f68443_u32, 0x85dc_u16, 0x427e_u16, StaticArray[0x91_u8, 0xd8_u8, 0x36_u8, 0x65_u8, 0x54_u8, 0xcc_u8, 0x75_u8, 0x4c_u8])
     def query_interface(this : ISWbemServicesEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6136,7 +6132,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemObjectExVtbl,
+  record ISWbemObjectExVtable,
     query_interface : Proc(ISWbemObjectEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemObjectEx*, UInt32),
     release : Proc(ISWbemObjectEx*, UInt32),
@@ -6176,7 +6172,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemObjectEx, lpVtbl : ISWbemObjectExVtbl* do
+  record ISWbemObjectEx, lpVtbl : ISWbemObjectExVtable* do
     GUID = LibC::GUID.new(0x269ad56a_u32, 0x8a67_u16, 0x4129_u16, StaticArray[0xbc_u8, 0x8c_u8, 0x5_u8, 0x6_u8, 0xdc_u8, 0xfe_u8, 0x98_u8, 0x80_u8])
     def query_interface(this : ISWbemObjectEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6290,7 +6286,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemDateTimeVtbl,
+  record ISWbemDateTimeVtable,
     query_interface : Proc(ISWbemDateTime*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemDateTime*, UInt32),
     release : Proc(ISWbemDateTime*, UInt32),
@@ -6341,7 +6337,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemDateTime, lpVtbl : ISWbemDateTimeVtbl* do
+  record ISWbemDateTime, lpVtbl : ISWbemDateTimeVtable* do
     GUID = LibC::GUID.new(0x5e97458a_u32, 0xcf77_u16, 0x11d3_u16, StaticArray[0xb3_u8, 0x8f_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x47_u8, 0x3a_u8])
     def query_interface(this : ISWbemDateTime*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6488,7 +6484,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemRefresherVtbl,
+  record ISWbemRefresherVtable,
     query_interface : Proc(ISWbemRefresher*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemRefresher*, UInt32),
     release : Proc(ISWbemRefresher*, UInt32),
@@ -6509,7 +6505,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemRefresher, lpVtbl : ISWbemRefresherVtbl* do
+  record ISWbemRefresher, lpVtbl : ISWbemRefresherVtable* do
     GUID = LibC::GUID.new(0x14d8250e_u32, 0xd9c2_u16, 0x11d3_u16, StaticArray[0xb3_u8, 0x8f_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x47_u8, 0x3a_u8])
     def query_interface(this : ISWbemRefresher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6566,7 +6562,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record ISWbemRefreshableItemVtbl,
+  record ISWbemRefreshableItemVtable,
     query_interface : Proc(ISWbemRefreshableItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISWbemRefreshableItem*, UInt32),
     release : Proc(ISWbemRefreshableItem*, UInt32),
@@ -6583,7 +6579,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record ISWbemRefreshableItem, lpVtbl : ISWbemRefreshableItemVtbl* do
+  record ISWbemRefreshableItem, lpVtbl : ISWbemRefreshableItemVtable* do
     GUID = LibC::GUID.new(0x5ad4bf92_u32, 0xdaab_u16, 0x11d3_u16, StaticArray[0xb3_u8, 0x8f_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x1f_u8, 0x47_u8, 0x3a_u8])
     def query_interface(this : ISWbemRefreshableItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6628,7 +6624,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWMIExtensionVtbl,
+  record IWMIExtensionVtable,
     query_interface : Proc(IWMIExtension*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMIExtension*, UInt32),
     release : Proc(IWMIExtension*, UInt32),
@@ -6642,7 +6638,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWMIExtension, lpVtbl : IWMIExtensionVtbl* do
+  record IWMIExtension, lpVtbl : IWMIExtensionVtable* do
     GUID = LibC::GUID.new(0xadc1f06e_u32, 0x5c7e_u16, 0x11d2_u16, StaticArray[0x8b_u8, 0x74_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0x2a_u8, 0xfb_u8, 0x41_u8])
     def query_interface(this : IWMIExtension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6678,7 +6674,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemTransportVtbl,
+  record IWbemTransportVtable,
     query_interface : Proc(IWbemTransport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemTransport*, UInt32),
     release : Proc(IWbemTransport*, UInt32),
@@ -6686,7 +6682,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemTransport, lpVtbl : IWbemTransportVtbl* do
+  record IWbemTransport, lpVtbl : IWbemTransportVtable* do
     GUID = LibC::GUID.new(0x553fe584_u32, 0x2156_u16, 0x11d0_u16, StaticArray[0xb6_u8, 0xae_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x32_u8, 0x40_u8, 0xc7_u8])
     def query_interface(this : IWbemTransport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6704,7 +6700,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemLevel1LoginVtbl,
+  record IWbemLevel1LoginVtable,
     query_interface : Proc(IWbemLevel1Login*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemLevel1Login*, UInt32),
     release : Proc(IWbemLevel1Login*, UInt32),
@@ -6715,7 +6711,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemLevel1Login, lpVtbl : IWbemLevel1LoginVtbl* do
+  record IWbemLevel1Login, lpVtbl : IWbemLevel1LoginVtable* do
     GUID = LibC::GUID.new(0xf309ad18_u32, 0xd86a_u16, 0x11d0_u16, StaticArray[0xa0_u8, 0x75_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x88_u8, 0x20_u8])
     def query_interface(this : IWbemLevel1Login*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6742,7 +6738,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemConnectorLoginVtbl,
+  record IWbemConnectorLoginVtable,
     query_interface : Proc(IWbemConnectorLogin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemConnectorLogin*, UInt32),
     release : Proc(IWbemConnectorLogin*, UInt32),
@@ -6750,7 +6746,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemConnectorLogin, lpVtbl : IWbemConnectorLoginVtbl* do
+  record IWbemConnectorLogin, lpVtbl : IWbemConnectorLoginVtable* do
     GUID = LibC::GUID.new(0xd8ec9cb1_u32, 0xb135_u16, 0x4f10_u16, StaticArray[0x8b_u8, 0x1b_u8, 0xc7_u8, 0x18_u8, 0x8b_u8, 0xb0_u8, 0xd1_u8, 0x86_u8])
     def query_interface(this : IWbemConnectorLogin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6768,7 +6764,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemAddressResolutionVtbl,
+  record IWbemAddressResolutionVtable,
     query_interface : Proc(IWbemAddressResolution*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemAddressResolution*, UInt32),
     release : Proc(IWbemAddressResolution*, UInt32),
@@ -6776,7 +6772,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemAddressResolution, lpVtbl : IWbemAddressResolutionVtbl* do
+  record IWbemAddressResolution, lpVtbl : IWbemAddressResolutionVtable* do
     GUID = LibC::GUID.new(0xf7ce2e12_u32, 0x8c90_u16, 0x11d1_u16, StaticArray[0x9e_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x24_u8, 0xa8_u8])
     def query_interface(this : IWbemAddressResolution*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6794,7 +6790,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemClientTransportVtbl,
+  record IWbemClientTransportVtable,
     query_interface : Proc(IWbemClientTransport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemClientTransport*, UInt32),
     release : Proc(IWbemClientTransport*, UInt32),
@@ -6802,7 +6798,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemClientTransport, lpVtbl : IWbemClientTransportVtbl* do
+  record IWbemClientTransport, lpVtbl : IWbemClientTransportVtable* do
     GUID = LibC::GUID.new(0xf7ce2e11_u32, 0x8c90_u16, 0x11d1_u16, StaticArray[0x9e_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x24_u8, 0xa8_u8])
     def query_interface(this : IWbemClientTransport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6820,7 +6816,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemClientConnectionTransportVtbl,
+  record IWbemClientConnectionTransportVtable,
     query_interface : Proc(IWbemClientConnectionTransport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemClientConnectionTransport*, UInt32),
     release : Proc(IWbemClientConnectionTransport*, UInt32),
@@ -6830,7 +6826,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemClientConnectionTransport, lpVtbl : IWbemClientConnectionTransportVtbl* do
+  record IWbemClientConnectionTransport, lpVtbl : IWbemClientConnectionTransportVtable* do
     GUID = LibC::GUID.new(0xa889c72a_u32, 0xfcc1_u16, 0x4a9e_u16, StaticArray[0xaf_u8, 0x61_u8, 0xed_u8, 0x7_u8, 0x13_u8, 0x33_u8, 0xfb_u8, 0x5b_u8])
     def query_interface(this : IWbemClientConnectionTransport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6854,7 +6850,7 @@ module Win32cr::System::Wmi
   end
 
   @[Extern]
-  record IWbemConstructClassObjectVtbl,
+  record IWbemConstructClassObjectVtable,
     query_interface : Proc(IWbemConstructClassObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWbemConstructClassObject*, UInt32),
     release : Proc(IWbemConstructClassObject*, UInt32),
@@ -6865,7 +6861,7 @@ module Win32cr::System::Wmi
 
 
   @[Extern]
-  record IWbemConstructClassObject, lpVtbl : IWbemConstructClassObjectVtbl* do
+  record IWbemConstructClassObject, lpVtbl : IWbemConstructClassObjectVtable* do
     GUID = LibC::GUID.new(0x9ef76194_u32, 0x70d5_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x90_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xfd_u8, 0xff_u8])
     def query_interface(this : IWbemConstructClassObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6892,13 +6888,17 @@ module Win32cr::System::Wmi
   end
 
   def mIApplicationInitializeV1(flags : UInt32, applicationID : UInt16*, extendedError : Win32cr::System::Wmi::MI_Instance**, application : Win32cr::System::Wmi::MI_Application*) : Win32cr::System::Wmi::MI_Result
+    {% if !flag?(:docs) %}
     C.MI_Application_InitializeV1(flags, applicationID, extendedError, application)
+    {% end %}
   end
 
   @[Link("mi")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun MI_Application_InitializeV1(flags : UInt32, applicationID : UInt16*, extendedError : Win32cr::System::Wmi::MI_Instance**, application : Win32cr::System::Wmi::MI_Application*) : Win32cr::System::Wmi::MI_Result
 
   end
+  {% end %}
 end

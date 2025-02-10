@@ -134,7 +134,7 @@ module Win32cr::Graphics::DirectManipulation
   end
 
   @[Extern]
-  record IDirectManipulationManagerVtbl,
+  record IDirectManipulationManagerVtable,
     query_interface : Proc(IDirectManipulationManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectManipulationManager*, UInt32),
     release : Proc(IDirectManipulationManager*, UInt32),
@@ -148,7 +148,7 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  record IDirectManipulationManager, lpVtbl : IDirectManipulationManagerVtbl* do
+  record IDirectManipulationManager, lpVtbl : IDirectManipulationManagerVtable* do
     GUID = LibC::GUID.new(0xfbf5d3b4_u32, 0x70c7_u16, 0x4163_u16, StaticArray[0x93_u8, 0x22_u8, 0x5a_u8, 0x6f_u8, 0x66_u8, 0xd_u8, 0x6f_u8, 0xbc_u8])
     def query_interface(this : IDirectManipulationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -184,7 +184,7 @@ module Win32cr::Graphics::DirectManipulation
   end
 
   @[Extern]
-  record IDirectManipulationManager2Vtbl,
+  record IDirectManipulationManager2Vtable,
     query_interface : Proc(IDirectManipulationManager2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectManipulationManager2*, UInt32),
     release : Proc(IDirectManipulationManager2*, UInt32),
@@ -199,7 +199,7 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  record IDirectManipulationManager2, lpVtbl : IDirectManipulationManager2Vtbl* do
+  record IDirectManipulationManager2, lpVtbl : IDirectManipulationManager2Vtable* do
     GUID = LibC::GUID.new(0xfa1005e9_u32, 0x3d16_u16, 0x484c_u16, StaticArray[0xbf_u8, 0xc9_u8, 0x62_u8, 0xb6_u8, 0x1e_u8, 0x56_u8, 0xec_u8, 0x4e_u8])
     def query_interface(this : IDirectManipulationManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -238,7 +238,7 @@ module Win32cr::Graphics::DirectManipulation
   end
 
   @[Extern]
-  record IDirectManipulationManager3Vtbl,
+  record IDirectManipulationManager3Vtable,
     query_interface : Proc(IDirectManipulationManager3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectManipulationManager3*, UInt32),
     release : Proc(IDirectManipulationManager3*, UInt32),
@@ -254,7 +254,7 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  record IDirectManipulationManager3, lpVtbl : IDirectManipulationManager3Vtbl* do
+  record IDirectManipulationManager3, lpVtbl : IDirectManipulationManager3Vtable* do
     GUID = LibC::GUID.new(0x2cb6b33d_u32, 0xffe8_u16, 0x488c_u16, StaticArray[0xb7_u8, 0x50_u8, 0xfb_u8, 0xdf_u8, 0xe8_u8, 0x8d_u8, 0xca_u8, 0x8c_u8])
     def query_interface(this : IDirectManipulationManager3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -296,7 +296,7 @@ module Win32cr::Graphics::DirectManipulation
   end
 
   @[Extern]
-  record IDirectManipulationViewportVtbl,
+  record IDirectManipulationViewportVtable,
     query_interface : Proc(IDirectManipulationViewport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectManipulationViewport*, UInt32),
     release : Proc(IDirectManipulationViewport*, UInt32),
@@ -331,7 +331,7 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  record IDirectManipulationViewport, lpVtbl : IDirectManipulationViewportVtbl* do
+  record IDirectManipulationViewport, lpVtbl : IDirectManipulationViewportVtable* do
     GUID = LibC::GUID.new(0x28b85a3d_u32, 0x60a0_u16, 0x48bd_u16, StaticArray[0x9b_u8, 0xa1_u8, 0x5c_u8, 0xe8_u8, 0xd9_u8, 0xea_u8, 0x3a_u8, 0x6d_u8])
     def query_interface(this : IDirectManipulationViewport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -430,7 +430,7 @@ module Win32cr::Graphics::DirectManipulation
   end
 
   @[Extern]
-  record IDirectManipulationViewport2Vtbl,
+  record IDirectManipulationViewport2Vtable,
     query_interface : Proc(IDirectManipulationViewport2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectManipulationViewport2*, UInt32),
     release : Proc(IDirectManipulationViewport2*, UInt32),
@@ -468,7 +468,7 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  record IDirectManipulationViewport2, lpVtbl : IDirectManipulationViewport2Vtbl* do
+  record IDirectManipulationViewport2, lpVtbl : IDirectManipulationViewport2Vtable* do
     GUID = LibC::GUID.new(0x923ccaac_u32, 0x61e1_u16, 0x4385_u16, StaticArray[0xb7_u8, 0x26_u8, 0x1_u8, 0x7a_u8, 0xf1_u8, 0x89_u8, 0x88_u8, 0x2a_u8])
     def query_interface(this : IDirectManipulationViewport2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -576,7 +576,7 @@ module Win32cr::Graphics::DirectManipulation
   end
 
   @[Extern]
-  record IDirectManipulationViewportEventHandlerVtbl,
+  record IDirectManipulationViewportEventHandlerVtable,
     query_interface : Proc(IDirectManipulationViewportEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectManipulationViewportEventHandler*, UInt32),
     release : Proc(IDirectManipulationViewportEventHandler*, UInt32),
@@ -586,7 +586,7 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  record IDirectManipulationViewportEventHandler, lpVtbl : IDirectManipulationViewportEventHandlerVtbl* do
+  record IDirectManipulationViewportEventHandler, lpVtbl : IDirectManipulationViewportEventHandlerVtable* do
     GUID = LibC::GUID.new(0x952121da_u32, 0xd69f_u16, 0x45f9_u16, StaticArray[0xb0_u8, 0xf9_u8, 0xf2_u8, 0x39_u8, 0x44_u8, 0x32_u8, 0x1a_u8, 0x6d_u8])
     def query_interface(this : IDirectManipulationViewportEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -610,7 +610,7 @@ module Win32cr::Graphics::DirectManipulation
   end
 
   @[Extern]
-  record IDirectManipulationContentVtbl,
+  record IDirectManipulationContentVtable,
     query_interface : Proc(IDirectManipulationContent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectManipulationContent*, UInt32),
     release : Proc(IDirectManipulationContent*, UInt32),
@@ -625,7 +625,7 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  record IDirectManipulationContent, lpVtbl : IDirectManipulationContentVtbl* do
+  record IDirectManipulationContent, lpVtbl : IDirectManipulationContentVtable* do
     GUID = LibC::GUID.new(0xb89962cb_u32, 0x3d89_u16, 0x442b_u16, StaticArray[0xbb_u8, 0x58_u8, 0x50_u8, 0x98_u8, 0xfa_u8, 0xf_u8, 0x9f_u8, 0x16_u8])
     def query_interface(this : IDirectManipulationContent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -664,7 +664,7 @@ module Win32cr::Graphics::DirectManipulation
   end
 
   @[Extern]
-  record IDirectManipulationPrimaryContentVtbl,
+  record IDirectManipulationPrimaryContentVtable,
     query_interface : Proc(IDirectManipulationPrimaryContent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectManipulationPrimaryContent*, UInt32),
     release : Proc(IDirectManipulationPrimaryContent*, UInt32),
@@ -680,7 +680,7 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  record IDirectManipulationPrimaryContent, lpVtbl : IDirectManipulationPrimaryContentVtbl* do
+  record IDirectManipulationPrimaryContent, lpVtbl : IDirectManipulationPrimaryContentVtable* do
     GUID = LibC::GUID.new(0xc12851e4_u32, 0x1698_u16, 0x4625_u16, StaticArray[0xb9_u8, 0xb1_u8, 0x7c_u8, 0xa3_u8, 0xec_u8, 0x18_u8, 0x63_u8, 0xb_u8])
     def query_interface(this : IDirectManipulationPrimaryContent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -722,7 +722,7 @@ module Win32cr::Graphics::DirectManipulation
   end
 
   @[Extern]
-  record IDirectManipulationDragDropEventHandlerVtbl,
+  record IDirectManipulationDragDropEventHandlerVtable,
     query_interface : Proc(IDirectManipulationDragDropEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectManipulationDragDropEventHandler*, UInt32),
     release : Proc(IDirectManipulationDragDropEventHandler*, UInt32),
@@ -730,7 +730,7 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  record IDirectManipulationDragDropEventHandler, lpVtbl : IDirectManipulationDragDropEventHandlerVtbl* do
+  record IDirectManipulationDragDropEventHandler, lpVtbl : IDirectManipulationDragDropEventHandlerVtable* do
     GUID = LibC::GUID.new(0x1fa11b10_u32, 0x701b_u16, 0x41ae_u16, StaticArray[0xb5_u8, 0xf2_u8, 0x49_u8, 0xe3_u8, 0x6b_u8, 0xd5_u8, 0x95_u8, 0xaa_u8])
     def query_interface(this : IDirectManipulationDragDropEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -748,7 +748,7 @@ module Win32cr::Graphics::DirectManipulation
   end
 
   @[Extern]
-  record IDirectManipulationDragDropBehaviorVtbl,
+  record IDirectManipulationDragDropBehaviorVtable,
     query_interface : Proc(IDirectManipulationDragDropBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectManipulationDragDropBehavior*, UInt32),
     release : Proc(IDirectManipulationDragDropBehavior*, UInt32),
@@ -757,7 +757,7 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  record IDirectManipulationDragDropBehavior, lpVtbl : IDirectManipulationDragDropBehaviorVtbl* do
+  record IDirectManipulationDragDropBehavior, lpVtbl : IDirectManipulationDragDropBehaviorVtable* do
     GUID = LibC::GUID.new(0x814b5af5_u32, 0xc2c8_u16, 0x4270_u16, StaticArray[0xa9_u8, 0xb7_u8, 0xa1_u8, 0x98_u8, 0xce_u8, 0x8d_u8, 0x2_u8, 0xfa_u8])
     def query_interface(this : IDirectManipulationDragDropBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -778,7 +778,7 @@ module Win32cr::Graphics::DirectManipulation
   end
 
   @[Extern]
-  record IDirectManipulationInteractionEventHandlerVtbl,
+  record IDirectManipulationInteractionEventHandlerVtable,
     query_interface : Proc(IDirectManipulationInteractionEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectManipulationInteractionEventHandler*, UInt32),
     release : Proc(IDirectManipulationInteractionEventHandler*, UInt32),
@@ -786,7 +786,7 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  record IDirectManipulationInteractionEventHandler, lpVtbl : IDirectManipulationInteractionEventHandlerVtbl* do
+  record IDirectManipulationInteractionEventHandler, lpVtbl : IDirectManipulationInteractionEventHandlerVtable* do
     GUID = LibC::GUID.new(0xe43f45b8_u32, 0x42b4_u16, 0x403e_u16, StaticArray[0xb1_u8, 0xf2_u8, 0x27_u8, 0x3b_u8, 0x8f_u8, 0x51_u8, 0x8_u8, 0x30_u8])
     def query_interface(this : IDirectManipulationInteractionEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -804,7 +804,7 @@ module Win32cr::Graphics::DirectManipulation
   end
 
   @[Extern]
-  record IDirectManipulationFrameInfoProviderVtbl,
+  record IDirectManipulationFrameInfoProviderVtable,
     query_interface : Proc(IDirectManipulationFrameInfoProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectManipulationFrameInfoProvider*, UInt32),
     release : Proc(IDirectManipulationFrameInfoProvider*, UInt32),
@@ -812,7 +812,7 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  record IDirectManipulationFrameInfoProvider, lpVtbl : IDirectManipulationFrameInfoProviderVtbl* do
+  record IDirectManipulationFrameInfoProvider, lpVtbl : IDirectManipulationFrameInfoProviderVtable* do
     GUID = LibC::GUID.new(0xfb759dba_u32, 0x6f4c_u16, 0x4c01_u16, StaticArray[0x87_u8, 0x4e_u8, 0x19_u8, 0xc8_u8, 0xa0_u8, 0x59_u8, 0x7_u8, 0xf9_u8])
     def query_interface(this : IDirectManipulationFrameInfoProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -830,7 +830,7 @@ module Win32cr::Graphics::DirectManipulation
   end
 
   @[Extern]
-  record IDirectManipulationCompositorVtbl,
+  record IDirectManipulationCompositorVtable,
     query_interface : Proc(IDirectManipulationCompositor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectManipulationCompositor*, UInt32),
     release : Proc(IDirectManipulationCompositor*, UInt32),
@@ -841,7 +841,7 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  record IDirectManipulationCompositor, lpVtbl : IDirectManipulationCompositorVtbl* do
+  record IDirectManipulationCompositor, lpVtbl : IDirectManipulationCompositorVtable* do
     GUID = LibC::GUID.new(0x537a0825_u32, 0x387_u16, 0x4efa_u16, StaticArray[0xb6_u8, 0x2f_u8, 0x71_u8, 0xeb_u8, 0x1f_u8, 0x8_u8, 0x5a_u8, 0x7e_u8])
     def query_interface(this : IDirectManipulationCompositor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -868,7 +868,7 @@ module Win32cr::Graphics::DirectManipulation
   end
 
   @[Extern]
-  record IDirectManipulationCompositor2Vtbl,
+  record IDirectManipulationCompositor2Vtable,
     query_interface : Proc(IDirectManipulationCompositor2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectManipulationCompositor2*, UInt32),
     release : Proc(IDirectManipulationCompositor2*, UInt32),
@@ -880,7 +880,7 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  record IDirectManipulationCompositor2, lpVtbl : IDirectManipulationCompositor2Vtbl* do
+  record IDirectManipulationCompositor2, lpVtbl : IDirectManipulationCompositor2Vtable* do
     GUID = LibC::GUID.new(0xd38c7822_u32, 0xf1cb_u16, 0x43cb_u16, StaticArray[0xb4_u8, 0xb9_u8, 0xac_u8, 0xc_u8, 0x76_u8, 0x7a_u8, 0x41_u8, 0x2e_u8])
     def query_interface(this : IDirectManipulationCompositor2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -910,7 +910,7 @@ module Win32cr::Graphics::DirectManipulation
   end
 
   @[Extern]
-  record IDirectManipulationUpdateHandlerVtbl,
+  record IDirectManipulationUpdateHandlerVtable,
     query_interface : Proc(IDirectManipulationUpdateHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectManipulationUpdateHandler*, UInt32),
     release : Proc(IDirectManipulationUpdateHandler*, UInt32),
@@ -918,7 +918,7 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  record IDirectManipulationUpdateHandler, lpVtbl : IDirectManipulationUpdateHandlerVtbl* do
+  record IDirectManipulationUpdateHandler, lpVtbl : IDirectManipulationUpdateHandlerVtable* do
     GUID = LibC::GUID.new(0x790b6337_u32, 0x64f8_u16, 0x4ff5_u16, StaticArray[0xa2_u8, 0x69_u8, 0xb3_u8, 0x2b_u8, 0xc2_u8, 0xaf_u8, 0x27_u8, 0xa7_u8])
     def query_interface(this : IDirectManipulationUpdateHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -936,7 +936,7 @@ module Win32cr::Graphics::DirectManipulation
   end
 
   @[Extern]
-  record IDirectManipulationUpdateManagerVtbl,
+  record IDirectManipulationUpdateManagerVtable,
     query_interface : Proc(IDirectManipulationUpdateManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectManipulationUpdateManager*, UInt32),
     release : Proc(IDirectManipulationUpdateManager*, UInt32),
@@ -946,7 +946,7 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  record IDirectManipulationUpdateManager, lpVtbl : IDirectManipulationUpdateManagerVtbl* do
+  record IDirectManipulationUpdateManager, lpVtbl : IDirectManipulationUpdateManagerVtable* do
     GUID = LibC::GUID.new(0xb0ae62fd_u32, 0xbe34_u16, 0x46e7_u16, StaticArray[0x9c_u8, 0xaa_u8, 0xd3_u8, 0x61_u8, 0xfa_u8, 0xcb_u8, 0xb9_u8, 0xcc_u8])
     def query_interface(this : IDirectManipulationUpdateManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -970,7 +970,7 @@ module Win32cr::Graphics::DirectManipulation
   end
 
   @[Extern]
-  record IDirectManipulationAutoScrollBehaviorVtbl,
+  record IDirectManipulationAutoScrollBehaviorVtable,
     query_interface : Proc(IDirectManipulationAutoScrollBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectManipulationAutoScrollBehavior*, UInt32),
     release : Proc(IDirectManipulationAutoScrollBehavior*, UInt32),
@@ -978,7 +978,7 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  record IDirectManipulationAutoScrollBehavior, lpVtbl : IDirectManipulationAutoScrollBehaviorVtbl* do
+  record IDirectManipulationAutoScrollBehavior, lpVtbl : IDirectManipulationAutoScrollBehaviorVtable* do
     GUID = LibC::GUID.new(0x6d5954d4_u32, 0x2003_u16, 0x4356_u16, StaticArray[0x9b_u8, 0x31_u8, 0xd0_u8, 0x51_u8, 0xc9_u8, 0xff_u8, 0xa_u8, 0xf7_u8])
     def query_interface(this : IDirectManipulationAutoScrollBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -996,7 +996,7 @@ module Win32cr::Graphics::DirectManipulation
   end
 
   @[Extern]
-  record IDirectManipulationDeferContactServiceVtbl,
+  record IDirectManipulationDeferContactServiceVtable,
     query_interface : Proc(IDirectManipulationDeferContactService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectManipulationDeferContactService*, UInt32),
     release : Proc(IDirectManipulationDeferContactService*, UInt32),
@@ -1006,7 +1006,7 @@ module Win32cr::Graphics::DirectManipulation
 
 
   @[Extern]
-  record IDirectManipulationDeferContactService, lpVtbl : IDirectManipulationDeferContactServiceVtbl* do
+  record IDirectManipulationDeferContactService, lpVtbl : IDirectManipulationDeferContactServiceVtable* do
     GUID = LibC::GUID.new(0x652d5c71_u32, 0xfe60_u16, 0x4a98_u16, StaticArray[0xbe_u8, 0x70_u8, 0xe5_u8, 0xf2_u8, 0x12_u8, 0x91_u8, 0xe7_u8, 0xf1_u8])
     def query_interface(this : IDirectManipulationDeferContactService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

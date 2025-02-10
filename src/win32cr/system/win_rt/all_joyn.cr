@@ -6,7 +6,7 @@ module Win32cr::System::WinRT::AllJoyn
 
 
   @[Extern]
-  record IWindowsDevicesAllJoynBusAttachmentInteropVtbl,
+  record IWindowsDevicesAllJoynBusAttachmentInteropVtable,
     query_interface : Proc(IWindowsDevicesAllJoynBusAttachmentInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsDevicesAllJoynBusAttachmentInterop*, UInt32),
     release : Proc(IWindowsDevicesAllJoynBusAttachmentInterop*, UInt32),
@@ -17,7 +17,7 @@ module Win32cr::System::WinRT::AllJoyn
 
 
   @[Extern]
-  record IWindowsDevicesAllJoynBusAttachmentInterop, lpVtbl : IWindowsDevicesAllJoynBusAttachmentInteropVtbl* do
+  record IWindowsDevicesAllJoynBusAttachmentInterop, lpVtbl : IWindowsDevicesAllJoynBusAttachmentInteropVtable* do
     GUID = LibC::GUID.new(0xfd89c65b_u32, 0xb50e_u16, 0x4a19_u16, StaticArray[0x9d_u8, 0xc_u8, 0xb4_u8, 0x2b_u8, 0x78_u8, 0x32_u8, 0x81_u8, 0xcd_u8])
     def query_interface(this : IWindowsDevicesAllJoynBusAttachmentInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44,7 +44,7 @@ module Win32cr::System::WinRT::AllJoyn
   end
 
   @[Extern]
-  record IWindowsDevicesAllJoynBusAttachmentFactoryInteropVtbl,
+  record IWindowsDevicesAllJoynBusAttachmentFactoryInteropVtable,
     query_interface : Proc(IWindowsDevicesAllJoynBusAttachmentFactoryInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsDevicesAllJoynBusAttachmentFactoryInterop*, UInt32),
     release : Proc(IWindowsDevicesAllJoynBusAttachmentFactoryInterop*, UInt32),
@@ -55,7 +55,7 @@ module Win32cr::System::WinRT::AllJoyn
 
 
   @[Extern]
-  record IWindowsDevicesAllJoynBusAttachmentFactoryInterop, lpVtbl : IWindowsDevicesAllJoynBusAttachmentFactoryInteropVtbl* do
+  record IWindowsDevicesAllJoynBusAttachmentFactoryInterop, lpVtbl : IWindowsDevicesAllJoynBusAttachmentFactoryInteropVtable* do
     GUID = LibC::GUID.new(0x4b8f7505_u32, 0xb239_u16, 0x4e7b_u16, StaticArray[0x88_u8, 0xaf_u8, 0xf6_u8, 0x68_u8, 0x25_u8, 0x75_u8, 0xd8_u8, 0x61_u8])
     def query_interface(this : IWindowsDevicesAllJoynBusAttachmentFactoryInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -82,7 +82,7 @@ module Win32cr::System::WinRT::AllJoyn
   end
 
   @[Extern]
-  record IWindowsDevicesAllJoynBusObjectInteropVtbl,
+  record IWindowsDevicesAllJoynBusObjectInteropVtable,
     query_interface : Proc(IWindowsDevicesAllJoynBusObjectInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsDevicesAllJoynBusObjectInterop*, UInt32),
     release : Proc(IWindowsDevicesAllJoynBusObjectInterop*, UInt32),
@@ -95,7 +95,7 @@ module Win32cr::System::WinRT::AllJoyn
 
 
   @[Extern]
-  record IWindowsDevicesAllJoynBusObjectInterop, lpVtbl : IWindowsDevicesAllJoynBusObjectInteropVtbl* do
+  record IWindowsDevicesAllJoynBusObjectInterop, lpVtbl : IWindowsDevicesAllJoynBusObjectInteropVtable* do
     GUID = LibC::GUID.new(0xd78aa3d5_u32, 0x5054_u16, 0x428f_u16, StaticArray[0x99_u8, 0xf2_u8, 0xec_u8, 0x3a_u8, 0x5d_u8, 0xe3_u8, 0xc3_u8, 0xbc_u8])
     def query_interface(this : IWindowsDevicesAllJoynBusObjectInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -128,7 +128,7 @@ module Win32cr::System::WinRT::AllJoyn
   end
 
   @[Extern]
-  record IWindowsDevicesAllJoynBusObjectFactoryInteropVtbl,
+  record IWindowsDevicesAllJoynBusObjectFactoryInteropVtable,
     query_interface : Proc(IWindowsDevicesAllJoynBusObjectFactoryInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsDevicesAllJoynBusObjectFactoryInterop*, UInt32),
     release : Proc(IWindowsDevicesAllJoynBusObjectFactoryInterop*, UInt32),
@@ -139,7 +139,7 @@ module Win32cr::System::WinRT::AllJoyn
 
 
   @[Extern]
-  record IWindowsDevicesAllJoynBusObjectFactoryInterop, lpVtbl : IWindowsDevicesAllJoynBusObjectFactoryInteropVtbl* do
+  record IWindowsDevicesAllJoynBusObjectFactoryInterop, lpVtbl : IWindowsDevicesAllJoynBusObjectFactoryInteropVtable* do
     GUID = LibC::GUID.new(0x6174e506_u32, 0x8b95_u16, 0x4e36_u16, StaticArray[0x95_u8, 0xc0_u8, 0xb8_u8, 0x8f_u8, 0xed_u8, 0x34_u8, 0x93_u8, 0x8c_u8])
     def query_interface(this : IWindowsDevicesAllJoynBusObjectFactoryInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

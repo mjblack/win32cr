@@ -14,7 +14,7 @@ module Win32cr::UI::Notifications
   end
 
   @[Extern]
-  record INotificationActivationCallbackVtbl,
+  record INotificationActivationCallbackVtable,
     query_interface : Proc(INotificationActivationCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INotificationActivationCallback*, UInt32),
     release : Proc(INotificationActivationCallback*, UInt32),
@@ -22,7 +22,7 @@ module Win32cr::UI::Notifications
 
 
   @[Extern]
-  record INotificationActivationCallback, lpVtbl : INotificationActivationCallbackVtbl* do
+  record INotificationActivationCallback, lpVtbl : INotificationActivationCallbackVtable* do
     GUID = LibC::GUID.new(0x53e31837_u32, 0x6600_u16, 0x4a81_u16, StaticArray[0x93_u8, 0x95_u8, 0x75_u8, 0xcf_u8, 0xfe_u8, 0x74_u8, 0x6f_u8, 0x94_u8])
     def query_interface(this : INotificationActivationCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

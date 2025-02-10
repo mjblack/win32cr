@@ -399,172 +399,255 @@ module Win32cr::System::ErrorReporting
   end
 
   def werReportCreate(pwzEventType : Win32cr::Foundation::PWSTR, repType : Win32cr::System::ErrorReporting::WER_REPORT_TYPE, pReportInformation : Win32cr::System::ErrorReporting::WER_REPORT_INFORMATION*, phReportHandle : Win32cr::System::ErrorReporting::HREPORT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerReportCreate(pwzEventType, repType, pReportInformation, phReportHandle)
+    {% end %}
   end
 
   def werReportSetParameter(hReportHandle : Win32cr::System::ErrorReporting::HREPORT, dwparamID : UInt32, pwzName : Win32cr::Foundation::PWSTR, pwzValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerReportSetParameter(hReportHandle, dwparamID, pwzName, pwzValue)
+    {% end %}
   end
 
   def werReportAddFile(hReportHandle : Win32cr::System::ErrorReporting::HREPORT, pwzPath : Win32cr::Foundation::PWSTR, repFileType : Win32cr::System::ErrorReporting::WER_FILE_TYPE, dwFileFlags : Win32cr::System::ErrorReporting::WER_FILE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerReportAddFile(hReportHandle, pwzPath, repFileType, dwFileFlags)
+    {% end %}
   end
 
   def werReportSetUIOption(hReportHandle : Win32cr::System::ErrorReporting::HREPORT, repUITypeID : Win32cr::System::ErrorReporting::WER_REPORT_UI, pwzValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerReportSetUIOption(hReportHandle, repUITypeID, pwzValue)
+    {% end %}
   end
 
   def werReportSubmit(hReportHandle : Win32cr::System::ErrorReporting::HREPORT, consent : Win32cr::System::ErrorReporting::WER_CONSENT, dwFlags : Win32cr::System::ErrorReporting::WER_SUBMIT_FLAGS, pSubmitResult : Win32cr::System::ErrorReporting::WER_SUBMIT_RESULT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerReportSubmit(hReportHandle, consent, dwFlags, pSubmitResult)
+    {% end %}
   end
 
   def werReportAddDump(hReportHandle : Win32cr::System::ErrorReporting::HREPORT, hProcess : Win32cr::Foundation::HANDLE, hThread : Win32cr::Foundation::HANDLE, dumpType : Win32cr::System::ErrorReporting::WER_DUMP_TYPE, pExceptionParam : Win32cr::System::ErrorReporting::WER_EXCEPTION_INFORMATION*, pDumpCustomOptions : Win32cr::System::ErrorReporting::WER_DUMP_CUSTOM_OPTIONS*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerReportAddDump(hReportHandle, hProcess, hThread, dumpType, pExceptionParam, pDumpCustomOptions, dwFlags)
+    {% end %}
   end
 
   def werReportCloseHandle(hReportHandle : Win32cr::System::ErrorReporting::HREPORT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerReportCloseHandle(hReportHandle)
+    {% end %}
   end
 
   def werRegisterFile(pwzFile : Win32cr::Foundation::PWSTR, regFileType : Win32cr::System::ErrorReporting::WER_REGISTER_FILE_TYPE, dwFlags : Win32cr::System::ErrorReporting::WER_FILE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerRegisterFile(pwzFile, regFileType, dwFlags)
+    {% end %}
   end
 
   def werUnregisterFile(pwzFilePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerUnregisterFile(pwzFilePath)
+    {% end %}
   end
 
   def werRegisterMemoryBlock(pvAddress : Void*, dwSize : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerRegisterMemoryBlock(pvAddress, dwSize)
+    {% end %}
   end
 
   def werUnregisterMemoryBlock(pvAddress : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerUnregisterMemoryBlock(pvAddress)
+    {% end %}
   end
 
   def werRegisterExcludedMemoryBlock(address : Void*, size : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerRegisterExcludedMemoryBlock(address, size)
+    {% end %}
   end
 
   def werUnregisterExcludedMemoryBlock(address : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerUnregisterExcludedMemoryBlock(address)
+    {% end %}
   end
 
   def werRegisterCustomMetadata(key : Win32cr::Foundation::PWSTR, value : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerRegisterCustomMetadata(key, value)
+    {% end %}
   end
 
   def werUnregisterCustomMetadata(key : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerUnregisterCustomMetadata(key)
+    {% end %}
   end
 
   def werRegisterAdditionalProcess(processId : UInt32, captureExtraInfoForThreadId : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerRegisterAdditionalProcess(processId, captureExtraInfoForThreadId)
+    {% end %}
   end
 
   def werUnregisterAdditionalProcess(processId : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerUnregisterAdditionalProcess(processId)
+    {% end %}
   end
 
   def werRegisterAppLocalDump(localAppDataRelativePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerRegisterAppLocalDump(localAppDataRelativePath)
+    {% end %}
   end
 
   def werUnregisterAppLocalDump : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerUnregisterAppLocalDump
+    {% end %}
   end
 
   def werSetFlags(dwFlags : Win32cr::System::ErrorReporting::WER_FAULT_REPORTING) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerSetFlags(dwFlags)
+    {% end %}
   end
 
   def werGetFlags(hProcess : Win32cr::Foundation::HANDLE, pdwFlags : Win32cr::System::ErrorReporting::WER_FAULT_REPORTING*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerGetFlags(hProcess, pdwFlags)
+    {% end %}
   end
 
   def werAddExcludedApplication(pwzExeName : Win32cr::Foundation::PWSTR, bAllUsers : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerAddExcludedApplication(pwzExeName, bAllUsers)
+    {% end %}
   end
 
   def werRemoveExcludedApplication(pwzExeName : Win32cr::Foundation::PWSTR, bAllUsers : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerRemoveExcludedApplication(pwzExeName, bAllUsers)
+    {% end %}
   end
 
   def werRegisterRuntimeExceptionModule(pwszOutOfProcessCallbackDll : Win32cr::Foundation::PWSTR, pContext : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerRegisterRuntimeExceptionModule(pwszOutOfProcessCallbackDll, pContext)
+    {% end %}
   end
 
   def werUnregisterRuntimeExceptionModule(pwszOutOfProcessCallbackDll : Win32cr::Foundation::PWSTR, pContext : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerUnregisterRuntimeExceptionModule(pwszOutOfProcessCallbackDll, pContext)
+    {% end %}
   end
 
   def werStoreOpen(repStoreType : Win32cr::System::ErrorReporting::REPORT_STORE_TYPES, phReportStore : Win32cr::System::ErrorReporting::HREPORTSTORE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerStoreOpen(repStoreType, phReportStore)
+    {% end %}
   end
 
   def werStoreClose(hReportStore : Win32cr::System::ErrorReporting::HREPORTSTORE) : Void
+    {% if !flag?(:docs) %}
     C.WerStoreClose(hReportStore)
+    {% end %}
   end
 
   def werStoreGetFirstReportKey(hReportStore : Win32cr::System::ErrorReporting::HREPORTSTORE, ppszReportKey : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerStoreGetFirstReportKey(hReportStore, ppszReportKey)
+    {% end %}
   end
 
   def werStoreGetNextReportKey(hReportStore : Win32cr::System::ErrorReporting::HREPORTSTORE, ppszReportKey : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerStoreGetNextReportKey(hReportStore, ppszReportKey)
+    {% end %}
   end
 
   def werStoreQueryReportMetadataV2(hReportStore : Win32cr::System::ErrorReporting::HREPORTSTORE, pszReportKey : Win32cr::Foundation::PWSTR, pReportMetadata : Win32cr::System::ErrorReporting::WER_REPORT_METADATA_V2*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerStoreQueryReportMetadataV2(hReportStore, pszReportKey, pReportMetadata)
+    {% end %}
   end
 
   def werStoreQueryReportMetadataV3(hReportStore : Win32cr::System::ErrorReporting::HREPORTSTORE, pszReportKey : Win32cr::Foundation::PWSTR, pReportMetadata : Win32cr::System::ErrorReporting::WER_REPORT_METADATA_V3*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerStoreQueryReportMetadataV3(hReportStore, pszReportKey, pReportMetadata)
+    {% end %}
   end
 
   def werFreeString(pwszStr : Win32cr::Foundation::PWSTR) : Void
+    {% if !flag?(:docs) %}
     C.WerFreeString(pwszStr)
+    {% end %}
   end
 
   def werStorePurge : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerStorePurge
+    {% end %}
   end
 
   def werStoreGetReportCount(hReportStore : Win32cr::System::ErrorReporting::HREPORTSTORE, pdwReportCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerStoreGetReportCount(hReportStore, pdwReportCount)
+    {% end %}
   end
 
   def werStoreGetSizeOnDisk(hReportStore : Win32cr::System::ErrorReporting::HREPORTSTORE, pqwSizeInBytes : UInt64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerStoreGetSizeOnDisk(hReportStore, pqwSizeInBytes)
+    {% end %}
   end
 
   def werStoreQueryReportMetadataV1(hReportStore : Win32cr::System::ErrorReporting::HREPORTSTORE, pszReportKey : Win32cr::Foundation::PWSTR, pReportMetadata : Win32cr::System::ErrorReporting::WER_REPORT_METADATA_V1*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerStoreQueryReportMetadataV1(hReportStore, pszReportKey, pReportMetadata)
+    {% end %}
   end
 
   def werStoreUploadReport(hReportStore : Win32cr::System::ErrorReporting::HREPORTSTORE, pszReportKey : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pSubmitResult : Win32cr::System::ErrorReporting::WER_SUBMIT_RESULT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerStoreUploadReport(hReportStore, pszReportKey, dwFlags, pSubmitResult)
+    {% end %}
   end
 
   def reportFault(pep : Win32cr::System::Diagnostics::Debug::EXCEPTION_POINTERS*, dwOpt : UInt32) : Win32cr::System::ErrorReporting::EFaultRepRetVal
+    {% if !flag?(:docs) %}
     C.ReportFault(pep, dwOpt)
+    {% end %}
   end
 
   def addERExcludedApplicationA(szApplication : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddERExcludedApplicationA(szApplication)
+    {% end %}
   end
 
   def addERExcludedApplicationW(wszApplication : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddERExcludedApplicationW(wszApplication)
+    {% end %}
   end
 
   def werReportHang(hwndHungApp : Win32cr::Foundation::HWND, pwzHungApplicationName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WerReportHang(hwndHungApp, pwzHungApplicationName)
+    {% end %}
   end
 
   @[Link("wer")]
   @[Link("kernel32")]
   @[Link("faultrep")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WerReportCreate(pwzEventType : Win32cr::Foundation::PWSTR, repType : Win32cr::System::ErrorReporting::WER_REPORT_TYPE, pReportInformation : Win32cr::System::ErrorReporting::WER_REPORT_INFORMATION*, phReportHandle : Win32cr::System::ErrorReporting::HREPORT*) : Win32cr::Foundation::HRESULT
@@ -690,4 +773,5 @@ module Win32cr::System::ErrorReporting
     fun WerReportHang(hwndHungApp : Win32cr::Foundation::HWND, pwzHungApplicationName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

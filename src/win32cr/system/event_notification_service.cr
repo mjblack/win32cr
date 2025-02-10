@@ -44,7 +44,7 @@ module Win32cr::System::EventNotificationService
   end
 
   @[Extern]
-  record ISensNetworkVtbl,
+  record ISensNetworkVtable,
     query_interface : Proc(ISensNetwork*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISensNetwork*, UInt32),
     release : Proc(ISensNetwork*, UInt32),
@@ -60,7 +60,7 @@ module Win32cr::System::EventNotificationService
 
 
   @[Extern]
-  record ISensNetwork, lpVtbl : ISensNetworkVtbl* do
+  record ISensNetwork, lpVtbl : ISensNetworkVtable* do
     GUID = LibC::GUID.new(0xd597bab1_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
     def query_interface(this : ISensNetwork*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -102,7 +102,7 @@ module Win32cr::System::EventNotificationService
   end
 
   @[Extern]
-  record ISensOnNowVtbl,
+  record ISensOnNowVtable,
     query_interface : Proc(ISensOnNow*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISensOnNow*, UInt32),
     release : Proc(ISensOnNow*, UInt32),
@@ -116,7 +116,7 @@ module Win32cr::System::EventNotificationService
 
 
   @[Extern]
-  record ISensOnNow, lpVtbl : ISensOnNowVtbl* do
+  record ISensOnNow, lpVtbl : ISensOnNowVtable* do
     GUID = LibC::GUID.new(0xd597bab2_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
     def query_interface(this : ISensOnNow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -152,7 +152,7 @@ module Win32cr::System::EventNotificationService
   end
 
   @[Extern]
-  record ISensLogonVtbl,
+  record ISensLogonVtable,
     query_interface : Proc(ISensLogon*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISensLogon*, UInt32),
     release : Proc(ISensLogon*, UInt32),
@@ -170,7 +170,7 @@ module Win32cr::System::EventNotificationService
 
 
   @[Extern]
-  record ISensLogon, lpVtbl : ISensLogonVtbl* do
+  record ISensLogon, lpVtbl : ISensLogonVtable* do
     GUID = LibC::GUID.new(0xd597bab3_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
     def query_interface(this : ISensLogon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -218,7 +218,7 @@ module Win32cr::System::EventNotificationService
   end
 
   @[Extern]
-  record ISensLogon2Vtbl,
+  record ISensLogon2Vtable,
     query_interface : Proc(ISensLogon2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISensLogon2*, UInt32),
     release : Proc(ISensLogon2*, UInt32),
@@ -234,7 +234,7 @@ module Win32cr::System::EventNotificationService
 
 
   @[Extern]
-  record ISensLogon2, lpVtbl : ISensLogon2Vtbl* do
+  record ISensLogon2, lpVtbl : ISensLogon2Vtable* do
     GUID = LibC::GUID.new(0xd597bab4_u32, 0x5b9f_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xd2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0xbd_u8, 0x5e_u8])
     def query_interface(this : ISensLogon2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -276,18 +276,25 @@ module Win32cr::System::EventNotificationService
   end
 
   def isDestinationReachableA(lpszDestination : Win32cr::Foundation::PSTR, lpQOCInfo : Win32cr::System::EventNotificationService::QOCINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsDestinationReachableA(lpszDestination, lpQOCInfo)
+    {% end %}
   end
 
   def isDestinationReachableW(lpszDestination : Win32cr::Foundation::PWSTR, lpQOCInfo : Win32cr::System::EventNotificationService::QOCINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsDestinationReachableW(lpszDestination, lpQOCInfo)
+    {% end %}
   end
 
   def isNetworkAlive(lpdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsNetworkAlive(lpdwFlags)
+    {% end %}
   end
 
   @[Link("sensapi")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun IsDestinationReachableA(lpszDestination : Win32cr::Foundation::PSTR, lpQOCInfo : Win32cr::System::EventNotificationService::QOCINFO*) : Win32cr::Foundation::BOOL
@@ -299,4 +306,5 @@ module Win32cr::System::EventNotificationService
     fun IsNetworkAlive(lpdwFlags : UInt32*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

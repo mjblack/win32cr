@@ -8,7 +8,7 @@ module Win32cr::System::WinRT::Display
 
 
   @[Extern]
-  record IDisplayDeviceInteropVtbl,
+  record IDisplayDeviceInteropVtable,
     query_interface : Proc(IDisplayDeviceInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDisplayDeviceInterop*, UInt32),
     release : Proc(IDisplayDeviceInterop*, UInt32),
@@ -17,7 +17,7 @@ module Win32cr::System::WinRT::Display
 
 
   @[Extern]
-  record IDisplayDeviceInterop, lpVtbl : IDisplayDeviceInteropVtbl* do
+  record IDisplayDeviceInterop, lpVtbl : IDisplayDeviceInteropVtable* do
     GUID = LibC::GUID.new(0x64338358_u32, 0x366a_u16, 0x471b_u16, StaticArray[0xbd_u8, 0x56_u8, 0xdd_u8, 0x8e_u8, 0xf4_u8, 0x8e_u8, 0x43_u8, 0x9b_u8])
     def query_interface(this : IDisplayDeviceInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38,7 +38,7 @@ module Win32cr::System::WinRT::Display
   end
 
   @[Extern]
-  record IDisplayPathInteropVtbl,
+  record IDisplayPathInteropVtable,
     query_interface : Proc(IDisplayPathInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDisplayPathInterop*, UInt32),
     release : Proc(IDisplayPathInterop*, UInt32),
@@ -47,7 +47,7 @@ module Win32cr::System::WinRT::Display
 
 
   @[Extern]
-  record IDisplayPathInterop, lpVtbl : IDisplayPathInteropVtbl* do
+  record IDisplayPathInterop, lpVtbl : IDisplayPathInteropVtable* do
     GUID = LibC::GUID.new(0xa6ba4205_u32, 0xe59e_u16, 0x4e71_u16, StaticArray[0xb2_u8, 0x5b_u8, 0x4e_u8, 0x43_u8, 0x6d_u8, 0x21_u8, 0xee_u8, 0x3d_u8])
     def query_interface(this : IDisplayPathInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

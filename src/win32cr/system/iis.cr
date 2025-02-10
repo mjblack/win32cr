@@ -1157,11 +1157,7 @@ module Win32cr::System::Iis
     end
   end
 
-  @[Extern]
-  struct IIS_CRYPTO_BLOB_
-    def initialize()
-    end
-  end
+  alias IIS_CRYPTO_BLOB_ = Void
 
   @[Extern]
   struct HSE_VERSION_INFO
@@ -1512,7 +1508,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IFtpProviderConstructVtbl,
+  record IFtpProviderConstructVtable,
     query_interface : Proc(IFtpProviderConstruct*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFtpProviderConstruct*, UInt32),
     release : Proc(IFtpProviderConstruct*, UInt32),
@@ -1520,7 +1516,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IFtpProviderConstruct, lpVtbl : IFtpProviderConstructVtbl* do
+  record IFtpProviderConstruct, lpVtbl : IFtpProviderConstructVtable* do
     GUID = LibC::GUID.new(0x4d1a3f7b_u32, 0x412d_u16, 0x447c_u16, StaticArray[0xb1_u8, 0x99_u8, 0x64_u8, 0xf9_u8, 0x67_u8, 0xe9_u8, 0xa2_u8, 0xda_u8])
     def query_interface(this : IFtpProviderConstruct*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1538,7 +1534,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IFtpAuthenticationProviderVtbl,
+  record IFtpAuthenticationProviderVtable,
     query_interface : Proc(IFtpAuthenticationProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFtpAuthenticationProvider*, UInt32),
     release : Proc(IFtpAuthenticationProvider*, UInt32),
@@ -1546,7 +1542,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IFtpAuthenticationProvider, lpVtbl : IFtpAuthenticationProviderVtbl* do
+  record IFtpAuthenticationProvider, lpVtbl : IFtpAuthenticationProviderVtable* do
     GUID = LibC::GUID.new(0x4659f95c_u32, 0xd5a8_u16, 0x4707_u16, StaticArray[0xb2_u8, 0xfc_u8, 0x6f_u8, 0xd5_u8, 0x79_u8, 0x42_u8, 0x46_u8, 0xcf_u8])
     def query_interface(this : IFtpAuthenticationProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1564,7 +1560,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record AsyncIFtpAuthenticationProviderVtbl,
+  record AsyncIFtpAuthenticationProviderVtable,
     query_interface : Proc(AsyncIFtpAuthenticationProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(AsyncIFtpAuthenticationProvider*, UInt32),
     release : Proc(AsyncIFtpAuthenticationProvider*, UInt32),
@@ -1573,7 +1569,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record AsyncIFtpAuthenticationProvider, lpVtbl : AsyncIFtpAuthenticationProviderVtbl* do
+  record AsyncIFtpAuthenticationProvider, lpVtbl : AsyncIFtpAuthenticationProviderVtable* do
     GUID = LibC::GUID.new(0xc24efb65_u32, 0x9f3e_u16, 0x4996_u16, StaticArray[0x8f_u8, 0xb1_u8, 0xce_u8, 0x16_u8, 0x69_u8, 0x16_u8, 0xba_u8, 0xb5_u8])
     def query_interface(this : AsyncIFtpAuthenticationProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1594,7 +1590,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IFtpRoleProviderVtbl,
+  record IFtpRoleProviderVtable,
     query_interface : Proc(IFtpRoleProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFtpRoleProvider*, UInt32),
     release : Proc(IFtpRoleProvider*, UInt32),
@@ -1602,7 +1598,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IFtpRoleProvider, lpVtbl : IFtpRoleProviderVtbl* do
+  record IFtpRoleProvider, lpVtbl : IFtpRoleProviderVtable* do
     GUID = LibC::GUID.new(0x909c850d_u32, 0x8ca0_u16, 0x4674_u16, StaticArray[0x96_u8, 0xb8_u8, 0xcc_u8, 0x29_u8, 0x41_u8, 0x53_u8, 0x57_u8, 0x25_u8])
     def query_interface(this : IFtpRoleProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1620,7 +1616,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record AsyncIFtpRoleProviderVtbl,
+  record AsyncIFtpRoleProviderVtable,
     query_interface : Proc(AsyncIFtpRoleProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(AsyncIFtpRoleProvider*, UInt32),
     release : Proc(AsyncIFtpRoleProvider*, UInt32),
@@ -1629,7 +1625,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record AsyncIFtpRoleProvider, lpVtbl : AsyncIFtpRoleProviderVtbl* do
+  record AsyncIFtpRoleProvider, lpVtbl : AsyncIFtpRoleProviderVtable* do
     GUID = LibC::GUID.new(0x3e83bf99_u32, 0x70ec_u16, 0x41ca_u16, StaticArray[0x84_u8, 0xb6_u8, 0xac_u8, 0xa7_u8, 0xc7_u8, 0xa6_u8, 0x2c_u8, 0xaf_u8])
     def query_interface(this : AsyncIFtpRoleProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1650,7 +1646,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IFtpHomeDirectoryProviderVtbl,
+  record IFtpHomeDirectoryProviderVtable,
     query_interface : Proc(IFtpHomeDirectoryProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFtpHomeDirectoryProvider*, UInt32),
     release : Proc(IFtpHomeDirectoryProvider*, UInt32),
@@ -1658,7 +1654,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IFtpHomeDirectoryProvider, lpVtbl : IFtpHomeDirectoryProviderVtbl* do
+  record IFtpHomeDirectoryProvider, lpVtbl : IFtpHomeDirectoryProviderVtable* do
     GUID = LibC::GUID.new(0x933b392_u32, 0x18dd_u16, 0x4097_u16, StaticArray[0x8b_u8, 0x9c_u8, 0x83_u8, 0x32_u8, 0x5c_u8, 0x35_u8, 0xd9_u8, 0xa6_u8])
     def query_interface(this : IFtpHomeDirectoryProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1676,7 +1672,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record AsyncIFtpHomeDirectoryProviderVtbl,
+  record AsyncIFtpHomeDirectoryProviderVtable,
     query_interface : Proc(AsyncIFtpHomeDirectoryProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(AsyncIFtpHomeDirectoryProvider*, UInt32),
     release : Proc(AsyncIFtpHomeDirectoryProvider*, UInt32),
@@ -1685,7 +1681,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record AsyncIFtpHomeDirectoryProvider, lpVtbl : AsyncIFtpHomeDirectoryProviderVtbl* do
+  record AsyncIFtpHomeDirectoryProvider, lpVtbl : AsyncIFtpHomeDirectoryProviderVtable* do
     GUID = LibC::GUID.new(0x73f81638_u32, 0x6295_u16, 0x42bd_u16, StaticArray[0xa2_u8, 0xbe_u8, 0x4a_u8, 0x65_u8, 0x7f_u8, 0x7c_u8, 0x47_u8, 0x9c_u8])
     def query_interface(this : AsyncIFtpHomeDirectoryProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1706,7 +1702,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IFtpLogProviderVtbl,
+  record IFtpLogProviderVtable,
     query_interface : Proc(IFtpLogProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFtpLogProvider*, UInt32),
     release : Proc(IFtpLogProvider*, UInt32),
@@ -1714,7 +1710,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IFtpLogProvider, lpVtbl : IFtpLogProviderVtbl* do
+  record IFtpLogProvider, lpVtbl : IFtpLogProviderVtable* do
     GUID = LibC::GUID.new(0xa18a94cc_u32, 0x8299_u16, 0x4408_u16, StaticArray[0x81_u8, 0x6c_u8, 0x7c_u8, 0x3b_u8, 0xac_u8, 0xa1_u8, 0xa4_u8, 0xe_u8])
     def query_interface(this : IFtpLogProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1732,7 +1728,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record AsyncIFtpLogProviderVtbl,
+  record AsyncIFtpLogProviderVtable,
     query_interface : Proc(AsyncIFtpLogProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(AsyncIFtpLogProvider*, UInt32),
     release : Proc(AsyncIFtpLogProvider*, UInt32),
@@ -1741,7 +1737,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record AsyncIFtpLogProvider, lpVtbl : AsyncIFtpLogProviderVtbl* do
+  record AsyncIFtpLogProvider, lpVtbl : AsyncIFtpLogProviderVtable* do
     GUID = LibC::GUID.new(0xa0ae46_u32, 0x2498_u16, 0x48b2_u16, StaticArray[0x95_u8, 0xe6_u8, 0xdf_u8, 0x67_u8, 0x8e_u8, 0xd7_u8, 0xd4_u8, 0x9f_u8])
     def query_interface(this : AsyncIFtpLogProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1762,7 +1758,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IFtpAuthorizationProviderVtbl,
+  record IFtpAuthorizationProviderVtable,
     query_interface : Proc(IFtpAuthorizationProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFtpAuthorizationProvider*, UInt32),
     release : Proc(IFtpAuthorizationProvider*, UInt32),
@@ -1770,7 +1766,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IFtpAuthorizationProvider, lpVtbl : IFtpAuthorizationProviderVtbl* do
+  record IFtpAuthorizationProvider, lpVtbl : IFtpAuthorizationProviderVtable* do
     GUID = LibC::GUID.new(0xa50ae7a1_u32, 0xa35a_u16, 0x42b4_u16, StaticArray[0xa4_u8, 0xf3_u8, 0xf4_u8, 0xf7_u8, 0x5_u8, 0x7a_u8, 0x5_u8, 0xd1_u8])
     def query_interface(this : IFtpAuthorizationProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1788,7 +1784,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record AsyncIFtpAuthorizationProviderVtbl,
+  record AsyncIFtpAuthorizationProviderVtable,
     query_interface : Proc(AsyncIFtpAuthorizationProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(AsyncIFtpAuthorizationProvider*, UInt32),
     release : Proc(AsyncIFtpAuthorizationProvider*, UInt32),
@@ -1797,7 +1793,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record AsyncIFtpAuthorizationProvider, lpVtbl : AsyncIFtpAuthorizationProviderVtbl* do
+  record AsyncIFtpAuthorizationProvider, lpVtbl : AsyncIFtpAuthorizationProviderVtable* do
     GUID = LibC::GUID.new(0x860dc339_u32, 0x7e5_u16, 0x4a5c_u16, StaticArray[0x9c_u8, 0x61_u8, 0x88_u8, 0x20_u8, 0xce_u8, 0xa0_u8, 0x12_u8, 0xbc_u8])
     def query_interface(this : AsyncIFtpAuthorizationProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1818,7 +1814,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IFtpPreprocessProviderVtbl,
+  record IFtpPreprocessProviderVtable,
     query_interface : Proc(IFtpPreprocessProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFtpPreprocessProvider*, UInt32),
     release : Proc(IFtpPreprocessProvider*, UInt32),
@@ -1826,7 +1822,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IFtpPreprocessProvider, lpVtbl : IFtpPreprocessProviderVtbl* do
+  record IFtpPreprocessProvider, lpVtbl : IFtpPreprocessProviderVtable* do
     GUID = LibC::GUID.new(0xa3c19b60_u32, 0x5a28_u16, 0x471a_u16, StaticArray[0x8f_u8, 0x93_u8, 0xab_u8, 0x30_u8, 0x41_u8, 0x1c_u8, 0xee_u8, 0x82_u8])
     def query_interface(this : IFtpPreprocessProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1844,7 +1840,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record AsyncIFtpPreprocessProviderVtbl,
+  record AsyncIFtpPreprocessProviderVtable,
     query_interface : Proc(AsyncIFtpPreprocessProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(AsyncIFtpPreprocessProvider*, UInt32),
     release : Proc(AsyncIFtpPreprocessProvider*, UInt32),
@@ -1853,7 +1849,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record AsyncIFtpPreprocessProvider, lpVtbl : AsyncIFtpPreprocessProviderVtbl* do
+  record AsyncIFtpPreprocessProvider, lpVtbl : AsyncIFtpPreprocessProviderVtable* do
     GUID = LibC::GUID.new(0x6ff5fd8f_u32, 0xfd8e_u16, 0x48b1_u16, StaticArray[0xa3_u8, 0xe0_u8, 0xbf_u8, 0x70_u8, 0x73_u8, 0xdb_u8, 0x4d_u8, 0xb5_u8])
     def query_interface(this : AsyncIFtpPreprocessProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1874,7 +1870,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IFtpPostprocessProviderVtbl,
+  record IFtpPostprocessProviderVtable,
     query_interface : Proc(IFtpPostprocessProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFtpPostprocessProvider*, UInt32),
     release : Proc(IFtpPostprocessProvider*, UInt32),
@@ -1882,7 +1878,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IFtpPostprocessProvider, lpVtbl : IFtpPostprocessProviderVtbl* do
+  record IFtpPostprocessProvider, lpVtbl : IFtpPostprocessProviderVtable* do
     GUID = LibC::GUID.new(0x4522cbc6_u32, 0x16cd_u16, 0x49ad_u16, StaticArray[0x86_u8, 0x53_u8, 0x9a_u8, 0x2c_u8, 0x57_u8, 0x9e_u8, 0x42_u8, 0x80_u8])
     def query_interface(this : IFtpPostprocessProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1900,7 +1896,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record AsyncIFtpPostprocessProviderVtbl,
+  record AsyncIFtpPostprocessProviderVtable,
     query_interface : Proc(AsyncIFtpPostprocessProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(AsyncIFtpPostprocessProvider*, UInt32),
     release : Proc(AsyncIFtpPostprocessProvider*, UInt32),
@@ -1909,7 +1905,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record AsyncIFtpPostprocessProvider, lpVtbl : AsyncIFtpPostprocessProviderVtbl* do
+  record AsyncIFtpPostprocessProvider, lpVtbl : AsyncIFtpPostprocessProviderVtable* do
     GUID = LibC::GUID.new(0xa16b2542_u32, 0x9694_u16, 0x4eb1_u16, StaticArray[0xa5_u8, 0x64_u8, 0x6c_u8, 0x2e_u8, 0x91_u8, 0xfd_u8, 0xc1_u8, 0x33_u8])
     def query_interface(this : AsyncIFtpPostprocessProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1930,7 +1926,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IADMEXTVtbl,
+  record IADMEXTVtable,
     query_interface : Proc(IADMEXT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADMEXT*, UInt32),
     release : Proc(IADMEXT*, UInt32),
@@ -1940,7 +1936,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IADMEXT, lpVtbl : IADMEXTVtbl* do
+  record IADMEXT, lpVtbl : IADMEXTVtable* do
     GUID = LibC::GUID.new(0x51dfe970_u32, 0xf6f2_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0xbd_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0xe7_u8, 0x50_u8])
     def query_interface(this : IADMEXT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1964,7 +1960,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IMSAdminBaseWVtbl,
+  record IMSAdminBaseWVtable,
     query_interface : Proc(IMSAdminBaseW*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSAdminBaseW*, UInt32),
     release : Proc(IMSAdminBaseW*, UInt32),
@@ -2002,7 +1998,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IMSAdminBaseW, lpVtbl : IMSAdminBaseWVtbl* do
+  record IMSAdminBaseW, lpVtbl : IMSAdminBaseWVtable* do
     GUID = LibC::GUID.new(0x70b51430_u32, 0xb6ca_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0xb9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0xe7_u8, 0x50_u8])
     def query_interface(this : IMSAdminBaseW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2110,7 +2106,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IMSAdminBase2WVtbl,
+  record IMSAdminBase2WVtable,
     query_interface : Proc(IMSAdminBase2W*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSAdminBase2W*, UInt32),
     release : Proc(IMSAdminBase2W*, UInt32),
@@ -2154,7 +2150,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IMSAdminBase2W, lpVtbl : IMSAdminBase2WVtbl* do
+  record IMSAdminBase2W, lpVtbl : IMSAdminBase2WVtable* do
     GUID = LibC::GUID.new(0x8298d101_u32, 0xf992_u16, 0x43b7_u16, StaticArray[0x8e_u8, 0xca_u8, 0x50_u8, 0x52_u8, 0xd8_u8, 0x85_u8, 0xb9_u8, 0x95_u8])
     def query_interface(this : IMSAdminBase2W*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2280,7 +2276,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IMSAdminBase3WVtbl,
+  record IMSAdminBase3WVtable,
     query_interface : Proc(IMSAdminBase3W*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSAdminBase3W*, UInt32),
     release : Proc(IMSAdminBase3W*, UInt32),
@@ -2325,7 +2321,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IMSAdminBase3W, lpVtbl : IMSAdminBase3WVtbl* do
+  record IMSAdminBase3W, lpVtbl : IMSAdminBase3WVtable* do
     GUID = LibC::GUID.new(0xf612954d_u32, 0x3b0b_u16, 0x4c56_u16, StaticArray[0x95_u8, 0x63_u8, 0x22_u8, 0x7b_u8, 0x7b_u8, 0xe6_u8, 0x24_u8, 0xb4_u8])
     def query_interface(this : IMSAdminBase3W*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2454,7 +2450,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IMSImpExpHelpWVtbl,
+  record IMSImpExpHelpWVtable,
     query_interface : Proc(IMSImpExpHelpW*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSImpExpHelpW*, UInt32),
     release : Proc(IMSImpExpHelpW*, UInt32),
@@ -2462,7 +2458,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IMSImpExpHelpW, lpVtbl : IMSImpExpHelpWVtbl* do
+  record IMSImpExpHelpW, lpVtbl : IMSImpExpHelpWVtable* do
     GUID = LibC::GUID.new(0x29ff67ff_u32, 0x8050_u16, 0x480f_u16, StaticArray[0x9f_u8, 0x30_u8, 0xcc_u8, 0x41_u8, 0x63_u8, 0x5f_u8, 0x2f_u8, 0x9d_u8])
     def query_interface(this : IMSImpExpHelpW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2480,7 +2476,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record IMSAdminBaseSinkWVtbl,
+  record IMSAdminBaseSinkWVtable,
     query_interface : Proc(IMSAdminBaseSinkW*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSAdminBaseSinkW*, UInt32),
     release : Proc(IMSAdminBaseSinkW*, UInt32),
@@ -2489,7 +2485,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record IMSAdminBaseSinkW, lpVtbl : IMSAdminBaseSinkWVtbl* do
+  record IMSAdminBaseSinkW, lpVtbl : IMSAdminBaseSinkWVtable* do
     GUID = LibC::GUID.new(0xa9e69612_u32, 0xb80d_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0xb9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0xe7_u8, 0x50_u8])
     def query_interface(this : IMSAdminBaseSinkW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2510,7 +2506,7 @@ module Win32cr::System::Iis
   end
 
   @[Extern]
-  record AsyncIMSAdminBaseSinkWVtbl,
+  record AsyncIMSAdminBaseSinkWVtable,
     query_interface : Proc(AsyncIMSAdminBaseSinkW*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(AsyncIMSAdminBaseSinkW*, UInt32),
     release : Proc(AsyncIMSAdminBaseSinkW*, UInt32),
@@ -2521,7 +2517,7 @@ module Win32cr::System::Iis
 
 
   @[Extern]
-  record AsyncIMSAdminBaseSinkW, lpVtbl : AsyncIMSAdminBaseSinkWVtbl* do
+  record AsyncIMSAdminBaseSinkW, lpVtbl : AsyncIMSAdminBaseSinkWVtable* do
     GUID = LibC::GUID.new(0xa9e69613_u32, 0xb80d_u16, 0x11d0_u16, StaticArray[0xb9_u8, 0xb9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0xe7_u8, 0x50_u8])
     def query_interface(this : AsyncIMSAdminBaseSinkW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2548,22 +2544,31 @@ module Win32cr::System::Iis
   end
 
   def getExtensionVersion(pVer : Win32cr::System::Iis::HSE_VERSION_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetExtensionVersion(pVer)
+    {% end %}
   end
 
   def httpExtensionProc(pECB : Win32cr::System::Iis::EXTENSION_CONTROL_BLOCK*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpExtensionProc(pECB)
+    {% end %}
   end
 
   def httpFilterProc(pfc : Win32cr::System::Iis::HTTP_FILTER_CONTEXT*, notification_type : UInt32, pvNotification : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpFilterProc(pfc, notification_type, pvNotification)
+    {% end %}
   end
 
   def getFilterVersion(pVer : Win32cr::System::Iis::HTTP_FILTER_VERSION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetFilterVersion(pVer)
+    {% end %}
   end
 
   @[Link("rpcproxy")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun GetExtensionVersion(pVer : Win32cr::System::Iis::HSE_VERSION_INFO*) : Win32cr::Foundation::BOOL
@@ -2578,4 +2583,5 @@ module Win32cr::System::Iis
     fun GetFilterVersion(pVer : Win32cr::System::Iis::HTTP_FILTER_VERSION*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

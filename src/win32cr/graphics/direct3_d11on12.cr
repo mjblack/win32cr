@@ -21,7 +21,7 @@ module Win32cr::Graphics::Direct3D11on12
   end
 
   @[Extern]
-  record ID3D11On12DeviceVtbl,
+  record ID3D11On12DeviceVtable,
     query_interface : Proc(ID3D11On12Device*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D11On12Device*, UInt32),
     release : Proc(ID3D11On12Device*, UInt32),
@@ -31,7 +31,7 @@ module Win32cr::Graphics::Direct3D11on12
 
 
   @[Extern]
-  record ID3D11On12Device, lpVtbl : ID3D11On12DeviceVtbl* do
+  record ID3D11On12Device, lpVtbl : ID3D11On12DeviceVtable* do
     GUID = LibC::GUID.new(0x85611e73_u32, 0x70a9_u16, 0x490e_u16, StaticArray[0x96_u8, 0x14_u8, 0xa9_u8, 0xe3_u8, 0x2_u8, 0x77_u8, 0x79_u8, 0x4_u8])
     def query_interface(this : ID3D11On12Device*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55,7 +55,7 @@ module Win32cr::Graphics::Direct3D11on12
   end
 
   @[Extern]
-  record ID3D11On12Device1Vtbl,
+  record ID3D11On12Device1Vtable,
     query_interface : Proc(ID3D11On12Device1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D11On12Device1*, UInt32),
     release : Proc(ID3D11On12Device1*, UInt32),
@@ -66,7 +66,7 @@ module Win32cr::Graphics::Direct3D11on12
 
 
   @[Extern]
-  record ID3D11On12Device1, lpVtbl : ID3D11On12Device1Vtbl* do
+  record ID3D11On12Device1, lpVtbl : ID3D11On12Device1Vtable* do
     GUID = LibC::GUID.new(0xbdb64df4_u32, 0xea2f_u16, 0x4c70_u16, StaticArray[0xb8_u8, 0x61_u8, 0xaa_u8, 0xab_u8, 0x12_u8, 0x58_u8, 0xbb_u8, 0x5d_u8])
     def query_interface(this : ID3D11On12Device1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -93,7 +93,7 @@ module Win32cr::Graphics::Direct3D11on12
   end
 
   @[Extern]
-  record ID3D11On12Device2Vtbl,
+  record ID3D11On12Device2Vtable,
     query_interface : Proc(ID3D11On12Device2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D11On12Device2*, UInt32),
     release : Proc(ID3D11On12Device2*, UInt32),
@@ -106,7 +106,7 @@ module Win32cr::Graphics::Direct3D11on12
 
 
   @[Extern]
-  record ID3D11On12Device2, lpVtbl : ID3D11On12Device2Vtbl* do
+  record ID3D11On12Device2, lpVtbl : ID3D11On12Device2Vtable* do
     GUID = LibC::GUID.new(0xdc90f331_u32, 0x4740_u16, 0x43fa_u16, StaticArray[0x86_u8, 0x6e_u8, 0x67_u8, 0xf1_u8, 0x2c_u8, 0xb5_u8, 0x82_u8, 0x23_u8])
     def query_interface(this : ID3D11On12Device2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -139,13 +139,17 @@ module Win32cr::Graphics::Direct3D11on12
   end
 
   def d3D11On12CreateDevice(pDevice : Void*, flags : UInt32, pFeatureLevels : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, feature_levels : UInt32, ppCommandQueues : Void**, num_queues : UInt32, node_mask : UInt32, ppDevice : Void**, ppImmediateContext : Void**, pChosenFeatureLevel : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D11On12CreateDevice(pDevice, flags, pFeatureLevels, feature_levels, ppCommandQueues, num_queues, node_mask, ppDevice, ppImmediateContext, pChosenFeatureLevel)
+    {% end %}
   end
 
   @[Link("d3d11")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun D3D11On12CreateDevice(pDevice : Void*, flags : UInt32, pFeatureLevels : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*, feature_levels : UInt32, ppCommandQueues : Void**, num_queues : UInt32, node_mask : UInt32, ppDevice : Void**, ppImmediateContext : Void**, pChosenFeatureLevel : Win32cr::Graphics::Direct3D::D3D_FEATURE_LEVEL*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

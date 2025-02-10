@@ -108,7 +108,7 @@ module Win32cr::Security::ConfigurationSnapin
   end
 
   @[Extern]
-  record ISceSvcAttachmentPersistInfoVtbl,
+  record ISceSvcAttachmentPersistInfoVtable,
     query_interface : Proc(ISceSvcAttachmentPersistInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISceSvcAttachmentPersistInfo*, UInt32),
     release : Proc(ISceSvcAttachmentPersistInfo*, UInt32),
@@ -118,7 +118,7 @@ module Win32cr::Security::ConfigurationSnapin
 
 
   @[Extern]
-  record ISceSvcAttachmentPersistInfo, lpVtbl : ISceSvcAttachmentPersistInfoVtbl* do
+  record ISceSvcAttachmentPersistInfo, lpVtbl : ISceSvcAttachmentPersistInfoVtable* do
     GUID = LibC::GUID.new(0x6d90e0d0_u32, 0x200d_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xfb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x84_u8, 0xf9_u8])
     def query_interface(this : ISceSvcAttachmentPersistInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -142,7 +142,7 @@ module Win32cr::Security::ConfigurationSnapin
   end
 
   @[Extern]
-  record ISceSvcAttachmentDataVtbl,
+  record ISceSvcAttachmentDataVtable,
     query_interface : Proc(ISceSvcAttachmentData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISceSvcAttachmentData*, UInt32),
     release : Proc(ISceSvcAttachmentData*, UInt32),
@@ -153,7 +153,7 @@ module Win32cr::Security::ConfigurationSnapin
 
 
   @[Extern]
-  record ISceSvcAttachmentData, lpVtbl : ISceSvcAttachmentDataVtbl* do
+  record ISceSvcAttachmentData, lpVtbl : ISceSvcAttachmentDataVtable* do
     GUID = LibC::GUID.new(0x17c35fde_u32, 0x200d_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xfb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x84_u8, 0xf9_u8])
     def query_interface(this : ISceSvcAttachmentData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

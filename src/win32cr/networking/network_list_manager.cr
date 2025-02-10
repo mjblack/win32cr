@@ -119,7 +119,7 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkListManagerVtbl,
+  record INetworkListManagerVtable,
     query_interface : Proc(INetworkListManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkListManager*, UInt32),
     release : Proc(INetworkListManager*, UInt32),
@@ -139,7 +139,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record INetworkListManager, lpVtbl : INetworkListManagerVtbl* do
+  record INetworkListManager, lpVtbl : INetworkListManagerVtable* do
     GUID = LibC::GUID.new(0xdcb00000_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkListManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -193,7 +193,7 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkListManagerEventsVtbl,
+  record INetworkListManagerEventsVtable,
     query_interface : Proc(INetworkListManagerEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkListManagerEvents*, UInt32),
     release : Proc(INetworkListManagerEvents*, UInt32),
@@ -201,7 +201,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record INetworkListManagerEvents, lpVtbl : INetworkListManagerEventsVtbl* do
+  record INetworkListManagerEvents, lpVtbl : INetworkListManagerEventsVtable* do
     GUID = LibC::GUID.new(0xdcb00001_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkListManagerEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -219,7 +219,7 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkVtbl,
+  record INetworkVtable,
     query_interface : Proc(INetwork*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetwork*, UInt32),
     release : Proc(INetwork*, UInt32),
@@ -243,7 +243,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record INetwork, lpVtbl : INetworkVtbl* do
+  record INetwork, lpVtbl : INetworkVtable* do
     GUID = LibC::GUID.new(0xdcb00002_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetwork*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -309,7 +309,7 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record IEnumNetworksVtbl,
+  record IEnumNetworksVtable,
     query_interface : Proc(IEnumNetworks*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumNetworks*, UInt32),
     release : Proc(IEnumNetworks*, UInt32),
@@ -325,7 +325,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record IEnumNetworks, lpVtbl : IEnumNetworksVtbl* do
+  record IEnumNetworks, lpVtbl : IEnumNetworksVtable* do
     GUID = LibC::GUID.new(0xdcb00003_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : IEnumNetworks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -367,7 +367,7 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkEventsVtbl,
+  record INetworkEventsVtable,
     query_interface : Proc(INetworkEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkEvents*, UInt32),
     release : Proc(INetworkEvents*, UInt32),
@@ -378,7 +378,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record INetworkEvents, lpVtbl : INetworkEventsVtbl* do
+  record INetworkEvents, lpVtbl : INetworkEventsVtable* do
     GUID = LibC::GUID.new(0xdcb00004_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -405,7 +405,7 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkConnectionVtbl,
+  record INetworkConnectionVtable,
     query_interface : Proc(INetworkConnection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkConnection*, UInt32),
     release : Proc(INetworkConnection*, UInt32),
@@ -423,7 +423,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record INetworkConnection, lpVtbl : INetworkConnectionVtbl* do
+  record INetworkConnection, lpVtbl : INetworkConnectionVtable* do
     GUID = LibC::GUID.new(0xdcb00005_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -471,7 +471,7 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record IEnumNetworkConnectionsVtbl,
+  record IEnumNetworkConnectionsVtable,
     query_interface : Proc(IEnumNetworkConnections*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumNetworkConnections*, UInt32),
     release : Proc(IEnumNetworkConnections*, UInt32),
@@ -487,7 +487,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record IEnumNetworkConnections, lpVtbl : IEnumNetworkConnectionsVtbl* do
+  record IEnumNetworkConnections, lpVtbl : IEnumNetworkConnectionsVtable* do
     GUID = LibC::GUID.new(0xdcb00006_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : IEnumNetworkConnections*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -529,7 +529,7 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkConnectionEventsVtbl,
+  record INetworkConnectionEventsVtable,
     query_interface : Proc(INetworkConnectionEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkConnectionEvents*, UInt32),
     release : Proc(INetworkConnectionEvents*, UInt32),
@@ -538,7 +538,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record INetworkConnectionEvents, lpVtbl : INetworkConnectionEventsVtbl* do
+  record INetworkConnectionEvents, lpVtbl : INetworkConnectionEventsVtable* do
     GUID = LibC::GUID.new(0xdcb00007_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkConnectionEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -559,7 +559,7 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkCostManagerVtbl,
+  record INetworkCostManagerVtable,
     query_interface : Proc(INetworkCostManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkCostManager*, UInt32),
     release : Proc(INetworkCostManager*, UInt32),
@@ -569,7 +569,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record INetworkCostManager, lpVtbl : INetworkCostManagerVtbl* do
+  record INetworkCostManager, lpVtbl : INetworkCostManagerVtable* do
     GUID = LibC::GUID.new(0xdcb00008_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkCostManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -593,7 +593,7 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkCostManagerEventsVtbl,
+  record INetworkCostManagerEventsVtable,
     query_interface : Proc(INetworkCostManagerEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkCostManagerEvents*, UInt32),
     release : Proc(INetworkCostManagerEvents*, UInt32),
@@ -602,7 +602,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record INetworkCostManagerEvents, lpVtbl : INetworkCostManagerEventsVtbl* do
+  record INetworkCostManagerEvents, lpVtbl : INetworkCostManagerEventsVtable* do
     GUID = LibC::GUID.new(0xdcb00009_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkCostManagerEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -623,7 +623,7 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkConnectionCostVtbl,
+  record INetworkConnectionCostVtable,
     query_interface : Proc(INetworkConnectionCost*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkConnectionCost*, UInt32),
     release : Proc(INetworkConnectionCost*, UInt32),
@@ -632,7 +632,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record INetworkConnectionCost, lpVtbl : INetworkConnectionCostVtbl* do
+  record INetworkConnectionCost, lpVtbl : INetworkConnectionCostVtable* do
     GUID = LibC::GUID.new(0xdcb0000a_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkConnectionCost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -653,7 +653,7 @@ module Win32cr::Networking::NetworkListManager
   end
 
   @[Extern]
-  record INetworkConnectionCostEventsVtbl,
+  record INetworkConnectionCostEventsVtable,
     query_interface : Proc(INetworkConnectionCostEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkConnectionCostEvents*, UInt32),
     release : Proc(INetworkConnectionCostEvents*, UInt32),
@@ -662,7 +662,7 @@ module Win32cr::Networking::NetworkListManager
 
 
   @[Extern]
-  record INetworkConnectionCostEvents, lpVtbl : INetworkConnectionCostEventsVtbl* do
+  record INetworkConnectionCostEvents, lpVtbl : INetworkConnectionCostEventsVtable* do
     GUID = LibC::GUID.new(0xdcb0000b_u32, 0x570f_u16, 0x4a9b_u16, StaticArray[0x8d_u8, 0x69_u8, 0x19_u8, 0x9f_u8, 0xdb_u8, 0xa5_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : INetworkConnectionCostEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

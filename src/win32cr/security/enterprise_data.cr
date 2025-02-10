@@ -38,7 +38,7 @@ module Win32cr::Security::EnterpriseData
   end
 
   @[Extern]
-  record IProtectionPolicyManagerInteropVtbl,
+  record IProtectionPolicyManagerInteropVtable,
     query_interface : Proc(IProtectionPolicyManagerInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProtectionPolicyManagerInterop*, UInt32),
     release : Proc(IProtectionPolicyManagerInterop*, UInt32),
@@ -50,7 +50,7 @@ module Win32cr::Security::EnterpriseData
 
 
   @[Extern]
-  record IProtectionPolicyManagerInterop, lpVtbl : IProtectionPolicyManagerInteropVtbl* do
+  record IProtectionPolicyManagerInterop, lpVtbl : IProtectionPolicyManagerInteropVtable* do
     GUID = LibC::GUID.new(0x4652651d_u32, 0xc1fe_u16, 0x4ba1_u16, StaticArray[0x9f_u8, 0xa_u8, 0xc0_u8, 0xf5_u8, 0x65_u8, 0x96_u8, 0xf7_u8, 0x21_u8])
     def query_interface(this : IProtectionPolicyManagerInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -80,7 +80,7 @@ module Win32cr::Security::EnterpriseData
   end
 
   @[Extern]
-  record IProtectionPolicyManagerInterop2Vtbl,
+  record IProtectionPolicyManagerInterop2Vtable,
     query_interface : Proc(IProtectionPolicyManagerInterop2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProtectionPolicyManagerInterop2*, UInt32),
     release : Proc(IProtectionPolicyManagerInterop2*, UInt32),
@@ -95,7 +95,7 @@ module Win32cr::Security::EnterpriseData
 
 
   @[Extern]
-  record IProtectionPolicyManagerInterop2, lpVtbl : IProtectionPolicyManagerInterop2Vtbl* do
+  record IProtectionPolicyManagerInterop2, lpVtbl : IProtectionPolicyManagerInterop2Vtable* do
     GUID = LibC::GUID.new(0x157cfbe4_u32, 0xa78d_u16, 0x4156_u16, StaticArray[0xb3_u8, 0x84_u8, 0x61_u8, 0xfd_u8, 0xac_u8, 0x41_u8, 0xe6_u8, 0x86_u8])
     def query_interface(this : IProtectionPolicyManagerInterop2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -134,7 +134,7 @@ module Win32cr::Security::EnterpriseData
   end
 
   @[Extern]
-  record IProtectionPolicyManagerInterop3Vtbl,
+  record IProtectionPolicyManagerInterop3Vtable,
     query_interface : Proc(IProtectionPolicyManagerInterop3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProtectionPolicyManagerInterop3*, UInt32),
     release : Proc(IProtectionPolicyManagerInterop3*, UInt32),
@@ -150,7 +150,7 @@ module Win32cr::Security::EnterpriseData
 
 
   @[Extern]
-  record IProtectionPolicyManagerInterop3, lpVtbl : IProtectionPolicyManagerInterop3Vtbl* do
+  record IProtectionPolicyManagerInterop3, lpVtbl : IProtectionPolicyManagerInterop3Vtable* do
     GUID = LibC::GUID.new(0xc1c03933_u32, 0xb398_u16, 0x4d93_u16, StaticArray[0xb0_u8, 0xfd_u8, 0x29_u8, 0x72_u8, 0xad_u8, 0xf8_u8, 0x2_u8, 0xc2_u8])
     def query_interface(this : IProtectionPolicyManagerInterop3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -192,59 +192,86 @@ module Win32cr::Security::EnterpriseData
   end
 
   def srpCreateThreadNetworkContext(enterpriseId : Win32cr::Foundation::PWSTR, threadNetworkContext : Win32cr::Security::EnterpriseData::HTHREAD_NETWORK_CONTEXT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SrpCreateThreadNetworkContext(enterpriseId, threadNetworkContext)
+    {% end %}
   end
 
   def srpCloseThreadNetworkContext(threadNetworkContext : Win32cr::Security::EnterpriseData::HTHREAD_NETWORK_CONTEXT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SrpCloseThreadNetworkContext(threadNetworkContext)
+    {% end %}
   end
 
   def srpSetTokenEnterpriseId(tokenHandle : Win32cr::Foundation::HANDLE, enterpriseId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SrpSetTokenEnterpriseId(tokenHandle, enterpriseId)
+    {% end %}
   end
 
   def srpGetEnterpriseIds(tokenHandle : Win32cr::Foundation::HANDLE, numberOfBytes : UInt32*, enterpriseIds : Win32cr::Foundation::PWSTR*, enterpriseIdCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SrpGetEnterpriseIds(tokenHandle, numberOfBytes, enterpriseIds, enterpriseIdCount)
+    {% end %}
   end
 
   def srpEnablePermissiveModeFileEncryption(enterpriseId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SrpEnablePermissiveModeFileEncryption(enterpriseId)
+    {% end %}
   end
 
   def srpDisablePermissiveModeFileEncryption : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SrpDisablePermissiveModeFileEncryption
+    {% end %}
   end
 
   def srpGetEnterprisePolicy(tokenHandle : Win32cr::Foundation::HANDLE, policyFlags : Win32cr::Security::EnterpriseData::ENTERPRISE_DATA_POLICIES*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SrpGetEnterprisePolicy(tokenHandle, policyFlags)
+    {% end %}
   end
 
   def srpIsTokenService(token_handle : Win32cr::Foundation::HANDLE, is_token_service : UInt8*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.SrpIsTokenService(token_handle, is_token_service)
+    {% end %}
   end
 
   def srpDoesPolicyAllowAppExecution(packageId : Win32cr::Storage::Packaging::Appx::PACKAGE_ID*, isAllowed : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SrpDoesPolicyAllowAppExecution(packageId, isAllowed)
+    {% end %}
   end
 
   def srpHostingInitialize(version : Win32cr::Security::EnterpriseData::SRPHOSTING_VERSION, type__ : Win32cr::Security::EnterpriseData::SRPHOSTING_TYPE, pvData : Void*, cbData : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SrpHostingInitialize(version, type__, pvData, cbData)
+    {% end %}
   end
 
   def srpHostingTerminate(type__ : Win32cr::Security::EnterpriseData::SRPHOSTING_TYPE) : Void
+    {% if !flag?(:docs) %}
     C.SrpHostingTerminate(type__)
+    {% end %}
   end
 
   def protectFileToEnterpriseIdentity(fileOrFolderPath : Win32cr::Foundation::PWSTR, identity : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ProtectFileToEnterpriseIdentity(fileOrFolderPath, identity)
+    {% end %}
   end
 
   def unprotectFile(fileOrFolderPath : Win32cr::Foundation::PWSTR, options : Win32cr::Security::EnterpriseData::FILE_UNPROTECT_OPTIONS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UnprotectFile(fileOrFolderPath, options)
+    {% end %}
   end
 
   @[Link("srpapi")]
   @[Link("efswrt")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun SrpCreateThreadNetworkContext(enterpriseId : Win32cr::Foundation::PWSTR, threadNetworkContext : Win32cr::Security::EnterpriseData::HTHREAD_NETWORK_CONTEXT*) : Win32cr::Foundation::HRESULT
@@ -286,4 +313,5 @@ module Win32cr::Security::EnterpriseData
     fun UnprotectFile(fileOrFolderPath : Win32cr::Foundation::PWSTR, options : Win32cr::Security::EnterpriseData::FILE_UNPROTECT_OPTIONS*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

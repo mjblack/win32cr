@@ -1076,7 +1076,7 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
   end
 
   @[Extern]
-  record IRouterProtocolConfigVtbl,
+  record IRouterProtocolConfigVtable,
     query_interface : Proc(IRouterProtocolConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRouterProtocolConfig*, UInt32),
     release : Proc(IRouterProtocolConfig*, UInt32),
@@ -1085,7 +1085,7 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
 
 
   @[Extern]
-  record IRouterProtocolConfig, lpVtbl : IRouterProtocolConfigVtbl* do
+  record IRouterProtocolConfig, lpVtbl : IRouterProtocolConfigVtable* do
     GUID = LibC::GUID.new(0x66a2db16_u32, 0xd706_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xda_u8, 0x4_u8])
     def query_interface(this : IRouterProtocolConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1106,7 +1106,7 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
   end
 
   @[Extern]
-  record IAuthenticationProviderConfigVtbl,
+  record IAuthenticationProviderConfigVtable,
     query_interface : Proc(IAuthenticationProviderConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAuthenticationProviderConfig*, UInt32),
     release : Proc(IAuthenticationProviderConfig*, UInt32),
@@ -1118,7 +1118,7 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
 
 
   @[Extern]
-  record IAuthenticationProviderConfig, lpVtbl : IAuthenticationProviderConfigVtbl* do
+  record IAuthenticationProviderConfig, lpVtbl : IAuthenticationProviderConfigVtable* do
     GUID = LibC::GUID.new(0x66a2db17_u32, 0xd706_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xda_u8, 0x4_u8])
     def query_interface(this : IAuthenticationProviderConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1148,7 +1148,7 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
   end
 
   @[Extern]
-  record IAccountingProviderConfigVtbl,
+  record IAccountingProviderConfigVtable,
     query_interface : Proc(IAccountingProviderConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAccountingProviderConfig*, UInt32),
     release : Proc(IAccountingProviderConfig*, UInt32),
@@ -1160,7 +1160,7 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
 
 
   @[Extern]
-  record IAccountingProviderConfig, lpVtbl : IAccountingProviderConfigVtbl* do
+  record IAccountingProviderConfig, lpVtbl : IAccountingProviderConfigVtable* do
     GUID = LibC::GUID.new(0x66a2db18_u32, 0xd706_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xda_u8, 0x4_u8])
     def query_interface(this : IAccountingProviderConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1190,7 +1190,7 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
   end
 
   @[Extern]
-  record IEAPProviderConfigVtbl,
+  record IEAPProviderConfigVtable,
     query_interface : Proc(IEAPProviderConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEAPProviderConfig*, UInt32),
     release : Proc(IEAPProviderConfig*, UInt32),
@@ -1202,7 +1202,7 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
 
 
   @[Extern]
-  record IEAPProviderConfig, lpVtbl : IEAPProviderConfigVtbl* do
+  record IEAPProviderConfig, lpVtbl : IEAPProviderConfigVtable* do
     GUID = LibC::GUID.new(0x66a2db19_u32, 0xd706_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x7b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xda_u8, 0x4_u8])
     def query_interface(this : IEAPProviderConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1232,7 +1232,7 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
   end
 
   @[Extern]
-  record IEAPProviderConfig2Vtbl,
+  record IEAPProviderConfig2Vtable,
     query_interface : Proc(IEAPProviderConfig2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEAPProviderConfig2*, UInt32),
     release : Proc(IEAPProviderConfig2*, UInt32),
@@ -1246,7 +1246,7 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
 
 
   @[Extern]
-  record IEAPProviderConfig2, lpVtbl : IEAPProviderConfig2Vtbl* do
+  record IEAPProviderConfig2, lpVtbl : IEAPProviderConfig2Vtable* do
     GUID = LibC::GUID.new(0xd565917a_u32, 0x85c4_u16, 0x4466_u16, StaticArray[0x85_u8, 0x6e_u8, 0x67_u8, 0x1c_u8, 0x37_u8, 0x42_u8, 0xea_u8, 0x9a_u8])
     def query_interface(this : IEAPProviderConfig2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1282,7 +1282,7 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
   end
 
   @[Extern]
-  record IEAPProviderConfig3Vtbl,
+  record IEAPProviderConfig3Vtable,
     query_interface : Proc(IEAPProviderConfig3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEAPProviderConfig3*, UInt32),
     release : Proc(IEAPProviderConfig3*, UInt32),
@@ -1297,7 +1297,7 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
 
 
   @[Extern]
-  record IEAPProviderConfig3, lpVtbl : IEAPProviderConfig3Vtbl* do
+  record IEAPProviderConfig3, lpVtbl : IEAPProviderConfig3Vtable* do
     GUID = LibC::GUID.new(0xb78ecd12_u32, 0x68bb_u16, 0x4f86_u16, StaticArray[0x9b_u8, 0xf0_u8, 0x84_u8, 0x38_u8, 0xdd_u8, 0x3b_u8, 0xe9_u8, 0x82_u8])
     def query_interface(this : IEAPProviderConfig3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1336,135 +1336,200 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
   end
 
   def eapHostPeerGetMethods(pEapMethodInfoArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO_ARRAY*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetMethods(pEapMethodInfoArray, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerGetMethodProperties(dwVersion : UInt32, dwFlags : UInt32, eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, hUserImpersonationToken : Win32cr::Foundation::HANDLE, dwEapConnDataSize : UInt32, pbEapConnData : UInt8*, dwUserDataSize : UInt32, pbUserData : UInt8*, pMethodPropertyArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_PROPERTY_ARRAY*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetMethodProperties(dwVersion, dwFlags, eapMethodType, hUserImpersonationToken, dwEapConnDataSize, pbEapConnData, dwUserDataSize, pbUserData, pMethodPropertyArray, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerInvokeConfigUI(hwndParent : Win32cr::Foundation::HWND, dwFlags : UInt32, eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, dwSizeOfConfigIn : UInt32, pConfigIn : UInt8*, pdwSizeOfConfigOut : UInt32*, ppConfigOut : UInt8**, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerInvokeConfigUI(hwndParent, dwFlags, eapMethodType, dwSizeOfConfigIn, pConfigIn, pdwSizeOfConfigOut, ppConfigOut, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerQueryCredentialInputFields(hUserImpersonationToken : Win32cr::Foundation::HANDLE, eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, dwFlags : UInt32, dwEapConnDataSize : UInt32, pbEapConnData : UInt8*, pEapConfigInputFieldArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_ARRAY*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerQueryCredentialInputFields(hUserImpersonationToken, eapMethodType, dwFlags, dwEapConnDataSize, pbEapConnData, pEapConfigInputFieldArray, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerQueryUserBlobFromCredentialInputFields(hUserImpersonationToken : Win32cr::Foundation::HANDLE, eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, dwFlags : UInt32, dwEapConnDataSize : UInt32, pbEapConnData : UInt8*, pEapConfigInputFieldArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_CONFIG_INPUT_FIELD_ARRAY*, pdwUserBlobSize : UInt32*, ppbUserBlob : UInt8**, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerQueryUserBlobFromCredentialInputFields(hUserImpersonationToken, eapMethodType, dwFlags, dwEapConnDataSize, pbEapConnData, pEapConfigInputFieldArray, pdwUserBlobSize, ppbUserBlob, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerInvokeIdentityUI(dwVersion : UInt32, eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, dwFlags : UInt32, hwndParent : Win32cr::Foundation::HWND, dwSizeofConnectionData : UInt32, pConnectionData : UInt8*, dwSizeofUserData : UInt32, pUserData : UInt8*, pdwSizeOfUserDataOut : UInt32*, ppUserDataOut : UInt8**, ppwszIdentity : Win32cr::Foundation::PWSTR*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**, ppvReserved : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerInvokeIdentityUI(dwVersion, eapMethodType, dwFlags, hwndParent, dwSizeofConnectionData, pConnectionData, dwSizeofUserData, pUserData, pdwSizeOfUserDataOut, ppUserDataOut, ppwszIdentity, ppEapError, ppvReserved)
+    {% end %}
   end
 
   def eapHostPeerInvokeInteractiveUI(hwndParent : Win32cr::Foundation::HWND, dwSizeofUIContextData : UInt32, pUIContextData : UInt8*, pdwSizeOfDataFromInteractiveUI : UInt32*, ppDataFromInteractiveUI : UInt8**, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerInvokeInteractiveUI(hwndParent, dwSizeofUIContextData, pUIContextData, pdwSizeOfDataFromInteractiveUI, ppDataFromInteractiveUI, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerQueryInteractiveUIInputFields(dwVersion : UInt32, dwFlags : UInt32, dwSizeofUIContextData : UInt32, pUIContextData : UInt8*, pEapInteractiveUIData : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_INTERACTIVE_UI_DATA*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**, ppvReserved : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerQueryInteractiveUIInputFields(dwVersion, dwFlags, dwSizeofUIContextData, pUIContextData, pEapInteractiveUIData, ppEapError, ppvReserved)
+    {% end %}
   end
 
   def eapHostPeerQueryUIBlobFromInteractiveUIInputFields(dwVersion : UInt32, dwFlags : UInt32, dwSizeofUIContextData : UInt32, pUIContextData : UInt8*, pEapInteractiveUIData : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_INTERACTIVE_UI_DATA*, pdwSizeOfDataFromInteractiveUI : UInt32*, ppDataFromInteractiveUI : UInt8**, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**, ppvReserved : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerQueryUIBlobFromInteractiveUIInputFields(dwVersion, dwFlags, dwSizeofUIContextData, pUIContextData, pEapInteractiveUIData, pdwSizeOfDataFromInteractiveUI, ppDataFromInteractiveUI, ppEapError, ppvReserved)
+    {% end %}
   end
 
   def eapHostPeerConfigXml2Blob(dwFlags : UInt32, pConfigDoc : Void*, pdwSizeOfConfigOut : UInt32*, ppConfigOut : UInt8**, pEapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerConfigXml2Blob(dwFlags, pConfigDoc, pdwSizeOfConfigOut, ppConfigOut, pEapMethodType, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerCredentialsXml2Blob(dwFlags : UInt32, pCredentialsDoc : Void*, dwSizeOfConfigIn : UInt32, pConfigIn : UInt8*, pdwSizeOfCredentialsOut : UInt32*, ppCredentialsOut : UInt8**, pEapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerCredentialsXml2Blob(dwFlags, pCredentialsDoc, dwSizeOfConfigIn, pConfigIn, pdwSizeOfCredentialsOut, ppCredentialsOut, pEapMethodType, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerConfigBlob2Xml(dwFlags : UInt32, eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, dwSizeOfConfigIn : UInt32, pConfigIn : UInt8*, ppConfigDoc : Void**, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerConfigBlob2Xml(dwFlags, eapMethodType, dwSizeOfConfigIn, pConfigIn, ppConfigDoc, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerFreeMemory(pData : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.EapHostPeerFreeMemory(pData)
+    {% end %}
   end
 
   def eapHostPeerFreeErrorMemory(pEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR*) : Void
+    {% if !flag?(:docs) %}
     C.EapHostPeerFreeErrorMemory(pEapError)
+    {% end %}
   end
 
   def eapHostPeerInitialize : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerInitialize
+    {% end %}
   end
 
   def eapHostPeerUninitialize : Void
+    {% if !flag?(:docs) %}
     C.EapHostPeerUninitialize
+    {% end %}
   end
 
   def eapHostPeerBeginSession(dwFlags : UInt32, eapType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, pAttributeArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*, hTokenImpersonateUser : Win32cr::Foundation::HANDLE, dwSizeofConnectionData : UInt32, pConnectionData : UInt8*, dwSizeofUserData : UInt32, pUserData : UInt8*, dwMaxSendPacketSize : UInt32, pConnectionId : LibC::GUID*, func : Win32cr::Security::ExtensibleAuthenticationProtocol::NotificationHandler, pContextData : Void*, pSessionId : UInt32*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerBeginSession(dwFlags, eapType, pAttributeArray, hTokenImpersonateUser, dwSizeofConnectionData, pConnectionData, dwSizeofUserData, pUserData, dwMaxSendPacketSize, pConnectionId, func, pContextData, pSessionId, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerProcessReceivedPacket(sessionHandle : UInt32, cbReceivePacket : UInt32, pReceivePacket : UInt8*, pEapOutput : Win32cr::Security::ExtensibleAuthenticationProtocol::EapHostPeerResponseAction*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerProcessReceivedPacket(sessionHandle, cbReceivePacket, pReceivePacket, pEapOutput, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerGetSendPacket(sessionHandle : UInt32, pcbSendPacket : UInt32*, ppSendPacket : UInt8**, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetSendPacket(sessionHandle, pcbSendPacket, ppSendPacket, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerGetResult(sessionHandle : UInt32, reason : Win32cr::Security::ExtensibleAuthenticationProtocol::EapHostPeerMethodResultReason, ppResult : Win32cr::Security::ExtensibleAuthenticationProtocol::EapHostPeerMethodResult*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetResult(sessionHandle, reason, ppResult, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerGetUIContext(sessionHandle : UInt32, pdwSizeOfUIContextData : UInt32*, ppUIContextData : UInt8**, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetUIContext(sessionHandle, pdwSizeOfUIContextData, ppUIContextData, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerSetUIContext(sessionHandle : UInt32, dwSizeOfUIContextData : UInt32, pUIContextData : UInt8*, pEapOutput : Win32cr::Security::ExtensibleAuthenticationProtocol::EapHostPeerResponseAction*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerSetUIContext(sessionHandle, dwSizeOfUIContextData, pUIContextData, pEapOutput, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerGetResponseAttributes(sessionHandle : UInt32, pAttribs : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetResponseAttributes(sessionHandle, pAttribs, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerSetResponseAttributes(sessionHandle : UInt32, pAttribs : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ATTRIBUTES*, pEapOutput : Win32cr::Security::ExtensibleAuthenticationProtocol::EapHostPeerResponseAction*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerSetResponseAttributes(sessionHandle, pAttribs, pEapOutput, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerGetAuthStatus(sessionHandle : UInt32, authParam : Win32cr::Security::ExtensibleAuthenticationProtocol::EapHostPeerAuthParams, pcbAuthData : UInt32*, ppAuthData : UInt8**, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetAuthStatus(sessionHandle, authParam, pcbAuthData, ppAuthData, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerEndSession(sessionHandle : UInt32, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerEndSession(sessionHandle, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerGetDataToUnplumbCredentials(pConnectionIdThatLastSavedCreds : LibC::GUID*, phCredentialImpersonationToken : LibC::IntPtrT*, sessionHandle : UInt32, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**, fSaveToCredMan : Win32cr::Foundation::BOOL*) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetDataToUnplumbCredentials(pConnectionIdThatLastSavedCreds, phCredentialImpersonationToken, sessionHandle, ppEapError, fSaveToCredMan)
+    {% end %}
   end
 
   def eapHostPeerClearConnection(pConnectionId : LibC::GUID*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerClearConnection(pConnectionId, ppEapError)
+    {% end %}
   end
 
   def eapHostPeerFreeEapError(pEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR*) : Void
+    {% if !flag?(:docs) %}
     C.EapHostPeerFreeEapError(pEapError)
+    {% end %}
   end
 
   def eapHostPeerGetIdentity(dwVersion : UInt32, dwFlags : UInt32, eapMethodType : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_TYPE, dwSizeofConnectionData : UInt32, pConnectionData : UInt8*, dwSizeofUserData : UInt32, pUserData : UInt8*, hTokenImpersonateUser : Win32cr::Foundation::HANDLE, pfInvokeUI : Win32cr::Foundation::BOOL*, pdwSizeOfUserDataOut : UInt32*, ppUserDataOut : UInt8**, ppwszIdentity : Win32cr::Foundation::PWSTR*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**, ppvReserved : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetIdentity(dwVersion, dwFlags, eapMethodType, dwSizeofConnectionData, pConnectionData, dwSizeofUserData, pUserData, hTokenImpersonateUser, pfInvokeUI, pdwSizeOfUserDataOut, ppUserDataOut, ppwszIdentity, ppEapError, ppvReserved)
+    {% end %}
   end
 
   def eapHostPeerGetEncryptedPassword(dwSizeofPassword : UInt32, szPassword : Win32cr::Foundation::PWSTR, ppszEncPassword : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.EapHostPeerGetEncryptedPassword(dwSizeofPassword, szPassword, ppszEncPassword)
+    {% end %}
   end
 
   def eapHostPeerFreeRuntimeMemory(pData : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.EapHostPeerFreeRuntimeMemory(pData)
+    {% end %}
   end
 
   @[Link("eappcfg")]
   @[Link("eappprxy")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun EapHostPeerGetMethods(pEapMethodInfoArray : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_METHOD_INFO_ARRAY*, ppEapError : Win32cr::Security::ExtensibleAuthenticationProtocol::EAP_ERROR**) : UInt32
@@ -1563,4 +1628,5 @@ module Win32cr::Security::ExtensibleAuthenticationProtocol
     fun EapHostPeerFreeRuntimeMemory(pData : UInt8*) : Void
 
   end
+  {% end %}
 end

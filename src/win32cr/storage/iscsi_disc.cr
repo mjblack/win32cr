@@ -241,11 +241,7 @@ module Win32cr::Storage::IscsiDisc
     LoginOptions = 7_i32
   end
 
-  @[Extern]
-  struct ADAPTER_OBJECT_
-    def initialize()
-    end
-  end
+  alias ADAPTER_OBJECT_ = Void
 
   @[Extern]
   struct SCSI_PASS_THROUGH
@@ -1433,322 +1429,481 @@ module Win32cr::Storage::IscsiDisc
   end
 
   def getIScsiVersionInformation(version_info : Win32cr::Storage::IscsiDisc::ISCSI_VERSION_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIScsiVersionInformation(version_info)
+    {% end %}
   end
 
   def getIScsiTargetInformationW(target_name : Win32cr::Foundation::PWSTR, discovery_mechanism : Win32cr::Foundation::PWSTR, info_class : Win32cr::Storage::IscsiDisc::TARGET_INFORMATION_CLASS, buffer_size : UInt32*, buffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIScsiTargetInformationW(target_name, discovery_mechanism, info_class, buffer_size, buffer)
+    {% end %}
   end
 
   def getIScsiTargetInformationA(target_name : Win32cr::Foundation::PSTR, discovery_mechanism : Win32cr::Foundation::PSTR, info_class : Win32cr::Storage::IscsiDisc::TARGET_INFORMATION_CLASS, buffer_size : UInt32*, buffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIScsiTargetInformationA(target_name, discovery_mechanism, info_class, buffer_size, buffer)
+    {% end %}
   end
 
   def addIScsiConnectionW(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, reserved : Void*, initiator_port_number : UInt32, target_portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*, security_flags : UInt64, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, key_size : UInt32, key : UInt8*, connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*) : UInt32
+    {% if !flag?(:docs) %}
     C.AddIScsiConnectionW(unique_session_id, reserved, initiator_port_number, target_portal, security_flags, login_options, key_size, key, connection_id)
+    {% end %}
   end
 
   def addIScsiConnectionA(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, reserved : Void*, initiator_port_number : UInt32, target_portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*, security_flags : UInt64, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, key_size : UInt32, key : UInt8*, connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*) : UInt32
+    {% if !flag?(:docs) %}
     C.AddIScsiConnectionA(unique_session_id, reserved, initiator_port_number, target_portal, security_flags, login_options, key_size, key, connection_id)
+    {% end %}
   end
 
   def removeIScsiConnection(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveIScsiConnection(unique_session_id, connection_id)
+    {% end %}
   end
 
   def reportIScsiTargetsW(force_update : Win32cr::Foundation::BOOLEAN, buffer_size : UInt32*, buffer : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportIScsiTargetsW(force_update, buffer_size, buffer)
+    {% end %}
   end
 
   def reportIScsiTargetsA(force_update : Win32cr::Foundation::BOOLEAN, buffer_size : UInt32*, buffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportIScsiTargetsA(force_update, buffer_size, buffer)
+    {% end %}
   end
 
   def addIScsiStaticTargetW(target_name : Win32cr::Foundation::PWSTR, target_alias : Win32cr::Foundation::PWSTR, target_flags : UInt32, persist : Win32cr::Foundation::BOOLEAN, mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGW*, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, portal_group : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTAL_GROUPW*) : UInt32
+    {% if !flag?(:docs) %}
     C.AddIScsiStaticTargetW(target_name, target_alias, target_flags, persist, mappings, login_options, portal_group)
+    {% end %}
   end
 
   def addIScsiStaticTargetA(target_name : Win32cr::Foundation::PSTR, target_alias : Win32cr::Foundation::PSTR, target_flags : UInt32, persist : Win32cr::Foundation::BOOLEAN, mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGA*, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, portal_group : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTAL_GROUPA*) : UInt32
+    {% if !flag?(:docs) %}
     C.AddIScsiStaticTargetA(target_name, target_alias, target_flags, persist, mappings, login_options, portal_group)
+    {% end %}
   end
 
   def removeIScsiStaticTargetW(target_name : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveIScsiStaticTargetW(target_name)
+    {% end %}
   end
 
   def removeIScsiStaticTargetA(target_name : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveIScsiStaticTargetA(target_name)
+    {% end %}
   end
 
   def addIScsiSendTargetPortalW(initiator_instance : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, security_flags : UInt64, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*) : UInt32
+    {% if !flag?(:docs) %}
     C.AddIScsiSendTargetPortalW(initiator_instance, initiator_port_number, login_options, security_flags, portal)
+    {% end %}
   end
 
   def addIScsiSendTargetPortalA(initiator_instance : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, security_flags : UInt64, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*) : UInt32
+    {% if !flag?(:docs) %}
     C.AddIScsiSendTargetPortalA(initiator_instance, initiator_port_number, login_options, security_flags, portal)
+    {% end %}
   end
 
   def removeIScsiSendTargetPortalW(initiator_instance : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveIScsiSendTargetPortalW(initiator_instance, initiator_port_number, portal)
+    {% end %}
   end
 
   def removeIScsiSendTargetPortalA(initiator_instance : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveIScsiSendTargetPortalA(initiator_instance, initiator_port_number, portal)
+    {% end %}
   end
 
   def refreshIScsiSendTargetPortalW(initiator_instance : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*) : UInt32
+    {% if !flag?(:docs) %}
     C.RefreshIScsiSendTargetPortalW(initiator_instance, initiator_port_number, portal)
+    {% end %}
   end
 
   def refreshIScsiSendTargetPortalA(initiator_instance : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*) : UInt32
+    {% if !flag?(:docs) %}
     C.RefreshIScsiSendTargetPortalA(initiator_instance, initiator_port_number, portal)
+    {% end %}
   end
 
   def reportIScsiSendTargetPortalsW(portal_count : UInt32*, portal_info : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTAL_INFOW*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportIScsiSendTargetPortalsW(portal_count, portal_info)
+    {% end %}
   end
 
   def reportIScsiSendTargetPortalsA(portal_count : UInt32*, portal_info : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTAL_INFOA*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportIScsiSendTargetPortalsA(portal_count, portal_info)
+    {% end %}
   end
 
   def reportIScsiSendTargetPortalsExW(portal_count : UInt32*, portal_info_size : UInt32*, portal_info : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTAL_INFO_EXW*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportIScsiSendTargetPortalsExW(portal_count, portal_info_size, portal_info)
+    {% end %}
   end
 
   def reportIScsiSendTargetPortalsExA(portal_count : UInt32*, portal_info_size : UInt32*, portal_info : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTAL_INFO_EXA*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportIScsiSendTargetPortalsExA(portal_count, portal_info_size, portal_info)
+    {% end %}
   end
 
   def loginIScsiTargetW(target_name : Win32cr::Foundation::PWSTR, is_informational_session : Win32cr::Foundation::BOOLEAN, initiator_instance : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, target_portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*, security_flags : UInt64, mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGW*, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, key_size : UInt32, key : UInt8*, is_persistent : Win32cr::Foundation::BOOLEAN, unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, unique_connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*) : UInt32
+    {% if !flag?(:docs) %}
     C.LoginIScsiTargetW(target_name, is_informational_session, initiator_instance, initiator_port_number, target_portal, security_flags, mappings, login_options, key_size, key, is_persistent, unique_session_id, unique_connection_id)
+    {% end %}
   end
 
   def loginIScsiTargetA(target_name : Win32cr::Foundation::PSTR, is_informational_session : Win32cr::Foundation::BOOLEAN, initiator_instance : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, target_portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*, security_flags : UInt64, mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGA*, login_options : Win32cr::Storage::IscsiDisc::ISCSI_LOGIN_OPTIONS*, key_size : UInt32, key : UInt8*, is_persistent : Win32cr::Foundation::BOOLEAN, unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, unique_connection_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*) : UInt32
+    {% if !flag?(:docs) %}
     C.LoginIScsiTargetA(target_name, is_informational_session, initiator_instance, initiator_port_number, target_portal, security_flags, mappings, login_options, key_size, key, is_persistent, unique_session_id, unique_connection_id)
+    {% end %}
   end
 
   def reportIScsiPersistentLoginsW(count : UInt32*, persistent_login_info : Win32cr::Storage::IscsiDisc::PERSISTENT_ISCSI_LOGIN_INFOW*, buffer_size_in_bytes : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportIScsiPersistentLoginsW(count, persistent_login_info, buffer_size_in_bytes)
+    {% end %}
   end
 
   def reportIScsiPersistentLoginsA(count : UInt32*, persistent_login_info : Win32cr::Storage::IscsiDisc::PERSISTENT_ISCSI_LOGIN_INFOA*, buffer_size_in_bytes : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportIScsiPersistentLoginsA(count, persistent_login_info, buffer_size_in_bytes)
+    {% end %}
   end
 
   def logoutIScsiTarget(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*) : UInt32
+    {% if !flag?(:docs) %}
     C.LogoutIScsiTarget(unique_session_id)
+    {% end %}
   end
 
   def removeIScsiPersistentTargetW(initiator_instance : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, target_name : Win32cr::Foundation::PWSTR, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveIScsiPersistentTargetW(initiator_instance, initiator_port_number, target_name, portal)
+    {% end %}
   end
 
   def removeIScsiPersistentTargetA(initiator_instance : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, target_name : Win32cr::Foundation::PSTR, portal : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveIScsiPersistentTargetA(initiator_instance, initiator_port_number, target_name, portal)
+    {% end %}
   end
 
   def sendScsiInquiry(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, lun : UInt64, evpd_cmddt : UInt8, page_code : UInt8, scsi_status : UInt8*, response_size : UInt32*, response_buffer : UInt8*, sense_size : UInt32*, sense_buffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.SendScsiInquiry(unique_session_id, lun, evpd_cmddt, page_code, scsi_status, response_size, response_buffer, sense_size, sense_buffer)
+    {% end %}
   end
 
   def sendScsiReadCapacity(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, lun : UInt64, scsi_status : UInt8*, response_size : UInt32*, response_buffer : UInt8*, sense_size : UInt32*, sense_buffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.SendScsiReadCapacity(unique_session_id, lun, scsi_status, response_size, response_buffer, sense_size, sense_buffer)
+    {% end %}
   end
 
   def sendScsiReportLuns(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, scsi_status : UInt8*, response_size : UInt32*, response_buffer : UInt8*, sense_size : UInt32*, sense_buffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.SendScsiReportLuns(unique_session_id, scsi_status, response_size, response_buffer, sense_size, sense_buffer)
+    {% end %}
   end
 
   def reportIScsiInitiatorListW(buffer_size : UInt32*, buffer : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportIScsiInitiatorListW(buffer_size, buffer)
+    {% end %}
   end
 
   def reportIScsiInitiatorListA(buffer_size : UInt32*, buffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportIScsiInitiatorListA(buffer_size, buffer)
+    {% end %}
   end
 
   def reportActiveIScsiTargetMappingsW(buffer_size : UInt32*, mapping_count : UInt32*, mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGW*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportActiveIScsiTargetMappingsW(buffer_size, mapping_count, mappings)
+    {% end %}
   end
 
   def reportActiveIScsiTargetMappingsA(buffer_size : UInt32*, mapping_count : UInt32*, mappings : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_MAPPINGA*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportActiveIScsiTargetMappingsA(buffer_size, mapping_count, mappings)
+    {% end %}
   end
 
   def setIScsiTunnelModeOuterAddressW(initiator_name : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, destination_address : Win32cr::Foundation::PWSTR, outer_mode_address : Win32cr::Foundation::PWSTR, persist : Win32cr::Foundation::BOOLEAN) : UInt32
+    {% if !flag?(:docs) %}
     C.SetIScsiTunnelModeOuterAddressW(initiator_name, initiator_port_number, destination_address, outer_mode_address, persist)
+    {% end %}
   end
 
   def setIScsiTunnelModeOuterAddressA(initiator_name : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, destination_address : Win32cr::Foundation::PSTR, outer_mode_address : Win32cr::Foundation::PSTR, persist : Win32cr::Foundation::BOOLEAN) : UInt32
+    {% if !flag?(:docs) %}
     C.SetIScsiTunnelModeOuterAddressA(initiator_name, initiator_port_number, destination_address, outer_mode_address, persist)
+    {% end %}
   end
 
   def setIScsiIKEInfoW(initiator_name : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, auth_info : Win32cr::Storage::IscsiDisc::IKE_AUTHENTICATION_INFORMATION*, persist : Win32cr::Foundation::BOOLEAN) : UInt32
+    {% if !flag?(:docs) %}
     C.SetIScsiIKEInfoW(initiator_name, initiator_port_number, auth_info, persist)
+    {% end %}
   end
 
   def setIScsiIKEInfoA(initiator_name : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, auth_info : Win32cr::Storage::IscsiDisc::IKE_AUTHENTICATION_INFORMATION*, persist : Win32cr::Foundation::BOOLEAN) : UInt32
+    {% if !flag?(:docs) %}
     C.SetIScsiIKEInfoA(initiator_name, initiator_port_number, auth_info, persist)
+    {% end %}
   end
 
   def getIScsiIKEInfoW(initiator_name : Win32cr::Foundation::PWSTR, initiator_port_number : UInt32, reserved : UInt32*, auth_info : Win32cr::Storage::IscsiDisc::IKE_AUTHENTICATION_INFORMATION*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIScsiIKEInfoW(initiator_name, initiator_port_number, reserved, auth_info)
+    {% end %}
   end
 
   def getIScsiIKEInfoA(initiator_name : Win32cr::Foundation::PSTR, initiator_port_number : UInt32, reserved : UInt32*, auth_info : Win32cr::Storage::IscsiDisc::IKE_AUTHENTICATION_INFORMATION*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIScsiIKEInfoA(initiator_name, initiator_port_number, reserved, auth_info)
+    {% end %}
   end
 
   def setIScsiGroupPresharedKey(key_length : UInt32, key : UInt8*, persist : Win32cr::Foundation::BOOLEAN) : UInt32
+    {% if !flag?(:docs) %}
     C.SetIScsiGroupPresharedKey(key_length, key, persist)
+    {% end %}
   end
 
   def setIScsiInitiatorCHAPSharedSecret(shared_secret_length : UInt32, shared_secret : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.SetIScsiInitiatorCHAPSharedSecret(shared_secret_length, shared_secret)
+    {% end %}
   end
 
   def setIScsiInitiatorRADIUSSharedSecret(shared_secret_length : UInt32, shared_secret : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.SetIScsiInitiatorRADIUSSharedSecret(shared_secret_length, shared_secret)
+    {% end %}
   end
 
   def setIScsiInitiatorNodeNameW(initiator_node_name : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.SetIScsiInitiatorNodeNameW(initiator_node_name)
+    {% end %}
   end
 
   def setIScsiInitiatorNodeNameA(initiator_node_name : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.SetIScsiInitiatorNodeNameA(initiator_node_name)
+    {% end %}
   end
 
   def getIScsiInitiatorNodeNameW(initiator_node_name : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIScsiInitiatorNodeNameW(initiator_node_name)
+    {% end %}
   end
 
   def getIScsiInitiatorNodeNameA(initiator_node_name : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIScsiInitiatorNodeNameA(initiator_node_name)
+    {% end %}
   end
 
   def addISNSServerW(address : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.AddISNSServerW(address)
+    {% end %}
   end
 
   def addISNSServerA(address : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.AddISNSServerA(address)
+    {% end %}
   end
 
   def removeISNSServerW(address : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveISNSServerW(address)
+    {% end %}
   end
 
   def removeISNSServerA(address : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveISNSServerA(address)
+    {% end %}
   end
 
   def refreshISNSServerW(address : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RefreshISNSServerW(address)
+    {% end %}
   end
 
   def refreshISNSServerA(address : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RefreshISNSServerA(address)
+    {% end %}
   end
 
   def reportISNSServerListW(buffer_size_in_char : UInt32*, buffer : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportISNSServerListW(buffer_size_in_char, buffer)
+    {% end %}
   end
 
   def reportISNSServerListA(buffer_size_in_char : UInt32*, buffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportISNSServerListA(buffer_size_in_char, buffer)
+    {% end %}
   end
 
   def getIScsiSessionListW(buffer_size : UInt32*, session_count : UInt32*, session_info : Win32cr::Storage::IscsiDisc::ISCSI_SESSION_INFOW*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIScsiSessionListW(buffer_size, session_count, session_info)
+    {% end %}
   end
 
   def getIScsiSessionListA(buffer_size : UInt32*, session_count : UInt32*, session_info : Win32cr::Storage::IscsiDisc::ISCSI_SESSION_INFOA*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIScsiSessionListA(buffer_size, session_count, session_info)
+    {% end %}
   end
 
   def getIScsiSessionListEx(buffer_size : UInt32*, session_count_ptr : UInt32*, session_info : Win32cr::Storage::IscsiDisc::ISCSI_SESSION_INFO_EX*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetIScsiSessionListEx(buffer_size, session_count_ptr, session_info)
+    {% end %}
   end
 
   def getDevicesForIScsiSessionW(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, device_count : UInt32*, devices : Win32cr::Storage::IscsiDisc::ISCSI_DEVICE_ON_SESSIONW*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetDevicesForIScsiSessionW(unique_session_id, device_count, devices)
+    {% end %}
   end
 
   def getDevicesForIScsiSessionA(unique_session_id : Win32cr::Storage::IscsiDisc::ISCSI_UNIQUE_SESSION_ID*, device_count : UInt32*, devices : Win32cr::Storage::IscsiDisc::ISCSI_DEVICE_ON_SESSIONA*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetDevicesForIScsiSessionA(unique_session_id, device_count, devices)
+    {% end %}
   end
 
   def setupPersistentIScsiVolumes : UInt32
+    {% if !flag?(:docs) %}
     C.SetupPersistentIScsiVolumes
+    {% end %}
   end
 
   def setupPersistentIScsiDevices : UInt32
+    {% if !flag?(:docs) %}
     C.SetupPersistentIScsiDevices
+    {% end %}
   end
 
   def addPersistentIScsiDeviceW(device_path : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.AddPersistentIScsiDeviceW(device_path)
+    {% end %}
   end
 
   def addPersistentIScsiDeviceA(device_path : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.AddPersistentIScsiDeviceA(device_path)
+    {% end %}
   end
 
   def removePersistentIScsiDeviceW(device_path : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RemovePersistentIScsiDeviceW(device_path)
+    {% end %}
   end
 
   def removePersistentIScsiDeviceA(device_path : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RemovePersistentIScsiDeviceA(device_path)
+    {% end %}
   end
 
   def clearPersistentIScsiDevices : UInt32
+    {% if !flag?(:docs) %}
     C.ClearPersistentIScsiDevices
+    {% end %}
   end
 
   def reportPersistentIScsiDevicesW(buffer_size_in_char : UInt32*, buffer : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportPersistentIScsiDevicesW(buffer_size_in_char, buffer)
+    {% end %}
   end
 
   def reportPersistentIScsiDevicesA(buffer_size_in_char : UInt32*, buffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportPersistentIScsiDevicesA(buffer_size_in_char, buffer)
+    {% end %}
   end
 
   def reportIScsiTargetPortalsW(initiator_name : Win32cr::Foundation::PWSTR, target_name : Win32cr::Foundation::PWSTR, target_portal_tag : UInt16*, element_count : UInt32*, portals : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALW*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportIScsiTargetPortalsW(initiator_name, target_name, target_portal_tag, element_count, portals)
+    {% end %}
   end
 
   def reportIScsiTargetPortalsA(initiator_name : Win32cr::Foundation::PSTR, target_name : Win32cr::Foundation::PSTR, target_portal_tag : UInt16*, element_count : UInt32*, portals : Win32cr::Storage::IscsiDisc::ISCSI_TARGET_PORTALA*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportIScsiTargetPortalsA(initiator_name, target_name, target_portal_tag, element_count, portals)
+    {% end %}
   end
 
   def addRadiusServerW(address : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.AddRadiusServerW(address)
+    {% end %}
   end
 
   def addRadiusServerA(address : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.AddRadiusServerA(address)
+    {% end %}
   end
 
   def removeRadiusServerW(address : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveRadiusServerW(address)
+    {% end %}
   end
 
   def removeRadiusServerA(address : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveRadiusServerA(address)
+    {% end %}
   end
 
   def reportRadiusServerListW(buffer_size_in_char : UInt32*, buffer : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportRadiusServerListW(buffer_size_in_char, buffer)
+    {% end %}
   end
 
   def reportRadiusServerListA(buffer_size_in_char : UInt32*, buffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReportRadiusServerListA(buffer_size_in_char, buffer)
+    {% end %}
   end
 
   @[Link("iscsidsc")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun GetIScsiVersionInformation(version_info : Win32cr::Storage::IscsiDisc::ISCSI_VERSION_INFO*) : UInt32
@@ -1988,4 +2143,5 @@ module Win32cr::Storage::IscsiDisc
     fun ReportRadiusServerListA(buffer_size_in_char : UInt32*, buffer : UInt8*) : UInt32
 
   end
+  {% end %}
 end

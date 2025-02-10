@@ -1224,7 +1224,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFileLoaderVtbl,
+  record IDWriteFontFileLoaderVtable,
     query_interface : Proc(IDWriteFontFileLoader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFileLoader*, UInt32),
     release : Proc(IDWriteFontFileLoader*, UInt32),
@@ -1232,7 +1232,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFileLoader, lpVtbl : IDWriteFontFileLoaderVtbl* do
+  record IDWriteFontFileLoader, lpVtbl : IDWriteFontFileLoaderVtable* do
     GUID = LibC::GUID.new(0x727cad4e_u32, 0xd6af_u16, 0x4c9e_u16, StaticArray[0x8a_u8, 0x8_u8, 0xd6_u8, 0x95_u8, 0xb1_u8, 0x1c_u8, 0xaa_u8, 0x49_u8])
     def query_interface(this : IDWriteFontFileLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1250,7 +1250,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteLocalFontFileLoaderVtbl,
+  record IDWriteLocalFontFileLoaderVtable,
     query_interface : Proc(IDWriteLocalFontFileLoader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteLocalFontFileLoader*, UInt32),
     release : Proc(IDWriteLocalFontFileLoader*, UInt32),
@@ -1261,7 +1261,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteLocalFontFileLoader, lpVtbl : IDWriteLocalFontFileLoaderVtbl* do
+  record IDWriteLocalFontFileLoader, lpVtbl : IDWriteLocalFontFileLoaderVtable* do
     GUID = LibC::GUID.new(0xb2d9f3ec_u32, 0xc9fe_u16, 0x4a11_u16, StaticArray[0xa2_u8, 0xec_u8, 0xd8_u8, 0x62_u8, 0x8_u8, 0xf7_u8, 0xc0_u8, 0xa2_u8])
     def query_interface(this : IDWriteLocalFontFileLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1288,7 +1288,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFileStreamVtbl,
+  record IDWriteFontFileStreamVtable,
     query_interface : Proc(IDWriteFontFileStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFileStream*, UInt32),
     release : Proc(IDWriteFontFileStream*, UInt32),
@@ -1299,7 +1299,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFileStream, lpVtbl : IDWriteFontFileStreamVtbl* do
+  record IDWriteFontFileStream, lpVtbl : IDWriteFontFileStreamVtable* do
     GUID = LibC::GUID.new(0x6d4865fe_u32, 0xab8_u16, 0x4d91_u16, StaticArray[0x8f_u8, 0x62_u8, 0x5d_u8, 0xd6_u8, 0xbe_u8, 0x34_u8, 0xa3_u8, 0xe0_u8])
     def query_interface(this : IDWriteFontFileStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1326,7 +1326,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFileVtbl,
+  record IDWriteFontFileVtable,
     query_interface : Proc(IDWriteFontFile*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFile*, UInt32),
     release : Proc(IDWriteFontFile*, UInt32),
@@ -1336,7 +1336,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFile, lpVtbl : IDWriteFontFileVtbl* do
+  record IDWriteFontFile, lpVtbl : IDWriteFontFileVtable* do
     GUID = LibC::GUID.new(0x739d886a_u32, 0xcef5_u16, 0x47dc_u16, StaticArray[0x87_u8, 0x69_u8, 0x1a_u8, 0x8b_u8, 0x41_u8, 0xbe_u8, 0xbb_u8, 0xb0_u8])
     def query_interface(this : IDWriteFontFile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1360,7 +1360,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteRenderingParamsVtbl,
+  record IDWriteRenderingParamsVtable,
     query_interface : Proc(IDWriteRenderingParams*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteRenderingParams*, UInt32),
     release : Proc(IDWriteRenderingParams*, UInt32),
@@ -1372,7 +1372,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteRenderingParams, lpVtbl : IDWriteRenderingParamsVtbl* do
+  record IDWriteRenderingParams, lpVtbl : IDWriteRenderingParamsVtable* do
     GUID = LibC::GUID.new(0x2f0da53a_u32, 0x2add_u16, 0x47cd_u16, StaticArray[0x82_u8, 0xee_u8, 0xd9_u8, 0xec_u8, 0x34_u8, 0x68_u8, 0x8e_u8, 0x75_u8])
     def query_interface(this : IDWriteRenderingParams*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1402,7 +1402,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFaceVtbl,
+  record IDWriteFontFaceVtable,
     query_interface : Proc(IDWriteFontFace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFace*, UInt32),
     release : Proc(IDWriteFontFace*, UInt32),
@@ -1424,7 +1424,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFace, lpVtbl : IDWriteFontFaceVtbl* do
+  record IDWriteFontFace, lpVtbl : IDWriteFontFaceVtable* do
     GUID = LibC::GUID.new(0x5f49804d_u32, 0x7024_u16, 0x4d43_u16, StaticArray[0xbf_u8, 0xa9_u8, 0xd2_u8, 0x59_u8, 0x84_u8, 0xf5_u8, 0x38_u8, 0x49_u8])
     def query_interface(this : IDWriteFontFace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1484,7 +1484,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontCollectionLoaderVtbl,
+  record IDWriteFontCollectionLoaderVtable,
     query_interface : Proc(IDWriteFontCollectionLoader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontCollectionLoader*, UInt32),
     release : Proc(IDWriteFontCollectionLoader*, UInt32),
@@ -1492,7 +1492,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontCollectionLoader, lpVtbl : IDWriteFontCollectionLoaderVtbl* do
+  record IDWriteFontCollectionLoader, lpVtbl : IDWriteFontCollectionLoaderVtable* do
     GUID = LibC::GUID.new(0xcca920e4_u32, 0x52f0_u16, 0x492b_u16, StaticArray[0xbf_u8, 0xa8_u8, 0x29_u8, 0xc7_u8, 0x2e_u8, 0xe0_u8, 0xa4_u8, 0x68_u8])
     def query_interface(this : IDWriteFontCollectionLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1510,7 +1510,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFileEnumeratorVtbl,
+  record IDWriteFontFileEnumeratorVtable,
     query_interface : Proc(IDWriteFontFileEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFileEnumerator*, UInt32),
     release : Proc(IDWriteFontFileEnumerator*, UInt32),
@@ -1519,7 +1519,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFileEnumerator, lpVtbl : IDWriteFontFileEnumeratorVtbl* do
+  record IDWriteFontFileEnumerator, lpVtbl : IDWriteFontFileEnumeratorVtable* do
     GUID = LibC::GUID.new(0x72755049_u32, 0x5ff7_u16, 0x435d_u16, StaticArray[0x83_u8, 0x48_u8, 0x4b_u8, 0xe9_u8, 0x7c_u8, 0xfa_u8, 0x6c_u8, 0x7c_u8])
     def query_interface(this : IDWriteFontFileEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1540,7 +1540,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteLocalizedStringsVtbl,
+  record IDWriteLocalizedStringsVtable,
     query_interface : Proc(IDWriteLocalizedStrings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteLocalizedStrings*, UInt32),
     release : Proc(IDWriteLocalizedStrings*, UInt32),
@@ -1553,7 +1553,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteLocalizedStrings, lpVtbl : IDWriteLocalizedStringsVtbl* do
+  record IDWriteLocalizedStrings, lpVtbl : IDWriteLocalizedStringsVtable* do
     GUID = LibC::GUID.new(0x8256209_u32, 0x99a_u16, 0x4b34_u16, StaticArray[0xb8_u8, 0x6d_u8, 0xc2_u8, 0x2b_u8, 0x11_u8, 0xe_u8, 0x77_u8, 0x71_u8])
     def query_interface(this : IDWriteLocalizedStrings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1586,7 +1586,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontCollectionVtbl,
+  record IDWriteFontCollectionVtable,
     query_interface : Proc(IDWriteFontCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontCollection*, UInt32),
     release : Proc(IDWriteFontCollection*, UInt32),
@@ -1597,7 +1597,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontCollection, lpVtbl : IDWriteFontCollectionVtbl* do
+  record IDWriteFontCollection, lpVtbl : IDWriteFontCollectionVtable* do
     GUID = LibC::GUID.new(0xa84cee02_u32, 0x3eea_u16, 0x4eee_u16, StaticArray[0xa8_u8, 0x27_u8, 0x87_u8, 0xc1_u8, 0xa0_u8, 0x2a_u8, 0xf_u8, 0xcc_u8])
     def query_interface(this : IDWriteFontCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1624,7 +1624,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontListVtbl,
+  record IDWriteFontListVtable,
     query_interface : Proc(IDWriteFontList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontList*, UInt32),
     release : Proc(IDWriteFontList*, UInt32),
@@ -1634,7 +1634,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontList, lpVtbl : IDWriteFontListVtbl* do
+  record IDWriteFontList, lpVtbl : IDWriteFontListVtable* do
     GUID = LibC::GUID.new(0x1a0d8438_u32, 0x1d97_u16, 0x4ec1_u16, StaticArray[0xae_u8, 0xf9_u8, 0xa2_u8, 0xfb_u8, 0x86_u8, 0xed_u8, 0x6a_u8, 0xcb_u8])
     def query_interface(this : IDWriteFontList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1658,7 +1658,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFamilyVtbl,
+  record IDWriteFontFamilyVtable,
     query_interface : Proc(IDWriteFontFamily*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFamily*, UInt32),
     release : Proc(IDWriteFontFamily*, UInt32),
@@ -1671,7 +1671,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFamily, lpVtbl : IDWriteFontFamilyVtbl* do
+  record IDWriteFontFamily, lpVtbl : IDWriteFontFamilyVtable* do
     GUID = LibC::GUID.new(0xda20d8ef_u32, 0x812a_u16, 0x4c43_u16, StaticArray[0x98_u8, 0x2_u8, 0x62_u8, 0xec_u8, 0x4a_u8, 0xbd_u8, 0x7a_u8, 0xdd_u8])
     def query_interface(this : IDWriteFontFamily*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1704,7 +1704,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontVtbl,
+  record IDWriteFontVtable,
     query_interface : Proc(IDWriteFont*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFont*, UInt32),
     release : Proc(IDWriteFont*, UInt32),
@@ -1722,7 +1722,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFont, lpVtbl : IDWriteFontVtbl* do
+  record IDWriteFont, lpVtbl : IDWriteFontVtable* do
     GUID = LibC::GUID.new(0xacd16696_u32, 0x8c14_u16, 0x4f5d_u16, StaticArray[0x87_u8, 0x7e_u8, 0xfe_u8, 0x3f_u8, 0xc1_u8, 0xd3_u8, 0x27_u8, 0x37_u8])
     def query_interface(this : IDWriteFont*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1770,7 +1770,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextFormatVtbl,
+  record IDWriteTextFormatVtable,
     query_interface : Proc(IDWriteTextFormat*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextFormat*, UInt32),
     release : Proc(IDWriteTextFormat*, UInt32),
@@ -1802,7 +1802,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextFormat, lpVtbl : IDWriteTextFormatVtbl* do
+  record IDWriteTextFormat, lpVtbl : IDWriteTextFormatVtable* do
     GUID = LibC::GUID.new(0x9c906818_u32, 0x31d7_u16, 0x4fd3_u16, StaticArray[0xa1_u8, 0x51_u8, 0x7c_u8, 0x5e_u8, 0x22_u8, 0x5d_u8, 0xb5_u8, 0x5a_u8])
     def query_interface(this : IDWriteTextFormat*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1892,7 +1892,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTypographyVtbl,
+  record IDWriteTypographyVtable,
     query_interface : Proc(IDWriteTypography*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTypography*, UInt32),
     release : Proc(IDWriteTypography*, UInt32),
@@ -1902,7 +1902,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTypography, lpVtbl : IDWriteTypographyVtbl* do
+  record IDWriteTypography, lpVtbl : IDWriteTypographyVtable* do
     GUID = LibC::GUID.new(0x55f1112b_u32, 0x1dc2_u16, 0x4b3c_u16, StaticArray[0x95_u8, 0x41_u8, 0xf4_u8, 0x68_u8, 0x94_u8, 0xed_u8, 0x85_u8, 0xb6_u8])
     def query_interface(this : IDWriteTypography*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1926,14 +1926,14 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteNumberSubstitutionVtbl,
+  record IDWriteNumberSubstitutionVtable,
     query_interface : Proc(IDWriteNumberSubstitution*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteNumberSubstitution*, UInt32),
     release : Proc(IDWriteNumberSubstitution*, UInt32)
 
 
   @[Extern]
-  record IDWriteNumberSubstitution, lpVtbl : IDWriteNumberSubstitutionVtbl* do
+  record IDWriteNumberSubstitution, lpVtbl : IDWriteNumberSubstitutionVtable* do
     GUID = LibC::GUID.new(0x14885cc9_u32, 0xbab0_u16, 0x4f90_u16, StaticArray[0xb6_u8, 0xed_u8, 0x5c_u8, 0x36_u8, 0x6a_u8, 0x2c_u8, 0xd0_u8, 0x3d_u8])
     def query_interface(this : IDWriteNumberSubstitution*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1948,7 +1948,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextAnalysisSourceVtbl,
+  record IDWriteTextAnalysisSourceVtable,
     query_interface : Proc(IDWriteTextAnalysisSource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextAnalysisSource*, UInt32),
     release : Proc(IDWriteTextAnalysisSource*, UInt32),
@@ -1960,7 +1960,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextAnalysisSource, lpVtbl : IDWriteTextAnalysisSourceVtbl* do
+  record IDWriteTextAnalysisSource, lpVtbl : IDWriteTextAnalysisSourceVtable* do
     GUID = LibC::GUID.new(0x688e1a58_u32, 0x5094_u16, 0x47c8_u16, StaticArray[0xad_u8, 0xc8_u8, 0xfb_u8, 0xce_u8, 0xa6_u8, 0xa_u8, 0xe9_u8, 0x2b_u8])
     def query_interface(this : IDWriteTextAnalysisSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1990,7 +1990,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextAnalysisSinkVtbl,
+  record IDWriteTextAnalysisSinkVtable,
     query_interface : Proc(IDWriteTextAnalysisSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextAnalysisSink*, UInt32),
     release : Proc(IDWriteTextAnalysisSink*, UInt32),
@@ -2001,7 +2001,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextAnalysisSink, lpVtbl : IDWriteTextAnalysisSinkVtbl* do
+  record IDWriteTextAnalysisSink, lpVtbl : IDWriteTextAnalysisSinkVtable* do
     GUID = LibC::GUID.new(0x5810cd44_u32, 0xca0_u16, 0x4701_u16, StaticArray[0xb3_u8, 0xfa_u8, 0xbe_u8, 0xc5_u8, 0x18_u8, 0x2a_u8, 0xe4_u8, 0xf6_u8])
     def query_interface(this : IDWriteTextAnalysisSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2028,7 +2028,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextAnalyzerVtbl,
+  record IDWriteTextAnalyzerVtable,
     query_interface : Proc(IDWriteTextAnalyzer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextAnalyzer*, UInt32),
     release : Proc(IDWriteTextAnalyzer*, UInt32),
@@ -2042,7 +2042,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextAnalyzer, lpVtbl : IDWriteTextAnalyzerVtbl* do
+  record IDWriteTextAnalyzer, lpVtbl : IDWriteTextAnalyzerVtable* do
     GUID = LibC::GUID.new(0xb7e6163e_u32, 0x7f46_u16, 0x43b4_u16, StaticArray[0x84_u8, 0xb3_u8, 0xe4_u8, 0xe6_u8, 0x24_u8, 0x9c_u8, 0x36_u8, 0x5d_u8])
     def query_interface(this : IDWriteTextAnalyzer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2078,7 +2078,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteInlineObjectVtbl,
+  record IDWriteInlineObjectVtable,
     query_interface : Proc(IDWriteInlineObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteInlineObject*, UInt32),
     release : Proc(IDWriteInlineObject*, UInt32),
@@ -2089,7 +2089,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteInlineObject, lpVtbl : IDWriteInlineObjectVtbl* do
+  record IDWriteInlineObject, lpVtbl : IDWriteInlineObjectVtable* do
     GUID = LibC::GUID.new(0x8339fde3_u32, 0x106f_u16, 0x47ab_u16, StaticArray[0x83_u8, 0x73_u8, 0x1c_u8, 0x62_u8, 0x95_u8, 0xeb_u8, 0x10_u8, 0xb3_u8])
     def query_interface(this : IDWriteInlineObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2116,7 +2116,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWritePixelSnappingVtbl,
+  record IDWritePixelSnappingVtable,
     query_interface : Proc(IDWritePixelSnapping*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWritePixelSnapping*, UInt32),
     release : Proc(IDWritePixelSnapping*, UInt32),
@@ -2126,7 +2126,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWritePixelSnapping, lpVtbl : IDWritePixelSnappingVtbl* do
+  record IDWritePixelSnapping, lpVtbl : IDWritePixelSnappingVtable* do
     GUID = LibC::GUID.new(0xeaf3a2da_u32, 0xecf4_u16, 0x4d24_u16, StaticArray[0xb6_u8, 0x44_u8, 0xb3_u8, 0x4f_u8, 0x68_u8, 0x42_u8, 0x2_u8, 0x4b_u8])
     def query_interface(this : IDWritePixelSnapping*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2150,7 +2150,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextRendererVtbl,
+  record IDWriteTextRendererVtable,
     query_interface : Proc(IDWriteTextRenderer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextRenderer*, UInt32),
     release : Proc(IDWriteTextRenderer*, UInt32),
@@ -2164,7 +2164,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextRenderer, lpVtbl : IDWriteTextRendererVtbl* do
+  record IDWriteTextRenderer, lpVtbl : IDWriteTextRendererVtable* do
     GUID = LibC::GUID.new(0xef8a8135_u32, 0x5cc6_u16, 0x45fe_u16, StaticArray[0x88_u8, 0x25_u8, 0xc5_u8, 0xa0_u8, 0x72_u8, 0x4e_u8, 0xb8_u8, 0x19_u8])
     def query_interface(this : IDWriteTextRenderer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2200,7 +2200,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextLayoutVtbl,
+  record IDWriteTextLayoutVtable,
     query_interface : Proc(IDWriteTextLayout*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextLayout*, UInt32),
     release : Proc(IDWriteTextLayout*, UInt32),
@@ -2271,7 +2271,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextLayout, lpVtbl : IDWriteTextLayoutVtbl* do
+  record IDWriteTextLayout, lpVtbl : IDWriteTextLayoutVtable* do
     GUID = LibC::GUID.new(0x53737037_u32, 0x6d14_u16, 0x410b_u16, StaticArray[0x9b_u8, 0xfe_u8, 0xb_u8, 0x18_u8, 0x2b_u8, 0xb7_u8, 0x9_u8, 0x61_u8])
     def query_interface(this : IDWriteTextLayout*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2478,7 +2478,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteBitmapRenderTargetVtbl,
+  record IDWriteBitmapRenderTargetVtable,
     query_interface : Proc(IDWriteBitmapRenderTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteBitmapRenderTarget*, UInt32),
     release : Proc(IDWriteBitmapRenderTarget*, UInt32),
@@ -2493,7 +2493,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteBitmapRenderTarget, lpVtbl : IDWriteBitmapRenderTargetVtbl* do
+  record IDWriteBitmapRenderTarget, lpVtbl : IDWriteBitmapRenderTargetVtable* do
     GUID = LibC::GUID.new(0x5e5a32a3_u32, 0x8dff_u16, 0x4773_u16, StaticArray[0x9f_u8, 0xf6_u8, 0x6_u8, 0x96_u8, 0xea_u8, 0xb7_u8, 0x72_u8, 0x67_u8])
     def query_interface(this : IDWriteBitmapRenderTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2532,7 +2532,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteGdiInteropVtbl,
+  record IDWriteGdiInteropVtable,
     query_interface : Proc(IDWriteGdiInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteGdiInterop*, UInt32),
     release : Proc(IDWriteGdiInterop*, UInt32),
@@ -2544,7 +2544,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteGdiInterop, lpVtbl : IDWriteGdiInteropVtbl* do
+  record IDWriteGdiInterop, lpVtbl : IDWriteGdiInteropVtable* do
     GUID = LibC::GUID.new(0x1edd9491_u32, 0x9853_u16, 0x4299_u16, StaticArray[0x89_u8, 0x8f_u8, 0x64_u8, 0x32_u8, 0x98_u8, 0x3b_u8, 0x6f_u8, 0x3a_u8])
     def query_interface(this : IDWriteGdiInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2574,7 +2574,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteGlyphRunAnalysisVtbl,
+  record IDWriteGlyphRunAnalysisVtable,
     query_interface : Proc(IDWriteGlyphRunAnalysis*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteGlyphRunAnalysis*, UInt32),
     release : Proc(IDWriteGlyphRunAnalysis*, UInt32),
@@ -2584,7 +2584,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteGlyphRunAnalysis, lpVtbl : IDWriteGlyphRunAnalysisVtbl* do
+  record IDWriteGlyphRunAnalysis, lpVtbl : IDWriteGlyphRunAnalysisVtable* do
     GUID = LibC::GUID.new(0x7d97dbf7_u32, 0xe085_u16, 0x42d4_u16, StaticArray[0x81_u8, 0xe3_u8, 0x6a_u8, 0x88_u8, 0x3b_u8, 0xde_u8, 0xd1_u8, 0x18_u8])
     def query_interface(this : IDWriteGlyphRunAnalysis*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2608,7 +2608,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFactoryVtbl,
+  record IDWriteFactoryVtable,
     query_interface : Proc(IDWriteFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFactory*, UInt32),
     release : Proc(IDWriteFactory*, UInt32),
@@ -2636,7 +2636,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFactory, lpVtbl : IDWriteFactoryVtbl* do
+  record IDWriteFactory, lpVtbl : IDWriteFactoryVtable* do
     GUID = LibC::GUID.new(0xb859ee5a_u32, 0xd838_u16, 0x4b5b_u16, StaticArray[0xa2_u8, 0xe8_u8, 0x1a_u8, 0xdc_u8, 0x7d_u8, 0x93_u8, 0xdb_u8, 0x48_u8])
     def query_interface(this : IDWriteFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2714,7 +2714,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFactory1Vtbl,
+  record IDWriteFactory1Vtable,
     query_interface : Proc(IDWriteFactory1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFactory1*, UInt32),
     release : Proc(IDWriteFactory1*, UInt32),
@@ -2744,7 +2744,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFactory1, lpVtbl : IDWriteFactory1Vtbl* do
+  record IDWriteFactory1, lpVtbl : IDWriteFactory1Vtable* do
     GUID = LibC::GUID.new(0x30572f99_u32, 0xdac6_u16, 0x41db_u16, StaticArray[0xa1_u8, 0x6e_u8, 0x4_u8, 0x86_u8, 0x30_u8, 0x7e_u8, 0x60_u8, 0x6a_u8])
     def query_interface(this : IDWriteFactory1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2828,7 +2828,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFace1Vtbl,
+  record IDWriteFontFace1Vtable,
     query_interface : Proc(IDWriteFontFace1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFace1*, UInt32),
     release : Proc(IDWriteFontFace1*, UInt32),
@@ -2862,7 +2862,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFace1, lpVtbl : IDWriteFontFace1Vtbl* do
+  record IDWriteFontFace1, lpVtbl : IDWriteFontFace1Vtable* do
     GUID = LibC::GUID.new(0xa71efdb4_u32, 0x9fdb_u16, 0x4838_u16, StaticArray[0xad_u8, 0x90_u8, 0xcf_u8, 0xc3_u8, 0xbe_u8, 0x8c_u8, 0x3d_u8, 0xaf_u8])
     def query_interface(this : IDWriteFontFace1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2958,7 +2958,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFont1Vtbl,
+  record IDWriteFont1Vtable,
     query_interface : Proc(IDWriteFont1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFont1*, UInt32),
     release : Proc(IDWriteFont1*, UInt32),
@@ -2980,7 +2980,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFont1, lpVtbl : IDWriteFont1Vtbl* do
+  record IDWriteFont1, lpVtbl : IDWriteFont1Vtable* do
     GUID = LibC::GUID.new(0xacd16696_u32, 0x8c14_u16, 0x4f5d_u16, StaticArray[0x87_u8, 0x7e_u8, 0xfe_u8, 0x3f_u8, 0xc1_u8, 0xd3_u8, 0x27_u8, 0x38_u8])
     def query_interface(this : IDWriteFont1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3040,7 +3040,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteRenderingParams1Vtbl,
+  record IDWriteRenderingParams1Vtable,
     query_interface : Proc(IDWriteRenderingParams1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteRenderingParams1*, UInt32),
     release : Proc(IDWriteRenderingParams1*, UInt32),
@@ -3053,7 +3053,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteRenderingParams1, lpVtbl : IDWriteRenderingParams1Vtbl* do
+  record IDWriteRenderingParams1, lpVtbl : IDWriteRenderingParams1Vtable* do
     GUID = LibC::GUID.new(0x94413cf4_u32, 0xa6fc_u16, 0x4248_u16, StaticArray[0x8b_u8, 0x50_u8, 0x66_u8, 0x74_u8, 0x34_u8, 0x8f_u8, 0xca_u8, 0xd3_u8])
     def query_interface(this : IDWriteRenderingParams1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3086,7 +3086,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextAnalyzer1Vtbl,
+  record IDWriteTextAnalyzer1Vtable,
     query_interface : Proc(IDWriteTextAnalyzer1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextAnalyzer1*, UInt32),
     release : Proc(IDWriteTextAnalyzer1*, UInt32),
@@ -3109,7 +3109,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextAnalyzer1, lpVtbl : IDWriteTextAnalyzer1Vtbl* do
+  record IDWriteTextAnalyzer1, lpVtbl : IDWriteTextAnalyzer1Vtable* do
     GUID = LibC::GUID.new(0x80dad800_u32, 0xe21f_u16, 0x4e83_u16, StaticArray[0x96_u8, 0xce_u8, 0xbf_u8, 0xcc_u8, 0xe5_u8, 0x0_u8, 0xdb_u8, 0x7c_u8])
     def query_interface(this : IDWriteTextAnalyzer1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3172,7 +3172,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextAnalysisSource1Vtbl,
+  record IDWriteTextAnalysisSource1Vtable,
     query_interface : Proc(IDWriteTextAnalysisSource1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextAnalysisSource1*, UInt32),
     release : Proc(IDWriteTextAnalysisSource1*, UInt32),
@@ -3185,7 +3185,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextAnalysisSource1, lpVtbl : IDWriteTextAnalysisSource1Vtbl* do
+  record IDWriteTextAnalysisSource1, lpVtbl : IDWriteTextAnalysisSource1Vtable* do
     GUID = LibC::GUID.new(0x639cfad8_u32, 0xfb4_u16, 0x4b21_u16, StaticArray[0xa5_u8, 0x8a_u8, 0x6_u8, 0x79_u8, 0x20_u8, 0x12_u8, 0x0_u8, 0x9_u8])
     def query_interface(this : IDWriteTextAnalysisSource1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3218,7 +3218,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextAnalysisSink1Vtbl,
+  record IDWriteTextAnalysisSink1Vtable,
     query_interface : Proc(IDWriteTextAnalysisSink1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextAnalysisSink1*, UInt32),
     release : Proc(IDWriteTextAnalysisSink1*, UInt32),
@@ -3230,7 +3230,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextAnalysisSink1, lpVtbl : IDWriteTextAnalysisSink1Vtbl* do
+  record IDWriteTextAnalysisSink1, lpVtbl : IDWriteTextAnalysisSink1Vtable* do
     GUID = LibC::GUID.new(0xb0d941a0_u32, 0x85e7_u16, 0x4d8b_u16, StaticArray[0x9f_u8, 0xd3_u8, 0x5c_u8, 0xed_u8, 0x99_u8, 0x34_u8, 0x48_u8, 0x2a_u8])
     def query_interface(this : IDWriteTextAnalysisSink1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3260,7 +3260,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextLayout1Vtbl,
+  record IDWriteTextLayout1Vtable,
     query_interface : Proc(IDWriteTextLayout1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextLayout1*, UInt32),
     release : Proc(IDWriteTextLayout1*, UInt32),
@@ -3335,7 +3335,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextLayout1, lpVtbl : IDWriteTextLayout1Vtbl* do
+  record IDWriteTextLayout1, lpVtbl : IDWriteTextLayout1Vtable* do
     GUID = LibC::GUID.new(0x9064d822_u32, 0x80a7_u16, 0x465c_u16, StaticArray[0xa9_u8, 0x86_u8, 0xdf_u8, 0x65_u8, 0xf7_u8, 0x8b_u8, 0x8f_u8, 0xeb_u8])
     def query_interface(this : IDWriteTextLayout1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3554,7 +3554,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteBitmapRenderTarget1Vtbl,
+  record IDWriteBitmapRenderTarget1Vtable,
     query_interface : Proc(IDWriteBitmapRenderTarget1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteBitmapRenderTarget1*, UInt32),
     release : Proc(IDWriteBitmapRenderTarget1*, UInt32),
@@ -3571,7 +3571,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteBitmapRenderTarget1, lpVtbl : IDWriteBitmapRenderTarget1Vtbl* do
+  record IDWriteBitmapRenderTarget1, lpVtbl : IDWriteBitmapRenderTarget1Vtable* do
     GUID = LibC::GUID.new(0x791e8298_u32, 0x3ef3_u16, 0x4230_u16, StaticArray[0x98_u8, 0x80_u8, 0xc9_u8, 0xbd_u8, 0xec_u8, 0xc4_u8, 0x20_u8, 0x64_u8])
     def query_interface(this : IDWriteBitmapRenderTarget1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3616,7 +3616,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextRenderer1Vtbl,
+  record IDWriteTextRenderer1Vtable,
     query_interface : Proc(IDWriteTextRenderer1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextRenderer1*, UInt32),
     release : Proc(IDWriteTextRenderer1*, UInt32),
@@ -3634,7 +3634,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextRenderer1, lpVtbl : IDWriteTextRenderer1Vtbl* do
+  record IDWriteTextRenderer1, lpVtbl : IDWriteTextRenderer1Vtable* do
     GUID = LibC::GUID.new(0xd3e0e934_u32, 0x22a0_u16, 0x427e_u16, StaticArray[0xaa_u8, 0xe4_u8, 0x7d_u8, 0x95_u8, 0x74_u8, 0xb5_u8, 0x9d_u8, 0xb1_u8])
     def query_interface(this : IDWriteTextRenderer1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3682,7 +3682,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextFormat1Vtbl,
+  record IDWriteTextFormat1Vtable,
     query_interface : Proc(IDWriteTextFormat1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextFormat1*, UInt32),
     release : Proc(IDWriteTextFormat1*, UInt32),
@@ -3722,7 +3722,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextFormat1, lpVtbl : IDWriteTextFormat1Vtbl* do
+  record IDWriteTextFormat1, lpVtbl : IDWriteTextFormat1Vtable* do
     GUID = LibC::GUID.new(0x5f174b49_u32, 0xd8b_u16, 0x4cfb_u16, StaticArray[0x8b_u8, 0xca_u8, 0xf1_u8, 0xcc_u8, 0xe9_u8, 0xd0_u8, 0x6c_u8, 0x67_u8])
     def query_interface(this : IDWriteTextFormat1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3836,7 +3836,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextLayout2Vtbl,
+  record IDWriteTextLayout2Vtable,
     query_interface : Proc(IDWriteTextLayout2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextLayout2*, UInt32),
     release : Proc(IDWriteTextLayout2*, UInt32),
@@ -3920,7 +3920,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextLayout2, lpVtbl : IDWriteTextLayout2Vtbl* do
+  record IDWriteTextLayout2, lpVtbl : IDWriteTextLayout2Vtable* do
     GUID = LibC::GUID.new(0x1093c18f_u32, 0x8d5e_u16, 0x43f0_u16, StaticArray[0xb0_u8, 0x64_u8, 0x9_u8, 0x17_u8, 0x31_u8, 0x1b_u8, 0x52_u8, 0x5e_u8])
     def query_interface(this : IDWriteTextLayout2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4166,7 +4166,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextAnalyzer2Vtbl,
+  record IDWriteTextAnalyzer2Vtable,
     query_interface : Proc(IDWriteTextAnalyzer2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextAnalyzer2*, UInt32),
     release : Proc(IDWriteTextAnalyzer2*, UInt32),
@@ -4192,7 +4192,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextAnalyzer2, lpVtbl : IDWriteTextAnalyzer2Vtbl* do
+  record IDWriteTextAnalyzer2, lpVtbl : IDWriteTextAnalyzer2Vtable* do
     GUID = LibC::GUID.new(0x553a9ff3_u32, 0x5693_u16, 0x4df7_u16, StaticArray[0xb5_u8, 0x2b_u8, 0x74_u8, 0x80_u8, 0x6f_u8, 0x7f_u8, 0x2e_u8, 0xb9_u8])
     def query_interface(this : IDWriteTextAnalyzer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4264,7 +4264,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFallbackVtbl,
+  record IDWriteFontFallbackVtable,
     query_interface : Proc(IDWriteFontFallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFallback*, UInt32),
     release : Proc(IDWriteFontFallback*, UInt32),
@@ -4272,7 +4272,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFallback, lpVtbl : IDWriteFontFallbackVtbl* do
+  record IDWriteFontFallback, lpVtbl : IDWriteFontFallbackVtable* do
     GUID = LibC::GUID.new(0xefa008f9_u32, 0xf7a1_u16, 0x48bf_u16, StaticArray[0xb0_u8, 0x5c_u8, 0xf2_u8, 0x24_u8, 0x71_u8, 0x3c_u8, 0xc0_u8, 0xff_u8])
     def query_interface(this : IDWriteFontFallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4290,7 +4290,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFallbackBuilderVtbl,
+  record IDWriteFontFallbackBuilderVtable,
     query_interface : Proc(IDWriteFontFallbackBuilder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFallbackBuilder*, UInt32),
     release : Proc(IDWriteFontFallbackBuilder*, UInt32),
@@ -4300,7 +4300,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFallbackBuilder, lpVtbl : IDWriteFontFallbackBuilderVtbl* do
+  record IDWriteFontFallbackBuilder, lpVtbl : IDWriteFontFallbackBuilderVtable* do
     GUID = LibC::GUID.new(0xfd882d06_u32, 0x8aba_u16, 0x4fb8_u16, StaticArray[0xb8_u8, 0x49_u8, 0x8b_u8, 0xe8_u8, 0xb7_u8, 0x3e_u8, 0x14_u8, 0xde_u8])
     def query_interface(this : IDWriteFontFallbackBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4324,7 +4324,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFont2Vtbl,
+  record IDWriteFont2Vtable,
     query_interface : Proc(IDWriteFont2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFont2*, UInt32),
     release : Proc(IDWriteFont2*, UInt32),
@@ -4347,7 +4347,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFont2, lpVtbl : IDWriteFont2Vtbl* do
+  record IDWriteFont2, lpVtbl : IDWriteFont2Vtable* do
     GUID = LibC::GUID.new(0x29748ed6_u32, 0x8c9c_u16, 0x4a6a_u16, StaticArray[0xbe_u8, 0xb_u8, 0xd9_u8, 0x12_u8, 0xe8_u8, 0x53_u8, 0x89_u8, 0x44_u8])
     def query_interface(this : IDWriteFont2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4410,7 +4410,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFace2Vtbl,
+  record IDWriteFontFace2Vtable,
     query_interface : Proc(IDWriteFontFace2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFace2*, UInt32),
     release : Proc(IDWriteFontFace2*, UInt32),
@@ -4449,7 +4449,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFace2, lpVtbl : IDWriteFontFace2Vtbl* do
+  record IDWriteFontFace2, lpVtbl : IDWriteFontFace2Vtable* do
     GUID = LibC::GUID.new(0xd8b768ff_u32, 0x64bc_u16, 0x4e66_u16, StaticArray[0x98_u8, 0x2b_u8, 0xec_u8, 0x8e_u8, 0x87_u8, 0xf6_u8, 0x93_u8, 0xf7_u8])
     def query_interface(this : IDWriteFontFace2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4560,7 +4560,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteColorGlyphRunEnumeratorVtbl,
+  record IDWriteColorGlyphRunEnumeratorVtable,
     query_interface : Proc(IDWriteColorGlyphRunEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteColorGlyphRunEnumerator*, UInt32),
     release : Proc(IDWriteColorGlyphRunEnumerator*, UInt32),
@@ -4569,7 +4569,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteColorGlyphRunEnumerator, lpVtbl : IDWriteColorGlyphRunEnumeratorVtbl* do
+  record IDWriteColorGlyphRunEnumerator, lpVtbl : IDWriteColorGlyphRunEnumeratorVtable* do
     GUID = LibC::GUID.new(0xd31fbe17_u32, 0xf157_u16, 0x41a2_u16, StaticArray[0x8d_u8, 0x24_u8, 0xcb_u8, 0x77_u8, 0x9e_u8, 0x5_u8, 0x60_u8, 0xe8_u8])
     def query_interface(this : IDWriteColorGlyphRunEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4590,7 +4590,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteRenderingParams2Vtbl,
+  record IDWriteRenderingParams2Vtable,
     query_interface : Proc(IDWriteRenderingParams2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteRenderingParams2*, UInt32),
     release : Proc(IDWriteRenderingParams2*, UInt32),
@@ -4604,7 +4604,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteRenderingParams2, lpVtbl : IDWriteRenderingParams2Vtbl* do
+  record IDWriteRenderingParams2, lpVtbl : IDWriteRenderingParams2Vtable* do
     GUID = LibC::GUID.new(0xf9d711c3_u32, 0x9777_u16, 0x40ae_u16, StaticArray[0x87_u8, 0xe8_u8, 0x3e_u8, 0x5a_u8, 0xf9_u8, 0xbf_u8, 0x9_u8, 0x48_u8])
     def query_interface(this : IDWriteRenderingParams2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4640,7 +4640,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFactory2Vtbl,
+  record IDWriteFactory2Vtable,
     query_interface : Proc(IDWriteFactory2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFactory2*, UInt32),
     release : Proc(IDWriteFactory2*, UInt32),
@@ -4675,7 +4675,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFactory2, lpVtbl : IDWriteFactory2Vtbl* do
+  record IDWriteFactory2, lpVtbl : IDWriteFactory2Vtable* do
     GUID = LibC::GUID.new(0x439fc60_u32, 0xca44_u16, 0x4994_u16, StaticArray[0x8d_u8, 0xee_u8, 0x3a_u8, 0x9a_u8, 0xf7_u8, 0xb7_u8, 0x32_u8, 0xec_u8])
     def query_interface(this : IDWriteFactory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4774,7 +4774,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteRenderingParams3Vtbl,
+  record IDWriteRenderingParams3Vtable,
     query_interface : Proc(IDWriteRenderingParams3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteRenderingParams3*, UInt32),
     release : Proc(IDWriteRenderingParams3*, UInt32),
@@ -4789,7 +4789,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteRenderingParams3, lpVtbl : IDWriteRenderingParams3Vtbl* do
+  record IDWriteRenderingParams3, lpVtbl : IDWriteRenderingParams3Vtable* do
     GUID = LibC::GUID.new(0xb7924baa_u32, 0x391b_u16, 0x412a_u16, StaticArray[0x8c_u8, 0x5c_u8, 0xe4_u8, 0x4c_u8, 0xc2_u8, 0xd8_u8, 0x67_u8, 0xdc_u8])
     def query_interface(this : IDWriteRenderingParams3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4828,7 +4828,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFactory3Vtbl,
+  record IDWriteFactory3Vtable,
     query_interface : Proc(IDWriteFactory3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFactory3*, UInt32),
     release : Proc(IDWriteFactory3*, UInt32),
@@ -4872,7 +4872,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFactory3, lpVtbl : IDWriteFactory3Vtbl* do
+  record IDWriteFactory3, lpVtbl : IDWriteFactory3Vtable* do
     GUID = LibC::GUID.new(0x9a1b41c3_u32, 0xd3bb_u16, 0x466a_u16, StaticArray[0x87_u8, 0xfc_u8, 0xfe_u8, 0x67_u8, 0x55_u8, 0x6a_u8, 0x3b_u8, 0x65_u8])
     def query_interface(this : IDWriteFactory3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4998,7 +4998,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontSetVtbl,
+  record IDWriteFontSetVtable,
     query_interface : Proc(IDWriteFontSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontSet*, UInt32),
     release : Proc(IDWriteFontSet*, UInt32),
@@ -5015,7 +5015,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontSet, lpVtbl : IDWriteFontSetVtbl* do
+  record IDWriteFontSet, lpVtbl : IDWriteFontSetVtable* do
     GUID = LibC::GUID.new(0x53585141_u32, 0xd9f8_u16, 0x4095_u16, StaticArray[0x83_u8, 0x21_u8, 0xd7_u8, 0x3c_u8, 0xf6_u8, 0xbd_u8, 0x11_u8, 0x6b_u8])
     def query_interface(this : IDWriteFontSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5060,7 +5060,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontSetBuilderVtbl,
+  record IDWriteFontSetBuilderVtable,
     query_interface : Proc(IDWriteFontSetBuilder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontSetBuilder*, UInt32),
     release : Proc(IDWriteFontSetBuilder*, UInt32),
@@ -5071,7 +5071,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontSetBuilder, lpVtbl : IDWriteFontSetBuilderVtbl* do
+  record IDWriteFontSetBuilder, lpVtbl : IDWriteFontSetBuilderVtable* do
     GUID = LibC::GUID.new(0x2f642afe_u32, 0x9c68_u16, 0x4f40_u16, StaticArray[0xb8_u8, 0xbe_u8, 0x45_u8, 0x74_u8, 0x1_u8, 0xaf_u8, 0xcb_u8, 0x3d_u8])
     def query_interface(this : IDWriteFontSetBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5098,7 +5098,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontCollection1Vtbl,
+  record IDWriteFontCollection1Vtable,
     query_interface : Proc(IDWriteFontCollection1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontCollection1*, UInt32),
     release : Proc(IDWriteFontCollection1*, UInt32),
@@ -5111,7 +5111,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontCollection1, lpVtbl : IDWriteFontCollection1Vtbl* do
+  record IDWriteFontCollection1, lpVtbl : IDWriteFontCollection1Vtable* do
     GUID = LibC::GUID.new(0x53585141_u32, 0xd9f8_u16, 0x4095_u16, StaticArray[0x83_u8, 0x21_u8, 0xd7_u8, 0x3c_u8, 0xf6_u8, 0xbd_u8, 0x11_u8, 0x6c_u8])
     def query_interface(this : IDWriteFontCollection1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5144,7 +5144,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFamily1Vtbl,
+  record IDWriteFontFamily1Vtable,
     query_interface : Proc(IDWriteFontFamily1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFamily1*, UInt32),
     release : Proc(IDWriteFontFamily1*, UInt32),
@@ -5160,7 +5160,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFamily1, lpVtbl : IDWriteFontFamily1Vtbl* do
+  record IDWriteFontFamily1, lpVtbl : IDWriteFontFamily1Vtable* do
     GUID = LibC::GUID.new(0xda20d8ef_u32, 0x812a_u16, 0x4c43_u16, StaticArray[0x98_u8, 0x2_u8, 0x62_u8, 0xec_u8, 0x4a_u8, 0xbd_u8, 0x7a_u8, 0xdf_u8])
     def query_interface(this : IDWriteFontFamily1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5202,7 +5202,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontList1Vtbl,
+  record IDWriteFontList1Vtable,
     query_interface : Proc(IDWriteFontList1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontList1*, UInt32),
     release : Proc(IDWriteFontList1*, UInt32),
@@ -5215,7 +5215,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontList1, lpVtbl : IDWriteFontList1Vtbl* do
+  record IDWriteFontList1, lpVtbl : IDWriteFontList1Vtable* do
     GUID = LibC::GUID.new(0xda20d8ef_u32, 0x812a_u16, 0x4c43_u16, StaticArray[0x98_u8, 0x2_u8, 0x62_u8, 0xec_u8, 0x4a_u8, 0xbd_u8, 0x7a_u8, 0xde_u8])
     def query_interface(this : IDWriteFontList1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5248,7 +5248,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFaceReferenceVtbl,
+  record IDWriteFontFaceReferenceVtable,
     query_interface : Proc(IDWriteFontFaceReference*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFaceReference*, UInt32),
     release : Proc(IDWriteFontFaceReference*, UInt32),
@@ -5269,7 +5269,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFaceReference, lpVtbl : IDWriteFontFaceReferenceVtbl* do
+  record IDWriteFontFaceReference, lpVtbl : IDWriteFontFaceReferenceVtable* do
     GUID = LibC::GUID.new(0x5e7fa7ca_u32, 0xdde3_u16, 0x424c_u16, StaticArray[0x89_u8, 0xf0_u8, 0x9f_u8, 0xcd_u8, 0x6f_u8, 0xed_u8, 0x58_u8, 0xcd_u8])
     def query_interface(this : IDWriteFontFaceReference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5326,7 +5326,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFont3Vtbl,
+  record IDWriteFont3Vtable,
     query_interface : Proc(IDWriteFont3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFont3*, UInt32),
     release : Proc(IDWriteFont3*, UInt32),
@@ -5354,7 +5354,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFont3, lpVtbl : IDWriteFont3Vtbl* do
+  record IDWriteFont3, lpVtbl : IDWriteFont3Vtable* do
     GUID = LibC::GUID.new(0x29748ed6_u32, 0x8c9c_u16, 0x4a6a_u16, StaticArray[0xbe_u8, 0xb_u8, 0xd9_u8, 0x12_u8, 0xe8_u8, 0x53_u8, 0x89_u8, 0x44_u8])
     def query_interface(this : IDWriteFont3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5432,7 +5432,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFace3Vtbl,
+  record IDWriteFontFace3Vtable,
     query_interface : Proc(IDWriteFontFace3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFace3*, UInt32),
     release : Proc(IDWriteFontFace3*, UInt32),
@@ -5485,7 +5485,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFace3, lpVtbl : IDWriteFontFace3Vtbl* do
+  record IDWriteFontFace3, lpVtbl : IDWriteFontFace3Vtable* do
     GUID = LibC::GUID.new(0xd37d7598_u32, 0x9be_u16, 0x4222_u16, StaticArray[0xa2_u8, 0x36_u8, 0x20_u8, 0x81_u8, 0x34_u8, 0x1c_u8, 0xc1_u8, 0xf2_u8])
     def query_interface(this : IDWriteFontFace3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5638,7 +5638,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteStringListVtbl,
+  record IDWriteStringListVtable,
     query_interface : Proc(IDWriteStringList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteStringList*, UInt32),
     release : Proc(IDWriteStringList*, UInt32),
@@ -5650,7 +5650,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteStringList, lpVtbl : IDWriteStringListVtbl* do
+  record IDWriteStringList, lpVtbl : IDWriteStringListVtable* do
     GUID = LibC::GUID.new(0xcfee3140_u32, 0x1157_u16, 0x47ca_u16, StaticArray[0x8b_u8, 0x85_u8, 0x31_u8, 0xbf_u8, 0xcf_u8, 0x3f_u8, 0x2d_u8, 0xe_u8])
     def query_interface(this : IDWriteStringList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5680,7 +5680,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontDownloadListenerVtbl,
+  record IDWriteFontDownloadListenerVtable,
     query_interface : Proc(IDWriteFontDownloadListener*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontDownloadListener*, UInt32),
     release : Proc(IDWriteFontDownloadListener*, UInt32),
@@ -5688,7 +5688,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontDownloadListener, lpVtbl : IDWriteFontDownloadListenerVtbl* do
+  record IDWriteFontDownloadListener, lpVtbl : IDWriteFontDownloadListenerVtable* do
     GUID = LibC::GUID.new(0xb06fe5b9_u32, 0x43ec_u16, 0x4393_u16, StaticArray[0x88_u8, 0x1b_u8, 0xdb_u8, 0xe4_u8, 0xdc_u8, 0x72_u8, 0xfd_u8, 0xa7_u8])
     def query_interface(this : IDWriteFontDownloadListener*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5706,7 +5706,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontDownloadQueueVtbl,
+  record IDWriteFontDownloadQueueVtable,
     query_interface : Proc(IDWriteFontDownloadQueue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontDownloadQueue*, UInt32),
     release : Proc(IDWriteFontDownloadQueue*, UInt32),
@@ -5719,7 +5719,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontDownloadQueue, lpVtbl : IDWriteFontDownloadQueueVtbl* do
+  record IDWriteFontDownloadQueue, lpVtbl : IDWriteFontDownloadQueueVtable* do
     GUID = LibC::GUID.new(0xb71e6052_u32, 0x5aea_u16, 0x4fa3_u16, StaticArray[0x83_u8, 0x2e_u8, 0xf6_u8, 0xd_u8, 0x43_u8, 0x1f_u8, 0x7e_u8, 0x91_u8])
     def query_interface(this : IDWriteFontDownloadQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5752,7 +5752,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteGdiInterop1Vtbl,
+  record IDWriteGdiInterop1Vtable,
     query_interface : Proc(IDWriteGdiInterop1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteGdiInterop1*, UInt32),
     release : Proc(IDWriteGdiInterop1*, UInt32),
@@ -5768,7 +5768,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteGdiInterop1, lpVtbl : IDWriteGdiInterop1Vtbl* do
+  record IDWriteGdiInterop1, lpVtbl : IDWriteGdiInterop1Vtable* do
     GUID = LibC::GUID.new(0x4556be70_u32, 0x3abd_u16, 0x4f70_u16, StaticArray[0x90_u8, 0xbe_u8, 0x42_u8, 0x17_u8, 0x80_u8, 0xa6_u8, 0xf5_u8, 0x15_u8])
     def query_interface(this : IDWriteGdiInterop1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5810,7 +5810,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextFormat2Vtbl,
+  record IDWriteTextFormat2Vtable,
     query_interface : Proc(IDWriteTextFormat2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextFormat2*, UInt32),
     release : Proc(IDWriteTextFormat2*, UInt32),
@@ -5852,7 +5852,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextFormat2, lpVtbl : IDWriteTextFormat2Vtbl* do
+  record IDWriteTextFormat2, lpVtbl : IDWriteTextFormat2Vtable* do
     GUID = LibC::GUID.new(0xf67e0edd_u32, 0x9e3d_u16, 0x4ecc_u16, StaticArray[0x8c_u8, 0x32_u8, 0x41_u8, 0x83_u8, 0x25_u8, 0x3d_u8, 0xfe_u8, 0x70_u8])
     def query_interface(this : IDWriteTextFormat2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5972,7 +5972,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextLayout3Vtbl,
+  record IDWriteTextLayout3Vtable,
     query_interface : Proc(IDWriteTextLayout3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextLayout3*, UInt32),
     release : Proc(IDWriteTextLayout3*, UInt32),
@@ -6060,7 +6060,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextLayout3, lpVtbl : IDWriteTextLayout3Vtbl* do
+  record IDWriteTextLayout3, lpVtbl : IDWriteTextLayout3Vtable* do
     GUID = LibC::GUID.new(0x7ddcd52_u32, 0x20e_u16, 0x4de8_u16, StaticArray[0xac_u8, 0x33_u8, 0x6c_u8, 0x95_u8, 0x3d_u8, 0x83_u8, 0xf9_u8, 0x2d_u8])
     def query_interface(this : IDWriteTextLayout3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6318,7 +6318,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteColorGlyphRunEnumerator1Vtbl,
+  record IDWriteColorGlyphRunEnumerator1Vtable,
     query_interface : Proc(IDWriteColorGlyphRunEnumerator1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteColorGlyphRunEnumerator1*, UInt32),
     release : Proc(IDWriteColorGlyphRunEnumerator1*, UInt32),
@@ -6328,7 +6328,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteColorGlyphRunEnumerator1, lpVtbl : IDWriteColorGlyphRunEnumerator1Vtbl* do
+  record IDWriteColorGlyphRunEnumerator1, lpVtbl : IDWriteColorGlyphRunEnumerator1Vtable* do
     GUID = LibC::GUID.new(0x7c5f86da_u32, 0xc7a1_u16, 0x4f05_u16, StaticArray[0xb8_u8, 0xe1_u8, 0x55_u8, 0xa1_u8, 0x79_u8, 0xfe_u8, 0x5a_u8, 0x35_u8])
     def query_interface(this : IDWriteColorGlyphRunEnumerator1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6352,7 +6352,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFace4Vtbl,
+  record IDWriteFontFace4Vtable,
     query_interface : Proc(IDWriteFontFace4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFace4*, UInt32),
     release : Proc(IDWriteFontFace4*, UInt32),
@@ -6409,7 +6409,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFace4, lpVtbl : IDWriteFontFace4Vtbl* do
+  record IDWriteFontFace4, lpVtbl : IDWriteFontFace4Vtable* do
     GUID = LibC::GUID.new(0x27f2a904_u32, 0x4eb8_u16, 0x441d_u16, StaticArray[0x96_u8, 0x78_u8, 0x5_u8, 0x63_u8, 0xf5_u8, 0x3e_u8, 0x3e_u8, 0x2f_u8])
     def query_interface(this : IDWriteFontFace4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6574,7 +6574,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFactory4Vtbl,
+  record IDWriteFactory4Vtable,
     query_interface : Proc(IDWriteFactory4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFactory4*, UInt32),
     release : Proc(IDWriteFactory4*, UInt32),
@@ -6621,7 +6621,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFactory4, lpVtbl : IDWriteFactory4Vtbl* do
+  record IDWriteFactory4, lpVtbl : IDWriteFactory4Vtable* do
     GUID = LibC::GUID.new(0x4b0b5bd3_u32, 0x797_u16, 0x4549_u16, StaticArray[0x8a_u8, 0xc5_u8, 0xfe_u8, 0x91_u8, 0x5c_u8, 0xc5_u8, 0x38_u8, 0x56_u8])
     def query_interface(this : IDWriteFactory4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6756,7 +6756,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontSetBuilder1Vtbl,
+  record IDWriteFontSetBuilder1Vtable,
     query_interface : Proc(IDWriteFontSetBuilder1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontSetBuilder1*, UInt32),
     release : Proc(IDWriteFontSetBuilder1*, UInt32),
@@ -6768,7 +6768,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontSetBuilder1, lpVtbl : IDWriteFontSetBuilder1Vtbl* do
+  record IDWriteFontSetBuilder1, lpVtbl : IDWriteFontSetBuilder1Vtable* do
     GUID = LibC::GUID.new(0x3ff7715f_u32, 0x3cdc_u16, 0x4dc6_u16, StaticArray[0x9b_u8, 0x72_u8, 0xec_u8, 0x56_u8, 0x21_u8, 0xdc_u8, 0xca_u8, 0xfd_u8])
     def query_interface(this : IDWriteFontSetBuilder1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6798,7 +6798,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteAsyncResultVtbl,
+  record IDWriteAsyncResultVtable,
     query_interface : Proc(IDWriteAsyncResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteAsyncResult*, UInt32),
     release : Proc(IDWriteAsyncResult*, UInt32),
@@ -6807,7 +6807,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteAsyncResult, lpVtbl : IDWriteAsyncResultVtbl* do
+  record IDWriteAsyncResult, lpVtbl : IDWriteAsyncResultVtable* do
     GUID = LibC::GUID.new(0xce25f8fd_u32, 0x863b_u16, 0x4d13_u16, StaticArray[0x96_u8, 0x51_u8, 0xc1_u8, 0xf8_u8, 0x8d_u8, 0xc7_u8, 0x3f_u8, 0xe2_u8])
     def query_interface(this : IDWriteAsyncResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6828,7 +6828,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteRemoteFontFileStreamVtbl,
+  record IDWriteRemoteFontFileStreamVtable,
     query_interface : Proc(IDWriteRemoteFontFileStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteRemoteFontFileStream*, UInt32),
     release : Proc(IDWriteRemoteFontFileStream*, UInt32),
@@ -6843,7 +6843,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteRemoteFontFileStream, lpVtbl : IDWriteRemoteFontFileStreamVtbl* do
+  record IDWriteRemoteFontFileStream, lpVtbl : IDWriteRemoteFontFileStreamVtable* do
     GUID = LibC::GUID.new(0x4db3757a_u32, 0x2c72_u16, 0x4ed9_u16, StaticArray[0xb2_u8, 0xb6_u8, 0x1a_u8, 0xba_u8, 0xbe_u8, 0x1a_u8, 0xff_u8, 0x9c_u8])
     def query_interface(this : IDWriteRemoteFontFileStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6882,7 +6882,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteRemoteFontFileLoaderVtbl,
+  record IDWriteRemoteFontFileLoaderVtable,
     query_interface : Proc(IDWriteRemoteFontFileLoader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteRemoteFontFileLoader*, UInt32),
     release : Proc(IDWriteRemoteFontFileLoader*, UInt32),
@@ -6893,7 +6893,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteRemoteFontFileLoader, lpVtbl : IDWriteRemoteFontFileLoaderVtbl* do
+  record IDWriteRemoteFontFileLoader, lpVtbl : IDWriteRemoteFontFileLoaderVtable* do
     GUID = LibC::GUID.new(0x68648c83_u32, 0x6ede_u16, 0x46c0_u16, StaticArray[0xab_u8, 0x46_u8, 0x20_u8, 0x8_u8, 0x3a_u8, 0x88_u8, 0x7f_u8, 0xde_u8])
     def query_interface(this : IDWriteRemoteFontFileLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6920,7 +6920,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteInMemoryFontFileLoaderVtbl,
+  record IDWriteInMemoryFontFileLoaderVtable,
     query_interface : Proc(IDWriteInMemoryFontFileLoader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteInMemoryFontFileLoader*, UInt32),
     release : Proc(IDWriteInMemoryFontFileLoader*, UInt32),
@@ -6930,7 +6930,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteInMemoryFontFileLoader, lpVtbl : IDWriteInMemoryFontFileLoaderVtbl* do
+  record IDWriteInMemoryFontFileLoader, lpVtbl : IDWriteInMemoryFontFileLoaderVtable* do
     GUID = LibC::GUID.new(0xdc102f47_u32, 0xa12d_u16, 0x4b1c_u16, StaticArray[0x82_u8, 0x2d_u8, 0x9e_u8, 0x11_u8, 0x7e_u8, 0x33_u8, 0x4_u8, 0x3f_u8])
     def query_interface(this : IDWriteInMemoryFontFileLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6954,7 +6954,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFactory5Vtbl,
+  record IDWriteFactory5Vtable,
     query_interface : Proc(IDWriteFactory5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFactory5*, UInt32),
     release : Proc(IDWriteFactory5*, UInt32),
@@ -7006,7 +7006,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFactory5, lpVtbl : IDWriteFactory5Vtbl* do
+  record IDWriteFactory5, lpVtbl : IDWriteFactory5Vtable* do
     GUID = LibC::GUID.new(0x958db99a_u32, 0xbe2a_u16, 0x4f09_u16, StaticArray[0xaf_u8, 0x7d_u8, 0x65_u8, 0x18_u8, 0x98_u8, 0x3_u8, 0xd1_u8, 0xd3_u8])
     def query_interface(this : IDWriteFactory5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7156,7 +7156,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFactory6Vtbl,
+  record IDWriteFactory6Vtable,
     query_interface : Proc(IDWriteFactory6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFactory6*, UInt32),
     release : Proc(IDWriteFactory6*, UInt32),
@@ -7215,7 +7215,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFactory6, lpVtbl : IDWriteFactory6Vtbl* do
+  record IDWriteFactory6, lpVtbl : IDWriteFactory6Vtable* do
     GUID = LibC::GUID.new(0xf3744d80_u32, 0x21f7_u16, 0x42eb_u16, StaticArray[0xb3_u8, 0x5d_u8, 0x99_u8, 0x5b_u8, 0xc7_u8, 0x2f_u8, 0xc2_u8, 0x23_u8])
     def query_interface(this : IDWriteFactory6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7386,7 +7386,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFace5Vtbl,
+  record IDWriteFontFace5Vtable,
     query_interface : Proc(IDWriteFontFace5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFace5*, UInt32),
     release : Proc(IDWriteFontFace5*, UInt32),
@@ -7448,7 +7448,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFace5, lpVtbl : IDWriteFontFace5Vtbl* do
+  record IDWriteFontFace5, lpVtbl : IDWriteFontFace5Vtable* do
     GUID = LibC::GUID.new(0x98eff3a5_u32, 0xb667_u16, 0x479a_u16, StaticArray[0xb1_u8, 0x45_u8, 0xe2_u8, 0xfa_u8, 0x5b_u8, 0x9f_u8, 0xdc_u8, 0x29_u8])
     def query_interface(this : IDWriteFontFace5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7628,7 +7628,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontResourceVtbl,
+  record IDWriteFontResourceVtable,
     query_interface : Proc(IDWriteFontResource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontResource*, UInt32),
     release : Proc(IDWriteFontResource*, UInt32),
@@ -7647,7 +7647,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontResource, lpVtbl : IDWriteFontResourceVtbl* do
+  record IDWriteFontResource, lpVtbl : IDWriteFontResourceVtable* do
     GUID = LibC::GUID.new(0x1f803a76_u32, 0x6871_u16, 0x48e8_u16, StaticArray[0x98_u8, 0x7f_u8, 0xb9_u8, 0x75_u8, 0x55_u8, 0x1c_u8, 0x50_u8, 0xf2_u8])
     def query_interface(this : IDWriteFontResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7698,7 +7698,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFaceReference1Vtbl,
+  record IDWriteFontFaceReference1Vtable,
     query_interface : Proc(IDWriteFontFaceReference1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFaceReference1*, UInt32),
     release : Proc(IDWriteFontFaceReference1*, UInt32),
@@ -7722,7 +7722,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFaceReference1, lpVtbl : IDWriteFontFaceReference1Vtbl* do
+  record IDWriteFontFaceReference1, lpVtbl : IDWriteFontFaceReference1Vtable* do
     GUID = LibC::GUID.new(0xc081fe77_u32, 0x2fd1_u16, 0x41ac_u16, StaticArray[0xa5_u8, 0xa3_u8, 0x34_u8, 0x98_u8, 0x3c_u8, 0x4b_u8, 0xa6_u8, 0x1a_u8])
     def query_interface(this : IDWriteFontFaceReference1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7788,7 +7788,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontSetBuilder2Vtbl,
+  record IDWriteFontSetBuilder2Vtable,
     query_interface : Proc(IDWriteFontSetBuilder2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontSetBuilder2*, UInt32),
     release : Proc(IDWriteFontSetBuilder2*, UInt32),
@@ -7802,7 +7802,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontSetBuilder2, lpVtbl : IDWriteFontSetBuilder2Vtbl* do
+  record IDWriteFontSetBuilder2, lpVtbl : IDWriteFontSetBuilder2Vtable* do
     GUID = LibC::GUID.new(0xee5ba612_u32, 0xb131_u16, 0x463c_u16, StaticArray[0x8f_u8, 0x4f_u8, 0x31_u8, 0x89_u8, 0xb9_u8, 0x40_u8, 0x1e_u8, 0x45_u8])
     def query_interface(this : IDWriteFontSetBuilder2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7838,7 +7838,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontSet1Vtbl,
+  record IDWriteFontSet1Vtable,
     query_interface : Proc(IDWriteFontSet1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontSet1*, UInt32),
     release : Proc(IDWriteFontSet1*, UInt32),
@@ -7868,7 +7868,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontSet1, lpVtbl : IDWriteFontSet1Vtbl* do
+  record IDWriteFontSet1, lpVtbl : IDWriteFontSet1Vtable* do
     GUID = LibC::GUID.new(0x7e9fda85_u32, 0x6c92_u16, 0x4053_u16, StaticArray[0xbc_u8, 0x47_u8, 0x7a_u8, 0xe3_u8, 0x53_u8, 0xd_u8, 0xb4_u8, 0xd3_u8])
     def query_interface(this : IDWriteFontSet1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7952,7 +7952,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontList2Vtbl,
+  record IDWriteFontList2Vtable,
     query_interface : Proc(IDWriteFontList2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontList2*, UInt32),
     release : Proc(IDWriteFontList2*, UInt32),
@@ -7966,7 +7966,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontList2, lpVtbl : IDWriteFontList2Vtbl* do
+  record IDWriteFontList2, lpVtbl : IDWriteFontList2Vtable* do
     GUID = LibC::GUID.new(0xc0763a34_u32, 0x77af_u16, 0x445a_u16, StaticArray[0xb7_u8, 0x35_u8, 0x8_u8, 0xc3_u8, 0x7b_u8, 0xa_u8, 0x5b_u8, 0xf5_u8])
     def query_interface(this : IDWriteFontList2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8002,7 +8002,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFamily2Vtbl,
+  record IDWriteFontFamily2Vtable,
     query_interface : Proc(IDWriteFontFamily2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFamily2*, UInt32),
     release : Proc(IDWriteFontFamily2*, UInt32),
@@ -8020,7 +8020,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFamily2, lpVtbl : IDWriteFontFamily2Vtbl* do
+  record IDWriteFontFamily2, lpVtbl : IDWriteFontFamily2Vtable* do
     GUID = LibC::GUID.new(0x3ed49e77_u32, 0xa398_u16, 0x4261_u16, StaticArray[0xb9_u8, 0xcf_u8, 0xc1_u8, 0x26_u8, 0xc2_u8, 0x13_u8, 0x1e_u8, 0xf3_u8])
     def query_interface(this : IDWriteFontFamily2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8068,7 +8068,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontCollection2Vtbl,
+  record IDWriteFontCollection2Vtable,
     query_interface : Proc(IDWriteFontCollection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontCollection2*, UInt32),
     release : Proc(IDWriteFontCollection2*, UInt32),
@@ -8085,7 +8085,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontCollection2, lpVtbl : IDWriteFontCollection2Vtbl* do
+  record IDWriteFontCollection2, lpVtbl : IDWriteFontCollection2Vtable* do
     GUID = LibC::GUID.new(0x514039c6_u32, 0x4617_u16, 0x4064_u16, StaticArray[0xbf_u8, 0x8b_u8, 0x92_u8, 0xea_u8, 0x83_u8, 0xe5_u8, 0x6_u8, 0xe0_u8])
     def query_interface(this : IDWriteFontCollection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8130,7 +8130,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextLayout4Vtbl,
+  record IDWriteTextLayout4Vtable,
     query_interface : Proc(IDWriteTextLayout4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextLayout4*, UInt32),
     release : Proc(IDWriteTextLayout4*, UInt32),
@@ -8223,7 +8223,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextLayout4, lpVtbl : IDWriteTextLayout4Vtbl* do
+  record IDWriteTextLayout4, lpVtbl : IDWriteTextLayout4Vtable* do
     GUID = LibC::GUID.new(0x5a9bf42_u32, 0x223f_u16, 0x4441_u16, StaticArray[0xb5_u8, 0xfb_u8, 0x82_u8, 0x63_u8, 0x68_u8, 0x5f_u8, 0x55_u8, 0xe9_u8])
     def query_interface(this : IDWriteTextLayout4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8496,7 +8496,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteTextFormat3Vtbl,
+  record IDWriteTextFormat3Vtable,
     query_interface : Proc(IDWriteTextFormat3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteTextFormat3*, UInt32),
     release : Proc(IDWriteTextFormat3*, UInt32),
@@ -8543,7 +8543,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteTextFormat3, lpVtbl : IDWriteTextFormat3Vtbl* do
+  record IDWriteTextFormat3, lpVtbl : IDWriteTextFormat3Vtable* do
     GUID = LibC::GUID.new(0x6d3b5641_u32, 0xe550_u16, 0x430d_u16, StaticArray[0xa8_u8, 0x5b_u8, 0xb7_u8, 0xbf_u8, 0x48_u8, 0xa9_u8, 0x34_u8, 0x27_u8])
     def query_interface(this : IDWriteTextFormat3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8678,7 +8678,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFallback1Vtbl,
+  record IDWriteFontFallback1Vtable,
     query_interface : Proc(IDWriteFontFallback1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFallback1*, UInt32),
     release : Proc(IDWriteFontFallback1*, UInt32),
@@ -8687,7 +8687,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFallback1, lpVtbl : IDWriteFontFallback1Vtbl* do
+  record IDWriteFontFallback1, lpVtbl : IDWriteFontFallback1Vtable* do
     GUID = LibC::GUID.new(0x2397599d_u32, 0xdd0d_u16, 0x4681_u16, StaticArray[0xbd_u8, 0x6a_u8, 0xf4_u8, 0xf3_u8, 0x1e_u8, 0xaa_u8, 0xde_u8, 0x77_u8])
     def query_interface(this : IDWriteFontFallback1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8708,7 +8708,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontSet2Vtbl,
+  record IDWriteFontSet2Vtable,
     query_interface : Proc(IDWriteFontSet2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontSet2*, UInt32),
     release : Proc(IDWriteFontSet2*, UInt32),
@@ -8739,7 +8739,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontSet2, lpVtbl : IDWriteFontSet2Vtbl* do
+  record IDWriteFontSet2, lpVtbl : IDWriteFontSet2Vtable* do
     GUID = LibC::GUID.new(0xdc7ead19_u32, 0xe54c_u16, 0x43af_u16, StaticArray[0xb2_u8, 0xda_u8, 0x4e_u8, 0x2b_u8, 0x79_u8, 0xba_u8, 0x3f_u8, 0x7f_u8])
     def query_interface(this : IDWriteFontSet2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8826,7 +8826,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontCollection3Vtbl,
+  record IDWriteFontCollection3Vtable,
     query_interface : Proc(IDWriteFontCollection3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontCollection3*, UInt32),
     release : Proc(IDWriteFontCollection3*, UInt32),
@@ -8844,7 +8844,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontCollection3, lpVtbl : IDWriteFontCollection3Vtbl* do
+  record IDWriteFontCollection3, lpVtbl : IDWriteFontCollection3Vtable* do
     GUID = LibC::GUID.new(0xa4d055a6_u32, 0xf9e3_u16, 0x4e25_u16, StaticArray[0x93_u8, 0xb7_u8, 0x9e_u8, 0x30_u8, 0x9f_u8, 0x3a_u8, 0xf8_u8, 0xe9_u8])
     def query_interface(this : IDWriteFontCollection3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8892,7 +8892,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFactory7Vtbl,
+  record IDWriteFactory7Vtable,
     query_interface : Proc(IDWriteFactory7*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFactory7*, UInt32),
     release : Proc(IDWriteFactory7*, UInt32),
@@ -8953,7 +8953,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFactory7, lpVtbl : IDWriteFactory7Vtbl* do
+  record IDWriteFactory7, lpVtbl : IDWriteFactory7Vtable* do
     GUID = LibC::GUID.new(0x35d0e0b3_u32, 0x9076_u16, 0x4d2e_u16, StaticArray[0xa0_u8, 0x16_u8, 0xa9_u8, 0x1b_u8, 0x56_u8, 0x8a_u8, 0x6_u8, 0xb4_u8])
     def query_interface(this : IDWriteFactory7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9130,7 +9130,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontSet3Vtbl,
+  record IDWriteFontSet3Vtable,
     query_interface : Proc(IDWriteFontSet3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontSet3*, UInt32),
     release : Proc(IDWriteFontSet3*, UInt32),
@@ -9164,7 +9164,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontSet3, lpVtbl : IDWriteFontSet3Vtbl* do
+  record IDWriteFontSet3, lpVtbl : IDWriteFontSet3Vtable* do
     GUID = LibC::GUID.new(0x7c073ef2_u32, 0xa7f4_u16, 0x4045_u16, StaticArray[0x8c_u8, 0x32_u8, 0x8a_u8, 0xb8_u8, 0xae_u8, 0x64_u8, 0xf_u8, 0x90_u8])
     def query_interface(this : IDWriteFontSet3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9260,7 +9260,7 @@ module Win32cr::Graphics::DirectWrite
   end
 
   @[Extern]
-  record IDWriteFontFace6Vtbl,
+  record IDWriteFontFace6Vtable,
     query_interface : Proc(IDWriteFontFace6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDWriteFontFace6*, UInt32),
     release : Proc(IDWriteFontFace6*, UInt32),
@@ -9324,7 +9324,7 @@ module Win32cr::Graphics::DirectWrite
 
 
   @[Extern]
-  record IDWriteFontFace6, lpVtbl : IDWriteFontFace6Vtbl* do
+  record IDWriteFontFace6, lpVtbl : IDWriteFontFace6Vtable* do
     GUID = LibC::GUID.new(0xc4b1fe1b_u32, 0x6e84_u16, 0x47d5_u16, StaticArray[0xb5_u8, 0x4c_u8, 0xa5_u8, 0x97_u8, 0x98_u8, 0x1b_u8, 0x6_u8, 0xad_u8])
     def query_interface(this : IDWriteFontFace6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9510,13 +9510,17 @@ module Win32cr::Graphics::DirectWrite
   end
 
   def dWriteCreateFactory(factoryType : Win32cr::Graphics::DirectWrite::DWRITE_FACTORY_TYPE, iid : LibC::GUID*, factory : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DWriteCreateFactory(factoryType, iid, factory)
+    {% end %}
   end
 
   @[Link("dwrite")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun DWriteCreateFactory(factoryType : Win32cr::Graphics::DirectWrite::DWRITE_FACTORY_TYPE, iid : LibC::GUID*, factory : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

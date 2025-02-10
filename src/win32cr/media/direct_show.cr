@@ -7786,7 +7786,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ICreateDevEnumVtbl,
+  record ICreateDevEnumVtable,
     query_interface : Proc(ICreateDevEnum*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICreateDevEnum*, UInt32),
     release : Proc(ICreateDevEnum*, UInt32),
@@ -7794,7 +7794,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ICreateDevEnum, lpVtbl : ICreateDevEnumVtbl* do
+  record ICreateDevEnum, lpVtbl : ICreateDevEnumVtable* do
     GUID = LibC::GUID.new(0x29840822_u32, 0x5b84_u16, 0x11d0_u16, StaticArray[0xbd_u8, 0x3b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xce_u8, 0x86_u8])
     def query_interface(this : ICreateDevEnum*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7812,7 +7812,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IPinVtbl,
+  record IPinVtable,
     query_interface : Proc(IPin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPin*, UInt32),
     release : Proc(IPin*, UInt32),
@@ -7834,7 +7834,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IPin, lpVtbl : IPinVtbl* do
+  record IPin, lpVtbl : IPinVtable* do
     GUID = LibC::GUID.new(0x56a86891_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IPin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7894,7 +7894,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IEnumPinsVtbl,
+  record IEnumPinsVtable,
     query_interface : Proc(IEnumPins*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumPins*, UInt32),
     release : Proc(IEnumPins*, UInt32),
@@ -7905,7 +7905,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IEnumPins, lpVtbl : IEnumPinsVtbl* do
+  record IEnumPins, lpVtbl : IEnumPinsVtable* do
     GUID = LibC::GUID.new(0x56a86892_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IEnumPins*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7932,7 +7932,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IEnumMediaTypesVtbl,
+  record IEnumMediaTypesVtable,
     query_interface : Proc(IEnumMediaTypes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumMediaTypes*, UInt32),
     release : Proc(IEnumMediaTypes*, UInt32),
@@ -7943,7 +7943,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IEnumMediaTypes, lpVtbl : IEnumMediaTypesVtbl* do
+  record IEnumMediaTypes, lpVtbl : IEnumMediaTypesVtable* do
     GUID = LibC::GUID.new(0x89c31040_u32, 0x846b_u16, 0x11ce_u16, StaticArray[0x97_u8, 0xd3_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x55_u8, 0x59_u8, 0x5a_u8])
     def query_interface(this : IEnumMediaTypes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7970,7 +7970,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IFilterGraphVtbl,
+  record IFilterGraphVtable,
     query_interface : Proc(IFilterGraph*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFilterGraph*, UInt32),
     release : Proc(IFilterGraph*, UInt32),
@@ -7985,7 +7985,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IFilterGraph, lpVtbl : IFilterGraphVtbl* do
+  record IFilterGraph, lpVtbl : IFilterGraphVtable* do
     GUID = LibC::GUID.new(0x56a8689f_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IFilterGraph*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8024,7 +8024,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IEnumFiltersVtbl,
+  record IEnumFiltersVtable,
     query_interface : Proc(IEnumFilters*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumFilters*, UInt32),
     release : Proc(IEnumFilters*, UInt32),
@@ -8035,7 +8035,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IEnumFilters, lpVtbl : IEnumFiltersVtbl* do
+  record IEnumFilters, lpVtbl : IEnumFiltersVtable* do
     GUID = LibC::GUID.new(0x56a86893_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IEnumFilters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8062,7 +8062,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMediaFilterVtbl,
+  record IMediaFilterVtable,
     query_interface : Proc(IMediaFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaFilter*, UInt32),
     release : Proc(IMediaFilter*, UInt32),
@@ -8076,7 +8076,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMediaFilter, lpVtbl : IMediaFilterVtbl* do
+  record IMediaFilter, lpVtbl : IMediaFilterVtable* do
     GUID = LibC::GUID.new(0x56a86899_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IMediaFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8112,7 +8112,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBaseFilterVtbl,
+  record IBaseFilterVtable,
     query_interface : Proc(IBaseFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBaseFilter*, UInt32),
     release : Proc(IBaseFilter*, UInt32),
@@ -8131,7 +8131,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBaseFilter, lpVtbl : IBaseFilterVtbl* do
+  record IBaseFilter, lpVtbl : IBaseFilterVtable* do
     GUID = LibC::GUID.new(0x56a86895_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IBaseFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8182,7 +8182,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMediaSampleVtbl,
+  record IMediaSampleVtable,
     query_interface : Proc(IMediaSample*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaSample*, UInt32),
     release : Proc(IMediaSample*, UInt32),
@@ -8205,7 +8205,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMediaSample, lpVtbl : IMediaSampleVtbl* do
+  record IMediaSample, lpVtbl : IMediaSampleVtable* do
     GUID = LibC::GUID.new(0x56a8689a_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IMediaSample*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8268,7 +8268,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMediaSample2Vtbl,
+  record IMediaSample2Vtable,
     query_interface : Proc(IMediaSample2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaSample2*, UInt32),
     release : Proc(IMediaSample2*, UInt32),
@@ -8293,7 +8293,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMediaSample2, lpVtbl : IMediaSample2Vtbl* do
+  record IMediaSample2, lpVtbl : IMediaSample2Vtable* do
     GUID = LibC::GUID.new(0x36b73884_u32, 0xc2c8_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0x46_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x6c_u8, 0xef_u8, 0x60_u8])
     def query_interface(this : IMediaSample2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8362,7 +8362,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMediaSample2ConfigVtbl,
+  record IMediaSample2ConfigVtable,
     query_interface : Proc(IMediaSample2Config*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaSample2Config*, UInt32),
     release : Proc(IMediaSample2Config*, UInt32),
@@ -8370,7 +8370,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMediaSample2Config, lpVtbl : IMediaSample2ConfigVtbl* do
+  record IMediaSample2Config, lpVtbl : IMediaSample2ConfigVtable* do
     GUID = LibC::GUID.new(0x68961e68_u32, 0x832b_u16, 0x41ea_u16, StaticArray[0xbc_u8, 0x91_u8, 0x63_u8, 0x59_u8, 0x3f_u8, 0x3e_u8, 0x70_u8, 0xe3_u8])
     def query_interface(this : IMediaSample2Config*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8388,7 +8388,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMemAllocatorVtbl,
+  record IMemAllocatorVtable,
     query_interface : Proc(IMemAllocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMemAllocator*, UInt32),
     release : Proc(IMemAllocator*, UInt32),
@@ -8401,7 +8401,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMemAllocator, lpVtbl : IMemAllocatorVtbl* do
+  record IMemAllocator, lpVtbl : IMemAllocatorVtable* do
     GUID = LibC::GUID.new(0x56a8689c_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IMemAllocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8434,7 +8434,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMemAllocatorCallbackTempVtbl,
+  record IMemAllocatorCallbackTempVtable,
     query_interface : Proc(IMemAllocatorCallbackTemp*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMemAllocatorCallbackTemp*, UInt32),
     release : Proc(IMemAllocatorCallbackTemp*, UInt32),
@@ -8449,7 +8449,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMemAllocatorCallbackTemp, lpVtbl : IMemAllocatorCallbackTempVtbl* do
+  record IMemAllocatorCallbackTemp, lpVtbl : IMemAllocatorCallbackTempVtable* do
     GUID = LibC::GUID.new(0x379a0cf0_u32, 0xc1de_u16, 0x11d2_u16, StaticArray[0xab_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
     def query_interface(this : IMemAllocatorCallbackTemp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8488,7 +8488,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMemAllocatorNotifyCallbackTempVtbl,
+  record IMemAllocatorNotifyCallbackTempVtable,
     query_interface : Proc(IMemAllocatorNotifyCallbackTemp*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMemAllocatorNotifyCallbackTemp*, UInt32),
     release : Proc(IMemAllocatorNotifyCallbackTemp*, UInt32),
@@ -8496,7 +8496,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMemAllocatorNotifyCallbackTemp, lpVtbl : IMemAllocatorNotifyCallbackTempVtbl* do
+  record IMemAllocatorNotifyCallbackTemp, lpVtbl : IMemAllocatorNotifyCallbackTempVtable* do
     GUID = LibC::GUID.new(0x92980b30_u32, 0xc1de_u16, 0x11d2_u16, StaticArray[0xab_u8, 0xf5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
     def query_interface(this : IMemAllocatorNotifyCallbackTemp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8514,7 +8514,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMemInputPinVtbl,
+  record IMemInputPinVtable,
     query_interface : Proc(IMemInputPin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMemInputPin*, UInt32),
     release : Proc(IMemInputPin*, UInt32),
@@ -8527,7 +8527,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMemInputPin, lpVtbl : IMemInputPinVtbl* do
+  record IMemInputPin, lpVtbl : IMemInputPinVtable* do
     GUID = LibC::GUID.new(0x56a8689d_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IMemInputPin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8560,7 +8560,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMovieSetupVtbl,
+  record IAMovieSetupVtable,
     query_interface : Proc(IAMovieSetup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMovieSetup*, UInt32),
     release : Proc(IAMovieSetup*, UInt32),
@@ -8569,7 +8569,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMovieSetup, lpVtbl : IAMovieSetupVtbl* do
+  record IAMovieSetup, lpVtbl : IAMovieSetupVtable* do
     GUID = LibC::GUID.new(0xa3d8cec0_u32, 0x7e5a_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0xc5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x6c_u8, 0xef_u8, 0x20_u8])
     def query_interface(this : IAMovieSetup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8590,7 +8590,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMediaSeekingVtbl,
+  record IMediaSeekingVtable,
     query_interface : Proc(IMediaSeeking*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaSeeking*, UInt32),
     release : Proc(IMediaSeeking*, UInt32),
@@ -8614,7 +8614,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMediaSeeking, lpVtbl : IMediaSeekingVtbl* do
+  record IMediaSeeking, lpVtbl : IMediaSeekingVtable* do
     GUID = LibC::GUID.new(0x36b73880_u32, 0xc2c8_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0x46_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x6c_u8, 0xef_u8, 0x60_u8])
     def query_interface(this : IMediaSeeking*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8680,7 +8680,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IEnumRegFiltersVtbl,
+  record IEnumRegFiltersVtable,
     query_interface : Proc(IEnumRegFilters*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumRegFilters*, UInt32),
     release : Proc(IEnumRegFilters*, UInt32),
@@ -8691,7 +8691,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IEnumRegFilters, lpVtbl : IEnumRegFiltersVtbl* do
+  record IEnumRegFilters, lpVtbl : IEnumRegFiltersVtable* do
     GUID = LibC::GUID.new(0x56a868a4_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IEnumRegFilters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8718,7 +8718,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IFilterMapperVtbl,
+  record IFilterMapperVtable,
     query_interface : Proc(IFilterMapper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFilterMapper*, UInt32),
     release : Proc(IFilterMapper*, UInt32),
@@ -8733,7 +8733,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IFilterMapper, lpVtbl : IFilterMapperVtbl* do
+  record IFilterMapper, lpVtbl : IFilterMapperVtable* do
     GUID = LibC::GUID.new(0x56a868a3_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IFilterMapper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8772,7 +8772,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IFilterMapper2Vtbl,
+  record IFilterMapper2Vtable,
     query_interface : Proc(IFilterMapper2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFilterMapper2*, UInt32),
     release : Proc(IFilterMapper2*, UInt32),
@@ -8783,7 +8783,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IFilterMapper2, lpVtbl : IFilterMapper2Vtbl* do
+  record IFilterMapper2, lpVtbl : IFilterMapper2Vtable* do
     GUID = LibC::GUID.new(0xb79bb0b0_u32, 0x33c1_u16, 0x11d1_u16, StaticArray[0xab_u8, 0xe1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
     def query_interface(this : IFilterMapper2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8810,7 +8810,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IFilterMapper3Vtbl,
+  record IFilterMapper3Vtable,
     query_interface : Proc(IFilterMapper3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFilterMapper3*, UInt32),
     release : Proc(IFilterMapper3*, UInt32),
@@ -8822,7 +8822,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IFilterMapper3, lpVtbl : IFilterMapper3Vtbl* do
+  record IFilterMapper3, lpVtbl : IFilterMapper3Vtable* do
     GUID = LibC::GUID.new(0xb79bb0b1_u32, 0x33c1_u16, 0x11d1_u16, StaticArray[0xab_u8, 0xe1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
     def query_interface(this : IFilterMapper3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8852,7 +8852,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IQualityControlVtbl,
+  record IQualityControlVtable,
     query_interface : Proc(IQualityControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IQualityControl*, UInt32),
     release : Proc(IQualityControl*, UInt32),
@@ -8861,7 +8861,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IQualityControl, lpVtbl : IQualityControlVtbl* do
+  record IQualityControl, lpVtbl : IQualityControlVtable* do
     GUID = LibC::GUID.new(0x56a868a5_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IQualityControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8882,7 +8882,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IOverlayNotifyVtbl,
+  record IOverlayNotifyVtable,
     query_interface : Proc(IOverlayNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOverlayNotify*, UInt32),
     release : Proc(IOverlayNotify*, UInt32),
@@ -8893,7 +8893,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IOverlayNotify, lpVtbl : IOverlayNotifyVtbl* do
+  record IOverlayNotify, lpVtbl : IOverlayNotifyVtable* do
     GUID = LibC::GUID.new(0x56a868a0_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IOverlayNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8920,7 +8920,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IOverlayNotify2Vtbl,
+  record IOverlayNotify2Vtable,
     query_interface : Proc(IOverlayNotify2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOverlayNotify2*, UInt32),
     release : Proc(IOverlayNotify2*, UInt32),
@@ -8932,7 +8932,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IOverlayNotify2, lpVtbl : IOverlayNotify2Vtbl* do
+  record IOverlayNotify2, lpVtbl : IOverlayNotify2Vtable* do
     GUID = LibC::GUID.new(0x680efa10_u32, 0xd535_u16, 0x11d1_u16, StaticArray[0x87_u8, 0xc8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0x31_u8, 0x96_u8])
     def query_interface(this : IOverlayNotify2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8962,7 +8962,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IOverlayVtbl,
+  record IOverlayVtable,
     query_interface : Proc(IOverlay*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOverlay*, UInt32),
     release : Proc(IOverlay*, UInt32),
@@ -8979,7 +8979,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IOverlay, lpVtbl : IOverlayVtbl* do
+  record IOverlay, lpVtbl : IOverlayVtable* do
     GUID = LibC::GUID.new(0x56a868a1_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IOverlay*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9024,7 +9024,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMediaEventSinkVtbl,
+  record IMediaEventSinkVtable,
     query_interface : Proc(IMediaEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaEventSink*, UInt32),
     release : Proc(IMediaEventSink*, UInt32),
@@ -9032,7 +9032,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMediaEventSink, lpVtbl : IMediaEventSinkVtbl* do
+  record IMediaEventSink, lpVtbl : IMediaEventSinkVtable* do
     GUID = LibC::GUID.new(0x56a868a2_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IMediaEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9050,7 +9050,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IFileSourceFilterVtbl,
+  record IFileSourceFilterVtable,
     query_interface : Proc(IFileSourceFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFileSourceFilter*, UInt32),
     release : Proc(IFileSourceFilter*, UInt32),
@@ -9059,7 +9059,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IFileSourceFilter, lpVtbl : IFileSourceFilterVtbl* do
+  record IFileSourceFilter, lpVtbl : IFileSourceFilterVtable* do
     GUID = LibC::GUID.new(0x56a868a6_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IFileSourceFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9080,7 +9080,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IFileSinkFilterVtbl,
+  record IFileSinkFilterVtable,
     query_interface : Proc(IFileSinkFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFileSinkFilter*, UInt32),
     release : Proc(IFileSinkFilter*, UInt32),
@@ -9089,7 +9089,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IFileSinkFilter, lpVtbl : IFileSinkFilterVtbl* do
+  record IFileSinkFilter, lpVtbl : IFileSinkFilterVtable* do
     GUID = LibC::GUID.new(0xa2104830_u32, 0x7c70_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0xce_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xf1_u8, 0xa6_u8])
     def query_interface(this : IFileSinkFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9110,7 +9110,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IFileSinkFilter2Vtbl,
+  record IFileSinkFilter2Vtable,
     query_interface : Proc(IFileSinkFilter2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFileSinkFilter2*, UInt32),
     release : Proc(IFileSinkFilter2*, UInt32),
@@ -9121,7 +9121,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IFileSinkFilter2, lpVtbl : IFileSinkFilter2Vtbl* do
+  record IFileSinkFilter2, lpVtbl : IFileSinkFilter2Vtable* do
     GUID = LibC::GUID.new(0x855b90_u32, 0xce1b_u16, 0x11d0_u16, StaticArray[0xbd_u8, 0x4f_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xce_u8, 0x86_u8])
     def query_interface(this : IFileSinkFilter2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9148,7 +9148,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IGraphBuilderVtbl,
+  record IGraphBuilderVtable,
     query_interface : Proc(IGraphBuilder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGraphBuilder*, UInt32),
     release : Proc(IGraphBuilder*, UInt32),
@@ -9170,7 +9170,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IGraphBuilder, lpVtbl : IGraphBuilderVtbl* do
+  record IGraphBuilder, lpVtbl : IGraphBuilderVtable* do
     GUID = LibC::GUID.new(0x56a868a9_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IGraphBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9230,7 +9230,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ICaptureGraphBuilderVtbl,
+  record ICaptureGraphBuilderVtable,
     query_interface : Proc(ICaptureGraphBuilder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICaptureGraphBuilder*, UInt32),
     release : Proc(ICaptureGraphBuilder*, UInt32),
@@ -9245,7 +9245,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ICaptureGraphBuilder, lpVtbl : ICaptureGraphBuilderVtbl* do
+  record ICaptureGraphBuilder, lpVtbl : ICaptureGraphBuilderVtable* do
     GUID = LibC::GUID.new(0xbf87b6e0_u32, 0x8c27_u16, 0x11d0_u16, StaticArray[0xb3_u8, 0xf0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x37_u8, 0x61_u8, 0xc5_u8])
     def query_interface(this : ICaptureGraphBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9284,7 +9284,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMCopyCaptureFileProgressVtbl,
+  record IAMCopyCaptureFileProgressVtable,
     query_interface : Proc(IAMCopyCaptureFileProgress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMCopyCaptureFileProgress*, UInt32),
     release : Proc(IAMCopyCaptureFileProgress*, UInt32),
@@ -9292,7 +9292,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMCopyCaptureFileProgress, lpVtbl : IAMCopyCaptureFileProgressVtbl* do
+  record IAMCopyCaptureFileProgress, lpVtbl : IAMCopyCaptureFileProgressVtable* do
     GUID = LibC::GUID.new(0x670d1d20_u32, 0xa068_u16, 0x11d0_u16, StaticArray[0xb3_u8, 0xf0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x37_u8, 0x61_u8, 0xc5_u8])
     def query_interface(this : IAMCopyCaptureFileProgress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9310,7 +9310,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ICaptureGraphBuilder2Vtbl,
+  record ICaptureGraphBuilder2Vtable,
     query_interface : Proc(ICaptureGraphBuilder2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICaptureGraphBuilder2*, UInt32),
     release : Proc(ICaptureGraphBuilder2*, UInt32),
@@ -9326,7 +9326,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ICaptureGraphBuilder2, lpVtbl : ICaptureGraphBuilder2Vtbl* do
+  record ICaptureGraphBuilder2, lpVtbl : ICaptureGraphBuilder2Vtable* do
     GUID = LibC::GUID.new(0x93e5a4e0_u32, 0x2d50_u16, 0x11d2_u16, StaticArray[0xab_u8, 0xfa_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xc6_u8, 0xe3_u8, 0x8d_u8])
     def query_interface(this : ICaptureGraphBuilder2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9368,7 +9368,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IFilterGraph2Vtbl,
+  record IFilterGraph2Vtable,
     query_interface : Proc(IFilterGraph2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFilterGraph2*, UInt32),
     release : Proc(IFilterGraph2*, UInt32),
@@ -9393,7 +9393,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IFilterGraph2, lpVtbl : IFilterGraph2Vtbl* do
+  record IFilterGraph2, lpVtbl : IFilterGraph2Vtable* do
     GUID = LibC::GUID.new(0x36b73882_u32, 0xc2c8_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0x46_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x6c_u8, 0xef_u8, 0x60_u8])
     def query_interface(this : IFilterGraph2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9462,7 +9462,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IFilterGraph3Vtbl,
+  record IFilterGraph3Vtable,
     query_interface : Proc(IFilterGraph3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFilterGraph3*, UInt32),
     release : Proc(IFilterGraph3*, UInt32),
@@ -9488,7 +9488,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IFilterGraph3, lpVtbl : IFilterGraph3Vtbl* do
+  record IFilterGraph3, lpVtbl : IFilterGraph3Vtable* do
     GUID = LibC::GUID.new(0xaaf38154_u32, 0xb80b_u16, 0x422f_u16, StaticArray[0x91_u8, 0xe6_u8, 0xb6_u8, 0x64_u8, 0x67_u8, 0x50_u8, 0x9a_u8, 0x7_u8])
     def query_interface(this : IFilterGraph3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9560,7 +9560,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IStreamBuilderVtbl,
+  record IStreamBuilderVtable,
     query_interface : Proc(IStreamBuilder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStreamBuilder*, UInt32),
     release : Proc(IStreamBuilder*, UInt32),
@@ -9569,7 +9569,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IStreamBuilder, lpVtbl : IStreamBuilderVtbl* do
+  record IStreamBuilder, lpVtbl : IStreamBuilderVtable* do
     GUID = LibC::GUID.new(0x56a868bf_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IStreamBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9590,7 +9590,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAsyncReaderVtbl,
+  record IAsyncReaderVtable,
     query_interface : Proc(IAsyncReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAsyncReader*, UInt32),
     release : Proc(IAsyncReader*, UInt32),
@@ -9605,7 +9605,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAsyncReader, lpVtbl : IAsyncReaderVtbl* do
+  record IAsyncReader, lpVtbl : IAsyncReaderVtable* do
     GUID = LibC::GUID.new(0x56a868aa_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IAsyncReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9644,7 +9644,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IGraphVersionVtbl,
+  record IGraphVersionVtable,
     query_interface : Proc(IGraphVersion*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGraphVersion*, UInt32),
     release : Proc(IGraphVersion*, UInt32),
@@ -9652,7 +9652,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IGraphVersion, lpVtbl : IGraphVersionVtbl* do
+  record IGraphVersion, lpVtbl : IGraphVersionVtable* do
     GUID = LibC::GUID.new(0x56a868ab_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IGraphVersion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9670,7 +9670,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IResourceConsumerVtbl,
+  record IResourceConsumerVtable,
     query_interface : Proc(IResourceConsumer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IResourceConsumer*, UInt32),
     release : Proc(IResourceConsumer*, UInt32),
@@ -9679,7 +9679,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IResourceConsumer, lpVtbl : IResourceConsumerVtbl* do
+  record IResourceConsumer, lpVtbl : IResourceConsumerVtable* do
     GUID = LibC::GUID.new(0x56a868ad_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IResourceConsumer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9700,7 +9700,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IResourceManagerVtbl,
+  record IResourceManagerVtable,
     query_interface : Proc(IResourceManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IResourceManager*, UInt32),
     release : Proc(IResourceManager*, UInt32),
@@ -9715,7 +9715,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IResourceManager, lpVtbl : IResourceManagerVtbl* do
+  record IResourceManager, lpVtbl : IResourceManagerVtable* do
     GUID = LibC::GUID.new(0x56a868ac_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IResourceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9754,7 +9754,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDistributorNotifyVtbl,
+  record IDistributorNotifyVtable,
     query_interface : Proc(IDistributorNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDistributorNotify*, UInt32),
     release : Proc(IDistributorNotify*, UInt32),
@@ -9766,7 +9766,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDistributorNotify, lpVtbl : IDistributorNotifyVtbl* do
+  record IDistributorNotify, lpVtbl : IDistributorNotifyVtable* do
     GUID = LibC::GUID.new(0x56a868af_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IDistributorNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9796,7 +9796,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMStreamControlVtbl,
+  record IAMStreamControlVtable,
     query_interface : Proc(IAMStreamControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMStreamControl*, UInt32),
     release : Proc(IAMStreamControl*, UInt32),
@@ -9806,7 +9806,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMStreamControl, lpVtbl : IAMStreamControlVtbl* do
+  record IAMStreamControl, lpVtbl : IAMStreamControlVtable* do
     GUID = LibC::GUID.new(0x36b73881_u32, 0xc2c8_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0x46_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x6c_u8, 0xef_u8, 0x60_u8])
     def query_interface(this : IAMStreamControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9830,7 +9830,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ISeekingPassThruVtbl,
+  record ISeekingPassThruVtable,
     query_interface : Proc(ISeekingPassThru*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISeekingPassThru*, UInt32),
     release : Proc(ISeekingPassThru*, UInt32),
@@ -9838,7 +9838,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ISeekingPassThru, lpVtbl : ISeekingPassThruVtbl* do
+  record ISeekingPassThru, lpVtbl : ISeekingPassThruVtable* do
     GUID = LibC::GUID.new(0x36b73883_u32, 0xc2c8_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0x46_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x6c_u8, 0xef_u8, 0x60_u8])
     def query_interface(this : ISeekingPassThru*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9856,7 +9856,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMStreamConfigVtbl,
+  record IAMStreamConfigVtable,
     query_interface : Proc(IAMStreamConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMStreamConfig*, UInt32),
     release : Proc(IAMStreamConfig*, UInt32),
@@ -9867,7 +9867,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMStreamConfig, lpVtbl : IAMStreamConfigVtbl* do
+  record IAMStreamConfig, lpVtbl : IAMStreamConfigVtable* do
     GUID = LibC::GUID.new(0xc6e13340_u32, 0x30ac_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
     def query_interface(this : IAMStreamConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9894,7 +9894,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IConfigInterleavingVtbl,
+  record IConfigInterleavingVtable,
     query_interface : Proc(IConfigInterleaving*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IConfigInterleaving*, UInt32),
     release : Proc(IConfigInterleaving*, UInt32),
@@ -9905,7 +9905,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IConfigInterleaving, lpVtbl : IConfigInterleavingVtbl* do
+  record IConfigInterleaving, lpVtbl : IConfigInterleavingVtable* do
     GUID = LibC::GUID.new(0xbee3d220_u32, 0x157b_u16, 0x11d0_u16, StaticArray[0xbd_u8, 0x23_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xce_u8, 0x86_u8])
     def query_interface(this : IConfigInterleaving*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9932,7 +9932,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IConfigAviMuxVtbl,
+  record IConfigAviMuxVtable,
     query_interface : Proc(IConfigAviMux*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IConfigAviMux*, UInt32),
     release : Proc(IConfigAviMux*, UInt32),
@@ -9943,7 +9943,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IConfigAviMux, lpVtbl : IConfigAviMuxVtbl* do
+  record IConfigAviMux, lpVtbl : IConfigAviMuxVtable* do
     GUID = LibC::GUID.new(0x5acd6aa0_u32, 0xf482_u16, 0x11ce_u16, StaticArray[0x8b_u8, 0x67_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xf1_u8, 0xa6_u8])
     def query_interface(this : IConfigAviMux*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9970,7 +9970,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMVideoCompressionVtbl,
+  record IAMVideoCompressionVtable,
     query_interface : Proc(IAMVideoCompression*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMVideoCompression*, UInt32),
     release : Proc(IAMVideoCompression*, UInt32),
@@ -9988,7 +9988,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMVideoCompression, lpVtbl : IAMVideoCompressionVtbl* do
+  record IAMVideoCompression, lpVtbl : IAMVideoCompressionVtable* do
     GUID = LibC::GUID.new(0xc6e13343_u32, 0x30ac_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
     def query_interface(this : IAMVideoCompression*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10036,7 +10036,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMVfwCaptureDialogsVtbl,
+  record IAMVfwCaptureDialogsVtable,
     query_interface : Proc(IAMVfwCaptureDialogs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMVfwCaptureDialogs*, UInt32),
     release : Proc(IAMVfwCaptureDialogs*, UInt32),
@@ -10046,7 +10046,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMVfwCaptureDialogs, lpVtbl : IAMVfwCaptureDialogsVtbl* do
+  record IAMVfwCaptureDialogs, lpVtbl : IAMVfwCaptureDialogsVtable* do
     GUID = LibC::GUID.new(0xd8d715a0_u32, 0x6e5e_u16, 0x11d0_u16, StaticArray[0xb3_u8, 0xf0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x37_u8, 0x61_u8, 0xc5_u8])
     def query_interface(this : IAMVfwCaptureDialogs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10070,7 +10070,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMVfwCompressDialogsVtbl,
+  record IAMVfwCompressDialogsVtable,
     query_interface : Proc(IAMVfwCompressDialogs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMVfwCompressDialogs*, UInt32),
     release : Proc(IAMVfwCompressDialogs*, UInt32),
@@ -10081,7 +10081,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMVfwCompressDialogs, lpVtbl : IAMVfwCompressDialogsVtbl* do
+  record IAMVfwCompressDialogs, lpVtbl : IAMVfwCompressDialogsVtable* do
     GUID = LibC::GUID.new(0xd8d715a3_u32, 0x6e5e_u16, 0x11d0_u16, StaticArray[0xb3_u8, 0xf0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x37_u8, 0x61_u8, 0xc5_u8])
     def query_interface(this : IAMVfwCompressDialogs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10108,7 +10108,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMDroppedFramesVtbl,
+  record IAMDroppedFramesVtable,
     query_interface : Proc(IAMDroppedFrames*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMDroppedFrames*, UInt32),
     release : Proc(IAMDroppedFrames*, UInt32),
@@ -10119,7 +10119,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMDroppedFrames, lpVtbl : IAMDroppedFramesVtbl* do
+  record IAMDroppedFrames, lpVtbl : IAMDroppedFramesVtable* do
     GUID = LibC::GUID.new(0xc6e13344_u32, 0x30ac_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
     def query_interface(this : IAMDroppedFrames*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10146,7 +10146,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMAudioInputMixerVtbl,
+  record IAMAudioInputMixerVtable,
     query_interface : Proc(IAMAudioInputMixer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMAudioInputMixer*, UInt32),
     release : Proc(IAMAudioInputMixer*, UInt32),
@@ -10169,7 +10169,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMAudioInputMixer, lpVtbl : IAMAudioInputMixerVtbl* do
+  record IAMAudioInputMixer, lpVtbl : IAMAudioInputMixerVtable* do
     GUID = LibC::GUID.new(0x54c39221_u32, 0x8380_u16, 0x11d0_u16, StaticArray[0xb3_u8, 0xf0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x37_u8, 0x61_u8, 0xc5_u8])
     def query_interface(this : IAMAudioInputMixer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10232,7 +10232,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMBufferNegotiationVtbl,
+  record IAMBufferNegotiationVtable,
     query_interface : Proc(IAMBufferNegotiation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMBufferNegotiation*, UInt32),
     release : Proc(IAMBufferNegotiation*, UInt32),
@@ -10241,7 +10241,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMBufferNegotiation, lpVtbl : IAMBufferNegotiationVtbl* do
+  record IAMBufferNegotiation, lpVtbl : IAMBufferNegotiationVtable* do
     GUID = LibC::GUID.new(0x56ed71a0_u32, 0xaf5f_u16, 0x11d0_u16, StaticArray[0xb3_u8, 0xf0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x37_u8, 0x61_u8, 0xc5_u8])
     def query_interface(this : IAMBufferNegotiation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10262,7 +10262,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMAnalogVideoDecoderVtbl,
+  record IAMAnalogVideoDecoderVtable,
     query_interface : Proc(IAMAnalogVideoDecoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMAnalogVideoDecoder*, UInt32),
     release : Proc(IAMAnalogVideoDecoder*, UInt32),
@@ -10278,7 +10278,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMAnalogVideoDecoder, lpVtbl : IAMAnalogVideoDecoderVtbl* do
+  record IAMAnalogVideoDecoder, lpVtbl : IAMAnalogVideoDecoderVtable* do
     GUID = LibC::GUID.new(0xc6e13350_u32, 0x30ac_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
     def query_interface(this : IAMAnalogVideoDecoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10320,7 +10320,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMVideoProcAmpVtbl,
+  record IAMVideoProcAmpVtable,
     query_interface : Proc(IAMVideoProcAmp*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMVideoProcAmp*, UInt32),
     release : Proc(IAMVideoProcAmp*, UInt32),
@@ -10330,7 +10330,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMVideoProcAmp, lpVtbl : IAMVideoProcAmpVtbl* do
+  record IAMVideoProcAmp, lpVtbl : IAMVideoProcAmpVtable* do
     GUID = LibC::GUID.new(0xc6e13360_u32, 0x30ac_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
     def query_interface(this : IAMVideoProcAmp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10354,7 +10354,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMCameraControlVtbl,
+  record IAMCameraControlVtable,
     query_interface : Proc(IAMCameraControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMCameraControl*, UInt32),
     release : Proc(IAMCameraControl*, UInt32),
@@ -10364,7 +10364,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMCameraControl, lpVtbl : IAMCameraControlVtbl* do
+  record IAMCameraControl, lpVtbl : IAMCameraControlVtable* do
     GUID = LibC::GUID.new(0xc6e13370_u32, 0x30ac_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
     def query_interface(this : IAMCameraControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10388,7 +10388,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMVideoControlVtbl,
+  record IAMVideoControlVtable,
     query_interface : Proc(IAMVideoControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMVideoControl*, UInt32),
     release : Proc(IAMVideoControl*, UInt32),
@@ -10401,7 +10401,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMVideoControl, lpVtbl : IAMVideoControlVtbl* do
+  record IAMVideoControl, lpVtbl : IAMVideoControlVtable* do
     GUID = LibC::GUID.new(0x6a2e0670_u32, 0x28e4_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
     def query_interface(this : IAMVideoControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10434,7 +10434,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMCrossbarVtbl,
+  record IAMCrossbarVtable,
     query_interface : Proc(IAMCrossbar*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMCrossbar*, UInt32),
     release : Proc(IAMCrossbar*, UInt32),
@@ -10446,7 +10446,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMCrossbar, lpVtbl : IAMCrossbarVtbl* do
+  record IAMCrossbar, lpVtbl : IAMCrossbarVtable* do
     GUID = LibC::GUID.new(0xc6e13380_u32, 0x30ac_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
     def query_interface(this : IAMCrossbar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10476,7 +10476,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMTunerVtbl,
+  record IAMTunerVtable,
     query_interface : Proc(IAMTuner*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMTuner*, UInt32),
     release : Proc(IAMTuner*, UInt32),
@@ -10498,7 +10498,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMTuner, lpVtbl : IAMTunerVtbl* do
+  record IAMTuner, lpVtbl : IAMTunerVtable* do
     GUID = LibC::GUID.new(0x211a8761_u32, 0x3ac_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0x13_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0x83_u8, 0x39_u8])
     def query_interface(this : IAMTuner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10558,7 +10558,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMTunerNotificationVtbl,
+  record IAMTunerNotificationVtable,
     query_interface : Proc(IAMTunerNotification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMTunerNotification*, UInt32),
     release : Proc(IAMTunerNotification*, UInt32),
@@ -10566,7 +10566,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMTunerNotification, lpVtbl : IAMTunerNotificationVtbl* do
+  record IAMTunerNotification, lpVtbl : IAMTunerNotificationVtable* do
     GUID = LibC::GUID.new(0x211a8760_u32, 0x3ac_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0x13_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0x83_u8, 0x39_u8])
     def query_interface(this : IAMTunerNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10584,7 +10584,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMTVTunerVtbl,
+  record IAMTVTunerVtable,
     query_interface : Proc(IAMTVTuner*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMTVTuner*, UInt32),
     release : Proc(IAMTVTuner*, UInt32),
@@ -10617,7 +10617,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMTVTuner, lpVtbl : IAMTVTunerVtbl* do
+  record IAMTVTuner, lpVtbl : IAMTVTunerVtable* do
     GUID = LibC::GUID.new(0x211a8766_u32, 0x3ac_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0x13_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0x83_u8, 0x39_u8])
     def query_interface(this : IAMTVTuner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10710,7 +10710,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBPCSatelliteTunerVtbl,
+  record IBPCSatelliteTunerVtable,
     query_interface : Proc(IBPCSatelliteTuner*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBPCSatelliteTuner*, UInt32),
     release : Proc(IBPCSatelliteTuner*, UInt32),
@@ -10735,7 +10735,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBPCSatelliteTuner, lpVtbl : IBPCSatelliteTunerVtbl* do
+  record IBPCSatelliteTuner, lpVtbl : IBPCSatelliteTunerVtable* do
     GUID = LibC::GUID.new(0x211a8765_u32, 0x3ac_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0x13_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0x83_u8, 0x39_u8])
     def query_interface(this : IBPCSatelliteTuner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10804,7 +10804,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMTVAudioVtbl,
+  record IAMTVAudioVtable,
     query_interface : Proc(IAMTVAudio*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMTVAudio*, UInt32),
     release : Proc(IAMTVAudio*, UInt32),
@@ -10817,7 +10817,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMTVAudio, lpVtbl : IAMTVAudioVtbl* do
+  record IAMTVAudio, lpVtbl : IAMTVAudioVtable* do
     GUID = LibC::GUID.new(0x83ec1c30_u32, 0x23d1_u16, 0x11d1_u16, StaticArray[0x99_u8, 0xe6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x56_u8, 0x2_u8, 0x66_u8])
     def query_interface(this : IAMTVAudio*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10850,7 +10850,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMTVAudioNotificationVtbl,
+  record IAMTVAudioNotificationVtable,
     query_interface : Proc(IAMTVAudioNotification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMTVAudioNotification*, UInt32),
     release : Proc(IAMTVAudioNotification*, UInt32),
@@ -10858,7 +10858,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMTVAudioNotification, lpVtbl : IAMTVAudioNotificationVtbl* do
+  record IAMTVAudioNotification, lpVtbl : IAMTVAudioNotificationVtable* do
     GUID = LibC::GUID.new(0x83ec1c33_u32, 0x23d1_u16, 0x11d1_u16, StaticArray[0x99_u8, 0xe6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x56_u8, 0x2_u8, 0x66_u8])
     def query_interface(this : IAMTVAudioNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10876,7 +10876,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMAnalogVideoEncoderVtbl,
+  record IAMAnalogVideoEncoderVtable,
     query_interface : Proc(IAMAnalogVideoEncoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMAnalogVideoEncoder*, UInt32),
     release : Proc(IAMAnalogVideoEncoder*, UInt32),
@@ -10890,7 +10890,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMAnalogVideoEncoder, lpVtbl : IAMAnalogVideoEncoderVtbl* do
+  record IAMAnalogVideoEncoder, lpVtbl : IAMAnalogVideoEncoderVtable* do
     GUID = LibC::GUID.new(0xc6e133b0_u32, 0x30ac_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0x8c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x89_u8, 0x56_u8])
     def query_interface(this : IAMAnalogVideoEncoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10926,7 +10926,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMediaPropertyBagVtbl,
+  record IMediaPropertyBagVtable,
     query_interface : Proc(IMediaPropertyBag*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaPropertyBag*, UInt32),
     release : Proc(IMediaPropertyBag*, UInt32),
@@ -10936,7 +10936,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMediaPropertyBag, lpVtbl : IMediaPropertyBagVtbl* do
+  record IMediaPropertyBag, lpVtbl : IMediaPropertyBagVtable* do
     GUID = LibC::GUID.new(0x6025a880_u32, 0xc0d5_u16, 0x11d0_u16, StaticArray[0xbd_u8, 0x4e_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xce_u8, 0x86_u8])
     def query_interface(this : IMediaPropertyBag*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10960,7 +10960,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IPersistMediaPropertyBagVtbl,
+  record IPersistMediaPropertyBagVtable,
     query_interface : Proc(IPersistMediaPropertyBag*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPersistMediaPropertyBag*, UInt32),
     release : Proc(IPersistMediaPropertyBag*, UInt32),
@@ -10971,7 +10971,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IPersistMediaPropertyBag, lpVtbl : IPersistMediaPropertyBagVtbl* do
+  record IPersistMediaPropertyBag, lpVtbl : IPersistMediaPropertyBagVtable* do
     GUID = LibC::GUID.new(0x5738e040_u32, 0xb67f_u16, 0x11d0_u16, StaticArray[0xbd_u8, 0x4d_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xce_u8, 0x86_u8])
     def query_interface(this : IPersistMediaPropertyBag*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10998,7 +10998,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMPhysicalPinInfoVtbl,
+  record IAMPhysicalPinInfoVtable,
     query_interface : Proc(IAMPhysicalPinInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMPhysicalPinInfo*, UInt32),
     release : Proc(IAMPhysicalPinInfo*, UInt32),
@@ -11006,7 +11006,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMPhysicalPinInfo, lpVtbl : IAMPhysicalPinInfoVtbl* do
+  record IAMPhysicalPinInfo, lpVtbl : IAMPhysicalPinInfoVtable* do
     GUID = LibC::GUID.new(0xf938c991_u32, 0x3029_u16, 0x11cf_u16, StaticArray[0x8c_u8, 0x44_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0x68_u8, 0x14_u8])
     def query_interface(this : IAMPhysicalPinInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11024,7 +11024,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMExtDeviceVtbl,
+  record IAMExtDeviceVtable,
     query_interface : Proc(IAMExtDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMExtDevice*, UInt32),
     release : Proc(IAMExtDevice*, UInt32),
@@ -11039,7 +11039,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMExtDevice, lpVtbl : IAMExtDeviceVtbl* do
+  record IAMExtDevice, lpVtbl : IAMExtDeviceVtable* do
     GUID = LibC::GUID.new(0xb5730a90_u32, 0x1a2c_u16, 0x11cf_u16, StaticArray[0x8c_u8, 0x23_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0x68_u8, 0x14_u8])
     def query_interface(this : IAMExtDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11078,7 +11078,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMExtTransportVtbl,
+  record IAMExtTransportVtable,
     query_interface : Proc(IAMExtTransport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMExtTransport*, UInt32),
     release : Proc(IAMExtTransport*, UInt32),
@@ -11113,7 +11113,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMExtTransport, lpVtbl : IAMExtTransportVtbl* do
+  record IAMExtTransport, lpVtbl : IAMExtTransportVtable* do
     GUID = LibC::GUID.new(0xa03cd5f0_u32, 0x3045_u16, 0x11cf_u16, StaticArray[0x8c_u8, 0x44_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0x68_u8, 0x14_u8])
     def query_interface(this : IAMExtTransport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11212,7 +11212,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMTimecodeReaderVtbl,
+  record IAMTimecodeReaderVtable,
     query_interface : Proc(IAMTimecodeReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMTimecodeReader*, UInt32),
     release : Proc(IAMTimecodeReader*, UInt32),
@@ -11224,7 +11224,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMTimecodeReader, lpVtbl : IAMTimecodeReaderVtbl* do
+  record IAMTimecodeReader, lpVtbl : IAMTimecodeReaderVtable* do
     GUID = LibC::GUID.new(0x9b496ce1_u32, 0x811b_u16, 0x11cf_u16, StaticArray[0x8c_u8, 0x77_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0x68_u8, 0x14_u8])
     def query_interface(this : IAMTimecodeReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11254,7 +11254,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMTimecodeGeneratorVtbl,
+  record IAMTimecodeGeneratorVtable,
     query_interface : Proc(IAMTimecodeGenerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMTimecodeGenerator*, UInt32),
     release : Proc(IAMTimecodeGenerator*, UInt32),
@@ -11267,7 +11267,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMTimecodeGenerator, lpVtbl : IAMTimecodeGeneratorVtbl* do
+  record IAMTimecodeGenerator, lpVtbl : IAMTimecodeGeneratorVtable* do
     GUID = LibC::GUID.new(0x9b496ce0_u32, 0x811b_u16, 0x11cf_u16, StaticArray[0x8c_u8, 0x77_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0x68_u8, 0x14_u8])
     def query_interface(this : IAMTimecodeGenerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11300,7 +11300,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMTimecodeDisplayVtbl,
+  record IAMTimecodeDisplayVtable,
     query_interface : Proc(IAMTimecodeDisplay*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMTimecodeDisplay*, UInt32),
     release : Proc(IAMTimecodeDisplay*, UInt32),
@@ -11311,7 +11311,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMTimecodeDisplay, lpVtbl : IAMTimecodeDisplayVtbl* do
+  record IAMTimecodeDisplay, lpVtbl : IAMTimecodeDisplayVtable* do
     GUID = LibC::GUID.new(0x9b496ce2_u32, 0x811b_u16, 0x11cf_u16, StaticArray[0x8c_u8, 0x77_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0x68_u8, 0x14_u8])
     def query_interface(this : IAMTimecodeDisplay*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11338,7 +11338,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMDevMemoryAllocatorVtbl,
+  record IAMDevMemoryAllocatorVtable,
     query_interface : Proc(IAMDevMemoryAllocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMDevMemoryAllocator*, UInt32),
     release : Proc(IAMDevMemoryAllocator*, UInt32),
@@ -11350,7 +11350,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMDevMemoryAllocator, lpVtbl : IAMDevMemoryAllocatorVtbl* do
+  record IAMDevMemoryAllocator, lpVtbl : IAMDevMemoryAllocatorVtable* do
     GUID = LibC::GUID.new(0xc6545bf0_u32, 0xe76b_u16, 0x11d0_u16, StaticArray[0xbd_u8, 0x52_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xce_u8, 0x86_u8])
     def query_interface(this : IAMDevMemoryAllocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11380,7 +11380,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMDevMemoryControlVtbl,
+  record IAMDevMemoryControlVtable,
     query_interface : Proc(IAMDevMemoryControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMDevMemoryControl*, UInt32),
     release : Proc(IAMDevMemoryControl*, UInt32),
@@ -11390,7 +11390,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMDevMemoryControl, lpVtbl : IAMDevMemoryControlVtbl* do
+  record IAMDevMemoryControl, lpVtbl : IAMDevMemoryControlVtable* do
     GUID = LibC::GUID.new(0xc6545bf1_u32, 0xe76b_u16, 0x11d0_u16, StaticArray[0xbd_u8, 0x52_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xce_u8, 0x86_u8])
     def query_interface(this : IAMDevMemoryControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11414,7 +11414,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMStreamSelectVtbl,
+  record IAMStreamSelectVtable,
     query_interface : Proc(IAMStreamSelect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMStreamSelect*, UInt32),
     release : Proc(IAMStreamSelect*, UInt32),
@@ -11424,7 +11424,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMStreamSelect, lpVtbl : IAMStreamSelectVtbl* do
+  record IAMStreamSelect, lpVtbl : IAMStreamSelectVtable* do
     GUID = LibC::GUID.new(0xc1960960_u32, 0x17f5_u16, 0x11d1_u16, StaticArray[0xab_u8, 0xe1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
     def query_interface(this : IAMStreamSelect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11448,7 +11448,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMResourceControlVtbl,
+  record IAMResourceControlVtable,
     query_interface : Proc(IAMResourceControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMResourceControl*, UInt32),
     release : Proc(IAMResourceControl*, UInt32),
@@ -11456,7 +11456,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMResourceControl, lpVtbl : IAMResourceControlVtbl* do
+  record IAMResourceControl, lpVtbl : IAMResourceControlVtable* do
     GUID = LibC::GUID.new(0x8389d2d0_u32, 0x77d7_u16, 0x11d1_u16, StaticArray[0xab_u8, 0xe6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
     def query_interface(this : IAMResourceControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11474,7 +11474,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMClockAdjustVtbl,
+  record IAMClockAdjustVtable,
     query_interface : Proc(IAMClockAdjust*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMClockAdjust*, UInt32),
     release : Proc(IAMClockAdjust*, UInt32),
@@ -11482,7 +11482,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMClockAdjust, lpVtbl : IAMClockAdjustVtbl* do
+  record IAMClockAdjust, lpVtbl : IAMClockAdjustVtable* do
     GUID = LibC::GUID.new(0x4d5466b0_u32, 0xa49c_u16, 0x11d1_u16, StaticArray[0xab_u8, 0xe8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
     def query_interface(this : IAMClockAdjust*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11500,7 +11500,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMFilterMiscFlagsVtbl,
+  record IAMFilterMiscFlagsVtable,
     query_interface : Proc(IAMFilterMiscFlags*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMFilterMiscFlags*, UInt32),
     release : Proc(IAMFilterMiscFlags*, UInt32),
@@ -11508,7 +11508,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMFilterMiscFlags, lpVtbl : IAMFilterMiscFlagsVtbl* do
+  record IAMFilterMiscFlags, lpVtbl : IAMFilterMiscFlagsVtable* do
     GUID = LibC::GUID.new(0x2dd74950_u32, 0xa890_u16, 0x11d1_u16, StaticArray[0xab_u8, 0xe8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
     def query_interface(this : IAMFilterMiscFlags*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11526,7 +11526,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDrawVideoImageVtbl,
+  record IDrawVideoImageVtable,
     query_interface : Proc(IDrawVideoImage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDrawVideoImage*, UInt32),
     release : Proc(IDrawVideoImage*, UInt32),
@@ -11536,7 +11536,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDrawVideoImage, lpVtbl : IDrawVideoImageVtbl* do
+  record IDrawVideoImage, lpVtbl : IDrawVideoImageVtable* do
     GUID = LibC::GUID.new(0x48efb120_u32, 0xab49_u16, 0x11d2_u16, StaticArray[0xae_u8, 0xd2_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x95_u8, 0xe8_u8, 0xd5_u8])
     def query_interface(this : IDrawVideoImage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11560,7 +11560,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDecimateVideoImageVtbl,
+  record IDecimateVideoImageVtable,
     query_interface : Proc(IDecimateVideoImage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDecimateVideoImage*, UInt32),
     release : Proc(IDecimateVideoImage*, UInt32),
@@ -11569,7 +11569,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDecimateVideoImage, lpVtbl : IDecimateVideoImageVtbl* do
+  record IDecimateVideoImage, lpVtbl : IDecimateVideoImageVtable* do
     GUID = LibC::GUID.new(0x2e5ea3e0_u32, 0xe924_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0xda_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x95_u8, 0xe8_u8, 0xdf_u8])
     def query_interface(this : IDecimateVideoImage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11590,7 +11590,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMVideoDecimationPropertiesVtbl,
+  record IAMVideoDecimationPropertiesVtable,
     query_interface : Proc(IAMVideoDecimationProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMVideoDecimationProperties*, UInt32),
     release : Proc(IAMVideoDecimationProperties*, UInt32),
@@ -11599,7 +11599,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMVideoDecimationProperties, lpVtbl : IAMVideoDecimationPropertiesVtbl* do
+  record IAMVideoDecimationProperties, lpVtbl : IAMVideoDecimationPropertiesVtable* do
     GUID = LibC::GUID.new(0x60d32930_u32, 0x13da_u16, 0x11d3_u16, StaticArray[0x9e_u8, 0xc6_u8, 0xc4_u8, 0xfc_u8, 0xae_u8, 0xf5_u8, 0xc7_u8, 0xbe_u8])
     def query_interface(this : IAMVideoDecimationProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11620,7 +11620,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVideoFrameStepVtbl,
+  record IVideoFrameStepVtable,
     query_interface : Proc(IVideoFrameStep*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVideoFrameStep*, UInt32),
     release : Proc(IVideoFrameStep*, UInt32),
@@ -11630,7 +11630,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVideoFrameStep, lpVtbl : IVideoFrameStepVtbl* do
+  record IVideoFrameStep, lpVtbl : IVideoFrameStepVtable* do
     GUID = LibC::GUID.new(0xe46a9787_u32, 0x2b71_u16, 0x444d_u16, StaticArray[0xa4_u8, 0xb5_u8, 0x1f_u8, 0xab_u8, 0x7b_u8, 0x70_u8, 0x8d_u8, 0x6a_u8])
     def query_interface(this : IVideoFrameStep*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11654,7 +11654,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMLatencyVtbl,
+  record IAMLatencyVtable,
     query_interface : Proc(IAMLatency*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMLatency*, UInt32),
     release : Proc(IAMLatency*, UInt32),
@@ -11662,7 +11662,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMLatency, lpVtbl : IAMLatencyVtbl* do
+  record IAMLatency, lpVtbl : IAMLatencyVtable* do
     GUID = LibC::GUID.new(0x62ea93ba_u32, 0xec62_u16, 0x11d2_u16, StaticArray[0xb7_u8, 0x70_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xbd_u8, 0x3d_u8])
     def query_interface(this : IAMLatency*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11680,7 +11680,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMPushSourceVtbl,
+  record IAMPushSourceVtable,
     query_interface : Proc(IAMPushSource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMPushSource*, UInt32),
     release : Proc(IAMPushSource*, UInt32),
@@ -11694,7 +11694,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMPushSource, lpVtbl : IAMPushSourceVtbl* do
+  record IAMPushSource, lpVtbl : IAMPushSourceVtable* do
     GUID = LibC::GUID.new(0xf185fe76_u32, 0xe64e_u16, 0x11d2_u16, StaticArray[0xb7_u8, 0x6e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xbd_u8, 0x3d_u8])
     def query_interface(this : IAMPushSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11730,7 +11730,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMDeviceRemovalVtbl,
+  record IAMDeviceRemovalVtable,
     query_interface : Proc(IAMDeviceRemoval*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMDeviceRemoval*, UInt32),
     release : Proc(IAMDeviceRemoval*, UInt32),
@@ -11740,7 +11740,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMDeviceRemoval, lpVtbl : IAMDeviceRemovalVtbl* do
+  record IAMDeviceRemoval, lpVtbl : IAMDeviceRemovalVtable* do
     GUID = LibC::GUID.new(0xf90a6130_u32, 0xb658_u16, 0x11d2_u16, StaticArray[0xae_u8, 0x49_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x4b_u8, 0x99_u8])
     def query_interface(this : IAMDeviceRemoval*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11764,7 +11764,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVEncVtbl,
+  record IDVEncVtable,
     query_interface : Proc(IDVEnc*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVEnc*, UInt32),
     release : Proc(IDVEnc*, UInt32),
@@ -11773,7 +11773,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVEnc, lpVtbl : IDVEncVtbl* do
+  record IDVEnc, lpVtbl : IDVEncVtable* do
     GUID = LibC::GUID.new(0xd18e17a0_u32, 0xaacb_u16, 0x11d0_u16, StaticArray[0xaf_u8, 0xb0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb6_u8, 0x7a_u8, 0x42_u8])
     def query_interface(this : IDVEnc*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11794,7 +11794,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IIPDVDecVtbl,
+  record IIPDVDecVtable,
     query_interface : Proc(IIPDVDec*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIPDVDec*, UInt32),
     release : Proc(IIPDVDec*, UInt32),
@@ -11803,7 +11803,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IIPDVDec, lpVtbl : IIPDVDecVtbl* do
+  record IIPDVDec, lpVtbl : IIPDVDecVtable* do
     GUID = LibC::GUID.new(0xb8e8bd60_u32, 0xbfe_u16, 0x11d0_u16, StaticArray[0xaf_u8, 0x91_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb6_u8, 0x7a_u8, 0x42_u8])
     def query_interface(this : IIPDVDec*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11824,7 +11824,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVRGB219Vtbl,
+  record IDVRGB219Vtable,
     query_interface : Proc(IDVRGB219*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVRGB219*, UInt32),
     release : Proc(IDVRGB219*, UInt32),
@@ -11832,7 +11832,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVRGB219, lpVtbl : IDVRGB219Vtbl* do
+  record IDVRGB219, lpVtbl : IDVRGB219Vtable* do
     GUID = LibC::GUID.new(0x58473a19_u32, 0x2bc8_u16, 0x4663_u16, StaticArray[0x80_u8, 0x12_u8, 0x25_u8, 0xf8_u8, 0x1b_u8, 0xab_u8, 0xdd_u8, 0xd1_u8])
     def query_interface(this : IDVRGB219*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11850,7 +11850,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVSplitterVtbl,
+  record IDVSplitterVtable,
     query_interface : Proc(IDVSplitter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVSplitter*, UInt32),
     release : Proc(IDVSplitter*, UInt32),
@@ -11858,7 +11858,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVSplitter, lpVtbl : IDVSplitterVtbl* do
+  record IDVSplitter, lpVtbl : IDVSplitterVtable* do
     GUID = LibC::GUID.new(0x92a3a302_u32, 0xda7c_u16, 0x4a1f_u16, StaticArray[0xba_u8, 0x7e_u8, 0x18_u8, 0x2_u8, 0xbb_u8, 0x5d_u8, 0x2d_u8, 0x2_u8])
     def query_interface(this : IDVSplitter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11876,7 +11876,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMAudioRendererStatsVtbl,
+  record IAMAudioRendererStatsVtable,
     query_interface : Proc(IAMAudioRendererStats*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMAudioRendererStats*, UInt32),
     release : Proc(IAMAudioRendererStats*, UInt32),
@@ -11884,7 +11884,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMAudioRendererStats, lpVtbl : IAMAudioRendererStatsVtbl* do
+  record IAMAudioRendererStats, lpVtbl : IAMAudioRendererStatsVtable* do
     GUID = LibC::GUID.new(0x22320cb2_u32, 0xd41a_u16, 0x11d2_u16, StaticArray[0xbf_u8, 0x7c_u8, 0xd7_u8, 0xcb_u8, 0x9d_u8, 0xf0_u8, 0xbf_u8, 0x93_u8])
     def query_interface(this : IAMAudioRendererStats*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11902,7 +11902,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMGraphStreamsVtbl,
+  record IAMGraphStreamsVtable,
     query_interface : Proc(IAMGraphStreams*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMGraphStreams*, UInt32),
     release : Proc(IAMGraphStreams*, UInt32),
@@ -11912,7 +11912,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMGraphStreams, lpVtbl : IAMGraphStreamsVtbl* do
+  record IAMGraphStreams, lpVtbl : IAMGraphStreamsVtable* do
     GUID = LibC::GUID.new(0x632105fa_u32, 0x72e_u16, 0x11d3_u16, StaticArray[0x8a_u8, 0xf9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xbd_u8, 0x3d_u8])
     def query_interface(this : IAMGraphStreams*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11936,7 +11936,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMOverlayFXVtbl,
+  record IAMOverlayFXVtable,
     query_interface : Proc(IAMOverlayFX*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMOverlayFX*, UInt32),
     release : Proc(IAMOverlayFX*, UInt32),
@@ -11946,7 +11946,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMOverlayFX, lpVtbl : IAMOverlayFXVtbl* do
+  record IAMOverlayFX, lpVtbl : IAMOverlayFXVtable* do
     GUID = LibC::GUID.new(0x62fae250_u32, 0x7e65_u16, 0x4460_u16, StaticArray[0xbf_u8, 0xc9_u8, 0x63_u8, 0x98_u8, 0xb3_u8, 0x22_u8, 0x7_u8, 0x3c_u8])
     def query_interface(this : IAMOverlayFX*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11970,7 +11970,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMOpenProgressVtbl,
+  record IAMOpenProgressVtable,
     query_interface : Proc(IAMOpenProgress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMOpenProgress*, UInt32),
     release : Proc(IAMOpenProgress*, UInt32),
@@ -11979,7 +11979,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMOpenProgress, lpVtbl : IAMOpenProgressVtbl* do
+  record IAMOpenProgress, lpVtbl : IAMOpenProgressVtable* do
     GUID = LibC::GUID.new(0x8e1c39a1_u32, 0xde53_u16, 0x11cf_u16, StaticArray[0xaa_u8, 0x63_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x44_u8, 0x52_u8, 0x8d_u8])
     def query_interface(this : IAMOpenProgress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12000,7 +12000,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMpeg2DemultiplexerVtbl,
+  record IMpeg2DemultiplexerVtable,
     query_interface : Proc(IMpeg2Demultiplexer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMpeg2Demultiplexer*, UInt32),
     release : Proc(IMpeg2Demultiplexer*, UInt32),
@@ -12010,7 +12010,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMpeg2Demultiplexer, lpVtbl : IMpeg2DemultiplexerVtbl* do
+  record IMpeg2Demultiplexer, lpVtbl : IMpeg2DemultiplexerVtable* do
     GUID = LibC::GUID.new(0x436eee9c_u32, 0x264f_u16, 0x4242_u16, StaticArray[0x90_u8, 0xe1_u8, 0x4e_u8, 0x33_u8, 0xc_u8, 0x10_u8, 0x75_u8, 0x12_u8])
     def query_interface(this : IMpeg2Demultiplexer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12034,7 +12034,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IEnumStreamIdMapVtbl,
+  record IEnumStreamIdMapVtable,
     query_interface : Proc(IEnumStreamIdMap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumStreamIdMap*, UInt32),
     release : Proc(IEnumStreamIdMap*, UInt32),
@@ -12045,7 +12045,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IEnumStreamIdMap, lpVtbl : IEnumStreamIdMapVtbl* do
+  record IEnumStreamIdMap, lpVtbl : IEnumStreamIdMapVtable* do
     GUID = LibC::GUID.new(0x945c1566_u32, 0x6202_u16, 0x46fc_u16, StaticArray[0x96_u8, 0xc7_u8, 0xd8_u8, 0x7f_u8, 0x28_u8, 0x9c_u8, 0x65_u8, 0x34_u8])
     def query_interface(this : IEnumStreamIdMap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12072,7 +12072,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMPEG2StreamIdMapVtbl,
+  record IMPEG2StreamIdMapVtable,
     query_interface : Proc(IMPEG2StreamIdMap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMPEG2StreamIdMap*, UInt32),
     release : Proc(IMPEG2StreamIdMap*, UInt32),
@@ -12082,7 +12082,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMPEG2StreamIdMap, lpVtbl : IMPEG2StreamIdMapVtbl* do
+  record IMPEG2StreamIdMap, lpVtbl : IMPEG2StreamIdMapVtable* do
     GUID = LibC::GUID.new(0xd0e04c47_u32, 0x25b8_u16, 0x4369_u16, StaticArray[0x92_u8, 0x5a_u8, 0x36_u8, 0x2a_u8, 0x1_u8, 0xd9_u8, 0x54_u8, 0x44_u8])
     def query_interface(this : IMPEG2StreamIdMap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12106,7 +12106,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IRegisterServiceProviderVtbl,
+  record IRegisterServiceProviderVtable,
     query_interface : Proc(IRegisterServiceProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRegisterServiceProvider*, UInt32),
     release : Proc(IRegisterServiceProvider*, UInt32),
@@ -12114,7 +12114,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IRegisterServiceProvider, lpVtbl : IRegisterServiceProviderVtbl* do
+  record IRegisterServiceProvider, lpVtbl : IRegisterServiceProviderVtable* do
     GUID = LibC::GUID.new(0x7b3a2f01_u32, 0x751_u16, 0x48dd_u16, StaticArray[0xb5_u8, 0x56_u8, 0x0_u8, 0x47_u8, 0x85_u8, 0x17_u8, 0x1c_u8, 0x54_u8])
     def query_interface(this : IRegisterServiceProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12132,7 +12132,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMClockSlaveVtbl,
+  record IAMClockSlaveVtable,
     query_interface : Proc(IAMClockSlave*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMClockSlave*, UInt32),
     release : Proc(IAMClockSlave*, UInt32),
@@ -12141,7 +12141,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMClockSlave, lpVtbl : IAMClockSlaveVtbl* do
+  record IAMClockSlave, lpVtbl : IAMClockSlaveVtable* do
     GUID = LibC::GUID.new(0x9fd52741_u32, 0x176d_u16, 0x4b36_u16, StaticArray[0x8f_u8, 0x51_u8, 0xca_u8, 0x8f_u8, 0x93_u8, 0x32_u8, 0x23_u8, 0xbe_u8])
     def query_interface(this : IAMClockSlave*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12162,7 +12162,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMGraphBuilderCallbackVtbl,
+  record IAMGraphBuilderCallbackVtable,
     query_interface : Proc(IAMGraphBuilderCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMGraphBuilderCallback*, UInt32),
     release : Proc(IAMGraphBuilderCallback*, UInt32),
@@ -12171,7 +12171,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMGraphBuilderCallback, lpVtbl : IAMGraphBuilderCallbackVtbl* do
+  record IAMGraphBuilderCallback, lpVtbl : IAMGraphBuilderCallbackVtable* do
     GUID = LibC::GUID.new(0x4995f511_u32, 0x9ddb_u16, 0x4f12_u16, StaticArray[0xbd_u8, 0x3b_u8, 0xf0_u8, 0x46_u8, 0x11_u8, 0x80_u8, 0x7b_u8, 0x79_u8])
     def query_interface(this : IAMGraphBuilderCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12192,7 +12192,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMFilterGraphCallbackVtbl,
+  record IAMFilterGraphCallbackVtable,
     query_interface : Proc(IAMFilterGraphCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMFilterGraphCallback*, UInt32),
     release : Proc(IAMFilterGraphCallback*, UInt32),
@@ -12200,7 +12200,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMFilterGraphCallback, lpVtbl : IAMFilterGraphCallbackVtbl* do
+  record IAMFilterGraphCallback, lpVtbl : IAMFilterGraphCallbackVtable* do
     GUID = LibC::GUID.new(0x56a868fd_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0xa3_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IAMFilterGraphCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12218,7 +12218,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IGetCapabilitiesKeyVtbl,
+  record IGetCapabilitiesKeyVtable,
     query_interface : Proc(IGetCapabilitiesKey*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGetCapabilitiesKey*, UInt32),
     release : Proc(IGetCapabilitiesKey*, UInt32),
@@ -12226,7 +12226,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IGetCapabilitiesKey, lpVtbl : IGetCapabilitiesKeyVtbl* do
+  record IGetCapabilitiesKey, lpVtbl : IGetCapabilitiesKeyVtable* do
     GUID = LibC::GUID.new(0xa8809222_u32, 0x7bb_u16, 0x48ea_u16, StaticArray[0x95_u8, 0x1c_u8, 0x33_u8, 0x15_u8, 0x81_u8, 0x0_u8, 0x62_u8, 0x5b_u8])
     def query_interface(this : IGetCapabilitiesKey*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12244,7 +12244,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IEncoderAPIVtbl,
+  record IEncoderAPIVtable,
     query_interface : Proc(IEncoderAPI*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEncoderAPI*, UInt32),
     release : Proc(IEncoderAPI*, UInt32),
@@ -12258,7 +12258,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IEncoderAPI, lpVtbl : IEncoderAPIVtbl* do
+  record IEncoderAPI, lpVtbl : IEncoderAPIVtable* do
     GUID = LibC::GUID.new(0x70423839_u32, 0x6acc_u16, 0x4b23_u16, StaticArray[0xb0_u8, 0x79_u8, 0x21_u8, 0xdb_u8, 0xf0_u8, 0x81_u8, 0x56_u8, 0xa5_u8])
     def query_interface(this : IEncoderAPI*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12294,7 +12294,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVideoEncoderVtbl,
+  record IVideoEncoderVtable,
     query_interface : Proc(IVideoEncoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVideoEncoder*, UInt32),
     release : Proc(IVideoEncoder*, UInt32),
@@ -12308,7 +12308,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVideoEncoder, lpVtbl : IVideoEncoderVtbl* do
+  record IVideoEncoder, lpVtbl : IVideoEncoderVtable* do
     GUID = LibC::GUID.new(0x2997c3b_u32, 0x8e1b_u16, 0x460e_u16, StaticArray[0x92_u8, 0x70_u8, 0x54_u8, 0x5e_u8, 0xd_u8, 0xe9_u8, 0x56_u8, 0x3e_u8])
     def query_interface(this : IVideoEncoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12344,7 +12344,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMDecoderCapsVtbl,
+  record IAMDecoderCapsVtable,
     query_interface : Proc(IAMDecoderCaps*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMDecoderCaps*, UInt32),
     release : Proc(IAMDecoderCaps*, UInt32),
@@ -12352,7 +12352,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMDecoderCaps, lpVtbl : IAMDecoderCapsVtbl* do
+  record IAMDecoderCaps, lpVtbl : IAMDecoderCapsVtable* do
     GUID = LibC::GUID.new(0xc0dff467_u32, 0xd499_u16, 0x4986_u16, StaticArray[0x97_u8, 0x2b_u8, 0xe1_u8, 0xd9_u8, 0x9_u8, 0xf_u8, 0xa9_u8, 0x41_u8])
     def query_interface(this : IAMDecoderCaps*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12370,7 +12370,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMCertifiedOutputProtectionVtbl,
+  record IAMCertifiedOutputProtectionVtable,
     query_interface : Proc(IAMCertifiedOutputProtection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMCertifiedOutputProtection*, UInt32),
     release : Proc(IAMCertifiedOutputProtection*, UInt32),
@@ -12381,7 +12381,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMCertifiedOutputProtection, lpVtbl : IAMCertifiedOutputProtectionVtbl* do
+  record IAMCertifiedOutputProtection, lpVtbl : IAMCertifiedOutputProtectionVtable* do
     GUID = LibC::GUID.new(0x6feded3e_u32, 0xff1_u16, 0x4901_u16, StaticArray[0xa2_u8, 0xf1_u8, 0x43_u8, 0xf7_u8, 0x1_u8, 0x2c_u8, 0x85_u8, 0x15_u8])
     def query_interface(this : IAMCertifiedOutputProtection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12408,7 +12408,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMAsyncReaderTimestampScalingVtbl,
+  record IAMAsyncReaderTimestampScalingVtable,
     query_interface : Proc(IAMAsyncReaderTimestampScaling*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMAsyncReaderTimestampScaling*, UInt32),
     release : Proc(IAMAsyncReaderTimestampScaling*, UInt32),
@@ -12417,7 +12417,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMAsyncReaderTimestampScaling, lpVtbl : IAMAsyncReaderTimestampScalingVtbl* do
+  record IAMAsyncReaderTimestampScaling, lpVtbl : IAMAsyncReaderTimestampScalingVtable* do
     GUID = LibC::GUID.new(0xcf7b26fc_u32, 0x9a00_u16, 0x485b_u16, StaticArray[0x81_u8, 0x47_u8, 0x3e_u8, 0x78_u8, 0x9d_u8, 0x5e_u8, 0x8f_u8, 0x67_u8])
     def query_interface(this : IAMAsyncReaderTimestampScaling*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12438,7 +12438,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMPluginControlVtbl,
+  record IAMPluginControlVtable,
     query_interface : Proc(IAMPluginControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMPluginControl*, UInt32),
     release : Proc(IAMPluginControl*, UInt32),
@@ -12452,7 +12452,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMPluginControl, lpVtbl : IAMPluginControlVtbl* do
+  record IAMPluginControl, lpVtbl : IAMPluginControlVtable* do
     GUID = LibC::GUID.new(0xe26a181_u32, 0xf40c_u16, 0x4635_u16, StaticArray[0x87_u8, 0x86_u8, 0x97_u8, 0x62_u8, 0x84_u8, 0xb5_u8, 0x29_u8, 0x81_u8])
     def query_interface(this : IAMPluginControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12488,7 +12488,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IPinConnectionVtbl,
+  record IPinConnectionVtable,
     query_interface : Proc(IPinConnection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPinConnection*, UInt32),
     release : Proc(IPinConnection*, UInt32),
@@ -12499,7 +12499,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IPinConnection, lpVtbl : IPinConnectionVtbl* do
+  record IPinConnection, lpVtbl : IPinConnectionVtable* do
     GUID = LibC::GUID.new(0x4a9a62d3_u32, 0x27d4_u16, 0x403d_u16, StaticArray[0x91_u8, 0xe9_u8, 0x89_u8, 0xf5_u8, 0x40_u8, 0xe5_u8, 0x55_u8, 0x34_u8])
     def query_interface(this : IPinConnection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12526,7 +12526,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IPinFlowControlVtbl,
+  record IPinFlowControlVtable,
     query_interface : Proc(IPinFlowControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPinFlowControl*, UInt32),
     release : Proc(IPinFlowControl*, UInt32),
@@ -12534,7 +12534,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IPinFlowControl, lpVtbl : IPinFlowControlVtbl* do
+  record IPinFlowControl, lpVtbl : IPinFlowControlVtable* do
     GUID = LibC::GUID.new(0xc56e9858_u32, 0xdbf3_u16, 0x4f6b_u16, StaticArray[0x81_u8, 0x19_u8, 0x38_u8, 0x4a_u8, 0xf2_u8, 0x6_u8, 0xd_u8, 0xeb_u8])
     def query_interface(this : IPinFlowControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12552,7 +12552,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IGraphConfigVtbl,
+  record IGraphConfigVtable,
     query_interface : Proc(IGraphConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGraphConfig*, UInt32),
     release : Proc(IGraphConfig*, UInt32),
@@ -12569,7 +12569,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IGraphConfig, lpVtbl : IGraphConfigVtbl* do
+  record IGraphConfig, lpVtbl : IGraphConfigVtable* do
     GUID = LibC::GUID.new(0x3a1eb8e_u32, 0x32bf_u16, 0x4245_u16, StaticArray[0x85_u8, 0x2_u8, 0x11_u8, 0x4d_u8, 0x8_u8, 0xa9_u8, 0xcb_u8, 0x88_u8])
     def query_interface(this : IGraphConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12614,7 +12614,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IGraphConfigCallbackVtbl,
+  record IGraphConfigCallbackVtable,
     query_interface : Proc(IGraphConfigCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGraphConfigCallback*, UInt32),
     release : Proc(IGraphConfigCallback*, UInt32),
@@ -12622,7 +12622,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IGraphConfigCallback, lpVtbl : IGraphConfigCallbackVtbl* do
+  record IGraphConfigCallback, lpVtbl : IGraphConfigCallbackVtable* do
     GUID = LibC::GUID.new(0xade0fd60_u32, 0xd19d_u16, 0x11d2_u16, StaticArray[0xab_u8, 0xf6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
     def query_interface(this : IGraphConfigCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12640,7 +12640,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IFilterChainVtbl,
+  record IFilterChainVtable,
     query_interface : Proc(IFilterChain*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFilterChain*, UInt32),
     release : Proc(IFilterChain*, UInt32),
@@ -12651,7 +12651,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IFilterChain, lpVtbl : IFilterChainVtbl* do
+  record IFilterChain, lpVtbl : IFilterChainVtable* do
     GUID = LibC::GUID.new(0xdcfbdcf6_u32, 0xdc2_u16, 0x45f5_u16, StaticArray[0x9a_u8, 0xb2_u8, 0x7c_u8, 0x33_u8, 0xe_u8, 0xa0_u8, 0x9c_u8, 0x29_u8])
     def query_interface(this : IFilterChain*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12678,7 +12678,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRImagePresenterVtbl,
+  record IVMRImagePresenterVtable,
     query_interface : Proc(IVMRImagePresenter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRImagePresenter*, UInt32),
     release : Proc(IVMRImagePresenter*, UInt32),
@@ -12688,7 +12688,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRImagePresenter, lpVtbl : IVMRImagePresenterVtbl* do
+  record IVMRImagePresenter, lpVtbl : IVMRImagePresenterVtable* do
     GUID = LibC::GUID.new(0xce704fe7_u32, 0xe71e_u16, 0x41fb_u16, StaticArray[0xba_u8, 0xa2_u8, 0xc4_u8, 0x40_u8, 0x3e_u8, 0x11_u8, 0x82_u8, 0xf5_u8])
     def query_interface(this : IVMRImagePresenter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12712,7 +12712,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRSurfaceAllocatorVtbl,
+  record IVMRSurfaceAllocatorVtable,
     query_interface : Proc(IVMRSurfaceAllocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRSurfaceAllocator*, UInt32),
     release : Proc(IVMRSurfaceAllocator*, UInt32),
@@ -12723,7 +12723,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRSurfaceAllocator, lpVtbl : IVMRSurfaceAllocatorVtbl* do
+  record IVMRSurfaceAllocator, lpVtbl : IVMRSurfaceAllocatorVtable* do
     GUID = LibC::GUID.new(0x31ce832e_u32, 0x4484_u16, 0x458b_u16, StaticArray[0x8c_u8, 0xca_u8, 0xf4_u8, 0xd7_u8, 0xe3_u8, 0xdb_u8, 0xb_u8, 0x52_u8])
     def query_interface(this : IVMRSurfaceAllocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12750,7 +12750,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRSurfaceAllocatorNotifyVtbl,
+  record IVMRSurfaceAllocatorNotifyVtable,
     query_interface : Proc(IVMRSurfaceAllocatorNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRSurfaceAllocatorNotify*, UInt32),
     release : Proc(IVMRSurfaceAllocatorNotify*, UInt32),
@@ -12763,7 +12763,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRSurfaceAllocatorNotify, lpVtbl : IVMRSurfaceAllocatorNotifyVtbl* do
+  record IVMRSurfaceAllocatorNotify, lpVtbl : IVMRSurfaceAllocatorNotifyVtable* do
     GUID = LibC::GUID.new(0xaada05a8_u32, 0x5a4e_u16, 0x4729_u16, StaticArray[0xaf_u8, 0xb_u8, 0xce_u8, 0xa2_u8, 0x7a_u8, 0xed_u8, 0x51_u8, 0xe2_u8])
     def query_interface(this : IVMRSurfaceAllocatorNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12796,7 +12796,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRWindowlessControlVtbl,
+  record IVMRWindowlessControlVtable,
     query_interface : Proc(IVMRWindowlessControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRWindowlessControl*, UInt32),
     release : Proc(IVMRWindowlessControl*, UInt32),
@@ -12818,7 +12818,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRWindowlessControl, lpVtbl : IVMRWindowlessControlVtbl* do
+  record IVMRWindowlessControl, lpVtbl : IVMRWindowlessControlVtable* do
     GUID = LibC::GUID.new(0xeb1088c_u32, 0x4dcd_u16, 0x46f0_u16, StaticArray[0x87_u8, 0x8f_u8, 0x39_u8, 0xda_u8, 0xe8_u8, 0x6a_u8, 0x51_u8, 0xb7_u8])
     def query_interface(this : IVMRWindowlessControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12878,7 +12878,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRMixerControlVtbl,
+  record IVMRMixerControlVtable,
     query_interface : Proc(IVMRMixerControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRMixerControl*, UInt32),
     release : Proc(IVMRMixerControl*, UInt32),
@@ -12895,7 +12895,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRMixerControl, lpVtbl : IVMRMixerControlVtbl* do
+  record IVMRMixerControl, lpVtbl : IVMRMixerControlVtable* do
     GUID = LibC::GUID.new(0x1c1a17b0_u32, 0xbed0_u16, 0x415d_u16, StaticArray[0x97_u8, 0x4b_u8, 0xdc_u8, 0x66_u8, 0x96_u8, 0x13_u8, 0x15_u8, 0x99_u8])
     def query_interface(this : IVMRMixerControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12940,7 +12940,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRMonitorConfigVtbl,
+  record IVMRMonitorConfigVtable,
     query_interface : Proc(IVMRMonitorConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRMonitorConfig*, UInt32),
     release : Proc(IVMRMonitorConfig*, UInt32),
@@ -12952,7 +12952,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRMonitorConfig, lpVtbl : IVMRMonitorConfigVtbl* do
+  record IVMRMonitorConfig, lpVtbl : IVMRMonitorConfigVtable* do
     GUID = LibC::GUID.new(0x9cf0b1b6_u32, 0xfbaa_u16, 0x4b7f_u16, StaticArray[0x88_u8, 0xcf_u8, 0xcf_u8, 0x1f_u8, 0x13_u8, 0xa_u8, 0xd_u8, 0xce_u8])
     def query_interface(this : IVMRMonitorConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12982,7 +12982,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRFilterConfigVtbl,
+  record IVMRFilterConfigVtable,
     query_interface : Proc(IVMRFilterConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRFilterConfig*, UInt32),
     release : Proc(IVMRFilterConfig*, UInt32),
@@ -12996,7 +12996,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRFilterConfig, lpVtbl : IVMRFilterConfigVtbl* do
+  record IVMRFilterConfig, lpVtbl : IVMRFilterConfigVtable* do
     GUID = LibC::GUID.new(0x9e5530c5_u32, 0x7034_u16, 0x48b4_u16, StaticArray[0xbb_u8, 0x46_u8, 0xb_u8, 0x8a_u8, 0x6e_u8, 0xfc_u8, 0x8e_u8, 0x36_u8])
     def query_interface(this : IVMRFilterConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13032,7 +13032,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRAspectRatioControlVtbl,
+  record IVMRAspectRatioControlVtable,
     query_interface : Proc(IVMRAspectRatioControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRAspectRatioControl*, UInt32),
     release : Proc(IVMRAspectRatioControl*, UInt32),
@@ -13041,7 +13041,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRAspectRatioControl, lpVtbl : IVMRAspectRatioControlVtbl* do
+  record IVMRAspectRatioControl, lpVtbl : IVMRAspectRatioControlVtable* do
     GUID = LibC::GUID.new(0xede80b5c_u32, 0xbad6_u16, 0x4623_u16, StaticArray[0xb5_u8, 0x37_u8, 0x65_u8, 0x58_u8, 0x6c_u8, 0x9f_u8, 0x8d_u8, 0xfd_u8])
     def query_interface(this : IVMRAspectRatioControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13062,7 +13062,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRDeinterlaceControlVtbl,
+  record IVMRDeinterlaceControlVtable,
     query_interface : Proc(IVMRDeinterlaceControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRDeinterlaceControl*, UInt32),
     release : Proc(IVMRDeinterlaceControl*, UInt32),
@@ -13076,7 +13076,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRDeinterlaceControl, lpVtbl : IVMRDeinterlaceControlVtbl* do
+  record IVMRDeinterlaceControl, lpVtbl : IVMRDeinterlaceControlVtable* do
     GUID = LibC::GUID.new(0xbb057577_u32, 0xdb8_u16, 0x4e6a_u16, StaticArray[0x87_u8, 0xa7_u8, 0x1a_u8, 0x8c_u8, 0x9a_u8, 0x50_u8, 0x5a_u8, 0xf_u8])
     def query_interface(this : IVMRDeinterlaceControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13112,7 +13112,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRMixerBitmapVtbl,
+  record IVMRMixerBitmapVtable,
     query_interface : Proc(IVMRMixerBitmap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRMixerBitmap*, UInt32),
     release : Proc(IVMRMixerBitmap*, UInt32),
@@ -13122,7 +13122,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRMixerBitmap, lpVtbl : IVMRMixerBitmapVtbl* do
+  record IVMRMixerBitmap, lpVtbl : IVMRMixerBitmapVtable* do
     GUID = LibC::GUID.new(0x1e673275_u32, 0x257_u16, 0x40aa_u16, StaticArray[0xaf_u8, 0x20_u8, 0x7c_u8, 0x60_u8, 0x8d_u8, 0x4a_u8, 0x4_u8, 0x28_u8])
     def query_interface(this : IVMRMixerBitmap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13146,7 +13146,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRImageCompositorVtbl,
+  record IVMRImageCompositorVtable,
     query_interface : Proc(IVMRImageCompositor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRImageCompositor*, UInt32),
     release : Proc(IVMRImageCompositor*, UInt32),
@@ -13157,7 +13157,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRImageCompositor, lpVtbl : IVMRImageCompositorVtbl* do
+  record IVMRImageCompositor, lpVtbl : IVMRImageCompositorVtable* do
     GUID = LibC::GUID.new(0x7a4fb5af_u32, 0x479f_u16, 0x4074_u16, StaticArray[0xbb_u8, 0x40_u8, 0xce_u8, 0x67_u8, 0x22_u8, 0xe4_u8, 0x3c_u8, 0x82_u8])
     def query_interface(this : IVMRImageCompositor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13184,7 +13184,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRVideoStreamControlVtbl,
+  record IVMRVideoStreamControlVtable,
     query_interface : Proc(IVMRVideoStreamControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRVideoStreamControl*, UInt32),
     release : Proc(IVMRVideoStreamControl*, UInt32),
@@ -13195,7 +13195,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRVideoStreamControl, lpVtbl : IVMRVideoStreamControlVtbl* do
+  record IVMRVideoStreamControl, lpVtbl : IVMRVideoStreamControlVtable* do
     GUID = LibC::GUID.new(0x58d1f11_u32, 0x2a54_u16, 0x4bef_u16, StaticArray[0xbd_u8, 0x54_u8, 0xdf_u8, 0x70_u8, 0x66_u8, 0x26_u8, 0xb7_u8, 0x27_u8])
     def query_interface(this : IVMRVideoStreamControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13222,7 +13222,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRSurfaceVtbl,
+  record IVMRSurfaceVtable,
     query_interface : Proc(IVMRSurface*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRSurface*, UInt32),
     release : Proc(IVMRSurface*, UInt32),
@@ -13233,7 +13233,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRSurface, lpVtbl : IVMRSurfaceVtbl* do
+  record IVMRSurface, lpVtbl : IVMRSurfaceVtable* do
     GUID = LibC::GUID.new(0xa9849bbe_u32, 0x9ec8_u16, 0x4263_u16, StaticArray[0xb7_u8, 0x64_u8, 0x62_u8, 0x73_u8, 0xf_u8, 0xd_u8, 0x15_u8, 0xd0_u8])
     def query_interface(this : IVMRSurface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13260,7 +13260,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRImagePresenterConfigVtbl,
+  record IVMRImagePresenterConfigVtable,
     query_interface : Proc(IVMRImagePresenterConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRImagePresenterConfig*, UInt32),
     release : Proc(IVMRImagePresenterConfig*, UInt32),
@@ -13269,7 +13269,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRImagePresenterConfig, lpVtbl : IVMRImagePresenterConfigVtbl* do
+  record IVMRImagePresenterConfig, lpVtbl : IVMRImagePresenterConfigVtable* do
     GUID = LibC::GUID.new(0x9f3a1c85_u32, 0x8555_u16, 0x49ba_u16, StaticArray[0x93_u8, 0x5f_u8, 0xbe_u8, 0x5b_u8, 0x5b_u8, 0x29_u8, 0xd1_u8, 0x78_u8])
     def query_interface(this : IVMRImagePresenterConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13290,7 +13290,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRImagePresenterExclModeConfigVtbl,
+  record IVMRImagePresenterExclModeConfigVtable,
     query_interface : Proc(IVMRImagePresenterExclModeConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRImagePresenterExclModeConfig*, UInt32),
     release : Proc(IVMRImagePresenterExclModeConfig*, UInt32),
@@ -13301,7 +13301,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRImagePresenterExclModeConfig, lpVtbl : IVMRImagePresenterExclModeConfigVtbl* do
+  record IVMRImagePresenterExclModeConfig, lpVtbl : IVMRImagePresenterExclModeConfigVtable* do
     GUID = LibC::GUID.new(0xe6f7ce40_u32, 0x4673_u16, 0x44f1_u16, StaticArray[0x8f_u8, 0x77_u8, 0x54_u8, 0x99_u8, 0xd6_u8, 0x8c_u8, 0xb4_u8, 0xea_u8])
     def query_interface(this : IVMRImagePresenterExclModeConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13328,7 +13328,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVPManagerVtbl,
+  record IVPManagerVtable,
     query_interface : Proc(IVPManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVPManager*, UInt32),
     release : Proc(IVPManager*, UInt32),
@@ -13337,7 +13337,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVPManager, lpVtbl : IVPManagerVtbl* do
+  record IVPManager, lpVtbl : IVPManagerVtable* do
     GUID = LibC::GUID.new(0xaac18c18_u32, 0xe186_u16, 0x46d2_u16, StaticArray[0x82_u8, 0x5d_u8, 0xa1_u8, 0xf8_u8, 0xdc_u8, 0x8e_u8, 0x39_u8, 0x5a_u8])
     def query_interface(this : IVPManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13358,7 +13358,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvdControlVtbl,
+  record IDvdControlVtable,
     query_interface : Proc(IDvdControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvdControl*, UInt32),
     release : Proc(IDvdControl*, UInt32),
@@ -13400,7 +13400,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvdControl, lpVtbl : IDvdControlVtbl* do
+  record IDvdControl, lpVtbl : IDvdControlVtable* do
     GUID = LibC::GUID.new(0xa70efe61_u32, 0xe2a3_u16, 0x11d0_u16, StaticArray[0xa9_u8, 0xbe_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x61_u8, 0xbe_u8, 0x93_u8])
     def query_interface(this : IDvdControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13520,7 +13520,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvdInfoVtbl,
+  record IDvdInfoVtable,
     query_interface : Proc(IDvdInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvdInfo*, UInt32),
     release : Proc(IDvdInfo*, UInt32),
@@ -13550,7 +13550,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvdInfo, lpVtbl : IDvdInfoVtbl* do
+  record IDvdInfo, lpVtbl : IDvdInfoVtable* do
     GUID = LibC::GUID.new(0xa70efe60_u32, 0xe2a3_u16, 0x11d0_u16, StaticArray[0xa9_u8, 0xbe_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x61_u8, 0xbe_u8, 0x93_u8])
     def query_interface(this : IDvdInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13634,7 +13634,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvdCmdVtbl,
+  record IDvdCmdVtable,
     query_interface : Proc(IDvdCmd*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvdCmd*, UInt32),
     release : Proc(IDvdCmd*, UInt32),
@@ -13643,7 +13643,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvdCmd, lpVtbl : IDvdCmdVtbl* do
+  record IDvdCmd, lpVtbl : IDvdCmdVtable* do
     GUID = LibC::GUID.new(0x5a4a97e4_u32, 0x94ee_u16, 0x4a55_u16, StaticArray[0x97_u8, 0x51_u8, 0x74_u8, 0xb5_u8, 0x64_u8, 0x3a_u8, 0xa2_u8, 0x7d_u8])
     def query_interface(this : IDvdCmd*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13664,7 +13664,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvdStateVtbl,
+  record IDvdStateVtable,
     query_interface : Proc(IDvdState*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvdState*, UInt32),
     release : Proc(IDvdState*, UInt32),
@@ -13673,7 +13673,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvdState, lpVtbl : IDvdStateVtbl* do
+  record IDvdState, lpVtbl : IDvdStateVtable* do
     GUID = LibC::GUID.new(0x86303d6d_u32, 0x1c4a_u16, 0x4087_u16, StaticArray[0xab_u8, 0x42_u8, 0xf7_u8, 0x11_u8, 0x16_u8, 0x70_u8, 0x48_u8, 0xef_u8])
     def query_interface(this : IDvdState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13694,7 +13694,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvdControl2Vtbl,
+  record IDvdControl2Vtable,
     query_interface : Proc(IDvdControl2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvdControl2*, UInt32),
     release : Proc(IDvdControl2*, UInt32),
@@ -13741,7 +13741,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvdControl2, lpVtbl : IDvdControl2Vtbl* do
+  record IDvdControl2, lpVtbl : IDvdControl2Vtable* do
     GUID = LibC::GUID.new(0x33bc7430_u32, 0xeec0_u16, 0x11d2_u16, StaticArray[0x82_u8, 0x1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd7_u8, 0x48_u8, 0x42_u8])
     def query_interface(this : IDvdControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13876,7 +13876,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvdInfo2Vtbl,
+  record IDvdInfo2Vtable,
     query_interface : Proc(IDvdInfo2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvdInfo2*, UInt32),
     release : Proc(IDvdInfo2*, UInt32),
@@ -13922,7 +13922,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvdInfo2, lpVtbl : IDvdInfo2Vtbl* do
+  record IDvdInfo2, lpVtbl : IDvdInfo2Vtable* do
     GUID = LibC::GUID.new(0x34151510_u32, 0xeec0_u16, 0x11d2_u16, StaticArray[0x82_u8, 0x1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd7_u8, 0x48_u8, 0x42_u8])
     def query_interface(this : IDvdInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14054,7 +14054,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvdGraphBuilderVtbl,
+  record IDvdGraphBuilderVtable,
     query_interface : Proc(IDvdGraphBuilder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvdGraphBuilder*, UInt32),
     release : Proc(IDvdGraphBuilder*, UInt32),
@@ -14064,7 +14064,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvdGraphBuilder, lpVtbl : IDvdGraphBuilderVtbl* do
+  record IDvdGraphBuilder, lpVtbl : IDvdGraphBuilderVtable* do
     GUID = LibC::GUID.new(0xfcc152b6_u32, 0xf372_u16, 0x11d0_u16, StaticArray[0x8e_u8, 0x0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xc0_u8, 0x8b_u8])
     def query_interface(this : IDvdGraphBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14088,7 +14088,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDDrawExclModeVideoVtbl,
+  record IDDrawExclModeVideoVtable,
     query_interface : Proc(IDDrawExclModeVideo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDDrawExclModeVideo*, UInt32),
     release : Proc(IDDrawExclModeVideo*, UInt32),
@@ -14102,7 +14102,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDDrawExclModeVideo, lpVtbl : IDDrawExclModeVideoVtbl* do
+  record IDDrawExclModeVideo, lpVtbl : IDDrawExclModeVideoVtable* do
     GUID = LibC::GUID.new(0x153acc21_u32, 0xd83b_u16, 0x11d1_u16, StaticArray[0x82_u8, 0xbf_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x69_u8, 0x6c_u8, 0x8f_u8])
     def query_interface(this : IDDrawExclModeVideo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14138,7 +14138,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDDrawExclModeVideoCallbackVtbl,
+  record IDDrawExclModeVideoCallbackVtable,
     query_interface : Proc(IDDrawExclModeVideoCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDDrawExclModeVideoCallback*, UInt32),
     release : Proc(IDDrawExclModeVideoCallback*, UInt32),
@@ -14148,7 +14148,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDDrawExclModeVideoCallback, lpVtbl : IDDrawExclModeVideoCallbackVtbl* do
+  record IDDrawExclModeVideoCallback, lpVtbl : IDDrawExclModeVideoCallbackVtable* do
     GUID = LibC::GUID.new(0x913c24a0_u32, 0x20ab_u16, 0x11d2_u16, StaticArray[0x90_u8, 0x38_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x69_u8, 0x72_u8, 0x98_u8])
     def query_interface(this : IDDrawExclModeVideoCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14172,7 +14172,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_NetworkProviderVtbl,
+  record IBDA_NetworkProviderVtable,
     query_interface : Proc(IBDA_NetworkProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_NetworkProvider*, UInt32),
     release : Proc(IBDA_NetworkProvider*, UInt32),
@@ -14186,7 +14186,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_NetworkProvider, lpVtbl : IBDA_NetworkProviderVtbl* do
+  record IBDA_NetworkProvider, lpVtbl : IBDA_NetworkProviderVtable* do
     GUID = LibC::GUID.new(0xfd501041_u32, 0x8ebe_u16, 0x11ce_u16, StaticArray[0x81_u8, 0x83_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x57_u8, 0x7d_u8, 0xa2_u8])
     def query_interface(this : IBDA_NetworkProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14222,7 +14222,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_EthernetFilterVtbl,
+  record IBDA_EthernetFilterVtable,
     query_interface : Proc(IBDA_EthernetFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_EthernetFilter*, UInt32),
     release : Proc(IBDA_EthernetFilter*, UInt32),
@@ -14234,7 +14234,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_EthernetFilter, lpVtbl : IBDA_EthernetFilterVtbl* do
+  record IBDA_EthernetFilter, lpVtbl : IBDA_EthernetFilterVtable* do
     GUID = LibC::GUID.new(0x71985f43_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
     def query_interface(this : IBDA_EthernetFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14264,7 +14264,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_IPV4FilterVtbl,
+  record IBDA_IPV4FilterVtable,
     query_interface : Proc(IBDA_IPV4Filter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_IPV4Filter*, UInt32),
     release : Proc(IBDA_IPV4Filter*, UInt32),
@@ -14276,7 +14276,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_IPV4Filter, lpVtbl : IBDA_IPV4FilterVtbl* do
+  record IBDA_IPV4Filter, lpVtbl : IBDA_IPV4FilterVtable* do
     GUID = LibC::GUID.new(0x71985f44_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
     def query_interface(this : IBDA_IPV4Filter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14306,7 +14306,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_IPV6FilterVtbl,
+  record IBDA_IPV6FilterVtable,
     query_interface : Proc(IBDA_IPV6Filter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_IPV6Filter*, UInt32),
     release : Proc(IBDA_IPV6Filter*, UInt32),
@@ -14318,7 +14318,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_IPV6Filter, lpVtbl : IBDA_IPV6FilterVtbl* do
+  record IBDA_IPV6Filter, lpVtbl : IBDA_IPV6FilterVtable* do
     GUID = LibC::GUID.new(0xe1785a74_u32, 0x2a23_u16, 0x4fb3_u16, StaticArray[0x92_u8, 0x45_u8, 0xa8_u8, 0xf8_u8, 0x80_u8, 0x17_u8, 0xef_u8, 0x33_u8])
     def query_interface(this : IBDA_IPV6Filter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14348,7 +14348,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_DeviceControlVtbl,
+  record IBDA_DeviceControlVtable,
     query_interface : Proc(IBDA_DeviceControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_DeviceControl*, UInt32),
     release : Proc(IBDA_DeviceControl*, UInt32),
@@ -14359,7 +14359,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_DeviceControl, lpVtbl : IBDA_DeviceControlVtbl* do
+  record IBDA_DeviceControl, lpVtbl : IBDA_DeviceControlVtable* do
     GUID = LibC::GUID.new(0xfd0a5af3_u32, 0xb41d_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0x95_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
     def query_interface(this : IBDA_DeviceControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14386,7 +14386,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_PinControlVtbl,
+  record IBDA_PinControlVtable,
     query_interface : Proc(IBDA_PinControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_PinControl*, UInt32),
     release : Proc(IBDA_PinControl*, UInt32),
@@ -14396,7 +14396,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_PinControl, lpVtbl : IBDA_PinControlVtbl* do
+  record IBDA_PinControl, lpVtbl : IBDA_PinControlVtable* do
     GUID = LibC::GUID.new(0xded49d5_u32, 0xa8b7_u16, 0x4d5d_u16, StaticArray[0x97_u8, 0xa1_u8, 0x12_u8, 0xb0_u8, 0xc1_u8, 0x95_u8, 0x87_u8, 0x4d_u8])
     def query_interface(this : IBDA_PinControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14420,7 +14420,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_SignalPropertiesVtbl,
+  record IBDA_SignalPropertiesVtable,
     query_interface : Proc(IBDA_SignalProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_SignalProperties*, UInt32),
     release : Proc(IBDA_SignalProperties*, UInt32),
@@ -14433,7 +14433,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_SignalProperties, lpVtbl : IBDA_SignalPropertiesVtbl* do
+  record IBDA_SignalProperties, lpVtbl : IBDA_SignalPropertiesVtable* do
     GUID = LibC::GUID.new(0xd2f1644b_u32, 0xb409_u16, 0x11d2_u16, StaticArray[0xbc_u8, 0x69_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xee_u8, 0x9e_u8, 0x16_u8])
     def query_interface(this : IBDA_SignalProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14466,7 +14466,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_SignalStatisticsVtbl,
+  record IBDA_SignalStatisticsVtable,
     query_interface : Proc(IBDA_SignalStatistics*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_SignalStatistics*, UInt32),
     release : Proc(IBDA_SignalStatistics*, UInt32),
@@ -14483,7 +14483,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_SignalStatistics, lpVtbl : IBDA_SignalStatisticsVtbl* do
+  record IBDA_SignalStatistics, lpVtbl : IBDA_SignalStatisticsVtable* do
     GUID = LibC::GUID.new(0x1347d106_u32, 0xcf3a_u16, 0x428a_u16, StaticArray[0xa5_u8, 0xcb_u8, 0xac_u8, 0xd_u8, 0x9a_u8, 0x2a_u8, 0x43_u8, 0x38_u8])
     def query_interface(this : IBDA_SignalStatistics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14528,7 +14528,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_TopologyVtbl,
+  record IBDA_TopologyVtable,
     query_interface : Proc(IBDA_Topology*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_Topology*, UInt32),
     release : Proc(IBDA_Topology*, UInt32),
@@ -14546,7 +14546,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_Topology, lpVtbl : IBDA_TopologyVtbl* do
+  record IBDA_Topology, lpVtbl : IBDA_TopologyVtable* do
     GUID = LibC::GUID.new(0x79b56888_u32, 0x7fea_u16, 0x4690_u16, StaticArray[0xb4_u8, 0x5d_u8, 0x38_u8, 0xfd_u8, 0x3c_u8, 0x78_u8, 0x49_u8, 0xbe_u8])
     def query_interface(this : IBDA_Topology*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14594,7 +14594,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_VoidTransformVtbl,
+  record IBDA_VoidTransformVtable,
     query_interface : Proc(IBDA_VoidTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_VoidTransform*, UInt32),
     release : Proc(IBDA_VoidTransform*, UInt32),
@@ -14603,7 +14603,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_VoidTransform, lpVtbl : IBDA_VoidTransformVtbl* do
+  record IBDA_VoidTransform, lpVtbl : IBDA_VoidTransformVtable* do
     GUID = LibC::GUID.new(0x71985f46_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
     def query_interface(this : IBDA_VoidTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14624,7 +14624,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_NullTransformVtbl,
+  record IBDA_NullTransformVtable,
     query_interface : Proc(IBDA_NullTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_NullTransform*, UInt32),
     release : Proc(IBDA_NullTransform*, UInt32),
@@ -14633,7 +14633,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_NullTransform, lpVtbl : IBDA_NullTransformVtbl* do
+  record IBDA_NullTransform, lpVtbl : IBDA_NullTransformVtable* do
     GUID = LibC::GUID.new(0xddf15b0d_u32, 0xbd25_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xa0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
     def query_interface(this : IBDA_NullTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14654,7 +14654,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_FrequencyFilterVtbl,
+  record IBDA_FrequencyFilterVtable,
     query_interface : Proc(IBDA_FrequencyFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_FrequencyFilter*, UInt32),
     release : Proc(IBDA_FrequencyFilter*, UInt32),
@@ -14673,7 +14673,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_FrequencyFilter, lpVtbl : IBDA_FrequencyFilterVtbl* do
+  record IBDA_FrequencyFilter, lpVtbl : IBDA_FrequencyFilterVtable* do
     GUID = LibC::GUID.new(0x71985f47_u32, 0x1ca1_u16, 0x11d3_u16, StaticArray[0x9c_u8, 0xc8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
     def query_interface(this : IBDA_FrequencyFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14724,7 +14724,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_LNBInfoVtbl,
+  record IBDA_LNBInfoVtable,
     query_interface : Proc(IBDA_LNBInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_LNBInfo*, UInt32),
     release : Proc(IBDA_LNBInfo*, UInt32),
@@ -14737,7 +14737,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_LNBInfo, lpVtbl : IBDA_LNBInfoVtbl* do
+  record IBDA_LNBInfo, lpVtbl : IBDA_LNBInfoVtable* do
     GUID = LibC::GUID.new(0x992cf102_u32, 0x49f9_u16, 0x4719_u16, StaticArray[0xa6_u8, 0x64_u8, 0xc4_u8, 0xf2_u8, 0x3e_u8, 0x24_u8, 0x8_u8, 0xf4_u8])
     def query_interface(this : IBDA_LNBInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14770,7 +14770,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_DiseqCommandVtbl,
+  record IBDA_DiseqCommandVtable,
     query_interface : Proc(IBDA_DiseqCommand*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_DiseqCommand*, UInt32),
     release : Proc(IBDA_DiseqCommand*, UInt32),
@@ -14783,7 +14783,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_DiseqCommand, lpVtbl : IBDA_DiseqCommandVtbl* do
+  record IBDA_DiseqCommand, lpVtbl : IBDA_DiseqCommandVtable* do
     GUID = LibC::GUID.new(0xf84e2ab0_u32, 0x3c6b_u16, 0x45e3_u16, StaticArray[0xa0_u8, 0xfc_u8, 0x86_u8, 0x69_u8, 0xd4_u8, 0xb8_u8, 0x1f_u8, 0x11_u8])
     def query_interface(this : IBDA_DiseqCommand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14816,7 +14816,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_AutoDemodulateVtbl,
+  record IBDA_AutoDemodulateVtable,
     query_interface : Proc(IBDA_AutoDemodulate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_AutoDemodulate*, UInt32),
     release : Proc(IBDA_AutoDemodulate*, UInt32),
@@ -14824,7 +14824,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_AutoDemodulate, lpVtbl : IBDA_AutoDemodulateVtbl* do
+  record IBDA_AutoDemodulate, lpVtbl : IBDA_AutoDemodulateVtable* do
     GUID = LibC::GUID.new(0xddf15b12_u32, 0xbd25_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xa0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe0_u8])
     def query_interface(this : IBDA_AutoDemodulate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14842,7 +14842,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_AutoDemodulateExVtbl,
+  record IBDA_AutoDemodulateExVtable,
     query_interface : Proc(IBDA_AutoDemodulateEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_AutoDemodulateEx*, UInt32),
     release : Proc(IBDA_AutoDemodulateEx*, UInt32),
@@ -14853,7 +14853,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_AutoDemodulateEx, lpVtbl : IBDA_AutoDemodulateExVtbl* do
+  record IBDA_AutoDemodulateEx, lpVtbl : IBDA_AutoDemodulateExVtable* do
     GUID = LibC::GUID.new(0x34518d13_u32, 0x1182_u16, 0x48e6_u16, StaticArray[0xb2_u8, 0x8f_u8, 0xb2_u8, 0x49_u8, 0x87_u8, 0x78_u8, 0x73_u8, 0x26_u8])
     def query_interface(this : IBDA_AutoDemodulateEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14880,7 +14880,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_DigitalDemodulatorVtbl,
+  record IBDA_DigitalDemodulatorVtable,
     query_interface : Proc(IBDA_DigitalDemodulator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_DigitalDemodulator*, UInt32),
     release : Proc(IBDA_DigitalDemodulator*, UInt32),
@@ -14901,7 +14901,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_DigitalDemodulator, lpVtbl : IBDA_DigitalDemodulatorVtbl* do
+  record IBDA_DigitalDemodulator, lpVtbl : IBDA_DigitalDemodulatorVtable* do
     GUID = LibC::GUID.new(0xef30f379_u32, 0x985b_u16, 0x4d10_u16, StaticArray[0xb6_u8, 0x40_u8, 0xa7_u8, 0x9d_u8, 0x5e_u8, 0x4_u8, 0xe1_u8, 0xe0_u8])
     def query_interface(this : IBDA_DigitalDemodulator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14958,7 +14958,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_DigitalDemodulator2Vtbl,
+  record IBDA_DigitalDemodulator2Vtable,
     query_interface : Proc(IBDA_DigitalDemodulator2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_DigitalDemodulator2*, UInt32),
     release : Proc(IBDA_DigitalDemodulator2*, UInt32),
@@ -14987,7 +14987,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_DigitalDemodulator2, lpVtbl : IBDA_DigitalDemodulator2Vtbl* do
+  record IBDA_DigitalDemodulator2, lpVtbl : IBDA_DigitalDemodulator2Vtable* do
     GUID = LibC::GUID.new(0x525ed3ee_u32, 0x5cf3_u16, 0x4e1e_u16, StaticArray[0x9a_u8, 0x6_u8, 0x53_u8, 0x68_u8, 0xa8_u8, 0x4f_u8, 0x9a_u8, 0x6e_u8])
     def query_interface(this : IBDA_DigitalDemodulator2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15068,7 +15068,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_DigitalDemodulator3Vtbl,
+  record IBDA_DigitalDemodulator3Vtable,
     query_interface : Proc(IBDA_DigitalDemodulator3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_DigitalDemodulator3*, UInt32),
     release : Proc(IBDA_DigitalDemodulator3*, UInt32),
@@ -15101,7 +15101,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_DigitalDemodulator3, lpVtbl : IBDA_DigitalDemodulator3Vtbl* do
+  record IBDA_DigitalDemodulator3, lpVtbl : IBDA_DigitalDemodulator3Vtable* do
     GUID = LibC::GUID.new(0x13f19604_u32, 0x7d32_u16, 0x4359_u16, StaticArray[0x93_u8, 0xa2_u8, 0xa0_u8, 0x52_u8, 0x5_u8, 0xd9_u8, 0xa_u8, 0xc9_u8])
     def query_interface(this : IBDA_DigitalDemodulator3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15194,7 +15194,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ICCSubStreamFilteringVtbl,
+  record ICCSubStreamFilteringVtable,
     query_interface : Proc(ICCSubStreamFiltering*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICCSubStreamFiltering*, UInt32),
     release : Proc(ICCSubStreamFiltering*, UInt32),
@@ -15203,7 +15203,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ICCSubStreamFiltering, lpVtbl : ICCSubStreamFilteringVtbl* do
+  record ICCSubStreamFiltering, lpVtbl : ICCSubStreamFilteringVtable* do
     GUID = LibC::GUID.new(0x4b2bd7ea_u32, 0x8347_u16, 0x467b_u16, StaticArray[0x8d_u8, 0xbf_u8, 0x62_u8, 0xf7_u8, 0x84_u8, 0x92_u8, 0x9c_u8, 0xc3_u8])
     def query_interface(this : ICCSubStreamFiltering*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15224,7 +15224,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_IPSinkControlVtbl,
+  record IBDA_IPSinkControlVtable,
     query_interface : Proc(IBDA_IPSinkControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_IPSinkControl*, UInt32),
     release : Proc(IBDA_IPSinkControl*, UInt32),
@@ -15233,7 +15233,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_IPSinkControl, lpVtbl : IBDA_IPSinkControlVtbl* do
+  record IBDA_IPSinkControl, lpVtbl : IBDA_IPSinkControlVtable* do
     GUID = LibC::GUID.new(0x3f4dc8e2_u32, 0x4050_u16, 0x11d3_u16, StaticArray[0x8f_u8, 0x4b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xe2_u8])
     def query_interface(this : IBDA_IPSinkControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15254,7 +15254,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_IPSinkInfoVtbl,
+  record IBDA_IPSinkInfoVtable,
     query_interface : Proc(IBDA_IPSinkInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_IPSinkInfo*, UInt32),
     release : Proc(IBDA_IPSinkInfo*, UInt32),
@@ -15264,7 +15264,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_IPSinkInfo, lpVtbl : IBDA_IPSinkInfoVtbl* do
+  record IBDA_IPSinkInfo, lpVtbl : IBDA_IPSinkInfoVtable* do
     GUID = LibC::GUID.new(0xa750108f_u32, 0x492e_u16, 0x4d51_u16, StaticArray[0x95_u8, 0xf7_u8, 0x64_u8, 0x9b_u8, 0x23_u8, 0xff_u8, 0x7a_u8, 0xd7_u8])
     def query_interface(this : IBDA_IPSinkInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15288,7 +15288,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IEnumPIDMapVtbl,
+  record IEnumPIDMapVtable,
     query_interface : Proc(IEnumPIDMap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumPIDMap*, UInt32),
     release : Proc(IEnumPIDMap*, UInt32),
@@ -15299,7 +15299,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IEnumPIDMap, lpVtbl : IEnumPIDMapVtbl* do
+  record IEnumPIDMap, lpVtbl : IEnumPIDMapVtable* do
     GUID = LibC::GUID.new(0xafb6c2a2_u32, 0x2c41_u16, 0x11d3_u16, StaticArray[0x8a_u8, 0x60_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x1e_u8, 0xe_u8, 0x4a_u8])
     def query_interface(this : IEnumPIDMap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15326,7 +15326,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMPEG2PIDMapVtbl,
+  record IMPEG2PIDMapVtable,
     query_interface : Proc(IMPEG2PIDMap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMPEG2PIDMap*, UInt32),
     release : Proc(IMPEG2PIDMap*, UInt32),
@@ -15336,7 +15336,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMPEG2PIDMap, lpVtbl : IMPEG2PIDMapVtbl* do
+  record IMPEG2PIDMap, lpVtbl : IMPEG2PIDMapVtable* do
     GUID = LibC::GUID.new(0xafb6c2a1_u32, 0x2c41_u16, 0x11d3_u16, StaticArray[0x8a_u8, 0x60_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x1e_u8, 0xe_u8, 0x4a_u8])
     def query_interface(this : IMPEG2PIDMap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15360,7 +15360,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IFrequencyMapVtbl,
+  record IFrequencyMapVtable,
     query_interface : Proc(IFrequencyMap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFrequencyMap*, UInt32),
     release : Proc(IFrequencyMap*, UInt32),
@@ -15373,7 +15373,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IFrequencyMap, lpVtbl : IFrequencyMapVtbl* do
+  record IFrequencyMap, lpVtbl : IFrequencyMapVtable* do
     GUID = LibC::GUID.new(0x6fb45c1_u32, 0x693c_u16, 0x4ea7_u16, StaticArray[0xb7_u8, 0x9f_u8, 0x7a_u8, 0x6a_u8, 0x54_u8, 0xd8_u8, 0xde_u8, 0xf2_u8])
     def query_interface(this : IFrequencyMap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15406,7 +15406,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_EasMessageVtbl,
+  record IBDA_EasMessageVtable,
     query_interface : Proc(IBDA_EasMessage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_EasMessage*, UInt32),
     release : Proc(IBDA_EasMessage*, UInt32),
@@ -15414,7 +15414,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_EasMessage, lpVtbl : IBDA_EasMessageVtbl* do
+  record IBDA_EasMessage, lpVtbl : IBDA_EasMessageVtable* do
     GUID = LibC::GUID.new(0xd806973d_u32, 0x3ebe_u16, 0x46de_u16, StaticArray[0x8f_u8, 0xbb_u8, 0x63_u8, 0x58_u8, 0xfe_u8, 0x78_u8, 0x42_u8, 0x8_u8])
     def query_interface(this : IBDA_EasMessage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15432,7 +15432,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_TransportStreamInfoVtbl,
+  record IBDA_TransportStreamInfoVtable,
     query_interface : Proc(IBDA_TransportStreamInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_TransportStreamInfo*, UInt32),
     release : Proc(IBDA_TransportStreamInfo*, UInt32),
@@ -15440,7 +15440,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_TransportStreamInfo, lpVtbl : IBDA_TransportStreamInfoVtbl* do
+  record IBDA_TransportStreamInfo, lpVtbl : IBDA_TransportStreamInfoVtable* do
     GUID = LibC::GUID.new(0x8e882535_u32, 0x5f86_u16, 0x47ab_u16, StaticArray[0x86_u8, 0xcf_u8, 0xc2_u8, 0x81_u8, 0xa7_u8, 0x2a_u8, 0x5_u8, 0x49_u8])
     def query_interface(this : IBDA_TransportStreamInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15458,7 +15458,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_ConditionalAccessVtbl,
+  record IBDA_ConditionalAccessVtable,
     query_interface : Proc(IBDA_ConditionalAccess*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_ConditionalAccess*, UInt32),
     release : Proc(IBDA_ConditionalAccess*, UInt32),
@@ -15475,7 +15475,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_ConditionalAccess, lpVtbl : IBDA_ConditionalAccessVtbl* do
+  record IBDA_ConditionalAccess, lpVtbl : IBDA_ConditionalAccessVtable* do
     GUID = LibC::GUID.new(0xcd51f1e0_u32, 0x7be9_u16, 0x4123_u16, StaticArray[0x84_u8, 0x82_u8, 0xa2_u8, 0xa7_u8, 0x96_u8, 0xc0_u8, 0xa6_u8, 0xb0_u8])
     def query_interface(this : IBDA_ConditionalAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15520,7 +15520,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_DiagnosticPropertiesVtbl,
+  record IBDA_DiagnosticPropertiesVtable,
     query_interface : Proc(IBDA_DiagnosticProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_DiagnosticProperties*, UInt32),
     release : Proc(IBDA_DiagnosticProperties*, UInt32),
@@ -15529,7 +15529,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_DiagnosticProperties, lpVtbl : IBDA_DiagnosticPropertiesVtbl* do
+  record IBDA_DiagnosticProperties, lpVtbl : IBDA_DiagnosticPropertiesVtable* do
     GUID = LibC::GUID.new(0x20e80cb5_u32, 0xc543_u16, 0x4c1b_u16, StaticArray[0x8e_u8, 0xb3_u8, 0x49_u8, 0xe7_u8, 0x19_u8, 0xee_u8, 0xe7_u8, 0xd4_u8])
     def query_interface(this : IBDA_DiagnosticProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15550,7 +15550,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_DRMVtbl,
+  record IBDA_DRMVtable,
     query_interface : Proc(IBDA_DRM*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_DRM*, UInt32),
     release : Proc(IBDA_DRM*, UInt32),
@@ -15559,7 +15559,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_DRM, lpVtbl : IBDA_DRMVtbl* do
+  record IBDA_DRM, lpVtbl : IBDA_DRMVtable* do
     GUID = LibC::GUID.new(0xf98d88b0_u32, 0x1992_u16, 0x4cd6_u16, StaticArray[0xa6_u8, 0xd9_u8, 0xb9_u8, 0xaf_u8, 0xab_u8, 0x99_u8, 0x33_u8, 0xd_u8])
     def query_interface(this : IBDA_DRM*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15580,7 +15580,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_NameValueServiceVtbl,
+  record IBDA_NameValueServiceVtable,
     query_interface : Proc(IBDA_NameValueService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_NameValueService*, UInt32),
     release : Proc(IBDA_NameValueService*, UInt32),
@@ -15590,7 +15590,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_NameValueService, lpVtbl : IBDA_NameValueServiceVtbl* do
+  record IBDA_NameValueService, lpVtbl : IBDA_NameValueServiceVtable* do
     GUID = LibC::GUID.new(0x7f0b3150_u32, 0x7b81_u16, 0x4ad4_u16, StaticArray[0x98_u8, 0xe3_u8, 0x7e_u8, 0x90_u8, 0x97_u8, 0x9_u8, 0x43_u8, 0x1_u8])
     def query_interface(this : IBDA_NameValueService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15614,7 +15614,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_ConditionalAccessExVtbl,
+  record IBDA_ConditionalAccessExVtable,
     query_interface : Proc(IBDA_ConditionalAccessEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_ConditionalAccessEx*, UInt32),
     release : Proc(IBDA_ConditionalAccessEx*, UInt32),
@@ -15626,7 +15626,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_ConditionalAccessEx, lpVtbl : IBDA_ConditionalAccessExVtbl* do
+  record IBDA_ConditionalAccessEx, lpVtbl : IBDA_ConditionalAccessExVtable* do
     GUID = LibC::GUID.new(0x497c3418_u32, 0x23cb_u16, 0x44ba_u16, StaticArray[0xbb_u8, 0x62_u8, 0x76_u8, 0x9f_u8, 0x50_u8, 0x6f_u8, 0xce_u8, 0xa7_u8])
     def query_interface(this : IBDA_ConditionalAccessEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15656,7 +15656,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_ISDBConditionalAccessVtbl,
+  record IBDA_ISDBConditionalAccessVtable,
     query_interface : Proc(IBDA_ISDBConditionalAccess*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_ISDBConditionalAccess*, UInt32),
     release : Proc(IBDA_ISDBConditionalAccess*, UInt32),
@@ -15664,7 +15664,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_ISDBConditionalAccess, lpVtbl : IBDA_ISDBConditionalAccessVtbl* do
+  record IBDA_ISDBConditionalAccess, lpVtbl : IBDA_ISDBConditionalAccessVtable* do
     GUID = LibC::GUID.new(0x5e68c627_u32, 0x16c2_u16, 0x4e6c_u16, StaticArray[0xb1_u8, 0xe2_u8, 0xd0_u8, 0x1_u8, 0x70_u8, 0xcd_u8, 0xaa_u8, 0xf_u8])
     def query_interface(this : IBDA_ISDBConditionalAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15682,7 +15682,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_EventingServiceVtbl,
+  record IBDA_EventingServiceVtable,
     query_interface : Proc(IBDA_EventingService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_EventingService*, UInt32),
     release : Proc(IBDA_EventingService*, UInt32),
@@ -15690,7 +15690,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_EventingService, lpVtbl : IBDA_EventingServiceVtbl* do
+  record IBDA_EventingService, lpVtbl : IBDA_EventingServiceVtable* do
     GUID = LibC::GUID.new(0x207c413f_u32, 0xdc_u16, 0x4c61_u16, StaticArray[0xba_u8, 0xd6_u8, 0x6f_u8, 0xee_u8, 0x1f_u8, 0xf0_u8, 0x70_u8, 0x64_u8])
     def query_interface(this : IBDA_EventingService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15708,7 +15708,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_AUXVtbl,
+  record IBDA_AUXVtable,
     query_interface : Proc(IBDA_AUX*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_AUX*, UInt32),
     release : Proc(IBDA_AUX*, UInt32),
@@ -15717,7 +15717,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_AUX, lpVtbl : IBDA_AUXVtbl* do
+  record IBDA_AUX, lpVtbl : IBDA_AUXVtable* do
     GUID = LibC::GUID.new(0x7def4c09_u32, 0x6e66_u16, 0x4567_u16, StaticArray[0xa8_u8, 0x19_u8, 0xf0_u8, 0xe1_u8, 0x7f_u8, 0x4a_u8, 0x81_u8, 0xab_u8])
     def query_interface(this : IBDA_AUX*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15738,7 +15738,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_EncoderVtbl,
+  record IBDA_EncoderVtable,
     query_interface : Proc(IBDA_Encoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_Encoder*, UInt32),
     release : Proc(IBDA_Encoder*, UInt32),
@@ -15750,7 +15750,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_Encoder, lpVtbl : IBDA_EncoderVtbl* do
+  record IBDA_Encoder, lpVtbl : IBDA_EncoderVtable* do
     GUID = LibC::GUID.new(0x3a8bad59_u32, 0x59fe_u16, 0x4559_u16, StaticArray[0xa0_u8, 0xba_u8, 0x39_u8, 0x6c_u8, 0xfa_u8, 0xa9_u8, 0x8a_u8, 0xe3_u8])
     def query_interface(this : IBDA_Encoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15780,7 +15780,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_FDCVtbl,
+  record IBDA_FDCVtable,
     query_interface : Proc(IBDA_FDC*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_FDC*, UInt32),
     release : Proc(IBDA_FDC*, UInt32),
@@ -15794,7 +15794,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_FDC, lpVtbl : IBDA_FDCVtbl* do
+  record IBDA_FDC, lpVtbl : IBDA_FDCVtable* do
     GUID = LibC::GUID.new(0x138adc7e_u32, 0x58ae_u16, 0x437f_u16, StaticArray[0xb0_u8, 0xb4_u8, 0xc9_u8, 0xfe_u8, 0x19_u8, 0xd5_u8, 0xb4_u8, 0xac_u8])
     def query_interface(this : IBDA_FDC*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15830,7 +15830,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_GuideDataDeliveryServiceVtbl,
+  record IBDA_GuideDataDeliveryServiceVtable,
     query_interface : Proc(IBDA_GuideDataDeliveryService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_GuideDataDeliveryService*, UInt32),
     release : Proc(IBDA_GuideDataDeliveryService*, UInt32),
@@ -15843,7 +15843,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_GuideDataDeliveryService, lpVtbl : IBDA_GuideDataDeliveryServiceVtbl* do
+  record IBDA_GuideDataDeliveryService, lpVtbl : IBDA_GuideDataDeliveryServiceVtable* do
     GUID = LibC::GUID.new(0xc0afcb73_u32, 0x23e7_u16, 0x4bc6_u16, StaticArray[0xba_u8, 0xfa_u8, 0xfd_u8, 0xc1_u8, 0x67_u8, 0xb4_u8, 0x71_u8, 0x9f_u8])
     def query_interface(this : IBDA_GuideDataDeliveryService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15876,7 +15876,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_DRMServiceVtbl,
+  record IBDA_DRMServiceVtable,
     query_interface : Proc(IBDA_DRMService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_DRMService*, UInt32),
     release : Proc(IBDA_DRMService*, UInt32),
@@ -15885,7 +15885,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_DRMService, lpVtbl : IBDA_DRMServiceVtbl* do
+  record IBDA_DRMService, lpVtbl : IBDA_DRMServiceVtable* do
     GUID = LibC::GUID.new(0xbff6b5bb_u32, 0xb0ae_u16, 0x484c_u16, StaticArray[0x9d_u8, 0xca_u8, 0x73_u8, 0x52_u8, 0x8f_u8, 0xb0_u8, 0xb4_u8, 0x6e_u8])
     def query_interface(this : IBDA_DRMService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15906,7 +15906,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_WMDRMSessionVtbl,
+  record IBDA_WMDRMSessionVtable,
     query_interface : Proc(IBDA_WMDRMSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_WMDRMSession*, UInt32),
     release : Proc(IBDA_WMDRMSession*, UInt32),
@@ -15921,7 +15921,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_WMDRMSession, lpVtbl : IBDA_WMDRMSessionVtbl* do
+  record IBDA_WMDRMSession, lpVtbl : IBDA_WMDRMSessionVtable* do
     GUID = LibC::GUID.new(0x4be6fa3d_u32, 0x7cd_u16, 0x4139_u16, StaticArray[0x8b_u8, 0x80_u8, 0x8c_u8, 0x18_u8, 0xba_u8, 0x3a_u8, 0xec_u8, 0x88_u8])
     def query_interface(this : IBDA_WMDRMSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15960,7 +15960,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_WMDRMTunerVtbl,
+  record IBDA_WMDRMTunerVtable,
     query_interface : Proc(IBDA_WMDRMTuner*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_WMDRMTuner*, UInt32),
     release : Proc(IBDA_WMDRMTuner*, UInt32),
@@ -15973,7 +15973,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_WMDRMTuner, lpVtbl : IBDA_WMDRMTunerVtbl* do
+  record IBDA_WMDRMTuner, lpVtbl : IBDA_WMDRMTunerVtable* do
     GUID = LibC::GUID.new(0x86d979cf_u32, 0xa8a7_u16, 0x4f94_u16, StaticArray[0xb5_u8, 0xfb_u8, 0x14_u8, 0xc0_u8, 0xac_u8, 0xa6_u8, 0x8f_u8, 0xe6_u8])
     def query_interface(this : IBDA_WMDRMTuner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16006,7 +16006,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_DRIDRMServiceVtbl,
+  record IBDA_DRIDRMServiceVtable,
     query_interface : Proc(IBDA_DRIDRMService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_DRIDRMService*, UInt32),
     release : Proc(IBDA_DRIDRMService*, UInt32),
@@ -16016,7 +16016,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_DRIDRMService, lpVtbl : IBDA_DRIDRMServiceVtbl* do
+  record IBDA_DRIDRMService, lpVtbl : IBDA_DRIDRMServiceVtable* do
     GUID = LibC::GUID.new(0x1f9bc2a5_u32, 0x44a3_u16, 0x4c52_u16, StaticArray[0xaa_u8, 0xb1_u8, 0xb_u8, 0xbc_u8, 0xe5_u8, 0xa1_u8, 0x38_u8, 0x1d_u8])
     def query_interface(this : IBDA_DRIDRMService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16040,7 +16040,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_DRIWMDRMSessionVtbl,
+  record IBDA_DRIWMDRMSessionVtable,
     query_interface : Proc(IBDA_DRIWMDRMSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_DRIWMDRMSession*, UInt32),
     release : Proc(IBDA_DRIWMDRMSession*, UInt32),
@@ -16054,7 +16054,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_DRIWMDRMSession, lpVtbl : IBDA_DRIWMDRMSessionVtbl* do
+  record IBDA_DRIWMDRMSession, lpVtbl : IBDA_DRIWMDRMSessionVtable* do
     GUID = LibC::GUID.new(0x5c690f8_u32, 0x56db_u16, 0x4bb2_u16, StaticArray[0xb0_u8, 0x53_u8, 0x79_u8, 0xc1_u8, 0x20_u8, 0x98_u8, 0xbb_u8, 0x26_u8])
     def query_interface(this : IBDA_DRIWMDRMSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16090,7 +16090,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_MUXVtbl,
+  record IBDA_MUXVtable,
     query_interface : Proc(IBDA_MUX*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_MUX*, UInt32),
     release : Proc(IBDA_MUX*, UInt32),
@@ -16099,7 +16099,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_MUX, lpVtbl : IBDA_MUXVtbl* do
+  record IBDA_MUX, lpVtbl : IBDA_MUXVtable* do
     GUID = LibC::GUID.new(0x942aafec_u32, 0x4c05_u16, 0x4c74_u16, StaticArray[0xb8_u8, 0xeb_u8, 0x87_u8, 0x6_u8, 0xc2_u8, 0xa4_u8, 0x94_u8, 0x3f_u8])
     def query_interface(this : IBDA_MUX*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16120,7 +16120,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_TransportStreamSelectorVtbl,
+  record IBDA_TransportStreamSelectorVtable,
     query_interface : Proc(IBDA_TransportStreamSelector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_TransportStreamSelector*, UInt32),
     release : Proc(IBDA_TransportStreamSelector*, UInt32),
@@ -16129,7 +16129,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_TransportStreamSelector, lpVtbl : IBDA_TransportStreamSelectorVtbl* do
+  record IBDA_TransportStreamSelector, lpVtbl : IBDA_TransportStreamSelectorVtable* do
     GUID = LibC::GUID.new(0x1dcfafe9_u32, 0xb45e_u16, 0x41b3_u16, StaticArray[0xbb_u8, 0x2a_u8, 0x56_u8, 0x1e_u8, 0xb1_u8, 0x29_u8, 0xae_u8, 0x98_u8])
     def query_interface(this : IBDA_TransportStreamSelector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16150,7 +16150,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_UserActivityServiceVtbl,
+  record IBDA_UserActivityServiceVtable,
     query_interface : Proc(IBDA_UserActivityService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_UserActivityService*, UInt32),
     release : Proc(IBDA_UserActivityService*, UInt32),
@@ -16160,7 +16160,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_UserActivityService, lpVtbl : IBDA_UserActivityServiceVtbl* do
+  record IBDA_UserActivityService, lpVtbl : IBDA_UserActivityServiceVtable* do
     GUID = LibC::GUID.new(0x53b14189_u32, 0xe478_u16, 0x4b7a_u16, StaticArray[0xa1_u8, 0xff_u8, 0x50_u8, 0x6d_u8, 0xb4_u8, 0xb9_u8, 0x9d_u8, 0xfe_u8])
     def query_interface(this : IBDA_UserActivityService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16184,7 +16184,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IESEventVtbl,
+  record IESEventVtable,
     query_interface : Proc(IESEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IESEvent*, UInt32),
     release : Proc(IESEvent*, UInt32),
@@ -16196,7 +16196,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IESEvent, lpVtbl : IESEventVtbl* do
+  record IESEvent, lpVtbl : IESEventVtable* do
     GUID = LibC::GUID.new(0x1f0e5357_u32, 0xaf43_u16, 0x44e6_u16, StaticArray[0x85_u8, 0x47_u8, 0x65_u8, 0x4c_u8, 0x64_u8, 0x51_u8, 0x45_u8, 0xd2_u8])
     def query_interface(this : IESEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16226,7 +16226,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IESEventsVtbl,
+  record IESEventsVtable,
     query_interface : Proc(IESEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IESEvents*, UInt32),
     release : Proc(IESEvents*, UInt32),
@@ -16234,7 +16234,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IESEvents, lpVtbl : IESEventsVtbl* do
+  record IESEvents, lpVtbl : IESEventsVtable* do
     GUID = LibC::GUID.new(0xabd414bf_u32, 0xcfe5_u16, 0x4e5e_u16, StaticArray[0xaf_u8, 0x5b_u8, 0x4b_u8, 0x4e_u8, 0x49_u8, 0xc5_u8, 0xbf_u8, 0xeb_u8])
     def query_interface(this : IESEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16252,7 +16252,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBroadcastEventVtbl,
+  record IBroadcastEventVtable,
     query_interface : Proc(IBroadcastEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBroadcastEvent*, UInt32),
     release : Proc(IBroadcastEvent*, UInt32),
@@ -16260,7 +16260,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBroadcastEvent, lpVtbl : IBroadcastEventVtbl* do
+  record IBroadcastEvent, lpVtbl : IBroadcastEventVtable* do
     GUID = LibC::GUID.new(0x3b21263f_u32, 0x26e8_u16, 0x489d_u16, StaticArray[0xaa_u8, 0xc4_u8, 0x92_u8, 0x4f_u8, 0x7e_u8, 0xfd_u8, 0x95_u8, 0x11_u8])
     def query_interface(this : IBroadcastEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16278,7 +16278,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBroadcastEventExVtbl,
+  record IBroadcastEventExVtable,
     query_interface : Proc(IBroadcastEventEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBroadcastEventEx*, UInt32),
     release : Proc(IBroadcastEventEx*, UInt32),
@@ -16287,7 +16287,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBroadcastEventEx, lpVtbl : IBroadcastEventExVtbl* do
+  record IBroadcastEventEx, lpVtbl : IBroadcastEventExVtable* do
     GUID = LibC::GUID.new(0x3d9e3887_u32, 0x1929_u16, 0x423f_u16, StaticArray[0x80_u8, 0x21_u8, 0x43_u8, 0x68_u8, 0x2d_u8, 0xe9_u8, 0x54_u8, 0x48_u8])
     def query_interface(this : IBroadcastEventEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16308,7 +16308,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMNetShowConfigVtbl,
+  record IAMNetShowConfigVtable,
     query_interface : Proc(IAMNetShowConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMNetShowConfig*, UInt32),
     release : Proc(IAMNetShowConfig*, UInt32),
@@ -16341,7 +16341,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMNetShowConfig, lpVtbl : IAMNetShowConfigVtbl* do
+  record IAMNetShowConfig, lpVtbl : IAMNetShowConfigVtable* do
     GUID = LibC::GUID.new(0xfa2aa8f1_u32, 0x8b62_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x20_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IAMNetShowConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16434,7 +16434,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMChannelInfoVtbl,
+  record IAMChannelInfoVtable,
     query_interface : Proc(IAMChannelInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMChannelInfo*, UInt32),
     release : Proc(IAMChannelInfo*, UInt32),
@@ -16451,7 +16451,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMChannelInfo, lpVtbl : IAMChannelInfoVtbl* do
+  record IAMChannelInfo, lpVtbl : IAMChannelInfoVtable* do
     GUID = LibC::GUID.new(0xfa2aa8f2_u32, 0x8b62_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x20_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IAMChannelInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16496,7 +16496,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMNetworkStatusVtbl,
+  record IAMNetworkStatusVtable,
     query_interface : Proc(IAMNetworkStatus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMNetworkStatus*, UInt32),
     release : Proc(IAMNetworkStatus*, UInt32),
@@ -16514,7 +16514,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMNetworkStatus, lpVtbl : IAMNetworkStatusVtbl* do
+  record IAMNetworkStatus, lpVtbl : IAMNetworkStatusVtable* do
     GUID = LibC::GUID.new(0xfa2aa8f3_u32, 0x8b62_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x20_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IAMNetworkStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16562,7 +16562,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMExtendedSeekingVtbl,
+  record IAMExtendedSeekingVtable,
     query_interface : Proc(IAMExtendedSeeking*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMExtendedSeeking*, UInt32),
     release : Proc(IAMExtendedSeeking*, UInt32),
@@ -16580,7 +16580,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMExtendedSeeking, lpVtbl : IAMExtendedSeekingVtbl* do
+  record IAMExtendedSeeking, lpVtbl : IAMExtendedSeekingVtable* do
     GUID = LibC::GUID.new(0xfa2aa8f9_u32, 0x8b62_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x20_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IAMExtendedSeeking*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16628,7 +16628,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMNetShowExPropsVtbl,
+  record IAMNetShowExPropsVtable,
     query_interface : Proc(IAMNetShowExProps*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMNetShowExProps*, UInt32),
     release : Proc(IAMNetShowExProps*, UInt32),
@@ -16648,7 +16648,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMNetShowExProps, lpVtbl : IAMNetShowExPropsVtbl* do
+  record IAMNetShowExProps, lpVtbl : IAMNetShowExPropsVtable* do
     GUID = LibC::GUID.new(0xfa2aa8f5_u32, 0x8b62_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x20_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IAMNetShowExProps*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16702,7 +16702,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMExtendedErrorInfoVtbl,
+  record IAMExtendedErrorInfoVtable,
     query_interface : Proc(IAMExtendedErrorInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMExtendedErrorInfo*, UInt32),
     release : Proc(IAMExtendedErrorInfo*, UInt32),
@@ -16716,7 +16716,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMExtendedErrorInfo, lpVtbl : IAMExtendedErrorInfoVtbl* do
+  record IAMExtendedErrorInfo, lpVtbl : IAMExtendedErrorInfoVtable* do
     GUID = LibC::GUID.new(0xfa2aa8f6_u32, 0x8b62_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x20_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IAMExtendedErrorInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16752,7 +16752,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMMediaContentVtbl,
+  record IAMMediaContentVtable,
     query_interface : Proc(IAMMediaContent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMMediaContent*, UInt32),
     release : Proc(IAMMediaContent*, UInt32),
@@ -16776,7 +16776,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMMediaContent, lpVtbl : IAMMediaContentVtbl* do
+  record IAMMediaContent, lpVtbl : IAMMediaContentVtable* do
     GUID = LibC::GUID.new(0xfa2aa8f4_u32, 0x8b62_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0x20_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IAMMediaContent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16842,7 +16842,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMMediaContent2Vtbl,
+  record IAMMediaContent2Vtable,
     query_interface : Proc(IAMMediaContent2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMMediaContent2*, UInt32),
     release : Proc(IAMMediaContent2*, UInt32),
@@ -16856,7 +16856,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMMediaContent2, lpVtbl : IAMMediaContent2Vtbl* do
+  record IAMMediaContent2, lpVtbl : IAMMediaContent2Vtable* do
     GUID = LibC::GUID.new(0xce8f78c1_u32, 0x74d9_u16, 0x11d2_u16, StaticArray[0xb0_u8, 0x9d_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa8_u8, 0x11_u8, 0x17_u8])
     def query_interface(this : IAMMediaContent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16892,7 +16892,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMNetShowPrerollVtbl,
+  record IAMNetShowPrerollVtable,
     query_interface : Proc(IAMNetShowPreroll*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMNetShowPreroll*, UInt32),
     release : Proc(IAMNetShowPreroll*, UInt32),
@@ -16905,7 +16905,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMNetShowPreroll, lpVtbl : IAMNetShowPrerollVtbl* do
+  record IAMNetShowPreroll, lpVtbl : IAMNetShowPrerollVtable* do
     GUID = LibC::GUID.new(0xaae7e4e2_u32, 0x6388_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0x93_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xc9_u8, 0xa2_u8, 0xb2_u8])
     def query_interface(this : IAMNetShowPreroll*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16938,7 +16938,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDShowPluginVtbl,
+  record IDShowPluginVtable,
     query_interface : Proc(IDShowPlugin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDShowPlugin*, UInt32),
     release : Proc(IDShowPlugin*, UInt32),
@@ -16947,7 +16947,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDShowPlugin, lpVtbl : IDShowPluginVtbl* do
+  record IDShowPlugin, lpVtbl : IDShowPluginVtable* do
     GUID = LibC::GUID.new(0x4746b7c8_u32, 0x700e_u16, 0x11d1_u16, StaticArray[0xbe_u8, 0xcc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xe9_u8, 0x37_u8])
     def query_interface(this : IDShowPlugin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16968,7 +16968,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMDirectSoundVtbl,
+  record IAMDirectSoundVtable,
     query_interface : Proc(IAMDirectSound*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMDirectSound*, UInt32),
     release : Proc(IAMDirectSound*, UInt32),
@@ -16983,7 +16983,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMDirectSound, lpVtbl : IAMDirectSoundVtbl* do
+  record IAMDirectSound, lpVtbl : IAMDirectSoundVtable* do
     GUID = LibC::GUID.new(0x546f4260_u32, 0xd53e_u16, 0x11cf_u16, StaticArray[0xb3_u8, 0xf0_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x37_u8, 0x61_u8, 0xc5_u8])
     def query_interface(this : IAMDirectSound*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17022,7 +17022,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMLine21DecoderVtbl,
+  record IAMLine21DecoderVtable,
     query_interface : Proc(IAMLine21Decoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMLine21Decoder*, UInt32),
     release : Proc(IAMLine21Decoder*, UInt32),
@@ -17042,7 +17042,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMLine21Decoder, lpVtbl : IAMLine21DecoderVtbl* do
+  record IAMLine21Decoder, lpVtbl : IAMLine21DecoderVtable* do
     GUID = LibC::GUID.new(0x6e8d4a21_u32, 0x310c_u16, 0x11d0_u16, StaticArray[0xb7_u8, 0x9a_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x37_u8, 0x67_u8, 0xa7_u8])
     def query_interface(this : IAMLine21Decoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17096,7 +17096,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMParseVtbl,
+  record IAMParseVtable,
     query_interface : Proc(IAMParse*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMParse*, UInt32),
     release : Proc(IAMParse*, UInt32),
@@ -17106,7 +17106,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMParse, lpVtbl : IAMParseVtbl* do
+  record IAMParse, lpVtbl : IAMParseVtable* do
     GUID = LibC::GUID.new(0xc47a3420_u32, 0x5c_u16, 0x11d2_u16, StaticArray[0x90_u8, 0x38_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x69_u8, 0x72_u8, 0x98_u8])
     def query_interface(this : IAMParse*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17130,7 +17130,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMCollectionVtbl,
+  record IAMCollectionVtable,
     query_interface : Proc(IAMCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMCollection*, UInt32),
     release : Proc(IAMCollection*, UInt32),
@@ -17144,7 +17144,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMCollection, lpVtbl : IAMCollectionVtbl* do
+  record IAMCollection, lpVtbl : IAMCollectionVtable* do
     GUID = LibC::GUID.new(0x56a868b9_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IAMCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17180,7 +17180,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMediaControlVtbl,
+  record IMediaControlVtable,
     query_interface : Proc(IMediaControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaControl*, UInt32),
     release : Proc(IMediaControl*, UInt32),
@@ -17200,7 +17200,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMediaControl, lpVtbl : IMediaControlVtbl* do
+  record IMediaControl, lpVtbl : IMediaControlVtable* do
     GUID = LibC::GUID.new(0x56a868b1_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IMediaControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17254,7 +17254,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMediaEventVtbl,
+  record IMediaEventVtable,
     query_interface : Proc(IMediaEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaEvent*, UInt32),
     release : Proc(IMediaEvent*, UInt32),
@@ -17271,7 +17271,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMediaEvent, lpVtbl : IMediaEventVtbl* do
+  record IMediaEvent, lpVtbl : IMediaEventVtable* do
     GUID = LibC::GUID.new(0x56a868b6_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IMediaEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17316,7 +17316,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMediaEventExVtbl,
+  record IMediaEventExVtable,
     query_interface : Proc(IMediaEventEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaEventEx*, UInt32),
     release : Proc(IMediaEventEx*, UInt32),
@@ -17336,7 +17336,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMediaEventEx, lpVtbl : IMediaEventExVtbl* do
+  record IMediaEventEx, lpVtbl : IMediaEventExVtable* do
     GUID = LibC::GUID.new(0x56a868c0_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IMediaEventEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17390,7 +17390,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMediaPositionVtbl,
+  record IMediaPositionVtable,
     query_interface : Proc(IMediaPosition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaPosition*, UInt32),
     release : Proc(IMediaPosition*, UInt32),
@@ -17412,7 +17412,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMediaPosition, lpVtbl : IMediaPositionVtbl* do
+  record IMediaPosition, lpVtbl : IMediaPositionVtable* do
     GUID = LibC::GUID.new(0x56a868b2_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IMediaPosition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17472,7 +17472,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBasicAudioVtbl,
+  record IBasicAudioVtable,
     query_interface : Proc(IBasicAudio*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBasicAudio*, UInt32),
     release : Proc(IBasicAudio*, UInt32),
@@ -17487,7 +17487,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBasicAudio, lpVtbl : IBasicAudioVtbl* do
+  record IBasicAudio, lpVtbl : IBasicAudioVtable* do
     GUID = LibC::GUID.new(0x56a868b3_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IBasicAudio*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17526,7 +17526,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVideoWindowVtbl,
+  record IVideoWindowVtable,
     query_interface : Proc(IVideoWindow*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVideoWindow*, UInt32),
     release : Proc(IVideoWindow*, UInt32),
@@ -17576,7 +17576,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVideoWindow, lpVtbl : IVideoWindowVtbl* do
+  record IVideoWindow, lpVtbl : IVideoWindowVtable* do
     GUID = LibC::GUID.new(0x56a868b4_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IVideoWindow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17720,7 +17720,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBasicVideoVtbl,
+  record IBasicVideoVtable,
     query_interface : Proc(IBasicVideo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBasicVideo*, UInt32),
     release : Proc(IBasicVideo*, UInt32),
@@ -17763,7 +17763,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBasicVideo, lpVtbl : IBasicVideoVtbl* do
+  record IBasicVideo, lpVtbl : IBasicVideoVtable* do
     GUID = LibC::GUID.new(0x56a868b5_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IBasicVideo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17886,7 +17886,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBasicVideo2Vtbl,
+  record IBasicVideo2Vtable,
     query_interface : Proc(IBasicVideo2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBasicVideo2*, UInt32),
     release : Proc(IBasicVideo2*, UInt32),
@@ -17930,7 +17930,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBasicVideo2, lpVtbl : IBasicVideo2Vtbl* do
+  record IBasicVideo2, lpVtbl : IBasicVideo2Vtable* do
     GUID = LibC::GUID.new(0x329bb360_u32, 0xf6ea_u16, 0x11d1_u16, StaticArray[0x90_u8, 0x38_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x69_u8, 0x72_u8, 0x98_u8])
     def query_interface(this : IBasicVideo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18056,7 +18056,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDeferredCommandVtbl,
+  record IDeferredCommandVtable,
     query_interface : Proc(IDeferredCommand*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDeferredCommand*, UInt32),
     release : Proc(IDeferredCommand*, UInt32),
@@ -18067,7 +18067,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDeferredCommand, lpVtbl : IDeferredCommandVtbl* do
+  record IDeferredCommand, lpVtbl : IDeferredCommandVtable* do
     GUID = LibC::GUID.new(0x56a868b8_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IDeferredCommand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18094,7 +18094,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IQueueCommandVtbl,
+  record IQueueCommandVtable,
     query_interface : Proc(IQueueCommand*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IQueueCommand*, UInt32),
     release : Proc(IQueueCommand*, UInt32),
@@ -18103,7 +18103,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IQueueCommand, lpVtbl : IQueueCommandVtbl* do
+  record IQueueCommand, lpVtbl : IQueueCommandVtable* do
     GUID = LibC::GUID.new(0x56a868b7_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IQueueCommand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18124,7 +18124,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IFilterInfoVtbl,
+  record IFilterInfoVtable,
     query_interface : Proc(IFilterInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFilterInfo*, UInt32),
     release : Proc(IFilterInfo*, UInt32),
@@ -18143,7 +18143,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IFilterInfo, lpVtbl : IFilterInfoVtbl* do
+  record IFilterInfo, lpVtbl : IFilterInfoVtable* do
     GUID = LibC::GUID.new(0x56a868ba_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IFilterInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18194,7 +18194,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IRegFilterInfoVtbl,
+  record IRegFilterInfoVtable,
     query_interface : Proc(IRegFilterInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRegFilterInfo*, UInt32),
     release : Proc(IRegFilterInfo*, UInt32),
@@ -18207,7 +18207,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IRegFilterInfo, lpVtbl : IRegFilterInfoVtbl* do
+  record IRegFilterInfo, lpVtbl : IRegFilterInfoVtable* do
     GUID = LibC::GUID.new(0x56a868bb_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IRegFilterInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18240,7 +18240,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMediaTypeInfoVtbl,
+  record IMediaTypeInfoVtable,
     query_interface : Proc(IMediaTypeInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaTypeInfo*, UInt32),
     release : Proc(IMediaTypeInfo*, UInt32),
@@ -18253,7 +18253,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMediaTypeInfo, lpVtbl : IMediaTypeInfoVtbl* do
+  record IMediaTypeInfo, lpVtbl : IMediaTypeInfoVtable* do
     GUID = LibC::GUID.new(0x56a868bc_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IMediaTypeInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18286,7 +18286,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IPinInfoVtbl,
+  record IPinInfoVtable,
     query_interface : Proc(IPinInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPinInfo*, UInt32),
     release : Proc(IPinInfo*, UInt32),
@@ -18310,7 +18310,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IPinInfo, lpVtbl : IPinInfoVtbl* do
+  record IPinInfo, lpVtbl : IPinInfoVtable* do
     GUID = LibC::GUID.new(0x56a868bd_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IPinInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18376,7 +18376,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMStatsVtbl,
+  record IAMStatsVtable,
     query_interface : Proc(IAMStats*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMStats*, UInt32),
     release : Proc(IAMStats*, UInt32),
@@ -18393,7 +18393,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMStats, lpVtbl : IAMStatsVtbl* do
+  record IAMStats, lpVtbl : IAMStatsVtable* do
     GUID = LibC::GUID.new(0xbc9bcf80_u32, 0xdcd2_u16, 0x11d2_u16, StaticArray[0xab_u8, 0xf6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
     def query_interface(this : IAMStats*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18438,7 +18438,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMVideoAcceleratorNotifyVtbl,
+  record IAMVideoAcceleratorNotifyVtable,
     query_interface : Proc(IAMVideoAcceleratorNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMVideoAcceleratorNotify*, UInt32),
     release : Proc(IAMVideoAcceleratorNotify*, UInt32),
@@ -18448,7 +18448,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMVideoAcceleratorNotify, lpVtbl : IAMVideoAcceleratorNotifyVtbl* do
+  record IAMVideoAcceleratorNotify, lpVtbl : IAMVideoAcceleratorNotifyVtable* do
     GUID = LibC::GUID.new(0x256a6a21_u32, 0xfbad_u16, 0x11d1_u16, StaticArray[0x82_u8, 0xbf_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x69_u8, 0x6c_u8, 0x8f_u8])
     def query_interface(this : IAMVideoAcceleratorNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18472,7 +18472,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMVideoAcceleratorVtbl,
+  record IAMVideoAcceleratorVtable,
     query_interface : Proc(IAMVideoAccelerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMVideoAccelerator*, UInt32),
     release : Proc(IAMVideoAccelerator*, UInt32),
@@ -18491,7 +18491,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMVideoAccelerator, lpVtbl : IAMVideoAcceleratorVtbl* do
+  record IAMVideoAccelerator, lpVtbl : IAMVideoAcceleratorVtable* do
     GUID = LibC::GUID.new(0x256a6a22_u32, 0xfbad_u16, 0x11d1_u16, StaticArray[0x82_u8, 0xbf_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x69_u8, 0x6c_u8, 0x8f_u8])
     def query_interface(this : IAMVideoAccelerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18542,7 +18542,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMWstDecoderVtbl,
+  record IAMWstDecoderVtable,
     query_interface : Proc(IAMWstDecoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMWstDecoder*, UInt32),
     release : Proc(IAMWstDecoder*, UInt32),
@@ -18567,7 +18567,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMWstDecoder, lpVtbl : IAMWstDecoderVtbl* do
+  record IAMWstDecoder, lpVtbl : IAMWstDecoderVtable* do
     GUID = LibC::GUID.new(0xc056de21_u32, 0x75c2_u16, 0x11d3_u16, StaticArray[0xa1_u8, 0x84_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0xef_u8, 0x9f_u8, 0x33_u8])
     def query_interface(this : IAMWstDecoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18636,7 +18636,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IKsTopologyInfoVtbl,
+  record IKsTopologyInfoVtable,
     query_interface : Proc(IKsTopologyInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsTopologyInfo*, UInt32),
     release : Proc(IKsTopologyInfo*, UInt32),
@@ -18651,7 +18651,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IKsTopologyInfo, lpVtbl : IKsTopologyInfoVtbl* do
+  record IKsTopologyInfo, lpVtbl : IKsTopologyInfoVtable* do
     GUID = LibC::GUID.new(0x720d4ac0_u32, 0x7533_u16, 0x11d0_u16, StaticArray[0xa5_u8, 0xd6_u8, 0x28_u8, 0xdb_u8, 0x4_u8, 0xc1_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IKsTopologyInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18690,7 +18690,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ISelectorVtbl,
+  record ISelectorVtable,
     query_interface : Proc(ISelector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISelector*, UInt32),
     release : Proc(ISelector*, UInt32),
@@ -18700,7 +18700,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ISelector, lpVtbl : ISelectorVtbl* do
+  record ISelector, lpVtbl : ISelectorVtable* do
     GUID = LibC::GUID.new(0x1abdaeca_u32, 0x68b6_u16, 0x4f83_u16, StaticArray[0x93_u8, 0x71_u8, 0xb4_u8, 0x13_u8, 0x90_u8, 0x7c_u8, 0x7b_u8, 0x9f_u8])
     def query_interface(this : ISelector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18724,7 +18724,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ICameraControlVtbl,
+  record ICameraControlVtable,
     query_interface : Proc(ICameraControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICameraControl*, UInt32),
     release : Proc(ICameraControl*, UInt32),
@@ -18782,7 +18782,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ICameraControl, lpVtbl : ICameraControlVtbl* do
+  record ICameraControl, lpVtbl : ICameraControlVtable* do
     GUID = LibC::GUID.new(0x2ba1785d_u32, 0x4d1b_u16, 0x44ef_u16, StaticArray[0x85_u8, 0xe8_u8, 0xc7_u8, 0xf1_u8, 0xd3_u8, 0xf2_u8, 0x1_u8, 0x84_u8])
     def query_interface(this : ICameraControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18950,7 +18950,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVideoProcAmpVtbl,
+  record IVideoProcAmpVtable,
     query_interface : Proc(IVideoProcAmp*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVideoProcAmp*, UInt32),
     release : Proc(IVideoProcAmp*, UInt32),
@@ -18996,7 +18996,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVideoProcAmp, lpVtbl : IVideoProcAmpVtbl* do
+  record IVideoProcAmp, lpVtbl : IVideoProcAmpVtable* do
     GUID = LibC::GUID.new(0x4050560e_u32, 0x42a7_u16, 0x413a_u16, StaticArray[0x85_u8, 0xc2_u8, 0x9_u8, 0x26_u8, 0x9a_u8, 0x2d_u8, 0xf_u8, 0x44_u8])
     def query_interface(this : IVideoProcAmp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19128,7 +19128,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IKsNodeControlVtbl,
+  record IKsNodeControlVtable,
     query_interface : Proc(IKsNodeControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsNodeControl*, UInt32),
     release : Proc(IKsNodeControl*, UInt32),
@@ -19137,7 +19137,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IKsNodeControl, lpVtbl : IKsNodeControlVtbl* do
+  record IKsNodeControl, lpVtbl : IKsNodeControlVtable* do
     GUID = LibC::GUID.new(0x11737c14_u32, 0x24a7_u16, 0x4bb5_u16, StaticArray[0x81_u8, 0xa0_u8, 0xd_u8, 0x0_u8, 0x38_u8, 0x13_u8, 0xb0_u8, 0xc4_u8])
     def query_interface(this : IKsNodeControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19158,7 +19158,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMWMBufferPassVtbl,
+  record IAMWMBufferPassVtable,
     query_interface : Proc(IAMWMBufferPass*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMWMBufferPass*, UInt32),
     release : Proc(IAMWMBufferPass*, UInt32),
@@ -19166,7 +19166,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMWMBufferPass, lpVtbl : IAMWMBufferPassVtbl* do
+  record IAMWMBufferPass, lpVtbl : IAMWMBufferPassVtable* do
     GUID = LibC::GUID.new(0x6dd816d7_u32, 0xe740_u16, 0x4123_u16, StaticArray[0x9e_u8, 0x24_u8, 0x24_u8, 0x44_u8, 0x41_u8, 0x26_u8, 0x44_u8, 0xd8_u8])
     def query_interface(this : IAMWMBufferPass*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19184,7 +19184,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMWMBufferPassCallbackVtbl,
+  record IAMWMBufferPassCallbackVtable,
     query_interface : Proc(IAMWMBufferPassCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMWMBufferPassCallback*, UInt32),
     release : Proc(IAMWMBufferPassCallback*, UInt32),
@@ -19192,7 +19192,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMWMBufferPassCallback, lpVtbl : IAMWMBufferPassCallbackVtbl* do
+  record IAMWMBufferPassCallback, lpVtbl : IAMWMBufferPassCallbackVtable* do
     GUID = LibC::GUID.new(0xb25b8372_u32, 0xd2d2_u16, 0x44b2_u16, StaticArray[0x86_u8, 0x53_u8, 0x1b_u8, 0x8d_u8, 0xae_u8, 0x33_u8, 0x24_u8, 0x89_u8])
     def query_interface(this : IAMWMBufferPassCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19210,7 +19210,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IConfigAsfWriterVtbl,
+  record IConfigAsfWriterVtable,
     query_interface : Proc(IConfigAsfWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IConfigAsfWriter*, UInt32),
     release : Proc(IConfigAsfWriter*, UInt32),
@@ -19225,7 +19225,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IConfigAsfWriter, lpVtbl : IConfigAsfWriterVtbl* do
+  record IConfigAsfWriter, lpVtbl : IConfigAsfWriterVtable* do
     GUID = LibC::GUID.new(0x45086030_u32, 0xf7e4_u16, 0x486a_u16, StaticArray[0xb5_u8, 0x4_u8, 0x82_u8, 0x6b_u8, 0xb5_u8, 0x79_u8, 0x2a_u8, 0x3b_u8])
     def query_interface(this : IConfigAsfWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19264,7 +19264,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IConfigAsfWriter2Vtbl,
+  record IConfigAsfWriter2Vtable,
     query_interface : Proc(IConfigAsfWriter2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IConfigAsfWriter2*, UInt32),
     release : Proc(IConfigAsfWriter2*, UInt32),
@@ -19283,7 +19283,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IConfigAsfWriter2, lpVtbl : IConfigAsfWriter2Vtbl* do
+  record IConfigAsfWriter2, lpVtbl : IConfigAsfWriter2Vtable* do
     GUID = LibC::GUID.new(0x7989ccaa_u32, 0x53f0_u16, 0x44f0_u16, StaticArray[0x88_u8, 0x4a_u8, 0xf3_u8, 0xb0_u8, 0x3f_u8, 0x6a_u8, 0xe0_u8, 0x66_u8])
     def query_interface(this : IConfigAsfWriter2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19334,7 +19334,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMultiMediaStreamVtbl,
+  record IMultiMediaStreamVtable,
     query_interface : Proc(IMultiMediaStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMultiMediaStream*, UInt32),
     release : Proc(IMultiMediaStream*, UInt32),
@@ -19350,7 +19350,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMultiMediaStream, lpVtbl : IMultiMediaStreamVtbl* do
+  record IMultiMediaStream, lpVtbl : IMultiMediaStreamVtable* do
     GUID = LibC::GUID.new(0xb502d1bc_u32, 0x9a57_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
     def query_interface(this : IMultiMediaStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19392,7 +19392,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMediaStreamVtbl,
+  record IMediaStreamVtable,
     query_interface : Proc(IMediaStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaStream*, UInt32),
     release : Proc(IMediaStream*, UInt32),
@@ -19405,7 +19405,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMediaStream, lpVtbl : IMediaStreamVtbl* do
+  record IMediaStream, lpVtbl : IMediaStreamVtable* do
     GUID = LibC::GUID.new(0xb502d1bd_u32, 0x9a57_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
     def query_interface(this : IMediaStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19438,7 +19438,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IStreamSampleVtbl,
+  record IStreamSampleVtable,
     query_interface : Proc(IStreamSample*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStreamSample*, UInt32),
     release : Proc(IStreamSample*, UInt32),
@@ -19450,7 +19450,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IStreamSample, lpVtbl : IStreamSampleVtbl* do
+  record IStreamSample, lpVtbl : IStreamSampleVtable* do
     GUID = LibC::GUID.new(0xb502d1be_u32, 0x9a57_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
     def query_interface(this : IStreamSample*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19480,7 +19480,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDirectDrawMediaStreamVtbl,
+  record IDirectDrawMediaStreamVtable,
     query_interface : Proc(IDirectDrawMediaStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawMediaStream*, UInt32),
     release : Proc(IDirectDrawMediaStream*, UInt32),
@@ -19499,7 +19499,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDirectDrawMediaStream, lpVtbl : IDirectDrawMediaStreamVtbl* do
+  record IDirectDrawMediaStream, lpVtbl : IDirectDrawMediaStreamVtable* do
     GUID = LibC::GUID.new(0xf4104fce_u32, 0x9a70_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
     def query_interface(this : IDirectDrawMediaStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19550,7 +19550,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDirectDrawStreamSampleVtbl,
+  record IDirectDrawStreamSampleVtable,
     query_interface : Proc(IDirectDrawStreamSample*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawStreamSample*, UInt32),
     release : Proc(IDirectDrawStreamSample*, UInt32),
@@ -19564,7 +19564,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDirectDrawStreamSample, lpVtbl : IDirectDrawStreamSampleVtbl* do
+  record IDirectDrawStreamSample, lpVtbl : IDirectDrawStreamSampleVtable* do
     GUID = LibC::GUID.new(0xf4104fcf_u32, 0x9a70_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
     def query_interface(this : IDirectDrawStreamSample*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19600,7 +19600,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAudioMediaStreamVtbl,
+  record IAudioMediaStreamVtable,
     query_interface : Proc(IAudioMediaStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioMediaStream*, UInt32),
     release : Proc(IAudioMediaStream*, UInt32),
@@ -19616,7 +19616,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAudioMediaStream, lpVtbl : IAudioMediaStreamVtbl* do
+  record IAudioMediaStream, lpVtbl : IAudioMediaStreamVtable* do
     GUID = LibC::GUID.new(0xf7537560_u32, 0xa3be_u16, 0x11d0_u16, StaticArray[0x82_u8, 0x12_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x2c_u8, 0x45_u8])
     def query_interface(this : IAudioMediaStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19658,7 +19658,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAudioStreamSampleVtbl,
+  record IAudioStreamSampleVtable,
     query_interface : Proc(IAudioStreamSample*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioStreamSample*, UInt32),
     release : Proc(IAudioStreamSample*, UInt32),
@@ -19671,7 +19671,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAudioStreamSample, lpVtbl : IAudioStreamSampleVtbl* do
+  record IAudioStreamSample, lpVtbl : IAudioStreamSampleVtable* do
     GUID = LibC::GUID.new(0x345fee00_u32, 0xaba5_u16, 0x11d0_u16, StaticArray[0x82_u8, 0x12_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x2c_u8, 0x45_u8])
     def query_interface(this : IAudioStreamSample*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19704,7 +19704,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMemoryDataVtbl,
+  record IMemoryDataVtable,
     query_interface : Proc(IMemoryData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMemoryData*, UInt32),
     release : Proc(IMemoryData*, UInt32),
@@ -19714,7 +19714,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMemoryData, lpVtbl : IMemoryDataVtbl* do
+  record IMemoryData, lpVtbl : IMemoryDataVtable* do
     GUID = LibC::GUID.new(0x327fc560_u32, 0xaf60_u16, 0x11d0_u16, StaticArray[0x82_u8, 0x12_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x2c_u8, 0x45_u8])
     def query_interface(this : IMemoryData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19738,7 +19738,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAudioDataVtbl,
+  record IAudioDataVtable,
     query_interface : Proc(IAudioData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioData*, UInt32),
     release : Proc(IAudioData*, UInt32),
@@ -19750,7 +19750,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAudioData, lpVtbl : IAudioDataVtbl* do
+  record IAudioData, lpVtbl : IAudioDataVtable* do
     GUID = LibC::GUID.new(0x54c719c0_u32, 0xaf60_u16, 0x11d0_u16, StaticArray[0x82_u8, 0x12_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x2c_u8, 0x45_u8])
     def query_interface(this : IAudioData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19780,7 +19780,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMMultiMediaStreamVtbl,
+  record IAMMultiMediaStreamVtable,
     query_interface : Proc(IAMMultiMediaStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMMultiMediaStream*, UInt32),
     release : Proc(IAMMultiMediaStream*, UInt32),
@@ -19803,7 +19803,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMMultiMediaStream, lpVtbl : IAMMultiMediaStreamVtbl* do
+  record IAMMultiMediaStream, lpVtbl : IAMMultiMediaStreamVtable* do
     GUID = LibC::GUID.new(0xbebe595c_u32, 0x9a6f_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
     def query_interface(this : IAMMultiMediaStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19866,7 +19866,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMMediaStreamVtbl,
+  record IAMMediaStreamVtable,
     query_interface : Proc(IAMMediaStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMMediaStream*, UInt32),
     release : Proc(IAMMediaStream*, UInt32),
@@ -19884,7 +19884,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMMediaStream, lpVtbl : IAMMediaStreamVtbl* do
+  record IAMMediaStream, lpVtbl : IAMMediaStreamVtable* do
     GUID = LibC::GUID.new(0xbebe595d_u32, 0x9a6f_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
     def query_interface(this : IAMMediaStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19932,7 +19932,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMediaStreamFilterVtbl,
+  record IMediaStreamFilterVtable,
     query_interface : Proc(IMediaStreamFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaStreamFilter*, UInt32),
     release : Proc(IMediaStreamFilter*, UInt32),
@@ -19960,7 +19960,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMediaStreamFilter, lpVtbl : IMediaStreamFilterVtbl* do
+  record IMediaStreamFilter, lpVtbl : IMediaStreamFilterVtable* do
     GUID = LibC::GUID.new(0xbebe595e_u32, 0x9a6f_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
     def query_interface(this : IMediaStreamFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20038,7 +20038,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDirectDrawMediaSampleAllocatorVtbl,
+  record IDirectDrawMediaSampleAllocatorVtable,
     query_interface : Proc(IDirectDrawMediaSampleAllocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawMediaSampleAllocator*, UInt32),
     release : Proc(IDirectDrawMediaSampleAllocator*, UInt32),
@@ -20046,7 +20046,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDirectDrawMediaSampleAllocator, lpVtbl : IDirectDrawMediaSampleAllocatorVtbl* do
+  record IDirectDrawMediaSampleAllocator, lpVtbl : IDirectDrawMediaSampleAllocatorVtable* do
     GUID = LibC::GUID.new(0xab6b4afc_u32, 0xf6e4_u16, 0x11d0_u16, StaticArray[0x90_u8, 0xd_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
     def query_interface(this : IDirectDrawMediaSampleAllocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20064,7 +20064,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDirectDrawMediaSampleVtbl,
+  record IDirectDrawMediaSampleVtable,
     query_interface : Proc(IDirectDrawMediaSample*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawMediaSample*, UInt32),
     release : Proc(IDirectDrawMediaSample*, UInt32),
@@ -20073,7 +20073,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDirectDrawMediaSample, lpVtbl : IDirectDrawMediaSampleVtbl* do
+  record IDirectDrawMediaSample, lpVtbl : IDirectDrawMediaSampleVtable* do
     GUID = LibC::GUID.new(0xab6b4afe_u32, 0xf6e4_u16, 0x11d0_u16, StaticArray[0x90_u8, 0xd_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
     def query_interface(this : IDirectDrawMediaSample*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20094,7 +20094,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMMediaTypeStreamVtbl,
+  record IAMMediaTypeStreamVtable,
     query_interface : Proc(IAMMediaTypeStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMMediaTypeStream*, UInt32),
     release : Proc(IAMMediaTypeStream*, UInt32),
@@ -20112,7 +20112,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMMediaTypeStream, lpVtbl : IAMMediaTypeStreamVtbl* do
+  record IAMMediaTypeStream, lpVtbl : IAMMediaTypeStreamVtable* do
     GUID = LibC::GUID.new(0xab6b4afa_u32, 0xf6e4_u16, 0x11d0_u16, StaticArray[0x90_u8, 0xd_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
     def query_interface(this : IAMMediaTypeStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20160,7 +20160,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMMediaTypeSampleVtbl,
+  record IAMMediaTypeSampleVtable,
     query_interface : Proc(IAMMediaTypeSample*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMMediaTypeSample*, UInt32),
     release : Proc(IAMMediaTypeSample*, UInt32),
@@ -20189,7 +20189,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMMediaTypeSample, lpVtbl : IAMMediaTypeSampleVtbl* do
+  record IAMMediaTypeSample, lpVtbl : IAMMediaTypeSampleVtable* do
     GUID = LibC::GUID.new(0xab6b4afb_u32, 0xf6e4_u16, 0x11d0_u16, StaticArray[0x90_u8, 0xd_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x18_u8, 0x9d_u8])
     def query_interface(this : IAMMediaTypeSample*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20270,7 +20270,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDirectDrawVideoVtbl,
+  record IDirectDrawVideoVtable,
     query_interface : Proc(IDirectDrawVideo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawVideo*, UInt32),
     release : Proc(IDirectDrawVideo*, UInt32),
@@ -20293,7 +20293,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDirectDrawVideo, lpVtbl : IDirectDrawVideoVtbl* do
+  record IDirectDrawVideo, lpVtbl : IDirectDrawVideoVtable* do
     GUID = LibC::GUID.new(0x36d39eb0_u32, 0xdd75_u16, 0x11ce_u16, StaticArray[0xbf_u8, 0xe_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x55_u8, 0x59_u8, 0x5a_u8])
     def query_interface(this : IDirectDrawVideo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20356,7 +20356,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IQualPropVtbl,
+  record IQualPropVtable,
     query_interface : Proc(IQualProp*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IQualProp*, UInt32),
     release : Proc(IQualProp*, UInt32),
@@ -20369,7 +20369,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IQualProp, lpVtbl : IQualPropVtbl* do
+  record IQualProp, lpVtbl : IQualPropVtable* do
     GUID = LibC::GUID.new(0x1bd0ecb0_u32, 0xf8e2_u16, 0x11ce_u16, StaticArray[0xaa_u8, 0xc6_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0x99_u8, 0xa3_u8])
     def query_interface(this : IQualProp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20402,7 +20402,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IFullScreenVideoVtbl,
+  record IFullScreenVideoVtable,
     query_interface : Proc(IFullScreenVideo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFullScreenVideo*, UInt32),
     release : Proc(IFullScreenVideo*, UInt32),
@@ -20426,7 +20426,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IFullScreenVideo, lpVtbl : IFullScreenVideoVtbl* do
+  record IFullScreenVideo, lpVtbl : IFullScreenVideoVtable* do
     GUID = LibC::GUID.new(0xdd1d7110_u32, 0x7836_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0x47_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x55_u8, 0x59_u8, 0x5a_u8])
     def query_interface(this : IFullScreenVideo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20492,7 +20492,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IFullScreenVideoExVtbl,
+  record IFullScreenVideoExVtable,
     query_interface : Proc(IFullScreenVideoEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFullScreenVideoEx*, UInt32),
     release : Proc(IFullScreenVideoEx*, UInt32),
@@ -20520,7 +20520,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IFullScreenVideoEx, lpVtbl : IFullScreenVideoExVtbl* do
+  record IFullScreenVideoEx, lpVtbl : IFullScreenVideoExVtable* do
     GUID = LibC::GUID.new(0x53479470_u32, 0xf1dd_u16, 0x11cf_u16, StaticArray[0xbc_u8, 0x42_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xac_u8, 0x74_u8, 0xf6_u8])
     def query_interface(this : IFullScreenVideoEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20598,7 +20598,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBaseVideoMixerVtbl,
+  record IBaseVideoMixerVtable,
     query_interface : Proc(IBaseVideoMixer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBaseVideoMixer*, UInt32),
     release : Proc(IBaseVideoMixer*, UInt32),
@@ -20612,7 +20612,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBaseVideoMixer, lpVtbl : IBaseVideoMixerVtbl* do
+  record IBaseVideoMixer, lpVtbl : IBaseVideoMixerVtable* do
     GUID = LibC::GUID.new(0x61ded640_u32, 0xe912_u16, 0x11ce_u16, StaticArray[0xa0_u8, 0x99_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0x9a_u8, 0x58_u8])
     def query_interface(this : IBaseVideoMixer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20648,7 +20648,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDMOWrapperFilterVtbl,
+  record IDMOWrapperFilterVtable,
     query_interface : Proc(IDMOWrapperFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDMOWrapperFilter*, UInt32),
     release : Proc(IDMOWrapperFilter*, UInt32),
@@ -20656,7 +20656,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDMOWrapperFilter, lpVtbl : IDMOWrapperFilterVtbl* do
+  record IDMOWrapperFilter, lpVtbl : IDMOWrapperFilterVtable* do
     GUID = LibC::GUID.new(0x52d6f586_u32, 0x9f0f_u16, 0x4824_u16, StaticArray[0x8f_u8, 0xc8_u8, 0xe3_u8, 0x2c_u8, 0xa0_u8, 0x49_u8, 0x30_u8, 0xc2_u8])
     def query_interface(this : IDMOWrapperFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20674,7 +20674,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMixerOCXNotifyVtbl,
+  record IMixerOCXNotifyVtable,
     query_interface : Proc(IMixerOCXNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMixerOCXNotify*, UInt32),
     release : Proc(IMixerOCXNotify*, UInt32),
@@ -20684,7 +20684,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMixerOCXNotify, lpVtbl : IMixerOCXNotifyVtbl* do
+  record IMixerOCXNotify, lpVtbl : IMixerOCXNotifyVtable* do
     GUID = LibC::GUID.new(0x81a3bd31_u32, 0xdee1_u16, 0x11d1_u16, StaticArray[0x85_u8, 0x8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x1f_u8, 0x9c_u8, 0xa0_u8])
     def query_interface(this : IMixerOCXNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20708,7 +20708,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMixerOCXVtbl,
+  record IMixerOCXVtable,
     query_interface : Proc(IMixerOCX*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMixerOCX*, UInt32),
     release : Proc(IMixerOCX*, UInt32),
@@ -20723,7 +20723,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMixerOCX, lpVtbl : IMixerOCXVtbl* do
+  record IMixerOCX, lpVtbl : IMixerOCXVtable* do
     GUID = LibC::GUID.new(0x81a3bd32_u32, 0xdee1_u16, 0x11d1_u16, StaticArray[0x85_u8, 0x8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x1f_u8, 0x9c_u8, 0xa0_u8])
     def query_interface(this : IMixerOCX*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20762,7 +20762,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMixerPinConfigVtbl,
+  record IMixerPinConfigVtable,
     query_interface : Proc(IMixerPinConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMixerPinConfig*, UInt32),
     release : Proc(IMixerPinConfig*, UInt32),
@@ -20781,7 +20781,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMixerPinConfig, lpVtbl : IMixerPinConfigVtbl* do
+  record IMixerPinConfig, lpVtbl : IMixerPinConfigVtable* do
     GUID = LibC::GUID.new(0x593cdde1_u32, 0x759_u16, 0x11d1_u16, StaticArray[0x9e_u8, 0x69_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xc1_u8, 0x5b_u8])
     def query_interface(this : IMixerPinConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20832,7 +20832,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMixerPinConfig2Vtbl,
+  record IMixerPinConfig2Vtable,
     query_interface : Proc(IMixerPinConfig2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMixerPinConfig2*, UInt32),
     release : Proc(IMixerPinConfig2*, UInt32),
@@ -20853,7 +20853,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMixerPinConfig2, lpVtbl : IMixerPinConfig2Vtbl* do
+  record IMixerPinConfig2, lpVtbl : IMixerPinConfig2Vtable* do
     GUID = LibC::GUID.new(0xebf47182_u32, 0x8764_u16, 0x11d1_u16, StaticArray[0x9e_u8, 0x69_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xc1_u8, 0x5b_u8])
     def query_interface(this : IMixerPinConfig2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20910,7 +20910,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMpegAudioDecoderVtbl,
+  record IMpegAudioDecoderVtable,
     query_interface : Proc(IMpegAudioDecoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMpegAudioDecoder*, UInt32),
     release : Proc(IMpegAudioDecoder*, UInt32),
@@ -20930,7 +20930,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMpegAudioDecoder, lpVtbl : IMpegAudioDecoderVtbl* do
+  record IMpegAudioDecoder, lpVtbl : IMpegAudioDecoderVtable* do
     GUID = LibC::GUID.new(0xb45dd570_u32, 0x3c77_u16, 0x11d1_u16, StaticArray[0xab_u8, 0xe1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0xf3_u8, 0x75_u8])
     def query_interface(this : IMpegAudioDecoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20984,7 +20984,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRImagePresenter9Vtbl,
+  record IVMRImagePresenter9Vtable,
     query_interface : Proc(IVMRImagePresenter9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRImagePresenter9*, UInt32),
     release : Proc(IVMRImagePresenter9*, UInt32),
@@ -20994,7 +20994,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRImagePresenter9, lpVtbl : IVMRImagePresenter9Vtbl* do
+  record IVMRImagePresenter9, lpVtbl : IVMRImagePresenter9Vtable* do
     GUID = LibC::GUID.new(0x69188c61_u32, 0x12a3_u16, 0x40f0_u16, StaticArray[0x8f_u8, 0xfc_u8, 0x34_u8, 0x2e_u8, 0x7b_u8, 0x43_u8, 0x3f_u8, 0xd7_u8])
     def query_interface(this : IVMRImagePresenter9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21018,7 +21018,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRSurfaceAllocator9Vtbl,
+  record IVMRSurfaceAllocator9Vtable,
     query_interface : Proc(IVMRSurfaceAllocator9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRSurfaceAllocator9*, UInt32),
     release : Proc(IVMRSurfaceAllocator9*, UInt32),
@@ -21029,7 +21029,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRSurfaceAllocator9, lpVtbl : IVMRSurfaceAllocator9Vtbl* do
+  record IVMRSurfaceAllocator9, lpVtbl : IVMRSurfaceAllocator9Vtable* do
     GUID = LibC::GUID.new(0x8d5148ea_u32, 0x3f5d_u16, 0x46cf_u16, StaticArray[0x9d_u8, 0xf1_u8, 0xd1_u8, 0xb8_u8, 0x96_u8, 0xee_u8, 0xdb_u8, 0x1f_u8])
     def query_interface(this : IVMRSurfaceAllocator9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21056,7 +21056,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRSurfaceAllocatorEx9Vtbl,
+  record IVMRSurfaceAllocatorEx9Vtable,
     query_interface : Proc(IVMRSurfaceAllocatorEx9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRSurfaceAllocatorEx9*, UInt32),
     release : Proc(IVMRSurfaceAllocatorEx9*, UInt32),
@@ -21068,7 +21068,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRSurfaceAllocatorEx9, lpVtbl : IVMRSurfaceAllocatorEx9Vtbl* do
+  record IVMRSurfaceAllocatorEx9, lpVtbl : IVMRSurfaceAllocatorEx9Vtable* do
     GUID = LibC::GUID.new(0x6de9a68a_u32, 0xa928_u16, 0x4522_u16, StaticArray[0xbf_u8, 0x57_u8, 0x65_u8, 0x5a_u8, 0xe3_u8, 0x86_u8, 0x64_u8, 0x56_u8])
     def query_interface(this : IVMRSurfaceAllocatorEx9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21098,7 +21098,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRSurfaceAllocatorNotify9Vtbl,
+  record IVMRSurfaceAllocatorNotify9Vtable,
     query_interface : Proc(IVMRSurfaceAllocatorNotify9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRSurfaceAllocatorNotify9*, UInt32),
     release : Proc(IVMRSurfaceAllocatorNotify9*, UInt32),
@@ -21110,7 +21110,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRSurfaceAllocatorNotify9, lpVtbl : IVMRSurfaceAllocatorNotify9Vtbl* do
+  record IVMRSurfaceAllocatorNotify9, lpVtbl : IVMRSurfaceAllocatorNotify9Vtable* do
     GUID = LibC::GUID.new(0xdca3f5df_u32, 0xbb3a_u16, 0x4d03_u16, StaticArray[0xbd_u8, 0x81_u8, 0x84_u8, 0x61_u8, 0x4b_u8, 0xfb_u8, 0xfa_u8, 0xc_u8])
     def query_interface(this : IVMRSurfaceAllocatorNotify9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21140,7 +21140,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRWindowlessControl9Vtbl,
+  record IVMRWindowlessControl9Vtable,
     query_interface : Proc(IVMRWindowlessControl9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRWindowlessControl9*, UInt32),
     release : Proc(IVMRWindowlessControl9*, UInt32),
@@ -21160,7 +21160,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRWindowlessControl9, lpVtbl : IVMRWindowlessControl9Vtbl* do
+  record IVMRWindowlessControl9, lpVtbl : IVMRWindowlessControl9Vtable* do
     GUID = LibC::GUID.new(0x8f537d09_u32, 0xf85e_u16, 0x4414_u16, StaticArray[0xb2_u8, 0x3b_u8, 0x50_u8, 0x2e_u8, 0x54_u8, 0xc7_u8, 0x99_u8, 0x27_u8])
     def query_interface(this : IVMRWindowlessControl9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21214,7 +21214,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRMixerControl9Vtbl,
+  record IVMRMixerControl9Vtable,
     query_interface : Proc(IVMRMixerControl9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRMixerControl9*, UInt32),
     release : Proc(IVMRMixerControl9*, UInt32),
@@ -21234,7 +21234,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRMixerControl9, lpVtbl : IVMRMixerControl9Vtbl* do
+  record IVMRMixerControl9, lpVtbl : IVMRMixerControl9Vtable* do
     GUID = LibC::GUID.new(0x1a777eaa_u32, 0x47c8_u16, 0x4930_u16, StaticArray[0xb2_u8, 0xc9_u8, 0x8f_u8, 0xee_u8, 0x1c_u8, 0x1b_u8, 0xf_u8, 0x3b_u8])
     def query_interface(this : IVMRMixerControl9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21288,7 +21288,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRMixerBitmap9Vtbl,
+  record IVMRMixerBitmap9Vtable,
     query_interface : Proc(IVMRMixerBitmap9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRMixerBitmap9*, UInt32),
     release : Proc(IVMRMixerBitmap9*, UInt32),
@@ -21298,7 +21298,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRMixerBitmap9, lpVtbl : IVMRMixerBitmap9Vtbl* do
+  record IVMRMixerBitmap9, lpVtbl : IVMRMixerBitmap9Vtable* do
     GUID = LibC::GUID.new(0xced175e5_u32, 0x1935_u16, 0x4820_u16, StaticArray[0x81_u8, 0xbd_u8, 0xff_u8, 0x6a_u8, 0xd0_u8, 0xc_u8, 0x91_u8, 0x8_u8])
     def query_interface(this : IVMRMixerBitmap9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21322,7 +21322,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRSurface9Vtbl,
+  record IVMRSurface9Vtable,
     query_interface : Proc(IVMRSurface9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRSurface9*, UInt32),
     release : Proc(IVMRSurface9*, UInt32),
@@ -21333,7 +21333,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRSurface9, lpVtbl : IVMRSurface9Vtbl* do
+  record IVMRSurface9, lpVtbl : IVMRSurface9Vtable* do
     GUID = LibC::GUID.new(0xdfc581a1_u32, 0x6e1f_u16, 0x4c3a_u16, StaticArray[0x8d_u8, 0xa_u8, 0x5e_u8, 0x97_u8, 0x92_u8, 0xea_u8, 0x2a_u8, 0xfc_u8])
     def query_interface(this : IVMRSurface9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21360,7 +21360,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRImagePresenterConfig9Vtbl,
+  record IVMRImagePresenterConfig9Vtable,
     query_interface : Proc(IVMRImagePresenterConfig9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRImagePresenterConfig9*, UInt32),
     release : Proc(IVMRImagePresenterConfig9*, UInt32),
@@ -21369,7 +21369,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRImagePresenterConfig9, lpVtbl : IVMRImagePresenterConfig9Vtbl* do
+  record IVMRImagePresenterConfig9, lpVtbl : IVMRImagePresenterConfig9Vtable* do
     GUID = LibC::GUID.new(0x45c15cab_u32, 0x6e22_u16, 0x420a_u16, StaticArray[0x80_u8, 0x43_u8, 0xae_u8, 0x1f_u8, 0xa_u8, 0xc0_u8, 0x2c_u8, 0x7d_u8])
     def query_interface(this : IVMRImagePresenterConfig9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21390,7 +21390,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRVideoStreamControl9Vtbl,
+  record IVMRVideoStreamControl9Vtable,
     query_interface : Proc(IVMRVideoStreamControl9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRVideoStreamControl9*, UInt32),
     release : Proc(IVMRVideoStreamControl9*, UInt32),
@@ -21399,7 +21399,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRVideoStreamControl9, lpVtbl : IVMRVideoStreamControl9Vtbl* do
+  record IVMRVideoStreamControl9, lpVtbl : IVMRVideoStreamControl9Vtable* do
     GUID = LibC::GUID.new(0xd0cfe38b_u32, 0x93e7_u16, 0x4772_u16, StaticArray[0x89_u8, 0x57_u8, 0x4_u8, 0x0_u8, 0xc4_u8, 0x9a_u8, 0x44_u8, 0x85_u8])
     def query_interface(this : IVMRVideoStreamControl9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21420,7 +21420,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRFilterConfig9Vtbl,
+  record IVMRFilterConfig9Vtable,
     query_interface : Proc(IVMRFilterConfig9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRFilterConfig9*, UInt32),
     release : Proc(IVMRFilterConfig9*, UInt32),
@@ -21434,7 +21434,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRFilterConfig9, lpVtbl : IVMRFilterConfig9Vtbl* do
+  record IVMRFilterConfig9, lpVtbl : IVMRFilterConfig9Vtable* do
     GUID = LibC::GUID.new(0x5a804648_u32, 0x4f66_u16, 0x4867_u16, StaticArray[0x9c_u8, 0x43_u8, 0x4f_u8, 0x5c_u8, 0x82_u8, 0x2c_u8, 0xf1_u8, 0xb8_u8])
     def query_interface(this : IVMRFilterConfig9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21470,7 +21470,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRAspectRatioControl9Vtbl,
+  record IVMRAspectRatioControl9Vtable,
     query_interface : Proc(IVMRAspectRatioControl9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRAspectRatioControl9*, UInt32),
     release : Proc(IVMRAspectRatioControl9*, UInt32),
@@ -21479,7 +21479,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRAspectRatioControl9, lpVtbl : IVMRAspectRatioControl9Vtbl* do
+  record IVMRAspectRatioControl9, lpVtbl : IVMRAspectRatioControl9Vtable* do
     GUID = LibC::GUID.new(0xd96c29_u32, 0xbbde_u16, 0x4efc_u16, StaticArray[0x99_u8, 0x1_u8, 0xbb_u8, 0x50_u8, 0x36_u8, 0x39_u8, 0x21_u8, 0x46_u8])
     def query_interface(this : IVMRAspectRatioControl9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21500,7 +21500,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRMonitorConfig9Vtbl,
+  record IVMRMonitorConfig9Vtable,
     query_interface : Proc(IVMRMonitorConfig9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRMonitorConfig9*, UInt32),
     release : Proc(IVMRMonitorConfig9*, UInt32),
@@ -21512,7 +21512,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRMonitorConfig9, lpVtbl : IVMRMonitorConfig9Vtbl* do
+  record IVMRMonitorConfig9, lpVtbl : IVMRMonitorConfig9Vtable* do
     GUID = LibC::GUID.new(0x46c2e457_u32, 0x8ba0_u16, 0x4eef_u16, StaticArray[0xb8_u8, 0xb_u8, 0x6_u8, 0x80_u8, 0xf0_u8, 0x97_u8, 0x87_u8, 0x49_u8])
     def query_interface(this : IVMRMonitorConfig9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21542,7 +21542,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRDeinterlaceControl9Vtbl,
+  record IVMRDeinterlaceControl9Vtable,
     query_interface : Proc(IVMRDeinterlaceControl9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRDeinterlaceControl9*, UInt32),
     release : Proc(IVMRDeinterlaceControl9*, UInt32),
@@ -21556,7 +21556,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRDeinterlaceControl9, lpVtbl : IVMRDeinterlaceControl9Vtbl* do
+  record IVMRDeinterlaceControl9, lpVtbl : IVMRDeinterlaceControl9Vtable* do
     GUID = LibC::GUID.new(0xa215fb8d_u32, 0x13c2_u16, 0x4f7f_u16, StaticArray[0x99_u8, 0x3c_u8, 0x0_u8, 0x3d_u8, 0x62_u8, 0x71_u8, 0xa4_u8, 0x59_u8])
     def query_interface(this : IVMRDeinterlaceControl9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21592,7 +21592,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVMRImageCompositor9Vtbl,
+  record IVMRImageCompositor9Vtable,
     query_interface : Proc(IVMRImageCompositor9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVMRImageCompositor9*, UInt32),
     release : Proc(IVMRImageCompositor9*, UInt32),
@@ -21603,7 +21603,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVMRImageCompositor9, lpVtbl : IVMRImageCompositor9Vtbl* do
+  record IVMRImageCompositor9, lpVtbl : IVMRImageCompositor9Vtable* do
     GUID = LibC::GUID.new(0x4a5c89eb_u32, 0xdf51_u16, 0x4654_u16, StaticArray[0xac_u8, 0x2a_u8, 0xe4_u8, 0x8e_u8, 0x2_u8, 0xbb_u8, 0xab_u8, 0xf6_u8])
     def query_interface(this : IVMRImageCompositor9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21630,7 +21630,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVPBaseConfigVtbl,
+  record IVPBaseConfigVtable,
     query_interface : Proc(IVPBaseConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVPBaseConfig*, UInt32),
     release : Proc(IVPBaseConfig*, UInt32),
@@ -21650,7 +21650,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVPBaseConfig, lpVtbl : IVPBaseConfigVtbl* do
+  record IVPBaseConfig, lpVtbl : IVPBaseConfigVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IVPBaseConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21704,7 +21704,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVPConfigVtbl,
+  record IVPConfigVtable,
     query_interface : Proc(IVPConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVPConfig*, UInt32),
     release : Proc(IVPConfig*, UInt32),
@@ -21726,7 +21726,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVPConfig, lpVtbl : IVPConfigVtbl* do
+  record IVPConfig, lpVtbl : IVPConfigVtable* do
     GUID = LibC::GUID.new(0xbc29a660_u32, 0x30e3_u16, 0x11d0_u16, StaticArray[0x9e_u8, 0x69_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xc1_u8, 0x5b_u8])
     def query_interface(this : IVPConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21786,7 +21786,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVPVBIConfigVtbl,
+  record IVPVBIConfigVtable,
     query_interface : Proc(IVPVBIConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVPVBIConfig*, UInt32),
     release : Proc(IVPVBIConfig*, UInt32),
@@ -21806,7 +21806,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVPVBIConfig, lpVtbl : IVPVBIConfigVtbl* do
+  record IVPVBIConfig, lpVtbl : IVPVBIConfigVtable* do
     GUID = LibC::GUID.new(0xec529b00_u32, 0x1a1f_u16, 0x11d1_u16, StaticArray[0xba_u8, 0xd9_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x44_u8, 0x11_u8, 0x1a_u8])
     def query_interface(this : IVPVBIConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21860,7 +21860,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVPBaseNotifyVtbl,
+  record IVPBaseNotifyVtable,
     query_interface : Proc(IVPBaseNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVPBaseNotify*, UInt32),
     release : Proc(IVPBaseNotify*, UInt32),
@@ -21868,7 +21868,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVPBaseNotify, lpVtbl : IVPBaseNotifyVtbl* do
+  record IVPBaseNotify, lpVtbl : IVPBaseNotifyVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IVPBaseNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21886,7 +21886,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVPNotifyVtbl,
+  record IVPNotifyVtable,
     query_interface : Proc(IVPNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVPNotify*, UInt32),
     release : Proc(IVPNotify*, UInt32),
@@ -21896,7 +21896,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVPNotify, lpVtbl : IVPNotifyVtbl* do
+  record IVPNotify, lpVtbl : IVPNotifyVtable* do
     GUID = LibC::GUID.new(0xc76794a1_u32, 0xd6c5_u16, 0x11d0_u16, StaticArray[0x9e_u8, 0x69_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xc1_u8, 0x5b_u8])
     def query_interface(this : IVPNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21920,7 +21920,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVPNotify2Vtbl,
+  record IVPNotify2Vtable,
     query_interface : Proc(IVPNotify2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVPNotify2*, UInt32),
     release : Proc(IVPNotify2*, UInt32),
@@ -21932,7 +21932,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVPNotify2, lpVtbl : IVPNotify2Vtbl* do
+  record IVPNotify2, lpVtbl : IVPNotify2Vtable* do
     GUID = LibC::GUID.new(0xebf47183_u32, 0x8764_u16, 0x11d1_u16, StaticArray[0x9e_u8, 0x69_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xc1_u8, 0x5b_u8])
     def query_interface(this : IVPNotify2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21962,7 +21962,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IVPVBINotifyVtbl,
+  record IVPVBINotifyVtable,
     query_interface : Proc(IVPVBINotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVPVBINotify*, UInt32),
     release : Proc(IVPVBINotify*, UInt32),
@@ -21970,7 +21970,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IVPVBINotify, lpVtbl : IVPVBINotifyVtbl* do
+  record IVPVBINotify, lpVtbl : IVPVBINotifyVtable* do
     GUID = LibC::GUID.new(0xec529b01_u32, 0x1a1f_u16, 0x11d1_u16, StaticArray[0xba_u8, 0xd9_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x44_u8, 0x11_u8, 0x1a_u8])
     def query_interface(this : IVPVBINotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21988,7 +21988,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMediaParamInfoVtbl,
+  record IMediaParamInfoVtable,
     query_interface : Proc(IMediaParamInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaParamInfo*, UInt32),
     release : Proc(IMediaParamInfo*, UInt32),
@@ -22001,7 +22001,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMediaParamInfo, lpVtbl : IMediaParamInfoVtbl* do
+  record IMediaParamInfo, lpVtbl : IMediaParamInfoVtable* do
     GUID = LibC::GUID.new(0x6d6cbb60_u32, 0xa223_u16, 0x44aa_u16, StaticArray[0x84_u8, 0x2f_u8, 0xa2_u8, 0xf0_u8, 0x67_u8, 0x50_u8, 0xbe_u8, 0x6d_u8])
     def query_interface(this : IMediaParamInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22034,7 +22034,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMediaParamsVtbl,
+  record IMediaParamsVtable,
     query_interface : Proc(IMediaParams*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaParams*, UInt32),
     release : Proc(IMediaParams*, UInt32),
@@ -22046,7 +22046,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMediaParams, lpVtbl : IMediaParamsVtbl* do
+  record IMediaParams, lpVtbl : IMediaParamsVtable* do
     GUID = LibC::GUID.new(0x6d6cbb61_u32, 0xa223_u16, 0x44aa_u16, StaticArray[0x84_u8, 0x2f_u8, 0xa2_u8, 0xf0_u8, 0x67_u8, 0x50_u8, 0xbe_u8, 0x6e_u8])
     def query_interface(this : IMediaParams*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22076,7 +22076,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMPlayListItemVtbl,
+  record IAMPlayListItemVtable,
     query_interface : Proc(IAMPlayListItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMPlayListItem*, UInt32),
     release : Proc(IAMPlayListItem*, UInt32),
@@ -22094,7 +22094,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMPlayListItem, lpVtbl : IAMPlayListItemVtbl* do
+  record IAMPlayListItem, lpVtbl : IAMPlayListItemVtable* do
     GUID = LibC::GUID.new(0x56a868ff_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IAMPlayListItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22142,7 +22142,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMPlayListVtbl,
+  record IAMPlayListVtable,
     query_interface : Proc(IAMPlayList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMPlayList*, UInt32),
     release : Proc(IAMPlayList*, UInt32),
@@ -22154,7 +22154,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMPlayList, lpVtbl : IAMPlayListVtbl* do
+  record IAMPlayList, lpVtbl : IAMPlayListVtable* do
     GUID = LibC::GUID.new(0x56a868fe_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IAMPlayList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22184,7 +22184,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ISpecifyParticularPagesVtbl,
+  record ISpecifyParticularPagesVtable,
     query_interface : Proc(ISpecifyParticularPages*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISpecifyParticularPages*, UInt32),
     release : Proc(ISpecifyParticularPages*, UInt32),
@@ -22192,7 +22192,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ISpecifyParticularPages, lpVtbl : ISpecifyParticularPagesVtbl* do
+  record ISpecifyParticularPages, lpVtbl : ISpecifyParticularPagesVtable* do
     GUID = LibC::GUID.new(0x4c437b91_u32, 0x6e9e_u16, 0x11d1_u16, StaticArray[0xa7_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xc4_u8, 0xe4_u8, 0x76_u8])
     def query_interface(this : ISpecifyParticularPages*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22210,7 +22210,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAMRebuildVtbl,
+  record IAMRebuildVtable,
     query_interface : Proc(IAMRebuild*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAMRebuild*, UInt32),
     release : Proc(IAMRebuild*, UInt32),
@@ -22218,7 +22218,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAMRebuild, lpVtbl : IAMRebuildVtbl* do
+  record IAMRebuild, lpVtbl : IAMRebuildVtable* do
     GUID = LibC::GUID.new(0x2ef04dd_u32, 0x7580_u16, 0x11d1_u16, StaticArray[0xbe_u8, 0xce_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xe9_u8, 0x37_u8])
     def query_interface(this : IAMRebuild*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22236,7 +22236,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBufferingTimeVtbl,
+  record IBufferingTimeVtable,
     query_interface : Proc(IBufferingTime*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBufferingTime*, UInt32),
     release : Proc(IBufferingTime*, UInt32),
@@ -22245,7 +22245,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBufferingTime, lpVtbl : IBufferingTimeVtbl* do
+  record IBufferingTime, lpVtbl : IBufferingTimeVtable* do
     GUID = LibC::GUID.new(0x1e00486a_u32, 0x78dd_u16, 0x11d2_u16, StaticArray[0x8d_u8, 0xd3_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xc9_u8, 0xa2_u8, 0xb2_u8])
     def query_interface(this : IBufferingTime*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22266,7 +22266,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ICreatePropBagOnRegKeyVtbl,
+  record ICreatePropBagOnRegKeyVtable,
     query_interface : Proc(ICreatePropBagOnRegKey*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICreatePropBagOnRegKey*, UInt32),
     release : Proc(ICreatePropBagOnRegKey*, UInt32),
@@ -22274,7 +22274,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ICreatePropBagOnRegKey, lpVtbl : ICreatePropBagOnRegKeyVtbl* do
+  record ICreatePropBagOnRegKey, lpVtbl : ICreatePropBagOnRegKeyVtable* do
     GUID = LibC::GUID.new(0x8a674b48_u32, 0x1f63_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x4c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : ICreatePropBagOnRegKey*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22292,7 +22292,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ITuningSpacesVtbl,
+  record ITuningSpacesVtable,
     query_interface : Proc(ITuningSpaces*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITuningSpaces*, UInt32),
     release : Proc(ITuningSpaces*, UInt32),
@@ -22307,7 +22307,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ITuningSpaces, lpVtbl : ITuningSpacesVtbl* do
+  record ITuningSpaces, lpVtbl : ITuningSpacesVtable* do
     GUID = LibC::GUID.new(0x901284e4_u32, 0x33fe_u16, 0x4b69_u16, StaticArray[0x8d_u8, 0x63_u8, 0x63_u8, 0x4a_u8, 0x59_u8, 0x6f_u8, 0x37_u8, 0x56_u8])
     def query_interface(this : ITuningSpaces*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22346,7 +22346,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ITuningSpaceContainerVtbl,
+  record ITuningSpaceContainerVtable,
     query_interface : Proc(ITuningSpaceContainer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITuningSpaceContainer*, UInt32),
     release : Proc(ITuningSpaceContainer*, UInt32),
@@ -22370,7 +22370,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ITuningSpaceContainer, lpVtbl : ITuningSpaceContainerVtbl* do
+  record ITuningSpaceContainer, lpVtbl : ITuningSpaceContainerVtable* do
     GUID = LibC::GUID.new(0x5b692e84_u32, 0xe2f1_u16, 0x11d2_u16, StaticArray[0x94_u8, 0x93_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
     def query_interface(this : ITuningSpaceContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22436,7 +22436,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ITuningSpaceVtbl,
+  record ITuningSpaceVtable,
     query_interface : Proc(ITuningSpace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITuningSpace*, UInt32),
     release : Proc(ITuningSpace*, UInt32),
@@ -22466,7 +22466,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ITuningSpace, lpVtbl : ITuningSpaceVtbl* do
+  record ITuningSpace, lpVtbl : ITuningSpaceVtable* do
     GUID = LibC::GUID.new(0x61c6e30_u32, 0xe622_u16, 0x11d2_u16, StaticArray[0x94_u8, 0x93_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
     def query_interface(this : ITuningSpace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22550,7 +22550,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IEnumTuningSpacesVtbl,
+  record IEnumTuningSpacesVtable,
     query_interface : Proc(IEnumTuningSpaces*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTuningSpaces*, UInt32),
     release : Proc(IEnumTuningSpaces*, UInt32),
@@ -22561,7 +22561,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IEnumTuningSpaces, lpVtbl : IEnumTuningSpacesVtbl* do
+  record IEnumTuningSpaces, lpVtbl : IEnumTuningSpacesVtable* do
     GUID = LibC::GUID.new(0x8b8eb248_u32, 0xfc2b_u16, 0x11d2_u16, StaticArray[0x9d_u8, 0x8c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
     def query_interface(this : IEnumTuningSpaces*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22588,7 +22588,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVBTuningSpaceVtbl,
+  record IDVBTuningSpaceVtable,
     query_interface : Proc(IDVBTuningSpace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVBTuningSpace*, UInt32),
     release : Proc(IDVBTuningSpace*, UInt32),
@@ -22620,7 +22620,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVBTuningSpace, lpVtbl : IDVBTuningSpaceVtbl* do
+  record IDVBTuningSpace, lpVtbl : IDVBTuningSpaceVtable* do
     GUID = LibC::GUID.new(0xada0b268_u32, 0x3b19_u16, 0x4e5b_u16, StaticArray[0xac_u8, 0xc4_u8, 0x49_u8, 0xf8_u8, 0x52_u8, 0xbe_u8, 0x13_u8, 0xba_u8])
     def query_interface(this : IDVBTuningSpace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22710,7 +22710,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVBTuningSpace2Vtbl,
+  record IDVBTuningSpace2Vtable,
     query_interface : Proc(IDVBTuningSpace2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVBTuningSpace2*, UInt32),
     release : Proc(IDVBTuningSpace2*, UInt32),
@@ -22744,7 +22744,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVBTuningSpace2, lpVtbl : IDVBTuningSpace2Vtbl* do
+  record IDVBTuningSpace2, lpVtbl : IDVBTuningSpace2Vtable* do
     GUID = LibC::GUID.new(0x843188b4_u32, 0xce62_u16, 0x43db_u16, StaticArray[0x96_u8, 0x6b_u8, 0x81_u8, 0x45_u8, 0xa0_u8, 0x94_u8, 0xe0_u8, 0x40_u8])
     def query_interface(this : IDVBTuningSpace2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22840,7 +22840,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVBSTuningSpaceVtbl,
+  record IDVBSTuningSpaceVtable,
     query_interface : Proc(IDVBSTuningSpace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVBSTuningSpace*, UInt32),
     release : Proc(IDVBSTuningSpace*, UInt32),
@@ -22884,7 +22884,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVBSTuningSpace, lpVtbl : IDVBSTuningSpaceVtbl* do
+  record IDVBSTuningSpace, lpVtbl : IDVBSTuningSpaceVtable* do
     GUID = LibC::GUID.new(0xcdf7be60_u32, 0xd954_u16, 0x42fd_u16, StaticArray[0xa9_u8, 0x72_u8, 0x78_u8, 0x97_u8, 0x19_u8, 0x58_u8, 0xe4_u8, 0x70_u8])
     def query_interface(this : IDVBSTuningSpace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23010,7 +23010,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAuxInTuningSpaceVtbl,
+  record IAuxInTuningSpaceVtable,
     query_interface : Proc(IAuxInTuningSpace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAuxInTuningSpace*, UInt32),
     release : Proc(IAuxInTuningSpace*, UInt32),
@@ -23040,7 +23040,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAuxInTuningSpace, lpVtbl : IAuxInTuningSpaceVtbl* do
+  record IAuxInTuningSpace, lpVtbl : IAuxInTuningSpaceVtable* do
     GUID = LibC::GUID.new(0xe48244b8_u32, 0x7e17_u16, 0x4f76_u16, StaticArray[0xa7_u8, 0x63_u8, 0x50_u8, 0x90_u8, 0xff_u8, 0x1e_u8, 0x2f_u8, 0x30_u8])
     def query_interface(this : IAuxInTuningSpace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23124,7 +23124,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAuxInTuningSpace2Vtbl,
+  record IAuxInTuningSpace2Vtable,
     query_interface : Proc(IAuxInTuningSpace2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAuxInTuningSpace2*, UInt32),
     release : Proc(IAuxInTuningSpace2*, UInt32),
@@ -23156,7 +23156,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAuxInTuningSpace2, lpVtbl : IAuxInTuningSpace2Vtbl* do
+  record IAuxInTuningSpace2, lpVtbl : IAuxInTuningSpace2Vtable* do
     GUID = LibC::GUID.new(0xb10931ed_u32, 0x8bfe_u16, 0x4ab0_u16, StaticArray[0x9d_u8, 0xce_u8, 0xe4_u8, 0x69_u8, 0xc2_u8, 0x9a_u8, 0x97_u8, 0x29_u8])
     def query_interface(this : IAuxInTuningSpace2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23246,7 +23246,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAnalogTVTuningSpaceVtbl,
+  record IAnalogTVTuningSpaceVtable,
     query_interface : Proc(IAnalogTVTuningSpace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAnalogTVTuningSpace*, UInt32),
     release : Proc(IAnalogTVTuningSpace*, UInt32),
@@ -23284,7 +23284,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAnalogTVTuningSpace, lpVtbl : IAnalogTVTuningSpaceVtbl* do
+  record IAnalogTVTuningSpace, lpVtbl : IAnalogTVTuningSpaceVtable* do
     GUID = LibC::GUID.new(0x2a6e293c_u32, 0x2595_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x4c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IAnalogTVTuningSpace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23392,7 +23392,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IATSCTuningSpaceVtbl,
+  record IATSCTuningSpaceVtable,
     query_interface : Proc(IATSCTuningSpace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IATSCTuningSpace*, UInt32),
     release : Proc(IATSCTuningSpace*, UInt32),
@@ -23438,7 +23438,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IATSCTuningSpace, lpVtbl : IATSCTuningSpaceVtbl* do
+  record IATSCTuningSpace, lpVtbl : IATSCTuningSpaceVtable* do
     GUID = LibC::GUID.new(0x369b4e2_u32, 0x45b6_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x50_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IATSCTuningSpace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23570,7 +23570,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDigitalCableTuningSpaceVtbl,
+  record IDigitalCableTuningSpaceVtable,
     query_interface : Proc(IDigitalCableTuningSpace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDigitalCableTuningSpace*, UInt32),
     release : Proc(IDigitalCableTuningSpace*, UInt32),
@@ -23624,7 +23624,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDigitalCableTuningSpace, lpVtbl : IDigitalCableTuningSpaceVtbl* do
+  record IDigitalCableTuningSpace, lpVtbl : IDigitalCableTuningSpaceVtable* do
     GUID = LibC::GUID.new(0x13f9f9c_u32, 0xb449_u16, 0x4ec7_u16, StaticArray[0xa6_u8, 0xd2_u8, 0x9d_u8, 0x4f_u8, 0x2f_u8, 0xc7_u8, 0xa_u8, 0xe5_u8])
     def query_interface(this : IDigitalCableTuningSpace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23780,7 +23780,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAnalogRadioTuningSpaceVtbl,
+  record IAnalogRadioTuningSpaceVtable,
     query_interface : Proc(IAnalogRadioTuningSpace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAnalogRadioTuningSpace*, UInt32),
     release : Proc(IAnalogRadioTuningSpace*, UInt32),
@@ -23816,7 +23816,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAnalogRadioTuningSpace, lpVtbl : IAnalogRadioTuningSpaceVtbl* do
+  record IAnalogRadioTuningSpace, lpVtbl : IAnalogRadioTuningSpaceVtable* do
     GUID = LibC::GUID.new(0x2a6e293b_u32, 0x2595_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x4c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IAnalogRadioTuningSpace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23918,7 +23918,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAnalogRadioTuningSpace2Vtbl,
+  record IAnalogRadioTuningSpace2Vtable,
     query_interface : Proc(IAnalogRadioTuningSpace2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAnalogRadioTuningSpace2*, UInt32),
     release : Proc(IAnalogRadioTuningSpace2*, UInt32),
@@ -23956,7 +23956,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAnalogRadioTuningSpace2, lpVtbl : IAnalogRadioTuningSpace2Vtbl* do
+  record IAnalogRadioTuningSpace2, lpVtbl : IAnalogRadioTuningSpace2Vtable* do
     GUID = LibC::GUID.new(0x39dd45da_u32, 0x2da8_u16, 0x46ba_u16, StaticArray[0x8a_u8, 0x8a_u8, 0x87_u8, 0xe2_u8, 0xb7_u8, 0x3d_u8, 0x98_u8, 0x3a_u8])
     def query_interface(this : IAnalogRadioTuningSpace2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24064,7 +24064,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ITuneRequestVtbl,
+  record ITuneRequestVtable,
     query_interface : Proc(ITuneRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITuneRequest*, UInt32),
     release : Proc(ITuneRequest*, UInt32),
@@ -24080,7 +24080,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ITuneRequest, lpVtbl : ITuneRequestVtbl* do
+  record ITuneRequest, lpVtbl : ITuneRequestVtable* do
     GUID = LibC::GUID.new(0x7ddc146_u32, 0xfc3d_u16, 0x11d2_u16, StaticArray[0x9d_u8, 0x8c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
     def query_interface(this : ITuneRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24122,7 +24122,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IChannelIDTuneRequestVtbl,
+  record IChannelIDTuneRequestVtable,
     query_interface : Proc(IChannelIDTuneRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IChannelIDTuneRequest*, UInt32),
     release : Proc(IChannelIDTuneRequest*, UInt32),
@@ -24140,7 +24140,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IChannelIDTuneRequest, lpVtbl : IChannelIDTuneRequestVtbl* do
+  record IChannelIDTuneRequest, lpVtbl : IChannelIDTuneRequestVtable* do
     GUID = LibC::GUID.new(0x156eff60_u32, 0x86f4_u16, 0x4e28_u16, StaticArray[0x89_u8, 0xfc_u8, 0x10_u8, 0x97_u8, 0x99_u8, 0xfd_u8, 0x57_u8, 0xee_u8])
     def query_interface(this : IChannelIDTuneRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24188,7 +24188,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IChannelTuneRequestVtbl,
+  record IChannelTuneRequestVtable,
     query_interface : Proc(IChannelTuneRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IChannelTuneRequest*, UInt32),
     release : Proc(IChannelTuneRequest*, UInt32),
@@ -24206,7 +24206,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IChannelTuneRequest, lpVtbl : IChannelTuneRequestVtbl* do
+  record IChannelTuneRequest, lpVtbl : IChannelTuneRequestVtable* do
     GUID = LibC::GUID.new(0x369b4e0_u32, 0x45b6_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x50_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IChannelTuneRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24254,7 +24254,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IATSCChannelTuneRequestVtbl,
+  record IATSCChannelTuneRequestVtable,
     query_interface : Proc(IATSCChannelTuneRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IATSCChannelTuneRequest*, UInt32),
     release : Proc(IATSCChannelTuneRequest*, UInt32),
@@ -24274,7 +24274,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IATSCChannelTuneRequest, lpVtbl : IATSCChannelTuneRequestVtbl* do
+  record IATSCChannelTuneRequest, lpVtbl : IATSCChannelTuneRequestVtable* do
     GUID = LibC::GUID.new(0x369b4e1_u32, 0x45b6_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x50_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IATSCChannelTuneRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24328,7 +24328,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDigitalCableTuneRequestVtbl,
+  record IDigitalCableTuneRequestVtable,
     query_interface : Proc(IDigitalCableTuneRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDigitalCableTuneRequest*, UInt32),
     release : Proc(IDigitalCableTuneRequest*, UInt32),
@@ -24352,7 +24352,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDigitalCableTuneRequest, lpVtbl : IDigitalCableTuneRequestVtbl* do
+  record IDigitalCableTuneRequest, lpVtbl : IDigitalCableTuneRequestVtable* do
     GUID = LibC::GUID.new(0xbad7753b_u32, 0x6b37_u16, 0x4810_u16, StaticArray[0xae_u8, 0x57_u8, 0x3c_u8, 0xe0_u8, 0xc4_u8, 0xa9_u8, 0xe6_u8, 0xcb_u8])
     def query_interface(this : IDigitalCableTuneRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24418,7 +24418,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVBTuneRequestVtbl,
+  record IDVBTuneRequestVtable,
     query_interface : Proc(IDVBTuneRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVBTuneRequest*, UInt32),
     release : Proc(IDVBTuneRequest*, UInt32),
@@ -24440,7 +24440,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVBTuneRequest, lpVtbl : IDVBTuneRequestVtbl* do
+  record IDVBTuneRequest, lpVtbl : IDVBTuneRequestVtable* do
     GUID = LibC::GUID.new(0xd6f567e_u32, 0xa636_u16, 0x42bb_u16, StaticArray[0x83_u8, 0xba_u8, 0xce_u8, 0x4c_u8, 0x17_u8, 0x4_u8, 0xaf_u8, 0xa2_u8])
     def query_interface(this : IDVBTuneRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24500,7 +24500,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMPEG2TuneRequestVtbl,
+  record IMPEG2TuneRequestVtable,
     query_interface : Proc(IMPEG2TuneRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMPEG2TuneRequest*, UInt32),
     release : Proc(IMPEG2TuneRequest*, UInt32),
@@ -24520,7 +24520,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMPEG2TuneRequest, lpVtbl : IMPEG2TuneRequestVtbl* do
+  record IMPEG2TuneRequest, lpVtbl : IMPEG2TuneRequestVtable* do
     GUID = LibC::GUID.new(0xeb7d987f_u32, 0x8a01_u16, 0x42ad_u16, StaticArray[0xb8_u8, 0xae_u8, 0x57_u8, 0x4d_u8, 0xee_u8, 0xe4_u8, 0x4d_u8, 0x1a_u8])
     def query_interface(this : IMPEG2TuneRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24574,7 +24574,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMPEG2TuneRequestFactoryVtbl,
+  record IMPEG2TuneRequestFactoryVtable,
     query_interface : Proc(IMPEG2TuneRequestFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMPEG2TuneRequestFactory*, UInt32),
     release : Proc(IMPEG2TuneRequestFactory*, UInt32),
@@ -24586,7 +24586,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMPEG2TuneRequestFactory, lpVtbl : IMPEG2TuneRequestFactoryVtbl* do
+  record IMPEG2TuneRequestFactory, lpVtbl : IMPEG2TuneRequestFactoryVtable* do
     GUID = LibC::GUID.new(0x14e11abd_u32, 0xee37_u16, 0x4893_u16, StaticArray[0x9e_u8, 0xa1_u8, 0x69_u8, 0x64_u8, 0xde_u8, 0x93_u8, 0x3e_u8, 0x39_u8])
     def query_interface(this : IMPEG2TuneRequestFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24616,14 +24616,14 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMPEG2TuneRequestSupportVtbl,
+  record IMPEG2TuneRequestSupportVtable,
     query_interface : Proc(IMPEG2TuneRequestSupport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMPEG2TuneRequestSupport*, UInt32),
     release : Proc(IMPEG2TuneRequestSupport*, UInt32)
 
 
   @[Extern]
-  record IMPEG2TuneRequestSupport, lpVtbl : IMPEG2TuneRequestSupportVtbl* do
+  record IMPEG2TuneRequestSupport, lpVtbl : IMPEG2TuneRequestSupportVtable* do
     GUID = LibC::GUID.new(0x1b9d5fc3_u32, 0x5bbc_u16, 0x4b6c_u16, StaticArray[0xbb_u8, 0x18_u8, 0xb9_u8, 0xd1_u8, 0xe_u8, 0x3e_u8, 0xee_u8, 0xbf_u8])
     def query_interface(this : IMPEG2TuneRequestSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24638,7 +24638,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ITunerCapVtbl,
+  record ITunerCapVtable,
     query_interface : Proc(ITunerCap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITunerCap*, UInt32),
     release : Proc(ITunerCap*, UInt32),
@@ -24648,7 +24648,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ITunerCap, lpVtbl : ITunerCapVtbl* do
+  record ITunerCap, lpVtbl : ITunerCapVtable* do
     GUID = LibC::GUID.new(0xe60dfa45_u32, 0x8d56_u16, 0x4e65_u16, StaticArray[0xa8_u8, 0xab_u8, 0xd6_u8, 0xbe_u8, 0x94_u8, 0x12_u8, 0xc2_u8, 0x49_u8])
     def query_interface(this : ITunerCap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24672,7 +24672,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ITunerCapExVtbl,
+  record ITunerCapExVtable,
     query_interface : Proc(ITunerCapEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITunerCapEx*, UInt32),
     release : Proc(ITunerCapEx*, UInt32),
@@ -24680,7 +24680,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ITunerCapEx, lpVtbl : ITunerCapExVtbl* do
+  record ITunerCapEx, lpVtbl : ITunerCapExVtable* do
     GUID = LibC::GUID.new(0xed3e0c66_u32, 0x18c8_u16, 0x4ea6_u16, StaticArray[0x93_u8, 0x0_u8, 0xf6_u8, 0x84_u8, 0x1f_u8, 0xdd_u8, 0x35_u8, 0xdc_u8])
     def query_interface(this : ITunerCapEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24698,7 +24698,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ITunerVtbl,
+  record ITunerVtable,
     query_interface : Proc(ITuner*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITuner*, UInt32),
     release : Proc(ITuner*, UInt32),
@@ -24715,7 +24715,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ITuner, lpVtbl : ITunerVtbl* do
+  record ITuner, lpVtbl : ITunerVtable* do
     GUID = LibC::GUID.new(0x28c52640_u32, 0x18a_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
     def query_interface(this : ITuner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24760,7 +24760,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IScanningTunerVtbl,
+  record IScanningTunerVtable,
     query_interface : Proc(IScanningTuner*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IScanningTuner*, UInt32),
     release : Proc(IScanningTuner*, UInt32),
@@ -24782,7 +24782,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IScanningTuner, lpVtbl : IScanningTunerVtbl* do
+  record IScanningTuner, lpVtbl : IScanningTunerVtable* do
     GUID = LibC::GUID.new(0x1dfd0a5c_u32, 0x284_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
     def query_interface(this : IScanningTuner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24842,7 +24842,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IScanningTunerExVtbl,
+  record IScanningTunerExVtable,
     query_interface : Proc(IScanningTunerEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IScanningTunerEx*, UInt32),
     release : Proc(IScanningTunerEx*, UInt32),
@@ -24872,7 +24872,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IScanningTunerEx, lpVtbl : IScanningTunerExVtbl* do
+  record IScanningTunerEx, lpVtbl : IScanningTunerExVtable* do
     GUID = LibC::GUID.new(0x4bbd195_u32, 0xe2d_u16, 0x4593_u16, StaticArray[0x9b_u8, 0xd5_u8, 0x4f_u8, 0x90_u8, 0x8b_u8, 0xc3_u8, 0x3c_u8, 0xf5_u8])
     def query_interface(this : IScanningTunerEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24956,7 +24956,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IComponentTypeVtbl,
+  record IComponentTypeVtable,
     query_interface : Proc(IComponentType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IComponentType*, UInt32),
     release : Proc(IComponentType*, UInt32),
@@ -24984,7 +24984,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IComponentType, lpVtbl : IComponentTypeVtbl* do
+  record IComponentType, lpVtbl : IComponentTypeVtable* do
     GUID = LibC::GUID.new(0x6a340dc0_u32, 0x311_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
     def query_interface(this : IComponentType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25062,7 +25062,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ILanguageComponentTypeVtbl,
+  record ILanguageComponentTypeVtable,
     query_interface : Proc(ILanguageComponentType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILanguageComponentType*, UInt32),
     release : Proc(ILanguageComponentType*, UInt32),
@@ -25092,7 +25092,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ILanguageComponentType, lpVtbl : ILanguageComponentTypeVtbl* do
+  record ILanguageComponentType, lpVtbl : ILanguageComponentTypeVtable* do
     GUID = LibC::GUID.new(0xb874c8ba_u32, 0xfa2_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
     def query_interface(this : ILanguageComponentType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25176,7 +25176,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMPEG2ComponentTypeVtbl,
+  record IMPEG2ComponentTypeVtable,
     query_interface : Proc(IMPEG2ComponentType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMPEG2ComponentType*, UInt32),
     release : Proc(IMPEG2ComponentType*, UInt32),
@@ -25208,7 +25208,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMPEG2ComponentType, lpVtbl : IMPEG2ComponentTypeVtbl* do
+  record IMPEG2ComponentType, lpVtbl : IMPEG2ComponentTypeVtable* do
     GUID = LibC::GUID.new(0x2c073d84_u32, 0xb51c_u16, 0x48c9_u16, StaticArray[0xaa_u8, 0x9f_u8, 0x68_u8, 0x97_u8, 0x1e_u8, 0x1f_u8, 0x6e_u8, 0x38_u8])
     def query_interface(this : IMPEG2ComponentType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25298,7 +25298,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IATSCComponentTypeVtbl,
+  record IATSCComponentTypeVtable,
     query_interface : Proc(IATSCComponentType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IATSCComponentType*, UInt32),
     release : Proc(IATSCComponentType*, UInt32),
@@ -25332,7 +25332,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IATSCComponentType, lpVtbl : IATSCComponentTypeVtbl* do
+  record IATSCComponentType, lpVtbl : IATSCComponentTypeVtable* do
     GUID = LibC::GUID.new(0xfc189e4d_u32, 0x7bd4_u16, 0x4125_u16, StaticArray[0xb3_u8, 0xb3_u8, 0x3a_u8, 0x76_u8, 0xa3_u8, 0x32_u8, 0xcc_u8, 0x96_u8])
     def query_interface(this : IATSCComponentType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25428,7 +25428,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IEnumComponentTypesVtbl,
+  record IEnumComponentTypesVtable,
     query_interface : Proc(IEnumComponentTypes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumComponentTypes*, UInt32),
     release : Proc(IEnumComponentTypes*, UInt32),
@@ -25439,7 +25439,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IEnumComponentTypes, lpVtbl : IEnumComponentTypesVtbl* do
+  record IEnumComponentTypes, lpVtbl : IEnumComponentTypesVtable* do
     GUID = LibC::GUID.new(0x8a674b4a_u32, 0x1f63_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x4c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IEnumComponentTypes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25466,7 +25466,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IComponentTypesVtbl,
+  record IComponentTypesVtable,
     query_interface : Proc(IComponentTypes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IComponentTypes*, UInt32),
     release : Proc(IComponentTypes*, UInt32),
@@ -25485,7 +25485,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IComponentTypes, lpVtbl : IComponentTypesVtbl* do
+  record IComponentTypes, lpVtbl : IComponentTypesVtable* do
     GUID = LibC::GUID.new(0xdc13d4a_u32, 0x313_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
     def query_interface(this : IComponentTypes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25536,7 +25536,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IComponentVtbl,
+  record IComponentVtable,
     query_interface : Proc(IComponent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IComponent*, UInt32),
     release : Proc(IComponent*, UInt32),
@@ -25556,7 +25556,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IComponent, lpVtbl : IComponentVtbl* do
+  record IComponent, lpVtbl : IComponentVtable* do
     GUID = LibC::GUID.new(0x1a5576fc_u32, 0xe19_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
     def query_interface(this : IComponent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25610,7 +25610,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAnalogAudioComponentTypeVtbl,
+  record IAnalogAudioComponentTypeVtable,
     query_interface : Proc(IAnalogAudioComponentType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAnalogAudioComponentType*, UInt32),
     release : Proc(IAnalogAudioComponentType*, UInt32),
@@ -25640,7 +25640,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAnalogAudioComponentType, lpVtbl : IAnalogAudioComponentTypeVtbl* do
+  record IAnalogAudioComponentType, lpVtbl : IAnalogAudioComponentTypeVtable* do
     GUID = LibC::GUID.new(0x2cfeb2a8_u32, 0x1787_u16, 0x4a24_u16, StaticArray[0xa9_u8, 0x41_u8, 0xc6_u8, 0xea_u8, 0xec_u8, 0x39_u8, 0xc8_u8, 0x42_u8])
     def query_interface(this : IAnalogAudioComponentType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25724,7 +25724,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMPEG2ComponentVtbl,
+  record IMPEG2ComponentVtable,
     query_interface : Proc(IMPEG2Component*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMPEG2Component*, UInt32),
     release : Proc(IMPEG2Component*, UInt32),
@@ -25750,7 +25750,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMPEG2Component, lpVtbl : IMPEG2ComponentVtbl* do
+  record IMPEG2Component, lpVtbl : IMPEG2ComponentVtable* do
     GUID = LibC::GUID.new(0x1493e353_u32, 0x1eb6_u16, 0x473c_u16, StaticArray[0x80_u8, 0x2d_u8, 0x8e_u8, 0x6b_u8, 0x8e_u8, 0xc9_u8, 0xd2_u8, 0xa9_u8])
     def query_interface(this : IMPEG2Component*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25822,7 +25822,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IEnumComponentsVtbl,
+  record IEnumComponentsVtable,
     query_interface : Proc(IEnumComponents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumComponents*, UInt32),
     release : Proc(IEnumComponents*, UInt32),
@@ -25833,7 +25833,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IEnumComponents, lpVtbl : IEnumComponentsVtbl* do
+  record IEnumComponents, lpVtbl : IEnumComponentsVtable* do
     GUID = LibC::GUID.new(0x2a6e2939_u32, 0x2595_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x4c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IEnumComponents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25860,7 +25860,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IComponentsVtbl,
+  record IComponentsVtable,
     query_interface : Proc(IComponents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IComponents*, UInt32),
     release : Proc(IComponents*, UInt32),
@@ -25879,7 +25879,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IComponents, lpVtbl : IComponentsVtbl* do
+  record IComponents, lpVtbl : IComponentsVtable* do
     GUID = LibC::GUID.new(0x39a48091_u32, 0xfffe_u16, 0x4182_u16, StaticArray[0xa1_u8, 0x61_u8, 0x3f_u8, 0xf8_u8, 0x2_u8, 0x64_u8, 0xe_u8, 0x26_u8])
     def query_interface(this : IComponents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25930,7 +25930,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IComponentsOldVtbl,
+  record IComponentsOldVtable,
     query_interface : Proc(IComponentsOld*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IComponentsOld*, UInt32),
     release : Proc(IComponentsOld*, UInt32),
@@ -25948,7 +25948,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IComponentsOld, lpVtbl : IComponentsOldVtbl* do
+  record IComponentsOld, lpVtbl : IComponentsOldVtable* do
     GUID = LibC::GUID.new(0xfcd01846_u32, 0xe19_u16, 0x11d3_u16, StaticArray[0x9d_u8, 0x8e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd9_u8, 0x80_u8])
     def query_interface(this : IComponentsOld*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25996,7 +25996,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ILocatorVtbl,
+  record ILocatorVtable,
     query_interface : Proc(ILocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILocator*, UInt32),
     release : Proc(ILocator*, UInt32),
@@ -26022,7 +26022,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ILocator, lpVtbl : ILocatorVtbl* do
+  record ILocator, lpVtbl : ILocatorVtable* do
     GUID = LibC::GUID.new(0x286d7f89_u32, 0x760c_u16, 0x4f89_u16, StaticArray[0x80_u8, 0xc4_u8, 0x66_u8, 0x84_u8, 0x1d_u8, 0x25_u8, 0x7_u8, 0xaa_u8])
     def query_interface(this : ILocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26094,7 +26094,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAnalogLocatorVtbl,
+  record IAnalogLocatorVtable,
     query_interface : Proc(IAnalogLocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAnalogLocator*, UInt32),
     release : Proc(IAnalogLocator*, UInt32),
@@ -26122,7 +26122,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAnalogLocator, lpVtbl : IAnalogLocatorVtbl* do
+  record IAnalogLocator, lpVtbl : IAnalogLocatorVtable* do
     GUID = LibC::GUID.new(0x34d1f26b_u32, 0xe339_u16, 0x430d_u16, StaticArray[0xab_u8, 0xce_u8, 0x73_u8, 0x8c_u8, 0xb4_u8, 0x89_u8, 0x84_u8, 0xdc_u8])
     def query_interface(this : IAnalogLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26200,7 +26200,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDigitalLocatorVtbl,
+  record IDigitalLocatorVtable,
     query_interface : Proc(IDigitalLocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDigitalLocator*, UInt32),
     release : Proc(IDigitalLocator*, UInt32),
@@ -26226,7 +26226,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDigitalLocator, lpVtbl : IDigitalLocatorVtbl* do
+  record IDigitalLocator, lpVtbl : IDigitalLocatorVtable* do
     GUID = LibC::GUID.new(0x19b595d8_u32, 0x839a_u16, 0x47f0_u16, StaticArray[0x96_u8, 0xdf_u8, 0x4f_u8, 0x19_u8, 0x4f_u8, 0x3c_u8, 0x76_u8, 0x8c_u8])
     def query_interface(this : IDigitalLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26298,7 +26298,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IATSCLocatorVtbl,
+  record IATSCLocatorVtable,
     query_interface : Proc(IATSCLocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IATSCLocator*, UInt32),
     release : Proc(IATSCLocator*, UInt32),
@@ -26328,7 +26328,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IATSCLocator, lpVtbl : IATSCLocatorVtbl* do
+  record IATSCLocator, lpVtbl : IATSCLocatorVtable* do
     GUID = LibC::GUID.new(0xbf8d986f_u32, 0x8c2b_u16, 0x4131_u16, StaticArray[0x94_u8, 0xd7_u8, 0x4d_u8, 0x3d_u8, 0x9f_u8, 0xcc_u8, 0x21_u8, 0xef_u8])
     def query_interface(this : IATSCLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26412,7 +26412,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IATSCLocator2Vtbl,
+  record IATSCLocator2Vtable,
     query_interface : Proc(IATSCLocator2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IATSCLocator2*, UInt32),
     release : Proc(IATSCLocator2*, UInt32),
@@ -26444,7 +26444,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IATSCLocator2, lpVtbl : IATSCLocator2Vtbl* do
+  record IATSCLocator2, lpVtbl : IATSCLocator2Vtable* do
     GUID = LibC::GUID.new(0x612aa885_u32, 0x66cf_u16, 0x4090_u16, StaticArray[0xba_u8, 0xa_u8, 0x56_u8, 0x6f_u8, 0x53_u8, 0x12_u8, 0xe4_u8, 0xca_u8])
     def query_interface(this : IATSCLocator2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26534,7 +26534,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDigitalCableLocatorVtbl,
+  record IDigitalCableLocatorVtable,
     query_interface : Proc(IDigitalCableLocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDigitalCableLocator*, UInt32),
     release : Proc(IDigitalCableLocator*, UInt32),
@@ -26566,7 +26566,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDigitalCableLocator, lpVtbl : IDigitalCableLocatorVtbl* do
+  record IDigitalCableLocator, lpVtbl : IDigitalCableLocatorVtable* do
     GUID = LibC::GUID.new(0x48f66a11_u32, 0x171a_u16, 0x419a_u16, StaticArray[0x95_u8, 0x25_u8, 0xbe_u8, 0xee_u8, 0xcd_u8, 0x51_u8, 0x58_u8, 0x4c_u8])
     def query_interface(this : IDigitalCableLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26656,7 +26656,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVBTLocatorVtbl,
+  record IDVBTLocatorVtable,
     query_interface : Proc(IDVBTLocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVBTLocator*, UInt32),
     release : Proc(IDVBTLocator*, UInt32),
@@ -26696,7 +26696,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVBTLocator, lpVtbl : IDVBTLocatorVtbl* do
+  record IDVBTLocator, lpVtbl : IDVBTLocatorVtable* do
     GUID = LibC::GUID.new(0x8664da16_u32, 0xdda2_u16, 0x42ac_u16, StaticArray[0x92_u8, 0x6a_u8, 0xc1_u8, 0x8f_u8, 0x91_u8, 0x27_u8, 0xc3_u8, 0x2_u8])
     def query_interface(this : IDVBTLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26810,7 +26810,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVBTLocator2Vtbl,
+  record IDVBTLocator2Vtable,
     query_interface : Proc(IDVBTLocator2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVBTLocator2*, UInt32),
     release : Proc(IDVBTLocator2*, UInt32),
@@ -26852,7 +26852,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVBTLocator2, lpVtbl : IDVBTLocator2Vtbl* do
+  record IDVBTLocator2, lpVtbl : IDVBTLocator2Vtable* do
     GUID = LibC::GUID.new(0x448a2edf_u32, 0xae95_u16, 0x4b43_u16, StaticArray[0xa3_u8, 0xcc_u8, 0x74_u8, 0x78_u8, 0x43_u8, 0xc4_u8, 0x53_u8, 0xd4_u8])
     def query_interface(this : IDVBTLocator2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26972,7 +26972,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVBSLocatorVtbl,
+  record IDVBSLocatorVtable,
     query_interface : Proc(IDVBSLocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVBSLocator*, UInt32),
     release : Proc(IDVBSLocator*, UInt32),
@@ -27008,7 +27008,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVBSLocator, lpVtbl : IDVBSLocatorVtbl* do
+  record IDVBSLocator, lpVtbl : IDVBSLocatorVtable* do
     GUID = LibC::GUID.new(0x3d7c353c_u32, 0xd04_u16, 0x45f1_u16, StaticArray[0xa7_u8, 0x42_u8, 0xf9_u8, 0x7c_u8, 0xc1_u8, 0x18_u8, 0x8d_u8, 0xc8_u8])
     def query_interface(this : IDVBSLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27110,7 +27110,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVBSLocator2Vtbl,
+  record IDVBSLocator2Vtable,
     query_interface : Proc(IDVBSLocator2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVBSLocator2*, UInt32),
     release : Proc(IDVBSLocator2*, UInt32),
@@ -27160,7 +27160,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVBSLocator2, lpVtbl : IDVBSLocator2Vtbl* do
+  record IDVBSLocator2, lpVtbl : IDVBSLocator2Vtable* do
     GUID = LibC::GUID.new(0x6044634a_u32, 0x1733_u16, 0x4f99_u16, StaticArray[0xb9_u8, 0x82_u8, 0x5f_u8, 0xb1_u8, 0x2a_u8, 0xfc_u8, 0xe4_u8, 0xf0_u8])
     def query_interface(this : IDVBSLocator2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27304,7 +27304,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVBCLocatorVtbl,
+  record IDVBCLocatorVtable,
     query_interface : Proc(IDVBCLocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVBCLocator*, UInt32),
     release : Proc(IDVBCLocator*, UInt32),
@@ -27330,7 +27330,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVBCLocator, lpVtbl : IDVBCLocatorVtbl* do
+  record IDVBCLocator, lpVtbl : IDVBCLocatorVtable* do
     GUID = LibC::GUID.new(0x6e42f36e_u32, 0x1dd2_u16, 0x43c4_u16, StaticArray[0x9f_u8, 0x78_u8, 0x69_u8, 0xd2_u8, 0x5a_u8, 0xe3_u8, 0x90_u8, 0x34_u8])
     def query_interface(this : IDVBCLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27402,7 +27402,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IISDBSLocatorVtbl,
+  record IISDBSLocatorVtable,
     query_interface : Proc(IISDBSLocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IISDBSLocator*, UInt32),
     release : Proc(IISDBSLocator*, UInt32),
@@ -27438,7 +27438,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IISDBSLocator, lpVtbl : IISDBSLocatorVtbl* do
+  record IISDBSLocator, lpVtbl : IISDBSLocatorVtable* do
     GUID = LibC::GUID.new(0xc9897087_u32, 0xe29c_u16, 0x473f_u16, StaticArray[0x9e_u8, 0x4b_u8, 0x70_u8, 0x72_u8, 0x12_u8, 0x3d_u8, 0xea_u8, 0x14_u8])
     def query_interface(this : IISDBSLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27540,7 +27540,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IESOpenMmiEventVtbl,
+  record IESOpenMmiEventVtable,
     query_interface : Proc(IESOpenMmiEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IESOpenMmiEvent*, UInt32),
     release : Proc(IESOpenMmiEvent*, UInt32),
@@ -27556,7 +27556,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IESOpenMmiEvent, lpVtbl : IESOpenMmiEventVtbl* do
+  record IESOpenMmiEvent, lpVtbl : IESOpenMmiEventVtable* do
     GUID = LibC::GUID.new(0xba4b6526_u32, 0x1a35_u16, 0x4635_u16, StaticArray[0x8b_u8, 0x56_u8, 0x3e_u8, 0xc6_u8, 0x12_u8, 0x74_u8, 0x6a_u8, 0x8c_u8])
     def query_interface(this : IESOpenMmiEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27598,7 +27598,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IESCloseMmiEventVtbl,
+  record IESCloseMmiEventVtable,
     query_interface : Proc(IESCloseMmiEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IESCloseMmiEvent*, UInt32),
     release : Proc(IESCloseMmiEvent*, UInt32),
@@ -27611,7 +27611,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IESCloseMmiEvent, lpVtbl : IESCloseMmiEventVtbl* do
+  record IESCloseMmiEvent, lpVtbl : IESCloseMmiEventVtable* do
     GUID = LibC::GUID.new(0x6b80e96f_u32, 0x55e2_u16, 0x45aa_u16, StaticArray[0xb7_u8, 0x54_u8, 0xc_u8, 0x23_u8, 0xc8_u8, 0xe7_u8, 0xd5_u8, 0xc1_u8])
     def query_interface(this : IESCloseMmiEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27644,7 +27644,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IESValueUpdatedEventVtbl,
+  record IESValueUpdatedEventVtable,
     query_interface : Proc(IESValueUpdatedEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IESValueUpdatedEvent*, UInt32),
     release : Proc(IESValueUpdatedEvent*, UInt32),
@@ -27657,7 +27657,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IESValueUpdatedEvent, lpVtbl : IESValueUpdatedEventVtbl* do
+  record IESValueUpdatedEvent, lpVtbl : IESValueUpdatedEventVtable* do
     GUID = LibC::GUID.new(0x8a24c46e_u32, 0xbb63_u16, 0x4664_u16, StaticArray[0x86_u8, 0x2_u8, 0x5d_u8, 0x9c_u8, 0x71_u8, 0x8c_u8, 0x14_u8, 0x6d_u8])
     def query_interface(this : IESValueUpdatedEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27690,7 +27690,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IESRequestTunerEventVtbl,
+  record IESRequestTunerEventVtable,
     query_interface : Proc(IESRequestTunerEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IESRequestTunerEvent*, UInt32),
     release : Proc(IESRequestTunerEvent*, UInt32),
@@ -27706,7 +27706,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IESRequestTunerEvent, lpVtbl : IESRequestTunerEventVtbl* do
+  record IESRequestTunerEvent, lpVtbl : IESRequestTunerEventVtable* do
     GUID = LibC::GUID.new(0x54c7a5e8_u32, 0xc3bb_u16, 0x4f51_u16, StaticArray[0xaf_u8, 0x14_u8, 0xe0_u8, 0xe2_u8, 0xc0_u8, 0xe3_u8, 0x4c_u8, 0x6d_u8])
     def query_interface(this : IESRequestTunerEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27748,7 +27748,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IESIsdbCasResponseEventVtbl,
+  record IESIsdbCasResponseEventVtable,
     query_interface : Proc(IESIsdbCasResponseEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IESIsdbCasResponseEvent*, UInt32),
     release : Proc(IESIsdbCasResponseEvent*, UInt32),
@@ -27764,7 +27764,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IESIsdbCasResponseEvent, lpVtbl : IESIsdbCasResponseEventVtbl* do
+  record IESIsdbCasResponseEvent, lpVtbl : IESIsdbCasResponseEventVtable* do
     GUID = LibC::GUID.new(0x2017cb03_u32, 0xdc0f_u16, 0x4c24_u16, StaticArray[0x83_u8, 0xca_u8, 0x36_u8, 0x30_u8, 0x7b_u8, 0x2c_u8, 0xd1_u8, 0x9f_u8])
     def query_interface(this : IESIsdbCasResponseEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27806,7 +27806,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IGpnvsCommonBaseVtbl,
+  record IGpnvsCommonBaseVtable,
     query_interface : Proc(IGpnvsCommonBase*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGpnvsCommonBase*, UInt32),
     release : Proc(IGpnvsCommonBase*, UInt32),
@@ -27814,7 +27814,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IGpnvsCommonBase, lpVtbl : IGpnvsCommonBaseVtbl* do
+  record IGpnvsCommonBase, lpVtbl : IGpnvsCommonBaseVtable* do
     GUID = LibC::GUID.new(0x907e0b5c_u32, 0xe42d_u16, 0x4f04_u16, StaticArray[0x91_u8, 0xf0_u8, 0x26_u8, 0xf4_u8, 0x1_u8, 0xf3_u8, 0x69_u8, 0x7_u8])
     def query_interface(this : IGpnvsCommonBase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27832,7 +27832,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IESEventFactoryVtbl,
+  record IESEventFactoryVtable,
     query_interface : Proc(IESEventFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IESEventFactory*, UInt32),
     release : Proc(IESEventFactory*, UInt32),
@@ -27840,7 +27840,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IESEventFactory, lpVtbl : IESEventFactoryVtbl* do
+  record IESEventFactory, lpVtbl : IESEventFactoryVtable* do
     GUID = LibC::GUID.new(0x506a09b8_u32, 0x7f86_u16, 0x4e04_u16, StaticArray[0xac_u8, 0x5_u8, 0x33_u8, 0x3_u8, 0xbf_u8, 0xe8_u8, 0xfc_u8, 0x49_u8])
     def query_interface(this : IESEventFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27858,7 +27858,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IESLicenseRenewalResultEventVtbl,
+  record IESLicenseRenewalResultEventVtable,
     query_interface : Proc(IESLicenseRenewalResultEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IESLicenseRenewalResultEvent*, UInt32),
     release : Proc(IESLicenseRenewalResultEvent*, UInt32),
@@ -27881,7 +27881,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IESLicenseRenewalResultEvent, lpVtbl : IESLicenseRenewalResultEventVtbl* do
+  record IESLicenseRenewalResultEvent, lpVtbl : IESLicenseRenewalResultEventVtable* do
     GUID = LibC::GUID.new(0xd5a48ef5_u32, 0xa81b_u16, 0x4df0_u16, StaticArray[0xac_u8, 0xaa_u8, 0x5e_u8, 0x35_u8, 0xe7_u8, 0xea_u8, 0x45_u8, 0xd4_u8])
     def query_interface(this : IESLicenseRenewalResultEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27944,7 +27944,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IESFileExpiryDateEventVtbl,
+  record IESFileExpiryDateEventVtable,
     query_interface : Proc(IESFileExpiryDateEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IESFileExpiryDateEvent*, UInt32),
     release : Proc(IESFileExpiryDateEvent*, UInt32),
@@ -27962,7 +27962,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IESFileExpiryDateEvent, lpVtbl : IESFileExpiryDateEventVtbl* do
+  record IESFileExpiryDateEvent, lpVtbl : IESFileExpiryDateEventVtable* do
     GUID = LibC::GUID.new(0xba9edcb6_u32, 0x4d36_u16, 0x4cfe_u16, StaticArray[0x8c_u8, 0x56_u8, 0x87_u8, 0xa6_u8, 0xb0_u8, 0xca_u8, 0x48_u8, 0xe1_u8])
     def query_interface(this : IESFileExpiryDateEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28010,7 +28010,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IESEventServiceVtbl,
+  record IESEventServiceVtable,
     query_interface : Proc(IESEventService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IESEventService*, UInt32),
     release : Proc(IESEventService*, UInt32),
@@ -28018,7 +28018,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IESEventService, lpVtbl : IESEventServiceVtbl* do
+  record IESEventService, lpVtbl : IESEventServiceVtable* do
     GUID = LibC::GUID.new(0xed89a619_u32, 0x4c06_u16, 0x4b2f_u16, StaticArray[0x99_u8, 0xeb_u8, 0xc7_u8, 0x66_u8, 0x9b_u8, 0x13_u8, 0x4_u8, 0x7c_u8])
     def query_interface(this : IESEventService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28036,7 +28036,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IESEventServiceConfigurationVtbl,
+  record IESEventServiceConfigurationVtable,
     query_interface : Proc(IESEventServiceConfiguration*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IESEventServiceConfiguration*, UInt32),
     release : Proc(IESEventServiceConfiguration*, UInt32),
@@ -28049,7 +28049,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IESEventServiceConfiguration, lpVtbl : IESEventServiceConfigurationVtbl* do
+  record IESEventServiceConfiguration, lpVtbl : IESEventServiceConfigurationVtable* do
     GUID = LibC::GUID.new(0x33b9daae_u32, 0x9309_u16, 0x491d_u16, StaticArray[0xa0_u8, 0x51_u8, 0xbc_u8, 0xad_u8, 0x2a_u8, 0x70_u8, 0xcd_u8, 0x66_u8])
     def query_interface(this : IESEventServiceConfiguration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28082,7 +28082,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IRegisterTunerVtbl,
+  record IRegisterTunerVtable,
     query_interface : Proc(IRegisterTuner*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRegisterTuner*, UInt32),
     release : Proc(IRegisterTuner*, UInt32),
@@ -28091,7 +28091,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IRegisterTuner, lpVtbl : IRegisterTunerVtbl* do
+  record IRegisterTuner, lpVtbl : IRegisterTunerVtable* do
     GUID = LibC::GUID.new(0x359b3901_u32, 0x572c_u16, 0x4854_u16, StaticArray[0xbb_u8, 0x49_u8, 0xcd_u8, 0xef_u8, 0x66_u8, 0x60_u8, 0x6a_u8, 0x25_u8])
     def query_interface(this : IRegisterTuner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28112,7 +28112,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDAComparableVtbl,
+  record IBDAComparableVtable,
     query_interface : Proc(IBDAComparable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDAComparable*, UInt32),
     release : Proc(IBDAComparable*, UInt32),
@@ -28125,7 +28125,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDAComparable, lpVtbl : IBDAComparableVtbl* do
+  record IBDAComparable, lpVtbl : IBDAComparableVtable* do
     GUID = LibC::GUID.new(0xb34505e0_u32, 0x2f0e_u16, 0x497b_u16, StaticArray[0x80_u8, 0xbc_u8, 0xd4_u8, 0x3f_u8, 0x3b_u8, 0x24_u8, 0xed_u8, 0x7f_u8])
     def query_interface(this : IBDAComparable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28158,7 +28158,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IPersistTuneXmlVtbl,
+  record IPersistTuneXmlVtable,
     query_interface : Proc(IPersistTuneXml*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPersistTuneXml*, UInt32),
     release : Proc(IPersistTuneXml*, UInt32),
@@ -28169,7 +28169,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IPersistTuneXml, lpVtbl : IPersistTuneXmlVtbl* do
+  record IPersistTuneXml, lpVtbl : IPersistTuneXmlVtable* do
     GUID = LibC::GUID.new(0x754cd31_u32, 0x8d15_u16, 0x47a9_u16, StaticArray[0x82_u8, 0x15_u8, 0xd2_u8, 0x0_u8, 0x64_u8, 0x15_u8, 0x72_u8, 0x44_u8])
     def query_interface(this : IPersistTuneXml*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28196,7 +28196,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IPersistTuneXmlUtilityVtbl,
+  record IPersistTuneXmlUtilityVtable,
     query_interface : Proc(IPersistTuneXmlUtility*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPersistTuneXmlUtility*, UInt32),
     release : Proc(IPersistTuneXmlUtility*, UInt32),
@@ -28204,7 +28204,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IPersistTuneXmlUtility, lpVtbl : IPersistTuneXmlUtilityVtbl* do
+  record IPersistTuneXmlUtility, lpVtbl : IPersistTuneXmlUtilityVtable* do
     GUID = LibC::GUID.new(0x990237ae_u32, 0xac11_u16, 0x4614_u16, StaticArray[0xbe_u8, 0x8f_u8, 0xdd_u8, 0x21_u8, 0x7a_u8, 0x4c_u8, 0xb4_u8, 0xcb_u8])
     def query_interface(this : IPersistTuneXmlUtility*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28222,7 +28222,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IPersistTuneXmlUtility2Vtbl,
+  record IPersistTuneXmlUtility2Vtable,
     query_interface : Proc(IPersistTuneXmlUtility2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPersistTuneXmlUtility2*, UInt32),
     release : Proc(IPersistTuneXmlUtility2*, UInt32),
@@ -28231,7 +28231,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IPersistTuneXmlUtility2, lpVtbl : IPersistTuneXmlUtility2Vtbl* do
+  record IPersistTuneXmlUtility2, lpVtbl : IPersistTuneXmlUtility2Vtable* do
     GUID = LibC::GUID.new(0x992e165f_u32, 0xea24_u16, 0x4b2f_u16, StaticArray[0x9a_u8, 0x1d_u8, 0x0_u8, 0x9d_u8, 0x92_u8, 0x12_u8, 0x4_u8, 0x51_u8])
     def query_interface(this : IPersistTuneXmlUtility2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28252,7 +28252,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDACreateTuneRequestExVtbl,
+  record IBDACreateTuneRequestExVtable,
     query_interface : Proc(IBDACreateTuneRequestEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDACreateTuneRequestEx*, UInt32),
     release : Proc(IBDACreateTuneRequestEx*, UInt32),
@@ -28260,7 +28260,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDACreateTuneRequestEx, lpVtbl : IBDACreateTuneRequestExVtbl* do
+  record IBDACreateTuneRequestEx, lpVtbl : IBDACreateTuneRequestExVtable* do
     GUID = LibC::GUID.new(0xc0a4a1d4_u32, 0x2b3c_u16, 0x491a_u16, StaticArray[0xba_u8, 0x22_u8, 0x49_u8, 0x9f_u8, 0xba_u8, 0xdd_u8, 0x4d_u8, 0x12_u8])
     def query_interface(this : IBDACreateTuneRequestEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28278,7 +28278,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IETFilterConfigVtbl,
+  record IETFilterConfigVtable,
     query_interface : Proc(IETFilterConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IETFilterConfig*, UInt32),
     release : Proc(IETFilterConfig*, UInt32),
@@ -28287,7 +28287,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IETFilterConfig, lpVtbl : IETFilterConfigVtbl* do
+  record IETFilterConfig, lpVtbl : IETFilterConfigVtable* do
     GUID = LibC::GUID.new(0xc4c4c4d1_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
     def query_interface(this : IETFilterConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28308,7 +28308,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDTFilterConfigVtbl,
+  record IDTFilterConfigVtable,
     query_interface : Proc(IDTFilterConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDTFilterConfig*, UInt32),
     release : Proc(IDTFilterConfig*, UInt32),
@@ -28316,7 +28316,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDTFilterConfig, lpVtbl : IDTFilterConfigVtbl* do
+  record IDTFilterConfig, lpVtbl : IDTFilterConfigVtable* do
     GUID = LibC::GUID.new(0xc4c4c4d2_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
     def query_interface(this : IDTFilterConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28334,7 +28334,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IXDSCodecConfigVtbl,
+  record IXDSCodecConfigVtable,
     query_interface : Proc(IXDSCodecConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXDSCodecConfig*, UInt32),
     release : Proc(IXDSCodecConfig*, UInt32),
@@ -28343,7 +28343,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IXDSCodecConfig, lpVtbl : IXDSCodecConfigVtbl* do
+  record IXDSCodecConfig, lpVtbl : IXDSCodecConfigVtable* do
     GUID = LibC::GUID.new(0xc4c4c4d3_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
     def query_interface(this : IXDSCodecConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28364,7 +28364,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDTFilterLicenseRenewalVtbl,
+  record IDTFilterLicenseRenewalVtable,
     query_interface : Proc(IDTFilterLicenseRenewal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDTFilterLicenseRenewal*, UInt32),
     release : Proc(IDTFilterLicenseRenewal*, UInt32),
@@ -28372,7 +28372,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDTFilterLicenseRenewal, lpVtbl : IDTFilterLicenseRenewalVtbl* do
+  record IDTFilterLicenseRenewal, lpVtbl : IDTFilterLicenseRenewalVtable* do
     GUID = LibC::GUID.new(0x8a78b317_u32, 0xe405_u16, 0x4a43_u16, StaticArray[0x99_u8, 0x4a_u8, 0x62_u8, 0xd_u8, 0x8f_u8, 0x5c_u8, 0xe2_u8, 0x5e_u8])
     def query_interface(this : IDTFilterLicenseRenewal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28390,7 +28390,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IPTFilterLicenseRenewalVtbl,
+  record IPTFilterLicenseRenewalVtable,
     query_interface : Proc(IPTFilterLicenseRenewal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPTFilterLicenseRenewal*, UInt32),
     release : Proc(IPTFilterLicenseRenewal*, UInt32),
@@ -28399,7 +28399,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IPTFilterLicenseRenewal, lpVtbl : IPTFilterLicenseRenewalVtbl* do
+  record IPTFilterLicenseRenewal, lpVtbl : IPTFilterLicenseRenewalVtable* do
     GUID = LibC::GUID.new(0x26d836a5_u32, 0xc15_u16, 0x44c7_u16, StaticArray[0xac_u8, 0x59_u8, 0xb0_u8, 0xda_u8, 0x87_u8, 0x28_u8, 0xf2_u8, 0x40_u8])
     def query_interface(this : IPTFilterLicenseRenewal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28420,7 +28420,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMceBurnerControlVtbl,
+  record IMceBurnerControlVtable,
     query_interface : Proc(IMceBurnerControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMceBurnerControl*, UInt32),
     release : Proc(IMceBurnerControl*, UInt32),
@@ -28428,7 +28428,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMceBurnerControl, lpVtbl : IMceBurnerControlVtbl* do
+  record IMceBurnerControl, lpVtbl : IMceBurnerControlVtable* do
     GUID = LibC::GUID.new(0x5a86b91a_u32, 0xe71e_u16, 0x46c1_u16, StaticArray[0x88_u8, 0xa9_u8, 0x9b_u8, 0xb3_u8, 0x38_u8, 0x71_u8, 0x5_u8, 0x52_u8])
     def query_interface(this : IMceBurnerControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28446,7 +28446,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IETFilterVtbl,
+  record IETFilterVtable,
     query_interface : Proc(IETFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IETFilter*, UInt32),
     release : Proc(IETFilter*, UInt32),
@@ -28458,7 +28458,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IETFilter, lpVtbl : IETFilterVtbl* do
+  record IETFilter, lpVtbl : IETFilterVtable* do
     GUID = LibC::GUID.new(0xc4c4c4b1_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
     def query_interface(this : IETFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28488,7 +28488,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IETFilterEventsVtbl,
+  record IETFilterEventsVtable,
     query_interface : Proc(IETFilterEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IETFilterEvents*, UInt32),
     release : Proc(IETFilterEvents*, UInt32),
@@ -28499,7 +28499,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IETFilterEvents, lpVtbl : IETFilterEventsVtbl* do
+  record IETFilterEvents, lpVtbl : IETFilterEventsVtable* do
     GUID = LibC::GUID.new(0xc4c4c4c1_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
     def query_interface(this : IETFilterEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28526,7 +28526,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDTFilterVtbl,
+  record IDTFilterVtable,
     query_interface : Proc(IDTFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDTFilter*, UInt32),
     release : Proc(IDTFilter*, UInt32),
@@ -28541,7 +28541,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDTFilter, lpVtbl : IDTFilterVtbl* do
+  record IDTFilter, lpVtbl : IDTFilterVtable* do
     GUID = LibC::GUID.new(0xc4c4c4b2_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
     def query_interface(this : IDTFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28580,7 +28580,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDTFilter2Vtbl,
+  record IDTFilter2Vtable,
     query_interface : Proc(IDTFilter2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDTFilter2*, UInt32),
     release : Proc(IDTFilter2*, UInt32),
@@ -28598,7 +28598,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDTFilter2, lpVtbl : IDTFilter2Vtbl* do
+  record IDTFilter2, lpVtbl : IDTFilter2Vtable* do
     GUID = LibC::GUID.new(0xc4c4c4b4_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
     def query_interface(this : IDTFilter2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28646,7 +28646,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDTFilter3Vtbl,
+  record IDTFilter3Vtable,
     query_interface : Proc(IDTFilter3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDTFilter3*, UInt32),
     release : Proc(IDTFilter3*, UInt32),
@@ -28667,7 +28667,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDTFilter3, lpVtbl : IDTFilter3Vtbl* do
+  record IDTFilter3, lpVtbl : IDTFilter3Vtable* do
     GUID = LibC::GUID.new(0x513998cc_u32, 0xe929_u16, 0x4cdf_u16, StaticArray[0x9f_u8, 0xbd_u8, 0xba_u8, 0xd1_u8, 0xe0_u8, 0x31_u8, 0x48_u8, 0x66_u8])
     def query_interface(this : IDTFilter3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28724,7 +28724,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDTFilterEventsVtbl,
+  record IDTFilterEventsVtable,
     query_interface : Proc(IDTFilterEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDTFilterEvents*, UInt32),
     release : Proc(IDTFilterEvents*, UInt32),
@@ -28735,7 +28735,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDTFilterEvents, lpVtbl : IDTFilterEventsVtbl* do
+  record IDTFilterEvents, lpVtbl : IDTFilterEventsVtable* do
     GUID = LibC::GUID.new(0xc4c4c4c2_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
     def query_interface(this : IDTFilterEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28762,7 +28762,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IXDSCodecVtbl,
+  record IXDSCodecVtable,
     query_interface : Proc(IXDSCodec*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXDSCodec*, UInt32),
     release : Proc(IXDSCodec*, UInt32),
@@ -28776,7 +28776,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IXDSCodec, lpVtbl : IXDSCodecVtbl* do
+  record IXDSCodec, lpVtbl : IXDSCodecVtable* do
     GUID = LibC::GUID.new(0xc4c4c4b3_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
     def query_interface(this : IXDSCodec*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28812,7 +28812,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IXDSCodecEventsVtbl,
+  record IXDSCodecEventsVtable,
     query_interface : Proc(IXDSCodecEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXDSCodecEvents*, UInt32),
     release : Proc(IXDSCodecEvents*, UInt32),
@@ -28823,7 +28823,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IXDSCodecEvents, lpVtbl : IXDSCodecEventsVtbl* do
+  record IXDSCodecEvents, lpVtbl : IXDSCodecEventsVtable* do
     GUID = LibC::GUID.new(0xc4c4c4c3_u32, 0x49_u16, 0x4e2b_u16, StaticArray[0x98_u8, 0xfb_u8, 0x95_u8, 0x37_u8, 0xf6_u8, 0xce_u8, 0x51_u8, 0x6d_u8])
     def query_interface(this : IXDSCodecEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28850,7 +28850,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IXDSToRatVtbl,
+  record IXDSToRatVtable,
     query_interface : Proc(IXDSToRat*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXDSToRat*, UInt32),
     release : Proc(IXDSToRat*, UInt32),
@@ -28863,7 +28863,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IXDSToRat, lpVtbl : IXDSToRatVtbl* do
+  record IXDSToRat, lpVtbl : IXDSToRatVtable* do
     GUID = LibC::GUID.new(0xc5c5c5b0_u32, 0x3abc_u16, 0x11d6_u16, StaticArray[0xb2_u8, 0x5b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa0_u8, 0xc0_u8, 0x26_u8])
     def query_interface(this : IXDSToRat*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28896,7 +28896,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IEvalRatVtbl,
+  record IEvalRatVtable,
     query_interface : Proc(IEvalRat*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEvalRat*, UInt32),
     release : Proc(IEvalRat*, UInt32),
@@ -28913,7 +28913,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IEvalRat, lpVtbl : IEvalRatVtbl* do
+  record IEvalRat, lpVtbl : IEvalRatVtable* do
     GUID = LibC::GUID.new(0xc5c5c5b1_u32, 0x3abc_u16, 0x11d6_u16, StaticArray[0xb2_u8, 0x5b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa0_u8, 0xc0_u8, 0x26_u8])
     def query_interface(this : IEvalRat*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28958,7 +28958,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidRectVtbl,
+  record IMSVidRectVtable,
     query_interface : Proc(IMSVidRect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidRect*, UInt32),
     release : Proc(IMSVidRect*, UInt32),
@@ -28980,7 +28980,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidRect, lpVtbl : IMSVidRectVtbl* do
+  record IMSVidRect, lpVtbl : IMSVidRectVtable* do
     GUID = LibC::GUID.new(0x7f5000a6_u32, 0xa440_u16, 0x47ca_u16, StaticArray[0x8a_u8, 0xcc_u8, 0xc0_u8, 0xe7_u8, 0x55_u8, 0x31_u8, 0xa2_u8, 0xc2_u8])
     def query_interface(this : IMSVidRect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29040,7 +29040,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidGraphSegmentContainerVtbl,
+  record IMSVidGraphSegmentContainerVtable,
     query_interface : Proc(IMSVidGraphSegmentContainer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidGraphSegmentContainer*, UInt32),
     release : Proc(IMSVidGraphSegmentContainer*, UInt32),
@@ -29058,7 +29058,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidGraphSegmentContainer, lpVtbl : IMSVidGraphSegmentContainerVtbl* do
+  record IMSVidGraphSegmentContainer, lpVtbl : IMSVidGraphSegmentContainerVtable* do
     GUID = LibC::GUID.new(0x3dd2903d_u32, 0xe0aa_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x3a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidGraphSegmentContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29106,7 +29106,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidGraphSegmentVtbl,
+  record IMSVidGraphSegmentVtable,
     query_interface : Proc(IMSVidGraphSegment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidGraphSegment*, UInt32),
     release : Proc(IMSVidGraphSegment*, UInt32),
@@ -29129,7 +29129,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidGraphSegment, lpVtbl : IMSVidGraphSegmentVtbl* do
+  record IMSVidGraphSegment, lpVtbl : IMSVidGraphSegmentVtable* do
     GUID = LibC::GUID.new(0x238dec54_u32, 0xadeb_u16, 0x4005_u16, StaticArray[0xa3_u8, 0x49_u8, 0xf7_u8, 0x72_u8, 0xb9_u8, 0xaf_u8, 0xeb_u8, 0xc4_u8])
     def query_interface(this : IMSVidGraphSegment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29192,7 +29192,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidGraphSegmentUserInputVtbl,
+  record IMSVidGraphSegmentUserInputVtable,
     query_interface : Proc(IMSVidGraphSegmentUserInput*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidGraphSegmentUserInput*, UInt32),
     release : Proc(IMSVidGraphSegmentUserInput*, UInt32),
@@ -29207,7 +29207,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidGraphSegmentUserInput, lpVtbl : IMSVidGraphSegmentUserInputVtbl* do
+  record IMSVidGraphSegmentUserInput, lpVtbl : IMSVidGraphSegmentUserInputVtable* do
     GUID = LibC::GUID.new(0x301c060e_u32, 0x20d9_u16, 0x4587_u16, StaticArray[0x9b_u8, 0x3_u8, 0xf8_u8, 0x2e_u8, 0xd9_u8, 0xa9_u8, 0x94_u8, 0x3c_u8])
     def query_interface(this : IMSVidGraphSegmentUserInput*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29246,7 +29246,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidCompositionSegmentVtbl,
+  record IMSVidCompositionSegmentVtable,
     query_interface : Proc(IMSVidCompositionSegment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidCompositionSegment*, UInt32),
     release : Proc(IMSVidCompositionSegment*, UInt32),
@@ -29272,7 +29272,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidCompositionSegment, lpVtbl : IMSVidCompositionSegmentVtbl* do
+  record IMSVidCompositionSegment, lpVtbl : IMSVidCompositionSegmentVtable* do
     GUID = LibC::GUID.new(0x1c15d483_u32, 0x911d_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidCompositionSegment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29344,7 +29344,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IEnumMSVidGraphSegmentVtbl,
+  record IEnumMSVidGraphSegmentVtable,
     query_interface : Proc(IEnumMSVidGraphSegment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumMSVidGraphSegment*, UInt32),
     release : Proc(IEnumMSVidGraphSegment*, UInt32),
@@ -29355,7 +29355,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IEnumMSVidGraphSegment, lpVtbl : IEnumMSVidGraphSegmentVtbl* do
+  record IEnumMSVidGraphSegment, lpVtbl : IEnumMSVidGraphSegmentVtable* do
     GUID = LibC::GUID.new(0x3dd2903e_u32, 0xe0aa_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x3a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IEnumMSVidGraphSegment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29382,7 +29382,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidVRGraphSegmentVtbl,
+  record IMSVidVRGraphSegmentVtable,
     query_interface : Proc(IMSVidVRGraphSegment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidVRGraphSegment*, UInt32),
     release : Proc(IMSVidVRGraphSegment*, UInt32),
@@ -29426,7 +29426,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidVRGraphSegment, lpVtbl : IMSVidVRGraphSegmentVtbl* do
+  record IMSVidVRGraphSegment, lpVtbl : IMSVidVRGraphSegmentVtable* do
     GUID = LibC::GUID.new(0xdd47de3f_u32, 0x9874_u16, 0x4f7b_u16, StaticArray[0x8b_u8, 0x22_u8, 0x7c_u8, 0xb2_u8, 0x68_u8, 0x84_u8, 0x61_u8, 0xe7_u8])
     def query_interface(this : IMSVidVRGraphSegment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29552,7 +29552,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidDeviceVtbl,
+  record IMSVidDeviceVtable,
     query_interface : Proc(IMSVidDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidDevice*, UInt32),
     release : Proc(IMSVidDevice*, UInt32),
@@ -29572,7 +29572,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidDevice, lpVtbl : IMSVidDeviceVtbl* do
+  record IMSVidDevice, lpVtbl : IMSVidDeviceVtable* do
     GUID = LibC::GUID.new(0x1c15d47c_u32, 0x911d_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29626,7 +29626,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidDevice2Vtbl,
+  record IMSVidDevice2Vtable,
     query_interface : Proc(IMSVidDevice2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidDevice2*, UInt32),
     release : Proc(IMSVidDevice2*, UInt32),
@@ -29634,7 +29634,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidDevice2, lpVtbl : IMSVidDevice2Vtbl* do
+  record IMSVidDevice2, lpVtbl : IMSVidDevice2Vtable* do
     GUID = LibC::GUID.new(0x87bd2783_u32, 0xebc0_u16, 0x478c_u16, StaticArray[0xb4_u8, 0xa0_u8, 0xe8_u8, 0xe7_u8, 0xf4_u8, 0x3a_u8, 0xb7_u8, 0x8e_u8])
     def query_interface(this : IMSVidDevice2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29652,7 +29652,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidInputDeviceVtbl,
+  record IMSVidInputDeviceVtable,
     query_interface : Proc(IMSVidInputDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidInputDevice*, UInt32),
     release : Proc(IMSVidInputDevice*, UInt32),
@@ -29674,7 +29674,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidInputDevice, lpVtbl : IMSVidInputDeviceVtbl* do
+  record IMSVidInputDevice, lpVtbl : IMSVidInputDeviceVtable* do
     GUID = LibC::GUID.new(0x37b0353d_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidInputDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29734,7 +29734,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidDeviceEventVtbl,
+  record IMSVidDeviceEventVtable,
     query_interface : Proc(IMSVidDeviceEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidDeviceEvent*, UInt32),
     release : Proc(IMSVidDeviceEvent*, UInt32),
@@ -29746,7 +29746,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidDeviceEvent, lpVtbl : IMSVidDeviceEventVtbl* do
+  record IMSVidDeviceEvent, lpVtbl : IMSVidDeviceEventVtable* do
     GUID = LibC::GUID.new(0x1c15d480_u32, 0x911d_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidDeviceEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29776,7 +29776,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidInputDeviceEventVtbl,
+  record IMSVidInputDeviceEventVtable,
     query_interface : Proc(IMSVidInputDeviceEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidInputDeviceEvent*, UInt32),
     release : Proc(IMSVidInputDeviceEvent*, UInt32),
@@ -29787,7 +29787,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidInputDeviceEvent, lpVtbl : IMSVidInputDeviceEventVtbl* do
+  record IMSVidInputDeviceEvent, lpVtbl : IMSVidInputDeviceEventVtable* do
     GUID = LibC::GUID.new(0x37b0353e_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidInputDeviceEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29814,7 +29814,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidVideoInputDeviceVtbl,
+  record IMSVidVideoInputDeviceVtable,
     query_interface : Proc(IMSVidVideoInputDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidVideoInputDevice*, UInt32),
     release : Proc(IMSVidVideoInputDevice*, UInt32),
@@ -29836,7 +29836,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidVideoInputDevice, lpVtbl : IMSVidVideoInputDeviceVtbl* do
+  record IMSVidVideoInputDevice, lpVtbl : IMSVidVideoInputDeviceVtable* do
     GUID = LibC::GUID.new(0x1c15d47f_u32, 0x911d_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidVideoInputDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29896,7 +29896,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidPlaybackVtbl,
+  record IMSVidPlaybackVtable,
     query_interface : Proc(IMSVidPlayback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidPlayback*, UInt32),
     release : Proc(IMSVidPlayback*, UInt32),
@@ -29932,7 +29932,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidPlayback, lpVtbl : IMSVidPlaybackVtbl* do
+  record IMSVidPlayback, lpVtbl : IMSVidPlaybackVtable* do
     GUID = LibC::GUID.new(0x37b03538_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidPlayback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30034,7 +30034,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidPlaybackEventVtbl,
+  record IMSVidPlaybackEventVtable,
     query_interface : Proc(IMSVidPlaybackEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidPlaybackEvent*, UInt32),
     release : Proc(IMSVidPlaybackEvent*, UInt32),
@@ -30046,7 +30046,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidPlaybackEvent, lpVtbl : IMSVidPlaybackEventVtbl* do
+  record IMSVidPlaybackEvent, lpVtbl : IMSVidPlaybackEventVtable* do
     GUID = LibC::GUID.new(0x37b0353b_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidPlaybackEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30076,7 +30076,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidTunerVtbl,
+  record IMSVidTunerVtable,
     query_interface : Proc(IMSVidTuner*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidTuner*, UInt32),
     release : Proc(IMSVidTuner*, UInt32),
@@ -30102,7 +30102,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidTuner, lpVtbl : IMSVidTunerVtbl* do
+  record IMSVidTuner, lpVtbl : IMSVidTunerVtable* do
     GUID = LibC::GUID.new(0x1c15d47d_u32, 0x911d_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidTuner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30174,7 +30174,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidTunerEventVtbl,
+  record IMSVidTunerEventVtable,
     query_interface : Proc(IMSVidTunerEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidTunerEvent*, UInt32),
     release : Proc(IMSVidTunerEvent*, UInt32),
@@ -30186,7 +30186,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidTunerEvent, lpVtbl : IMSVidTunerEventVtbl* do
+  record IMSVidTunerEvent, lpVtbl : IMSVidTunerEventVtable* do
     GUID = LibC::GUID.new(0x1c15d485_u32, 0x911d_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidTunerEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30216,7 +30216,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidAnalogTunerVtbl,
+  record IMSVidAnalogTunerVtable,
     query_interface : Proc(IMSVidAnalogTuner*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidAnalogTuner*, UInt32),
     release : Proc(IMSVidAnalogTuner*, UInt32),
@@ -30251,7 +30251,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidAnalogTuner, lpVtbl : IMSVidAnalogTunerVtbl* do
+  record IMSVidAnalogTuner, lpVtbl : IMSVidAnalogTunerVtable* do
     GUID = LibC::GUID.new(0x1c15d47e_u32, 0x911d_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidAnalogTuner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30350,7 +30350,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidAnalogTuner2Vtbl,
+  record IMSVidAnalogTuner2Vtable,
     query_interface : Proc(IMSVidAnalogTuner2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidAnalogTuner2*, UInt32),
     release : Proc(IMSVidAnalogTuner2*, UInt32),
@@ -30388,7 +30388,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidAnalogTuner2, lpVtbl : IMSVidAnalogTuner2Vtbl* do
+  record IMSVidAnalogTuner2, lpVtbl : IMSVidAnalogTuner2Vtable* do
     GUID = LibC::GUID.new(0x37647bf7_u32, 0x3dde_u16, 0x4cc8_u16, StaticArray[0xa4_u8, 0xdc_u8, 0xd_u8, 0x53_u8, 0x4d_u8, 0x3d_u8, 0x0_u8, 0x37_u8])
     def query_interface(this : IMSVidAnalogTuner2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30496,7 +30496,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidAnalogTunerEventVtbl,
+  record IMSVidAnalogTunerEventVtable,
     query_interface : Proc(IMSVidAnalogTunerEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidAnalogTunerEvent*, UInt32),
     release : Proc(IMSVidAnalogTunerEvent*, UInt32),
@@ -30508,7 +30508,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidAnalogTunerEvent, lpVtbl : IMSVidAnalogTunerEventVtbl* do
+  record IMSVidAnalogTunerEvent, lpVtbl : IMSVidAnalogTunerEventVtable* do
     GUID = LibC::GUID.new(0x1c15d486_u32, 0x911d_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidAnalogTunerEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30538,7 +30538,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidFilePlaybackVtbl,
+  record IMSVidFilePlaybackVtable,
     query_interface : Proc(IMSVidFilePlayback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidFilePlayback*, UInt32),
     release : Proc(IMSVidFilePlayback*, UInt32),
@@ -30576,7 +30576,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidFilePlayback, lpVtbl : IMSVidFilePlaybackVtbl* do
+  record IMSVidFilePlayback, lpVtbl : IMSVidFilePlaybackVtable* do
     GUID = LibC::GUID.new(0x37b03539_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidFilePlayback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30684,7 +30684,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidFilePlayback2Vtbl,
+  record IMSVidFilePlayback2Vtable,
     query_interface : Proc(IMSVidFilePlayback2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidFilePlayback2*, UInt32),
     release : Proc(IMSVidFilePlayback2*, UInt32),
@@ -30724,7 +30724,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidFilePlayback2, lpVtbl : IMSVidFilePlayback2Vtbl* do
+  record IMSVidFilePlayback2, lpVtbl : IMSVidFilePlayback2Vtable* do
     GUID = LibC::GUID.new(0x2f7e44af_u32, 0x6e52_u16, 0x4660_u16, StaticArray[0xbc_u8, 0x8_u8, 0xd8_u8, 0xd5_u8, 0x42_u8, 0x58_u8, 0x7d_u8, 0x72_u8])
     def query_interface(this : IMSVidFilePlayback2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30838,7 +30838,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidFilePlaybackEventVtbl,
+  record IMSVidFilePlaybackEventVtable,
     query_interface : Proc(IMSVidFilePlaybackEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidFilePlaybackEvent*, UInt32),
     release : Proc(IMSVidFilePlaybackEvent*, UInt32),
@@ -30850,7 +30850,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidFilePlaybackEvent, lpVtbl : IMSVidFilePlaybackEventVtbl* do
+  record IMSVidFilePlaybackEvent, lpVtbl : IMSVidFilePlaybackEventVtable* do
     GUID = LibC::GUID.new(0x37b0353a_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidFilePlaybackEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30880,7 +30880,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidWebDVDVtbl,
+  record IMSVidWebDVDVtable,
     query_interface : Proc(IMSVidWebDVD*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidWebDVD*, UInt32),
     release : Proc(IMSVidWebDVD*, UInt32),
@@ -31011,7 +31011,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidWebDVD, lpVtbl : IMSVidWebDVDVtbl* do
+  record IMSVidWebDVD, lpVtbl : IMSVidWebDVDVtable* do
     GUID = LibC::GUID.new(0xcf45f88b_u32, 0xac56_u16, 0x4ee2_u16, StaticArray[0xa7_u8, 0x3a_u8, 0xed_u8, 0x4_u8, 0xe2_u8, 0x88_u8, 0x5d_u8, 0x3c_u8])
     def query_interface(this : IMSVidWebDVD*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31398,7 +31398,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidWebDVD2Vtbl,
+  record IMSVidWebDVD2Vtable,
     query_interface : Proc(IMSVidWebDVD2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidWebDVD2*, UInt32),
     release : Proc(IMSVidWebDVD2*, UInt32),
@@ -31531,7 +31531,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidWebDVD2, lpVtbl : IMSVidWebDVD2Vtbl* do
+  record IMSVidWebDVD2, lpVtbl : IMSVidWebDVD2Vtable* do
     GUID = LibC::GUID.new(0x7027212f_u32, 0xee9a_u16, 0x4a7c_u16, StaticArray[0x8b_u8, 0x67_u8, 0xf0_u8, 0x23_u8, 0x71_u8, 0x4c_u8, 0xda_u8, 0xff_u8])
     def query_interface(this : IMSVidWebDVD2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31924,7 +31924,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidWebDVDEventVtbl,
+  record IMSVidWebDVDEventVtable,
     query_interface : Proc(IMSVidWebDVDEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidWebDVDEvent*, UInt32),
     release : Proc(IMSVidWebDVDEvent*, UInt32),
@@ -31959,7 +31959,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidWebDVDEvent, lpVtbl : IMSVidWebDVDEventVtbl* do
+  record IMSVidWebDVDEvent, lpVtbl : IMSVidWebDVDEventVtable* do
     GUID = LibC::GUID.new(0xb4f7a674_u32, 0x9b83_u16, 0x49cb_u16, StaticArray[0xa3_u8, 0x57_u8, 0xc6_u8, 0x3b_u8, 0x87_u8, 0x1b_u8, 0xe9_u8, 0x58_u8])
     def query_interface(this : IMSVidWebDVDEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32058,7 +32058,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidWebDVDAdmVtbl,
+  record IMSVidWebDVDAdmVtable,
     query_interface : Proc(IMSVidWebDVDAdm*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidWebDVDAdm*, UInt32),
     release : Proc(IMSVidWebDVDAdm*, UInt32),
@@ -32083,7 +32083,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidWebDVDAdm, lpVtbl : IMSVidWebDVDAdmVtbl* do
+  record IMSVidWebDVDAdm, lpVtbl : IMSVidWebDVDAdmVtable* do
     GUID = LibC::GUID.new(0xb8be681a_u32, 0xeb2c_u16, 0x47f0_u16, StaticArray[0xb4_u8, 0x15_u8, 0x94_u8, 0xd5_u8, 0x45_u8, 0x2f_u8, 0xe_u8, 0x5_u8])
     def query_interface(this : IMSVidWebDVDAdm*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32152,7 +32152,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidOutputDeviceVtbl,
+  record IMSVidOutputDeviceVtable,
     query_interface : Proc(IMSVidOutputDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidOutputDevice*, UInt32),
     release : Proc(IMSVidOutputDevice*, UInt32),
@@ -32172,7 +32172,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidOutputDevice, lpVtbl : IMSVidOutputDeviceVtbl* do
+  record IMSVidOutputDevice, lpVtbl : IMSVidOutputDeviceVtable* do
     GUID = LibC::GUID.new(0x37b03546_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidOutputDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32226,7 +32226,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidOutputDeviceEventVtbl,
+  record IMSVidOutputDeviceEventVtable,
     query_interface : Proc(IMSVidOutputDeviceEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidOutputDeviceEvent*, UInt32),
     release : Proc(IMSVidOutputDeviceEvent*, UInt32),
@@ -32238,7 +32238,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidOutputDeviceEvent, lpVtbl : IMSVidOutputDeviceEventVtbl* do
+  record IMSVidOutputDeviceEvent, lpVtbl : IMSVidOutputDeviceEventVtable* do
     GUID = LibC::GUID.new(0x2e6a14e2_u32, 0x571c_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x52_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidOutputDeviceEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32268,7 +32268,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidFeatureVtbl,
+  record IMSVidFeatureVtable,
     query_interface : Proc(IMSVidFeature*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidFeature*, UInt32),
     release : Proc(IMSVidFeature*, UInt32),
@@ -32288,7 +32288,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidFeature, lpVtbl : IMSVidFeatureVtbl* do
+  record IMSVidFeature, lpVtbl : IMSVidFeatureVtable* do
     GUID = LibC::GUID.new(0x37b03547_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidFeature*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32342,7 +32342,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidFeatureEventVtbl,
+  record IMSVidFeatureEventVtable,
     query_interface : Proc(IMSVidFeatureEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidFeatureEvent*, UInt32),
     release : Proc(IMSVidFeatureEvent*, UInt32),
@@ -32354,7 +32354,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidFeatureEvent, lpVtbl : IMSVidFeatureEventVtbl* do
+  record IMSVidFeatureEvent, lpVtbl : IMSVidFeatureEventVtable* do
     GUID = LibC::GUID.new(0x3dd2903c_u32, 0xe0aa_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x3a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidFeatureEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32384,7 +32384,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidEncoderVtbl,
+  record IMSVidEncoderVtable,
     query_interface : Proc(IMSVidEncoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidEncoder*, UInt32),
     release : Proc(IMSVidEncoder*, UInt32),
@@ -32406,7 +32406,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidEncoder, lpVtbl : IMSVidEncoderVtbl* do
+  record IMSVidEncoder, lpVtbl : IMSVidEncoderVtable* do
     GUID = LibC::GUID.new(0xc0020fd4_u32, 0xbee7_u16, 0x43d9_u16, StaticArray[0xa4_u8, 0x95_u8, 0x9f_u8, 0x21_u8, 0x31_u8, 0x17_u8, 0x10_u8, 0x3d_u8])
     def query_interface(this : IMSVidEncoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32466,7 +32466,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidClosedCaptioningVtbl,
+  record IMSVidClosedCaptioningVtable,
     query_interface : Proc(IMSVidClosedCaptioning*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidClosedCaptioning*, UInt32),
     release : Proc(IMSVidClosedCaptioning*, UInt32),
@@ -32488,7 +32488,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidClosedCaptioning, lpVtbl : IMSVidClosedCaptioningVtbl* do
+  record IMSVidClosedCaptioning, lpVtbl : IMSVidClosedCaptioningVtable* do
     GUID = LibC::GUID.new(0x99652ea1_u32, 0xc1f7_u16, 0x414f_u16, StaticArray[0xbb_u8, 0x7b_u8, 0x1c_u8, 0x96_u8, 0x7d_u8, 0xe7_u8, 0x59_u8, 0x83_u8])
     def query_interface(this : IMSVidClosedCaptioning*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32548,7 +32548,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidClosedCaptioning2Vtbl,
+  record IMSVidClosedCaptioning2Vtable,
     query_interface : Proc(IMSVidClosedCaptioning2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidClosedCaptioning2*, UInt32),
     release : Proc(IMSVidClosedCaptioning2*, UInt32),
@@ -32572,7 +32572,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidClosedCaptioning2, lpVtbl : IMSVidClosedCaptioning2Vtbl* do
+  record IMSVidClosedCaptioning2, lpVtbl : IMSVidClosedCaptioning2Vtable* do
     GUID = LibC::GUID.new(0xe00cb864_u32, 0xa029_u16, 0x4310_u16, StaticArray[0x99_u8, 0x87_u8, 0xa8_u8, 0x73_u8, 0xf5_u8, 0x88_u8, 0x7d_u8, 0x97_u8])
     def query_interface(this : IMSVidClosedCaptioning2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32638,7 +32638,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidClosedCaptioning3Vtbl,
+  record IMSVidClosedCaptioning3Vtable,
     query_interface : Proc(IMSVidClosedCaptioning3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidClosedCaptioning3*, UInt32),
     release : Proc(IMSVidClosedCaptioning3*, UInt32),
@@ -32663,7 +32663,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidClosedCaptioning3, lpVtbl : IMSVidClosedCaptioning3Vtbl* do
+  record IMSVidClosedCaptioning3, lpVtbl : IMSVidClosedCaptioning3Vtable* do
     GUID = LibC::GUID.new(0xc8638e8a_u32, 0x7625_u16, 0x4c51_u16, StaticArray[0x93_u8, 0x66_u8, 0x2f_u8, 0x40_u8, 0xa9_u8, 0x83_u8, 0x1f_u8, 0xc0_u8])
     def query_interface(this : IMSVidClosedCaptioning3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32732,7 +32732,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidXDSVtbl,
+  record IMSVidXDSVtable,
     query_interface : Proc(IMSVidXDS*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidXDS*, UInt32),
     release : Proc(IMSVidXDS*, UInt32),
@@ -32753,7 +32753,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidXDS, lpVtbl : IMSVidXDSVtbl* do
+  record IMSVidXDS, lpVtbl : IMSVidXDSVtable* do
     GUID = LibC::GUID.new(0x11ebc158_u32, 0xe712_u16, 0x4d1f_u16, StaticArray[0x8b_u8, 0xb3_u8, 0x1_u8, 0xed_u8, 0x52_u8, 0x74_u8, 0xc4_u8, 0xce_u8])
     def query_interface(this : IMSVidXDS*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32810,7 +32810,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidXDSEventVtbl,
+  record IMSVidXDSEventVtable,
     query_interface : Proc(IMSVidXDSEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidXDSEvent*, UInt32),
     release : Proc(IMSVidXDSEvent*, UInt32),
@@ -32823,7 +32823,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidXDSEvent, lpVtbl : IMSVidXDSEventVtbl* do
+  record IMSVidXDSEvent, lpVtbl : IMSVidXDSEventVtable* do
     GUID = LibC::GUID.new(0x6db2317d_u32, 0x3b23_u16, 0x41ec_u16, StaticArray[0xba_u8, 0x4b_u8, 0x70_u8, 0x1f_u8, 0x40_u8, 0x7e_u8, 0xaf_u8, 0x3a_u8])
     def query_interface(this : IMSVidXDSEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32856,7 +32856,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidDataServicesVtbl,
+  record IMSVidDataServicesVtable,
     query_interface : Proc(IMSVidDataServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidDataServices*, UInt32),
     release : Proc(IMSVidDataServices*, UInt32),
@@ -32876,7 +32876,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidDataServices, lpVtbl : IMSVidDataServicesVtbl* do
+  record IMSVidDataServices, lpVtbl : IMSVidDataServicesVtable* do
     GUID = LibC::GUID.new(0x334125c1_u32, 0x77e5_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidDataServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32930,7 +32930,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidDataServicesEventVtbl,
+  record IMSVidDataServicesEventVtable,
     query_interface : Proc(IMSVidDataServicesEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidDataServicesEvent*, UInt32),
     release : Proc(IMSVidDataServicesEvent*, UInt32),
@@ -32942,7 +32942,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidDataServicesEvent, lpVtbl : IMSVidDataServicesEventVtbl* do
+  record IMSVidDataServicesEvent, lpVtbl : IMSVidDataServicesEventVtable* do
     GUID = LibC::GUID.new(0x334125c2_u32, 0x77e5_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x53_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidDataServicesEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32972,7 +32972,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidVideoRendererVtbl,
+  record IMSVidVideoRendererVtable,
     query_interface : Proc(IMSVidVideoRenderer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidVideoRenderer*, UInt32),
     release : Proc(IMSVidVideoRenderer*, UInt32),
@@ -33022,7 +33022,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidVideoRenderer, lpVtbl : IMSVidVideoRendererVtbl* do
+  record IMSVidVideoRenderer, lpVtbl : IMSVidVideoRendererVtable* do
     GUID = LibC::GUID.new(0x37b03540_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidVideoRenderer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33166,7 +33166,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidVideoRendererEventVtbl,
+  record IMSVidVideoRendererEventVtable,
     query_interface : Proc(IMSVidVideoRendererEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidVideoRendererEvent*, UInt32),
     release : Proc(IMSVidVideoRendererEvent*, UInt32),
@@ -33179,7 +33179,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidVideoRendererEvent, lpVtbl : IMSVidVideoRendererEventVtbl* do
+  record IMSVidVideoRendererEvent, lpVtbl : IMSVidVideoRendererEventVtable* do
     GUID = LibC::GUID.new(0x37b03545_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidVideoRendererEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33212,7 +33212,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidGenericSinkVtbl,
+  record IMSVidGenericSinkVtable,
     query_interface : Proc(IMSVidGenericSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidGenericSink*, UInt32),
     release : Proc(IMSVidGenericSink*, UInt32),
@@ -33235,7 +33235,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidGenericSink, lpVtbl : IMSVidGenericSinkVtbl* do
+  record IMSVidGenericSink, lpVtbl : IMSVidGenericSinkVtable* do
     GUID = LibC::GUID.new(0x6c29b41d_u32, 0x455b_u16, 0x4c33_u16, StaticArray[0x96_u8, 0x3a_u8, 0xd_u8, 0x28_u8, 0xe5_u8, 0xe5_u8, 0x55_u8, 0xea_u8])
     def query_interface(this : IMSVidGenericSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33298,7 +33298,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidGenericSink2Vtbl,
+  record IMSVidGenericSink2Vtable,
     query_interface : Proc(IMSVidGenericSink2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidGenericSink2*, UInt32),
     release : Proc(IMSVidGenericSink2*, UInt32),
@@ -33323,7 +33323,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidGenericSink2, lpVtbl : IMSVidGenericSink2Vtbl* do
+  record IMSVidGenericSink2, lpVtbl : IMSVidGenericSink2Vtable* do
     GUID = LibC::GUID.new(0x6b5a28f3_u32, 0x47f1_u16, 0x4092_u16, StaticArray[0xb1_u8, 0x68_u8, 0x60_u8, 0xca_u8, 0xbe_u8, 0xc0_u8, 0x8f_u8, 0x1c_u8])
     def query_interface(this : IMSVidGenericSink2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33392,7 +33392,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidStreamBufferRecordingControlVtbl,
+  record IMSVidStreamBufferRecordingControlVtable,
     query_interface : Proc(IMSVidStreamBufferRecordingControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidStreamBufferRecordingControl*, UInt32),
     release : Proc(IMSVidStreamBufferRecordingControl*, UInt32),
@@ -33411,7 +33411,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidStreamBufferRecordingControl, lpVtbl : IMSVidStreamBufferRecordingControlVtbl* do
+  record IMSVidStreamBufferRecordingControl, lpVtbl : IMSVidStreamBufferRecordingControlVtable* do
     GUID = LibC::GUID.new(0x160621aa_u32, 0xbbbc_u16, 0x4326_u16, StaticArray[0xa8_u8, 0x24_u8, 0xc3_u8, 0x95_u8, 0xae_u8, 0xbc_u8, 0x6e_u8, 0x74_u8])
     def query_interface(this : IMSVidStreamBufferRecordingControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33462,7 +33462,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidStreamBufferSinkVtbl,
+  record IMSVidStreamBufferSinkVtable,
     query_interface : Proc(IMSVidStreamBufferSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidStreamBufferSink*, UInt32),
     release : Proc(IMSVidStreamBufferSink*, UInt32),
@@ -33488,7 +33488,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidStreamBufferSink, lpVtbl : IMSVidStreamBufferSinkVtbl* do
+  record IMSVidStreamBufferSink, lpVtbl : IMSVidStreamBufferSinkVtable* do
     GUID = LibC::GUID.new(0x159dbb45_u32, 0xcd1b_u16, 0x4dab_u16, StaticArray[0x83_u8, 0xea_u8, 0x5c_u8, 0xb1_u8, 0xf4_u8, 0xf2_u8, 0x1d_u8, 0x7_u8])
     def query_interface(this : IMSVidStreamBufferSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33560,7 +33560,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidStreamBufferSink2Vtbl,
+  record IMSVidStreamBufferSink2Vtable,
     query_interface : Proc(IMSVidStreamBufferSink2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidStreamBufferSink2*, UInt32),
     release : Proc(IMSVidStreamBufferSink2*, UInt32),
@@ -33587,7 +33587,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidStreamBufferSink2, lpVtbl : IMSVidStreamBufferSink2Vtbl* do
+  record IMSVidStreamBufferSink2, lpVtbl : IMSVidStreamBufferSink2Vtable* do
     GUID = LibC::GUID.new(0x2ca9fc63_u32, 0xc131_u16, 0x4e5a_u16, StaticArray[0x95_u8, 0x5a_u8, 0x54_u8, 0x4a_u8, 0x47_u8, 0xc6_u8, 0x71_u8, 0x46_u8])
     def query_interface(this : IMSVidStreamBufferSink2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33662,7 +33662,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidStreamBufferSink3Vtbl,
+  record IMSVidStreamBufferSink3Vtable,
     query_interface : Proc(IMSVidStreamBufferSink3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidStreamBufferSink3*, UInt32),
     release : Proc(IMSVidStreamBufferSink3*, UInt32),
@@ -33707,7 +33707,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidStreamBufferSink3, lpVtbl : IMSVidStreamBufferSink3Vtbl* do
+  record IMSVidStreamBufferSink3, lpVtbl : IMSVidStreamBufferSink3Vtable* do
     GUID = LibC::GUID.new(0x4f8721d7_u32, 0x7d59_u16, 0x4d8b_u16, StaticArray[0x99_u8, 0xf5_u8, 0xa7_u8, 0x77_u8, 0x75_u8, 0x58_u8, 0x6b_u8, 0xd5_u8])
     def query_interface(this : IMSVidStreamBufferSink3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33836,7 +33836,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidStreamBufferSinkEventVtbl,
+  record IMSVidStreamBufferSinkEventVtable,
     query_interface : Proc(IMSVidStreamBufferSinkEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidStreamBufferSinkEvent*, UInt32),
     release : Proc(IMSVidStreamBufferSinkEvent*, UInt32),
@@ -33851,7 +33851,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidStreamBufferSinkEvent, lpVtbl : IMSVidStreamBufferSinkEventVtbl* do
+  record IMSVidStreamBufferSinkEvent, lpVtbl : IMSVidStreamBufferSinkEventVtable* do
     GUID = LibC::GUID.new(0xf798a36b_u32, 0xb05b_u16, 0x4bbe_u16, StaticArray[0x97_u8, 0x3_u8, 0xea_u8, 0xea_u8, 0x7d_u8, 0x61_u8, 0xcd_u8, 0x51_u8])
     def query_interface(this : IMSVidStreamBufferSinkEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33890,7 +33890,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidStreamBufferSinkEvent2Vtbl,
+  record IMSVidStreamBufferSinkEvent2Vtable,
     query_interface : Proc(IMSVidStreamBufferSinkEvent2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidStreamBufferSinkEvent2*, UInt32),
     release : Proc(IMSVidStreamBufferSinkEvent2*, UInt32),
@@ -33907,7 +33907,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidStreamBufferSinkEvent2, lpVtbl : IMSVidStreamBufferSinkEvent2Vtbl* do
+  record IMSVidStreamBufferSinkEvent2, lpVtbl : IMSVidStreamBufferSinkEvent2Vtable* do
     GUID = LibC::GUID.new(0x3d7a5166_u32, 0x72d7_u16, 0x484b_u16, StaticArray[0xa0_u8, 0x6f_u8, 0x28_u8, 0x61_u8, 0x87_u8, 0xb8_u8, 0xc_u8, 0xa1_u8])
     def query_interface(this : IMSVidStreamBufferSinkEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33952,7 +33952,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidStreamBufferSinkEvent3Vtbl,
+  record IMSVidStreamBufferSinkEvent3Vtable,
     query_interface : Proc(IMSVidStreamBufferSinkEvent3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidStreamBufferSinkEvent3*, UInt32),
     release : Proc(IMSVidStreamBufferSinkEvent3*, UInt32),
@@ -33970,7 +33970,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidStreamBufferSinkEvent3, lpVtbl : IMSVidStreamBufferSinkEvent3Vtbl* do
+  record IMSVidStreamBufferSinkEvent3, lpVtbl : IMSVidStreamBufferSinkEvent3Vtable* do
     GUID = LibC::GUID.new(0x735ad8d5_u32, 0xc259_u16, 0x48e9_u16, StaticArray[0x81_u8, 0xe7_u8, 0xd2_u8, 0x79_u8, 0x53_u8, 0x66_u8, 0x5b_u8, 0x23_u8])
     def query_interface(this : IMSVidStreamBufferSinkEvent3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34018,7 +34018,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidStreamBufferSinkEvent4Vtbl,
+  record IMSVidStreamBufferSinkEvent4Vtable,
     query_interface : Proc(IMSVidStreamBufferSinkEvent4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidStreamBufferSinkEvent4*, UInt32),
     release : Proc(IMSVidStreamBufferSinkEvent4*, UInt32),
@@ -34037,7 +34037,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidStreamBufferSinkEvent4, lpVtbl : IMSVidStreamBufferSinkEvent4Vtbl* do
+  record IMSVidStreamBufferSinkEvent4, lpVtbl : IMSVidStreamBufferSinkEvent4Vtable* do
     GUID = LibC::GUID.new(0x1b01dcb0_u32, 0xdaf0_u16, 0x412c_u16, StaticArray[0xa5_u8, 0xd1_u8, 0x59_u8, 0xc_u8, 0x7f_u8, 0x62_u8, 0xe2_u8, 0xb8_u8])
     def query_interface(this : IMSVidStreamBufferSinkEvent4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34088,7 +34088,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidStreamBufferSourceVtbl,
+  record IMSVidStreamBufferSourceVtable,
     query_interface : Proc(IMSVidStreamBufferSource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidStreamBufferSource*, UInt32),
     release : Proc(IMSVidStreamBufferSource*, UInt32),
@@ -34133,7 +34133,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidStreamBufferSource, lpVtbl : IMSVidStreamBufferSourceVtbl* do
+  record IMSVidStreamBufferSource, lpVtbl : IMSVidStreamBufferSourceVtable* do
     GUID = LibC::GUID.new(0xeb0c8cf9_u32, 0x6950_u16, 0x4772_u16, StaticArray[0x87_u8, 0xb1_u8, 0x47_u8, 0xd1_u8, 0x1c_u8, 0xf3_u8, 0xa0_u8, 0x2f_u8])
     def query_interface(this : IMSVidStreamBufferSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34262,7 +34262,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidStreamBufferSource2Vtbl,
+  record IMSVidStreamBufferSource2Vtable,
     query_interface : Proc(IMSVidStreamBufferSource2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidStreamBufferSource2*, UInt32),
     release : Proc(IMSVidStreamBufferSource2*, UInt32),
@@ -34312,7 +34312,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidStreamBufferSource2, lpVtbl : IMSVidStreamBufferSource2Vtbl* do
+  record IMSVidStreamBufferSource2, lpVtbl : IMSVidStreamBufferSource2Vtable* do
     GUID = LibC::GUID.new(0xe4ba9059_u32, 0xb1ce_u16, 0x40d8_u16, StaticArray[0xb9_u8, 0xa0_u8, 0xd4_u8, 0xea_u8, 0x4a_u8, 0x99_u8, 0x89_u8, 0xd3_u8])
     def query_interface(this : IMSVidStreamBufferSource2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34456,7 +34456,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidStreamBufferSourceEventVtbl,
+  record IMSVidStreamBufferSourceEventVtable,
     query_interface : Proc(IMSVidStreamBufferSourceEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidStreamBufferSourceEvent*, UInt32),
     release : Proc(IMSVidStreamBufferSourceEvent*, UInt32),
@@ -34477,7 +34477,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidStreamBufferSourceEvent, lpVtbl : IMSVidStreamBufferSourceEventVtbl* do
+  record IMSVidStreamBufferSourceEvent, lpVtbl : IMSVidStreamBufferSourceEventVtable* do
     GUID = LibC::GUID.new(0x50ce8a7d_u32, 0x9c28_u16, 0x4da8_u16, StaticArray[0x90_u8, 0x42_u8, 0xcd_u8, 0xfa_u8, 0x71_u8, 0x16_u8, 0xf9_u8, 0x79_u8])
     def query_interface(this : IMSVidStreamBufferSourceEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34534,7 +34534,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidStreamBufferSourceEvent2Vtbl,
+  record IMSVidStreamBufferSourceEvent2Vtable,
     query_interface : Proc(IMSVidStreamBufferSourceEvent2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidStreamBufferSourceEvent2*, UInt32),
     release : Proc(IMSVidStreamBufferSourceEvent2*, UInt32),
@@ -34556,7 +34556,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidStreamBufferSourceEvent2, lpVtbl : IMSVidStreamBufferSourceEvent2Vtbl* do
+  record IMSVidStreamBufferSourceEvent2, lpVtbl : IMSVidStreamBufferSourceEvent2Vtable* do
     GUID = LibC::GUID.new(0x7aef50ce_u32, 0x8e22_u16, 0x4ba8_u16, StaticArray[0xbc_u8, 0x6_u8, 0xa9_u8, 0x2a_u8, 0x45_u8, 0x8b_u8, 0x4e_u8, 0xf2_u8])
     def query_interface(this : IMSVidStreamBufferSourceEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34616,7 +34616,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidStreamBufferSourceEvent3Vtbl,
+  record IMSVidStreamBufferSourceEvent3Vtable,
     query_interface : Proc(IMSVidStreamBufferSourceEvent3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidStreamBufferSourceEvent3*, UInt32),
     release : Proc(IMSVidStreamBufferSourceEvent3*, UInt32),
@@ -34643,7 +34643,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidStreamBufferSourceEvent3, lpVtbl : IMSVidStreamBufferSourceEvent3Vtbl* do
+  record IMSVidStreamBufferSourceEvent3, lpVtbl : IMSVidStreamBufferSourceEvent3Vtable* do
     GUID = LibC::GUID.new(0xceabd6ab_u32, 0x9b90_u16, 0x4570_u16, StaticArray[0xad_u8, 0xf1_u8, 0x3c_u8, 0xe7_u8, 0x6e_u8, 0x0_u8, 0xa7_u8, 0x63_u8])
     def query_interface(this : IMSVidStreamBufferSourceEvent3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34718,7 +34718,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidStreamBufferV2SourceEventVtbl,
+  record IMSVidStreamBufferV2SourceEventVtable,
     query_interface : Proc(IMSVidStreamBufferV2SourceEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidStreamBufferV2SourceEvent*, UInt32),
     release : Proc(IMSVidStreamBufferV2SourceEvent*, UInt32),
@@ -34739,7 +34739,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidStreamBufferV2SourceEvent, lpVtbl : IMSVidStreamBufferV2SourceEventVtbl* do
+  record IMSVidStreamBufferV2SourceEvent, lpVtbl : IMSVidStreamBufferV2SourceEventVtable* do
     GUID = LibC::GUID.new(0x49c771f9_u32, 0x41b2_u16, 0x4cf7_u16, StaticArray[0x9f_u8, 0x9a_u8, 0xa3_u8, 0x13_u8, 0xa8_u8, 0xf6_u8, 0x2_u8, 0x7e_u8])
     def query_interface(this : IMSVidStreamBufferV2SourceEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34796,7 +34796,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidVideoRenderer2Vtbl,
+  record IMSVidVideoRenderer2Vtable,
     query_interface : Proc(IMSVidVideoRenderer2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidVideoRenderer2*, UInt32),
     release : Proc(IMSVidVideoRenderer2*, UInt32),
@@ -34853,7 +34853,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidVideoRenderer2, lpVtbl : IMSVidVideoRenderer2Vtbl* do
+  record IMSVidVideoRenderer2, lpVtbl : IMSVidVideoRenderer2Vtable* do
     GUID = LibC::GUID.new(0x6bdd5c1e_u32, 0x2810_u16, 0x4159_u16, StaticArray[0x94_u8, 0xbc_u8, 0x5_u8, 0x51_u8, 0x1a_u8, 0xe8_u8, 0x54_u8, 0x9b_u8])
     def query_interface(this : IMSVidVideoRenderer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35018,7 +35018,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidVideoRendererEvent2Vtbl,
+  record IMSVidVideoRendererEvent2Vtable,
     query_interface : Proc(IMSVidVideoRendererEvent2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidVideoRendererEvent2*, UInt32),
     release : Proc(IMSVidVideoRendererEvent2*, UInt32),
@@ -35031,7 +35031,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidVideoRendererEvent2, lpVtbl : IMSVidVideoRendererEvent2Vtbl* do
+  record IMSVidVideoRendererEvent2, lpVtbl : IMSVidVideoRendererEvent2Vtable* do
     GUID = LibC::GUID.new(0x7145ed66_u32, 0x4730_u16, 0x4fdb_u16, StaticArray[0x8a_u8, 0x53_u8, 0xfd_u8, 0xe7_u8, 0x50_u8, 0x8d_u8, 0x3e_u8, 0x5e_u8])
     def query_interface(this : IMSVidVideoRendererEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35064,7 +35064,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidVMR9Vtbl,
+  record IMSVidVMR9Vtable,
     query_interface : Proc(IMSVidVMR9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidVMR9*, UInt32),
     release : Proc(IMSVidVMR9*, UInt32),
@@ -35119,7 +35119,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidVMR9, lpVtbl : IMSVidVMR9Vtbl* do
+  record IMSVidVMR9, lpVtbl : IMSVidVMR9Vtable* do
     GUID = LibC::GUID.new(0xd58b0015_u32, 0xebef_u16, 0x44bb_u16, StaticArray[0xbb_u8, 0xdd_u8, 0x3f_u8, 0x36_u8, 0x99_u8, 0xd7_u8, 0x6e_u8, 0xa1_u8])
     def query_interface(this : IMSVidVMR9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35278,7 +35278,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidEVRVtbl,
+  record IMSVidEVRVtable,
     query_interface : Proc(IMSVidEVR*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidEVR*, UInt32),
     release : Proc(IMSVidEVR*, UInt32),
@@ -35332,7 +35332,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidEVR, lpVtbl : IMSVidEVRVtbl* do
+  record IMSVidEVR, lpVtbl : IMSVidEVRVtable* do
     GUID = LibC::GUID.new(0x15e496ae_u32, 0x82a8_u16, 0x4cf9_u16, StaticArray[0xa6_u8, 0xb6_u8, 0xc5_u8, 0x61_u8, 0xdc_u8, 0x60_u8, 0x39_u8, 0x8f_u8])
     def query_interface(this : IMSVidEVR*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35488,7 +35488,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidEVREventVtbl,
+  record IMSVidEVREventVtable,
     query_interface : Proc(IMSVidEVREvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidEVREvent*, UInt32),
     release : Proc(IMSVidEVREvent*, UInt32),
@@ -35501,7 +35501,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidEVREvent, lpVtbl : IMSVidEVREventVtbl* do
+  record IMSVidEVREvent, lpVtbl : IMSVidEVREventVtable* do
     GUID = LibC::GUID.new(0x349abb10_u32, 0x883c_u16, 0x4f22_u16, StaticArray[0x87_u8, 0x14_u8, 0xce_u8, 0xca_u8, 0xee_u8, 0xe4_u8, 0x5d_u8, 0x62_u8])
     def query_interface(this : IMSVidEVREvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35534,7 +35534,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidAudioRendererVtbl,
+  record IMSVidAudioRendererVtable,
     query_interface : Proc(IMSVidAudioRenderer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidAudioRenderer*, UInt32),
     release : Proc(IMSVidAudioRenderer*, UInt32),
@@ -35558,7 +35558,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidAudioRenderer, lpVtbl : IMSVidAudioRendererVtbl* do
+  record IMSVidAudioRenderer, lpVtbl : IMSVidAudioRendererVtable* do
     GUID = LibC::GUID.new(0x37b0353f_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidAudioRenderer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35624,7 +35624,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidAudioRendererEventVtbl,
+  record IMSVidAudioRendererEventVtable,
     query_interface : Proc(IMSVidAudioRendererEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidAudioRendererEvent*, UInt32),
     release : Proc(IMSVidAudioRendererEvent*, UInt32),
@@ -35636,7 +35636,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidAudioRendererEvent, lpVtbl : IMSVidAudioRendererEventVtbl* do
+  record IMSVidAudioRendererEvent, lpVtbl : IMSVidAudioRendererEventVtable* do
     GUID = LibC::GUID.new(0x37b03541_u32, 0xa4c8_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidAudioRendererEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35666,7 +35666,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidAudioRendererEvent2Vtbl,
+  record IMSVidAudioRendererEvent2Vtable,
     query_interface : Proc(IMSVidAudioRendererEvent2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidAudioRendererEvent2*, UInt32),
     release : Proc(IMSVidAudioRendererEvent2*, UInt32),
@@ -35686,7 +35686,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidAudioRendererEvent2, lpVtbl : IMSVidAudioRendererEvent2Vtbl* do
+  record IMSVidAudioRendererEvent2, lpVtbl : IMSVidAudioRendererEvent2Vtable* do
     GUID = LibC::GUID.new(0xe3f55729_u32, 0x353b_u16, 0x4c43_u16, StaticArray[0xa0_u8, 0x28_u8, 0x50_u8, 0xf7_u8, 0x9a_u8, 0xa9_u8, 0xa9_u8, 0x7_u8])
     def query_interface(this : IMSVidAudioRendererEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35740,7 +35740,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidInputDevicesVtbl,
+  record IMSVidInputDevicesVtable,
     query_interface : Proc(IMSVidInputDevices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidInputDevices*, UInt32),
     release : Proc(IMSVidInputDevices*, UInt32),
@@ -35756,7 +35756,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidInputDevices, lpVtbl : IMSVidInputDevicesVtbl* do
+  record IMSVidInputDevices, lpVtbl : IMSVidInputDevicesVtable* do
     GUID = LibC::GUID.new(0xc5702cd1_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidInputDevices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35798,7 +35798,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidOutputDevicesVtbl,
+  record IMSVidOutputDevicesVtable,
     query_interface : Proc(IMSVidOutputDevices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidOutputDevices*, UInt32),
     release : Proc(IMSVidOutputDevices*, UInt32),
@@ -35814,7 +35814,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidOutputDevices, lpVtbl : IMSVidOutputDevicesVtbl* do
+  record IMSVidOutputDevices, lpVtbl : IMSVidOutputDevicesVtable* do
     GUID = LibC::GUID.new(0xc5702cd2_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidOutputDevices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35856,7 +35856,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidVideoRendererDevicesVtbl,
+  record IMSVidVideoRendererDevicesVtable,
     query_interface : Proc(IMSVidVideoRendererDevices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidVideoRendererDevices*, UInt32),
     release : Proc(IMSVidVideoRendererDevices*, UInt32),
@@ -35872,7 +35872,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidVideoRendererDevices, lpVtbl : IMSVidVideoRendererDevicesVtbl* do
+  record IMSVidVideoRendererDevices, lpVtbl : IMSVidVideoRendererDevicesVtable* do
     GUID = LibC::GUID.new(0xc5702cd3_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidVideoRendererDevices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35914,7 +35914,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidAudioRendererDevicesVtbl,
+  record IMSVidAudioRendererDevicesVtable,
     query_interface : Proc(IMSVidAudioRendererDevices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidAudioRendererDevices*, UInt32),
     release : Proc(IMSVidAudioRendererDevices*, UInt32),
@@ -35930,7 +35930,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidAudioRendererDevices, lpVtbl : IMSVidAudioRendererDevicesVtbl* do
+  record IMSVidAudioRendererDevices, lpVtbl : IMSVidAudioRendererDevicesVtable* do
     GUID = LibC::GUID.new(0xc5702cd4_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidAudioRendererDevices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35972,7 +35972,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidFeaturesVtbl,
+  record IMSVidFeaturesVtable,
     query_interface : Proc(IMSVidFeatures*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidFeatures*, UInt32),
     release : Proc(IMSVidFeatures*, UInt32),
@@ -35988,7 +35988,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidFeatures, lpVtbl : IMSVidFeaturesVtbl* do
+  record IMSVidFeatures, lpVtbl : IMSVidFeaturesVtable* do
     GUID = LibC::GUID.new(0xc5702cd5_u32, 0x9b79_u16, 0x11d3_u16, StaticArray[0xb6_u8, 0x54_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidFeatures*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36030,7 +36030,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidCtlVtbl,
+  record IMSVidCtlVtable,
     query_interface : Proc(IMSVidCtl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidCtl*, UInt32),
     release : Proc(IMSVidCtl*, UInt32),
@@ -36084,7 +36084,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidCtl, lpVtbl : IMSVidCtlVtbl* do
+  record IMSVidCtl, lpVtbl : IMSVidCtlVtable* do
     GUID = LibC::GUID.new(0xb0edf162_u32, 0x910a_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidCtl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36240,7 +36240,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSEventBinderVtbl,
+  record IMSEventBinderVtable,
     query_interface : Proc(IMSEventBinder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSEventBinder*, UInt32),
     release : Proc(IMSEventBinder*, UInt32),
@@ -36253,7 +36253,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSEventBinder, lpVtbl : IMSEventBinderVtbl* do
+  record IMSEventBinder, lpVtbl : IMSEventBinderVtable* do
     GUID = LibC::GUID.new(0xc3a9f406_u32, 0x2222_u16, 0x436d_u16, StaticArray[0x86_u8, 0xd5_u8, 0xba_u8, 0x32_u8, 0x29_u8, 0x27_u8, 0x9e_u8, 0xfb_u8])
     def query_interface(this : IMSEventBinder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36286,7 +36286,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMSVidCtlEvents_Vtbl,
+  record IMSVidCtlEvents_Vtable,
     query_interface : Proc(IMSVidCtlEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSVidCtlEvents_*, UInt32),
     release : Proc(IMSVidCtlEvents_*, UInt32),
@@ -36297,7 +36297,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMSVidCtlEvents_, lpVtbl : IMSVidCtlEvents_Vtbl* do
+  record IMSVidCtlEvents_, lpVtbl : IMSVidCtlEvents_Vtable* do
     GUID = LibC::GUID.new(0xb0edf164_u32, 0x910a_u16, 0x11d2_u16, StaticArray[0xb6_u8, 0x32_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x49_u8, 0x8e_u8])
     def query_interface(this : IMSVidCtlEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36324,7 +36324,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IStreamBufferInitializeVtbl,
+  record IStreamBufferInitializeVtable,
     query_interface : Proc(IStreamBufferInitialize*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStreamBufferInitialize*, UInt32),
     release : Proc(IStreamBufferInitialize*, UInt32),
@@ -36333,7 +36333,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IStreamBufferInitialize, lpVtbl : IStreamBufferInitializeVtbl* do
+  record IStreamBufferInitialize, lpVtbl : IStreamBufferInitializeVtable* do
     GUID = LibC::GUID.new(0x9ce50f2d_u32, 0x6ba7_u16, 0x40fb_u16, StaticArray[0xa0_u8, 0x34_u8, 0x50_u8, 0xb1_u8, 0xa6_u8, 0x74_u8, 0xec_u8, 0x78_u8])
     def query_interface(this : IStreamBufferInitialize*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36354,7 +36354,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IStreamBufferSinkVtbl,
+  record IStreamBufferSinkVtable,
     query_interface : Proc(IStreamBufferSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStreamBufferSink*, UInt32),
     release : Proc(IStreamBufferSink*, UInt32),
@@ -36364,7 +36364,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IStreamBufferSink, lpVtbl : IStreamBufferSinkVtbl* do
+  record IStreamBufferSink, lpVtbl : IStreamBufferSinkVtable* do
     GUID = LibC::GUID.new(0xafd1f242_u32, 0x7efd_u16, 0x45ee_u16, StaticArray[0xba_u8, 0x4e_u8, 0x40_u8, 0x7a_u8, 0x25_u8, 0xc9_u8, 0xa7_u8, 0x7a_u8])
     def query_interface(this : IStreamBufferSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36388,7 +36388,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IStreamBufferSink2Vtbl,
+  record IStreamBufferSink2Vtable,
     query_interface : Proc(IStreamBufferSink2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStreamBufferSink2*, UInt32),
     release : Proc(IStreamBufferSink2*, UInt32),
@@ -36399,7 +36399,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IStreamBufferSink2, lpVtbl : IStreamBufferSink2Vtbl* do
+  record IStreamBufferSink2, lpVtbl : IStreamBufferSink2Vtable* do
     GUID = LibC::GUID.new(0xdb94a660_u32, 0xf4fb_u16, 0x4bfa_u16, StaticArray[0xbc_u8, 0xc6_u8, 0xfe_u8, 0x15_u8, 0x9a_u8, 0x4e_u8, 0xea_u8, 0x93_u8])
     def query_interface(this : IStreamBufferSink2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36426,7 +36426,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IStreamBufferSink3Vtbl,
+  record IStreamBufferSink3Vtable,
     query_interface : Proc(IStreamBufferSink3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStreamBufferSink3*, UInt32),
     release : Proc(IStreamBufferSink3*, UInt32),
@@ -36438,7 +36438,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IStreamBufferSink3, lpVtbl : IStreamBufferSink3Vtbl* do
+  record IStreamBufferSink3, lpVtbl : IStreamBufferSink3Vtable* do
     GUID = LibC::GUID.new(0x974723f2_u32, 0x887a_u16, 0x4452_u16, StaticArray[0x93_u8, 0x66_u8, 0x2c_u8, 0xff_u8, 0x30_u8, 0x57_u8, 0xbc_u8, 0x8f_u8])
     def query_interface(this : IStreamBufferSink3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36468,7 +36468,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IStreamBufferSourceVtbl,
+  record IStreamBufferSourceVtable,
     query_interface : Proc(IStreamBufferSource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStreamBufferSource*, UInt32),
     release : Proc(IStreamBufferSource*, UInt32),
@@ -36476,7 +36476,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IStreamBufferSource, lpVtbl : IStreamBufferSourceVtbl* do
+  record IStreamBufferSource, lpVtbl : IStreamBufferSourceVtable* do
     GUID = LibC::GUID.new(0x1c5bd776_u32, 0x6ced_u16, 0x4f44_u16, StaticArray[0x81_u8, 0x64_u8, 0x5e_u8, 0xab_u8, 0xe_u8, 0x98_u8, 0xdb_u8, 0x12_u8])
     def query_interface(this : IStreamBufferSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36494,7 +36494,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IStreamBufferRecordControlVtbl,
+  record IStreamBufferRecordControlVtable,
     query_interface : Proc(IStreamBufferRecordControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStreamBufferRecordControl*, UInt32),
     release : Proc(IStreamBufferRecordControl*, UInt32),
@@ -36504,7 +36504,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IStreamBufferRecordControl, lpVtbl : IStreamBufferRecordControlVtbl* do
+  record IStreamBufferRecordControl, lpVtbl : IStreamBufferRecordControlVtable* do
     GUID = LibC::GUID.new(0xba9b6c99_u32, 0xf3c7_u16, 0x4ff2_u16, StaticArray[0x92_u8, 0xdb_u8, 0xcf_u8, 0xdd_u8, 0x48_u8, 0x51_u8, 0xbf_u8, 0x31_u8])
     def query_interface(this : IStreamBufferRecordControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36528,7 +36528,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IStreamBufferRecCompVtbl,
+  record IStreamBufferRecCompVtable,
     query_interface : Proc(IStreamBufferRecComp*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStreamBufferRecComp*, UInt32),
     release : Proc(IStreamBufferRecComp*, UInt32),
@@ -36541,7 +36541,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IStreamBufferRecComp, lpVtbl : IStreamBufferRecCompVtbl* do
+  record IStreamBufferRecComp, lpVtbl : IStreamBufferRecCompVtable* do
     GUID = LibC::GUID.new(0x9e259a9b_u32, 0x8815_u16, 0x42ae_u16, StaticArray[0xb0_u8, 0x9f_u8, 0x22_u8, 0x19_u8, 0x70_u8, 0xb1_u8, 0x54_u8, 0xfd_u8])
     def query_interface(this : IStreamBufferRecComp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36574,7 +36574,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IStreamBufferRecordingAttributeVtbl,
+  record IStreamBufferRecordingAttributeVtable,
     query_interface : Proc(IStreamBufferRecordingAttribute*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStreamBufferRecordingAttribute*, UInt32),
     release : Proc(IStreamBufferRecordingAttribute*, UInt32),
@@ -36586,7 +36586,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IStreamBufferRecordingAttribute, lpVtbl : IStreamBufferRecordingAttributeVtbl* do
+  record IStreamBufferRecordingAttribute, lpVtbl : IStreamBufferRecordingAttributeVtable* do
     GUID = LibC::GUID.new(0x16ca4e03_u32, 0xfe69_u16, 0x4705_u16, StaticArray[0xbd_u8, 0x41_u8, 0x5b_u8, 0x7d_u8, 0xfc_u8, 0xc_u8, 0x95_u8, 0xf3_u8])
     def query_interface(this : IStreamBufferRecordingAttribute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36616,7 +36616,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IEnumStreamBufferRecordingAttribVtbl,
+  record IEnumStreamBufferRecordingAttribVtable,
     query_interface : Proc(IEnumStreamBufferRecordingAttrib*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumStreamBufferRecordingAttrib*, UInt32),
     release : Proc(IEnumStreamBufferRecordingAttrib*, UInt32),
@@ -36627,7 +36627,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IEnumStreamBufferRecordingAttrib, lpVtbl : IEnumStreamBufferRecordingAttribVtbl* do
+  record IEnumStreamBufferRecordingAttrib, lpVtbl : IEnumStreamBufferRecordingAttribVtable* do
     GUID = LibC::GUID.new(0xc18a9162_u32, 0x1e82_u16, 0x4142_u16, StaticArray[0x8c_u8, 0x73_u8, 0x56_u8, 0x90_u8, 0xfa_u8, 0x62_u8, 0xfe_u8, 0x33_u8])
     def query_interface(this : IEnumStreamBufferRecordingAttrib*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36654,7 +36654,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IStreamBufferConfigureVtbl,
+  record IStreamBufferConfigureVtable,
     query_interface : Proc(IStreamBufferConfigure*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStreamBufferConfigure*, UInt32),
     release : Proc(IStreamBufferConfigure*, UInt32),
@@ -36667,7 +36667,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IStreamBufferConfigure, lpVtbl : IStreamBufferConfigureVtbl* do
+  record IStreamBufferConfigure, lpVtbl : IStreamBufferConfigureVtable* do
     GUID = LibC::GUID.new(0xce14dfae_u32, 0x4098_u16, 0x4af7_u16, StaticArray[0xbb_u8, 0xf7_u8, 0xd6_u8, 0x51_u8, 0x1f_u8, 0x83_u8, 0x54_u8, 0x14_u8])
     def query_interface(this : IStreamBufferConfigure*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36700,7 +36700,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IStreamBufferConfigure2Vtbl,
+  record IStreamBufferConfigure2Vtable,
     query_interface : Proc(IStreamBufferConfigure2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStreamBufferConfigure2*, UInt32),
     release : Proc(IStreamBufferConfigure2*, UInt32),
@@ -36717,7 +36717,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IStreamBufferConfigure2, lpVtbl : IStreamBufferConfigure2Vtbl* do
+  record IStreamBufferConfigure2, lpVtbl : IStreamBufferConfigure2Vtable* do
     GUID = LibC::GUID.new(0x53e037bf_u32, 0x3992_u16, 0x4282_u16, StaticArray[0xae_u8, 0x34_u8, 0x24_u8, 0x87_u8, 0xb4_u8, 0xda_u8, 0xe0_u8, 0x6b_u8])
     def query_interface(this : IStreamBufferConfigure2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36762,7 +36762,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IStreamBufferConfigure3Vtbl,
+  record IStreamBufferConfigure3Vtable,
     query_interface : Proc(IStreamBufferConfigure3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStreamBufferConfigure3*, UInt32),
     release : Proc(IStreamBufferConfigure3*, UInt32),
@@ -36783,7 +36783,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IStreamBufferConfigure3, lpVtbl : IStreamBufferConfigure3Vtbl* do
+  record IStreamBufferConfigure3, lpVtbl : IStreamBufferConfigure3Vtable* do
     GUID = LibC::GUID.new(0x7e2d2a1e_u32, 0x7192_u16, 0x4bd7_u16, StaticArray[0x80_u8, 0xc1_u8, 0x6_u8, 0x1f_u8, 0xd1_u8, 0xd1_u8, 0x4_u8, 0x2_u8])
     def query_interface(this : IStreamBufferConfigure3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36840,7 +36840,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IStreamBufferMediaSeekingVtbl,
+  record IStreamBufferMediaSeekingVtable,
     query_interface : Proc(IStreamBufferMediaSeeking*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStreamBufferMediaSeeking*, UInt32),
     release : Proc(IStreamBufferMediaSeeking*, UInt32),
@@ -36864,7 +36864,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IStreamBufferMediaSeeking, lpVtbl : IStreamBufferMediaSeekingVtbl* do
+  record IStreamBufferMediaSeeking, lpVtbl : IStreamBufferMediaSeekingVtable* do
     GUID = LibC::GUID.new(0xf61f5c26_u32, 0x863d_u16, 0x4afa_u16, StaticArray[0xb0_u8, 0xba_u8, 0x2f_u8, 0x81_u8, 0xdc_u8, 0x97_u8, 0x85_u8, 0x96_u8])
     def query_interface(this : IStreamBufferMediaSeeking*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36930,7 +36930,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IStreamBufferMediaSeeking2Vtbl,
+  record IStreamBufferMediaSeeking2Vtable,
     query_interface : Proc(IStreamBufferMediaSeeking2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStreamBufferMediaSeeking2*, UInt32),
     release : Proc(IStreamBufferMediaSeeking2*, UInt32),
@@ -36955,7 +36955,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IStreamBufferMediaSeeking2, lpVtbl : IStreamBufferMediaSeeking2Vtbl* do
+  record IStreamBufferMediaSeeking2, lpVtbl : IStreamBufferMediaSeeking2Vtable* do
     GUID = LibC::GUID.new(0x3a439ab0_u32, 0x155f_u16, 0x470a_u16, StaticArray[0x86_u8, 0xa6_u8, 0x9e_u8, 0xa5_u8, 0x4a_u8, 0xfd_u8, 0x6e_u8, 0xaf_u8])
     def query_interface(this : IStreamBufferMediaSeeking2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37024,7 +37024,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IStreamBufferDataCountersVtbl,
+  record IStreamBufferDataCountersVtable,
     query_interface : Proc(IStreamBufferDataCounters*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStreamBufferDataCounters*, UInt32),
     release : Proc(IStreamBufferDataCounters*, UInt32),
@@ -37033,7 +37033,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IStreamBufferDataCounters, lpVtbl : IStreamBufferDataCountersVtbl* do
+  record IStreamBufferDataCounters, lpVtbl : IStreamBufferDataCountersVtable* do
     GUID = LibC::GUID.new(0x9d2a2563_u32, 0x31ab_u16, 0x402e_u16, StaticArray[0x9a_u8, 0x6b_u8, 0xad_u8, 0xb9_u8, 0x3_u8, 0x48_u8, 0x94_u8, 0x40_u8])
     def query_interface(this : IStreamBufferDataCounters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37054,7 +37054,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ISBE2GlobalEventVtbl,
+  record ISBE2GlobalEventVtable,
     query_interface : Proc(ISBE2GlobalEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISBE2GlobalEvent*, UInt32),
     release : Proc(ISBE2GlobalEvent*, UInt32),
@@ -37062,7 +37062,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ISBE2GlobalEvent, lpVtbl : ISBE2GlobalEventVtbl* do
+  record ISBE2GlobalEvent, lpVtbl : ISBE2GlobalEventVtable* do
     GUID = LibC::GUID.new(0xcaede759_u32, 0xb6b1_u16, 0x11db_u16, StaticArray[0xa5_u8, 0x78_u8, 0x0_u8, 0x18_u8, 0xf3_u8, 0xfa_u8, 0x24_u8, 0xc6_u8])
     def query_interface(this : ISBE2GlobalEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37080,7 +37080,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ISBE2GlobalEvent2Vtbl,
+  record ISBE2GlobalEvent2Vtable,
     query_interface : Proc(ISBE2GlobalEvent2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISBE2GlobalEvent2*, UInt32),
     release : Proc(ISBE2GlobalEvent2*, UInt32),
@@ -37089,7 +37089,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ISBE2GlobalEvent2, lpVtbl : ISBE2GlobalEvent2Vtbl* do
+  record ISBE2GlobalEvent2, lpVtbl : ISBE2GlobalEvent2Vtable* do
     GUID = LibC::GUID.new(0x6d8309bf_u32, 0xfe_u16, 0x4506_u16, StaticArray[0x8b_u8, 0x3_u8, 0xf8_u8, 0xc6_u8, 0x5b_u8, 0x5c_u8, 0x9b_u8, 0x39_u8])
     def query_interface(this : ISBE2GlobalEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37110,7 +37110,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ISBE2SpanningEventVtbl,
+  record ISBE2SpanningEventVtable,
     query_interface : Proc(ISBE2SpanningEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISBE2SpanningEvent*, UInt32),
     release : Proc(ISBE2SpanningEvent*, UInt32),
@@ -37118,7 +37118,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ISBE2SpanningEvent, lpVtbl : ISBE2SpanningEventVtbl* do
+  record ISBE2SpanningEvent, lpVtbl : ISBE2SpanningEventVtable* do
     GUID = LibC::GUID.new(0xcaede760_u32, 0xb6b1_u16, 0x11db_u16, StaticArray[0xa5_u8, 0x78_u8, 0x0_u8, 0x18_u8, 0xf3_u8, 0xfa_u8, 0x24_u8, 0xc6_u8])
     def query_interface(this : ISBE2SpanningEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37136,7 +37136,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ISBE2CrossbarVtbl,
+  record ISBE2CrossbarVtable,
     query_interface : Proc(ISBE2Crossbar*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISBE2Crossbar*, UInt32),
     release : Proc(ISBE2Crossbar*, UInt32),
@@ -37147,7 +37147,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ISBE2Crossbar, lpVtbl : ISBE2CrossbarVtbl* do
+  record ISBE2Crossbar, lpVtbl : ISBE2CrossbarVtable* do
     GUID = LibC::GUID.new(0x547b6d26_u32, 0x3226_u16, 0x487e_u16, StaticArray[0x82_u8, 0x53_u8, 0x8a_u8, 0xa1_u8, 0x68_u8, 0x74_u8, 0x94_u8, 0x34_u8])
     def query_interface(this : ISBE2Crossbar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37174,7 +37174,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ISBE2StreamMapVtbl,
+  record ISBE2StreamMapVtable,
     query_interface : Proc(ISBE2StreamMap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISBE2StreamMap*, UInt32),
     release : Proc(ISBE2StreamMap*, UInt32),
@@ -37184,7 +37184,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ISBE2StreamMap, lpVtbl : ISBE2StreamMapVtbl* do
+  record ISBE2StreamMap, lpVtbl : ISBE2StreamMapVtable* do
     GUID = LibC::GUID.new(0x667c7745_u32, 0x85b1_u16, 0x4c55_u16, StaticArray[0xae_u8, 0x55_u8, 0x4e_u8, 0x25_u8, 0x5_u8, 0x61_u8, 0x59_u8, 0xfc_u8])
     def query_interface(this : ISBE2StreamMap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37208,7 +37208,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ISBE2EnumStreamVtbl,
+  record ISBE2EnumStreamVtable,
     query_interface : Proc(ISBE2EnumStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISBE2EnumStream*, UInt32),
     release : Proc(ISBE2EnumStream*, UInt32),
@@ -37219,7 +37219,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ISBE2EnumStream, lpVtbl : ISBE2EnumStreamVtbl* do
+  record ISBE2EnumStream, lpVtbl : ISBE2EnumStreamVtable* do
     GUID = LibC::GUID.new(0xf7611092_u32, 0x9fbc_u16, 0x46ec_u16, StaticArray[0xa7_u8, 0xc7_u8, 0x54_u8, 0x8e_u8, 0xa7_u8, 0x8b_u8, 0x71_u8, 0xa4_u8])
     def query_interface(this : ISBE2EnumStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37246,7 +37246,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ISBE2MediaTypeProfileVtbl,
+  record ISBE2MediaTypeProfileVtable,
     query_interface : Proc(ISBE2MediaTypeProfile*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISBE2MediaTypeProfile*, UInt32),
     release : Proc(ISBE2MediaTypeProfile*, UInt32),
@@ -37257,7 +37257,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ISBE2MediaTypeProfile, lpVtbl : ISBE2MediaTypeProfileVtbl* do
+  record ISBE2MediaTypeProfile, lpVtbl : ISBE2MediaTypeProfileVtable* do
     GUID = LibC::GUID.new(0xf238267d_u32, 0x4671_u16, 0x40d7_u16, StaticArray[0x99_u8, 0x7e_u8, 0x25_u8, 0xdc_u8, 0x32_u8, 0xcf_u8, 0xed_u8, 0x2a_u8])
     def query_interface(this : ISBE2MediaTypeProfile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37284,7 +37284,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ISBE2FileScanVtbl,
+  record ISBE2FileScanVtable,
     query_interface : Proc(ISBE2FileScan*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISBE2FileScan*, UInt32),
     release : Proc(ISBE2FileScan*, UInt32),
@@ -37292,7 +37292,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ISBE2FileScan, lpVtbl : ISBE2FileScanVtbl* do
+  record ISBE2FileScan, lpVtbl : ISBE2FileScanVtable* do
     GUID = LibC::GUID.new(0x3e2bf5a5_u32, 0x4f96_u16, 0x4899_u16, StaticArray[0xa1_u8, 0xa3_u8, 0x75_u8, 0xe8_u8, 0xbe_u8, 0x9a_u8, 0x5a_u8, 0xc0_u8])
     def query_interface(this : ISBE2FileScan*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37310,7 +37310,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMpeg2TableFilterVtbl,
+  record IMpeg2TableFilterVtable,
     query_interface : Proc(IMpeg2TableFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMpeg2TableFilter*, UInt32),
     release : Proc(IMpeg2TableFilter*, UInt32),
@@ -37323,7 +37323,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMpeg2TableFilter, lpVtbl : IMpeg2TableFilterVtbl* do
+  record IMpeg2TableFilter, lpVtbl : IMpeg2TableFilterVtable* do
     GUID = LibC::GUID.new(0xbdcdd913_u32, 0x9ecd_u16, 0x4fb2_u16, StaticArray[0x81_u8, 0xae_u8, 0xad_u8, 0xf7_u8, 0x47_u8, 0xea_u8, 0x75_u8, 0xa5_u8])
     def query_interface(this : IMpeg2TableFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37356,7 +37356,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMpeg2DataVtbl,
+  record IMpeg2DataVtable,
     query_interface : Proc(IMpeg2Data*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMpeg2Data*, UInt32),
     release : Proc(IMpeg2Data*, UInt32),
@@ -37366,7 +37366,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMpeg2Data, lpVtbl : IMpeg2DataVtbl* do
+  record IMpeg2Data, lpVtbl : IMpeg2DataVtable* do
     GUID = LibC::GUID.new(0x9b396d40_u32, 0xf380_u16, 0x4e3c_u16, StaticArray[0xa5_u8, 0x14_u8, 0x1a_u8, 0x82_u8, 0xbf_u8, 0x6e_u8, 0xbf_u8, 0xe6_u8])
     def query_interface(this : IMpeg2Data*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37390,7 +37390,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ISectionListVtbl,
+  record ISectionListVtable,
     query_interface : Proc(ISectionList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISectionList*, UInt32),
     release : Proc(ISectionList*, UInt32),
@@ -37404,7 +37404,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ISectionList, lpVtbl : ISectionListVtbl* do
+  record ISectionList, lpVtbl : ISectionListVtable* do
     GUID = LibC::GUID.new(0xafec1eb5_u32, 0x2a64_u16, 0x46c6_u16, StaticArray[0xbf_u8, 0x4b_u8, 0xae_u8, 0x3c_u8, 0xcb_u8, 0x6a_u8, 0xfd_u8, 0xb0_u8])
     def query_interface(this : ISectionList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37440,7 +37440,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMpeg2StreamVtbl,
+  record IMpeg2StreamVtable,
     query_interface : Proc(IMpeg2Stream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMpeg2Stream*, UInt32),
     release : Proc(IMpeg2Stream*, UInt32),
@@ -37449,7 +37449,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMpeg2Stream, lpVtbl : IMpeg2StreamVtbl* do
+  record IMpeg2Stream, lpVtbl : IMpeg2StreamVtable* do
     GUID = LibC::GUID.new(0x400cc286_u32, 0x32a0_u16, 0x4ce4_u16, StaticArray[0x90_u8, 0x41_u8, 0x39_u8, 0x57_u8, 0x11_u8, 0x25_u8, 0xa6_u8, 0x35_u8])
     def query_interface(this : IMpeg2Stream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37470,7 +37470,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IGenericDescriptorVtbl,
+  record IGenericDescriptorVtable,
     query_interface : Proc(IGenericDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGenericDescriptor*, UInt32),
     release : Proc(IGenericDescriptor*, UInt32),
@@ -37481,7 +37481,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IGenericDescriptor, lpVtbl : IGenericDescriptorVtbl* do
+  record IGenericDescriptor, lpVtbl : IGenericDescriptorVtable* do
     GUID = LibC::GUID.new(0x6a5918f8_u32, 0xa77a_u16, 0x4f61_u16, StaticArray[0xae_u8, 0xd0_u8, 0x57_u8, 0x2_u8, 0xbd_u8, 0xcd_u8, 0xa3_u8, 0xe6_u8])
     def query_interface(this : IGenericDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37508,7 +37508,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IGenericDescriptor2Vtbl,
+  record IGenericDescriptor2Vtable,
     query_interface : Proc(IGenericDescriptor2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGenericDescriptor2*, UInt32),
     release : Proc(IGenericDescriptor2*, UInt32),
@@ -37521,7 +37521,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IGenericDescriptor2, lpVtbl : IGenericDescriptor2Vtbl* do
+  record IGenericDescriptor2, lpVtbl : IGenericDescriptor2Vtable* do
     GUID = LibC::GUID.new(0xbf02fb7e_u32, 0x9792_u16, 0x4e10_u16, StaticArray[0xa6_u8, 0x8d_u8, 0x3_u8, 0x3a_u8, 0x2c_u8, 0xc2_u8, 0x46_u8, 0xa5_u8])
     def query_interface(this : IGenericDescriptor2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37554,7 +37554,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IPATVtbl,
+  record IPATVtable,
     query_interface : Proc(IPAT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPAT*, UInt32),
     release : Proc(IPAT*, UInt32),
@@ -37572,7 +37572,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IPAT, lpVtbl : IPATVtbl* do
+  record IPAT, lpVtbl : IPATVtable* do
     GUID = LibC::GUID.new(0x6623b511_u32, 0x4b5f_u16, 0x43c3_u16, StaticArray[0x9a_u8, 0x1_u8, 0xe8_u8, 0xff_u8, 0x84_u8, 0x18_u8, 0x80_u8, 0x60_u8])
     def query_interface(this : IPAT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37620,7 +37620,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ICATVtbl,
+  record ICATVtable,
     query_interface : Proc(ICAT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICAT*, UInt32),
     release : Proc(ICAT*, UInt32),
@@ -37636,7 +37636,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ICAT, lpVtbl : ICATVtbl* do
+  record ICAT, lpVtbl : ICATVtable* do
     GUID = LibC::GUID.new(0x7c6995fb_u32, 0x2a31_u16, 0x4bd7_u16, StaticArray[0x95_u8, 0x3e_u8, 0xb1_u8, 0xad_u8, 0x7f_u8, 0xb7_u8, 0xd3_u8, 0x1c_u8])
     def query_interface(this : ICAT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37678,7 +37678,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IPMTVtbl,
+  record IPMTVtable,
     query_interface : Proc(IPMT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPMT*, UInt32),
     release : Proc(IPMT*, UInt32),
@@ -37704,7 +37704,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IPMT, lpVtbl : IPMTVtbl* do
+  record IPMT, lpVtbl : IPMTVtable* do
     GUID = LibC::GUID.new(0x1f3b398_u32, 0x9527_u16, 0x4736_u16, StaticArray[0x94_u8, 0xdb_u8, 0x51_u8, 0x95_u8, 0x87_u8, 0x8e_u8, 0x97_u8, 0xa8_u8])
     def query_interface(this : IPMT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37776,7 +37776,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ITSDTVtbl,
+  record ITSDTVtable,
     query_interface : Proc(ITSDT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITSDT*, UInt32),
     release : Proc(ITSDT*, UInt32),
@@ -37792,7 +37792,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ITSDT, lpVtbl : ITSDTVtbl* do
+  record ITSDT, lpVtbl : ITSDTVtable* do
     GUID = LibC::GUID.new(0xd19bdb43_u32, 0x405b_u16, 0x4a7c_u16, StaticArray[0xa7_u8, 0x91_u8, 0xc8_u8, 0x91_u8, 0x10_u8, 0xc3_u8, 0x31_u8, 0x65_u8])
     def query_interface(this : ITSDT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37834,7 +37834,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IPSITablesVtbl,
+  record IPSITablesVtable,
     query_interface : Proc(IPSITables*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPSITables*, UInt32),
     release : Proc(IPSITables*, UInt32),
@@ -37842,7 +37842,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IPSITables, lpVtbl : IPSITablesVtbl* do
+  record IPSITables, lpVtbl : IPSITablesVtable* do
     GUID = LibC::GUID.new(0x919f24c5_u32, 0x7b14_u16, 0x42ac_u16, StaticArray[0xa4_u8, 0xb0_u8, 0x2a_u8, 0xe0_u8, 0x8d_u8, 0xaf_u8, 0x0_u8, 0xac_u8])
     def query_interface(this : IPSITables*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37860,7 +37860,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAtscPsipParserVtbl,
+  record IAtscPsipParserVtable,
     query_interface : Proc(IAtscPsipParser*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAtscPsipParser*, UInt32),
     release : Proc(IAtscPsipParser*, UInt32),
@@ -37878,7 +37878,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAtscPsipParser, lpVtbl : IAtscPsipParserVtbl* do
+  record IAtscPsipParser, lpVtbl : IAtscPsipParserVtable* do
     GUID = LibC::GUID.new(0xb2c98995_u32, 0x5eb2_u16, 0x4fb1_u16, StaticArray[0xb4_u8, 0x6_u8, 0xf3_u8, 0xe8_u8, 0xe2_u8, 0x2_u8, 0x6a_u8, 0x9a_u8])
     def query_interface(this : IAtscPsipParser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37926,7 +37926,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IATSC_MGTVtbl,
+  record IATSC_MGTVtable,
     query_interface : Proc(IATSC_MGT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IATSC_MGT*, UInt32),
     release : Proc(IATSC_MGT*, UInt32),
@@ -37946,7 +37946,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IATSC_MGT, lpVtbl : IATSC_MGTVtbl* do
+  record IATSC_MGT, lpVtbl : IATSC_MGTVtable* do
     GUID = LibC::GUID.new(0x8877dabd_u32, 0xc137_u16, 0x4073_u16, StaticArray[0x97_u8, 0xe3_u8, 0x77_u8, 0x94_u8, 0x7_u8, 0xa5_u8, 0xd8_u8, 0x7a_u8])
     def query_interface(this : IATSC_MGT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38000,7 +38000,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IATSC_VCTVtbl,
+  record IATSC_VCTVtable,
     query_interface : Proc(IATSC_VCT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IATSC_VCT*, UInt32),
     release : Proc(IATSC_VCT*, UInt32),
@@ -38033,7 +38033,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IATSC_VCT, lpVtbl : IATSC_VCTVtbl* do
+  record IATSC_VCT, lpVtbl : IATSC_VCTVtable* do
     GUID = LibC::GUID.new(0x26879a18_u32, 0x32f9_u16, 0x46c6_u16, StaticArray[0x91_u8, 0xf0_u8, 0xfb_u8, 0x64_u8, 0x79_u8, 0x27_u8, 0xe_u8, 0x8c_u8])
     def query_interface(this : IATSC_VCT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38126,7 +38126,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IATSC_EITVtbl,
+  record IATSC_EITVtable,
     query_interface : Proc(IATSC_EIT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IATSC_EIT*, UInt32),
     release : Proc(IATSC_EIT*, UInt32),
@@ -38146,7 +38146,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IATSC_EIT, lpVtbl : IATSC_EITVtbl* do
+  record IATSC_EIT, lpVtbl : IATSC_EITVtable* do
     GUID = LibC::GUID.new(0xd7c212d7_u32, 0x76a2_u16, 0x4b4b_u16, StaticArray[0xaa_u8, 0x56_u8, 0x84_u8, 0x68_u8, 0x79_u8, 0xa8_u8, 0x0_u8, 0x96_u8])
     def query_interface(this : IATSC_EIT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38200,7 +38200,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IATSC_ETTVtbl,
+  record IATSC_ETTVtable,
     query_interface : Proc(IATSC_ETT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IATSC_ETT*, UInt32),
     release : Proc(IATSC_ETT*, UInt32),
@@ -38212,7 +38212,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IATSC_ETT, lpVtbl : IATSC_ETTVtbl* do
+  record IATSC_ETT, lpVtbl : IATSC_ETTVtable* do
     GUID = LibC::GUID.new(0x5a142cc9_u32, 0xb8cf_u16, 0x4a86_u16, StaticArray[0xa0_u8, 0x40_u8, 0xe9_u8, 0xca_u8, 0xdf_u8, 0x3e_u8, 0xf3_u8, 0xe7_u8])
     def query_interface(this : IATSC_ETT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38242,7 +38242,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IATSC_STTVtbl,
+  record IATSC_STTVtable,
     query_interface : Proc(IATSC_STT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IATSC_STT*, UInt32),
     release : Proc(IATSC_STT*, UInt32),
@@ -38257,7 +38257,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IATSC_STT, lpVtbl : IATSC_STTVtbl* do
+  record IATSC_STT, lpVtbl : IATSC_STTVtable* do
     GUID = LibC::GUID.new(0x6bf42423_u32, 0x217d_u16, 0x4d6f_u16, StaticArray[0x81_u8, 0xe1_u8, 0x3a_u8, 0x7b_u8, 0x36_u8, 0xe_u8, 0xc8_u8, 0x96_u8])
     def query_interface(this : IATSC_STT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38296,7 +38296,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ISCTE_EASVtbl,
+  record ISCTE_EASVtable,
     query_interface : Proc(ISCTE_EAS*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISCTE_EAS*, UInt32),
     release : Proc(ISCTE_EAS*, UInt32),
@@ -38332,7 +38332,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ISCTE_EAS, lpVtbl : ISCTE_EASVtbl* do
+  record ISCTE_EAS, lpVtbl : ISCTE_EASVtable* do
     GUID = LibC::GUID.new(0x1ff544d6_u32, 0x161d_u16, 0x4fae_u16, StaticArray[0x9f_u8, 0xaa_u8, 0x4f_u8, 0x9f_u8, 0x49_u8, 0x2a_u8, 0xe9_u8, 0x99_u8])
     def query_interface(this : ISCTE_EAS*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38434,7 +38434,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAtscContentAdvisoryDescriptorVtbl,
+  record IAtscContentAdvisoryDescriptorVtable,
     query_interface : Proc(IAtscContentAdvisoryDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAtscContentAdvisoryDescriptor*, UInt32),
     release : Proc(IAtscContentAdvisoryDescriptor*, UInt32),
@@ -38449,7 +38449,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAtscContentAdvisoryDescriptor, lpVtbl : IAtscContentAdvisoryDescriptorVtbl* do
+  record IAtscContentAdvisoryDescriptor, lpVtbl : IAtscContentAdvisoryDescriptorVtable* do
     GUID = LibC::GUID.new(0xff76e60c_u32, 0x283_u16, 0x43ea_u16, StaticArray[0xba_u8, 0x32_u8, 0xb4_u8, 0x22_u8, 0x23_u8, 0x85_u8, 0x47_u8, 0xee_u8])
     def query_interface(this : IAtscContentAdvisoryDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38488,7 +38488,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ICaptionServiceDescriptorVtbl,
+  record ICaptionServiceDescriptorVtable,
     query_interface : Proc(ICaptionServiceDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICaptionServiceDescriptor*, UInt32),
     release : Proc(ICaptionServiceDescriptor*, UInt32),
@@ -38501,7 +38501,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ICaptionServiceDescriptor, lpVtbl : ICaptionServiceDescriptorVtbl* do
+  record ICaptionServiceDescriptor, lpVtbl : ICaptionServiceDescriptorVtable* do
     GUID = LibC::GUID.new(0x40834007_u32, 0x6834_u16, 0x46f0_u16, StaticArray[0xbd_u8, 0x45_u8, 0xd5_u8, 0xf6_u8, 0xa6_u8, 0xbe_u8, 0x25_u8, 0x8c_u8])
     def query_interface(this : ICaptionServiceDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38534,7 +38534,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IServiceLocationDescriptorVtbl,
+  record IServiceLocationDescriptorVtable,
     query_interface : Proc(IServiceLocationDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IServiceLocationDescriptor*, UInt32),
     release : Proc(IServiceLocationDescriptor*, UInt32),
@@ -38546,7 +38546,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IServiceLocationDescriptor, lpVtbl : IServiceLocationDescriptorVtbl* do
+  record IServiceLocationDescriptor, lpVtbl : IServiceLocationDescriptorVtable* do
     GUID = LibC::GUID.new(0x58c3c827_u32, 0x9d91_u16, 0x4215_u16, StaticArray[0xbf_u8, 0xf3_u8, 0x82_u8, 0xa_u8, 0x49_u8, 0xf0_u8, 0x90_u8, 0x4c_u8])
     def query_interface(this : IServiceLocationDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38576,7 +38576,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAttributeSetVtbl,
+  record IAttributeSetVtable,
     query_interface : Proc(IAttributeSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAttributeSet*, UInt32),
     release : Proc(IAttributeSet*, UInt32),
@@ -38584,7 +38584,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAttributeSet, lpVtbl : IAttributeSetVtbl* do
+  record IAttributeSet, lpVtbl : IAttributeSetVtable* do
     GUID = LibC::GUID.new(0x583ec3cc_u32, 0x4960_u16, 0x4857_u16, StaticArray[0x98_u8, 0x2b_u8, 0x41_u8, 0xa3_u8, 0x3e_u8, 0xa0_u8, 0xa0_u8, 0x6_u8])
     def query_interface(this : IAttributeSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38602,7 +38602,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IAttributeGetVtbl,
+  record IAttributeGetVtable,
     query_interface : Proc(IAttributeGet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAttributeGet*, UInt32),
     release : Proc(IAttributeGet*, UInt32),
@@ -38612,7 +38612,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IAttributeGet, lpVtbl : IAttributeGetVtbl* do
+  record IAttributeGet, lpVtbl : IAttributeGetVtable* do
     GUID = LibC::GUID.new(0x52dbd1ec_u32, 0xe48f_u16, 0x4528_u16, StaticArray[0x92_u8, 0x32_u8, 0xf4_u8, 0x42_u8, 0xa6_u8, 0x8f_u8, 0xa_u8, 0xe1_u8])
     def query_interface(this : IAttributeGet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38636,7 +38636,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbSiParserVtbl,
+  record IDvbSiParserVtable,
     query_interface : Proc(IDvbSiParser*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbSiParser*, UInt32),
     release : Proc(IDvbSiParser*, UInt32),
@@ -38658,7 +38658,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbSiParser, lpVtbl : IDvbSiParserVtbl* do
+  record IDvbSiParser, lpVtbl : IDvbSiParserVtable* do
     GUID = LibC::GUID.new(0xb758a7bd_u32, 0x14dc_u16, 0x449d_u16, StaticArray[0xb8_u8, 0x28_u8, 0x35_u8, 0x90_u8, 0x9a_u8, 0xcb_u8, 0x3b_u8, 0x1e_u8])
     def query_interface(this : IDvbSiParser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38718,7 +38718,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbSiParser2Vtbl,
+  record IDvbSiParser2Vtable,
     query_interface : Proc(IDvbSiParser2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbSiParser2*, UInt32),
     release : Proc(IDvbSiParser2*, UInt32),
@@ -38741,7 +38741,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbSiParser2, lpVtbl : IDvbSiParser2Vtbl* do
+  record IDvbSiParser2, lpVtbl : IDvbSiParser2Vtable* do
     GUID = LibC::GUID.new(0xac5525f_u32, 0xf816_u16, 0x42f4_u16, StaticArray[0x93_u8, 0xba_u8, 0x4c_u8, 0xf_u8, 0x32_u8, 0xf4_u8, 0x6e_u8, 0x54_u8])
     def query_interface(this : IDvbSiParser2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38804,7 +38804,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IIsdbSiParser2Vtbl,
+  record IIsdbSiParser2Vtable,
     query_interface : Proc(IIsdbSiParser2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIsdbSiParser2*, UInt32),
     release : Proc(IIsdbSiParser2*, UInt32),
@@ -38834,7 +38834,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IIsdbSiParser2, lpVtbl : IIsdbSiParser2Vtbl* do
+  record IIsdbSiParser2, lpVtbl : IIsdbSiParser2Vtable* do
     GUID = LibC::GUID.new(0x900e4bb7_u32, 0x18cd_u16, 0x453f_u16, StaticArray[0x98_u8, 0xbe_u8, 0x3b_u8, 0xe6_u8, 0xaa_u8, 0x21_u8, 0x17_u8, 0x72_u8])
     def query_interface(this : IIsdbSiParser2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38918,7 +38918,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVB_NITVtbl,
+  record IDVB_NITVtable,
     query_interface : Proc(IDVB_NIT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVB_NIT*, UInt32),
     release : Proc(IDVB_NIT*, UInt32),
@@ -38942,7 +38942,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVB_NIT, lpVtbl : IDVB_NITVtbl* do
+  record IDVB_NIT, lpVtbl : IDVB_NITVtable* do
     GUID = LibC::GUID.new(0xc64935f4_u32, 0x29e4_u16, 0x4e22_u16, StaticArray[0x91_u8, 0x1a_u8, 0x63_u8, 0xf7_u8, 0xf5_u8, 0x5c_u8, 0xb0_u8, 0x97_u8])
     def query_interface(this : IDVB_NIT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39008,7 +39008,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVB_SDTVtbl,
+  record IDVB_SDTVtable,
     query_interface : Proc(IDVB_SDT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVB_SDT*, UInt32),
     release : Proc(IDVB_SDT*, UInt32),
@@ -39033,7 +39033,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVB_SDT, lpVtbl : IDVB_SDTVtbl* do
+  record IDVB_SDT, lpVtbl : IDVB_SDTVtable* do
     GUID = LibC::GUID.new(0x2cad8d3_u32, 0xfe43_u16, 0x48e2_u16, StaticArray[0x90_u8, 0xbd_u8, 0x45_u8, 0xe_u8, 0xd9_u8, 0xa8_u8, 0xa5_u8, 0xfd_u8])
     def query_interface(this : IDVB_SDT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39102,7 +39102,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IISDB_SDTVtbl,
+  record IISDB_SDTVtable,
     query_interface : Proc(IISDB_SDT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IISDB_SDT*, UInt32),
     release : Proc(IISDB_SDT*, UInt32),
@@ -39128,7 +39128,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IISDB_SDT, lpVtbl : IISDB_SDTVtbl* do
+  record IISDB_SDT, lpVtbl : IISDB_SDTVtable* do
     GUID = LibC::GUID.new(0x3f3dc9a2_u32, 0xbb32_u16, 0x4fb9_u16, StaticArray[0xae_u8, 0x9e_u8, 0xd8_u8, 0x56_u8, 0x84_u8, 0x89_u8, 0x27_u8, 0xa3_u8])
     def query_interface(this : IISDB_SDT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39200,7 +39200,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVB_EITVtbl,
+  record IDVB_EITVtable,
     query_interface : Proc(IDVB_EIT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVB_EIT*, UInt32),
     release : Proc(IDVB_EIT*, UInt32),
@@ -39228,7 +39228,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVB_EIT, lpVtbl : IDVB_EITVtbl* do
+  record IDVB_EIT, lpVtbl : IDVB_EITVtable* do
     GUID = LibC::GUID.new(0x442db029_u32, 0x2cb_u16, 0x4495_u16, StaticArray[0x8b_u8, 0x92_u8, 0x1c_u8, 0x13_u8, 0x37_u8, 0x5b_u8, 0xce_u8, 0x99_u8])
     def query_interface(this : IDVB_EIT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39306,7 +39306,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVB_EIT2Vtbl,
+  record IDVB_EIT2Vtable,
     query_interface : Proc(IDVB_EIT2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVB_EIT2*, UInt32),
     release : Proc(IDVB_EIT2*, UInt32),
@@ -39336,7 +39336,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVB_EIT2, lpVtbl : IDVB_EIT2Vtbl* do
+  record IDVB_EIT2, lpVtbl : IDVB_EIT2Vtable* do
     GUID = LibC::GUID.new(0x61a389e0_u32, 0x9b9e_u16, 0x4ba0_u16, StaticArray[0xae_u8, 0xea_u8, 0x5d_u8, 0xdd_u8, 0x15_u8, 0x98_u8, 0x20_u8, 0xea_u8])
     def query_interface(this : IDVB_EIT2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39420,7 +39420,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVB_BATVtbl,
+  record IDVB_BATVtable,
     query_interface : Proc(IDVB_BAT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVB_BAT*, UInt32),
     release : Proc(IDVB_BAT*, UInt32),
@@ -39443,7 +39443,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVB_BAT, lpVtbl : IDVB_BATVtbl* do
+  record IDVB_BAT, lpVtbl : IDVB_BATVtable* do
     GUID = LibC::GUID.new(0xece9bb0c_u32, 0x43b6_u16, 0x4558_u16, StaticArray[0xa0_u8, 0xec_u8, 0x18_u8, 0x12_u8, 0xc3_u8, 0x4c_u8, 0xd6_u8, 0xca_u8])
     def query_interface(this : IDVB_BAT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39506,7 +39506,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVB_RSTVtbl,
+  record IDVB_RSTVtable,
     query_interface : Proc(IDVB_RST*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVB_RST*, UInt32),
     release : Proc(IDVB_RST*, UInt32),
@@ -39520,7 +39520,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVB_RST, lpVtbl : IDVB_RSTVtbl* do
+  record IDVB_RST, lpVtbl : IDVB_RSTVtable* do
     GUID = LibC::GUID.new(0xf47dcd04_u32, 0x1e23_u16, 0x4fb7_u16, StaticArray[0x9f_u8, 0x96_u8, 0xb4_u8, 0xe_u8, 0xea_u8, 0xd1_u8, 0xb_u8, 0x2b_u8])
     def query_interface(this : IDVB_RST*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39556,7 +39556,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVB_STVtbl,
+  record IDVB_STVtable,
     query_interface : Proc(IDVB_ST*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVB_ST*, UInt32),
     release : Proc(IDVB_ST*, UInt32),
@@ -39566,7 +39566,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVB_ST, lpVtbl : IDVB_STVtbl* do
+  record IDVB_ST, lpVtbl : IDVB_STVtable* do
     GUID = LibC::GUID.new(0x4d5b9f23_u32, 0x2a02_u16, 0x45de_u16, StaticArray[0xbc_u8, 0xda_u8, 0x5d_u8, 0x5d_u8, 0xbf_u8, 0xbf_u8, 0xbe_u8, 0x62_u8])
     def query_interface(this : IDVB_ST*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39590,7 +39590,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVB_TDTVtbl,
+  record IDVB_TDTVtable,
     query_interface : Proc(IDVB_TDT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVB_TDT*, UInt32),
     release : Proc(IDVB_TDT*, UInt32),
@@ -39599,7 +39599,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVB_TDT, lpVtbl : IDVB_TDTVtbl* do
+  record IDVB_TDT, lpVtbl : IDVB_TDTVtable* do
     GUID = LibC::GUID.new(0x780dc7d_u32, 0xd55c_u16, 0x4aef_u16, StaticArray[0x97_u8, 0xe6_u8, 0x6b_u8, 0x75_u8, 0x90_u8, 0x6e_u8, 0x27_u8, 0x96_u8])
     def query_interface(this : IDVB_TDT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39620,7 +39620,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVB_TOTVtbl,
+  record IDVB_TOTVtable,
     query_interface : Proc(IDVB_TOT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVB_TOT*, UInt32),
     release : Proc(IDVB_TOT*, UInt32),
@@ -39632,7 +39632,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVB_TOT, lpVtbl : IDVB_TOTVtbl* do
+  record IDVB_TOT, lpVtbl : IDVB_TOTVtable* do
     GUID = LibC::GUID.new(0x83295d6a_u32, 0xfaba_u16, 0x4ee1_u16, StaticArray[0x9b_u8, 0x15_u8, 0x80_u8, 0x67_u8, 0x69_u8, 0x69_u8, 0x10_u8, 0xae_u8])
     def query_interface(this : IDVB_TOT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39662,7 +39662,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVB_DITVtbl,
+  record IDVB_DITVtable,
     query_interface : Proc(IDVB_DIT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVB_DIT*, UInt32),
     release : Proc(IDVB_DIT*, UInt32),
@@ -39671,7 +39671,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVB_DIT, lpVtbl : IDVB_DITVtbl* do
+  record IDVB_DIT, lpVtbl : IDVB_DITVtable* do
     GUID = LibC::GUID.new(0x91bffdf9_u32, 0x9432_u16, 0x410f_u16, StaticArray[0x86_u8, 0xef_u8, 0x1c_u8, 0x22_u8, 0x8e_u8, 0xd0_u8, 0xad_u8, 0x70_u8])
     def query_interface(this : IDVB_DIT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39692,7 +39692,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDVB_SITVtbl,
+  record IDVB_SITVtable,
     query_interface : Proc(IDVB_SIT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDVB_SIT*, UInt32),
     release : Proc(IDVB_SIT*, UInt32),
@@ -39714,7 +39714,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDVB_SIT, lpVtbl : IDVB_SITVtbl* do
+  record IDVB_SIT, lpVtbl : IDVB_SITVtable* do
     GUID = LibC::GUID.new(0x68cdce53_u32, 0x8bea_u16, 0x45c2_u16, StaticArray[0x9d_u8, 0x9d_u8, 0xac_u8, 0xf5_u8, 0x75_u8, 0xa0_u8, 0x89_u8, 0xb5_u8])
     def query_interface(this : IDVB_SIT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39774,7 +39774,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IISDB_BITVtbl,
+  record IISDB_BITVtable,
     query_interface : Proc(IISDB_BIT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IISDB_BIT*, UInt32),
     release : Proc(IISDB_BIT*, UInt32),
@@ -39794,7 +39794,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IISDB_BIT, lpVtbl : IISDB_BITVtbl* do
+  record IISDB_BIT, lpVtbl : IISDB_BITVtable* do
     GUID = LibC::GUID.new(0x537cd71e_u32, 0xe46_u16, 0x4173_u16, StaticArray[0x90_u8, 0x1_u8, 0xba_u8, 0x4_u8, 0x3f_u8, 0x3e_u8, 0x49_u8, 0xe2_u8])
     def query_interface(this : IISDB_BIT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39848,7 +39848,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IISDB_NBITVtbl,
+  record IISDB_NBITVtable,
     query_interface : Proc(IISDB_NBIT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IISDB_NBIT*, UInt32),
     release : Proc(IISDB_NBIT*, UInt32),
@@ -39870,7 +39870,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IISDB_NBIT, lpVtbl : IISDB_NBITVtbl* do
+  record IISDB_NBIT, lpVtbl : IISDB_NBITVtable* do
     GUID = LibC::GUID.new(0x1b1863ef_u32, 0x8f1_u16, 0x40b7_u16, StaticArray[0xa5_u8, 0x59_u8, 0x3b_u8, 0x1e_u8, 0xff_u8, 0x8c_u8, 0xaf_u8, 0xa6_u8])
     def query_interface(this : IISDB_NBIT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39930,7 +39930,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IISDB_LDTVtbl,
+  record IISDB_LDTVtable,
     query_interface : Proc(IISDB_LDT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IISDB_LDT*, UInt32),
     release : Proc(IISDB_LDT*, UInt32),
@@ -39948,7 +39948,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IISDB_LDT, lpVtbl : IISDB_LDTVtbl* do
+  record IISDB_LDT, lpVtbl : IISDB_LDTVtable* do
     GUID = LibC::GUID.new(0x141a546b_u32, 0x2ff_u16, 0x4fb9_u16, StaticArray[0xa3_u8, 0xa3_u8, 0x2f_u8, 0x7_u8, 0x4b_u8, 0x74_u8, 0xa9_u8, 0xa9_u8])
     def query_interface(this : IISDB_LDT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39996,7 +39996,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IISDB_SDTTVtbl,
+  record IISDB_SDTTVtable,
     query_interface : Proc(IISDB_SDTT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IISDB_SDTT*, UInt32),
     release : Proc(IISDB_SDTT*, UInt32),
@@ -40023,7 +40023,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IISDB_SDTT, lpVtbl : IISDB_SDTTVtbl* do
+  record IISDB_SDTT, lpVtbl : IISDB_SDTTVtable* do
     GUID = LibC::GUID.new(0xee60ef2d_u32, 0x813a_u16, 0x4dc7_u16, StaticArray[0xbf_u8, 0x92_u8, 0xea_u8, 0x13_u8, 0xda_u8, 0xc8_u8, 0x53_u8, 0x13_u8])
     def query_interface(this : IISDB_SDTT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40098,7 +40098,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IISDB_CDTVtbl,
+  record IISDB_CDTVtable,
     query_interface : Proc(IISDB_CDT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IISDB_CDT*, UInt32),
     release : Proc(IISDB_CDT*, UInt32),
@@ -40117,7 +40117,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IISDB_CDT, lpVtbl : IISDB_CDTVtbl* do
+  record IISDB_CDT, lpVtbl : IISDB_CDTVtable* do
     GUID = LibC::GUID.new(0x25fa92c2_u32, 0x8b80_u16, 0x4787_u16, StaticArray[0xa8_u8, 0x41_u8, 0x3a_u8, 0xe_u8, 0x8f_u8, 0x17_u8, 0x98_u8, 0x4b_u8])
     def query_interface(this : IISDB_CDT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40168,7 +40168,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IISDB_EMMVtbl,
+  record IISDB_EMMVtable,
     query_interface : Proc(IISDB_EMM*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IISDB_EMM*, UInt32),
     release : Proc(IISDB_EMM*, UInt32),
@@ -40182,7 +40182,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IISDB_EMM, lpVtbl : IISDB_EMMVtbl* do
+  record IISDB_EMM, lpVtbl : IISDB_EMMVtable* do
     GUID = LibC::GUID.new(0xedb556d_u32, 0x43ad_u16, 0x4938_u16, StaticArray[0x96_u8, 0x68_u8, 0x32_u8, 0x1b_u8, 0x2f_u8, 0xfe_u8, 0xcf_u8, 0xd3_u8])
     def query_interface(this : IISDB_EMM*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40218,7 +40218,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbServiceAttributeDescriptorVtbl,
+  record IDvbServiceAttributeDescriptorVtable,
     query_interface : Proc(IDvbServiceAttributeDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbServiceAttributeDescriptor*, UInt32),
     release : Proc(IDvbServiceAttributeDescriptor*, UInt32),
@@ -40231,7 +40231,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbServiceAttributeDescriptor, lpVtbl : IDvbServiceAttributeDescriptorVtbl* do
+  record IDvbServiceAttributeDescriptor, lpVtbl : IDvbServiceAttributeDescriptorVtable* do
     GUID = LibC::GUID.new(0xf37bd92_u32, 0xd6a1_u16, 0x4854_u16, StaticArray[0xb9_u8, 0x50_u8, 0x3a_u8, 0x96_u8, 0x9d_u8, 0x27_u8, 0xf3_u8, 0xe_u8])
     def query_interface(this : IDvbServiceAttributeDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40264,7 +40264,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbContentIdentifierDescriptorVtbl,
+  record IDvbContentIdentifierDescriptorVtable,
     query_interface : Proc(IDvbContentIdentifierDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbContentIdentifierDescriptor*, UInt32),
     release : Proc(IDvbContentIdentifierDescriptor*, UInt32),
@@ -40275,7 +40275,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbContentIdentifierDescriptor, lpVtbl : IDvbContentIdentifierDescriptorVtbl* do
+  record IDvbContentIdentifierDescriptor, lpVtbl : IDvbContentIdentifierDescriptorVtable* do
     GUID = LibC::GUID.new(0x5e0c1ea_u32, 0xf661_u16, 0x4053_u16, StaticArray[0x9f_u8, 0xbf_u8, 0xd9_u8, 0x3b_u8, 0x28_u8, 0x35_u8, 0x98_u8, 0x38_u8])
     def query_interface(this : IDvbContentIdentifierDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40302,7 +40302,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbDefaultAuthorityDescriptorVtbl,
+  record IDvbDefaultAuthorityDescriptorVtable,
     query_interface : Proc(IDvbDefaultAuthorityDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbDefaultAuthorityDescriptor*, UInt32),
     release : Proc(IDvbDefaultAuthorityDescriptor*, UInt32),
@@ -40312,7 +40312,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbDefaultAuthorityDescriptor, lpVtbl : IDvbDefaultAuthorityDescriptorVtbl* do
+  record IDvbDefaultAuthorityDescriptor, lpVtbl : IDvbDefaultAuthorityDescriptorVtable* do
     GUID = LibC::GUID.new(0x5ec24d1_u32, 0x3a31_u16, 0x44e7_u16, StaticArray[0xb4_u8, 0x8_u8, 0x67_u8, 0xc6_u8, 0xa_u8, 0x35_u8, 0x22_u8, 0x76_u8])
     def query_interface(this : IDvbDefaultAuthorityDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40336,7 +40336,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbSatelliteDeliverySystemDescriptorVtbl,
+  record IDvbSatelliteDeliverySystemDescriptorVtable,
     query_interface : Proc(IDvbSatelliteDeliverySystemDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbSatelliteDeliverySystemDescriptor*, UInt32),
     release : Proc(IDvbSatelliteDeliverySystemDescriptor*, UInt32),
@@ -40352,7 +40352,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbSatelliteDeliverySystemDescriptor, lpVtbl : IDvbSatelliteDeliverySystemDescriptorVtbl* do
+  record IDvbSatelliteDeliverySystemDescriptor, lpVtbl : IDvbSatelliteDeliverySystemDescriptorVtable* do
     GUID = LibC::GUID.new(0x2f2225a_u32, 0x805b_u16, 0x4ec5_u16, StaticArray[0xa9_u8, 0xa6_u8, 0xf9_u8, 0xb5_u8, 0x91_u8, 0x3c_u8, 0xd4_u8, 0x70_u8])
     def query_interface(this : IDvbSatelliteDeliverySystemDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40394,7 +40394,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbCableDeliverySystemDescriptorVtbl,
+  record IDvbCableDeliverySystemDescriptorVtable,
     query_interface : Proc(IDvbCableDeliverySystemDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbCableDeliverySystemDescriptor*, UInt32),
     release : Proc(IDvbCableDeliverySystemDescriptor*, UInt32),
@@ -40408,7 +40408,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbCableDeliverySystemDescriptor, lpVtbl : IDvbCableDeliverySystemDescriptorVtbl* do
+  record IDvbCableDeliverySystemDescriptor, lpVtbl : IDvbCableDeliverySystemDescriptorVtable* do
     GUID = LibC::GUID.new(0xdfb98e36_u32, 0x9e1a_u16, 0x4862_u16, StaticArray[0x99_u8, 0x46_u8, 0x99_u8, 0x3a_u8, 0x4e_u8, 0x59_u8, 0x1_u8, 0x7b_u8])
     def query_interface(this : IDvbCableDeliverySystemDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40444,7 +40444,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbTerrestrialDeliverySystemDescriptorVtbl,
+  record IDvbTerrestrialDeliverySystemDescriptorVtable,
     query_interface : Proc(IDvbTerrestrialDeliverySystemDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbTerrestrialDeliverySystemDescriptor*, UInt32),
     release : Proc(IDvbTerrestrialDeliverySystemDescriptor*, UInt32),
@@ -40462,7 +40462,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbTerrestrialDeliverySystemDescriptor, lpVtbl : IDvbTerrestrialDeliverySystemDescriptorVtbl* do
+  record IDvbTerrestrialDeliverySystemDescriptor, lpVtbl : IDvbTerrestrialDeliverySystemDescriptorVtable* do
     GUID = LibC::GUID.new(0xed7e1b91_u32, 0xd12e_u16, 0x420c_u16, StaticArray[0xb4_u8, 0x1d_u8, 0xa4_u8, 0x9d_u8, 0x84_u8, 0xfe_u8, 0x18_u8, 0x23_u8])
     def query_interface(this : IDvbTerrestrialDeliverySystemDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40510,7 +40510,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbTerrestrial2DeliverySystemDescriptorVtbl,
+  record IDvbTerrestrial2DeliverySystemDescriptorVtable,
     query_interface : Proc(IDvbTerrestrial2DeliverySystemDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbTerrestrial2DeliverySystemDescriptor*, UInt32),
     release : Proc(IDvbTerrestrial2DeliverySystemDescriptor*, UInt32),
@@ -40530,7 +40530,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbTerrestrial2DeliverySystemDescriptor, lpVtbl : IDvbTerrestrial2DeliverySystemDescriptorVtbl* do
+  record IDvbTerrestrial2DeliverySystemDescriptor, lpVtbl : IDvbTerrestrial2DeliverySystemDescriptorVtable* do
     GUID = LibC::GUID.new(0x20ee9be9_u32, 0xcd57_u16, 0x49ab_u16, StaticArray[0x8f_u8, 0x6e_u8, 0x1d_u8, 0x7_u8, 0xae_u8, 0xb8_u8, 0xe4_u8, 0x82_u8])
     def query_interface(this : IDvbTerrestrial2DeliverySystemDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40584,7 +40584,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbFrequencyListDescriptorVtbl,
+  record IDvbFrequencyListDescriptorVtable,
     query_interface : Proc(IDvbFrequencyListDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbFrequencyListDescriptor*, UInt32),
     release : Proc(IDvbFrequencyListDescriptor*, UInt32),
@@ -40596,7 +40596,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbFrequencyListDescriptor, lpVtbl : IDvbFrequencyListDescriptorVtbl* do
+  record IDvbFrequencyListDescriptor, lpVtbl : IDvbFrequencyListDescriptorVtable* do
     GUID = LibC::GUID.new(0x1cadb613_u32, 0xe1dd_u16, 0x4512_u16, StaticArray[0xaf_u8, 0xa8_u8, 0xbb_u8, 0x7a_u8, 0x0_u8, 0x7e_u8, 0xf8_u8, 0xb1_u8])
     def query_interface(this : IDvbFrequencyListDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40626,7 +40626,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbPrivateDataSpecifierDescriptorVtbl,
+  record IDvbPrivateDataSpecifierDescriptorVtable,
     query_interface : Proc(IDvbPrivateDataSpecifierDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbPrivateDataSpecifierDescriptor*, UInt32),
     release : Proc(IDvbPrivateDataSpecifierDescriptor*, UInt32),
@@ -40636,7 +40636,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbPrivateDataSpecifierDescriptor, lpVtbl : IDvbPrivateDataSpecifierDescriptorVtbl* do
+  record IDvbPrivateDataSpecifierDescriptor, lpVtbl : IDvbPrivateDataSpecifierDescriptorVtable* do
     GUID = LibC::GUID.new(0x5660a019_u32, 0xe75a_u16, 0x4b82_u16, StaticArray[0x9b_u8, 0x4c_u8, 0xed_u8, 0x22_u8, 0x56_u8, 0xd1_u8, 0x65_u8, 0xa2_u8])
     def query_interface(this : IDvbPrivateDataSpecifierDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40660,7 +40660,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbLogicalChannelDescriptorVtbl,
+  record IDvbLogicalChannelDescriptorVtable,
     query_interface : Proc(IDvbLogicalChannelDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbLogicalChannelDescriptor*, UInt32),
     release : Proc(IDvbLogicalChannelDescriptor*, UInt32),
@@ -40672,7 +40672,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbLogicalChannelDescriptor, lpVtbl : IDvbLogicalChannelDescriptorVtbl* do
+  record IDvbLogicalChannelDescriptor, lpVtbl : IDvbLogicalChannelDescriptorVtable* do
     GUID = LibC::GUID.new(0xcf1edaff_u32, 0x3ffd_u16, 0x4cf7_u16, StaticArray[0x82_u8, 0x1_u8, 0x35_u8, 0x75_u8, 0x6a_u8, 0xcb_u8, 0xf8_u8, 0x5f_u8])
     def query_interface(this : IDvbLogicalChannelDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40702,7 +40702,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbLogicalChannelDescriptor2Vtbl,
+  record IDvbLogicalChannelDescriptor2Vtable,
     query_interface : Proc(IDvbLogicalChannelDescriptor2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbLogicalChannelDescriptor2*, UInt32),
     release : Proc(IDvbLogicalChannelDescriptor2*, UInt32),
@@ -40715,7 +40715,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbLogicalChannelDescriptor2, lpVtbl : IDvbLogicalChannelDescriptor2Vtbl* do
+  record IDvbLogicalChannelDescriptor2, lpVtbl : IDvbLogicalChannelDescriptor2Vtable* do
     GUID = LibC::GUID.new(0x43aca974_u32, 0x4be8_u16, 0x4b98_u16, StaticArray[0xbc_u8, 0x17_u8, 0x9e_u8, 0xaf_u8, 0xd7_u8, 0x88_u8, 0xb1_u8, 0xd7_u8])
     def query_interface(this : IDvbLogicalChannelDescriptor2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40748,7 +40748,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbLogicalChannel2DescriptorVtbl,
+  record IDvbLogicalChannel2DescriptorVtable,
     query_interface : Proc(IDvbLogicalChannel2Descriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbLogicalChannel2Descriptor*, UInt32),
     release : Proc(IDvbLogicalChannel2Descriptor*, UInt32),
@@ -40769,7 +40769,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbLogicalChannel2Descriptor, lpVtbl : IDvbLogicalChannel2DescriptorVtbl* do
+  record IDvbLogicalChannel2Descriptor, lpVtbl : IDvbLogicalChannel2DescriptorVtable* do
     GUID = LibC::GUID.new(0xf69c3747_u32, 0x8a30_u16, 0x4980_u16, StaticArray[0x99_u8, 0x8c_u8, 0x1_u8, 0xfe_u8, 0x7f_u8, 0xb_u8, 0xa3_u8, 0x5a_u8])
     def query_interface(this : IDvbLogicalChannel2Descriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40826,7 +40826,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbHDSimulcastLogicalChannelDescriptorVtbl,
+  record IDvbHDSimulcastLogicalChannelDescriptorVtable,
     query_interface : Proc(IDvbHDSimulcastLogicalChannelDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbHDSimulcastLogicalChannelDescriptor*, UInt32),
     release : Proc(IDvbHDSimulcastLogicalChannelDescriptor*, UInt32),
@@ -40839,7 +40839,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbHDSimulcastLogicalChannelDescriptor, lpVtbl : IDvbHDSimulcastLogicalChannelDescriptorVtbl* do
+  record IDvbHDSimulcastLogicalChannelDescriptor, lpVtbl : IDvbHDSimulcastLogicalChannelDescriptorVtable* do
     GUID = LibC::GUID.new(0x1ea8b738_u32, 0xa307_u16, 0x4680_u16, StaticArray[0x9e_u8, 0x26_u8, 0xd0_u8, 0xa9_u8, 0x8_u8, 0xc8_u8, 0x24_u8, 0xf4_u8])
     def query_interface(this : IDvbHDSimulcastLogicalChannelDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40872,7 +40872,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbDataBroadcastIDDescriptorVtbl,
+  record IDvbDataBroadcastIDDescriptorVtable,
     query_interface : Proc(IDvbDataBroadcastIDDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbDataBroadcastIDDescriptor*, UInt32),
     release : Proc(IDvbDataBroadcastIDDescriptor*, UInt32),
@@ -40883,7 +40883,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbDataBroadcastIDDescriptor, lpVtbl : IDvbDataBroadcastIDDescriptorVtbl* do
+  record IDvbDataBroadcastIDDescriptor, lpVtbl : IDvbDataBroadcastIDDescriptorVtable* do
     GUID = LibC::GUID.new(0x5f26f518_u32, 0x65c8_u16, 0x4048_u16, StaticArray[0x91_u8, 0xf2_u8, 0x92_u8, 0x90_u8, 0xf5_u8, 0x9f_u8, 0x7b_u8, 0x90_u8])
     def query_interface(this : IDvbDataBroadcastIDDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40910,7 +40910,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbDataBroadcastDescriptorVtbl,
+  record IDvbDataBroadcastDescriptorVtable,
     query_interface : Proc(IDvbDataBroadcastDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbDataBroadcastDescriptor*, UInt32),
     release : Proc(IDvbDataBroadcastDescriptor*, UInt32),
@@ -40926,7 +40926,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbDataBroadcastDescriptor, lpVtbl : IDvbDataBroadcastDescriptorVtbl* do
+  record IDvbDataBroadcastDescriptor, lpVtbl : IDvbDataBroadcastDescriptorVtable* do
     GUID = LibC::GUID.new(0xd1ebc1d6_u32, 0x8b60_u16, 0x4c20_u16, StaticArray[0x9c_u8, 0xaf_u8, 0xe5_u8, 0x93_u8, 0x82_u8, 0xe7_u8, 0xc4_u8, 0x0_u8])
     def query_interface(this : IDvbDataBroadcastDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40968,7 +40968,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbLinkageDescriptorVtbl,
+  record IDvbLinkageDescriptorVtable,
     query_interface : Proc(IDvbLinkageDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbLinkageDescriptor*, UInt32),
     release : Proc(IDvbLinkageDescriptor*, UInt32),
@@ -40983,7 +40983,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbLinkageDescriptor, lpVtbl : IDvbLinkageDescriptorVtbl* do
+  record IDvbLinkageDescriptor, lpVtbl : IDvbLinkageDescriptorVtable* do
     GUID = LibC::GUID.new(0x1cdf8b31_u32, 0x994a_u16, 0x46fc_u16, StaticArray[0xac_u8, 0xfd_u8, 0x6a_u8, 0x6b_u8, 0xe8_u8, 0x93_u8, 0x4d_u8, 0xd5_u8])
     def query_interface(this : IDvbLinkageDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41022,7 +41022,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbTeletextDescriptorVtbl,
+  record IDvbTeletextDescriptorVtable,
     query_interface : Proc(IDvbTeletextDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbTeletextDescriptor*, UInt32),
     release : Proc(IDvbTeletextDescriptor*, UInt32),
@@ -41036,7 +41036,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbTeletextDescriptor, lpVtbl : IDvbTeletextDescriptorVtbl* do
+  record IDvbTeletextDescriptor, lpVtbl : IDvbTeletextDescriptorVtable* do
     GUID = LibC::GUID.new(0x9cd29d47_u32, 0x69c6_u16, 0x4f92_u16, StaticArray[0x98_u8, 0xa9_u8, 0x21_u8, 0xa_u8, 0xf1_u8, 0xb7_u8, 0x30_u8, 0x3a_u8])
     def query_interface(this : IDvbTeletextDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41072,7 +41072,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbSubtitlingDescriptorVtbl,
+  record IDvbSubtitlingDescriptorVtable,
     query_interface : Proc(IDvbSubtitlingDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbSubtitlingDescriptor*, UInt32),
     release : Proc(IDvbSubtitlingDescriptor*, UInt32),
@@ -41086,7 +41086,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbSubtitlingDescriptor, lpVtbl : IDvbSubtitlingDescriptorVtbl* do
+  record IDvbSubtitlingDescriptor, lpVtbl : IDvbSubtitlingDescriptorVtable* do
     GUID = LibC::GUID.new(0x9b25fe1d_u32, 0xfa23_u16, 0x4e50_u16, StaticArray[0x97_u8, 0x84_u8, 0x6d_u8, 0xf8_u8, 0xb2_u8, 0x6f_u8, 0x8a_u8, 0x49_u8])
     def query_interface(this : IDvbSubtitlingDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41122,7 +41122,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbServiceDescriptorVtbl,
+  record IDvbServiceDescriptorVtable,
     query_interface : Proc(IDvbServiceDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbServiceDescriptor*, UInt32),
     release : Proc(IDvbServiceDescriptor*, UInt32),
@@ -41137,7 +41137,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbServiceDescriptor, lpVtbl : IDvbServiceDescriptorVtbl* do
+  record IDvbServiceDescriptor, lpVtbl : IDvbServiceDescriptorVtable* do
     GUID = LibC::GUID.new(0xf9c7fbcf_u32, 0xe2d6_u16, 0x464d_u16, StaticArray[0xb3_u8, 0x2d_u8, 0x2e_u8, 0xf5_u8, 0x26_u8, 0xe4_u8, 0x92_u8, 0x90_u8])
     def query_interface(this : IDvbServiceDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41176,7 +41176,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbServiceDescriptor2Vtbl,
+  record IDvbServiceDescriptor2Vtable,
     query_interface : Proc(IDvbServiceDescriptor2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbServiceDescriptor2*, UInt32),
     release : Proc(IDvbServiceDescriptor2*, UInt32),
@@ -41193,7 +41193,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbServiceDescriptor2, lpVtbl : IDvbServiceDescriptor2Vtbl* do
+  record IDvbServiceDescriptor2, lpVtbl : IDvbServiceDescriptor2Vtable* do
     GUID = LibC::GUID.new(0xd6c76506_u32, 0x85ab_u16, 0x487c_u16, StaticArray[0x9b_u8, 0x2b_u8, 0x36_u8, 0x41_u8, 0x65_u8, 0x11_u8, 0xe4_u8, 0xa2_u8])
     def query_interface(this : IDvbServiceDescriptor2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41238,7 +41238,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbServiceListDescriptorVtbl,
+  record IDvbServiceListDescriptorVtable,
     query_interface : Proc(IDvbServiceListDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbServiceListDescriptor*, UInt32),
     release : Proc(IDvbServiceListDescriptor*, UInt32),
@@ -41250,7 +41250,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbServiceListDescriptor, lpVtbl : IDvbServiceListDescriptorVtbl* do
+  record IDvbServiceListDescriptor, lpVtbl : IDvbServiceListDescriptorVtable* do
     GUID = LibC::GUID.new(0x5db0d8f_u32, 0x6008_u16, 0x491a_u16, StaticArray[0xac_u8, 0xd3_u8, 0x70_u8, 0x90_u8, 0x95_u8, 0x27_u8, 0x7_u8, 0xd0_u8])
     def query_interface(this : IDvbServiceListDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41280,7 +41280,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbMultilingualServiceNameDescriptorVtbl,
+  record IDvbMultilingualServiceNameDescriptorVtable,
     query_interface : Proc(IDvbMultilingualServiceNameDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbMultilingualServiceNameDescriptor*, UInt32),
     release : Proc(IDvbMultilingualServiceNameDescriptor*, UInt32),
@@ -41293,7 +41293,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbMultilingualServiceNameDescriptor, lpVtbl : IDvbMultilingualServiceNameDescriptorVtbl* do
+  record IDvbMultilingualServiceNameDescriptor, lpVtbl : IDvbMultilingualServiceNameDescriptorVtable* do
     GUID = LibC::GUID.new(0x2d80433b_u32, 0xb32c_u16, 0x47ef_u16, StaticArray[0x98_u8, 0x7f_u8, 0xe7_u8, 0x8e_u8, 0xbb_u8, 0x77_u8, 0x3e_u8, 0x34_u8])
     def query_interface(this : IDvbMultilingualServiceNameDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41326,7 +41326,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbNetworkNameDescriptorVtbl,
+  record IDvbNetworkNameDescriptorVtable,
     query_interface : Proc(IDvbNetworkNameDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbNetworkNameDescriptor*, UInt32),
     release : Proc(IDvbNetworkNameDescriptor*, UInt32),
@@ -41337,7 +41337,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbNetworkNameDescriptor, lpVtbl : IDvbNetworkNameDescriptorVtbl* do
+  record IDvbNetworkNameDescriptor, lpVtbl : IDvbNetworkNameDescriptorVtable* do
     GUID = LibC::GUID.new(0x5b2a80cf_u32, 0x35b9_u16, 0x446c_u16, StaticArray[0xb3_u8, 0xe4_u8, 0x4_u8, 0x8b_u8, 0x76_u8, 0x1d_u8, 0xbc_u8, 0x51_u8])
     def query_interface(this : IDvbNetworkNameDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41364,7 +41364,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbShortEventDescriptorVtbl,
+  record IDvbShortEventDescriptorVtable,
     query_interface : Proc(IDvbShortEventDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbShortEventDescriptor*, UInt32),
     release : Proc(IDvbShortEventDescriptor*, UInt32),
@@ -41376,7 +41376,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbShortEventDescriptor, lpVtbl : IDvbShortEventDescriptorVtbl* do
+  record IDvbShortEventDescriptor, lpVtbl : IDvbShortEventDescriptorVtable* do
     GUID = LibC::GUID.new(0xb170be92_u32, 0x5b75_u16, 0x458e_u16, StaticArray[0x9c_u8, 0x6e_u8, 0xb0_u8, 0x0_u8, 0x82_u8, 0x31_u8, 0x49_u8, 0x1a_u8])
     def query_interface(this : IDvbShortEventDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41406,7 +41406,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbExtendedEventDescriptorVtbl,
+  record IDvbExtendedEventDescriptorVtable,
     query_interface : Proc(IDvbExtendedEventDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbExtendedEventDescriptor*, UInt32),
     release : Proc(IDvbExtendedEventDescriptor*, UInt32),
@@ -41424,7 +41424,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbExtendedEventDescriptor, lpVtbl : IDvbExtendedEventDescriptorVtbl* do
+  record IDvbExtendedEventDescriptor, lpVtbl : IDvbExtendedEventDescriptorVtable* do
     GUID = LibC::GUID.new(0xc9b22eca_u32, 0x85f4_u16, 0x499f_u16, StaticArray[0xb1_u8, 0xdb_u8, 0xef_u8, 0xa9_u8, 0x3a_u8, 0x91_u8, 0xee_u8, 0x57_u8])
     def query_interface(this : IDvbExtendedEventDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41472,7 +41472,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbComponentDescriptorVtbl,
+  record IDvbComponentDescriptorVtable,
     query_interface : Proc(IDvbComponentDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbComponentDescriptor*, UInt32),
     release : Proc(IDvbComponentDescriptor*, UInt32),
@@ -41486,7 +41486,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbComponentDescriptor, lpVtbl : IDvbComponentDescriptorVtbl* do
+  record IDvbComponentDescriptor, lpVtbl : IDvbComponentDescriptorVtable* do
     GUID = LibC::GUID.new(0x91e405cf_u32, 0x80e7_u16, 0x457f_u16, StaticArray[0x90_u8, 0x96_u8, 0x1b_u8, 0x9d_u8, 0x1c_u8, 0xe3_u8, 0x21_u8, 0x41_u8])
     def query_interface(this : IDvbComponentDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41522,7 +41522,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbContentDescriptorVtbl,
+  record IDvbContentDescriptorVtable,
     query_interface : Proc(IDvbContentDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbContentDescriptor*, UInt32),
     release : Proc(IDvbContentDescriptor*, UInt32),
@@ -41534,7 +41534,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbContentDescriptor, lpVtbl : IDvbContentDescriptorVtbl* do
+  record IDvbContentDescriptor, lpVtbl : IDvbContentDescriptorVtable* do
     GUID = LibC::GUID.new(0x2e883881_u32, 0xa467_u16, 0x412a_u16, StaticArray[0x9d_u8, 0x63_u8, 0x6f_u8, 0x2b_u8, 0x6d_u8, 0xa0_u8, 0x5b_u8, 0xf0_u8])
     def query_interface(this : IDvbContentDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41564,7 +41564,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IDvbParentalRatingDescriptorVtbl,
+  record IDvbParentalRatingDescriptorVtable,
     query_interface : Proc(IDvbParentalRatingDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDvbParentalRatingDescriptor*, UInt32),
     release : Proc(IDvbParentalRatingDescriptor*, UInt32),
@@ -41575,7 +41575,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IDvbParentalRatingDescriptor, lpVtbl : IDvbParentalRatingDescriptorVtbl* do
+  record IDvbParentalRatingDescriptor, lpVtbl : IDvbParentalRatingDescriptorVtable* do
     GUID = LibC::GUID.new(0x3ad9dde1_u32, 0xfb1b_u16, 0x4186_u16, StaticArray[0x93_u8, 0x7f_u8, 0x22_u8, 0xe6_u8, 0xb5_u8, 0xa7_u8, 0x2a_u8, 0x10_u8])
     def query_interface(this : IDvbParentalRatingDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41602,7 +41602,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IIsdbTerrestrialDeliverySystemDescriptorVtbl,
+  record IIsdbTerrestrialDeliverySystemDescriptorVtable,
     query_interface : Proc(IIsdbTerrestrialDeliverySystemDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIsdbTerrestrialDeliverySystemDescriptor*, UInt32),
     release : Proc(IIsdbTerrestrialDeliverySystemDescriptor*, UInt32),
@@ -41616,7 +41616,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IIsdbTerrestrialDeliverySystemDescriptor, lpVtbl : IIsdbTerrestrialDeliverySystemDescriptorVtbl* do
+  record IIsdbTerrestrialDeliverySystemDescriptor, lpVtbl : IIsdbTerrestrialDeliverySystemDescriptorVtable* do
     GUID = LibC::GUID.new(0x39fae0a6_u32, 0xd151_u16, 0x44dd_u16, StaticArray[0xa2_u8, 0x8a_u8, 0x76_u8, 0x5d_u8, 0xe5_u8, 0x99_u8, 0x16_u8, 0x70_u8])
     def query_interface(this : IIsdbTerrestrialDeliverySystemDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41652,7 +41652,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IIsdbTSInformationDescriptorVtbl,
+  record IIsdbTSInformationDescriptorVtable,
     query_interface : Proc(IIsdbTSInformationDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIsdbTSInformationDescriptor*, UInt32),
     release : Proc(IIsdbTSInformationDescriptor*, UInt32),
@@ -41667,7 +41667,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IIsdbTSInformationDescriptor, lpVtbl : IIsdbTSInformationDescriptorVtbl* do
+  record IIsdbTSInformationDescriptor, lpVtbl : IIsdbTSInformationDescriptorVtable* do
     GUID = LibC::GUID.new(0xd7ad183e_u32, 0x38f5_u16, 0x4210_u16, StaticArray[0xb5_u8, 0x5f_u8, 0xec_u8, 0x8d_u8, 0x60_u8, 0x1b_u8, 0xbd_u8, 0x47_u8])
     def query_interface(this : IIsdbTSInformationDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41706,7 +41706,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IIsdbDigitalCopyControlDescriptorVtbl,
+  record IIsdbDigitalCopyControlDescriptorVtable,
     query_interface : Proc(IIsdbDigitalCopyControlDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIsdbDigitalCopyControlDescriptor*, UInt32),
     release : Proc(IIsdbDigitalCopyControlDescriptor*, UInt32),
@@ -41718,7 +41718,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IIsdbDigitalCopyControlDescriptor, lpVtbl : IIsdbDigitalCopyControlDescriptorVtbl* do
+  record IIsdbDigitalCopyControlDescriptor, lpVtbl : IIsdbDigitalCopyControlDescriptorVtable* do
     GUID = LibC::GUID.new(0x1a28417e_u32, 0x266a_u16, 0x4bb8_u16, StaticArray[0xa4_u8, 0xbd_u8, 0xd7_u8, 0x82_u8, 0xbc_u8, 0xfb_u8, 0x81_u8, 0x61_u8])
     def query_interface(this : IIsdbDigitalCopyControlDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41748,7 +41748,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IIsdbAudioComponentDescriptorVtbl,
+  record IIsdbAudioComponentDescriptorVtable,
     query_interface : Proc(IIsdbAudioComponentDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIsdbAudioComponentDescriptor*, UInt32),
     release : Proc(IIsdbAudioComponentDescriptor*, UInt32),
@@ -41769,7 +41769,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IIsdbAudioComponentDescriptor, lpVtbl : IIsdbAudioComponentDescriptorVtbl* do
+  record IIsdbAudioComponentDescriptor, lpVtbl : IIsdbAudioComponentDescriptorVtable* do
     GUID = LibC::GUID.new(0x679d2002_u32, 0x2425_u16, 0x4be4_u16, StaticArray[0xa4_u8, 0xc7_u8, 0xd6_u8, 0x63_u8, 0x2a_u8, 0x57_u8, 0x4f_u8, 0x4d_u8])
     def query_interface(this : IIsdbAudioComponentDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41826,7 +41826,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IIsdbDataContentDescriptorVtbl,
+  record IIsdbDataContentDescriptorVtable,
     query_interface : Proc(IIsdbDataContentDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIsdbDataContentDescriptor*, UInt32),
     release : Proc(IIsdbDataContentDescriptor*, UInt32),
@@ -41843,7 +41843,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IIsdbDataContentDescriptor, lpVtbl : IIsdbDataContentDescriptorVtbl* do
+  record IIsdbDataContentDescriptor, lpVtbl : IIsdbDataContentDescriptorVtable* do
     GUID = LibC::GUID.new(0xa428100a_u32, 0xe646_u16, 0x4bd6_u16, StaticArray[0xaa_u8, 0x14_u8, 0x60_u8, 0x87_u8, 0xbd_u8, 0xc0_u8, 0x8c_u8, 0xd5_u8])
     def query_interface(this : IIsdbDataContentDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41888,7 +41888,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IIsdbCAContractInformationDescriptorVtbl,
+  record IIsdbCAContractInformationDescriptorVtable,
     query_interface : Proc(IIsdbCAContractInformationDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIsdbCAContractInformationDescriptor*, UInt32),
     release : Proc(IIsdbCAContractInformationDescriptor*, UInt32),
@@ -41904,7 +41904,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IIsdbCAContractInformationDescriptor, lpVtbl : IIsdbCAContractInformationDescriptorVtbl* do
+  record IIsdbCAContractInformationDescriptor, lpVtbl : IIsdbCAContractInformationDescriptorVtable* do
     GUID = LibC::GUID.new(0x8e18b25_u32, 0xa28f_u16, 0x4e92_u16, StaticArray[0x82_u8, 0x1e_u8, 0x4f_u8, 0xce_u8, 0xd5_u8, 0xcc_u8, 0x22_u8, 0x91_u8])
     def query_interface(this : IIsdbCAContractInformationDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41946,7 +41946,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IIsdbEventGroupDescriptorVtbl,
+  record IIsdbEventGroupDescriptorVtable,
     query_interface : Proc(IIsdbEventGroupDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIsdbEventGroupDescriptor*, UInt32),
     release : Proc(IIsdbEventGroupDescriptor*, UInt32),
@@ -41960,7 +41960,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IIsdbEventGroupDescriptor, lpVtbl : IIsdbEventGroupDescriptorVtbl* do
+  record IIsdbEventGroupDescriptor, lpVtbl : IIsdbEventGroupDescriptorVtable* do
     GUID = LibC::GUID.new(0x94b06780_u32, 0x2e2a_u16, 0x44dc_u16, StaticArray[0xa9_u8, 0x66_u8, 0xcc_u8, 0x56_u8, 0xfd_u8, 0xab_u8, 0xc6_u8, 0xc2_u8])
     def query_interface(this : IIsdbEventGroupDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41996,7 +41996,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IIsdbComponentGroupDescriptorVtbl,
+  record IIsdbComponentGroupDescriptorVtable,
     query_interface : Proc(IIsdbComponentGroupDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIsdbComponentGroupDescriptor*, UInt32),
     release : Proc(IIsdbComponentGroupDescriptor*, UInt32),
@@ -42014,7 +42014,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IIsdbComponentGroupDescriptor, lpVtbl : IIsdbComponentGroupDescriptorVtbl* do
+  record IIsdbComponentGroupDescriptor, lpVtbl : IIsdbComponentGroupDescriptorVtable* do
     GUID = LibC::GUID.new(0xa494f17f_u32, 0xc592_u16, 0x47d8_u16, StaticArray[0x89_u8, 0x43_u8, 0x64_u8, 0xc9_u8, 0xa3_u8, 0x4b_u8, 0xe7_u8, 0xb9_u8])
     def query_interface(this : IIsdbComponentGroupDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42062,7 +42062,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IIsdbSeriesDescriptorVtbl,
+  record IIsdbSeriesDescriptorVtable,
     query_interface : Proc(IIsdbSeriesDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIsdbSeriesDescriptor*, UInt32),
     release : Proc(IIsdbSeriesDescriptor*, UInt32),
@@ -42078,7 +42078,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IIsdbSeriesDescriptor, lpVtbl : IIsdbSeriesDescriptorVtbl* do
+  record IIsdbSeriesDescriptor, lpVtbl : IIsdbSeriesDescriptorVtable* do
     GUID = LibC::GUID.new(0x7ef6370_u32, 0x1660_u16, 0x4f26_u16, StaticArray[0x87_u8, 0xfc_u8, 0x61_u8, 0x4a_u8, 0xda_u8, 0xb2_u8, 0x4b_u8, 0x11_u8])
     def query_interface(this : IIsdbSeriesDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42120,7 +42120,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IIsdbDownloadContentDescriptorVtbl,
+  record IIsdbDownloadContentDescriptorVtable,
     query_interface : Proc(IIsdbDownloadContentDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIsdbDownloadContentDescriptor*, UInt32),
     release : Proc(IIsdbDownloadContentDescriptor*, UInt32),
@@ -42144,7 +42144,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IIsdbDownloadContentDescriptor, lpVtbl : IIsdbDownloadContentDescriptorVtbl* do
+  record IIsdbDownloadContentDescriptor, lpVtbl : IIsdbDownloadContentDescriptorVtable* do
     GUID = LibC::GUID.new(0x5298661e_u32, 0xcb88_u16, 0x4f5f_u16, StaticArray[0xa1_u8, 0xde_u8, 0x5f_u8, 0x44_u8, 0xc_u8, 0x18_u8, 0x5b_u8, 0x92_u8])
     def query_interface(this : IIsdbDownloadContentDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42210,7 +42210,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IIsdbLogoTransmissionDescriptorVtbl,
+  record IIsdbLogoTransmissionDescriptorVtable,
     query_interface : Proc(IIsdbLogoTransmissionDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIsdbLogoTransmissionDescriptor*, UInt32),
     release : Proc(IIsdbLogoTransmissionDescriptor*, UInt32),
@@ -42224,7 +42224,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IIsdbLogoTransmissionDescriptor, lpVtbl : IIsdbLogoTransmissionDescriptorVtbl* do
+  record IIsdbLogoTransmissionDescriptor, lpVtbl : IIsdbLogoTransmissionDescriptorVtable* do
     GUID = LibC::GUID.new(0xe0103f49_u32, 0x4ae1_u16, 0x4f07_u16, StaticArray[0x90_u8, 0x98_u8, 0x75_u8, 0x6d_u8, 0xb1_u8, 0xfa_u8, 0x88_u8, 0xcd_u8])
     def query_interface(this : IIsdbLogoTransmissionDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42260,7 +42260,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IIsdbSIParameterDescriptorVtbl,
+  record IIsdbSIParameterDescriptorVtable,
     query_interface : Proc(IIsdbSIParameterDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIsdbSIParameterDescriptor*, UInt32),
     release : Proc(IIsdbSIParameterDescriptor*, UInt32),
@@ -42275,7 +42275,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IIsdbSIParameterDescriptor, lpVtbl : IIsdbSIParameterDescriptorVtbl* do
+  record IIsdbSIParameterDescriptor, lpVtbl : IIsdbSIParameterDescriptorVtable* do
     GUID = LibC::GUID.new(0xf837dc36_u32, 0x867c_u16, 0x426a_u16, StaticArray[0x91_u8, 0x11_u8, 0xf6_u8, 0x20_u8, 0x93_u8, 0x95_u8, 0x1a_u8, 0x45_u8])
     def query_interface(this : IIsdbSIParameterDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42314,7 +42314,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IIsdbEmergencyInformationDescriptorVtbl,
+  record IIsdbEmergencyInformationDescriptorVtable,
     query_interface : Proc(IIsdbEmergencyInformationDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIsdbEmergencyInformationDescriptor*, UInt32),
     release : Proc(IIsdbEmergencyInformationDescriptor*, UInt32),
@@ -42328,7 +42328,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IIsdbEmergencyInformationDescriptor, lpVtbl : IIsdbEmergencyInformationDescriptorVtbl* do
+  record IIsdbEmergencyInformationDescriptor, lpVtbl : IIsdbEmergencyInformationDescriptorVtable* do
     GUID = LibC::GUID.new(0xba6fa681_u32, 0xb973_u16, 0x4da1_u16, StaticArray[0x92_u8, 0x7_u8, 0xac_u8, 0x3e_u8, 0x7f_u8, 0x3_u8, 0x41_u8, 0xeb_u8])
     def query_interface(this : IIsdbEmergencyInformationDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42364,7 +42364,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IIsdbCADescriptorVtbl,
+  record IIsdbCADescriptorVtable,
     query_interface : Proc(IIsdbCADescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIsdbCADescriptor*, UInt32),
     release : Proc(IIsdbCADescriptor*, UInt32),
@@ -42377,7 +42377,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IIsdbCADescriptor, lpVtbl : IIsdbCADescriptorVtbl* do
+  record IIsdbCADescriptor, lpVtbl : IIsdbCADescriptorVtable* do
     GUID = LibC::GUID.new(0x570aa47_u32, 0x52bc_u16, 0x42ae_u16, StaticArray[0x8c_u8, 0xa5_u8, 0x96_u8, 0x9f_u8, 0x41_u8, 0xe8_u8, 0x1a_u8, 0xea_u8])
     def query_interface(this : IIsdbCADescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42410,7 +42410,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IIsdbCAServiceDescriptorVtbl,
+  record IIsdbCAServiceDescriptorVtable,
     query_interface : Proc(IIsdbCAServiceDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIsdbCAServiceDescriptor*, UInt32),
     release : Proc(IIsdbCAServiceDescriptor*, UInt32),
@@ -42423,7 +42423,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IIsdbCAServiceDescriptor, lpVtbl : IIsdbCAServiceDescriptorVtbl* do
+  record IIsdbCAServiceDescriptor, lpVtbl : IIsdbCAServiceDescriptorVtable* do
     GUID = LibC::GUID.new(0x39cbeb97_u32, 0xff0b_u16, 0x42a7_u16, StaticArray[0x9a_u8, 0xb9_u8, 0x7b_u8, 0x9c_u8, 0xfe_u8, 0x70_u8, 0xa7_u8, 0x7a_u8])
     def query_interface(this : IIsdbCAServiceDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42456,7 +42456,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IIsdbHierarchicalTransmissionDescriptorVtbl,
+  record IIsdbHierarchicalTransmissionDescriptorVtable,
     query_interface : Proc(IIsdbHierarchicalTransmissionDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIsdbHierarchicalTransmissionDescriptor*, UInt32),
     release : Proc(IIsdbHierarchicalTransmissionDescriptor*, UInt32),
@@ -42469,7 +42469,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IIsdbHierarchicalTransmissionDescriptor, lpVtbl : IIsdbHierarchicalTransmissionDescriptorVtbl* do
+  record IIsdbHierarchicalTransmissionDescriptor, lpVtbl : IIsdbHierarchicalTransmissionDescriptorVtable* do
     GUID = LibC::GUID.new(0xb7b3ae90_u32, 0xee0b_u16, 0x446d_u16, StaticArray[0x87_u8, 0x69_u8, 0xf7_u8, 0xe2_u8, 0xaa_u8, 0x26_u8, 0x6a_u8, 0xa6_u8])
     def query_interface(this : IIsdbHierarchicalTransmissionDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42502,7 +42502,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IPBDASiParserVtbl,
+  record IPBDASiParserVtable,
     query_interface : Proc(IPBDASiParser*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPBDASiParser*, UInt32),
     release : Proc(IPBDASiParser*, UInt32),
@@ -42512,7 +42512,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IPBDASiParser, lpVtbl : IPBDASiParserVtbl* do
+  record IPBDASiParser, lpVtbl : IPBDASiParserVtable* do
     GUID = LibC::GUID.new(0x9de49a74_u32, 0xaba2_u16, 0x4a18_u16, StaticArray[0x93_u8, 0xe1_u8, 0x21_u8, 0xf1_u8, 0x7f_u8, 0x95_u8, 0xc3_u8, 0xc3_u8])
     def query_interface(this : IPBDASiParser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42536,7 +42536,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IPBDA_EITVtbl,
+  record IPBDA_EITVtable,
     query_interface : Proc(IPBDA_EIT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPBDA_EIT*, UInt32),
     release : Proc(IPBDA_EIT*, UInt32),
@@ -42554,7 +42554,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IPBDA_EIT, lpVtbl : IPBDA_EITVtbl* do
+  record IPBDA_EIT, lpVtbl : IPBDA_EITVtable* do
     GUID = LibC::GUID.new(0xa35f2dea_u32, 0x98f_u16, 0x4ebd_u16, StaticArray[0x98_u8, 0x4c_u8, 0x2b_u8, 0xd4_u8, 0xc3_u8, 0xc8_u8, 0xce_u8, 0xa_u8])
     def query_interface(this : IPBDA_EIT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42602,7 +42602,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IPBDA_ServicesVtbl,
+  record IPBDA_ServicesVtable,
     query_interface : Proc(IPBDA_Services*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPBDA_Services*, UInt32),
     release : Proc(IPBDA_Services*, UInt32),
@@ -42612,7 +42612,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IPBDA_Services, lpVtbl : IPBDA_ServicesVtbl* do
+  record IPBDA_Services, lpVtbl : IPBDA_ServicesVtable* do
     GUID = LibC::GUID.new(0x944eab37_u32, 0xeed4_u16, 0x4850_u16, StaticArray[0xaf_u8, 0xd2_u8, 0x77_u8, 0xe7_u8, 0xef_u8, 0xeb_u8, 0x44_u8, 0x27_u8])
     def query_interface(this : IPBDA_Services*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42636,7 +42636,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IPBDAEntitlementDescriptorVtbl,
+  record IPBDAEntitlementDescriptorVtable,
     query_interface : Proc(IPBDAEntitlementDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPBDAEntitlementDescriptor*, UInt32),
     release : Proc(IPBDAEntitlementDescriptor*, UInt32),
@@ -42646,7 +42646,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IPBDAEntitlementDescriptor, lpVtbl : IPBDAEntitlementDescriptorVtbl* do
+  record IPBDAEntitlementDescriptor, lpVtbl : IPBDAEntitlementDescriptorVtable* do
     GUID = LibC::GUID.new(0x22632497_u32, 0xde3_u16, 0x4587_u16, StaticArray[0xaa_u8, 0xdc_u8, 0xd8_u8, 0xd9_u8, 0x90_u8, 0x17_u8, 0xe7_u8, 0x60_u8])
     def query_interface(this : IPBDAEntitlementDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42670,7 +42670,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IPBDAAttributesDescriptorVtbl,
+  record IPBDAAttributesDescriptorVtable,
     query_interface : Proc(IPBDAAttributesDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPBDAAttributesDescriptor*, UInt32),
     release : Proc(IPBDAAttributesDescriptor*, UInt32),
@@ -42680,7 +42680,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IPBDAAttributesDescriptor, lpVtbl : IPBDAAttributesDescriptorVtbl* do
+  record IPBDAAttributesDescriptor, lpVtbl : IPBDAAttributesDescriptorVtable* do
     GUID = LibC::GUID.new(0x313b3620_u32, 0x3263_u16, 0x45a6_u16, StaticArray[0x95_u8, 0x33_u8, 0x96_u8, 0x8b_u8, 0xef_u8, 0xbe_u8, 0xac_u8, 0x3_u8])
     def query_interface(this : IPBDAAttributesDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42704,7 +42704,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IBDA_TIF_REGISTRATIONVtbl,
+  record IBDA_TIF_REGISTRATIONVtable,
     query_interface : Proc(IBDA_TIF_REGISTRATION*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBDA_TIF_REGISTRATION*, UInt32),
     release : Proc(IBDA_TIF_REGISTRATION*, UInt32),
@@ -42713,7 +42713,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IBDA_TIF_REGISTRATION, lpVtbl : IBDA_TIF_REGISTRATIONVtbl* do
+  record IBDA_TIF_REGISTRATION, lpVtbl : IBDA_TIF_REGISTRATIONVtable* do
     GUID = LibC::GUID.new(0xdfef4a68_u32, 0xee61_u16, 0x415f_u16, StaticArray[0x9c_u8, 0xcb_u8, 0xcd_u8, 0x95_u8, 0xf2_u8, 0xf9_u8, 0x8a_u8, 0x3a_u8])
     def query_interface(this : IBDA_TIF_REGISTRATION*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42734,7 +42734,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IMPEG2_TIF_CONTROLVtbl,
+  record IMPEG2_TIF_CONTROLVtable,
     query_interface : Proc(IMPEG2_TIF_CONTROL*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMPEG2_TIF_CONTROL*, UInt32),
     release : Proc(IMPEG2_TIF_CONTROL*, UInt32),
@@ -42747,7 +42747,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IMPEG2_TIF_CONTROL, lpVtbl : IMPEG2_TIF_CONTROLVtbl* do
+  record IMPEG2_TIF_CONTROL, lpVtbl : IMPEG2_TIF_CONTROLVtable* do
     GUID = LibC::GUID.new(0xf9bac2f9_u32, 0x4149_u16, 0x4916_u16, StaticArray[0xb2_u8, 0xef_u8, 0xfa_u8, 0xa2_u8, 0x2_u8, 0x32_u8, 0x68_u8, 0x62_u8])
     def query_interface(this : IMPEG2_TIF_CONTROL*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42780,7 +42780,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ITuneRequestInfoVtbl,
+  record ITuneRequestInfoVtable,
     query_interface : Proc(ITuneRequestInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITuneRequestInfo*, UInt32),
     release : Proc(ITuneRequestInfo*, UInt32),
@@ -42794,7 +42794,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ITuneRequestInfo, lpVtbl : ITuneRequestInfoVtbl* do
+  record ITuneRequestInfo, lpVtbl : ITuneRequestInfoVtable* do
     GUID = LibC::GUID.new(0xa3b152df_u32, 0x7a90_u16, 0x4218_u16, StaticArray[0xac_u8, 0x54_u8, 0x98_u8, 0x30_u8, 0xbe_u8, 0xe8_u8, 0xc0_u8, 0xb6_u8])
     def query_interface(this : ITuneRequestInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42830,7 +42830,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ITuneRequestInfoExVtbl,
+  record ITuneRequestInfoExVtable,
     query_interface : Proc(ITuneRequestInfoEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITuneRequestInfoEx*, UInt32),
     release : Proc(ITuneRequestInfoEx*, UInt32),
@@ -42845,7 +42845,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ITuneRequestInfoEx, lpVtbl : ITuneRequestInfoExVtbl* do
+  record ITuneRequestInfoEx, lpVtbl : ITuneRequestInfoExVtable* do
     GUID = LibC::GUID.new(0xee957c52_u32, 0xb0d0_u16, 0x4e78_u16, StaticArray[0x8d_u8, 0xd1_u8, 0xb8_u8, 0x7a_u8, 0x8_u8, 0xbf_u8, 0xd8_u8, 0x93_u8])
     def query_interface(this : ITuneRequestInfoEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42884,7 +42884,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ISIInbandEPGEventVtbl,
+  record ISIInbandEPGEventVtable,
     query_interface : Proc(ISIInbandEPGEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISIInbandEPGEvent*, UInt32),
     release : Proc(ISIInbandEPGEvent*, UInt32),
@@ -42892,7 +42892,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ISIInbandEPGEvent, lpVtbl : ISIInbandEPGEventVtbl* do
+  record ISIInbandEPGEvent, lpVtbl : ISIInbandEPGEventVtable* do
     GUID = LibC::GUID.new(0x7e47913a_u32, 0x5a89_u16, 0x423d_u16, StaticArray[0x9a_u8, 0x2b_u8, 0xe1_u8, 0x51_u8, 0x68_u8, 0x85_u8, 0x89_u8, 0x34_u8])
     def query_interface(this : ISIInbandEPGEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42910,7 +42910,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record ISIInbandEPGVtbl,
+  record ISIInbandEPGVtable,
     query_interface : Proc(ISIInbandEPG*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISIInbandEPG*, UInt32),
     release : Proc(ISIInbandEPG*, UInt32),
@@ -42920,7 +42920,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record ISIInbandEPG, lpVtbl : ISIInbandEPGVtbl* do
+  record ISIInbandEPG, lpVtbl : ISIInbandEPGVtable* do
     GUID = LibC::GUID.new(0xf90ad9d0_u32, 0xb854_u16, 0x4b68_u16, StaticArray[0x9c_u8, 0xc1_u8, 0xb2_u8, 0xcc_u8, 0x96_u8, 0x11_u8, 0x9d_u8, 0x85_u8])
     def query_interface(this : ISIInbandEPG*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42944,7 +42944,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IGuideDataEventVtbl,
+  record IGuideDataEventVtable,
     query_interface : Proc(IGuideDataEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGuideDataEvent*, UInt32),
     release : Proc(IGuideDataEvent*, UInt32),
@@ -42958,7 +42958,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IGuideDataEvent, lpVtbl : IGuideDataEventVtbl* do
+  record IGuideDataEvent, lpVtbl : IGuideDataEventVtable* do
     GUID = LibC::GUID.new(0xefda0c80_u32, 0xf395_u16, 0x42c3_u16, StaticArray[0x9b_u8, 0x3c_u8, 0x56_u8, 0xb3_u8, 0x7d_u8, 0xec_u8, 0x7b_u8, 0xb7_u8])
     def query_interface(this : IGuideDataEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42994,7 +42994,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IGuideDataPropertyVtbl,
+  record IGuideDataPropertyVtable,
     query_interface : Proc(IGuideDataProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGuideDataProperty*, UInt32),
     release : Proc(IGuideDataProperty*, UInt32),
@@ -43004,7 +43004,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IGuideDataProperty, lpVtbl : IGuideDataPropertyVtbl* do
+  record IGuideDataProperty, lpVtbl : IGuideDataPropertyVtable* do
     GUID = LibC::GUID.new(0x88ec5e58_u32, 0xbb73_u16, 0x41d6_u16, StaticArray[0x99_u8, 0xce_u8, 0x66_u8, 0xc5_u8, 0x24_u8, 0xb8_u8, 0xb5_u8, 0x91_u8])
     def query_interface(this : IGuideDataProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43028,7 +43028,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IEnumGuideDataPropertiesVtbl,
+  record IEnumGuideDataPropertiesVtable,
     query_interface : Proc(IEnumGuideDataProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumGuideDataProperties*, UInt32),
     release : Proc(IEnumGuideDataProperties*, UInt32),
@@ -43039,7 +43039,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IEnumGuideDataProperties, lpVtbl : IEnumGuideDataPropertiesVtbl* do
+  record IEnumGuideDataProperties, lpVtbl : IEnumGuideDataPropertiesVtable* do
     GUID = LibC::GUID.new(0xae44423b_u32, 0x4571_u16, 0x475c_u16, StaticArray[0xad_u8, 0x2c_u8, 0xf4_u8, 0xa_u8, 0x77_u8, 0x1d_u8, 0x80_u8, 0xef_u8])
     def query_interface(this : IEnumGuideDataProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43066,7 +43066,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IEnumTuneRequestsVtbl,
+  record IEnumTuneRequestsVtable,
     query_interface : Proc(IEnumTuneRequests*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTuneRequests*, UInt32),
     release : Proc(IEnumTuneRequests*, UInt32),
@@ -43077,7 +43077,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IEnumTuneRequests, lpVtbl : IEnumTuneRequestsVtbl* do
+  record IEnumTuneRequests, lpVtbl : IEnumTuneRequestsVtable* do
     GUID = LibC::GUID.new(0x1993299c_u32, 0xced6_u16, 0x4788_u16, StaticArray[0x87_u8, 0xa3_u8, 0x42_u8, 0x0_u8, 0x67_u8, 0xdc_u8, 0xe0_u8, 0xc7_u8])
     def query_interface(this : IEnumTuneRequests*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43104,7 +43104,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IGuideDataVtbl,
+  record IGuideDataVtable,
     query_interface : Proc(IGuideData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGuideData*, UInt32),
     release : Proc(IGuideData*, UInt32),
@@ -43117,7 +43117,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IGuideData, lpVtbl : IGuideDataVtbl* do
+  record IGuideData, lpVtbl : IGuideDataVtable* do
     GUID = LibC::GUID.new(0x61571138_u32, 0x5b01_u16, 0x43cd_u16, StaticArray[0xae_u8, 0xaf_u8, 0x60_u8, 0xb7_u8, 0x84_u8, 0xa0_u8, 0xbf_u8, 0x93_u8])
     def query_interface(this : IGuideData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43150,7 +43150,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IGuideDataLoaderVtbl,
+  record IGuideDataLoaderVtable,
     query_interface : Proc(IGuideDataLoader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGuideDataLoader*, UInt32),
     release : Proc(IGuideDataLoader*, UInt32),
@@ -43159,7 +43159,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IGuideDataLoader, lpVtbl : IGuideDataLoaderVtbl* do
+  record IGuideDataLoader, lpVtbl : IGuideDataLoaderVtable* do
     GUID = LibC::GUID.new(0x4764ff7c_u32, 0xfa95_u16, 0x4525_u16, StaticArray[0xaf_u8, 0x4d_u8, 0xd3_u8, 0x22_u8, 0x36_u8, 0xdb_u8, 0x9e_u8, 0x38_u8])
     def query_interface(this : IGuideDataLoader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43180,7 +43180,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IWMCodecAMVideoAcceleratorVtbl,
+  record IWMCodecAMVideoAcceleratorVtable,
     query_interface : Proc(IWMCodecAMVideoAccelerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMCodecAMVideoAccelerator*, UInt32),
     release : Proc(IWMCodecAMVideoAccelerator*, UInt32),
@@ -43190,7 +43190,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IWMCodecAMVideoAccelerator, lpVtbl : IWMCodecAMVideoAcceleratorVtbl* do
+  record IWMCodecAMVideoAccelerator, lpVtbl : IWMCodecAMVideoAcceleratorVtable* do
     GUID = LibC::GUID.new(0xd98ee251_u32, 0x34e0_u16, 0x4a2d_u16, StaticArray[0x93_u8, 0x12_u8, 0x9b_u8, 0x4c_u8, 0x78_u8, 0x8d_u8, 0x9f_u8, 0xa1_u8])
     def query_interface(this : IWMCodecAMVideoAccelerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43214,7 +43214,7 @@ module Win32cr::Media::DirectShow
   end
 
   @[Extern]
-  record IWMCodecVideoAcceleratorVtbl,
+  record IWMCodecVideoAcceleratorVtable,
     query_interface : Proc(IWMCodecVideoAccelerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWMCodecVideoAccelerator*, UInt32),
     release : Proc(IWMCodecVideoAccelerator*, UInt32),
@@ -43223,7 +43223,7 @@ module Win32cr::Media::DirectShow
 
 
   @[Extern]
-  record IWMCodecVideoAccelerator, lpVtbl : IWMCodecVideoAcceleratorVtbl* do
+  record IWMCodecVideoAccelerator, lpVtbl : IWMCodecVideoAcceleratorVtable* do
     GUID = LibC::GUID.new(0x990641b0_u32, 0x739f_u16, 0x4e94_u16, StaticArray[0xa8_u8, 0x8_u8, 0x98_u8, 0x88_u8, 0xda_u8, 0x8f_u8, 0x75_u8, 0xaf_u8])
     def query_interface(this : IWMCodecVideoAccelerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43244,14 +43244,19 @@ module Win32cr::Media::DirectShow
   end
 
   def aMGetErrorTextA(hr : Win32cr::Foundation::HRESULT, pbuffer : UInt8*, max_len : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.AMGetErrorTextA(hr, pbuffer, max_len)
+    {% end %}
   end
 
   def aMGetErrorTextW(hr : Win32cr::Foundation::HRESULT, pbuffer : UInt16*, max_len : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.AMGetErrorTextW(hr, pbuffer, max_len)
+    {% end %}
   end
 
   @[Link("quartz")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun AMGetErrorTextA(hr : Win32cr::Foundation::HRESULT, pbuffer : UInt8*, max_len : UInt32) : UInt32
@@ -43260,4 +43265,5 @@ module Win32cr::Media::DirectShow
     fun AMGetErrorTextW(hr : Win32cr::Foundation::HRESULT, pbuffer : UInt16*, max_len : UInt32) : UInt32
 
   end
+  {% end %}
 end

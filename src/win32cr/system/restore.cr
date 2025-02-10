@@ -78,14 +78,19 @@ module Win32cr::System::Restore
   end
 
   def sRSetRestorePointA(pRestorePtSpec : Win32cr::System::Restore::RESTOREPOINTINFOA*, pSMgrStatus : Win32cr::System::Restore::STATEMGRSTATUS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SRSetRestorePointA(pRestorePtSpec, pSMgrStatus)
+    {% end %}
   end
 
   def sRSetRestorePointW(pRestorePtSpec : Win32cr::System::Restore::RESTOREPOINTINFOW*, pSMgrStatus : Win32cr::System::Restore::STATEMGRSTATUS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SRSetRestorePointW(pRestorePtSpec, pSMgrStatus)
+    {% end %}
   end
 
   @[Link("sfc")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun SRSetRestorePointA(pRestorePtSpec : Win32cr::System::Restore::RESTOREPOINTINFOA*, pSMgrStatus : Win32cr::System::Restore::STATEMGRSTATUS*) : Win32cr::Foundation::BOOL
@@ -94,4 +99,5 @@ module Win32cr::System::Restore
     fun SRSetRestorePointW(pRestorePtSpec : Win32cr::System::Restore::RESTOREPOINTINFOW*, pSMgrStatus : Win32cr::System::Restore::STATEMGRSTATUS*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

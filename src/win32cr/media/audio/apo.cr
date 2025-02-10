@@ -325,7 +325,7 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioMediaTypeVtbl,
+  record IAudioMediaTypeVtable,
     query_interface : Proc(IAudioMediaType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioMediaType*, UInt32),
     release : Proc(IAudioMediaType*, UInt32),
@@ -336,7 +336,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioMediaType, lpVtbl : IAudioMediaTypeVtbl* do
+  record IAudioMediaType, lpVtbl : IAudioMediaTypeVtable* do
     GUID = LibC::GUID.new(0x4e997f73_u32, 0xb71f_u16, 0x4798_u16, StaticArray[0x87_u8, 0x3b_u8, 0xed_u8, 0x7d_u8, 0xfc_u8, 0xf1_u8, 0x5b_u8, 0x4d_u8])
     def query_interface(this : IAudioMediaType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -363,7 +363,7 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioProcessingObjectRTVtbl,
+  record IAudioProcessingObjectRTVtable,
     query_interface : Proc(IAudioProcessingObjectRT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioProcessingObjectRT*, UInt32),
     release : Proc(IAudioProcessingObjectRT*, UInt32),
@@ -373,7 +373,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioProcessingObjectRT, lpVtbl : IAudioProcessingObjectRTVtbl* do
+  record IAudioProcessingObjectRT, lpVtbl : IAudioProcessingObjectRTVtable* do
     GUID = LibC::GUID.new(0x9e1d6a6d_u32, 0xddbc_u16, 0x4e95_u16, StaticArray[0xa4_u8, 0xc7_u8, 0xad_u8, 0x64_u8, 0xba_u8, 0x37_u8, 0x84_u8, 0x6c_u8])
     def query_interface(this : IAudioProcessingObjectRT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -397,7 +397,7 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioProcessingObjectVBRVtbl,
+  record IAudioProcessingObjectVBRVtable,
     query_interface : Proc(IAudioProcessingObjectVBR*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioProcessingObjectVBR*, UInt32),
     release : Proc(IAudioProcessingObjectVBR*, UInt32),
@@ -406,7 +406,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioProcessingObjectVBR, lpVtbl : IAudioProcessingObjectVBRVtbl* do
+  record IAudioProcessingObjectVBR, lpVtbl : IAudioProcessingObjectVBRVtable* do
     GUID = LibC::GUID.new(0x7ba1db8f_u32, 0x78ad_u16, 0x49cd_u16, StaticArray[0x95_u8, 0x91_u8, 0xf7_u8, 0x9d_u8, 0x80_u8, 0xa1_u8, 0x7c_u8, 0x81_u8])
     def query_interface(this : IAudioProcessingObjectVBR*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -427,7 +427,7 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioProcessingObjectConfigurationVtbl,
+  record IAudioProcessingObjectConfigurationVtable,
     query_interface : Proc(IAudioProcessingObjectConfiguration*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioProcessingObjectConfiguration*, UInt32),
     release : Proc(IAudioProcessingObjectConfiguration*, UInt32),
@@ -436,7 +436,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioProcessingObjectConfiguration, lpVtbl : IAudioProcessingObjectConfigurationVtbl* do
+  record IAudioProcessingObjectConfiguration, lpVtbl : IAudioProcessingObjectConfigurationVtable* do
     GUID = LibC::GUID.new(0xe5ed805_u32, 0xaba6_u16, 0x49c3_u16, StaticArray[0x8f_u8, 0x9a_u8, 0x2b_u8, 0x8c_u8, 0x88_u8, 0x9c_u8, 0x4f_u8, 0xa8_u8])
     def query_interface(this : IAudioProcessingObjectConfiguration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -457,7 +457,7 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioProcessingObjectVtbl,
+  record IAudioProcessingObjectVtable,
     query_interface : Proc(IAudioProcessingObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioProcessingObject*, UInt32),
     release : Proc(IAudioProcessingObject*, UInt32),
@@ -471,7 +471,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioProcessingObject, lpVtbl : IAudioProcessingObjectVtbl* do
+  record IAudioProcessingObject, lpVtbl : IAudioProcessingObjectVtable* do
     GUID = LibC::GUID.new(0xfd7f2b29_u32, 0x24d0_u16, 0x4b5c_u16, StaticArray[0xb1_u8, 0x77_u8, 0x59_u8, 0x2c_u8, 0x39_u8, 0xf9_u8, 0xca_u8, 0x10_u8])
     def query_interface(this : IAudioProcessingObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -507,7 +507,7 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioDeviceModulesClientVtbl,
+  record IAudioDeviceModulesClientVtable,
     query_interface : Proc(IAudioDeviceModulesClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioDeviceModulesClient*, UInt32),
     release : Proc(IAudioDeviceModulesClient*, UInt32),
@@ -515,7 +515,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioDeviceModulesClient, lpVtbl : IAudioDeviceModulesClientVtbl* do
+  record IAudioDeviceModulesClient, lpVtbl : IAudioDeviceModulesClientVtable* do
     GUID = LibC::GUID.new(0x98f37dac_u32, 0xd0b6_u16, 0x49f5_u16, StaticArray[0x89_u8, 0x6a_u8, 0xaa_u8, 0x4d_u8, 0x16_u8, 0x9a_u8, 0x4c_u8, 0x48_u8])
     def query_interface(this : IAudioDeviceModulesClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -533,14 +533,14 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioSystemEffectsVtbl,
+  record IAudioSystemEffectsVtable,
     query_interface : Proc(IAudioSystemEffects*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioSystemEffects*, UInt32),
     release : Proc(IAudioSystemEffects*, UInt32)
 
 
   @[Extern]
-  record IAudioSystemEffects, lpVtbl : IAudioSystemEffectsVtbl* do
+  record IAudioSystemEffects, lpVtbl : IAudioSystemEffectsVtable* do
     GUID = LibC::GUID.new(0x5fa00f27_u32, 0xadd6_u16, 0x499a_u16, StaticArray[0x8a_u8, 0x9d_u8, 0x6b_u8, 0x98_u8, 0x52_u8, 0x1f_u8, 0xa7_u8, 0x5b_u8])
     def query_interface(this : IAudioSystemEffects*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -555,7 +555,7 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioSystemEffects2Vtbl,
+  record IAudioSystemEffects2Vtable,
     query_interface : Proc(IAudioSystemEffects2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioSystemEffects2*, UInt32),
     release : Proc(IAudioSystemEffects2*, UInt32),
@@ -563,7 +563,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioSystemEffects2, lpVtbl : IAudioSystemEffects2Vtbl* do
+  record IAudioSystemEffects2, lpVtbl : IAudioSystemEffects2Vtable* do
     GUID = LibC::GUID.new(0xbafe99d2_u32, 0x7436_u16, 0x44ce_u16, StaticArray[0x9e_u8, 0xe_u8, 0x4d_u8, 0x89_u8, 0xaf_u8, 0xbf_u8, 0xff_u8, 0x56_u8])
     def query_interface(this : IAudioSystemEffects2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -581,7 +581,7 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioSystemEffectsCustomFormatsVtbl,
+  record IAudioSystemEffectsCustomFormatsVtable,
     query_interface : Proc(IAudioSystemEffectsCustomFormats*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioSystemEffectsCustomFormats*, UInt32),
     release : Proc(IAudioSystemEffectsCustomFormats*, UInt32),
@@ -591,7 +591,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioSystemEffectsCustomFormats, lpVtbl : IAudioSystemEffectsCustomFormatsVtbl* do
+  record IAudioSystemEffectsCustomFormats, lpVtbl : IAudioSystemEffectsCustomFormatsVtable* do
     GUID = LibC::GUID.new(0xb1176e34_u32, 0xbb7f_u16, 0x4f05_u16, StaticArray[0xbe_u8, 0xbd_u8, 0x1b_u8, 0x18_u8, 0xa5_u8, 0x34_u8, 0xe0_u8, 0x97_u8])
     def query_interface(this : IAudioSystemEffectsCustomFormats*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -615,7 +615,7 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IApoAuxiliaryInputConfigurationVtbl,
+  record IApoAuxiliaryInputConfigurationVtable,
     query_interface : Proc(IApoAuxiliaryInputConfiguration*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IApoAuxiliaryInputConfiguration*, UInt32),
     release : Proc(IApoAuxiliaryInputConfiguration*, UInt32),
@@ -625,7 +625,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IApoAuxiliaryInputConfiguration, lpVtbl : IApoAuxiliaryInputConfigurationVtbl* do
+  record IApoAuxiliaryInputConfiguration, lpVtbl : IApoAuxiliaryInputConfigurationVtable* do
     GUID = LibC::GUID.new(0x4ceb0aab_u32, 0xfa19_u16, 0x48ed_u16, StaticArray[0xa8_u8, 0x57_u8, 0x87_u8, 0x77_u8, 0x1a_u8, 0xe1_u8, 0xb7_u8, 0x68_u8])
     def query_interface(this : IApoAuxiliaryInputConfiguration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -649,7 +649,7 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IApoAuxiliaryInputRTVtbl,
+  record IApoAuxiliaryInputRTVtable,
     query_interface : Proc(IApoAuxiliaryInputRT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IApoAuxiliaryInputRT*, UInt32),
     release : Proc(IApoAuxiliaryInputRT*, UInt32),
@@ -657,7 +657,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IApoAuxiliaryInputRT, lpVtbl : IApoAuxiliaryInputRTVtbl* do
+  record IApoAuxiliaryInputRT, lpVtbl : IApoAuxiliaryInputRTVtable* do
     GUID = LibC::GUID.new(0xf851809c_u32, 0xc177_u16, 0x49a0_u16, StaticArray[0xb1_u8, 0xb2_u8, 0xb6_u8, 0x6f_u8, 0x1_u8, 0x79_u8, 0x43_u8, 0xab_u8])
     def query_interface(this : IApoAuxiliaryInputRT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -675,14 +675,14 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IApoAcousticEchoCancellationVtbl,
+  record IApoAcousticEchoCancellationVtable,
     query_interface : Proc(IApoAcousticEchoCancellation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IApoAcousticEchoCancellation*, UInt32),
     release : Proc(IApoAcousticEchoCancellation*, UInt32)
 
 
   @[Extern]
-  record IApoAcousticEchoCancellation, lpVtbl : IApoAcousticEchoCancellationVtbl* do
+  record IApoAcousticEchoCancellation, lpVtbl : IApoAcousticEchoCancellationVtable* do
     GUID = LibC::GUID.new(0x25385759_u32, 0x3236_u16, 0x4101_u16, StaticArray[0xa9_u8, 0x43_u8, 0x25_u8, 0x69_u8, 0x3d_u8, 0xfb_u8, 0x5d_u8, 0x2d_u8])
     def query_interface(this : IApoAcousticEchoCancellation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -697,7 +697,7 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioSystemEffects3Vtbl,
+  record IAudioSystemEffects3Vtable,
     query_interface : Proc(IAudioSystemEffects3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioSystemEffects3*, UInt32),
     release : Proc(IAudioSystemEffects3*, UInt32),
@@ -707,7 +707,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioSystemEffects3, lpVtbl : IAudioSystemEffects3Vtbl* do
+  record IAudioSystemEffects3, lpVtbl : IAudioSystemEffects3Vtable* do
     GUID = LibC::GUID.new(0xc58b31cd_u32, 0xfc6a_u16, 0x4255_u16, StaticArray[0xbc_u8, 0x1f_u8, 0xad_u8, 0x29_u8, 0xbb_u8, 0xa_u8, 0x4a_u8, 0x17_u8])
     def query_interface(this : IAudioSystemEffects3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -731,7 +731,7 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioProcessingObjectRTQueueServiceVtbl,
+  record IAudioProcessingObjectRTQueueServiceVtable,
     query_interface : Proc(IAudioProcessingObjectRTQueueService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioProcessingObjectRTQueueService*, UInt32),
     release : Proc(IAudioProcessingObjectRTQueueService*, UInt32),
@@ -739,7 +739,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioProcessingObjectRTQueueService, lpVtbl : IAudioProcessingObjectRTQueueServiceVtbl* do
+  record IAudioProcessingObjectRTQueueService, lpVtbl : IAudioProcessingObjectRTQueueServiceVtable* do
     GUID = LibC::GUID.new(0xacd65e2f_u32, 0x955b_u16, 0x4b57_u16, StaticArray[0xb9_u8, 0xbf_u8, 0xac_u8, 0x29_u8, 0x7b_u8, 0xb7_u8, 0x52_u8, 0xc9_u8])
     def query_interface(this : IAudioProcessingObjectRTQueueService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -757,7 +757,7 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioProcessingObjectLoggingServiceVtbl,
+  record IAudioProcessingObjectLoggingServiceVtable,
     query_interface : Proc(IAudioProcessingObjectLoggingService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioProcessingObjectLoggingService*, UInt32),
     release : Proc(IAudioProcessingObjectLoggingService*, UInt32),
@@ -765,7 +765,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioProcessingObjectLoggingService, lpVtbl : IAudioProcessingObjectLoggingServiceVtbl* do
+  record IAudioProcessingObjectLoggingService, lpVtbl : IAudioProcessingObjectLoggingServiceVtable* do
     GUID = LibC::GUID.new(0x698f0107_u32, 0x1745_u16, 0x4708_u16, StaticArray[0x95_u8, 0xa5_u8, 0xd8_u8, 0x44_u8, 0x78_u8, 0xa6_u8, 0x2a_u8, 0x65_u8])
     def query_interface(this : IAudioProcessingObjectLoggingService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -783,7 +783,7 @@ module Win32cr::Media::Audio::Apo
   end
 
   @[Extern]
-  record IAudioProcessingObjectNotificationsVtbl,
+  record IAudioProcessingObjectNotificationsVtable,
     query_interface : Proc(IAudioProcessingObjectNotifications*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioProcessingObjectNotifications*, UInt32),
     release : Proc(IAudioProcessingObjectNotifications*, UInt32),
@@ -792,7 +792,7 @@ module Win32cr::Media::Audio::Apo
 
 
   @[Extern]
-  record IAudioProcessingObjectNotifications, lpVtbl : IAudioProcessingObjectNotificationsVtbl* do
+  record IAudioProcessingObjectNotifications, lpVtbl : IAudioProcessingObjectNotificationsVtable* do
     GUID = LibC::GUID.new(0x56b0c76f_u32, 0x2fd_u16, 0x4b21_u16, StaticArray[0xa5_u8, 0x2e_u8, 0x9f_u8, 0x82_u8, 0x19_u8, 0xfc_u8, 0x86_u8, 0xe4_u8])
     def query_interface(this : IAudioProcessingObjectNotifications*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

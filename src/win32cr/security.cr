@@ -1114,479 +1114,717 @@ module Win32cr::Security
   end
 
   def accessCheck(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, client_token : Win32cr::Foundation::HANDLE, desired_access : UInt32, generic_mapping : Win32cr::Security::GENERIC_MAPPING*, privilege_set : Win32cr::Security::PRIVILEGE_SET*, privilege_set_length : UInt32*, granted_access : UInt32*, access_status : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AccessCheck(pSecurityDescriptor, client_token, desired_access, generic_mapping, privilege_set, privilege_set_length, granted_access, access_status)
+    {% end %}
   end
 
   def accessCheckAndAuditAlarmW(subsystem_name : Win32cr::Foundation::PWSTR, handle_id : Void*, object_type_name : Win32cr::Foundation::PWSTR, object_name : Win32cr::Foundation::PWSTR, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, desired_access : UInt32, generic_mapping : Win32cr::Security::GENERIC_MAPPING*, object_creation : Win32cr::Foundation::BOOL, granted_access : UInt32*, access_status : Int32*, pfGenerateOnClose : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AccessCheckAndAuditAlarmW(subsystem_name, handle_id, object_type_name, object_name, security_descriptor, desired_access, generic_mapping, object_creation, granted_access, access_status, pfGenerateOnClose)
+    {% end %}
   end
 
   def accessCheckByType(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, principal_self_sid : Win32cr::Foundation::PSID, client_token : Win32cr::Foundation::HANDLE, desired_access : UInt32, object_type_list : Win32cr::Security::OBJECT_TYPE_LIST*, object_type_list_length : UInt32, generic_mapping : Win32cr::Security::GENERIC_MAPPING*, privilege_set : Win32cr::Security::PRIVILEGE_SET*, privilege_set_length : UInt32*, granted_access : UInt32*, access_status : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AccessCheckByType(pSecurityDescriptor, principal_self_sid, client_token, desired_access, object_type_list, object_type_list_length, generic_mapping, privilege_set, privilege_set_length, granted_access, access_status)
+    {% end %}
   end
 
   def accessCheckByTypeResultList(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, principal_self_sid : Win32cr::Foundation::PSID, client_token : Win32cr::Foundation::HANDLE, desired_access : UInt32, object_type_list : Win32cr::Security::OBJECT_TYPE_LIST*, object_type_list_length : UInt32, generic_mapping : Win32cr::Security::GENERIC_MAPPING*, privilege_set : Win32cr::Security::PRIVILEGE_SET*, privilege_set_length : UInt32*, granted_access_list : UInt32*, access_status_list : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AccessCheckByTypeResultList(pSecurityDescriptor, principal_self_sid, client_token, desired_access, object_type_list, object_type_list_length, generic_mapping, privilege_set, privilege_set_length, granted_access_list, access_status_list)
+    {% end %}
   end
 
   def accessCheckByTypeAndAuditAlarmW(subsystem_name : Win32cr::Foundation::PWSTR, handle_id : Void*, object_type_name : Win32cr::Foundation::PWSTR, object_name : Win32cr::Foundation::PWSTR, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, principal_self_sid : Win32cr::Foundation::PSID, desired_access : UInt32, audit_type : Win32cr::Security::AUDIT_EVENT_TYPE, flags : UInt32, object_type_list : Win32cr::Security::OBJECT_TYPE_LIST*, object_type_list_length : UInt32, generic_mapping : Win32cr::Security::GENERIC_MAPPING*, object_creation : Win32cr::Foundation::BOOL, granted_access : UInt32*, access_status : Int32*, pfGenerateOnClose : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AccessCheckByTypeAndAuditAlarmW(subsystem_name, handle_id, object_type_name, object_name, security_descriptor, principal_self_sid, desired_access, audit_type, flags, object_type_list, object_type_list_length, generic_mapping, object_creation, granted_access, access_status, pfGenerateOnClose)
+    {% end %}
   end
 
   def accessCheckByTypeResultListAndAuditAlarmW(subsystem_name : Win32cr::Foundation::PWSTR, handle_id : Void*, object_type_name : Win32cr::Foundation::PWSTR, object_name : Win32cr::Foundation::PWSTR, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, principal_self_sid : Win32cr::Foundation::PSID, desired_access : UInt32, audit_type : Win32cr::Security::AUDIT_EVENT_TYPE, flags : UInt32, object_type_list : Win32cr::Security::OBJECT_TYPE_LIST*, object_type_list_length : UInt32, generic_mapping : Win32cr::Security::GENERIC_MAPPING*, object_creation : Win32cr::Foundation::BOOL, granted_access_list : UInt32*, access_status_list : UInt32*, pfGenerateOnClose : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AccessCheckByTypeResultListAndAuditAlarmW(subsystem_name, handle_id, object_type_name, object_name, security_descriptor, principal_self_sid, desired_access, audit_type, flags, object_type_list, object_type_list_length, generic_mapping, object_creation, granted_access_list, access_status_list, pfGenerateOnClose)
+    {% end %}
   end
 
   def accessCheckByTypeResultListAndAuditAlarmByHandleW(subsystem_name : Win32cr::Foundation::PWSTR, handle_id : Void*, client_token : Win32cr::Foundation::HANDLE, object_type_name : Win32cr::Foundation::PWSTR, object_name : Win32cr::Foundation::PWSTR, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, principal_self_sid : Win32cr::Foundation::PSID, desired_access : UInt32, audit_type : Win32cr::Security::AUDIT_EVENT_TYPE, flags : UInt32, object_type_list : Win32cr::Security::OBJECT_TYPE_LIST*, object_type_list_length : UInt32, generic_mapping : Win32cr::Security::GENERIC_MAPPING*, object_creation : Win32cr::Foundation::BOOL, granted_access_list : UInt32*, access_status_list : UInt32*, pfGenerateOnClose : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AccessCheckByTypeResultListAndAuditAlarmByHandleW(subsystem_name, handle_id, client_token, object_type_name, object_name, security_descriptor, principal_self_sid, desired_access, audit_type, flags, object_type_list, object_type_list_length, generic_mapping, object_creation, granted_access_list, access_status_list, pfGenerateOnClose)
+    {% end %}
   end
 
   def addAccessAllowedAce(pAcl : Win32cr::Security::ACL*, dwAceRevision : UInt32, access_mask : UInt32, pSid : Win32cr::Foundation::PSID) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddAccessAllowedAce(pAcl, dwAceRevision, access_mask, pSid)
+    {% end %}
   end
 
   def addAccessAllowedAceEx(pAcl : Win32cr::Security::ACL*, dwAceRevision : UInt32, ace_flags : Win32cr::Security::ACE_FLAGS, access_mask : UInt32, pSid : Win32cr::Foundation::PSID) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddAccessAllowedAceEx(pAcl, dwAceRevision, ace_flags, access_mask, pSid)
+    {% end %}
   end
 
   def addAccessAllowedObjectAce(pAcl : Win32cr::Security::ACL*, dwAceRevision : UInt32, ace_flags : Win32cr::Security::ACE_FLAGS, access_mask : UInt32, object_type_guid : LibC::GUID*, inherited_object_type_guid : LibC::GUID*, pSid : Win32cr::Foundation::PSID) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddAccessAllowedObjectAce(pAcl, dwAceRevision, ace_flags, access_mask, object_type_guid, inherited_object_type_guid, pSid)
+    {% end %}
   end
 
   def addAccessDeniedAce(pAcl : Win32cr::Security::ACL*, dwAceRevision : UInt32, access_mask : UInt32, pSid : Win32cr::Foundation::PSID) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddAccessDeniedAce(pAcl, dwAceRevision, access_mask, pSid)
+    {% end %}
   end
 
   def addAccessDeniedAceEx(pAcl : Win32cr::Security::ACL*, dwAceRevision : UInt32, ace_flags : Win32cr::Security::ACE_FLAGS, access_mask : UInt32, pSid : Win32cr::Foundation::PSID) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddAccessDeniedAceEx(pAcl, dwAceRevision, ace_flags, access_mask, pSid)
+    {% end %}
   end
 
   def addAccessDeniedObjectAce(pAcl : Win32cr::Security::ACL*, dwAceRevision : UInt32, ace_flags : Win32cr::Security::ACE_FLAGS, access_mask : UInt32, object_type_guid : LibC::GUID*, inherited_object_type_guid : LibC::GUID*, pSid : Win32cr::Foundation::PSID) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddAccessDeniedObjectAce(pAcl, dwAceRevision, ace_flags, access_mask, object_type_guid, inherited_object_type_guid, pSid)
+    {% end %}
   end
 
   def addAce(pAcl : Win32cr::Security::ACL*, dwAceRevision : UInt32, dwStartingAceIndex : UInt32, pAceList : Void*, nAceListLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddAce(pAcl, dwAceRevision, dwStartingAceIndex, pAceList, nAceListLength)
+    {% end %}
   end
 
   def addAuditAccessAce(pAcl : Win32cr::Security::ACL*, dwAceRevision : UInt32, dwAccessMask : UInt32, pSid : Win32cr::Foundation::PSID, bAuditSuccess : Win32cr::Foundation::BOOL, bAuditFailure : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddAuditAccessAce(pAcl, dwAceRevision, dwAccessMask, pSid, bAuditSuccess, bAuditFailure)
+    {% end %}
   end
 
   def addAuditAccessAceEx(pAcl : Win32cr::Security::ACL*, dwAceRevision : UInt32, ace_flags : Win32cr::Security::ACE_FLAGS, dwAccessMask : UInt32, pSid : Win32cr::Foundation::PSID, bAuditSuccess : Win32cr::Foundation::BOOL, bAuditFailure : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddAuditAccessAceEx(pAcl, dwAceRevision, ace_flags, dwAccessMask, pSid, bAuditSuccess, bAuditFailure)
+    {% end %}
   end
 
   def addAuditAccessObjectAce(pAcl : Win32cr::Security::ACL*, dwAceRevision : UInt32, ace_flags : Win32cr::Security::ACE_FLAGS, access_mask : UInt32, object_type_guid : LibC::GUID*, inherited_object_type_guid : LibC::GUID*, pSid : Win32cr::Foundation::PSID, bAuditSuccess : Win32cr::Foundation::BOOL, bAuditFailure : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddAuditAccessObjectAce(pAcl, dwAceRevision, ace_flags, access_mask, object_type_guid, inherited_object_type_guid, pSid, bAuditSuccess, bAuditFailure)
+    {% end %}
   end
 
   def addMandatoryAce(pAcl : Win32cr::Security::ACL*, dwAceRevision : Win32cr::Security::ACE_REVISION, ace_flags : Win32cr::Security::ACE_FLAGS, mandatory_policy : UInt32, pLabelSid : Win32cr::Foundation::PSID) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddMandatoryAce(pAcl, dwAceRevision, ace_flags, mandatory_policy, pLabelSid)
+    {% end %}
   end
 
   def addResourceAttributeAce(pAcl : Win32cr::Security::ACL*, dwAceRevision : UInt32, ace_flags : Win32cr::Security::ACE_FLAGS, access_mask : UInt32, pSid : Win32cr::Foundation::PSID, pAttributeInfo : Win32cr::Security::CLAIM_SECURITY_ATTRIBUTES_INFORMATION*, pReturnLength : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddResourceAttributeAce(pAcl, dwAceRevision, ace_flags, access_mask, pSid, pAttributeInfo, pReturnLength)
+    {% end %}
   end
 
   def addScopedPolicyIDAce(pAcl : Win32cr::Security::ACL*, dwAceRevision : UInt32, ace_flags : Win32cr::Security::ACE_FLAGS, access_mask : UInt32, pSid : Win32cr::Foundation::PSID) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddScopedPolicyIDAce(pAcl, dwAceRevision, ace_flags, access_mask, pSid)
+    {% end %}
   end
 
   def adjustTokenGroups(token_handle : Win32cr::Foundation::HANDLE, reset_to_default : Win32cr::Foundation::BOOL, new_state : Win32cr::Security::TOKEN_GROUPS*, buffer_length : UInt32, previous_state : Win32cr::Security::TOKEN_GROUPS*, return_length : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AdjustTokenGroups(token_handle, reset_to_default, new_state, buffer_length, previous_state, return_length)
+    {% end %}
   end
 
   def adjustTokenPrivileges(token_handle : Win32cr::Foundation::HANDLE, disable_all_privileges : Win32cr::Foundation::BOOL, new_state : Win32cr::Security::TOKEN_PRIVILEGES*, buffer_length : UInt32, previous_state : Win32cr::Security::TOKEN_PRIVILEGES*, return_length : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AdjustTokenPrivileges(token_handle, disable_all_privileges, new_state, buffer_length, previous_state, return_length)
+    {% end %}
   end
 
   def allocateAndInitializeSid(pIdentifierAuthority : Win32cr::Security::SID_IDENTIFIER_AUTHORITY*, nSubAuthorityCount : UInt8, nSubAuthority0 : UInt32, nSubAuthority1 : UInt32, nSubAuthority2 : UInt32, nSubAuthority3 : UInt32, nSubAuthority4 : UInt32, nSubAuthority5 : UInt32, nSubAuthority6 : UInt32, nSubAuthority7 : UInt32, pSid : Win32cr::Foundation::PSID*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AllocateAndInitializeSid(pIdentifierAuthority, nSubAuthorityCount, nSubAuthority0, nSubAuthority1, nSubAuthority2, nSubAuthority3, nSubAuthority4, nSubAuthority5, nSubAuthority6, nSubAuthority7, pSid)
+    {% end %}
   end
 
   def allocateLocallyUniqueId(luid : Win32cr::Foundation::LUID*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AllocateLocallyUniqueId(luid)
+    {% end %}
   end
 
   def areAllAccessesGranted(granted_access : UInt32, desired_access : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AreAllAccessesGranted(granted_access, desired_access)
+    {% end %}
   end
 
   def areAnyAccessesGranted(granted_access : UInt32, desired_access : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AreAnyAccessesGranted(granted_access, desired_access)
+    {% end %}
   end
 
   def checkTokenMembership(token_handle : Win32cr::Foundation::HANDLE, sid_to_check : Win32cr::Foundation::PSID, is_member : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CheckTokenMembership(token_handle, sid_to_check, is_member)
+    {% end %}
   end
 
   def checkTokenCapability(token_handle : Win32cr::Foundation::HANDLE, capability_sid_to_check : Win32cr::Foundation::PSID, has_capability : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CheckTokenCapability(token_handle, capability_sid_to_check, has_capability)
+    {% end %}
   end
 
   def getAppContainerAce(acl : Win32cr::Security::ACL*, starting_ace_index : UInt32, app_container_ace : Void**, app_container_ace_index : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetAppContainerAce(acl, starting_ace_index, app_container_ace, app_container_ace_index)
+    {% end %}
   end
 
   def checkTokenMembershipEx(token_handle : Win32cr::Foundation::HANDLE, sid_to_check : Win32cr::Foundation::PSID, flags : UInt32, is_member : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CheckTokenMembershipEx(token_handle, sid_to_check, flags, is_member)
+    {% end %}
   end
 
   def convertToAutoInheritPrivateObjectSecurity(parent_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, current_security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, new_security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, object_type : LibC::GUID*, is_directory_object : Win32cr::Foundation::BOOLEAN, generic_mapping : Win32cr::Security::GENERIC_MAPPING*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ConvertToAutoInheritPrivateObjectSecurity(parent_descriptor, current_security_descriptor, new_security_descriptor, object_type, is_directory_object, generic_mapping)
+    {% end %}
   end
 
   def copySid(nDestinationSidLength : UInt32, pDestinationSid : Win32cr::Foundation::PSID, pSourceSid : Win32cr::Foundation::PSID) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CopySid(nDestinationSidLength, pDestinationSid, pSourceSid)
+    {% end %}
   end
 
   def createPrivateObjectSecurity(parent_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, creator_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, new_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, is_directory_object : Win32cr::Foundation::BOOL, token : Win32cr::Foundation::HANDLE, generic_mapping : Win32cr::Security::GENERIC_MAPPING*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreatePrivateObjectSecurity(parent_descriptor, creator_descriptor, new_descriptor, is_directory_object, token, generic_mapping)
+    {% end %}
   end
 
   def createPrivateObjectSecurityEx(parent_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, creator_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, new_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, object_type : LibC::GUID*, is_container_object : Win32cr::Foundation::BOOL, auto_inherit_flags : Win32cr::Security::SECURITY_AUTO_INHERIT_FLAGS, token : Win32cr::Foundation::HANDLE, generic_mapping : Win32cr::Security::GENERIC_MAPPING*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreatePrivateObjectSecurityEx(parent_descriptor, creator_descriptor, new_descriptor, object_type, is_container_object, auto_inherit_flags, token, generic_mapping)
+    {% end %}
   end
 
   def createPrivateObjectSecurityWithMultipleInheritance(parent_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, creator_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, new_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, object_types : LibC::GUID**, guid_count : UInt32, is_container_object : Win32cr::Foundation::BOOL, auto_inherit_flags : Win32cr::Security::SECURITY_AUTO_INHERIT_FLAGS, token : Win32cr::Foundation::HANDLE, generic_mapping : Win32cr::Security::GENERIC_MAPPING*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreatePrivateObjectSecurityWithMultipleInheritance(parent_descriptor, creator_descriptor, new_descriptor, object_types, guid_count, is_container_object, auto_inherit_flags, token, generic_mapping)
+    {% end %}
   end
 
   def createRestrictedToken(existing_token_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Security::CREATE_RESTRICTED_TOKEN_FLAGS, disable_sid_count : UInt32, sids_to_disable : Win32cr::Security::SID_AND_ATTRIBUTES*, delete_privilege_count : UInt32, privileges_to_delete : Win32cr::Security::LUID_AND_ATTRIBUTES*, restricted_sid_count : UInt32, sids_to_restrict : Win32cr::Security::SID_AND_ATTRIBUTES*, new_token_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateRestrictedToken(existing_token_handle, flags, disable_sid_count, sids_to_disable, delete_privilege_count, privileges_to_delete, restricted_sid_count, sids_to_restrict, new_token_handle)
+    {% end %}
   end
 
   def createWellKnownSid(well_known_sid_type : Win32cr::Security::WELL_KNOWN_SID_TYPE, domain_sid : Win32cr::Foundation::PSID, pSid : Win32cr::Foundation::PSID, cbSid : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateWellKnownSid(well_known_sid_type, domain_sid, pSid, cbSid)
+    {% end %}
   end
 
   def equalDomainSid(pSid1 : Win32cr::Foundation::PSID, pSid2 : Win32cr::Foundation::PSID, pfEqual : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EqualDomainSid(pSid1, pSid2, pfEqual)
+    {% end %}
   end
 
   def deleteAce(pAcl : Win32cr::Security::ACL*, dwAceIndex : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteAce(pAcl, dwAceIndex)
+    {% end %}
   end
 
   def destroyPrivateObjectSecurity(object_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DestroyPrivateObjectSecurity(object_descriptor)
+    {% end %}
   end
 
   def duplicateToken(existing_token_handle : Win32cr::Foundation::HANDLE, impersonation_level : Win32cr::Security::SECURITY_IMPERSONATION_LEVEL, duplicate_token_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DuplicateToken(existing_token_handle, impersonation_level, duplicate_token_handle)
+    {% end %}
   end
 
   def duplicateTokenEx(hExistingToken : Win32cr::Foundation::HANDLE, dwDesiredAccess : Win32cr::Security::TOKEN_ACCESS_MASK, lpTokenAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, impersonation_level : Win32cr::Security::SECURITY_IMPERSONATION_LEVEL, token_type : Win32cr::Security::TOKEN_TYPE, phNewToken : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DuplicateTokenEx(hExistingToken, dwDesiredAccess, lpTokenAttributes, impersonation_level, token_type, phNewToken)
+    {% end %}
   end
 
   def equalPrefixSid(pSid1 : Win32cr::Foundation::PSID, pSid2 : Win32cr::Foundation::PSID) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EqualPrefixSid(pSid1, pSid2)
+    {% end %}
   end
 
   def equalSid(pSid1 : Win32cr::Foundation::PSID, pSid2 : Win32cr::Foundation::PSID) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EqualSid(pSid1, pSid2)
+    {% end %}
   end
 
   def findFirstFreeAce(pAcl : Win32cr::Security::ACL*, pAce : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FindFirstFreeAce(pAcl, pAce)
+    {% end %}
   end
 
   def freeSid(pSid : Win32cr::Foundation::PSID) : Void*
+    {% if !flag?(:docs) %}
     C.FreeSid(pSid)
+    {% end %}
   end
 
   def getAce(pAcl : Win32cr::Security::ACL*, dwAceIndex : UInt32, pAce : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetAce(pAcl, dwAceIndex, pAce)
+    {% end %}
   end
 
   def getAclInformation(pAcl : Win32cr::Security::ACL*, pAclInformation : Void*, nAclInformationLength : UInt32, dwAclInformationClass : Win32cr::Security::ACL_INFORMATION_CLASS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetAclInformation(pAcl, pAclInformation, nAclInformationLength, dwAclInformationClass)
+    {% end %}
   end
 
   def getFileSecurityW(lpFileName : Win32cr::Foundation::PWSTR, requested_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetFileSecurityW(lpFileName, requested_information, pSecurityDescriptor, nLength, lpnLengthNeeded)
+    {% end %}
   end
 
   def getKernelObjectSecurity(handle : Win32cr::Foundation::HANDLE, requested_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetKernelObjectSecurity(handle, requested_information, pSecurityDescriptor, nLength, lpnLengthNeeded)
+    {% end %}
   end
 
   def getLengthSid(pSid : Win32cr::Foundation::PSID) : UInt32
+    {% if !flag?(:docs) %}
     C.GetLengthSid(pSid)
+    {% end %}
   end
 
   def getPrivateObjectSecurity(object_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, security_information : UInt32, resultant_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, descriptor_length : UInt32, return_length : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPrivateObjectSecurity(object_descriptor, security_information, resultant_descriptor, descriptor_length, return_length)
+    {% end %}
   end
 
   def getSecurityDescriptorControl(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pControl : UInt16*, lpdwRevision : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSecurityDescriptorControl(pSecurityDescriptor, pControl, lpdwRevision)
+    {% end %}
   end
 
   def getSecurityDescriptorDacl(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, lpbDaclPresent : Int32*, pDacl : Win32cr::Security::ACL**, lpbDaclDefaulted : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSecurityDescriptorDacl(pSecurityDescriptor, lpbDaclPresent, pDacl, lpbDaclDefaulted)
+    {% end %}
   end
 
   def getSecurityDescriptorGroup(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pGroup : Win32cr::Foundation::PSID*, lpbGroupDefaulted : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSecurityDescriptorGroup(pSecurityDescriptor, pGroup, lpbGroupDefaulted)
+    {% end %}
   end
 
   def getSecurityDescriptorLength(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSecurityDescriptorLength(pSecurityDescriptor)
+    {% end %}
   end
 
   def getSecurityDescriptorOwner(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pOwner : Win32cr::Foundation::PSID*, lpbOwnerDefaulted : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSecurityDescriptorOwner(pSecurityDescriptor, pOwner, lpbOwnerDefaulted)
+    {% end %}
   end
 
   def getSecurityDescriptorRMControl(security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, rm_control : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSecurityDescriptorRMControl(security_descriptor, rm_control)
+    {% end %}
   end
 
   def getSecurityDescriptorSacl(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, lpbSaclPresent : Int32*, pSacl : Win32cr::Security::ACL**, lpbSaclDefaulted : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSecurityDescriptorSacl(pSecurityDescriptor, lpbSaclPresent, pSacl, lpbSaclDefaulted)
+    {% end %}
   end
 
   def getSidIdentifierAuthority(pSid : Win32cr::Foundation::PSID) : Win32cr::Security::SID_IDENTIFIER_AUTHORITY*
+    {% if !flag?(:docs) %}
     C.GetSidIdentifierAuthority(pSid)
+    {% end %}
   end
 
   def getSidLengthRequired(nSubAuthorityCount : UInt8) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSidLengthRequired(nSubAuthorityCount)
+    {% end %}
   end
 
   def getSidSubAuthority(pSid : Win32cr::Foundation::PSID, nSubAuthority : UInt32) : UInt32*
+    {% if !flag?(:docs) %}
     C.GetSidSubAuthority(pSid, nSubAuthority)
+    {% end %}
   end
 
   def getSidSubAuthorityCount(pSid : Win32cr::Foundation::PSID) : UInt8*
+    {% if !flag?(:docs) %}
     C.GetSidSubAuthorityCount(pSid)
+    {% end %}
   end
 
   def getTokenInformation(token_handle : Win32cr::Foundation::HANDLE, token_information_class : Win32cr::Security::TOKEN_INFORMATION_CLASS, token_information : Void*, token_information_length : UInt32, return_length : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetTokenInformation(token_handle, token_information_class, token_information, token_information_length, return_length)
+    {% end %}
   end
 
   def getWindowsAccountDomainSid(pSid : Win32cr::Foundation::PSID, pDomainSid : Win32cr::Foundation::PSID, cbDomainSid : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetWindowsAccountDomainSid(pSid, pDomainSid, cbDomainSid)
+    {% end %}
   end
 
   def impersonateAnonymousToken(thread_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImpersonateAnonymousToken(thread_handle)
+    {% end %}
   end
 
   def impersonateLoggedOnUser(hToken : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImpersonateLoggedOnUser(hToken)
+    {% end %}
   end
 
   def impersonateSelf(impersonation_level : Win32cr::Security::SECURITY_IMPERSONATION_LEVEL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImpersonateSelf(impersonation_level)
+    {% end %}
   end
 
   def initializeAcl(pAcl : Win32cr::Security::ACL*, nAclLength : UInt32, dwAclRevision : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitializeAcl(pAcl, nAclLength, dwAclRevision)
+    {% end %}
   end
 
   def initializeSecurityDescriptor(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, dwRevision : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitializeSecurityDescriptor(pSecurityDescriptor, dwRevision)
+    {% end %}
   end
 
   def initializeSid(sid : Win32cr::Foundation::PSID, pIdentifierAuthority : Win32cr::Security::SID_IDENTIFIER_AUTHORITY*, nSubAuthorityCount : UInt8) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitializeSid(sid, pIdentifierAuthority, nSubAuthorityCount)
+    {% end %}
   end
 
   def isTokenRestricted(token_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsTokenRestricted(token_handle)
+    {% end %}
   end
 
   def isValidAcl(pAcl : Win32cr::Security::ACL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsValidAcl(pAcl)
+    {% end %}
   end
 
   def isValidSecurityDescriptor(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsValidSecurityDescriptor(pSecurityDescriptor)
+    {% end %}
   end
 
   def isValidSid(pSid : Win32cr::Foundation::PSID) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsValidSid(pSid)
+    {% end %}
   end
 
   def isWellKnownSid(pSid : Win32cr::Foundation::PSID, well_known_sid_type : Win32cr::Security::WELL_KNOWN_SID_TYPE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsWellKnownSid(pSid, well_known_sid_type)
+    {% end %}
   end
 
   def makeAbsoluteSD(pSelfRelativeSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pAbsoluteSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, lpdwAbsoluteSecurityDescriptorSize : UInt32*, pDacl : Win32cr::Security::ACL*, lpdwDaclSize : UInt32*, pSacl : Win32cr::Security::ACL*, lpdwSaclSize : UInt32*, pOwner : Win32cr::Foundation::PSID, lpdwOwnerSize : UInt32*, pPrimaryGroup : Win32cr::Foundation::PSID, lpdwPrimaryGroupSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MakeAbsoluteSD(pSelfRelativeSecurityDescriptor, pAbsoluteSecurityDescriptor, lpdwAbsoluteSecurityDescriptorSize, pDacl, lpdwDaclSize, pSacl, lpdwSaclSize, pOwner, lpdwOwnerSize, pPrimaryGroup, lpdwPrimaryGroupSize)
+    {% end %}
   end
 
   def makeSelfRelativeSD(pAbsoluteSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pSelfRelativeSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, lpdwBufferLength : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MakeSelfRelativeSD(pAbsoluteSecurityDescriptor, pSelfRelativeSecurityDescriptor, lpdwBufferLength)
+    {% end %}
   end
 
   def mapGenericMask(access_mask : UInt32*, generic_mapping : Win32cr::Security::GENERIC_MAPPING*) : Void
+    {% if !flag?(:docs) %}
     C.MapGenericMask(access_mask, generic_mapping)
+    {% end %}
   end
 
   def objectCloseAuditAlarmW(subsystem_name : Win32cr::Foundation::PWSTR, handle_id : Void*, generate_on_close : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ObjectCloseAuditAlarmW(subsystem_name, handle_id, generate_on_close)
+    {% end %}
   end
 
   def objectDeleteAuditAlarmW(subsystem_name : Win32cr::Foundation::PWSTR, handle_id : Void*, generate_on_close : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ObjectDeleteAuditAlarmW(subsystem_name, handle_id, generate_on_close)
+    {% end %}
   end
 
   def objectOpenAuditAlarmW(subsystem_name : Win32cr::Foundation::PWSTR, handle_id : Void*, object_type_name : Win32cr::Foundation::PWSTR, object_name : Win32cr::Foundation::PWSTR, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, client_token : Win32cr::Foundation::HANDLE, desired_access : UInt32, granted_access : UInt32, privileges : Win32cr::Security::PRIVILEGE_SET*, object_creation : Win32cr::Foundation::BOOL, access_granted : Win32cr::Foundation::BOOL, generate_on_close : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ObjectOpenAuditAlarmW(subsystem_name, handle_id, object_type_name, object_name, pSecurityDescriptor, client_token, desired_access, granted_access, privileges, object_creation, access_granted, generate_on_close)
+    {% end %}
   end
 
   def objectPrivilegeAuditAlarmW(subsystem_name : Win32cr::Foundation::PWSTR, handle_id : Void*, client_token : Win32cr::Foundation::HANDLE, desired_access : UInt32, privileges : Win32cr::Security::PRIVILEGE_SET*, access_granted : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ObjectPrivilegeAuditAlarmW(subsystem_name, handle_id, client_token, desired_access, privileges, access_granted)
+    {% end %}
   end
 
   def privilegeCheck(client_token : Win32cr::Foundation::HANDLE, required_privileges : Win32cr::Security::PRIVILEGE_SET*, pfResult : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PrivilegeCheck(client_token, required_privileges, pfResult)
+    {% end %}
   end
 
   def privilegedServiceAuditAlarmW(subsystem_name : Win32cr::Foundation::PWSTR, service_name : Win32cr::Foundation::PWSTR, client_token : Win32cr::Foundation::HANDLE, privileges : Win32cr::Security::PRIVILEGE_SET*, access_granted : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PrivilegedServiceAuditAlarmW(subsystem_name, service_name, client_token, privileges, access_granted)
+    {% end %}
   end
 
   def querySecurityAccessMask(security_information : UInt32, desired_access : UInt32*) : Void
+    {% if !flag?(:docs) %}
     C.QuerySecurityAccessMask(security_information, desired_access)
+    {% end %}
   end
 
   def revertToSelf : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RevertToSelf
+    {% end %}
   end
 
   def setAclInformation(pAcl : Win32cr::Security::ACL*, pAclInformation : Void*, nAclInformationLength : UInt32, dwAclInformationClass : Win32cr::Security::ACL_INFORMATION_CLASS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetAclInformation(pAcl, pAclInformation, nAclInformationLength, dwAclInformationClass)
+    {% end %}
   end
 
   def setFileSecurityW(lpFileName : Win32cr::Foundation::PWSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetFileSecurityW(lpFileName, security_information, pSecurityDescriptor)
+    {% end %}
   end
 
   def setKernelObjectSecurity(handle : Win32cr::Foundation::HANDLE, security_information : UInt32, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetKernelObjectSecurity(handle, security_information, security_descriptor)
+    {% end %}
   end
 
   def setPrivateObjectSecurity(security_information : UInt32, modification_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, objects_security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, generic_mapping : Win32cr::Security::GENERIC_MAPPING*, token : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetPrivateObjectSecurity(security_information, modification_descriptor, objects_security_descriptor, generic_mapping, token)
+    {% end %}
   end
 
   def setPrivateObjectSecurityEx(security_information : UInt32, modification_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, objects_security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, auto_inherit_flags : Win32cr::Security::SECURITY_AUTO_INHERIT_FLAGS, generic_mapping : Win32cr::Security::GENERIC_MAPPING*, token : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetPrivateObjectSecurityEx(security_information, modification_descriptor, objects_security_descriptor, auto_inherit_flags, generic_mapping, token)
+    {% end %}
   end
 
   def setSecurityAccessMask(security_information : UInt32, desired_access : UInt32*) : Void
+    {% if !flag?(:docs) %}
     C.SetSecurityAccessMask(security_information, desired_access)
+    {% end %}
   end
 
   def setSecurityDescriptorControl(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, control_bits_of_interest : UInt16, control_bits_to_set : UInt16) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetSecurityDescriptorControl(pSecurityDescriptor, control_bits_of_interest, control_bits_to_set)
+    {% end %}
   end
 
   def setSecurityDescriptorDacl(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, bDaclPresent : Win32cr::Foundation::BOOL, pDacl : Win32cr::Security::ACL*, bDaclDefaulted : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetSecurityDescriptorDacl(pSecurityDescriptor, bDaclPresent, pDacl, bDaclDefaulted)
+    {% end %}
   end
 
   def setSecurityDescriptorGroup(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pGroup : Win32cr::Foundation::PSID, bGroupDefaulted : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetSecurityDescriptorGroup(pSecurityDescriptor, pGroup, bGroupDefaulted)
+    {% end %}
   end
 
   def setSecurityDescriptorOwner(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pOwner : Win32cr::Foundation::PSID, bOwnerDefaulted : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetSecurityDescriptorOwner(pSecurityDescriptor, pOwner, bOwnerDefaulted)
+    {% end %}
   end
 
   def setSecurityDescriptorRMControl(security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, rm_control : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.SetSecurityDescriptorRMControl(security_descriptor, rm_control)
+    {% end %}
   end
 
   def setSecurityDescriptorSacl(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, bSaclPresent : Win32cr::Foundation::BOOL, pSacl : Win32cr::Security::ACL*, bSaclDefaulted : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetSecurityDescriptorSacl(pSecurityDescriptor, bSaclPresent, pSacl, bSaclDefaulted)
+    {% end %}
   end
 
   def setTokenInformation(token_handle : Win32cr::Foundation::HANDLE, token_information_class : Win32cr::Security::TOKEN_INFORMATION_CLASS, token_information : Void*, token_information_length : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetTokenInformation(token_handle, token_information_class, token_information, token_information_length)
+    {% end %}
   end
 
   def setCachedSigningLevel(source_files : Win32cr::Foundation::HANDLE*, source_file_count : UInt32, flags : UInt32, target_file : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetCachedSigningLevel(source_files, source_file_count, flags, target_file)
+    {% end %}
   end
 
   def getCachedSigningLevel(file : Win32cr::Foundation::HANDLE, flags : UInt32*, signing_level : UInt32*, thumbprint : UInt8*, thumbprint_size : UInt32*, thumbprint_algorithm : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCachedSigningLevel(file, flags, signing_level, thumbprint, thumbprint_size, thumbprint_algorithm)
+    {% end %}
   end
 
   def deriveCapabilitySidsFromName(cap_name : Win32cr::Foundation::PWSTR, capability_group_sids : Win32cr::Foundation::PSID**, capability_group_sid_count : UInt32*, capability_sids : Win32cr::Foundation::PSID**, capability_sid_count : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeriveCapabilitySidsFromName(cap_name, capability_group_sids, capability_group_sid_count, capability_sids, capability_sid_count)
+    {% end %}
   end
 
   def rtlNormalizeSecurityDescriptor(security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, security_descriptor_length : UInt32, new_security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, new_security_descriptor_length : UInt32*, check_only : Win32cr::Foundation::BOOLEAN) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.RtlNormalizeSecurityDescriptor(security_descriptor, security_descriptor_length, new_security_descriptor, new_security_descriptor_length, check_only)
+    {% end %}
   end
 
   def setUserObjectSecurity(hObj : Win32cr::Foundation::HANDLE, pSIRequested : Win32cr::Security::OBJECT_SECURITY_INFORMATION*, pSID : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetUserObjectSecurity(hObj, pSIRequested, pSID)
+    {% end %}
   end
 
   def getUserObjectSecurity(hObj : Win32cr::Foundation::HANDLE, pSIRequested : UInt32*, pSID : Win32cr::Security::PSECURITY_DESCRIPTOR, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUserObjectSecurity(hObj, pSIRequested, pSID, nLength, lpnLengthNeeded)
+    {% end %}
   end
 
   def accessCheckAndAuditAlarmA(subsystem_name : Win32cr::Foundation::PSTR, handle_id : Void*, object_type_name : Win32cr::Foundation::PSTR, object_name : Win32cr::Foundation::PSTR, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, desired_access : UInt32, generic_mapping : Win32cr::Security::GENERIC_MAPPING*, object_creation : Win32cr::Foundation::BOOL, granted_access : UInt32*, access_status : Int32*, pfGenerateOnClose : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AccessCheckAndAuditAlarmA(subsystem_name, handle_id, object_type_name, object_name, security_descriptor, desired_access, generic_mapping, object_creation, granted_access, access_status, pfGenerateOnClose)
+    {% end %}
   end
 
   def accessCheckByTypeAndAuditAlarmA(subsystem_name : Win32cr::Foundation::PSTR, handle_id : Void*, object_type_name : Win32cr::Foundation::PSTR, object_name : Win32cr::Foundation::PSTR, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, principal_self_sid : Win32cr::Foundation::PSID, desired_access : UInt32, audit_type : Win32cr::Security::AUDIT_EVENT_TYPE, flags : UInt32, object_type_list : Win32cr::Security::OBJECT_TYPE_LIST*, object_type_list_length : UInt32, generic_mapping : Win32cr::Security::GENERIC_MAPPING*, object_creation : Win32cr::Foundation::BOOL, granted_access : UInt32*, access_status : Int32*, pfGenerateOnClose : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AccessCheckByTypeAndAuditAlarmA(subsystem_name, handle_id, object_type_name, object_name, security_descriptor, principal_self_sid, desired_access, audit_type, flags, object_type_list, object_type_list_length, generic_mapping, object_creation, granted_access, access_status, pfGenerateOnClose)
+    {% end %}
   end
 
   def accessCheckByTypeResultListAndAuditAlarmA(subsystem_name : Win32cr::Foundation::PSTR, handle_id : Void*, object_type_name : Win32cr::Foundation::PSTR, object_name : Win32cr::Foundation::PSTR, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, principal_self_sid : Win32cr::Foundation::PSID, desired_access : UInt32, audit_type : Win32cr::Security::AUDIT_EVENT_TYPE, flags : UInt32, object_type_list : Win32cr::Security::OBJECT_TYPE_LIST*, object_type_list_length : UInt32, generic_mapping : Win32cr::Security::GENERIC_MAPPING*, object_creation : Win32cr::Foundation::BOOL, granted_access : UInt32*, access_status_list : UInt32*, pfGenerateOnClose : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AccessCheckByTypeResultListAndAuditAlarmA(subsystem_name, handle_id, object_type_name, object_name, security_descriptor, principal_self_sid, desired_access, audit_type, flags, object_type_list, object_type_list_length, generic_mapping, object_creation, granted_access, access_status_list, pfGenerateOnClose)
+    {% end %}
   end
 
   def accessCheckByTypeResultListAndAuditAlarmByHandleA(subsystem_name : Win32cr::Foundation::PSTR, handle_id : Void*, client_token : Win32cr::Foundation::HANDLE, object_type_name : Win32cr::Foundation::PSTR, object_name : Win32cr::Foundation::PSTR, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, principal_self_sid : Win32cr::Foundation::PSID, desired_access : UInt32, audit_type : Win32cr::Security::AUDIT_EVENT_TYPE, flags : UInt32, object_type_list : Win32cr::Security::OBJECT_TYPE_LIST*, object_type_list_length : UInt32, generic_mapping : Win32cr::Security::GENERIC_MAPPING*, object_creation : Win32cr::Foundation::BOOL, granted_access : UInt32*, access_status_list : UInt32*, pfGenerateOnClose : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AccessCheckByTypeResultListAndAuditAlarmByHandleA(subsystem_name, handle_id, client_token, object_type_name, object_name, security_descriptor, principal_self_sid, desired_access, audit_type, flags, object_type_list, object_type_list_length, generic_mapping, object_creation, granted_access, access_status_list, pfGenerateOnClose)
+    {% end %}
   end
 
   def objectOpenAuditAlarmA(subsystem_name : Win32cr::Foundation::PSTR, handle_id : Void*, object_type_name : Win32cr::Foundation::PSTR, object_name : Win32cr::Foundation::PSTR, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, client_token : Win32cr::Foundation::HANDLE, desired_access : UInt32, granted_access : UInt32, privileges : Win32cr::Security::PRIVILEGE_SET*, object_creation : Win32cr::Foundation::BOOL, access_granted : Win32cr::Foundation::BOOL, generate_on_close : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ObjectOpenAuditAlarmA(subsystem_name, handle_id, object_type_name, object_name, pSecurityDescriptor, client_token, desired_access, granted_access, privileges, object_creation, access_granted, generate_on_close)
+    {% end %}
   end
 
   def objectPrivilegeAuditAlarmA(subsystem_name : Win32cr::Foundation::PSTR, handle_id : Void*, client_token : Win32cr::Foundation::HANDLE, desired_access : UInt32, privileges : Win32cr::Security::PRIVILEGE_SET*, access_granted : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ObjectPrivilegeAuditAlarmA(subsystem_name, handle_id, client_token, desired_access, privileges, access_granted)
+    {% end %}
   end
 
   def objectCloseAuditAlarmA(subsystem_name : Win32cr::Foundation::PSTR, handle_id : Void*, generate_on_close : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ObjectCloseAuditAlarmA(subsystem_name, handle_id, generate_on_close)
+    {% end %}
   end
 
   def objectDeleteAuditAlarmA(subsystem_name : Win32cr::Foundation::PSTR, handle_id : Void*, generate_on_close : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ObjectDeleteAuditAlarmA(subsystem_name, handle_id, generate_on_close)
+    {% end %}
   end
 
   def privilegedServiceAuditAlarmA(subsystem_name : Win32cr::Foundation::PSTR, service_name : Win32cr::Foundation::PSTR, client_token : Win32cr::Foundation::HANDLE, privileges : Win32cr::Security::PRIVILEGE_SET*, access_granted : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PrivilegedServiceAuditAlarmA(subsystem_name, service_name, client_token, privileges, access_granted)
+    {% end %}
   end
 
   def addConditionalAce(pAcl : Win32cr::Security::ACL*, dwAceRevision : UInt32, ace_flags : Win32cr::Security::ACE_FLAGS, ace_type : UInt8, access_mask : UInt32, pSid : Win32cr::Foundation::PSID, condition_str : Win32cr::Foundation::PWSTR, return_length : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddConditionalAce(pAcl, dwAceRevision, ace_flags, ace_type, access_mask, pSid, condition_str, return_length)
+    {% end %}
   end
 
   def setFileSecurityA(lpFileName : Win32cr::Foundation::PSTR, security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetFileSecurityA(lpFileName, security_information, pSecurityDescriptor)
+    {% end %}
   end
 
   def getFileSecurityA(lpFileName : Win32cr::Foundation::PSTR, requested_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, nLength : UInt32, lpnLengthNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetFileSecurityA(lpFileName, requested_information, pSecurityDescriptor, nLength, lpnLengthNeeded)
+    {% end %}
   end
 
   def lookupAccountSidA(lpSystemName : Win32cr::Foundation::PSTR, sid : Win32cr::Foundation::PSID, name : UInt8*, cchName : UInt32*, referenced_domain_name : UInt8*, cchReferencedDomainName : UInt32*, peUse : Win32cr::Security::SID_NAME_USE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LookupAccountSidA(lpSystemName, sid, name, cchName, referenced_domain_name, cchReferencedDomainName, peUse)
+    {% end %}
   end
 
   #def lookupAccountSidW(lpSystemName : Win32cr::Foundation::PWSTR, sid : Win32cr::Foundation::PSID, name : UInt16*, cchName : UInt32*, referenced_domain_name : UInt16*, cchReferencedDomainName : UInt32*, peUse : Win32cr::Security::SID_NAME_USE*) : Win32cr::Foundation::BOOL
@@ -1594,7 +1832,9 @@ module Win32cr::Security
   #end
 
   def lookupAccountNameA(lpSystemName : Win32cr::Foundation::PSTR, lpAccountName : Win32cr::Foundation::PSTR, sid : Win32cr::Foundation::PSID, cbSid : UInt32*, referenced_domain_name : UInt8*, cchReferencedDomainName : UInt32*, peUse : Win32cr::Security::SID_NAME_USE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LookupAccountNameA(lpSystemName, lpAccountName, sid, cbSid, referenced_domain_name, cchReferencedDomainName, peUse)
+    {% end %}
   end
 
   #def lookupAccountNameW(lpSystemName : Win32cr::Foundation::PWSTR, lpAccountName : Win32cr::Foundation::PWSTR, sid : Win32cr::Foundation::PSID, cbSid : UInt32*, referenced_domain_name : UInt16*, cchReferencedDomainName : UInt32*, peUse : Win32cr::Security::SID_NAME_USE*) : Win32cr::Foundation::BOOL
@@ -1602,53 +1842,76 @@ module Win32cr::Security
   #end
 
   def lookupPrivilegeValueA(lpSystemName : Win32cr::Foundation::PSTR, lpName : Win32cr::Foundation::PSTR, lpLuid : Win32cr::Foundation::LUID*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LookupPrivilegeValueA(lpSystemName, lpName, lpLuid)
+    {% end %}
   end
 
   def lookupPrivilegeValueW(lpSystemName : Win32cr::Foundation::PWSTR, lpName : Win32cr::Foundation::PWSTR, lpLuid : Win32cr::Foundation::LUID*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LookupPrivilegeValueW(lpSystemName, lpName, lpLuid)
+    {% end %}
   end
 
   def lookupPrivilegeNameA(lpSystemName : Win32cr::Foundation::PSTR, lpLuid : Win32cr::Foundation::LUID*, lpName : UInt8*, cchName : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LookupPrivilegeNameA(lpSystemName, lpLuid, lpName, cchName)
+    {% end %}
   end
 
   def lookupPrivilegeNameW(lpSystemName : Win32cr::Foundation::PWSTR, lpLuid : Win32cr::Foundation::LUID*, lpName : UInt16*, cchName : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LookupPrivilegeNameW(lpSystemName, lpLuid, lpName, cchName)
+    {% end %}
   end
 
   def lookupPrivilegeDisplayNameA(lpSystemName : Win32cr::Foundation::PSTR, lpName : Win32cr::Foundation::PSTR, lpDisplayName : UInt8*, cchDisplayName : UInt32*, lpLanguageId : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LookupPrivilegeDisplayNameA(lpSystemName, lpName, lpDisplayName, cchDisplayName, lpLanguageId)
+    {% end %}
   end
 
   def lookupPrivilegeDisplayNameW(lpSystemName : Win32cr::Foundation::PWSTR, lpName : Win32cr::Foundation::PWSTR, lpDisplayName : UInt16*, cchDisplayName : UInt32*, lpLanguageId : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LookupPrivilegeDisplayNameW(lpSystemName, lpName, lpDisplayName, cchDisplayName, lpLanguageId)
+    {% end %}
   end
 
   def logonUserA(lpszUsername : Win32cr::Foundation::PSTR, lpszDomain : Win32cr::Foundation::PSTR, lpszPassword : Win32cr::Foundation::PSTR, dwLogonType : Win32cr::Security::LOGON32_LOGON, dwLogonProvider : Win32cr::Security::LOGON32_PROVIDER, phToken : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LogonUserA(lpszUsername, lpszDomain, lpszPassword, dwLogonType, dwLogonProvider, phToken)
+    {% end %}
   end
 
   def logonUserW(lpszUsername : Win32cr::Foundation::PWSTR, lpszDomain : Win32cr::Foundation::PWSTR, lpszPassword : Win32cr::Foundation::PWSTR, dwLogonType : Win32cr::Security::LOGON32_LOGON, dwLogonProvider : Win32cr::Security::LOGON32_PROVIDER, phToken : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LogonUserW(lpszUsername, lpszDomain, lpszPassword, dwLogonType, dwLogonProvider, phToken)
+    {% end %}
   end
 
   def logonUserExA(lpszUsername : Win32cr::Foundation::PSTR, lpszDomain : Win32cr::Foundation::PSTR, lpszPassword : Win32cr::Foundation::PSTR, dwLogonType : Win32cr::Security::LOGON32_LOGON, dwLogonProvider : Win32cr::Security::LOGON32_PROVIDER, phToken : Win32cr::Foundation::HANDLE*, ppLogonSid : Win32cr::Foundation::PSID*, ppProfileBuffer : Void**, pdwProfileLength : UInt32*, pQuotaLimits : Win32cr::Security::QUOTA_LIMITS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LogonUserExA(lpszUsername, lpszDomain, lpszPassword, dwLogonType, dwLogonProvider, phToken, ppLogonSid, ppProfileBuffer, pdwProfileLength, pQuotaLimits)
+    {% end %}
   end
 
   def logonUserExW(lpszUsername : Win32cr::Foundation::PWSTR, lpszDomain : Win32cr::Foundation::PWSTR, lpszPassword : Win32cr::Foundation::PWSTR, dwLogonType : Win32cr::Security::LOGON32_LOGON, dwLogonProvider : Win32cr::Security::LOGON32_PROVIDER, phToken : Win32cr::Foundation::HANDLE*, ppLogonSid : Win32cr::Foundation::PSID*, ppProfileBuffer : Void**, pdwProfileLength : UInt32*, pQuotaLimits : Win32cr::Security::QUOTA_LIMITS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LogonUserExW(lpszUsername, lpszDomain, lpszPassword, dwLogonType, dwLogonProvider, phToken, ppLogonSid, ppProfileBuffer, pdwProfileLength, pQuotaLimits)
+    {% end %}
   end
 
   def rtlConvertSidToUnicodeString(unicode_string : Win32cr::Foundation::UNICODE_STRING*, sid : Win32cr::Foundation::PSID, allocate_destination_string : Win32cr::Foundation::BOOLEAN) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.RtlConvertSidToUnicodeString(unicode_string, sid, allocate_destination_string)
+    {% end %}
   end
 
   @[Link("advapi32")]
   @[Link("kernel32")]
   @[Link("ntdll")]
   @[Link("user32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun AccessCheck(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, client_token : Win32cr::Foundation::HANDLE, desired_access : UInt32, generic_mapping : Win32cr::Security::GENERIC_MAPPING*, privilege_set : Win32cr::Security::PRIVILEGE_SET*, privilege_set_length : UInt32*, granted_access : UInt32*, access_status : Int32*) : Win32cr::Foundation::BOOL
@@ -2052,4 +2315,5 @@ module Win32cr::Security
     fun RtlConvertSidToUnicodeString(unicode_string : Win32cr::Foundation::UNICODE_STRING*, sid : Win32cr::Foundation::PSID, allocate_destination_string : Win32cr::Foundation::BOOLEAN) : Win32cr::Foundation::NTSTATUS
 
   end
+  {% end %}
 end

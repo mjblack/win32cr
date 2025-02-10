@@ -830,7 +830,7 @@ module Win32cr::Media::Audio::DirectMusic
   end
 
   @[Extern]
-  record IDirectMusicVtbl,
+  record IDirectMusicVtable,
     query_interface : Proc(IDirectMusic*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectMusic*, UInt32),
     release : Proc(IDirectMusic*, UInt32),
@@ -846,7 +846,7 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  record IDirectMusic, lpVtbl : IDirectMusicVtbl* do
+  record IDirectMusic, lpVtbl : IDirectMusicVtable* do
     GUID = LibC::GUID.new(0x6536115a_u32, 0x7b2d_u16, 0x11d2_u16, StaticArray[0xba_u8, 0x18_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0xac_u8, 0x12_u8])
     def query_interface(this : IDirectMusic*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -888,7 +888,7 @@ module Win32cr::Media::Audio::DirectMusic
   end
 
   @[Extern]
-  record IDirectMusic8Vtbl,
+  record IDirectMusic8Vtable,
     query_interface : Proc(IDirectMusic8*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectMusic8*, UInt32),
     release : Proc(IDirectMusic8*, UInt32),
@@ -905,7 +905,7 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  record IDirectMusic8, lpVtbl : IDirectMusic8Vtbl* do
+  record IDirectMusic8, lpVtbl : IDirectMusic8Vtable* do
     GUID = LibC::GUID.new(0x2d3629f7_u32, 0x813d_u16, 0x4939_u16, StaticArray[0x85_u8, 0x8_u8, 0xf0_u8, 0x5c_u8, 0x6b_u8, 0x75_u8, 0xfd_u8, 0x97_u8])
     def query_interface(this : IDirectMusic8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -950,7 +950,7 @@ module Win32cr::Media::Audio::DirectMusic
   end
 
   @[Extern]
-  record IDirectMusicBufferVtbl,
+  record IDirectMusicBufferVtable,
     query_interface : Proc(IDirectMusicBuffer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectMusicBuffer*, UInt32),
     release : Proc(IDirectMusicBuffer*, UInt32),
@@ -970,7 +970,7 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  record IDirectMusicBuffer, lpVtbl : IDirectMusicBufferVtbl* do
+  record IDirectMusicBuffer, lpVtbl : IDirectMusicBufferVtable* do
     GUID = LibC::GUID.new(0xd2ac2878_u32, 0xb39b_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x93_u8, 0xb1_u8, 0xbd_u8])
     def query_interface(this : IDirectMusicBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1024,7 +1024,7 @@ module Win32cr::Media::Audio::DirectMusic
   end
 
   @[Extern]
-  record IDirectMusicInstrumentVtbl,
+  record IDirectMusicInstrumentVtable,
     query_interface : Proc(IDirectMusicInstrument*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectMusicInstrument*, UInt32),
     release : Proc(IDirectMusicInstrument*, UInt32),
@@ -1033,7 +1033,7 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  record IDirectMusicInstrument, lpVtbl : IDirectMusicInstrumentVtbl* do
+  record IDirectMusicInstrument, lpVtbl : IDirectMusicInstrumentVtable* do
     GUID = LibC::GUID.new(0xd2ac287d_u32, 0xb39b_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x93_u8, 0xb1_u8, 0xbd_u8])
     def query_interface(this : IDirectMusicInstrument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1054,14 +1054,14 @@ module Win32cr::Media::Audio::DirectMusic
   end
 
   @[Extern]
-  record IDirectMusicDownloadedInstrumentVtbl,
+  record IDirectMusicDownloadedInstrumentVtable,
     query_interface : Proc(IDirectMusicDownloadedInstrument*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectMusicDownloadedInstrument*, UInt32),
     release : Proc(IDirectMusicDownloadedInstrument*, UInt32)
 
 
   @[Extern]
-  record IDirectMusicDownloadedInstrument, lpVtbl : IDirectMusicDownloadedInstrumentVtbl* do
+  record IDirectMusicDownloadedInstrument, lpVtbl : IDirectMusicDownloadedInstrumentVtable* do
     GUID = LibC::GUID.new(0xd2ac287e_u32, 0xb39b_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x93_u8, 0xb1_u8, 0xbd_u8])
     def query_interface(this : IDirectMusicDownloadedInstrument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1076,7 +1076,7 @@ module Win32cr::Media::Audio::DirectMusic
   end
 
   @[Extern]
-  record IDirectMusicCollectionVtbl,
+  record IDirectMusicCollectionVtable,
     query_interface : Proc(IDirectMusicCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectMusicCollection*, UInt32),
     release : Proc(IDirectMusicCollection*, UInt32),
@@ -1085,7 +1085,7 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  record IDirectMusicCollection, lpVtbl : IDirectMusicCollectionVtbl* do
+  record IDirectMusicCollection, lpVtbl : IDirectMusicCollectionVtable* do
     GUID = LibC::GUID.new(0xd2ac287c_u32, 0xb39b_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x93_u8, 0xb1_u8, 0xbd_u8])
     def query_interface(this : IDirectMusicCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1106,7 +1106,7 @@ module Win32cr::Media::Audio::DirectMusic
   end
 
   @[Extern]
-  record IDirectMusicDownloadVtbl,
+  record IDirectMusicDownloadVtable,
     query_interface : Proc(IDirectMusicDownload*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectMusicDownload*, UInt32),
     release : Proc(IDirectMusicDownload*, UInt32),
@@ -1114,7 +1114,7 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  record IDirectMusicDownload, lpVtbl : IDirectMusicDownloadVtbl* do
+  record IDirectMusicDownload, lpVtbl : IDirectMusicDownloadVtable* do
     GUID = LibC::GUID.new(0xd2ac287b_u32, 0xb39b_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x93_u8, 0xb1_u8, 0xbd_u8])
     def query_interface(this : IDirectMusicDownload*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1132,7 +1132,7 @@ module Win32cr::Media::Audio::DirectMusic
   end
 
   @[Extern]
-  record IDirectMusicPortDownloadVtbl,
+  record IDirectMusicPortDownloadVtable,
     query_interface : Proc(IDirectMusicPortDownload*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectMusicPortDownload*, UInt32),
     release : Proc(IDirectMusicPortDownload*, UInt32),
@@ -1145,7 +1145,7 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  record IDirectMusicPortDownload, lpVtbl : IDirectMusicPortDownloadVtbl* do
+  record IDirectMusicPortDownload, lpVtbl : IDirectMusicPortDownloadVtable* do
     GUID = LibC::GUID.new(0xd2ac287a_u32, 0xb39b_u16, 0x11d1_u16, StaticArray[0x87_u8, 0x4_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x93_u8, 0xb1_u8, 0xbd_u8])
     def query_interface(this : IDirectMusicPortDownload*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1178,7 +1178,7 @@ module Win32cr::Media::Audio::DirectMusic
   end
 
   @[Extern]
-  record IDirectMusicPortVtbl,
+  record IDirectMusicPortVtable,
     query_interface : Proc(IDirectMusicPort*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectMusicPort*, UInt32),
     release : Proc(IDirectMusicPort*, UInt32),
@@ -1202,7 +1202,7 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  record IDirectMusicPort, lpVtbl : IDirectMusicPortVtbl* do
+  record IDirectMusicPort, lpVtbl : IDirectMusicPortVtable* do
     GUID = LibC::GUID.new(0x8f2d8c9_u32, 0x37c2_u16, 0x11d2_u16, StaticArray[0xb9_u8, 0xf9_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0xac_u8, 0x12_u8])
     def query_interface(this : IDirectMusicPort*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1268,7 +1268,7 @@ module Win32cr::Media::Audio::DirectMusic
   end
 
   @[Extern]
-  record IDirectMusicThruVtbl,
+  record IDirectMusicThruVtable,
     query_interface : Proc(IDirectMusicThru*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectMusicThru*, UInt32),
     release : Proc(IDirectMusicThru*, UInt32),
@@ -1276,7 +1276,7 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  record IDirectMusicThru, lpVtbl : IDirectMusicThruVtbl* do
+  record IDirectMusicThru, lpVtbl : IDirectMusicThruVtable* do
     GUID = LibC::GUID.new(0xced153e7_u32, 0x3606_u16, 0x11d2_u16, StaticArray[0xb9_u8, 0xf9_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0xac_u8, 0x12_u8])
     def query_interface(this : IDirectMusicThru*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1294,7 +1294,7 @@ module Win32cr::Media::Audio::DirectMusic
   end
 
   @[Extern]
-  record IDirectMusicSynthVtbl,
+  record IDirectMusicSynthVtable,
     query_interface : Proc(IDirectMusicSynth*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectMusicSynth*, UInt32),
     release : Proc(IDirectMusicSynth*, UInt32),
@@ -1318,7 +1318,7 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  record IDirectMusicSynth, lpVtbl : IDirectMusicSynthVtbl* do
+  record IDirectMusicSynth, lpVtbl : IDirectMusicSynthVtable* do
     GUID = LibC::GUID.new(0x9823661_u32, 0x5c85_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xa6_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x24_u8, 0xd8_u8, 0xb6_u8])
     def query_interface(this : IDirectMusicSynth*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1384,7 +1384,7 @@ module Win32cr::Media::Audio::DirectMusic
   end
 
   @[Extern]
-  record IDirectMusicSynth8Vtbl,
+  record IDirectMusicSynth8Vtable,
     query_interface : Proc(IDirectMusicSynth8*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectMusicSynth8*, UInt32),
     release : Proc(IDirectMusicSynth8*, UInt32),
@@ -1413,7 +1413,7 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  record IDirectMusicSynth8, lpVtbl : IDirectMusicSynth8Vtbl* do
+  record IDirectMusicSynth8, lpVtbl : IDirectMusicSynth8Vtable* do
     GUID = LibC::GUID.new(0x53cab625_u32, 0x2711_u16, 0x4c9f_u16, StaticArray[0x9d_u8, 0xe7_u8, 0x1b_u8, 0x7f_u8, 0x92_u8, 0x5f_u8, 0x6f_u8, 0xc8_u8])
     def query_interface(this : IDirectMusicSynth8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1494,7 +1494,7 @@ module Win32cr::Media::Audio::DirectMusic
   end
 
   @[Extern]
-  record IDirectMusicSynthSinkVtbl,
+  record IDirectMusicSynthSinkVtable,
     query_interface : Proc(IDirectMusicSynthSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectMusicSynthSink*, UInt32),
     release : Proc(IDirectMusicSynthSink*, UInt32),
@@ -1509,7 +1509,7 @@ module Win32cr::Media::Audio::DirectMusic
 
 
   @[Extern]
-  record IDirectMusicSynthSink, lpVtbl : IDirectMusicSynthSinkVtbl* do
+  record IDirectMusicSynthSink, lpVtbl : IDirectMusicSynthSinkVtable* do
     GUID = LibC::GUID.new(0x9823663_u32, 0x5c85_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xa6_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x24_u8, 0xd8_u8, 0xb6_u8])
     def query_interface(this : IDirectMusicSynthSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

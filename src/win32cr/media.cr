@@ -202,7 +202,7 @@ module Win32cr::Media
   end
 
   @[Extern]
-  record IReferenceClockVtbl,
+  record IReferenceClockVtable,
     query_interface : Proc(IReferenceClock*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IReferenceClock*, UInt32),
     release : Proc(IReferenceClock*, UInt32),
@@ -213,7 +213,7 @@ module Win32cr::Media
 
 
   @[Extern]
-  record IReferenceClock, lpVtbl : IReferenceClockVtbl* do
+  record IReferenceClock, lpVtbl : IReferenceClockVtable* do
     GUID = LibC::GUID.new(0x56a86897_u32, 0xad4_u16, 0x11ce_u16, StaticArray[0xb0_u8, 0x3a_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xa7_u8, 0x70_u8])
     def query_interface(this : IReferenceClock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -240,7 +240,7 @@ module Win32cr::Media
   end
 
   @[Extern]
-  record IReferenceClockTimerControlVtbl,
+  record IReferenceClockTimerControlVtable,
     query_interface : Proc(IReferenceClockTimerControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IReferenceClockTimerControl*, UInt32),
     release : Proc(IReferenceClockTimerControl*, UInt32),
@@ -249,7 +249,7 @@ module Win32cr::Media
 
 
   @[Extern]
-  record IReferenceClockTimerControl, lpVtbl : IReferenceClockTimerControlVtbl* do
+  record IReferenceClockTimerControl, lpVtbl : IReferenceClockTimerControlVtable* do
     GUID = LibC::GUID.new(0xebec459c_u32, 0x2eca_u16, 0x4d42_u16, StaticArray[0xa8_u8, 0xaf_u8, 0x30_u8, 0xdf_u8, 0x55_u8, 0x76_u8, 0x14_u8, 0xb8_u8])
     def query_interface(this : IReferenceClockTimerControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -270,7 +270,7 @@ module Win32cr::Media
   end
 
   @[Extern]
-  record IReferenceClock2Vtbl,
+  record IReferenceClock2Vtable,
     query_interface : Proc(IReferenceClock2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IReferenceClock2*, UInt32),
     release : Proc(IReferenceClock2*, UInt32),
@@ -281,7 +281,7 @@ module Win32cr::Media
 
 
   @[Extern]
-  record IReferenceClock2, lpVtbl : IReferenceClock2Vtbl* do
+  record IReferenceClock2, lpVtbl : IReferenceClock2Vtable* do
     GUID = LibC::GUID.new(0x36b73885_u32, 0xc2c8_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0x46_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x6c_u8, 0xef_u8, 0x60_u8])
     def query_interface(this : IReferenceClock2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -308,34 +308,49 @@ module Win32cr::Media
   end
 
   def timeGetSystemTime(pmmt : Win32cr::Media::MMTIME*, cbmmt : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.timeGetSystemTime(pmmt, cbmmt)
+    {% end %}
   end
 
   def timeGetTime : UInt32
+    {% if !flag?(:docs) %}
     C.timeGetTime
+    {% end %}
   end
 
   def timeGetDevCaps(ptc : Win32cr::Media::TIMECAPS*, cbtc : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.timeGetDevCaps(ptc, cbtc)
+    {% end %}
   end
 
   def timeBeginPeriod(uPeriod : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.timeBeginPeriod(uPeriod)
+    {% end %}
   end
 
   def timeEndPeriod(uPeriod : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.timeEndPeriod(uPeriod)
+    {% end %}
   end
 
   def timeSetEvent(uDelay : UInt32, uResolution : UInt32, fptc : Win32cr::Media::LPTIMECALLBACK, dwUser : LibC::UIntPtrT, fuEvent : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.timeSetEvent(uDelay, uResolution, fptc, dwUser, fuEvent)
+    {% end %}
   end
 
   def timeKillEvent(uTimerID : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.timeKillEvent(uTimerID)
+    {% end %}
   end
 
   @[Link("winmm")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun timeGetSystemTime(pmmt : Win32cr::Media::MMTIME*, cbmmt : UInt32) : UInt32
@@ -359,4 +374,5 @@ module Win32cr::Media
     fun timeKillEvent(uTimerID : UInt32) : UInt32
 
   end
+  {% end %}
 end

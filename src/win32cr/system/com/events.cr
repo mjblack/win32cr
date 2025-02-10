@@ -35,7 +35,7 @@ module Win32cr::System::Com::Events
   end
 
   @[Extern]
-  record IEventSystemVtbl,
+  record IEventSystemVtable,
     query_interface : Proc(IEventSystem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEventSystem*, UInt32),
     release : Proc(IEventSystem*, UInt32),
@@ -52,7 +52,7 @@ module Win32cr::System::Com::Events
 
 
   @[Extern]
-  record IEventSystem, lpVtbl : IEventSystemVtbl* do
+  record IEventSystem, lpVtbl : IEventSystemVtable* do
     GUID = LibC::GUID.new(0x4e14fb9f_u32, 0x2e22_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
     def query_interface(this : IEventSystem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -97,7 +97,7 @@ module Win32cr::System::Com::Events
   end
 
   @[Extern]
-  record IEventPublisherVtbl,
+  record IEventPublisherVtable,
     query_interface : Proc(IEventPublisher*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEventPublisher*, UInt32),
     release : Proc(IEventPublisher*, UInt32),
@@ -122,7 +122,7 @@ module Win32cr::System::Com::Events
 
 
   @[Extern]
-  record IEventPublisher, lpVtbl : IEventPublisherVtbl* do
+  record IEventPublisher, lpVtbl : IEventPublisherVtable* do
     GUID = LibC::GUID.new(0xe341516b_u32, 0x2e32_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
     def query_interface(this : IEventPublisher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -191,7 +191,7 @@ module Win32cr::System::Com::Events
   end
 
   @[Extern]
-  record IEventClassVtbl,
+  record IEventClassVtable,
     query_interface : Proc(IEventClass*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEventClass*, UInt32),
     release : Proc(IEventClass*, UInt32),
@@ -216,7 +216,7 @@ module Win32cr::System::Com::Events
 
 
   @[Extern]
-  record IEventClass, lpVtbl : IEventClassVtbl* do
+  record IEventClass, lpVtbl : IEventClassVtable* do
     GUID = LibC::GUID.new(0xfb2b72a0_u32, 0x7a68_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xf9_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
     def query_interface(this : IEventClass*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -285,7 +285,7 @@ module Win32cr::System::Com::Events
   end
 
   @[Extern]
-  record IEventClass2Vtbl,
+  record IEventClass2Vtable,
     query_interface : Proc(IEventClass2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEventClass2*, UInt32),
     release : Proc(IEventClass2*, UInt32),
@@ -318,7 +318,7 @@ module Win32cr::System::Com::Events
 
 
   @[Extern]
-  record IEventClass2, lpVtbl : IEventClass2Vtbl* do
+  record IEventClass2, lpVtbl : IEventClass2Vtable* do
     GUID = LibC::GUID.new(0xfb2b72a1_u32, 0x7a68_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xf9_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
     def query_interface(this : IEventClass2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -411,7 +411,7 @@ module Win32cr::System::Com::Events
   end
 
   @[Extern]
-  record IEventSubscriptionVtbl,
+  record IEventSubscriptionVtable,
     query_interface : Proc(IEventSubscription*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEventSubscription*, UInt32),
     release : Proc(IEventSubscription*, UInt32),
@@ -456,7 +456,7 @@ module Win32cr::System::Com::Events
 
 
   @[Extern]
-  record IEventSubscription, lpVtbl : IEventSubscriptionVtbl* do
+  record IEventSubscription, lpVtbl : IEventSubscriptionVtable* do
     GUID = LibC::GUID.new(0x4a6b0e15_u32, 0x2e38_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x65_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
     def query_interface(this : IEventSubscription*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -585,7 +585,7 @@ module Win32cr::System::Com::Events
   end
 
   @[Extern]
-  record IFiringControlVtbl,
+  record IFiringControlVtable,
     query_interface : Proc(IFiringControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFiringControl*, UInt32),
     release : Proc(IFiringControl*, UInt32),
@@ -597,7 +597,7 @@ module Win32cr::System::Com::Events
 
 
   @[Extern]
-  record IFiringControl, lpVtbl : IFiringControlVtbl* do
+  record IFiringControl, lpVtbl : IFiringControlVtable* do
     GUID = LibC::GUID.new(0xe0498c93_u32, 0x4efe_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x71_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
     def query_interface(this : IFiringControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -627,7 +627,7 @@ module Win32cr::System::Com::Events
   end
 
   @[Extern]
-  record IPublisherFilterVtbl,
+  record IPublisherFilterVtable,
     query_interface : Proc(IPublisherFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPublisherFilter*, UInt32),
     release : Proc(IPublisherFilter*, UInt32),
@@ -636,7 +636,7 @@ module Win32cr::System::Com::Events
 
 
   @[Extern]
-  record IPublisherFilter, lpVtbl : IPublisherFilterVtbl* do
+  record IPublisherFilter, lpVtbl : IPublisherFilterVtable* do
     GUID = LibC::GUID.new(0x465e5cc0_u32, 0x7b26_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xfb_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
     def query_interface(this : IPublisherFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -657,7 +657,7 @@ module Win32cr::System::Com::Events
   end
 
   @[Extern]
-  record IMultiInterfacePublisherFilterVtbl,
+  record IMultiInterfacePublisherFilterVtable,
     query_interface : Proc(IMultiInterfacePublisherFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMultiInterfacePublisherFilter*, UInt32),
     release : Proc(IMultiInterfacePublisherFilter*, UInt32),
@@ -666,7 +666,7 @@ module Win32cr::System::Com::Events
 
 
   @[Extern]
-  record IMultiInterfacePublisherFilter, lpVtbl : IMultiInterfacePublisherFilterVtbl* do
+  record IMultiInterfacePublisherFilter, lpVtbl : IMultiInterfacePublisherFilterVtable* do
     GUID = LibC::GUID.new(0x465e5cc1_u32, 0x7b26_u16, 0x11d1_u16, StaticArray[0x88_u8, 0xfb_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xd7_u8, 0x71_u8, 0xbf_u8])
     def query_interface(this : IMultiInterfacePublisherFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -687,7 +687,7 @@ module Win32cr::System::Com::Events
   end
 
   @[Extern]
-  record IEventObjectChangeVtbl,
+  record IEventObjectChangeVtable,
     query_interface : Proc(IEventObjectChange*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEventObjectChange*, UInt32),
     release : Proc(IEventObjectChange*, UInt32),
@@ -697,7 +697,7 @@ module Win32cr::System::Com::Events
 
 
   @[Extern]
-  record IEventObjectChange, lpVtbl : IEventObjectChangeVtbl* do
+  record IEventObjectChange, lpVtbl : IEventObjectChangeVtable* do
     GUID = LibC::GUID.new(0xf4a07d70_u32, 0x2e25_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
     def query_interface(this : IEventObjectChange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -721,7 +721,7 @@ module Win32cr::System::Com::Events
   end
 
   @[Extern]
-  record IEventObjectChange2Vtbl,
+  record IEventObjectChange2Vtable,
     query_interface : Proc(IEventObjectChange2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEventObjectChange2*, UInt32),
     release : Proc(IEventObjectChange2*, UInt32),
@@ -730,7 +730,7 @@ module Win32cr::System::Com::Events
 
 
   @[Extern]
-  record IEventObjectChange2, lpVtbl : IEventObjectChange2Vtbl* do
+  record IEventObjectChange2, lpVtbl : IEventObjectChange2Vtable* do
     GUID = LibC::GUID.new(0x7701a9c3_u32, 0xbd68_u16, 0x438f_u16, StaticArray[0x83_u8, 0xe0_u8, 0x67_u8, 0xbf_u8, 0x4f_u8, 0x53_u8, 0xa4_u8, 0x22_u8])
     def query_interface(this : IEventObjectChange2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -751,7 +751,7 @@ module Win32cr::System::Com::Events
   end
 
   @[Extern]
-  record IEnumEventObjectVtbl,
+  record IEnumEventObjectVtable,
     query_interface : Proc(IEnumEventObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumEventObject*, UInt32),
     release : Proc(IEnumEventObject*, UInt32),
@@ -762,7 +762,7 @@ module Win32cr::System::Com::Events
 
 
   @[Extern]
-  record IEnumEventObject, lpVtbl : IEnumEventObjectVtbl* do
+  record IEnumEventObject, lpVtbl : IEnumEventObjectVtable* do
     GUID = LibC::GUID.new(0xf4a07d63_u32, 0x2e25_u16, 0x11d1_u16, StaticArray[0x99_u8, 0x64_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xbb_u8, 0xb3_u8, 0x45_u8])
     def query_interface(this : IEnumEventObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -789,7 +789,7 @@ module Win32cr::System::Com::Events
   end
 
   @[Extern]
-  record IEventObjectCollectionVtbl,
+  record IEventObjectCollectionVtable,
     query_interface : Proc(IEventObjectCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEventObjectCollection*, UInt32),
     release : Proc(IEventObjectCollection*, UInt32),
@@ -806,7 +806,7 @@ module Win32cr::System::Com::Events
 
 
   @[Extern]
-  record IEventObjectCollection, lpVtbl : IEventObjectCollectionVtbl* do
+  record IEventObjectCollection, lpVtbl : IEventObjectCollectionVtable* do
     GUID = LibC::GUID.new(0xf89ac270_u32, 0xd4eb_u16, 0x11d1_u16, StaticArray[0xb6_u8, 0x82_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc7_u8, 0x92_u8, 0x16_u8])
     def query_interface(this : IEventObjectCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -851,7 +851,7 @@ module Win32cr::System::Com::Events
   end
 
   @[Extern]
-  record IEventPropertyVtbl,
+  record IEventPropertyVtable,
     query_interface : Proc(IEventProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEventProperty*, UInt32),
     release : Proc(IEventProperty*, UInt32),
@@ -866,7 +866,7 @@ module Win32cr::System::Com::Events
 
 
   @[Extern]
-  record IEventProperty, lpVtbl : IEventPropertyVtbl* do
+  record IEventProperty, lpVtbl : IEventPropertyVtable* do
     GUID = LibC::GUID.new(0xda538ee2_u32, 0xf4de_u16, 0x11d1_u16, StaticArray[0xb6_u8, 0xbb_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc7_u8, 0x92_u8, 0x16_u8])
     def query_interface(this : IEventProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -905,7 +905,7 @@ module Win32cr::System::Com::Events
   end
 
   @[Extern]
-  record IEventControlVtbl,
+  record IEventControlVtable,
     query_interface : Proc(IEventControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEventControl*, UInt32),
     release : Proc(IEventControl*, UInt32),
@@ -921,7 +921,7 @@ module Win32cr::System::Com::Events
 
 
   @[Extern]
-  record IEventControl, lpVtbl : IEventControlVtbl* do
+  record IEventControl, lpVtbl : IEventControlVtable* do
     GUID = LibC::GUID.new(0x343e2f4_u32, 0x86f6_u16, 0x11d1_u16, StaticArray[0xb7_u8, 0x60_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x26_u8, 0xaf_u8])
     def query_interface(this : IEventControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -963,7 +963,7 @@ module Win32cr::System::Com::Events
   end
 
   @[Extern]
-  record IMultiInterfaceEventControlVtbl,
+  record IMultiInterfaceEventControlVtable,
     query_interface : Proc(IMultiInterfaceEventControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMultiInterfaceEventControl*, UInt32),
     release : Proc(IMultiInterfaceEventControl*, UInt32),
@@ -977,7 +977,7 @@ module Win32cr::System::Com::Events
 
 
   @[Extern]
-  record IMultiInterfaceEventControl, lpVtbl : IMultiInterfaceEventControlVtbl* do
+  record IMultiInterfaceEventControl, lpVtbl : IMultiInterfaceEventControlVtable* do
     GUID = LibC::GUID.new(0x343e2f5_u32, 0x86f6_u16, 0x11d1_u16, StaticArray[0xb7_u8, 0x60_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x26_u8, 0xaf_u8])
     def query_interface(this : IMultiInterfaceEventControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1013,14 +1013,14 @@ module Win32cr::System::Com::Events
   end
 
   @[Extern]
-  record IDontSupportEventSubscriptionVtbl,
+  record IDontSupportEventSubscriptionVtable,
     query_interface : Proc(IDontSupportEventSubscription*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDontSupportEventSubscription*, UInt32),
     release : Proc(IDontSupportEventSubscription*, UInt32)
 
 
   @[Extern]
-  record IDontSupportEventSubscription, lpVtbl : IDontSupportEventSubscriptionVtbl* do
+  record IDontSupportEventSubscription, lpVtbl : IDontSupportEventSubscriptionVtable* do
     GUID = LibC::GUID.new(0x784121f1_u32, 0x62a6_u16, 0x4b89_u16, StaticArray[0x85_u8, 0x5f_u8, 0xd6_u8, 0x5f_u8, 0x29_u8, 0x6d_u8, 0xe8_u8, 0x3a_u8])
     def query_interface(this : IDontSupportEventSubscription*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

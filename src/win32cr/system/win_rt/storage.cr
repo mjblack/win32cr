@@ -39,7 +39,7 @@ module Win32cr::System::WinRT::Storage
   end
 
   @[Extern]
-  record IRandomAccessStreamFileAccessModeVtbl,
+  record IRandomAccessStreamFileAccessModeVtable,
     query_interface : Proc(IRandomAccessStreamFileAccessMode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRandomAccessStreamFileAccessMode*, UInt32),
     release : Proc(IRandomAccessStreamFileAccessMode*, UInt32),
@@ -47,7 +47,7 @@ module Win32cr::System::WinRT::Storage
 
 
   @[Extern]
-  record IRandomAccessStreamFileAccessMode, lpVtbl : IRandomAccessStreamFileAccessModeVtbl* do
+  record IRandomAccessStreamFileAccessMode, lpVtbl : IRandomAccessStreamFileAccessModeVtable* do
     GUID = LibC::GUID.new(0x332e5848_u32, 0x2e15_u16, 0x458e_u16, StaticArray[0x85_u8, 0xc4_u8, 0xc9_u8, 0x11_u8, 0xc0_u8, 0xc3_u8, 0xd6_u8, 0xf4_u8])
     def query_interface(this : IRandomAccessStreamFileAccessMode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -65,7 +65,7 @@ module Win32cr::System::WinRT::Storage
   end
 
   @[Extern]
-  record IUnbufferedFileHandleOplockCallbackVtbl,
+  record IUnbufferedFileHandleOplockCallbackVtable,
     query_interface : Proc(IUnbufferedFileHandleOplockCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUnbufferedFileHandleOplockCallback*, UInt32),
     release : Proc(IUnbufferedFileHandleOplockCallback*, UInt32),
@@ -73,7 +73,7 @@ module Win32cr::System::WinRT::Storage
 
 
   @[Extern]
-  record IUnbufferedFileHandleOplockCallback, lpVtbl : IUnbufferedFileHandleOplockCallbackVtbl* do
+  record IUnbufferedFileHandleOplockCallback, lpVtbl : IUnbufferedFileHandleOplockCallbackVtable* do
     GUID = LibC::GUID.new(0xd1019a0e_u32, 0x6243_u16, 0x4329_u16, StaticArray[0x84_u8, 0x97_u8, 0x2e_u8, 0x75_u8, 0x89_u8, 0x4d_u8, 0x77_u8, 0x10_u8])
     def query_interface(this : IUnbufferedFileHandleOplockCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -91,7 +91,7 @@ module Win32cr::System::WinRT::Storage
   end
 
   @[Extern]
-  record IUnbufferedFileHandleProviderVtbl,
+  record IUnbufferedFileHandleProviderVtable,
     query_interface : Proc(IUnbufferedFileHandleProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUnbufferedFileHandleProvider*, UInt32),
     release : Proc(IUnbufferedFileHandleProvider*, UInt32),
@@ -100,7 +100,7 @@ module Win32cr::System::WinRT::Storage
 
 
   @[Extern]
-  record IUnbufferedFileHandleProvider, lpVtbl : IUnbufferedFileHandleProviderVtbl* do
+  record IUnbufferedFileHandleProvider, lpVtbl : IUnbufferedFileHandleProviderVtable* do
     GUID = LibC::GUID.new(0xa65c9109_u32, 0x42ab_u16, 0x4b94_u16, StaticArray[0xa7_u8, 0xb1_u8, 0xdd_u8, 0x2e_u8, 0x4e_u8, 0x68_u8, 0x51_u8, 0x5e_u8])
     def query_interface(this : IUnbufferedFileHandleProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -121,7 +121,7 @@ module Win32cr::System::WinRT::Storage
   end
 
   @[Extern]
-  record IOplockBreakingHandlerVtbl,
+  record IOplockBreakingHandlerVtable,
     query_interface : Proc(IOplockBreakingHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOplockBreakingHandler*, UInt32),
     release : Proc(IOplockBreakingHandler*, UInt32),
@@ -129,7 +129,7 @@ module Win32cr::System::WinRT::Storage
 
 
   @[Extern]
-  record IOplockBreakingHandler, lpVtbl : IOplockBreakingHandlerVtbl* do
+  record IOplockBreakingHandler, lpVtbl : IOplockBreakingHandlerVtable* do
     GUID = LibC::GUID.new(0x826abe3d_u32, 0x3acd_u16, 0x47d3_u16, StaticArray[0x84_u8, 0xf2_u8, 0x88_u8, 0xaa_u8, 0xed_u8, 0xcf_u8, 0x63_u8, 0x4_u8])
     def query_interface(this : IOplockBreakingHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -147,7 +147,7 @@ module Win32cr::System::WinRT::Storage
   end
 
   @[Extern]
-  record IStorageItemHandleAccessVtbl,
+  record IStorageItemHandleAccessVtable,
     query_interface : Proc(IStorageItemHandleAccess*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStorageItemHandleAccess*, UInt32),
     release : Proc(IStorageItemHandleAccess*, UInt32),
@@ -155,7 +155,7 @@ module Win32cr::System::WinRT::Storage
 
 
   @[Extern]
-  record IStorageItemHandleAccess, lpVtbl : IStorageItemHandleAccessVtbl* do
+  record IStorageItemHandleAccess, lpVtbl : IStorageItemHandleAccessVtable* do
     GUID = LibC::GUID.new(0x5ca296b2_u32, 0x2c25_u16, 0x4d22_u16, StaticArray[0xb7_u8, 0x85_u8, 0xb8_u8, 0x85_u8, 0xc8_u8, 0x20_u8, 0x1e_u8, 0x6a_u8])
     def query_interface(this : IStorageItemHandleAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -173,7 +173,7 @@ module Win32cr::System::WinRT::Storage
   end
 
   @[Extern]
-  record IStorageFolderHandleAccessVtbl,
+  record IStorageFolderHandleAccessVtable,
     query_interface : Proc(IStorageFolderHandleAccess*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStorageFolderHandleAccess*, UInt32),
     release : Proc(IStorageFolderHandleAccess*, UInt32),
@@ -181,7 +181,7 @@ module Win32cr::System::WinRT::Storage
 
 
   @[Extern]
-  record IStorageFolderHandleAccess, lpVtbl : IStorageFolderHandleAccessVtbl* do
+  record IStorageFolderHandleAccess, lpVtbl : IStorageFolderHandleAccessVtable* do
     GUID = LibC::GUID.new(0xdf19938f_u32, 0x5462_u16, 0x48a0_u16, StaticArray[0xbe_u8, 0x65_u8, 0xd2_u8, 0xa3_u8, 0x27_u8, 0x1a_u8, 0x8_u8, 0xd6_u8])
     def query_interface(this : IStorageFolderHandleAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

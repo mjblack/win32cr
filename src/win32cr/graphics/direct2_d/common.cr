@@ -390,7 +390,7 @@ module Win32cr::Graphics::Direct2D::Common
   end
 
   @[Extern]
-  record ID2D1SimplifiedGeometrySinkVtbl,
+  record ID2D1SimplifiedGeometrySinkVtable,
     query_interface : Proc(ID2D1SimplifiedGeometrySink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1SimplifiedGeometrySink*, UInt32),
     release : Proc(ID2D1SimplifiedGeometrySink*, UInt32),
@@ -404,7 +404,7 @@ module Win32cr::Graphics::Direct2D::Common
 
 
   @[Extern]
-  record ID2D1SimplifiedGeometrySink, lpVtbl : ID2D1SimplifiedGeometrySinkVtbl* do
+  record ID2D1SimplifiedGeometrySink, lpVtbl : ID2D1SimplifiedGeometrySinkVtable* do
     GUID = LibC::GUID.new(0x2cd9069e_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1SimplifiedGeometrySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

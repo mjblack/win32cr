@@ -915,78 +915,115 @@ module Win32cr::Security::WinTrust
   end
 
   def winVerifyTrust(hwnd : Win32cr::Foundation::HWND, pgActionID : LibC::GUID*, pWVTData : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.WinVerifyTrust(hwnd, pgActionID, pWVTData)
+    {% end %}
   end
 
   def winVerifyTrustEx(hwnd : Win32cr::Foundation::HWND, pgActionID : LibC::GUID*, pWinTrustData : Win32cr::Security::WinTrust::WINTRUST_DATA*) : Int32
+    {% if !flag?(:docs) %}
     C.WinVerifyTrustEx(hwnd, pgActionID, pWinTrustData)
+    {% end %}
   end
 
   def wintrustGetRegPolicyFlags(pdwPolicyFlags : Win32cr::Security::WinTrust::WINTRUST_POLICY_FLAGS*) : Void
+    {% if !flag?(:docs) %}
     C.WintrustGetRegPolicyFlags(pdwPolicyFlags)
+    {% end %}
   end
 
   def wintrustSetRegPolicyFlags(dwPolicyFlags : Win32cr::Security::WinTrust::WINTRUST_POLICY_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WintrustSetRegPolicyFlags(dwPolicyFlags)
+    {% end %}
   end
 
   def wintrustAddActionID(pgActionID : LibC::GUID*, fdwFlags : UInt32, psProvInfo : Win32cr::Security::WinTrust::CRYPT_REGISTER_ACTIONID*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WintrustAddActionID(pgActionID, fdwFlags, psProvInfo)
+    {% end %}
   end
 
   def wintrustRemoveActionID(pgActionID : LibC::GUID*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WintrustRemoveActionID(pgActionID)
+    {% end %}
   end
 
   def wintrustLoadFunctionPointers(pgActionID : LibC::GUID*, pPfns : Win32cr::Security::WinTrust::CRYPT_PROVIDER_FUNCTIONS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WintrustLoadFunctionPointers(pgActionID, pPfns)
+    {% end %}
   end
 
   def wintrustAddDefaultForUsage(pszUsageOID : Win32cr::Foundation::PSTR, psDefUsage : Win32cr::Security::WinTrust::CRYPT_PROVIDER_REGDEFUSAGE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WintrustAddDefaultForUsage(pszUsageOID, psDefUsage)
+    {% end %}
   end
 
   def wintrustGetDefaultForUsage(dwAction : Win32cr::Security::WinTrust::WINTRUST_GET_DEFAULT_FOR_USAGE_ACTION, pszUsageOID : Win32cr::Foundation::PSTR, psUsage : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DEFUSAGE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WintrustGetDefaultForUsage(dwAction, pszUsageOID, psUsage)
+    {% end %}
   end
 
   def wTHelperGetProvSignerFromChain(pProvData : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, idxSigner : UInt32, fCounterSigner : Win32cr::Foundation::BOOL, idxCounterSigner : UInt32) : Win32cr::Security::WinTrust::CRYPT_PROVIDER_SGNR*
+    {% if !flag?(:docs) %}
     C.WTHelperGetProvSignerFromChain(pProvData, idxSigner, fCounterSigner, idxCounterSigner)
+    {% end %}
   end
 
   def wTHelperGetProvCertFromChain(pSgnr : Win32cr::Security::WinTrust::CRYPT_PROVIDER_SGNR*, idxCert : UInt32) : Win32cr::Security::WinTrust::CRYPT_PROVIDER_CERT*
+    {% if !flag?(:docs) %}
     C.WTHelperGetProvCertFromChain(pSgnr, idxCert)
+    {% end %}
   end
 
   def wTHelperProvDataFromStateData(hStateData : Win32cr::Foundation::HANDLE) : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*
+    {% if !flag?(:docs) %}
     C.WTHelperProvDataFromStateData(hStateData)
+    {% end %}
   end
 
   def wTHelperGetProvPrivateDataFromChain(pProvData : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*, pgProviderID : LibC::GUID*) : Win32cr::Security::WinTrust::CRYPT_PROVIDER_PRIVDATA*
+    {% if !flag?(:docs) %}
     C.WTHelperGetProvPrivateDataFromChain(pProvData, pgProviderID)
+    {% end %}
   end
 
   def wTHelperCertIsSelfSigned(dwEncoding : UInt32, pCert : Win32cr::Security::Cryptography::CERT_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WTHelperCertIsSelfSigned(dwEncoding, pCert)
+    {% end %}
   end
 
   def wTHelperCertCheckValidSignature(pProvData : Win32cr::Security::WinTrust::CRYPT_PROVIDER_DATA*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WTHelperCertCheckValidSignature(pProvData)
+    {% end %}
   end
 
   def openPersonalTrustDBDialogEx(hwndParent : Win32cr::Foundation::HWND, dwFlags : UInt32, pvReserved : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.OpenPersonalTrustDBDialogEx(hwndParent, dwFlags, pvReserved)
+    {% end %}
   end
 
   def openPersonalTrustDBDialog(hwndParent : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.OpenPersonalTrustDBDialog(hwndParent)
+    {% end %}
   end
 
   def wintrustSetDefaultIncludePEPageHashes(fIncludePEPageHashes : Win32cr::Foundation::BOOL) : Void
+    {% if !flag?(:docs) %}
     C.WintrustSetDefaultIncludePEPageHashes(fIncludePEPageHashes)
+    {% end %}
   end
 
   @[Link("wintrust")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WinVerifyTrust(hwnd : Win32cr::Foundation::HWND, pgActionID : LibC::GUID*, pWVTData : Void*) : Int32
@@ -1043,4 +1080,5 @@ module Win32cr::Security::WinTrust
     fun WintrustSetDefaultIncludePEPageHashes(fIncludePEPageHashes : Win32cr::Foundation::BOOL) : Void
 
   end
+  {% end %}
 end

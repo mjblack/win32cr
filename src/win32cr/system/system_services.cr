@@ -3739,23 +3739,11 @@ module Win32cr::System::SystemServices
     KTMOBJECT_INVALID = 4_i32
   end
 
-  @[Extern]
-  struct TP_POOL
-    def initialize()
-    end
-  end
+  alias TP_POOL = Void
 
-  @[Extern]
-  struct TP_CLEANUP_GROUP
-    def initialize()
-    end
-  end
+  alias TP_CLEANUP_GROUP = Void
 
-  @[Extern]
-  struct TEB
-    def initialize()
-    end
-  end
+  alias TEB = Void
 
   @[Extern]
   struct RemHGLOBAL
@@ -4239,11 +4227,7 @@ module Win32cr::System::SystemServices
     end
   end
 
-  @[Extern]
-  struct AtlThunkData_t
-    def initialize()
-    end
-  end
+  alias AtlThunkData_t = Void
 
   @[Extern]
   struct XSAVE_CET_U_FORMAT
@@ -6756,13 +6740,17 @@ module Win32cr::System::SystemServices
   end
 
   def unregisterDeviceNotification(handle : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnregisterDeviceNotification(handle)
+    {% end %}
   end
 
   @[Link("user32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun UnregisterDeviceNotification(handle : Void*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

@@ -882,7 +882,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITextStoreACPVtbl,
+  record ITextStoreACPVtable,
     query_interface : Proc(ITextStoreACP*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextStoreACP*, UInt32),
     release : Proc(ITextStoreACP*, UInt32),
@@ -915,7 +915,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITextStoreACP, lpVtbl : ITextStoreACPVtbl* do
+  record ITextStoreACP, lpVtbl : ITextStoreACPVtable* do
     GUID = LibC::GUID.new(0x28888fe3_u32, 0xc2a0_u16, 0x483a_u16, StaticArray[0xa3_u8, 0xea_u8, 0x8c_u8, 0xb1_u8, 0xce_u8, 0x51_u8, 0xff_u8, 0x3d_u8])
     def query_interface(this : ITextStoreACP*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1008,7 +1008,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITextStoreACP2Vtbl,
+  record ITextStoreACP2Vtable,
     query_interface : Proc(ITextStoreACP2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextStoreACP2*, UInt32),
     release : Proc(ITextStoreACP2*, UInt32),
@@ -1040,7 +1040,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITextStoreACP2, lpVtbl : ITextStoreACP2Vtbl* do
+  record ITextStoreACP2, lpVtbl : ITextStoreACP2Vtable* do
     GUID = LibC::GUID.new(0xf86ad89f_u32, 0x5fe4_u16, 0x4b8d_u16, StaticArray[0xbb_u8, 0x9f_u8, 0xef_u8, 0x37_u8, 0x97_u8, 0xa8_u8, 0x4f_u8, 0x1f_u8])
     def query_interface(this : ITextStoreACP2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1130,7 +1130,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITextStoreACPSinkVtbl,
+  record ITextStoreACPSinkVtable,
     query_interface : Proc(ITextStoreACPSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextStoreACPSink*, UInt32),
     release : Proc(ITextStoreACPSink*, UInt32),
@@ -1145,7 +1145,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITextStoreACPSink, lpVtbl : ITextStoreACPSinkVtbl* do
+  record ITextStoreACPSink, lpVtbl : ITextStoreACPSinkVtable* do
     GUID = LibC::GUID.new(0x22d44c94_u32, 0xa419_u16, 0x4542_u16, StaticArray[0xa2_u8, 0x72_u8, 0xae_u8, 0x26_u8, 0x9_u8, 0x3e_u8, 0xce_u8, 0xcf_u8])
     def query_interface(this : ITextStoreACPSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1184,7 +1184,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IAnchorVtbl,
+  record IAnchorVtable,
     query_interface : Proc(IAnchor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAnchor*, UInt32),
     release : Proc(IAnchor*, UInt32),
@@ -1202,7 +1202,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IAnchor, lpVtbl : IAnchorVtbl* do
+  record IAnchor, lpVtbl : IAnchorVtable* do
     GUID = LibC::GUID.new(0xfeb7e34_u32, 0x5a60_u16, 0x4356_u16, StaticArray[0x8e_u8, 0xf7_u8, 0xab_u8, 0xde_u8, 0xc2_u8, 0xff_u8, 0x7c_u8, 0xf8_u8])
     def query_interface(this : IAnchor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1250,7 +1250,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITextStoreAnchorVtbl,
+  record ITextStoreAnchorVtable,
     query_interface : Proc(ITextStoreAnchor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextStoreAnchor*, UInt32),
     release : Proc(ITextStoreAnchor*, UInt32),
@@ -1284,7 +1284,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITextStoreAnchor, lpVtbl : ITextStoreAnchorVtbl* do
+  record ITextStoreAnchor, lpVtbl : ITextStoreAnchorVtable* do
     GUID = LibC::GUID.new(0x9b2077b0_u32, 0x5f18_u16, 0x4dec_u16, StaticArray[0xbe_u8, 0xe9_u8, 0x3c_u8, 0xc7_u8, 0x22_u8, 0xf5_u8, 0xdf_u8, 0xe0_u8])
     def query_interface(this : ITextStoreAnchor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1380,7 +1380,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITextStoreAnchorSinkVtbl,
+  record ITextStoreAnchorSinkVtable,
     query_interface : Proc(ITextStoreAnchorSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextStoreAnchorSink*, UInt32),
     release : Proc(ITextStoreAnchorSink*, UInt32),
@@ -1395,7 +1395,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITextStoreAnchorSink, lpVtbl : ITextStoreAnchorSinkVtbl* do
+  record ITextStoreAnchorSink, lpVtbl : ITextStoreAnchorSinkVtable* do
     GUID = LibC::GUID.new(0xaa80e905_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITextStoreAnchorSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1434,7 +1434,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfLangBarMgrVtbl,
+  record ITfLangBarMgrVtable,
     query_interface : Proc(ITfLangBarMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfLangBarMgr*, UInt32),
     release : Proc(ITfLangBarMgr*, UInt32),
@@ -1450,7 +1450,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfLangBarMgr, lpVtbl : ITfLangBarMgrVtbl* do
+  record ITfLangBarMgr, lpVtbl : ITfLangBarMgrVtable* do
     GUID = LibC::GUID.new(0x87955690_u32, 0xe627_u16, 0x11d2_u16, StaticArray[0x8d_u8, 0xdb_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfLangBarMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1492,7 +1492,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfLangBarEventSinkVtbl,
+  record ITfLangBarEventSinkVtable,
     query_interface : Proc(ITfLangBarEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfLangBarEventSink*, UInt32),
     release : Proc(ITfLangBarEventSink*, UInt32),
@@ -1505,7 +1505,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfLangBarEventSink, lpVtbl : ITfLangBarEventSinkVtbl* do
+  record ITfLangBarEventSink, lpVtbl : ITfLangBarEventSinkVtable* do
     GUID = LibC::GUID.new(0x18a4e900_u32, 0xe0ae_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xdd_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfLangBarEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1538,7 +1538,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfLangBarItemSinkVtbl,
+  record ITfLangBarItemSinkVtable,
     query_interface : Proc(ITfLangBarItemSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfLangBarItemSink*, UInt32),
     release : Proc(ITfLangBarItemSink*, UInt32),
@@ -1546,7 +1546,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfLangBarItemSink, lpVtbl : ITfLangBarItemSinkVtbl* do
+  record ITfLangBarItemSink, lpVtbl : ITfLangBarItemSinkVtable* do
     GUID = LibC::GUID.new(0x57dbe1a0_u32, 0xde25_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xdd_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfLangBarItemSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1564,7 +1564,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IEnumTfLangBarItemsVtbl,
+  record IEnumTfLangBarItemsVtable,
     query_interface : Proc(IEnumTfLangBarItems*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTfLangBarItems*, UInt32),
     release : Proc(IEnumTfLangBarItems*, UInt32),
@@ -1575,7 +1575,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IEnumTfLangBarItems, lpVtbl : IEnumTfLangBarItemsVtbl* do
+  record IEnumTfLangBarItems, lpVtbl : IEnumTfLangBarItemsVtable* do
     GUID = LibC::GUID.new(0x583f34d0_u32, 0xde25_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xdd_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : IEnumTfLangBarItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1602,7 +1602,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfLangBarItemMgrVtbl,
+  record ITfLangBarItemMgrVtable,
     query_interface : Proc(ITfLangBarItemMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfLangBarItemMgr*, UInt32),
     release : Proc(ITfLangBarItemMgr*, UInt32),
@@ -1621,7 +1621,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfLangBarItemMgr, lpVtbl : ITfLangBarItemMgrVtbl* do
+  record ITfLangBarItemMgr, lpVtbl : ITfLangBarItemMgrVtable* do
     GUID = LibC::GUID.new(0xba468c55_u32, 0x9956_u16, 0x4fb1_u16, StaticArray[0xa5_u8, 0x9d_u8, 0x52_u8, 0xa7_u8, 0xdd_u8, 0x7c_u8, 0xc6_u8, 0xaa_u8])
     def query_interface(this : ITfLangBarItemMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1672,7 +1672,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfLangBarItemVtbl,
+  record ITfLangBarItemVtable,
     query_interface : Proc(ITfLangBarItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfLangBarItem*, UInt32),
     release : Proc(ITfLangBarItem*, UInt32),
@@ -1683,7 +1683,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfLangBarItem, lpVtbl : ITfLangBarItemVtbl* do
+  record ITfLangBarItem, lpVtbl : ITfLangBarItemVtable* do
     GUID = LibC::GUID.new(0x73540d69_u32, 0xedeb_u16, 0x4ee9_u16, StaticArray[0x96_u8, 0xc9_u8, 0x23_u8, 0xaa_u8, 0x30_u8, 0xb2_u8, 0x59_u8, 0x16_u8])
     def query_interface(this : ITfLangBarItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1710,7 +1710,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfSystemLangBarItemSinkVtbl,
+  record ITfSystemLangBarItemSinkVtable,
     query_interface : Proc(ITfSystemLangBarItemSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfSystemLangBarItemSink*, UInt32),
     release : Proc(ITfSystemLangBarItemSink*, UInt32),
@@ -1719,7 +1719,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfSystemLangBarItemSink, lpVtbl : ITfSystemLangBarItemSinkVtbl* do
+  record ITfSystemLangBarItemSink, lpVtbl : ITfSystemLangBarItemSinkVtable* do
     GUID = LibC::GUID.new(0x1449d9ab_u32, 0x13cf_u16, 0x4687_u16, StaticArray[0xaa_u8, 0x3e_u8, 0x8d_u8, 0x8b_u8, 0x18_u8, 0x57_u8, 0x43_u8, 0x96_u8])
     def query_interface(this : ITfSystemLangBarItemSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1740,7 +1740,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfSystemLangBarItemVtbl,
+  record ITfSystemLangBarItemVtable,
     query_interface : Proc(ITfSystemLangBarItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfSystemLangBarItem*, UInt32),
     release : Proc(ITfSystemLangBarItem*, UInt32),
@@ -1749,7 +1749,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfSystemLangBarItem, lpVtbl : ITfSystemLangBarItemVtbl* do
+  record ITfSystemLangBarItem, lpVtbl : ITfSystemLangBarItemVtable* do
     GUID = LibC::GUID.new(0x1e13e9ec_u32, 0x6b33_u16, 0x4d4a_u16, StaticArray[0xb5_u8, 0xeb_u8, 0x8a_u8, 0x92_u8, 0xf0_u8, 0x29_u8, 0xf3_u8, 0x56_u8])
     def query_interface(this : ITfSystemLangBarItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1770,7 +1770,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfSystemLangBarItemTextVtbl,
+  record ITfSystemLangBarItemTextVtable,
     query_interface : Proc(ITfSystemLangBarItemText*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfSystemLangBarItemText*, UInt32),
     release : Proc(ITfSystemLangBarItemText*, UInt32),
@@ -1779,7 +1779,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfSystemLangBarItemText, lpVtbl : ITfSystemLangBarItemTextVtbl* do
+  record ITfSystemLangBarItemText, lpVtbl : ITfSystemLangBarItemTextVtable* do
     GUID = LibC::GUID.new(0x5c4ce0e5_u32, 0xba49_u16, 0x4b52_u16, StaticArray[0xac_u8, 0x6b_u8, 0x3b_u8, 0x39_u8, 0x7b_u8, 0x4f_u8, 0x70_u8, 0x1f_u8])
     def query_interface(this : ITfSystemLangBarItemText*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1800,7 +1800,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfSystemDeviceTypeLangBarItemVtbl,
+  record ITfSystemDeviceTypeLangBarItemVtable,
     query_interface : Proc(ITfSystemDeviceTypeLangBarItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfSystemDeviceTypeLangBarItem*, UInt32),
     release : Proc(ITfSystemDeviceTypeLangBarItem*, UInt32),
@@ -1809,7 +1809,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfSystemDeviceTypeLangBarItem, lpVtbl : ITfSystemDeviceTypeLangBarItemVtbl* do
+  record ITfSystemDeviceTypeLangBarItem, lpVtbl : ITfSystemDeviceTypeLangBarItemVtable* do
     GUID = LibC::GUID.new(0x45672eb9_u32, 0x9059_u16, 0x46a2_u16, StaticArray[0x83_u8, 0x8d_u8, 0x45_u8, 0x30_u8, 0x35_u8, 0x5f_u8, 0x6a_u8, 0x77_u8])
     def query_interface(this : ITfSystemDeviceTypeLangBarItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1830,7 +1830,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfLangBarItemButtonVtbl,
+  record ITfLangBarItemButtonVtable,
     query_interface : Proc(ITfLangBarItemButton*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfLangBarItemButton*, UInt32),
     release : Proc(ITfLangBarItemButton*, UInt32),
@@ -1846,7 +1846,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfLangBarItemButton, lpVtbl : ITfLangBarItemButtonVtbl* do
+  record ITfLangBarItemButton, lpVtbl : ITfLangBarItemButtonVtable* do
     GUID = LibC::GUID.new(0x28c7f1d0_u32, 0xde25_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xdd_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfLangBarItemButton*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1888,7 +1888,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfLangBarItemBitmapButtonVtbl,
+  record ITfLangBarItemBitmapButtonVtable,
     query_interface : Proc(ITfLangBarItemBitmapButton*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfLangBarItemBitmapButton*, UInt32),
     release : Proc(ITfLangBarItemBitmapButton*, UInt32),
@@ -1905,7 +1905,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfLangBarItemBitmapButton, lpVtbl : ITfLangBarItemBitmapButtonVtbl* do
+  record ITfLangBarItemBitmapButton, lpVtbl : ITfLangBarItemBitmapButtonVtable* do
     GUID = LibC::GUID.new(0xa26a0525_u32, 0x3fae_u16, 0x4fa0_u16, StaticArray[0x89_u8, 0xee_u8, 0x88_u8, 0xa9_u8, 0x64_u8, 0xf9_u8, 0xf1_u8, 0xb5_u8])
     def query_interface(this : ITfLangBarItemBitmapButton*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1950,7 +1950,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfLangBarItemBitmapVtbl,
+  record ITfLangBarItemBitmapVtable,
     query_interface : Proc(ITfLangBarItemBitmap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfLangBarItemBitmap*, UInt32),
     release : Proc(ITfLangBarItemBitmap*, UInt32),
@@ -1964,7 +1964,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfLangBarItemBitmap, lpVtbl : ITfLangBarItemBitmapVtbl* do
+  record ITfLangBarItemBitmap, lpVtbl : ITfLangBarItemBitmapVtable* do
     GUID = LibC::GUID.new(0x73830352_u32, 0xd722_u16, 0x4179_u16, StaticArray[0xad_u8, 0xa5_u8, 0xf0_u8, 0x45_u8, 0xc9_u8, 0x8d_u8, 0xf3_u8, 0x55_u8])
     def query_interface(this : ITfLangBarItemBitmap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2000,7 +2000,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfLangBarItemBalloonVtbl,
+  record ITfLangBarItemBalloonVtable,
     query_interface : Proc(ITfLangBarItemBalloon*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfLangBarItemBalloon*, UInt32),
     release : Proc(ITfLangBarItemBalloon*, UInt32),
@@ -2014,7 +2014,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfLangBarItemBalloon, lpVtbl : ITfLangBarItemBalloonVtbl* do
+  record ITfLangBarItemBalloon, lpVtbl : ITfLangBarItemBalloonVtable* do
     GUID = LibC::GUID.new(0x1c2d285_u32, 0xd3c7_u16, 0x4b7b_u16, StaticArray[0xb5_u8, 0xb5_u8, 0xd9_u8, 0x74_u8, 0x11_u8, 0xd0_u8, 0xc2_u8, 0x83_u8])
     def query_interface(this : ITfLangBarItemBalloon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2050,7 +2050,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfMenuVtbl,
+  record ITfMenuVtable,
     query_interface : Proc(ITfMenu*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfMenu*, UInt32),
     release : Proc(ITfMenu*, UInt32),
@@ -2058,7 +2058,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfMenu, lpVtbl : ITfMenuVtbl* do
+  record ITfMenu, lpVtbl : ITfMenuVtable* do
     GUID = LibC::GUID.new(0x6f8a98e4_u32, 0xaaa0_u16, 0x4f15_u16, StaticArray[0x8c_u8, 0x5b_u8, 0x7_u8, 0xe0_u8, 0xdf_u8, 0xa_u8, 0x3d_u8, 0xd8_u8])
     def query_interface(this : ITfMenu*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2076,7 +2076,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfThreadMgrVtbl,
+  record ITfThreadMgrVtable,
     query_interface : Proc(ITfThreadMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfThreadMgr*, UInt32),
     release : Proc(ITfThreadMgr*, UInt32),
@@ -2094,7 +2094,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfThreadMgr, lpVtbl : ITfThreadMgrVtbl* do
+  record ITfThreadMgr, lpVtbl : ITfThreadMgrVtable* do
     GUID = LibC::GUID.new(0xaa80e801_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfThreadMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2142,7 +2142,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfThreadMgrExVtbl,
+  record ITfThreadMgrExVtable,
     query_interface : Proc(ITfThreadMgrEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfThreadMgrEx*, UInt32),
     release : Proc(ITfThreadMgrEx*, UInt32),
@@ -2162,7 +2162,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfThreadMgrEx, lpVtbl : ITfThreadMgrExVtbl* do
+  record ITfThreadMgrEx, lpVtbl : ITfThreadMgrExVtable* do
     GUID = LibC::GUID.new(0x3e90ade3_u32, 0x7594_u16, 0x4cb0_u16, StaticArray[0xbb_u8, 0x58_u8, 0x69_u8, 0x62_u8, 0x8f_u8, 0x5f_u8, 0x45_u8, 0x8c_u8])
     def query_interface(this : ITfThreadMgrEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2216,7 +2216,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfThreadMgr2Vtbl,
+  record ITfThreadMgr2Vtable,
     query_interface : Proc(ITfThreadMgr2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfThreadMgr2*, UInt32),
     release : Proc(ITfThreadMgr2*, UInt32),
@@ -2237,7 +2237,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfThreadMgr2, lpVtbl : ITfThreadMgr2Vtbl* do
+  record ITfThreadMgr2, lpVtbl : ITfThreadMgr2Vtable* do
     GUID = LibC::GUID.new(0xab198ef_u32, 0x6477_u16, 0x4ee8_u16, StaticArray[0x88_u8, 0x12_u8, 0x67_u8, 0x80_u8, 0xed_u8, 0xb8_u8, 0x2d_u8, 0x5e_u8])
     def query_interface(this : ITfThreadMgr2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2294,7 +2294,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfThreadMgrEventSinkVtbl,
+  record ITfThreadMgrEventSinkVtable,
     query_interface : Proc(ITfThreadMgrEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfThreadMgrEventSink*, UInt32),
     release : Proc(ITfThreadMgrEventSink*, UInt32),
@@ -2306,7 +2306,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfThreadMgrEventSink, lpVtbl : ITfThreadMgrEventSinkVtbl* do
+  record ITfThreadMgrEventSink, lpVtbl : ITfThreadMgrEventSinkVtable* do
     GUID = LibC::GUID.new(0xaa80e80e_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfThreadMgrEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2336,7 +2336,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfConfigureSystemKeystrokeFeedVtbl,
+  record ITfConfigureSystemKeystrokeFeedVtable,
     query_interface : Proc(ITfConfigureSystemKeystrokeFeed*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfConfigureSystemKeystrokeFeed*, UInt32),
     release : Proc(ITfConfigureSystemKeystrokeFeed*, UInt32),
@@ -2345,7 +2345,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfConfigureSystemKeystrokeFeed, lpVtbl : ITfConfigureSystemKeystrokeFeedVtbl* do
+  record ITfConfigureSystemKeystrokeFeed, lpVtbl : ITfConfigureSystemKeystrokeFeedVtable* do
     GUID = LibC::GUID.new(0xd2c969a_u32, 0xbc9c_u16, 0x437c_u16, StaticArray[0x84_u8, 0xee_u8, 0x95_u8, 0x1c_u8, 0x49_u8, 0xb1_u8, 0xa7_u8, 0x64_u8])
     def query_interface(this : ITfConfigureSystemKeystrokeFeed*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2366,7 +2366,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IEnumTfDocumentMgrsVtbl,
+  record IEnumTfDocumentMgrsVtable,
     query_interface : Proc(IEnumTfDocumentMgrs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTfDocumentMgrs*, UInt32),
     release : Proc(IEnumTfDocumentMgrs*, UInt32),
@@ -2377,7 +2377,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IEnumTfDocumentMgrs, lpVtbl : IEnumTfDocumentMgrsVtbl* do
+  record IEnumTfDocumentMgrs, lpVtbl : IEnumTfDocumentMgrsVtable* do
     GUID = LibC::GUID.new(0xaa80e808_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : IEnumTfDocumentMgrs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2404,7 +2404,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfDocumentMgrVtbl,
+  record ITfDocumentMgrVtable,
     query_interface : Proc(ITfDocumentMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfDocumentMgr*, UInt32),
     release : Proc(ITfDocumentMgr*, UInt32),
@@ -2417,7 +2417,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfDocumentMgr, lpVtbl : ITfDocumentMgrVtbl* do
+  record ITfDocumentMgr, lpVtbl : ITfDocumentMgrVtable* do
     GUID = LibC::GUID.new(0xaa80e7f4_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfDocumentMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2450,7 +2450,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IEnumTfContextsVtbl,
+  record IEnumTfContextsVtable,
     query_interface : Proc(IEnumTfContexts*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTfContexts*, UInt32),
     release : Proc(IEnumTfContexts*, UInt32),
@@ -2461,7 +2461,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IEnumTfContexts, lpVtbl : IEnumTfContextsVtbl* do
+  record IEnumTfContexts, lpVtbl : IEnumTfContextsVtable* do
     GUID = LibC::GUID.new(0x8f1a7ea6_u32, 0x1654_u16, 0x4502_u16, StaticArray[0xa8_u8, 0x6e_u8, 0xb2_u8, 0x90_u8, 0x23_u8, 0x44_u8, 0xd5_u8, 0x7_u8])
     def query_interface(this : IEnumTfContexts*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2488,7 +2488,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfCompositionViewVtbl,
+  record ITfCompositionViewVtable,
     query_interface : Proc(ITfCompositionView*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfCompositionView*, UInt32),
     release : Proc(ITfCompositionView*, UInt32),
@@ -2497,7 +2497,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfCompositionView, lpVtbl : ITfCompositionViewVtbl* do
+  record ITfCompositionView, lpVtbl : ITfCompositionViewVtable* do
     GUID = LibC::GUID.new(0xd7540241_u32, 0xf9a1_u16, 0x4364_u16, StaticArray[0xbe_u8, 0xfc_u8, 0xdb_u8, 0xcd_u8, 0x2c_u8, 0x43_u8, 0x95_u8, 0xb7_u8])
     def query_interface(this : ITfCompositionView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2518,7 +2518,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IEnumITfCompositionViewVtbl,
+  record IEnumITfCompositionViewVtable,
     query_interface : Proc(IEnumITfCompositionView*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumITfCompositionView*, UInt32),
     release : Proc(IEnumITfCompositionView*, UInt32),
@@ -2529,7 +2529,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IEnumITfCompositionView, lpVtbl : IEnumITfCompositionViewVtbl* do
+  record IEnumITfCompositionView, lpVtbl : IEnumITfCompositionViewVtable* do
     GUID = LibC::GUID.new(0x5efd22ba_u32, 0x7838_u16, 0x46cb_u16, StaticArray[0x88_u8, 0xe2_u8, 0xca_u8, 0xdb_u8, 0x14_u8, 0x12_u8, 0x4f_u8, 0x8f_u8])
     def query_interface(this : IEnumITfCompositionView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2556,7 +2556,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfCompositionVtbl,
+  record ITfCompositionVtable,
     query_interface : Proc(ITfComposition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfComposition*, UInt32),
     release : Proc(ITfComposition*, UInt32),
@@ -2567,7 +2567,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfComposition, lpVtbl : ITfCompositionVtbl* do
+  record ITfComposition, lpVtbl : ITfCompositionVtable* do
     GUID = LibC::GUID.new(0x20168d64_u32, 0x5a8f_u16, 0x4a5a_u16, StaticArray[0xb7_u8, 0xbd_u8, 0xcf_u8, 0xa2_u8, 0x9f_u8, 0x4d_u8, 0xf_u8, 0xd9_u8])
     def query_interface(this : ITfComposition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2594,7 +2594,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfCompositionSinkVtbl,
+  record ITfCompositionSinkVtable,
     query_interface : Proc(ITfCompositionSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfCompositionSink*, UInt32),
     release : Proc(ITfCompositionSink*, UInt32),
@@ -2602,7 +2602,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfCompositionSink, lpVtbl : ITfCompositionSinkVtbl* do
+  record ITfCompositionSink, lpVtbl : ITfCompositionSinkVtable* do
     GUID = LibC::GUID.new(0xa781718c_u32, 0x579a_u16, 0x4b15_u16, StaticArray[0xa2_u8, 0x80_u8, 0x32_u8, 0xb8_u8, 0x57_u8, 0x7a_u8, 0xcc_u8, 0x5e_u8])
     def query_interface(this : ITfCompositionSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2620,7 +2620,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfContextCompositionVtbl,
+  record ITfContextCompositionVtable,
     query_interface : Proc(ITfContextComposition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfContextComposition*, UInt32),
     release : Proc(ITfContextComposition*, UInt32),
@@ -2631,7 +2631,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfContextComposition, lpVtbl : ITfContextCompositionVtbl* do
+  record ITfContextComposition, lpVtbl : ITfContextCompositionVtable* do
     GUID = LibC::GUID.new(0xd40c8aae_u32, 0xac92_u16, 0x4fc7_u16, StaticArray[0x9a_u8, 0x11_u8, 0xe_u8, 0xe0_u8, 0xe2_u8, 0x3a_u8, 0xa3_u8, 0x9b_u8])
     def query_interface(this : ITfContextComposition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2658,7 +2658,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfContextOwnerCompositionServicesVtbl,
+  record ITfContextOwnerCompositionServicesVtable,
     query_interface : Proc(ITfContextOwnerCompositionServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfContextOwnerCompositionServices*, UInt32),
     release : Proc(ITfContextOwnerCompositionServices*, UInt32),
@@ -2670,7 +2670,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfContextOwnerCompositionServices, lpVtbl : ITfContextOwnerCompositionServicesVtbl* do
+  record ITfContextOwnerCompositionServices, lpVtbl : ITfContextOwnerCompositionServicesVtable* do
     GUID = LibC::GUID.new(0x86462810_u32, 0x593b_u16, 0x4916_u16, StaticArray[0x97_u8, 0x64_u8, 0x19_u8, 0xc0_u8, 0x8e_u8, 0x9c_u8, 0xe1_u8, 0x10_u8])
     def query_interface(this : ITfContextOwnerCompositionServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2700,7 +2700,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfContextOwnerCompositionSinkVtbl,
+  record ITfContextOwnerCompositionSinkVtable,
     query_interface : Proc(ITfContextOwnerCompositionSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfContextOwnerCompositionSink*, UInt32),
     release : Proc(ITfContextOwnerCompositionSink*, UInt32),
@@ -2710,7 +2710,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfContextOwnerCompositionSink, lpVtbl : ITfContextOwnerCompositionSinkVtbl* do
+  record ITfContextOwnerCompositionSink, lpVtbl : ITfContextOwnerCompositionSinkVtable* do
     GUID = LibC::GUID.new(0x5f20aa40_u32, 0xb57a_u16, 0x4f34_u16, StaticArray[0x96_u8, 0xab_u8, 0x35_u8, 0x76_u8, 0xf3_u8, 0x77_u8, 0xcc_u8, 0x79_u8])
     def query_interface(this : ITfContextOwnerCompositionSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2734,7 +2734,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfContextViewVtbl,
+  record ITfContextViewVtable,
     query_interface : Proc(ITfContextView*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfContextView*, UInt32),
     release : Proc(ITfContextView*, UInt32),
@@ -2745,7 +2745,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfContextView, lpVtbl : ITfContextViewVtbl* do
+  record ITfContextView, lpVtbl : ITfContextViewVtable* do
     GUID = LibC::GUID.new(0x2433bf8e_u32, 0xf9b_u16, 0x435c_u16, StaticArray[0xba_u8, 0x2c_u8, 0x18_u8, 0x6_u8, 0x11_u8, 0x97_u8, 0x8c_u8, 0x30_u8])
     def query_interface(this : ITfContextView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2772,7 +2772,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IEnumTfContextViewsVtbl,
+  record IEnumTfContextViewsVtable,
     query_interface : Proc(IEnumTfContextViews*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTfContextViews*, UInt32),
     release : Proc(IEnumTfContextViews*, UInt32),
@@ -2783,7 +2783,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IEnumTfContextViews, lpVtbl : IEnumTfContextViewsVtbl* do
+  record IEnumTfContextViews, lpVtbl : IEnumTfContextViewsVtable* do
     GUID = LibC::GUID.new(0xf0c0f8dd_u32, 0xcf38_u16, 0x44e1_u16, StaticArray[0xbb_u8, 0xf_u8, 0x68_u8, 0xcf_u8, 0xd_u8, 0x55_u8, 0x1c_u8, 0x78_u8])
     def query_interface(this : IEnumTfContextViews*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2810,7 +2810,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfContextVtbl,
+  record ITfContextVtable,
     query_interface : Proc(ITfContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfContext*, UInt32),
     release : Proc(ITfContext*, UInt32),
@@ -2832,7 +2832,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfContext, lpVtbl : ITfContextVtbl* do
+  record ITfContext, lpVtbl : ITfContextVtable* do
     GUID = LibC::GUID.new(0xaa80e7fd_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2892,7 +2892,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfQueryEmbeddedVtbl,
+  record ITfQueryEmbeddedVtable,
     query_interface : Proc(ITfQueryEmbedded*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfQueryEmbedded*, UInt32),
     release : Proc(ITfQueryEmbedded*, UInt32),
@@ -2900,7 +2900,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfQueryEmbedded, lpVtbl : ITfQueryEmbeddedVtbl* do
+  record ITfQueryEmbedded, lpVtbl : ITfQueryEmbeddedVtable* do
     GUID = LibC::GUID.new(0xfab9bdb_u32, 0xd250_u16, 0x4169_u16, StaticArray[0x84_u8, 0xe5_u8, 0x6b_u8, 0xe1_u8, 0x18_u8, 0xfd_u8, 0xd7_u8, 0xa8_u8])
     def query_interface(this : ITfQueryEmbedded*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2918,7 +2918,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfInsertAtSelectionVtbl,
+  record ITfInsertAtSelectionVtable,
     query_interface : Proc(ITfInsertAtSelection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfInsertAtSelection*, UInt32),
     release : Proc(ITfInsertAtSelection*, UInt32),
@@ -2927,7 +2927,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfInsertAtSelection, lpVtbl : ITfInsertAtSelectionVtbl* do
+  record ITfInsertAtSelection, lpVtbl : ITfInsertAtSelectionVtable* do
     GUID = LibC::GUID.new(0x55ce16ba_u32, 0x3014_u16, 0x41c1_u16, StaticArray[0x9c_u8, 0xeb_u8, 0xfa_u8, 0xde_u8, 0x14_u8, 0x46_u8, 0xac_u8, 0x6c_u8])
     def query_interface(this : ITfInsertAtSelection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2948,7 +2948,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfCleanupContextSinkVtbl,
+  record ITfCleanupContextSinkVtable,
     query_interface : Proc(ITfCleanupContextSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfCleanupContextSink*, UInt32),
     release : Proc(ITfCleanupContextSink*, UInt32),
@@ -2956,7 +2956,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfCleanupContextSink, lpVtbl : ITfCleanupContextSinkVtbl* do
+  record ITfCleanupContextSink, lpVtbl : ITfCleanupContextSinkVtable* do
     GUID = LibC::GUID.new(0x1689689_u32, 0x7acb_u16, 0x4e9b_u16, StaticArray[0xab_u8, 0x7c_u8, 0x7e_u8, 0xa4_u8, 0x6b_u8, 0x12_u8, 0xb5_u8, 0x22_u8])
     def query_interface(this : ITfCleanupContextSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2974,7 +2974,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfCleanupContextDurationSinkVtbl,
+  record ITfCleanupContextDurationSinkVtable,
     query_interface : Proc(ITfCleanupContextDurationSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfCleanupContextDurationSink*, UInt32),
     release : Proc(ITfCleanupContextDurationSink*, UInt32),
@@ -2983,7 +2983,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfCleanupContextDurationSink, lpVtbl : ITfCleanupContextDurationSinkVtbl* do
+  record ITfCleanupContextDurationSink, lpVtbl : ITfCleanupContextDurationSinkVtable* do
     GUID = LibC::GUID.new(0x45c35144_u32, 0x154e_u16, 0x4797_u16, StaticArray[0xbe_u8, 0xd8_u8, 0xd3_u8, 0x3a_u8, 0xe7_u8, 0xbf_u8, 0x87_u8, 0x94_u8])
     def query_interface(this : ITfCleanupContextDurationSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3004,7 +3004,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfReadOnlyPropertyVtbl,
+  record ITfReadOnlyPropertyVtable,
     query_interface : Proc(ITfReadOnlyProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfReadOnlyProperty*, UInt32),
     release : Proc(ITfReadOnlyProperty*, UInt32),
@@ -3015,7 +3015,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfReadOnlyProperty, lpVtbl : ITfReadOnlyPropertyVtbl* do
+  record ITfReadOnlyProperty, lpVtbl : ITfReadOnlyPropertyVtable* do
     GUID = LibC::GUID.new(0x17d49a3d_u32, 0xf8b8_u16, 0x4b2f_u16, StaticArray[0xb2_u8, 0x54_u8, 0x52_u8, 0x31_u8, 0x9d_u8, 0xd6_u8, 0x4c_u8, 0x53_u8])
     def query_interface(this : ITfReadOnlyProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3042,7 +3042,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IEnumTfPropertyValueVtbl,
+  record IEnumTfPropertyValueVtable,
     query_interface : Proc(IEnumTfPropertyValue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTfPropertyValue*, UInt32),
     release : Proc(IEnumTfPropertyValue*, UInt32),
@@ -3053,7 +3053,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IEnumTfPropertyValue, lpVtbl : IEnumTfPropertyValueVtbl* do
+  record IEnumTfPropertyValue, lpVtbl : IEnumTfPropertyValueVtable* do
     GUID = LibC::GUID.new(0x8ed8981b_u32, 0x7c10_u16, 0x4d7d_u16, StaticArray[0x9f_u8, 0xb3_u8, 0xab_u8, 0x72_u8, 0xe9_u8, 0xc7_u8, 0x5f_u8, 0x72_u8])
     def query_interface(this : IEnumTfPropertyValue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3080,7 +3080,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfMouseTrackerVtbl,
+  record ITfMouseTrackerVtable,
     query_interface : Proc(ITfMouseTracker*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfMouseTracker*, UInt32),
     release : Proc(ITfMouseTracker*, UInt32),
@@ -3089,7 +3089,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfMouseTracker, lpVtbl : ITfMouseTrackerVtbl* do
+  record ITfMouseTracker, lpVtbl : ITfMouseTrackerVtable* do
     GUID = LibC::GUID.new(0x9d146cd_u32, 0xa544_u16, 0x4132_u16, StaticArray[0x92_u8, 0x5b_u8, 0x7a_u8, 0xfa_u8, 0x8e_u8, 0xf3_u8, 0x22_u8, 0xd0_u8])
     def query_interface(this : ITfMouseTracker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3110,7 +3110,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfMouseTrackerACPVtbl,
+  record ITfMouseTrackerACPVtable,
     query_interface : Proc(ITfMouseTrackerACP*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfMouseTrackerACP*, UInt32),
     release : Proc(ITfMouseTrackerACP*, UInt32),
@@ -3119,7 +3119,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfMouseTrackerACP, lpVtbl : ITfMouseTrackerACPVtbl* do
+  record ITfMouseTrackerACP, lpVtbl : ITfMouseTrackerACPVtable* do
     GUID = LibC::GUID.new(0x3bdd78e2_u32, 0xc16e_u16, 0x47fd_u16, StaticArray[0xb8_u8, 0x83_u8, 0xce_u8, 0x6f_u8, 0xac_u8, 0xc1_u8, 0xa2_u8, 0x8_u8])
     def query_interface(this : ITfMouseTrackerACP*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3140,7 +3140,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfMouseSinkVtbl,
+  record ITfMouseSinkVtable,
     query_interface : Proc(ITfMouseSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfMouseSink*, UInt32),
     release : Proc(ITfMouseSink*, UInt32),
@@ -3148,7 +3148,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfMouseSink, lpVtbl : ITfMouseSinkVtbl* do
+  record ITfMouseSink, lpVtbl : ITfMouseSinkVtable* do
     GUID = LibC::GUID.new(0xa1adaaa2_u32, 0x3a24_u16, 0x449d_u16, StaticArray[0xac_u8, 0x96_u8, 0x51_u8, 0x83_u8, 0xe7_u8, 0xf5_u8, 0xc2_u8, 0x17_u8])
     def query_interface(this : ITfMouseSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3166,7 +3166,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfEditRecordVtbl,
+  record ITfEditRecordVtable,
     query_interface : Proc(ITfEditRecord*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfEditRecord*, UInt32),
     release : Proc(ITfEditRecord*, UInt32),
@@ -3175,7 +3175,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfEditRecord, lpVtbl : ITfEditRecordVtbl* do
+  record ITfEditRecord, lpVtbl : ITfEditRecordVtable* do
     GUID = LibC::GUID.new(0x42d4d099_u32, 0x7c1a_u16, 0x4a89_u16, StaticArray[0xb8_u8, 0x36_u8, 0x6c_u8, 0x6f_u8, 0x22_u8, 0x16_u8, 0xd_u8, 0xf0_u8])
     def query_interface(this : ITfEditRecord*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3196,7 +3196,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfTextEditSinkVtbl,
+  record ITfTextEditSinkVtable,
     query_interface : Proc(ITfTextEditSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfTextEditSink*, UInt32),
     release : Proc(ITfTextEditSink*, UInt32),
@@ -3204,7 +3204,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfTextEditSink, lpVtbl : ITfTextEditSinkVtbl* do
+  record ITfTextEditSink, lpVtbl : ITfTextEditSinkVtable* do
     GUID = LibC::GUID.new(0x8127d409_u32, 0xccd3_u16, 0x4683_u16, StaticArray[0x96_u8, 0x7a_u8, 0xb4_u8, 0x3d_u8, 0x5b_u8, 0x48_u8, 0x2b_u8, 0xf7_u8])
     def query_interface(this : ITfTextEditSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3222,7 +3222,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfTextLayoutSinkVtbl,
+  record ITfTextLayoutSinkVtable,
     query_interface : Proc(ITfTextLayoutSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfTextLayoutSink*, UInt32),
     release : Proc(ITfTextLayoutSink*, UInt32),
@@ -3230,7 +3230,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfTextLayoutSink, lpVtbl : ITfTextLayoutSinkVtbl* do
+  record ITfTextLayoutSink, lpVtbl : ITfTextLayoutSinkVtable* do
     GUID = LibC::GUID.new(0x2af2d06a_u32, 0xdd5b_u16, 0x4927_u16, StaticArray[0xa0_u8, 0xb4_u8, 0x54_u8, 0xf1_u8, 0x9c_u8, 0x91_u8, 0xfa_u8, 0xde_u8])
     def query_interface(this : ITfTextLayoutSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3248,7 +3248,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfStatusSinkVtbl,
+  record ITfStatusSinkVtable,
     query_interface : Proc(ITfStatusSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfStatusSink*, UInt32),
     release : Proc(ITfStatusSink*, UInt32),
@@ -3256,7 +3256,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfStatusSink, lpVtbl : ITfStatusSinkVtbl* do
+  record ITfStatusSink, lpVtbl : ITfStatusSinkVtable* do
     GUID = LibC::GUID.new(0x6b7d8d73_u32, 0xb267_u16, 0x4f69_u16, StaticArray[0xb3_u8, 0x2e_u8, 0x1c_u8, 0xa3_u8, 0x21_u8, 0xce_u8, 0x4f_u8, 0x45_u8])
     def query_interface(this : ITfStatusSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3274,7 +3274,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfEditTransactionSinkVtbl,
+  record ITfEditTransactionSinkVtable,
     query_interface : Proc(ITfEditTransactionSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfEditTransactionSink*, UInt32),
     release : Proc(ITfEditTransactionSink*, UInt32),
@@ -3283,7 +3283,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfEditTransactionSink, lpVtbl : ITfEditTransactionSinkVtbl* do
+  record ITfEditTransactionSink, lpVtbl : ITfEditTransactionSinkVtable* do
     GUID = LibC::GUID.new(0x708fbf70_u32, 0xb520_u16, 0x416b_u16, StaticArray[0xb0_u8, 0x6c_u8, 0x2c_u8, 0x41_u8, 0xab_u8, 0x44_u8, 0xf8_u8, 0xba_u8])
     def query_interface(this : ITfEditTransactionSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3304,7 +3304,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfContextOwnerVtbl,
+  record ITfContextOwnerVtable,
     query_interface : Proc(ITfContextOwner*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfContextOwner*, UInt32),
     release : Proc(ITfContextOwner*, UInt32),
@@ -3317,7 +3317,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfContextOwner, lpVtbl : ITfContextOwnerVtbl* do
+  record ITfContextOwner, lpVtbl : ITfContextOwnerVtable* do
     GUID = LibC::GUID.new(0xaa80e80c_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfContextOwner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3350,7 +3350,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfContextOwnerServicesVtbl,
+  record ITfContextOwnerServicesVtable,
     query_interface : Proc(ITfContextOwnerServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfContextOwnerServices*, UInt32),
     release : Proc(ITfContextOwnerServices*, UInt32),
@@ -3364,7 +3364,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfContextOwnerServices, lpVtbl : ITfContextOwnerServicesVtbl* do
+  record ITfContextOwnerServices, lpVtbl : ITfContextOwnerServicesVtable* do
     GUID = LibC::GUID.new(0xb23eb630_u32, 0x3e1c_u16, 0x11d3_u16, StaticArray[0xa7_u8, 0x45_u8, 0x0_u8, 0x50_u8, 0x4_u8, 0xa_u8, 0xb4_u8, 0x7_u8])
     def query_interface(this : ITfContextOwnerServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3400,7 +3400,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfContextKeyEventSinkVtbl,
+  record ITfContextKeyEventSinkVtable,
     query_interface : Proc(ITfContextKeyEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfContextKeyEventSink*, UInt32),
     release : Proc(ITfContextKeyEventSink*, UInt32),
@@ -3411,7 +3411,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfContextKeyEventSink, lpVtbl : ITfContextKeyEventSinkVtbl* do
+  record ITfContextKeyEventSink, lpVtbl : ITfContextKeyEventSinkVtable* do
     GUID = LibC::GUID.new(0x552ba5d_u32, 0xc835_u16, 0x4934_u16, StaticArray[0xbf_u8, 0x50_u8, 0x84_u8, 0x6a_u8, 0xaa_u8, 0x67_u8, 0x43_u8, 0x2f_u8])
     def query_interface(this : ITfContextKeyEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3438,7 +3438,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfEditSessionVtbl,
+  record ITfEditSessionVtable,
     query_interface : Proc(ITfEditSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfEditSession*, UInt32),
     release : Proc(ITfEditSession*, UInt32),
@@ -3446,7 +3446,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfEditSession, lpVtbl : ITfEditSessionVtbl* do
+  record ITfEditSession, lpVtbl : ITfEditSessionVtable* do
     GUID = LibC::GUID.new(0xaa80e803_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfEditSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3464,7 +3464,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfRangeVtbl,
+  record ITfRangeVtable,
     query_interface : Proc(ITfRange*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfRange*, UInt32),
     release : Proc(ITfRange*, UInt32),
@@ -3493,7 +3493,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfRange, lpVtbl : ITfRangeVtbl* do
+  record ITfRange, lpVtbl : ITfRangeVtable* do
     GUID = LibC::GUID.new(0xaa80e7ff_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfRange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3574,7 +3574,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfRangeACPVtbl,
+  record ITfRangeACPVtable,
     query_interface : Proc(ITfRangeACP*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfRangeACP*, UInt32),
     release : Proc(ITfRangeACP*, UInt32),
@@ -3605,7 +3605,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfRangeACP, lpVtbl : ITfRangeACPVtbl* do
+  record ITfRangeACP, lpVtbl : ITfRangeACPVtable* do
     GUID = LibC::GUID.new(0x57a6296_u32, 0x29b_u16, 0x4154_u16, StaticArray[0xb7_u8, 0x9a_u8, 0xd_u8, 0x46_u8, 0x1d_u8, 0x4e_u8, 0xa9_u8, 0x4c_u8])
     def query_interface(this : ITfRangeACP*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3692,7 +3692,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITextStoreACPServicesVtbl,
+  record ITextStoreACPServicesVtable,
     query_interface : Proc(ITextStoreACPServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextStoreACPServices*, UInt32),
     release : Proc(ITextStoreACPServices*, UInt32),
@@ -3703,7 +3703,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITextStoreACPServices, lpVtbl : ITextStoreACPServicesVtbl* do
+  record ITextStoreACPServices, lpVtbl : ITextStoreACPServicesVtable* do
     GUID = LibC::GUID.new(0xaa80e901_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITextStoreACPServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3730,7 +3730,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfRangeBackupVtbl,
+  record ITfRangeBackupVtable,
     query_interface : Proc(ITfRangeBackup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfRangeBackup*, UInt32),
     release : Proc(ITfRangeBackup*, UInt32),
@@ -3738,7 +3738,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfRangeBackup, lpVtbl : ITfRangeBackupVtbl* do
+  record ITfRangeBackup, lpVtbl : ITfRangeBackupVtable* do
     GUID = LibC::GUID.new(0x463a506d_u32, 0x6992_u16, 0x49d2_u16, StaticArray[0x9b_u8, 0x88_u8, 0x93_u8, 0xd5_u8, 0x5e_u8, 0x70_u8, 0xbb_u8, 0x16_u8])
     def query_interface(this : ITfRangeBackup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3756,7 +3756,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfPropertyStoreVtbl,
+  record ITfPropertyStoreVtable,
     query_interface : Proc(ITfPropertyStore*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfPropertyStore*, UInt32),
     release : Proc(ITfPropertyStore*, UInt32),
@@ -3772,7 +3772,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfPropertyStore, lpVtbl : ITfPropertyStoreVtbl* do
+  record ITfPropertyStore, lpVtbl : ITfPropertyStoreVtable* do
     GUID = LibC::GUID.new(0x6834b120_u32, 0x88cb_u16, 0x11d2_u16, StaticArray[0xbf_u8, 0x45_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfPropertyStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3814,7 +3814,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IEnumTfRangesVtbl,
+  record IEnumTfRangesVtable,
     query_interface : Proc(IEnumTfRanges*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTfRanges*, UInt32),
     release : Proc(IEnumTfRanges*, UInt32),
@@ -3825,7 +3825,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IEnumTfRanges, lpVtbl : IEnumTfRangesVtbl* do
+  record IEnumTfRanges, lpVtbl : IEnumTfRangesVtable* do
     GUID = LibC::GUID.new(0xf99d3f40_u32, 0x8e32_u16, 0x11d2_u16, StaticArray[0xbf_u8, 0x46_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : IEnumTfRanges*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3852,7 +3852,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfCreatePropertyStoreVtbl,
+  record ITfCreatePropertyStoreVtable,
     query_interface : Proc(ITfCreatePropertyStore*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfCreatePropertyStore*, UInt32),
     release : Proc(ITfCreatePropertyStore*, UInt32),
@@ -3861,7 +3861,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfCreatePropertyStore, lpVtbl : ITfCreatePropertyStoreVtbl* do
+  record ITfCreatePropertyStore, lpVtbl : ITfCreatePropertyStoreVtable* do
     GUID = LibC::GUID.new(0x2463fbf0_u32, 0xb0af_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xc5_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfCreatePropertyStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3882,7 +3882,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfPersistentPropertyLoaderACPVtbl,
+  record ITfPersistentPropertyLoaderACPVtable,
     query_interface : Proc(ITfPersistentPropertyLoaderACP*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfPersistentPropertyLoaderACP*, UInt32),
     release : Proc(ITfPersistentPropertyLoaderACP*, UInt32),
@@ -3890,7 +3890,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfPersistentPropertyLoaderACP, lpVtbl : ITfPersistentPropertyLoaderACPVtbl* do
+  record ITfPersistentPropertyLoaderACP, lpVtbl : ITfPersistentPropertyLoaderACPVtable* do
     GUID = LibC::GUID.new(0x4ef89150_u32, 0x807_u16, 0x11d3_u16, StaticArray[0x8d_u8, 0xf0_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfPersistentPropertyLoaderACP*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3908,7 +3908,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfPropertyVtbl,
+  record ITfPropertyVtable,
     query_interface : Proc(ITfProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfProperty*, UInt32),
     release : Proc(ITfProperty*, UInt32),
@@ -3923,7 +3923,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfProperty, lpVtbl : ITfPropertyVtbl* do
+  record ITfProperty, lpVtbl : ITfPropertyVtable* do
     GUID = LibC::GUID.new(0xe2449660_u32, 0x9542_u16, 0x11d2_u16, StaticArray[0xbf_u8, 0x46_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3962,7 +3962,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IEnumTfPropertiesVtbl,
+  record IEnumTfPropertiesVtable,
     query_interface : Proc(IEnumTfProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTfProperties*, UInt32),
     release : Proc(IEnumTfProperties*, UInt32),
@@ -3973,7 +3973,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IEnumTfProperties, lpVtbl : IEnumTfPropertiesVtbl* do
+  record IEnumTfProperties, lpVtbl : IEnumTfPropertiesVtable* do
     GUID = LibC::GUID.new(0x19188cb0_u32, 0xaca9_u16, 0x11d2_u16, StaticArray[0xaf_u8, 0xc5_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : IEnumTfProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4000,7 +4000,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfCompartmentVtbl,
+  record ITfCompartmentVtable,
     query_interface : Proc(ITfCompartment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfCompartment*, UInt32),
     release : Proc(ITfCompartment*, UInt32),
@@ -4009,7 +4009,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfCompartment, lpVtbl : ITfCompartmentVtbl* do
+  record ITfCompartment, lpVtbl : ITfCompartmentVtable* do
     GUID = LibC::GUID.new(0xbb08f7a9_u32, 0x607a_u16, 0x4384_u16, StaticArray[0x86_u8, 0x23_u8, 0x5_u8, 0x68_u8, 0x92_u8, 0xb6_u8, 0x43_u8, 0x71_u8])
     def query_interface(this : ITfCompartment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4030,7 +4030,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfCompartmentEventSinkVtbl,
+  record ITfCompartmentEventSinkVtable,
     query_interface : Proc(ITfCompartmentEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfCompartmentEventSink*, UInt32),
     release : Proc(ITfCompartmentEventSink*, UInt32),
@@ -4038,7 +4038,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfCompartmentEventSink, lpVtbl : ITfCompartmentEventSinkVtbl* do
+  record ITfCompartmentEventSink, lpVtbl : ITfCompartmentEventSinkVtable* do
     GUID = LibC::GUID.new(0x743abd5f_u32, 0xf26d_u16, 0x48df_u16, StaticArray[0x8c_u8, 0xc5_u8, 0x23_u8, 0x84_u8, 0x92_u8, 0x41_u8, 0x9b_u8, 0x64_u8])
     def query_interface(this : ITfCompartmentEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4056,7 +4056,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfCompartmentMgrVtbl,
+  record ITfCompartmentMgrVtable,
     query_interface : Proc(ITfCompartmentMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfCompartmentMgr*, UInt32),
     release : Proc(ITfCompartmentMgr*, UInt32),
@@ -4066,7 +4066,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfCompartmentMgr, lpVtbl : ITfCompartmentMgrVtbl* do
+  record ITfCompartmentMgr, lpVtbl : ITfCompartmentMgrVtable* do
     GUID = LibC::GUID.new(0x7dcf57ac_u32, 0x18ad_u16, 0x438b_u16, StaticArray[0x82_u8, 0x4d_u8, 0x97_u8, 0x9b_u8, 0xff_u8, 0xb7_u8, 0x4b_u8, 0x7c_u8])
     def query_interface(this : ITfCompartmentMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4090,7 +4090,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFunctionVtbl,
+  record ITfFunctionVtable,
     query_interface : Proc(ITfFunction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFunction*, UInt32),
     release : Proc(ITfFunction*, UInt32),
@@ -4098,7 +4098,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFunction, lpVtbl : ITfFunctionVtbl* do
+  record ITfFunction, lpVtbl : ITfFunctionVtable* do
     GUID = LibC::GUID.new(0xdb593490_u32, 0x98f_u16, 0x11d3_u16, StaticArray[0x8d_u8, 0xf0_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfFunction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4116,7 +4116,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFunctionProviderVtbl,
+  record ITfFunctionProviderVtable,
     query_interface : Proc(ITfFunctionProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFunctionProvider*, UInt32),
     release : Proc(ITfFunctionProvider*, UInt32),
@@ -4126,7 +4126,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFunctionProvider, lpVtbl : ITfFunctionProviderVtbl* do
+  record ITfFunctionProvider, lpVtbl : ITfFunctionProviderVtable* do
     GUID = LibC::GUID.new(0x101d6610_u32, 0x990_u16, 0x11d3_u16, StaticArray[0x8d_u8, 0xf0_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfFunctionProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4150,7 +4150,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IEnumTfFunctionProvidersVtbl,
+  record IEnumTfFunctionProvidersVtable,
     query_interface : Proc(IEnumTfFunctionProviders*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTfFunctionProviders*, UInt32),
     release : Proc(IEnumTfFunctionProviders*, UInt32),
@@ -4161,7 +4161,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IEnumTfFunctionProviders, lpVtbl : IEnumTfFunctionProvidersVtbl* do
+  record IEnumTfFunctionProviders, lpVtbl : IEnumTfFunctionProvidersVtable* do
     GUID = LibC::GUID.new(0xe4b24db0_u32, 0x990_u16, 0x11d3_u16, StaticArray[0x8d_u8, 0xf0_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : IEnumTfFunctionProviders*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4188,7 +4188,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfInputProcessorProfilesVtbl,
+  record ITfInputProcessorProfilesVtable,
     query_interface : Proc(ITfInputProcessorProfiles*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfInputProcessorProfiles*, UInt32),
     release : Proc(ITfInputProcessorProfiles*, UInt32),
@@ -4213,7 +4213,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfInputProcessorProfiles, lpVtbl : ITfInputProcessorProfilesVtbl* do
+  record ITfInputProcessorProfiles, lpVtbl : ITfInputProcessorProfilesVtable* do
     GUID = LibC::GUID.new(0x1f02b6c5_u32, 0x7842_u16, 0x4ee6_u16, StaticArray[0x8a_u8, 0xb_u8, 0x9a_u8, 0x24_u8, 0x18_u8, 0x3a_u8, 0x95_u8, 0xca_u8])
     def query_interface(this : ITfInputProcessorProfiles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4282,7 +4282,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfInputProcessorProfilesExVtbl,
+  record ITfInputProcessorProfilesExVtable,
     query_interface : Proc(ITfInputProcessorProfilesEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfInputProcessorProfilesEx*, UInt32),
     release : Proc(ITfInputProcessorProfilesEx*, UInt32),
@@ -4308,7 +4308,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfInputProcessorProfilesEx, lpVtbl : ITfInputProcessorProfilesExVtbl* do
+  record ITfInputProcessorProfilesEx, lpVtbl : ITfInputProcessorProfilesExVtable* do
     GUID = LibC::GUID.new(0x892f230f_u32, 0xfe00_u16, 0x4a41_u16, StaticArray[0xa9_u8, 0x8e_u8, 0xfc_u8, 0xd6_u8, 0xde_u8, 0xd_u8, 0x35_u8, 0xef_u8])
     def query_interface(this : ITfInputProcessorProfilesEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4380,7 +4380,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfInputProcessorProfileSubstituteLayoutVtbl,
+  record ITfInputProcessorProfileSubstituteLayoutVtable,
     query_interface : Proc(ITfInputProcessorProfileSubstituteLayout*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfInputProcessorProfileSubstituteLayout*, UInt32),
     release : Proc(ITfInputProcessorProfileSubstituteLayout*, UInt32),
@@ -4388,7 +4388,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfInputProcessorProfileSubstituteLayout, lpVtbl : ITfInputProcessorProfileSubstituteLayoutVtbl* do
+  record ITfInputProcessorProfileSubstituteLayout, lpVtbl : ITfInputProcessorProfileSubstituteLayoutVtable* do
     GUID = LibC::GUID.new(0x4fd67194_u32, 0x1002_u16, 0x4513_u16, StaticArray[0xbf_u8, 0xf2_u8, 0xc0_u8, 0xdd_u8, 0xf6_u8, 0x25_u8, 0x85_u8, 0x52_u8])
     def query_interface(this : ITfInputProcessorProfileSubstituteLayout*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4406,7 +4406,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfActiveLanguageProfileNotifySinkVtbl,
+  record ITfActiveLanguageProfileNotifySinkVtable,
     query_interface : Proc(ITfActiveLanguageProfileNotifySink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfActiveLanguageProfileNotifySink*, UInt32),
     release : Proc(ITfActiveLanguageProfileNotifySink*, UInt32),
@@ -4414,7 +4414,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfActiveLanguageProfileNotifySink, lpVtbl : ITfActiveLanguageProfileNotifySinkVtbl* do
+  record ITfActiveLanguageProfileNotifySink, lpVtbl : ITfActiveLanguageProfileNotifySinkVtable* do
     GUID = LibC::GUID.new(0xb246cb75_u32, 0xa93e_u16, 0x4652_u16, StaticArray[0xbf_u8, 0x8c_u8, 0xb3_u8, 0xfe_u8, 0xc_u8, 0xfd_u8, 0x7e_u8, 0x57_u8])
     def query_interface(this : ITfActiveLanguageProfileNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4432,7 +4432,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IEnumTfLanguageProfilesVtbl,
+  record IEnumTfLanguageProfilesVtable,
     query_interface : Proc(IEnumTfLanguageProfiles*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTfLanguageProfiles*, UInt32),
     release : Proc(IEnumTfLanguageProfiles*, UInt32),
@@ -4443,7 +4443,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IEnumTfLanguageProfiles, lpVtbl : IEnumTfLanguageProfilesVtbl* do
+  record IEnumTfLanguageProfiles, lpVtbl : IEnumTfLanguageProfilesVtable* do
     GUID = LibC::GUID.new(0x3d61bf11_u32, 0xac5f_u16, 0x42c8_u16, StaticArray[0xa4_u8, 0xcb_u8, 0x93_u8, 0x1b_u8, 0xcc_u8, 0x28_u8, 0xc7_u8, 0x44_u8])
     def query_interface(this : IEnumTfLanguageProfiles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4470,7 +4470,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfLanguageProfileNotifySinkVtbl,
+  record ITfLanguageProfileNotifySinkVtable,
     query_interface : Proc(ITfLanguageProfileNotifySink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfLanguageProfileNotifySink*, UInt32),
     release : Proc(ITfLanguageProfileNotifySink*, UInt32),
@@ -4479,7 +4479,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfLanguageProfileNotifySink, lpVtbl : ITfLanguageProfileNotifySinkVtbl* do
+  record ITfLanguageProfileNotifySink, lpVtbl : ITfLanguageProfileNotifySinkVtable* do
     GUID = LibC::GUID.new(0x43c9fe15_u32, 0xf494_u16, 0x4c17_u16, StaticArray[0x9d_u8, 0xe2_u8, 0xb8_u8, 0xa4_u8, 0xac_u8, 0x35_u8, 0xa_u8, 0xa8_u8])
     def query_interface(this : ITfLanguageProfileNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4500,7 +4500,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfInputProcessorProfileMgrVtbl,
+  record ITfInputProcessorProfileMgrVtable,
     query_interface : Proc(ITfInputProcessorProfileMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfInputProcessorProfileMgr*, UInt32),
     release : Proc(ITfInputProcessorProfileMgr*, UInt32),
@@ -4515,7 +4515,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfInputProcessorProfileMgr, lpVtbl : ITfInputProcessorProfileMgrVtbl* do
+  record ITfInputProcessorProfileMgr, lpVtbl : ITfInputProcessorProfileMgrVtable* do
     GUID = LibC::GUID.new(0x71c6e74c_u32, 0xf28_u16, 0x11d8_u16, StaticArray[0xa8_u8, 0x2a_u8, 0x0_u8, 0x6_u8, 0x5b_u8, 0x84_u8, 0x43_u8, 0x5c_u8])
     def query_interface(this : ITfInputProcessorProfileMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4554,7 +4554,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IEnumTfInputProcessorProfilesVtbl,
+  record IEnumTfInputProcessorProfilesVtable,
     query_interface : Proc(IEnumTfInputProcessorProfiles*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTfInputProcessorProfiles*, UInt32),
     release : Proc(IEnumTfInputProcessorProfiles*, UInt32),
@@ -4565,7 +4565,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IEnumTfInputProcessorProfiles, lpVtbl : IEnumTfInputProcessorProfilesVtbl* do
+  record IEnumTfInputProcessorProfiles, lpVtbl : IEnumTfInputProcessorProfilesVtable* do
     GUID = LibC::GUID.new(0x71c6e74d_u32, 0xf28_u16, 0x11d8_u16, StaticArray[0xa8_u8, 0x2a_u8, 0x0_u8, 0x6_u8, 0x5b_u8, 0x84_u8, 0x43_u8, 0x5c_u8])
     def query_interface(this : IEnumTfInputProcessorProfiles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4592,7 +4592,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfInputProcessorProfileActivationSinkVtbl,
+  record ITfInputProcessorProfileActivationSinkVtable,
     query_interface : Proc(ITfInputProcessorProfileActivationSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfInputProcessorProfileActivationSink*, UInt32),
     release : Proc(ITfInputProcessorProfileActivationSink*, UInt32),
@@ -4600,7 +4600,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfInputProcessorProfileActivationSink, lpVtbl : ITfInputProcessorProfileActivationSinkVtbl* do
+  record ITfInputProcessorProfileActivationSink, lpVtbl : ITfInputProcessorProfileActivationSinkVtable* do
     GUID = LibC::GUID.new(0x71c6e74e_u32, 0xf28_u16, 0x11d8_u16, StaticArray[0xa8_u8, 0x2a_u8, 0x0_u8, 0x6_u8, 0x5b_u8, 0x84_u8, 0x43_u8, 0x5c_u8])
     def query_interface(this : ITfInputProcessorProfileActivationSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4618,7 +4618,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfKeystrokeMgrVtbl,
+  record ITfKeystrokeMgrVtable,
     query_interface : Proc(ITfKeystrokeMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfKeystrokeMgr*, UInt32),
     release : Proc(ITfKeystrokeMgr*, UInt32),
@@ -4639,7 +4639,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfKeystrokeMgr, lpVtbl : ITfKeystrokeMgrVtbl* do
+  record ITfKeystrokeMgr, lpVtbl : ITfKeystrokeMgrVtable* do
     GUID = LibC::GUID.new(0xaa80e7f0_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfKeystrokeMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4696,7 +4696,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfKeyEventSinkVtbl,
+  record ITfKeyEventSinkVtable,
     query_interface : Proc(ITfKeyEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfKeyEventSink*, UInt32),
     release : Proc(ITfKeyEventSink*, UInt32),
@@ -4709,7 +4709,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfKeyEventSink, lpVtbl : ITfKeyEventSinkVtbl* do
+  record ITfKeyEventSink, lpVtbl : ITfKeyEventSinkVtable* do
     GUID = LibC::GUID.new(0xaa80e7f5_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfKeyEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4742,7 +4742,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfKeyTraceEventSinkVtbl,
+  record ITfKeyTraceEventSinkVtable,
     query_interface : Proc(ITfKeyTraceEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfKeyTraceEventSink*, UInt32),
     release : Proc(ITfKeyTraceEventSink*, UInt32),
@@ -4751,7 +4751,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfKeyTraceEventSink, lpVtbl : ITfKeyTraceEventSinkVtbl* do
+  record ITfKeyTraceEventSink, lpVtbl : ITfKeyTraceEventSinkVtable* do
     GUID = LibC::GUID.new(0x1cd4c13b_u32, 0x1c36_u16, 0x4191_u16, StaticArray[0xa7_u8, 0xa_u8, 0x7f_u8, 0x3e_u8, 0x61_u8, 0x1f_u8, 0x36_u8, 0x7d_u8])
     def query_interface(this : ITfKeyTraceEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4772,7 +4772,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfPreservedKeyNotifySinkVtbl,
+  record ITfPreservedKeyNotifySinkVtable,
     query_interface : Proc(ITfPreservedKeyNotifySink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfPreservedKeyNotifySink*, UInt32),
     release : Proc(ITfPreservedKeyNotifySink*, UInt32),
@@ -4780,7 +4780,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfPreservedKeyNotifySink, lpVtbl : ITfPreservedKeyNotifySinkVtbl* do
+  record ITfPreservedKeyNotifySink, lpVtbl : ITfPreservedKeyNotifySinkVtable* do
     GUID = LibC::GUID.new(0x6f77c993_u32, 0xd2b1_u16, 0x446e_u16, StaticArray[0x85_u8, 0x3e_u8, 0x59_u8, 0x12_u8, 0xef_u8, 0xc8_u8, 0xa2_u8, 0x86_u8])
     def query_interface(this : ITfPreservedKeyNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4798,7 +4798,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfMessagePumpVtbl,
+  record ITfMessagePumpVtable,
     query_interface : Proc(ITfMessagePump*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfMessagePump*, UInt32),
     release : Proc(ITfMessagePump*, UInt32),
@@ -4809,7 +4809,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfMessagePump, lpVtbl : ITfMessagePumpVtbl* do
+  record ITfMessagePump, lpVtbl : ITfMessagePumpVtable* do
     GUID = LibC::GUID.new(0x8f1b8ad8_u32, 0xb6b_u16, 0x4874_u16, StaticArray[0x90_u8, 0xc5_u8, 0xbd_u8, 0x76_u8, 0x1_u8, 0x1e_u8, 0x8f_u8, 0x7c_u8])
     def query_interface(this : ITfMessagePump*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4836,7 +4836,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfThreadFocusSinkVtbl,
+  record ITfThreadFocusSinkVtable,
     query_interface : Proc(ITfThreadFocusSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfThreadFocusSink*, UInt32),
     release : Proc(ITfThreadFocusSink*, UInt32),
@@ -4845,7 +4845,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfThreadFocusSink, lpVtbl : ITfThreadFocusSinkVtbl* do
+  record ITfThreadFocusSink, lpVtbl : ITfThreadFocusSinkVtable* do
     GUID = LibC::GUID.new(0xc0f1db0c_u32, 0x3a20_u16, 0x405c_u16, StaticArray[0xa3_u8, 0x3_u8, 0x96_u8, 0xb6_u8, 0x1_u8, 0xa_u8, 0x88_u8, 0x5f_u8])
     def query_interface(this : ITfThreadFocusSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4866,7 +4866,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfTextInputProcessorVtbl,
+  record ITfTextInputProcessorVtable,
     query_interface : Proc(ITfTextInputProcessor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfTextInputProcessor*, UInt32),
     release : Proc(ITfTextInputProcessor*, UInt32),
@@ -4875,7 +4875,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfTextInputProcessor, lpVtbl : ITfTextInputProcessorVtbl* do
+  record ITfTextInputProcessor, lpVtbl : ITfTextInputProcessorVtable* do
     GUID = LibC::GUID.new(0xaa80e7f7_u32, 0x2021_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe0_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : ITfTextInputProcessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4896,7 +4896,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfTextInputProcessorExVtbl,
+  record ITfTextInputProcessorExVtable,
     query_interface : Proc(ITfTextInputProcessorEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfTextInputProcessorEx*, UInt32),
     release : Proc(ITfTextInputProcessorEx*, UInt32),
@@ -4906,7 +4906,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfTextInputProcessorEx, lpVtbl : ITfTextInputProcessorExVtbl* do
+  record ITfTextInputProcessorEx, lpVtbl : ITfTextInputProcessorExVtable* do
     GUID = LibC::GUID.new(0x6e4e2102_u32, 0xf9cd_u16, 0x433d_u16, StaticArray[0xb4_u8, 0x96_u8, 0x30_u8, 0x3c_u8, 0xe0_u8, 0x3a_u8, 0x65_u8, 0x7_u8])
     def query_interface(this : ITfTextInputProcessorEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4930,7 +4930,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfClientIdVtbl,
+  record ITfClientIdVtable,
     query_interface : Proc(ITfClientId*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfClientId*, UInt32),
     release : Proc(ITfClientId*, UInt32),
@@ -4938,7 +4938,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfClientId, lpVtbl : ITfClientIdVtbl* do
+  record ITfClientId, lpVtbl : ITfClientIdVtable* do
     GUID = LibC::GUID.new(0xd60a7b49_u32, 0x1b9f_u16, 0x4be2_u16, StaticArray[0xb7_u8, 0x2_u8, 0x47_u8, 0xe9_u8, 0xdc_u8, 0x5_u8, 0xde_u8, 0xc3_u8])
     def query_interface(this : ITfClientId*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4956,7 +4956,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfDisplayAttributeInfoVtbl,
+  record ITfDisplayAttributeInfoVtable,
     query_interface : Proc(ITfDisplayAttributeInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfDisplayAttributeInfo*, UInt32),
     release : Proc(ITfDisplayAttributeInfo*, UInt32),
@@ -4968,7 +4968,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfDisplayAttributeInfo, lpVtbl : ITfDisplayAttributeInfoVtbl* do
+  record ITfDisplayAttributeInfo, lpVtbl : ITfDisplayAttributeInfoVtable* do
     GUID = LibC::GUID.new(0x70528852_u32, 0x2f26_u16, 0x4aea_u16, StaticArray[0x8c_u8, 0x96_u8, 0x21_u8, 0x51_u8, 0x50_u8, 0x57_u8, 0x89_u8, 0x32_u8])
     def query_interface(this : ITfDisplayAttributeInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4998,7 +4998,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IEnumTfDisplayAttributeInfoVtbl,
+  record IEnumTfDisplayAttributeInfoVtable,
     query_interface : Proc(IEnumTfDisplayAttributeInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTfDisplayAttributeInfo*, UInt32),
     release : Proc(IEnumTfDisplayAttributeInfo*, UInt32),
@@ -5009,7 +5009,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IEnumTfDisplayAttributeInfo, lpVtbl : IEnumTfDisplayAttributeInfoVtbl* do
+  record IEnumTfDisplayAttributeInfo, lpVtbl : IEnumTfDisplayAttributeInfoVtable* do
     GUID = LibC::GUID.new(0x7cef04d7_u32, 0xcb75_u16, 0x4e80_u16, StaticArray[0xa7_u8, 0xab_u8, 0x5f_u8, 0x5b_u8, 0xc7_u8, 0xd3_u8, 0x32_u8, 0xde_u8])
     def query_interface(this : IEnumTfDisplayAttributeInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5036,7 +5036,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfDisplayAttributeProviderVtbl,
+  record ITfDisplayAttributeProviderVtable,
     query_interface : Proc(ITfDisplayAttributeProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfDisplayAttributeProvider*, UInt32),
     release : Proc(ITfDisplayAttributeProvider*, UInt32),
@@ -5045,7 +5045,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfDisplayAttributeProvider, lpVtbl : ITfDisplayAttributeProviderVtbl* do
+  record ITfDisplayAttributeProvider, lpVtbl : ITfDisplayAttributeProviderVtable* do
     GUID = LibC::GUID.new(0xfee47777_u32, 0x163c_u16, 0x4769_u16, StaticArray[0x99_u8, 0x6a_u8, 0x6e_u8, 0x9c_u8, 0x50_u8, 0xad_u8, 0x8f_u8, 0x54_u8])
     def query_interface(this : ITfDisplayAttributeProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5066,7 +5066,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfDisplayAttributeMgrVtbl,
+  record ITfDisplayAttributeMgrVtable,
     query_interface : Proc(ITfDisplayAttributeMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfDisplayAttributeMgr*, UInt32),
     release : Proc(ITfDisplayAttributeMgr*, UInt32),
@@ -5076,7 +5076,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfDisplayAttributeMgr, lpVtbl : ITfDisplayAttributeMgrVtbl* do
+  record ITfDisplayAttributeMgr, lpVtbl : ITfDisplayAttributeMgrVtable* do
     GUID = LibC::GUID.new(0x8ded7393_u32, 0x5db1_u16, 0x475c_u16, StaticArray[0x9e_u8, 0x71_u8, 0xa3_u8, 0x91_u8, 0x11_u8, 0xb0_u8, 0xff_u8, 0x67_u8])
     def query_interface(this : ITfDisplayAttributeMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5100,7 +5100,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfDisplayAttributeNotifySinkVtbl,
+  record ITfDisplayAttributeNotifySinkVtable,
     query_interface : Proc(ITfDisplayAttributeNotifySink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfDisplayAttributeNotifySink*, UInt32),
     release : Proc(ITfDisplayAttributeNotifySink*, UInt32),
@@ -5108,7 +5108,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfDisplayAttributeNotifySink, lpVtbl : ITfDisplayAttributeNotifySinkVtbl* do
+  record ITfDisplayAttributeNotifySink, lpVtbl : ITfDisplayAttributeNotifySinkVtable* do
     GUID = LibC::GUID.new(0xad56f402_u32, 0xe162_u16, 0x4f25_u16, StaticArray[0x90_u8, 0x8f_u8, 0x7d_u8, 0x57_u8, 0x7c_u8, 0xf9_u8, 0xbd_u8, 0xa9_u8])
     def query_interface(this : ITfDisplayAttributeNotifySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5126,7 +5126,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfCategoryMgrVtbl,
+  record ITfCategoryMgrVtable,
     query_interface : Proc(ITfCategoryMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfCategoryMgr*, UInt32),
     release : Proc(ITfCategoryMgr*, UInt32),
@@ -5147,7 +5147,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfCategoryMgr, lpVtbl : ITfCategoryMgrVtbl* do
+  record ITfCategoryMgr, lpVtbl : ITfCategoryMgrVtable* do
     GUID = LibC::GUID.new(0xc3acefb5_u32, 0xf69d_u16, 0x4905_u16, StaticArray[0x93_u8, 0x8f_u8, 0xfc_u8, 0xad_u8, 0xcf_u8, 0x4b_u8, 0xe8_u8, 0x30_u8])
     def query_interface(this : ITfCategoryMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5204,7 +5204,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfSourceVtbl,
+  record ITfSourceVtable,
     query_interface : Proc(ITfSource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfSource*, UInt32),
     release : Proc(ITfSource*, UInt32),
@@ -5213,7 +5213,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfSource, lpVtbl : ITfSourceVtbl* do
+  record ITfSource, lpVtbl : ITfSourceVtable* do
     GUID = LibC::GUID.new(0x4ea48a35_u32, 0x60ae_u16, 0x446f_u16, StaticArray[0x8f_u8, 0xd6_u8, 0xe6_u8, 0xa8_u8, 0xd8_u8, 0x24_u8, 0x59_u8, 0xf7_u8])
     def query_interface(this : ITfSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5234,7 +5234,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfSourceSingleVtbl,
+  record ITfSourceSingleVtable,
     query_interface : Proc(ITfSourceSingle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfSourceSingle*, UInt32),
     release : Proc(ITfSourceSingle*, UInt32),
@@ -5243,7 +5243,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfSourceSingle, lpVtbl : ITfSourceSingleVtbl* do
+  record ITfSourceSingle, lpVtbl : ITfSourceSingleVtable* do
     GUID = LibC::GUID.new(0x73131f9c_u32, 0x56a9_u16, 0x49dd_u16, StaticArray[0xb0_u8, 0xee_u8, 0xd0_u8, 0x46_u8, 0x63_u8, 0x3f_u8, 0x75_u8, 0x28_u8])
     def query_interface(this : ITfSourceSingle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5264,7 +5264,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfUIElementMgrVtbl,
+  record ITfUIElementMgrVtable,
     query_interface : Proc(ITfUIElementMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfUIElementMgr*, UInt32),
     release : Proc(ITfUIElementMgr*, UInt32),
@@ -5276,7 +5276,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfUIElementMgr, lpVtbl : ITfUIElementMgrVtbl* do
+  record ITfUIElementMgr, lpVtbl : ITfUIElementMgrVtable* do
     GUID = LibC::GUID.new(0xea1ea135_u32, 0x19df_u16, 0x11d7_u16, StaticArray[0xa6_u8, 0xd2_u8, 0x0_u8, 0x6_u8, 0x5b_u8, 0x84_u8, 0x43_u8, 0x5c_u8])
     def query_interface(this : ITfUIElementMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5306,7 +5306,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IEnumTfUIElementsVtbl,
+  record IEnumTfUIElementsVtable,
     query_interface : Proc(IEnumTfUIElements*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTfUIElements*, UInt32),
     release : Proc(IEnumTfUIElements*, UInt32),
@@ -5317,7 +5317,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IEnumTfUIElements, lpVtbl : IEnumTfUIElementsVtbl* do
+  record IEnumTfUIElements, lpVtbl : IEnumTfUIElementsVtable* do
     GUID = LibC::GUID.new(0x887aa91e_u32, 0xacba_u16, 0x4931_u16, StaticArray[0x84_u8, 0xda_u8, 0x3c_u8, 0x52_u8, 0x8_u8, 0xcf_u8, 0x54_u8, 0x3f_u8])
     def query_interface(this : IEnumTfUIElements*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5344,7 +5344,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfUIElementSinkVtbl,
+  record ITfUIElementSinkVtable,
     query_interface : Proc(ITfUIElementSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfUIElementSink*, UInt32),
     release : Proc(ITfUIElementSink*, UInt32),
@@ -5354,7 +5354,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfUIElementSink, lpVtbl : ITfUIElementSinkVtbl* do
+  record ITfUIElementSink, lpVtbl : ITfUIElementSinkVtable* do
     GUID = LibC::GUID.new(0xea1ea136_u32, 0x19df_u16, 0x11d7_u16, StaticArray[0xa6_u8, 0xd2_u8, 0x0_u8, 0x6_u8, 0x5b_u8, 0x84_u8, 0x43_u8, 0x5c_u8])
     def query_interface(this : ITfUIElementSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5378,7 +5378,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfUIElementVtbl,
+  record ITfUIElementVtable,
     query_interface : Proc(ITfUIElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfUIElement*, UInt32),
     release : Proc(ITfUIElement*, UInt32),
@@ -5389,7 +5389,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfUIElement, lpVtbl : ITfUIElementVtbl* do
+  record ITfUIElement, lpVtbl : ITfUIElementVtable* do
     GUID = LibC::GUID.new(0xea1ea137_u32, 0x19df_u16, 0x11d7_u16, StaticArray[0xa6_u8, 0xd2_u8, 0x0_u8, 0x6_u8, 0x5b_u8, 0x84_u8, 0x43_u8, 0x5c_u8])
     def query_interface(this : ITfUIElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5416,7 +5416,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfCandidateListUIElementVtbl,
+  record ITfCandidateListUIElementVtable,
     query_interface : Proc(ITfCandidateListUIElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfCandidateListUIElement*, UInt32),
     release : Proc(ITfCandidateListUIElement*, UInt32),
@@ -5435,7 +5435,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfCandidateListUIElement, lpVtbl : ITfCandidateListUIElementVtbl* do
+  record ITfCandidateListUIElement, lpVtbl : ITfCandidateListUIElementVtable* do
     GUID = LibC::GUID.new(0xea1ea138_u32, 0x19df_u16, 0x11d7_u16, StaticArray[0xa6_u8, 0xd2_u8, 0x0_u8, 0x6_u8, 0x5b_u8, 0x84_u8, 0x43_u8, 0x5c_u8])
     def query_interface(this : ITfCandidateListUIElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5486,7 +5486,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfCandidateListUIElementBehaviorVtbl,
+  record ITfCandidateListUIElementBehaviorVtable,
     query_interface : Proc(ITfCandidateListUIElementBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfCandidateListUIElementBehavior*, UInt32),
     release : Proc(ITfCandidateListUIElementBehavior*, UInt32),
@@ -5508,7 +5508,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfCandidateListUIElementBehavior, lpVtbl : ITfCandidateListUIElementBehaviorVtbl* do
+  record ITfCandidateListUIElementBehavior, lpVtbl : ITfCandidateListUIElementBehaviorVtable* do
     GUID = LibC::GUID.new(0x85fad185_u32, 0x58ce_u16, 0x497a_u16, StaticArray[0x94_u8, 0x60_u8, 0x35_u8, 0x53_u8, 0x66_u8, 0xb6_u8, 0x4b_u8, 0x9a_u8])
     def query_interface(this : ITfCandidateListUIElementBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5568,7 +5568,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfReadingInformationUIElementVtbl,
+  record ITfReadingInformationUIElementVtable,
     query_interface : Proc(ITfReadingInformationUIElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfReadingInformationUIElement*, UInt32),
     release : Proc(ITfReadingInformationUIElement*, UInt32),
@@ -5585,7 +5585,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfReadingInformationUIElement, lpVtbl : ITfReadingInformationUIElementVtbl* do
+  record ITfReadingInformationUIElement, lpVtbl : ITfReadingInformationUIElementVtable* do
     GUID = LibC::GUID.new(0xea1ea139_u32, 0x19df_u16, 0x11d7_u16, StaticArray[0xa6_u8, 0xd2_u8, 0x0_u8, 0x6_u8, 0x5b_u8, 0x84_u8, 0x43_u8, 0x5c_u8])
     def query_interface(this : ITfReadingInformationUIElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5630,7 +5630,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfTransitoryExtensionUIElementVtbl,
+  record ITfTransitoryExtensionUIElementVtable,
     query_interface : Proc(ITfTransitoryExtensionUIElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfTransitoryExtensionUIElement*, UInt32),
     release : Proc(ITfTransitoryExtensionUIElement*, UInt32),
@@ -5642,7 +5642,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfTransitoryExtensionUIElement, lpVtbl : ITfTransitoryExtensionUIElementVtbl* do
+  record ITfTransitoryExtensionUIElement, lpVtbl : ITfTransitoryExtensionUIElementVtable* do
     GUID = LibC::GUID.new(0x858f956a_u32, 0x972f_u16, 0x42a2_u16, StaticArray[0xa2_u8, 0xf2_u8, 0x3_u8, 0x21_u8, 0xe1_u8, 0xab_u8, 0xe2_u8, 0x9_u8])
     def query_interface(this : ITfTransitoryExtensionUIElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5672,7 +5672,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfTransitoryExtensionSinkVtbl,
+  record ITfTransitoryExtensionSinkVtable,
     query_interface : Proc(ITfTransitoryExtensionSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfTransitoryExtensionSink*, UInt32),
     release : Proc(ITfTransitoryExtensionSink*, UInt32),
@@ -5680,7 +5680,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfTransitoryExtensionSink, lpVtbl : ITfTransitoryExtensionSinkVtbl* do
+  record ITfTransitoryExtensionSink, lpVtbl : ITfTransitoryExtensionSinkVtable* do
     GUID = LibC::GUID.new(0xa615096f_u32, 0x1c57_u16, 0x4813_u16, StaticArray[0x8a_u8, 0x15_u8, 0x55_u8, 0xee_u8, 0x6e_u8, 0x5a_u8, 0x83_u8, 0x9c_u8])
     def query_interface(this : ITfTransitoryExtensionSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5698,7 +5698,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfToolTipUIElementVtbl,
+  record ITfToolTipUIElementVtable,
     query_interface : Proc(ITfToolTipUIElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfToolTipUIElement*, UInt32),
     release : Proc(ITfToolTipUIElement*, UInt32),
@@ -5710,7 +5710,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfToolTipUIElement, lpVtbl : ITfToolTipUIElementVtbl* do
+  record ITfToolTipUIElement, lpVtbl : ITfToolTipUIElementVtable* do
     GUID = LibC::GUID.new(0x52b18b5c_u32, 0x555d_u16, 0x46b2_u16, StaticArray[0xb0_u8, 0xa_u8, 0xfa_u8, 0x68_u8, 0x1_u8, 0x44_u8, 0xfb_u8, 0xdb_u8])
     def query_interface(this : ITfToolTipUIElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5740,7 +5740,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfReverseConversionListVtbl,
+  record ITfReverseConversionListVtable,
     query_interface : Proc(ITfReverseConversionList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfReverseConversionList*, UInt32),
     release : Proc(ITfReverseConversionList*, UInt32),
@@ -5749,7 +5749,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfReverseConversionList, lpVtbl : ITfReverseConversionListVtbl* do
+  record ITfReverseConversionList, lpVtbl : ITfReverseConversionListVtable* do
     GUID = LibC::GUID.new(0x151d69f0_u32, 0x86f4_u16, 0x4674_u16, StaticArray[0xb7_u8, 0x21_u8, 0x56_u8, 0x91_u8, 0x1e_u8, 0x79_u8, 0x7f_u8, 0x47_u8])
     def query_interface(this : ITfReverseConversionList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5770,7 +5770,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfReverseConversionVtbl,
+  record ITfReverseConversionVtable,
     query_interface : Proc(ITfReverseConversion*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfReverseConversion*, UInt32),
     release : Proc(ITfReverseConversion*, UInt32),
@@ -5778,7 +5778,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfReverseConversion, lpVtbl : ITfReverseConversionVtbl* do
+  record ITfReverseConversion, lpVtbl : ITfReverseConversionVtable* do
     GUID = LibC::GUID.new(0xa415e162_u32, 0x157d_u16, 0x417d_u16, StaticArray[0x8a_u8, 0x8c_u8, 0xa_u8, 0xb2_u8, 0x6c_u8, 0x7d_u8, 0x27_u8, 0x81_u8])
     def query_interface(this : ITfReverseConversion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5796,7 +5796,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfReverseConversionMgrVtbl,
+  record ITfReverseConversionMgrVtable,
     query_interface : Proc(ITfReverseConversionMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfReverseConversionMgr*, UInt32),
     release : Proc(ITfReverseConversionMgr*, UInt32),
@@ -5804,7 +5804,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfReverseConversionMgr, lpVtbl : ITfReverseConversionMgrVtbl* do
+  record ITfReverseConversionMgr, lpVtbl : ITfReverseConversionMgrVtable* do
     GUID = LibC::GUID.new(0xb643c236_u32, 0xc493_u16, 0x41b6_u16, StaticArray[0xab_u8, 0xb3_u8, 0x69_u8, 0x24_u8, 0x12_u8, 0x77_u8, 0x5c_u8, 0xc4_u8])
     def query_interface(this : ITfReverseConversionMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5822,7 +5822,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfCandidateStringVtbl,
+  record ITfCandidateStringVtable,
     query_interface : Proc(ITfCandidateString*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfCandidateString*, UInt32),
     release : Proc(ITfCandidateString*, UInt32),
@@ -5831,7 +5831,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfCandidateString, lpVtbl : ITfCandidateStringVtbl* do
+  record ITfCandidateString, lpVtbl : ITfCandidateStringVtable* do
     GUID = LibC::GUID.new(0x581f317e_u32, 0xfd9d_u16, 0x443f_u16, StaticArray[0xb9_u8, 0x72_u8, 0xed_u8, 0x0_u8, 0x46_u8, 0x7c_u8, 0x5d_u8, 0x40_u8])
     def query_interface(this : ITfCandidateString*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5852,7 +5852,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IEnumTfCandidatesVtbl,
+  record IEnumTfCandidatesVtable,
     query_interface : Proc(IEnumTfCandidates*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTfCandidates*, UInt32),
     release : Proc(IEnumTfCandidates*, UInt32),
@@ -5863,7 +5863,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IEnumTfCandidates, lpVtbl : IEnumTfCandidatesVtbl* do
+  record IEnumTfCandidates, lpVtbl : IEnumTfCandidatesVtable* do
     GUID = LibC::GUID.new(0xdefb1926_u32, 0x6c80_u16, 0x4ce8_u16, StaticArray[0x87_u8, 0xd4_u8, 0xd6_u8, 0xb7_u8, 0x2b_u8, 0x81_u8, 0x2b_u8, 0xde_u8])
     def query_interface(this : IEnumTfCandidates*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5890,7 +5890,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfCandidateListVtbl,
+  record ITfCandidateListVtable,
     query_interface : Proc(ITfCandidateList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfCandidateList*, UInt32),
     release : Proc(ITfCandidateList*, UInt32),
@@ -5901,7 +5901,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfCandidateList, lpVtbl : ITfCandidateListVtbl* do
+  record ITfCandidateList, lpVtbl : ITfCandidateListVtable* do
     GUID = LibC::GUID.new(0xa3ad50fb_u32, 0x9bdb_u16, 0x49e3_u16, StaticArray[0xa8_u8, 0x43_u8, 0x6c_u8, 0x76_u8, 0x52_u8, 0xf_u8, 0xbf_u8, 0x5d_u8])
     def query_interface(this : ITfCandidateList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5928,7 +5928,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFnReconversionVtbl,
+  record ITfFnReconversionVtable,
     query_interface : Proc(ITfFnReconversion*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFnReconversion*, UInt32),
     release : Proc(ITfFnReconversion*, UInt32),
@@ -5939,7 +5939,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFnReconversion, lpVtbl : ITfFnReconversionVtbl* do
+  record ITfFnReconversion, lpVtbl : ITfFnReconversionVtable* do
     GUID = LibC::GUID.new(0x4cea93c0_u32, 0xa58_u16, 0x11d3_u16, StaticArray[0x8d_u8, 0xf0_u8, 0x0_u8, 0x10_u8, 0x5a_u8, 0x27_u8, 0x99_u8, 0xb5_u8])
     def query_interface(this : ITfFnReconversion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5966,7 +5966,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFnPlayBackVtbl,
+  record ITfFnPlayBackVtable,
     query_interface : Proc(ITfFnPlayBack*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFnPlayBack*, UInt32),
     release : Proc(ITfFnPlayBack*, UInt32),
@@ -5976,7 +5976,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFnPlayBack, lpVtbl : ITfFnPlayBackVtbl* do
+  record ITfFnPlayBack, lpVtbl : ITfFnPlayBackVtable* do
     GUID = LibC::GUID.new(0xa3a416a4_u32, 0xf64_u16, 0x11d3_u16, StaticArray[0xb5_u8, 0xb7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x24_u8, 0xa1_u8])
     def query_interface(this : ITfFnPlayBack*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6000,7 +6000,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFnLangProfileUtilVtbl,
+  record ITfFnLangProfileUtilVtable,
     query_interface : Proc(ITfFnLangProfileUtil*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFnLangProfileUtil*, UInt32),
     release : Proc(ITfFnLangProfileUtil*, UInt32),
@@ -6010,7 +6010,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFnLangProfileUtil, lpVtbl : ITfFnLangProfileUtilVtbl* do
+  record ITfFnLangProfileUtil, lpVtbl : ITfFnLangProfileUtilVtable* do
     GUID = LibC::GUID.new(0xa87a8574_u32, 0xa6c1_u16, 0x4e15_u16, StaticArray[0x99_u8, 0xf0_u8, 0x3d_u8, 0x39_u8, 0x65_u8, 0xf5_u8, 0x48_u8, 0xeb_u8])
     def query_interface(this : ITfFnLangProfileUtil*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6034,7 +6034,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFnConfigureVtbl,
+  record ITfFnConfigureVtable,
     query_interface : Proc(ITfFnConfigure*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFnConfigure*, UInt32),
     release : Proc(ITfFnConfigure*, UInt32),
@@ -6043,7 +6043,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFnConfigure, lpVtbl : ITfFnConfigureVtbl* do
+  record ITfFnConfigure, lpVtbl : ITfFnConfigureVtable* do
     GUID = LibC::GUID.new(0x88f567c6_u32, 0x1757_u16, 0x49f8_u16, StaticArray[0xa1_u8, 0xb2_u8, 0x89_u8, 0x23_u8, 0x4c_u8, 0x1e_u8, 0xef_u8, 0xf9_u8])
     def query_interface(this : ITfFnConfigure*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6064,7 +6064,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFnConfigureRegisterWordVtbl,
+  record ITfFnConfigureRegisterWordVtable,
     query_interface : Proc(ITfFnConfigureRegisterWord*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFnConfigureRegisterWord*, UInt32),
     release : Proc(ITfFnConfigureRegisterWord*, UInt32),
@@ -6073,7 +6073,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFnConfigureRegisterWord, lpVtbl : ITfFnConfigureRegisterWordVtbl* do
+  record ITfFnConfigureRegisterWord, lpVtbl : ITfFnConfigureRegisterWordVtable* do
     GUID = LibC::GUID.new(0xbb95808a_u32, 0x6d8f_u16, 0x4bca_u16, StaticArray[0x84_u8, 0x0_u8, 0x53_u8, 0x90_u8, 0xb5_u8, 0x86_u8, 0xae_u8, 0xdf_u8])
     def query_interface(this : ITfFnConfigureRegisterWord*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6094,7 +6094,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFnConfigureRegisterEudcVtbl,
+  record ITfFnConfigureRegisterEudcVtable,
     query_interface : Proc(ITfFnConfigureRegisterEudc*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFnConfigureRegisterEudc*, UInt32),
     release : Proc(ITfFnConfigureRegisterEudc*, UInt32),
@@ -6103,7 +6103,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFnConfigureRegisterEudc, lpVtbl : ITfFnConfigureRegisterEudcVtbl* do
+  record ITfFnConfigureRegisterEudc, lpVtbl : ITfFnConfigureRegisterEudcVtable* do
     GUID = LibC::GUID.new(0xb5e26ff5_u32, 0xd7ad_u16, 0x4304_u16, StaticArray[0x91_u8, 0x3f_u8, 0x21_u8, 0xa2_u8, 0xed_u8, 0x95_u8, 0xa1_u8, 0xb0_u8])
     def query_interface(this : ITfFnConfigureRegisterEudc*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6124,7 +6124,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFnShowHelpVtbl,
+  record ITfFnShowHelpVtable,
     query_interface : Proc(ITfFnShowHelp*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFnShowHelp*, UInt32),
     release : Proc(ITfFnShowHelp*, UInt32),
@@ -6133,7 +6133,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFnShowHelp, lpVtbl : ITfFnShowHelpVtbl* do
+  record ITfFnShowHelp, lpVtbl : ITfFnShowHelpVtable* do
     GUID = LibC::GUID.new(0x5ab1d30c_u32, 0x94d_u16, 0x4c29_u16, StaticArray[0x8e_u8, 0xa5_u8, 0xb_u8, 0xf5_u8, 0x9b_u8, 0xe8_u8, 0x7b_u8, 0xf3_u8])
     def query_interface(this : ITfFnShowHelp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6154,7 +6154,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFnBalloonVtbl,
+  record ITfFnBalloonVtable,
     query_interface : Proc(ITfFnBalloon*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFnBalloon*, UInt32),
     release : Proc(ITfFnBalloon*, UInt32),
@@ -6162,7 +6162,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFnBalloon, lpVtbl : ITfFnBalloonVtbl* do
+  record ITfFnBalloon, lpVtbl : ITfFnBalloonVtable* do
     GUID = LibC::GUID.new(0x3bab89e4_u32, 0x5fbe_u16, 0x45f4_u16, StaticArray[0xa5_u8, 0xbc_u8, 0xdc_u8, 0xa3_u8, 0x6a_u8, 0xd2_u8, 0x25_u8, 0xa8_u8])
     def query_interface(this : ITfFnBalloon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6180,7 +6180,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFnGetSAPIObjectVtbl,
+  record ITfFnGetSAPIObjectVtable,
     query_interface : Proc(ITfFnGetSAPIObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFnGetSAPIObject*, UInt32),
     release : Proc(ITfFnGetSAPIObject*, UInt32),
@@ -6189,7 +6189,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFnGetSAPIObject, lpVtbl : ITfFnGetSAPIObjectVtbl* do
+  record ITfFnGetSAPIObject, lpVtbl : ITfFnGetSAPIObjectVtable* do
     GUID = LibC::GUID.new(0x5c0ab7ea_u32, 0x167d_u16, 0x4f59_u16, StaticArray[0xbf_u8, 0xb5_u8, 0x46_u8, 0x93_u8, 0x75_u8, 0x5e_u8, 0x90_u8, 0xca_u8])
     def query_interface(this : ITfFnGetSAPIObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6210,7 +6210,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFnPropertyUIStatusVtbl,
+  record ITfFnPropertyUIStatusVtable,
     query_interface : Proc(ITfFnPropertyUIStatus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFnPropertyUIStatus*, UInt32),
     release : Proc(ITfFnPropertyUIStatus*, UInt32),
@@ -6220,7 +6220,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFnPropertyUIStatus, lpVtbl : ITfFnPropertyUIStatusVtbl* do
+  record ITfFnPropertyUIStatus, lpVtbl : ITfFnPropertyUIStatusVtable* do
     GUID = LibC::GUID.new(0x2338ac6e_u32, 0x2b9d_u16, 0x44c0_u16, StaticArray[0xa7_u8, 0x5e_u8, 0xee_u8, 0x64_u8, 0xf2_u8, 0x56_u8, 0xb3_u8, 0xbd_u8])
     def query_interface(this : ITfFnPropertyUIStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6244,7 +6244,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IEnumSpeechCommandsVtbl,
+  record IEnumSpeechCommandsVtable,
     query_interface : Proc(IEnumSpeechCommands*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumSpeechCommands*, UInt32),
     release : Proc(IEnumSpeechCommands*, UInt32),
@@ -6255,7 +6255,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IEnumSpeechCommands, lpVtbl : IEnumSpeechCommandsVtbl* do
+  record IEnumSpeechCommands, lpVtbl : IEnumSpeechCommandsVtable* do
     GUID = LibC::GUID.new(0x8c5dac4f_u32, 0x83c_u16, 0x4b85_u16, StaticArray[0xa4_u8, 0xc9_u8, 0x71_u8, 0x74_u8, 0x60_u8, 0x48_u8, 0xad_u8, 0xca_u8])
     def query_interface(this : IEnumSpeechCommands*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6282,7 +6282,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ISpeechCommandProviderVtbl,
+  record ISpeechCommandProviderVtable,
     query_interface : Proc(ISpeechCommandProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISpeechCommandProvider*, UInt32),
     release : Proc(ISpeechCommandProvider*, UInt32),
@@ -6291,7 +6291,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ISpeechCommandProvider, lpVtbl : ISpeechCommandProviderVtbl* do
+  record ISpeechCommandProvider, lpVtbl : ISpeechCommandProviderVtable* do
     GUID = LibC::GUID.new(0x38e09d4c_u32, 0x586d_u16, 0x435a_u16, StaticArray[0xb5_u8, 0x92_u8, 0xc8_u8, 0xa8_u8, 0x66_u8, 0x91_u8, 0xde_u8, 0xc6_u8])
     def query_interface(this : ISpeechCommandProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6312,7 +6312,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFnCustomSpeechCommandVtbl,
+  record ITfFnCustomSpeechCommandVtable,
     query_interface : Proc(ITfFnCustomSpeechCommand*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFnCustomSpeechCommand*, UInt32),
     release : Proc(ITfFnCustomSpeechCommand*, UInt32),
@@ -6321,7 +6321,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFnCustomSpeechCommand, lpVtbl : ITfFnCustomSpeechCommandVtbl* do
+  record ITfFnCustomSpeechCommand, lpVtbl : ITfFnCustomSpeechCommandVtable* do
     GUID = LibC::GUID.new(0xfca6c349_u32, 0xa12f_u16, 0x43a3_u16, StaticArray[0x8d_u8, 0xd6_u8, 0x5a_u8, 0x5a_u8, 0x42_u8, 0x82_u8, 0x57_u8, 0x7b_u8])
     def query_interface(this : ITfFnCustomSpeechCommand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6342,7 +6342,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFnLMProcessorVtbl,
+  record ITfFnLMProcessorVtable,
     query_interface : Proc(ITfFnLMProcessor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFnLMProcessor*, UInt32),
     release : Proc(ITfFnLMProcessor*, UInt32),
@@ -6357,7 +6357,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFnLMProcessor, lpVtbl : ITfFnLMProcessorVtbl* do
+  record ITfFnLMProcessor, lpVtbl : ITfFnLMProcessorVtable* do
     GUID = LibC::GUID.new(0x7afbf8e7_u32, 0xac4b_u16, 0x4082_u16, StaticArray[0xb0_u8, 0x58_u8, 0x89_u8, 0x8_u8, 0x99_u8, 0xd3_u8, 0xa0_u8, 0x10_u8])
     def query_interface(this : ITfFnLMProcessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6396,7 +6396,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFnLMInternalVtbl,
+  record ITfFnLMInternalVtable,
     query_interface : Proc(ITfFnLMInternal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFnLMInternal*, UInt32),
     release : Proc(ITfFnLMInternal*, UInt32),
@@ -6412,7 +6412,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFnLMInternal, lpVtbl : ITfFnLMInternalVtbl* do
+  record ITfFnLMInternal, lpVtbl : ITfFnLMInternalVtable* do
     GUID = LibC::GUID.new(0x4b825b1_u32, 0xac9a_u16, 0x4f7b_u16, StaticArray[0xb5_u8, 0xad_u8, 0xc7_u8, 0x16_u8, 0x8f_u8, 0x1e_u8, 0xe4_u8, 0x45_u8])
     def query_interface(this : ITfFnLMInternal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6454,7 +6454,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IEnumTfLatticeElementsVtbl,
+  record IEnumTfLatticeElementsVtable,
     query_interface : Proc(IEnumTfLatticeElements*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTfLatticeElements*, UInt32),
     release : Proc(IEnumTfLatticeElements*, UInt32),
@@ -6465,7 +6465,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IEnumTfLatticeElements, lpVtbl : IEnumTfLatticeElementsVtbl* do
+  record IEnumTfLatticeElements, lpVtbl : IEnumTfLatticeElementsVtable* do
     GUID = LibC::GUID.new(0x56988052_u32, 0x47da_u16, 0x4a05_u16, StaticArray[0x91_u8, 0x1a_u8, 0xe3_u8, 0xd9_u8, 0x41_u8, 0xf1_u8, 0x71_u8, 0x45_u8])
     def query_interface(this : IEnumTfLatticeElements*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6492,7 +6492,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfLMLatticeVtbl,
+  record ITfLMLatticeVtable,
     query_interface : Proc(ITfLMLattice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfLMLattice*, UInt32),
     release : Proc(ITfLMLattice*, UInt32),
@@ -6501,7 +6501,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfLMLattice, lpVtbl : ITfLMLatticeVtbl* do
+  record ITfLMLattice, lpVtbl : ITfLMLatticeVtable* do
     GUID = LibC::GUID.new(0xd4236675_u32, 0xa5bf_u16, 0x4570_u16, StaticArray[0x9d_u8, 0x42_u8, 0x5d_u8, 0x6d_u8, 0x7b_u8, 0x2_u8, 0xd5_u8, 0x9b_u8])
     def query_interface(this : ITfLMLattice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6522,7 +6522,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFnAdviseTextVtbl,
+  record ITfFnAdviseTextVtable,
     query_interface : Proc(ITfFnAdviseText*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFnAdviseText*, UInt32),
     release : Proc(ITfFnAdviseText*, UInt32),
@@ -6532,7 +6532,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFnAdviseText, lpVtbl : ITfFnAdviseTextVtbl* do
+  record ITfFnAdviseText, lpVtbl : ITfFnAdviseTextVtable* do
     GUID = LibC::GUID.new(0x3527268b_u32, 0x7d53_u16, 0x4dd9_u16, StaticArray[0x92_u8, 0xb7_u8, 0x72_u8, 0x96_u8, 0xae_u8, 0x46_u8, 0x12_u8, 0x49_u8])
     def query_interface(this : ITfFnAdviseText*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6556,7 +6556,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFnSearchCandidateProviderVtbl,
+  record ITfFnSearchCandidateProviderVtable,
     query_interface : Proc(ITfFnSearchCandidateProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFnSearchCandidateProvider*, UInt32),
     release : Proc(ITfFnSearchCandidateProvider*, UInt32),
@@ -6566,7 +6566,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFnSearchCandidateProvider, lpVtbl : ITfFnSearchCandidateProviderVtbl* do
+  record ITfFnSearchCandidateProvider, lpVtbl : ITfFnSearchCandidateProviderVtable* do
     GUID = LibC::GUID.new(0x87a2ad8f_u32, 0xf27b_u16, 0x4920_u16, StaticArray[0x85_u8, 0x1_u8, 0x67_u8, 0x60_u8, 0x22_u8, 0x80_u8, 0x17_u8, 0x5d_u8])
     def query_interface(this : ITfFnSearchCandidateProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6590,7 +6590,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfIntegratableCandidateListUIElementVtbl,
+  record ITfIntegratableCandidateListUIElementVtable,
     query_interface : Proc(ITfIntegratableCandidateListUIElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfIntegratableCandidateListUIElement*, UInt32),
     release : Proc(ITfIntegratableCandidateListUIElement*, UInt32),
@@ -6602,7 +6602,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfIntegratableCandidateListUIElement, lpVtbl : ITfIntegratableCandidateListUIElementVtbl* do
+  record ITfIntegratableCandidateListUIElement, lpVtbl : ITfIntegratableCandidateListUIElementVtable* do
     GUID = LibC::GUID.new(0xc7a6f54f_u32, 0xb180_u16, 0x416f_u16, StaticArray[0xb2_u8, 0xbf_u8, 0x7b_u8, 0xf2_u8, 0xe4_u8, 0x68_u8, 0x3d_u8, 0x7b_u8])
     def query_interface(this : ITfIntegratableCandidateListUIElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6632,7 +6632,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFnGetPreferredTouchKeyboardLayoutVtbl,
+  record ITfFnGetPreferredTouchKeyboardLayoutVtable,
     query_interface : Proc(ITfFnGetPreferredTouchKeyboardLayout*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFnGetPreferredTouchKeyboardLayout*, UInt32),
     release : Proc(ITfFnGetPreferredTouchKeyboardLayout*, UInt32),
@@ -6641,7 +6641,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFnGetPreferredTouchKeyboardLayout, lpVtbl : ITfFnGetPreferredTouchKeyboardLayoutVtbl* do
+  record ITfFnGetPreferredTouchKeyboardLayout, lpVtbl : ITfFnGetPreferredTouchKeyboardLayoutVtable* do
     GUID = LibC::GUID.new(0x5f309a41_u32, 0x590a_u16, 0x4acc_u16, StaticArray[0xa9_u8, 0x7f_u8, 0xd8_u8, 0xef_u8, 0xff_u8, 0x13_u8, 0xfd_u8, 0xfc_u8])
     def query_interface(this : ITfFnGetPreferredTouchKeyboardLayout*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6662,7 +6662,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfFnGetLinguisticAlternatesVtbl,
+  record ITfFnGetLinguisticAlternatesVtable,
     query_interface : Proc(ITfFnGetLinguisticAlternates*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfFnGetLinguisticAlternates*, UInt32),
     release : Proc(ITfFnGetLinguisticAlternates*, UInt32),
@@ -6671,7 +6671,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfFnGetLinguisticAlternates, lpVtbl : ITfFnGetLinguisticAlternatesVtbl* do
+  record ITfFnGetLinguisticAlternates, lpVtbl : ITfFnGetLinguisticAlternatesVtable* do
     GUID = LibC::GUID.new(0xea163ce2_u32, 0x7a65_u16, 0x4506_u16, StaticArray[0x82_u8, 0xa3_u8, 0xc5_u8, 0x28_u8, 0x21_u8, 0x5d_u8, 0xa6_u8, 0x4e_u8])
     def query_interface(this : ITfFnGetLinguisticAlternates*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6692,7 +6692,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IUIManagerEventSinkVtbl,
+  record IUIManagerEventSinkVtable,
     query_interface : Proc(IUIManagerEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIManagerEventSink*, UInt32),
     release : Proc(IUIManagerEventSink*, UInt32),
@@ -6705,7 +6705,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IUIManagerEventSink, lpVtbl : IUIManagerEventSinkVtbl* do
+  record IUIManagerEventSink, lpVtbl : IUIManagerEventSinkVtable* do
     GUID = LibC::GUID.new(0xcd91d690_u32, 0xa7e8_u16, 0x4265_u16, StaticArray[0x9b_u8, 0x38_u8, 0x8b_u8, 0xb3_u8, 0xbb_u8, 0xab_u8, 0xa7_u8, 0xde_u8])
     def query_interface(this : IUIManagerEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6738,7 +6738,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfInputScopeVtbl,
+  record ITfInputScopeVtable,
     query_interface : Proc(ITfInputScope*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfInputScope*, UInt32),
     release : Proc(ITfInputScope*, UInt32),
@@ -6750,7 +6750,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfInputScope, lpVtbl : ITfInputScopeVtbl* do
+  record ITfInputScope, lpVtbl : ITfInputScopeVtable* do
     GUID = LibC::GUID.new(0xfde1eaee_u32, 0x6924_u16, 0x4cdf_u16, StaticArray[0x91_u8, 0xe7_u8, 0xda_u8, 0x38_u8, 0xcf_u8, 0xf5_u8, 0x55_u8, 0x9d_u8])
     def query_interface(this : ITfInputScope*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6780,7 +6780,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfInputScope2Vtbl,
+  record ITfInputScope2Vtable,
     query_interface : Proc(ITfInputScope2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfInputScope2*, UInt32),
     release : Proc(ITfInputScope2*, UInt32),
@@ -6793,7 +6793,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfInputScope2, lpVtbl : ITfInputScope2Vtbl* do
+  record ITfInputScope2, lpVtbl : ITfInputScope2Vtable* do
     GUID = LibC::GUID.new(0x5731eaa0_u32, 0x6bc2_u16, 0x4681_u16, StaticArray[0xa5_u8, 0x32_u8, 0x92_u8, 0xfb_u8, 0xb7_u8, 0x4d_u8, 0x7c_u8, 0x41_u8])
     def query_interface(this : ITfInputScope2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6826,7 +6826,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfMSAAControlVtbl,
+  record ITfMSAAControlVtable,
     query_interface : Proc(ITfMSAAControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfMSAAControl*, UInt32),
     release : Proc(ITfMSAAControl*, UInt32),
@@ -6835,7 +6835,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfMSAAControl, lpVtbl : ITfMSAAControlVtbl* do
+  record ITfMSAAControl, lpVtbl : ITfMSAAControlVtable* do
     GUID = LibC::GUID.new(0xb5f8fb3b_u32, 0x393f_u16, 0x4f7c_u16, StaticArray[0x84_u8, 0xcb_u8, 0x50_u8, 0x49_u8, 0x24_u8, 0xc2_u8, 0x70_u8, 0x5a_u8])
     def query_interface(this : ITfMSAAControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6856,7 +6856,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IInternalDocWrapVtbl,
+  record IInternalDocWrapVtable,
     query_interface : Proc(IInternalDocWrap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInternalDocWrap*, UInt32),
     release : Proc(IInternalDocWrap*, UInt32),
@@ -6864,7 +6864,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IInternalDocWrap, lpVtbl : IInternalDocWrapVtbl* do
+  record IInternalDocWrap, lpVtbl : IInternalDocWrapVtable* do
     GUID = LibC::GUID.new(0xe1aa6466_u32, 0x9db4_u16, 0x40ba_u16, StaticArray[0xbe_u8, 0x3_u8, 0x77_u8, 0xc3_u8, 0x8e_u8, 0x8e_u8, 0x60_u8, 0xb2_u8])
     def query_interface(this : IInternalDocWrap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6882,7 +6882,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITextStoreACPExVtbl,
+  record ITextStoreACPExVtable,
     query_interface : Proc(ITextStoreACPEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextStoreACPEx*, UInt32),
     release : Proc(ITextStoreACPEx*, UInt32),
@@ -6890,7 +6890,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITextStoreACPEx, lpVtbl : ITextStoreACPExVtbl* do
+  record ITextStoreACPEx, lpVtbl : ITextStoreACPExVtable* do
     GUID = LibC::GUID.new(0xa2de3bc2_u32, 0x3d8e_u16, 0x11d3_u16, StaticArray[0x81_u8, 0xa9_u8, 0xf7_u8, 0x53_u8, 0xfb_u8, 0xe6_u8, 0x1a_u8, 0x0_u8])
     def query_interface(this : ITextStoreACPEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6908,7 +6908,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITextStoreAnchorExVtbl,
+  record ITextStoreAnchorExVtable,
     query_interface : Proc(ITextStoreAnchorEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextStoreAnchorEx*, UInt32),
     release : Proc(ITextStoreAnchorEx*, UInt32),
@@ -6916,7 +6916,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITextStoreAnchorEx, lpVtbl : ITextStoreAnchorExVtbl* do
+  record ITextStoreAnchorEx, lpVtbl : ITextStoreAnchorExVtable* do
     GUID = LibC::GUID.new(0xa2de3bc1_u32, 0x3d8e_u16, 0x11d3_u16, StaticArray[0x81_u8, 0xa9_u8, 0xf7_u8, 0x53_u8, 0xfb_u8, 0xe6_u8, 0x1a_u8, 0x0_u8])
     def query_interface(this : ITextStoreAnchorEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6934,7 +6934,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITextStoreACPSinkExVtbl,
+  record ITextStoreACPSinkExVtable,
     query_interface : Proc(ITextStoreACPSinkEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextStoreACPSinkEx*, UInt32),
     release : Proc(ITextStoreACPSinkEx*, UInt32),
@@ -6950,7 +6950,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITextStoreACPSinkEx, lpVtbl : ITextStoreACPSinkExVtbl* do
+  record ITextStoreACPSinkEx, lpVtbl : ITextStoreACPSinkExVtable* do
     GUID = LibC::GUID.new(0x2bdf9464_u32, 0x41e2_u16, 0x43e3_u16, StaticArray[0x95_u8, 0xc_u8, 0xa6_u8, 0x86_u8, 0x5b_u8, 0xa2_u8, 0x5c_u8, 0xd4_u8])
     def query_interface(this : ITextStoreACPSinkEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6992,7 +6992,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITextStoreSinkAnchorExVtbl,
+  record ITextStoreSinkAnchorExVtable,
     query_interface : Proc(ITextStoreSinkAnchorEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextStoreSinkAnchorEx*, UInt32),
     release : Proc(ITextStoreSinkAnchorEx*, UInt32),
@@ -7008,7 +7008,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITextStoreSinkAnchorEx, lpVtbl : ITextStoreSinkAnchorExVtbl* do
+  record ITextStoreSinkAnchorEx, lpVtbl : ITextStoreSinkAnchorExVtable* do
     GUID = LibC::GUID.new(0x25642426_u32, 0x28d_u16, 0x4474_u16, StaticArray[0x97_u8, 0x7b_u8, 0x11_u8, 0x1b_u8, 0xb1_u8, 0x14_u8, 0xfe_u8, 0x3e_u8])
     def query_interface(this : ITextStoreSinkAnchorEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7050,7 +7050,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IAccDictionaryVtbl,
+  record IAccDictionaryVtable,
     query_interface : Proc(IAccDictionary*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAccDictionary*, UInt32),
     release : Proc(IAccDictionary*, UInt32),
@@ -7062,7 +7062,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IAccDictionary, lpVtbl : IAccDictionaryVtbl* do
+  record IAccDictionary, lpVtbl : IAccDictionaryVtable* do
     GUID = LibC::GUID.new(0x1dc4cb5f_u32, 0xd737_u16, 0x474d_u16, StaticArray[0xad_u8, 0xe9_u8, 0x5c_u8, 0xcf_u8, 0xc9_u8, 0xbc_u8, 0x1c_u8, 0xc9_u8])
     def query_interface(this : IAccDictionary*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7092,7 +7092,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IVersionInfoVtbl,
+  record IVersionInfoVtable,
     query_interface : Proc(IVersionInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVersionInfo*, UInt32),
     release : Proc(IVersionInfo*, UInt32),
@@ -7104,7 +7104,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IVersionInfo, lpVtbl : IVersionInfoVtbl* do
+  record IVersionInfo, lpVtbl : IVersionInfoVtable* do
     GUID = LibC::GUID.new(0x401518ec_u32, 0xdb00_u16, 0x4611_u16, StaticArray[0x9b_u8, 0x29_u8, 0x2a_u8, 0xe_u8, 0x4b_u8, 0x9a_u8, 0xfa_u8, 0x85_u8])
     def query_interface(this : IVersionInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7134,7 +7134,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ICoCreateLocallyVtbl,
+  record ICoCreateLocallyVtable,
     query_interface : Proc(ICoCreateLocally*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICoCreateLocally*, UInt32),
     release : Proc(ICoCreateLocally*, UInt32),
@@ -7142,7 +7142,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ICoCreateLocally, lpVtbl : ICoCreateLocallyVtbl* do
+  record ICoCreateLocally, lpVtbl : ICoCreateLocallyVtable* do
     GUID = LibC::GUID.new(0x3de00aa_u32, 0xf272_u16, 0x41e3_u16, StaticArray[0x99_u8, 0xcb_u8, 0x3_u8, 0xc5_u8, 0xe8_u8, 0x11_u8, 0x4e_u8, 0xa0_u8])
     def query_interface(this : ICoCreateLocally*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7160,7 +7160,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ICoCreatedLocallyVtbl,
+  record ICoCreatedLocallyVtable,
     query_interface : Proc(ICoCreatedLocally*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICoCreatedLocally*, UInt32),
     release : Proc(ICoCreatedLocally*, UInt32),
@@ -7168,7 +7168,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ICoCreatedLocally, lpVtbl : ICoCreatedLocallyVtbl* do
+  record ICoCreatedLocally, lpVtbl : ICoCreatedLocallyVtable* do
     GUID = LibC::GUID.new(0xa53eb6c_u32, 0x1908_u16, 0x4742_u16, StaticArray[0x8c_u8, 0xff_u8, 0x2c_u8, 0xee_u8, 0x2e_u8, 0x93_u8, 0xf9_u8, 0x4c_u8])
     def query_interface(this : ICoCreatedLocally*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7186,7 +7186,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IAccStoreVtbl,
+  record IAccStoreVtable,
     query_interface : Proc(IAccStore*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAccStore*, UInt32),
     release : Proc(IAccStore*, UInt32),
@@ -7200,7 +7200,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IAccStore, lpVtbl : IAccStoreVtbl* do
+  record IAccStore, lpVtbl : IAccStoreVtable* do
     GUID = LibC::GUID.new(0xe2cd4a63_u32, 0x2b72_u16, 0x4d48_u16, StaticArray[0xb7_u8, 0x39_u8, 0x95_u8, 0xe4_u8, 0x76_u8, 0x51_u8, 0x95_u8, 0xba_u8])
     def query_interface(this : IAccStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7236,7 +7236,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IAccServerDocMgrVtbl,
+  record IAccServerDocMgrVtable,
     query_interface : Proc(IAccServerDocMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAccServerDocMgr*, UInt32),
     release : Proc(IAccServerDocMgr*, UInt32),
@@ -7246,7 +7246,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IAccServerDocMgr, lpVtbl : IAccServerDocMgrVtbl* do
+  record IAccServerDocMgr, lpVtbl : IAccServerDocMgrVtable* do
     GUID = LibC::GUID.new(0xad7c73cf_u32, 0x6dd5_u16, 0x4855_u16, StaticArray[0xab_u8, 0xc2_u8, 0xb0_u8, 0x4b_u8, 0xad_u8, 0x5b_u8, 0x91_u8, 0x53_u8])
     def query_interface(this : IAccServerDocMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7270,7 +7270,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IAccClientDocMgrVtbl,
+  record IAccClientDocMgrVtable,
     query_interface : Proc(IAccClientDocMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAccClientDocMgr*, UInt32),
     release : Proc(IAccClientDocMgr*, UInt32),
@@ -7281,7 +7281,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IAccClientDocMgr, lpVtbl : IAccClientDocMgrVtbl* do
+  record IAccClientDocMgr, lpVtbl : IAccClientDocMgrVtable* do
     GUID = LibC::GUID.new(0x4c896039_u32, 0x7b6d_u16, 0x49e6_u16, StaticArray[0xa8_u8, 0xc1_u8, 0x45_u8, 0x11_u8, 0x6a_u8, 0x98_u8, 0x29_u8, 0x2b_u8])
     def query_interface(this : IAccClientDocMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7308,7 +7308,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IDocWrapVtbl,
+  record IDocWrapVtable,
     query_interface : Proc(IDocWrap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDocWrap*, UInt32),
     release : Proc(IDocWrap*, UInt32),
@@ -7317,7 +7317,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IDocWrap, lpVtbl : IDocWrapVtbl* do
+  record IDocWrap, lpVtbl : IDocWrapVtable* do
     GUID = LibC::GUID.new(0xdcd285fe_u32, 0xbe0_u16, 0x43bd_u16, StaticArray[0x99_u8, 0xc9_u8, 0xaa_u8, 0xae_u8, 0xc5_u8, 0x13_u8, 0xc5_u8, 0x55_u8])
     def query_interface(this : IDocWrap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7338,7 +7338,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record IClonableWrapperVtbl,
+  record IClonableWrapperVtable,
     query_interface : Proc(IClonableWrapper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IClonableWrapper*, UInt32),
     release : Proc(IClonableWrapper*, UInt32),
@@ -7346,7 +7346,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record IClonableWrapper, lpVtbl : IClonableWrapperVtbl* do
+  record IClonableWrapper, lpVtbl : IClonableWrapperVtable* do
     GUID = LibC::GUID.new(0xb33e75ff_u32, 0xe84c_u16, 0x4dca_u16, StaticArray[0xa2_u8, 0x5c_u8, 0x33_u8, 0xb8_u8, 0xdc_u8, 0x0_u8, 0x33_u8, 0x74_u8])
     def query_interface(this : IClonableWrapper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7364,7 +7364,7 @@ module Win32cr::UI::TextServices
   end
 
   @[Extern]
-  record ITfSpeechUIServerVtbl,
+  record ITfSpeechUIServerVtable,
     query_interface : Proc(ITfSpeechUIServer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITfSpeechUIServer*, UInt32),
     release : Proc(ITfSpeechUIServer*, UInt32),
@@ -7374,7 +7374,7 @@ module Win32cr::UI::TextServices
 
 
   @[Extern]
-  record ITfSpeechUIServer, lpVtbl : ITfSpeechUIServerVtbl* do
+  record ITfSpeechUIServer, lpVtbl : ITfSpeechUIServerVtable* do
     GUID = LibC::GUID.new(0x90e9a944_u32, 0x9244_u16, 0x489f_u16, StaticArray[0xa7_u8, 0x8f_u8, 0xde_u8, 0x67_u8, 0xaf_u8, 0xc0_u8, 0x13_u8, 0xa7_u8])
     def query_interface(this : ITfSpeechUIServer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7398,18 +7398,25 @@ module Win32cr::UI::TextServices
   end
 
   def doMsCtfMonitor(dwFlags : UInt32, hEventForServiceStop : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DoMsCtfMonitor(dwFlags, hEventForServiceStop)
+    {% end %}
   end
 
   def initLocalMsCtfMonitor(dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.InitLocalMsCtfMonitor(dwFlags)
+    {% end %}
   end
 
   def uninitLocalMsCtfMonitor : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UninitLocalMsCtfMonitor
+    {% end %}
   end
 
   @[Link("msctfmonitor")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun DoMsCtfMonitor(dwFlags : UInt32, hEventForServiceStop : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
@@ -7421,4 +7428,5 @@ module Win32cr::UI::TextServices
     fun UninitLocalMsCtfMonitor : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

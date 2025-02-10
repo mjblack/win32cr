@@ -293,15 +293,21 @@ module Win32cr::System::Console
   end
 
   def allocConsole : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AllocConsole
+    {% end %}
   end
 
   def freeConsole : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FreeConsole
+    {% end %}
   end
 
   def attachConsole(dwProcessId : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AttachConsole(dwProcessId)
+    {% end %}
   end
 
   #def getConsoleCP : UInt32
@@ -321,27 +327,39 @@ module Win32cr::System::Console
   #end
 
   def getNumberOfConsoleInputEvents(hConsoleInput : Win32cr::Foundation::HANDLE, lpNumberOfEvents : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetNumberOfConsoleInputEvents(hConsoleInput, lpNumberOfEvents)
+    {% end %}
   end
 
   def readConsoleInputA(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::INPUT_RECORD*, nLength : UInt32, lpNumberOfEventsRead : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReadConsoleInputA(hConsoleInput, lpBuffer, nLength, lpNumberOfEventsRead)
+    {% end %}
   end
 
   def readConsoleInputW(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::INPUT_RECORD*, nLength : UInt32, lpNumberOfEventsRead : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReadConsoleInputW(hConsoleInput, lpBuffer, nLength, lpNumberOfEventsRead)
+    {% end %}
   end
 
   def peekConsoleInputA(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::INPUT_RECORD*, nLength : UInt32, lpNumberOfEventsRead : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PeekConsoleInputA(hConsoleInput, lpBuffer, nLength, lpNumberOfEventsRead)
+    {% end %}
   end
 
   def peekConsoleInputW(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::INPUT_RECORD*, nLength : UInt32, lpNumberOfEventsRead : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PeekConsoleInputW(hConsoleInput, lpBuffer, nLength, lpNumberOfEventsRead)
+    {% end %}
   end
 
   def readConsoleA(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfCharsToRead : UInt32, lpNumberOfCharsRead : UInt32*, pInputControl : Win32cr::System::Console::CONSOLE_READCONSOLE_CONTROL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReadConsoleA(hConsoleInput, lpBuffer, nNumberOfCharsToRead, lpNumberOfCharsRead, pInputControl)
+    {% end %}
   end
 
   #def readConsoleW(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfCharsToRead : UInt32, lpNumberOfCharsRead : UInt32*, pInputControl : Win32cr::System::Console::CONSOLE_READCONSOLE_CONTROL*) : Win32cr::Foundation::BOOL
@@ -349,11 +367,15 @@ module Win32cr::System::Console
   #end
 
   def writeConsoleA(hConsoleOutput : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfCharsToWrite : UInt32, lpNumberOfCharsWritten : UInt32*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WriteConsoleA(hConsoleOutput, lpBuffer, nNumberOfCharsToWrite, lpNumberOfCharsWritten, lpReserved)
+    {% end %}
   end
 
   def writeConsoleW(hConsoleOutput : Win32cr::Foundation::HANDLE, lpBuffer : Void*, nNumberOfCharsToWrite : UInt32, lpNumberOfCharsWritten : UInt32*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WriteConsoleW(hConsoleOutput, lpBuffer, nNumberOfCharsToWrite, lpNumberOfCharsWritten, lpReserved)
+    {% end %}
   end
 
   #def setConsoleCtrlHandler(handler_routine : Win32cr::System::Console::PHANDLER_ROUTINE, add : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
@@ -361,43 +383,63 @@ module Win32cr::System::Console
   #end
 
   def createPseudoConsole(size : Win32cr::System::Console::COORD, hInput : Win32cr::Foundation::HANDLE, hOutput : Win32cr::Foundation::HANDLE, dwFlags : UInt32, phPC : Win32cr::System::Console::HPCON*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreatePseudoConsole(size, hInput, hOutput, dwFlags, phPC)
+    {% end %}
   end
 
   def resizePseudoConsole(hPC : Win32cr::System::Console::HPCON, size : Win32cr::System::Console::COORD) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ResizePseudoConsole(hPC, size)
+    {% end %}
   end
 
   def closePseudoConsole(hPC : Win32cr::System::Console::HPCON) : Void
+    {% if !flag?(:docs) %}
     C.ClosePseudoConsole(hPC)
+    {% end %}
   end
 
   def fillConsoleOutputCharacterA(hConsoleOutput : Win32cr::Foundation::HANDLE, cCharacter : Win32cr::Foundation::CHAR, nLength : UInt32, dwWriteCoord : Win32cr::System::Console::COORD, lpNumberOfCharsWritten : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FillConsoleOutputCharacterA(hConsoleOutput, cCharacter, nLength, dwWriteCoord, lpNumberOfCharsWritten)
+    {% end %}
   end
 
   def fillConsoleOutputCharacterW(hConsoleOutput : Win32cr::Foundation::HANDLE, cCharacter : UInt16, nLength : UInt32, dwWriteCoord : Win32cr::System::Console::COORD, lpNumberOfCharsWritten : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FillConsoleOutputCharacterW(hConsoleOutput, cCharacter, nLength, dwWriteCoord, lpNumberOfCharsWritten)
+    {% end %}
   end
 
   def fillConsoleOutputAttribute(hConsoleOutput : Win32cr::Foundation::HANDLE, wAttribute : UInt16, nLength : UInt32, dwWriteCoord : Win32cr::System::Console::COORD, lpNumberOfAttrsWritten : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FillConsoleOutputAttribute(hConsoleOutput, wAttribute, nLength, dwWriteCoord, lpNumberOfAttrsWritten)
+    {% end %}
   end
 
   def generateConsoleCtrlEvent(dwCtrlEvent : UInt32, dwProcessGroupId : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GenerateConsoleCtrlEvent(dwCtrlEvent, dwProcessGroupId)
+    {% end %}
   end
 
   def createConsoleScreenBuffer(dwDesiredAccess : UInt32, dwShareMode : UInt32, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwFlags : UInt32, lpScreenBufferData : Void*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateConsoleScreenBuffer(dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwFlags, lpScreenBufferData)
+    {% end %}
   end
 
   def setConsoleActiveScreenBuffer(hConsoleOutput : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetConsoleActiveScreenBuffer(hConsoleOutput)
+    {% end %}
   end
 
   def flushConsoleInputBuffer(hConsoleInput : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FlushConsoleInputBuffer(hConsoleInput)
+    {% end %}
   end
 
   #def setConsoleCP(wCodePageID : UInt32) : Win32cr::Foundation::BOOL
@@ -409,251 +451,375 @@ module Win32cr::System::Console
   #end
 
   def getConsoleCursorInfo(hConsoleOutput : Win32cr::Foundation::HANDLE, lpConsoleCursorInfo : Win32cr::System::Console::CONSOLE_CURSOR_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetConsoleCursorInfo(hConsoleOutput, lpConsoleCursorInfo)
+    {% end %}
   end
 
   def setConsoleCursorInfo(hConsoleOutput : Win32cr::Foundation::HANDLE, lpConsoleCursorInfo : Win32cr::System::Console::CONSOLE_CURSOR_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetConsoleCursorInfo(hConsoleOutput, lpConsoleCursorInfo)
+    {% end %}
   end
 
   def getConsoleScreenBufferInfo(hConsoleOutput : Win32cr::Foundation::HANDLE, lpConsoleScreenBufferInfo : Win32cr::System::Console::CONSOLE_SCREEN_BUFFER_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetConsoleScreenBufferInfo(hConsoleOutput, lpConsoleScreenBufferInfo)
+    {% end %}
   end
 
   def getConsoleScreenBufferInfoEx(hConsoleOutput : Win32cr::Foundation::HANDLE, lpConsoleScreenBufferInfoEx : Win32cr::System::Console::CONSOLE_SCREEN_BUFFER_INFOEX*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetConsoleScreenBufferInfoEx(hConsoleOutput, lpConsoleScreenBufferInfoEx)
+    {% end %}
   end
 
   def setConsoleScreenBufferInfoEx(hConsoleOutput : Win32cr::Foundation::HANDLE, lpConsoleScreenBufferInfoEx : Win32cr::System::Console::CONSOLE_SCREEN_BUFFER_INFOEX*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetConsoleScreenBufferInfoEx(hConsoleOutput, lpConsoleScreenBufferInfoEx)
+    {% end %}
   end
 
   def setConsoleScreenBufferSize(hConsoleOutput : Win32cr::Foundation::HANDLE, dwSize : Win32cr::System::Console::COORD) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetConsoleScreenBufferSize(hConsoleOutput, dwSize)
+    {% end %}
   end
 
   def setConsoleCursorPosition(hConsoleOutput : Win32cr::Foundation::HANDLE, dwCursorPosition : Win32cr::System::Console::COORD) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetConsoleCursorPosition(hConsoleOutput, dwCursorPosition)
+    {% end %}
   end
 
   def getLargestConsoleWindowSize(hConsoleOutput : Win32cr::Foundation::HANDLE) : Win32cr::System::Console::COORD
+    {% if !flag?(:docs) %}
     C.GetLargestConsoleWindowSize(hConsoleOutput)
+    {% end %}
   end
 
   def setConsoleTextAttribute(hConsoleOutput : Win32cr::Foundation::HANDLE, wAttributes : Win32cr::System::Console::CONSOLE_CHARACTER_ATTRIBUTES) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetConsoleTextAttribute(hConsoleOutput, wAttributes)
+    {% end %}
   end
 
   def setConsoleWindowInfo(hConsoleOutput : Win32cr::Foundation::HANDLE, bAbsolute : Win32cr::Foundation::BOOL, lpConsoleWindow : Win32cr::System::Console::SMALL_RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetConsoleWindowInfo(hConsoleOutput, bAbsolute, lpConsoleWindow)
+    {% end %}
   end
 
   def writeConsoleOutputCharacterA(hConsoleOutput : Win32cr::Foundation::HANDLE, lpCharacter : UInt8*, nLength : UInt32, dwWriteCoord : Win32cr::System::Console::COORD, lpNumberOfCharsWritten : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WriteConsoleOutputCharacterA(hConsoleOutput, lpCharacter, nLength, dwWriteCoord, lpNumberOfCharsWritten)
+    {% end %}
   end
 
   def writeConsoleOutputCharacterW(hConsoleOutput : Win32cr::Foundation::HANDLE, lpCharacter : UInt16*, nLength : UInt32, dwWriteCoord : Win32cr::System::Console::COORD, lpNumberOfCharsWritten : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WriteConsoleOutputCharacterW(hConsoleOutput, lpCharacter, nLength, dwWriteCoord, lpNumberOfCharsWritten)
+    {% end %}
   end
 
   def writeConsoleOutputAttribute(hConsoleOutput : Win32cr::Foundation::HANDLE, lpAttribute : UInt16*, nLength : UInt32, dwWriteCoord : Win32cr::System::Console::COORD, lpNumberOfAttrsWritten : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WriteConsoleOutputAttribute(hConsoleOutput, lpAttribute, nLength, dwWriteCoord, lpNumberOfAttrsWritten)
+    {% end %}
   end
 
   def readConsoleOutputCharacterA(hConsoleOutput : Win32cr::Foundation::HANDLE, lpCharacter : UInt8*, nLength : UInt32, dwReadCoord : Win32cr::System::Console::COORD, lpNumberOfCharsRead : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReadConsoleOutputCharacterA(hConsoleOutput, lpCharacter, nLength, dwReadCoord, lpNumberOfCharsRead)
+    {% end %}
   end
 
   def readConsoleOutputCharacterW(hConsoleOutput : Win32cr::Foundation::HANDLE, lpCharacter : UInt16*, nLength : UInt32, dwReadCoord : Win32cr::System::Console::COORD, lpNumberOfCharsRead : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReadConsoleOutputCharacterW(hConsoleOutput, lpCharacter, nLength, dwReadCoord, lpNumberOfCharsRead)
+    {% end %}
   end
 
   def readConsoleOutputAttribute(hConsoleOutput : Win32cr::Foundation::HANDLE, lpAttribute : UInt16*, nLength : UInt32, dwReadCoord : Win32cr::System::Console::COORD, lpNumberOfAttrsRead : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReadConsoleOutputAttribute(hConsoleOutput, lpAttribute, nLength, dwReadCoord, lpNumberOfAttrsRead)
+    {% end %}
   end
 
   def writeConsoleInputA(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::INPUT_RECORD*, nLength : UInt32, lpNumberOfEventsWritten : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WriteConsoleInputA(hConsoleInput, lpBuffer, nLength, lpNumberOfEventsWritten)
+    {% end %}
   end
 
   def writeConsoleInputW(hConsoleInput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::INPUT_RECORD*, nLength : UInt32, lpNumberOfEventsWritten : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WriteConsoleInputW(hConsoleInput, lpBuffer, nLength, lpNumberOfEventsWritten)
+    {% end %}
   end
 
   def scrollConsoleScreenBufferA(hConsoleOutput : Win32cr::Foundation::HANDLE, lpScrollRectangle : Win32cr::System::Console::SMALL_RECT*, lpClipRectangle : Win32cr::System::Console::SMALL_RECT*, dwDestinationOrigin : Win32cr::System::Console::COORD, lpFill : Win32cr::System::Console::CHAR_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ScrollConsoleScreenBufferA(hConsoleOutput, lpScrollRectangle, lpClipRectangle, dwDestinationOrigin, lpFill)
+    {% end %}
   end
 
   def scrollConsoleScreenBufferW(hConsoleOutput : Win32cr::Foundation::HANDLE, lpScrollRectangle : Win32cr::System::Console::SMALL_RECT*, lpClipRectangle : Win32cr::System::Console::SMALL_RECT*, dwDestinationOrigin : Win32cr::System::Console::COORD, lpFill : Win32cr::System::Console::CHAR_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ScrollConsoleScreenBufferW(hConsoleOutput, lpScrollRectangle, lpClipRectangle, dwDestinationOrigin, lpFill)
+    {% end %}
   end
 
   def writeConsoleOutputA(hConsoleOutput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::CHAR_INFO*, dwBufferSize : Win32cr::System::Console::COORD, dwBufferCoord : Win32cr::System::Console::COORD, lpWriteRegion : Win32cr::System::Console::SMALL_RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WriteConsoleOutputA(hConsoleOutput, lpBuffer, dwBufferSize, dwBufferCoord, lpWriteRegion)
+    {% end %}
   end
 
   def writeConsoleOutputW(hConsoleOutput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::CHAR_INFO*, dwBufferSize : Win32cr::System::Console::COORD, dwBufferCoord : Win32cr::System::Console::COORD, lpWriteRegion : Win32cr::System::Console::SMALL_RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WriteConsoleOutputW(hConsoleOutput, lpBuffer, dwBufferSize, dwBufferCoord, lpWriteRegion)
+    {% end %}
   end
 
   def readConsoleOutputA(hConsoleOutput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::CHAR_INFO*, dwBufferSize : Win32cr::System::Console::COORD, dwBufferCoord : Win32cr::System::Console::COORD, lpReadRegion : Win32cr::System::Console::SMALL_RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReadConsoleOutputA(hConsoleOutput, lpBuffer, dwBufferSize, dwBufferCoord, lpReadRegion)
+    {% end %}
   end
 
   def readConsoleOutputW(hConsoleOutput : Win32cr::Foundation::HANDLE, lpBuffer : Win32cr::System::Console::CHAR_INFO*, dwBufferSize : Win32cr::System::Console::COORD, dwBufferCoord : Win32cr::System::Console::COORD, lpReadRegion : Win32cr::System::Console::SMALL_RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReadConsoleOutputW(hConsoleOutput, lpBuffer, dwBufferSize, dwBufferCoord, lpReadRegion)
+    {% end %}
   end
 
   def getConsoleTitleA(lpConsoleTitle : UInt8*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleTitleA(lpConsoleTitle, nSize)
+    {% end %}
   end
 
   def getConsoleTitleW(lpConsoleTitle : UInt16*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleTitleW(lpConsoleTitle, nSize)
+    {% end %}
   end
 
   def getConsoleOriginalTitleA(lpConsoleTitle : UInt8*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleOriginalTitleA(lpConsoleTitle, nSize)
+    {% end %}
   end
 
   def getConsoleOriginalTitleW(lpConsoleTitle : UInt16*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleOriginalTitleW(lpConsoleTitle, nSize)
+    {% end %}
   end
 
   def setConsoleTitleA(lpConsoleTitle : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetConsoleTitleA(lpConsoleTitle)
+    {% end %}
   end
 
   def setConsoleTitleW(lpConsoleTitle : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetConsoleTitleW(lpConsoleTitle)
+    {% end %}
   end
 
   def getNumberOfConsoleMouseButtons(lpNumberOfMouseButtons : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetNumberOfConsoleMouseButtons(lpNumberOfMouseButtons)
+    {% end %}
   end
 
   def getConsoleFontSize(hConsoleOutput : Win32cr::Foundation::HANDLE, nFont : UInt32) : Win32cr::System::Console::COORD
+    {% if !flag?(:docs) %}
     C.GetConsoleFontSize(hConsoleOutput, nFont)
+    {% end %}
   end
 
   def getCurrentConsoleFont(hConsoleOutput : Win32cr::Foundation::HANDLE, bMaximumWindow : Win32cr::Foundation::BOOL, lpConsoleCurrentFont : Win32cr::System::Console::CONSOLE_FONT_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCurrentConsoleFont(hConsoleOutput, bMaximumWindow, lpConsoleCurrentFont)
+    {% end %}
   end
 
   def getCurrentConsoleFontEx(hConsoleOutput : Win32cr::Foundation::HANDLE, bMaximumWindow : Win32cr::Foundation::BOOL, lpConsoleCurrentFontEx : Win32cr::System::Console::CONSOLE_FONT_INFOEX*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCurrentConsoleFontEx(hConsoleOutput, bMaximumWindow, lpConsoleCurrentFontEx)
+    {% end %}
   end
 
   def setCurrentConsoleFontEx(hConsoleOutput : Win32cr::Foundation::HANDLE, bMaximumWindow : Win32cr::Foundation::BOOL, lpConsoleCurrentFontEx : Win32cr::System::Console::CONSOLE_FONT_INFOEX*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetCurrentConsoleFontEx(hConsoleOutput, bMaximumWindow, lpConsoleCurrentFontEx)
+    {% end %}
   end
 
   def getConsoleSelectionInfo(lpConsoleSelectionInfo : Win32cr::System::Console::CONSOLE_SELECTION_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetConsoleSelectionInfo(lpConsoleSelectionInfo)
+    {% end %}
   end
 
   def getConsoleHistoryInfo(lpConsoleHistoryInfo : Win32cr::System::Console::CONSOLE_HISTORY_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetConsoleHistoryInfo(lpConsoleHistoryInfo)
+    {% end %}
   end
 
   def setConsoleHistoryInfo(lpConsoleHistoryInfo : Win32cr::System::Console::CONSOLE_HISTORY_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetConsoleHistoryInfo(lpConsoleHistoryInfo)
+    {% end %}
   end
 
   def getConsoleDisplayMode(lpModeFlags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetConsoleDisplayMode(lpModeFlags)
+    {% end %}
   end
 
   def setConsoleDisplayMode(hConsoleOutput : Win32cr::Foundation::HANDLE, dwFlags : UInt32, lpNewScreenBufferDimensions : Win32cr::System::Console::COORD*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetConsoleDisplayMode(hConsoleOutput, dwFlags, lpNewScreenBufferDimensions)
+    {% end %}
   end
 
   def getConsoleWindow : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.GetConsoleWindow
+    {% end %}
   end
 
   def addConsoleAliasA(source : Win32cr::Foundation::PSTR, target : Win32cr::Foundation::PSTR, exe_name : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddConsoleAliasA(source, target, exe_name)
+    {% end %}
   end
 
   def addConsoleAliasW(source : Win32cr::Foundation::PWSTR, target : Win32cr::Foundation::PWSTR, exe_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddConsoleAliasW(source, target, exe_name)
+    {% end %}
   end
 
   def getConsoleAliasA(source : Win32cr::Foundation::PSTR, target_buffer : UInt8*, target_buffer_length : UInt32, exe_name : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleAliasA(source, target_buffer, target_buffer_length, exe_name)
+    {% end %}
   end
 
   def getConsoleAliasW(source : Win32cr::Foundation::PWSTR, target_buffer : UInt16*, target_buffer_length : UInt32, exe_name : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleAliasW(source, target_buffer, target_buffer_length, exe_name)
+    {% end %}
   end
 
   def getConsoleAliasesLengthA(exe_name : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleAliasesLengthA(exe_name)
+    {% end %}
   end
 
   def getConsoleAliasesLengthW(exe_name : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleAliasesLengthW(exe_name)
+    {% end %}
   end
 
   def getConsoleAliasExesLengthA : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleAliasExesLengthA
+    {% end %}
   end
 
   def getConsoleAliasExesLengthW : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleAliasExesLengthW
+    {% end %}
   end
 
   def getConsoleAliasesA(alias_buffer : UInt8*, alias_buffer_length : UInt32, exe_name : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleAliasesA(alias_buffer, alias_buffer_length, exe_name)
+    {% end %}
   end
 
   def getConsoleAliasesW(alias_buffer : UInt16*, alias_buffer_length : UInt32, exe_name : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleAliasesW(alias_buffer, alias_buffer_length, exe_name)
+    {% end %}
   end
 
   def getConsoleAliasExesA(exe_name_buffer : UInt8*, exe_name_buffer_length : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleAliasExesA(exe_name_buffer, exe_name_buffer_length)
+    {% end %}
   end
 
   def getConsoleAliasExesW(exe_name_buffer : UInt16*, exe_name_buffer_length : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleAliasExesW(exe_name_buffer, exe_name_buffer_length)
+    {% end %}
   end
 
   def expungeConsoleCommandHistoryA(exe_name : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.ExpungeConsoleCommandHistoryA(exe_name)
+    {% end %}
   end
 
   def expungeConsoleCommandHistoryW(exe_name : Win32cr::Foundation::PWSTR) : Void
+    {% if !flag?(:docs) %}
     C.ExpungeConsoleCommandHistoryW(exe_name)
+    {% end %}
   end
 
   def setConsoleNumberOfCommandsA(number : UInt32, exe_name : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetConsoleNumberOfCommandsA(number, exe_name)
+    {% end %}
   end
 
   def setConsoleNumberOfCommandsW(number : UInt32, exe_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetConsoleNumberOfCommandsW(number, exe_name)
+    {% end %}
   end
 
   def getConsoleCommandHistoryLengthA(exe_name : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleCommandHistoryLengthA(exe_name)
+    {% end %}
   end
 
   def getConsoleCommandHistoryLengthW(exe_name : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleCommandHistoryLengthW(exe_name)
+    {% end %}
   end
 
   def getConsoleCommandHistoryA(commands : Win32cr::Foundation::PSTR, command_buffer_length : UInt32, exe_name : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleCommandHistoryA(commands, command_buffer_length, exe_name)
+    {% end %}
   end
 
   def getConsoleCommandHistoryW(commands : Win32cr::Foundation::PWSTR, command_buffer_length : UInt32, exe_name : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleCommandHistoryW(commands, command_buffer_length, exe_name)
+    {% end %}
   end
 
   def getConsoleProcessList(lpdwProcessList : UInt32*, dwProcessCount : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetConsoleProcessList(lpdwProcessList, dwProcessCount)
+    {% end %}
   end
 
   #def getStdHandle(nStdHandle : Win32cr::System::Console::STD_HANDLE) : Win32cr::Foundation::HANDLE
@@ -661,14 +827,19 @@ module Win32cr::System::Console
   #end
 
   def setStdHandle(nStdHandle : Win32cr::System::Console::STD_HANDLE, hHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetStdHandle(nStdHandle, hHandle)
+    {% end %}
   end
 
   def setStdHandleEx(nStdHandle : Win32cr::System::Console::STD_HANDLE, hHandle : Win32cr::Foundation::HANDLE, phPrevValue : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetStdHandleEx(nStdHandle, hHandle, phPrevValue)
+    {% end %}
   end
 
   @[Link("kernel32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun AllocConsole : Win32cr::Foundation::BOOL
@@ -962,4 +1133,5 @@ module Win32cr::System::Console
     fun SetStdHandleEx(nStdHandle : Win32cr::System::Console::STD_HANDLE, hHandle : Win32cr::Foundation::HANDLE, phPrevValue : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

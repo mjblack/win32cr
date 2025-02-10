@@ -6546,7 +6546,7 @@ module Win32cr::Media::Multimedia
   end
 
   @[Extern]
-  record IAVIStreamVtbl,
+  record IAVIStreamVtable,
     query_interface : Proc(IAVIStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAVIStream*, UInt32),
     release : Proc(IAVIStream*, UInt32),
@@ -6564,7 +6564,7 @@ module Win32cr::Media::Multimedia
 
 
   @[Extern]
-  record IAVIStream, lpVtbl : IAVIStreamVtbl* do
+  record IAVIStream, lpVtbl : IAVIStreamVtable* do
     GUID = LibC::GUID.new(0x20021_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IAVIStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6612,7 +6612,7 @@ module Win32cr::Media::Multimedia
   end
 
   @[Extern]
-  record IAVIStreamingVtbl,
+  record IAVIStreamingVtable,
     query_interface : Proc(IAVIStreaming*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAVIStreaming*, UInt32),
     release : Proc(IAVIStreaming*, UInt32),
@@ -6621,7 +6621,7 @@ module Win32cr::Media::Multimedia
 
 
   @[Extern]
-  record IAVIStreaming, lpVtbl : IAVIStreamingVtbl* do
+  record IAVIStreaming, lpVtbl : IAVIStreamingVtable* do
     GUID = LibC::GUID.new(0x20022_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IAVIStreaming*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6642,7 +6642,7 @@ module Win32cr::Media::Multimedia
   end
 
   @[Extern]
-  record IAVIEditStreamVtbl,
+  record IAVIEditStreamVtable,
     query_interface : Proc(IAVIEditStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAVIEditStream*, UInt32),
     release : Proc(IAVIEditStream*, UInt32),
@@ -6654,7 +6654,7 @@ module Win32cr::Media::Multimedia
 
 
   @[Extern]
-  record IAVIEditStream, lpVtbl : IAVIEditStreamVtbl* do
+  record IAVIEditStream, lpVtbl : IAVIEditStreamVtable* do
     GUID = LibC::GUID.new(0x20024_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IAVIEditStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6684,7 +6684,7 @@ module Win32cr::Media::Multimedia
   end
 
   @[Extern]
-  record IAVIPersistFileVtbl,
+  record IAVIPersistFileVtable,
     query_interface : Proc(IAVIPersistFile*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAVIPersistFile*, UInt32),
     release : Proc(IAVIPersistFile*, UInt32),
@@ -6698,7 +6698,7 @@ module Win32cr::Media::Multimedia
 
 
   @[Extern]
-  record IAVIPersistFile, lpVtbl : IAVIPersistFileVtbl* do
+  record IAVIPersistFile, lpVtbl : IAVIPersistFileVtable* do
     GUID = LibC::GUID.new(0x20025_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IAVIPersistFile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6734,7 +6734,7 @@ module Win32cr::Media::Multimedia
   end
 
   @[Extern]
-  record IAVIFileVtbl,
+  record IAVIFileVtable,
     query_interface : Proc(IAVIFile*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAVIFile*, UInt32),
     release : Proc(IAVIFile*, UInt32),
@@ -6748,7 +6748,7 @@ module Win32cr::Media::Multimedia
 
 
   @[Extern]
-  record IAVIFile, lpVtbl : IAVIFileVtbl* do
+  record IAVIFile, lpVtbl : IAVIFileVtable* do
     GUID = LibC::GUID.new(0x20020_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IAVIFile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6784,7 +6784,7 @@ module Win32cr::Media::Multimedia
   end
 
   @[Extern]
-  record IGetFrameVtbl,
+  record IGetFrameVtable,
     query_interface : Proc(IGetFrame*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGetFrame*, UInt32),
     release : Proc(IGetFrame*, UInt32),
@@ -6795,7 +6795,7 @@ module Win32cr::Media::Multimedia
 
 
   @[Extern]
-  record IGetFrame, lpVtbl : IGetFrameVtbl* do
+  record IGetFrame, lpVtbl : IGetFrameVtable* do
     GUID = LibC::GUID.new(0x20023_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IGetFrame*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6822,689 +6822,1030 @@ module Win32cr::Media::Multimedia
   end
 
   def mciSendCommandA(mciId : UInt32, uMsg : UInt32, dwParam1 : LibC::UIntPtrT, dwParam2 : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.mciSendCommandA(mciId, uMsg, dwParam1, dwParam2)
+    {% end %}
   end
 
   def mciSendCommandW(mciId : UInt32, uMsg : UInt32, dwParam1 : LibC::UIntPtrT, dwParam2 : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.mciSendCommandW(mciId, uMsg, dwParam1, dwParam2)
+    {% end %}
   end
 
   def mciSendStringA(lpstrCommand : Win32cr::Foundation::PSTR, lpstrReturnString : UInt8*, uReturnLength : UInt32, hwndCallback : Win32cr::Foundation::HWND) : UInt32
+    {% if !flag?(:docs) %}
     C.mciSendStringA(lpstrCommand, lpstrReturnString, uReturnLength, hwndCallback)
+    {% end %}
   end
 
   def mciSendStringW(lpstrCommand : Win32cr::Foundation::PWSTR, lpstrReturnString : UInt16*, uReturnLength : UInt32, hwndCallback : Win32cr::Foundation::HWND) : UInt32
+    {% if !flag?(:docs) %}
     C.mciSendStringW(lpstrCommand, lpstrReturnString, uReturnLength, hwndCallback)
+    {% end %}
   end
 
   def mciGetDeviceIDA(pszDevice : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.mciGetDeviceIDA(pszDevice)
+    {% end %}
   end
 
   def mciGetDeviceIDW(pszDevice : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.mciGetDeviceIDW(pszDevice)
+    {% end %}
   end
 
   def mciGetDeviceIDFromElementIDA(dwElementID : UInt32, lpstrType : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.mciGetDeviceIDFromElementIDA(dwElementID, lpstrType)
+    {% end %}
   end
 
   def mciGetDeviceIDFromElementIDW(dwElementID : UInt32, lpstrType : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.mciGetDeviceIDFromElementIDW(dwElementID, lpstrType)
+    {% end %}
   end
 
   def mciGetErrorStringA(mcierr : UInt32, pszText : UInt8*, cchText : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.mciGetErrorStringA(mcierr, pszText, cchText)
+    {% end %}
   end
 
   def mciGetErrorStringW(mcierr : UInt32, pszText : UInt16*, cchText : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.mciGetErrorStringW(mcierr, pszText, cchText)
+    {% end %}
   end
 
   def mciSetYieldProc(mciId : UInt32, fpYieldProc : Win32cr::Media::Multimedia::YIELDPROC, dwYieldData : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.mciSetYieldProc(mciId, fpYieldProc, dwYieldData)
+    {% end %}
   end
 
   def mciGetCreatorTask(mciId : UInt32) : Win32cr::Media::HTASK
+    {% if !flag?(:docs) %}
     C.mciGetCreatorTask(mciId)
+    {% end %}
   end
 
   def mciGetYieldProc(mciId : UInt32, pdwYieldData : UInt32*) : Win32cr::Media::Multimedia::YIELDPROC
+    {% if !flag?(:docs) %}
     C.mciGetYieldProc(mciId, pdwYieldData)
+    {% end %}
   end
 
   def mciGetDriverData(wDeviceID : UInt32) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.mciGetDriverData(wDeviceID)
+    {% end %}
   end
 
   def mciLoadCommandResource(hInstance : Win32cr::Foundation::HANDLE, lpResName : Win32cr::Foundation::PWSTR, wType : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.mciLoadCommandResource(hInstance, lpResName, wType)
+    {% end %}
   end
 
   def mciSetDriverData(wDeviceID : UInt32, dwData : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.mciSetDriverData(wDeviceID, dwData)
+    {% end %}
   end
 
   def mciDriverYield(wDeviceID : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.mciDriverYield(wDeviceID)
+    {% end %}
   end
 
   def mciDriverNotify(hwndCallback : Win32cr::Foundation::HANDLE, wDeviceID : UInt32, uStatus : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.mciDriverNotify(hwndCallback, wDeviceID, uStatus)
+    {% end %}
   end
 
   def mciFreeCommandResource(wTable : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.mciFreeCommandResource(wTable)
+    {% end %}
   end
 
   def closeDriver(hDriver : Win32cr::Media::Multimedia::HDRVR, lParam1 : Win32cr::Foundation::LPARAM, lParam2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.CloseDriver(hDriver, lParam1, lParam2)
+    {% end %}
   end
 
   def openDriver(szDriverName : Win32cr::Foundation::PWSTR, szSectionName : Win32cr::Foundation::PWSTR, lParam2 : Win32cr::Foundation::LPARAM) : Win32cr::Media::Multimedia::HDRVR
+    {% if !flag?(:docs) %}
     C.OpenDriver(szDriverName, szSectionName, lParam2)
+    {% end %}
   end
 
   def sendDriverMessage(hDriver : Win32cr::Media::Multimedia::HDRVR, message : UInt32, lParam1 : Win32cr::Foundation::LPARAM, lParam2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.SendDriverMessage(hDriver, message, lParam1, lParam2)
+    {% end %}
   end
 
   def drvGetModuleHandle(hDriver : Win32cr::Media::Multimedia::HDRVR) : Win32cr::Foundation::HINSTANCE
+    {% if !flag?(:docs) %}
     C.DrvGetModuleHandle(hDriver)
+    {% end %}
   end
 
   def getDriverModuleHandle(hDriver : Win32cr::Media::Multimedia::HDRVR) : Win32cr::Foundation::HINSTANCE
+    {% if !flag?(:docs) %}
     C.GetDriverModuleHandle(hDriver)
+    {% end %}
   end
 
   def defDriverProc(dwDriverIdentifier : LibC::UIntPtrT, hdrvr : Win32cr::Media::Multimedia::HDRVR, uMsg : UInt32, lParam1 : Win32cr::Foundation::LPARAM, lParam2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.DefDriverProc(dwDriverIdentifier, hdrvr, uMsg, lParam1, lParam2)
+    {% end %}
   end
 
   def driverCallback(dwCallback : LibC::UIntPtrT, dwFlags : UInt32, hDevice : Win32cr::Media::Multimedia::HDRVR, dwMsg : UInt32, dwUser : LibC::UIntPtrT, dwParam1 : LibC::UIntPtrT, dwParam2 : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DriverCallback(dwCallback, dwFlags, hDevice, dwMsg, dwUser, dwParam1, dwParam2)
+    {% end %}
   end
 
   def sndOpenSound(event_name : Win32cr::Foundation::PWSTR, app_name : Win32cr::Foundation::PWSTR, flags : Int32, file_handle : Win32cr::Foundation::HANDLE*) : Int32
+    {% if !flag?(:docs) %}
     C.sndOpenSound(event_name, app_name, flags, file_handle)
+    {% end %}
   end
 
   def mmDrvInstall(hDriver : Win32cr::Media::Multimedia::HDRVR, wszDrvEntry : Win32cr::Foundation::PWSTR, drvMessage : Win32cr::Media::Multimedia::DRIVERMSGPROC, wFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.mmDrvInstall(hDriver, wszDrvEntry, drvMessage, wFlags)
+    {% end %}
   end
 
   def mmioStringToFOURCCA(sz : Win32cr::Foundation::PSTR, uFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.mmioStringToFOURCCA(sz, uFlags)
+    {% end %}
   end
 
   def mmioStringToFOURCCW(sz : Win32cr::Foundation::PWSTR, uFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.mmioStringToFOURCCW(sz, uFlags)
+    {% end %}
   end
 
   def mmioInstallIOProcA(fccIOProc : UInt32, pIOProc : Win32cr::Media::Multimedia::LPMMIOPROC, dwFlags : UInt32) : Win32cr::Media::Multimedia::LPMMIOPROC
+    {% if !flag?(:docs) %}
     C.mmioInstallIOProcA(fccIOProc, pIOProc, dwFlags)
+    {% end %}
   end
 
   def mmioInstallIOProcW(fccIOProc : UInt32, pIOProc : Win32cr::Media::Multimedia::LPMMIOPROC, dwFlags : UInt32) : Win32cr::Media::Multimedia::LPMMIOPROC
+    {% if !flag?(:docs) %}
     C.mmioInstallIOProcW(fccIOProc, pIOProc, dwFlags)
+    {% end %}
   end
 
   def mmioOpenA(pszFileName : UInt8*, pmmioinfo : Win32cr::Media::Multimedia::MMIOINFO*, fdwOpen : UInt32) : Win32cr::Media::Multimedia::HMMIO
+    {% if !flag?(:docs) %}
     C.mmioOpenA(pszFileName, pmmioinfo, fdwOpen)
+    {% end %}
   end
 
   def mmioOpenW(pszFileName : UInt16*, pmmioinfo : Win32cr::Media::Multimedia::MMIOINFO*, fdwOpen : UInt32) : Win32cr::Media::Multimedia::HMMIO
+    {% if !flag?(:docs) %}
     C.mmioOpenW(pszFileName, pmmioinfo, fdwOpen)
+    {% end %}
   end
 
   def mmioRenameA(pszFileName : Win32cr::Foundation::PSTR, pszNewFileName : Win32cr::Foundation::PSTR, pmmioinfo : Win32cr::Media::Multimedia::MMIOINFO*, fdwRename : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.mmioRenameA(pszFileName, pszNewFileName, pmmioinfo, fdwRename)
+    {% end %}
   end
 
   def mmioRenameW(pszFileName : Win32cr::Foundation::PWSTR, pszNewFileName : Win32cr::Foundation::PWSTR, pmmioinfo : Win32cr::Media::Multimedia::MMIOINFO*, fdwRename : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.mmioRenameW(pszFileName, pszNewFileName, pmmioinfo, fdwRename)
+    {% end %}
   end
 
   def mmioClose(hmmio : Win32cr::Media::Multimedia::HMMIO, fuClose : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.mmioClose(hmmio, fuClose)
+    {% end %}
   end
 
   def mmioRead(hmmio : Win32cr::Media::Multimedia::HMMIO, pch : Int8*, cch : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.mmioRead(hmmio, pch, cch)
+    {% end %}
   end
 
   def mmioWrite(hmmio : Win32cr::Media::Multimedia::HMMIO, pch : Win32cr::Foundation::PSTR, cch : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.mmioWrite(hmmio, pch, cch)
+    {% end %}
   end
 
   def mmioSeek(hmmio : Win32cr::Media::Multimedia::HMMIO, lOffset : Int32, iOrigin : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.mmioSeek(hmmio, lOffset, iOrigin)
+    {% end %}
   end
 
   def mmioGetInfo(hmmio : Win32cr::Media::Multimedia::HMMIO, pmmioinfo : Win32cr::Media::Multimedia::MMIOINFO*, fuInfo : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.mmioGetInfo(hmmio, pmmioinfo, fuInfo)
+    {% end %}
   end
 
   def mmioSetInfo(hmmio : Win32cr::Media::Multimedia::HMMIO, pmmioinfo : Win32cr::Media::Multimedia::MMIOINFO*, fuInfo : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.mmioSetInfo(hmmio, pmmioinfo, fuInfo)
+    {% end %}
   end
 
   def mmioSetBuffer(hmmio : Win32cr::Media::Multimedia::HMMIO, pchBuffer : UInt8*, cchBuffer : Int32, fuBuffer : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.mmioSetBuffer(hmmio, pchBuffer, cchBuffer, fuBuffer)
+    {% end %}
   end
 
   def mmioFlush(hmmio : Win32cr::Media::Multimedia::HMMIO, fuFlush : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.mmioFlush(hmmio, fuFlush)
+    {% end %}
   end
 
   def mmioAdvance(hmmio : Win32cr::Media::Multimedia::HMMIO, pmmioinfo : Win32cr::Media::Multimedia::MMIOINFO*, fuAdvance : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.mmioAdvance(hmmio, pmmioinfo, fuAdvance)
+    {% end %}
   end
 
   def mmioSendMessage(hmmio : Win32cr::Media::Multimedia::HMMIO, uMsg : UInt32, lParam1 : Win32cr::Foundation::LPARAM, lParam2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.mmioSendMessage(hmmio, uMsg, lParam1, lParam2)
+    {% end %}
   end
 
   def mmioDescend(hmmio : Win32cr::Media::Multimedia::HMMIO, pmmcki : Win32cr::Media::Multimedia::MMCKINFO*, pmmckiParent : Win32cr::Media::Multimedia::MMCKINFO*, fuDescend : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.mmioDescend(hmmio, pmmcki, pmmckiParent, fuDescend)
+    {% end %}
   end
 
   def mmioAscend(hmmio : Win32cr::Media::Multimedia::HMMIO, pmmcki : Win32cr::Media::Multimedia::MMCKINFO*, fuAscend : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.mmioAscend(hmmio, pmmcki, fuAscend)
+    {% end %}
   end
 
   def mmioCreateChunk(hmmio : Win32cr::Media::Multimedia::HMMIO, pmmcki : Win32cr::Media::Multimedia::MMCKINFO*, fuCreate : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.mmioCreateChunk(hmmio, pmmcki, fuCreate)
+    {% end %}
   end
 
   def joyGetPosEx(uJoyID : UInt32, pji : Win32cr::Media::Multimedia::JOYINFOEX*) : UInt32
+    {% if !flag?(:docs) %}
     C.joyGetPosEx(uJoyID, pji)
+    {% end %}
   end
 
   def joyGetNumDevs : UInt32
+    {% if !flag?(:docs) %}
     C.joyGetNumDevs
+    {% end %}
   end
 
   def joyGetDevCapsA(uJoyID : LibC::UIntPtrT, pjc : Win32cr::Media::Multimedia::JOYCAPSA*, cbjc : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.joyGetDevCapsA(uJoyID, pjc, cbjc)
+    {% end %}
   end
 
   def joyGetDevCapsW(uJoyID : LibC::UIntPtrT, pjc : Win32cr::Media::Multimedia::JOYCAPSW*, cbjc : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.joyGetDevCapsW(uJoyID, pjc, cbjc)
+    {% end %}
   end
 
   def joyGetPos(uJoyID : UInt32, pji : Win32cr::Media::Multimedia::JOYINFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.joyGetPos(uJoyID, pji)
+    {% end %}
   end
 
   def joyGetThreshold(uJoyID : UInt32, puThreshold : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.joyGetThreshold(uJoyID, puThreshold)
+    {% end %}
   end
 
   def joyReleaseCapture(uJoyID : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.joyReleaseCapture(uJoyID)
+    {% end %}
   end
 
   def joySetCapture(hwnd : Win32cr::Foundation::HWND, uJoyID : UInt32, uPeriod : UInt32, fChanged : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.joySetCapture(hwnd, uJoyID, uPeriod, fChanged)
+    {% end %}
   end
 
   def joySetThreshold(uJoyID : UInt32, uThreshold : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.joySetThreshold(uJoyID, uThreshold)
+    {% end %}
   end
 
   def videoForWindowsVersion : UInt32
+    {% if !flag?(:docs) %}
     C.VideoForWindowsVersion
+    {% end %}
   end
 
   def iCInfo(fccType : UInt32, fccHandler : UInt32, lpicinfo : Win32cr::Media::Multimedia::ICINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ICInfo(fccType, fccHandler, lpicinfo)
+    {% end %}
   end
 
   def iCInstall(fccType : UInt32, fccHandler : UInt32, lParam : Win32cr::Foundation::LPARAM, szDesc : Win32cr::Foundation::PSTR, wFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ICInstall(fccType, fccHandler, lParam, szDesc, wFlags)
+    {% end %}
   end
 
   def iCRemove(fccType : UInt32, fccHandler : UInt32, wFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ICRemove(fccType, fccHandler, wFlags)
+    {% end %}
   end
 
   def iCGetInfo(hic : Win32cr::Media::Multimedia::HIC, picinfo : Win32cr::Media::Multimedia::ICINFO*, cb : UInt32) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.ICGetInfo(hic, picinfo, cb)
+    {% end %}
   end
 
   def iCOpen(fccType : UInt32, fccHandler : UInt32, wMode : UInt32) : Win32cr::Media::Multimedia::HIC
+    {% if !flag?(:docs) %}
     C.ICOpen(fccType, fccHandler, wMode)
+    {% end %}
   end
 
   def iCOpenFunction(fccType : UInt32, fccHandler : UInt32, wMode : UInt32, lpfnHandler : Win32cr::Foundation::FARPROC) : Win32cr::Media::Multimedia::HIC
+    {% if !flag?(:docs) %}
     C.ICOpenFunction(fccType, fccHandler, wMode, lpfnHandler)
+    {% end %}
   end
 
   def iCClose(hic : Win32cr::Media::Multimedia::HIC) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.ICClose(hic)
+    {% end %}
   end
 
   def iCSendMessage(hic : Win32cr::Media::Multimedia::HIC, msg : UInt32, dw1 : LibC::UIntPtrT, dw2 : LibC::UIntPtrT) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.ICSendMessage(hic, msg, dw1, dw2)
+    {% end %}
   end
 
   def iCCompress(hic : Win32cr::Media::Multimedia::HIC, dwFlags : UInt32, lpbiOutput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, lpData : Void*, lpbiInput : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, lpBits : Void*, lpckid : UInt32*, lpdwFlags : UInt32*, lFrameNum : Int32, dwFrameSize : UInt32, dwQuality : UInt32, lpbiPrev : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, lpPrev : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.ICCompress(hic, dwFlags, lpbiOutput, lpData, lpbiInput, lpBits, lpckid, lpdwFlags, lFrameNum, dwFrameSize, dwQuality, lpbiPrev, lpPrev)
+    {% end %}
   end
 
   def iCDecompress(hic : Win32cr::Media::Multimedia::HIC, dwFlags : UInt32, lpbiFormat : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, lpData : Void*, lpbi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, lpBits : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.ICDecompress(hic, dwFlags, lpbiFormat, lpData, lpbi, lpBits)
+    {% end %}
   end
 
   def iCDrawBegin(hic : Win32cr::Media::Multimedia::HIC, dwFlags : UInt32, hpal : Win32cr::Graphics::Gdi::HPALETTE, hwnd : Win32cr::Foundation::HWND, hdc : Win32cr::Graphics::Gdi::HDC, xDst : Int32, yDst : Int32, dxDst : Int32, dyDst : Int32, lpbi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, xSrc : Int32, ySrc : Int32, dxSrc : Int32, dySrc : Int32, dwRate : UInt32, dwScale : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ICDrawBegin(hic, dwFlags, hpal, hwnd, hdc, xDst, yDst, dxDst, dyDst, lpbi, xSrc, ySrc, dxSrc, dySrc, dwRate, dwScale)
+    {% end %}
   end
 
   def iCDraw(hic : Win32cr::Media::Multimedia::HIC, dwFlags : UInt32, lpFormat : Void*, lpData : Void*, cbData : UInt32, lTime : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.ICDraw(hic, dwFlags, lpFormat, lpData, cbData, lTime)
+    {% end %}
   end
 
   def iCLocate(fccType : UInt32, fccHandler : UInt32, lpbiIn : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, lpbiOut : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, wFlags : UInt16) : Win32cr::Media::Multimedia::HIC
+    {% if !flag?(:docs) %}
     C.ICLocate(fccType, fccHandler, lpbiIn, lpbiOut, wFlags)
+    {% end %}
   end
 
   def iCGetDisplayFormat(hic : Win32cr::Media::Multimedia::HIC, lpbiIn : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, lpbiOut : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, bit_depth : Int32, dx : Int32, dy : Int32) : Win32cr::Media::Multimedia::HIC
+    {% if !flag?(:docs) %}
     C.ICGetDisplayFormat(hic, lpbiIn, lpbiOut, bit_depth, dx, dy)
+    {% end %}
   end
 
   def iCImageCompress(hic : Win32cr::Media::Multimedia::HIC, uiFlags : UInt32, lpbiIn : Win32cr::Graphics::Gdi::BITMAPINFO*, lpBits : Void*, lpbiOut : Win32cr::Graphics::Gdi::BITMAPINFO*, lQuality : Int32, plSize : Int32*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.ICImageCompress(hic, uiFlags, lpbiIn, lpBits, lpbiOut, lQuality, plSize)
+    {% end %}
   end
 
   def iCImageDecompress(hic : Win32cr::Media::Multimedia::HIC, uiFlags : UInt32, lpbiIn : Win32cr::Graphics::Gdi::BITMAPINFO*, lpBits : Void*, lpbiOut : Win32cr::Graphics::Gdi::BITMAPINFO*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.ICImageDecompress(hic, uiFlags, lpbiIn, lpBits, lpbiOut)
+    {% end %}
   end
 
   def iCCompressorChoose(hwnd : Win32cr::Foundation::HWND, uiFlags : UInt32, pvIn : Void*, lpData : Void*, pc : Win32cr::Media::Multimedia::COMPVARS*, lpszTitle : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ICCompressorChoose(hwnd, uiFlags, pvIn, lpData, pc, lpszTitle)
+    {% end %}
   end
 
   def iCSeqCompressFrameStart(pc : Win32cr::Media::Multimedia::COMPVARS*, lpbiIn : Win32cr::Graphics::Gdi::BITMAPINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ICSeqCompressFrameStart(pc, lpbiIn)
+    {% end %}
   end
 
   def iCSeqCompressFrameEnd(pc : Win32cr::Media::Multimedia::COMPVARS*) : Void
+    {% if !flag?(:docs) %}
     C.ICSeqCompressFrameEnd(pc)
+    {% end %}
   end
 
   def iCSeqCompressFrame(pc : Win32cr::Media::Multimedia::COMPVARS*, uiFlags : UInt32, lpBits : Void*, pfKey : Win32cr::Foundation::BOOL*, plSize : Int32*) : Void*
+    {% if !flag?(:docs) %}
     C.ICSeqCompressFrame(pc, uiFlags, lpBits, pfKey, plSize)
+    {% end %}
   end
 
   def iCCompressorFree(pc : Win32cr::Media::Multimedia::COMPVARS*) : Void
+    {% if !flag?(:docs) %}
     C.ICCompressorFree(pc)
+    {% end %}
   end
 
   def drawDibOpen : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.DrawDibOpen
+    {% end %}
   end
 
   def drawDibClose(hdd : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawDibClose(hdd)
+    {% end %}
   end
 
   def drawDibGetBuffer(hdd : LibC::IntPtrT, lpbi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, dwSize : UInt32, dwFlags : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.DrawDibGetBuffer(hdd, lpbi, dwSize, dwFlags)
+    {% end %}
   end
 
   def drawDibGetPalette(hdd : LibC::IntPtrT) : Win32cr::Graphics::Gdi::HPALETTE
+    {% if !flag?(:docs) %}
     C.DrawDibGetPalette(hdd)
+    {% end %}
   end
 
   def drawDibSetPalette(hdd : LibC::IntPtrT, hpal : Win32cr::Graphics::Gdi::HPALETTE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawDibSetPalette(hdd, hpal)
+    {% end %}
   end
 
   def drawDibChangePalette(hdd : LibC::IntPtrT, iStart : Int32, iLen : Int32, lppe : Win32cr::Graphics::Gdi::PALETTEENTRY*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawDibChangePalette(hdd, iStart, iLen, lppe)
+    {% end %}
   end
 
   def drawDibRealize(hdd : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, fBackground : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.DrawDibRealize(hdd, hdc, fBackground)
+    {% end %}
   end
 
   def drawDibStart(hdd : LibC::IntPtrT, rate : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawDibStart(hdd, rate)
+    {% end %}
   end
 
   def drawDibStop(hdd : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawDibStop(hdd)
+    {% end %}
   end
 
   def drawDibBegin(hdd : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, dxDst : Int32, dyDst : Int32, lpbi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, dxSrc : Int32, dySrc : Int32, wFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawDibBegin(hdd, hdc, dxDst, dyDst, lpbi, dxSrc, dySrc, wFlags)
+    {% end %}
   end
 
   def drawDibDraw(hdd : LibC::IntPtrT, hdc : Win32cr::Graphics::Gdi::HDC, xDst : Int32, yDst : Int32, dxDst : Int32, dyDst : Int32, lpbi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, lpBits : Void*, xSrc : Int32, ySrc : Int32, dxSrc : Int32, dySrc : Int32, wFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawDibDraw(hdd, hdc, xDst, yDst, dxDst, dyDst, lpbi, lpBits, xSrc, ySrc, dxSrc, dySrc, wFlags)
+    {% end %}
   end
 
   def drawDibEnd(hdd : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawDibEnd(hdd)
+    {% end %}
   end
 
   def drawDibTime(hdd : LibC::IntPtrT, lpddtime : Win32cr::Media::Multimedia::DRAWDIBTIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawDibTime(hdd, lpddtime)
+    {% end %}
   end
 
   def drawDibProfileDisplay(lpbi : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.DrawDibProfileDisplay(lpbi)
+    {% end %}
   end
 
   def aVIFileInit : Void
+    {% if !flag?(:docs) %}
     C.AVIFileInit
+    {% end %}
   end
 
   def aVIFileExit : Void
+    {% if !flag?(:docs) %}
     C.AVIFileExit
+    {% end %}
   end
 
   def aVIFileAddRef(pfile : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.AVIFileAddRef(pfile)
+    {% end %}
   end
 
   def aVIFileRelease(pfile : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.AVIFileRelease(pfile)
+    {% end %}
   end
 
   def aVIFileOpenA(ppfile : Void**, szFile : Win32cr::Foundation::PSTR, uMode : UInt32, lpHandler : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIFileOpenA(ppfile, szFile, uMode, lpHandler)
+    {% end %}
   end
 
   def aVIFileOpenW(ppfile : Void**, szFile : Win32cr::Foundation::PWSTR, uMode : UInt32, lpHandler : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIFileOpenW(ppfile, szFile, uMode, lpHandler)
+    {% end %}
   end
 
   def aVIFileInfoW(pfile : Void*, pfi : Win32cr::Media::Multimedia::AVIFILEINFOW*, lSize : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIFileInfoW(pfile, pfi, lSize)
+    {% end %}
   end
 
   def aVIFileInfoA(pfile : Void*, pfi : Win32cr::Media::Multimedia::AVIFILEINFOA*, lSize : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIFileInfoA(pfile, pfi, lSize)
+    {% end %}
   end
 
   def aVIFileGetStream(pfile : Void*, ppavi : Void**, fccType : UInt32, lParam : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIFileGetStream(pfile, ppavi, fccType, lParam)
+    {% end %}
   end
 
   def aVIFileCreateStreamW(pfile : Void*, ppavi : Void**, psi : Win32cr::Media::Multimedia::AVISTREAMINFOW*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIFileCreateStreamW(pfile, ppavi, psi)
+    {% end %}
   end
 
   def aVIFileCreateStreamA(pfile : Void*, ppavi : Void**, psi : Win32cr::Media::Multimedia::AVISTREAMINFOA*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIFileCreateStreamA(pfile, ppavi, psi)
+    {% end %}
   end
 
   def aVIFileWriteData(pfile : Void*, ckid : UInt32, lpData : Void*, cbData : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIFileWriteData(pfile, ckid, lpData, cbData)
+    {% end %}
   end
 
   def aVIFileReadData(pfile : Void*, ckid : UInt32, lpData : Void*, lpcbData : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIFileReadData(pfile, ckid, lpData, lpcbData)
+    {% end %}
   end
 
   def aVIFileEndRecord(pfile : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIFileEndRecord(pfile)
+    {% end %}
   end
 
   def aVIStreamAddRef(pavi : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.AVIStreamAddRef(pavi)
+    {% end %}
   end
 
   def aVIStreamRelease(pavi : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.AVIStreamRelease(pavi)
+    {% end %}
   end
 
   def aVIStreamInfoW(pavi : Void*, psi : Win32cr::Media::Multimedia::AVISTREAMINFOW*, lSize : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIStreamInfoW(pavi, psi, lSize)
+    {% end %}
   end
 
   def aVIStreamInfoA(pavi : Void*, psi : Win32cr::Media::Multimedia::AVISTREAMINFOA*, lSize : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIStreamInfoA(pavi, psi, lSize)
+    {% end %}
   end
 
   def aVIStreamFindSample(pavi : Void*, lPos : Int32, lFlags : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.AVIStreamFindSample(pavi, lPos, lFlags)
+    {% end %}
   end
 
   def aVIStreamReadFormat(pavi : Void*, lPos : Int32, lpFormat : Void*, lpcbFormat : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIStreamReadFormat(pavi, lPos, lpFormat, lpcbFormat)
+    {% end %}
   end
 
   def aVIStreamSetFormat(pavi : Void*, lPos : Int32, lpFormat : Void*, cbFormat : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIStreamSetFormat(pavi, lPos, lpFormat, cbFormat)
+    {% end %}
   end
 
   def aVIStreamReadData(pavi : Void*, fcc : UInt32, lp : Void*, lpcb : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIStreamReadData(pavi, fcc, lp, lpcb)
+    {% end %}
   end
 
   def aVIStreamWriteData(pavi : Void*, fcc : UInt32, lp : Void*, cb : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIStreamWriteData(pavi, fcc, lp, cb)
+    {% end %}
   end
 
   def aVIStreamRead(pavi : Void*, lStart : Int32, lSamples : Int32, lpBuffer : Void*, cbBuffer : Int32, plBytes : Int32*, plSamples : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIStreamRead(pavi, lStart, lSamples, lpBuffer, cbBuffer, plBytes, plSamples)
+    {% end %}
   end
 
   def aVIStreamWrite(pavi : Void*, lStart : Int32, lSamples : Int32, lpBuffer : Void*, cbBuffer : Int32, dwFlags : UInt32, plSampWritten : Int32*, plBytesWritten : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIStreamWrite(pavi, lStart, lSamples, lpBuffer, cbBuffer, dwFlags, plSampWritten, plBytesWritten)
+    {% end %}
   end
 
   def aVIStreamStart(pavi : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.AVIStreamStart(pavi)
+    {% end %}
   end
 
   def aVIStreamLength(pavi : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.AVIStreamLength(pavi)
+    {% end %}
   end
 
   def aVIStreamTimeToSample(pavi : Void*, lTime : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.AVIStreamTimeToSample(pavi, lTime)
+    {% end %}
   end
 
   def aVIStreamSampleToTime(pavi : Void*, lSample : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.AVIStreamSampleToTime(pavi, lSample)
+    {% end %}
   end
 
   def aVIStreamBeginStreaming(pavi : Void*, lStart : Int32, lEnd : Int32, lRate : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIStreamBeginStreaming(pavi, lStart, lEnd, lRate)
+    {% end %}
   end
 
   def aVIStreamEndStreaming(pavi : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIStreamEndStreaming(pavi)
+    {% end %}
   end
 
   def aVIStreamGetFrameOpen(pavi : Void*, lpbiWanted : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*) : Void*
+    {% if !flag?(:docs) %}
     C.AVIStreamGetFrameOpen(pavi, lpbiWanted)
+    {% end %}
   end
 
   def aVIStreamGetFrame(pg : Void*, lPos : Int32) : Void*
+    {% if !flag?(:docs) %}
     C.AVIStreamGetFrame(pg, lPos)
+    {% end %}
   end
 
   def aVIStreamGetFrameClose(pg : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIStreamGetFrameClose(pg)
+    {% end %}
   end
 
   def aVIStreamOpenFromFileA(ppavi : Void**, szFile : Win32cr::Foundation::PSTR, fccType : UInt32, lParam : Int32, mode : UInt32, pclsidHandler : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIStreamOpenFromFileA(ppavi, szFile, fccType, lParam, mode, pclsidHandler)
+    {% end %}
   end
 
   def aVIStreamOpenFromFileW(ppavi : Void**, szFile : Win32cr::Foundation::PWSTR, fccType : UInt32, lParam : Int32, mode : UInt32, pclsidHandler : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIStreamOpenFromFileW(ppavi, szFile, fccType, lParam, mode, pclsidHandler)
+    {% end %}
   end
 
   def aVIStreamCreate(ppavi : Void**, lParam1 : Int32, lParam2 : Int32, pclsidHandler : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIStreamCreate(ppavi, lParam1, lParam2, pclsidHandler)
+    {% end %}
   end
 
   def aVIMakeCompressedStream(ppsCompressed : Void**, ppsSource : Void*, lpOptions : Win32cr::Media::Multimedia::AVICOMPRESSOPTIONS*, pclsidHandler : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIMakeCompressedStream(ppsCompressed, ppsSource, lpOptions, pclsidHandler)
+    {% end %}
   end
 
   def aVISaveA(szFile : Win32cr::Foundation::PSTR, pclsidHandler : LibC::GUID*, lpfnCallback : Win32cr::Media::Multimedia::AVISAVECALLBACK, nStreams : Int32, pfile : Void*, lpOptions : Win32cr::Media::Multimedia::AVICOMPRESSOPTIONS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVISaveA(szFile, pclsidHandler, lpfnCallback, nStreams, pfile, lpOptions)
+    {% end %}
   end
 
   def aVISaveVA(szFile : Win32cr::Foundation::PSTR, pclsidHandler : LibC::GUID*, lpfnCallback : Win32cr::Media::Multimedia::AVISAVECALLBACK, nStreams : Int32, ppavi : Void**, plpOptions : Win32cr::Media::Multimedia::AVICOMPRESSOPTIONS**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVISaveVA(szFile, pclsidHandler, lpfnCallback, nStreams, ppavi, plpOptions)
+    {% end %}
   end
 
   def aVISaveW(szFile : Win32cr::Foundation::PWSTR, pclsidHandler : LibC::GUID*, lpfnCallback : Win32cr::Media::Multimedia::AVISAVECALLBACK, nStreams : Int32, pfile : Void*, lpOptions : Win32cr::Media::Multimedia::AVICOMPRESSOPTIONS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVISaveW(szFile, pclsidHandler, lpfnCallback, nStreams, pfile, lpOptions)
+    {% end %}
   end
 
   def aVISaveVW(szFile : Win32cr::Foundation::PWSTR, pclsidHandler : LibC::GUID*, lpfnCallback : Win32cr::Media::Multimedia::AVISAVECALLBACK, nStreams : Int32, ppavi : Void**, plpOptions : Win32cr::Media::Multimedia::AVICOMPRESSOPTIONS**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVISaveVW(szFile, pclsidHandler, lpfnCallback, nStreams, ppavi, plpOptions)
+    {% end %}
   end
 
   def aVISaveOptions(hwnd : Win32cr::Foundation::HWND, uiFlags : UInt32, nStreams : Int32, ppavi : Void**, plpOptions : Win32cr::Media::Multimedia::AVICOMPRESSOPTIONS**) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.AVISaveOptions(hwnd, uiFlags, nStreams, ppavi, plpOptions)
+    {% end %}
   end
 
   def aVISaveOptionsFree(nStreams : Int32, plpOptions : Win32cr::Media::Multimedia::AVICOMPRESSOPTIONS**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVISaveOptionsFree(nStreams, plpOptions)
+    {% end %}
   end
 
   def aVIBuildFilterW(lpszFilter : UInt16*, cbFilter : Int32, fSaving : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIBuildFilterW(lpszFilter, cbFilter, fSaving)
+    {% end %}
   end
 
   def aVIBuildFilterA(lpszFilter : UInt8*, cbFilter : Int32, fSaving : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIBuildFilterA(lpszFilter, cbFilter, fSaving)
+    {% end %}
   end
 
   def aVIMakeFileFromStreams(ppfile : Void**, nStreams : Int32, papStreams : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIMakeFileFromStreams(ppfile, nStreams, papStreams)
+    {% end %}
   end
 
   def aVIMakeStreamFromClipboard(cfFormat : UInt32, hGlobal : Win32cr::Foundation::HANDLE, ppstream : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIMakeStreamFromClipboard(cfFormat, hGlobal, ppstream)
+    {% end %}
   end
 
   def aVIPutFileOnClipboard(pf : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIPutFileOnClipboard(pf)
+    {% end %}
   end
 
   def aVIGetFromClipboard(lppf : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIGetFromClipboard(lppf)
+    {% end %}
   end
 
   def aVIClearClipboard : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AVIClearClipboard
+    {% end %}
   end
 
   def createEditableStream(ppsEditable : Void**, psSource : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateEditableStream(ppsEditable, psSource)
+    {% end %}
   end
 
   def editStreamCut(pavi : Void*, plStart : Int32*, plLength : Int32*, ppResult : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EditStreamCut(pavi, plStart, plLength, ppResult)
+    {% end %}
   end
 
   def editStreamCopy(pavi : Void*, plStart : Int32*, plLength : Int32*, ppResult : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EditStreamCopy(pavi, plStart, plLength, ppResult)
+    {% end %}
   end
 
   def editStreamPaste(pavi : Void*, plPos : Int32*, plLength : Int32*, pstream : Void*, lStart : Int32, lEnd : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EditStreamPaste(pavi, plPos, plLength, pstream, lStart, lEnd)
+    {% end %}
   end
 
   def editStreamClone(pavi : Void*, ppResult : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EditStreamClone(pavi, ppResult)
+    {% end %}
   end
 
   def editStreamSetNameA(pavi : Void*, lpszName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EditStreamSetNameA(pavi, lpszName)
+    {% end %}
   end
 
   def editStreamSetNameW(pavi : Void*, lpszName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EditStreamSetNameW(pavi, lpszName)
+    {% end %}
   end
 
   def editStreamSetInfoW(pavi : Void*, lpInfo : Win32cr::Media::Multimedia::AVISTREAMINFOW*, cbInfo : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EditStreamSetInfoW(pavi, lpInfo, cbInfo)
+    {% end %}
   end
 
   def editStreamSetInfoA(pavi : Void*, lpInfo : Win32cr::Media::Multimedia::AVISTREAMINFOA*, cbInfo : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EditStreamSetInfoA(pavi, lpInfo, cbInfo)
+    {% end %}
   end
 
   def mCIWndCreateA(hwndParent : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, dwStyle : UInt32, szFile : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.MCIWndCreateA(hwndParent, hInstance, dwStyle, szFile)
+    {% end %}
   end
 
   def mCIWndCreateW(hwndParent : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, dwStyle : UInt32, szFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.MCIWndCreateW(hwndParent, hInstance, dwStyle, szFile)
+    {% end %}
   end
 
   def mCIWndRegisterClass : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MCIWndRegisterClass
+    {% end %}
   end
 
   def capCreateCaptureWindowA(lpszWindowName : Win32cr::Foundation::PSTR, dwStyle : UInt32, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, hwndParent : Win32cr::Foundation::HWND, nID : Int32) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.capCreateCaptureWindowA(lpszWindowName, dwStyle, x, y, nWidth, nHeight, hwndParent, nID)
+    {% end %}
   end
 
   def capGetDriverDescriptionA(wDriverIndex : UInt32, lpszName : UInt8*, cbName : Int32, lpszVer : UInt8*, cbVer : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.capGetDriverDescriptionA(wDriverIndex, lpszName, cbName, lpszVer, cbVer)
+    {% end %}
   end
 
   def capCreateCaptureWindowW(lpszWindowName : Win32cr::Foundation::PWSTR, dwStyle : UInt32, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, hwndParent : Win32cr::Foundation::HWND, nID : Int32) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.capCreateCaptureWindowW(lpszWindowName, dwStyle, x, y, nWidth, nHeight, hwndParent, nID)
+    {% end %}
   end
 
   def capGetDriverDescriptionW(wDriverIndex : UInt32, lpszName : UInt16*, cbName : Int32, lpszVer : UInt16*, cbVer : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.capGetDriverDescriptionW(wDriverIndex, lpszName, cbName, lpszVer, cbVer)
+    {% end %}
   end
 
   def getOpenFileNamePreviewA(lpofn : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetOpenFileNamePreviewA(lpofn)
+    {% end %}
   end
 
   def getSaveFileNamePreviewA(lpofn : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSaveFileNamePreviewA(lpofn)
+    {% end %}
   end
 
   def getOpenFileNamePreviewW(lpofn : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetOpenFileNamePreviewW(lpofn)
+    {% end %}
   end
 
   def getSaveFileNamePreviewW(lpofn : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSaveFileNamePreviewW(lpofn)
+    {% end %}
   end
 
   def mmTaskCreate(lpfn : Win32cr::Media::Multimedia::LPTASKCALLBACK, lph : Win32cr::Foundation::HANDLE*, dwInst : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.mmTaskCreate(lpfn, lph, dwInst)
+    {% end %}
   end
 
   def mmTaskBlock(h : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.mmTaskBlock(h)
+    {% end %}
   end
 
   def mmTaskSignal(h : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.mmTaskSignal(h)
+    {% end %}
   end
 
   def mmTaskYield : Void
+    {% if !flag?(:docs) %}
     C.mmTaskYield
+    {% end %}
   end
 
   def mmGetCurrentTask : UInt32
+    {% if !flag?(:docs) %}
     C.mmGetCurrentTask
+    {% end %}
   end
 
   @[Link("winmm")]
   @[Link("msvfw32")]
   @[Link("avifil32")]
   @[Link("avicap32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun mciSendCommandA(mciId : UInt32, uMsg : UInt32, dwParam1 : LibC::UIntPtrT, dwParam2 : LibC::UIntPtrT) : UInt32
@@ -8017,4 +8358,5 @@ module Win32cr::Media::Multimedia
     fun mmGetCurrentTask : UInt32
 
   end
+  {% end %}
 end

@@ -880,7 +880,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICPaletteVtbl,
+  record IWICPaletteVtable,
     query_interface : Proc(IWICPalette*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICPalette*, UInt32),
     release : Proc(IWICPalette*, UInt32),
@@ -897,7 +897,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICPalette, lpVtbl : IWICPaletteVtbl* do
+  record IWICPalette, lpVtbl : IWICPaletteVtable* do
     GUID = LibC::GUID.new(0x40_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
     def query_interface(this : IWICPalette*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -942,7 +942,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICBitmapSourceVtbl,
+  record IWICBitmapSourceVtable,
     query_interface : Proc(IWICBitmapSource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICBitmapSource*, UInt32),
     release : Proc(IWICBitmapSource*, UInt32),
@@ -954,7 +954,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICBitmapSource, lpVtbl : IWICBitmapSourceVtbl* do
+  record IWICBitmapSource, lpVtbl : IWICBitmapSourceVtable* do
     GUID = LibC::GUID.new(0x120_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
     def query_interface(this : IWICBitmapSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -984,7 +984,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICFormatConverterVtbl,
+  record IWICFormatConverterVtable,
     query_interface : Proc(IWICFormatConverter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICFormatConverter*, UInt32),
     release : Proc(IWICFormatConverter*, UInt32),
@@ -998,7 +998,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICFormatConverter, lpVtbl : IWICFormatConverterVtbl* do
+  record IWICFormatConverter, lpVtbl : IWICFormatConverterVtable* do
     GUID = LibC::GUID.new(0x301_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
     def query_interface(this : IWICFormatConverter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1034,7 +1034,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICPlanarFormatConverterVtbl,
+  record IWICPlanarFormatConverterVtable,
     query_interface : Proc(IWICPlanarFormatConverter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICPlanarFormatConverter*, UInt32),
     release : Proc(IWICPlanarFormatConverter*, UInt32),
@@ -1048,7 +1048,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICPlanarFormatConverter, lpVtbl : IWICPlanarFormatConverterVtbl* do
+  record IWICPlanarFormatConverter, lpVtbl : IWICPlanarFormatConverterVtable* do
     GUID = LibC::GUID.new(0xbebee9cb_u32, 0x83b0_u16, 0x4dcc_u16, StaticArray[0x81_u8, 0x32_u8, 0xb0_u8, 0xaa_u8, 0xa5_u8, 0x5e_u8, 0xac_u8, 0x96_u8])
     def query_interface(this : IWICPlanarFormatConverter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1084,7 +1084,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICBitmapScalerVtbl,
+  record IWICBitmapScalerVtable,
     query_interface : Proc(IWICBitmapScaler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICBitmapScaler*, UInt32),
     release : Proc(IWICBitmapScaler*, UInt32),
@@ -1097,7 +1097,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICBitmapScaler, lpVtbl : IWICBitmapScalerVtbl* do
+  record IWICBitmapScaler, lpVtbl : IWICBitmapScalerVtable* do
     GUID = LibC::GUID.new(0x302_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
     def query_interface(this : IWICBitmapScaler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1130,7 +1130,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICBitmapClipperVtbl,
+  record IWICBitmapClipperVtable,
     query_interface : Proc(IWICBitmapClipper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICBitmapClipper*, UInt32),
     release : Proc(IWICBitmapClipper*, UInt32),
@@ -1143,7 +1143,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICBitmapClipper, lpVtbl : IWICBitmapClipperVtbl* do
+  record IWICBitmapClipper, lpVtbl : IWICBitmapClipperVtable* do
     GUID = LibC::GUID.new(0xe4fbcf03_u32, 0x223d_u16, 0x4e81_u16, StaticArray[0x93_u8, 0x33_u8, 0xd6_u8, 0x35_u8, 0x55_u8, 0x6d_u8, 0xd1_u8, 0xb5_u8])
     def query_interface(this : IWICBitmapClipper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1176,7 +1176,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICBitmapFlipRotatorVtbl,
+  record IWICBitmapFlipRotatorVtable,
     query_interface : Proc(IWICBitmapFlipRotator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICBitmapFlipRotator*, UInt32),
     release : Proc(IWICBitmapFlipRotator*, UInt32),
@@ -1189,7 +1189,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICBitmapFlipRotator, lpVtbl : IWICBitmapFlipRotatorVtbl* do
+  record IWICBitmapFlipRotator, lpVtbl : IWICBitmapFlipRotatorVtable* do
     GUID = LibC::GUID.new(0x5009834f_u32, 0x2d6a_u16, 0x41ce_u16, StaticArray[0x9e_u8, 0x1b_u8, 0x17_u8, 0xc5_u8, 0xaf_u8, 0xf7_u8, 0xa7_u8, 0x82_u8])
     def query_interface(this : IWICBitmapFlipRotator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1222,7 +1222,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICBitmapLockVtbl,
+  record IWICBitmapLockVtable,
     query_interface : Proc(IWICBitmapLock*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICBitmapLock*, UInt32),
     release : Proc(IWICBitmapLock*, UInt32),
@@ -1233,7 +1233,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICBitmapLock, lpVtbl : IWICBitmapLockVtbl* do
+  record IWICBitmapLock, lpVtbl : IWICBitmapLockVtable* do
     GUID = LibC::GUID.new(0x123_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
     def query_interface(this : IWICBitmapLock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1260,7 +1260,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICBitmapVtbl,
+  record IWICBitmapVtable,
     query_interface : Proc(IWICBitmap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICBitmap*, UInt32),
     release : Proc(IWICBitmap*, UInt32),
@@ -1275,7 +1275,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICBitmap, lpVtbl : IWICBitmapVtbl* do
+  record IWICBitmap, lpVtbl : IWICBitmapVtable* do
     GUID = LibC::GUID.new(0x121_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
     def query_interface(this : IWICBitmap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1314,7 +1314,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICColorContextVtbl,
+  record IWICColorContextVtable,
     query_interface : Proc(IWICColorContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICColorContext*, UInt32),
     release : Proc(IWICColorContext*, UInt32),
@@ -1327,7 +1327,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICColorContext, lpVtbl : IWICColorContextVtbl* do
+  record IWICColorContext, lpVtbl : IWICColorContextVtable* do
     GUID = LibC::GUID.new(0x3c613a02_u32, 0x34b2_u16, 0x44ea_u16, StaticArray[0x9a_u8, 0x7c_u8, 0x45_u8, 0xae_u8, 0xa9_u8, 0xc6_u8, 0xfd_u8, 0x6d_u8])
     def query_interface(this : IWICColorContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1360,7 +1360,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICColorTransformVtbl,
+  record IWICColorTransformVtable,
     query_interface : Proc(IWICColorTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICColorTransform*, UInt32),
     release : Proc(IWICColorTransform*, UInt32),
@@ -1373,7 +1373,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICColorTransform, lpVtbl : IWICColorTransformVtbl* do
+  record IWICColorTransform, lpVtbl : IWICColorTransformVtable* do
     GUID = LibC::GUID.new(0xb66f034f_u32, 0xd0e2_u16, 0x40ab_u16, StaticArray[0xb4_u8, 0x36_u8, 0x6d_u8, 0xe3_u8, 0x9e_u8, 0x32_u8, 0x1a_u8, 0x94_u8])
     def query_interface(this : IWICColorTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1406,7 +1406,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICFastMetadataEncoderVtbl,
+  record IWICFastMetadataEncoderVtable,
     query_interface : Proc(IWICFastMetadataEncoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICFastMetadataEncoder*, UInt32),
     release : Proc(IWICFastMetadataEncoder*, UInt32),
@@ -1415,7 +1415,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICFastMetadataEncoder, lpVtbl : IWICFastMetadataEncoderVtbl* do
+  record IWICFastMetadataEncoder, lpVtbl : IWICFastMetadataEncoderVtable* do
     GUID = LibC::GUID.new(0xb84e2c09_u32, 0x78c9_u16, 0x4ac4_u16, StaticArray[0x8b_u8, 0xd3_u8, 0x52_u8, 0x4a_u8, 0xe1_u8, 0x66_u8, 0x3a_u8, 0x2f_u8])
     def query_interface(this : IWICFastMetadataEncoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1436,7 +1436,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICStreamVtbl,
+  record IWICStreamVtable,
     query_interface : Proc(IWICStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICStream*, UInt32),
     release : Proc(IWICStream*, UInt32),
@@ -1458,7 +1458,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICStream, lpVtbl : IWICStreamVtbl* do
+  record IWICStream, lpVtbl : IWICStreamVtable* do
     GUID = LibC::GUID.new(0x135ff860_u32, 0x22b7_u16, 0x4ddf_u16, StaticArray[0xb0_u8, 0xf6_u8, 0x21_u8, 0x8f_u8, 0x4f_u8, 0x29_u8, 0x9a_u8, 0x43_u8])
     def query_interface(this : IWICStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1518,7 +1518,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICEnumMetadataItemVtbl,
+  record IWICEnumMetadataItemVtable,
     query_interface : Proc(IWICEnumMetadataItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICEnumMetadataItem*, UInt32),
     release : Proc(IWICEnumMetadataItem*, UInt32),
@@ -1529,7 +1529,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICEnumMetadataItem, lpVtbl : IWICEnumMetadataItemVtbl* do
+  record IWICEnumMetadataItem, lpVtbl : IWICEnumMetadataItemVtable* do
     GUID = LibC::GUID.new(0xdc2bb46d_u32, 0x3f07_u16, 0x481e_u16, StaticArray[0x86_u8, 0x25_u8, 0x22_u8, 0xc_u8, 0x4a_u8, 0xed_u8, 0xbb_u8, 0x33_u8])
     def query_interface(this : IWICEnumMetadataItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1556,7 +1556,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICMetadataQueryReaderVtbl,
+  record IWICMetadataQueryReaderVtable,
     query_interface : Proc(IWICMetadataQueryReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICMetadataQueryReader*, UInt32),
     release : Proc(IWICMetadataQueryReader*, UInt32),
@@ -1567,7 +1567,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICMetadataQueryReader, lpVtbl : IWICMetadataQueryReaderVtbl* do
+  record IWICMetadataQueryReader, lpVtbl : IWICMetadataQueryReaderVtable* do
     GUID = LibC::GUID.new(0x30989668_u32, 0xe1c9_u16, 0x4597_u16, StaticArray[0xb3_u8, 0x95_u8, 0x45_u8, 0x8e_u8, 0xed_u8, 0xb8_u8, 0x8_u8, 0xdf_u8])
     def query_interface(this : IWICMetadataQueryReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1594,7 +1594,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICMetadataQueryWriterVtbl,
+  record IWICMetadataQueryWriterVtable,
     query_interface : Proc(IWICMetadataQueryWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICMetadataQueryWriter*, UInt32),
     release : Proc(IWICMetadataQueryWriter*, UInt32),
@@ -1607,7 +1607,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICMetadataQueryWriter, lpVtbl : IWICMetadataQueryWriterVtbl* do
+  record IWICMetadataQueryWriter, lpVtbl : IWICMetadataQueryWriterVtable* do
     GUID = LibC::GUID.new(0xa721791a_u32, 0xdef_u16, 0x4d06_u16, StaticArray[0xbd_u8, 0x91_u8, 0x21_u8, 0x18_u8, 0xbf_u8, 0x1d_u8, 0xb1_u8, 0xb_u8])
     def query_interface(this : IWICMetadataQueryWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1640,7 +1640,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICBitmapEncoderVtbl,
+  record IWICBitmapEncoderVtable,
     query_interface : Proc(IWICBitmapEncoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICBitmapEncoder*, UInt32),
     release : Proc(IWICBitmapEncoder*, UInt32),
@@ -1657,7 +1657,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICBitmapEncoder, lpVtbl : IWICBitmapEncoderVtbl* do
+  record IWICBitmapEncoder, lpVtbl : IWICBitmapEncoderVtable* do
     GUID = LibC::GUID.new(0x103_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
     def query_interface(this : IWICBitmapEncoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1702,7 +1702,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICBitmapFrameEncodeVtbl,
+  record IWICBitmapFrameEncodeVtable,
     query_interface : Proc(IWICBitmapFrameEncode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICBitmapFrameEncode*, UInt32),
     release : Proc(IWICBitmapFrameEncode*, UInt32),
@@ -1720,7 +1720,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICBitmapFrameEncode, lpVtbl : IWICBitmapFrameEncodeVtbl* do
+  record IWICBitmapFrameEncode, lpVtbl : IWICBitmapFrameEncodeVtable* do
     GUID = LibC::GUID.new(0x105_u32, 0xa8f2_u16, 0x4877_u16, StaticArray[0xba_u8, 0xa_u8, 0xfd_u8, 0x2b_u8, 0x66_u8, 0x45_u8, 0xfb_u8, 0x94_u8])
     def query_interface(this : IWICBitmapFrameEncode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1768,7 +1768,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICPlanarBitmapFrameEncodeVtbl,
+  record IWICPlanarBitmapFrameEncodeVtable,
     query_interface : Proc(IWICPlanarBitmapFrameEncode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICPlanarBitmapFrameEncode*, UInt32),
     release : Proc(IWICPlanarBitmapFrameEncode*, UInt32),
@@ -1777,7 +1777,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICPlanarBitmapFrameEncode, lpVtbl : IWICPlanarBitmapFrameEncodeVtbl* do
+  record IWICPlanarBitmapFrameEncode, lpVtbl : IWICPlanarBitmapFrameEncodeVtable* do
     GUID = LibC::GUID.new(0xf928b7b8_u32, 0x2221_u16, 0x40c1_u16, StaticArray[0xb7_u8, 0x2e_u8, 0x7e_u8, 0x82_u8, 0xf1_u8, 0x97_u8, 0x4d_u8, 0x1a_u8])
     def query_interface(this : IWICPlanarBitmapFrameEncode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1798,7 +1798,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICBitmapDecoderVtbl,
+  record IWICBitmapDecoderVtable,
     query_interface : Proc(IWICBitmapDecoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICBitmapDecoder*, UInt32),
     release : Proc(IWICBitmapDecoder*, UInt32),
@@ -1816,7 +1816,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICBitmapDecoder, lpVtbl : IWICBitmapDecoderVtbl* do
+  record IWICBitmapDecoder, lpVtbl : IWICBitmapDecoderVtable* do
     GUID = LibC::GUID.new(0x9edde9e7_u32, 0x8dee_u16, 0x47ea_u16, StaticArray[0x99_u8, 0xdf_u8, 0xe6_u8, 0xfa_u8, 0xf2_u8, 0xed_u8, 0x44_u8, 0xbf_u8])
     def query_interface(this : IWICBitmapDecoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1864,7 +1864,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICBitmapSourceTransformVtbl,
+  record IWICBitmapSourceTransformVtable,
     query_interface : Proc(IWICBitmapSourceTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICBitmapSourceTransform*, UInt32),
     release : Proc(IWICBitmapSourceTransform*, UInt32),
@@ -1875,7 +1875,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICBitmapSourceTransform, lpVtbl : IWICBitmapSourceTransformVtbl* do
+  record IWICBitmapSourceTransform, lpVtbl : IWICBitmapSourceTransformVtable* do
     GUID = LibC::GUID.new(0x3b16811b_u32, 0x6a43_u16, 0x4ec9_u16, StaticArray[0xb7_u8, 0x13_u8, 0x3d_u8, 0x5a_u8, 0xc_u8, 0x13_u8, 0xb9_u8, 0x40_u8])
     def query_interface(this : IWICBitmapSourceTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1902,7 +1902,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICPlanarBitmapSourceTransformVtbl,
+  record IWICPlanarBitmapSourceTransformVtable,
     query_interface : Proc(IWICPlanarBitmapSourceTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICPlanarBitmapSourceTransform*, UInt32),
     release : Proc(IWICPlanarBitmapSourceTransform*, UInt32),
@@ -1911,7 +1911,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICPlanarBitmapSourceTransform, lpVtbl : IWICPlanarBitmapSourceTransformVtbl* do
+  record IWICPlanarBitmapSourceTransform, lpVtbl : IWICPlanarBitmapSourceTransformVtable* do
     GUID = LibC::GUID.new(0x3aff9cce_u32, 0xbe95_u16, 0x4303_u16, StaticArray[0xb9_u8, 0x27_u8, 0xe7_u8, 0xd1_u8, 0x6f_u8, 0xf4_u8, 0xa6_u8, 0x13_u8])
     def query_interface(this : IWICPlanarBitmapSourceTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1932,7 +1932,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICBitmapFrameDecodeVtbl,
+  record IWICBitmapFrameDecodeVtable,
     query_interface : Proc(IWICBitmapFrameDecode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICBitmapFrameDecode*, UInt32),
     release : Proc(IWICBitmapFrameDecode*, UInt32),
@@ -1947,7 +1947,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICBitmapFrameDecode, lpVtbl : IWICBitmapFrameDecodeVtbl* do
+  record IWICBitmapFrameDecode, lpVtbl : IWICBitmapFrameDecodeVtable* do
     GUID = LibC::GUID.new(0x3b16811b_u32, 0x6a43_u16, 0x4ec9_u16, StaticArray[0xa8_u8, 0x13_u8, 0x3d_u8, 0x93_u8, 0xc_u8, 0x13_u8, 0xb9_u8, 0x40_u8])
     def query_interface(this : IWICBitmapFrameDecode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1986,7 +1986,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICProgressiveLevelControlVtbl,
+  record IWICProgressiveLevelControlVtable,
     query_interface : Proc(IWICProgressiveLevelControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICProgressiveLevelControl*, UInt32),
     release : Proc(IWICProgressiveLevelControl*, UInt32),
@@ -1996,7 +1996,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICProgressiveLevelControl, lpVtbl : IWICProgressiveLevelControlVtbl* do
+  record IWICProgressiveLevelControl, lpVtbl : IWICProgressiveLevelControlVtable* do
     GUID = LibC::GUID.new(0xdaac296f_u32, 0x7aa5_u16, 0x4dbf_u16, StaticArray[0x8d_u8, 0x15_u8, 0x22_u8, 0x5c_u8, 0x59_u8, 0x76_u8, 0xf8_u8, 0x91_u8])
     def query_interface(this : IWICProgressiveLevelControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2020,7 +2020,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICProgressCallbackVtbl,
+  record IWICProgressCallbackVtable,
     query_interface : Proc(IWICProgressCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICProgressCallback*, UInt32),
     release : Proc(IWICProgressCallback*, UInt32),
@@ -2028,7 +2028,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICProgressCallback, lpVtbl : IWICProgressCallbackVtbl* do
+  record IWICProgressCallback, lpVtbl : IWICProgressCallbackVtable* do
     GUID = LibC::GUID.new(0x4776f9cd_u32, 0x9517_u16, 0x45fa_u16, StaticArray[0xbf_u8, 0x24_u8, 0xe8_u8, 0x9c_u8, 0x5e_u8, 0xc5_u8, 0xc6_u8, 0xc_u8])
     def query_interface(this : IWICProgressCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2046,7 +2046,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICBitmapCodecProgressNotificationVtbl,
+  record IWICBitmapCodecProgressNotificationVtable,
     query_interface : Proc(IWICBitmapCodecProgressNotification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICBitmapCodecProgressNotification*, UInt32),
     release : Proc(IWICBitmapCodecProgressNotification*, UInt32),
@@ -2054,7 +2054,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICBitmapCodecProgressNotification, lpVtbl : IWICBitmapCodecProgressNotificationVtbl* do
+  record IWICBitmapCodecProgressNotification, lpVtbl : IWICBitmapCodecProgressNotificationVtable* do
     GUID = LibC::GUID.new(0x64c1024e_u32, 0xc3cf_u16, 0x4462_u16, StaticArray[0x80_u8, 0x78_u8, 0x88_u8, 0xc2_u8, 0xb1_u8, 0x1c_u8, 0x46_u8, 0xd9_u8])
     def query_interface(this : IWICBitmapCodecProgressNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2072,7 +2072,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICComponentInfoVtbl,
+  record IWICComponentInfoVtable,
     query_interface : Proc(IWICComponentInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICComponentInfo*, UInt32),
     release : Proc(IWICComponentInfo*, UInt32),
@@ -2087,7 +2087,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICComponentInfo, lpVtbl : IWICComponentInfoVtbl* do
+  record IWICComponentInfo, lpVtbl : IWICComponentInfoVtable* do
     GUID = LibC::GUID.new(0x23bc3f0a_u32, 0x698b_u16, 0x4357_u16, StaticArray[0x88_u8, 0x6b_u8, 0xf2_u8, 0x4d_u8, 0x50_u8, 0x67_u8, 0x13_u8, 0x34_u8])
     def query_interface(this : IWICComponentInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2126,7 +2126,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICFormatConverterInfoVtbl,
+  record IWICFormatConverterInfoVtable,
     query_interface : Proc(IWICFormatConverterInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICFormatConverterInfo*, UInt32),
     release : Proc(IWICFormatConverterInfo*, UInt32),
@@ -2143,7 +2143,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICFormatConverterInfo, lpVtbl : IWICFormatConverterInfoVtbl* do
+  record IWICFormatConverterInfo, lpVtbl : IWICFormatConverterInfoVtable* do
     GUID = LibC::GUID.new(0x9f34fb65_u32, 0x13f4_u16, 0x4f15_u16, StaticArray[0xbc_u8, 0x57_u8, 0x37_u8, 0x26_u8, 0xb5_u8, 0xe5_u8, 0x3d_u8, 0x9f_u8])
     def query_interface(this : IWICFormatConverterInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2188,7 +2188,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICBitmapCodecInfoVtbl,
+  record IWICBitmapCodecInfoVtable,
     query_interface : Proc(IWICBitmapCodecInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICBitmapCodecInfo*, UInt32),
     release : Proc(IWICBitmapCodecInfo*, UInt32),
@@ -2215,7 +2215,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICBitmapCodecInfo, lpVtbl : IWICBitmapCodecInfoVtbl* do
+  record IWICBitmapCodecInfo, lpVtbl : IWICBitmapCodecInfoVtable* do
     GUID = LibC::GUID.new(0xe87a44c4_u32, 0xb76e_u16, 0x4c47_u16, StaticArray[0x8b_u8, 0x9_u8, 0x29_u8, 0x8e_u8, 0xb1_u8, 0x2a_u8, 0x27_u8, 0x14_u8])
     def query_interface(this : IWICBitmapCodecInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2290,7 +2290,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICBitmapEncoderInfoVtbl,
+  record IWICBitmapEncoderInfoVtable,
     query_interface : Proc(IWICBitmapEncoderInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICBitmapEncoderInfo*, UInt32),
     release : Proc(IWICBitmapEncoderInfo*, UInt32),
@@ -2318,7 +2318,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICBitmapEncoderInfo, lpVtbl : IWICBitmapEncoderInfoVtbl* do
+  record IWICBitmapEncoderInfo, lpVtbl : IWICBitmapEncoderInfoVtable* do
     GUID = LibC::GUID.new(0x94c9b4ee_u32, 0xa09f_u16, 0x4f92_u16, StaticArray[0x8a_u8, 0x1e_u8, 0x4a_u8, 0x9b_u8, 0xce_u8, 0x7e_u8, 0x76_u8, 0xfb_u8])
     def query_interface(this : IWICBitmapEncoderInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2396,7 +2396,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICBitmapDecoderInfoVtbl,
+  record IWICBitmapDecoderInfoVtable,
     query_interface : Proc(IWICBitmapDecoderInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICBitmapDecoderInfo*, UInt32),
     release : Proc(IWICBitmapDecoderInfo*, UInt32),
@@ -2426,7 +2426,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICBitmapDecoderInfo, lpVtbl : IWICBitmapDecoderInfoVtbl* do
+  record IWICBitmapDecoderInfo, lpVtbl : IWICBitmapDecoderInfoVtable* do
     GUID = LibC::GUID.new(0xd8cd007f_u32, 0xd08f_u16, 0x4191_u16, StaticArray[0x9b_u8, 0xfc_u8, 0x23_u8, 0x6e_u8, 0xa7_u8, 0xf0_u8, 0xe4_u8, 0xb5_u8])
     def query_interface(this : IWICBitmapDecoderInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2510,7 +2510,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICPixelFormatInfoVtbl,
+  record IWICPixelFormatInfoVtable,
     query_interface : Proc(IWICPixelFormatInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICPixelFormatInfo*, UInt32),
     release : Proc(IWICPixelFormatInfo*, UInt32),
@@ -2530,7 +2530,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICPixelFormatInfo, lpVtbl : IWICPixelFormatInfoVtbl* do
+  record IWICPixelFormatInfo, lpVtbl : IWICPixelFormatInfoVtable* do
     GUID = LibC::GUID.new(0xe8eda601_u32, 0x3d48_u16, 0x431a_u16, StaticArray[0xab_u8, 0x44_u8, 0x69_u8, 0x5_u8, 0x9b_u8, 0xe8_u8, 0x8b_u8, 0xbe_u8])
     def query_interface(this : IWICPixelFormatInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2584,7 +2584,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICPixelFormatInfo2Vtbl,
+  record IWICPixelFormatInfo2Vtable,
     query_interface : Proc(IWICPixelFormatInfo2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICPixelFormatInfo2*, UInt32),
     release : Proc(IWICPixelFormatInfo2*, UInt32),
@@ -2606,7 +2606,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICPixelFormatInfo2, lpVtbl : IWICPixelFormatInfo2Vtbl* do
+  record IWICPixelFormatInfo2, lpVtbl : IWICPixelFormatInfo2Vtable* do
     GUID = LibC::GUID.new(0xa9db33a2_u32, 0xaf5f_u16, 0x43c7_u16, StaticArray[0xb6_u8, 0x79_u8, 0x74_u8, 0xf5_u8, 0x98_u8, 0x4b_u8, 0x5a_u8, 0xa4_u8])
     def query_interface(this : IWICPixelFormatInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2666,7 +2666,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICImagingFactoryVtbl,
+  record IWICImagingFactoryVtable,
     query_interface : Proc(IWICImagingFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICImagingFactory*, UInt32),
     release : Proc(IWICImagingFactory*, UInt32),
@@ -2698,7 +2698,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICImagingFactory, lpVtbl : IWICImagingFactoryVtbl* do
+  record IWICImagingFactory, lpVtbl : IWICImagingFactoryVtable* do
     GUID = LibC::GUID.new(0xec5ec8a9_u32, 0xc395_u16, 0x4314_u16, StaticArray[0x9c_u8, 0x77_u8, 0x54_u8, 0xd7_u8, 0xa9_u8, 0x35_u8, 0xff_u8, 0x70_u8])
     def query_interface(this : IWICImagingFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2788,7 +2788,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICDevelopRawNotificationCallbackVtbl,
+  record IWICDevelopRawNotificationCallbackVtable,
     query_interface : Proc(IWICDevelopRawNotificationCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICDevelopRawNotificationCallback*, UInt32),
     release : Proc(IWICDevelopRawNotificationCallback*, UInt32),
@@ -2796,7 +2796,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICDevelopRawNotificationCallback, lpVtbl : IWICDevelopRawNotificationCallbackVtbl* do
+  record IWICDevelopRawNotificationCallback, lpVtbl : IWICDevelopRawNotificationCallbackVtable* do
     GUID = LibC::GUID.new(0x95c75a6e_u32, 0x3e8c_u16, 0x4ec2_u16, StaticArray[0x85_u8, 0xa8_u8, 0xae_u8, 0xbc_u8, 0xc5_u8, 0x51_u8, 0xe5_u8, 0x9b_u8])
     def query_interface(this : IWICDevelopRawNotificationCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2814,7 +2814,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICDevelopRawVtbl,
+  record IWICDevelopRawVtable,
     query_interface : Proc(IWICDevelopRaw*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICDevelopRaw*, UInt32),
     release : Proc(IWICDevelopRaw*, UInt32),
@@ -2861,7 +2861,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICDevelopRaw, lpVtbl : IWICDevelopRawVtbl* do
+  record IWICDevelopRaw, lpVtbl : IWICDevelopRawVtable* do
     GUID = LibC::GUID.new(0xfbec5e44_u32, 0xf7be_u16, 0x4b65_u16, StaticArray[0xb7_u8, 0xf8_u8, 0xc0_u8, 0xc8_u8, 0x1f_u8, 0xef_u8, 0x2_u8, 0x6d_u8])
     def query_interface(this : IWICDevelopRaw*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2996,7 +2996,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICDdsDecoderVtbl,
+  record IWICDdsDecoderVtable,
     query_interface : Proc(IWICDdsDecoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICDdsDecoder*, UInt32),
     release : Proc(IWICDdsDecoder*, UInt32),
@@ -3005,7 +3005,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICDdsDecoder, lpVtbl : IWICDdsDecoderVtbl* do
+  record IWICDdsDecoder, lpVtbl : IWICDdsDecoderVtable* do
     GUID = LibC::GUID.new(0x409cd537_u32, 0x8532_u16, 0x40cb_u16, StaticArray[0x97_u8, 0x74_u8, 0xe2_u8, 0xfe_u8, 0xb2_u8, 0xdf_u8, 0x4e_u8, 0x9c_u8])
     def query_interface(this : IWICDdsDecoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3026,7 +3026,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICDdsEncoderVtbl,
+  record IWICDdsEncoderVtable,
     query_interface : Proc(IWICDdsEncoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICDdsEncoder*, UInt32),
     release : Proc(IWICDdsEncoder*, UInt32),
@@ -3036,7 +3036,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICDdsEncoder, lpVtbl : IWICDdsEncoderVtbl* do
+  record IWICDdsEncoder, lpVtbl : IWICDdsEncoderVtable* do
     GUID = LibC::GUID.new(0x5cacdb4c_u32, 0x407e_u16, 0x41b3_u16, StaticArray[0xb9_u8, 0x36_u8, 0xd0_u8, 0xf0_u8, 0x10_u8, 0xcd_u8, 0x67_u8, 0x32_u8])
     def query_interface(this : IWICDdsEncoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3060,7 +3060,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICDdsFrameDecodeVtbl,
+  record IWICDdsFrameDecodeVtable,
     query_interface : Proc(IWICDdsFrameDecode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICDdsFrameDecode*, UInt32),
     release : Proc(IWICDdsFrameDecode*, UInt32),
@@ -3070,7 +3070,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICDdsFrameDecode, lpVtbl : IWICDdsFrameDecodeVtbl* do
+  record IWICDdsFrameDecode, lpVtbl : IWICDdsFrameDecodeVtable* do
     GUID = LibC::GUID.new(0x3d4c0c61_u32, 0x18a4_u16, 0x41e4_u16, StaticArray[0xbd_u8, 0x80_u8, 0x48_u8, 0x1a_u8, 0x4f_u8, 0xc9_u8, 0xf4_u8, 0x64_u8])
     def query_interface(this : IWICDdsFrameDecode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3094,7 +3094,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICJpegFrameDecodeVtbl,
+  record IWICJpegFrameDecodeVtable,
     query_interface : Proc(IWICJpegFrameDecode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICJpegFrameDecode*, UInt32),
     release : Proc(IWICJpegFrameDecode*, UInt32),
@@ -3111,7 +3111,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICJpegFrameDecode, lpVtbl : IWICJpegFrameDecodeVtbl* do
+  record IWICJpegFrameDecode, lpVtbl : IWICJpegFrameDecodeVtable* do
     GUID = LibC::GUID.new(0x8939f66e_u32, 0xc46a_u16, 0x4c21_u16, StaticArray[0xa9_u8, 0xd1_u8, 0x98_u8, 0xb3_u8, 0x27_u8, 0xce_u8, 0x16_u8, 0x79_u8])
     def query_interface(this : IWICJpegFrameDecode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3156,7 +3156,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICJpegFrameEncodeVtbl,
+  record IWICJpegFrameEncodeVtable,
     query_interface : Proc(IWICJpegFrameEncode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICJpegFrameEncode*, UInt32),
     release : Proc(IWICJpegFrameEncode*, UInt32),
@@ -3167,7 +3167,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICJpegFrameEncode, lpVtbl : IWICJpegFrameEncodeVtbl* do
+  record IWICJpegFrameEncode, lpVtbl : IWICJpegFrameEncodeVtable* do
     GUID = LibC::GUID.new(0x2f0c601f_u32, 0xd2c6_u16, 0x468c_u16, StaticArray[0xab_u8, 0xfa_u8, 0x49_u8, 0x49_u8, 0x5d_u8, 0x98_u8, 0x3e_u8, 0xd1_u8])
     def query_interface(this : IWICJpegFrameEncode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3194,7 +3194,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICMetadataBlockReaderVtbl,
+  record IWICMetadataBlockReaderVtable,
     query_interface : Proc(IWICMetadataBlockReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICMetadataBlockReader*, UInt32),
     release : Proc(IWICMetadataBlockReader*, UInt32),
@@ -3205,7 +3205,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICMetadataBlockReader, lpVtbl : IWICMetadataBlockReaderVtbl* do
+  record IWICMetadataBlockReader, lpVtbl : IWICMetadataBlockReaderVtable* do
     GUID = LibC::GUID.new(0xfeaa2a8d_u32, 0xb3f3_u16, 0x43e4_u16, StaticArray[0xb2_u8, 0x5c_u8, 0xd1_u8, 0xde_u8, 0x99_u8, 0xa_u8, 0x1a_u8, 0xe1_u8])
     def query_interface(this : IWICMetadataBlockReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3232,7 +3232,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICMetadataBlockWriterVtbl,
+  record IWICMetadataBlockWriterVtable,
     query_interface : Proc(IWICMetadataBlockWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICMetadataBlockWriter*, UInt32),
     release : Proc(IWICMetadataBlockWriter*, UInt32),
@@ -3248,7 +3248,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICMetadataBlockWriter, lpVtbl : IWICMetadataBlockWriterVtbl* do
+  record IWICMetadataBlockWriter, lpVtbl : IWICMetadataBlockWriterVtable* do
     GUID = LibC::GUID.new(0x8fb9676_u32, 0xb444_u16, 0x41e8_u16, StaticArray[0x8d_u8, 0xbe_u8, 0x6a_u8, 0x53_u8, 0xa5_u8, 0x42_u8, 0xbf_u8, 0xf1_u8])
     def query_interface(this : IWICMetadataBlockWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3290,7 +3290,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICMetadataReaderVtbl,
+  record IWICMetadataReaderVtable,
     query_interface : Proc(IWICMetadataReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICMetadataReader*, UInt32),
     release : Proc(IWICMetadataReader*, UInt32),
@@ -3303,7 +3303,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICMetadataReader, lpVtbl : IWICMetadataReaderVtbl* do
+  record IWICMetadataReader, lpVtbl : IWICMetadataReaderVtable* do
     GUID = LibC::GUID.new(0x9204fe99_u32, 0xd8fc_u16, 0x4fd5_u16, StaticArray[0xa0_u8, 0x1_u8, 0x95_u8, 0x36_u8, 0xb0_u8, 0x67_u8, 0xa8_u8, 0x99_u8])
     def query_interface(this : IWICMetadataReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3336,7 +3336,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICMetadataWriterVtbl,
+  record IWICMetadataWriterVtable,
     query_interface : Proc(IWICMetadataWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICMetadataWriter*, UInt32),
     release : Proc(IWICMetadataWriter*, UInt32),
@@ -3353,7 +3353,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICMetadataWriter, lpVtbl : IWICMetadataWriterVtbl* do
+  record IWICMetadataWriter, lpVtbl : IWICMetadataWriterVtable* do
     GUID = LibC::GUID.new(0xf7836e16_u32, 0x3be0_u16, 0x470b_u16, StaticArray[0x86_u8, 0xbb_u8, 0x16_u8, 0xd_u8, 0xa_u8, 0xec_u8, 0xd7_u8, 0xde_u8])
     def query_interface(this : IWICMetadataWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3398,7 +3398,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICStreamProviderVtbl,
+  record IWICStreamProviderVtable,
     query_interface : Proc(IWICStreamProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICStreamProvider*, UInt32),
     release : Proc(IWICStreamProvider*, UInt32),
@@ -3409,7 +3409,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICStreamProvider, lpVtbl : IWICStreamProviderVtbl* do
+  record IWICStreamProvider, lpVtbl : IWICStreamProviderVtable* do
     GUID = LibC::GUID.new(0x449494bc_u32, 0xb468_u16, 0x4927_u16, StaticArray[0x96_u8, 0xd7_u8, 0xba_u8, 0x90_u8, 0xd3_u8, 0x1a_u8, 0xb5_u8, 0x5_u8])
     def query_interface(this : IWICStreamProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3436,7 +3436,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICPersistStreamVtbl,
+  record IWICPersistStreamVtable,
     query_interface : Proc(IWICPersistStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICPersistStream*, UInt32),
     release : Proc(IWICPersistStream*, UInt32),
@@ -3450,7 +3450,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICPersistStream, lpVtbl : IWICPersistStreamVtbl* do
+  record IWICPersistStream, lpVtbl : IWICPersistStreamVtable* do
     GUID = LibC::GUID.new(0x675040_u32, 0x6908_u16, 0x45f8_u16, StaticArray[0x86_u8, 0xa3_u8, 0x49_u8, 0xc7_u8, 0xdf_u8, 0xd6_u8, 0xd9_u8, 0xad_u8])
     def query_interface(this : IWICPersistStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3486,7 +3486,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICMetadataHandlerInfoVtbl,
+  record IWICMetadataHandlerInfoVtable,
     query_interface : Proc(IWICMetadataHandlerInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICMetadataHandlerInfo*, UInt32),
     release : Proc(IWICMetadataHandlerInfo*, UInt32),
@@ -3508,7 +3508,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICMetadataHandlerInfo, lpVtbl : IWICMetadataHandlerInfoVtbl* do
+  record IWICMetadataHandlerInfo, lpVtbl : IWICMetadataHandlerInfoVtable* do
     GUID = LibC::GUID.new(0xaba958bf_u32, 0xc672_u16, 0x44d1_u16, StaticArray[0x8d_u8, 0x61_u8, 0xce_u8, 0x6d_u8, 0xf2_u8, 0xe6_u8, 0x82_u8, 0xc2_u8])
     def query_interface(this : IWICMetadataHandlerInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3568,7 +3568,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICMetadataReaderInfoVtbl,
+  record IWICMetadataReaderInfoVtable,
     query_interface : Proc(IWICMetadataReaderInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICMetadataReaderInfo*, UInt32),
     release : Proc(IWICMetadataReaderInfo*, UInt32),
@@ -3593,7 +3593,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICMetadataReaderInfo, lpVtbl : IWICMetadataReaderInfoVtbl* do
+  record IWICMetadataReaderInfo, lpVtbl : IWICMetadataReaderInfoVtable* do
     GUID = LibC::GUID.new(0xeebf1f5b_u32, 0x7c1_u16, 0x4447_u16, StaticArray[0xa3_u8, 0xab_u8, 0x22_u8, 0xac_u8, 0xaf_u8, 0x78_u8, 0xa8_u8, 0x4_u8])
     def query_interface(this : IWICMetadataReaderInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3662,7 +3662,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICMetadataWriterInfoVtbl,
+  record IWICMetadataWriterInfoVtable,
     query_interface : Proc(IWICMetadataWriterInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICMetadataWriterInfo*, UInt32),
     release : Proc(IWICMetadataWriterInfo*, UInt32),
@@ -3686,7 +3686,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICMetadataWriterInfo, lpVtbl : IWICMetadataWriterInfoVtbl* do
+  record IWICMetadataWriterInfo, lpVtbl : IWICMetadataWriterInfoVtable* do
     GUID = LibC::GUID.new(0xb22e3fba_u32, 0x3925_u16, 0x4323_u16, StaticArray[0xb5_u8, 0xc1_u8, 0x9e_u8, 0xbf_u8, 0xc4_u8, 0x30_u8, 0xf2_u8, 0x36_u8])
     def query_interface(this : IWICMetadataWriterInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3752,7 +3752,7 @@ module Win32cr::Graphics::Imaging
   end
 
   @[Extern]
-  record IWICComponentFactoryVtbl,
+  record IWICComponentFactoryVtable,
     query_interface : Proc(IWICComponentFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICComponentFactory*, UInt32),
     release : Proc(IWICComponentFactory*, UInt32),
@@ -3791,7 +3791,7 @@ module Win32cr::Graphics::Imaging
 
 
   @[Extern]
-  record IWICComponentFactory, lpVtbl : IWICComponentFactoryVtbl* do
+  record IWICComponentFactory, lpVtbl : IWICComponentFactoryVtable* do
     GUID = LibC::GUID.new(0x412d0c3a_u32, 0x9650_u16, 0x44fa_u16, StaticArray[0xaf_u8, 0x5b_u8, 0xdd_u8, 0x2a_u8, 0x6_u8, 0xc8_u8, 0xe8_u8, 0xfb_u8])
     def query_interface(this : IWICComponentFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3902,42 +3902,61 @@ module Win32cr::Graphics::Imaging
   end
 
   def wICConvertBitmapSource(dstFormat : LibC::GUID*, pISrc : Void*, ppIDst : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WICConvertBitmapSource(dstFormat, pISrc, ppIDst)
+    {% end %}
   end
 
   def wICCreateBitmapFromSection(width : UInt32, height : UInt32, pixelFormat : LibC::GUID*, hSection : Win32cr::Foundation::HANDLE, stride : UInt32, offset : UInt32, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WICCreateBitmapFromSection(width, height, pixelFormat, hSection, stride, offset, ppIBitmap)
+    {% end %}
   end
 
   def wICCreateBitmapFromSectionEx(width : UInt32, height : UInt32, pixelFormat : LibC::GUID*, hSection : Win32cr::Foundation::HANDLE, stride : UInt32, offset : UInt32, desiredAccessLevel : Win32cr::Graphics::Imaging::WICSectionAccessLevel, ppIBitmap : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WICCreateBitmapFromSectionEx(width, height, pixelFormat, hSection, stride, offset, desiredAccessLevel, ppIBitmap)
+    {% end %}
   end
 
   def wICMapGuidToShortName(guid : LibC::GUID*, cchName : UInt32, wzName : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WICMapGuidToShortName(guid, cchName, wzName, pcchActual)
+    {% end %}
   end
 
   def wICMapShortNameToGuid(wzName : Win32cr::Foundation::PWSTR, pguid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WICMapShortNameToGuid(wzName, pguid)
+    {% end %}
   end
 
   def wICMapSchemaToName(guidMetadataFormat : LibC::GUID*, pwzSchema : Win32cr::Foundation::PWSTR, cchName : UInt32, wzName : UInt16*, pcchActual : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WICMapSchemaToName(guidMetadataFormat, pwzSchema, cchName, wzName, pcchActual)
+    {% end %}
   end
 
   def wICMatchMetadataContent(guidContainerFormat : LibC::GUID*, pguidVendor : LibC::GUID*, pIStream : Void*, pguidMetadataFormat : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WICMatchMetadataContent(guidContainerFormat, pguidVendor, pIStream, pguidMetadataFormat)
+    {% end %}
   end
 
   def wICSerializeMetadataContent(guidContainerFormat : LibC::GUID*, pIWriter : Void*, dwPersistOptions : UInt32, pIStream : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WICSerializeMetadataContent(guidContainerFormat, pIWriter, dwPersistOptions, pIStream)
+    {% end %}
   end
 
   def wICGetMetadataContentSize(guidContainerFormat : LibC::GUID*, pIWriter : Void*, pcbSize : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WICGetMetadataContentSize(guidContainerFormat, pIWriter, pcbSize)
+    {% end %}
   end
 
   @[Link("windowscodecs")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WICConvertBitmapSource(dstFormat : LibC::GUID*, pISrc : Void*, ppIDst : Void**) : Win32cr::Foundation::HRESULT
@@ -3967,4 +3986,5 @@ module Win32cr::Graphics::Imaging
     fun WICGetMetadataContentSize(guidContainerFormat : LibC::GUID*, pIWriter : Void*, pcbSize : Win32cr::Foundation::ULARGE_INTEGER*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

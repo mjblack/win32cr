@@ -406,34 +406,49 @@ module Win32cr::System::Kernel
   {% end %}
 
   def rtlInitializeSListHead(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Void
+    {% if !flag?(:docs) %}
     C.RtlInitializeSListHead(list_head)
+    {% end %}
   end
 
   def rtlFirstEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.RtlFirstEntrySList(list_head)
+    {% end %}
   end
 
   def rtlInterlockedPopEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.RtlInterlockedPopEntrySList(list_head)
+    {% end %}
   end
 
   def rtlInterlockedPushEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*, list_entry : Win32cr::System::Kernel::SLIST_ENTRY*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.RtlInterlockedPushEntrySList(list_head, list_entry)
+    {% end %}
   end
 
   def rtlInterlockedPushListSListEx(list_head : Win32cr::System::Kernel::SLIST_HEADER*, list : Win32cr::System::Kernel::SLIST_ENTRY*, list_end : Win32cr::System::Kernel::SLIST_ENTRY*, count : UInt32) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.RtlInterlockedPushListSListEx(list_head, list, list_end, count)
+    {% end %}
   end
 
   def rtlInterlockedFlushSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.RtlInterlockedFlushSList(list_head)
+    {% end %}
   end
 
   def rtlQueryDepthSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : UInt16
+    {% if !flag?(:docs) %}
     C.RtlQueryDepthSList(list_head)
+    {% end %}
   end
 
   @[Link("ntdll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun RtlInitializeSListHead(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Void
@@ -457,4 +472,5 @@ module Win32cr::System::Kernel
     fun RtlQueryDepthSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : UInt16
 
   end
+  {% end %}
 end

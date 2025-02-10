@@ -2496,7 +2496,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IEnumCERTVIEWCOLUMNVtbl,
+  record IEnumCERTVIEWCOLUMNVtable,
     query_interface : Proc(IEnumCERTVIEWCOLUMN*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumCERTVIEWCOLUMN*, UInt32),
     release : Proc(IEnumCERTVIEWCOLUMN*, UInt32),
@@ -2517,7 +2517,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IEnumCERTVIEWCOLUMN, lpVtbl : IEnumCERTVIEWCOLUMNVtbl* do
+  record IEnumCERTVIEWCOLUMN, lpVtbl : IEnumCERTVIEWCOLUMNVtable* do
     GUID = LibC::GUID.new(0x9c735be2_u32, 0x57a5_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xdb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x83_u8, 0xfa_u8])
     def query_interface(this : IEnumCERTVIEWCOLUMN*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2574,7 +2574,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IEnumCERTVIEWATTRIBUTEVtbl,
+  record IEnumCERTVIEWATTRIBUTEVtable,
     query_interface : Proc(IEnumCERTVIEWATTRIBUTE*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumCERTVIEWATTRIBUTE*, UInt32),
     release : Proc(IEnumCERTVIEWATTRIBUTE*, UInt32),
@@ -2591,7 +2591,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IEnumCERTVIEWATTRIBUTE, lpVtbl : IEnumCERTVIEWATTRIBUTEVtbl* do
+  record IEnumCERTVIEWATTRIBUTE, lpVtbl : IEnumCERTVIEWATTRIBUTEVtable* do
     GUID = LibC::GUID.new(0xe77db656_u32, 0x7653_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x83_u8, 0xfa_u8])
     def query_interface(this : IEnumCERTVIEWATTRIBUTE*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2636,7 +2636,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IEnumCERTVIEWEXTENSIONVtbl,
+  record IEnumCERTVIEWEXTENSIONVtable,
     query_interface : Proc(IEnumCERTVIEWEXTENSION*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumCERTVIEWEXTENSION*, UInt32),
     release : Proc(IEnumCERTVIEWEXTENSION*, UInt32),
@@ -2654,7 +2654,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IEnumCERTVIEWEXTENSION, lpVtbl : IEnumCERTVIEWEXTENSIONVtbl* do
+  record IEnumCERTVIEWEXTENSION, lpVtbl : IEnumCERTVIEWEXTENSIONVtable* do
     GUID = LibC::GUID.new(0xe7dd1466_u32, 0x7653_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xde_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x83_u8, 0xfa_u8])
     def query_interface(this : IEnumCERTVIEWEXTENSION*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2702,7 +2702,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IEnumCERTVIEWROWVtbl,
+  record IEnumCERTVIEWROWVtable,
     query_interface : Proc(IEnumCERTVIEWROW*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumCERTVIEWROW*, UInt32),
     release : Proc(IEnumCERTVIEWROW*, UInt32),
@@ -2721,7 +2721,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IEnumCERTVIEWROW, lpVtbl : IEnumCERTVIEWROWVtbl* do
+  record IEnumCERTVIEWROW, lpVtbl : IEnumCERTVIEWROWVtable* do
     GUID = LibC::GUID.new(0xd1157f4c_u32, 0x5af2_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xdc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x83_u8, 0xfa_u8])
     def query_interface(this : IEnumCERTVIEWROW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2772,7 +2772,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertViewVtbl,
+  record ICertViewVtable,
     query_interface : Proc(ICertView*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertView*, UInt32),
     release : Proc(ICertView*, UInt32),
@@ -2791,7 +2791,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertView, lpVtbl : ICertViewVtbl* do
+  record ICertView, lpVtbl : ICertViewVtable* do
     GUID = LibC::GUID.new(0xc3fac344_u32, 0x1e84_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xd6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x83_u8, 0xfa_u8])
     def query_interface(this : ICertView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2842,7 +2842,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertView2Vtbl,
+  record ICertView2Vtable,
     query_interface : Proc(ICertView2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertView2*, UInt32),
     release : Proc(ICertView2*, UInt32),
@@ -2862,7 +2862,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertView2, lpVtbl : ICertView2Vtbl* do
+  record ICertView2, lpVtbl : ICertView2Vtable* do
     GUID = LibC::GUID.new(0xd594b282_u32, 0x8851_u16, 0x4b61_u16, StaticArray[0x9c_u8, 0x66_u8, 0x3e_u8, 0xda_u8, 0xdf_u8, 0x84_u8, 0x88_u8, 0x63_u8])
     def query_interface(this : ICertView2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2916,7 +2916,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertAdminVtbl,
+  record ICertAdminVtable,
     query_interface : Proc(ICertAdmin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertAdmin*, UInt32),
     release : Proc(ICertAdmin*, UInt32),
@@ -2937,7 +2937,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertAdmin, lpVtbl : ICertAdminVtbl* do
+  record ICertAdmin, lpVtbl : ICertAdminVtable* do
     GUID = LibC::GUID.new(0x34df6950_u32, 0x7fb6_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x17_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertAdmin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2994,7 +2994,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertAdmin2Vtbl,
+  record ICertAdmin2Vtable,
     query_interface : Proc(ICertAdmin2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertAdmin2*, UInt32),
     release : Proc(ICertAdmin2*, UInt32),
@@ -3026,7 +3026,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertAdmin2, lpVtbl : ICertAdmin2Vtbl* do
+  record ICertAdmin2, lpVtbl : ICertAdmin2Vtable* do
     GUID = LibC::GUID.new(0xf7c3ac41_u32, 0xb8ce_u16, 0x4fb4_u16, StaticArray[0xaa_u8, 0x58_u8, 0x3d_u8, 0x1d_u8, 0xc0_u8, 0xe3_u8, 0x6b_u8, 0x39_u8])
     def query_interface(this : ICertAdmin2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3116,7 +3116,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IOCSPPropertyVtbl,
+  record IOCSPPropertyVtable,
     query_interface : Proc(IOCSPProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOCSPProperty*, UInt32),
     release : Proc(IOCSPProperty*, UInt32),
@@ -3131,7 +3131,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IOCSPProperty, lpVtbl : IOCSPPropertyVtbl* do
+  record IOCSPProperty, lpVtbl : IOCSPPropertyVtable* do
     GUID = LibC::GUID.new(0x66fb7839_u32, 0x5f04_u16, 0x4c25_u16, StaticArray[0xad_u8, 0x18_u8, 0x9f_u8, 0xf1_u8, 0xa8_u8, 0x37_u8, 0x6e_u8, 0xe0_u8])
     def query_interface(this : IOCSPProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3170,7 +3170,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IOCSPPropertyCollectionVtbl,
+  record IOCSPPropertyCollectionVtable,
     query_interface : Proc(IOCSPPropertyCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOCSPPropertyCollection*, UInt32),
     release : Proc(IOCSPPropertyCollection*, UInt32),
@@ -3189,7 +3189,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IOCSPPropertyCollection, lpVtbl : IOCSPPropertyCollectionVtbl* do
+  record IOCSPPropertyCollection, lpVtbl : IOCSPPropertyCollectionVtable* do
     GUID = LibC::GUID.new(0x2597c18d_u32, 0x54e6_u16, 0x4b74_u16, StaticArray[0x9f_u8, 0xa9_u8, 0xa6_u8, 0xbf_u8, 0xda_u8, 0x99_u8, 0xcb_u8, 0xbe_u8])
     def query_interface(this : IOCSPPropertyCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3240,7 +3240,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IOCSPCAConfigurationVtbl,
+  record IOCSPCAConfigurationVtable,
     query_interface : Proc(IOCSPCAConfiguration*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOCSPCAConfiguration*, UInt32),
     release : Proc(IOCSPCAConfiguration*, UInt32),
@@ -3275,7 +3275,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IOCSPCAConfiguration, lpVtbl : IOCSPCAConfigurationVtbl* do
+  record IOCSPCAConfiguration, lpVtbl : IOCSPCAConfigurationVtable* do
     GUID = LibC::GUID.new(0xaec92b40_u32, 0x3d46_u16, 0x433f_u16, StaticArray[0x87_u8, 0xd1_u8, 0xb8_u8, 0x4d_u8, 0x5c_u8, 0x1e_u8, 0x79_u8, 0xd_u8])
     def query_interface(this : IOCSPCAConfiguration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3374,7 +3374,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IOCSPCAConfigurationCollectionVtbl,
+  record IOCSPCAConfigurationCollectionVtable,
     query_interface : Proc(IOCSPCAConfigurationCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOCSPCAConfigurationCollection*, UInt32),
     release : Proc(IOCSPCAConfigurationCollection*, UInt32),
@@ -3391,7 +3391,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IOCSPCAConfigurationCollection, lpVtbl : IOCSPCAConfigurationCollectionVtbl* do
+  record IOCSPCAConfigurationCollection, lpVtbl : IOCSPCAConfigurationCollectionVtable* do
     GUID = LibC::GUID.new(0x2bebea0b_u32, 0x5ece_u16, 0x4f28_u16, StaticArray[0xa9_u8, 0x1c_u8, 0x86_u8, 0xb4_u8, 0xbb_u8, 0x20_u8, 0xf0_u8, 0xd3_u8])
     def query_interface(this : IOCSPCAConfigurationCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3436,7 +3436,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IOCSPAdminVtbl,
+  record IOCSPAdminVtable,
     query_interface : Proc(IOCSPAdmin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOCSPAdmin*, UInt32),
     release : Proc(IOCSPAdmin*, UInt32),
@@ -3457,7 +3457,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IOCSPAdmin, lpVtbl : IOCSPAdminVtbl* do
+  record IOCSPAdmin, lpVtbl : IOCSPAdminVtable* do
     GUID = LibC::GUID.new(0x322e830d_u32, 0x67db_u16, 0x4fe9_u16, StaticArray[0x95_u8, 0x77_u8, 0x45_u8, 0x96_u8, 0xd9_u8, 0xf0_u8, 0x92_u8, 0x94_u8])
     def query_interface(this : IOCSPAdmin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3514,7 +3514,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertServerPolicyVtbl,
+  record ICertServerPolicyVtable,
     query_interface : Proc(ICertServerPolicy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertServerPolicy*, UInt32),
     release : Proc(ICertServerPolicy*, UInt32),
@@ -3539,7 +3539,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertServerPolicy, lpVtbl : ICertServerPolicyVtbl* do
+  record ICertServerPolicy, lpVtbl : ICertServerPolicyVtable* do
     GUID = LibC::GUID.new(0xaa000922_u32, 0xffbe_u16, 0x11cf_u16, StaticArray[0x88_u8, 0x0_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertServerPolicy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3608,7 +3608,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertServerExitVtbl,
+  record ICertServerExitVtable,
     query_interface : Proc(ICertServerExit*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertServerExit*, UInt32),
     release : Proc(ICertServerExit*, UInt32),
@@ -3631,7 +3631,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertServerExit, lpVtbl : ICertServerExitVtbl* do
+  record ICertServerExit, lpVtbl : ICertServerExitVtable* do
     GUID = LibC::GUID.new(0x4ba9eb90_u32, 0x732c_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x16_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertServerExit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3694,7 +3694,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertGetConfigVtbl,
+  record ICertGetConfigVtable,
     query_interface : Proc(ICertGetConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertGetConfig*, UInt32),
     release : Proc(ICertGetConfig*, UInt32),
@@ -3706,7 +3706,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertGetConfig, lpVtbl : ICertGetConfigVtbl* do
+  record ICertGetConfig, lpVtbl : ICertGetConfigVtable* do
     GUID = LibC::GUID.new(0xc7ea09c0_u32, 0xce17_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x33_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertGetConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3736,7 +3736,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertConfigVtbl,
+  record ICertConfigVtable,
     query_interface : Proc(ICertConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertConfig*, UInt32),
     release : Proc(ICertConfig*, UInt32),
@@ -3751,7 +3751,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertConfig, lpVtbl : ICertConfigVtbl* do
+  record ICertConfig, lpVtbl : ICertConfigVtable* do
     GUID = LibC::GUID.new(0x372fce34_u32, 0x4324_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x10_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3790,7 +3790,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertConfig2Vtbl,
+  record ICertConfig2Vtable,
     query_interface : Proc(ICertConfig2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertConfig2*, UInt32),
     release : Proc(ICertConfig2*, UInt32),
@@ -3806,7 +3806,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertConfig2, lpVtbl : ICertConfig2Vtbl* do
+  record ICertConfig2, lpVtbl : ICertConfig2Vtable* do
     GUID = LibC::GUID.new(0x7a18edde_u32, 0x7e78_u16, 0x4163_u16, StaticArray[0x8d_u8, 0xed_u8, 0x78_u8, 0xe2_u8, 0xc9_u8, 0xce_u8, 0xe9_u8, 0x24_u8])
     def query_interface(this : ICertConfig2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3848,7 +3848,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertRequestVtbl,
+  record ICertRequestVtable,
     query_interface : Proc(ICertRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertRequest*, UInt32),
     release : Proc(ICertRequest*, UInt32),
@@ -3866,7 +3866,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertRequest, lpVtbl : ICertRequestVtbl* do
+  record ICertRequest, lpVtbl : ICertRequestVtable* do
     GUID = LibC::GUID.new(0x14e4840_u32, 0x5523_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x12_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3914,7 +3914,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertRequest2Vtbl,
+  record ICertRequest2Vtable,
     query_interface : Proc(ICertRequest2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertRequest2*, UInt32),
     release : Proc(ICertRequest2*, UInt32),
@@ -3938,7 +3938,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertRequest2, lpVtbl : ICertRequest2Vtbl* do
+  record ICertRequest2, lpVtbl : ICertRequest2Vtable* do
     GUID = LibC::GUID.new(0xa4772988_u32, 0x4a85_u16, 0x4fa9_u16, StaticArray[0x82_u8, 0x4e_u8, 0xb5_u8, 0xcf_u8, 0x5c_u8, 0x16_u8, 0x40_u8, 0x5a_u8])
     def query_interface(this : ICertRequest2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4004,7 +4004,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertRequest3Vtbl,
+  record ICertRequest3Vtable,
     query_interface : Proc(ICertRequest3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertRequest3*, UInt32),
     release : Proc(ICertRequest3*, UInt32),
@@ -4032,7 +4032,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertRequest3, lpVtbl : ICertRequest3Vtbl* do
+  record ICertRequest3, lpVtbl : ICertRequest3Vtable* do
     GUID = LibC::GUID.new(0xafc8f92b_u32, 0x33a2_u16, 0x4861_u16, StaticArray[0xbf_u8, 0x36_u8, 0x29_u8, 0x33_u8, 0xb7_u8, 0xcd_u8, 0x67_u8, 0xb3_u8])
     def query_interface(this : ICertRequest3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4110,7 +4110,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertManageModuleVtbl,
+  record ICertManageModuleVtable,
     query_interface : Proc(ICertManageModule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertManageModule*, UInt32),
     release : Proc(ICertManageModule*, UInt32),
@@ -4124,7 +4124,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertManageModule, lpVtbl : ICertManageModuleVtbl* do
+  record ICertManageModule, lpVtbl : ICertManageModuleVtable* do
     GUID = LibC::GUID.new(0xe7d7ad42_u32, 0xbd3d_u16, 0x11d1_u16, StaticArray[0x9a_u8, 0x4d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x97_u8, 0xeb_u8])
     def query_interface(this : ICertManageModule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4160,7 +4160,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPolicyVtbl,
+  record ICertPolicyVtable,
     query_interface : Proc(ICertPolicy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPolicy*, UInt32),
     release : Proc(ICertPolicy*, UInt32),
@@ -4175,7 +4175,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertPolicy, lpVtbl : ICertPolicyVtbl* do
+  record ICertPolicy, lpVtbl : ICertPolicyVtable* do
     GUID = LibC::GUID.new(0x38bb5a00_u32, 0x7636_u16, 0x11d0_u16, StaticArray[0xb4_u8, 0x13_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x1b_u8, 0xbf_u8, 0x8c_u8])
     def query_interface(this : ICertPolicy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4214,7 +4214,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPolicy2Vtbl,
+  record ICertPolicy2Vtable,
     query_interface : Proc(ICertPolicy2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPolicy2*, UInt32),
     release : Proc(ICertPolicy2*, UInt32),
@@ -4230,7 +4230,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertPolicy2, lpVtbl : ICertPolicy2Vtbl* do
+  record ICertPolicy2, lpVtbl : ICertPolicy2Vtable* do
     GUID = LibC::GUID.new(0x3db4910e_u32, 0x8001_u16, 0x4bf1_u16, StaticArray[0xaa_u8, 0x1b_u8, 0xf4_u8, 0x3a_u8, 0x80_u8, 0x83_u8, 0x17_u8, 0xa0_u8])
     def query_interface(this : ICertPolicy2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4272,7 +4272,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record INDESPolicyVtbl,
+  record INDESPolicyVtable,
     query_interface : Proc(INDESPolicy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INDESPolicy*, UInt32),
     release : Proc(INDESPolicy*, UInt32),
@@ -4284,7 +4284,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record INDESPolicy, lpVtbl : INDESPolicyVtbl* do
+  record INDESPolicy, lpVtbl : INDESPolicyVtable* do
     GUID = LibC::GUID.new(0x13ca515d_u32, 0x431d_u16, 0x46cc_u16, StaticArray[0x8c_u8, 0x2e_u8, 0x1d_u8, 0xa2_u8, 0x69_u8, 0xbb_u8, 0xd6_u8, 0x25_u8])
     def query_interface(this : INDESPolicy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4314,7 +4314,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IObjectIdVtbl,
+  record IObjectIdVtable,
     query_interface : Proc(IObjectId*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IObjectId*, UInt32),
     release : Proc(IObjectId*, UInt32),
@@ -4333,7 +4333,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IObjectId, lpVtbl : IObjectIdVtbl* do
+  record IObjectId, lpVtbl : IObjectIdVtable* do
     GUID = LibC::GUID.new(0x728ab300_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IObjectId*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4384,7 +4384,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IObjectIdsVtbl,
+  record IObjectIdsVtable,
     query_interface : Proc(IObjectIds*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IObjectIds*, UInt32),
     release : Proc(IObjectIds*, UInt32),
@@ -4402,7 +4402,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IObjectIds, lpVtbl : IObjectIdsVtbl* do
+  record IObjectIds, lpVtbl : IObjectIdsVtable* do
     GUID = LibC::GUID.new(0x728ab301_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IObjectIds*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4450,7 +4450,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IBinaryConverterVtbl,
+  record IBinaryConverterVtable,
     query_interface : Proc(IBinaryConverter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBinaryConverter*, UInt32),
     release : Proc(IBinaryConverter*, UInt32),
@@ -4464,7 +4464,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IBinaryConverter, lpVtbl : IBinaryConverterVtbl* do
+  record IBinaryConverter, lpVtbl : IBinaryConverterVtable* do
     GUID = LibC::GUID.new(0x728ab302_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IBinaryConverter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4500,7 +4500,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IBinaryConverter2Vtbl,
+  record IBinaryConverter2Vtable,
     query_interface : Proc(IBinaryConverter2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBinaryConverter2*, UInt32),
     release : Proc(IBinaryConverter2*, UInt32),
@@ -4516,7 +4516,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IBinaryConverter2, lpVtbl : IBinaryConverter2Vtbl* do
+  record IBinaryConverter2, lpVtbl : IBinaryConverter2Vtable* do
     GUID = LibC::GUID.new(0x8d7928b4_u32, 0x4e17_u16, 0x428d_u16, StaticArray[0x9a_u8, 0x17_u8, 0x72_u8, 0x8d_u8, 0xf0_u8, 0xd_u8, 0x1b_u8, 0x2b_u8])
     def query_interface(this : IBinaryConverter2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4558,7 +4558,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX500DistinguishedNameVtbl,
+  record IX500DistinguishedNameVtable,
     query_interface : Proc(IX500DistinguishedName*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX500DistinguishedName*, UInt32),
     release : Proc(IX500DistinguishedName*, UInt32),
@@ -4573,7 +4573,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX500DistinguishedName, lpVtbl : IX500DistinguishedNameVtbl* do
+  record IX500DistinguishedName, lpVtbl : IX500DistinguishedNameVtable* do
     GUID = LibC::GUID.new(0x728ab303_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX500DistinguishedName*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4612,7 +4612,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509EnrollmentStatusVtbl,
+  record IX509EnrollmentStatusVtable,
     query_interface : Proc(IX509EnrollmentStatus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509EnrollmentStatus*, UInt32),
     release : Proc(IX509EnrollmentStatus*, UInt32),
@@ -4635,7 +4635,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509EnrollmentStatus, lpVtbl : IX509EnrollmentStatusVtbl* do
+  record IX509EnrollmentStatus, lpVtbl : IX509EnrollmentStatusVtable* do
     GUID = LibC::GUID.new(0x728ab304_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509EnrollmentStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4698,7 +4698,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICspAlgorithmVtbl,
+  record ICspAlgorithmVtable,
     query_interface : Proc(ICspAlgorithm*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICspAlgorithm*, UInt32),
     release : Proc(ICspAlgorithm*, UInt32),
@@ -4719,7 +4719,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICspAlgorithm, lpVtbl : ICspAlgorithmVtbl* do
+  record ICspAlgorithm, lpVtbl : ICspAlgorithmVtable* do
     GUID = LibC::GUID.new(0x728ab305_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICspAlgorithm*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4776,7 +4776,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICspAlgorithmsVtbl,
+  record ICspAlgorithmsVtable,
     query_interface : Proc(ICspAlgorithms*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICspAlgorithms*, UInt32),
     release : Proc(ICspAlgorithms*, UInt32),
@@ -4795,7 +4795,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICspAlgorithms, lpVtbl : ICspAlgorithmsVtbl* do
+  record ICspAlgorithms, lpVtbl : ICspAlgorithmsVtable* do
     GUID = LibC::GUID.new(0x728ab306_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICspAlgorithms*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4846,7 +4846,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICspInformationVtbl,
+  record ICspInformationVtable,
     query_interface : Proc(ICspInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICspInformation*, UInt32),
     release : Proc(ICspInformation*, UInt32),
@@ -4874,7 +4874,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICspInformation, lpVtbl : ICspInformationVtbl* do
+  record ICspInformation, lpVtbl : ICspInformationVtable* do
     GUID = LibC::GUID.new(0x728ab307_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICspInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4952,7 +4952,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICspInformationsVtbl,
+  record ICspInformationsVtable,
     query_interface : Proc(ICspInformations*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICspInformations*, UInt32),
     release : Proc(ICspInformations*, UInt32),
@@ -4975,7 +4975,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICspInformations, lpVtbl : ICspInformationsVtbl* do
+  record ICspInformations, lpVtbl : ICspInformationsVtable* do
     GUID = LibC::GUID.new(0x728ab308_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICspInformations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5038,7 +5038,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICspStatusVtbl,
+  record ICspStatusVtable,
     query_interface : Proc(ICspStatus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICspStatus*, UInt32),
     release : Proc(ICspStatus*, UInt32),
@@ -5056,7 +5056,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICspStatus, lpVtbl : ICspStatusVtbl* do
+  record ICspStatus, lpVtbl : ICspStatusVtable* do
     GUID = LibC::GUID.new(0x728ab309_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICspStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5104,7 +5104,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICspStatusesVtbl,
+  record ICspStatusesVtable,
     query_interface : Proc(ICspStatuses*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICspStatuses*, UInt32),
     release : Proc(ICspStatuses*, UInt32),
@@ -5125,7 +5125,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICspStatuses, lpVtbl : ICspStatusesVtbl* do
+  record ICspStatuses, lpVtbl : ICspStatusesVtable* do
     GUID = LibC::GUID.new(0x728ab30a_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICspStatuses*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5182,7 +5182,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509PublicKeyVtbl,
+  record IX509PublicKeyVtable,
     query_interface : Proc(IX509PublicKey*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509PublicKey*, UInt32),
     release : Proc(IX509PublicKey*, UInt32),
@@ -5200,7 +5200,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509PublicKey, lpVtbl : IX509PublicKeyVtbl* do
+  record IX509PublicKey, lpVtbl : IX509PublicKeyVtable* do
     GUID = LibC::GUID.new(0x728ab30b_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509PublicKey*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5248,7 +5248,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509PrivateKeyVtbl,
+  record IX509PrivateKeyVtable,
     query_interface : Proc(IX509PrivateKey*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509PrivateKey*, UInt32),
     release : Proc(IX509PrivateKey*, UInt32),
@@ -5317,7 +5317,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509PrivateKey, lpVtbl : IX509PrivateKeyVtbl* do
+  record IX509PrivateKey, lpVtbl : IX509PrivateKeyVtable* do
     GUID = LibC::GUID.new(0x728ab30c_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509PrivateKey*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5518,7 +5518,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509PrivateKey2Vtbl,
+  record IX509PrivateKey2Vtable,
     query_interface : Proc(IX509PrivateKey2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509PrivateKey2*, UInt32),
     release : Proc(IX509PrivateKey2*, UInt32),
@@ -5597,7 +5597,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509PrivateKey2, lpVtbl : IX509PrivateKey2Vtbl* do
+  record IX509PrivateKey2, lpVtbl : IX509PrivateKey2Vtable* do
     GUID = LibC::GUID.new(0x728ab362_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509PrivateKey2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5828,7 +5828,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509EndorsementKeyVtbl,
+  record IX509EndorsementKeyVtable,
     query_interface : Proc(IX509EndorsementKey*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509EndorsementKey*, UInt32),
     release : Proc(IX509EndorsementKey*, UInt32),
@@ -5850,7 +5850,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509EndorsementKey, lpVtbl : IX509EndorsementKeyVtbl* do
+  record IX509EndorsementKey, lpVtbl : IX509EndorsementKeyVtable* do
     GUID = LibC::GUID.new(0xb11cd855_u32, 0xf4c4_u16, 0x4fc6_u16, StaticArray[0xb7_u8, 0x10_u8, 0x44_u8, 0x22_u8, 0x23_u8, 0x7f_u8, 0x9_u8, 0xe9_u8])
     def query_interface(this : IX509EndorsementKey*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5910,7 +5910,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionVtbl,
+  record IX509ExtensionVtable,
     query_interface : Proc(IX509Extension*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509Extension*, UInt32),
     release : Proc(IX509Extension*, UInt32),
@@ -5926,7 +5926,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509Extension, lpVtbl : IX509ExtensionVtbl* do
+  record IX509Extension, lpVtbl : IX509ExtensionVtable* do
     GUID = LibC::GUID.new(0x728ab30d_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509Extension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5968,7 +5968,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionsVtbl,
+  record IX509ExtensionsVtable,
     query_interface : Proc(IX509Extensions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509Extensions*, UInt32),
     release : Proc(IX509Extensions*, UInt32),
@@ -5987,7 +5987,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509Extensions, lpVtbl : IX509ExtensionsVtbl* do
+  record IX509Extensions, lpVtbl : IX509ExtensionsVtable* do
     GUID = LibC::GUID.new(0x728ab30e_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509Extensions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6038,7 +6038,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionKeyUsageVtbl,
+  record IX509ExtensionKeyUsageVtable,
     query_interface : Proc(IX509ExtensionKeyUsage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionKeyUsage*, UInt32),
     release : Proc(IX509ExtensionKeyUsage*, UInt32),
@@ -6057,7 +6057,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509ExtensionKeyUsage, lpVtbl : IX509ExtensionKeyUsageVtbl* do
+  record IX509ExtensionKeyUsage, lpVtbl : IX509ExtensionKeyUsageVtable* do
     GUID = LibC::GUID.new(0x728ab30f_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionKeyUsage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6108,7 +6108,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionEnhancedKeyUsageVtbl,
+  record IX509ExtensionEnhancedKeyUsageVtable,
     query_interface : Proc(IX509ExtensionEnhancedKeyUsage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionEnhancedKeyUsage*, UInt32),
     release : Proc(IX509ExtensionEnhancedKeyUsage*, UInt32),
@@ -6127,7 +6127,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509ExtensionEnhancedKeyUsage, lpVtbl : IX509ExtensionEnhancedKeyUsageVtbl* do
+  record IX509ExtensionEnhancedKeyUsage, lpVtbl : IX509ExtensionEnhancedKeyUsageVtable* do
     GUID = LibC::GUID.new(0x728ab310_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionEnhancedKeyUsage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6178,7 +6178,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionTemplateNameVtbl,
+  record IX509ExtensionTemplateNameVtable,
     query_interface : Proc(IX509ExtensionTemplateName*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionTemplateName*, UInt32),
     release : Proc(IX509ExtensionTemplateName*, UInt32),
@@ -6197,7 +6197,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509ExtensionTemplateName, lpVtbl : IX509ExtensionTemplateNameVtbl* do
+  record IX509ExtensionTemplateName, lpVtbl : IX509ExtensionTemplateNameVtable* do
     GUID = LibC::GUID.new(0x728ab311_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionTemplateName*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6248,7 +6248,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionTemplateVtbl,
+  record IX509ExtensionTemplateVtable,
     query_interface : Proc(IX509ExtensionTemplate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionTemplate*, UInt32),
     release : Proc(IX509ExtensionTemplate*, UInt32),
@@ -6269,7 +6269,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509ExtensionTemplate, lpVtbl : IX509ExtensionTemplateVtbl* do
+  record IX509ExtensionTemplate, lpVtbl : IX509ExtensionTemplateVtable* do
     GUID = LibC::GUID.new(0x728ab312_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionTemplate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6326,7 +6326,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IAlternativeNameVtbl,
+  record IAlternativeNameVtable,
     query_interface : Proc(IAlternativeName*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAlternativeName*, UInt32),
     release : Proc(IAlternativeName*, UInt32),
@@ -6344,7 +6344,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IAlternativeName, lpVtbl : IAlternativeNameVtbl* do
+  record IAlternativeName, lpVtbl : IAlternativeNameVtable* do
     GUID = LibC::GUID.new(0x728ab313_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IAlternativeName*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6392,7 +6392,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IAlternativeNamesVtbl,
+  record IAlternativeNamesVtable,
     query_interface : Proc(IAlternativeNames*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAlternativeNames*, UInt32),
     release : Proc(IAlternativeNames*, UInt32),
@@ -6409,7 +6409,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IAlternativeNames, lpVtbl : IAlternativeNamesVtbl* do
+  record IAlternativeNames, lpVtbl : IAlternativeNamesVtable* do
     GUID = LibC::GUID.new(0x728ab314_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IAlternativeNames*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6454,7 +6454,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionAlternativeNamesVtbl,
+  record IX509ExtensionAlternativeNamesVtable,
     query_interface : Proc(IX509ExtensionAlternativeNames*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionAlternativeNames*, UInt32),
     release : Proc(IX509ExtensionAlternativeNames*, UInt32),
@@ -6473,7 +6473,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509ExtensionAlternativeNames, lpVtbl : IX509ExtensionAlternativeNamesVtbl* do
+  record IX509ExtensionAlternativeNames, lpVtbl : IX509ExtensionAlternativeNamesVtable* do
     GUID = LibC::GUID.new(0x728ab315_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionAlternativeNames*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6524,7 +6524,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionBasicConstraintsVtbl,
+  record IX509ExtensionBasicConstraintsVtable,
     query_interface : Proc(IX509ExtensionBasicConstraints*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionBasicConstraints*, UInt32),
     release : Proc(IX509ExtensionBasicConstraints*, UInt32),
@@ -6544,7 +6544,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509ExtensionBasicConstraints, lpVtbl : IX509ExtensionBasicConstraintsVtbl* do
+  record IX509ExtensionBasicConstraints, lpVtbl : IX509ExtensionBasicConstraintsVtable* do
     GUID = LibC::GUID.new(0x728ab316_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionBasicConstraints*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6598,7 +6598,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionSubjectKeyIdentifierVtbl,
+  record IX509ExtensionSubjectKeyIdentifierVtable,
     query_interface : Proc(IX509ExtensionSubjectKeyIdentifier*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionSubjectKeyIdentifier*, UInt32),
     release : Proc(IX509ExtensionSubjectKeyIdentifier*, UInt32),
@@ -6617,7 +6617,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509ExtensionSubjectKeyIdentifier, lpVtbl : IX509ExtensionSubjectKeyIdentifierVtbl* do
+  record IX509ExtensionSubjectKeyIdentifier, lpVtbl : IX509ExtensionSubjectKeyIdentifierVtable* do
     GUID = LibC::GUID.new(0x728ab317_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionSubjectKeyIdentifier*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6668,7 +6668,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionAuthorityKeyIdentifierVtbl,
+  record IX509ExtensionAuthorityKeyIdentifierVtable,
     query_interface : Proc(IX509ExtensionAuthorityKeyIdentifier*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionAuthorityKeyIdentifier*, UInt32),
     release : Proc(IX509ExtensionAuthorityKeyIdentifier*, UInt32),
@@ -6687,7 +6687,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509ExtensionAuthorityKeyIdentifier, lpVtbl : IX509ExtensionAuthorityKeyIdentifierVtbl* do
+  record IX509ExtensionAuthorityKeyIdentifier, lpVtbl : IX509ExtensionAuthorityKeyIdentifierVtable* do
     GUID = LibC::GUID.new(0x728ab318_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionAuthorityKeyIdentifier*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6738,7 +6738,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ISmimeCapabilityVtbl,
+  record ISmimeCapabilityVtable,
     query_interface : Proc(ISmimeCapability*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISmimeCapability*, UInt32),
     release : Proc(ISmimeCapability*, UInt32),
@@ -6752,7 +6752,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ISmimeCapability, lpVtbl : ISmimeCapabilityVtbl* do
+  record ISmimeCapability, lpVtbl : ISmimeCapabilityVtable* do
     GUID = LibC::GUID.new(0x728ab319_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ISmimeCapability*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6788,7 +6788,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ISmimeCapabilitiesVtbl,
+  record ISmimeCapabilitiesVtable,
     query_interface : Proc(ISmimeCapabilities*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISmimeCapabilities*, UInt32),
     release : Proc(ISmimeCapabilities*, UInt32),
@@ -6807,7 +6807,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ISmimeCapabilities, lpVtbl : ISmimeCapabilitiesVtbl* do
+  record ISmimeCapabilities, lpVtbl : ISmimeCapabilitiesVtable* do
     GUID = LibC::GUID.new(0x728ab31a_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ISmimeCapabilities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6858,7 +6858,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionSmimeCapabilitiesVtbl,
+  record IX509ExtensionSmimeCapabilitiesVtable,
     query_interface : Proc(IX509ExtensionSmimeCapabilities*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionSmimeCapabilities*, UInt32),
     release : Proc(IX509ExtensionSmimeCapabilities*, UInt32),
@@ -6877,7 +6877,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509ExtensionSmimeCapabilities, lpVtbl : IX509ExtensionSmimeCapabilitiesVtbl* do
+  record IX509ExtensionSmimeCapabilities, lpVtbl : IX509ExtensionSmimeCapabilitiesVtable* do
     GUID = LibC::GUID.new(0x728ab31b_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionSmimeCapabilities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6928,7 +6928,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IPolicyQualifierVtbl,
+  record IPolicyQualifierVtable,
     query_interface : Proc(IPolicyQualifier*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPolicyQualifier*, UInt32),
     release : Proc(IPolicyQualifier*, UInt32),
@@ -6944,7 +6944,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IPolicyQualifier, lpVtbl : IPolicyQualifierVtbl* do
+  record IPolicyQualifier, lpVtbl : IPolicyQualifierVtable* do
     GUID = LibC::GUID.new(0x728ab31c_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IPolicyQualifier*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6986,7 +6986,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IPolicyQualifiersVtbl,
+  record IPolicyQualifiersVtable,
     query_interface : Proc(IPolicyQualifiers*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPolicyQualifiers*, UInt32),
     release : Proc(IPolicyQualifiers*, UInt32),
@@ -7003,7 +7003,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IPolicyQualifiers, lpVtbl : IPolicyQualifiersVtbl* do
+  record IPolicyQualifiers, lpVtbl : IPolicyQualifiersVtable* do
     GUID = LibC::GUID.new(0x728ab31d_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IPolicyQualifiers*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7048,7 +7048,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertificatePolicyVtbl,
+  record ICertificatePolicyVtable,
     query_interface : Proc(ICertificatePolicy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertificatePolicy*, UInt32),
     release : Proc(ICertificatePolicy*, UInt32),
@@ -7062,7 +7062,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertificatePolicy, lpVtbl : ICertificatePolicyVtbl* do
+  record ICertificatePolicy, lpVtbl : ICertificatePolicyVtable* do
     GUID = LibC::GUID.new(0x728ab31e_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertificatePolicy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7098,7 +7098,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertificatePoliciesVtbl,
+  record ICertificatePoliciesVtable,
     query_interface : Proc(ICertificatePolicies*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertificatePolicies*, UInt32),
     release : Proc(ICertificatePolicies*, UInt32),
@@ -7115,7 +7115,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertificatePolicies, lpVtbl : ICertificatePoliciesVtbl* do
+  record ICertificatePolicies, lpVtbl : ICertificatePoliciesVtable* do
     GUID = LibC::GUID.new(0x728ab31f_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertificatePolicies*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7160,7 +7160,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionCertificatePoliciesVtbl,
+  record IX509ExtensionCertificatePoliciesVtable,
     query_interface : Proc(IX509ExtensionCertificatePolicies*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionCertificatePolicies*, UInt32),
     release : Proc(IX509ExtensionCertificatePolicies*, UInt32),
@@ -7179,7 +7179,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509ExtensionCertificatePolicies, lpVtbl : IX509ExtensionCertificatePoliciesVtbl* do
+  record IX509ExtensionCertificatePolicies, lpVtbl : IX509ExtensionCertificatePoliciesVtable* do
     GUID = LibC::GUID.new(0x728ab320_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionCertificatePolicies*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7230,7 +7230,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509ExtensionMSApplicationPoliciesVtbl,
+  record IX509ExtensionMSApplicationPoliciesVtable,
     query_interface : Proc(IX509ExtensionMSApplicationPolicies*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509ExtensionMSApplicationPolicies*, UInt32),
     release : Proc(IX509ExtensionMSApplicationPolicies*, UInt32),
@@ -7249,7 +7249,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509ExtensionMSApplicationPolicies, lpVtbl : IX509ExtensionMSApplicationPoliciesVtbl* do
+  record IX509ExtensionMSApplicationPolicies, lpVtbl : IX509ExtensionMSApplicationPoliciesVtable* do
     GUID = LibC::GUID.new(0x728ab321_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509ExtensionMSApplicationPolicies*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7300,7 +7300,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509AttributeVtbl,
+  record IX509AttributeVtable,
     query_interface : Proc(IX509Attribute*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509Attribute*, UInt32),
     release : Proc(IX509Attribute*, UInt32),
@@ -7314,7 +7314,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509Attribute, lpVtbl : IX509AttributeVtbl* do
+  record IX509Attribute, lpVtbl : IX509AttributeVtable* do
     GUID = LibC::GUID.new(0x728ab322_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509Attribute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7350,7 +7350,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509AttributesVtbl,
+  record IX509AttributesVtable,
     query_interface : Proc(IX509Attributes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509Attributes*, UInt32),
     release : Proc(IX509Attributes*, UInt32),
@@ -7367,7 +7367,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509Attributes, lpVtbl : IX509AttributesVtbl* do
+  record IX509Attributes, lpVtbl : IX509AttributesVtable* do
     GUID = LibC::GUID.new(0x728ab323_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509Attributes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7412,7 +7412,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509AttributeExtensionsVtbl,
+  record IX509AttributeExtensionsVtable,
     query_interface : Proc(IX509AttributeExtensions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509AttributeExtensions*, UInt32),
     release : Proc(IX509AttributeExtensions*, UInt32),
@@ -7429,7 +7429,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509AttributeExtensions, lpVtbl : IX509AttributeExtensionsVtbl* do
+  record IX509AttributeExtensions, lpVtbl : IX509AttributeExtensionsVtable* do
     GUID = LibC::GUID.new(0x728ab324_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509AttributeExtensions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7474,7 +7474,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509AttributeClientIdVtbl,
+  record IX509AttributeClientIdVtable,
     query_interface : Proc(IX509AttributeClientId*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509AttributeClientId*, UInt32),
     release : Proc(IX509AttributeClientId*, UInt32),
@@ -7494,7 +7494,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509AttributeClientId, lpVtbl : IX509AttributeClientIdVtbl* do
+  record IX509AttributeClientId, lpVtbl : IX509AttributeClientIdVtable* do
     GUID = LibC::GUID.new(0x728ab325_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509AttributeClientId*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7548,7 +7548,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509AttributeRenewalCertificateVtbl,
+  record IX509AttributeRenewalCertificateVtable,
     query_interface : Proc(IX509AttributeRenewalCertificate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509AttributeRenewalCertificate*, UInt32),
     release : Proc(IX509AttributeRenewalCertificate*, UInt32),
@@ -7565,7 +7565,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509AttributeRenewalCertificate, lpVtbl : IX509AttributeRenewalCertificateVtbl* do
+  record IX509AttributeRenewalCertificate, lpVtbl : IX509AttributeRenewalCertificateVtable* do
     GUID = LibC::GUID.new(0x728ab326_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509AttributeRenewalCertificate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7610,7 +7610,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509AttributeArchiveKeyVtbl,
+  record IX509AttributeArchiveKeyVtable,
     query_interface : Proc(IX509AttributeArchiveKey*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509AttributeArchiveKey*, UInt32),
     release : Proc(IX509AttributeArchiveKey*, UInt32),
@@ -7629,7 +7629,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509AttributeArchiveKey, lpVtbl : IX509AttributeArchiveKeyVtbl* do
+  record IX509AttributeArchiveKey, lpVtbl : IX509AttributeArchiveKeyVtable* do
     GUID = LibC::GUID.new(0x728ab327_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509AttributeArchiveKey*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7680,7 +7680,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509AttributeArchiveKeyHashVtbl,
+  record IX509AttributeArchiveKeyHashVtable,
     query_interface : Proc(IX509AttributeArchiveKeyHash*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509AttributeArchiveKeyHash*, UInt32),
     release : Proc(IX509AttributeArchiveKeyHash*, UInt32),
@@ -7697,7 +7697,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509AttributeArchiveKeyHash, lpVtbl : IX509AttributeArchiveKeyHashVtbl* do
+  record IX509AttributeArchiveKeyHash, lpVtbl : IX509AttributeArchiveKeyHashVtable* do
     GUID = LibC::GUID.new(0x728ab328_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509AttributeArchiveKeyHash*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7742,7 +7742,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509AttributeOSVersionVtbl,
+  record IX509AttributeOSVersionVtable,
     query_interface : Proc(IX509AttributeOSVersion*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509AttributeOSVersion*, UInt32),
     release : Proc(IX509AttributeOSVersion*, UInt32),
@@ -7759,7 +7759,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509AttributeOSVersion, lpVtbl : IX509AttributeOSVersionVtbl* do
+  record IX509AttributeOSVersion, lpVtbl : IX509AttributeOSVersionVtable* do
     GUID = LibC::GUID.new(0x728ab32a_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509AttributeOSVersion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7804,7 +7804,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509AttributeCspProviderVtbl,
+  record IX509AttributeCspProviderVtable,
     query_interface : Proc(IX509AttributeCspProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509AttributeCspProvider*, UInt32),
     release : Proc(IX509AttributeCspProvider*, UInt32),
@@ -7823,7 +7823,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509AttributeCspProvider, lpVtbl : IX509AttributeCspProviderVtbl* do
+  record IX509AttributeCspProvider, lpVtbl : IX509AttributeCspProviderVtable* do
     GUID = LibC::GUID.new(0x728ab32b_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509AttributeCspProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7874,7 +7874,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICryptAttributeVtbl,
+  record ICryptAttributeVtable,
     query_interface : Proc(ICryptAttribute*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICryptAttribute*, UInt32),
     release : Proc(ICryptAttribute*, UInt32),
@@ -7889,7 +7889,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICryptAttribute, lpVtbl : ICryptAttributeVtbl* do
+  record ICryptAttribute, lpVtbl : ICryptAttributeVtable* do
     GUID = LibC::GUID.new(0x728ab32c_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICryptAttribute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7928,7 +7928,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICryptAttributesVtbl,
+  record ICryptAttributesVtable,
     query_interface : Proc(ICryptAttributes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICryptAttributes*, UInt32),
     release : Proc(ICryptAttributes*, UInt32),
@@ -7947,7 +7947,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICryptAttributes, lpVtbl : ICryptAttributesVtbl* do
+  record ICryptAttributes, lpVtbl : ICryptAttributesVtable* do
     GUID = LibC::GUID.new(0x728ab32d_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICryptAttributes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7998,7 +7998,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyVtbl,
+  record ICertPropertyVtable,
     query_interface : Proc(ICertProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertProperty*, UInt32),
     release : Proc(ICertProperty*, UInt32),
@@ -8016,7 +8016,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertProperty, lpVtbl : ICertPropertyVtbl* do
+  record ICertProperty, lpVtbl : ICertPropertyVtable* do
     GUID = LibC::GUID.new(0x728ab32e_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8064,7 +8064,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertiesVtbl,
+  record ICertPropertiesVtable,
     query_interface : Proc(ICertProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertProperties*, UInt32),
     release : Proc(ICertProperties*, UInt32),
@@ -8082,7 +8082,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertProperties, lpVtbl : ICertPropertiesVtbl* do
+  record ICertProperties, lpVtbl : ICertPropertiesVtable* do
     GUID = LibC::GUID.new(0x728ab32f_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8130,7 +8130,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyFriendlyNameVtbl,
+  record ICertPropertyFriendlyNameVtable,
     query_interface : Proc(ICertPropertyFriendlyName*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyFriendlyName*, UInt32),
     release : Proc(ICertPropertyFriendlyName*, UInt32),
@@ -8150,7 +8150,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertPropertyFriendlyName, lpVtbl : ICertPropertyFriendlyNameVtbl* do
+  record ICertPropertyFriendlyName, lpVtbl : ICertPropertyFriendlyNameVtable* do
     GUID = LibC::GUID.new(0x728ab330_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyFriendlyName*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8204,7 +8204,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyDescriptionVtbl,
+  record ICertPropertyDescriptionVtable,
     query_interface : Proc(ICertPropertyDescription*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyDescription*, UInt32),
     release : Proc(ICertPropertyDescription*, UInt32),
@@ -8224,7 +8224,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertPropertyDescription, lpVtbl : ICertPropertyDescriptionVtbl* do
+  record ICertPropertyDescription, lpVtbl : ICertPropertyDescriptionVtable* do
     GUID = LibC::GUID.new(0x728ab331_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyDescription*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8278,7 +8278,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyAutoEnrollVtbl,
+  record ICertPropertyAutoEnrollVtable,
     query_interface : Proc(ICertPropertyAutoEnroll*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyAutoEnroll*, UInt32),
     release : Proc(ICertPropertyAutoEnroll*, UInt32),
@@ -8298,7 +8298,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertPropertyAutoEnroll, lpVtbl : ICertPropertyAutoEnrollVtbl* do
+  record ICertPropertyAutoEnroll, lpVtbl : ICertPropertyAutoEnrollVtable* do
     GUID = LibC::GUID.new(0x728ab332_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyAutoEnroll*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8352,7 +8352,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyRequestOriginatorVtbl,
+  record ICertPropertyRequestOriginatorVtable,
     query_interface : Proc(ICertPropertyRequestOriginator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyRequestOriginator*, UInt32),
     release : Proc(ICertPropertyRequestOriginator*, UInt32),
@@ -8373,7 +8373,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertPropertyRequestOriginator, lpVtbl : ICertPropertyRequestOriginatorVtbl* do
+  record ICertPropertyRequestOriginator, lpVtbl : ICertPropertyRequestOriginatorVtable* do
     GUID = LibC::GUID.new(0x728ab333_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyRequestOriginator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8430,7 +8430,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertySHA1HashVtbl,
+  record ICertPropertySHA1HashVtable,
     query_interface : Proc(ICertPropertySHA1Hash*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertySHA1Hash*, UInt32),
     release : Proc(ICertPropertySHA1Hash*, UInt32),
@@ -8450,7 +8450,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertPropertySHA1Hash, lpVtbl : ICertPropertySHA1HashVtbl* do
+  record ICertPropertySHA1Hash, lpVtbl : ICertPropertySHA1HashVtable* do
     GUID = LibC::GUID.new(0x728ab334_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertySHA1Hash*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8504,7 +8504,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyKeyProvInfoVtbl,
+  record ICertPropertyKeyProvInfoVtable,
     query_interface : Proc(ICertPropertyKeyProvInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyKeyProvInfo*, UInt32),
     release : Proc(ICertPropertyKeyProvInfo*, UInt32),
@@ -8524,7 +8524,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertPropertyKeyProvInfo, lpVtbl : ICertPropertyKeyProvInfoVtbl* do
+  record ICertPropertyKeyProvInfo, lpVtbl : ICertPropertyKeyProvInfoVtable* do
     GUID = LibC::GUID.new(0x728ab336_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyKeyProvInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8578,7 +8578,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyArchivedVtbl,
+  record ICertPropertyArchivedVtable,
     query_interface : Proc(ICertPropertyArchived*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyArchived*, UInt32),
     release : Proc(ICertPropertyArchived*, UInt32),
@@ -8598,7 +8598,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertPropertyArchived, lpVtbl : ICertPropertyArchivedVtbl* do
+  record ICertPropertyArchived, lpVtbl : ICertPropertyArchivedVtable* do
     GUID = LibC::GUID.new(0x728ab337_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyArchived*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8652,7 +8652,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyBackedUpVtbl,
+  record ICertPropertyBackedUpVtable,
     query_interface : Proc(ICertPropertyBackedUp*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyBackedUp*, UInt32),
     release : Proc(ICertPropertyBackedUp*, UInt32),
@@ -8674,7 +8674,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertPropertyBackedUp, lpVtbl : ICertPropertyBackedUpVtbl* do
+  record ICertPropertyBackedUp, lpVtbl : ICertPropertyBackedUpVtable* do
     GUID = LibC::GUID.new(0x728ab338_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyBackedUp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8734,7 +8734,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyEnrollmentVtbl,
+  record ICertPropertyEnrollmentVtable,
     query_interface : Proc(ICertPropertyEnrollment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyEnrollment*, UInt32),
     release : Proc(ICertPropertyEnrollment*, UInt32),
@@ -8757,7 +8757,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertPropertyEnrollment, lpVtbl : ICertPropertyEnrollmentVtbl* do
+  record ICertPropertyEnrollment, lpVtbl : ICertPropertyEnrollmentVtable* do
     GUID = LibC::GUID.new(0x728ab339_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyEnrollment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8820,7 +8820,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyRenewalVtbl,
+  record ICertPropertyRenewalVtable,
     query_interface : Proc(ICertPropertyRenewal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyRenewal*, UInt32),
     release : Proc(ICertPropertyRenewal*, UInt32),
@@ -8841,7 +8841,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertPropertyRenewal, lpVtbl : ICertPropertyRenewalVtbl* do
+  record ICertPropertyRenewal, lpVtbl : ICertPropertyRenewalVtable* do
     GUID = LibC::GUID.new(0x728ab33a_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyRenewal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8898,7 +8898,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyArchivedKeyHashVtbl,
+  record ICertPropertyArchivedKeyHashVtable,
     query_interface : Proc(ICertPropertyArchivedKeyHash*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyArchivedKeyHash*, UInt32),
     release : Proc(ICertPropertyArchivedKeyHash*, UInt32),
@@ -8918,7 +8918,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertPropertyArchivedKeyHash, lpVtbl : ICertPropertyArchivedKeyHashVtbl* do
+  record ICertPropertyArchivedKeyHash, lpVtbl : ICertPropertyArchivedKeyHashVtable* do
     GUID = LibC::GUID.new(0x728ab33b_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyArchivedKeyHash*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8972,7 +8972,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertPropertyEnrollmentPolicyServerVtbl,
+  record ICertPropertyEnrollmentPolicyServerVtable,
     query_interface : Proc(ICertPropertyEnrollmentPolicyServer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertPropertyEnrollmentPolicyServer*, UInt32),
     release : Proc(ICertPropertyEnrollmentPolicyServer*, UInt32),
@@ -8999,7 +8999,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertPropertyEnrollmentPolicyServer, lpVtbl : ICertPropertyEnrollmentPolicyServerVtbl* do
+  record ICertPropertyEnrollmentPolicyServer, lpVtbl : ICertPropertyEnrollmentPolicyServerVtable* do
     GUID = LibC::GUID.new(0x728ab34a_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertPropertyEnrollmentPolicyServer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9074,7 +9074,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509SignatureInformationVtbl,
+  record IX509SignatureInformationVtable,
     query_interface : Proc(IX509SignatureInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509SignatureInformation*, UInt32),
     release : Proc(IX509SignatureInformation*, UInt32),
@@ -9098,7 +9098,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509SignatureInformation, lpVtbl : IX509SignatureInformationVtbl* do
+  record IX509SignatureInformation, lpVtbl : IX509SignatureInformationVtable* do
     GUID = LibC::GUID.new(0x728ab33c_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509SignatureInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9164,7 +9164,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ISignerCertificateVtbl,
+  record ISignerCertificateVtable,
     query_interface : Proc(ISignerCertificate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISignerCertificate*, UInt32),
     release : Proc(ISignerCertificate*, UInt32),
@@ -9186,7 +9186,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ISignerCertificate, lpVtbl : ISignerCertificateVtbl* do
+  record ISignerCertificate, lpVtbl : ISignerCertificateVtable* do
     GUID = LibC::GUID.new(0x728ab33d_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ISignerCertificate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9246,7 +9246,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ISignerCertificatesVtbl,
+  record ISignerCertificatesVtable,
     query_interface : Proc(ISignerCertificates*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISignerCertificates*, UInt32),
     release : Proc(ISignerCertificates*, UInt32),
@@ -9264,7 +9264,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ISignerCertificates, lpVtbl : ISignerCertificatesVtbl* do
+  record ISignerCertificates, lpVtbl : ISignerCertificatesVtable* do
     GUID = LibC::GUID.new(0x728ab33e_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ISignerCertificates*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9312,7 +9312,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509NameValuePairVtbl,
+  record IX509NameValuePairVtable,
     query_interface : Proc(IX509NameValuePair*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509NameValuePair*, UInt32),
     release : Proc(IX509NameValuePair*, UInt32),
@@ -9326,7 +9326,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509NameValuePair, lpVtbl : IX509NameValuePairVtbl* do
+  record IX509NameValuePair, lpVtbl : IX509NameValuePairVtable* do
     GUID = LibC::GUID.new(0x728ab33f_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509NameValuePair*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9362,7 +9362,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509NameValuePairsVtbl,
+  record IX509NameValuePairsVtable,
     query_interface : Proc(IX509NameValuePairs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509NameValuePairs*, UInt32),
     release : Proc(IX509NameValuePairs*, UInt32),
@@ -9379,7 +9379,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509NameValuePairs, lpVtbl : IX509NameValuePairsVtbl* do
+  record IX509NameValuePairs, lpVtbl : IX509NameValuePairsVtable* do
     GUID = LibC::GUID.new(0x728ab340_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509NameValuePairs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9424,7 +9424,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateTemplateVtbl,
+  record IX509CertificateTemplateVtable,
     query_interface : Proc(IX509CertificateTemplate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateTemplate*, UInt32),
     release : Proc(IX509CertificateTemplate*, UInt32),
@@ -9436,7 +9436,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateTemplate, lpVtbl : IX509CertificateTemplateVtbl* do
+  record IX509CertificateTemplate, lpVtbl : IX509CertificateTemplateVtable* do
     GUID = LibC::GUID.new(0x54244a13_u32, 0x555a_u16, 0x4e22_u16, StaticArray[0x89_u8, 0x6d_u8, 0x1b_u8, 0xe_u8, 0x52_u8, 0xf7_u8, 0x64_u8, 0x6_u8])
     def query_interface(this : IX509CertificateTemplate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9466,7 +9466,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateTemplatesVtbl,
+  record IX509CertificateTemplatesVtable,
     query_interface : Proc(IX509CertificateTemplates*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateTemplates*, UInt32),
     release : Proc(IX509CertificateTemplates*, UInt32),
@@ -9485,7 +9485,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateTemplates, lpVtbl : IX509CertificateTemplatesVtbl* do
+  record IX509CertificateTemplates, lpVtbl : IX509CertificateTemplatesVtable* do
     GUID = LibC::GUID.new(0x13b79003_u32, 0x2181_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateTemplates*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9536,7 +9536,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateTemplateWritableVtbl,
+  record IX509CertificateTemplateWritableVtable,
     query_interface : Proc(IX509CertificateTemplateWritable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateTemplateWritable*, UInt32),
     release : Proc(IX509CertificateTemplateWritable*, UInt32),
@@ -9552,7 +9552,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateTemplateWritable, lpVtbl : IX509CertificateTemplateWritableVtbl* do
+  record IX509CertificateTemplateWritable, lpVtbl : IX509CertificateTemplateWritableVtable* do
     GUID = LibC::GUID.new(0xf49466a7_u32, 0x395a_u16, 0x4e9e_u16, StaticArray[0xb6_u8, 0xe7_u8, 0x32_u8, 0xb3_u8, 0x31_u8, 0x60_u8, 0xd_u8, 0xc0_u8])
     def query_interface(this : IX509CertificateTemplateWritable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9594,7 +9594,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertificationAuthorityVtbl,
+  record ICertificationAuthorityVtable,
     query_interface : Proc(ICertificationAuthority*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertificationAuthority*, UInt32),
     release : Proc(ICertificationAuthority*, UInt32),
@@ -9606,7 +9606,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertificationAuthority, lpVtbl : ICertificationAuthorityVtbl* do
+  record ICertificationAuthority, lpVtbl : ICertificationAuthorityVtable* do
     GUID = LibC::GUID.new(0x835d1f61_u32, 0x1e95_u16, 0x4bc8_u16, StaticArray[0xb4_u8, 0xd3_u8, 0x97_u8, 0x6c_u8, 0x42_u8, 0xb9_u8, 0x68_u8, 0xf7_u8])
     def query_interface(this : ICertificationAuthority*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9636,7 +9636,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertificationAuthoritiesVtbl,
+  record ICertificationAuthoritiesVtable,
     query_interface : Proc(ICertificationAuthorities*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertificationAuthorities*, UInt32),
     release : Proc(ICertificationAuthorities*, UInt32),
@@ -9655,7 +9655,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertificationAuthorities, lpVtbl : ICertificationAuthoritiesVtbl* do
+  record ICertificationAuthorities, lpVtbl : ICertificationAuthoritiesVtable* do
     GUID = LibC::GUID.new(0x13b79005_u32, 0x2181_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : ICertificationAuthorities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9706,7 +9706,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509EnrollmentPolicyServerVtbl,
+  record IX509EnrollmentPolicyServerVtable,
     query_interface : Proc(IX509EnrollmentPolicyServer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509EnrollmentPolicyServer*, UInt32),
     release : Proc(IX509EnrollmentPolicyServer*, UInt32),
@@ -9741,7 +9741,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509EnrollmentPolicyServer, lpVtbl : IX509EnrollmentPolicyServerVtbl* do
+  record IX509EnrollmentPolicyServer, lpVtbl : IX509EnrollmentPolicyServerVtable* do
     GUID = LibC::GUID.new(0x13b79026_u32, 0x2181_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509EnrollmentPolicyServer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9840,7 +9840,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509PolicyServerUrlVtbl,
+  record IX509PolicyServerUrlVtable,
     query_interface : Proc(IX509PolicyServerUrl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509PolicyServerUrl*, UInt32),
     release : Proc(IX509PolicyServerUrl*, UInt32),
@@ -9866,7 +9866,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509PolicyServerUrl, lpVtbl : IX509PolicyServerUrlVtbl* do
+  record IX509PolicyServerUrl, lpVtbl : IX509PolicyServerUrlVtable* do
     GUID = LibC::GUID.new(0x884e204a_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509PolicyServerUrl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9938,7 +9938,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509PolicyServerListManagerVtbl,
+  record IX509PolicyServerListManagerVtable,
     query_interface : Proc(IX509PolicyServerListManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509PolicyServerListManager*, UInt32),
     release : Proc(IX509PolicyServerListManager*, UInt32),
@@ -9956,7 +9956,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509PolicyServerListManager, lpVtbl : IX509PolicyServerListManagerVtbl* do
+  record IX509PolicyServerListManager, lpVtbl : IX509PolicyServerListManagerVtable* do
     GUID = LibC::GUID.new(0x884e204b_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509PolicyServerListManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10004,7 +10004,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestVtbl,
+  record IX509CertificateRequestVtable,
     query_interface : Proc(IX509CertificateRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequest*, UInt32),
     release : Proc(IX509CertificateRequest*, UInt32),
@@ -10040,7 +10040,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRequest, lpVtbl : IX509CertificateRequestVtbl* do
+  record IX509CertificateRequest, lpVtbl : IX509CertificateRequestVtable* do
     GUID = LibC::GUID.new(0x728ab341_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10142,7 +10142,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestPkcs10Vtbl,
+  record IX509CertificateRequestPkcs10Vtable,
     query_interface : Proc(IX509CertificateRequestPkcs10*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestPkcs10*, UInt32),
     release : Proc(IX509CertificateRequestPkcs10*, UInt32),
@@ -10206,7 +10206,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRequestPkcs10, lpVtbl : IX509CertificateRequestPkcs10Vtbl* do
+  record IX509CertificateRequestPkcs10, lpVtbl : IX509CertificateRequestPkcs10Vtable* do
     GUID = LibC::GUID.new(0x728ab342_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequestPkcs10*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10392,7 +10392,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestPkcs10V2Vtbl,
+  record IX509CertificateRequestPkcs10V2Vtable,
     query_interface : Proc(IX509CertificateRequestPkcs10V2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestPkcs10V2*, UInt32),
     release : Proc(IX509CertificateRequestPkcs10V2*, UInt32),
@@ -10461,7 +10461,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRequestPkcs10V2, lpVtbl : IX509CertificateRequestPkcs10V2Vtbl* do
+  record IX509CertificateRequestPkcs10V2, lpVtbl : IX509CertificateRequestPkcs10V2Vtable* do
     GUID = LibC::GUID.new(0x728ab35b_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequestPkcs10V2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10662,7 +10662,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestPkcs10V3Vtbl,
+  record IX509CertificateRequestPkcs10V3Vtable,
     query_interface : Proc(IX509CertificateRequestPkcs10V3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestPkcs10V3*, UInt32),
     release : Proc(IX509CertificateRequestPkcs10V3*, UInt32),
@@ -10742,7 +10742,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRequestPkcs10V3, lpVtbl : IX509CertificateRequestPkcs10V3Vtbl* do
+  record IX509CertificateRequestPkcs10V3, lpVtbl : IX509CertificateRequestPkcs10V3Vtable* do
     GUID = LibC::GUID.new(0x54ea9942_u32, 0x3d66_u16, 0x4530_u16, StaticArray[0xb7_u8, 0x6e_u8, 0x7c_u8, 0x91_u8, 0x70_u8, 0xd3_u8, 0xec_u8, 0x52_u8])
     def query_interface(this : IX509CertificateRequestPkcs10V3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10976,7 +10976,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestPkcs10V4Vtbl,
+  record IX509CertificateRequestPkcs10V4Vtable,
     query_interface : Proc(IX509CertificateRequestPkcs10V4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestPkcs10V4*, UInt32),
     release : Proc(IX509CertificateRequestPkcs10V4*, UInt32),
@@ -11060,7 +11060,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRequestPkcs10V4, lpVtbl : IX509CertificateRequestPkcs10V4Vtbl* do
+  record IX509CertificateRequestPkcs10V4, lpVtbl : IX509CertificateRequestPkcs10V4Vtable* do
     GUID = LibC::GUID.new(0x728ab363_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequestPkcs10V4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11306,7 +11306,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestCertificateVtbl,
+  record IX509CertificateRequestCertificateVtable,
     query_interface : Proc(IX509CertificateRequestCertificate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestCertificate*, UInt32),
     release : Proc(IX509CertificateRequestCertificate*, UInt32),
@@ -11381,7 +11381,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRequestCertificate, lpVtbl : IX509CertificateRequestCertificateVtbl* do
+  record IX509CertificateRequestCertificate, lpVtbl : IX509CertificateRequestCertificateVtable* do
     GUID = LibC::GUID.new(0x728ab343_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequestCertificate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11600,7 +11600,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestCertificate2Vtbl,
+  record IX509CertificateRequestCertificate2Vtable,
     query_interface : Proc(IX509CertificateRequestCertificate2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestCertificate2*, UInt32),
     release : Proc(IX509CertificateRequestCertificate2*, UInt32),
@@ -11679,7 +11679,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRequestCertificate2, lpVtbl : IX509CertificateRequestCertificate2Vtbl* do
+  record IX509CertificateRequestCertificate2, lpVtbl : IX509CertificateRequestCertificate2Vtable* do
     GUID = LibC::GUID.new(0x728ab35a_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequestCertificate2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11910,7 +11910,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestPkcs7Vtbl,
+  record IX509CertificateRequestPkcs7Vtable,
     query_interface : Proc(IX509CertificateRequestPkcs7*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestPkcs7*, UInt32),
     release : Proc(IX509CertificateRequestPkcs7*, UInt32),
@@ -11954,7 +11954,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRequestPkcs7, lpVtbl : IX509CertificateRequestPkcs7Vtbl* do
+  record IX509CertificateRequestPkcs7, lpVtbl : IX509CertificateRequestPkcs7Vtable* do
     GUID = LibC::GUID.new(0x728ab344_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequestPkcs7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12080,7 +12080,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestPkcs7V2Vtbl,
+  record IX509CertificateRequestPkcs7V2Vtable,
     query_interface : Proc(IX509CertificateRequestPkcs7V2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestPkcs7V2*, UInt32),
     release : Proc(IX509CertificateRequestPkcs7V2*, UInt32),
@@ -12128,7 +12128,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRequestPkcs7V2, lpVtbl : IX509CertificateRequestPkcs7V2Vtbl* do
+  record IX509CertificateRequestPkcs7V2, lpVtbl : IX509CertificateRequestPkcs7V2Vtable* do
     GUID = LibC::GUID.new(0x728ab35c_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequestPkcs7V2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12266,7 +12266,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestCmcVtbl,
+  record IX509CertificateRequestCmcVtable,
     query_interface : Proc(IX509CertificateRequestCmc*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestCmc*, UInt32),
     release : Proc(IX509CertificateRequestCmc*, UInt32),
@@ -12333,7 +12333,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRequestCmc, lpVtbl : IX509CertificateRequestCmcVtbl* do
+  record IX509CertificateRequestCmc, lpVtbl : IX509CertificateRequestCmcVtable* do
     GUID = LibC::GUID.new(0x728ab345_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequestCmc*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12528,7 +12528,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRequestCmc2Vtbl,
+  record IX509CertificateRequestCmc2Vtable,
     query_interface : Proc(IX509CertificateRequestCmc2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRequestCmc2*, UInt32),
     release : Proc(IX509CertificateRequestCmc2*, UInt32),
@@ -12601,7 +12601,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRequestCmc2, lpVtbl : IX509CertificateRequestCmc2Vtbl* do
+  record IX509CertificateRequestCmc2, lpVtbl : IX509CertificateRequestCmc2Vtable* do
     GUID = LibC::GUID.new(0x728ab35d_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRequestCmc2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12814,7 +12814,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509EnrollmentVtbl,
+  record IX509EnrollmentVtable,
     query_interface : Proc(IX509Enrollment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509Enrollment*, UInt32),
     release : Proc(IX509Enrollment*, UInt32),
@@ -12848,7 +12848,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509Enrollment, lpVtbl : IX509EnrollmentVtbl* do
+  record IX509Enrollment, lpVtbl : IX509EnrollmentVtable* do
     GUID = LibC::GUID.new(0x728ab346_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509Enrollment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12944,7 +12944,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509Enrollment2Vtbl,
+  record IX509Enrollment2Vtable,
     query_interface : Proc(IX509Enrollment2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509Enrollment2*, UInt32),
     release : Proc(IX509Enrollment2*, UInt32),
@@ -12983,7 +12983,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509Enrollment2, lpVtbl : IX509Enrollment2Vtbl* do
+  record IX509Enrollment2, lpVtbl : IX509Enrollment2Vtable* do
     GUID = LibC::GUID.new(0x728ab350_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509Enrollment2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13094,7 +13094,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509EnrollmentHelperVtbl,
+  record IX509EnrollmentHelperVtable,
     query_interface : Proc(IX509EnrollmentHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509EnrollmentHelper*, UInt32),
     release : Proc(IX509EnrollmentHelper*, UInt32),
@@ -13109,7 +13109,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509EnrollmentHelper, lpVtbl : IX509EnrollmentHelperVtbl* do
+  record IX509EnrollmentHelper, lpVtbl : IX509EnrollmentHelperVtable* do
     GUID = LibC::GUID.new(0x728ab351_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509EnrollmentHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13148,7 +13148,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509EnrollmentWebClassFactoryVtbl,
+  record IX509EnrollmentWebClassFactoryVtable,
     query_interface : Proc(IX509EnrollmentWebClassFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509EnrollmentWebClassFactory*, UInt32),
     release : Proc(IX509EnrollmentWebClassFactory*, UInt32),
@@ -13160,7 +13160,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509EnrollmentWebClassFactory, lpVtbl : IX509EnrollmentWebClassFactoryVtbl* do
+  record IX509EnrollmentWebClassFactory, lpVtbl : IX509EnrollmentWebClassFactoryVtable* do
     GUID = LibC::GUID.new(0x728ab349_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509EnrollmentWebClassFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13190,7 +13190,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509MachineEnrollmentFactoryVtbl,
+  record IX509MachineEnrollmentFactoryVtable,
     query_interface : Proc(IX509MachineEnrollmentFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509MachineEnrollmentFactory*, UInt32),
     release : Proc(IX509MachineEnrollmentFactory*, UInt32),
@@ -13202,7 +13202,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509MachineEnrollmentFactory, lpVtbl : IX509MachineEnrollmentFactoryVtbl* do
+  record IX509MachineEnrollmentFactory, lpVtbl : IX509MachineEnrollmentFactoryVtable* do
     GUID = LibC::GUID.new(0x728ab352_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509MachineEnrollmentFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13232,7 +13232,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRevocationListEntryVtbl,
+  record IX509CertificateRevocationListEntryVtable,
     query_interface : Proc(IX509CertificateRevocationListEntry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRevocationListEntry*, UInt32),
     release : Proc(IX509CertificateRevocationListEntry*, UInt32),
@@ -13250,7 +13250,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRevocationListEntry, lpVtbl : IX509CertificateRevocationListEntryVtbl* do
+  record IX509CertificateRevocationListEntry, lpVtbl : IX509CertificateRevocationListEntryVtable* do
     GUID = LibC::GUID.new(0x728ab35e_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRevocationListEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13298,7 +13298,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRevocationListEntriesVtbl,
+  record IX509CertificateRevocationListEntriesVtable,
     query_interface : Proc(IX509CertificateRevocationListEntries*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRevocationListEntries*, UInt32),
     release : Proc(IX509CertificateRevocationListEntries*, UInt32),
@@ -13317,7 +13317,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRevocationListEntries, lpVtbl : IX509CertificateRevocationListEntriesVtbl* do
+  record IX509CertificateRevocationListEntries, lpVtbl : IX509CertificateRevocationListEntriesVtable* do
     GUID = LibC::GUID.new(0x728ab35f_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRevocationListEntries*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13368,7 +13368,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509CertificateRevocationListVtbl,
+  record IX509CertificateRevocationListVtable,
     query_interface : Proc(IX509CertificateRevocationList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509CertificateRevocationList*, UInt32),
     release : Proc(IX509CertificateRevocationList*, UInt32),
@@ -13410,7 +13410,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509CertificateRevocationList, lpVtbl : IX509CertificateRevocationListVtbl* do
+  record IX509CertificateRevocationList, lpVtbl : IX509CertificateRevocationListVtable* do
     GUID = LibC::GUID.new(0x728ab360_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509CertificateRevocationList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13530,7 +13530,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertificateAttestationChallengeVtbl,
+  record ICertificateAttestationChallengeVtable,
     query_interface : Proc(ICertificateAttestationChallenge*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertificateAttestationChallenge*, UInt32),
     release : Proc(ICertificateAttestationChallenge*, UInt32),
@@ -13544,7 +13544,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertificateAttestationChallenge, lpVtbl : ICertificateAttestationChallengeVtbl* do
+  record ICertificateAttestationChallenge, lpVtbl : ICertificateAttestationChallengeVtable* do
     GUID = LibC::GUID.new(0x6f175a7c_u32, 0x4a3a_u16, 0x40ae_u16, StaticArray[0x9d_u8, 0xba_u8, 0x59_u8, 0x2f_u8, 0xd6_u8, 0xbb_u8, 0xf9_u8, 0xb8_u8])
     def query_interface(this : ICertificateAttestationChallenge*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13580,7 +13580,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertificateAttestationChallenge2Vtbl,
+  record ICertificateAttestationChallenge2Vtable,
     query_interface : Proc(ICertificateAttestationChallenge2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertificateAttestationChallenge2*, UInt32),
     release : Proc(ICertificateAttestationChallenge2*, UInt32),
@@ -13596,7 +13596,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertificateAttestationChallenge2, lpVtbl : ICertificateAttestationChallenge2Vtbl* do
+  record ICertificateAttestationChallenge2, lpVtbl : ICertificateAttestationChallenge2Vtable* do
     GUID = LibC::GUID.new(0x4631334d_u32, 0xe266_u16, 0x47d6_u16, StaticArray[0xbd_u8, 0x79_u8, 0xbe_u8, 0x53_u8, 0xcb_u8, 0x2e_u8, 0x27_u8, 0x53_u8])
     def query_interface(this : ICertificateAttestationChallenge2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13638,7 +13638,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509SCEPEnrollmentVtbl,
+  record IX509SCEPEnrollmentVtable,
     query_interface : Proc(IX509SCEPEnrollment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509SCEPEnrollment*, UInt32),
     release : Proc(IX509SCEPEnrollment*, UInt32),
@@ -13671,7 +13671,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509SCEPEnrollment, lpVtbl : IX509SCEPEnrollmentVtbl* do
+  record IX509SCEPEnrollment, lpVtbl : IX509SCEPEnrollmentVtable* do
     GUID = LibC::GUID.new(0x728ab361_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509SCEPEnrollment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13764,7 +13764,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509SCEPEnrollment2Vtbl,
+  record IX509SCEPEnrollment2Vtable,
     query_interface : Proc(IX509SCEPEnrollment2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509SCEPEnrollment2*, UInt32),
     release : Proc(IX509SCEPEnrollment2*, UInt32),
@@ -13803,7 +13803,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509SCEPEnrollment2, lpVtbl : IX509SCEPEnrollment2Vtbl* do
+  record IX509SCEPEnrollment2, lpVtbl : IX509SCEPEnrollment2Vtable* do
     GUID = LibC::GUID.new(0x728ab364_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509SCEPEnrollment2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13914,7 +13914,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IX509SCEPEnrollmentHelperVtbl,
+  record IX509SCEPEnrollmentHelperVtable,
     query_interface : Proc(IX509SCEPEnrollmentHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IX509SCEPEnrollmentHelper*, UInt32),
     release : Proc(IX509SCEPEnrollmentHelper*, UInt32),
@@ -13931,7 +13931,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IX509SCEPEnrollmentHelper, lpVtbl : IX509SCEPEnrollmentHelperVtbl* do
+  record IX509SCEPEnrollmentHelper, lpVtbl : IX509SCEPEnrollmentHelperVtable* do
     GUID = LibC::GUID.new(0x728ab365_u32, 0x217d_u16, 0x11da_u16, StaticArray[0xb2_u8, 0xa4_u8, 0x0_u8, 0xe_u8, 0x7b_u8, 0xbb_u8, 0x2b_u8, 0x9_u8])
     def query_interface(this : IX509SCEPEnrollmentHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13976,7 +13976,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeStringArrayVtbl,
+  record ICertEncodeStringArrayVtable,
     query_interface : Proc(ICertEncodeStringArray*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeStringArray*, UInt32),
     release : Proc(ICertEncodeStringArray*, UInt32),
@@ -13994,7 +13994,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeStringArray, lpVtbl : ICertEncodeStringArrayVtbl* do
+  record ICertEncodeStringArray, lpVtbl : ICertEncodeStringArrayVtable* do
     GUID = LibC::GUID.new(0x12a88820_u32, 0x7494_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x16_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertEncodeStringArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14042,7 +14042,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeStringArray2Vtbl,
+  record ICertEncodeStringArray2Vtable,
     query_interface : Proc(ICertEncodeStringArray2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeStringArray2*, UInt32),
     release : Proc(ICertEncodeStringArray2*, UInt32),
@@ -14062,7 +14062,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeStringArray2, lpVtbl : ICertEncodeStringArray2Vtbl* do
+  record ICertEncodeStringArray2, lpVtbl : ICertEncodeStringArray2Vtable* do
     GUID = LibC::GUID.new(0x9c680d93_u32, 0x9b7d_u16, 0x4e95_u16, StaticArray[0x90_u8, 0x18_u8, 0x4f_u8, 0xfe_u8, 0x10_u8, 0xba_u8, 0x5a_u8, 0xda_u8])
     def query_interface(this : ICertEncodeStringArray2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14116,7 +14116,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeLongArrayVtbl,
+  record ICertEncodeLongArrayVtable,
     query_interface : Proc(ICertEncodeLongArray*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeLongArray*, UInt32),
     release : Proc(ICertEncodeLongArray*, UInt32),
@@ -14133,7 +14133,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeLongArray, lpVtbl : ICertEncodeLongArrayVtbl* do
+  record ICertEncodeLongArray, lpVtbl : ICertEncodeLongArrayVtable* do
     GUID = LibC::GUID.new(0x15e2f230_u32, 0xa0a2_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x21_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertEncodeLongArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14178,7 +14178,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeLongArray2Vtbl,
+  record ICertEncodeLongArray2Vtable,
     query_interface : Proc(ICertEncodeLongArray2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeLongArray2*, UInt32),
     release : Proc(ICertEncodeLongArray2*, UInt32),
@@ -14197,7 +14197,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeLongArray2, lpVtbl : ICertEncodeLongArray2Vtbl* do
+  record ICertEncodeLongArray2, lpVtbl : ICertEncodeLongArray2Vtable* do
     GUID = LibC::GUID.new(0x4efde84a_u32, 0xbd9b_u16, 0x4fc2_u16, StaticArray[0xa1_u8, 0x8_u8, 0xc3_u8, 0x47_u8, 0xd4_u8, 0x78_u8, 0x84_u8, 0xf_u8])
     def query_interface(this : ICertEncodeLongArray2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14248,7 +14248,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeDateArrayVtbl,
+  record ICertEncodeDateArrayVtable,
     query_interface : Proc(ICertEncodeDateArray*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeDateArray*, UInt32),
     release : Proc(ICertEncodeDateArray*, UInt32),
@@ -14265,7 +14265,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeDateArray, lpVtbl : ICertEncodeDateArrayVtbl* do
+  record ICertEncodeDateArray, lpVtbl : ICertEncodeDateArrayVtable* do
     GUID = LibC::GUID.new(0x2f9469a0_u32, 0xa470_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x21_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertEncodeDateArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14310,7 +14310,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeDateArray2Vtbl,
+  record ICertEncodeDateArray2Vtable,
     query_interface : Proc(ICertEncodeDateArray2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeDateArray2*, UInt32),
     release : Proc(ICertEncodeDateArray2*, UInt32),
@@ -14329,7 +14329,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeDateArray2, lpVtbl : ICertEncodeDateArray2Vtbl* do
+  record ICertEncodeDateArray2, lpVtbl : ICertEncodeDateArray2Vtable* do
     GUID = LibC::GUID.new(0x99a4edb5_u32, 0x2b8e_u16, 0x448d_u16, StaticArray[0xbf_u8, 0x95_u8, 0xbb_u8, 0xa8_u8, 0xd7_u8, 0x78_u8, 0x9d_u8, 0xc8_u8])
     def query_interface(this : ICertEncodeDateArray2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14380,7 +14380,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeCRLDistInfoVtbl,
+  record ICertEncodeCRLDistInfoVtable,
     query_interface : Proc(ICertEncodeCRLDistInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeCRLDistInfo*, UInt32),
     release : Proc(ICertEncodeCRLDistInfo*, UInt32),
@@ -14400,7 +14400,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeCRLDistInfo, lpVtbl : ICertEncodeCRLDistInfoVtbl* do
+  record ICertEncodeCRLDistInfo, lpVtbl : ICertEncodeCRLDistInfoVtable* do
     GUID = LibC::GUID.new(0x1958640_u32, 0xbbff_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x25_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertEncodeCRLDistInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14454,7 +14454,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeCRLDistInfo2Vtbl,
+  record ICertEncodeCRLDistInfo2Vtable,
     query_interface : Proc(ICertEncodeCRLDistInfo2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeCRLDistInfo2*, UInt32),
     release : Proc(ICertEncodeCRLDistInfo2*, UInt32),
@@ -14476,7 +14476,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeCRLDistInfo2, lpVtbl : ICertEncodeCRLDistInfo2Vtbl* do
+  record ICertEncodeCRLDistInfo2, lpVtbl : ICertEncodeCRLDistInfo2Vtable* do
     GUID = LibC::GUID.new(0xb4275d4b_u32, 0x3e30_u16, 0x446f_u16, StaticArray[0xad_u8, 0x36_u8, 0x9_u8, 0xd0_u8, 0x31_u8, 0x20_u8, 0xb0_u8, 0x78_u8])
     def query_interface(this : ICertEncodeCRLDistInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14536,7 +14536,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeAltNameVtbl,
+  record ICertEncodeAltNameVtable,
     query_interface : Proc(ICertEncodeAltName*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeAltName*, UInt32),
     release : Proc(ICertEncodeAltName*, UInt32),
@@ -14554,7 +14554,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeAltName, lpVtbl : ICertEncodeAltNameVtbl* do
+  record ICertEncodeAltName, lpVtbl : ICertEncodeAltNameVtable* do
     GUID = LibC::GUID.new(0x1c9a8c70_u32, 0x1271_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xd4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x83_u8, 0xfa_u8])
     def query_interface(this : ICertEncodeAltName*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14602,7 +14602,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeAltName2Vtbl,
+  record ICertEncodeAltName2Vtable,
     query_interface : Proc(ICertEncodeAltName2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeAltName2*, UInt32),
     release : Proc(ICertEncodeAltName2*, UInt32),
@@ -14624,7 +14624,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeAltName2, lpVtbl : ICertEncodeAltName2Vtbl* do
+  record ICertEncodeAltName2, lpVtbl : ICertEncodeAltName2Vtable* do
     GUID = LibC::GUID.new(0xf67fe177_u32, 0x5ef1_u16, 0x4535_u16, StaticArray[0xb4_u8, 0xce_u8, 0x29_u8, 0xdf_u8, 0x15_u8, 0xe2_u8, 0xe0_u8, 0xc3_u8])
     def query_interface(this : ICertEncodeAltName2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14684,7 +14684,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeBitStringVtbl,
+  record ICertEncodeBitStringVtable,
     query_interface : Proc(ICertEncodeBitString*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeBitString*, UInt32),
     release : Proc(ICertEncodeBitString*, UInt32),
@@ -14699,7 +14699,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeBitString, lpVtbl : ICertEncodeBitStringVtbl* do
+  record ICertEncodeBitString, lpVtbl : ICertEncodeBitStringVtable* do
     GUID = LibC::GUID.new(0x6db525be_u32, 0x1278_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xd4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x83_u8, 0xfa_u8])
     def query_interface(this : ICertEncodeBitString*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14738,7 +14738,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertEncodeBitString2Vtbl,
+  record ICertEncodeBitString2Vtable,
     query_interface : Proc(ICertEncodeBitString2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertEncodeBitString2*, UInt32),
     release : Proc(ICertEncodeBitString2*, UInt32),
@@ -14756,7 +14756,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertEncodeBitString2, lpVtbl : ICertEncodeBitString2Vtbl* do
+  record ICertEncodeBitString2, lpVtbl : ICertEncodeBitString2Vtable* do
     GUID = LibC::GUID.new(0xe070d6e7_u32, 0x23ef_u16, 0x4dd2_u16, StaticArray[0x82_u8, 0x42_u8, 0xeb_u8, 0xd9_u8, 0xc9_u8, 0x28_u8, 0xcb_u8, 0x30_u8])
     def query_interface(this : ICertEncodeBitString2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14804,7 +14804,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertExitVtbl,
+  record ICertExitVtable,
     query_interface : Proc(ICertExit*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertExit*, UInt32),
     release : Proc(ICertExit*, UInt32),
@@ -14818,7 +14818,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertExit, lpVtbl : ICertExitVtbl* do
+  record ICertExit, lpVtbl : ICertExitVtable* do
     GUID = LibC::GUID.new(0xe19ae1a0_u32, 0x7364_u16, 0x11d0_u16, StaticArray[0x88_u8, 0x16_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xb8_u8, 0x3c_u8])
     def query_interface(this : ICertExit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14854,7 +14854,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertExit2Vtbl,
+  record ICertExit2Vtable,
     query_interface : Proc(ICertExit2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertExit2*, UInt32),
     release : Proc(ICertExit2*, UInt32),
@@ -14869,7 +14869,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertExit2, lpVtbl : ICertExit2Vtbl* do
+  record ICertExit2, lpVtbl : ICertExit2Vtable* do
     GUID = LibC::GUID.new(0xabf484b_u32, 0xd049_u16, 0x464d_u16, StaticArray[0xa7_u8, 0xed_u8, 0x55_u8, 0x2e_u8, 0x75_u8, 0x29_u8, 0xb0_u8, 0xff_u8])
     def query_interface(this : ICertExit2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14908,7 +14908,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICEnrollVtbl,
+  record ICEnrollVtable,
     query_interface : Proc(ICEnroll*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICEnroll*, UInt32),
     release : Proc(ICEnroll*, UInt32),
@@ -14975,7 +14975,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICEnroll, lpVtbl : ICEnrollVtbl* do
+  record ICEnroll, lpVtbl : ICEnrollVtable* do
     GUID = LibC::GUID.new(0x43f8f288_u32, 0x7a20_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0x6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x95_u8, 0xe1_u8])
     def query_interface(this : ICEnroll*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15170,7 +15170,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICEnroll2Vtbl,
+  record ICEnroll2Vtable,
     query_interface : Proc(ICEnroll2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICEnroll2*, UInt32),
     release : Proc(ICEnroll2*, UInt32),
@@ -15243,7 +15243,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICEnroll2, lpVtbl : ICEnroll2Vtbl* do
+  record ICEnroll2, lpVtbl : ICEnroll2Vtable* do
     GUID = LibC::GUID.new(0x704ca730_u32, 0xc90b_u16, 0x11d1_u16, StaticArray[0x9b_u8, 0xec_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x95_u8, 0xe1_u8])
     def query_interface(this : ICEnroll2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15456,7 +15456,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICEnroll3Vtbl,
+  record ICEnroll3Vtable,
     query_interface : Proc(ICEnroll3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICEnroll3*, UInt32),
     release : Proc(ICEnroll3*, UInt32),
@@ -15543,7 +15543,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICEnroll3, lpVtbl : ICEnroll3Vtbl* do
+  record ICEnroll3, lpVtbl : ICEnroll3Vtable* do
     GUID = LibC::GUID.new(0xc28c2d95_u32, 0xb7de_u16, 0x11d2_u16, StaticArray[0xa4_u8, 0x21_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xfe_u8, 0x8e_u8])
     def query_interface(this : ICEnroll3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15798,7 +15798,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICEnroll4Vtbl,
+  record ICEnroll4Vtable,
     query_interface : Proc(ICEnroll4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICEnroll4*, UInt32),
     release : Proc(ICEnroll4*, UInt32),
@@ -15918,7 +15918,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICEnroll4, lpVtbl : ICEnroll4Vtbl* do
+  record ICEnroll4, lpVtbl : ICEnroll4Vtable* do
     GUID = LibC::GUID.new(0xc1f1188a_u32, 0x2eb5_u16, 0x4a80_u16, StaticArray[0x84_u8, 0x1b_u8, 0x7e_u8, 0x72_u8, 0x9a_u8, 0x35_u8, 0x6d_u8, 0x90_u8])
     def query_interface(this : ICEnroll4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16272,7 +16272,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IEnrollVtbl,
+  record IEnrollVtable,
     query_interface : Proc(IEnroll*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnroll*, UInt32),
     release : Proc(IEnroll*, UInt32),
@@ -16349,7 +16349,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IEnroll, lpVtbl : IEnrollVtbl* do
+  record IEnroll, lpVtbl : IEnrollVtable* do
     GUID = LibC::GUID.new(0xacaa7838_u32, 0x4585_u16, 0x11d1_u16, StaticArray[0xab_u8, 0x57_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x95_u8, 0xe1_u8])
     def query_interface(this : IEnroll*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16574,7 +16574,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IEnroll2Vtbl,
+  record IEnroll2Vtable,
     query_interface : Proc(IEnroll2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnroll2*, UInt32),
     release : Proc(IEnroll2*, UInt32),
@@ -16669,7 +16669,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IEnroll2, lpVtbl : IEnroll2Vtbl* do
+  record IEnroll2, lpVtbl : IEnroll2Vtable* do
     GUID = LibC::GUID.new(0xc080e199_u32, 0xb7df_u16, 0x11d2_u16, StaticArray[0xa4_u8, 0x21_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0xfe_u8, 0x8e_u8])
     def query_interface(this : IEnroll2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16948,7 +16948,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record IEnroll4Vtbl,
+  record IEnroll4Vtable,
     query_interface : Proc(IEnroll4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnroll4*, UInt32),
     release : Proc(IEnroll4*, UInt32),
@@ -17075,7 +17075,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record IEnroll4, lpVtbl : IEnroll4Vtbl* do
+  record IEnroll4, lpVtbl : IEnroll4Vtable* do
     GUID = LibC::GUID.new(0xf8053fe5_u32, 0x78f4_u16, 0x448f_u16, StaticArray[0xa0_u8, 0xdb_u8, 0x41_u8, 0xd6_u8, 0x1b_u8, 0x73_u8, 0x44_u8, 0x6b_u8])
     def query_interface(this : IEnroll4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17450,7 +17450,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertRequestDVtbl,
+  record ICertRequestDVtable,
     query_interface : Proc(ICertRequestD*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertRequestD*, UInt32),
     release : Proc(ICertRequestD*, UInt32),
@@ -17460,7 +17460,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertRequestD, lpVtbl : ICertRequestDVtbl* do
+  record ICertRequestD, lpVtbl : ICertRequestDVtable* do
     GUID = LibC::GUID.new(0xd99e6e70_u32, 0xfc88_u16, 0x11d0_u16, StaticArray[0xb4_u8, 0x98_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0x12_u8, 0xf3_u8])
     def query_interface(this : ICertRequestD*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17484,7 +17484,7 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   @[Extern]
-  record ICertRequestD2Vtbl,
+  record ICertRequestD2Vtable,
     query_interface : Proc(ICertRequestD2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICertRequestD2*, UInt32),
     release : Proc(ICertRequestD2*, UInt32),
@@ -17498,7 +17498,7 @@ module Win32cr::Security::Cryptography::Certificates
 
 
   @[Extern]
-  record ICertRequestD2, lpVtbl : ICertRequestD2Vtbl* do
+  record ICertRequestD2, lpVtbl : ICertRequestD2Vtable* do
     GUID = LibC::GUID.new(0x5422fd3a_u32, 0xd4b8_u16, 0x4cef_u16, StaticArray[0xa1_u8, 0x2e_u8, 0xe8_u8, 0x7d_u8, 0x4c_u8, 0xa2_u8, 0x2e_u8, 0x90_u8])
     def query_interface(this : ICertRequestD2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17534,111 +17534,164 @@ module Win32cr::Security::Cryptography::Certificates
   end
 
   def certSrvIsServerOnlineW(pwszServerName : Win32cr::Foundation::PWSTR, pfServerOnline : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvIsServerOnlineW(pwszServerName, pfServerOnline)
+    {% end %}
   end
 
   def certSrvBackupGetDynamicFileListW(hbc : Void*, ppwszzFileList : Win32cr::Foundation::PWSTR*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvBackupGetDynamicFileListW(hbc, ppwszzFileList, pcbSize)
+    {% end %}
   end
 
   def certSrvBackupPrepareW(pwszServerName : Win32cr::Foundation::PWSTR, grbitJet : UInt32, dwBackupFlags : Win32cr::Security::Cryptography::Certificates::CSBACKUP_TYPE, phbc : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvBackupPrepareW(pwszServerName, grbitJet, dwBackupFlags, phbc)
+    {% end %}
   end
 
   def certSrvBackupGetDatabaseNamesW(hbc : Void*, ppwszzAttachmentInformation : Win32cr::Foundation::PWSTR*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvBackupGetDatabaseNamesW(hbc, ppwszzAttachmentInformation, pcbSize)
+    {% end %}
   end
 
   def certSrvBackupOpenFileW(hbc : Void*, pwszAttachmentName : Win32cr::Foundation::PWSTR, cbReadHintSize : UInt32, pliFileSize : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvBackupOpenFileW(hbc, pwszAttachmentName, cbReadHintSize, pliFileSize)
+    {% end %}
   end
 
   def certSrvBackupRead(hbc : Void*, pvBuffer : Void*, cbBuffer : UInt32, pcbRead : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvBackupRead(hbc, pvBuffer, cbBuffer, pcbRead)
+    {% end %}
   end
 
   def certSrvBackupClose(hbc : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvBackupClose(hbc)
+    {% end %}
   end
 
   def certSrvBackupGetBackupLogsW(hbc : Void*, ppwszzBackupLogFiles : Win32cr::Foundation::PWSTR*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvBackupGetBackupLogsW(hbc, ppwszzBackupLogFiles, pcbSize)
+    {% end %}
   end
 
   def certSrvBackupTruncateLogs(hbc : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvBackupTruncateLogs(hbc)
+    {% end %}
   end
 
   def certSrvBackupEnd(hbc : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvBackupEnd(hbc)
+    {% end %}
   end
 
   def certSrvBackupFree(pv : Void*) : Void
+    {% if !flag?(:docs) %}
     C.CertSrvBackupFree(pv)
+    {% end %}
   end
 
   def certSrvRestoreGetDatabaseLocationsW(hbc : Void*, ppwszzDatabaseLocationList : Win32cr::Foundation::PWSTR*, pcbSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvRestoreGetDatabaseLocationsW(hbc, ppwszzDatabaseLocationList, pcbSize)
+    {% end %}
   end
 
   def certSrvRestorePrepareW(pwszServerName : Win32cr::Foundation::PWSTR, dwRestoreFlags : UInt32, phbc : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvRestorePrepareW(pwszServerName, dwRestoreFlags, phbc)
+    {% end %}
   end
 
   def certSrvRestoreRegisterW(hbc : Void*, pwszCheckPointFilePath : Win32cr::Foundation::PWSTR, pwszLogPath : Win32cr::Foundation::PWSTR, rgrstmap : Win32cr::Security::Cryptography::Certificates::CSEDB_RSTMAPW*, crstmap : Int32, pwszBackupLogPath : Win32cr::Foundation::PWSTR, genLow : UInt32, genHigh : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvRestoreRegisterW(hbc, pwszCheckPointFilePath, pwszLogPath, rgrstmap, crstmap, pwszBackupLogPath, genLow, genHigh)
+    {% end %}
   end
 
   def certSrvRestoreRegisterThroughFile(hbc : Void*, pwszCheckPointFilePath : Win32cr::Foundation::PWSTR, pwszLogPath : Win32cr::Foundation::PWSTR, rgrstmap : Win32cr::Security::Cryptography::Certificates::CSEDB_RSTMAPW*, crstmap : Int32, pwszBackupLogPath : Win32cr::Foundation::PWSTR, genLow : UInt32, genHigh : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvRestoreRegisterThroughFile(hbc, pwszCheckPointFilePath, pwszLogPath, rgrstmap, crstmap, pwszBackupLogPath, genLow, genHigh)
+    {% end %}
   end
 
   def certSrvRestoreRegisterComplete(hbc : Void*, hrRestoreState : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvRestoreRegisterComplete(hbc, hrRestoreState)
+    {% end %}
   end
 
   def certSrvRestoreEnd(hbc : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvRestoreEnd(hbc)
+    {% end %}
   end
 
   def certSrvServerControlW(pwszServerName : Win32cr::Foundation::PWSTR, dwControlFlags : UInt32, pcbOut : UInt32*, ppbOut : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSrvServerControlW(pwszServerName, dwControlFlags, pcbOut, ppbOut)
+    {% end %}
   end
 
   def pstGetTrustAnchors(pTargetName : Win32cr::Foundation::UNICODE_STRING*, cCriteria : UInt32, rgpCriteria : Win32cr::Security::Cryptography::CERT_SELECT_CRITERIA*, ppTrustedIssuers : Win32cr::Security::Authentication::Identity::SecPkgContext_IssuerListInfoEx**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.PstGetTrustAnchors(pTargetName, cCriteria, rgpCriteria, ppTrustedIssuers)
+    {% end %}
   end
 
   def pstGetTrustAnchorsEx(pTargetName : Win32cr::Foundation::UNICODE_STRING*, cCriteria : UInt32, rgpCriteria : Win32cr::Security::Cryptography::CERT_SELECT_CRITERIA*, pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, ppTrustedIssuers : Win32cr::Security::Authentication::Identity::SecPkgContext_IssuerListInfoEx**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.PstGetTrustAnchorsEx(pTargetName, cCriteria, rgpCriteria, pCertContext, ppTrustedIssuers)
+    {% end %}
   end
 
   def pstGetCertificateChain(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pTrustedIssuers : Win32cr::Security::Authentication::Identity::SecPkgContext_IssuerListInfoEx*, ppCertChainContext : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.PstGetCertificateChain(pCert, pTrustedIssuers, ppCertChainContext)
+    {% end %}
   end
 
   def pstGetCertificates(pTargetName : Win32cr::Foundation::UNICODE_STRING*, cCriteria : UInt32, rgpCriteria : Win32cr::Security::Cryptography::CERT_SELECT_CRITERIA*, bIsClient : Win32cr::Foundation::BOOL, pdwCertChainContextCount : UInt32*, ppCertChainContexts : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT***) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.PstGetCertificates(pTargetName, cCriteria, rgpCriteria, bIsClient, pdwCertChainContextCount, ppCertChainContexts)
+    {% end %}
   end
 
   def pstAcquirePrivateKey(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.PstAcquirePrivateKey(pCert)
+    {% end %}
   end
 
   def pstValidate(pTargetName : Win32cr::Foundation::UNICODE_STRING*, bIsClient : Win32cr::Foundation::BOOL, pRequestedIssuancePolicy : Win32cr::Security::Cryptography::CERT_USAGE_MATCH*, phAdditionalCertStore : Win32cr::Security::Cryptography::HCERTSTORE*, pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pProvGUID : LibC::GUID*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.PstValidate(pTargetName, bIsClient, pRequestedIssuancePolicy, phAdditionalCertStore, pCert, pProvGUID)
+    {% end %}
   end
 
   def pstMapCertificate(pCert : Win32cr::Security::Cryptography::CERT_CONTEXT*, pTokenInformationType : Win32cr::Security::Authentication::Identity::LSA_TOKEN_INFORMATION_TYPE*, ppTokenInformation : Void**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.PstMapCertificate(pCert, pTokenInformationType, ppTokenInformation)
+    {% end %}
   end
 
   def pstGetUserNameForCertificate(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, user_name : Win32cr::Foundation::UNICODE_STRING*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.PstGetUserNameForCertificate(pCertContext, user_name)
+    {% end %}
   end
 
   @[Link("certadm")]
   @[Link("certpoleng")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CertSrvIsServerOnlineW(pwszServerName : Win32cr::Foundation::PWSTR, pfServerOnline : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
@@ -17719,4 +17772,5 @@ module Win32cr::Security::Cryptography::Certificates
     fun PstGetUserNameForCertificate(pCertContext : Win32cr::Security::Cryptography::CERT_CONTEXT*, user_name : Win32cr::Foundation::UNICODE_STRING*) : Win32cr::Foundation::NTSTATUS
 
   end
+  {% end %}
 end

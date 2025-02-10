@@ -237,13 +237,17 @@ module Win32cr::NetworkManagement::NetBios
   {% end %}
 
   def netbios(pncb : Win32cr::NetworkManagement::NetBios::NCB*) : UInt8
+    {% if !flag?(:docs) %}
     C.Netbios(pncb)
+    {% end %}
   end
 
   @[Link("netapi32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun Netbios(pncb : Win32cr::NetworkManagement::NetBios::NCB*) : UInt8
 
   end
+  {% end %}
 end

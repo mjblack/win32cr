@@ -478,7 +478,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmObjectVtbl,
+  record IFsrmObjectVtable,
     query_interface : Proc(IFsrmObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmObject*, UInt32),
     release : Proc(IFsrmObject*, UInt32),
@@ -494,7 +494,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmObject, lpVtbl : IFsrmObjectVtbl* do
+  record IFsrmObject, lpVtbl : IFsrmObjectVtable* do
     GUID = LibC::GUID.new(0x22bcef93_u32, 0x4a3f_u16, 0x4183_u16, StaticArray[0x89_u8, 0xf9_u8, 0x2f_u8, 0x8b_u8, 0x8a_u8, 0x62_u8, 0x8a_u8, 0xee_u8])
     def query_interface(this : IFsrmObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -536,7 +536,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmCollectionVtbl,
+  record IFsrmCollectionVtable,
     query_interface : Proc(IFsrmCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmCollection*, UInt32),
     release : Proc(IFsrmCollection*, UInt32),
@@ -554,7 +554,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmCollection, lpVtbl : IFsrmCollectionVtbl* do
+  record IFsrmCollection, lpVtbl : IFsrmCollectionVtable* do
     GUID = LibC::GUID.new(0xf76fbf3b_u32, 0x8ddd_u16, 0x4b42_u16, StaticArray[0xb0_u8, 0x5a_u8, 0xcb_u8, 0x1c_u8, 0x3f_u8, 0xf1_u8, 0xfe_u8, 0xe8_u8])
     def query_interface(this : IFsrmCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -602,7 +602,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmMutableCollectionVtbl,
+  record IFsrmMutableCollectionVtable,
     query_interface : Proc(IFsrmMutableCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmMutableCollection*, UInt32),
     release : Proc(IFsrmMutableCollection*, UInt32),
@@ -624,7 +624,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmMutableCollection, lpVtbl : IFsrmMutableCollectionVtbl* do
+  record IFsrmMutableCollection, lpVtbl : IFsrmMutableCollectionVtable* do
     GUID = LibC::GUID.new(0x1bb617b8_u32, 0x3886_u16, 0x49dc_u16, StaticArray[0xaf_u8, 0x82_u8, 0xa6_u8, 0xc9_u8, 0xf_u8, 0xa3_u8, 0x5d_u8, 0xda_u8])
     def query_interface(this : IFsrmMutableCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -684,7 +684,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmCommittableCollectionVtbl,
+  record IFsrmCommittableCollectionVtable,
     query_interface : Proc(IFsrmCommittableCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmCommittableCollection*, UInt32),
     release : Proc(IFsrmCommittableCollection*, UInt32),
@@ -707,7 +707,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmCommittableCollection, lpVtbl : IFsrmCommittableCollectionVtbl* do
+  record IFsrmCommittableCollection, lpVtbl : IFsrmCommittableCollectionVtable* do
     GUID = LibC::GUID.new(0x96deb3b5_u32, 0x8b91_u16, 0x4a2a_u16, StaticArray[0x9d_u8, 0x93_u8, 0x80_u8, 0xa3_u8, 0x5d_u8, 0x8a_u8, 0xa8_u8, 0x47_u8])
     def query_interface(this : IFsrmCommittableCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -770,7 +770,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmActionVtbl,
+  record IFsrmActionVtable,
     query_interface : Proc(IFsrmAction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmAction*, UInt32),
     release : Proc(IFsrmAction*, UInt32),
@@ -786,7 +786,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmAction, lpVtbl : IFsrmActionVtbl* do
+  record IFsrmAction, lpVtbl : IFsrmActionVtable* do
     GUID = LibC::GUID.new(0x6cd6408a_u32, 0xae60_u16, 0x463b_u16, StaticArray[0x9e_u8, 0xf1_u8, 0xe1_u8, 0x17_u8, 0x53_u8, 0x4d_u8, 0x69_u8, 0xdc_u8])
     def query_interface(this : IFsrmAction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -828,7 +828,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmActionEmailVtbl,
+  record IFsrmActionEmailVtable,
     query_interface : Proc(IFsrmActionEmail*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmActionEmail*, UInt32),
     release : Proc(IFsrmActionEmail*, UInt32),
@@ -858,7 +858,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmActionEmail, lpVtbl : IFsrmActionEmailVtbl* do
+  record IFsrmActionEmail, lpVtbl : IFsrmActionEmailVtable* do
     GUID = LibC::GUID.new(0xd646567d_u32, 0x26ae_u16, 0x4caa_u16, StaticArray[0x9f_u8, 0x84_u8, 0x4e_u8, 0xa_u8, 0xad_u8, 0x20_u8, 0x7f_u8, 0xca_u8])
     def query_interface(this : IFsrmActionEmail*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -942,7 +942,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmActionEmail2Vtbl,
+  record IFsrmActionEmail2Vtable,
     query_interface : Proc(IFsrmActionEmail2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmActionEmail2*, UInt32),
     release : Proc(IFsrmActionEmail2*, UInt32),
@@ -974,7 +974,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmActionEmail2, lpVtbl : IFsrmActionEmail2Vtbl* do
+  record IFsrmActionEmail2, lpVtbl : IFsrmActionEmail2Vtable* do
     GUID = LibC::GUID.new(0x8276702f_u32, 0x2532_u16, 0x4839_u16, StaticArray[0x89_u8, 0xbf_u8, 0x48_u8, 0x72_u8, 0x60_u8, 0x9a_u8, 0x2e_u8, 0xa4_u8])
     def query_interface(this : IFsrmActionEmail2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1064,7 +1064,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmActionReportVtbl,
+  record IFsrmActionReportVtable,
     query_interface : Proc(IFsrmActionReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmActionReport*, UInt32),
     release : Proc(IFsrmActionReport*, UInt32),
@@ -1084,7 +1084,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmActionReport, lpVtbl : IFsrmActionReportVtbl* do
+  record IFsrmActionReport, lpVtbl : IFsrmActionReportVtable* do
     GUID = LibC::GUID.new(0x2dbe63c4_u32, 0xb340_u16, 0x48a0_u16, StaticArray[0xa5_u8, 0xb0_u8, 0x15_u8, 0x8e_u8, 0x7_u8, 0xfc_u8, 0x56_u8, 0x7e_u8])
     def query_interface(this : IFsrmActionReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1138,7 +1138,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmActionEventLogVtbl,
+  record IFsrmActionEventLogVtable,
     query_interface : Proc(IFsrmActionEventLog*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmActionEventLog*, UInt32),
     release : Proc(IFsrmActionEventLog*, UInt32),
@@ -1158,7 +1158,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmActionEventLog, lpVtbl : IFsrmActionEventLogVtbl* do
+  record IFsrmActionEventLog, lpVtbl : IFsrmActionEventLogVtable* do
     GUID = LibC::GUID.new(0x4c8f96c3_u32, 0x5d94_u16, 0x4f37_u16, StaticArray[0xa4_u8, 0xf4_u8, 0xf5_u8, 0x6a_u8, 0xb4_u8, 0x63_u8, 0x54_u8, 0x6f_u8])
     def query_interface(this : IFsrmActionEventLog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1212,7 +1212,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmActionCommandVtbl,
+  record IFsrmActionCommandVtable,
     query_interface : Proc(IFsrmActionCommand*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmActionCommand*, UInt32),
     release : Proc(IFsrmActionCommand*, UInt32),
@@ -1242,7 +1242,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmActionCommand, lpVtbl : IFsrmActionCommandVtbl* do
+  record IFsrmActionCommand, lpVtbl : IFsrmActionCommandVtable* do
     GUID = LibC::GUID.new(0x12937789_u32, 0xe247_u16, 0x4917_u16, StaticArray[0x9c_u8, 0x20_u8, 0xf3_u8, 0xee_u8, 0x9c_u8, 0x7e_u8, 0xe7_u8, 0x83_u8])
     def query_interface(this : IFsrmActionCommand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1326,7 +1326,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmSettingVtbl,
+  record IFsrmSettingVtable,
     query_interface : Proc(IFsrmSetting*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmSetting*, UInt32),
     release : Proc(IFsrmSetting*, UInt32),
@@ -1350,7 +1350,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmSetting, lpVtbl : IFsrmSettingVtbl* do
+  record IFsrmSetting, lpVtbl : IFsrmSettingVtable* do
     GUID = LibC::GUID.new(0xf411d4fd_u32, 0x14be_u16, 0x4260_u16, StaticArray[0x8c_u8, 0x40_u8, 0x3_u8, 0xb7_u8, 0xc9_u8, 0x5e_u8, 0x60_u8, 0x8a_u8])
     def query_interface(this : IFsrmSetting*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1416,7 +1416,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPathMapperVtbl,
+  record IFsrmPathMapperVtable,
     query_interface : Proc(IFsrmPathMapper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPathMapper*, UInt32),
     release : Proc(IFsrmPathMapper*, UInt32),
@@ -1428,7 +1428,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmPathMapper, lpVtbl : IFsrmPathMapperVtbl* do
+  record IFsrmPathMapper, lpVtbl : IFsrmPathMapperVtable* do
     GUID = LibC::GUID.new(0x6f4dbfff_u32, 0x6920_u16, 0x4821_u16, StaticArray[0xa6_u8, 0xc3_u8, 0xb7_u8, 0xe9_u8, 0x4c_u8, 0x1f_u8, 0xd6_u8, 0xc_u8])
     def query_interface(this : IFsrmPathMapper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1458,7 +1458,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmExportImportVtbl,
+  record IFsrmExportImportVtable,
     query_interface : Proc(IFsrmExportImport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmExportImport*, UInt32),
     release : Proc(IFsrmExportImport*, UInt32),
@@ -1475,7 +1475,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmExportImport, lpVtbl : IFsrmExportImportVtbl* do
+  record IFsrmExportImport, lpVtbl : IFsrmExportImportVtable* do
     GUID = LibC::GUID.new(0xefcb0ab1_u32, 0x16c4_u16, 0x4a79_u16, StaticArray[0x81_u8, 0x2c_u8, 0x72_u8, 0x56_u8, 0x14_u8, 0xc3_u8, 0x30_u8, 0x6b_u8])
     def query_interface(this : IFsrmExportImport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1520,7 +1520,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmDerivedObjectsResultVtbl,
+  record IFsrmDerivedObjectsResultVtable,
     query_interface : Proc(IFsrmDerivedObjectsResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmDerivedObjectsResult*, UInt32),
     release : Proc(IFsrmDerivedObjectsResult*, UInt32),
@@ -1533,7 +1533,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmDerivedObjectsResult, lpVtbl : IFsrmDerivedObjectsResultVtbl* do
+  record IFsrmDerivedObjectsResult, lpVtbl : IFsrmDerivedObjectsResultVtable* do
     GUID = LibC::GUID.new(0x39322a2d_u32, 0x38ee_u16, 0x4d0d_u16, StaticArray[0x80_u8, 0x95_u8, 0x42_u8, 0x1a_u8, 0x80_u8, 0x84_u8, 0x9a_u8, 0x82_u8])
     def query_interface(this : IFsrmDerivedObjectsResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1566,7 +1566,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmAccessDeniedRemediationClientVtbl,
+  record IFsrmAccessDeniedRemediationClientVtable,
     query_interface : Proc(IFsrmAccessDeniedRemediationClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmAccessDeniedRemediationClient*, UInt32),
     release : Proc(IFsrmAccessDeniedRemediationClient*, UInt32),
@@ -1578,7 +1578,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmAccessDeniedRemediationClient, lpVtbl : IFsrmAccessDeniedRemediationClientVtbl* do
+  record IFsrmAccessDeniedRemediationClient, lpVtbl : IFsrmAccessDeniedRemediationClientVtable* do
     GUID = LibC::GUID.new(0x40002314_u32, 0x590b_u16, 0x45a5_u16, StaticArray[0x8e_u8, 0x1b_u8, 0x8c_u8, 0x5_u8, 0xda_u8, 0x52_u8, 0x7e_u8, 0x52_u8])
     def query_interface(this : IFsrmAccessDeniedRemediationClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1608,7 +1608,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmQuotaBaseVtbl,
+  record IFsrmQuotaBaseVtable,
     query_interface : Proc(IFsrmQuotaBase*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmQuotaBase*, UInt32),
     release : Proc(IFsrmQuotaBase*, UInt32),
@@ -1634,7 +1634,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmQuotaBase, lpVtbl : IFsrmQuotaBaseVtbl* do
+  record IFsrmQuotaBase, lpVtbl : IFsrmQuotaBaseVtable* do
     GUID = LibC::GUID.new(0x1568a795_u32, 0x3924_u16, 0x4118_u16, StaticArray[0xb7_u8, 0x4b_u8, 0x68_u8, 0xd8_u8, 0xf0_u8, 0xfa_u8, 0x5d_u8, 0xaf_u8])
     def query_interface(this : IFsrmQuotaBase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1706,7 +1706,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmQuotaObjectVtbl,
+  record IFsrmQuotaObjectVtable,
     query_interface : Proc(IFsrmQuotaObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmQuotaObject*, UInt32),
     release : Proc(IFsrmQuotaObject*, UInt32),
@@ -1738,7 +1738,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmQuotaObject, lpVtbl : IFsrmQuotaObjectVtbl* do
+  record IFsrmQuotaObject, lpVtbl : IFsrmQuotaObjectVtable* do
     GUID = LibC::GUID.new(0x42dc3511_u32, 0x61d5_u16, 0x48ae_u16, StaticArray[0xb6_u8, 0xdc_u8, 0x59_u8, 0xfc_u8, 0x0_u8, 0xc0_u8, 0xa8_u8, 0xd6_u8])
     def query_interface(this : IFsrmQuotaObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1828,7 +1828,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmQuotaVtbl,
+  record IFsrmQuotaVtable,
     query_interface : Proc(IFsrmQuota*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmQuota*, UInt32),
     release : Proc(IFsrmQuota*, UInt32),
@@ -1865,7 +1865,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmQuota, lpVtbl : IFsrmQuotaVtbl* do
+  record IFsrmQuota, lpVtbl : IFsrmQuotaVtable* do
     GUID = LibC::GUID.new(0x377f739d_u32, 0x9647_u16, 0x4b8e_u16, StaticArray[0x97_u8, 0xd2_u8, 0x5f_u8, 0xfc_u8, 0xe6_u8, 0xd7_u8, 0x59_u8, 0xcd_u8])
     def query_interface(this : IFsrmQuota*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1970,7 +1970,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmAutoApplyQuotaVtbl,
+  record IFsrmAutoApplyQuotaVtable,
     query_interface : Proc(IFsrmAutoApplyQuota*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmAutoApplyQuota*, UInt32),
     release : Proc(IFsrmAutoApplyQuota*, UInt32),
@@ -2005,7 +2005,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmAutoApplyQuota, lpVtbl : IFsrmAutoApplyQuotaVtbl* do
+  record IFsrmAutoApplyQuota, lpVtbl : IFsrmAutoApplyQuotaVtable* do
     GUID = LibC::GUID.new(0xf82e5729_u32, 0x6aba_u16, 0x4740_u16, StaticArray[0xbf_u8, 0xc7_u8, 0xc7_u8, 0xf5_u8, 0x8f_u8, 0x75_u8, 0xfb_u8, 0x7b_u8])
     def query_interface(this : IFsrmAutoApplyQuota*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2104,7 +2104,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmQuotaManagerVtbl,
+  record IFsrmQuotaManagerVtable,
     query_interface : Proc(IFsrmQuotaManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmQuotaManager*, UInt32),
     release : Proc(IFsrmQuotaManager*, UInt32),
@@ -2127,7 +2127,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmQuotaManager, lpVtbl : IFsrmQuotaManagerVtbl* do
+  record IFsrmQuotaManager, lpVtbl : IFsrmQuotaManagerVtable* do
     GUID = LibC::GUID.new(0x8bb68c7d_u32, 0x19d8_u16, 0x4ffb_u16, StaticArray[0x80_u8, 0x9e_u8, 0xbe_u8, 0x4f_u8, 0xc1_u8, 0x73_u8, 0x40_u8, 0x14_u8])
     def query_interface(this : IFsrmQuotaManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2190,7 +2190,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmQuotaManagerExVtbl,
+  record IFsrmQuotaManagerExVtable,
     query_interface : Proc(IFsrmQuotaManagerEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmQuotaManagerEx*, UInt32),
     release : Proc(IFsrmQuotaManagerEx*, UInt32),
@@ -2214,7 +2214,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmQuotaManagerEx, lpVtbl : IFsrmQuotaManagerExVtbl* do
+  record IFsrmQuotaManagerEx, lpVtbl : IFsrmQuotaManagerExVtable* do
     GUID = LibC::GUID.new(0x4846cb01_u32, 0xd430_u16, 0x494f_u16, StaticArray[0xab_u8, 0xb4_u8, 0xb1_u8, 0x5_u8, 0x49_u8, 0x99_u8, 0xfb_u8, 0x9_u8])
     def query_interface(this : IFsrmQuotaManagerEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2280,7 +2280,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmQuotaTemplateVtbl,
+  record IFsrmQuotaTemplateVtable,
     query_interface : Proc(IFsrmQuotaTemplate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmQuotaTemplate*, UInt32),
     release : Proc(IFsrmQuotaTemplate*, UInt32),
@@ -2310,7 +2310,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmQuotaTemplate, lpVtbl : IFsrmQuotaTemplateVtbl* do
+  record IFsrmQuotaTemplate, lpVtbl : IFsrmQuotaTemplateVtable* do
     GUID = LibC::GUID.new(0xa2efab31_u32, 0x295e_u16, 0x46bb_u16, StaticArray[0xb9_u8, 0x76_u8, 0xe8_u8, 0x6d_u8, 0x58_u8, 0xb5_u8, 0x2e_u8, 0x8b_u8])
     def query_interface(this : IFsrmQuotaTemplate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2394,7 +2394,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmQuotaTemplateImportedVtbl,
+  record IFsrmQuotaTemplateImportedVtable,
     query_interface : Proc(IFsrmQuotaTemplateImported*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmQuotaTemplateImported*, UInt32),
     release : Proc(IFsrmQuotaTemplateImported*, UInt32),
@@ -2426,7 +2426,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmQuotaTemplateImported, lpVtbl : IFsrmQuotaTemplateImportedVtbl* do
+  record IFsrmQuotaTemplateImported, lpVtbl : IFsrmQuotaTemplateImportedVtable* do
     GUID = LibC::GUID.new(0x9a2bf113_u32, 0xa329_u16, 0x44cc_u16, StaticArray[0x80_u8, 0x9a_u8, 0x5c_u8, 0x0_u8, 0xfc_u8, 0xe8_u8, 0xda_u8, 0x40_u8])
     def query_interface(this : IFsrmQuotaTemplateImported*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2516,7 +2516,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmQuotaTemplateManagerVtbl,
+  record IFsrmQuotaTemplateManagerVtable,
     query_interface : Proc(IFsrmQuotaTemplateManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmQuotaTemplateManager*, UInt32),
     release : Proc(IFsrmQuotaTemplateManager*, UInt32),
@@ -2532,7 +2532,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmQuotaTemplateManager, lpVtbl : IFsrmQuotaTemplateManagerVtbl* do
+  record IFsrmQuotaTemplateManager, lpVtbl : IFsrmQuotaTemplateManagerVtable* do
     GUID = LibC::GUID.new(0x4173ac41_u32, 0x172d_u16, 0x4d52_u16, StaticArray[0x96_u8, 0x3c_u8, 0xfd_u8, 0xc7_u8, 0xe4_u8, 0x15_u8, 0xf7_u8, 0x17_u8])
     def query_interface(this : IFsrmQuotaTemplateManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2574,7 +2574,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileGroupVtbl,
+  record IFsrmFileGroupVtable,
     query_interface : Proc(IFsrmFileGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileGroup*, UInt32),
     release : Proc(IFsrmFileGroup*, UInt32),
@@ -2596,7 +2596,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileGroup, lpVtbl : IFsrmFileGroupVtbl* do
+  record IFsrmFileGroup, lpVtbl : IFsrmFileGroupVtable* do
     GUID = LibC::GUID.new(0x8dd04909_u32, 0xe34_u16, 0x4d55_u16, StaticArray[0xaf_u8, 0xaa_u8, 0x89_u8, 0xe1_u8, 0xf1_u8, 0xa1_u8, 0xbb_u8, 0xb9_u8])
     def query_interface(this : IFsrmFileGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2656,7 +2656,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileGroupImportedVtbl,
+  record IFsrmFileGroupImportedVtable,
     query_interface : Proc(IFsrmFileGroupImported*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileGroupImported*, UInt32),
     release : Proc(IFsrmFileGroupImported*, UInt32),
@@ -2680,7 +2680,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileGroupImported, lpVtbl : IFsrmFileGroupImportedVtbl* do
+  record IFsrmFileGroupImported, lpVtbl : IFsrmFileGroupImportedVtable* do
     GUID = LibC::GUID.new(0xad55f10b_u32, 0x5f11_u16, 0x4be7_u16, StaticArray[0x94_u8, 0xef_u8, 0xd9_u8, 0xee_u8, 0x2e_u8, 0x47_u8, 0xd_u8, 0xed_u8])
     def query_interface(this : IFsrmFileGroupImported*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2746,7 +2746,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileGroupManagerVtbl,
+  record IFsrmFileGroupManagerVtable,
     query_interface : Proc(IFsrmFileGroupManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileGroupManager*, UInt32),
     release : Proc(IFsrmFileGroupManager*, UInt32),
@@ -2762,7 +2762,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileGroupManager, lpVtbl : IFsrmFileGroupManagerVtbl* do
+  record IFsrmFileGroupManager, lpVtbl : IFsrmFileGroupManagerVtable* do
     GUID = LibC::GUID.new(0x426677d5_u32, 0x18c_u16, 0x485c_u16, StaticArray[0x8a_u8, 0x51_u8, 0x20_u8, 0xb8_u8, 0x6d_u8, 0x0_u8, 0xbd_u8, 0xc4_u8])
     def query_interface(this : IFsrmFileGroupManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2804,7 +2804,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileScreenBaseVtbl,
+  record IFsrmFileScreenBaseVtable,
     query_interface : Proc(IFsrmFileScreenBase*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileScreenBase*, UInt32),
     release : Proc(IFsrmFileScreenBase*, UInt32),
@@ -2826,7 +2826,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileScreenBase, lpVtbl : IFsrmFileScreenBaseVtbl* do
+  record IFsrmFileScreenBase, lpVtbl : IFsrmFileScreenBaseVtable* do
     GUID = LibC::GUID.new(0xf3637e80_u32, 0x5b22_u16, 0x4a2b_u16, StaticArray[0xa6_u8, 0x37_u8, 0xbb_u8, 0xb6_u8, 0x42_u8, 0xb4_u8, 0x1c_u8, 0xfc_u8])
     def query_interface(this : IFsrmFileScreenBase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2886,7 +2886,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileScreenVtbl,
+  record IFsrmFileScreenVtable,
     query_interface : Proc(IFsrmFileScreen*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileScreen*, UInt32),
     release : Proc(IFsrmFileScreen*, UInt32),
@@ -2914,7 +2914,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileScreen, lpVtbl : IFsrmFileScreenVtbl* do
+  record IFsrmFileScreen, lpVtbl : IFsrmFileScreenVtable* do
     GUID = LibC::GUID.new(0x5f6325d3_u32, 0xce88_u16, 0x4733_u16, StaticArray[0x84_u8, 0xc1_u8, 0x2d_u8, 0x6a_u8, 0xef_u8, 0xc5_u8, 0xea_u8, 0x7_u8])
     def query_interface(this : IFsrmFileScreen*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2992,7 +2992,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileScreenExceptionVtbl,
+  record IFsrmFileScreenExceptionVtable,
     query_interface : Proc(IFsrmFileScreenException*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileScreenException*, UInt32),
     release : Proc(IFsrmFileScreenException*, UInt32),
@@ -3011,7 +3011,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileScreenException, lpVtbl : IFsrmFileScreenExceptionVtbl* do
+  record IFsrmFileScreenException, lpVtbl : IFsrmFileScreenExceptionVtable* do
     GUID = LibC::GUID.new(0xbee7ce02_u32, 0xdf77_u16, 0x4515_u16, StaticArray[0x93_u8, 0x89_u8, 0x78_u8, 0xf0_u8, 0x1c_u8, 0x5a_u8, 0xfc_u8, 0x1a_u8])
     def query_interface(this : IFsrmFileScreenException*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3062,7 +3062,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileScreenManagerVtbl,
+  record IFsrmFileScreenManagerVtable,
     query_interface : Proc(IFsrmFileScreenManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileScreenManager*, UInt32),
     release : Proc(IFsrmFileScreenManager*, UInt32),
@@ -3082,7 +3082,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileScreenManager, lpVtbl : IFsrmFileScreenManagerVtbl* do
+  record IFsrmFileScreenManager, lpVtbl : IFsrmFileScreenManagerVtable* do
     GUID = LibC::GUID.new(0xff4fa04e_u32, 0x5a94_u16, 0x4bda_u16, StaticArray[0xa3_u8, 0xa0_u8, 0xd5_u8, 0xb4_u8, 0xd3_u8, 0xc5_u8, 0x2e_u8, 0xba_u8])
     def query_interface(this : IFsrmFileScreenManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3136,7 +3136,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileScreenTemplateVtbl,
+  record IFsrmFileScreenTemplateVtable,
     query_interface : Proc(IFsrmFileScreenTemplate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileScreenTemplate*, UInt32),
     release : Proc(IFsrmFileScreenTemplate*, UInt32),
@@ -3162,7 +3162,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileScreenTemplate, lpVtbl : IFsrmFileScreenTemplateVtbl* do
+  record IFsrmFileScreenTemplate, lpVtbl : IFsrmFileScreenTemplateVtable* do
     GUID = LibC::GUID.new(0x205bebf8_u32, 0xdd93_u16, 0x452a_u16, StaticArray[0x95_u8, 0xa6_u8, 0x32_u8, 0xb5_u8, 0x66_u8, 0xb3_u8, 0x58_u8, 0x28_u8])
     def query_interface(this : IFsrmFileScreenTemplate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3234,7 +3234,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileScreenTemplateImportedVtbl,
+  record IFsrmFileScreenTemplateImportedVtable,
     query_interface : Proc(IFsrmFileScreenTemplateImported*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileScreenTemplateImported*, UInt32),
     release : Proc(IFsrmFileScreenTemplateImported*, UInt32),
@@ -3262,7 +3262,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileScreenTemplateImported, lpVtbl : IFsrmFileScreenTemplateImportedVtbl* do
+  record IFsrmFileScreenTemplateImported, lpVtbl : IFsrmFileScreenTemplateImportedVtable* do
     GUID = LibC::GUID.new(0xe1010359_u32, 0x3e5d_u16, 0x4ecd_u16, StaticArray[0x9f_u8, 0xe4_u8, 0xef_u8, 0x48_u8, 0x62_u8, 0x2f_u8, 0xdf_u8, 0x30_u8])
     def query_interface(this : IFsrmFileScreenTemplateImported*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3340,7 +3340,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileScreenTemplateManagerVtbl,
+  record IFsrmFileScreenTemplateManagerVtable,
     query_interface : Proc(IFsrmFileScreenTemplateManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileScreenTemplateManager*, UInt32),
     release : Proc(IFsrmFileScreenTemplateManager*, UInt32),
@@ -3356,7 +3356,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileScreenTemplateManager, lpVtbl : IFsrmFileScreenTemplateManagerVtbl* do
+  record IFsrmFileScreenTemplateManager, lpVtbl : IFsrmFileScreenTemplateManagerVtable* do
     GUID = LibC::GUID.new(0xcfe36cba_u32, 0x1949_u16, 0x4e74_u16, StaticArray[0xa1_u8, 0x4f_u8, 0xf1_u8, 0xd5_u8, 0x80_u8, 0xce_u8, 0xaf_u8, 0x13_u8])
     def query_interface(this : IFsrmFileScreenTemplateManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3398,7 +3398,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmReportManagerVtbl,
+  record IFsrmReportManagerVtable,
     query_interface : Proc(IFsrmReportManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmReportManager*, UInt32),
     release : Proc(IFsrmReportManager*, UInt32),
@@ -3419,7 +3419,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmReportManager, lpVtbl : IFsrmReportManagerVtbl* do
+  record IFsrmReportManager, lpVtbl : IFsrmReportManagerVtable* do
     GUID = LibC::GUID.new(0x27b899fe_u32, 0x6ffa_u16, 0x4481_u16, StaticArray[0xa1_u8, 0x84_u8, 0xd3_u8, 0xda_u8, 0xad_u8, 0xe8_u8, 0xa0_u8, 0x2b_u8])
     def query_interface(this : IFsrmReportManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3476,7 +3476,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmReportJobVtbl,
+  record IFsrmReportJobVtable,
     query_interface : Proc(IFsrmReportJob*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmReportJob*, UInt32),
     release : Proc(IFsrmReportJob*, UInt32),
@@ -3509,7 +3509,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmReportJob, lpVtbl : IFsrmReportJobVtbl* do
+  record IFsrmReportJob, lpVtbl : IFsrmReportJobVtable* do
     GUID = LibC::GUID.new(0x38e87280_u32, 0x715c_u16, 0x4c7d_u16, StaticArray[0xa2_u8, 0x80_u8, 0xea_u8, 0x16_u8, 0x51_u8, 0xa1_u8, 0x9f_u8, 0xef_u8])
     def query_interface(this : IFsrmReportJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3602,7 +3602,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmReportVtbl,
+  record IFsrmReportVtable,
     query_interface : Proc(IFsrmReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmReport*, UInt32),
     release : Proc(IFsrmReport*, UInt32),
@@ -3622,7 +3622,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmReport, lpVtbl : IFsrmReportVtbl* do
+  record IFsrmReport, lpVtbl : IFsrmReportVtable* do
     GUID = LibC::GUID.new(0xd8cc81d9_u32, 0x46b8_u16, 0x4fa4_u16, StaticArray[0xbf_u8, 0xa5_u8, 0x4a_u8, 0xa9_u8, 0xde_u8, 0xc9_u8, 0xb6_u8, 0x38_u8])
     def query_interface(this : IFsrmReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3676,7 +3676,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmReportSchedulerVtbl,
+  record IFsrmReportSchedulerVtable,
     query_interface : Proc(IFsrmReportScheduler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmReportScheduler*, UInt32),
     release : Proc(IFsrmReportScheduler*, UInt32),
@@ -3691,7 +3691,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmReportScheduler, lpVtbl : IFsrmReportSchedulerVtbl* do
+  record IFsrmReportScheduler, lpVtbl : IFsrmReportSchedulerVtable* do
     GUID = LibC::GUID.new(0x6879caf9_u32, 0x6617_u16, 0x4484_u16, StaticArray[0x87_u8, 0x19_u8, 0x71_u8, 0xc3_u8, 0xd8_u8, 0x64_u8, 0x5f_u8, 0x94_u8])
     def query_interface(this : IFsrmReportScheduler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3730,7 +3730,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileManagementJobManagerVtbl,
+  record IFsrmFileManagementJobManagerVtable,
     query_interface : Proc(IFsrmFileManagementJobManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileManagementJobManager*, UInt32),
     release : Proc(IFsrmFileManagementJobManager*, UInt32),
@@ -3746,7 +3746,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileManagementJobManager, lpVtbl : IFsrmFileManagementJobManagerVtbl* do
+  record IFsrmFileManagementJobManager, lpVtbl : IFsrmFileManagementJobManagerVtable* do
     GUID = LibC::GUID.new(0xee321ecb_u32, 0xd95e_u16, 0x48e9_u16, StaticArray[0x90_u8, 0x7c_u8, 0xc7_u8, 0x68_u8, 0x5a_u8, 0x1_u8, 0x32_u8, 0x35_u8])
     def query_interface(this : IFsrmFileManagementJobManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3788,7 +3788,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileManagementJobVtbl,
+  record IFsrmFileManagementJobVtable,
     query_interface : Proc(IFsrmFileManagementJob*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileManagementJob*, UInt32),
     release : Proc(IFsrmFileManagementJob*, UInt32),
@@ -3853,7 +3853,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileManagementJob, lpVtbl : IFsrmFileManagementJobVtbl* do
+  record IFsrmFileManagementJob, lpVtbl : IFsrmFileManagementJobVtable* do
     GUID = LibC::GUID.new(0x770687e_u32, 0x9f36_u16, 0x4d6f_u16, StaticArray[0x87_u8, 0x78_u8, 0x59_u8, 0x9d_u8, 0x18_u8, 0x84_u8, 0x61_u8, 0xc9_u8])
     def query_interface(this : IFsrmFileManagementJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4042,7 +4042,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPropertyConditionVtbl,
+  record IFsrmPropertyConditionVtable,
     query_interface : Proc(IFsrmPropertyCondition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPropertyCondition*, UInt32),
     release : Proc(IFsrmPropertyCondition*, UInt32),
@@ -4060,7 +4060,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmPropertyCondition, lpVtbl : IFsrmPropertyConditionVtbl* do
+  record IFsrmPropertyCondition, lpVtbl : IFsrmPropertyConditionVtable* do
     GUID = LibC::GUID.new(0x326af66f_u32, 0x2ac0_u16, 0x4f68_u16, StaticArray[0xbf_u8, 0x8c_u8, 0x47_u8, 0x59_u8, 0xf0_u8, 0x54_u8, 0xfa_u8, 0x29_u8])
     def query_interface(this : IFsrmPropertyCondition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4108,7 +4108,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileConditionVtbl,
+  record IFsrmFileConditionVtable,
     query_interface : Proc(IFsrmFileCondition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileCondition*, UInt32),
     release : Proc(IFsrmFileCondition*, UInt32),
@@ -4121,7 +4121,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileCondition, lpVtbl : IFsrmFileConditionVtbl* do
+  record IFsrmFileCondition, lpVtbl : IFsrmFileConditionVtable* do
     GUID = LibC::GUID.new(0x70684ffc_u32, 0x691a_u16, 0x4a1a_u16, StaticArray[0xb9_u8, 0x22_u8, 0x97_u8, 0x75_u8, 0x2e_u8, 0x13_u8, 0x8c_u8, 0xc1_u8])
     def query_interface(this : IFsrmFileCondition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4154,7 +4154,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmFileConditionPropertyVtbl,
+  record IFsrmFileConditionPropertyVtable,
     query_interface : Proc(IFsrmFileConditionProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmFileConditionProperty*, UInt32),
     release : Proc(IFsrmFileConditionProperty*, UInt32),
@@ -4177,7 +4177,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmFileConditionProperty, lpVtbl : IFsrmFileConditionPropertyVtbl* do
+  record IFsrmFileConditionProperty, lpVtbl : IFsrmFileConditionPropertyVtable* do
     GUID = LibC::GUID.new(0x81926775_u32, 0xb981_u16, 0x4479_u16, StaticArray[0x98_u8, 0x8f_u8, 0xda_u8, 0x17_u8, 0x1d_u8, 0x62_u8, 0x73_u8, 0x60_u8])
     def query_interface(this : IFsrmFileConditionProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4240,7 +4240,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPropertyDefinitionVtbl,
+  record IFsrmPropertyDefinitionVtable,
     query_interface : Proc(IFsrmPropertyDefinition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPropertyDefinition*, UInt32),
     release : Proc(IFsrmPropertyDefinition*, UInt32),
@@ -4266,7 +4266,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmPropertyDefinition, lpVtbl : IFsrmPropertyDefinitionVtbl* do
+  record IFsrmPropertyDefinition, lpVtbl : IFsrmPropertyDefinitionVtable* do
     GUID = LibC::GUID.new(0xede0150f_u32, 0xe9a3_u16, 0x419c_u16, StaticArray[0x87_u8, 0x7c_u8, 0x1_u8, 0xfe_u8, 0x5d_u8, 0x24_u8, 0xc5_u8, 0xd3_u8])
     def query_interface(this : IFsrmPropertyDefinition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4338,7 +4338,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPropertyDefinition2Vtbl,
+  record IFsrmPropertyDefinition2Vtable,
     query_interface : Proc(IFsrmPropertyDefinition2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPropertyDefinition2*, UInt32),
     release : Proc(IFsrmPropertyDefinition2*, UInt32),
@@ -4369,7 +4369,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmPropertyDefinition2, lpVtbl : IFsrmPropertyDefinition2Vtbl* do
+  record IFsrmPropertyDefinition2, lpVtbl : IFsrmPropertyDefinition2Vtable* do
     GUID = LibC::GUID.new(0x47782152_u32, 0xd16c_u16, 0x4229_u16, StaticArray[0xb4_u8, 0xe1_u8, 0xd_u8, 0xdf_u8, 0xe3_u8, 0x8_u8, 0xb9_u8, 0xf6_u8])
     def query_interface(this : IFsrmPropertyDefinition2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4456,7 +4456,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPropertyDefinitionValueVtbl,
+  record IFsrmPropertyDefinitionValueVtable,
     query_interface : Proc(IFsrmPropertyDefinitionValue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPropertyDefinitionValue*, UInt32),
     release : Proc(IFsrmPropertyDefinitionValue*, UInt32),
@@ -4471,7 +4471,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmPropertyDefinitionValue, lpVtbl : IFsrmPropertyDefinitionValueVtbl* do
+  record IFsrmPropertyDefinitionValue, lpVtbl : IFsrmPropertyDefinitionValueVtable* do
     GUID = LibC::GUID.new(0xe946d148_u32, 0xbd67_u16, 0x4178_u16, StaticArray[0x8e_u8, 0x22_u8, 0x1c_u8, 0x44_u8, 0x92_u8, 0x5e_u8, 0xd7_u8, 0x10_u8])
     def query_interface(this : IFsrmPropertyDefinitionValue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4510,7 +4510,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPropertyVtbl,
+  record IFsrmPropertyVtable,
     query_interface : Proc(IFsrmProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmProperty*, UInt32),
     release : Proc(IFsrmProperty*, UInt32),
@@ -4525,7 +4525,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmProperty, lpVtbl : IFsrmPropertyVtbl* do
+  record IFsrmProperty, lpVtbl : IFsrmPropertyVtable* do
     GUID = LibC::GUID.new(0x4a73fee4_u32, 0x4102_u16, 0x4fcc_u16, StaticArray[0x9f_u8, 0xfb_u8, 0x38_u8, 0x61_u8, 0x4f_u8, 0x9e_u8, 0xe7_u8, 0x68_u8])
     def query_interface(this : IFsrmProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4564,7 +4564,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmRuleVtbl,
+  record IFsrmRuleVtable,
     query_interface : Proc(IFsrmRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmRule*, UInt32),
     release : Proc(IFsrmRule*, UInt32),
@@ -4592,7 +4592,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmRule, lpVtbl : IFsrmRuleVtbl* do
+  record IFsrmRule, lpVtbl : IFsrmRuleVtable* do
     GUID = LibC::GUID.new(0xcb0df960_u32, 0x16f5_u16, 0x4495_u16, StaticArray[0x90_u8, 0x79_u8, 0x3f_u8, 0x93_u8, 0x60_u8, 0xd8_u8, 0x31_u8, 0xdf_u8])
     def query_interface(this : IFsrmRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4670,7 +4670,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmClassificationRuleVtbl,
+  record IFsrmClassificationRuleVtable,
     query_interface : Proc(IFsrmClassificationRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmClassificationRule*, UInt32),
     release : Proc(IFsrmClassificationRule*, UInt32),
@@ -4704,7 +4704,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmClassificationRule, lpVtbl : IFsrmClassificationRuleVtbl* do
+  record IFsrmClassificationRule, lpVtbl : IFsrmClassificationRuleVtable* do
     GUID = LibC::GUID.new(0xafc052c2_u32, 0x5315_u16, 0x45ab_u16, StaticArray[0x84_u8, 0x1b_u8, 0xc6_u8, 0xdb_u8, 0xe_u8, 0x12_u8, 0x1_u8, 0x48_u8])
     def query_interface(this : IFsrmClassificationRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4800,7 +4800,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPipelineModuleDefinitionVtbl,
+  record IFsrmPipelineModuleDefinitionVtable,
     query_interface : Proc(IFsrmPipelineModuleDefinition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPipelineModuleDefinition*, UInt32),
     release : Proc(IFsrmPipelineModuleDefinition*, UInt32),
@@ -4835,7 +4835,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmPipelineModuleDefinition, lpVtbl : IFsrmPipelineModuleDefinitionVtbl* do
+  record IFsrmPipelineModuleDefinition, lpVtbl : IFsrmPipelineModuleDefinitionVtable* do
     GUID = LibC::GUID.new(0x515c1277_u32, 0x2c81_u16, 0x440e_u16, StaticArray[0x8f_u8, 0xcf_u8, 0x36_u8, 0x79_u8, 0x21_u8, 0xed_u8, 0x4f_u8, 0x59_u8])
     def query_interface(this : IFsrmPipelineModuleDefinition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4934,7 +4934,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmClassifierModuleDefinitionVtbl,
+  record IFsrmClassifierModuleDefinitionVtable,
     query_interface : Proc(IFsrmClassifierModuleDefinition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmClassifierModuleDefinition*, UInt32),
     release : Proc(IFsrmClassifierModuleDefinition*, UInt32),
@@ -4975,7 +4975,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmClassifierModuleDefinition, lpVtbl : IFsrmClassifierModuleDefinitionVtbl* do
+  record IFsrmClassifierModuleDefinition, lpVtbl : IFsrmClassifierModuleDefinitionVtable* do
     GUID = LibC::GUID.new(0xbb36ea26_u32, 0x6318_u16, 0x4b8c_u16, StaticArray[0x85_u8, 0x92_u8, 0xf7_u8, 0x2d_u8, 0xd6_u8, 0x2_u8, 0xe7_u8, 0xa5_u8])
     def query_interface(this : IFsrmClassifierModuleDefinition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5092,7 +5092,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmStorageModuleDefinitionVtbl,
+  record IFsrmStorageModuleDefinitionVtable,
     query_interface : Proc(IFsrmStorageModuleDefinition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmStorageModuleDefinition*, UInt32),
     release : Proc(IFsrmStorageModuleDefinition*, UInt32),
@@ -5133,7 +5133,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmStorageModuleDefinition, lpVtbl : IFsrmStorageModuleDefinitionVtbl* do
+  record IFsrmStorageModuleDefinition, lpVtbl : IFsrmStorageModuleDefinitionVtable* do
     GUID = LibC::GUID.new(0x15a81350_u32, 0x497d_u16, 0x4aba_u16, StaticArray[0x80_u8, 0xe9_u8, 0xd4_u8, 0xdb_u8, 0xcc_u8, 0x55_u8, 0x21_u8, 0xfe_u8])
     def query_interface(this : IFsrmStorageModuleDefinition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5250,7 +5250,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmClassificationManagerVtbl,
+  record IFsrmClassificationManagerVtable,
     query_interface : Proc(IFsrmClassificationManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmClassificationManager*, UInt32),
     release : Proc(IFsrmClassificationManager*, UInt32),
@@ -5288,7 +5288,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmClassificationManager, lpVtbl : IFsrmClassificationManagerVtbl* do
+  record IFsrmClassificationManager, lpVtbl : IFsrmClassificationManagerVtable* do
     GUID = LibC::GUID.new(0xd2dc89da_u32, 0xee91_u16, 0x48a0_u16, StaticArray[0x85_u8, 0xd8_u8, 0xcc_u8, 0x72_u8, 0xa5_u8, 0x6f_u8, 0x7d_u8, 0x4_u8])
     def query_interface(this : IFsrmClassificationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5396,7 +5396,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmClassificationManager2Vtbl,
+  record IFsrmClassificationManager2Vtable,
     query_interface : Proc(IFsrmClassificationManager2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmClassificationManager2*, UInt32),
     release : Proc(IFsrmClassificationManager2*, UInt32),
@@ -5435,7 +5435,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmClassificationManager2, lpVtbl : IFsrmClassificationManager2Vtbl* do
+  record IFsrmClassificationManager2, lpVtbl : IFsrmClassificationManager2Vtable* do
     GUID = LibC::GUID.new(0x4c1c9_u32, 0x127e_u16, 0x4765_u16, StaticArray[0xba_u8, 0x7_u8, 0x6a_u8, 0x31_u8, 0x47_u8, 0xbc_u8, 0xa1_u8, 0x12_u8])
     def query_interface(this : IFsrmClassificationManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5546,7 +5546,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPropertyBagVtbl,
+  record IFsrmPropertyBagVtable,
     query_interface : Proc(IFsrmPropertyBag*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPropertyBag*, UInt32),
     release : Proc(IFsrmPropertyBag*, UInt32),
@@ -5578,7 +5578,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmPropertyBag, lpVtbl : IFsrmPropertyBagVtbl* do
+  record IFsrmPropertyBag, lpVtbl : IFsrmPropertyBagVtable* do
     GUID = LibC::GUID.new(0x774589d1_u32, 0xd300_u16, 0x4f7a_u16, StaticArray[0x9a_u8, 0x24_u8, 0xf7_u8, 0xb7_u8, 0x66_u8, 0x80_u8, 0x2_u8, 0x50_u8])
     def query_interface(this : IFsrmPropertyBag*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5668,7 +5668,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPropertyBag2Vtbl,
+  record IFsrmPropertyBag2Vtable,
     query_interface : Proc(IFsrmPropertyBag2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPropertyBag2*, UInt32),
     release : Proc(IFsrmPropertyBag2*, UInt32),
@@ -5702,7 +5702,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmPropertyBag2, lpVtbl : IFsrmPropertyBag2Vtbl* do
+  record IFsrmPropertyBag2, lpVtbl : IFsrmPropertyBag2Vtable* do
     GUID = LibC::GUID.new(0xe46bdbd_u32, 0x2402_u16, 0x4fed_u16, StaticArray[0x9c_u8, 0x30_u8, 0x92_u8, 0x66_u8, 0xe6_u8, 0xeb_u8, 0x2c_u8, 0xc9_u8])
     def query_interface(this : IFsrmPropertyBag2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5798,7 +5798,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPipelineModuleImplementationVtbl,
+  record IFsrmPipelineModuleImplementationVtable,
     query_interface : Proc(IFsrmPipelineModuleImplementation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPipelineModuleImplementation*, UInt32),
     release : Proc(IFsrmPipelineModuleImplementation*, UInt32),
@@ -5811,7 +5811,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmPipelineModuleImplementation, lpVtbl : IFsrmPipelineModuleImplementationVtbl* do
+  record IFsrmPipelineModuleImplementation, lpVtbl : IFsrmPipelineModuleImplementationVtable* do
     GUID = LibC::GUID.new(0xb7907906_u32, 0x2b02_u16, 0x4cb5_u16, StaticArray[0x84_u8, 0xa9_u8, 0xfd_u8, 0xf5_u8, 0x46_u8, 0x13_u8, 0xd6_u8, 0xcd_u8])
     def query_interface(this : IFsrmPipelineModuleImplementation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5844,7 +5844,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmClassifierModuleImplementationVtbl,
+  record IFsrmClassifierModuleImplementationVtable,
     query_interface : Proc(IFsrmClassifierModuleImplementation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmClassifierModuleImplementation*, UInt32),
     release : Proc(IFsrmClassifierModuleImplementation*, UInt32),
@@ -5863,7 +5863,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmClassifierModuleImplementation, lpVtbl : IFsrmClassifierModuleImplementationVtbl* do
+  record IFsrmClassifierModuleImplementation, lpVtbl : IFsrmClassifierModuleImplementationVtable* do
     GUID = LibC::GUID.new(0x4c968fc6_u32, 0x6edb_u16, 0x4051_u16, StaticArray[0x9c_u8, 0x18_u8, 0x73_u8, 0xb7_u8, 0x29_u8, 0x1a_u8, 0xe1_u8, 0x6_u8])
     def query_interface(this : IFsrmClassifierModuleImplementation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5914,7 +5914,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmStorageModuleImplementationVtbl,
+  record IFsrmStorageModuleImplementationVtable,
     query_interface : Proc(IFsrmStorageModuleImplementation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmStorageModuleImplementation*, UInt32),
     release : Proc(IFsrmStorageModuleImplementation*, UInt32),
@@ -5930,7 +5930,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmStorageModuleImplementation, lpVtbl : IFsrmStorageModuleImplementationVtbl* do
+  record IFsrmStorageModuleImplementation, lpVtbl : IFsrmStorageModuleImplementationVtable* do
     GUID = LibC::GUID.new(0xaf4a0da_u32, 0x895a_u16, 0x4e50_u16, StaticArray[0x87_u8, 0x12_u8, 0xa9_u8, 0x67_u8, 0x24_u8, 0xbc_u8, 0xec_u8, 0x64_u8])
     def query_interface(this : IFsrmStorageModuleImplementation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5972,7 +5972,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record IFsrmPipelineModuleConnectorVtbl,
+  record IFsrmPipelineModuleConnectorVtable,
     query_interface : Proc(IFsrmPipelineModuleConnector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFsrmPipelineModuleConnector*, UInt32),
     release : Proc(IFsrmPipelineModuleConnector*, UInt32),
@@ -5988,7 +5988,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record IFsrmPipelineModuleConnector, lpVtbl : IFsrmPipelineModuleConnectorVtbl* do
+  record IFsrmPipelineModuleConnector, lpVtbl : IFsrmPipelineModuleConnectorVtable* do
     GUID = LibC::GUID.new(0xc16014f3_u32, 0x9aa1_u16, 0x46b3_u16, StaticArray[0xb0_u8, 0xa7_u8, 0xab_u8, 0x14_u8, 0x6e_u8, 0xb2_u8, 0x5_u8, 0xf2_u8])
     def query_interface(this : IFsrmPipelineModuleConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6030,7 +6030,7 @@ module Win32cr::Storage::FileServerResourceManager
   end
 
   @[Extern]
-  record DIFsrmClassificationEventsVtbl,
+  record DIFsrmClassificationEventsVtable,
     query_interface : Proc(DIFsrmClassificationEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DIFsrmClassificationEvents*, UInt32),
     release : Proc(DIFsrmClassificationEvents*, UInt32),
@@ -6041,7 +6041,7 @@ module Win32cr::Storage::FileServerResourceManager
 
 
   @[Extern]
-  record DIFsrmClassificationEvents, lpVtbl : DIFsrmClassificationEventsVtbl* do
+  record DIFsrmClassificationEvents, lpVtbl : DIFsrmClassificationEventsVtable* do
     GUID = LibC::GUID.new(0x26942db0_u32, 0xdabf_u16, 0x41d8_u16, StaticArray[0xbb_u8, 0xdd_u8, 0xb1_u8, 0x29_u8, 0xa9_u8, 0xf7_u8, 0x4_u8, 0x24_u8])
     def query_interface(this : DIFsrmClassificationEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

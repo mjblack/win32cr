@@ -616,7 +616,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateLockdownVtbl,
+  record IUpdateLockdownVtable,
     query_interface : Proc(IUpdateLockdown*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateLockdown*, UInt32),
     release : Proc(IUpdateLockdown*, UInt32),
@@ -624,7 +624,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateLockdown, lpVtbl : IUpdateLockdownVtbl* do
+  record IUpdateLockdown, lpVtbl : IUpdateLockdownVtable* do
     GUID = LibC::GUID.new(0xa976c28d_u32, 0x75a1_u16, 0x42aa_u16, StaticArray[0x94_u8, 0xae_u8, 0x8a_u8, 0xf8_u8, 0xb8_u8, 0x72_u8, 0x8_u8, 0x9a_u8])
     def query_interface(this : IUpdateLockdown*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -642,7 +642,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IStringCollectionVtbl,
+  record IStringCollectionVtable,
     query_interface : Proc(IStringCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStringCollection*, UInt32),
     release : Proc(IStringCollection*, UInt32),
@@ -663,7 +663,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IStringCollection, lpVtbl : IStringCollectionVtbl* do
+  record IStringCollection, lpVtbl : IStringCollectionVtable* do
     GUID = LibC::GUID.new(0xeff90582_u32, 0x2ddc_u16, 0x480f_u16, StaticArray[0xa0_u8, 0x6d_u8, 0x60_u8, 0xf3_u8, 0xfb_u8, 0xc3_u8, 0x62_u8, 0xc3_u8])
     def query_interface(this : IStringCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -720,7 +720,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IWebProxyVtbl,
+  record IWebProxyVtable,
     query_interface : Proc(IWebProxy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebProxy*, UInt32),
     release : Proc(IWebProxy*, UInt32),
@@ -745,7 +745,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IWebProxy, lpVtbl : IWebProxyVtbl* do
+  record IWebProxy, lpVtbl : IWebProxyVtable* do
     GUID = LibC::GUID.new(0x174c81fe_u32, 0xaecd_u16, 0x4dae_u16, StaticArray[0xb8_u8, 0xa0_u8, 0x2c_u8, 0x63_u8, 0x18_u8, 0xdd_u8, 0x86_u8, 0xa8_u8])
     def query_interface(this : IWebProxy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -814,7 +814,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record ISystemInformationVtbl,
+  record ISystemInformationVtable,
     query_interface : Proc(ISystemInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISystemInformation*, UInt32),
     release : Proc(ISystemInformation*, UInt32),
@@ -827,7 +827,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record ISystemInformation, lpVtbl : ISystemInformationVtbl* do
+  record ISystemInformation, lpVtbl : ISystemInformationVtable* do
     GUID = LibC::GUID.new(0xade87bf7_u32, 0x7b56_u16, 0x4275_u16, StaticArray[0x8f_u8, 0xab_u8, 0xb9_u8, 0xb0_u8, 0xe5_u8, 0x91_u8, 0x84_u8, 0x4b_u8])
     def query_interface(this : ISystemInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -860,7 +860,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IWindowsUpdateAgentInfoVtbl,
+  record IWindowsUpdateAgentInfoVtable,
     query_interface : Proc(IWindowsUpdateAgentInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsUpdateAgentInfo*, UInt32),
     release : Proc(IWindowsUpdateAgentInfo*, UInt32),
@@ -872,7 +872,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IWindowsUpdateAgentInfo, lpVtbl : IWindowsUpdateAgentInfoVtbl* do
+  record IWindowsUpdateAgentInfo, lpVtbl : IWindowsUpdateAgentInfoVtable* do
     GUID = LibC::GUID.new(0x85713fa1_u32, 0x7796_u16, 0x4fa2_u16, StaticArray[0xbe_u8, 0x3b_u8, 0xe2_u8, 0xd6_u8, 0x12_u8, 0x4d_u8, 0xd3_u8, 0x73_u8])
     def query_interface(this : IWindowsUpdateAgentInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -902,7 +902,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IAutomaticUpdatesResultsVtbl,
+  record IAutomaticUpdatesResultsVtable,
     query_interface : Proc(IAutomaticUpdatesResults*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAutomaticUpdatesResults*, UInt32),
     release : Proc(IAutomaticUpdatesResults*, UInt32),
@@ -915,7 +915,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IAutomaticUpdatesResults, lpVtbl : IAutomaticUpdatesResultsVtbl* do
+  record IAutomaticUpdatesResults, lpVtbl : IAutomaticUpdatesResultsVtable* do
     GUID = LibC::GUID.new(0xe7a4d634_u32, 0x7942_u16, 0x4dd9_u16, StaticArray[0xa1_u8, 0x11_u8, 0x82_u8, 0x22_u8, 0x8b_u8, 0xa3_u8, 0x39_u8, 0x1_u8])
     def query_interface(this : IAutomaticUpdatesResults*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -948,7 +948,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IAutomaticUpdatesSettingsVtbl,
+  record IAutomaticUpdatesSettingsVtable,
     query_interface : Proc(IAutomaticUpdatesSettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAutomaticUpdatesSettings*, UInt32),
     release : Proc(IAutomaticUpdatesSettings*, UInt32),
@@ -969,7 +969,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IAutomaticUpdatesSettings, lpVtbl : IAutomaticUpdatesSettingsVtbl* do
+  record IAutomaticUpdatesSettings, lpVtbl : IAutomaticUpdatesSettingsVtable* do
     GUID = LibC::GUID.new(0x2ee48f22_u32, 0xaf3c_u16, 0x405f_u16, StaticArray[0x89_u8, 0x70_u8, 0xf7_u8, 0x1b_u8, 0xe1_u8, 0x2e_u8, 0xe9_u8, 0xa2_u8])
     def query_interface(this : IAutomaticUpdatesSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1026,7 +1026,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IAutomaticUpdatesSettings2Vtbl,
+  record IAutomaticUpdatesSettings2Vtable,
     query_interface : Proc(IAutomaticUpdatesSettings2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAutomaticUpdatesSettings2*, UInt32),
     release : Proc(IAutomaticUpdatesSettings2*, UInt32),
@@ -1050,7 +1050,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IAutomaticUpdatesSettings2, lpVtbl : IAutomaticUpdatesSettings2Vtbl* do
+  record IAutomaticUpdatesSettings2, lpVtbl : IAutomaticUpdatesSettings2Vtable* do
     GUID = LibC::GUID.new(0x6abc136a_u32, 0xc3ca_u16, 0x4384_u16, StaticArray[0x81_u8, 0x71_u8, 0xcb_u8, 0x2b_u8, 0x1e_u8, 0x59_u8, 0xb8_u8, 0xdc_u8])
     def query_interface(this : IAutomaticUpdatesSettings2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1116,7 +1116,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IAutomaticUpdatesSettings3Vtbl,
+  record IAutomaticUpdatesSettings3Vtable,
     query_interface : Proc(IAutomaticUpdatesSettings3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAutomaticUpdatesSettings3*, UInt32),
     release : Proc(IAutomaticUpdatesSettings3*, UInt32),
@@ -1144,7 +1144,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IAutomaticUpdatesSettings3, lpVtbl : IAutomaticUpdatesSettings3Vtbl* do
+  record IAutomaticUpdatesSettings3, lpVtbl : IAutomaticUpdatesSettings3Vtable* do
     GUID = LibC::GUID.new(0xb587f5c3_u32, 0xf57e_u16, 0x485f_u16, StaticArray[0xbb_u8, 0xf5_u8, 0xd_u8, 0x18_u8, 0x1c_u8, 0x5c_u8, 0xd0_u8, 0xdc_u8])
     def query_interface(this : IAutomaticUpdatesSettings3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1222,7 +1222,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IAutomaticUpdatesVtbl,
+  record IAutomaticUpdatesVtable,
     query_interface : Proc(IAutomaticUpdates*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAutomaticUpdates*, UInt32),
     release : Proc(IAutomaticUpdates*, UInt32),
@@ -1240,7 +1240,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IAutomaticUpdates, lpVtbl : IAutomaticUpdatesVtbl* do
+  record IAutomaticUpdates, lpVtbl : IAutomaticUpdatesVtable* do
     GUID = LibC::GUID.new(0x673425bf_u32, 0xc082_u16, 0x4c7c_u16, StaticArray[0xbd_u8, 0xfd_u8, 0x56_u8, 0x94_u8, 0x64_u8, 0xb8_u8, 0xe0_u8, 0xce_u8])
     def query_interface(this : IAutomaticUpdates*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1288,7 +1288,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IAutomaticUpdates2Vtbl,
+  record IAutomaticUpdates2Vtable,
     query_interface : Proc(IAutomaticUpdates2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAutomaticUpdates2*, UInt32),
     release : Proc(IAutomaticUpdates2*, UInt32),
@@ -1307,7 +1307,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IAutomaticUpdates2, lpVtbl : IAutomaticUpdates2Vtbl* do
+  record IAutomaticUpdates2, lpVtbl : IAutomaticUpdates2Vtable* do
     GUID = LibC::GUID.new(0x4a2f5c31_u32, 0xcfd9_u16, 0x410e_u16, StaticArray[0xb7_u8, 0xfb_u8, 0x29_u8, 0xa6_u8, 0x53_u8, 0x97_u8, 0x3a_u8, 0xf_u8])
     def query_interface(this : IAutomaticUpdates2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1358,7 +1358,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateIdentityVtbl,
+  record IUpdateIdentityVtable,
     query_interface : Proc(IUpdateIdentity*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateIdentity*, UInt32),
     release : Proc(IUpdateIdentity*, UInt32),
@@ -1371,7 +1371,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateIdentity, lpVtbl : IUpdateIdentityVtbl* do
+  record IUpdateIdentity, lpVtbl : IUpdateIdentityVtable* do
     GUID = LibC::GUID.new(0x46297823_u32, 0x9940_u16, 0x4c09_u16, StaticArray[0xae_u8, 0xd9_u8, 0xcd_u8, 0x3e_u8, 0xa6_u8, 0xd0_u8, 0x59_u8, 0x68_u8])
     def query_interface(this : IUpdateIdentity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1404,7 +1404,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IImageInformationVtbl,
+  record IImageInformationVtable,
     query_interface : Proc(IImageInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IImageInformation*, UInt32),
     release : Proc(IImageInformation*, UInt32),
@@ -1419,7 +1419,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IImageInformation, lpVtbl : IImageInformationVtbl* do
+  record IImageInformation, lpVtbl : IImageInformationVtable* do
     GUID = LibC::GUID.new(0x7c907864_u32, 0x346c_u16, 0x4aeb_u16, StaticArray[0x8f_u8, 0x3f_u8, 0x57_u8, 0xda_u8, 0x28_u8, 0x9f_u8, 0x96_u8, 0x9f_u8])
     def query_interface(this : IImageInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1458,7 +1458,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record ICategoryVtbl,
+  record ICategoryVtable,
     query_interface : Proc(ICategory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICategory*, UInt32),
     release : Proc(ICategory*, UInt32),
@@ -1478,7 +1478,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record ICategory, lpVtbl : ICategoryVtbl* do
+  record ICategory, lpVtbl : ICategoryVtable* do
     GUID = LibC::GUID.new(0x81ddc1b8_u32, 0x9d35_u16, 0x47a6_u16, StaticArray[0xb4_u8, 0x71_u8, 0x5b_u8, 0x80_u8, 0xf5_u8, 0x19_u8, 0x22_u8, 0x3b_u8])
     def query_interface(this : ICategory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1532,7 +1532,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record ICategoryCollectionVtbl,
+  record ICategoryCollectionVtable,
     query_interface : Proc(ICategoryCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICategoryCollection*, UInt32),
     release : Proc(ICategoryCollection*, UInt32),
@@ -1546,7 +1546,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record ICategoryCollection, lpVtbl : ICategoryCollectionVtbl* do
+  record ICategoryCollection, lpVtbl : ICategoryCollectionVtable* do
     GUID = LibC::GUID.new(0x3a56bfb8_u32, 0x576c_u16, 0x43f7_u16, StaticArray[0x93_u8, 0x35_u8, 0xfe_u8, 0x48_u8, 0x38_u8, 0xfd_u8, 0x7e_u8, 0x37_u8])
     def query_interface(this : ICategoryCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1582,7 +1582,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInstallationBehaviorVtbl,
+  record IInstallationBehaviorVtable,
     query_interface : Proc(IInstallationBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInstallationBehavior*, UInt32),
     release : Proc(IInstallationBehavior*, UInt32),
@@ -1597,7 +1597,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IInstallationBehavior, lpVtbl : IInstallationBehaviorVtbl* do
+  record IInstallationBehavior, lpVtbl : IInstallationBehaviorVtable* do
     GUID = LibC::GUID.new(0xd9a59339_u32, 0xe245_u16, 0x4dbd_u16, StaticArray[0x96_u8, 0x86_u8, 0x4d_u8, 0x57_u8, 0x63_u8, 0xe3_u8, 0x96_u8, 0x24_u8])
     def query_interface(this : IInstallationBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1636,7 +1636,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateDownloadContentVtbl,
+  record IUpdateDownloadContentVtable,
     query_interface : Proc(IUpdateDownloadContent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateDownloadContent*, UInt32),
     release : Proc(IUpdateDownloadContent*, UInt32),
@@ -1648,7 +1648,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateDownloadContent, lpVtbl : IUpdateDownloadContentVtbl* do
+  record IUpdateDownloadContent, lpVtbl : IUpdateDownloadContentVtable* do
     GUID = LibC::GUID.new(0x54a2cb2d_u32, 0x9a0c_u16, 0x48b6_u16, StaticArray[0x8a_u8, 0x50_u8, 0x9a_u8, 0xbb_u8, 0x69_u8, 0xee_u8, 0x2d_u8, 0x2_u8])
     def query_interface(this : IUpdateDownloadContent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1678,7 +1678,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateDownloadContent2Vtbl,
+  record IUpdateDownloadContent2Vtable,
     query_interface : Proc(IUpdateDownloadContent2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateDownloadContent2*, UInt32),
     release : Proc(IUpdateDownloadContent2*, UInt32),
@@ -1691,7 +1691,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateDownloadContent2, lpVtbl : IUpdateDownloadContent2Vtbl* do
+  record IUpdateDownloadContent2, lpVtbl : IUpdateDownloadContent2Vtable* do
     GUID = LibC::GUID.new(0xc97ad11b_u32, 0xf257_u16, 0x420b_u16, StaticArray[0x9d_u8, 0x9f_u8, 0x37_u8, 0x7f_u8, 0x73_u8, 0x3f_u8, 0x6f_u8, 0x68_u8])
     def query_interface(this : IUpdateDownloadContent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1724,7 +1724,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateDownloadContentCollectionVtbl,
+  record IUpdateDownloadContentCollectionVtable,
     query_interface : Proc(IUpdateDownloadContentCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateDownloadContentCollection*, UInt32),
     release : Proc(IUpdateDownloadContentCollection*, UInt32),
@@ -1738,7 +1738,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateDownloadContentCollection, lpVtbl : IUpdateDownloadContentCollectionVtbl* do
+  record IUpdateDownloadContentCollection, lpVtbl : IUpdateDownloadContentCollectionVtable* do
     GUID = LibC::GUID.new(0xbc5513c8_u32, 0xb3b8_u16, 0x4bf7_u16, StaticArray[0xa4_u8, 0xd4_u8, 0x36_u8, 0x1c_u8, 0xd_u8, 0x8c_u8, 0x88_u8, 0xba_u8])
     def query_interface(this : IUpdateDownloadContentCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1774,7 +1774,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateVtbl,
+  record IUpdateVtable,
     query_interface : Proc(IUpdate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdate*, UInt32),
     release : Proc(IUpdate*, UInt32),
@@ -1830,7 +1830,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdate, lpVtbl : IUpdateVtbl* do
+  record IUpdate, lpVtbl : IUpdateVtable* do
     GUID = LibC::GUID.new(0x6a92b07a_u32, 0xd821_u16, 0x4682_u16, StaticArray[0xb4_u8, 0x23_u8, 0x5c_u8, 0x80_u8, 0x50_u8, 0x22_u8, 0xcc_u8, 0x4d_u8])
     def query_interface(this : IUpdate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1992,7 +1992,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IWindowsDriverUpdateVtbl,
+  record IWindowsDriverUpdateVtable,
     query_interface : Proc(IWindowsDriverUpdate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsDriverUpdate*, UInt32),
     release : Proc(IWindowsDriverUpdate*, UInt32),
@@ -2056,7 +2056,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IWindowsDriverUpdate, lpVtbl : IWindowsDriverUpdateVtbl* do
+  record IWindowsDriverUpdate, lpVtbl : IWindowsDriverUpdateVtable* do
     GUID = LibC::GUID.new(0xb383cd1a_u32, 0x5ce9_u16, 0x4504_u16, StaticArray[0x9f_u8, 0x63_u8, 0x76_u8, 0x4b_u8, 0x12_u8, 0x36_u8, 0xf1_u8, 0x91_u8])
     def query_interface(this : IWindowsDriverUpdate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2242,7 +2242,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdate2Vtbl,
+  record IUpdate2Vtable,
     query_interface : Proc(IUpdate2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdate2*, UInt32),
     release : Proc(IUpdate2*, UInt32),
@@ -2302,7 +2302,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdate2, lpVtbl : IUpdate2Vtbl* do
+  record IUpdate2, lpVtbl : IUpdate2Vtable* do
     GUID = LibC::GUID.new(0x144fe9b0_u32, 0xd23d_u16, 0x4a8b_u16, StaticArray[0x86_u8, 0x34_u8, 0xfb_u8, 0x44_u8, 0x57_u8, 0x53_u8, 0x3b_u8, 0x7a_u8])
     def query_interface(this : IUpdate2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2476,7 +2476,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdate3Vtbl,
+  record IUpdate3Vtable,
     query_interface : Proc(IUpdate3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdate3*, UInt32),
     release : Proc(IUpdate3*, UInt32),
@@ -2537,7 +2537,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdate3, lpVtbl : IUpdate3Vtbl* do
+  record IUpdate3, lpVtbl : IUpdate3Vtable* do
     GUID = LibC::GUID.new(0x112eda6b_u32, 0x95b3_u16, 0x476f_u16, StaticArray[0x9d_u8, 0x90_u8, 0xae_u8, 0xe8_u8, 0x2c_u8, 0x6b_u8, 0x81_u8, 0x81_u8])
     def query_interface(this : IUpdate3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2714,7 +2714,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdate4Vtbl,
+  record IUpdate4Vtable,
     query_interface : Proc(IUpdate4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdate4*, UInt32),
     release : Proc(IUpdate4*, UInt32),
@@ -2776,7 +2776,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdate4, lpVtbl : IUpdate4Vtbl* do
+  record IUpdate4, lpVtbl : IUpdate4Vtable* do
     GUID = LibC::GUID.new(0x27e94b0d_u32, 0x5139_u16, 0x49a2_u16, StaticArray[0x9a_u8, 0x61_u8, 0x93_u8, 0x52_u8, 0x2d_u8, 0xc5_u8, 0x46_u8, 0x52_u8])
     def query_interface(this : IUpdate4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2956,7 +2956,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdate5Vtbl,
+  record IUpdate5Vtable,
     query_interface : Proc(IUpdate5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdate5*, UInt32),
     release : Proc(IUpdate5*, UInt32),
@@ -3020,7 +3020,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdate5, lpVtbl : IUpdate5Vtbl* do
+  record IUpdate5, lpVtbl : IUpdate5Vtable* do
     GUID = LibC::GUID.new(0xc1c2f21a_u32, 0xd2f4_u16, 0x4902_u16, StaticArray[0xb5_u8, 0xc6_u8, 0x8a_u8, 0x8_u8, 0x1c_u8, 0x19_u8, 0xa8_u8, 0x90_u8])
     def query_interface(this : IUpdate5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3206,7 +3206,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IWindowsDriverUpdate2Vtbl,
+  record IWindowsDriverUpdate2Vtable,
     query_interface : Proc(IWindowsDriverUpdate2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsDriverUpdate2*, UInt32),
     release : Proc(IWindowsDriverUpdate2*, UInt32),
@@ -3274,7 +3274,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IWindowsDriverUpdate2, lpVtbl : IWindowsDriverUpdate2Vtbl* do
+  record IWindowsDriverUpdate2, lpVtbl : IWindowsDriverUpdate2Vtable* do
     GUID = LibC::GUID.new(0x615c4269_u32, 0x7a48_u16, 0x43bd_u16, StaticArray[0x96_u8, 0xb7_u8, 0xbf_u8, 0x6c_u8, 0xa2_u8, 0x7d_u8, 0x6c_u8, 0x3e_u8])
     def query_interface(this : IWindowsDriverUpdate2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3472,7 +3472,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IWindowsDriverUpdate3Vtbl,
+  record IWindowsDriverUpdate3Vtable,
     query_interface : Proc(IWindowsDriverUpdate3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsDriverUpdate3*, UInt32),
     release : Proc(IWindowsDriverUpdate3*, UInt32),
@@ -3541,7 +3541,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IWindowsDriverUpdate3, lpVtbl : IWindowsDriverUpdate3Vtbl* do
+  record IWindowsDriverUpdate3, lpVtbl : IWindowsDriverUpdate3Vtable* do
     GUID = LibC::GUID.new(0x49ebd502_u32, 0x4a96_u16, 0x41bd_u16, StaticArray[0x9e_u8, 0x3e_u8, 0x4c_u8, 0x50_u8, 0x57_u8, 0xf4_u8, 0x25_u8, 0xc_u8])
     def query_interface(this : IWindowsDriverUpdate3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3742,7 +3742,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IWindowsDriverUpdateEntryVtbl,
+  record IWindowsDriverUpdateEntryVtable,
     query_interface : Proc(IWindowsDriverUpdateEntry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsDriverUpdateEntry*, UInt32),
     release : Proc(IWindowsDriverUpdateEntry*, UInt32),
@@ -3761,7 +3761,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IWindowsDriverUpdateEntry, lpVtbl : IWindowsDriverUpdateEntryVtbl* do
+  record IWindowsDriverUpdateEntry, lpVtbl : IWindowsDriverUpdateEntryVtable* do
     GUID = LibC::GUID.new(0xed8bfe40_u32, 0xa60b_u16, 0x42ea_u16, StaticArray[0x96_u8, 0x52_u8, 0x81_u8, 0x7d_u8, 0xfc_u8, 0xfa_u8, 0x23_u8, 0xec_u8])
     def query_interface(this : IWindowsDriverUpdateEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3812,7 +3812,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IWindowsDriverUpdateEntryCollectionVtbl,
+  record IWindowsDriverUpdateEntryCollectionVtable,
     query_interface : Proc(IWindowsDriverUpdateEntryCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsDriverUpdateEntryCollection*, UInt32),
     release : Proc(IWindowsDriverUpdateEntryCollection*, UInt32),
@@ -3826,7 +3826,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IWindowsDriverUpdateEntryCollection, lpVtbl : IWindowsDriverUpdateEntryCollectionVtbl* do
+  record IWindowsDriverUpdateEntryCollection, lpVtbl : IWindowsDriverUpdateEntryCollectionVtable* do
     GUID = LibC::GUID.new(0xd521700_u32, 0xa372_u16, 0x4bef_u16, StaticArray[0x82_u8, 0x8b_u8, 0x3d_u8, 0x0_u8, 0xc1_u8, 0xa_u8, 0xde_u8, 0xbd_u8])
     def query_interface(this : IWindowsDriverUpdateEntryCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3862,7 +3862,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IWindowsDriverUpdate4Vtbl,
+  record IWindowsDriverUpdate4Vtable,
     query_interface : Proc(IWindowsDriverUpdate4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsDriverUpdate4*, UInt32),
     release : Proc(IWindowsDriverUpdate4*, UInt32),
@@ -3933,7 +3933,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IWindowsDriverUpdate4, lpVtbl : IWindowsDriverUpdate4Vtbl* do
+  record IWindowsDriverUpdate4, lpVtbl : IWindowsDriverUpdate4Vtable* do
     GUID = LibC::GUID.new(0x4c6a2b_u32, 0xc19_u16, 0x4c69_u16, StaticArray[0x9f_u8, 0x5c_u8, 0xa2_u8, 0x69_u8, 0xb2_u8, 0x56_u8, 0xd_u8, 0xb9_u8])
     def query_interface(this : IWindowsDriverUpdate4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4140,7 +4140,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IWindowsDriverUpdate5Vtbl,
+  record IWindowsDriverUpdate5Vtable,
     query_interface : Proc(IWindowsDriverUpdate5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsDriverUpdate5*, UInt32),
     release : Proc(IWindowsDriverUpdate5*, UInt32),
@@ -4213,7 +4213,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IWindowsDriverUpdate5, lpVtbl : IWindowsDriverUpdate5Vtbl* do
+  record IWindowsDriverUpdate5, lpVtbl : IWindowsDriverUpdate5Vtable* do
     GUID = LibC::GUID.new(0x70cf5c82_u32, 0x8642_u16, 0x42bb_u16, StaticArray[0x9d_u8, 0xbc_u8, 0xc_u8, 0xfd_u8, 0x26_u8, 0x3c_u8, 0x6c_u8, 0x4f_u8])
     def query_interface(this : IWindowsDriverUpdate5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4426,7 +4426,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateCollectionVtbl,
+  record IUpdateCollectionVtable,
     query_interface : Proc(IUpdateCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateCollection*, UInt32),
     release : Proc(IUpdateCollection*, UInt32),
@@ -4447,7 +4447,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateCollection, lpVtbl : IUpdateCollectionVtbl* do
+  record IUpdateCollection, lpVtbl : IUpdateCollectionVtable* do
     GUID = LibC::GUID.new(0x7f7438c_u32, 0x7709_u16, 0x4ca5_u16, StaticArray[0xb5_u8, 0x18_u8, 0x91_u8, 0x27_u8, 0x92_u8, 0x88_u8, 0x13_u8, 0x4e_u8])
     def query_interface(this : IUpdateCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4504,7 +4504,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateExceptionVtbl,
+  record IUpdateExceptionVtable,
     query_interface : Proc(IUpdateException*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateException*, UInt32),
     release : Proc(IUpdateException*, UInt32),
@@ -4518,7 +4518,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateException, lpVtbl : IUpdateExceptionVtbl* do
+  record IUpdateException, lpVtbl : IUpdateExceptionVtable* do
     GUID = LibC::GUID.new(0xa376dd5e_u32, 0x9d4_u16, 0x427f_u16, StaticArray[0xaf_u8, 0x7c_u8, 0xfe_u8, 0xd5_u8, 0xb6_u8, 0xe1_u8, 0xc1_u8, 0xd6_u8])
     def query_interface(this : IUpdateException*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4554,7 +4554,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInvalidProductLicenseExceptionVtbl,
+  record IInvalidProductLicenseExceptionVtable,
     query_interface : Proc(IInvalidProductLicenseException*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInvalidProductLicenseException*, UInt32),
     release : Proc(IInvalidProductLicenseException*, UInt32),
@@ -4569,7 +4569,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IInvalidProductLicenseException, lpVtbl : IInvalidProductLicenseExceptionVtbl* do
+  record IInvalidProductLicenseException, lpVtbl : IInvalidProductLicenseExceptionVtable* do
     GUID = LibC::GUID.new(0xa37d00f5_u32, 0x7bb0_u16, 0x4953_u16, StaticArray[0xb4_u8, 0x14_u8, 0xf9_u8, 0xe9_u8, 0x83_u8, 0x26_u8, 0xf2_u8, 0xe8_u8])
     def query_interface(this : IInvalidProductLicenseException*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4608,7 +4608,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateExceptionCollectionVtbl,
+  record IUpdateExceptionCollectionVtable,
     query_interface : Proc(IUpdateExceptionCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateExceptionCollection*, UInt32),
     release : Proc(IUpdateExceptionCollection*, UInt32),
@@ -4622,7 +4622,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateExceptionCollection, lpVtbl : IUpdateExceptionCollectionVtbl* do
+  record IUpdateExceptionCollection, lpVtbl : IUpdateExceptionCollectionVtable* do
     GUID = LibC::GUID.new(0x503626a3_u32, 0x8e14_u16, 0x4729_u16, StaticArray[0x93_u8, 0x55_u8, 0xf_u8, 0xe6_u8, 0x64_u8, 0xbd_u8, 0x23_u8, 0x21_u8])
     def query_interface(this : IUpdateExceptionCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4658,7 +4658,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record ISearchResultVtbl,
+  record ISearchResultVtable,
     query_interface : Proc(ISearchResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchResult*, UInt32),
     release : Proc(ISearchResult*, UInt32),
@@ -4673,7 +4673,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record ISearchResult, lpVtbl : ISearchResultVtbl* do
+  record ISearchResult, lpVtbl : ISearchResultVtable* do
     GUID = LibC::GUID.new(0xd40cff62_u32, 0xe08c_u16, 0x4498_u16, StaticArray[0x94_u8, 0x1a_u8, 0x1_u8, 0xe2_u8, 0x5f_u8, 0xf_u8, 0xd3_u8, 0x3c_u8])
     def query_interface(this : ISearchResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4712,7 +4712,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record ISearchJobVtbl,
+  record ISearchJobVtable,
     query_interface : Proc(ISearchJob*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchJob*, UInt32),
     release : Proc(ISearchJob*, UInt32),
@@ -4727,7 +4727,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record ISearchJob, lpVtbl : ISearchJobVtbl* do
+  record ISearchJob, lpVtbl : ISearchJobVtable* do
     GUID = LibC::GUID.new(0x7366ea16_u32, 0x7a1a_u16, 0x4ea2_u16, StaticArray[0xb0_u8, 0x42_u8, 0x97_u8, 0x3d_u8, 0x3e_u8, 0x9c_u8, 0xd9_u8, 0x9b_u8])
     def query_interface(this : ISearchJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4766,7 +4766,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record ISearchCompletedCallbackArgsVtbl,
+  record ISearchCompletedCallbackArgsVtable,
     query_interface : Proc(ISearchCompletedCallbackArgs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchCompletedCallbackArgs*, UInt32),
     release : Proc(ISearchCompletedCallbackArgs*, UInt32),
@@ -4777,7 +4777,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record ISearchCompletedCallbackArgs, lpVtbl : ISearchCompletedCallbackArgsVtbl* do
+  record ISearchCompletedCallbackArgs, lpVtbl : ISearchCompletedCallbackArgsVtable* do
     GUID = LibC::GUID.new(0xa700a634_u32, 0x2850_u16, 0x4c47_u16, StaticArray[0x93_u8, 0x8a_u8, 0x9e_u8, 0x4b_u8, 0x6e_u8, 0x5a_u8, 0xf9_u8, 0xa6_u8])
     def query_interface(this : ISearchCompletedCallbackArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4804,7 +4804,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record ISearchCompletedCallbackVtbl,
+  record ISearchCompletedCallbackVtable,
     query_interface : Proc(ISearchCompletedCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchCompletedCallback*, UInt32),
     release : Proc(ISearchCompletedCallback*, UInt32),
@@ -4812,7 +4812,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record ISearchCompletedCallback, lpVtbl : ISearchCompletedCallbackVtbl* do
+  record ISearchCompletedCallback, lpVtbl : ISearchCompletedCallbackVtable* do
     GUID = LibC::GUID.new(0x88aee058_u32, 0xd4b0_u16, 0x4725_u16, StaticArray[0xa2_u8, 0xf1_u8, 0x81_u8, 0x4a_u8, 0x67_u8, 0xae_u8, 0x96_u8, 0x4c_u8])
     def query_interface(this : ISearchCompletedCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4830,7 +4830,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateHistoryEntryVtbl,
+  record IUpdateHistoryEntryVtable,
     query_interface : Proc(IUpdateHistoryEntry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateHistoryEntry*, UInt32),
     release : Proc(IUpdateHistoryEntry*, UInt32),
@@ -4855,7 +4855,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateHistoryEntry, lpVtbl : IUpdateHistoryEntryVtbl* do
+  record IUpdateHistoryEntry, lpVtbl : IUpdateHistoryEntryVtable* do
     GUID = LibC::GUID.new(0xbe56a644_u32, 0xaf0e_u16, 0x4e0e_u16, StaticArray[0xa3_u8, 0x11_u8, 0xc1_u8, 0xd8_u8, 0xe6_u8, 0x95_u8, 0xcb_u8, 0xff_u8])
     def query_interface(this : IUpdateHistoryEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4924,7 +4924,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateHistoryEntry2Vtbl,
+  record IUpdateHistoryEntry2Vtable,
     query_interface : Proc(IUpdateHistoryEntry2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateHistoryEntry2*, UInt32),
     release : Proc(IUpdateHistoryEntry2*, UInt32),
@@ -4950,7 +4950,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateHistoryEntry2, lpVtbl : IUpdateHistoryEntry2Vtbl* do
+  record IUpdateHistoryEntry2, lpVtbl : IUpdateHistoryEntry2Vtable* do
     GUID = LibC::GUID.new(0xc2bfb780_u32, 0x4539_u16, 0x4132_u16, StaticArray[0xab_u8, 0x8c_u8, 0xa_u8, 0x87_u8, 0x72_u8, 0x1_u8, 0x3a_u8, 0xb6_u8])
     def query_interface(this : IUpdateHistoryEntry2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5022,7 +5022,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateHistoryEntryCollectionVtbl,
+  record IUpdateHistoryEntryCollectionVtable,
     query_interface : Proc(IUpdateHistoryEntryCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateHistoryEntryCollection*, UInt32),
     release : Proc(IUpdateHistoryEntryCollection*, UInt32),
@@ -5036,7 +5036,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateHistoryEntryCollection, lpVtbl : IUpdateHistoryEntryCollectionVtbl* do
+  record IUpdateHistoryEntryCollection, lpVtbl : IUpdateHistoryEntryCollectionVtable* do
     GUID = LibC::GUID.new(0xa7f04f3c_u32, 0xa290_u16, 0x435b_u16, StaticArray[0xaa_u8, 0xdf_u8, 0xa1_u8, 0x16_u8, 0xc3_u8, 0x35_u8, 0x7a_u8, 0x5c_u8])
     def query_interface(this : IUpdateHistoryEntryCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5072,7 +5072,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateSearcherVtbl,
+  record IUpdateSearcherVtable,
     query_interface : Proc(IUpdateSearcher*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateSearcher*, UInt32),
     release : Proc(IUpdateSearcher*, UInt32),
@@ -5101,7 +5101,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateSearcher, lpVtbl : IUpdateSearcherVtbl* do
+  record IUpdateSearcher, lpVtbl : IUpdateSearcherVtable* do
     GUID = LibC::GUID.new(0x8f45abf1_u32, 0xf9ae_u16, 0x4b95_u16, StaticArray[0xa9_u8, 0x33_u8, 0xf0_u8, 0xf6_u8, 0x6e_u8, 0x50_u8, 0x56_u8, 0xea_u8])
     def query_interface(this : IUpdateSearcher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5182,7 +5182,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateSearcher2Vtbl,
+  record IUpdateSearcher2Vtable,
     query_interface : Proc(IUpdateSearcher2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateSearcher2*, UInt32),
     release : Proc(IUpdateSearcher2*, UInt32),
@@ -5213,7 +5213,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateSearcher2, lpVtbl : IUpdateSearcher2Vtbl* do
+  record IUpdateSearcher2, lpVtbl : IUpdateSearcher2Vtable* do
     GUID = LibC::GUID.new(0x4cbdcb2d_u32, 0x1589_u16, 0x4beb_u16, StaticArray[0xbd_u8, 0x1c_u8, 0x3e_u8, 0x58_u8, 0x2f_u8, 0xf0_u8, 0xad_u8, 0xd0_u8])
     def query_interface(this : IUpdateSearcher2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5300,7 +5300,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateSearcher3Vtbl,
+  record IUpdateSearcher3Vtable,
     query_interface : Proc(IUpdateSearcher3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateSearcher3*, UInt32),
     release : Proc(IUpdateSearcher3*, UInt32),
@@ -5333,7 +5333,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateSearcher3, lpVtbl : IUpdateSearcher3Vtbl* do
+  record IUpdateSearcher3, lpVtbl : IUpdateSearcher3Vtable* do
     GUID = LibC::GUID.new(0x4c6895d_u32, 0xeaf2_u16, 0x4034_u16, StaticArray[0x97_u8, 0xf3_u8, 0x31_u8, 0x1d_u8, 0xe9_u8, 0xbe_u8, 0x41_u8, 0x3a_u8])
     def query_interface(this : IUpdateSearcher3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5426,7 +5426,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateDownloadResultVtbl,
+  record IUpdateDownloadResultVtable,
     query_interface : Proc(IUpdateDownloadResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateDownloadResult*, UInt32),
     release : Proc(IUpdateDownloadResult*, UInt32),
@@ -5439,7 +5439,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateDownloadResult, lpVtbl : IUpdateDownloadResultVtbl* do
+  record IUpdateDownloadResult, lpVtbl : IUpdateDownloadResultVtable* do
     GUID = LibC::GUID.new(0xbf99af76_u32, 0xb575_u16, 0x42ad_u16, StaticArray[0x8a_u8, 0xa4_u8, 0x33_u8, 0xcb_u8, 0xb5_u8, 0x47_u8, 0x7a_u8, 0xf1_u8])
     def query_interface(this : IUpdateDownloadResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5472,7 +5472,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IDownloadResultVtbl,
+  record IDownloadResultVtable,
     query_interface : Proc(IDownloadResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDownloadResult*, UInt32),
     release : Proc(IDownloadResult*, UInt32),
@@ -5486,7 +5486,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IDownloadResult, lpVtbl : IDownloadResultVtbl* do
+  record IDownloadResult, lpVtbl : IDownloadResultVtable* do
     GUID = LibC::GUID.new(0xdaa4fdd0_u32, 0x4727_u16, 0x4dbe_u16, StaticArray[0xa1_u8, 0xe7_u8, 0x74_u8, 0x5d_u8, 0xca_u8, 0x31_u8, 0x71_u8, 0x44_u8])
     def query_interface(this : IDownloadResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5522,7 +5522,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IDownloadProgressVtbl,
+  record IDownloadProgressVtable,
     query_interface : Proc(IDownloadProgress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDownloadProgress*, UInt32),
     release : Proc(IDownloadProgress*, UInt32),
@@ -5542,7 +5542,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IDownloadProgress, lpVtbl : IDownloadProgressVtbl* do
+  record IDownloadProgress, lpVtbl : IDownloadProgressVtable* do
     GUID = LibC::GUID.new(0xd31a5bac_u32, 0xf719_u16, 0x4178_u16, StaticArray[0x9d_u8, 0xbb_u8, 0x5e_u8, 0x2c_u8, 0xb4_u8, 0x7f_u8, 0xd1_u8, 0x8a_u8])
     def query_interface(this : IDownloadProgress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5596,7 +5596,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IDownloadJobVtbl,
+  record IDownloadJobVtable,
     query_interface : Proc(IDownloadJob*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDownloadJob*, UInt32),
     release : Proc(IDownloadJob*, UInt32),
@@ -5613,7 +5613,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IDownloadJob, lpVtbl : IDownloadJobVtbl* do
+  record IDownloadJob, lpVtbl : IDownloadJobVtable* do
     GUID = LibC::GUID.new(0xc574de85_u32, 0x7358_u16, 0x43f6_u16, StaticArray[0xaa_u8, 0xe8_u8, 0x86_u8, 0x97_u8, 0xe6_u8, 0x2d_u8, 0x8b_u8, 0xa7_u8])
     def query_interface(this : IDownloadJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5658,7 +5658,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IDownloadCompletedCallbackArgsVtbl,
+  record IDownloadCompletedCallbackArgsVtable,
     query_interface : Proc(IDownloadCompletedCallbackArgs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDownloadCompletedCallbackArgs*, UInt32),
     release : Proc(IDownloadCompletedCallbackArgs*, UInt32),
@@ -5669,7 +5669,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IDownloadCompletedCallbackArgs, lpVtbl : IDownloadCompletedCallbackArgsVtbl* do
+  record IDownloadCompletedCallbackArgs, lpVtbl : IDownloadCompletedCallbackArgsVtable* do
     GUID = LibC::GUID.new(0xfa565b23_u32, 0x498c_u16, 0x47a0_u16, StaticArray[0x97_u8, 0x9d_u8, 0xe7_u8, 0xd5_u8, 0xb1_u8, 0x81_u8, 0x33_u8, 0x60_u8])
     def query_interface(this : IDownloadCompletedCallbackArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5696,7 +5696,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IDownloadCompletedCallbackVtbl,
+  record IDownloadCompletedCallbackVtable,
     query_interface : Proc(IDownloadCompletedCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDownloadCompletedCallback*, UInt32),
     release : Proc(IDownloadCompletedCallback*, UInt32),
@@ -5704,7 +5704,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IDownloadCompletedCallback, lpVtbl : IDownloadCompletedCallbackVtbl* do
+  record IDownloadCompletedCallback, lpVtbl : IDownloadCompletedCallbackVtable* do
     GUID = LibC::GUID.new(0x77254866_u32, 0x9f5b_u16, 0x4c8e_u16, StaticArray[0xb9_u8, 0xe2_u8, 0xc7_u8, 0x7a_u8, 0x85_u8, 0x30_u8, 0xd6_u8, 0x4b_u8])
     def query_interface(this : IDownloadCompletedCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5722,7 +5722,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IDownloadProgressChangedCallbackArgsVtbl,
+  record IDownloadProgressChangedCallbackArgsVtable,
     query_interface : Proc(IDownloadProgressChangedCallbackArgs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDownloadProgressChangedCallbackArgs*, UInt32),
     release : Proc(IDownloadProgressChangedCallbackArgs*, UInt32),
@@ -5734,7 +5734,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IDownloadProgressChangedCallbackArgs, lpVtbl : IDownloadProgressChangedCallbackArgsVtbl* do
+  record IDownloadProgressChangedCallbackArgs, lpVtbl : IDownloadProgressChangedCallbackArgsVtable* do
     GUID = LibC::GUID.new(0x324ff2c6_u32, 0x4981_u16, 0x4b04_u16, StaticArray[0x94_u8, 0x12_u8, 0x57_u8, 0x48_u8, 0x17_u8, 0x45_u8, 0xab_u8, 0x24_u8])
     def query_interface(this : IDownloadProgressChangedCallbackArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5764,7 +5764,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IDownloadProgressChangedCallbackVtbl,
+  record IDownloadProgressChangedCallbackVtable,
     query_interface : Proc(IDownloadProgressChangedCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDownloadProgressChangedCallback*, UInt32),
     release : Proc(IDownloadProgressChangedCallback*, UInt32),
@@ -5772,7 +5772,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IDownloadProgressChangedCallback, lpVtbl : IDownloadProgressChangedCallbackVtbl* do
+  record IDownloadProgressChangedCallback, lpVtbl : IDownloadProgressChangedCallbackVtable* do
     GUID = LibC::GUID.new(0x8c3f1cdd_u32, 0x6173_u16, 0x4591_u16, StaticArray[0xae_u8, 0xbd_u8, 0xa5_u8, 0x6a_u8, 0x53_u8, 0xca_u8, 0x77_u8, 0xc1_u8])
     def query_interface(this : IDownloadProgressChangedCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5790,7 +5790,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateDownloaderVtbl,
+  record IUpdateDownloaderVtable,
     query_interface : Proc(IUpdateDownloader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateDownloader*, UInt32),
     release : Proc(IUpdateDownloader*, UInt32),
@@ -5812,7 +5812,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateDownloader, lpVtbl : IUpdateDownloaderVtbl* do
+  record IUpdateDownloader, lpVtbl : IUpdateDownloaderVtable* do
     GUID = LibC::GUID.new(0x68f1c6f9_u32, 0x7ecc_u16, 0x4666_u16, StaticArray[0xa4_u8, 0x64_u8, 0x24_u8, 0x7f_u8, 0xe1_u8, 0x24_u8, 0x96_u8, 0xc3_u8])
     def query_interface(this : IUpdateDownloader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5872,7 +5872,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateInstallationResultVtbl,
+  record IUpdateInstallationResultVtable,
     query_interface : Proc(IUpdateInstallationResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateInstallationResult*, UInt32),
     release : Proc(IUpdateInstallationResult*, UInt32),
@@ -5886,7 +5886,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateInstallationResult, lpVtbl : IUpdateInstallationResultVtbl* do
+  record IUpdateInstallationResult, lpVtbl : IUpdateInstallationResultVtable* do
     GUID = LibC::GUID.new(0xd940f0f8_u32, 0x3cbb_u16, 0x4fd0_u16, StaticArray[0x99_u8, 0x3f_u8, 0x47_u8, 0x1e_u8, 0x7f_u8, 0x23_u8, 0x28_u8, 0xad_u8])
     def query_interface(this : IUpdateInstallationResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5922,7 +5922,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInstallationResultVtbl,
+  record IInstallationResultVtable,
     query_interface : Proc(IInstallationResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInstallationResult*, UInt32),
     release : Proc(IInstallationResult*, UInt32),
@@ -5937,7 +5937,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IInstallationResult, lpVtbl : IInstallationResultVtbl* do
+  record IInstallationResult, lpVtbl : IInstallationResultVtable* do
     GUID = LibC::GUID.new(0xa43c56d6_u32, 0x7451_u16, 0x48d4_u16, StaticArray[0xaf_u8, 0x96_u8, 0xb6_u8, 0xcd_u8, 0x2d_u8, 0xd_u8, 0x9b_u8, 0x7a_u8])
     def query_interface(this : IInstallationResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5976,7 +5976,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInstallationProgressVtbl,
+  record IInstallationProgressVtable,
     query_interface : Proc(IInstallationProgress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInstallationProgress*, UInt32),
     release : Proc(IInstallationProgress*, UInt32),
@@ -5991,7 +5991,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IInstallationProgress, lpVtbl : IInstallationProgressVtbl* do
+  record IInstallationProgress, lpVtbl : IInstallationProgressVtable* do
     GUID = LibC::GUID.new(0x345c8244_u32, 0x43a3_u16, 0x4e32_u16, StaticArray[0xa3_u8, 0x68_u8, 0x65_u8, 0xf0_u8, 0x73_u8, 0xb7_u8, 0x6f_u8, 0x36_u8])
     def query_interface(this : IInstallationProgress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6030,7 +6030,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInstallationJobVtbl,
+  record IInstallationJobVtable,
     query_interface : Proc(IInstallationJob*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInstallationJob*, UInt32),
     release : Proc(IInstallationJob*, UInt32),
@@ -6047,7 +6047,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IInstallationJob, lpVtbl : IInstallationJobVtbl* do
+  record IInstallationJob, lpVtbl : IInstallationJobVtable* do
     GUID = LibC::GUID.new(0x5c209f0b_u32, 0xbad5_u16, 0x432a_u16, StaticArray[0x95_u8, 0x56_u8, 0x46_u8, 0x99_u8, 0xbe_u8, 0xd2_u8, 0x63_u8, 0x8a_u8])
     def query_interface(this : IInstallationJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6092,7 +6092,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInstallationCompletedCallbackArgsVtbl,
+  record IInstallationCompletedCallbackArgsVtable,
     query_interface : Proc(IInstallationCompletedCallbackArgs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInstallationCompletedCallbackArgs*, UInt32),
     release : Proc(IInstallationCompletedCallbackArgs*, UInt32),
@@ -6103,7 +6103,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IInstallationCompletedCallbackArgs, lpVtbl : IInstallationCompletedCallbackArgsVtbl* do
+  record IInstallationCompletedCallbackArgs, lpVtbl : IInstallationCompletedCallbackArgsVtable* do
     GUID = LibC::GUID.new(0x250e2106_u32, 0x8efb_u16, 0x4705_u16, StaticArray[0x96_u8, 0x53_u8, 0xef_u8, 0x13_u8, 0xc5_u8, 0x81_u8, 0xb6_u8, 0xa1_u8])
     def query_interface(this : IInstallationCompletedCallbackArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6130,7 +6130,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInstallationCompletedCallbackVtbl,
+  record IInstallationCompletedCallbackVtable,
     query_interface : Proc(IInstallationCompletedCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInstallationCompletedCallback*, UInt32),
     release : Proc(IInstallationCompletedCallback*, UInt32),
@@ -6138,7 +6138,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IInstallationCompletedCallback, lpVtbl : IInstallationCompletedCallbackVtbl* do
+  record IInstallationCompletedCallback, lpVtbl : IInstallationCompletedCallbackVtable* do
     GUID = LibC::GUID.new(0x45f4f6f3_u32, 0xd602_u16, 0x4f98_u16, StaticArray[0x9a_u8, 0x8a_u8, 0x3e_u8, 0xfa_u8, 0x15_u8, 0x2a_u8, 0xd2_u8, 0xd3_u8])
     def query_interface(this : IInstallationCompletedCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6156,7 +6156,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInstallationProgressChangedCallbackArgsVtbl,
+  record IInstallationProgressChangedCallbackArgsVtable,
     query_interface : Proc(IInstallationProgressChangedCallbackArgs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInstallationProgressChangedCallbackArgs*, UInt32),
     release : Proc(IInstallationProgressChangedCallbackArgs*, UInt32),
@@ -6168,7 +6168,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IInstallationProgressChangedCallbackArgs, lpVtbl : IInstallationProgressChangedCallbackArgsVtbl* do
+  record IInstallationProgressChangedCallbackArgs, lpVtbl : IInstallationProgressChangedCallbackArgsVtable* do
     GUID = LibC::GUID.new(0xe4f14e1e_u32, 0x689d_u16, 0x4218_u16, StaticArray[0xa0_u8, 0xb9_u8, 0xbc_u8, 0x18_u8, 0x9c_u8, 0x48_u8, 0x4a_u8, 0x1_u8])
     def query_interface(this : IInstallationProgressChangedCallbackArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6198,7 +6198,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInstallationProgressChangedCallbackVtbl,
+  record IInstallationProgressChangedCallbackVtable,
     query_interface : Proc(IInstallationProgressChangedCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInstallationProgressChangedCallback*, UInt32),
     release : Proc(IInstallationProgressChangedCallback*, UInt32),
@@ -6206,7 +6206,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IInstallationProgressChangedCallback, lpVtbl : IInstallationProgressChangedCallbackVtbl* do
+  record IInstallationProgressChangedCallback, lpVtbl : IInstallationProgressChangedCallbackVtable* do
     GUID = LibC::GUID.new(0xe01402d5_u32, 0xf8da_u16, 0x43ba_u16, StaticArray[0xa0_u8, 0x12_u8, 0x38_u8, 0x89_u8, 0x4b_u8, 0xd0_u8, 0x48_u8, 0xf1_u8])
     def query_interface(this : IInstallationProgressChangedCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6224,7 +6224,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateInstallerVtbl,
+  record IUpdateInstallerVtable,
     query_interface : Proc(IUpdateInstaller*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateInstaller*, UInt32),
     release : Proc(IUpdateInstaller*, UInt32),
@@ -6256,7 +6256,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateInstaller, lpVtbl : IUpdateInstallerVtbl* do
+  record IUpdateInstaller, lpVtbl : IUpdateInstallerVtable* do
     GUID = LibC::GUID.new(0x7b929c68_u32, 0xccdc_u16, 0x4226_u16, StaticArray[0x96_u8, 0xb1_u8, 0x87_u8, 0x24_u8, 0x60_u8, 0xb_u8, 0x54_u8, 0xc2_u8])
     def query_interface(this : IUpdateInstaller*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6346,7 +6346,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateInstaller2Vtbl,
+  record IUpdateInstaller2Vtable,
     query_interface : Proc(IUpdateInstaller2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateInstaller2*, UInt32),
     release : Proc(IUpdateInstaller2*, UInt32),
@@ -6380,7 +6380,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateInstaller2, lpVtbl : IUpdateInstaller2Vtbl* do
+  record IUpdateInstaller2, lpVtbl : IUpdateInstaller2Vtable* do
     GUID = LibC::GUID.new(0x3442d4fe_u32, 0x224d_u16, 0x4cee_u16, StaticArray[0x98_u8, 0xcf_u8, 0x30_u8, 0xe0_u8, 0xc4_u8, 0xd2_u8, 0x29_u8, 0xe6_u8])
     def query_interface(this : IUpdateInstaller2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6476,7 +6476,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateInstaller3Vtbl,
+  record IUpdateInstaller3Vtable,
     query_interface : Proc(IUpdateInstaller3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateInstaller3*, UInt32),
     release : Proc(IUpdateInstaller3*, UInt32),
@@ -6512,7 +6512,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateInstaller3, lpVtbl : IUpdateInstaller3Vtbl* do
+  record IUpdateInstaller3, lpVtbl : IUpdateInstaller3Vtable* do
     GUID = LibC::GUID.new(0x16d11c35_u32, 0x99a_u16, 0x48d0_u16, StaticArray[0x83_u8, 0x38_u8, 0x5f_u8, 0xae_u8, 0x64_u8, 0x4_u8, 0x7f_u8, 0x8e_u8])
     def query_interface(this : IUpdateInstaller3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6614,7 +6614,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateInstaller4Vtbl,
+  record IUpdateInstaller4Vtable,
     query_interface : Proc(IUpdateInstaller4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateInstaller4*, UInt32),
     release : Proc(IUpdateInstaller4*, UInt32),
@@ -6651,7 +6651,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateInstaller4, lpVtbl : IUpdateInstaller4Vtbl* do
+  record IUpdateInstaller4, lpVtbl : IUpdateInstaller4Vtable* do
     GUID = LibC::GUID.new(0xef8208ea_u32, 0x2304_u16, 0x492d_u16, StaticArray[0x91_u8, 0x9_u8, 0x23_u8, 0x81_u8, 0x3b_u8, 0x9_u8, 0x58_u8, 0xe1_u8])
     def query_interface(this : IUpdateInstaller4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6756,7 +6756,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateSessionVtbl,
+  record IUpdateSessionVtable,
     query_interface : Proc(IUpdateSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateSession*, UInt32),
     release : Proc(IUpdateSession*, UInt32),
@@ -6775,7 +6775,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateSession, lpVtbl : IUpdateSessionVtbl* do
+  record IUpdateSession, lpVtbl : IUpdateSessionVtable* do
     GUID = LibC::GUID.new(0x816858a4_u32, 0x260d_u16, 0x4260_u16, StaticArray[0x93_u8, 0x3a_u8, 0x25_u8, 0x85_u8, 0xf1_u8, 0xab_u8, 0xc7_u8, 0x6b_u8])
     def query_interface(this : IUpdateSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6826,7 +6826,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateSession2Vtbl,
+  record IUpdateSession2Vtable,
     query_interface : Proc(IUpdateSession2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateSession2*, UInt32),
     release : Proc(IUpdateSession2*, UInt32),
@@ -6847,7 +6847,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateSession2, lpVtbl : IUpdateSession2Vtbl* do
+  record IUpdateSession2, lpVtbl : IUpdateSession2Vtable* do
     GUID = LibC::GUID.new(0x91caf7b0_u32, 0xeb23_u16, 0x49ed_u16, StaticArray[0x99_u8, 0x37_u8, 0xc5_u8, 0x2d_u8, 0x81_u8, 0x7f_u8, 0x46_u8, 0xf7_u8])
     def query_interface(this : IUpdateSession2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6904,7 +6904,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateSession3Vtbl,
+  record IUpdateSession3Vtable,
     query_interface : Proc(IUpdateSession3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateSession3*, UInt32),
     release : Proc(IUpdateSession3*, UInt32),
@@ -6927,7 +6927,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateSession3, lpVtbl : IUpdateSession3Vtbl* do
+  record IUpdateSession3, lpVtbl : IUpdateSession3Vtable* do
     GUID = LibC::GUID.new(0x918efd1e_u32, 0xb5d8_u16, 0x4c90_u16, StaticArray[0x85_u8, 0x40_u8, 0xae_u8, 0xb9_u8, 0xbd_u8, 0xc5_u8, 0x6f_u8, 0x9d_u8])
     def query_interface(this : IUpdateSession3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6990,7 +6990,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateServiceVtbl,
+  record IUpdateServiceVtable,
     query_interface : Proc(IUpdateService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateService*, UInt32),
     release : Proc(IUpdateService*, UInt32),
@@ -7014,7 +7014,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateService, lpVtbl : IUpdateServiceVtbl* do
+  record IUpdateService, lpVtbl : IUpdateServiceVtable* do
     GUID = LibC::GUID.new(0x76b3b17e_u32, 0xaed6_u16, 0x4da5_u16, StaticArray[0x85_u8, 0xf0_u8, 0x83_u8, 0x58_u8, 0x7f_u8, 0x81_u8, 0xab_u8, 0xe3_u8])
     def query_interface(this : IUpdateService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7080,7 +7080,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateService2Vtbl,
+  record IUpdateService2Vtable,
     query_interface : Proc(IUpdateService2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateService2*, UInt32),
     release : Proc(IUpdateService2*, UInt32),
@@ -7105,7 +7105,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateService2, lpVtbl : IUpdateService2Vtbl* do
+  record IUpdateService2, lpVtbl : IUpdateService2Vtable* do
     GUID = LibC::GUID.new(0x1518b460_u32, 0x6518_u16, 0x4172_u16, StaticArray[0x94_u8, 0xf_u8, 0xc7_u8, 0x58_u8, 0x83_u8, 0xb2_u8, 0x4c_u8, 0xeb_u8])
     def query_interface(this : IUpdateService2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7174,7 +7174,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateServiceCollectionVtbl,
+  record IUpdateServiceCollectionVtable,
     query_interface : Proc(IUpdateServiceCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateServiceCollection*, UInt32),
     release : Proc(IUpdateServiceCollection*, UInt32),
@@ -7188,7 +7188,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateServiceCollection, lpVtbl : IUpdateServiceCollectionVtbl* do
+  record IUpdateServiceCollection, lpVtbl : IUpdateServiceCollectionVtable* do
     GUID = LibC::GUID.new(0x9b0353aa_u32, 0xe52_u16, 0x44ff_u16, StaticArray[0xb8_u8, 0xb0_u8, 0x1f_u8, 0x7f_u8, 0xa0_u8, 0x43_u8, 0x7f_u8, 0x88_u8])
     def query_interface(this : IUpdateServiceCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7224,7 +7224,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateServiceRegistrationVtbl,
+  record IUpdateServiceRegistrationVtable,
     query_interface : Proc(IUpdateServiceRegistration*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateServiceRegistration*, UInt32),
     release : Proc(IUpdateServiceRegistration*, UInt32),
@@ -7239,7 +7239,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateServiceRegistration, lpVtbl : IUpdateServiceRegistrationVtbl* do
+  record IUpdateServiceRegistration, lpVtbl : IUpdateServiceRegistrationVtable* do
     GUID = LibC::GUID.new(0xdde02280_u32, 0x12b3_u16, 0x4e0b_u16, StaticArray[0x93_u8, 0x7b_u8, 0x67_u8, 0x47_u8, 0xf6_u8, 0xac_u8, 0xb2_u8, 0x86_u8])
     def query_interface(this : IUpdateServiceRegistration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7278,7 +7278,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateServiceManagerVtbl,
+  record IUpdateServiceManagerVtable,
     query_interface : Proc(IUpdateServiceManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateServiceManager*, UInt32),
     release : Proc(IUpdateServiceManager*, UInt32),
@@ -7296,7 +7296,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateServiceManager, lpVtbl : IUpdateServiceManagerVtbl* do
+  record IUpdateServiceManager, lpVtbl : IUpdateServiceManagerVtable* do
     GUID = LibC::GUID.new(0x23857e3c_u32, 0x2ba_u16, 0x44a3_u16, StaticArray[0x94_u8, 0x23_u8, 0xb1_u8, 0xc9_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x37_u8])
     def query_interface(this : IUpdateServiceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7344,7 +7344,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IUpdateServiceManager2Vtbl,
+  record IUpdateServiceManager2Vtable,
     query_interface : Proc(IUpdateServiceManager2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUpdateServiceManager2*, UInt32),
     release : Proc(IUpdateServiceManager2*, UInt32),
@@ -7366,7 +7366,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IUpdateServiceManager2, lpVtbl : IUpdateServiceManager2Vtbl* do
+  record IUpdateServiceManager2, lpVtbl : IUpdateServiceManager2Vtable* do
     GUID = LibC::GUID.new(0xbb8531d_u32, 0x7e8d_u16, 0x424f_u16, StaticArray[0x98_u8, 0x6c_u8, 0xa0_u8, 0xb8_u8, 0xf6_u8, 0xa_u8, 0x3e_u8, 0x7b_u8])
     def query_interface(this : IUpdateServiceManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7426,7 +7426,7 @@ module Win32cr::System::UpdateAgent
   end
 
   @[Extern]
-  record IInstallationAgentVtbl,
+  record IInstallationAgentVtable,
     query_interface : Proc(IInstallationAgent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInstallationAgent*, UInt32),
     release : Proc(IInstallationAgent*, UInt32),
@@ -7438,7 +7438,7 @@ module Win32cr::System::UpdateAgent
 
 
   @[Extern]
-  record IInstallationAgent, lpVtbl : IInstallationAgentVtbl* do
+  record IInstallationAgent, lpVtbl : IInstallationAgentVtable* do
     GUID = LibC::GUID.new(0x925cbc18_u32, 0xa2ea_u16, 0x4648_u16, StaticArray[0xbf_u8, 0x1c_u8, 0xec_u8, 0x8b_u8, 0xad_u8, 0xcf_u8, 0xe2_u8, 0xa_u8])
     def query_interface(this : IInstallationAgent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

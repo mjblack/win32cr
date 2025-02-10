@@ -1605,246 +1605,367 @@ module Win32cr::NetworkManagement::Dns
   {% end %}
 
   def dnsQueryConfig(config : Win32cr::NetworkManagement::Dns::DNS_CONFIG_TYPE, flag : UInt32, pwsAdapterName : Win32cr::Foundation::PWSTR, pReserved : Void*, pBuffer : Void*, pBufLen : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.DnsQueryConfig(config, flag, pwsAdapterName, pReserved, pBuffer, pBufLen)
+    {% end %}
   end
 
   def dnsRecordCopyEx(pRecord : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, char_set_in : Win32cr::NetworkManagement::Dns::DNS_CHARSET, char_set_out : Win32cr::NetworkManagement::Dns::DNS_CHARSET) : Win32cr::NetworkManagement::Dns::DNS_RECORDA*
+    {% if !flag?(:docs) %}
     C.DnsRecordCopyEx(pRecord, char_set_in, char_set_out)
+    {% end %}
   end
 
   def dnsRecordSetCopyEx(pRecordSet : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, char_set_in : Win32cr::NetworkManagement::Dns::DNS_CHARSET, char_set_out : Win32cr::NetworkManagement::Dns::DNS_CHARSET) : Win32cr::NetworkManagement::Dns::DNS_RECORDA*
+    {% if !flag?(:docs) %}
     C.DnsRecordSetCopyEx(pRecordSet, char_set_in, char_set_out)
+    {% end %}
   end
 
   def dnsRecordCompare(pRecord1 : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, pRecord2 : Win32cr::NetworkManagement::Dns::DNS_RECORDA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DnsRecordCompare(pRecord1, pRecord2)
+    {% end %}
   end
 
   def dnsRecordSetCompare(pRR1 : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, pRR2 : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, ppDiff1 : Win32cr::NetworkManagement::Dns::DNS_RECORDA**, ppDiff2 : Win32cr::NetworkManagement::Dns::DNS_RECORDA**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DnsRecordSetCompare(pRR1, pRR2, ppDiff1, ppDiff2)
+    {% end %}
   end
 
   def dnsRecordSetDetach(pRecordList : Win32cr::NetworkManagement::Dns::DNS_RECORDA*) : Win32cr::NetworkManagement::Dns::DNS_RECORDA*
+    {% if !flag?(:docs) %}
     C.DnsRecordSetDetach(pRecordList)
+    {% end %}
   end
 
   def dnsFree(pData : Void*, free_type : Win32cr::NetworkManagement::Dns::DNS_FREE_TYPE) : Void
+    {% if !flag?(:docs) %}
     C.DnsFree(pData, free_type)
+    {% end %}
   end
 
   def dnsQueryA(pszName : Win32cr::Foundation::PSTR, wType : UInt16, options : UInt32, pExtra : Void*, ppQueryResults : Win32cr::NetworkManagement::Dns::DNS_RECORDA**, pReserved : Void**) : Int32
+    {% if !flag?(:docs) %}
     C.DnsQuery_A(pszName, wType, options, pExtra, ppQueryResults, pReserved)
+    {% end %}
   end
 
   def dnsQueryUTF8(pszName : Win32cr::Foundation::PSTR, wType : UInt16, options : UInt32, pExtra : Void*, ppQueryResults : Win32cr::NetworkManagement::Dns::DNS_RECORDA**, pReserved : Void**) : Int32
+    {% if !flag?(:docs) %}
     C.DnsQuery_UTF8(pszName, wType, options, pExtra, ppQueryResults, pReserved)
+    {% end %}
   end
 
   def dnsQueryW(pszName : Win32cr::Foundation::PWSTR, wType : UInt16, options : UInt32, pExtra : Void*, ppQueryResults : Win32cr::NetworkManagement::Dns::DNS_RECORDA**, pReserved : Void**) : Int32
+    {% if !flag?(:docs) %}
     C.DnsQuery_W(pszName, wType, options, pExtra, ppQueryResults, pReserved)
+    {% end %}
   end
 
   def dnsQueryEx(pQueryRequest : Win32cr::NetworkManagement::Dns::DNS_QUERY_REQUEST*, pQueryResults : Win32cr::NetworkManagement::Dns::DNS_QUERY_RESULT*, pCancelHandle : Win32cr::NetworkManagement::Dns::DNS_QUERY_CANCEL*) : Int32
+    {% if !flag?(:docs) %}
     C.DnsQueryEx(pQueryRequest, pQueryResults, pCancelHandle)
+    {% end %}
   end
 
   def dnsCancelQuery(pCancelHandle : Win32cr::NetworkManagement::Dns::DNS_QUERY_CANCEL*) : Int32
+    {% if !flag?(:docs) %}
     C.DnsCancelQuery(pCancelHandle)
+    {% end %}
   end
 
   def dnsFreeCustomServers(pcServers : UInt32*, ppServers : Win32cr::NetworkManagement::Dns::DNS_CUSTOM_SERVER**) : Void
+    {% if !flag?(:docs) %}
     C.DnsFreeCustomServers(pcServers, ppServers)
+    {% end %}
   end
 
   def dnsGetApplicationSettings(pcServers : UInt32*, ppDefaultServers : Win32cr::NetworkManagement::Dns::DNS_CUSTOM_SERVER**, pSettings : Win32cr::NetworkManagement::Dns::DNS_APPLICATION_SETTINGS*) : UInt32
+    {% if !flag?(:docs) %}
     C.DnsGetApplicationSettings(pcServers, ppDefaultServers, pSettings)
+    {% end %}
   end
 
   def dnsSetApplicationSettings(cServers : UInt32, pServers : Win32cr::NetworkManagement::Dns::DNS_CUSTOM_SERVER*, pSettings : Win32cr::NetworkManagement::Dns::DNS_APPLICATION_SETTINGS*) : UInt32
+    {% if !flag?(:docs) %}
     C.DnsSetApplicationSettings(cServers, pServers, pSettings)
+    {% end %}
   end
 
   def dnsAcquireContextHandleW(credential_flags : UInt32, credentials : Void*, pContext : Win32cr::NetworkManagement::Dns::DnsContextHandle*) : Int32
+    {% if !flag?(:docs) %}
     C.DnsAcquireContextHandle_W(credential_flags, credentials, pContext)
+    {% end %}
   end
 
   def dnsAcquireContextHandleA(credential_flags : UInt32, credentials : Void*, pContext : Win32cr::NetworkManagement::Dns::DnsContextHandle*) : Int32
+    {% if !flag?(:docs) %}
     C.DnsAcquireContextHandle_A(credential_flags, credentials, pContext)
+    {% end %}
   end
 
   def dnsReleaseContextHandle(hContext : Win32cr::Foundation::HANDLE) : Void
+    {% if !flag?(:docs) %}
     C.DnsReleaseContextHandle(hContext)
+    {% end %}
   end
 
   def dnsModifyRecordsInSetW(pAddRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, pDeleteRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, options : UInt32, hCredentials : Win32cr::Foundation::HANDLE, pExtraList : Void*, pReserved : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.DnsModifyRecordsInSet_W(pAddRecords, pDeleteRecords, options, hCredentials, pExtraList, pReserved)
+    {% end %}
   end
 
   def dnsModifyRecordsInSetA(pAddRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, pDeleteRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, options : UInt32, hCredentials : Win32cr::Foundation::HANDLE, pExtraList : Void*, pReserved : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.DnsModifyRecordsInSet_A(pAddRecords, pDeleteRecords, options, hCredentials, pExtraList, pReserved)
+    {% end %}
   end
 
   def dnsModifyRecordsInSetUTF8(pAddRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, pDeleteRecords : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, options : UInt32, hCredentials : Win32cr::Foundation::HANDLE, pExtraList : Void*, pReserved : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.DnsModifyRecordsInSet_UTF8(pAddRecords, pDeleteRecords, options, hCredentials, pExtraList, pReserved)
+    {% end %}
   end
 
   def dnsReplaceRecordSetW(pReplaceSet : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, options : UInt32, hContext : Win32cr::Foundation::HANDLE, pExtraInfo : Void*, pReserved : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.DnsReplaceRecordSetW(pReplaceSet, options, hContext, pExtraInfo, pReserved)
+    {% end %}
   end
 
   def dnsReplaceRecordSetA(pReplaceSet : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, options : UInt32, hContext : Win32cr::Foundation::HANDLE, pExtraInfo : Void*, pReserved : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.DnsReplaceRecordSetA(pReplaceSet, options, hContext, pExtraInfo, pReserved)
+    {% end %}
   end
 
   def dnsReplaceRecordSetUTF8(pReplaceSet : Win32cr::NetworkManagement::Dns::DNS_RECORDA*, options : UInt32, hContext : Win32cr::Foundation::HANDLE, pExtraInfo : Void*, pReserved : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.DnsReplaceRecordSetUTF8(pReplaceSet, options, hContext, pExtraInfo, pReserved)
+    {% end %}
   end
 
   def dnsValidateNameW(pszName : Win32cr::Foundation::PWSTR, format : Win32cr::NetworkManagement::Dns::DNS_NAME_FORMAT) : Int32
+    {% if !flag?(:docs) %}
     C.DnsValidateName_W(pszName, format)
+    {% end %}
   end
 
   def dnsValidateNameA(pszName : Win32cr::Foundation::PSTR, format : Win32cr::NetworkManagement::Dns::DNS_NAME_FORMAT) : Int32
+    {% if !flag?(:docs) %}
     C.DnsValidateName_A(pszName, format)
+    {% end %}
   end
 
   def dnsValidateNameUTF8(pszName : Win32cr::Foundation::PSTR, format : Win32cr::NetworkManagement::Dns::DNS_NAME_FORMAT) : Int32
+    {% if !flag?(:docs) %}
     C.DnsValidateName_UTF8(pszName, format)
+    {% end %}
   end
 
   def dnsNameCompareA(pName1 : Win32cr::Foundation::PSTR, pName2 : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DnsNameCompare_A(pName1, pName2)
+    {% end %}
   end
 
   def dnsNameCompareW(pName1 : Win32cr::Foundation::PWSTR, pName2 : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DnsNameCompare_W(pName1, pName2)
+    {% end %}
   end
 
   def dnsWriteQuestionToBufferW(pDnsBuffer : Win32cr::NetworkManagement::Dns::DNS_MESSAGE_BUFFER*, pdwBufferSize : UInt32*, pszName : Win32cr::Foundation::PWSTR, wType : UInt16, xid : UInt16, fRecursionDesired : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DnsWriteQuestionToBuffer_W(pDnsBuffer, pdwBufferSize, pszName, wType, xid, fRecursionDesired)
+    {% end %}
   end
 
   def dnsWriteQuestionToBufferUTF8(pDnsBuffer : Win32cr::NetworkManagement::Dns::DNS_MESSAGE_BUFFER*, pdwBufferSize : UInt32*, pszName : Win32cr::Foundation::PSTR, wType : UInt16, xid : UInt16, fRecursionDesired : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DnsWriteQuestionToBuffer_UTF8(pDnsBuffer, pdwBufferSize, pszName, wType, xid, fRecursionDesired)
+    {% end %}
   end
 
   def dnsExtractRecordsFromMessageW(pDnsBuffer : Win32cr::NetworkManagement::Dns::DNS_MESSAGE_BUFFER*, wMessageLength : UInt16, ppRecord : Win32cr::NetworkManagement::Dns::DNS_RECORDA**) : Int32
+    {% if !flag?(:docs) %}
     C.DnsExtractRecordsFromMessage_W(pDnsBuffer, wMessageLength, ppRecord)
+    {% end %}
   end
 
   def dnsExtractRecordsFromMessageUTF8(pDnsBuffer : Win32cr::NetworkManagement::Dns::DNS_MESSAGE_BUFFER*, wMessageLength : UInt16, ppRecord : Win32cr::NetworkManagement::Dns::DNS_RECORDA**) : Int32
+    {% if !flag?(:docs) %}
     C.DnsExtractRecordsFromMessage_UTF8(pDnsBuffer, wMessageLength, ppRecord)
+    {% end %}
   end
 
   def dnsGetProxyInformation(hostName : Win32cr::Foundation::PWSTR, proxyInformation : Win32cr::NetworkManagement::Dns::DNS_PROXY_INFORMATION*, defaultProxyInformation : Win32cr::NetworkManagement::Dns::DNS_PROXY_INFORMATION*, completionRoutine : Win32cr::NetworkManagement::Dns::DNS_PROXY_COMPLETION_ROUTINE, completionContext : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.DnsGetProxyInformation(hostName, proxyInformation, defaultProxyInformation, completionRoutine, completionContext)
+    {% end %}
   end
 
   def dnsFreeProxyName(proxyName : Win32cr::Foundation::PWSTR) : Void
+    {% if !flag?(:docs) %}
     C.DnsFreeProxyName(proxyName)
+    {% end %}
   end
 
   def dnsConnectionGetProxyInfoForHostUrl(pwszHostUrl : Win32cr::Foundation::PWSTR, pSelectionContext : UInt8*, dwSelectionContextLength : UInt32, dwExplicitInterfaceIndex : UInt32, pProxyInfoEx : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO_EX*) : UInt32
+    {% if !flag?(:docs) %}
     C.DnsConnectionGetProxyInfoForHostUrl(pwszHostUrl, pSelectionContext, dwSelectionContextLength, dwExplicitInterfaceIndex, pProxyInfoEx)
+    {% end %}
   end
 
   def dnsConnectionFreeProxyInfoEx(pProxyInfoEx : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO_EX*) : Void
+    {% if !flag?(:docs) %}
     C.DnsConnectionFreeProxyInfoEx(pProxyInfoEx)
+    {% end %}
   end
 
   def dnsConnectionGetProxyInfo(pwszConnectionName : Win32cr::Foundation::PWSTR, type__ : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_TYPE, pProxyInfo : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.DnsConnectionGetProxyInfo(pwszConnectionName, type__, pProxyInfo)
+    {% end %}
   end
 
   def dnsConnectionFreeProxyInfo(pProxyInfo : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO*) : Void
+    {% if !flag?(:docs) %}
     C.DnsConnectionFreeProxyInfo(pProxyInfo)
+    {% end %}
   end
 
   def dnsConnectionSetProxyInfo(pwszConnectionName : Win32cr::Foundation::PWSTR, type__ : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_TYPE, pProxyInfo : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.DnsConnectionSetProxyInfo(pwszConnectionName, type__, pProxyInfo)
+    {% end %}
   end
 
   def dnsConnectionDeleteProxyInfo(pwszConnectionName : Win32cr::Foundation::PWSTR, type__ : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_TYPE) : UInt32
+    {% if !flag?(:docs) %}
     C.DnsConnectionDeleteProxyInfo(pwszConnectionName, type__)
+    {% end %}
   end
 
   def dnsConnectionGetProxyList(pwszConnectionName : Win32cr::Foundation::PWSTR, pProxyList : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_LIST*) : UInt32
+    {% if !flag?(:docs) %}
     C.DnsConnectionGetProxyList(pwszConnectionName, pProxyList)
+    {% end %}
   end
 
   def dnsConnectionFreeProxyList(pProxyList : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_PROXY_LIST*) : Void
+    {% if !flag?(:docs) %}
     C.DnsConnectionFreeProxyList(pProxyList)
+    {% end %}
   end
 
   def dnsConnectionGetNameList(pNameList : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_NAME_LIST*) : UInt32
+    {% if !flag?(:docs) %}
     C.DnsConnectionGetNameList(pNameList)
+    {% end %}
   end
 
   def dnsConnectionFreeNameList(pNameList : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_NAME_LIST*) : Void
+    {% if !flag?(:docs) %}
     C.DnsConnectionFreeNameList(pNameList)
+    {% end %}
   end
 
   def dnsConnectionUpdateIfIndexTable(pConnectionIfIndexEntries : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_IFINDEX_LIST*) : UInt32
+    {% if !flag?(:docs) %}
     C.DnsConnectionUpdateIfIndexTable(pConnectionIfIndexEntries)
+    {% end %}
   end
 
   def dnsConnectionSetPolicyEntries(policy_entry_tag : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_POLICY_TAG, pPolicyEntryList : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_POLICY_ENTRY_LIST*) : UInt32
+    {% if !flag?(:docs) %}
     C.DnsConnectionSetPolicyEntries(policy_entry_tag, pPolicyEntryList)
+    {% end %}
   end
 
   def dnsConnectionDeletePolicyEntries(policy_entry_tag : Win32cr::NetworkManagement::Dns::DNS_CONNECTION_POLICY_TAG) : UInt32
+    {% if !flag?(:docs) %}
     C.DnsConnectionDeletePolicyEntries(policy_entry_tag)
+    {% end %}
   end
 
   def dnsServiceConstructInstance(pServiceName : Win32cr::Foundation::PWSTR, pHostName : Win32cr::Foundation::PWSTR, pIp4 : UInt32*, pIp6 : Win32cr::NetworkManagement::Dns::IP6_ADDRESS*, wPort : UInt16, wPriority : UInt16, wWeight : UInt16, dwPropertiesCount : UInt32, keys : Win32cr::Foundation::PWSTR*, values : Win32cr::Foundation::PWSTR*) : Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*
+    {% if !flag?(:docs) %}
     C.DnsServiceConstructInstance(pServiceName, pHostName, pIp4, pIp6, wPort, wPriority, wWeight, dwPropertiesCount, keys, values)
+    {% end %}
   end
 
   def dnsServiceCopyInstance(pOrig : Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*) : Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*
+    {% if !flag?(:docs) %}
     C.DnsServiceCopyInstance(pOrig)
+    {% end %}
   end
 
   def dnsServiceFreeInstance(pInstance : Win32cr::NetworkManagement::Dns::DNS_SERVICE_INSTANCE*) : Void
+    {% if !flag?(:docs) %}
     C.DnsServiceFreeInstance(pInstance)
+    {% end %}
   end
 
   def dnsServiceBrowse(pRequest : Win32cr::NetworkManagement::Dns::DNS_SERVICE_BROWSE_REQUEST*, pCancel : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : Int32
+    {% if !flag?(:docs) %}
     C.DnsServiceBrowse(pRequest, pCancel)
+    {% end %}
   end
 
   def dnsServiceBrowseCancel(pCancelHandle : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : Int32
+    {% if !flag?(:docs) %}
     C.DnsServiceBrowseCancel(pCancelHandle)
+    {% end %}
   end
 
   def dnsServiceResolve(pRequest : Win32cr::NetworkManagement::Dns::DNS_SERVICE_RESOLVE_REQUEST*, pCancel : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : Int32
+    {% if !flag?(:docs) %}
     C.DnsServiceResolve(pRequest, pCancel)
+    {% end %}
   end
 
   def dnsServiceResolveCancel(pCancelHandle : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : Int32
+    {% if !flag?(:docs) %}
     C.DnsServiceResolveCancel(pCancelHandle)
+    {% end %}
   end
 
   def dnsServiceRegister(pRequest : Win32cr::NetworkManagement::Dns::DNS_SERVICE_REGISTER_REQUEST*, pCancel : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : UInt32
+    {% if !flag?(:docs) %}
     C.DnsServiceRegister(pRequest, pCancel)
+    {% end %}
   end
 
   def dnsServiceDeRegister(pRequest : Win32cr::NetworkManagement::Dns::DNS_SERVICE_REGISTER_REQUEST*, pCancel : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : UInt32
+    {% if !flag?(:docs) %}
     C.DnsServiceDeRegister(pRequest, pCancel)
+    {% end %}
   end
 
   def dnsServiceRegisterCancel(pCancelHandle : Win32cr::NetworkManagement::Dns::DNS_SERVICE_CANCEL*) : UInt32
+    {% if !flag?(:docs) %}
     C.DnsServiceRegisterCancel(pCancelHandle)
+    {% end %}
   end
 
   def dnsStartMulticastQuery(pQueryRequest : Win32cr::NetworkManagement::Dns::MDNS_QUERY_REQUEST*, pHandle : Win32cr::NetworkManagement::Dns::MDNS_QUERY_HANDLE*) : Int32
+    {% if !flag?(:docs) %}
     C.DnsStartMulticastQuery(pQueryRequest, pHandle)
+    {% end %}
   end
 
   def dnsStopMulticastQuery(pHandle : Win32cr::NetworkManagement::Dns::MDNS_QUERY_HANDLE*) : Int32
+    {% if !flag?(:docs) %}
     C.DnsStopMulticastQuery(pHandle)
+    {% end %}
   end
 
   @[Link("dnsapi")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun DnsQueryConfig(config : Win32cr::NetworkManagement::Dns::DNS_CONFIG_TYPE, flag : UInt32, pwsAdapterName : Win32cr::Foundation::PWSTR, pReserved : Void*, pBuffer : Void*, pBufLen : UInt32*) : Int32
@@ -2027,4 +2148,5 @@ module Win32cr::NetworkManagement::Dns
     fun DnsStopMulticastQuery(pHandle : Win32cr::NetworkManagement::Dns::MDNS_QUERY_HANDLE*) : Int32
 
   end
+  {% end %}
 end

@@ -9,7 +9,7 @@ module Win32cr::Media::DirectShow::Xml
 
 
   @[Extern]
-  record IXMLGraphBuilderVtbl,
+  record IXMLGraphBuilderVtable,
     query_interface : Proc(IXMLGraphBuilder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLGraphBuilder*, UInt32),
     release : Proc(IXMLGraphBuilder*, UInt32),
@@ -19,7 +19,7 @@ module Win32cr::Media::DirectShow::Xml
 
 
   @[Extern]
-  record IXMLGraphBuilder, lpVtbl : IXMLGraphBuilderVtbl* do
+  record IXMLGraphBuilder, lpVtbl : IXMLGraphBuilderVtable* do
     GUID = LibC::GUID.new(0x1bb05960_u32, 0x5fbf_u16, 0x11d2_u16, StaticArray[0xa5_u8, 0x21_u8, 0x44_u8, 0xdf_u8, 0x7_u8, 0xc1_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IXMLGraphBuilder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

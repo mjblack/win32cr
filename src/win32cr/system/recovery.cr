@@ -13,38 +13,55 @@ module Win32cr::System::Recovery
   end
 
   def registerApplicationRecoveryCallback(pRecoveyCallback : Win32cr::System::WindowsProgramming::APPLICATION_RECOVERY_CALLBACK, pvParameter : Void*, dwPingInterval : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RegisterApplicationRecoveryCallback(pRecoveyCallback, pvParameter, dwPingInterval, dwFlags)
+    {% end %}
   end
 
   def unregisterApplicationRecoveryCallback : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UnregisterApplicationRecoveryCallback
+    {% end %}
   end
 
   def registerApplicationRestart(pwzCommandline : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::System::Recovery::REGISTER_APPLICATION_RESTART_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RegisterApplicationRestart(pwzCommandline, dwFlags)
+    {% end %}
   end
 
   def unregisterApplicationRestart : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UnregisterApplicationRestart
+    {% end %}
   end
 
   def getApplicationRecoveryCallback(hProcess : Win32cr::Foundation::HANDLE, pRecoveryCallback : Win32cr::System::WindowsProgramming::APPLICATION_RECOVERY_CALLBACK*, ppvParameter : Void**, pdwPingInterval : UInt32*, pdwFlags : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetApplicationRecoveryCallback(hProcess, pRecoveryCallback, ppvParameter, pdwPingInterval, pdwFlags)
+    {% end %}
   end
 
   def getApplicationRestartSettings(hProcess : Win32cr::Foundation::HANDLE, pwzCommandline : UInt16*, pcchSize : UInt32*, pdwFlags : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetApplicationRestartSettings(hProcess, pwzCommandline, pcchSize, pdwFlags)
+    {% end %}
   end
 
   def applicationRecoveryInProgress(pbCancelled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ApplicationRecoveryInProgress(pbCancelled)
+    {% end %}
   end
 
   def applicationRecoveryFinished(bSuccess : Win32cr::Foundation::BOOL) : Void
+    {% if !flag?(:docs) %}
     C.ApplicationRecoveryFinished(bSuccess)
+    {% end %}
   end
 
   @[Link("kernel32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun RegisterApplicationRecoveryCallback(pRecoveyCallback : Win32cr::System::WindowsProgramming::APPLICATION_RECOVERY_CALLBACK, pvParameter : Void*, dwPingInterval : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
@@ -71,4 +88,5 @@ module Win32cr::System::Recovery
     fun ApplicationRecoveryFinished(bSuccess : Win32cr::Foundation::BOOL) : Void
 
   end
+  {% end %}
 end

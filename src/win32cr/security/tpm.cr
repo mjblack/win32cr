@@ -53,7 +53,7 @@ module Win32cr::Security::Tpm
   end
 
   @[Extern]
-  record ITpmVirtualSmartCardManagerStatusCallbackVtbl,
+  record ITpmVirtualSmartCardManagerStatusCallbackVtable,
     query_interface : Proc(ITpmVirtualSmartCardManagerStatusCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITpmVirtualSmartCardManagerStatusCallback*, UInt32),
     release : Proc(ITpmVirtualSmartCardManagerStatusCallback*, UInt32),
@@ -62,7 +62,7 @@ module Win32cr::Security::Tpm
 
 
   @[Extern]
-  record ITpmVirtualSmartCardManagerStatusCallback, lpVtbl : ITpmVirtualSmartCardManagerStatusCallbackVtbl* do
+  record ITpmVirtualSmartCardManagerStatusCallback, lpVtbl : ITpmVirtualSmartCardManagerStatusCallbackVtable* do
     GUID = LibC::GUID.new(0x1a1bb35f_u32, 0xabb8_u16, 0x451c_u16, StaticArray[0xa1_u8, 0xae_u8, 0x33_u8, 0xd9_u8, 0x8f_u8, 0x1b_u8, 0xef_u8, 0x4a_u8])
     def query_interface(this : ITpmVirtualSmartCardManagerStatusCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -83,7 +83,7 @@ module Win32cr::Security::Tpm
   end
 
   @[Extern]
-  record ITpmVirtualSmartCardManagerVtbl,
+  record ITpmVirtualSmartCardManagerVtable,
     query_interface : Proc(ITpmVirtualSmartCardManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITpmVirtualSmartCardManager*, UInt32),
     release : Proc(ITpmVirtualSmartCardManager*, UInt32),
@@ -92,7 +92,7 @@ module Win32cr::Security::Tpm
 
 
   @[Extern]
-  record ITpmVirtualSmartCardManager, lpVtbl : ITpmVirtualSmartCardManagerVtbl* do
+  record ITpmVirtualSmartCardManager, lpVtbl : ITpmVirtualSmartCardManagerVtable* do
     GUID = LibC::GUID.new(0x112b1dff_u32, 0xd9dc_u16, 0x41f7_u16, StaticArray[0x86_u8, 0x9f_u8, 0xd6_u8, 0x7f_u8, 0xee_u8, 0x7c_u8, 0xb5_u8, 0x91_u8])
     def query_interface(this : ITpmVirtualSmartCardManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -113,7 +113,7 @@ module Win32cr::Security::Tpm
   end
 
   @[Extern]
-  record ITpmVirtualSmartCardManager2Vtbl,
+  record ITpmVirtualSmartCardManager2Vtable,
     query_interface : Proc(ITpmVirtualSmartCardManager2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITpmVirtualSmartCardManager2*, UInt32),
     release : Proc(ITpmVirtualSmartCardManager2*, UInt32),
@@ -123,7 +123,7 @@ module Win32cr::Security::Tpm
 
 
   @[Extern]
-  record ITpmVirtualSmartCardManager2, lpVtbl : ITpmVirtualSmartCardManager2Vtbl* do
+  record ITpmVirtualSmartCardManager2, lpVtbl : ITpmVirtualSmartCardManager2Vtable* do
     GUID = LibC::GUID.new(0xfdf8a2b9_u32, 0x2de_u16, 0x47f4_u16, StaticArray[0xbc_u8, 0x26_u8, 0xaa_u8, 0x85_u8, 0xab_u8, 0x5e_u8, 0x52_u8, 0x67_u8])
     def query_interface(this : ITpmVirtualSmartCardManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -147,7 +147,7 @@ module Win32cr::Security::Tpm
   end
 
   @[Extern]
-  record ITpmVirtualSmartCardManager3Vtbl,
+  record ITpmVirtualSmartCardManager3Vtable,
     query_interface : Proc(ITpmVirtualSmartCardManager3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITpmVirtualSmartCardManager3*, UInt32),
     release : Proc(ITpmVirtualSmartCardManager3*, UInt32),
@@ -158,7 +158,7 @@ module Win32cr::Security::Tpm
 
 
   @[Extern]
-  record ITpmVirtualSmartCardManager3, lpVtbl : ITpmVirtualSmartCardManager3Vtbl* do
+  record ITpmVirtualSmartCardManager3, lpVtbl : ITpmVirtualSmartCardManager3Vtable* do
     GUID = LibC::GUID.new(0x3c745a97_u32, 0xf375_u16, 0x4150_u16, StaticArray[0xbe_u8, 0x17_u8, 0x59_u8, 0x50_u8, 0xf6_u8, 0x94_u8, 0xc6_u8, 0x99_u8])
     def query_interface(this : ITpmVirtualSmartCardManager3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

@@ -1790,7 +1790,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1ResourceVtbl,
+  record ID2D1ResourceVtable,
     query_interface : Proc(ID2D1Resource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Resource*, UInt32),
     release : Proc(ID2D1Resource*, UInt32),
@@ -1798,7 +1798,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Resource, lpVtbl : ID2D1ResourceVtbl* do
+  record ID2D1Resource, lpVtbl : ID2D1ResourceVtable* do
     GUID = LibC::GUID.new(0x2cd90691_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1Resource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1816,7 +1816,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1ImageVtbl,
+  record ID2D1ImageVtable,
     query_interface : Proc(ID2D1Image*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Image*, UInt32),
     release : Proc(ID2D1Image*, UInt32),
@@ -1824,7 +1824,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Image, lpVtbl : ID2D1ImageVtbl* do
+  record ID2D1Image, lpVtbl : ID2D1ImageVtable* do
     GUID = LibC::GUID.new(0x65019f75_u32, 0x8da2_u16, 0x497c_u16, StaticArray[0xb3_u8, 0x2c_u8, 0xdf_u8, 0xa3_u8, 0x4e_u8, 0x48_u8, 0xed_u8, 0xe6_u8])
     def query_interface(this : ID2D1Image*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1842,7 +1842,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1BitmapVtbl,
+  record ID2D1BitmapVtable,
     query_interface : Proc(ID2D1Bitmap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Bitmap*, UInt32),
     release : Proc(ID2D1Bitmap*, UInt32),
@@ -1857,7 +1857,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Bitmap, lpVtbl : ID2D1BitmapVtbl* do
+  record ID2D1Bitmap, lpVtbl : ID2D1BitmapVtable* do
     GUID = LibC::GUID.new(0xa2296057_u32, 0xea42_u16, 0x4099_u16, StaticArray[0x98_u8, 0x3b_u8, 0x53_u8, 0x9f_u8, 0xb6_u8, 0x50_u8, 0x54_u8, 0x26_u8])
     def query_interface(this : ID2D1Bitmap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1896,7 +1896,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1GradientStopCollectionVtbl,
+  record ID2D1GradientStopCollectionVtable,
     query_interface : Proc(ID2D1GradientStopCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1GradientStopCollection*, UInt32),
     release : Proc(ID2D1GradientStopCollection*, UInt32),
@@ -1908,7 +1908,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1GradientStopCollection, lpVtbl : ID2D1GradientStopCollectionVtbl* do
+  record ID2D1GradientStopCollection, lpVtbl : ID2D1GradientStopCollectionVtable* do
     GUID = LibC::GUID.new(0x2cd906a7_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1GradientStopCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1938,7 +1938,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1BrushVtbl,
+  record ID2D1BrushVtable,
     query_interface : Proc(ID2D1Brush*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Brush*, UInt32),
     release : Proc(ID2D1Brush*, UInt32),
@@ -1950,7 +1950,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Brush, lpVtbl : ID2D1BrushVtbl* do
+  record ID2D1Brush, lpVtbl : ID2D1BrushVtable* do
     GUID = LibC::GUID.new(0x2cd906a8_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1Brush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1980,7 +1980,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1BitmapBrushVtbl,
+  record ID2D1BitmapBrushVtable,
     query_interface : Proc(ID2D1BitmapBrush*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1BitmapBrush*, UInt32),
     release : Proc(ID2D1BitmapBrush*, UInt32),
@@ -2000,7 +2000,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1BitmapBrush, lpVtbl : ID2D1BitmapBrushVtbl* do
+  record ID2D1BitmapBrush, lpVtbl : ID2D1BitmapBrushVtable* do
     GUID = LibC::GUID.new(0x2cd906aa_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1BitmapBrush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2054,7 +2054,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1SolidColorBrushVtbl,
+  record ID2D1SolidColorBrushVtable,
     query_interface : Proc(ID2D1SolidColorBrush*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1SolidColorBrush*, UInt32),
     release : Proc(ID2D1SolidColorBrush*, UInt32),
@@ -2068,7 +2068,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1SolidColorBrush, lpVtbl : ID2D1SolidColorBrushVtbl* do
+  record ID2D1SolidColorBrush, lpVtbl : ID2D1SolidColorBrushVtable* do
     GUID = LibC::GUID.new(0x2cd906a9_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1SolidColorBrush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2104,7 +2104,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1LinearGradientBrushVtbl,
+  record ID2D1LinearGradientBrushVtable,
     query_interface : Proc(ID2D1LinearGradientBrush*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1LinearGradientBrush*, UInt32),
     release : Proc(ID2D1LinearGradientBrush*, UInt32),
@@ -2121,7 +2121,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1LinearGradientBrush, lpVtbl : ID2D1LinearGradientBrushVtbl* do
+  record ID2D1LinearGradientBrush, lpVtbl : ID2D1LinearGradientBrushVtable* do
     GUID = LibC::GUID.new(0x2cd906ab_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1LinearGradientBrush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2166,7 +2166,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1RadialGradientBrushVtbl,
+  record ID2D1RadialGradientBrushVtable,
     query_interface : Proc(ID2D1RadialGradientBrush*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1RadialGradientBrush*, UInt32),
     release : Proc(ID2D1RadialGradientBrush*, UInt32),
@@ -2187,7 +2187,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1RadialGradientBrush, lpVtbl : ID2D1RadialGradientBrushVtbl* do
+  record ID2D1RadialGradientBrush, lpVtbl : ID2D1RadialGradientBrushVtable* do
     GUID = LibC::GUID.new(0x2cd906ac_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1RadialGradientBrush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2244,7 +2244,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1StrokeStyleVtbl,
+  record ID2D1StrokeStyleVtable,
     query_interface : Proc(ID2D1StrokeStyle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1StrokeStyle*, UInt32),
     release : Proc(ID2D1StrokeStyle*, UInt32),
@@ -2261,7 +2261,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1StrokeStyle, lpVtbl : ID2D1StrokeStyleVtbl* do
+  record ID2D1StrokeStyle, lpVtbl : ID2D1StrokeStyleVtable* do
     GUID = LibC::GUID.new(0x2cd9069d_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1StrokeStyle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2306,7 +2306,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1GeometryVtbl,
+  record ID2D1GeometryVtable,
     query_interface : Proc(ID2D1Geometry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Geometry*, UInt32),
     release : Proc(ID2D1Geometry*, UInt32),
@@ -2327,7 +2327,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Geometry, lpVtbl : ID2D1GeometryVtbl* do
+  record ID2D1Geometry, lpVtbl : ID2D1GeometryVtable* do
     GUID = LibC::GUID.new(0x2cd906a1_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1Geometry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2384,7 +2384,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1RectangleGeometryVtbl,
+  record ID2D1RectangleGeometryVtable,
     query_interface : Proc(ID2D1RectangleGeometry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1RectangleGeometry*, UInt32),
     release : Proc(ID2D1RectangleGeometry*, UInt32),
@@ -2406,7 +2406,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1RectangleGeometry, lpVtbl : ID2D1RectangleGeometryVtbl* do
+  record ID2D1RectangleGeometry, lpVtbl : ID2D1RectangleGeometryVtable* do
     GUID = LibC::GUID.new(0x2cd906a2_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1RectangleGeometry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2466,7 +2466,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1RoundedRectangleGeometryVtbl,
+  record ID2D1RoundedRectangleGeometryVtable,
     query_interface : Proc(ID2D1RoundedRectangleGeometry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1RoundedRectangleGeometry*, UInt32),
     release : Proc(ID2D1RoundedRectangleGeometry*, UInt32),
@@ -2488,7 +2488,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1RoundedRectangleGeometry, lpVtbl : ID2D1RoundedRectangleGeometryVtbl* do
+  record ID2D1RoundedRectangleGeometry, lpVtbl : ID2D1RoundedRectangleGeometryVtable* do
     GUID = LibC::GUID.new(0x2cd906a3_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1RoundedRectangleGeometry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2548,7 +2548,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1EllipseGeometryVtbl,
+  record ID2D1EllipseGeometryVtable,
     query_interface : Proc(ID2D1EllipseGeometry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1EllipseGeometry*, UInt32),
     release : Proc(ID2D1EllipseGeometry*, UInt32),
@@ -2570,7 +2570,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1EllipseGeometry, lpVtbl : ID2D1EllipseGeometryVtbl* do
+  record ID2D1EllipseGeometry, lpVtbl : ID2D1EllipseGeometryVtable* do
     GUID = LibC::GUID.new(0x2cd906a4_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1EllipseGeometry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2630,7 +2630,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1GeometryGroupVtbl,
+  record ID2D1GeometryGroupVtable,
     query_interface : Proc(ID2D1GeometryGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1GeometryGroup*, UInt32),
     release : Proc(ID2D1GeometryGroup*, UInt32),
@@ -2654,7 +2654,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1GeometryGroup, lpVtbl : ID2D1GeometryGroupVtbl* do
+  record ID2D1GeometryGroup, lpVtbl : ID2D1GeometryGroupVtable* do
     GUID = LibC::GUID.new(0x2cd906a6_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1GeometryGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2720,7 +2720,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1TransformedGeometryVtbl,
+  record ID2D1TransformedGeometryVtable,
     query_interface : Proc(ID2D1TransformedGeometry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1TransformedGeometry*, UInt32),
     release : Proc(ID2D1TransformedGeometry*, UInt32),
@@ -2743,7 +2743,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1TransformedGeometry, lpVtbl : ID2D1TransformedGeometryVtbl* do
+  record ID2D1TransformedGeometry, lpVtbl : ID2D1TransformedGeometryVtable* do
     GUID = LibC::GUID.new(0x2cd906bb_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1TransformedGeometry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2806,7 +2806,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1GeometrySinkVtbl,
+  record ID2D1GeometrySinkVtable,
     query_interface : Proc(ID2D1GeometrySink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1GeometrySink*, UInt32),
     release : Proc(ID2D1GeometrySink*, UInt32),
@@ -2825,7 +2825,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1GeometrySink, lpVtbl : ID2D1GeometrySinkVtbl* do
+  record ID2D1GeometrySink, lpVtbl : ID2D1GeometrySinkVtable* do
     GUID = LibC::GUID.new(0x2cd9069f_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1GeometrySink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2876,7 +2876,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1TessellationSinkVtbl,
+  record ID2D1TessellationSinkVtable,
     query_interface : Proc(ID2D1TessellationSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1TessellationSink*, UInt32),
     release : Proc(ID2D1TessellationSink*, UInt32),
@@ -2885,7 +2885,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1TessellationSink, lpVtbl : ID2D1TessellationSinkVtbl* do
+  record ID2D1TessellationSink, lpVtbl : ID2D1TessellationSinkVtable* do
     GUID = LibC::GUID.new(0x2cd906c1_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1TessellationSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2906,7 +2906,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1PathGeometryVtbl,
+  record ID2D1PathGeometryVtable,
     query_interface : Proc(ID2D1PathGeometry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1PathGeometry*, UInt32),
     release : Proc(ID2D1PathGeometry*, UInt32),
@@ -2931,7 +2931,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1PathGeometry, lpVtbl : ID2D1PathGeometryVtbl* do
+  record ID2D1PathGeometry, lpVtbl : ID2D1PathGeometryVtable* do
     GUID = LibC::GUID.new(0x2cd906a5_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1PathGeometry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3000,7 +3000,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1MeshVtbl,
+  record ID2D1MeshVtable,
     query_interface : Proc(ID2D1Mesh*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Mesh*, UInt32),
     release : Proc(ID2D1Mesh*, UInt32),
@@ -3009,7 +3009,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Mesh, lpVtbl : ID2D1MeshVtbl* do
+  record ID2D1Mesh, lpVtbl : ID2D1MeshVtable* do
     GUID = LibC::GUID.new(0x2cd906c2_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1Mesh*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3030,7 +3030,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1LayerVtbl,
+  record ID2D1LayerVtable,
     query_interface : Proc(ID2D1Layer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Layer*, UInt32),
     release : Proc(ID2D1Layer*, UInt32),
@@ -3039,7 +3039,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Layer, lpVtbl : ID2D1LayerVtbl* do
+  record ID2D1Layer, lpVtbl : ID2D1LayerVtable* do
     GUID = LibC::GUID.new(0x2cd9069b_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1Layer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3060,7 +3060,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1DrawingStateBlockVtbl,
+  record ID2D1DrawingStateBlockVtable,
     query_interface : Proc(ID2D1DrawingStateBlock*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1DrawingStateBlock*, UInt32),
     release : Proc(ID2D1DrawingStateBlock*, UInt32),
@@ -3072,7 +3072,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1DrawingStateBlock, lpVtbl : ID2D1DrawingStateBlockVtbl* do
+  record ID2D1DrawingStateBlock, lpVtbl : ID2D1DrawingStateBlockVtable* do
     GUID = LibC::GUID.new(0x28506e39_u32, 0xebf6_u16, 0x46a1_u16, StaticArray[0xbb_u8, 0x47_u8, 0xfd_u8, 0x85_u8, 0x56_u8, 0x5a_u8, 0xb9_u8, 0x57_u8])
     def query_interface(this : ID2D1DrawingStateBlock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3102,7 +3102,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1RenderTargetVtbl,
+  record ID2D1RenderTargetVtable,
     query_interface : Proc(ID2D1RenderTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1RenderTarget*, UInt32),
     release : Proc(ID2D1RenderTarget*, UInt32),
@@ -3163,7 +3163,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1RenderTarget, lpVtbl : ID2D1RenderTargetVtbl* do
+  record ID2D1RenderTarget, lpVtbl : ID2D1RenderTargetVtable* do
     GUID = LibC::GUID.new(0x2cd90694_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1RenderTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3340,7 +3340,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1BitmapRenderTargetVtbl,
+  record ID2D1BitmapRenderTargetVtable,
     query_interface : Proc(ID2D1BitmapRenderTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1BitmapRenderTarget*, UInt32),
     release : Proc(ID2D1BitmapRenderTarget*, UInt32),
@@ -3402,7 +3402,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1BitmapRenderTarget, lpVtbl : ID2D1BitmapRenderTargetVtbl* do
+  record ID2D1BitmapRenderTarget, lpVtbl : ID2D1BitmapRenderTargetVtable* do
     GUID = LibC::GUID.new(0x2cd90695_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1BitmapRenderTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3582,7 +3582,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1HwndRenderTargetVtbl,
+  record ID2D1HwndRenderTargetVtable,
     query_interface : Proc(ID2D1HwndRenderTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1HwndRenderTarget*, UInt32),
     release : Proc(ID2D1HwndRenderTarget*, UInt32),
@@ -3646,7 +3646,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1HwndRenderTarget, lpVtbl : ID2D1HwndRenderTargetVtbl* do
+  record ID2D1HwndRenderTarget, lpVtbl : ID2D1HwndRenderTargetVtable* do
     GUID = LibC::GUID.new(0x2cd90698_u32, 0x12e2_u16, 0x11dc_u16, StaticArray[0x9f_u8, 0xed_u8, 0x0_u8, 0x11_u8, 0x43_u8, 0xa0_u8, 0x55_u8, 0xf9_u8])
     def query_interface(this : ID2D1HwndRenderTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3832,7 +3832,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1GdiInteropRenderTargetVtbl,
+  record ID2D1GdiInteropRenderTargetVtable,
     query_interface : Proc(ID2D1GdiInteropRenderTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1GdiInteropRenderTarget*, UInt32),
     release : Proc(ID2D1GdiInteropRenderTarget*, UInt32),
@@ -3841,7 +3841,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1GdiInteropRenderTarget, lpVtbl : ID2D1GdiInteropRenderTargetVtbl* do
+  record ID2D1GdiInteropRenderTarget, lpVtbl : ID2D1GdiInteropRenderTargetVtable* do
     GUID = LibC::GUID.new(0xe0db51c3_u32, 0x6f77_u16, 0x4bae_u16, StaticArray[0xb3_u8, 0xd5_u8, 0xe4_u8, 0x75_u8, 0x9_u8, 0xb3_u8, 0x58_u8, 0x38_u8])
     def query_interface(this : ID2D1GdiInteropRenderTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3862,7 +3862,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1DCRenderTargetVtbl,
+  record ID2D1DCRenderTargetVtable,
     query_interface : Proc(ID2D1DCRenderTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1DCRenderTarget*, UInt32),
     release : Proc(ID2D1DCRenderTarget*, UInt32),
@@ -3924,7 +3924,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1DCRenderTarget, lpVtbl : ID2D1DCRenderTargetVtbl* do
+  record ID2D1DCRenderTarget, lpVtbl : ID2D1DCRenderTargetVtable* do
     GUID = LibC::GUID.new(0x1c51bc64_u32, 0xde61_u16, 0x46fd_u16, StaticArray[0x98_u8, 0x99_u8, 0x63_u8, 0xa5_u8, 0xd8_u8, 0xf0_u8, 0x39_u8, 0x50_u8])
     def query_interface(this : ID2D1DCRenderTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4104,7 +4104,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1FactoryVtbl,
+  record ID2D1FactoryVtable,
     query_interface : Proc(ID2D1Factory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Factory*, UInt32),
     release : Proc(ID2D1Factory*, UInt32),
@@ -4125,7 +4125,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Factory, lpVtbl : ID2D1FactoryVtbl* do
+  record ID2D1Factory, lpVtbl : ID2D1FactoryVtable* do
     GUID = LibC::GUID.new(0x6152247_u32, 0x6f50_u16, 0x465a_u16, StaticArray[0x92_u8, 0x45_u8, 0x11_u8, 0x8b_u8, 0xfd_u8, 0x3b_u8, 0x60_u8, 0x7_u8])
     def query_interface(this : ID2D1Factory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4182,7 +4182,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1GdiMetafileSinkVtbl,
+  record ID2D1GdiMetafileSinkVtable,
     query_interface : Proc(ID2D1GdiMetafileSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1GdiMetafileSink*, UInt32),
     release : Proc(ID2D1GdiMetafileSink*, UInt32),
@@ -4190,7 +4190,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1GdiMetafileSink, lpVtbl : ID2D1GdiMetafileSinkVtbl* do
+  record ID2D1GdiMetafileSink, lpVtbl : ID2D1GdiMetafileSinkVtable* do
     GUID = LibC::GUID.new(0x82237326_u32, 0x8111_u16, 0x4f7c_u16, StaticArray[0xbc_u8, 0xf4_u8, 0xb5_u8, 0xc1_u8, 0x17_u8, 0x55_u8, 0x64_u8, 0xfe_u8])
     def query_interface(this : ID2D1GdiMetafileSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4208,7 +4208,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1GdiMetafileVtbl,
+  record ID2D1GdiMetafileVtable,
     query_interface : Proc(ID2D1GdiMetafile*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1GdiMetafile*, UInt32),
     release : Proc(ID2D1GdiMetafile*, UInt32),
@@ -4218,7 +4218,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1GdiMetafile, lpVtbl : ID2D1GdiMetafileVtbl* do
+  record ID2D1GdiMetafile, lpVtbl : ID2D1GdiMetafileVtable* do
     GUID = LibC::GUID.new(0x2f543dc3_u32, 0xcfc1_u16, 0x4211_u16, StaticArray[0x86_u8, 0x4f_u8, 0xcf_u8, 0xd9_u8, 0x1c_u8, 0x6f_u8, 0x33_u8, 0x95_u8])
     def query_interface(this : ID2D1GdiMetafile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4242,7 +4242,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1CommandSinkVtbl,
+  record ID2D1CommandSinkVtable,
     query_interface : Proc(ID2D1CommandSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1CommandSink*, UInt32),
     release : Proc(ID2D1CommandSink*, UInt32),
@@ -4274,7 +4274,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1CommandSink, lpVtbl : ID2D1CommandSinkVtbl* do
+  record ID2D1CommandSink, lpVtbl : ID2D1CommandSinkVtable* do
     GUID = LibC::GUID.new(0x54d7898a_u32, 0xa061_u16, 0x40a7_u16, StaticArray[0xbe_u8, 0xc7_u8, 0xe4_u8, 0x65_u8, 0xbc_u8, 0xba_u8, 0x2c_u8, 0x4f_u8])
     def query_interface(this : ID2D1CommandSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4364,7 +4364,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1CommandListVtbl,
+  record ID2D1CommandListVtable,
     query_interface : Proc(ID2D1CommandList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1CommandList*, UInt32),
     release : Proc(ID2D1CommandList*, UInt32),
@@ -4374,7 +4374,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1CommandList, lpVtbl : ID2D1CommandListVtbl* do
+  record ID2D1CommandList, lpVtbl : ID2D1CommandListVtable* do
     GUID = LibC::GUID.new(0xb4f34a19_u32, 0x2383_u16, 0x4d76_u16, StaticArray[0x94_u8, 0xf6_u8, 0xec_u8, 0x34_u8, 0x36_u8, 0x57_u8, 0xc3_u8, 0xdc_u8])
     def query_interface(this : ID2D1CommandList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4398,7 +4398,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1PrintControlVtbl,
+  record ID2D1PrintControlVtable,
     query_interface : Proc(ID2D1PrintControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1PrintControl*, UInt32),
     release : Proc(ID2D1PrintControl*, UInt32),
@@ -4407,7 +4407,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1PrintControl, lpVtbl : ID2D1PrintControlVtbl* do
+  record ID2D1PrintControl, lpVtbl : ID2D1PrintControlVtable* do
     GUID = LibC::GUID.new(0x2c1d867d_u32, 0xc290_u16, 0x41c8_u16, StaticArray[0xae_u8, 0x7e_u8, 0x34_u8, 0xa9_u8, 0x87_u8, 0x2_u8, 0xe9_u8, 0xa5_u8])
     def query_interface(this : ID2D1PrintControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4428,7 +4428,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1ImageBrushVtbl,
+  record ID2D1ImageBrushVtable,
     query_interface : Proc(ID2D1ImageBrush*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1ImageBrush*, UInt32),
     release : Proc(ID2D1ImageBrush*, UInt32),
@@ -4450,7 +4450,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1ImageBrush, lpVtbl : ID2D1ImageBrushVtbl* do
+  record ID2D1ImageBrush, lpVtbl : ID2D1ImageBrushVtable* do
     GUID = LibC::GUID.new(0xfe9e984d_u32, 0x3f95_u16, 0x407c_u16, StaticArray[0xb5_u8, 0xdb_u8, 0xcb_u8, 0x94_u8, 0xd4_u8, 0xe8_u8, 0xf8_u8, 0x7c_u8])
     def query_interface(this : ID2D1ImageBrush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4510,7 +4510,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1BitmapBrush1Vtbl,
+  record ID2D1BitmapBrush1Vtable,
     query_interface : Proc(ID2D1BitmapBrush1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1BitmapBrush1*, UInt32),
     release : Proc(ID2D1BitmapBrush1*, UInt32),
@@ -4532,7 +4532,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1BitmapBrush1, lpVtbl : ID2D1BitmapBrush1Vtbl* do
+  record ID2D1BitmapBrush1, lpVtbl : ID2D1BitmapBrush1Vtable* do
     GUID = LibC::GUID.new(0x41343a53_u32, 0xe41a_u16, 0x49a2_u16, StaticArray[0x91_u8, 0xcd_u8, 0x21_u8, 0x79_u8, 0x3b_u8, 0xbb_u8, 0x62_u8, 0xe5_u8])
     def query_interface(this : ID2D1BitmapBrush1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4592,7 +4592,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1StrokeStyle1Vtbl,
+  record ID2D1StrokeStyle1Vtable,
     query_interface : Proc(ID2D1StrokeStyle1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1StrokeStyle1*, UInt32),
     release : Proc(ID2D1StrokeStyle1*, UInt32),
@@ -4610,7 +4610,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1StrokeStyle1, lpVtbl : ID2D1StrokeStyle1Vtbl* do
+  record ID2D1StrokeStyle1, lpVtbl : ID2D1StrokeStyle1Vtable* do
     GUID = LibC::GUID.new(0x10a72a66_u32, 0xe91c_u16, 0x43f4_u16, StaticArray[0x99_u8, 0x3f_u8, 0xdd_u8, 0xf4_u8, 0xb8_u8, 0x2b_u8, 0xb_u8, 0x4a_u8])
     def query_interface(this : ID2D1StrokeStyle1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4658,7 +4658,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1PathGeometry1Vtbl,
+  record ID2D1PathGeometry1Vtable,
     query_interface : Proc(ID2D1PathGeometry1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1PathGeometry1*, UInt32),
     release : Proc(ID2D1PathGeometry1*, UInt32),
@@ -4684,7 +4684,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1PathGeometry1, lpVtbl : ID2D1PathGeometry1Vtbl* do
+  record ID2D1PathGeometry1, lpVtbl : ID2D1PathGeometry1Vtable* do
     GUID = LibC::GUID.new(0x62baa2d2_u32, 0xab54_u16, 0x41b7_u16, StaticArray[0xb8_u8, 0x72_u8, 0x78_u8, 0x7e_u8, 0x1_u8, 0x6_u8, 0xa4_u8, 0x21_u8])
     def query_interface(this : ID2D1PathGeometry1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4756,7 +4756,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1PropertiesVtbl,
+  record ID2D1PropertiesVtable,
     query_interface : Proc(ID2D1Properties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Properties*, UInt32),
     release : Proc(ID2D1Properties*, UInt32),
@@ -4774,7 +4774,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Properties, lpVtbl : ID2D1PropertiesVtbl* do
+  record ID2D1Properties, lpVtbl : ID2D1PropertiesVtable* do
     GUID = LibC::GUID.new(0x483473d7_u32, 0xcd46_u16, 0x4f9d_u16, StaticArray[0x9d_u8, 0x3a_u8, 0x31_u8, 0x12_u8, 0xaa_u8, 0x80_u8, 0x15_u8, 0x9d_u8])
     def query_interface(this : ID2D1Properties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4822,7 +4822,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1EffectVtbl,
+  record ID2D1EffectVtable,
     query_interface : Proc(ID2D1Effect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Effect*, UInt32),
     release : Proc(ID2D1Effect*, UInt32),
@@ -4845,7 +4845,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Effect, lpVtbl : ID2D1EffectVtbl* do
+  record ID2D1Effect, lpVtbl : ID2D1EffectVtable* do
     GUID = LibC::GUID.new(0x28211a43_u32, 0x7d89_u16, 0x476f_u16, StaticArray[0x81_u8, 0x81_u8, 0x2d_u8, 0x61_u8, 0x59_u8, 0xb2_u8, 0x20_u8, 0xad_u8])
     def query_interface(this : ID2D1Effect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4908,7 +4908,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1Bitmap1Vtbl,
+  record ID2D1Bitmap1Vtable,
     query_interface : Proc(ID2D1Bitmap1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Bitmap1*, UInt32),
     release : Proc(ID2D1Bitmap1*, UInt32),
@@ -4928,7 +4928,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Bitmap1, lpVtbl : ID2D1Bitmap1Vtbl* do
+  record ID2D1Bitmap1, lpVtbl : ID2D1Bitmap1Vtable* do
     GUID = LibC::GUID.new(0xa898a84c_u32, 0x3873_u16, 0x4588_u16, StaticArray[0xb0_u8, 0x8b_u8, 0xeb_u8, 0xbf_u8, 0x97_u8, 0x8d_u8, 0xf0_u8, 0x41_u8])
     def query_interface(this : ID2D1Bitmap1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4982,7 +4982,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1ColorContextVtbl,
+  record ID2D1ColorContextVtable,
     query_interface : Proc(ID2D1ColorContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1ColorContext*, UInt32),
     release : Proc(ID2D1ColorContext*, UInt32),
@@ -4993,7 +4993,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1ColorContext, lpVtbl : ID2D1ColorContextVtbl* do
+  record ID2D1ColorContext, lpVtbl : ID2D1ColorContextVtable* do
     GUID = LibC::GUID.new(0x1c4820bb_u32, 0x5771_u16, 0x4518_u16, StaticArray[0xa5_u8, 0x81_u8, 0x2f_u8, 0xe4_u8, 0xdd_u8, 0xe_u8, 0xc6_u8, 0x57_u8])
     def query_interface(this : ID2D1ColorContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5020,7 +5020,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1GradientStopCollection1Vtbl,
+  record ID2D1GradientStopCollection1Vtable,
     query_interface : Proc(ID2D1GradientStopCollection1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1GradientStopCollection1*, UInt32),
     release : Proc(ID2D1GradientStopCollection1*, UInt32),
@@ -5037,7 +5037,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1GradientStopCollection1, lpVtbl : ID2D1GradientStopCollection1Vtbl* do
+  record ID2D1GradientStopCollection1, lpVtbl : ID2D1GradientStopCollection1Vtable* do
     GUID = LibC::GUID.new(0xae1572f4_u32, 0x5dd0_u16, 0x4777_u16, StaticArray[0x99_u8, 0x8b_u8, 0x92_u8, 0x79_u8, 0x47_u8, 0x2a_u8, 0xe6_u8, 0x3b_u8])
     def query_interface(this : ID2D1GradientStopCollection1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5082,7 +5082,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1DrawingStateBlock1Vtbl,
+  record ID2D1DrawingStateBlock1Vtable,
     query_interface : Proc(ID2D1DrawingStateBlock1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1DrawingStateBlock1*, UInt32),
     release : Proc(ID2D1DrawingStateBlock1*, UInt32),
@@ -5096,7 +5096,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1DrawingStateBlock1, lpVtbl : ID2D1DrawingStateBlock1Vtbl* do
+  record ID2D1DrawingStateBlock1, lpVtbl : ID2D1DrawingStateBlock1Vtable* do
     GUID = LibC::GUID.new(0x689f1f85_u32, 0xc72e_u16, 0x4e33_u16, StaticArray[0x8f_u8, 0x19_u8, 0x85_u8, 0x75_u8, 0x4e_u8, 0xfd_u8, 0x5a_u8, 0xce_u8])
     def query_interface(this : ID2D1DrawingStateBlock1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5132,7 +5132,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1DeviceContextVtbl,
+  record ID2D1DeviceContextVtable,
     query_interface : Proc(ID2D1DeviceContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1DeviceContext*, UInt32),
     release : Proc(ID2D1DeviceContext*, UInt32),
@@ -5228,7 +5228,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1DeviceContext, lpVtbl : ID2D1DeviceContextVtbl* do
+  record ID2D1DeviceContext, lpVtbl : ID2D1DeviceContextVtable* do
     GUID = LibC::GUID.new(0xe8f7fe7a_u32, 0x191c_u16, 0x466d_u16, StaticArray[0xad_u8, 0x95_u8, 0x97_u8, 0x56_u8, 0x78_u8, 0xbd_u8, 0xa9_u8, 0x98_u8])
     def query_interface(this : ID2D1DeviceContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5510,7 +5510,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1DeviceVtbl,
+  record ID2D1DeviceVtable,
     query_interface : Proc(ID2D1Device*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Device*, UInt32),
     release : Proc(ID2D1Device*, UInt32),
@@ -5523,7 +5523,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Device, lpVtbl : ID2D1DeviceVtbl* do
+  record ID2D1Device, lpVtbl : ID2D1DeviceVtable* do
     GUID = LibC::GUID.new(0x47dd575d_u32, 0xac05_u16, 0x4cdd_u16, StaticArray[0x80_u8, 0x49_u8, 0x9b_u8, 0x2_u8, 0xcd_u8, 0x16_u8, 0xf4_u8, 0x4c_u8])
     def query_interface(this : ID2D1Device*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5556,7 +5556,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1Factory1Vtbl,
+  record ID2D1Factory1Vtable,
     query_interface : Proc(ID2D1Factory1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Factory1*, UInt32),
     release : Proc(ID2D1Factory1*, UInt32),
@@ -5587,7 +5587,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Factory1, lpVtbl : ID2D1Factory1Vtbl* do
+  record ID2D1Factory1, lpVtbl : ID2D1Factory1Vtable* do
     GUID = LibC::GUID.new(0xbb12d362_u32, 0xdaee_u16, 0x4b9a_u16, StaticArray[0xaa_u8, 0x1d_u8, 0x14_u8, 0xba_u8, 0x40_u8, 0x1c_u8, 0xfa_u8, 0x1f_u8])
     def query_interface(this : ID2D1Factory1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5674,7 +5674,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1MultithreadVtbl,
+  record ID2D1MultithreadVtable,
     query_interface : Proc(ID2D1Multithread*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Multithread*, UInt32),
     release : Proc(ID2D1Multithread*, UInt32),
@@ -5684,7 +5684,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Multithread, lpVtbl : ID2D1MultithreadVtbl* do
+  record ID2D1Multithread, lpVtbl : ID2D1MultithreadVtable* do
     GUID = LibC::GUID.new(0x31e6e7bc_u32, 0xe0ff_u16, 0x4d46_u16, StaticArray[0x8c_u8, 0x64_u8, 0xa0_u8, 0xa8_u8, 0xc4_u8, 0x1c_u8, 0x15_u8, 0xd3_u8])
     def query_interface(this : ID2D1Multithread*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5708,7 +5708,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1VertexBufferVtbl,
+  record ID2D1VertexBufferVtable,
     query_interface : Proc(ID2D1VertexBuffer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1VertexBuffer*, UInt32),
     release : Proc(ID2D1VertexBuffer*, UInt32),
@@ -5717,7 +5717,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1VertexBuffer, lpVtbl : ID2D1VertexBufferVtbl* do
+  record ID2D1VertexBuffer, lpVtbl : ID2D1VertexBufferVtable* do
     GUID = LibC::GUID.new(0x9b8b1336_u32, 0xa5_u16, 0x4668_u16, StaticArray[0x92_u8, 0xb7_u8, 0xce_u8, 0xd5_u8, 0xd8_u8, 0xbf_u8, 0x9b_u8, 0x7b_u8])
     def query_interface(this : ID2D1VertexBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5738,7 +5738,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1ResourceTextureVtbl,
+  record ID2D1ResourceTextureVtable,
     query_interface : Proc(ID2D1ResourceTexture*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1ResourceTexture*, UInt32),
     release : Proc(ID2D1ResourceTexture*, UInt32),
@@ -5746,7 +5746,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1ResourceTexture, lpVtbl : ID2D1ResourceTextureVtbl* do
+  record ID2D1ResourceTexture, lpVtbl : ID2D1ResourceTextureVtable* do
     GUID = LibC::GUID.new(0x688d15c3_u32, 0x2b0_u16, 0x438d_u16, StaticArray[0xb1_u8, 0x3a_u8, 0xd1_u8, 0xb4_u8, 0x4c_u8, 0x32_u8, 0xc3_u8, 0x9a_u8])
     def query_interface(this : ID2D1ResourceTexture*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5764,7 +5764,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1RenderInfoVtbl,
+  record ID2D1RenderInfoVtable,
     query_interface : Proc(ID2D1RenderInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1RenderInfo*, UInt32),
     release : Proc(ID2D1RenderInfo*, UInt32),
@@ -5775,7 +5775,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1RenderInfo, lpVtbl : ID2D1RenderInfoVtbl* do
+  record ID2D1RenderInfo, lpVtbl : ID2D1RenderInfoVtable* do
     GUID = LibC::GUID.new(0x519ae1bd_u32, 0xd19a_u16, 0x420d_u16, StaticArray[0xb8_u8, 0x49_u8, 0x36_u8, 0x4f_u8, 0x59_u8, 0x47_u8, 0x76_u8, 0xb7_u8])
     def query_interface(this : ID2D1RenderInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5802,7 +5802,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1DrawInfoVtbl,
+  record ID2D1DrawInfoVtable,
     query_interface : Proc(ID2D1DrawInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1DrawInfo*, UInt32),
     release : Proc(ID2D1DrawInfo*, UInt32),
@@ -5818,7 +5818,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1DrawInfo, lpVtbl : ID2D1DrawInfoVtbl* do
+  record ID2D1DrawInfo, lpVtbl : ID2D1DrawInfoVtable* do
     GUID = LibC::GUID.new(0x693ce632_u32, 0x7f2f_u16, 0x45de_u16, StaticArray[0x93_u8, 0xfe_u8, 0x18_u8, 0xd8_u8, 0x8b_u8, 0x37_u8, 0xaa_u8, 0x21_u8])
     def query_interface(this : ID2D1DrawInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5860,7 +5860,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1ComputeInfoVtbl,
+  record ID2D1ComputeInfoVtable,
     query_interface : Proc(ID2D1ComputeInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1ComputeInfo*, UInt32),
     release : Proc(ID2D1ComputeInfo*, UInt32),
@@ -5874,7 +5874,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1ComputeInfo, lpVtbl : ID2D1ComputeInfoVtbl* do
+  record ID2D1ComputeInfo, lpVtbl : ID2D1ComputeInfoVtable* do
     GUID = LibC::GUID.new(0x5598b14b_u32, 0x9fd7_u16, 0x48b7_u16, StaticArray[0x9b_u8, 0xdb_u8, 0x8f_u8, 0x9_u8, 0x64_u8, 0xeb_u8, 0x38_u8, 0xbc_u8])
     def query_interface(this : ID2D1ComputeInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5910,7 +5910,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1TransformNodeVtbl,
+  record ID2D1TransformNodeVtable,
     query_interface : Proc(ID2D1TransformNode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1TransformNode*, UInt32),
     release : Proc(ID2D1TransformNode*, UInt32),
@@ -5918,7 +5918,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1TransformNode, lpVtbl : ID2D1TransformNodeVtbl* do
+  record ID2D1TransformNode, lpVtbl : ID2D1TransformNodeVtable* do
     GUID = LibC::GUID.new(0xb2efe1e7_u32, 0x729f_u16, 0x4102_u16, StaticArray[0x94_u8, 0x9f_u8, 0x50_u8, 0x5f_u8, 0xa2_u8, 0x1b_u8, 0xf6_u8, 0x66_u8])
     def query_interface(this : ID2D1TransformNode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5936,7 +5936,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1TransformGraphVtbl,
+  record ID2D1TransformGraphVtable,
     query_interface : Proc(ID2D1TransformGraph*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1TransformGraph*, UInt32),
     release : Proc(ID2D1TransformGraph*, UInt32),
@@ -5952,7 +5952,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1TransformGraph, lpVtbl : ID2D1TransformGraphVtbl* do
+  record ID2D1TransformGraph, lpVtbl : ID2D1TransformGraphVtable* do
     GUID = LibC::GUID.new(0x13d29038_u32, 0xc3e6_u16, 0x4034_u16, StaticArray[0x90_u8, 0x81_u8, 0x13_u8, 0xb5_u8, 0x3a_u8, 0x41_u8, 0x79_u8, 0x92_u8])
     def query_interface(this : ID2D1TransformGraph*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5994,7 +5994,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1TransformVtbl,
+  record ID2D1TransformVtable,
     query_interface : Proc(ID2D1Transform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Transform*, UInt32),
     release : Proc(ID2D1Transform*, UInt32),
@@ -6005,7 +6005,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Transform, lpVtbl : ID2D1TransformVtbl* do
+  record ID2D1Transform, lpVtbl : ID2D1TransformVtable* do
     GUID = LibC::GUID.new(0xef1a287d_u32, 0x342a_u16, 0x4f76_u16, StaticArray[0x8f_u8, 0xdb_u8, 0xda_u8, 0xd_u8, 0x6e_u8, 0xa9_u8, 0xf9_u8, 0x2b_u8])
     def query_interface(this : ID2D1Transform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6032,7 +6032,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1DrawTransformVtbl,
+  record ID2D1DrawTransformVtable,
     query_interface : Proc(ID2D1DrawTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1DrawTransform*, UInt32),
     release : Proc(ID2D1DrawTransform*, UInt32),
@@ -6044,7 +6044,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1DrawTransform, lpVtbl : ID2D1DrawTransformVtbl* do
+  record ID2D1DrawTransform, lpVtbl : ID2D1DrawTransformVtable* do
     GUID = LibC::GUID.new(0x36bfdcb6_u32, 0x9739_u16, 0x435d_u16, StaticArray[0xa3_u8, 0xd_u8, 0xa6_u8, 0x53_u8, 0xbe_u8, 0xff_u8, 0x6a_u8, 0x6f_u8])
     def query_interface(this : ID2D1DrawTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6074,7 +6074,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1ComputeTransformVtbl,
+  record ID2D1ComputeTransformVtable,
     query_interface : Proc(ID2D1ComputeTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1ComputeTransform*, UInt32),
     release : Proc(ID2D1ComputeTransform*, UInt32),
@@ -6087,7 +6087,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1ComputeTransform, lpVtbl : ID2D1ComputeTransformVtbl* do
+  record ID2D1ComputeTransform, lpVtbl : ID2D1ComputeTransformVtable* do
     GUID = LibC::GUID.new(0xd85573c_u32, 0x1e3_u16, 0x4f7d_u16, StaticArray[0xbf_u8, 0xd9_u8, 0xd_u8, 0x60_u8, 0x60_u8, 0x8b_u8, 0xf3_u8, 0xc3_u8])
     def query_interface(this : ID2D1ComputeTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6120,7 +6120,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1AnalysisTransformVtbl,
+  record ID2D1AnalysisTransformVtable,
     query_interface : Proc(ID2D1AnalysisTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1AnalysisTransform*, UInt32),
     release : Proc(ID2D1AnalysisTransform*, UInt32),
@@ -6128,7 +6128,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1AnalysisTransform, lpVtbl : ID2D1AnalysisTransformVtbl* do
+  record ID2D1AnalysisTransform, lpVtbl : ID2D1AnalysisTransformVtable* do
     GUID = LibC::GUID.new(0x359dc30_u32, 0x95e6_u16, 0x4568_u16, StaticArray[0x90_u8, 0x55_u8, 0x27_u8, 0x72_u8, 0xd_u8, 0x13_u8, 0xe_u8, 0x93_u8])
     def query_interface(this : ID2D1AnalysisTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6146,7 +6146,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1SourceTransformVtbl,
+  record ID2D1SourceTransformVtable,
     query_interface : Proc(ID2D1SourceTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1SourceTransform*, UInt32),
     release : Proc(ID2D1SourceTransform*, UInt32),
@@ -6159,7 +6159,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1SourceTransform, lpVtbl : ID2D1SourceTransformVtbl* do
+  record ID2D1SourceTransform, lpVtbl : ID2D1SourceTransformVtable* do
     GUID = LibC::GUID.new(0xdb1800dd_u32, 0xc34_u16, 0x4cf9_u16, StaticArray[0xbe_u8, 0x90_u8, 0x31_u8, 0xcc_u8, 0xa_u8, 0x56_u8, 0x53_u8, 0xe1_u8])
     def query_interface(this : ID2D1SourceTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6192,7 +6192,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1ConcreteTransformVtbl,
+  record ID2D1ConcreteTransformVtable,
     query_interface : Proc(ID2D1ConcreteTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1ConcreteTransform*, UInt32),
     release : Proc(ID2D1ConcreteTransform*, UInt32),
@@ -6202,7 +6202,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1ConcreteTransform, lpVtbl : ID2D1ConcreteTransformVtbl* do
+  record ID2D1ConcreteTransform, lpVtbl : ID2D1ConcreteTransformVtable* do
     GUID = LibC::GUID.new(0x1a799d8a_u32, 0x69f7_u16, 0x4e4c_u16, StaticArray[0x9f_u8, 0xed_u8, 0x43_u8, 0x7c_u8, 0xcc_u8, 0x66_u8, 0x84_u8, 0xcc_u8])
     def query_interface(this : ID2D1ConcreteTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6226,7 +6226,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1BlendTransformVtbl,
+  record ID2D1BlendTransformVtable,
     query_interface : Proc(ID2D1BlendTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1BlendTransform*, UInt32),
     release : Proc(ID2D1BlendTransform*, UInt32),
@@ -6238,7 +6238,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1BlendTransform, lpVtbl : ID2D1BlendTransformVtbl* do
+  record ID2D1BlendTransform, lpVtbl : ID2D1BlendTransformVtable* do
     GUID = LibC::GUID.new(0x63ac0b32_u32, 0xba44_u16, 0x450f_u16, StaticArray[0x88_u8, 0x6_u8, 0x7f_u8, 0x4c_u8, 0xa1_u8, 0xff_u8, 0x2f_u8, 0x1b_u8])
     def query_interface(this : ID2D1BlendTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6268,7 +6268,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1BorderTransformVtbl,
+  record ID2D1BorderTransformVtable,
     query_interface : Proc(ID2D1BorderTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1BorderTransform*, UInt32),
     release : Proc(ID2D1BorderTransform*, UInt32),
@@ -6282,7 +6282,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1BorderTransform, lpVtbl : ID2D1BorderTransformVtbl* do
+  record ID2D1BorderTransform, lpVtbl : ID2D1BorderTransformVtable* do
     GUID = LibC::GUID.new(0x4998735c_u32, 0x3a19_u16, 0x473c_u16, StaticArray[0x97_u8, 0x81_u8, 0x65_u8, 0x68_u8, 0x47_u8, 0xe3_u8, 0xa3_u8, 0x47_u8])
     def query_interface(this : ID2D1BorderTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6318,7 +6318,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1OffsetTransformVtbl,
+  record ID2D1OffsetTransformVtable,
     query_interface : Proc(ID2D1OffsetTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1OffsetTransform*, UInt32),
     release : Proc(ID2D1OffsetTransform*, UInt32),
@@ -6328,7 +6328,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1OffsetTransform, lpVtbl : ID2D1OffsetTransformVtbl* do
+  record ID2D1OffsetTransform, lpVtbl : ID2D1OffsetTransformVtable* do
     GUID = LibC::GUID.new(0x3fe6adea_u32, 0x7643_u16, 0x4f53_u16, StaticArray[0xbd_u8, 0x14_u8, 0xa0_u8, 0xce_u8, 0x63_u8, 0xf2_u8, 0x40_u8, 0x42_u8])
     def query_interface(this : ID2D1OffsetTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6352,7 +6352,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1BoundsAdjustmentTransformVtbl,
+  record ID2D1BoundsAdjustmentTransformVtable,
     query_interface : Proc(ID2D1BoundsAdjustmentTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1BoundsAdjustmentTransform*, UInt32),
     release : Proc(ID2D1BoundsAdjustmentTransform*, UInt32),
@@ -6362,7 +6362,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1BoundsAdjustmentTransform, lpVtbl : ID2D1BoundsAdjustmentTransformVtbl* do
+  record ID2D1BoundsAdjustmentTransform, lpVtbl : ID2D1BoundsAdjustmentTransformVtable* do
     GUID = LibC::GUID.new(0x90f732e2_u32, 0x5092_u16, 0x4606_u16, StaticArray[0xa8_u8, 0x19_u8, 0x86_u8, 0x51_u8, 0x97_u8, 0xb_u8, 0xac_u8, 0xcd_u8])
     def query_interface(this : ID2D1BoundsAdjustmentTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6386,7 +6386,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1EffectImplVtbl,
+  record ID2D1EffectImplVtable,
     query_interface : Proc(ID2D1EffectImpl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1EffectImpl*, UInt32),
     release : Proc(ID2D1EffectImpl*, UInt32),
@@ -6396,7 +6396,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1EffectImpl, lpVtbl : ID2D1EffectImplVtbl* do
+  record ID2D1EffectImpl, lpVtbl : ID2D1EffectImplVtable* do
     GUID = LibC::GUID.new(0xa248fd3f_u32, 0x3e6c_u16, 0x4e63_u16, StaticArray[0x9f_u8, 0x3_u8, 0x7f_u8, 0x68_u8, 0xec_u8, 0xc9_u8, 0x1d_u8, 0xb9_u8])
     def query_interface(this : ID2D1EffectImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6420,7 +6420,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1EffectContextVtbl,
+  record ID2D1EffectContextVtable,
     query_interface : Proc(ID2D1EffectContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1EffectContext*, UInt32),
     release : Proc(ID2D1EffectContext*, UInt32),
@@ -6448,7 +6448,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1EffectContext, lpVtbl : ID2D1EffectContextVtbl* do
+  record ID2D1EffectContext, lpVtbl : ID2D1EffectContextVtable* do
     GUID = LibC::GUID.new(0x3d9f916b_u32, 0x27dc_u16, 0x4ad7_u16, StaticArray[0xb4_u8, 0xf1_u8, 0x64_u8, 0x94_u8, 0x53_u8, 0x40_u8, 0xf5_u8, 0x63_u8])
     def query_interface(this : ID2D1EffectContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6526,7 +6526,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1GeometryRealizationVtbl,
+  record ID2D1GeometryRealizationVtable,
     query_interface : Proc(ID2D1GeometryRealization*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1GeometryRealization*, UInt32),
     release : Proc(ID2D1GeometryRealization*, UInt32),
@@ -6534,7 +6534,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1GeometryRealization, lpVtbl : ID2D1GeometryRealizationVtbl* do
+  record ID2D1GeometryRealization, lpVtbl : ID2D1GeometryRealizationVtable* do
     GUID = LibC::GUID.new(0xa16907d7_u32, 0xbc02_u16, 0x4801_u16, StaticArray[0x99_u8, 0xe8_u8, 0x8c_u8, 0xf7_u8, 0xf4_u8, 0x85_u8, 0xf7_u8, 0x74_u8])
     def query_interface(this : ID2D1GeometryRealization*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6552,7 +6552,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1DeviceContext1Vtbl,
+  record ID2D1DeviceContext1Vtable,
     query_interface : Proc(ID2D1DeviceContext1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1DeviceContext1*, UInt32),
     release : Proc(ID2D1DeviceContext1*, UInt32),
@@ -6651,7 +6651,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1DeviceContext1, lpVtbl : ID2D1DeviceContext1Vtbl* do
+  record ID2D1DeviceContext1, lpVtbl : ID2D1DeviceContext1Vtable* do
     GUID = LibC::GUID.new(0xd37f57e4_u32, 0x6908_u16, 0x459f_u16, StaticArray[0xa1_u8, 0x99_u8, 0xe7_u8, 0x2f_u8, 0x24_u8, 0xf7_u8, 0x99_u8, 0x87_u8])
     def query_interface(this : ID2D1DeviceContext1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6942,7 +6942,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1Device1Vtbl,
+  record ID2D1Device1Vtable,
     query_interface : Proc(ID2D1Device1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Device1*, UInt32),
     release : Proc(ID2D1Device1*, UInt32),
@@ -6958,7 +6958,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Device1, lpVtbl : ID2D1Device1Vtbl* do
+  record ID2D1Device1, lpVtbl : ID2D1Device1Vtable* do
     GUID = LibC::GUID.new(0xd21768e1_u32, 0x23a4_u16, 0x4823_u16, StaticArray[0xa1_u8, 0x4b_u8, 0x7c_u8, 0x3e_u8, 0xba_u8, 0x85_u8, 0xd6_u8, 0x58_u8])
     def query_interface(this : ID2D1Device1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7000,7 +7000,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1Factory2Vtbl,
+  record ID2D1Factory2Vtable,
     query_interface : Proc(ID2D1Factory2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Factory2*, UInt32),
     release : Proc(ID2D1Factory2*, UInt32),
@@ -7032,7 +7032,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Factory2, lpVtbl : ID2D1Factory2Vtbl* do
+  record ID2D1Factory2, lpVtbl : ID2D1Factory2Vtable* do
     GUID = LibC::GUID.new(0x94f81a73_u32, 0x9212_u16, 0x4376_u16, StaticArray[0x9c_u8, 0x58_u8, 0xb1_u8, 0x6a_u8, 0x3a_u8, 0xd_u8, 0x39_u8, 0x92_u8])
     def query_interface(this : ID2D1Factory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7122,7 +7122,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1CommandSink1Vtbl,
+  record ID2D1CommandSink1Vtable,
     query_interface : Proc(ID2D1CommandSink1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1CommandSink1*, UInt32),
     release : Proc(ID2D1CommandSink1*, UInt32),
@@ -7155,7 +7155,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1CommandSink1, lpVtbl : ID2D1CommandSink1Vtbl* do
+  record ID2D1CommandSink1, lpVtbl : ID2D1CommandSink1Vtable* do
     GUID = LibC::GUID.new(0x9eb767fd_u32, 0x4269_u16, 0x4467_u16, StaticArray[0xb8_u8, 0xc2_u8, 0xeb_u8, 0x30_u8, 0xcb_u8, 0x30_u8, 0x57_u8, 0x43_u8])
     def query_interface(this : ID2D1CommandSink1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7248,7 +7248,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1SvgAttributeVtbl,
+  record ID2D1SvgAttributeVtable,
     query_interface : Proc(ID2D1SvgAttribute*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1SvgAttribute*, UInt32),
     release : Proc(ID2D1SvgAttribute*, UInt32),
@@ -7258,7 +7258,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1SvgAttribute, lpVtbl : ID2D1SvgAttributeVtbl* do
+  record ID2D1SvgAttribute, lpVtbl : ID2D1SvgAttributeVtable* do
     GUID = LibC::GUID.new(0xc9cdb0dd_u32, 0xf8c9_u16, 0x4e70_u16, StaticArray[0xb7_u8, 0xc2_u8, 0x30_u8, 0x1c_u8, 0x80_u8, 0x29_u8, 0x2c_u8, 0x5e_u8])
     def query_interface(this : ID2D1SvgAttribute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7282,7 +7282,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1SvgPaintVtbl,
+  record ID2D1SvgPaintVtable,
     query_interface : Proc(ID2D1SvgPaint*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1SvgPaint*, UInt32),
     release : Proc(ID2D1SvgPaint*, UInt32),
@@ -7299,7 +7299,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1SvgPaint, lpVtbl : ID2D1SvgPaintVtbl* do
+  record ID2D1SvgPaint, lpVtbl : ID2D1SvgPaintVtable* do
     GUID = LibC::GUID.new(0xd59bab0a_u32, 0x68a2_u16, 0x455b_u16, StaticArray[0xa5_u8, 0xdc_u8, 0x9e_u8, 0xb2_u8, 0x85_u8, 0x4e_u8, 0x24_u8, 0x90_u8])
     def query_interface(this : ID2D1SvgPaint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7344,7 +7344,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1SvgStrokeDashArrayVtbl,
+  record ID2D1SvgStrokeDashArrayVtable,
     query_interface : Proc(ID2D1SvgStrokeDashArray*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1SvgStrokeDashArray*, UInt32),
     release : Proc(ID2D1SvgStrokeDashArray*, UInt32),
@@ -7360,7 +7360,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1SvgStrokeDashArray, lpVtbl : ID2D1SvgStrokeDashArrayVtbl* do
+  record ID2D1SvgStrokeDashArray, lpVtbl : ID2D1SvgStrokeDashArrayVtable* do
     GUID = LibC::GUID.new(0xf1c0ca52_u32, 0x92a3_u16, 0x4f00_u16, StaticArray[0xb4_u8, 0xce_u8, 0xf3_u8, 0x56_u8, 0x91_u8, 0xef_u8, 0xd9_u8, 0xd9_u8])
     def query_interface(this : ID2D1SvgStrokeDashArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7402,7 +7402,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1SvgPointCollectionVtbl,
+  record ID2D1SvgPointCollectionVtable,
     query_interface : Proc(ID2D1SvgPointCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1SvgPointCollection*, UInt32),
     release : Proc(ID2D1SvgPointCollection*, UInt32),
@@ -7416,7 +7416,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1SvgPointCollection, lpVtbl : ID2D1SvgPointCollectionVtbl* do
+  record ID2D1SvgPointCollection, lpVtbl : ID2D1SvgPointCollectionVtable* do
     GUID = LibC::GUID.new(0x9dbe4c0d_u32, 0x3572_u16, 0x4dd9_u16, StaticArray[0x98_u8, 0x25_u8, 0x55_u8, 0x30_u8, 0x81_u8, 0x3b_u8, 0xb7_u8, 0x12_u8])
     def query_interface(this : ID2D1SvgPointCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7452,7 +7452,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1SvgPathDataVtbl,
+  record ID2D1SvgPathDataVtable,
     query_interface : Proc(ID2D1SvgPathData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1SvgPathData*, UInt32),
     release : Proc(ID2D1SvgPathData*, UInt32),
@@ -7471,7 +7471,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1SvgPathData, lpVtbl : ID2D1SvgPathDataVtbl* do
+  record ID2D1SvgPathData, lpVtbl : ID2D1SvgPathDataVtable* do
     GUID = LibC::GUID.new(0xc095e4f4_u32, 0xbb98_u16, 0x43d6_u16, StaticArray[0x97_u8, 0x45_u8, 0x4d_u8, 0x1b_u8, 0x84_u8, 0xec_u8, 0x98_u8, 0x88_u8])
     def query_interface(this : ID2D1SvgPathData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7522,7 +7522,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1SvgElementVtbl,
+  record ID2D1SvgElementVtable,
     query_interface : Proc(ID2D1SvgElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1SvgElement*, UInt32),
     release : Proc(ID2D1SvgElement*, UInt32),
@@ -7560,7 +7560,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1SvgElement, lpVtbl : ID2D1SvgElementVtbl* do
+  record ID2D1SvgElement, lpVtbl : ID2D1SvgElementVtable* do
     GUID = LibC::GUID.new(0xac7b67a6_u32, 0x183e_u16, 0x49c1_u16, StaticArray[0xa8_u8, 0x23_u8, 0xe_u8, 0xbe_u8, 0x40_u8, 0xb0_u8, 0xdb_u8, 0x29_u8])
     def query_interface(this : ID2D1SvgElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7668,7 +7668,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1SvgDocumentVtbl,
+  record ID2D1SvgDocumentVtable,
     query_interface : Proc(ID2D1SvgDocument*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1SvgDocument*, UInt32),
     release : Proc(ID2D1SvgDocument*, UInt32),
@@ -7687,7 +7687,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1SvgDocument, lpVtbl : ID2D1SvgDocumentVtbl* do
+  record ID2D1SvgDocument, lpVtbl : ID2D1SvgDocumentVtable* do
     GUID = LibC::GUID.new(0x86b88e4d_u32, 0xafa4_u16, 0x4d7b_u16, StaticArray[0x88_u8, 0xe4_u8, 0x68_u8, 0xa5_u8, 0x1c_u8, 0x4a_u8, 0xa_u8, 0xec_u8])
     def query_interface(this : ID2D1SvgDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7738,7 +7738,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1InkStyleVtbl,
+  record ID2D1InkStyleVtable,
     query_interface : Proc(ID2D1InkStyle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1InkStyle*, UInt32),
     release : Proc(ID2D1InkStyle*, UInt32),
@@ -7750,7 +7750,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1InkStyle, lpVtbl : ID2D1InkStyleVtbl* do
+  record ID2D1InkStyle, lpVtbl : ID2D1InkStyleVtable* do
     GUID = LibC::GUID.new(0xbae8b344_u32, 0x23fc_u16, 0x4071_u16, StaticArray[0x8c_u8, 0xb5_u8, 0xd0_u8, 0x5d_u8, 0x6f_u8, 0x7_u8, 0x38_u8, 0x48_u8])
     def query_interface(this : ID2D1InkStyle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7780,7 +7780,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1InkVtbl,
+  record ID2D1InkVtable,
     query_interface : Proc(ID2D1Ink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Ink*, UInt32),
     release : Proc(ID2D1Ink*, UInt32),
@@ -7798,7 +7798,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Ink, lpVtbl : ID2D1InkVtbl* do
+  record ID2D1Ink, lpVtbl : ID2D1InkVtable* do
     GUID = LibC::GUID.new(0xb499923b_u32, 0x7029_u16, 0x478f_u16, StaticArray[0xa8_u8, 0xb3_u8, 0x43_u8, 0x2c_u8, 0x7c_u8, 0x5f_u8, 0x53_u8, 0x12_u8])
     def query_interface(this : ID2D1Ink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7846,7 +7846,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1GradientMeshVtbl,
+  record ID2D1GradientMeshVtable,
     query_interface : Proc(ID2D1GradientMesh*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1GradientMesh*, UInt32),
     release : Proc(ID2D1GradientMesh*, UInt32),
@@ -7856,7 +7856,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1GradientMesh, lpVtbl : ID2D1GradientMeshVtbl* do
+  record ID2D1GradientMesh, lpVtbl : ID2D1GradientMeshVtable* do
     GUID = LibC::GUID.new(0xf292e401_u32, 0xc050_u16, 0x4cde_u16, StaticArray[0x83_u8, 0xd7_u8, 0x4_u8, 0x96_u8, 0x2d_u8, 0x3b_u8, 0x23_u8, 0xc2_u8])
     def query_interface(this : ID2D1GradientMesh*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7880,7 +7880,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1ImageSourceVtbl,
+  record ID2D1ImageSourceVtable,
     query_interface : Proc(ID2D1ImageSource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1ImageSource*, UInt32),
     release : Proc(ID2D1ImageSource*, UInt32),
@@ -7890,7 +7890,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1ImageSource, lpVtbl : ID2D1ImageSourceVtbl* do
+  record ID2D1ImageSource, lpVtbl : ID2D1ImageSourceVtable* do
     GUID = LibC::GUID.new(0xc9b664e5_u32, 0x74a1_u16, 0x4378_u16, StaticArray[0x9a_u8, 0xc2_u8, 0xee_u8, 0xfc_u8, 0x37_u8, 0xa3_u8, 0xf4_u8, 0xd8_u8])
     def query_interface(this : ID2D1ImageSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7914,7 +7914,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1ImageSourceFromWicVtbl,
+  record ID2D1ImageSourceFromWicVtable,
     query_interface : Proc(ID2D1ImageSourceFromWic*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1ImageSourceFromWic*, UInt32),
     release : Proc(ID2D1ImageSourceFromWic*, UInt32),
@@ -7927,7 +7927,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1ImageSourceFromWic, lpVtbl : ID2D1ImageSourceFromWicVtbl* do
+  record ID2D1ImageSourceFromWic, lpVtbl : ID2D1ImageSourceFromWicVtable* do
     GUID = LibC::GUID.new(0x77395441_u32, 0x1c8f_u16, 0x4555_u16, StaticArray[0x86_u8, 0x83_u8, 0xf5_u8, 0xd_u8, 0xab_u8, 0xf_u8, 0xe7_u8, 0x92_u8])
     def query_interface(this : ID2D1ImageSourceFromWic*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7960,7 +7960,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1TransformedImageSourceVtbl,
+  record ID2D1TransformedImageSourceVtable,
     query_interface : Proc(ID2D1TransformedImageSource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1TransformedImageSource*, UInt32),
     release : Proc(ID2D1TransformedImageSource*, UInt32),
@@ -7970,7 +7970,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1TransformedImageSource, lpVtbl : ID2D1TransformedImageSourceVtbl* do
+  record ID2D1TransformedImageSource, lpVtbl : ID2D1TransformedImageSourceVtable* do
     GUID = LibC::GUID.new(0x7f1f79e5_u32, 0x2796_u16, 0x416c_u16, StaticArray[0x8f_u8, 0x55_u8, 0x70_u8, 0xf_u8, 0x91_u8, 0x14_u8, 0x45_u8, 0xe5_u8])
     def query_interface(this : ID2D1TransformedImageSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7994,7 +7994,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1LookupTable3DVtbl,
+  record ID2D1LookupTable3DVtable,
     query_interface : Proc(ID2D1LookupTable3D*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1LookupTable3D*, UInt32),
     release : Proc(ID2D1LookupTable3D*, UInt32),
@@ -8002,7 +8002,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1LookupTable3D, lpVtbl : ID2D1LookupTable3DVtbl* do
+  record ID2D1LookupTable3D, lpVtbl : ID2D1LookupTable3DVtable* do
     GUID = LibC::GUID.new(0x53dd9855_u32, 0xa3b0_u16, 0x4d5b_u16, StaticArray[0x82_u8, 0xe1_u8, 0x26_u8, 0xe2_u8, 0x5c_u8, 0x5e_u8, 0x57_u8, 0x97_u8])
     def query_interface(this : ID2D1LookupTable3D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8020,7 +8020,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1DeviceContext2Vtbl,
+  record ID2D1DeviceContext2Vtable,
     query_interface : Proc(ID2D1DeviceContext2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1DeviceContext2*, UInt32),
     release : Proc(ID2D1DeviceContext2*, UInt32),
@@ -8130,7 +8130,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1DeviceContext2, lpVtbl : ID2D1DeviceContext2Vtbl* do
+  record ID2D1DeviceContext2, lpVtbl : ID2D1DeviceContext2Vtable* do
     GUID = LibC::GUID.new(0x394ea6a3_u32, 0xc34_u16, 0x4321_u16, StaticArray[0x95_u8, 0xb_u8, 0x6c_u8, 0xa2_u8, 0xf_u8, 0xb_u8, 0xe6_u8, 0xc7_u8])
     def query_interface(this : ID2D1DeviceContext2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8454,7 +8454,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1Device2Vtbl,
+  record ID2D1Device2Vtable,
     query_interface : Proc(ID2D1Device2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Device2*, UInt32),
     release : Proc(ID2D1Device2*, UInt32),
@@ -8473,7 +8473,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Device2, lpVtbl : ID2D1Device2Vtbl* do
+  record ID2D1Device2, lpVtbl : ID2D1Device2Vtable* do
     GUID = LibC::GUID.new(0xa44472e1_u32, 0x8dfb_u16, 0x4e60_u16, StaticArray[0x84_u8, 0x92_u8, 0x6e_u8, 0x28_u8, 0x61_u8, 0xc9_u8, 0xca_u8, 0x8b_u8])
     def query_interface(this : ID2D1Device2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8524,7 +8524,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1Factory3Vtbl,
+  record ID2D1Factory3Vtable,
     query_interface : Proc(ID2D1Factory3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Factory3*, UInt32),
     release : Proc(ID2D1Factory3*, UInt32),
@@ -8557,7 +8557,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Factory3, lpVtbl : ID2D1Factory3Vtbl* do
+  record ID2D1Factory3, lpVtbl : ID2D1Factory3Vtable* do
     GUID = LibC::GUID.new(0x869759f_u32, 0x4f00_u16, 0x413f_u16, StaticArray[0xb0_u8, 0x3e_u8, 0x2b_u8, 0xda_u8, 0x45_u8, 0x40_u8, 0x4d_u8, 0xf_u8])
     def query_interface(this : ID2D1Factory3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8650,7 +8650,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1CommandSink2Vtbl,
+  record ID2D1CommandSink2Vtable,
     query_interface : Proc(ID2D1CommandSink2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1CommandSink2*, UInt32),
     release : Proc(ID2D1CommandSink2*, UInt32),
@@ -8686,7 +8686,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1CommandSink2, lpVtbl : ID2D1CommandSink2Vtbl* do
+  record ID2D1CommandSink2, lpVtbl : ID2D1CommandSink2Vtable* do
     GUID = LibC::GUID.new(0x3bab440e_u32, 0x417e_u16, 0x47df_u16, StaticArray[0xa2_u8, 0xe2_u8, 0xbc_u8, 0xb_u8, 0xe6_u8, 0xa0_u8, 0x9_u8, 0x16_u8])
     def query_interface(this : ID2D1CommandSink2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8788,7 +8788,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1GdiMetafile1Vtbl,
+  record ID2D1GdiMetafile1Vtable,
     query_interface : Proc(ID2D1GdiMetafile1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1GdiMetafile1*, UInt32),
     release : Proc(ID2D1GdiMetafile1*, UInt32),
@@ -8800,7 +8800,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1GdiMetafile1, lpVtbl : ID2D1GdiMetafile1Vtbl* do
+  record ID2D1GdiMetafile1, lpVtbl : ID2D1GdiMetafile1Vtable* do
     GUID = LibC::GUID.new(0x2e69f9e8_u32, 0xdd3f_u16, 0x4bf9_u16, StaticArray[0x95_u8, 0xba_u8, 0xc0_u8, 0x4f_u8, 0x49_u8, 0xd7_u8, 0x88_u8, 0xdf_u8])
     def query_interface(this : ID2D1GdiMetafile1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8830,7 +8830,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1GdiMetafileSink1Vtbl,
+  record ID2D1GdiMetafileSink1Vtable,
     query_interface : Proc(ID2D1GdiMetafileSink1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1GdiMetafileSink1*, UInt32),
     release : Proc(ID2D1GdiMetafileSink1*, UInt32),
@@ -8839,7 +8839,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1GdiMetafileSink1, lpVtbl : ID2D1GdiMetafileSink1Vtbl* do
+  record ID2D1GdiMetafileSink1, lpVtbl : ID2D1GdiMetafileSink1Vtable* do
     GUID = LibC::GUID.new(0xfd0ecb6b_u32, 0x91e6_u16, 0x411e_u16, StaticArray[0x86_u8, 0x55_u8, 0x39_u8, 0x5e_u8, 0x76_u8, 0xf_u8, 0x91_u8, 0xb4_u8])
     def query_interface(this : ID2D1GdiMetafileSink1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8860,7 +8860,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1SpriteBatchVtbl,
+  record ID2D1SpriteBatchVtable,
     query_interface : Proc(ID2D1SpriteBatch*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1SpriteBatch*, UInt32),
     release : Proc(ID2D1SpriteBatch*, UInt32),
@@ -8873,7 +8873,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1SpriteBatch, lpVtbl : ID2D1SpriteBatchVtbl* do
+  record ID2D1SpriteBatch, lpVtbl : ID2D1SpriteBatchVtable* do
     GUID = LibC::GUID.new(0x4dc583bf_u32, 0x3a10_u16, 0x438a_u16, StaticArray[0x87_u8, 0x22_u8, 0xe9_u8, 0x76_u8, 0x52_u8, 0x24_u8, 0xf1_u8, 0xf1_u8])
     def query_interface(this : ID2D1SpriteBatch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8906,7 +8906,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1DeviceContext3Vtbl,
+  record ID2D1DeviceContext3Vtable,
     query_interface : Proc(ID2D1DeviceContext3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1DeviceContext3*, UInt32),
     release : Proc(ID2D1DeviceContext3*, UInt32),
@@ -9018,7 +9018,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1DeviceContext3, lpVtbl : ID2D1DeviceContext3Vtbl* do
+  record ID2D1DeviceContext3, lpVtbl : ID2D1DeviceContext3Vtable* do
     GUID = LibC::GUID.new(0x235a7496_u32, 0x8351_u16, 0x414c_u16, StaticArray[0xbc_u8, 0xd4_u8, 0x66_u8, 0x72_u8, 0xab_u8, 0x2d_u8, 0x8e_u8, 0x0_u8])
     def query_interface(this : ID2D1DeviceContext3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9348,7 +9348,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1Device3Vtbl,
+  record ID2D1Device3Vtable,
     query_interface : Proc(ID2D1Device3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Device3*, UInt32),
     release : Proc(ID2D1Device3*, UInt32),
@@ -9368,7 +9368,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Device3, lpVtbl : ID2D1Device3Vtbl* do
+  record ID2D1Device3, lpVtbl : ID2D1Device3Vtable* do
     GUID = LibC::GUID.new(0x852f2087_u32, 0x802c_u16, 0x4037_u16, StaticArray[0xab_u8, 0x60_u8, 0xff_u8, 0x2e_u8, 0x7e_u8, 0xe6_u8, 0xfc_u8, 0x1_u8])
     def query_interface(this : ID2D1Device3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9422,7 +9422,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1Factory4Vtbl,
+  record ID2D1Factory4Vtable,
     query_interface : Proc(ID2D1Factory4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Factory4*, UInt32),
     release : Proc(ID2D1Factory4*, UInt32),
@@ -9456,7 +9456,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Factory4, lpVtbl : ID2D1Factory4Vtbl* do
+  record ID2D1Factory4, lpVtbl : ID2D1Factory4Vtable* do
     GUID = LibC::GUID.new(0xbd4ec2d2_u32, 0x662_u16, 0x4bee_u16, StaticArray[0xba_u8, 0x8e_u8, 0x6f_u8, 0x29_u8, 0xf0_u8, 0x32_u8, 0xe0_u8, 0x96_u8])
     def query_interface(this : ID2D1Factory4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9552,7 +9552,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1CommandSink3Vtbl,
+  record ID2D1CommandSink3Vtable,
     query_interface : Proc(ID2D1CommandSink3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1CommandSink3*, UInt32),
     release : Proc(ID2D1CommandSink3*, UInt32),
@@ -9589,7 +9589,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1CommandSink3, lpVtbl : ID2D1CommandSink3Vtbl* do
+  record ID2D1CommandSink3, lpVtbl : ID2D1CommandSink3Vtable* do
     GUID = LibC::GUID.new(0x18079135_u32, 0x4cf3_u16, 0x4868_u16, StaticArray[0xbc_u8, 0x8e_u8, 0x6_u8, 0x6_u8, 0x7e_u8, 0x6d_u8, 0x24_u8, 0x2d_u8])
     def query_interface(this : ID2D1CommandSink3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9694,7 +9694,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1SvgGlyphStyleVtbl,
+  record ID2D1SvgGlyphStyleVtable,
     query_interface : Proc(ID2D1SvgGlyphStyle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1SvgGlyphStyle*, UInt32),
     release : Proc(ID2D1SvgGlyphStyle*, UInt32),
@@ -9707,7 +9707,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1SvgGlyphStyle, lpVtbl : ID2D1SvgGlyphStyleVtbl* do
+  record ID2D1SvgGlyphStyle, lpVtbl : ID2D1SvgGlyphStyleVtable* do
     GUID = LibC::GUID.new(0xaf671749_u32, 0xd241_u16, 0x4db8_u16, StaticArray[0x8e_u8, 0x41_u8, 0xdc_u8, 0xc2_u8, 0xe5_u8, 0xc1_u8, 0xa4_u8, 0x38_u8])
     def query_interface(this : ID2D1SvgGlyphStyle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9740,7 +9740,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1DeviceContext4Vtbl,
+  record ID2D1DeviceContext4Vtable,
     query_interface : Proc(ID2D1DeviceContext4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1DeviceContext4*, UInt32),
     release : Proc(ID2D1DeviceContext4*, UInt32),
@@ -9859,7 +9859,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1DeviceContext4, lpVtbl : ID2D1DeviceContext4Vtbl* do
+  record ID2D1DeviceContext4, lpVtbl : ID2D1DeviceContext4Vtable* do
     GUID = LibC::GUID.new(0x8c427831_u32, 0x3d90_u16, 0x4476_u16, StaticArray[0xb6_u8, 0x47_u8, 0xc4_u8, 0xfa_u8, 0xe3_u8, 0x49_u8, 0xe4_u8, 0xdb_u8])
     def query_interface(this : ID2D1DeviceContext4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10210,7 +10210,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1Device4Vtbl,
+  record ID2D1Device4Vtable,
     query_interface : Proc(ID2D1Device4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Device4*, UInt32),
     release : Proc(ID2D1Device4*, UInt32),
@@ -10233,7 +10233,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Device4, lpVtbl : ID2D1Device4Vtbl* do
+  record ID2D1Device4, lpVtbl : ID2D1Device4Vtable* do
     GUID = LibC::GUID.new(0xd7bdb159_u32, 0x5683_u16, 0x4a46_u16, StaticArray[0xbc_u8, 0x9c_u8, 0x72_u8, 0xdc_u8, 0x72_u8, 0xb_u8, 0x85_u8, 0x8b_u8])
     def query_interface(this : ID2D1Device4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10296,7 +10296,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1Factory5Vtbl,
+  record ID2D1Factory5Vtable,
     query_interface : Proc(ID2D1Factory5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Factory5*, UInt32),
     release : Proc(ID2D1Factory5*, UInt32),
@@ -10331,7 +10331,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Factory5, lpVtbl : ID2D1Factory5Vtbl* do
+  record ID2D1Factory5, lpVtbl : ID2D1Factory5Vtable* do
     GUID = LibC::GUID.new(0xc4349994_u32, 0x838e_u16, 0x4b0f_u16, StaticArray[0x8c_u8, 0xab_u8, 0x44_u8, 0x99_u8, 0x7d_u8, 0x9e_u8, 0xea_u8, 0xcc_u8])
     def query_interface(this : ID2D1Factory5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10430,7 +10430,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1CommandSink4Vtbl,
+  record ID2D1CommandSink4Vtable,
     query_interface : Proc(ID2D1CommandSink4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1CommandSink4*, UInt32),
     release : Proc(ID2D1CommandSink4*, UInt32),
@@ -10468,7 +10468,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1CommandSink4, lpVtbl : ID2D1CommandSink4Vtbl* do
+  record ID2D1CommandSink4, lpVtbl : ID2D1CommandSink4Vtable* do
     GUID = LibC::GUID.new(0xc78a6519_u32, 0x40d6_u16, 0x4218_u16, StaticArray[0xb2_u8, 0xde_u8, 0xbe_u8, 0xee_u8, 0xb7_u8, 0x44_u8, 0xbb_u8, 0x3e_u8])
     def query_interface(this : ID2D1CommandSink4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10576,7 +10576,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1ColorContext1Vtbl,
+  record ID2D1ColorContext1Vtable,
     query_interface : Proc(ID2D1ColorContext1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1ColorContext1*, UInt32),
     release : Proc(ID2D1ColorContext1*, UInt32),
@@ -10590,7 +10590,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1ColorContext1, lpVtbl : ID2D1ColorContext1Vtbl* do
+  record ID2D1ColorContext1, lpVtbl : ID2D1ColorContext1Vtable* do
     GUID = LibC::GUID.new(0x1ab42875_u32, 0xc57f_u16, 0x4be9_u16, StaticArray[0xbd_u8, 0x85_u8, 0x9c_u8, 0xd7_u8, 0x8d_u8, 0x6f_u8, 0x55_u8, 0xee_u8])
     def query_interface(this : ID2D1ColorContext1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10626,7 +10626,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1DeviceContext5Vtbl,
+  record ID2D1DeviceContext5Vtable,
     query_interface : Proc(ID2D1DeviceContext5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1DeviceContext5*, UInt32),
     release : Proc(ID2D1DeviceContext5*, UInt32),
@@ -10749,7 +10749,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1DeviceContext5, lpVtbl : ID2D1DeviceContext5Vtbl* do
+  record ID2D1DeviceContext5, lpVtbl : ID2D1DeviceContext5Vtable* do
     GUID = LibC::GUID.new(0x7836d248_u32, 0x68cc_u16, 0x4df6_u16, StaticArray[0xb9_u8, 0xe8_u8, 0xde_u8, 0x99_u8, 0x1b_u8, 0xf6_u8, 0x2e_u8, 0xb7_u8])
     def query_interface(this : ID2D1DeviceContext5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11112,7 +11112,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1Device5Vtbl,
+  record ID2D1Device5Vtable,
     query_interface : Proc(ID2D1Device5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Device5*, UInt32),
     release : Proc(ID2D1Device5*, UInt32),
@@ -11136,7 +11136,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Device5, lpVtbl : ID2D1Device5Vtbl* do
+  record ID2D1Device5, lpVtbl : ID2D1Device5Vtable* do
     GUID = LibC::GUID.new(0xd55ba0a4_u32, 0x6405_u16, 0x4694_u16, StaticArray[0xae_u8, 0xf5_u8, 0x8_u8, 0xee_u8, 0x1a_u8, 0x43_u8, 0x58_u8, 0xb4_u8])
     def query_interface(this : ID2D1Device5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11202,7 +11202,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1Factory6Vtbl,
+  record ID2D1Factory6Vtable,
     query_interface : Proc(ID2D1Factory6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Factory6*, UInt32),
     release : Proc(ID2D1Factory6*, UInt32),
@@ -11238,7 +11238,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Factory6, lpVtbl : ID2D1Factory6Vtbl* do
+  record ID2D1Factory6, lpVtbl : ID2D1Factory6Vtable* do
     GUID = LibC::GUID.new(0xf9976f46_u32, 0xf642_u16, 0x44c1_u16, StaticArray[0x97_u8, 0xca_u8, 0xda_u8, 0x32_u8, 0xea_u8, 0x2a_u8, 0x26_u8, 0x35_u8])
     def query_interface(this : ID2D1Factory6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11340,7 +11340,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1CommandSink5Vtbl,
+  record ID2D1CommandSink5Vtable,
     query_interface : Proc(ID2D1CommandSink5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1CommandSink5*, UInt32),
     release : Proc(ID2D1CommandSink5*, UInt32),
@@ -11379,7 +11379,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1CommandSink5, lpVtbl : ID2D1CommandSink5Vtbl* do
+  record ID2D1CommandSink5, lpVtbl : ID2D1CommandSink5Vtable* do
     GUID = LibC::GUID.new(0x7047dd26_u32, 0xb1e7_u16, 0x44a7_u16, StaticArray[0x95_u8, 0x9a_u8, 0x83_u8, 0x49_u8, 0xe2_u8, 0x14_u8, 0x4f_u8, 0xa8_u8])
     def query_interface(this : ID2D1CommandSink5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11490,7 +11490,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1DeviceContext6Vtbl,
+  record ID2D1DeviceContext6Vtable,
     query_interface : Proc(ID2D1DeviceContext6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1DeviceContext6*, UInt32),
     release : Proc(ID2D1DeviceContext6*, UInt32),
@@ -11614,7 +11614,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1DeviceContext6, lpVtbl : ID2D1DeviceContext6Vtbl* do
+  record ID2D1DeviceContext6, lpVtbl : ID2D1DeviceContext6Vtable* do
     GUID = LibC::GUID.new(0x985f7e37_u32, 0x4ed0_u16, 0x4a19_u16, StaticArray[0x98_u8, 0xa3_u8, 0x15_u8, 0xb0_u8, 0xed_u8, 0xfd_u8, 0xe3_u8, 0x6_u8])
     def query_interface(this : ID2D1DeviceContext6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11980,7 +11980,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1Device6Vtbl,
+  record ID2D1Device6Vtable,
     query_interface : Proc(ID2D1Device6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Device6*, UInt32),
     release : Proc(ID2D1Device6*, UInt32),
@@ -12005,7 +12005,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Device6, lpVtbl : ID2D1Device6Vtbl* do
+  record ID2D1Device6, lpVtbl : ID2D1Device6Vtable* do
     GUID = LibC::GUID.new(0x7bfef914_u32, 0x2d75_u16, 0x4bad_u16, StaticArray[0xbe_u8, 0x87_u8, 0xe1_u8, 0x8d_u8, 0xdb_u8, 0x7_u8, 0x7b_u8, 0x6d_u8])
     def query_interface(this : ID2D1Device6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12074,7 +12074,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1Factory7Vtbl,
+  record ID2D1Factory7Vtable,
     query_interface : Proc(ID2D1Factory7*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1Factory7*, UInt32),
     release : Proc(ID2D1Factory7*, UInt32),
@@ -12111,7 +12111,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1Factory7, lpVtbl : ID2D1Factory7Vtbl* do
+  record ID2D1Factory7, lpVtbl : ID2D1Factory7Vtable* do
     GUID = LibC::GUID.new(0xbdc2bdd3_u32, 0xb96c_u16, 0x4de6_u16, StaticArray[0xbd_u8, 0xf7_u8, 0x99_u8, 0xd4_u8, 0x74_u8, 0x54_u8, 0x54_u8, 0xde_u8])
     def query_interface(this : ID2D1Factory7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12216,7 +12216,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1EffectContext1Vtbl,
+  record ID2D1EffectContext1Vtable,
     query_interface : Proc(ID2D1EffectContext1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1EffectContext1*, UInt32),
     release : Proc(ID2D1EffectContext1*, UInt32),
@@ -12245,7 +12245,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1EffectContext1, lpVtbl : ID2D1EffectContext1Vtbl* do
+  record ID2D1EffectContext1, lpVtbl : ID2D1EffectContext1Vtable* do
     GUID = LibC::GUID.new(0x84ab595a_u32, 0xfc81_u16, 0x4546_u16, StaticArray[0xba_u8, 0xcd_u8, 0xe8_u8, 0xef_u8, 0x4d_u8, 0x8a_u8, 0xbe_u8, 0x7a_u8])
     def query_interface(this : ID2D1EffectContext1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12326,7 +12326,7 @@ module Win32cr::Graphics::Direct2D
   end
 
   @[Extern]
-  record ID2D1EffectContext2Vtbl,
+  record ID2D1EffectContext2Vtable,
     query_interface : Proc(ID2D1EffectContext2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID2D1EffectContext2*, UInt32),
     release : Proc(ID2D1EffectContext2*, UInt32),
@@ -12357,7 +12357,7 @@ module Win32cr::Graphics::Direct2D
 
 
   @[Extern]
-  record ID2D1EffectContext2, lpVtbl : ID2D1EffectContext2Vtbl* do
+  record ID2D1EffectContext2, lpVtbl : ID2D1EffectContext2Vtable* do
     GUID = LibC::GUID.new(0x577ad2a0_u32, 0x9fc7_u16, 0x4dda_u16, StaticArray[0x8b_u8, 0x18_u8, 0xda_u8, 0xb8_u8, 0x10_u8, 0x14_u8, 0x0_u8, 0x52_u8])
     def query_interface(this : ID2D1EffectContext2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12444,58 +12444,85 @@ module Win32cr::Graphics::Direct2D
   end
 
   def d2D1CreateFactory(factoryType : Win32cr::Graphics::Direct2D::D2D1_FACTORY_TYPE, riid : LibC::GUID*, pFactoryOptions : Win32cr::Graphics::Direct2D::D2D1_FACTORY_OPTIONS*, ppIFactory : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D2D1CreateFactory(factoryType, riid, pFactoryOptions, ppIFactory)
+    {% end %}
   end
 
   def d2D1MakeRotateMatrix(angle : Float32, center : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Void
+    {% if !flag?(:docs) %}
     C.D2D1MakeRotateMatrix(angle, center, matrix)
+    {% end %}
   end
 
   def d2D1MakeSkewMatrix(angleX : Float32, angleY : Float32, center : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F, matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Void
+    {% if !flag?(:docs) %}
     C.D2D1MakeSkewMatrix(angleX, angleY, center, matrix)
+    {% end %}
   end
 
   def d2D1IsMatrixInvertible(matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.D2D1IsMatrixInvertible(matrix)
+    {% end %}
   end
 
   def d2D1InvertMatrix(matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.D2D1InvertMatrix(matrix)
+    {% end %}
   end
 
   def d2D1CreateDevice(dxgiDevice : Void*, creationProperties : Win32cr::Graphics::Direct2D::D2D1_CREATION_PROPERTIES*, d2dDevice : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D2D1CreateDevice(dxgiDevice, creationProperties, d2dDevice)
+    {% end %}
   end
 
   def d2D1CreateDeviceContext(dxgiSurface : Void*, creationProperties : Win32cr::Graphics::Direct2D::D2D1_CREATION_PROPERTIES*, d2dDeviceContext : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D2D1CreateDeviceContext(dxgiSurface, creationProperties, d2dDeviceContext)
+    {% end %}
   end
 
   def d2D1ConvertColorSpace(sourceColorSpace : Win32cr::Graphics::Direct2D::D2D1_COLOR_SPACE, destinationColorSpace : Win32cr::Graphics::Direct2D::D2D1_COLOR_SPACE, color : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F*) : Win32cr::Graphics::Direct2D::Common::D2D1_COLOR_F
+    {% if !flag?(:docs) %}
     C.D2D1ConvertColorSpace(sourceColorSpace, destinationColorSpace, color)
+    {% end %}
   end
 
   def d2D1SinCos(angle : Float32, s : Float32*, c : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.D2D1SinCos(angle, s, c)
+    {% end %}
   end
 
   def d2D1Tan(angle : Float32) : Float32
+    {% if !flag?(:docs) %}
     C.D2D1Tan(angle)
+    {% end %}
   end
 
   def d2D1Vec3Length(x : Float32, y : Float32, z : Float32) : Float32
+    {% if !flag?(:docs) %}
     C.D2D1Vec3Length(x, y, z)
+    {% end %}
   end
 
   def d2D1ComputeMaximumScaleFactor(matrix : Win32cr::Graphics::Direct2D::Common::D2D_MATRIX_3X2_F*) : Float32
+    {% if !flag?(:docs) %}
     C.D2D1ComputeMaximumScaleFactor(matrix)
+    {% end %}
   end
 
   def d2D1GetGradientMeshInteriorPointsFromCoonsPatch(pPoint0 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint1 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint2 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint3 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint4 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint5 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint6 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint7 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint8 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint9 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint10 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint11 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pTensorPoint11 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pTensorPoint12 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pTensorPoint21 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pTensorPoint22 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*) : Void
+    {% if !flag?(:docs) %}
     C.D2D1GetGradientMeshInteriorPointsFromCoonsPatch(pPoint0, pPoint1, pPoint2, pPoint3, pPoint4, pPoint5, pPoint6, pPoint7, pPoint8, pPoint9, pPoint10, pPoint11, pTensorPoint11, pTensorPoint12, pTensorPoint21, pTensorPoint22)
+    {% end %}
   end
 
   @[Link("d2d1")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun D2D1CreateFactory(factoryType : Win32cr::Graphics::Direct2D::D2D1_FACTORY_TYPE, riid : LibC::GUID*, pFactoryOptions : Win32cr::Graphics::Direct2D::D2D1_FACTORY_OPTIONS*, ppIFactory : Void**) : Win32cr::Foundation::HRESULT
@@ -12537,4 +12564,5 @@ module Win32cr::Graphics::Direct2D
     fun D2D1GetGradientMeshInteriorPointsFromCoonsPatch(pPoint0 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint1 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint2 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint3 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint4 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint5 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint6 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint7 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint8 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint9 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint10 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pPoint11 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pTensorPoint11 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pTensorPoint12 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pTensorPoint21 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*, pTensorPoint22 : Win32cr::Graphics::Direct2D::Common::D2D_POINT_2F*) : Void
 
   end
+  {% end %}
 end

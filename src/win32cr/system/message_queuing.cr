@@ -599,7 +599,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueryVtbl,
+  record IMSMQQueryVtable,
     query_interface : Proc(IMSMQQuery*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQuery*, UInt32),
     release : Proc(IMSMQQuery*, UInt32),
@@ -611,7 +611,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQQuery, lpVtbl : IMSMQQueryVtbl* do
+  record IMSMQQuery, lpVtbl : IMSMQQueryVtable* do
     GUID = LibC::GUID.new(0xd7d6e072_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -641,7 +641,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueueInfoVtbl,
+  record IMSMQQueueInfoVtable,
     query_interface : Proc(IMSMQQueueInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueueInfo*, UInt32),
     release : Proc(IMSMQQueueInfo*, UInt32),
@@ -682,7 +682,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQQueueInfo, lpVtbl : IMSMQQueueInfoVtbl* do
+  record IMSMQQueueInfo, lpVtbl : IMSMQQueueInfoVtable* do
     GUID = LibC::GUID.new(0xd7d6e07b_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQQueueInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -799,7 +799,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueueInfo2Vtbl,
+  record IMSMQQueueInfo2Vtable,
     query_interface : Proc(IMSMQQueueInfo2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueueInfo2*, UInt32),
     release : Proc(IMSMQQueueInfo2*, UInt32),
@@ -844,7 +844,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQQueueInfo2, lpVtbl : IMSMQQueueInfo2Vtbl* do
+  record IMSMQQueueInfo2, lpVtbl : IMSMQQueueInfo2Vtable* do
     GUID = LibC::GUID.new(0xfd174a80_u32, 0x89cf_u16, 0x11d2_u16, StaticArray[0xb0_u8, 0xf2_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueueInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -973,7 +973,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueueInfo3Vtbl,
+  record IMSMQQueueInfo3Vtable,
     query_interface : Proc(IMSMQQueueInfo3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueueInfo3*, UInt32),
     release : Proc(IMSMQQueueInfo3*, UInt32),
@@ -1023,7 +1023,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQQueueInfo3, lpVtbl : IMSMQQueueInfo3Vtbl* do
+  record IMSMQQueueInfo3, lpVtbl : IMSMQQueueInfo3Vtable* do
     GUID = LibC::GUID.new(0xeba96b1d_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueueInfo3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1167,7 +1167,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueueInfo4Vtbl,
+  record IMSMQQueueInfo4Vtable,
     query_interface : Proc(IMSMQQueueInfo4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueueInfo4*, UInt32),
     release : Proc(IMSMQQueueInfo4*, UInt32),
@@ -1217,7 +1217,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQQueueInfo4, lpVtbl : IMSMQQueueInfo4Vtbl* do
+  record IMSMQQueueInfo4, lpVtbl : IMSMQQueueInfo4Vtable* do
     GUID = LibC::GUID.new(0xeba96b21_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueueInfo4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1361,7 +1361,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueueVtbl,
+  record IMSMQQueueVtable,
     query_interface : Proc(IMSMQQueue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueue*, UInt32),
     release : Proc(IMSMQQueue*, UInt32),
@@ -1385,7 +1385,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQQueue, lpVtbl : IMSMQQueueVtbl* do
+  record IMSMQQueue, lpVtbl : IMSMQQueueVtable* do
     GUID = LibC::GUID.new(0xd7d6e076_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1451,7 +1451,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueue2Vtbl,
+  record IMSMQQueue2Vtable,
     query_interface : Proc(IMSMQQueue2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueue2*, UInt32),
     release : Proc(IMSMQQueue2*, UInt32),
@@ -1481,7 +1481,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQQueue2, lpVtbl : IMSMQQueue2Vtbl* do
+  record IMSMQQueue2, lpVtbl : IMSMQQueue2Vtable* do
     GUID = LibC::GUID.new(0xef0574e0_u32, 0x6d8_u16, 0x11d3_u16, StaticArray[0xb1_u8, 0x0_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueue2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1565,7 +1565,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueue3Vtbl,
+  record IMSMQQueue3Vtable,
     query_interface : Proc(IMSMQQueue3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueue3*, UInt32),
     release : Proc(IMSMQQueue3*, UInt32),
@@ -1608,7 +1608,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQQueue3, lpVtbl : IMSMQQueue3Vtbl* do
+  record IMSMQQueue3, lpVtbl : IMSMQQueue3Vtable* do
     GUID = LibC::GUID.new(0xeba96b1b_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueue3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1731,7 +1731,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueue4Vtbl,
+  record IMSMQQueue4Vtable,
     query_interface : Proc(IMSMQQueue4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueue4*, UInt32),
     release : Proc(IMSMQQueue4*, UInt32),
@@ -1775,7 +1775,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQQueue4, lpVtbl : IMSMQQueue4Vtbl* do
+  record IMSMQQueue4, lpVtbl : IMSMQQueue4Vtable* do
     GUID = LibC::GUID.new(0xeba96b20_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueue4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1901,7 +1901,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQMessageVtbl,
+  record IMSMQMessageVtable,
     query_interface : Proc(IMSMQMessage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQMessage*, UInt32),
     release : Proc(IMSMQMessage*, UInt32),
@@ -1961,7 +1961,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQMessage, lpVtbl : IMSMQMessageVtbl* do
+  record IMSMQMessage, lpVtbl : IMSMQMessageVtable* do
     GUID = LibC::GUID.new(0xd7d6e074_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQMessage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2135,7 +2135,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueueInfosVtbl,
+  record IMSMQQueueInfosVtable,
     query_interface : Proc(IMSMQQueueInfos*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueueInfos*, UInt32),
     release : Proc(IMSMQQueueInfos*, UInt32),
@@ -2148,7 +2148,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQQueueInfos, lpVtbl : IMSMQQueueInfosVtbl* do
+  record IMSMQQueueInfos, lpVtbl : IMSMQQueueInfosVtable* do
     GUID = LibC::GUID.new(0xd7d6e07d_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQQueueInfos*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2181,7 +2181,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueueInfos2Vtbl,
+  record IMSMQQueueInfos2Vtable,
     query_interface : Proc(IMSMQQueueInfos2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueueInfos2*, UInt32),
     release : Proc(IMSMQQueueInfos2*, UInt32),
@@ -2195,7 +2195,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQQueueInfos2, lpVtbl : IMSMQQueueInfos2Vtbl* do
+  record IMSMQQueueInfos2, lpVtbl : IMSMQQueueInfos2Vtable* do
     GUID = LibC::GUID.new(0xeba96b0f_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueueInfos2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2231,7 +2231,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueueInfos3Vtbl,
+  record IMSMQQueueInfos3Vtable,
     query_interface : Proc(IMSMQQueueInfos3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueueInfos3*, UInt32),
     release : Proc(IMSMQQueueInfos3*, UInt32),
@@ -2245,7 +2245,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQQueueInfos3, lpVtbl : IMSMQQueueInfos3Vtbl* do
+  record IMSMQQueueInfos3, lpVtbl : IMSMQQueueInfos3Vtable* do
     GUID = LibC::GUID.new(0xeba96b1e_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueueInfos3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2281,7 +2281,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueueInfos4Vtbl,
+  record IMSMQQueueInfos4Vtable,
     query_interface : Proc(IMSMQQueueInfos4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueueInfos4*, UInt32),
     release : Proc(IMSMQQueueInfos4*, UInt32),
@@ -2295,7 +2295,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQQueueInfos4, lpVtbl : IMSMQQueueInfos4Vtbl* do
+  record IMSMQQueueInfos4, lpVtbl : IMSMQQueueInfos4Vtable* do
     GUID = LibC::GUID.new(0xeba96b22_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQueueInfos4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2331,7 +2331,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQEventVtbl,
+  record IMSMQEventVtable,
     query_interface : Proc(IMSMQEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQEvent*, UInt32),
     release : Proc(IMSMQEvent*, UInt32),
@@ -2342,7 +2342,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQEvent, lpVtbl : IMSMQEventVtbl* do
+  record IMSMQEvent, lpVtbl : IMSMQEventVtable* do
     GUID = LibC::GUID.new(0xd7d6e077_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2369,7 +2369,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQEvent2Vtbl,
+  record IMSMQEvent2Vtable,
     query_interface : Proc(IMSMQEvent2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQEvent2*, UInt32),
     release : Proc(IMSMQEvent2*, UInt32),
@@ -2381,7 +2381,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQEvent2, lpVtbl : IMSMQEvent2Vtbl* do
+  record IMSMQEvent2, lpVtbl : IMSMQEvent2Vtable* do
     GUID = LibC::GUID.new(0xeba96b12_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2411,7 +2411,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQEvent3Vtbl,
+  record IMSMQEvent3Vtable,
     query_interface : Proc(IMSMQEvent3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQEvent3*, UInt32),
     release : Proc(IMSMQEvent3*, UInt32),
@@ -2423,7 +2423,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQEvent3, lpVtbl : IMSMQEvent3Vtbl* do
+  record IMSMQEvent3, lpVtbl : IMSMQEvent3Vtable* do
     GUID = LibC::GUID.new(0xeba96b1c_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQEvent3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2453,7 +2453,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQTransactionVtbl,
+  record IMSMQTransactionVtable,
     query_interface : Proc(IMSMQTransaction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQTransaction*, UInt32),
     release : Proc(IMSMQTransaction*, UInt32),
@@ -2467,7 +2467,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQTransaction, lpVtbl : IMSMQTransactionVtbl* do
+  record IMSMQTransaction, lpVtbl : IMSMQTransactionVtable* do
     GUID = LibC::GUID.new(0xd7d6e07f_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQTransaction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2503,7 +2503,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQCoordinatedTransactionDispenserVtbl,
+  record IMSMQCoordinatedTransactionDispenserVtable,
     query_interface : Proc(IMSMQCoordinatedTransactionDispenser*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQCoordinatedTransactionDispenser*, UInt32),
     release : Proc(IMSMQCoordinatedTransactionDispenser*, UInt32),
@@ -2515,7 +2515,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQCoordinatedTransactionDispenser, lpVtbl : IMSMQCoordinatedTransactionDispenserVtbl* do
+  record IMSMQCoordinatedTransactionDispenser, lpVtbl : IMSMQCoordinatedTransactionDispenserVtable* do
     GUID = LibC::GUID.new(0xd7d6e081_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQCoordinatedTransactionDispenser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2545,7 +2545,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQTransactionDispenserVtbl,
+  record IMSMQTransactionDispenserVtable,
     query_interface : Proc(IMSMQTransactionDispenser*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQTransactionDispenser*, UInt32),
     release : Proc(IMSMQTransactionDispenser*, UInt32),
@@ -2557,7 +2557,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQTransactionDispenser, lpVtbl : IMSMQTransactionDispenserVtbl* do
+  record IMSMQTransactionDispenser, lpVtbl : IMSMQTransactionDispenserVtable* do
     GUID = LibC::GUID.new(0xd7d6e083_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQTransactionDispenser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2587,7 +2587,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQuery2Vtbl,
+  record IMSMQQuery2Vtable,
     query_interface : Proc(IMSMQQuery2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQuery2*, UInt32),
     release : Proc(IMSMQQuery2*, UInt32),
@@ -2600,7 +2600,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQQuery2, lpVtbl : IMSMQQuery2Vtbl* do
+  record IMSMQQuery2, lpVtbl : IMSMQQuery2Vtable* do
     GUID = LibC::GUID.new(0xeba96b0e_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQuery2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2633,7 +2633,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQuery3Vtbl,
+  record IMSMQQuery3Vtable,
     query_interface : Proc(IMSMQQuery3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQuery3*, UInt32),
     release : Proc(IMSMQQuery3*, UInt32),
@@ -2647,7 +2647,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQQuery3, lpVtbl : IMSMQQuery3Vtbl* do
+  record IMSMQQuery3, lpVtbl : IMSMQQuery3Vtable* do
     GUID = LibC::GUID.new(0xeba96b19_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQuery3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2683,7 +2683,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQuery4Vtbl,
+  record IMSMQQuery4Vtable,
     query_interface : Proc(IMSMQQuery4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQuery4*, UInt32),
     release : Proc(IMSMQQuery4*, UInt32),
@@ -2697,7 +2697,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQQuery4, lpVtbl : IMSMQQuery4Vtbl* do
+  record IMSMQQuery4, lpVtbl : IMSMQQuery4Vtable* do
     GUID = LibC::GUID.new(0xeba96b24_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQQuery4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2733,7 +2733,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQMessage2Vtbl,
+  record IMSMQMessage2Vtable,
     query_interface : Proc(IMSMQMessage2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQMessage2*, UInt32),
     release : Proc(IMSMQMessage2*, UInt32),
@@ -2819,7 +2819,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQMessage2, lpVtbl : IMSMQMessage2Vtbl* do
+  record IMSMQMessage2, lpVtbl : IMSMQMessage2Vtable* do
     GUID = LibC::GUID.new(0xd9933be0_u32, 0xa567_u16, 0x11d2_u16, StaticArray[0xb0_u8, 0xf3_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQMessage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3071,7 +3071,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQMessage3Vtbl,
+  record IMSMQMessage3Vtable,
     query_interface : Proc(IMSMQMessage3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQMessage3*, UInt32),
     release : Proc(IMSMQMessage3*, UInt32),
@@ -3173,7 +3173,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQMessage3, lpVtbl : IMSMQMessage3Vtbl* do
+  record IMSMQMessage3, lpVtbl : IMSMQMessage3Vtable* do
     GUID = LibC::GUID.new(0xeba96b1a_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQMessage3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3473,7 +3473,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQMessage4Vtbl,
+  record IMSMQMessage4Vtable,
     query_interface : Proc(IMSMQMessage4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQMessage4*, UInt32),
     release : Proc(IMSMQMessage4*, UInt32),
@@ -3575,7 +3575,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQMessage4, lpVtbl : IMSMQMessage4Vtbl* do
+  record IMSMQMessage4, lpVtbl : IMSMQMessage4Vtable* do
     GUID = LibC::GUID.new(0xeba96b23_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQMessage4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3875,7 +3875,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQPrivateEventVtbl,
+  record IMSMQPrivateEventVtable,
     query_interface : Proc(IMSMQPrivateEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQPrivateEvent*, UInt32),
     release : Proc(IMSMQPrivateEvent*, UInt32),
@@ -3889,7 +3889,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQPrivateEvent, lpVtbl : IMSMQPrivateEventVtbl* do
+  record IMSMQPrivateEvent, lpVtbl : IMSMQPrivateEventVtable* do
     GUID = LibC::GUID.new(0xd7ab3341_u32, 0xc9d3_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x47_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0xc5_u8, 0xa2_u8, 0xc0_u8])
     def query_interface(this : IMSMQPrivateEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3925,7 +3925,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record DMSMQEventEvents_Vtbl,
+  record DMSMQEventEvents_Vtable,
     query_interface : Proc(DMSMQEventEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DMSMQEventEvents_*, UInt32),
     release : Proc(DMSMQEventEvents_*, UInt32),
@@ -3936,7 +3936,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record DMSMQEventEvents_, lpVtbl : DMSMQEventEvents_Vtbl* do
+  record DMSMQEventEvents_, lpVtbl : DMSMQEventEvents_Vtable* do
     GUID = LibC::GUID.new(0xd7d6e078_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : DMSMQEventEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3963,7 +3963,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQTransaction2Vtbl,
+  record IMSMQTransaction2Vtable,
     query_interface : Proc(IMSMQTransaction2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQTransaction2*, UInt32),
     release : Proc(IMSMQTransaction2*, UInt32),
@@ -3979,7 +3979,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQTransaction2, lpVtbl : IMSMQTransaction2Vtbl* do
+  record IMSMQTransaction2, lpVtbl : IMSMQTransaction2Vtable* do
     GUID = LibC::GUID.new(0x2ce0c5b0_u32, 0x6e67_u16, 0x11d2_u16, StaticArray[0xb0_u8, 0xe6_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQTransaction2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4021,7 +4021,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQTransaction3Vtbl,
+  record IMSMQTransaction3Vtable,
     query_interface : Proc(IMSMQTransaction3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQTransaction3*, UInt32),
     release : Proc(IMSMQTransaction3*, UInt32),
@@ -4038,7 +4038,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQTransaction3, lpVtbl : IMSMQTransaction3Vtbl* do
+  record IMSMQTransaction3, lpVtbl : IMSMQTransaction3Vtable* do
     GUID = LibC::GUID.new(0xeba96b13_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQTransaction3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4083,7 +4083,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQCoordinatedTransactionDispenser2Vtbl,
+  record IMSMQCoordinatedTransactionDispenser2Vtable,
     query_interface : Proc(IMSMQCoordinatedTransactionDispenser2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQCoordinatedTransactionDispenser2*, UInt32),
     release : Proc(IMSMQCoordinatedTransactionDispenser2*, UInt32),
@@ -4096,7 +4096,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQCoordinatedTransactionDispenser2, lpVtbl : IMSMQCoordinatedTransactionDispenser2Vtbl* do
+  record IMSMQCoordinatedTransactionDispenser2, lpVtbl : IMSMQCoordinatedTransactionDispenser2Vtable* do
     GUID = LibC::GUID.new(0xeba96b10_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQCoordinatedTransactionDispenser2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4129,7 +4129,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQCoordinatedTransactionDispenser3Vtbl,
+  record IMSMQCoordinatedTransactionDispenser3Vtable,
     query_interface : Proc(IMSMQCoordinatedTransactionDispenser3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQCoordinatedTransactionDispenser3*, UInt32),
     release : Proc(IMSMQCoordinatedTransactionDispenser3*, UInt32),
@@ -4142,7 +4142,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQCoordinatedTransactionDispenser3, lpVtbl : IMSMQCoordinatedTransactionDispenser3Vtbl* do
+  record IMSMQCoordinatedTransactionDispenser3, lpVtbl : IMSMQCoordinatedTransactionDispenser3Vtable* do
     GUID = LibC::GUID.new(0xeba96b14_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQCoordinatedTransactionDispenser3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4175,7 +4175,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQTransactionDispenser2Vtbl,
+  record IMSMQTransactionDispenser2Vtable,
     query_interface : Proc(IMSMQTransactionDispenser2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQTransactionDispenser2*, UInt32),
     release : Proc(IMSMQTransactionDispenser2*, UInt32),
@@ -4188,7 +4188,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQTransactionDispenser2, lpVtbl : IMSMQTransactionDispenser2Vtbl* do
+  record IMSMQTransactionDispenser2, lpVtbl : IMSMQTransactionDispenser2Vtable* do
     GUID = LibC::GUID.new(0xeba96b11_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQTransactionDispenser2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4221,7 +4221,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQTransactionDispenser3Vtbl,
+  record IMSMQTransactionDispenser3Vtable,
     query_interface : Proc(IMSMQTransactionDispenser3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQTransactionDispenser3*, UInt32),
     release : Proc(IMSMQTransactionDispenser3*, UInt32),
@@ -4234,7 +4234,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQTransactionDispenser3, lpVtbl : IMSMQTransactionDispenser3Vtbl* do
+  record IMSMQTransactionDispenser3, lpVtbl : IMSMQTransactionDispenser3Vtable* do
     GUID = LibC::GUID.new(0xeba96b15_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQTransactionDispenser3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4267,7 +4267,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQApplicationVtbl,
+  record IMSMQApplicationVtable,
     query_interface : Proc(IMSMQApplication*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQApplication*, UInt32),
     release : Proc(IMSMQApplication*, UInt32),
@@ -4279,7 +4279,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQApplication, lpVtbl : IMSMQApplicationVtbl* do
+  record IMSMQApplication, lpVtbl : IMSMQApplicationVtable* do
     GUID = LibC::GUID.new(0xd7d6e085_u32, 0xdccd_u16, 0x11d0_u16, StaticArray[0xaa_u8, 0x4b_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xd_u8, 0xeb_u8, 0xae_u8])
     def query_interface(this : IMSMQApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4309,7 +4309,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQApplication2Vtbl,
+  record IMSMQApplication2Vtable,
     query_interface : Proc(IMSMQApplication2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQApplication2*, UInt32),
     release : Proc(IMSMQApplication2*, UInt32),
@@ -4328,7 +4328,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQApplication2, lpVtbl : IMSMQApplication2Vtbl* do
+  record IMSMQApplication2, lpVtbl : IMSMQApplication2Vtable* do
     GUID = LibC::GUID.new(0x12a30900_u32, 0x7300_u16, 0x11d2_u16, StaticArray[0xb0_u8, 0xe6_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQApplication2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4379,7 +4379,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQApplication3Vtbl,
+  record IMSMQApplication3Vtable,
     query_interface : Proc(IMSMQApplication3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQApplication3*, UInt32),
     release : Proc(IMSMQApplication3*, UInt32),
@@ -4408,7 +4408,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQApplication3, lpVtbl : IMSMQApplication3Vtbl* do
+  record IMSMQApplication3, lpVtbl : IMSMQApplication3Vtable* do
     GUID = LibC::GUID.new(0xeba96b1f_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQApplication3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4489,7 +4489,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQDestinationVtbl,
+  record IMSMQDestinationVtable,
     query_interface : Proc(IMSMQDestination*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQDestination*, UInt32),
     release : Proc(IMSMQDestination*, UInt32),
@@ -4514,7 +4514,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQDestination, lpVtbl : IMSMQDestinationVtbl* do
+  record IMSMQDestination, lpVtbl : IMSMQDestinationVtable* do
     GUID = LibC::GUID.new(0xeba96b16_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQDestination*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4583,7 +4583,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQPrivateDestinationVtbl,
+  record IMSMQPrivateDestinationVtable,
     query_interface : Proc(IMSMQPrivateDestination*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQPrivateDestination*, UInt32),
     release : Proc(IMSMQPrivateDestination*, UInt32),
@@ -4596,7 +4596,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQPrivateDestination, lpVtbl : IMSMQPrivateDestinationVtbl* do
+  record IMSMQPrivateDestination, lpVtbl : IMSMQPrivateDestinationVtable* do
     GUID = LibC::GUID.new(0xeba96b17_u32, 0x2168_u16, 0x11d3_u16, StaticArray[0x89_u8, 0x8c_u8, 0x0_u8, 0xe0_u8, 0x2c_u8, 0x7_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IMSMQPrivateDestination*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4629,7 +4629,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQCollectionVtbl,
+  record IMSMQCollectionVtable,
     query_interface : Proc(IMSMQCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQCollection*, UInt32),
     release : Proc(IMSMQCollection*, UInt32),
@@ -4643,7 +4643,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQCollection, lpVtbl : IMSMQCollectionVtbl* do
+  record IMSMQCollection, lpVtbl : IMSMQCollectionVtable* do
     GUID = LibC::GUID.new(0x188ac2f_u32, 0xecb3_u16, 0x4173_u16, StaticArray[0x97_u8, 0x79_u8, 0x63_u8, 0x5c_u8, 0xa2_u8, 0x3_u8, 0x9c_u8, 0x72_u8])
     def query_interface(this : IMSMQCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4679,7 +4679,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQManagementVtbl,
+  record IMSMQManagementVtable,
     query_interface : Proc(IMSMQManagement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQManagement*, UInt32),
     release : Proc(IMSMQManagement*, UInt32),
@@ -4699,7 +4699,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQManagement, lpVtbl : IMSMQManagementVtbl* do
+  record IMSMQManagement, lpVtbl : IMSMQManagementVtable* do
     GUID = LibC::GUID.new(0xbe5f0241_u32, 0xe489_u16, 0x4957_u16, StaticArray[0x8c_u8, 0xc4_u8, 0xa4_u8, 0x52_u8, 0xfc_u8, 0xf3_u8, 0xe2_u8, 0x3e_u8])
     def query_interface(this : IMSMQManagement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4753,7 +4753,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQOutgoingQueueManagementVtbl,
+  record IMSMQOutgoingQueueManagementVtable,
     query_interface : Proc(IMSMQOutgoingQueueManagement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQOutgoingQueueManagement*, UInt32),
     release : Proc(IMSMQOutgoingQueueManagement*, UInt32),
@@ -4779,7 +4779,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQOutgoingQueueManagement, lpVtbl : IMSMQOutgoingQueueManagementVtbl* do
+  record IMSMQOutgoingQueueManagement, lpVtbl : IMSMQOutgoingQueueManagementVtable* do
     GUID = LibC::GUID.new(0x64c478fb_u32, 0xf9b0_u16, 0x4695_u16, StaticArray[0x8a_u8, 0x7f_u8, 0x43_u8, 0x9a_u8, 0xc9_u8, 0x43_u8, 0x26_u8, 0xd3_u8])
     def query_interface(this : IMSMQOutgoingQueueManagement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4851,7 +4851,7 @@ module Win32cr::System::MessageQueuing
   end
 
   @[Extern]
-  record IMSMQQueueManagementVtbl,
+  record IMSMQQueueManagementVtable,
     query_interface : Proc(IMSMQQueueManagement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMSMQQueueManagement*, UInt32),
     release : Proc(IMSMQQueueManagement*, UInt32),
@@ -4874,7 +4874,7 @@ module Win32cr::System::MessageQueuing
 
 
   @[Extern]
-  record IMSMQQueueManagement, lpVtbl : IMSMQQueueManagementVtbl* do
+  record IMSMQQueueManagement, lpVtbl : IMSMQQueueManagementVtable* do
     GUID = LibC::GUID.new(0x7fbe7759_u32, 0x5760_u16, 0x444d_u16, StaticArray[0xb8_u8, 0xa5_u8, 0x5e_u8, 0x7a_u8, 0xb9_u8, 0xa8_u8, 0x4c_u8, 0xce_u8])
     def query_interface(this : IMSMQQueueManagement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

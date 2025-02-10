@@ -10067,43 +10067,63 @@ module Win32cr::Foundation
   end
 
   def sysAllocString(psz : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BSTR
+    {% if !flag?(:docs) %}
     C.SysAllocString(psz)
+    {% end %}
   end
 
   def sysReAllocString(pbstr : Win32cr::Foundation::BSTR*, psz : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.SysReAllocString(pbstr, psz)
+    {% end %}
   end
 
   def sysAllocStringLen(strIn : UInt16*, ui : UInt32) : Win32cr::Foundation::BSTR
+    {% if !flag?(:docs) %}
     C.SysAllocStringLen(strIn, ui)
+    {% end %}
   end
 
   def sysReAllocStringLen(pbstr : Win32cr::Foundation::BSTR*, psz : Win32cr::Foundation::PWSTR, len : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SysReAllocStringLen(pbstr, psz, len)
+    {% end %}
   end
 
   def sysAddRefString(bstrString : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SysAddRefString(bstrString)
+    {% end %}
   end
 
   def sysReleaseString(bstrString : Win32cr::Foundation::BSTR) : Void
+    {% if !flag?(:docs) %}
     C.SysReleaseString(bstrString)
+    {% end %}
   end
 
   def sysFreeString(bstrString : Win32cr::Foundation::BSTR) : Void
+    {% if !flag?(:docs) %}
     C.SysFreeString(bstrString)
+    {% end %}
   end
 
   def sysStringLen(pbstr : Win32cr::Foundation::BSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.SysStringLen(pbstr)
+    {% end %}
   end
 
   def sysStringByteLen(bstr : Win32cr::Foundation::BSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.SysStringByteLen(bstr)
+    {% end %}
   end
 
   def sysAllocStringByteLen(psz : UInt8*, len : UInt32) : Win32cr::Foundation::BSTR
+    {% if !flag?(:docs) %}
     C.SysAllocStringByteLen(psz, len)
+    {% end %}
   end
 
   #def closeHandle(hObject : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
@@ -10115,15 +10135,21 @@ module Win32cr::Foundation
   #end
 
   def compareObjectHandles(hFirstObjectHandle : Win32cr::Foundation::HANDLE, hSecondObjectHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CompareObjectHandles(hFirstObjectHandle, hSecondObjectHandle)
+    {% end %}
   end
 
   def getHandleInformation(hObject : Win32cr::Foundation::HANDLE, lpdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetHandleInformation(hObject, lpdwFlags)
+    {% end %}
   end
 
   def setHandleInformation(hObject : Win32cr::Foundation::HANDLE, dwMask : UInt32, dwFlags : Win32cr::Foundation::HANDLE_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetHandleInformation(hObject, dwMask, dwFlags)
+    {% end %}
   end
 
   #def getLastError : Win32cr::Foundation::WIN32_ERROR
@@ -10135,7 +10161,9 @@ module Win32cr::Foundation
   #end
 
   def setLastErrorEx(dwErrCode : Win32cr::Foundation::WIN32_ERROR, dwType : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.SetLastErrorEx(dwErrCode, dwType)
+    {% end %}
   end
 
   #def rtlNtStatusToDosError(status : Win32cr::Foundation::NTSTATUS) : UInt32
@@ -10146,6 +10174,7 @@ module Win32cr::Foundation
   @[Link("kernel32")]
   @[Link("user32")]
   @[Link("ntdll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun SysAllocString(psz : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BSTR
@@ -10210,4 +10239,5 @@ module Win32cr::Foundation
     #fun RtlNtStatusToDosError(status : Win32cr::Foundation::NTSTATUS) : UInt32
 
   end
+  {% end %}
 end

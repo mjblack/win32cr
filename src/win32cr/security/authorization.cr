@@ -1047,7 +1047,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzAuthorizationStoreVtbl,
+  record IAzAuthorizationStoreVtable,
     query_interface : Proc(IAzAuthorizationStore*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzAuthorizationStore*, UInt32),
     release : Proc(IAzAuthorizationStore*, UInt32),
@@ -1109,7 +1109,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzAuthorizationStore, lpVtbl : IAzAuthorizationStoreVtbl* do
+  record IAzAuthorizationStore, lpVtbl : IAzAuthorizationStoreVtable* do
     GUID = LibC::GUID.new(0xedbd9ca9_u32, 0x9b82_u16, 0x4f6a_u16, StaticArray[0x9e_u8, 0x8b_u8, 0x98_u8, 0x30_u8, 0x1e_u8, 0x45_u8, 0xf_u8, 0x14_u8])
     def query_interface(this : IAzAuthorizationStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1289,7 +1289,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzAuthorizationStore2Vtbl,
+  record IAzAuthorizationStore2Vtable,
     query_interface : Proc(IAzAuthorizationStore2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzAuthorizationStore2*, UInt32),
     release : Proc(IAzAuthorizationStore2*, UInt32),
@@ -1353,7 +1353,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzAuthorizationStore2, lpVtbl : IAzAuthorizationStore2Vtbl* do
+  record IAzAuthorizationStore2, lpVtbl : IAzAuthorizationStore2Vtable* do
     GUID = LibC::GUID.new(0xb11e5584_u32, 0xd577_u16, 0x4273_u16, StaticArray[0xb6_u8, 0xc5_u8, 0x9_u8, 0x73_u8, 0xe0_u8, 0xf8_u8, 0xe8_u8, 0xd_u8])
     def query_interface(this : IAzAuthorizationStore2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1539,7 +1539,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzAuthorizationStore3Vtbl,
+  record IAzAuthorizationStore3Vtable,
     query_interface : Proc(IAzAuthorizationStore3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzAuthorizationStore3*, UInt32),
     release : Proc(IAzAuthorizationStore3*, UInt32),
@@ -1608,7 +1608,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzAuthorizationStore3, lpVtbl : IAzAuthorizationStore3Vtbl* do
+  record IAzAuthorizationStore3, lpVtbl : IAzAuthorizationStore3Vtable* do
     GUID = LibC::GUID.new(0xabc08425_u32, 0xc86_u16, 0x4fa0_u16, StaticArray[0x9b_u8, 0xe3_u8, 0x71_u8, 0x89_u8, 0x95_u8, 0x6c_u8, 0x92_u8, 0x6e_u8])
     def query_interface(this : IAzAuthorizationStore3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1809,7 +1809,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzApplicationVtbl,
+  record IAzApplicationVtable,
     query_interface : Proc(IAzApplication*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzApplication*, UInt32),
     release : Proc(IAzApplication*, UInt32),
@@ -1881,7 +1881,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzApplication, lpVtbl : IAzApplicationVtbl* do
+  record IAzApplication, lpVtbl : IAzApplicationVtable* do
     GUID = LibC::GUID.new(0x987bc7c7_u32, 0xb813_u16, 0x4d27_u16, StaticArray[0xbe_u8, 0xde_u8, 0x6b_u8, 0xa5_u8, 0xae_u8, 0x86_u8, 0x7e_u8, 0x95_u8])
     def query_interface(this : IAzApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2091,7 +2091,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzApplication2Vtbl,
+  record IAzApplication2Vtable,
     query_interface : Proc(IAzApplication2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzApplication2*, UInt32),
     release : Proc(IAzApplication2*, UInt32),
@@ -2165,7 +2165,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzApplication2, lpVtbl : IAzApplication2Vtbl* do
+  record IAzApplication2, lpVtbl : IAzApplication2Vtable* do
     GUID = LibC::GUID.new(0x86a68af_u32, 0xa249_u16, 0x437c_u16, StaticArray[0xb1_u8, 0x8d_u8, 0xd4_u8, 0xd8_u8, 0x6d_u8, 0x6a_u8, 0x96_u8, 0x60_u8])
     def query_interface(this : IAzApplication2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2381,7 +2381,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzApplicationsVtbl,
+  record IAzApplicationsVtable,
     query_interface : Proc(IAzApplications*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzApplications*, UInt32),
     release : Proc(IAzApplications*, UInt32),
@@ -2395,7 +2395,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzApplications, lpVtbl : IAzApplicationsVtbl* do
+  record IAzApplications, lpVtbl : IAzApplicationsVtable* do
     GUID = LibC::GUID.new(0x929b11a9_u32, 0x95c5_u16, 0x4a84_u16, StaticArray[0xa2_u8, 0x9a_u8, 0x20_u8, 0xad_u8, 0x42_u8, 0xc2_u8, 0xf1_u8, 0x6c_u8])
     def query_interface(this : IAzApplications*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2431,7 +2431,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzOperationVtbl,
+  record IAzOperationVtable,
     query_interface : Proc(IAzOperation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzOperation*, UInt32),
     release : Proc(IAzOperation*, UInt32),
@@ -2454,7 +2454,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzOperation, lpVtbl : IAzOperationVtbl* do
+  record IAzOperation, lpVtbl : IAzOperationVtable* do
     GUID = LibC::GUID.new(0x5e56b24f_u32, 0xea01_u16, 0x4d61_u16, StaticArray[0xbe_u8, 0x44_u8, 0xc4_u8, 0x9b_u8, 0x5e_u8, 0x4e_u8, 0xaf_u8, 0x74_u8])
     def query_interface(this : IAzOperation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2517,7 +2517,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzOperationsVtbl,
+  record IAzOperationsVtable,
     query_interface : Proc(IAzOperations*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzOperations*, UInt32),
     release : Proc(IAzOperations*, UInt32),
@@ -2531,7 +2531,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzOperations, lpVtbl : IAzOperationsVtbl* do
+  record IAzOperations, lpVtbl : IAzOperationsVtable* do
     GUID = LibC::GUID.new(0x90ef9c07_u32, 0x9706_u16, 0x49d9_u16, StaticArray[0xaf_u8, 0x80_u8, 0x4_u8, 0x38_u8, 0xa5_u8, 0xf3_u8, 0xec_u8, 0x35_u8])
     def query_interface(this : IAzOperations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2567,7 +2567,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzTaskVtbl,
+  record IAzTaskVtable,
     query_interface : Proc(IAzTask*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzTask*, UInt32),
     release : Proc(IAzTask*, UInt32),
@@ -2604,7 +2604,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzTask, lpVtbl : IAzTaskVtbl* do
+  record IAzTask, lpVtbl : IAzTaskVtable* do
     GUID = LibC::GUID.new(0xcb94e592_u32, 0x2e0e_u16, 0x4a6c_u16, StaticArray[0xa3_u8, 0x36_u8, 0xb8_u8, 0x9a_u8, 0x6d_u8, 0xc1_u8, 0xe3_u8, 0x88_u8])
     def query_interface(this : IAzTask*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2709,7 +2709,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzTasksVtbl,
+  record IAzTasksVtable,
     query_interface : Proc(IAzTasks*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzTasks*, UInt32),
     release : Proc(IAzTasks*, UInt32),
@@ -2723,7 +2723,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzTasks, lpVtbl : IAzTasksVtbl* do
+  record IAzTasks, lpVtbl : IAzTasksVtable* do
     GUID = LibC::GUID.new(0xb338ccab_u32, 0x4c85_u16, 0x4388_u16, StaticArray[0x8c_u8, 0xa_u8, 0xc5_u8, 0x85_u8, 0x92_u8, 0xba_u8, 0xd3_u8, 0x98_u8])
     def query_interface(this : IAzTasks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2759,7 +2759,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzScopeVtbl,
+  record IAzScopeVtable,
     query_interface : Proc(IAzScope*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzScope*, UInt32),
     release : Proc(IAzScope*, UInt32),
@@ -2808,7 +2808,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzScope, lpVtbl : IAzScopeVtbl* do
+  record IAzScope, lpVtbl : IAzScopeVtable* do
     GUID = LibC::GUID.new(0xe52487_u32, 0xe08d_u16, 0x4514_u16, StaticArray[0xb6_u8, 0x2e_u8, 0x87_u8, 0x7d_u8, 0x56_u8, 0x45_u8, 0xf5_u8, 0xab_u8])
     def query_interface(this : IAzScope*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2949,7 +2949,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzScopesVtbl,
+  record IAzScopesVtable,
     query_interface : Proc(IAzScopes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzScopes*, UInt32),
     release : Proc(IAzScopes*, UInt32),
@@ -2963,7 +2963,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzScopes, lpVtbl : IAzScopesVtbl* do
+  record IAzScopes, lpVtbl : IAzScopesVtable* do
     GUID = LibC::GUID.new(0x78e14853_u32, 0x9f5e_u16, 0x406d_u16, StaticArray[0x9b_u8, 0x91_u8, 0x6b_u8, 0xdb_u8, 0xa6_u8, 0x97_u8, 0x35_u8, 0x10_u8])
     def query_interface(this : IAzScopes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2999,7 +2999,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzApplicationGroupVtbl,
+  record IAzApplicationGroupVtable,
     query_interface : Proc(IAzApplicationGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzApplicationGroup*, UInt32),
     release : Proc(IAzApplicationGroup*, UInt32),
@@ -3042,7 +3042,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzApplicationGroup, lpVtbl : IAzApplicationGroupVtbl* do
+  record IAzApplicationGroup, lpVtbl : IAzApplicationGroupVtable* do
     GUID = LibC::GUID.new(0xf1b744cd_u32, 0x58a6_u16, 0x4e06_u16, StaticArray[0x9f_u8, 0xbf_u8, 0x36_u8, 0xf6_u8, 0xd7_u8, 0x79_u8, 0xe2_u8, 0x1e_u8])
     def query_interface(this : IAzApplicationGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3165,7 +3165,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzApplicationGroupsVtbl,
+  record IAzApplicationGroupsVtable,
     query_interface : Proc(IAzApplicationGroups*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzApplicationGroups*, UInt32),
     release : Proc(IAzApplicationGroups*, UInt32),
@@ -3179,7 +3179,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzApplicationGroups, lpVtbl : IAzApplicationGroupsVtbl* do
+  record IAzApplicationGroups, lpVtbl : IAzApplicationGroupsVtable* do
     GUID = LibC::GUID.new(0x4ce66ad5_u32, 0x9f3c_u16, 0x469d_u16, StaticArray[0xa9_u8, 0x11_u8, 0xb9_u8, 0x98_u8, 0x87_u8, 0xa7_u8, 0xe6_u8, 0x85_u8])
     def query_interface(this : IAzApplicationGroups*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3215,7 +3215,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzRoleVtbl,
+  record IAzRoleVtable,
     query_interface : Proc(IAzRole*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzRole*, UInt32),
     release : Proc(IAzRole*, UInt32),
@@ -3253,7 +3253,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzRole, lpVtbl : IAzRoleVtbl* do
+  record IAzRole, lpVtbl : IAzRoleVtable* do
     GUID = LibC::GUID.new(0x859e0d8d_u32, 0x62d7_u16, 0x41d8_u16, StaticArray[0xa0_u8, 0x34_u8, 0xc0_u8, 0xcd_u8, 0x5d_u8, 0x43_u8, 0xfd_u8, 0xfa_u8])
     def query_interface(this : IAzRole*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3361,7 +3361,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzRolesVtbl,
+  record IAzRolesVtable,
     query_interface : Proc(IAzRoles*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzRoles*, UInt32),
     release : Proc(IAzRoles*, UInt32),
@@ -3375,7 +3375,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzRoles, lpVtbl : IAzRolesVtbl* do
+  record IAzRoles, lpVtbl : IAzRolesVtable* do
     GUID = LibC::GUID.new(0x95e0f119_u32, 0x13b4_u16, 0x4dae_u16, StaticArray[0xb6_u8, 0x5f_u8, 0x2f_u8, 0x7d_u8, 0x60_u8, 0xd8_u8, 0x22_u8, 0xe4_u8])
     def query_interface(this : IAzRoles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3411,7 +3411,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzClientContextVtbl,
+  record IAzClientContextVtable,
     query_interface : Proc(IAzClientContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzClientContext*, UInt32),
     release : Proc(IAzClientContext*, UInt32),
@@ -3435,7 +3435,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzClientContext, lpVtbl : IAzClientContextVtbl* do
+  record IAzClientContext, lpVtbl : IAzClientContextVtable* do
     GUID = LibC::GUID.new(0xeff1f00b_u32, 0x488a_u16, 0x466d_u16, StaticArray[0xaf_u8, 0xd9_u8, 0xa4_u8, 0x1_u8, 0xc5_u8, 0xf9_u8, 0xee_u8, 0xf5_u8])
     def query_interface(this : IAzClientContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3501,7 +3501,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzClientContext2Vtbl,
+  record IAzClientContext2Vtable,
     query_interface : Proc(IAzClientContext2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzClientContext2*, UInt32),
     release : Proc(IAzClientContext2*, UInt32),
@@ -3531,7 +3531,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzClientContext2, lpVtbl : IAzClientContext2Vtbl* do
+  record IAzClientContext2, lpVtbl : IAzClientContext2Vtable* do
     GUID = LibC::GUID.new(0x2b0c92b8_u32, 0x208a_u16, 0x488a_u16, StaticArray[0x8f_u8, 0x81_u8, 0xe4_u8, 0xed_u8, 0xb2_u8, 0x21_u8, 0x11_u8, 0xcd_u8])
     def query_interface(this : IAzClientContext2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3615,7 +3615,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzBizRuleContextVtbl,
+  record IAzBizRuleContextVtable,
     query_interface : Proc(IAzBizRuleContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzBizRuleContext*, UInt32),
     release : Proc(IAzBizRuleContext*, UInt32),
@@ -3630,7 +3630,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzBizRuleContext, lpVtbl : IAzBizRuleContextVtbl* do
+  record IAzBizRuleContext, lpVtbl : IAzBizRuleContextVtable* do
     GUID = LibC::GUID.new(0xe192f17d_u32, 0xd59f_u16, 0x455e_u16, StaticArray[0xa1_u8, 0x52_u8, 0x94_u8, 0x3_u8, 0x16_u8, 0xcd_u8, 0x77_u8, 0xb2_u8])
     def query_interface(this : IAzBizRuleContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3669,7 +3669,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzBizRuleParametersVtbl,
+  record IAzBizRuleParametersVtable,
     query_interface : Proc(IAzBizRuleParameters*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzBizRuleParameters*, UInt32),
     release : Proc(IAzBizRuleParameters*, UInt32),
@@ -3686,7 +3686,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzBizRuleParameters, lpVtbl : IAzBizRuleParametersVtbl* do
+  record IAzBizRuleParameters, lpVtbl : IAzBizRuleParametersVtable* do
     GUID = LibC::GUID.new(0xfc17685f_u32, 0xe25d_u16, 0x4dcd_u16, StaticArray[0xba_u8, 0xe1_u8, 0x27_u8, 0x6e_u8, 0xc9_u8, 0x53_u8, 0x3c_u8, 0xb5_u8])
     def query_interface(this : IAzBizRuleParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3731,7 +3731,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzBizRuleInterfacesVtbl,
+  record IAzBizRuleInterfacesVtable,
     query_interface : Proc(IAzBizRuleInterfaces*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzBizRuleInterfaces*, UInt32),
     release : Proc(IAzBizRuleInterfaces*, UInt32),
@@ -3748,7 +3748,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzBizRuleInterfaces, lpVtbl : IAzBizRuleInterfacesVtbl* do
+  record IAzBizRuleInterfaces, lpVtbl : IAzBizRuleInterfacesVtable* do
     GUID = LibC::GUID.new(0xe94128c7_u32, 0xe9da_u16, 0x44cc_u16, StaticArray[0xb0_u8, 0xbd_u8, 0x53_u8, 0x3_u8, 0x6f_u8, 0x3a_u8, 0xab_u8, 0x3d_u8])
     def query_interface(this : IAzBizRuleInterfaces*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3793,7 +3793,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzClientContext3Vtbl,
+  record IAzClientContext3Vtable,
     query_interface : Proc(IAzClientContext3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzClientContext3*, UInt32),
     release : Proc(IAzClientContext3*, UInt32),
@@ -3831,7 +3831,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzClientContext3, lpVtbl : IAzClientContext3Vtbl* do
+  record IAzClientContext3, lpVtbl : IAzClientContext3Vtable* do
     GUID = LibC::GUID.new(0x11894fde_u32, 0x1deb_u16, 0x4b4b_u16, StaticArray[0x89_u8, 0x7_u8, 0x6d_u8, 0x1c_u8, 0xda_u8, 0x1f_u8, 0x5d_u8, 0x4f_u8])
     def query_interface(this : IAzClientContext3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3939,7 +3939,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzScope2Vtbl,
+  record IAzScope2Vtable,
     query_interface : Proc(IAzScope2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzScope2*, UInt32),
     release : Proc(IAzScope2*, UInt32),
@@ -3996,7 +3996,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzScope2, lpVtbl : IAzScope2Vtbl* do
+  record IAzScope2, lpVtbl : IAzScope2Vtable* do
     GUID = LibC::GUID.new(0xee9fe8c9_u32, 0xc9f3_u16, 0x40e2_u16, StaticArray[0xaa_u8, 0x12_u8, 0xd1_u8, 0xd8_u8, 0x59_u8, 0x97_u8, 0x27_u8, 0xfd_u8])
     def query_interface(this : IAzScope2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4161,7 +4161,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzApplication3Vtbl,
+  record IAzApplication3Vtable,
     query_interface : Proc(IAzApplication3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzApplication3*, UInt32),
     release : Proc(IAzApplication3*, UInt32),
@@ -4249,7 +4249,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzApplication3, lpVtbl : IAzApplication3Vtbl* do
+  record IAzApplication3, lpVtbl : IAzApplication3Vtable* do
     GUID = LibC::GUID.new(0x181c845e_u32, 0x7196_u16, 0x4a7d_u16, StaticArray[0xac_u8, 0x2e_u8, 0x2_u8, 0xc_u8, 0xb_u8, 0xb7_u8, 0xa3_u8, 0x3_u8])
     def query_interface(this : IAzApplication3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4507,7 +4507,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzOperation2Vtbl,
+  record IAzOperation2Vtable,
     query_interface : Proc(IAzOperation2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzOperation2*, UInt32),
     release : Proc(IAzOperation2*, UInt32),
@@ -4531,7 +4531,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzOperation2, lpVtbl : IAzOperation2Vtbl* do
+  record IAzOperation2, lpVtbl : IAzOperation2Vtable* do
     GUID = LibC::GUID.new(0x1f5ea01f_u32, 0x44a2_u16, 0x4184_u16, StaticArray[0x9c_u8, 0x48_u8, 0xa7_u8, 0x5b_u8, 0x4d_u8, 0xcc_u8, 0x8c_u8, 0xcc_u8])
     def query_interface(this : IAzOperation2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4597,7 +4597,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzRoleDefinitionsVtbl,
+  record IAzRoleDefinitionsVtable,
     query_interface : Proc(IAzRoleDefinitions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzRoleDefinitions*, UInt32),
     release : Proc(IAzRoleDefinitions*, UInt32),
@@ -4611,7 +4611,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzRoleDefinitions, lpVtbl : IAzRoleDefinitionsVtbl* do
+  record IAzRoleDefinitions, lpVtbl : IAzRoleDefinitionsVtable* do
     GUID = LibC::GUID.new(0x881f25a5_u32, 0xd755_u16, 0x4550_u16, StaticArray[0x95_u8, 0x7a_u8, 0xd5_u8, 0x3_u8, 0xa3_u8, 0xb3_u8, 0x40_u8, 0x1_u8])
     def query_interface(this : IAzRoleDefinitions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4647,7 +4647,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzRoleDefinitionVtbl,
+  record IAzRoleDefinitionVtable,
     query_interface : Proc(IAzRoleDefinition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzRoleDefinition*, UInt32),
     release : Proc(IAzRoleDefinition*, UInt32),
@@ -4688,7 +4688,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzRoleDefinition, lpVtbl : IAzRoleDefinitionVtbl* do
+  record IAzRoleDefinition, lpVtbl : IAzRoleDefinitionVtable* do
     GUID = LibC::GUID.new(0xd97fcea1_u32, 0x2599_u16, 0x44f1_u16, StaticArray[0x9f_u8, 0xc3_u8, 0x58_u8, 0xe9_u8, 0xfb_u8, 0xe0_u8, 0x94_u8, 0x66_u8])
     def query_interface(this : IAzRoleDefinition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4805,7 +4805,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzRoleAssignmentVtbl,
+  record IAzRoleAssignmentVtable,
     query_interface : Proc(IAzRoleAssignment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzRoleAssignment*, UInt32),
     release : Proc(IAzRoleAssignment*, UInt32),
@@ -4847,7 +4847,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzRoleAssignment, lpVtbl : IAzRoleAssignmentVtbl* do
+  record IAzRoleAssignment, lpVtbl : IAzRoleAssignmentVtable* do
     GUID = LibC::GUID.new(0x55647d31_u32, 0xd5a_u16, 0x4fa3_u16, StaticArray[0xb4_u8, 0xac_u8, 0x2b_u8, 0x5f_u8, 0x9a_u8, 0xd5_u8, 0xab_u8, 0x76_u8])
     def query_interface(this : IAzRoleAssignment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4967,7 +4967,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzRoleAssignmentsVtbl,
+  record IAzRoleAssignmentsVtable,
     query_interface : Proc(IAzRoleAssignments*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzRoleAssignments*, UInt32),
     release : Proc(IAzRoleAssignments*, UInt32),
@@ -4981,7 +4981,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzRoleAssignments, lpVtbl : IAzRoleAssignmentsVtbl* do
+  record IAzRoleAssignments, lpVtbl : IAzRoleAssignmentsVtable* do
     GUID = LibC::GUID.new(0x9c80b900_u32, 0xfceb_u16, 0x4d73_u16, StaticArray[0xa0_u8, 0xf4_u8, 0xc8_u8, 0x3b_u8, 0xb_u8, 0xbf_u8, 0x24_u8, 0x81_u8])
     def query_interface(this : IAzRoleAssignments*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5017,7 +5017,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzPrincipalLocatorVtbl,
+  record IAzPrincipalLocatorVtable,
     query_interface : Proc(IAzPrincipalLocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzPrincipalLocator*, UInt32),
     release : Proc(IAzPrincipalLocator*, UInt32),
@@ -5030,7 +5030,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzPrincipalLocator, lpVtbl : IAzPrincipalLocatorVtbl* do
+  record IAzPrincipalLocator, lpVtbl : IAzPrincipalLocatorVtable* do
     GUID = LibC::GUID.new(0xe5c3507d_u32, 0xad6a_u16, 0x4992_u16, StaticArray[0x9c_u8, 0x7f_u8, 0x74_u8, 0xab_u8, 0x48_u8, 0xb_u8, 0x44_u8, 0xcc_u8])
     def query_interface(this : IAzPrincipalLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5063,7 +5063,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzNameResolverVtbl,
+  record IAzNameResolverVtable,
     query_interface : Proc(IAzNameResolver*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzNameResolver*, UInt32),
     release : Proc(IAzNameResolver*, UInt32),
@@ -5076,7 +5076,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzNameResolver, lpVtbl : IAzNameResolverVtbl* do
+  record IAzNameResolver, lpVtbl : IAzNameResolverVtable* do
     GUID = LibC::GUID.new(0x504d0f15_u32, 0x73e2_u16, 0x43df_u16, StaticArray[0xa8_u8, 0x70_u8, 0xa6_u8, 0x4f_u8, 0x40_u8, 0x71_u8, 0x4f_u8, 0x53_u8])
     def query_interface(this : IAzNameResolver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5109,7 +5109,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzObjectPickerVtbl,
+  record IAzObjectPickerVtable,
     query_interface : Proc(IAzObjectPicker*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzObjectPicker*, UInt32),
     release : Proc(IAzObjectPicker*, UInt32),
@@ -5122,7 +5122,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzObjectPicker, lpVtbl : IAzObjectPickerVtbl* do
+  record IAzObjectPicker, lpVtbl : IAzObjectPickerVtable* do
     GUID = LibC::GUID.new(0x63130a48_u32, 0x699a_u16, 0x42d8_u16, StaticArray[0xbf_u8, 0x1_u8, 0xc6_u8, 0x2a_u8, 0xc3_u8, 0xfb_u8, 0x79_u8, 0xf9_u8])
     def query_interface(this : IAzObjectPicker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5155,7 +5155,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzApplicationGroup2Vtbl,
+  record IAzApplicationGroup2Vtable,
     query_interface : Proc(IAzApplicationGroup2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzApplicationGroup2*, UInt32),
     release : Proc(IAzApplicationGroup2*, UInt32),
@@ -5205,7 +5205,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzApplicationGroup2, lpVtbl : IAzApplicationGroup2Vtbl* do
+  record IAzApplicationGroup2, lpVtbl : IAzApplicationGroup2Vtable* do
     GUID = LibC::GUID.new(0x3f0613fc_u32, 0xb71a_u16, 0x464e_u16, StaticArray[0xa1_u8, 0x1d_u8, 0x5b_u8, 0x88_u8, 0x1a_u8, 0x56_u8, 0xce_u8, 0xfa_u8])
     def query_interface(this : IAzApplicationGroup2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5349,7 +5349,7 @@ module Win32cr::Security::Authorization
   end
 
   @[Extern]
-  record IAzTask2Vtbl,
+  record IAzTask2Vtable,
     query_interface : Proc(IAzTask2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAzTask2*, UInt32),
     release : Proc(IAzTask2*, UInt32),
@@ -5387,7 +5387,7 @@ module Win32cr::Security::Authorization
 
 
   @[Extern]
-  record IAzTask2, lpVtbl : IAzTask2Vtbl* do
+  record IAzTask2, lpVtbl : IAzTask2Vtable* do
     GUID = LibC::GUID.new(0x3a9a5ee_u32, 0x48c8_u16, 0x4832_u16, StaticArray[0x90_u8, 0x25_u8, 0xaa_u8, 0xd5_u8, 0x3_u8, 0xc4_u8, 0x65_u8, 0x26_u8])
     def query_interface(this : IAzTask2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5495,335 +5495,501 @@ module Win32cr::Security::Authorization
   end
 
   def authzAccessCheck(flags : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_FLAGS, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, optional_security_descriptor_array : Win32cr::Security::PSECURITY_DESCRIPTOR*, optional_security_descriptor_count : UInt32, pReply : Win32cr::Security::Authorization::AUTHZ_ACCESS_REPLY*, phAccessCheckResults : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzAccessCheck(flags, hAuthzClientContext, pRequest, hAuditEvent, pSecurityDescriptor, optional_security_descriptor_array, optional_security_descriptor_count, pReply, phAccessCheckResults)
+    {% end %}
   end
 
   def authzCachedAccessCheck(flags : UInt32, hAccessCheckResults : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_RESULTS_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE, pReply : Win32cr::Security::Authorization::AUTHZ_ACCESS_REPLY*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzCachedAccessCheck(flags, hAccessCheckResults, pRequest, hAuditEvent, pReply)
+    {% end %}
   end
 
   def authzOpenObjectAudit(flags : UInt32, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, optional_security_descriptor_array : Win32cr::Security::PSECURITY_DESCRIPTOR*, optional_security_descriptor_count : UInt32, pReply : Win32cr::Security::Authorization::AUTHZ_ACCESS_REPLY*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzOpenObjectAudit(flags, hAuthzClientContext, pRequest, hAuditEvent, pSecurityDescriptor, optional_security_descriptor_array, optional_security_descriptor_count, pReply)
+    {% end %}
   end
 
   def authzFreeHandle(hAccessCheckResults : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_RESULTS_HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzFreeHandle(hAccessCheckResults)
+    {% end %}
   end
 
   def authzInitializeResourceManager(flags : UInt32, pfnDynamicAccessCheck : Win32cr::Security::Authorization::PFN_AUTHZ_DYNAMIC_ACCESS_CHECK, pfnComputeDynamicGroups : Win32cr::Security::Authorization::PFN_AUTHZ_COMPUTE_DYNAMIC_GROUPS, pfnFreeDynamicGroups : Win32cr::Security::Authorization::PFN_AUTHZ_FREE_DYNAMIC_GROUPS, szResourceManagerName : Win32cr::Foundation::PWSTR, phAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInitializeResourceManager(flags, pfnDynamicAccessCheck, pfnComputeDynamicGroups, pfnFreeDynamicGroups, szResourceManagerName, phAuthzResourceManager)
+    {% end %}
   end
 
   def authzInitializeResourceManagerEx(flags : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_FLAGS, pAuthzInitInfo : Win32cr::Security::Authorization::AUTHZ_INIT_INFO*, phAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInitializeResourceManagerEx(flags, pAuthzInitInfo, phAuthzResourceManager)
+    {% end %}
   end
 
   def authzInitializeRemoteResourceManager(pRpcInitInfo : Win32cr::Security::Authorization::AUTHZ_RPC_INIT_INFO_CLIENT*, phAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInitializeRemoteResourceManager(pRpcInitInfo, phAuthzResourceManager)
+    {% end %}
   end
 
   def authzFreeResourceManager(hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzFreeResourceManager(hAuthzResourceManager)
+    {% end %}
   end
 
   def authzInitializeContextFromToken(flags : UInt32, token_handle : Win32cr::Foundation::HANDLE, hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE, pExpirationTime : Win32cr::Foundation::LARGE_INTEGER*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInitializeContextFromToken(flags, token_handle, hAuthzResourceManager, pExpirationTime, identifier, dynamic_group_args, phAuthzClientContext)
+    {% end %}
   end
 
   def authzInitializeContextFromSid(flags : UInt32, user_sid : Win32cr::Foundation::PSID, hAuthzResourceManager : Win32cr::Security::Authorization::AUTHZ_RESOURCE_MANAGER_HANDLE, pExpirationTime : Win32cr::Foundation::LARGE_INTEGER*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInitializeContextFromSid(flags, user_sid, hAuthzResourceManager, pExpirationTime, identifier, dynamic_group_args, phAuthzClientContext)
+    {% end %}
   end
 
   def authzInitializeContextFromAuthzContext(flags : UInt32, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pExpirationTime : Win32cr::Foundation::LARGE_INTEGER*, identifier : Win32cr::Foundation::LUID, dynamic_group_args : Void*, phNewAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInitializeContextFromAuthzContext(flags, hAuthzClientContext, pExpirationTime, identifier, dynamic_group_args, phNewAuthzClientContext)
+    {% end %}
   end
 
   def authzInitializeCompoundContext(user_context : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, device_context : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, phCompoundContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInitializeCompoundContext(user_context, device_context, phCompoundContext)
+    {% end %}
   end
 
   def authzAddSidsToContext(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, sids : Win32cr::Security::SID_AND_ATTRIBUTES*, sid_count : UInt32, restricted_sids : Win32cr::Security::SID_AND_ATTRIBUTES*, restricted_sid_count : UInt32, phNewAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzAddSidsToContext(hAuthzClientContext, sids, sid_count, restricted_sids, restricted_sid_count, phNewAuthzClientContext)
+    {% end %}
   end
 
   def authzModifySecurityAttributes(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pOperations : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, pAttributes : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzModifySecurityAttributes(hAuthzClientContext, pOperations, pAttributes)
+    {% end %}
   end
 
   def authzModifyClaims(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, claim_class : Win32cr::Security::Authorization::AUTHZ_CONTEXT_INFORMATION_CLASS, pClaimOperations : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTE_OPERATION*, pClaims : Win32cr::Security::Authorization::AUTHZ_SECURITY_ATTRIBUTES_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzModifyClaims(hAuthzClientContext, claim_class, pClaimOperations, pClaims)
+    {% end %}
   end
 
   def authzModifySids(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, sid_class : Win32cr::Security::Authorization::AUTHZ_CONTEXT_INFORMATION_CLASS, pSidOperations : Win32cr::Security::Authorization::AUTHZ_SID_OPERATION*, pSids : Win32cr::Security::TOKEN_GROUPS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzModifySids(hAuthzClientContext, sid_class, pSidOperations, pSids)
+    {% end %}
   end
 
   def authzSetAppContainerInformation(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pAppContainerSid : Win32cr::Foundation::PSID, capability_count : UInt32, pCapabilitySids : Win32cr::Security::SID_AND_ATTRIBUTES*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzSetAppContainerInformation(hAuthzClientContext, pAppContainerSid, capability_count, pCapabilitySids)
+    {% end %}
   end
 
   def authzGetInformationFromContext(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, info_class : Win32cr::Security::Authorization::AUTHZ_CONTEXT_INFORMATION_CLASS, buffer_size : UInt32, pSizeRequired : UInt32*, buffer : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzGetInformationFromContext(hAuthzClientContext, info_class, buffer_size, pSizeRequired, buffer)
+    {% end %}
   end
 
   def authzFreeContext(hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzFreeContext(hAuthzClientContext)
+    {% end %}
   end
 
   def authzInitializeObjectAccessAuditEvent(flags : Win32cr::Security::Authorization::AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS, hAuditEventType : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType : Win32cr::Foundation::PWSTR, szObjectType : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szAdditionalInfo : Win32cr::Foundation::PWSTR, phAuditEvent : LibC::IntPtrT*, dwAdditionalParameterCount : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInitializeObjectAccessAuditEvent(flags, hAuditEventType, szOperationType, szObjectType, szObjectName, szAdditionalInfo, phAuditEvent, dwAdditionalParameterCount)
+    {% end %}
   end
 
   def authzInitializeObjectAccessAuditEvent2(flags : UInt32, hAuditEventType : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_TYPE_HANDLE, szOperationType : Win32cr::Foundation::PWSTR, szObjectType : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szAdditionalInfo : Win32cr::Foundation::PWSTR, szAdditionalInfo2 : Win32cr::Foundation::PWSTR, phAuditEvent : LibC::IntPtrT*, dwAdditionalParameterCount : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInitializeObjectAccessAuditEvent2(flags, hAuditEventType, szOperationType, szObjectType, szObjectName, szAdditionalInfo, szAdditionalInfo2, phAuditEvent, dwAdditionalParameterCount)
+    {% end %}
   end
 
   def authzFreeAuditEvent(hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzFreeAuditEvent(hAuditEvent)
+    {% end %}
   end
 
   def authzEvaluateSacl(authz_client_context : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, sacl : Win32cr::Security::ACL*, granted_access : UInt32, access_granted : Win32cr::Foundation::BOOL, pbGenerateAudit : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzEvaluateSacl(authz_client_context, pRequest, sacl, granted_access, access_granted, pbGenerateAudit)
+    {% end %}
   end
 
   def authzInstallSecurityEventSource(dwFlags : UInt32, pRegistration : Win32cr::Security::Authorization::AUTHZ_SOURCE_SCHEMA_REGISTRATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzInstallSecurityEventSource(dwFlags, pRegistration)
+    {% end %}
   end
 
   def authzUninstallSecurityEventSource(dwFlags : UInt32, szEventSourceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzUninstallSecurityEventSource(dwFlags, szEventSourceName)
+    {% end %}
   end
 
   def authzEnumerateSecurityEventSources(dwFlags : UInt32, buffer : Win32cr::Security::Authorization::AUTHZ_SOURCE_SCHEMA_REGISTRATION*, pdwCount : UInt32*, pdwLength : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzEnumerateSecurityEventSources(dwFlags, buffer, pdwCount, pdwLength)
+    {% end %}
   end
 
   def authzRegisterSecurityEventSource(dwFlags : UInt32, szEventSourceName : Win32cr::Foundation::PWSTR, phEventProvider : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzRegisterSecurityEventSource(dwFlags, szEventSourceName, phEventProvider)
+    {% end %}
   end
 
   def authzUnregisterSecurityEventSource(dwFlags : UInt32, phEventProvider : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzUnregisterSecurityEventSource(dwFlags, phEventProvider)
+    {% end %}
   end
 
   def authzReportSecurityEvent(dwFlags : UInt32, hEventProvider : Win32cr::Security::Authorization::AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE, dwAuditId : UInt32, pUserSid : Win32cr::Foundation::PSID, dwCount : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzReportSecurityEvent(dwFlags, hEventProvider, dwAuditId, pUserSid, dwCount)
+    {% end %}
   end
 
   def authzReportSecurityEventFromParams(dwFlags : UInt32, hEventProvider : Win32cr::Security::Authorization::AUTHZ_SECURITY_EVENT_PROVIDER_HANDLE, dwAuditId : UInt32, pUserSid : Win32cr::Foundation::PSID, pParams : Win32cr::Security::Authorization::AUDIT_PARAMS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzReportSecurityEventFromParams(dwFlags, hEventProvider, dwAuditId, pUserSid, pParams)
+    {% end %}
   end
 
   def authzRegisterCapChangeNotification(phCapChangeSubscription : Win32cr::Security::Authorization::AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE__**, pfnCapChangeCallback : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, pCallbackContext : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzRegisterCapChangeNotification(phCapChangeSubscription, pfnCapChangeCallback, pCallbackContext)
+    {% end %}
   end
 
   def authzUnregisterCapChangeNotification(hCapChangeSubscription : Win32cr::Security::Authorization::AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE__*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzUnregisterCapChangeNotification(hCapChangeSubscription)
+    {% end %}
   end
 
   def authzFreeCentralAccessPolicyCache : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AuthzFreeCentralAccessPolicyCache
+    {% end %}
   end
 
   def setEntriesInAclA(cCountOfExplicitEntries : UInt32, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, old_acl : Win32cr::Security::ACL*, new_acl : Win32cr::Security::ACL**) : UInt32
+    {% if !flag?(:docs) %}
     C.SetEntriesInAclA(cCountOfExplicitEntries, pListOfExplicitEntries, old_acl, new_acl)
+    {% end %}
   end
 
   def setEntriesInAclW(cCountOfExplicitEntries : UInt32, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, old_acl : Win32cr::Security::ACL*, new_acl : Win32cr::Security::ACL**) : UInt32
+    {% if !flag?(:docs) %}
     C.SetEntriesInAclW(cCountOfExplicitEntries, pListOfExplicitEntries, old_acl, new_acl)
+    {% end %}
   end
 
   def getExplicitEntriesFromAclA(pacl : Win32cr::Security::ACL*, pcCountOfExplicitEntries : UInt32*, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**) : UInt32
+    {% if !flag?(:docs) %}
     C.GetExplicitEntriesFromAclA(pacl, pcCountOfExplicitEntries, pListOfExplicitEntries)
+    {% end %}
   end
 
   def getExplicitEntriesFromAclW(pacl : Win32cr::Security::ACL*, pcCountOfExplicitEntries : UInt32*, pListOfExplicitEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**) : UInt32
+    {% if !flag?(:docs) %}
     C.GetExplicitEntriesFromAclW(pacl, pcCountOfExplicitEntries, pListOfExplicitEntries)
+    {% end %}
   end
 
   def getEffectiveRightsFromAclA(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pAccessRights : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetEffectiveRightsFromAclA(pacl, pTrustee, pAccessRights)
+    {% end %}
   end
 
   def getEffectiveRightsFromAclW(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pAccessRights : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetEffectiveRightsFromAclW(pacl, pTrustee, pAccessRights)
+    {% end %}
   end
 
   def getAuditedPermissionsFromAclA(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pSuccessfulAuditedRights : UInt32*, pFailedAuditRights : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetAuditedPermissionsFromAclA(pacl, pTrustee, pSuccessfulAuditedRights, pFailedAuditRights)
+    {% end %}
   end
 
   def getAuditedPermissionsFromAclW(pacl : Win32cr::Security::ACL*, pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pSuccessfulAuditedRights : UInt32*, pFailedAuditRights : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetAuditedPermissionsFromAclW(pacl, pTrustee, pSuccessfulAuditedRights, pFailedAuditRights)
+    {% end %}
   end
 
   def getNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, ppsidOwner : Win32cr::Foundation::PSID*, ppsidGroup : Win32cr::Foundation::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetNamedSecurityInfoA(pObjectName, object_type, security_info, ppsidOwner, ppsidGroup, ppDacl, ppSacl, ppSecurityDescriptor)
+    {% end %}
   end
 
   def getNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, ppsidOwner : Win32cr::Foundation::PSID*, ppsidGroup : Win32cr::Foundation::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetNamedSecurityInfoW(pObjectName, object_type, security_info, ppsidOwner, ppsidGroup, ppDacl, ppSacl, ppSecurityDescriptor)
+    {% end %}
   end
 
   def getSecurityInfo(handle : Win32cr::Foundation::HANDLE, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, ppsidOwner : Win32cr::Foundation::PSID*, ppsidGroup : Win32cr::Foundation::PSID*, ppDacl : Win32cr::Security::ACL**, ppSacl : Win32cr::Security::ACL**, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetSecurityInfo(handle, object_type, security_info, ppsidOwner, ppsidGroup, ppDacl, ppSacl, ppSecurityDescriptor)
+    {% end %}
   end
 
   def setNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, psidOwner : Win32cr::Foundation::PSID, psidGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : UInt32
+    {% if !flag?(:docs) %}
     C.SetNamedSecurityInfoA(pObjectName, object_type, security_info, psidOwner, psidGroup, pDacl, pSacl)
+    {% end %}
   end
 
   def setNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : Win32cr::Security::OBJECT_SECURITY_INFORMATION, psidOwner : Win32cr::Foundation::PSID, psidGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : UInt32
+    {% if !flag?(:docs) %}
     C.SetNamedSecurityInfoW(pObjectName, object_type, security_info, psidOwner, psidGroup, pDacl, pSacl)
+    {% end %}
   end
 
   def setSecurityInfo(handle : Win32cr::Foundation::HANDLE, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, psidOwner : Win32cr::Foundation::PSID, psidGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*) : UInt32
+    {% if !flag?(:docs) %}
     C.SetSecurityInfo(handle, object_type, security_info, psidOwner, psidGroup, pDacl, pSacl)
+    {% end %}
   end
 
   def getInheritanceSourceA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, container : Win32cr::Foundation::BOOL, pObjectClassGuids : LibC::GUID**, guid_count : UInt32, pAcl : Win32cr::Security::ACL*, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTIONS*, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMA*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetInheritanceSourceA(pObjectName, object_type, security_info, container, pObjectClassGuids, guid_count, pAcl, pfnArray, pGenericMapping, pInheritArray)
+    {% end %}
   end
 
   def getInheritanceSourceW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, container : Win32cr::Foundation::BOOL, pObjectClassGuids : LibC::GUID**, guid_count : UInt32, pAcl : Win32cr::Security::ACL*, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTIONS*, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMW*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetInheritanceSourceW(pObjectName, object_type, security_info, container, pObjectClassGuids, guid_count, pAcl, pfnArray, pGenericMapping, pInheritArray)
+    {% end %}
   end
 
   def freeInheritedFromArray(pInheritArray : Win32cr::Security::Authorization::INHERITED_FROMW*, ace_cnt : UInt16, pfnArray : Win32cr::Security::Authorization::FN_OBJECT_MGR_FUNCTIONS*) : UInt32
+    {% if !flag?(:docs) %}
     C.FreeInheritedFromArray(pInheritArray, ace_cnt, pfnArray)
+    {% end %}
   end
 
   def treeResetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, keep_explicit : Win32cr::Foundation::BOOL, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.TreeResetNamedSecurityInfoA(pObjectName, object_type, security_info, pOwner, pGroup, pDacl, pSacl, keep_explicit, fnProgress, progress_invoke_setting, args)
+    {% end %}
   end
 
   def treeResetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, keep_explicit : Win32cr::Foundation::BOOL, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.TreeResetNamedSecurityInfoW(pObjectName, object_type, security_info, pOwner, pGroup, pDacl, pSacl, keep_explicit, fnProgress, progress_invoke_setting, args)
+    {% end %}
   end
 
   def treeSetNamedSecurityInfoA(pObjectName : Win32cr::Foundation::PSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, dwAction : Win32cr::Security::Authorization::TREE_SEC_INFO, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.TreeSetNamedSecurityInfoA(pObjectName, object_type, security_info, pOwner, pGroup, pDacl, pSacl, dwAction, fnProgress, progress_invoke_setting, args)
+    {% end %}
   end
 
   def treeSetNamedSecurityInfoW(pObjectName : Win32cr::Foundation::PWSTR, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, security_info : UInt32, pOwner : Win32cr::Foundation::PSID, pGroup : Win32cr::Foundation::PSID, pDacl : Win32cr::Security::ACL*, pSacl : Win32cr::Security::ACL*, dwAction : Win32cr::Security::Authorization::TREE_SEC_INFO, fnProgress : Win32cr::Security::Authorization::FN_PROGRESS, progress_invoke_setting : Win32cr::Security::Authorization::PROG_INVOKE_SETTING, args : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.TreeSetNamedSecurityInfoW(pObjectName, object_type, security_info, pOwner, pGroup, pDacl, pSacl, dwAction, fnProgress, progress_invoke_setting, args)
+    {% end %}
   end
 
   def buildSecurityDescriptorA(pOwner : Win32cr::Security::Authorization::TRUSTEE_A*, pGroup : Win32cr::Security::Authorization::TRUSTEE_A*, cCountOfAccessEntries : UInt32, pListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, cCountOfAuditEntries : UInt32, pListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, pOldSD : Win32cr::Security::PSECURITY_DESCRIPTOR, pSizeNewSD : UInt32*, pNewSD : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    {% if !flag?(:docs) %}
     C.BuildSecurityDescriptorA(pOwner, pGroup, cCountOfAccessEntries, pListOfAccessEntries, cCountOfAuditEntries, pListOfAuditEntries, pOldSD, pSizeNewSD, pNewSD)
+    {% end %}
   end
 
   def buildSecurityDescriptorW(pOwner : Win32cr::Security::Authorization::TRUSTEE_W*, pGroup : Win32cr::Security::Authorization::TRUSTEE_W*, cCountOfAccessEntries : UInt32, pListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, cCountOfAuditEntries : UInt32, pListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, pOldSD : Win32cr::Security::PSECURITY_DESCRIPTOR, pSizeNewSD : UInt32*, pNewSD : Win32cr::Security::PSECURITY_DESCRIPTOR*) : UInt32
+    {% if !flag?(:docs) %}
     C.BuildSecurityDescriptorW(pOwner, pGroup, cCountOfAccessEntries, pListOfAccessEntries, cCountOfAuditEntries, pListOfAuditEntries, pOldSD, pSizeNewSD, pNewSD)
+    {% end %}
   end
 
   def lookupSecurityDescriptorPartsA(ppOwner : Win32cr::Security::Authorization::TRUSTEE_A**, ppGroup : Win32cr::Security::Authorization::TRUSTEE_A**, pcCountOfAccessEntries : UInt32*, ppListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**, pcCountOfAuditEntries : UInt32*, ppListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A**, pSD : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
+    {% if !flag?(:docs) %}
     C.LookupSecurityDescriptorPartsA(ppOwner, ppGroup, pcCountOfAccessEntries, ppListOfAccessEntries, pcCountOfAuditEntries, ppListOfAuditEntries, pSD)
+    {% end %}
   end
 
   def lookupSecurityDescriptorPartsW(ppOwner : Win32cr::Security::Authorization::TRUSTEE_W**, ppGroup : Win32cr::Security::Authorization::TRUSTEE_W**, pcCountOfAccessEntries : UInt32*, ppListOfAccessEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**, pcCountOfAuditEntries : UInt32*, ppListOfAuditEntries : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W**, pSD : Win32cr::Security::PSECURITY_DESCRIPTOR) : UInt32
+    {% if !flag?(:docs) %}
     C.LookupSecurityDescriptorPartsW(ppOwner, ppGroup, pcCountOfAccessEntries, ppListOfAccessEntries, pcCountOfAuditEntries, ppListOfAuditEntries, pSD)
+    {% end %}
   end
 
   def buildExplicitAccessWithNameA(pExplicitAccess : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, pTrusteeName : Win32cr::Foundation::PSTR, access_permissions : UInt32, access_mode : Win32cr::Security::Authorization::ACCESS_MODE, inheritance : Win32cr::Security::ACE_FLAGS) : Void
+    {% if !flag?(:docs) %}
     C.BuildExplicitAccessWithNameA(pExplicitAccess, pTrusteeName, access_permissions, access_mode, inheritance)
+    {% end %}
   end
 
   def buildExplicitAccessWithNameW(pExplicitAccess : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, pTrusteeName : Win32cr::Foundation::PWSTR, access_permissions : UInt32, access_mode : Win32cr::Security::Authorization::ACCESS_MODE, inheritance : Win32cr::Security::ACE_FLAGS) : Void
+    {% if !flag?(:docs) %}
     C.BuildExplicitAccessWithNameW(pExplicitAccess, pTrusteeName, access_permissions, access_mode, inheritance)
+    {% end %}
   end
 
   def buildImpersonateExplicitAccessWithNameA(pExplicitAccess : Win32cr::Security::Authorization::EXPLICIT_ACCESS_A*, pTrusteeName : Win32cr::Foundation::PSTR, pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, access_permissions : UInt32, access_mode : Win32cr::Security::Authorization::ACCESS_MODE, inheritance : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.BuildImpersonateExplicitAccessWithNameA(pExplicitAccess, pTrusteeName, pTrustee, access_permissions, access_mode, inheritance)
+    {% end %}
   end
 
   def buildImpersonateExplicitAccessWithNameW(pExplicitAccess : Win32cr::Security::Authorization::EXPLICIT_ACCESS_W*, pTrusteeName : Win32cr::Foundation::PWSTR, pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, access_permissions : UInt32, access_mode : Win32cr::Security::Authorization::ACCESS_MODE, inheritance : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.BuildImpersonateExplicitAccessWithNameW(pExplicitAccess, pTrusteeName, pTrustee, access_permissions, access_mode, inheritance)
+    {% end %}
   end
 
   def buildTrusteeWithNameA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pName : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.BuildTrusteeWithNameA(pTrustee, pName)
+    {% end %}
   end
 
   def buildTrusteeWithNameW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pName : Win32cr::Foundation::PWSTR) : Void
+    {% if !flag?(:docs) %}
     C.BuildTrusteeWithNameW(pTrustee, pName)
+    {% end %}
   end
 
   def buildImpersonateTrusteeA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pImpersonateTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Void
+    {% if !flag?(:docs) %}
     C.BuildImpersonateTrusteeA(pTrustee, pImpersonateTrustee)
+    {% end %}
   end
 
   def buildImpersonateTrusteeW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pImpersonateTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Void
+    {% if !flag?(:docs) %}
     C.BuildImpersonateTrusteeW(pTrustee, pImpersonateTrustee)
+    {% end %}
   end
 
   def buildTrusteeWithSidA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pSid : Win32cr::Foundation::PSID) : Void
+    {% if !flag?(:docs) %}
     C.BuildTrusteeWithSidA(pTrustee, pSid)
+    {% end %}
   end
 
   def buildTrusteeWithSidW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pSid : Win32cr::Foundation::PSID) : Void
+    {% if !flag?(:docs) %}
     C.BuildTrusteeWithSidW(pTrustee, pSid)
+    {% end %}
   end
 
   def buildTrusteeWithObjectsAndSidA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pObjSid : Win32cr::Security::Authorization::OBJECTS_AND_SID*, pObjectGuid : LibC::GUID*, pInheritedObjectGuid : LibC::GUID*, pSid : Win32cr::Foundation::PSID) : Void
+    {% if !flag?(:docs) %}
     C.BuildTrusteeWithObjectsAndSidA(pTrustee, pObjSid, pObjectGuid, pInheritedObjectGuid, pSid)
+    {% end %}
   end
 
   def buildTrusteeWithObjectsAndSidW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pObjSid : Win32cr::Security::Authorization::OBJECTS_AND_SID*, pObjectGuid : LibC::GUID*, pInheritedObjectGuid : LibC::GUID*, pSid : Win32cr::Foundation::PSID) : Void
+    {% if !flag?(:docs) %}
     C.BuildTrusteeWithObjectsAndSidW(pTrustee, pObjSid, pObjectGuid, pInheritedObjectGuid, pSid)
+    {% end %}
   end
 
   def buildTrusteeWithObjectsAndNameA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*, pObjName : Win32cr::Security::Authorization::OBJECTS_AND_NAME_A*, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, object_type_name : Win32cr::Foundation::PSTR, inherited_object_type_name : Win32cr::Foundation::PSTR, name : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.BuildTrusteeWithObjectsAndNameA(pTrustee, pObjName, object_type, object_type_name, inherited_object_type_name, name)
+    {% end %}
   end
 
   def buildTrusteeWithObjectsAndNameW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*, pObjName : Win32cr::Security::Authorization::OBJECTS_AND_NAME_W*, object_type : Win32cr::Security::Authorization::SE_OBJECT_TYPE, object_type_name : Win32cr::Foundation::PWSTR, inherited_object_type_name : Win32cr::Foundation::PWSTR, name : Win32cr::Foundation::PWSTR) : Void
+    {% if !flag?(:docs) %}
     C.BuildTrusteeWithObjectsAndNameW(pTrustee, pObjName, object_type, object_type_name, inherited_object_type_name, name)
+    {% end %}
   end
 
   def getTrusteeNameA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.GetTrusteeNameA(pTrustee)
+    {% end %}
   end
 
   def getTrusteeNameW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.GetTrusteeNameW(pTrustee)
+    {% end %}
   end
 
   def getTrusteeTypeA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Security::Authorization::TRUSTEE_TYPE
+    {% if !flag?(:docs) %}
     C.GetTrusteeTypeA(pTrustee)
+    {% end %}
   end
 
   def getTrusteeTypeW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Security::Authorization::TRUSTEE_TYPE
+    {% if !flag?(:docs) %}
     C.GetTrusteeTypeW(pTrustee)
+    {% end %}
   end
 
   def getTrusteeFormA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Security::Authorization::TRUSTEE_FORM
+    {% if !flag?(:docs) %}
     C.GetTrusteeFormA(pTrustee)
+    {% end %}
   end
 
   def getTrusteeFormW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Security::Authorization::TRUSTEE_FORM
+    {% if !flag?(:docs) %}
     C.GetTrusteeFormW(pTrustee)
+    {% end %}
   end
 
   def getMultipleTrusteeOperationA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Security::Authorization::MULTIPLE_TRUSTEE_OPERATION
+    {% if !flag?(:docs) %}
     C.GetMultipleTrusteeOperationA(pTrustee)
+    {% end %}
   end
 
   def getMultipleTrusteeOperationW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Security::Authorization::MULTIPLE_TRUSTEE_OPERATION
+    {% if !flag?(:docs) %}
     C.GetMultipleTrusteeOperationW(pTrustee)
+    {% end %}
   end
 
   def getMultipleTrusteeA(pTrustee : Win32cr::Security::Authorization::TRUSTEE_A*) : Win32cr::Security::Authorization::TRUSTEE_A*
+    {% if !flag?(:docs) %}
     C.GetMultipleTrusteeA(pTrustee)
+    {% end %}
   end
 
   def getMultipleTrusteeW(pTrustee : Win32cr::Security::Authorization::TRUSTEE_W*) : Win32cr::Security::Authorization::TRUSTEE_W*
+    {% if !flag?(:docs) %}
     C.GetMultipleTrusteeW(pTrustee)
+    {% end %}
   end
 
   def convertSidToStringSidA(sid : Win32cr::Foundation::PSID, string_sid : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ConvertSidToStringSidA(sid, string_sid)
+    {% end %}
   end
 
   #def convertSidToStringSidW(sid : Win32cr::Foundation::PSID, string_sid : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
@@ -5831,7 +5997,9 @@ module Win32cr::Security::Authorization
   #end
 
   def convertStringSidToSidA(string_sid : Win32cr::Foundation::PSTR, sid : Win32cr::Foundation::PSID*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ConvertStringSidToSidA(string_sid, sid)
+    {% end %}
   end
 
   #def convertStringSidToSidW(string_sid : Win32cr::Foundation::PWSTR, sid : Win32cr::Foundation::PSID*) : Win32cr::Foundation::BOOL
@@ -5839,23 +6007,32 @@ module Win32cr::Security::Authorization
   #end
 
   def convertStringSecurityDescriptorToSecurityDescriptorA(string_security_descriptor : Win32cr::Foundation::PSTR, string_sd_revision : UInt32, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, security_descriptor_size : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ConvertStringSecurityDescriptorToSecurityDescriptorA(string_security_descriptor, string_sd_revision, security_descriptor, security_descriptor_size)
+    {% end %}
   end
 
   def convertStringSecurityDescriptorToSecurityDescriptorW(string_security_descriptor : Win32cr::Foundation::PWSTR, string_sd_revision : UInt32, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, security_descriptor_size : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ConvertStringSecurityDescriptorToSecurityDescriptorW(string_security_descriptor, string_sd_revision, security_descriptor, security_descriptor_size)
+    {% end %}
   end
 
   def convertSecurityDescriptorToStringSecurityDescriptorA(security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, requested_string_sd_revision : UInt32, security_information : UInt32, string_security_descriptor : Win32cr::Foundation::PSTR*, string_security_descriptor_len : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ConvertSecurityDescriptorToStringSecurityDescriptorA(security_descriptor, requested_string_sd_revision, security_information, string_security_descriptor, string_security_descriptor_len)
+    {% end %}
   end
 
   def convertSecurityDescriptorToStringSecurityDescriptorW(security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, requested_string_sd_revision : UInt32, security_information : UInt32, string_security_descriptor : Win32cr::Foundation::PWSTR*, string_security_descriptor_len : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ConvertSecurityDescriptorToStringSecurityDescriptorW(security_descriptor, requested_string_sd_revision, security_information, string_security_descriptor, string_security_descriptor_len)
+    {% end %}
   end
 
   @[Link("authz")]
   @[Link("advapi32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun AuthzAccessCheck(flags : Win32cr::Security::Authorization::AUTHZ_ACCESS_CHECK_FLAGS, hAuthzClientContext : Win32cr::Security::Authorization::AUTHZ_CLIENT_CONTEXT_HANDLE, pRequest : Win32cr::Security::Authorization::AUTHZ_ACCESS_REQUEST*, hAuditEvent : Win32cr::Security::Authorization::AUTHZ_AUDIT_EVENT_HANDLE, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, optional_security_descriptor_array : Win32cr::Security::PSECURITY_DESCRIPTOR*, optional_security_descriptor_count : UInt32, pReply : Win32cr::Security::Authorization::AUTHZ_ACCESS_REPLY*, phAccessCheckResults : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
@@ -6130,4 +6307,5 @@ module Win32cr::Security::Authorization
     fun ConvertSecurityDescriptorToStringSecurityDescriptorW(security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, requested_string_sd_revision : UInt32, security_information : UInt32, string_security_descriptor : Win32cr::Foundation::PWSTR*, string_security_descriptor_len : UInt32*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

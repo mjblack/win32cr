@@ -1231,7 +1231,7 @@ module Win32cr::UI::Controls::Dialogs
   {% end %}
 
   @[Extern]
-  record IPrintDialogCallbackVtbl,
+  record IPrintDialogCallbackVtable,
     query_interface : Proc(IPrintDialogCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrintDialogCallback*, UInt32),
     release : Proc(IPrintDialogCallback*, UInt32),
@@ -1241,7 +1241,7 @@ module Win32cr::UI::Controls::Dialogs
 
 
   @[Extern]
-  record IPrintDialogCallback, lpVtbl : IPrintDialogCallbackVtbl* do
+  record IPrintDialogCallback, lpVtbl : IPrintDialogCallbackVtable* do
     GUID = LibC::GUID.new(0x5852a2c3_u32, 0x6530_u16, 0x11d1_u16, StaticArray[0xb6_u8, 0xa3_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x7b_u8, 0xf9_u8])
     def query_interface(this : IPrintDialogCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1265,7 +1265,7 @@ module Win32cr::UI::Controls::Dialogs
   end
 
   @[Extern]
-  record IPrintDialogServicesVtbl,
+  record IPrintDialogServicesVtable,
     query_interface : Proc(IPrintDialogServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrintDialogServices*, UInt32),
     release : Proc(IPrintDialogServices*, UInt32),
@@ -1275,7 +1275,7 @@ module Win32cr::UI::Controls::Dialogs
 
 
   @[Extern]
-  record IPrintDialogServices, lpVtbl : IPrintDialogServicesVtbl* do
+  record IPrintDialogServices, lpVtbl : IPrintDialogServicesVtable* do
     GUID = LibC::GUID.new(0x509aaeda_u32, 0x5639_u16, 0x11d1_u16, StaticArray[0xb6_u8, 0xa1_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x7b_u8, 0xf9_u8])
     def query_interface(this : IPrintDialogServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1299,90 +1299,133 @@ module Win32cr::UI::Controls::Dialogs
   end
 
   def getOpenFileNameA(param0 : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetOpenFileNameA(param0)
+    {% end %}
   end
 
   def getOpenFileNameW(param0 : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetOpenFileNameW(param0)
+    {% end %}
   end
 
   def getSaveFileNameA(param0 : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSaveFileNameA(param0)
+    {% end %}
   end
 
   def getSaveFileNameW(param0 : Win32cr::UI::Controls::Dialogs::OPENFILENAMEW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSaveFileNameW(param0)
+    {% end %}
   end
 
   def getFileTitleA(param0 : Win32cr::Foundation::PSTR, buf : UInt8*, cchSize : UInt16) : Int16
+    {% if !flag?(:docs) %}
     C.GetFileTitleA(param0, buf, cchSize)
+    {% end %}
   end
 
   def getFileTitleW(param0 : Win32cr::Foundation::PWSTR, buf : UInt16*, cchSize : UInt16) : Int16
+    {% if !flag?(:docs) %}
     C.GetFileTitleW(param0, buf, cchSize)
+    {% end %}
   end
 
   def chooseColorA(param0 : Win32cr::UI::Controls::Dialogs::CHOOSECOLORA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ChooseColorA(param0)
+    {% end %}
   end
 
   def chooseColorW(param0 : Win32cr::UI::Controls::Dialogs::CHOOSECOLORW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ChooseColorW(param0)
+    {% end %}
   end
 
   def findTextA(param0 : Win32cr::UI::Controls::Dialogs::FINDREPLACEA*) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.FindTextA(param0)
+    {% end %}
   end
 
   def findTextW(param0 : Win32cr::UI::Controls::Dialogs::FINDREPLACEW*) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.FindTextW(param0)
+    {% end %}
   end
 
   def replaceTextA(param0 : Win32cr::UI::Controls::Dialogs::FINDREPLACEA*) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.ReplaceTextA(param0)
+    {% end %}
   end
 
   def replaceTextW(param0 : Win32cr::UI::Controls::Dialogs::FINDREPLACEW*) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.ReplaceTextW(param0)
+    {% end %}
   end
 
   def chooseFontA(param0 : Win32cr::UI::Controls::Dialogs::CHOOSEFONTA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ChooseFontA(param0)
+    {% end %}
   end
 
   def chooseFontW(param0 : Win32cr::UI::Controls::Dialogs::CHOOSEFONTW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ChooseFontW(param0)
+    {% end %}
   end
 
   def printDlgA(pPD : Win32cr::UI::Controls::Dialogs::PRINTDLGA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PrintDlgA(pPD)
+    {% end %}
   end
 
   def printDlgW(pPD : Win32cr::UI::Controls::Dialogs::PRINTDLGW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PrintDlgW(pPD)
+    {% end %}
   end
 
   def printDlgExA(pPD : Win32cr::UI::Controls::Dialogs::PRINTDLGEXA*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PrintDlgExA(pPD)
+    {% end %}
   end
 
   def printDlgExW(pPD : Win32cr::UI::Controls::Dialogs::PRINTDLGEXW*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PrintDlgExW(pPD)
+    {% end %}
   end
 
   def commDlgExtendedError : Win32cr::UI::Controls::Dialogs::COMMON_DLG_ERRORS
+    {% if !flag?(:docs) %}
     C.CommDlgExtendedError
+    {% end %}
   end
 
   def pageSetupDlgA(param0 : Win32cr::UI::Controls::Dialogs::PAGESETUPDLGA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PageSetupDlgA(param0)
+    {% end %}
   end
 
   def pageSetupDlgW(param0 : Win32cr::UI::Controls::Dialogs::PAGESETUPDLGW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PageSetupDlgW(param0)
+    {% end %}
   end
 
   @[Link("comdlg32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun GetOpenFileNameA(param0 : Win32cr::UI::Controls::Dialogs::OPENFILENAMEA*) : Win32cr::Foundation::BOOL
@@ -1448,4 +1491,5 @@ module Win32cr::UI::Controls::Dialogs
     fun PageSetupDlgW(param0 : Win32cr::UI::Controls::Dialogs::PAGESETUPDLGW*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

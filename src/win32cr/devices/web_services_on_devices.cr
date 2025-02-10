@@ -779,7 +779,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDAddressVtbl,
+  record IWSDAddressVtable,
     query_interface : Proc(IWSDAddress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDAddress*, UInt32),
     release : Proc(IWSDAddress*, UInt32),
@@ -788,7 +788,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDAddress, lpVtbl : IWSDAddressVtbl* do
+  record IWSDAddress, lpVtbl : IWSDAddressVtable* do
     GUID = LibC::GUID.new(0xb9574c6c_u32, 0x12a6_u16, 0x4f74_u16, StaticArray[0x93_u8, 0xa1_u8, 0x33_u8, 0x18_u8, 0xff_u8, 0x60_u8, 0x57_u8, 0x59_u8])
     def query_interface(this : IWSDAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -809,7 +809,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDTransportAddressVtbl,
+  record IWSDTransportAddressVtable,
     query_interface : Proc(IWSDTransportAddress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDTransportAddress*, UInt32),
     release : Proc(IWSDTransportAddress*, UInt32),
@@ -823,7 +823,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDTransportAddress, lpVtbl : IWSDTransportAddressVtbl* do
+  record IWSDTransportAddress, lpVtbl : IWSDTransportAddressVtable* do
     GUID = LibC::GUID.new(0x70d23498_u32, 0x4ee6_u16, 0x4340_u16, StaticArray[0xa3_u8, 0xdf_u8, 0xd8_u8, 0x45_u8, 0xd2_u8, 0x23_u8, 0x54_u8, 0x67_u8])
     def query_interface(this : IWSDTransportAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -859,7 +859,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDMessageParametersVtbl,
+  record IWSDMessageParametersVtable,
     query_interface : Proc(IWSDMessageParameters*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDMessageParameters*, UInt32),
     release : Proc(IWSDMessageParameters*, UInt32),
@@ -871,7 +871,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDMessageParameters, lpVtbl : IWSDMessageParametersVtbl* do
+  record IWSDMessageParameters, lpVtbl : IWSDMessageParametersVtable* do
     GUID = LibC::GUID.new(0x1fafe8a2_u32, 0xe6fc_u16, 0x4b80_u16, StaticArray[0xb6_u8, 0xcf_u8, 0xb7_u8, 0xd4_u8, 0x5c_u8, 0x41_u8, 0x6d_u8, 0x7c_u8])
     def query_interface(this : IWSDMessageParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -901,7 +901,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDUdpMessageParametersVtbl,
+  record IWSDUdpMessageParametersVtable,
     query_interface : Proc(IWSDUdpMessageParameters*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDUdpMessageParameters*, UInt32),
     release : Proc(IWSDUdpMessageParameters*, UInt32),
@@ -915,7 +915,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDUdpMessageParameters, lpVtbl : IWSDUdpMessageParametersVtbl* do
+  record IWSDUdpMessageParameters, lpVtbl : IWSDUdpMessageParametersVtable* do
     GUID = LibC::GUID.new(0x9934149f_u32, 0x8f0c_u16, 0x447b_u16, StaticArray[0xaa_u8, 0xb_u8, 0x73_u8, 0x12_u8, 0x4b_u8, 0xc_u8, 0xa7_u8, 0xf0_u8])
     def query_interface(this : IWSDUdpMessageParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -951,7 +951,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDUdpAddressVtbl,
+  record IWSDUdpAddressVtable,
     query_interface : Proc(IWSDUdpAddress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDUdpAddress*, UInt32),
     release : Proc(IWSDUdpAddress*, UInt32),
@@ -975,7 +975,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDUdpAddress, lpVtbl : IWSDUdpAddressVtbl* do
+  record IWSDUdpAddress, lpVtbl : IWSDUdpAddressVtable* do
     GUID = LibC::GUID.new(0x74d6124a_u32, 0xa441_u16, 0x4f78_u16, StaticArray[0xa1_u8, 0xeb_u8, 0x97_u8, 0xa8_u8, 0xd1_u8, 0x99_u8, 0x68_u8, 0x93_u8])
     def query_interface(this : IWSDUdpAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1041,7 +1041,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDHttpMessageParametersVtbl,
+  record IWSDHttpMessageParametersVtable,
     query_interface : Proc(IWSDHttpMessageParameters*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDHttpMessageParameters*, UInt32),
     release : Proc(IWSDHttpMessageParameters*, UInt32),
@@ -1062,7 +1062,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDHttpMessageParameters, lpVtbl : IWSDHttpMessageParametersVtbl* do
+  record IWSDHttpMessageParameters, lpVtbl : IWSDHttpMessageParametersVtable* do
     GUID = LibC::GUID.new(0x540bd122_u32, 0x5c83_u16, 0x4dec_u16, StaticArray[0xb3_u8, 0x96_u8, 0xea_u8, 0x62_u8, 0xa2_u8, 0x69_u8, 0x7f_u8, 0xdf_u8])
     def query_interface(this : IWSDHttpMessageParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1119,7 +1119,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDHttpAddressVtbl,
+  record IWSDHttpAddressVtable,
     query_interface : Proc(IWSDHttpAddress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDHttpAddress*, UInt32),
     release : Proc(IWSDHttpAddress*, UInt32),
@@ -1137,7 +1137,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDHttpAddress, lpVtbl : IWSDHttpAddressVtbl* do
+  record IWSDHttpAddress, lpVtbl : IWSDHttpAddressVtable* do
     GUID = LibC::GUID.new(0xd09ac7bd_u32, 0x2a3e_u16, 0x4b85_u16, StaticArray[0x86_u8, 0x5_u8, 0x27_u8, 0x37_u8, 0xff_u8, 0x3e_u8, 0x4e_u8, 0xa0_u8])
     def query_interface(this : IWSDHttpAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1185,7 +1185,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDSSLClientCertificateVtbl,
+  record IWSDSSLClientCertificateVtable,
     query_interface : Proc(IWSDSSLClientCertificate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDSSLClientCertificate*, UInt32),
     release : Proc(IWSDSSLClientCertificate*, UInt32),
@@ -1194,7 +1194,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDSSLClientCertificate, lpVtbl : IWSDSSLClientCertificateVtbl* do
+  record IWSDSSLClientCertificate, lpVtbl : IWSDSSLClientCertificateVtable* do
     GUID = LibC::GUID.new(0xde105e87_u32, 0xa0da_u16, 0x418e_u16, StaticArray[0x98_u8, 0xad_u8, 0x27_u8, 0xb9_u8, 0xee_u8, 0xd8_u8, 0x7b_u8, 0xdc_u8])
     def query_interface(this : IWSDSSLClientCertificate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1215,7 +1215,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDHttpAuthParametersVtbl,
+  record IWSDHttpAuthParametersVtable,
     query_interface : Proc(IWSDHttpAuthParameters*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDHttpAuthParameters*, UInt32),
     release : Proc(IWSDHttpAuthParameters*, UInt32),
@@ -1224,7 +1224,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDHttpAuthParameters, lpVtbl : IWSDHttpAuthParametersVtbl* do
+  record IWSDHttpAuthParameters, lpVtbl : IWSDHttpAuthParametersVtable* do
     GUID = LibC::GUID.new(0xb476df0_u32, 0x8dac_u16, 0x480d_u16, StaticArray[0xb0_u8, 0x5c_u8, 0x99_u8, 0x78_u8, 0x1a_u8, 0x58_u8, 0x84_u8, 0xaa_u8])
     def query_interface(this : IWSDHttpAuthParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1245,7 +1245,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDSignaturePropertyVtbl,
+  record IWSDSignaturePropertyVtable,
     query_interface : Proc(IWSDSignatureProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDSignatureProperty*, UInt32),
     release : Proc(IWSDSignatureProperty*, UInt32),
@@ -1257,7 +1257,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDSignatureProperty, lpVtbl : IWSDSignaturePropertyVtbl* do
+  record IWSDSignatureProperty, lpVtbl : IWSDSignaturePropertyVtable* do
     GUID = LibC::GUID.new(0x3ce20aa_u32, 0x71c4_u16, 0x45e2_u16, StaticArray[0xb3_u8, 0x2e_u8, 0x37_u8, 0x66_u8, 0xc6_u8, 0x1c_u8, 0x79_u8, 0xf_u8])
     def query_interface(this : IWSDSignatureProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1287,14 +1287,14 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDAttachmentVtbl,
+  record IWSDAttachmentVtable,
     query_interface : Proc(IWSDAttachment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDAttachment*, UInt32),
     release : Proc(IWSDAttachment*, UInt32)
 
 
   @[Extern]
-  record IWSDAttachment, lpVtbl : IWSDAttachmentVtbl* do
+  record IWSDAttachment, lpVtbl : IWSDAttachmentVtable* do
     GUID = LibC::GUID.new(0x5d55a616_u32, 0x9df8_u16, 0x4b09_u16, StaticArray[0xb1_u8, 0x56_u8, 0x9b_u8, 0xa3_u8, 0x51_u8, 0xa4_u8, 0x8b_u8, 0x76_u8])
     def query_interface(this : IWSDAttachment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1309,7 +1309,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDOutboundAttachmentVtbl,
+  record IWSDOutboundAttachmentVtable,
     query_interface : Proc(IWSDOutboundAttachment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDOutboundAttachment*, UInt32),
     release : Proc(IWSDOutboundAttachment*, UInt32),
@@ -1319,7 +1319,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDOutboundAttachment, lpVtbl : IWSDOutboundAttachmentVtbl* do
+  record IWSDOutboundAttachment, lpVtbl : IWSDOutboundAttachmentVtable* do
     GUID = LibC::GUID.new(0xaa302f8d_u32, 0x5a22_u16, 0x4ba5_u16, StaticArray[0xb3_u8, 0x92_u8, 0xaa_u8, 0x84_u8, 0x86_u8, 0xf4_u8, 0xc1_u8, 0x5d_u8])
     def query_interface(this : IWSDOutboundAttachment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1343,7 +1343,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDInboundAttachmentVtbl,
+  record IWSDInboundAttachmentVtable,
     query_interface : Proc(IWSDInboundAttachment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDInboundAttachment*, UInt32),
     release : Proc(IWSDInboundAttachment*, UInt32),
@@ -1352,7 +1352,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDInboundAttachment, lpVtbl : IWSDInboundAttachmentVtbl* do
+  record IWSDInboundAttachment, lpVtbl : IWSDInboundAttachmentVtable* do
     GUID = LibC::GUID.new(0x5bd6ca65_u32, 0x233c_u16, 0x4fb8_u16, StaticArray[0x9f_u8, 0x7a_u8, 0x26_u8, 0x41_u8, 0x61_u8, 0x96_u8, 0x55_u8, 0xc9_u8])
     def query_interface(this : IWSDInboundAttachment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1373,7 +1373,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDXMLContextVtbl,
+  record IWSDXMLContextVtable,
     query_interface : Proc(IWSDXMLContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDXMLContext*, UInt32),
     release : Proc(IWSDXMLContext*, UInt32),
@@ -1384,7 +1384,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDXMLContext, lpVtbl : IWSDXMLContextVtbl* do
+  record IWSDXMLContext, lpVtbl : IWSDXMLContextVtable* do
     GUID = LibC::GUID.new(0x75d8f3ee_u32, 0x3e5a_u16, 0x43b4_u16, StaticArray[0xa1_u8, 0x5a_u8, 0xbc_u8, 0xf6_u8, 0x88_u8, 0x74_u8, 0x60_u8, 0xc0_u8])
     def query_interface(this : IWSDXMLContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1411,7 +1411,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDiscoveryProviderVtbl,
+  record IWSDiscoveryProviderVtable,
     query_interface : Proc(IWSDiscoveryProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDiscoveryProvider*, UInt32),
     release : Proc(IWSDiscoveryProvider*, UInt32),
@@ -1425,7 +1425,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDiscoveryProvider, lpVtbl : IWSDiscoveryProviderVtbl* do
+  record IWSDiscoveryProvider, lpVtbl : IWSDiscoveryProviderVtable* do
     GUID = LibC::GUID.new(0x8ffc8e55_u32, 0xf0eb_u16, 0x480f_u16, StaticArray[0x88_u8, 0xb7_u8, 0xb4_u8, 0x35_u8, 0xdd_u8, 0x28_u8, 0x1d_u8, 0x45_u8])
     def query_interface(this : IWSDiscoveryProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1461,7 +1461,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDiscoveryProviderNotifyVtbl,
+  record IWSDiscoveryProviderNotifyVtable,
     query_interface : Proc(IWSDiscoveryProviderNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDiscoveryProviderNotify*, UInt32),
     release : Proc(IWSDiscoveryProviderNotify*, UInt32),
@@ -1472,7 +1472,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDiscoveryProviderNotify, lpVtbl : IWSDiscoveryProviderNotifyVtbl* do
+  record IWSDiscoveryProviderNotify, lpVtbl : IWSDiscoveryProviderNotifyVtable* do
     GUID = LibC::GUID.new(0x73ee3ced_u32, 0xb6e6_u16, 0x4329_u16, StaticArray[0xa5_u8, 0x46_u8, 0x3e_u8, 0x8a_u8, 0xd4_u8, 0x65_u8, 0x63_u8, 0xd2_u8])
     def query_interface(this : IWSDiscoveryProviderNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1499,7 +1499,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDiscoveredServiceVtbl,
+  record IWSDiscoveredServiceVtable,
     query_interface : Proc(IWSDiscoveredService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDiscoveredService*, UInt32),
     release : Proc(IWSDiscoveredService*, UInt32),
@@ -1517,7 +1517,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDiscoveredService, lpVtbl : IWSDiscoveredServiceVtbl* do
+  record IWSDiscoveredService, lpVtbl : IWSDiscoveredServiceVtable* do
     GUID = LibC::GUID.new(0x4bad8a3b_u32, 0xb374_u16, 0x4420_u16, StaticArray[0x96_u8, 0x32_u8, 0xaa_u8, 0xc9_u8, 0x45_u8, 0xb3_u8, 0x74_u8, 0xaa_u8])
     def query_interface(this : IWSDiscoveredService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1565,7 +1565,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDiscoveryPublisherVtbl,
+  record IWSDiscoveryPublisherVtable,
     query_interface : Proc(IWSDiscoveryPublisher*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDiscoveryPublisher*, UInt32),
     release : Proc(IWSDiscoveryPublisher*, UInt32),
@@ -1585,7 +1585,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDiscoveryPublisher, lpVtbl : IWSDiscoveryPublisherVtbl* do
+  record IWSDiscoveryPublisher, lpVtbl : IWSDiscoveryPublisherVtable* do
     GUID = LibC::GUID.new(0xae01e1a8_u32, 0x3ff9_u16, 0x4148_u16, StaticArray[0x81_u8, 0x16_u8, 0x5_u8, 0x7c_u8, 0xc6_u8, 0x16_u8, 0xfe_u8, 0x13_u8])
     def query_interface(this : IWSDiscoveryPublisher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1639,7 +1639,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDiscoveryPublisherNotifyVtbl,
+  record IWSDiscoveryPublisherNotifyVtable,
     query_interface : Proc(IWSDiscoveryPublisherNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDiscoveryPublisherNotify*, UInt32),
     release : Proc(IWSDiscoveryPublisherNotify*, UInt32),
@@ -1648,7 +1648,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDiscoveryPublisherNotify, lpVtbl : IWSDiscoveryPublisherNotifyVtbl* do
+  record IWSDiscoveryPublisherNotify, lpVtbl : IWSDiscoveryPublisherNotifyVtable* do
     GUID = LibC::GUID.new(0xe67651b0_u32, 0x337a_u16, 0x4b3c_u16, StaticArray[0x97_u8, 0x58_u8, 0x73_u8, 0x33_u8, 0x88_u8, 0x56_u8, 0x82_u8, 0x51_u8])
     def query_interface(this : IWSDiscoveryPublisherNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1669,7 +1669,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDScopeMatchingRuleVtbl,
+  record IWSDScopeMatchingRuleVtable,
     query_interface : Proc(IWSDScopeMatchingRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDScopeMatchingRule*, UInt32),
     release : Proc(IWSDScopeMatchingRule*, UInt32),
@@ -1678,7 +1678,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDScopeMatchingRule, lpVtbl : IWSDScopeMatchingRuleVtbl* do
+  record IWSDScopeMatchingRule, lpVtbl : IWSDScopeMatchingRuleVtable* do
     GUID = LibC::GUID.new(0xfcafe424_u32, 0xfef5_u16, 0x481a_u16, StaticArray[0xbd_u8, 0x9f_u8, 0x33_u8, 0xce_u8, 0x5_u8, 0x74_u8, 0x25_u8, 0x6f_u8])
     def query_interface(this : IWSDScopeMatchingRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1699,7 +1699,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDEndpointProxyVtbl,
+  record IWSDEndpointProxyVtable,
     query_interface : Proc(IWSDEndpointProxy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDEndpointProxy*, UInt32),
     release : Proc(IWSDEndpointProxy*, UInt32),
@@ -1713,7 +1713,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDEndpointProxy, lpVtbl : IWSDEndpointProxyVtbl* do
+  record IWSDEndpointProxy, lpVtbl : IWSDEndpointProxyVtable* do
     GUID = LibC::GUID.new(0x1860d430_u32, 0xb24c_u16, 0x4975_u16, StaticArray[0x9f_u8, 0x90_u8, 0xdb_u8, 0xb3_u8, 0x9b_u8, 0xaa_u8, 0x24_u8, 0xec_u8])
     def query_interface(this : IWSDEndpointProxy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1749,7 +1749,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDMetadataExchangeVtbl,
+  record IWSDMetadataExchangeVtable,
     query_interface : Proc(IWSDMetadataExchange*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDMetadataExchange*, UInt32),
     release : Proc(IWSDMetadataExchange*, UInt32),
@@ -1757,7 +1757,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDMetadataExchange, lpVtbl : IWSDMetadataExchangeVtbl* do
+  record IWSDMetadataExchange, lpVtbl : IWSDMetadataExchangeVtable* do
     GUID = LibC::GUID.new(0x6996d57_u32, 0x1d67_u16, 0x4928_u16, StaticArray[0x93_u8, 0x7_u8, 0x3d_u8, 0x78_u8, 0x33_u8, 0xfd_u8, 0xb8_u8, 0x46_u8])
     def query_interface(this : IWSDMetadataExchange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1775,7 +1775,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDServiceProxyVtbl,
+  record IWSDServiceProxyVtable,
     query_interface : Proc(IWSDServiceProxy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDServiceProxy*, UInt32),
     release : Proc(IWSDServiceProxy*, UInt32),
@@ -1790,7 +1790,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDServiceProxy, lpVtbl : IWSDServiceProxyVtbl* do
+  record IWSDServiceProxy, lpVtbl : IWSDServiceProxyVtable* do
     GUID = LibC::GUID.new(0xd4c7fb9c_u32, 0x3ab_u16, 0x4175_u16, StaticArray[0x9d_u8, 0x67_u8, 0x9_u8, 0x4f_u8, 0xaf_u8, 0xeb_u8, 0xf4_u8, 0x87_u8])
     def query_interface(this : IWSDServiceProxy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1829,7 +1829,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDServiceProxyEventingVtbl,
+  record IWSDServiceProxyEventingVtable,
     query_interface : Proc(IWSDServiceProxyEventing*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDServiceProxyEventing*, UInt32),
     release : Proc(IWSDServiceProxyEventing*, UInt32),
@@ -1856,7 +1856,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDServiceProxyEventing, lpVtbl : IWSDServiceProxyEventingVtbl* do
+  record IWSDServiceProxyEventing, lpVtbl : IWSDServiceProxyEventingVtable* do
     GUID = LibC::GUID.new(0xf9279d6d_u32, 0x1012_u16, 0x4a94_u16, StaticArray[0xb8_u8, 0xcc_u8, 0xfd_u8, 0x35_u8, 0xd2_u8, 0x20_u8, 0x2b_u8, 0xfe_u8])
     def query_interface(this : IWSDServiceProxyEventing*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1931,7 +1931,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDDeviceProxyVtbl,
+  record IWSDDeviceProxyVtable,
     query_interface : Proc(IWSDDeviceProxy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDDeviceProxy*, UInt32),
     release : Proc(IWSDDeviceProxy*, UInt32),
@@ -1948,7 +1948,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDDeviceProxy, lpVtbl : IWSDDeviceProxyVtbl* do
+  record IWSDDeviceProxy, lpVtbl : IWSDDeviceProxyVtable* do
     GUID = LibC::GUID.new(0xeee0c031_u32, 0xc578_u16, 0x4c0e_u16, StaticArray[0x9a_u8, 0x3b_u8, 0x97_u8, 0x3c_u8, 0x35_u8, 0xf4_u8, 0x9_u8, 0xdb_u8])
     def query_interface(this : IWSDDeviceProxy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1993,7 +1993,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDAsyncResultVtbl,
+  record IWSDAsyncResultVtable,
     query_interface : Proc(IWSDAsyncResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDAsyncResult*, UInt32),
     release : Proc(IWSDAsyncResult*, UInt32),
@@ -2007,7 +2007,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDAsyncResult, lpVtbl : IWSDAsyncResultVtbl* do
+  record IWSDAsyncResult, lpVtbl : IWSDAsyncResultVtable* do
     GUID = LibC::GUID.new(0x11a9852a_u32, 0x8dd8_u16, 0x423e_u16, StaticArray[0xb5_u8, 0x37_u8, 0x93_u8, 0x56_u8, 0xdb_u8, 0x4f_u8, 0xbf_u8, 0xb8_u8])
     def query_interface(this : IWSDAsyncResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2043,7 +2043,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDAsyncCallbackVtbl,
+  record IWSDAsyncCallbackVtable,
     query_interface : Proc(IWSDAsyncCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDAsyncCallback*, UInt32),
     release : Proc(IWSDAsyncCallback*, UInt32),
@@ -2051,7 +2051,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDAsyncCallback, lpVtbl : IWSDAsyncCallbackVtbl* do
+  record IWSDAsyncCallback, lpVtbl : IWSDAsyncCallbackVtable* do
     GUID = LibC::GUID.new(0xa63e109d_u32, 0xce72_u16, 0x49e2_u16, StaticArray[0xba_u8, 0x98_u8, 0xe8_u8, 0x45_u8, 0xf5_u8, 0xee_u8, 0x16_u8, 0x66_u8])
     def query_interface(this : IWSDAsyncCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2069,7 +2069,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDEventingStatusVtbl,
+  record IWSDEventingStatusVtable,
     query_interface : Proc(IWSDEventingStatus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDEventingStatus*, UInt32),
     release : Proc(IWSDEventingStatus*, UInt32),
@@ -2079,7 +2079,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDEventingStatus, lpVtbl : IWSDEventingStatusVtbl* do
+  record IWSDEventingStatus, lpVtbl : IWSDEventingStatusVtable* do
     GUID = LibC::GUID.new(0x49b17f52_u32, 0x637a_u16, 0x407a_u16, StaticArray[0xae_u8, 0x99_u8, 0xfb_u8, 0xe8_u8, 0x2a_u8, 0x4d_u8, 0x38_u8, 0xc0_u8])
     def query_interface(this : IWSDEventingStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2103,7 +2103,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDDeviceHostVtbl,
+  record IWSDDeviceHostVtable,
     query_interface : Proc(IWSDDeviceHost*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDDeviceHost*, UInt32),
     release : Proc(IWSDDeviceHost*, UInt32),
@@ -2122,7 +2122,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDDeviceHost, lpVtbl : IWSDDeviceHostVtbl* do
+  record IWSDDeviceHost, lpVtbl : IWSDDeviceHostVtable* do
     GUID = LibC::GUID.new(0x917fe891_u32, 0x3d13_u16, 0x4138_u16, StaticArray[0x98_u8, 0x9_u8, 0x93_u8, 0x4c_u8, 0x8a_u8, 0xbe_u8, 0xb1_u8, 0x2c_u8])
     def query_interface(this : IWSDDeviceHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2173,7 +2173,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDDeviceHostNotifyVtbl,
+  record IWSDDeviceHostNotifyVtable,
     query_interface : Proc(IWSDDeviceHostNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDDeviceHostNotify*, UInt32),
     release : Proc(IWSDDeviceHostNotify*, UInt32),
@@ -2181,7 +2181,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDDeviceHostNotify, lpVtbl : IWSDDeviceHostNotifyVtbl* do
+  record IWSDDeviceHostNotify, lpVtbl : IWSDDeviceHostNotifyVtable* do
     GUID = LibC::GUID.new(0xb5bee9f9_u32, 0xeeda_u16, 0x41fe_u16, StaticArray[0x96_u8, 0xf7_u8, 0xf4_u8, 0x5e_u8, 0x14_u8, 0x99_u8, 0xf_u8, 0xb0_u8])
     def query_interface(this : IWSDDeviceHostNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2199,7 +2199,7 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   @[Extern]
-  record IWSDServiceMessagingVtbl,
+  record IWSDServiceMessagingVtable,
     query_interface : Proc(IWSDServiceMessaging*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSDServiceMessaging*, UInt32),
     release : Proc(IWSDServiceMessaging*, UInt32),
@@ -2208,7 +2208,7 @@ module Win32cr::Devices::WebServicesOnDevices
 
 
   @[Extern]
-  record IWSDServiceMessaging, lpVtbl : IWSDServiceMessagingVtbl* do
+  record IWSDServiceMessaging, lpVtbl : IWSDServiceMessagingVtable* do
     GUID = LibC::GUID.new(0x94974cf4_u32, 0xcab_u16, 0x460d_u16, StaticArray[0xa3_u8, 0xf6_u8, 0x7a_u8, 0xa_u8, 0xd6_u8, 0x23_u8, 0xc0_u8, 0xe6_u8])
     def query_interface(this : IWSDServiceMessaging*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2229,134 +2229,199 @@ module Win32cr::Devices::WebServicesOnDevices
   end
 
   def wSDCreateUdpMessageParameters(ppTxParams : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDCreateUdpMessageParameters(ppTxParams)
+    {% end %}
   end
 
   def wSDCreateUdpAddress(ppAddress : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDCreateUdpAddress(ppAddress)
+    {% end %}
   end
 
   def wSDCreateHttpMessageParameters(ppTxParams : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDCreateHttpMessageParameters(ppTxParams)
+    {% end %}
   end
 
   def wSDCreateHttpAddress(ppAddress : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDCreateHttpAddress(ppAddress)
+    {% end %}
   end
 
   def wSDCreateOutboundAttachment(ppAttachment : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDCreateOutboundAttachment(ppAttachment)
+    {% end %}
   end
 
   def wSDXMLGetNameFromBuiltinNamespace(pszNamespace : Win32cr::Foundation::PWSTR, pszName : Win32cr::Foundation::PWSTR, ppName : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDXMLGetNameFromBuiltinNamespace(pszNamespace, pszName, ppName)
+    {% end %}
   end
 
   def wSDXMLCreateContext(ppContext : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDXMLCreateContext(ppContext)
+    {% end %}
   end
 
   def wSDCreateDiscoveryProvider(pContext : Void*, ppProvider : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDCreateDiscoveryProvider(pContext, ppProvider)
+    {% end %}
   end
 
   def wSDCreateDiscoveryProvider2(pContext : Void*, pConfigParams : Win32cr::Devices::WebServicesOnDevices::WSD_CONFIG_PARAM*, dwConfigParamCount : UInt32, ppProvider : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDCreateDiscoveryProvider2(pContext, pConfigParams, dwConfigParamCount, ppProvider)
+    {% end %}
   end
 
   def wSDCreateDiscoveryPublisher(pContext : Void*, ppPublisher : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDCreateDiscoveryPublisher(pContext, ppPublisher)
+    {% end %}
   end
 
   def wSDCreateDiscoveryPublisher2(pContext : Void*, pConfigParams : Win32cr::Devices::WebServicesOnDevices::WSD_CONFIG_PARAM*, dwConfigParamCount : UInt32, ppPublisher : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDCreateDiscoveryPublisher2(pContext, pConfigParams, dwConfigParamCount, ppPublisher)
+    {% end %}
   end
 
   def wSDCreateDeviceProxy(pszDeviceId : Win32cr::Foundation::PWSTR, pszLocalId : Win32cr::Foundation::PWSTR, pContext : Void*, ppDeviceProxy : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDCreateDeviceProxy(pszDeviceId, pszLocalId, pContext, ppDeviceProxy)
+    {% end %}
   end
 
   def wSDCreateDeviceProxyAdvanced(pszDeviceId : Win32cr::Foundation::PWSTR, pDeviceAddress : Void*, pszLocalId : Win32cr::Foundation::PWSTR, pContext : Void*, ppDeviceProxy : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDCreateDeviceProxyAdvanced(pszDeviceId, pDeviceAddress, pszLocalId, pContext, ppDeviceProxy)
+    {% end %}
   end
 
   def wSDCreateDeviceProxy2(pszDeviceId : Win32cr::Foundation::PWSTR, pszLocalId : Win32cr::Foundation::PWSTR, pContext : Void*, pConfigParams : Win32cr::Devices::WebServicesOnDevices::WSD_CONFIG_PARAM*, dwConfigParamCount : UInt32, ppDeviceProxy : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDCreateDeviceProxy2(pszDeviceId, pszLocalId, pContext, pConfigParams, dwConfigParamCount, ppDeviceProxy)
+    {% end %}
   end
 
   def wSDCreateDeviceHost(pszLocalId : Win32cr::Foundation::PWSTR, pContext : Void*, ppDeviceHost : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDCreateDeviceHost(pszLocalId, pContext, ppDeviceHost)
+    {% end %}
   end
 
   def wSDCreateDeviceHostAdvanced(pszLocalId : Win32cr::Foundation::PWSTR, pContext : Void*, ppHostAddresses : Void**, dwHostAddressCount : UInt32, ppDeviceHost : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDCreateDeviceHostAdvanced(pszLocalId, pContext, ppHostAddresses, dwHostAddressCount, ppDeviceHost)
+    {% end %}
   end
 
   def wSDCreateDeviceHost2(pszLocalId : Win32cr::Foundation::PWSTR, pContext : Void*, pConfigParams : Win32cr::Devices::WebServicesOnDevices::WSD_CONFIG_PARAM*, dwConfigParamCount : UInt32, ppDeviceHost : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDCreateDeviceHost2(pszLocalId, pContext, pConfigParams, dwConfigParamCount, ppDeviceHost)
+    {% end %}
   end
 
   def wSDSetConfigurationOption(dwOption : UInt32, pVoid : Void*, cbInBuffer : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDSetConfigurationOption(dwOption, pVoid, cbInBuffer)
+    {% end %}
   end
 
   def wSDGetConfigurationOption(dwOption : UInt32, pVoid : Void*, cbOutBuffer : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDGetConfigurationOption(dwOption, pVoid, cbOutBuffer)
+    {% end %}
   end
 
   def wSDAllocateLinkedMemory(pParent : Void*, cbSize : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.WSDAllocateLinkedMemory(pParent, cbSize)
+    {% end %}
   end
 
   def wSDFreeLinkedMemory(pVoid : Void*) : Void
+    {% if !flag?(:docs) %}
     C.WSDFreeLinkedMemory(pVoid)
+    {% end %}
   end
 
   def wSDAttachLinkedMemory(pParent : Void*, pChild : Void*) : Void
+    {% if !flag?(:docs) %}
     C.WSDAttachLinkedMemory(pParent, pChild)
+    {% end %}
   end
 
   def wSDDetachLinkedMemory(pVoid : Void*) : Void
+    {% if !flag?(:docs) %}
     C.WSDDetachLinkedMemory(pVoid)
+    {% end %}
   end
 
   def wSDXMLBuildAnyForSingleElement(pElementName : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*, pszText : Win32cr::Foundation::PWSTR, ppAny : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDXMLBuildAnyForSingleElement(pElementName, pszText, ppAny)
+    {% end %}
   end
 
   def wSDXMLGetValueFromAny(pszNamespace : Win32cr::Foundation::PWSTR, pszName : Win32cr::Foundation::PWSTR, pAny : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*, ppszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDXMLGetValueFromAny(pszNamespace, pszName, pAny, ppszValue)
+    {% end %}
   end
 
   def wSDXMLAddSibling(pFirst : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*, pSecond : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDXMLAddSibling(pFirst, pSecond)
+    {% end %}
   end
 
   def wSDXMLAddChild(pParent : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*, pChild : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDXMLAddChild(pParent, pChild)
+    {% end %}
   end
 
   def wSDXMLCleanupElement(pAny : Win32cr::Devices::WebServicesOnDevices::WSDXML_ELEMENT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDXMLCleanupElement(pAny)
+    {% end %}
   end
 
   def wSDGenerateFault(pszCode : Win32cr::Foundation::PWSTR, pszSubCode : Win32cr::Foundation::PWSTR, pszReason : Win32cr::Foundation::PWSTR, pszDetail : Win32cr::Foundation::PWSTR, pContext : Void*, ppFault : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_FAULT**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDGenerateFault(pszCode, pszSubCode, pszReason, pszDetail, pContext, ppFault)
+    {% end %}
   end
 
   def wSDGenerateFaultEx(pCode : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*, pSubCode : Win32cr::Devices::WebServicesOnDevices::WSDXML_NAME*, pReasons : Win32cr::Devices::WebServicesOnDevices::WSD_LOCALIZED_STRING_LIST*, pszDetail : Win32cr::Foundation::PWSTR, ppFault : Win32cr::Devices::WebServicesOnDevices::WSD_SOAP_FAULT**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDGenerateFaultEx(pCode, pSubCode, pReasons, pszDetail, ppFault)
+    {% end %}
   end
 
   def wSDUriEncode(source : UInt16*, cchSource : UInt32, destOut : Win32cr::Foundation::PWSTR*, cchDestOut : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDUriEncode(source, cchSource, destOut, cchDestOut)
+    {% end %}
   end
 
   def wSDUriDecode(source : UInt16*, cchSource : UInt32, destOut : Win32cr::Foundation::PWSTR*, cchDestOut : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WSDUriDecode(source, cchSource, destOut, cchDestOut)
+    {% end %}
   end
 
   @[Link("wsdapi")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WSDCreateUdpMessageParameters(ppTxParams : Void**) : Win32cr::Foundation::HRESULT
@@ -2455,4 +2520,5 @@ module Win32cr::Devices::WebServicesOnDevices
     fun WSDUriDecode(source : UInt16*, cchSource : UInt32, destOut : Win32cr::Foundation::PWSTR*, cchDestOut : UInt32*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

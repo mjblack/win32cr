@@ -800,215 +800,320 @@ module Win32cr::UI::Input::KeyboardAndMouse
   end
 
   def _TrackMouseEvent(lpEventTrack : Win32cr::UI::Input::KeyboardAndMouse::TRACKMOUSEEVENT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C._TrackMouseEvent(lpEventTrack)
+    {% end %}
   end
 
   def loadKeyboardLayoutA(pwszKLID : Win32cr::Foundation::PSTR, flags : Win32cr::UI::Input::KeyboardAndMouse::ACTIVATE_KEYBOARD_LAYOUT_FLAGS) : Win32cr::UI::TextServices::HKL
+    {% if !flag?(:docs) %}
     C.LoadKeyboardLayoutA(pwszKLID, flags)
+    {% end %}
   end
 
   def loadKeyboardLayoutW(pwszKLID : Win32cr::Foundation::PWSTR, flags : Win32cr::UI::Input::KeyboardAndMouse::ACTIVATE_KEYBOARD_LAYOUT_FLAGS) : Win32cr::UI::TextServices::HKL
+    {% if !flag?(:docs) %}
     C.LoadKeyboardLayoutW(pwszKLID, flags)
+    {% end %}
   end
 
   def activateKeyboardLayout(hkl : Win32cr::UI::TextServices::HKL, flags : Win32cr::UI::Input::KeyboardAndMouse::ACTIVATE_KEYBOARD_LAYOUT_FLAGS) : Win32cr::UI::TextServices::HKL
+    {% if !flag?(:docs) %}
     C.ActivateKeyboardLayout(hkl, flags)
+    {% end %}
   end
 
   def toUnicodeEx(wVirtKey : UInt32, wScanCode : UInt32, lpKeyState : UInt8*, pwszBuff : UInt16*, cchBuff : Int32, wFlags : UInt32, dwhkl : Win32cr::UI::TextServices::HKL) : Int32
+    {% if !flag?(:docs) %}
     C.ToUnicodeEx(wVirtKey, wScanCode, lpKeyState, pwszBuff, cchBuff, wFlags, dwhkl)
+    {% end %}
   end
 
   def unloadKeyboardLayout(hkl : Win32cr::UI::TextServices::HKL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnloadKeyboardLayout(hkl)
+    {% end %}
   end
 
   def getKeyboardLayoutNameA(pwszKLID : UInt8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetKeyboardLayoutNameA(pwszKLID)
+    {% end %}
   end
 
   def getKeyboardLayoutNameW(pwszKLID : UInt16*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetKeyboardLayoutNameW(pwszKLID)
+    {% end %}
   end
 
   def getKeyboardLayoutList(nBuff : Int32, lpList : Win32cr::UI::TextServices::HKL*) : Int32
+    {% if !flag?(:docs) %}
     C.GetKeyboardLayoutList(nBuff, lpList)
+    {% end %}
   end
 
   def getKeyboardLayout(idThread : UInt32) : Win32cr::UI::TextServices::HKL
+    {% if !flag?(:docs) %}
     C.GetKeyboardLayout(idThread)
+    {% end %}
   end
 
   def getMouseMovePointsEx(cbSize : UInt32, lppt : Win32cr::UI::Input::KeyboardAndMouse::MOUSEMOVEPOINT*, lpptBuf : Win32cr::UI::Input::KeyboardAndMouse::MOUSEMOVEPOINT*, nBufPoints : Int32, resolution : Win32cr::UI::Input::KeyboardAndMouse::GET_MOUSE_MOVE_POINTS_EX_RESOLUTION) : Int32
+    {% if !flag?(:docs) %}
     C.GetMouseMovePointsEx(cbSize, lppt, lpptBuf, nBufPoints, resolution)
+    {% end %}
   end
 
   def trackMouseEvent(lpEventTrack : Win32cr::UI::Input::KeyboardAndMouse::TRACKMOUSEEVENT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TrackMouseEvent(lpEventTrack)
+    {% end %}
   end
 
   def registerHotKey(hWnd : Win32cr::Foundation::HWND, id : Int32, fsModifiers : Win32cr::UI::Input::KeyboardAndMouse::HOT_KEY_MODIFIERS, vk : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RegisterHotKey(hWnd, id, fsModifiers, vk)
+    {% end %}
   end
 
   def unregisterHotKey(hWnd : Win32cr::Foundation::HWND, id : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnregisterHotKey(hWnd, id)
+    {% end %}
   end
 
   def swapMouseButton(fSwap : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SwapMouseButton(fSwap)
+    {% end %}
   end
 
   def getDoubleClickTime : UInt32
+    {% if !flag?(:docs) %}
     C.GetDoubleClickTime
+    {% end %}
   end
 
   def setDoubleClickTime(param0 : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetDoubleClickTime(param0)
+    {% end %}
   end
 
   def setFocus(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.SetFocus(hWnd)
+    {% end %}
   end
 
   def getActiveWindow : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.GetActiveWindow
+    {% end %}
   end
 
   def getFocus : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.GetFocus
+    {% end %}
   end
 
   def getKBCodePage : UInt32
+    {% if !flag?(:docs) %}
     C.GetKBCodePage
+    {% end %}
   end
 
   def getKeyState(nVirtKey : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.GetKeyState(nVirtKey)
+    {% end %}
   end
 
   def getAsyncKeyState(vKey : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.GetAsyncKeyState(vKey)
+    {% end %}
   end
 
   def getKeyboardState(lpKeyState : UInt8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetKeyboardState(lpKeyState)
+    {% end %}
   end
 
   def setKeyboardState(lpKeyState : UInt8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetKeyboardState(lpKeyState)
+    {% end %}
   end
 
   def getKeyNameTextA(lParam : Int32, lpString : UInt8*, cchSize : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetKeyNameTextA(lParam, lpString, cchSize)
+    {% end %}
   end
 
   def getKeyNameTextW(lParam : Int32, lpString : UInt16*, cchSize : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetKeyNameTextW(lParam, lpString, cchSize)
+    {% end %}
   end
 
   def getKeyboardType(nTypeFlag : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetKeyboardType(nTypeFlag)
+    {% end %}
   end
 
   def toAscii(uVirtKey : UInt32, uScanCode : UInt32, lpKeyState : UInt8*, lpChar : UInt16*, uFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.ToAscii(uVirtKey, uScanCode, lpKeyState, lpChar, uFlags)
+    {% end %}
   end
 
   def toAsciiEx(uVirtKey : UInt32, uScanCode : UInt32, lpKeyState : UInt8*, lpChar : UInt16*, uFlags : UInt32, dwhkl : Win32cr::UI::TextServices::HKL) : Int32
+    {% if !flag?(:docs) %}
     C.ToAsciiEx(uVirtKey, uScanCode, lpKeyState, lpChar, uFlags, dwhkl)
+    {% end %}
   end
 
   def toUnicode(wVirtKey : UInt32, wScanCode : UInt32, lpKeyState : UInt8*, pwszBuff : UInt16*, cchBuff : Int32, wFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.ToUnicode(wVirtKey, wScanCode, lpKeyState, pwszBuff, cchBuff, wFlags)
+    {% end %}
   end
 
   def oemKeyScan(wOemChar : UInt16) : UInt32
+    {% if !flag?(:docs) %}
     C.OemKeyScan(wOemChar)
+    {% end %}
   end
 
   def vkKeyScanA(ch : Win32cr::Foundation::CHAR) : Int16
+    {% if !flag?(:docs) %}
     C.VkKeyScanA(ch)
+    {% end %}
   end
 
   def vkKeyScanW(ch : UInt16) : Int16
+    {% if !flag?(:docs) %}
     C.VkKeyScanW(ch)
+    {% end %}
   end
 
   def vkKeyScanExA(ch : Win32cr::Foundation::CHAR, dwhkl : Win32cr::UI::TextServices::HKL) : Int16
+    {% if !flag?(:docs) %}
     C.VkKeyScanExA(ch, dwhkl)
+    {% end %}
   end
 
   def vkKeyScanExW(ch : UInt16, dwhkl : Win32cr::UI::TextServices::HKL) : Int16
+    {% if !flag?(:docs) %}
     C.VkKeyScanExW(ch, dwhkl)
+    {% end %}
   end
 
   def keybdEvent(bVk : UInt8, bScan : UInt8, dwFlags : Win32cr::UI::Input::KeyboardAndMouse::KEYBD_EVENT_FLAGS, dwExtraInfo : LibC::UIntPtrT) : Void
+    {% if !flag?(:docs) %}
     C.keybd_event(bVk, bScan, dwFlags, dwExtraInfo)
+    {% end %}
   end
 
   def mouseEvent(dwFlags : Win32cr::UI::Input::KeyboardAndMouse::MOUSE_EVENT_FLAGS, dx : Int32, dy : Int32, dwData : UInt32, dwExtraInfo : LibC::UIntPtrT) : Void
+    {% if !flag?(:docs) %}
     C.mouse_event(dwFlags, dx, dy, dwData, dwExtraInfo)
+    {% end %}
   end
 
   def sendInput(cInputs : UInt32, pInputs : Win32cr::UI::Input::KeyboardAndMouse::INPUT*, cbSize : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.SendInput(cInputs, pInputs, cbSize)
+    {% end %}
   end
 
   def getLastInputInfo(plii : Win32cr::UI::Input::KeyboardAndMouse::LASTINPUTINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetLastInputInfo(plii)
+    {% end %}
   end
 
   def mapVirtualKeyA(uCode : UInt32, uMapType : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MapVirtualKeyA(uCode, uMapType)
+    {% end %}
   end
 
   def mapVirtualKeyW(uCode : UInt32, uMapType : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MapVirtualKeyW(uCode, uMapType)
+    {% end %}
   end
 
   def mapVirtualKeyExA(uCode : UInt32, uMapType : UInt32, dwhkl : Win32cr::UI::TextServices::HKL) : UInt32
+    {% if !flag?(:docs) %}
     C.MapVirtualKeyExA(uCode, uMapType, dwhkl)
+    {% end %}
   end
 
   def mapVirtualKeyExW(uCode : UInt32, uMapType : UInt32, dwhkl : Win32cr::UI::TextServices::HKL) : UInt32
+    {% if !flag?(:docs) %}
     C.MapVirtualKeyExW(uCode, uMapType, dwhkl)
+    {% end %}
   end
 
   def getCapture : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.GetCapture
+    {% end %}
   end
 
   def setCapture(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.SetCapture(hWnd)
+    {% end %}
   end
 
   def releaseCapture : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReleaseCapture
+    {% end %}
   end
 
   def enableWindow(hWnd : Win32cr::Foundation::HWND, bEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnableWindow(hWnd, bEnable)
+    {% end %}
   end
 
   def isWindowEnabled(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsWindowEnabled(hWnd)
+    {% end %}
   end
 
   def dragDetect(hwnd : Win32cr::Foundation::HWND, pt : Win32cr::Foundation::POINT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DragDetect(hwnd, pt)
+    {% end %}
   end
 
   def setActiveWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.SetActiveWindow(hWnd)
+    {% end %}
   end
 
   def blockInput(fBlockIt : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BlockInput(fBlockIt)
+    {% end %}
   end
 
   @[Link("comctl32")]
   @[Link("user32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun _TrackMouseEvent(lpEventTrack : Win32cr::UI::Input::KeyboardAndMouse::TRACKMOUSEEVENT*) : Win32cr::Foundation::BOOL
@@ -1167,4 +1272,5 @@ module Win32cr::UI::Input::KeyboardAndMouse
     fun BlockInput(fBlockIt : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

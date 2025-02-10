@@ -511,11 +511,7 @@ module Win32cr::System::Com::StructuredStorage
     end
   end
 
-  @[Extern]
-  struct PMemoryAllocator
-    def initialize()
-    end
-  end
+  alias PMemoryAllocator = Void
 
   @[Extern]
   struct OLESTREAMVTBL
@@ -545,7 +541,7 @@ module Win32cr::System::Com::StructuredStorage
   end
 
   @[Extern]
-  record IEnumSTATSTGVtbl,
+  record IEnumSTATSTGVtable,
     query_interface : Proc(IEnumSTATSTG*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumSTATSTG*, UInt32),
     release : Proc(IEnumSTATSTG*, UInt32),
@@ -556,7 +552,7 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  record IEnumSTATSTG, lpVtbl : IEnumSTATSTGVtbl* do
+  record IEnumSTATSTG, lpVtbl : IEnumSTATSTGVtable* do
     GUID = LibC::GUID.new(0xd_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IEnumSTATSTG*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -583,7 +579,7 @@ module Win32cr::System::Com::StructuredStorage
   end
 
   @[Extern]
-  record IStorageVtbl,
+  record IStorageVtable,
     query_interface : Proc(IStorage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStorage*, UInt32),
     release : Proc(IStorage*, UInt32),
@@ -605,7 +601,7 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  record IStorage, lpVtbl : IStorageVtbl* do
+  record IStorage, lpVtbl : IStorageVtable* do
     GUID = LibC::GUID.new(0xb_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -665,7 +661,7 @@ module Win32cr::System::Com::StructuredStorage
   end
 
   @[Extern]
-  record IPersistStorageVtbl,
+  record IPersistStorageVtable,
     query_interface : Proc(IPersistStorage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPersistStorage*, UInt32),
     release : Proc(IPersistStorage*, UInt32),
@@ -679,7 +675,7 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  record IPersistStorage, lpVtbl : IPersistStorageVtbl* do
+  record IPersistStorage, lpVtbl : IPersistStorageVtable* do
     GUID = LibC::GUID.new(0x10a_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IPersistStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -715,7 +711,7 @@ module Win32cr::System::Com::StructuredStorage
   end
 
   @[Extern]
-  record ILockBytesVtbl,
+  record ILockBytesVtable,
     query_interface : Proc(ILockBytes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILockBytes*, UInt32),
     release : Proc(ILockBytes*, UInt32),
@@ -729,7 +725,7 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  record ILockBytes, lpVtbl : ILockBytesVtbl* do
+  record ILockBytes, lpVtbl : ILockBytesVtable* do
     GUID = LibC::GUID.new(0xa_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : ILockBytes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -765,7 +761,7 @@ module Win32cr::System::Com::StructuredStorage
   end
 
   @[Extern]
-  record IRootStorageVtbl,
+  record IRootStorageVtable,
     query_interface : Proc(IRootStorage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRootStorage*, UInt32),
     release : Proc(IRootStorage*, UInt32),
@@ -773,7 +769,7 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  record IRootStorage, lpVtbl : IRootStorageVtbl* do
+  record IRootStorage, lpVtbl : IRootStorageVtable* do
     GUID = LibC::GUID.new(0x12_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IRootStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -791,7 +787,7 @@ module Win32cr::System::Com::StructuredStorage
   end
 
   @[Extern]
-  record IFillLockBytesVtbl,
+  record IFillLockBytesVtable,
     query_interface : Proc(IFillLockBytes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFillLockBytes*, UInt32),
     release : Proc(IFillLockBytes*, UInt32),
@@ -802,7 +798,7 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  record IFillLockBytes, lpVtbl : IFillLockBytesVtbl* do
+  record IFillLockBytes, lpVtbl : IFillLockBytesVtable* do
     GUID = LibC::GUID.new(0x99caf010_u32, 0x415e_u16, 0x11cf_u16, StaticArray[0x88_u8, 0x14_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb5_u8, 0x69_u8, 0xf5_u8])
     def query_interface(this : IFillLockBytes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -829,7 +825,7 @@ module Win32cr::System::Com::StructuredStorage
   end
 
   @[Extern]
-  record ILayoutStorageVtbl,
+  record ILayoutStorageVtable,
     query_interface : Proc(ILayoutStorage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILayoutStorage*, UInt32),
     release : Proc(ILayoutStorage*, UInt32),
@@ -841,7 +837,7 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  record ILayoutStorage, lpVtbl : ILayoutStorageVtbl* do
+  record ILayoutStorage, lpVtbl : ILayoutStorageVtable* do
     GUID = LibC::GUID.new(0xe6d4d90_u32, 0x6738_u16, 0x11cf_u16, StaticArray[0x96_u8, 0x8_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x68_u8, 0xd_u8, 0xb4_u8])
     def query_interface(this : ILayoutStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -871,7 +867,7 @@ module Win32cr::System::Com::StructuredStorage
   end
 
   @[Extern]
-  record IDirectWriterLockVtbl,
+  record IDirectWriterLockVtable,
     query_interface : Proc(IDirectWriterLock*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectWriterLock*, UInt32),
     release : Proc(IDirectWriterLock*, UInt32),
@@ -881,7 +877,7 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  record IDirectWriterLock, lpVtbl : IDirectWriterLockVtbl* do
+  record IDirectWriterLock, lpVtbl : IDirectWriterLockVtable* do
     GUID = LibC::GUID.new(0xe6d4d92_u32, 0x6738_u16, 0x11cf_u16, StaticArray[0x96_u8, 0x8_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x68_u8, 0xd_u8, 0xb4_u8])
     def query_interface(this : IDirectWriterLock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -905,7 +901,7 @@ module Win32cr::System::Com::StructuredStorage
   end
 
   @[Extern]
-  record IPropertyStorageVtbl,
+  record IPropertyStorageVtable,
     query_interface : Proc(IPropertyStorage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPropertyStorage*, UInt32),
     release : Proc(IPropertyStorage*, UInt32),
@@ -924,7 +920,7 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  record IPropertyStorage, lpVtbl : IPropertyStorageVtbl* do
+  record IPropertyStorage, lpVtbl : IPropertyStorageVtable* do
     GUID = LibC::GUID.new(0x138_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IPropertyStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -975,7 +971,7 @@ module Win32cr::System::Com::StructuredStorage
   end
 
   @[Extern]
-  record IPropertySetStorageVtbl,
+  record IPropertySetStorageVtable,
     query_interface : Proc(IPropertySetStorage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPropertySetStorage*, UInt32),
     release : Proc(IPropertySetStorage*, UInt32),
@@ -986,7 +982,7 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  record IPropertySetStorage, lpVtbl : IPropertySetStorageVtbl* do
+  record IPropertySetStorage, lpVtbl : IPropertySetStorageVtable* do
     GUID = LibC::GUID.new(0x13a_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IPropertySetStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1013,7 +1009,7 @@ module Win32cr::System::Com::StructuredStorage
   end
 
   @[Extern]
-  record IEnumSTATPROPSTGVtbl,
+  record IEnumSTATPROPSTGVtable,
     query_interface : Proc(IEnumSTATPROPSTG*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumSTATPROPSTG*, UInt32),
     release : Proc(IEnumSTATPROPSTG*, UInt32),
@@ -1024,7 +1020,7 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  record IEnumSTATPROPSTG, lpVtbl : IEnumSTATPROPSTGVtbl* do
+  record IEnumSTATPROPSTG, lpVtbl : IEnumSTATPROPSTGVtable* do
     GUID = LibC::GUID.new(0x139_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IEnumSTATPROPSTG*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1051,7 +1047,7 @@ module Win32cr::System::Com::StructuredStorage
   end
 
   @[Extern]
-  record IEnumSTATPROPSETSTGVtbl,
+  record IEnumSTATPROPSETSTGVtable,
     query_interface : Proc(IEnumSTATPROPSETSTG*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumSTATPROPSETSTG*, UInt32),
     release : Proc(IEnumSTATPROPSETSTG*, UInt32),
@@ -1062,7 +1058,7 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  record IEnumSTATPROPSETSTG, lpVtbl : IEnumSTATPROPSETSTGVtbl* do
+  record IEnumSTATPROPSETSTG, lpVtbl : IEnumSTATPROPSETSTGVtable* do
     GUID = LibC::GUID.new(0x13b_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IEnumSTATPROPSETSTG*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1089,7 +1085,7 @@ module Win32cr::System::Com::StructuredStorage
   end
 
   @[Extern]
-  record IPropertyBagVtbl,
+  record IPropertyBagVtable,
     query_interface : Proc(IPropertyBag*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPropertyBag*, UInt32),
     release : Proc(IPropertyBag*, UInt32),
@@ -1098,7 +1094,7 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  record IPropertyBag, lpVtbl : IPropertyBagVtbl* do
+  record IPropertyBag, lpVtbl : IPropertyBagVtable* do
     GUID = LibC::GUID.new(0x55272a00_u32, 0x42cb_u16, 0x11ce_u16, StaticArray[0x81_u8, 0x35_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0xb8_u8, 0x51_u8])
     def query_interface(this : IPropertyBag*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1119,7 +1115,7 @@ module Win32cr::System::Com::StructuredStorage
   end
 
   @[Extern]
-  record IPropertyBag2Vtbl,
+  record IPropertyBag2Vtable,
     query_interface : Proc(IPropertyBag2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPropertyBag2*, UInt32),
     release : Proc(IPropertyBag2*, UInt32),
@@ -1131,7 +1127,7 @@ module Win32cr::System::Com::StructuredStorage
 
 
   @[Extern]
-  record IPropertyBag2, lpVtbl : IPropertyBag2Vtbl* do
+  record IPropertyBag2, lpVtbl : IPropertyBag2Vtable* do
     GUID = LibC::GUID.new(0x22f55882_u32, 0x280b_u16, 0x11d0_u16, StaticArray[0xa8_u8, 0xa9_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xc_u8, 0x20_u8, 0x4_u8])
     def query_interface(this : IPropertyBag2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1161,188 +1157,279 @@ module Win32cr::System::Com::StructuredStorage
   end
 
   def coGetInstanceFromFile(pServerInfo : Win32cr::System::Com::COSERVERINFO*, pClsid : LibC::GUID*, punkOuter : Void*, dwClsCtx : Win32cr::System::Com::CLSCTX, grfMode : UInt32, pwszName : Win32cr::Foundation::PWSTR, dwCount : UInt32, pResults : Win32cr::System::Com::MULTI_QI*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CoGetInstanceFromFile(pServerInfo, pClsid, punkOuter, dwClsCtx, grfMode, pwszName, dwCount, pResults)
+    {% end %}
   end
 
   def coGetInstanceFromIStorage(pServerInfo : Win32cr::System::Com::COSERVERINFO*, pClsid : LibC::GUID*, punkOuter : Void*, dwClsCtx : Win32cr::System::Com::CLSCTX, pstg : Void*, dwCount : UInt32, pResults : Win32cr::System::Com::MULTI_QI*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CoGetInstanceFromIStorage(pServerInfo, pClsid, punkOuter, dwClsCtx, pstg, dwCount, pResults)
+    {% end %}
   end
 
   def stgOpenAsyncDocfileOnIFillLockBytes(pflb : Void*, grfMode : UInt32, asyncFlags : UInt32, ppstgOpen : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StgOpenAsyncDocfileOnIFillLockBytes(pflb, grfMode, asyncFlags, ppstgOpen)
+    {% end %}
   end
 
   def stgGetIFillLockBytesOnILockBytes(pilb : Void*, ppflb : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StgGetIFillLockBytesOnILockBytes(pilb, ppflb)
+    {% end %}
   end
 
   def stgGetIFillLockBytesOnFile(pwcsName : Win32cr::Foundation::PWSTR, ppflb : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StgGetIFillLockBytesOnFile(pwcsName, ppflb)
+    {% end %}
   end
 
   def stgOpenLayoutDocfile(pwcsDfName : Win32cr::Foundation::PWSTR, grfMode : UInt32, reserved : UInt32, ppstgOpen : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StgOpenLayoutDocfile(pwcsDfName, grfMode, reserved, ppstgOpen)
+    {% end %}
   end
 
   def createStreamOnHGlobal(hGlobal : LibC::IntPtrT, fDeleteOnRelease : Win32cr::Foundation::BOOL, ppstm : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateStreamOnHGlobal(hGlobal, fDeleteOnRelease, ppstm)
+    {% end %}
   end
 
   def getHGlobalFromStream(pstm : Void*, phglobal : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetHGlobalFromStream(pstm, phglobal)
+    {% end %}
   end
 
   def coGetInterfaceAndReleaseStream(pStm : Void*, iid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CoGetInterfaceAndReleaseStream(pStm, iid, ppv)
+    {% end %}
   end
 
   def propVariantCopy(pvarDest : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pvarSrc : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PropVariantCopy(pvarDest, pvarSrc)
+    {% end %}
   end
 
   def propVariantClear(pvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PropVariantClear(pvar)
+    {% end %}
   end
 
   def freePropVariantArray(cVariants : UInt32, rgvars : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FreePropVariantArray(cVariants, rgvars)
+    {% end %}
   end
 
   def stgCreateDocfile(pwcsName : Win32cr::Foundation::PWSTR, grfMode : Win32cr::System::Com::StructuredStorage::STGM, reserved : UInt32, ppstgOpen : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StgCreateDocfile(pwcsName, grfMode, reserved, ppstgOpen)
+    {% end %}
   end
 
   def stgCreateDocfileOnILockBytes(plkbyt : Void*, grfMode : Win32cr::System::Com::StructuredStorage::STGM, reserved : UInt32, ppstgOpen : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StgCreateDocfileOnILockBytes(plkbyt, grfMode, reserved, ppstgOpen)
+    {% end %}
   end
 
   def stgOpenStorage(pwcsName : Win32cr::Foundation::PWSTR, pstgPriority : Void*, grfMode : Win32cr::System::Com::StructuredStorage::STGM, snbExclude : UInt16**, reserved : UInt32, ppstgOpen : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StgOpenStorage(pwcsName, pstgPriority, grfMode, snbExclude, reserved, ppstgOpen)
+    {% end %}
   end
 
   def stgOpenStorageOnILockBytes(plkbyt : Void*, pstgPriority : Void*, grfMode : UInt32, snbExclude : UInt16**, reserved : UInt32, ppstgOpen : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StgOpenStorageOnILockBytes(plkbyt, pstgPriority, grfMode, snbExclude, reserved, ppstgOpen)
+    {% end %}
   end
 
   def stgIsStorageFile(pwcsName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StgIsStorageFile(pwcsName)
+    {% end %}
   end
 
   def stgIsStorageILockBytes(plkbyt : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StgIsStorageILockBytes(plkbyt)
+    {% end %}
   end
 
   def stgSetTimes(lpszName : Win32cr::Foundation::PWSTR, pctime : Win32cr::Foundation::FILETIME*, patime : Win32cr::Foundation::FILETIME*, pmtime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StgSetTimes(lpszName, pctime, patime, pmtime)
+    {% end %}
   end
 
   def stgCreateStorageEx(pwcsName : Win32cr::Foundation::PWSTR, grfMode : Win32cr::System::Com::StructuredStorage::STGM, stgfmt : Win32cr::System::Com::StructuredStorage::STGFMT, grfAttrs : UInt32, pStgOptions : Win32cr::System::Com::StructuredStorage::STGOPTIONS*, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, riid : LibC::GUID*, ppObjectOpen : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StgCreateStorageEx(pwcsName, grfMode, stgfmt, grfAttrs, pStgOptions, pSecurityDescriptor, riid, ppObjectOpen)
+    {% end %}
   end
 
   def stgOpenStorageEx(pwcsName : Win32cr::Foundation::PWSTR, grfMode : Win32cr::System::Com::StructuredStorage::STGM, stgfmt : Win32cr::System::Com::StructuredStorage::STGFMT, grfAttrs : UInt32, pStgOptions : Win32cr::System::Com::StructuredStorage::STGOPTIONS*, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, riid : LibC::GUID*, ppObjectOpen : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StgOpenStorageEx(pwcsName, grfMode, stgfmt, grfAttrs, pStgOptions, pSecurityDescriptor, riid, ppObjectOpen)
+    {% end %}
   end
 
   def stgCreatePropStg(pUnk : Void*, fmtid : LibC::GUID*, pclsid : LibC::GUID*, grfFlags : UInt32, dwReserved : UInt32, ppPropStg : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StgCreatePropStg(pUnk, fmtid, pclsid, grfFlags, dwReserved, ppPropStg)
+    {% end %}
   end
 
   def stgOpenPropStg(pUnk : Void*, fmtid : LibC::GUID*, grfFlags : UInt32, dwReserved : UInt32, ppPropStg : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StgOpenPropStg(pUnk, fmtid, grfFlags, dwReserved, ppPropStg)
+    {% end %}
   end
 
   def stgCreatePropSetStg(pStorage : Void*, dwReserved : UInt32, ppPropSetStg : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StgCreatePropSetStg(pStorage, dwReserved, ppPropSetStg)
+    {% end %}
   end
 
   def fmtIdToPropStgName(pfmtid : LibC::GUID*, oszName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FmtIdToPropStgName(pfmtid, oszName)
+    {% end %}
   end
 
   def propStgNameToFmtId(oszName : Win32cr::Foundation::PWSTR, pfmtid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PropStgNameToFmtId(oszName, pfmtid)
+    {% end %}
   end
 
   def readClassStg(pStg : Void*, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ReadClassStg(pStg, pclsid)
+    {% end %}
   end
 
   def writeClassStg(pStg : Void*, rclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WriteClassStg(pStg, rclsid)
+    {% end %}
   end
 
   def readClassStm(pStm : Void*, pclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ReadClassStm(pStm, pclsid)
+    {% end %}
   end
 
   def writeClassStm(pStm : Void*, rclsid : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WriteClassStm(pStm, rclsid)
+    {% end %}
   end
 
   def getHGlobalFromILockBytes(plkbyt : Void*, phglobal : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetHGlobalFromILockBytes(plkbyt, phglobal)
+    {% end %}
   end
 
   def createILockBytesOnHGlobal(hGlobal : LibC::IntPtrT, fDeleteOnRelease : Win32cr::Foundation::BOOL, pplkbyt : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateILockBytesOnHGlobal(hGlobal, fDeleteOnRelease, pplkbyt)
+    {% end %}
   end
 
   def getConvertStg(pStg : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetConvertStg(pStg)
+    {% end %}
   end
 
   def stgConvertVariantToProperty(pvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, code_page : UInt16, pprop : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE*, pcb : UInt32*, pid : UInt32, fReserved : Win32cr::Foundation::BOOLEAN, pcIndirect : UInt32*) : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE*
+    {% if !flag?(:docs) %}
     C.StgConvertVariantToProperty(pvar, code_page, pprop, pcb, pid, fReserved, pcIndirect)
+    {% end %}
   end
 
   def stgConvertPropertyToVariant(pprop : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE*, code_page : UInt16, pvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, pma : Win32cr::System::Com::StructuredStorage::PMemoryAllocator*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.StgConvertPropertyToVariant(pprop, code_page, pvar, pma)
+    {% end %}
   end
 
   def stgPropertyLengthAsVariant(pProp : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE*, cbProp : UInt32, code_page : UInt16, bReserved : UInt8) : UInt32
+    {% if !flag?(:docs) %}
     C.StgPropertyLengthAsVariant(pProp, cbProp, code_page, bReserved)
+    {% end %}
   end
 
   def writeFmtUserTypeStg(pstg : Void*, cf : UInt16, lpszUserType : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WriteFmtUserTypeStg(pstg, cf, lpszUserType)
+    {% end %}
   end
 
   def readFmtUserTypeStg(pstg : Void*, pcf : UInt16*, lplpszUserType : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ReadFmtUserTypeStg(pstg, pcf, lplpszUserType)
+    {% end %}
   end
 
   def oleConvertOLESTREAMToIStorage(lpolestream : Win32cr::System::Com::StructuredStorage::OLESTREAM*, pstg : Void*, ptd : Win32cr::System::Com::DVTARGETDEVICE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.OleConvertOLESTREAMToIStorage(lpolestream, pstg, ptd)
+    {% end %}
   end
 
   def oleConvertIStorageToOLESTREAM(pstg : Void*, lpolestream : Win32cr::System::Com::StructuredStorage::OLESTREAM*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.OleConvertIStorageToOLESTREAM(pstg, lpolestream)
+    {% end %}
   end
 
   def setConvertStg(pStg : Void*, fConvert : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetConvertStg(pStg, fConvert)
+    {% end %}
   end
 
   def oleConvertIStorageToOLESTREAMEx(pstg : Void*, cfFormat : UInt16, lWidth : Int32, lHeight : Int32, dwSize : UInt32, pmedium : Win32cr::System::Com::STGMEDIUM*, polestm : Win32cr::System::Com::StructuredStorage::OLESTREAM*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.OleConvertIStorageToOLESTREAMEx(pstg, cfFormat, lWidth, lHeight, dwSize, pmedium, polestm)
+    {% end %}
   end
 
   def oleConvertOLESTREAMToIStorageEx(polestm : Win32cr::System::Com::StructuredStorage::OLESTREAM*, pstg : Void*, pcfFormat : UInt16*, plwWidth : Int32*, plHeight : Int32*, pdwSize : UInt32*, pmedium : Win32cr::System::Com::STGMEDIUM*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.OleConvertOLESTREAMToIStorageEx(polestm, pstg, pcfFormat, plwWidth, plHeight, pdwSize, pmedium)
+    {% end %}
   end
 
   def stgSerializePropVariant(ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*, ppProp : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE**, pcb : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StgSerializePropVariant(ppropvar, ppProp, pcb)
+    {% end %}
   end
 
   def stgDeserializePropVariant(pprop : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE*, cbMax : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StgDeserializePropVariant(pprop, cbMax, ppropvar)
+    {% end %}
   end
 
   @[Link("ole32")]
   @[Link("dflayout")]
   @[Link("propsys")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CoGetInstanceFromFile(pServerInfo : Win32cr::System::Com::COSERVERINFO*, pClsid : LibC::GUID*, punkOuter : Void*, dwClsCtx : Win32cr::System::Com::CLSCTX, grfMode : UInt32, pwszName : Win32cr::Foundation::PWSTR, dwCount : UInt32, pResults : Win32cr::System::Com::MULTI_QI*) : Win32cr::Foundation::HRESULT
@@ -1480,4 +1567,5 @@ module Win32cr::System::Com::StructuredStorage
     fun StgDeserializePropVariant(pprop : Win32cr::System::Com::StructuredStorage::SERIALIZEDPROPERTYVALUE*, cbMax : UInt32, ppropvar : Win32cr::System::Com::StructuredStorage::PROPVARIANT*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

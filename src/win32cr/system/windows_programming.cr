@@ -786,17 +786,9 @@ module Win32cr::System::WindowsProgramming
     WLDP_POLICY_SETTING_AV_PERF_MODE = 1000_i32
   end
 
-  @[Extern]
-  struct D3DHAL_CALLBACKS_
-    def initialize()
-    end
-  end
+  alias D3DHAL_CALLBACKS_ = Void
 
-  @[Extern]
-  struct D3DHAL_GLOBALDRIVERDATA_
-    def initialize()
-    end
-  end
+  alias D3DHAL_GLOBALDRIVERDATA_ = Void
 
   @[Extern]
   struct IMAGE_THUNK_DATA64
@@ -1616,7 +1608,7 @@ module Win32cr::System::WindowsProgramming
   {% end %}
 
   @[Extern]
-  record ICameraUIControlEventCallbackVtbl,
+  record ICameraUIControlEventCallbackVtable,
     query_interface : Proc(ICameraUIControlEventCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICameraUIControlEventCallback*, UInt32),
     release : Proc(ICameraUIControlEventCallback*, UInt32),
@@ -1628,7 +1620,7 @@ module Win32cr::System::WindowsProgramming
 
 
   @[Extern]
-  record ICameraUIControlEventCallback, lpVtbl : ICameraUIControlEventCallbackVtbl* do
+  record ICameraUIControlEventCallback, lpVtbl : ICameraUIControlEventCallbackVtable* do
     GUID = LibC::GUID.new(0x1bfa0c2c_u32, 0xfbcd_u16, 0x4776_u16, StaticArray[0xbd_u8, 0xa4_u8, 0x88_u8, 0xbf_u8, 0x97_u8, 0x4e_u8, 0x74_u8, 0xf4_u8])
     def query_interface(this : ICameraUIControlEventCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1658,7 +1650,7 @@ module Win32cr::System::WindowsProgramming
   end
 
   @[Extern]
-  record ICameraUIControlVtbl,
+  record ICameraUIControlVtable,
     query_interface : Proc(ICameraUIControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICameraUIControl*, UInt32),
     release : Proc(ICameraUIControl*, UInt32),
@@ -1673,7 +1665,7 @@ module Win32cr::System::WindowsProgramming
 
 
   @[Extern]
-  record ICameraUIControl, lpVtbl : ICameraUIControlVtbl* do
+  record ICameraUIControl, lpVtbl : ICameraUIControlVtable* do
     GUID = LibC::GUID.new(0xb8733adf_u32, 0x3d68_u16, 0x4b8f_u16, StaticArray[0xbb_u8, 0x8_u8, 0xe2_u8, 0x8a_u8, 0xb_u8, 0xed_u8, 0x3_u8, 0x76_u8])
     def query_interface(this : ICameraUIControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1712,7 +1704,7 @@ module Win32cr::System::WindowsProgramming
   end
 
   @[Extern]
-  record IEditionUpgradeHelperVtbl,
+  record IEditionUpgradeHelperVtable,
     query_interface : Proc(IEditionUpgradeHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEditionUpgradeHelper*, UInt32),
     release : Proc(IEditionUpgradeHelper*, UInt32),
@@ -1724,7 +1716,7 @@ module Win32cr::System::WindowsProgramming
 
 
   @[Extern]
-  record IEditionUpgradeHelper, lpVtbl : IEditionUpgradeHelperVtbl* do
+  record IEditionUpgradeHelper, lpVtbl : IEditionUpgradeHelperVtable* do
     GUID = LibC::GUID.new(0xd3e9e342_u32, 0x5deb_u16, 0x43b6_u16, StaticArray[0x84_u8, 0x9e_u8, 0x69_u8, 0x13_u8, 0xb8_u8, 0x5d_u8, 0x50_u8, 0x3a_u8])
     def query_interface(this : IEditionUpgradeHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1754,7 +1746,7 @@ module Win32cr::System::WindowsProgramming
   end
 
   @[Extern]
-  record IWindowsLockModeHelperVtbl,
+  record IWindowsLockModeHelperVtable,
     query_interface : Proc(IWindowsLockModeHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsLockModeHelper*, UInt32),
     release : Proc(IWindowsLockModeHelper*, UInt32),
@@ -1762,7 +1754,7 @@ module Win32cr::System::WindowsProgramming
 
 
   @[Extern]
-  record IWindowsLockModeHelper, lpVtbl : IWindowsLockModeHelperVtbl* do
+  record IWindowsLockModeHelper, lpVtbl : IWindowsLockModeHelperVtable* do
     GUID = LibC::GUID.new(0xf342d19e_u32, 0xcc22_u16, 0x4648_u16, StaticArray[0xbb_u8, 0x5d_u8, 0x3_u8, 0xcc_u8, 0xf7_u8, 0x5b_u8, 0x47_u8, 0xc5_u8])
     def query_interface(this : IWindowsLockModeHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1780,7 +1772,7 @@ module Win32cr::System::WindowsProgramming
   end
 
   @[Extern]
-  record IEditionUpgradeBrokerVtbl,
+  record IEditionUpgradeBrokerVtable,
     query_interface : Proc(IEditionUpgradeBroker*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEditionUpgradeBroker*, UInt32),
     release : Proc(IEditionUpgradeBroker*, UInt32),
@@ -1791,7 +1783,7 @@ module Win32cr::System::WindowsProgramming
 
 
   @[Extern]
-  record IEditionUpgradeBroker, lpVtbl : IEditionUpgradeBrokerVtbl* do
+  record IEditionUpgradeBroker, lpVtbl : IEditionUpgradeBrokerVtable* do
     GUID = LibC::GUID.new(0xff19cbcf_u32, 0x9455_u16, 0x4937_u16, StaticArray[0xb8_u8, 0x72_u8, 0x6b_u8, 0x79_u8, 0x29_u8, 0xa4_u8, 0x60_u8, 0xaf_u8])
     def query_interface(this : IEditionUpgradeBroker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1818,7 +1810,7 @@ module Win32cr::System::WindowsProgramming
   end
 
   @[Extern]
-  record IContainerActivationHelperVtbl,
+  record IContainerActivationHelperVtable,
     query_interface : Proc(IContainerActivationHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IContainerActivationHelper*, UInt32),
     release : Proc(IContainerActivationHelper*, UInt32),
@@ -1826,7 +1818,7 @@ module Win32cr::System::WindowsProgramming
 
 
   @[Extern]
-  record IContainerActivationHelper, lpVtbl : IContainerActivationHelperVtbl* do
+  record IContainerActivationHelper, lpVtbl : IContainerActivationHelperVtable* do
     GUID = LibC::GUID.new(0xb524f93f_u32, 0x80d5_u16, 0x4ec7_u16, StaticArray[0xae_u8, 0x9e_u8, 0xd6_u8, 0x6e_u8, 0x93_u8, 0xad_u8, 0xe1_u8, 0xfa_u8])
     def query_interface(this : IContainerActivationHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1844,7 +1836,7 @@ module Win32cr::System::WindowsProgramming
   end
 
   @[Extern]
-  record IClipServiceNotificationHelperVtbl,
+  record IClipServiceNotificationHelperVtable,
     query_interface : Proc(IClipServiceNotificationHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IClipServiceNotificationHelper*, UInt32),
     release : Proc(IClipServiceNotificationHelper*, UInt32),
@@ -1852,7 +1844,7 @@ module Win32cr::System::WindowsProgramming
 
 
   @[Extern]
-  record IClipServiceNotificationHelper, lpVtbl : IClipServiceNotificationHelperVtbl* do
+  record IClipServiceNotificationHelper, lpVtbl : IClipServiceNotificationHelperVtable* do
     GUID = LibC::GUID.new(0xc39948f0_u32, 0x6142_u16, 0x44fd_u16, StaticArray[0x98_u8, 0xca_u8, 0xe1_u8, 0x68_u8, 0x1a_u8, 0x8d_u8, 0x68_u8, 0xb5_u8])
     def query_interface(this : IClipServiceNotificationHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1870,7 +1862,7 @@ module Win32cr::System::WindowsProgramming
   end
 
   @[Extern]
-  record IDefaultBrowserSyncSettingsVtbl,
+  record IDefaultBrowserSyncSettingsVtable,
     query_interface : Proc(IDefaultBrowserSyncSettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDefaultBrowserSyncSettings*, UInt32),
     release : Proc(IDefaultBrowserSyncSettings*, UInt32),
@@ -1878,7 +1870,7 @@ module Win32cr::System::WindowsProgramming
 
 
   @[Extern]
-  record IDefaultBrowserSyncSettings, lpVtbl : IDefaultBrowserSyncSettingsVtbl* do
+  record IDefaultBrowserSyncSettings, lpVtbl : IDefaultBrowserSyncSettingsVtable* do
     GUID = LibC::GUID.new(0x7a27faad_u32, 0x5ae6_u16, 0x4255_u16, StaticArray[0x90_u8, 0x30_u8, 0xc5_u8, 0x30_u8, 0x93_u8, 0x62_u8, 0x92_u8, 0xe3_u8])
     def query_interface(this : IDefaultBrowserSyncSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1896,7 +1888,7 @@ module Win32cr::System::WindowsProgramming
   end
 
   @[Extern]
-  record IDeleteBrowsingHistoryVtbl,
+  record IDeleteBrowsingHistoryVtable,
     query_interface : Proc(IDeleteBrowsingHistory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDeleteBrowsingHistory*, UInt32),
     release : Proc(IDeleteBrowsingHistory*, UInt32),
@@ -1904,7 +1896,7 @@ module Win32cr::System::WindowsProgramming
 
 
   @[Extern]
-  record IDeleteBrowsingHistory, lpVtbl : IDeleteBrowsingHistoryVtbl* do
+  record IDeleteBrowsingHistory, lpVtbl : IDeleteBrowsingHistoryVtable* do
     GUID = LibC::GUID.new(0xcf38ed4b_u32, 0x2be7_u16, 0x4461_u16, StaticArray[0x8b_u8, 0x5e_u8, 0x9a_u8, 0x46_u8, 0x6d_u8, 0xc8_u8, 0x2a_u8, 0xe3_u8])
     def query_interface(this : IDeleteBrowsingHistory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1922,931 +1914,1385 @@ module Win32cr::System::WindowsProgramming
   end
 
   def rtlGetReturnAddressHijackTarget : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.RtlGetReturnAddressHijackTarget
+    {% end %}
   end
 
   def rtlRaiseCustomSystemEventTrigger(trigger_config : Win32cr::System::WindowsProgramming::CUSTOM_SYSTEM_EVENT_TRIGGER_CONFIG*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlRaiseCustomSystemEventTrigger(trigger_config)
+    {% end %}
   end
 
   def isApiSetImplemented(contract : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsApiSetImplemented(contract)
+    {% end %}
   end
 
   def queryThreadCycleTime(thread_handle : Win32cr::Foundation::HANDLE, cycle_time : UInt64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryThreadCycleTime(thread_handle, cycle_time)
+    {% end %}
   end
 
   def queryProcessCycleTime(process_handle : Win32cr::Foundation::HANDLE, cycle_time : UInt64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryProcessCycleTime(process_handle, cycle_time)
+    {% end %}
   end
 
   def queryIdleProcessorCycleTime(buffer_length : UInt32*, processor_idle_cycle_time : UInt64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryIdleProcessorCycleTime(buffer_length, processor_idle_cycle_time)
+    {% end %}
   end
 
   def queryIdleProcessorCycleTimeEx(group : UInt16, buffer_length : UInt32*, processor_idle_cycle_time : UInt64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryIdleProcessorCycleTimeEx(group, buffer_length, processor_idle_cycle_time)
+    {% end %}
   end
 
   def queryInterruptTimePrecise(lpInterruptTimePrecise : UInt64*) : Void
+    {% if !flag?(:docs) %}
     C.QueryInterruptTimePrecise(lpInterruptTimePrecise)
+    {% end %}
   end
 
   def queryUnbiasedInterruptTimePrecise(lpUnbiasedInterruptTimePrecise : UInt64*) : Void
+    {% if !flag?(:docs) %}
     C.QueryUnbiasedInterruptTimePrecise(lpUnbiasedInterruptTimePrecise)
+    {% end %}
   end
 
   def queryInterruptTime(lpInterruptTime : UInt64*) : Void
+    {% if !flag?(:docs) %}
     C.QueryInterruptTime(lpInterruptTime)
+    {% end %}
   end
 
   def queryUnbiasedInterruptTime(unbiased_time : UInt64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryUnbiasedInterruptTime(unbiased_time)
+    {% end %}
   end
 
   def queryAuxiliaryCounterFrequency(lpAuxiliaryCounterFrequency : UInt64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.QueryAuxiliaryCounterFrequency(lpAuxiliaryCounterFrequency)
+    {% end %}
   end
 
   def convertAuxiliaryCounterToPerformanceCounter(ullAuxiliaryCounterValue : UInt64, lpPerformanceCounterValue : UInt64*, lpConversionError : UInt64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ConvertAuxiliaryCounterToPerformanceCounter(ullAuxiliaryCounterValue, lpPerformanceCounterValue, lpConversionError)
+    {% end %}
   end
 
   def convertPerformanceCounterToAuxiliaryCounter(ullPerformanceCounterValue : UInt64, lpAuxiliaryCounterValue : UInt64*, lpConversionError : UInt64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ConvertPerformanceCounterToAuxiliaryCounter(ullPerformanceCounterValue, lpAuxiliaryCounterValue, lpConversionError)
+    {% end %}
   end
 
   def globalCompact(dwMinFree : UInt32) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.GlobalCompact(dwMinFree)
+    {% end %}
   end
 
   def globalFix(hMem : LibC::IntPtrT) : Void
+    {% if !flag?(:docs) %}
     C.GlobalFix(hMem)
+    {% end %}
   end
 
   def globalUnfix(hMem : LibC::IntPtrT) : Void
+    {% if !flag?(:docs) %}
     C.GlobalUnfix(hMem)
+    {% end %}
   end
 
   def globalWire(hMem : LibC::IntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.GlobalWire(hMem)
+    {% end %}
   end
 
   def globalUnWire(hMem : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GlobalUnWire(hMem)
+    {% end %}
   end
 
   def localShrink(hMem : LibC::IntPtrT, cbNewSize : UInt32) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.LocalShrink(hMem, cbNewSize)
+    {% end %}
   end
 
   def localCompact(uMinFree : UInt32) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.LocalCompact(uMinFree)
+    {% end %}
   end
 
   def setEnvironmentStringsA(new_environment : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetEnvironmentStringsA(new_environment)
+    {% end %}
   end
 
   def setHandleCount(uNumber : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SetHandleCount(uNumber)
+    {% end %}
   end
 
   def requestDeviceWakeup(hDevice : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RequestDeviceWakeup(hDevice)
+    {% end %}
   end
 
   def cancelDeviceWakeupRequest(hDevice : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CancelDeviceWakeupRequest(hDevice)
+    {% end %}
   end
 
   def setMessageWaitingIndicator(hMsgIndicator : Win32cr::Foundation::HANDLE, ulMsgCount : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetMessageWaitingIndicator(hMsgIndicator, ulMsgCount)
+    {% end %}
   end
 
   def mulDiv(nNumber : Int32, nNumerator : Int32, nDenominator : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.MulDiv(nNumber, nNumerator, nDenominator)
+    {% end %}
   end
 
   def getSystemRegistryQuota(pdwQuotaAllowed : UInt32*, pdwQuotaUsed : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSystemRegistryQuota(pdwQuotaAllowed, pdwQuotaUsed)
+    {% end %}
   end
 
   def fileTimeToDosDateTime(lpFileTime : Win32cr::Foundation::FILETIME*, lpFatDate : UInt16*, lpFatTime : UInt16*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FileTimeToDosDateTime(lpFileTime, lpFatDate, lpFatTime)
+    {% end %}
   end
 
   def dosDateTimeToFileTime(wFatDate : UInt16, wFatTime : UInt16, lpFileTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DosDateTimeToFileTime(wFatDate, wFatTime, lpFileTime)
+    {% end %}
   end
 
   def _lopen(lpPathName : Win32cr::Foundation::PSTR, iReadWrite : Int32) : Int32
+    {% if !flag?(:docs) %}
     C._lopen(lpPathName, iReadWrite)
+    {% end %}
   end
 
   def _lcreat(lpPathName : Win32cr::Foundation::PSTR, iAttribute : Int32) : Int32
+    {% if !flag?(:docs) %}
     C._lcreat(lpPathName, iAttribute)
+    {% end %}
   end
 
   def _lread(hFile : Int32, lpBuffer : Void*, uBytes : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C._lread(hFile, lpBuffer, uBytes)
+    {% end %}
   end
 
   def _lwrite(hFile : Int32, lpBuffer : Win32cr::Foundation::PSTR, uBytes : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C._lwrite(hFile, lpBuffer, uBytes)
+    {% end %}
   end
 
   def _hread(hFile : Int32, lpBuffer : Void*, lBytes : Int32) : Int32
+    {% if !flag?(:docs) %}
     C._hread(hFile, lpBuffer, lBytes)
+    {% end %}
   end
 
   def _hwrite(hFile : Int32, lpBuffer : Win32cr::Foundation::PSTR, lBytes : Int32) : Int32
+    {% if !flag?(:docs) %}
     C._hwrite(hFile, lpBuffer, lBytes)
+    {% end %}
   end
 
   def _lclose(hFile : Int32) : Int32
+    {% if !flag?(:docs) %}
     C._lclose(hFile)
+    {% end %}
   end
 
   def _llseek(hFile : Int32, lOffset : Int32, iOrigin : Int32) : Int32
+    {% if !flag?(:docs) %}
     C._llseek(hFile, lOffset, iOrigin)
+    {% end %}
   end
 
   def signalObjectAndWait(hObjectToSignal : Win32cr::Foundation::HANDLE, hObjectToWaitOn : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.SignalObjectAndWait(hObjectToSignal, hObjectToWaitOn, dwMilliseconds, bAlertable)
+    {% end %}
   end
 
   def openMutexA(dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenMutexA(dwDesiredAccess, bInheritHandle, lpName)
+    {% end %}
   end
 
   def openSemaphoreA(dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenSemaphoreA(dwDesiredAccess, bInheritHandle, lpName)
+    {% end %}
   end
 
   def createWaitableTimerA(lpTimerAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bManualReset : Win32cr::Foundation::BOOL, lpTimerName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateWaitableTimerA(lpTimerAttributes, bManualReset, lpTimerName)
+    {% end %}
   end
 
   def openWaitableTimerA(dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, lpTimerName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenWaitableTimerA(dwDesiredAccess, bInheritHandle, lpTimerName)
+    {% end %}
   end
 
   def createWaitableTimerExA(lpTimerAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpTimerName : Win32cr::Foundation::PSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateWaitableTimerExA(lpTimerAttributes, lpTimerName, dwFlags, dwDesiredAccess)
+    {% end %}
   end
 
   def getFirmwareEnvironmentVariableA(lpName : Win32cr::Foundation::PSTR, lpGuid : Win32cr::Foundation::PSTR, pBuffer : Void*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetFirmwareEnvironmentVariableA(lpName, lpGuid, pBuffer, nSize)
+    {% end %}
   end
 
   def getFirmwareEnvironmentVariableW(lpName : Win32cr::Foundation::PWSTR, lpGuid : Win32cr::Foundation::PWSTR, pBuffer : Void*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetFirmwareEnvironmentVariableW(lpName, lpGuid, pBuffer, nSize)
+    {% end %}
   end
 
   def getFirmwareEnvironmentVariableExA(lpName : Win32cr::Foundation::PSTR, lpGuid : Win32cr::Foundation::PSTR, pBuffer : Void*, nSize : UInt32, pdwAttribubutes : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetFirmwareEnvironmentVariableExA(lpName, lpGuid, pBuffer, nSize, pdwAttribubutes)
+    {% end %}
   end
 
   def getFirmwareEnvironmentVariableExW(lpName : Win32cr::Foundation::PWSTR, lpGuid : Win32cr::Foundation::PWSTR, pBuffer : Void*, nSize : UInt32, pdwAttribubutes : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetFirmwareEnvironmentVariableExW(lpName, lpGuid, pBuffer, nSize, pdwAttribubutes)
+    {% end %}
   end
 
   def setFirmwareEnvironmentVariableA(lpName : Win32cr::Foundation::PSTR, lpGuid : Win32cr::Foundation::PSTR, pValue : Void*, nSize : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetFirmwareEnvironmentVariableA(lpName, lpGuid, pValue, nSize)
+    {% end %}
   end
 
   def setFirmwareEnvironmentVariableW(lpName : Win32cr::Foundation::PWSTR, lpGuid : Win32cr::Foundation::PWSTR, pValue : Void*, nSize : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetFirmwareEnvironmentVariableW(lpName, lpGuid, pValue, nSize)
+    {% end %}
   end
 
   def setFirmwareEnvironmentVariableExA(lpName : Win32cr::Foundation::PSTR, lpGuid : Win32cr::Foundation::PSTR, pValue : Void*, nSize : UInt32, dwAttributes : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetFirmwareEnvironmentVariableExA(lpName, lpGuid, pValue, nSize, dwAttributes)
+    {% end %}
   end
 
   def setFirmwareEnvironmentVariableExW(lpName : Win32cr::Foundation::PWSTR, lpGuid : Win32cr::Foundation::PWSTR, pValue : Void*, nSize : UInt32, dwAttributes : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetFirmwareEnvironmentVariableExW(lpName, lpGuid, pValue, nSize, dwAttributes)
+    {% end %}
   end
 
   def isNativeVhdBoot(native_vhd_boot : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsNativeVhdBoot(native_vhd_boot)
+    {% end %}
   end
 
   def getProfileIntA(lpAppName : Win32cr::Foundation::PSTR, lpKeyName : Win32cr::Foundation::PSTR, nDefault : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetProfileIntA(lpAppName, lpKeyName, nDefault)
+    {% end %}
   end
 
   def getProfileIntW(lpAppName : Win32cr::Foundation::PWSTR, lpKeyName : Win32cr::Foundation::PWSTR, nDefault : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetProfileIntW(lpAppName, lpKeyName, nDefault)
+    {% end %}
   end
 
   def getProfileStringA(lpAppName : Win32cr::Foundation::PSTR, lpKeyName : Win32cr::Foundation::PSTR, lpDefault : Win32cr::Foundation::PSTR, lpReturnedString : UInt8*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetProfileStringA(lpAppName, lpKeyName, lpDefault, lpReturnedString, nSize)
+    {% end %}
   end
 
   def getProfileStringW(lpAppName : Win32cr::Foundation::PWSTR, lpKeyName : Win32cr::Foundation::PWSTR, lpDefault : Win32cr::Foundation::PWSTR, lpReturnedString : UInt16*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetProfileStringW(lpAppName, lpKeyName, lpDefault, lpReturnedString, nSize)
+    {% end %}
   end
 
   def writeProfileStringA(lpAppName : Win32cr::Foundation::PSTR, lpKeyName : Win32cr::Foundation::PSTR, lpString : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WriteProfileStringA(lpAppName, lpKeyName, lpString)
+    {% end %}
   end
 
   def writeProfileStringW(lpAppName : Win32cr::Foundation::PWSTR, lpKeyName : Win32cr::Foundation::PWSTR, lpString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WriteProfileStringW(lpAppName, lpKeyName, lpString)
+    {% end %}
   end
 
   def getProfileSectionA(lpAppName : Win32cr::Foundation::PSTR, lpReturnedString : UInt8*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetProfileSectionA(lpAppName, lpReturnedString, nSize)
+    {% end %}
   end
 
   def getProfileSectionW(lpAppName : Win32cr::Foundation::PWSTR, lpReturnedString : UInt16*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetProfileSectionW(lpAppName, lpReturnedString, nSize)
+    {% end %}
   end
 
   def writeProfileSectionA(lpAppName : Win32cr::Foundation::PSTR, lpString : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WriteProfileSectionA(lpAppName, lpString)
+    {% end %}
   end
 
   def writeProfileSectionW(lpAppName : Win32cr::Foundation::PWSTR, lpString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WriteProfileSectionW(lpAppName, lpString)
+    {% end %}
   end
 
   def getPrivateProfileIntA(lpAppName : Win32cr::Foundation::PSTR, lpKeyName : Win32cr::Foundation::PSTR, nDefault : Int32, lpFileName : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetPrivateProfileIntA(lpAppName, lpKeyName, nDefault, lpFileName)
+    {% end %}
   end
 
   def getPrivateProfileIntW(lpAppName : Win32cr::Foundation::PWSTR, lpKeyName : Win32cr::Foundation::PWSTR, nDefault : Int32, lpFileName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetPrivateProfileIntW(lpAppName, lpKeyName, nDefault, lpFileName)
+    {% end %}
   end
 
   def getPrivateProfileStringA(lpAppName : Win32cr::Foundation::PSTR, lpKeyName : Win32cr::Foundation::PSTR, lpDefault : Win32cr::Foundation::PSTR, lpReturnedString : UInt8*, nSize : UInt32, lpFileName : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetPrivateProfileStringA(lpAppName, lpKeyName, lpDefault, lpReturnedString, nSize, lpFileName)
+    {% end %}
   end
 
   def getPrivateProfileStringW(lpAppName : Win32cr::Foundation::PWSTR, lpKeyName : Win32cr::Foundation::PWSTR, lpDefault : Win32cr::Foundation::PWSTR, lpReturnedString : UInt16*, nSize : UInt32, lpFileName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetPrivateProfileStringW(lpAppName, lpKeyName, lpDefault, lpReturnedString, nSize, lpFileName)
+    {% end %}
   end
 
   def writePrivateProfileStringA(lpAppName : Win32cr::Foundation::PSTR, lpKeyName : Win32cr::Foundation::PSTR, lpString : Win32cr::Foundation::PSTR, lpFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WritePrivateProfileStringA(lpAppName, lpKeyName, lpString, lpFileName)
+    {% end %}
   end
 
   def writePrivateProfileStringW(lpAppName : Win32cr::Foundation::PWSTR, lpKeyName : Win32cr::Foundation::PWSTR, lpString : Win32cr::Foundation::PWSTR, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WritePrivateProfileStringW(lpAppName, lpKeyName, lpString, lpFileName)
+    {% end %}
   end
 
   def getPrivateProfileSectionA(lpAppName : Win32cr::Foundation::PSTR, lpReturnedString : UInt8*, nSize : UInt32, lpFileName : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetPrivateProfileSectionA(lpAppName, lpReturnedString, nSize, lpFileName)
+    {% end %}
   end
 
   def getPrivateProfileSectionW(lpAppName : Win32cr::Foundation::PWSTR, lpReturnedString : UInt16*, nSize : UInt32, lpFileName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetPrivateProfileSectionW(lpAppName, lpReturnedString, nSize, lpFileName)
+    {% end %}
   end
 
   def writePrivateProfileSectionA(lpAppName : Win32cr::Foundation::PSTR, lpString : Win32cr::Foundation::PSTR, lpFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WritePrivateProfileSectionA(lpAppName, lpString, lpFileName)
+    {% end %}
   end
 
   def writePrivateProfileSectionW(lpAppName : Win32cr::Foundation::PWSTR, lpString : Win32cr::Foundation::PWSTR, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WritePrivateProfileSectionW(lpAppName, lpString, lpFileName)
+    {% end %}
   end
 
   def getPrivateProfileSectionNamesA(lpszReturnBuffer : UInt8*, nSize : UInt32, lpFileName : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetPrivateProfileSectionNamesA(lpszReturnBuffer, nSize, lpFileName)
+    {% end %}
   end
 
   def getPrivateProfileSectionNamesW(lpszReturnBuffer : UInt16*, nSize : UInt32, lpFileName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.GetPrivateProfileSectionNamesW(lpszReturnBuffer, nSize, lpFileName)
+    {% end %}
   end
 
   def getPrivateProfileStructA(lpszSection : Win32cr::Foundation::PSTR, lpszKey : Win32cr::Foundation::PSTR, lpStruct : Void*, uSizeStruct : UInt32, szFile : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPrivateProfileStructA(lpszSection, lpszKey, lpStruct, uSizeStruct, szFile)
+    {% end %}
   end
 
   def getPrivateProfileStructW(lpszSection : Win32cr::Foundation::PWSTR, lpszKey : Win32cr::Foundation::PWSTR, lpStruct : Void*, uSizeStruct : UInt32, szFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPrivateProfileStructW(lpszSection, lpszKey, lpStruct, uSizeStruct, szFile)
+    {% end %}
   end
 
   def writePrivateProfileStructA(lpszSection : Win32cr::Foundation::PSTR, lpszKey : Win32cr::Foundation::PSTR, lpStruct : Void*, uSizeStruct : UInt32, szFile : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WritePrivateProfileStructA(lpszSection, lpszKey, lpStruct, uSizeStruct, szFile)
+    {% end %}
   end
 
   def writePrivateProfileStructW(lpszSection : Win32cr::Foundation::PWSTR, lpszKey : Win32cr::Foundation::PWSTR, lpStruct : Void*, uSizeStruct : UInt32, szFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WritePrivateProfileStructW(lpszSection, lpszKey, lpStruct, uSizeStruct, szFile)
+    {% end %}
   end
 
   def isBadHugeReadPtr(lp : Void*, ucb : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsBadHugeReadPtr(lp, ucb)
+    {% end %}
   end
 
   def isBadHugeWritePtr(lp : Void*, ucb : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsBadHugeWritePtr(lp, ucb)
+    {% end %}
   end
 
   def getComputerNameA(lpBuffer : UInt8*, nSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetComputerNameA(lpBuffer, nSize)
+    {% end %}
   end
 
   def getComputerNameW(lpBuffer : UInt16*, nSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetComputerNameW(lpBuffer, nSize)
+    {% end %}
   end
 
   def dnsHostnameToComputerNameA(hostname : Win32cr::Foundation::PSTR, computer_name : UInt8*, nSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DnsHostnameToComputerNameA(hostname, computer_name, nSize)
+    {% end %}
   end
 
   def dnsHostnameToComputerNameW(hostname : Win32cr::Foundation::PWSTR, computer_name : UInt16*, nSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DnsHostnameToComputerNameW(hostname, computer_name, nSize)
+    {% end %}
   end
 
   def getUserNameA(lpBuffer : UInt8*, pcbBuffer : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUserNameA(lpBuffer, pcbBuffer)
+    {% end %}
   end
 
   def getUserNameW(lpBuffer : UInt16*, pcbBuffer : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUserNameW(lpBuffer, pcbBuffer)
+    {% end %}
   end
 
   def isTokenUntrusted(token_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsTokenUntrusted(token_handle)
+    {% end %}
   end
 
   def cancelTimerQueueTimer(timer_queue : Win32cr::Foundation::HANDLE, timer : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CancelTimerQueueTimer(timer_queue, timer)
+    {% end %}
   end
 
   def getCurrentHwProfileA(lpHwProfileInfo : Win32cr::System::WindowsProgramming::HW_PROFILE_INFOA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCurrentHwProfileA(lpHwProfileInfo)
+    {% end %}
   end
 
   def getCurrentHwProfileW(lpHwProfileInfo : Win32cr::System::WindowsProgramming::HW_PROFILE_INFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCurrentHwProfileW(lpHwProfileInfo)
+    {% end %}
   end
 
   def replacePartitionUnit(target_partition : Win32cr::Foundation::PWSTR, spare_partition : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReplacePartitionUnit(target_partition, spare_partition, flags)
+    {% end %}
   end
 
 {% if flag?(:i386) || flag?(:x86_64) %}
   def getThreadEnabledXStateFeatures : UInt64
+    {% if !flag?(:docs) %}
     C.GetThreadEnabledXStateFeatures
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) || flag?(:x86_64) %}
   def enableProcessOptionalXStateFeatures(features : UInt64) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnableProcessOptionalXStateFeatures(features)
+    {% end %}
   end
 {% end %}
 
   def raiseCustomSystemEventTrigger(custom_system_event_trigger_config : Win32cr::System::WindowsProgramming::CUSTOM_SYSTEM_EVENT_TRIGGER_CONFIG*) : UInt32
+    {% if !flag?(:docs) %}
     C.RaiseCustomSystemEventTrigger(custom_system_event_trigger_config)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def uawLstrcmpW(string1 : UInt16*, string2 : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.uaw_lstrcmpW(string1, string2)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def uawLstrcmpiW(string1 : UInt16*, string2 : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.uaw_lstrcmpiW(string1, string2)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def uawLstrlenW(string : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.uaw_lstrlenW(string)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def uawWcschr(string : UInt16*, character : UInt16) : UInt16*
+    {% if !flag?(:docs) %}
     C.uaw_wcschr(string, character)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def uawWcscpy(destination : UInt16*, source : UInt16*) : UInt16*
+    {% if !flag?(:docs) %}
     C.uaw_wcscpy(destination, source)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def uawWcsicmp(string1 : UInt16*, string2 : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.uaw_wcsicmp(string1, string2)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def uawWcslen(string : UInt16*) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.uaw_wcslen(string)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def uawWcsrchr(string : UInt16*, character : UInt16) : UInt16*
+    {% if !flag?(:docs) %}
     C.uaw_wcsrchr(string, character)
+    {% end %}
   end
 {% end %}
 
   def ntClose(handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NtClose(handle)
+    {% end %}
   end
 
   def ntOpenFile(file_handle : Win32cr::Foundation::HANDLE*, desired_access : UInt32, object_attributes : Win32cr::System::WindowsProgramming::OBJECT_ATTRIBUTES*, io_status_block : Win32cr::System::WindowsProgramming::IO_STATUS_BLOCK*, share_access : UInt32, open_options : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NtOpenFile(file_handle, desired_access, object_attributes, io_status_block, share_access, open_options)
+    {% end %}
   end
 
   def ntRenameKey(key_handle : Win32cr::Foundation::HANDLE, new_name : Win32cr::Foundation::UNICODE_STRING*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NtRenameKey(key_handle, new_name)
+    {% end %}
   end
 
   def ntNotifyChangeMultipleKeys(master_key_handle : Win32cr::Foundation::HANDLE, count : UInt32, subordinate_objects : Win32cr::System::WindowsProgramming::OBJECT_ATTRIBUTES*, event : Win32cr::Foundation::HANDLE, apc_routine : Win32cr::System::WindowsProgramming::PIO_APC_ROUTINE, apc_context : Void*, io_status_block : Win32cr::System::WindowsProgramming::IO_STATUS_BLOCK*, completion_filter : UInt32, watch_tree : Win32cr::Foundation::BOOLEAN, buffer : Void*, buffer_size : UInt32, asynchronous : Win32cr::Foundation::BOOLEAN) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NtNotifyChangeMultipleKeys(master_key_handle, count, subordinate_objects, event, apc_routine, apc_context, io_status_block, completion_filter, watch_tree, buffer, buffer_size, asynchronous)
+    {% end %}
   end
 
   def ntQueryMultipleValueKey(key_handle : Win32cr::Foundation::HANDLE, value_entries : Win32cr::System::WindowsProgramming::KEY_VALUE_ENTRY*, entry_count : UInt32, value_buffer : Void*, buffer_length : UInt32*, required_buffer_length : UInt32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NtQueryMultipleValueKey(key_handle, value_entries, entry_count, value_buffer, buffer_length, required_buffer_length)
+    {% end %}
   end
 
   def ntSetInformationKey(key_handle : Win32cr::Foundation::HANDLE, key_set_information_class : Win32cr::System::WindowsProgramming::KEY_SET_INFORMATION_CLASS, key_set_information : Void*, key_set_information_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NtSetInformationKey(key_handle, key_set_information_class, key_set_information, key_set_information_length)
+    {% end %}
   end
 
   def ntDeviceIoControlFile(file_handle : Win32cr::Foundation::HANDLE, event : Win32cr::Foundation::HANDLE, apc_routine : Win32cr::System::WindowsProgramming::PIO_APC_ROUTINE, apc_context : Void*, io_status_block : Win32cr::System::WindowsProgramming::IO_STATUS_BLOCK*, io_control_code : UInt32, input_buffer : Void*, input_buffer_length : UInt32, output_buffer : Void*, output_buffer_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NtDeviceIoControlFile(file_handle, event, apc_routine, apc_context, io_status_block, io_control_code, input_buffer, input_buffer_length, output_buffer, output_buffer_length)
+    {% end %}
   end
 
   def ntWaitForSingleObject(handle : Win32cr::Foundation::HANDLE, alertable : Win32cr::Foundation::BOOLEAN, timeout : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NtWaitForSingleObject(handle, alertable, timeout)
+    {% end %}
   end
 
   def rtlIsNameLegalDOS8Dot3(name : Win32cr::Foundation::UNICODE_STRING*, oem_name : Win32cr::System::Kernel::STRING*, name_contains_spaces : Win32cr::Foundation::BOOLEAN*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.RtlIsNameLegalDOS8Dot3(name, oem_name, name_contains_spaces)
+    {% end %}
   end
 
   def ntQueryObject(handle : Win32cr::Foundation::HANDLE, object_information_class : Win32cr::System::WindowsProgramming::OBJECT_INFORMATION_CLASS, object_information : Void*, object_information_length : UInt32, return_length : UInt32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NtQueryObject(handle, object_information_class, object_information, object_information_length, return_length)
+    {% end %}
   end
 
   def ntQuerySystemInformation(system_information_class : Win32cr::System::WindowsProgramming::SYSTEM_INFORMATION_CLASS, system_information : Void*, system_information_length : UInt32, return_length : UInt32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NtQuerySystemInformation(system_information_class, system_information, system_information_length, return_length)
+    {% end %}
   end
 
   def ntQuerySystemTime(system_time : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NtQuerySystemTime(system_time)
+    {% end %}
   end
 
   def ntQueryTimerResolution(maximum_time : UInt32*, minimum_time : UInt32*, current_time : UInt32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NtQueryTimerResolution(maximum_time, minimum_time, current_time)
+    {% end %}
   end
 
   def rtlLocalTimeToSystemTime(local_time : Win32cr::Foundation::LARGE_INTEGER*, system_time : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.RtlLocalTimeToSystemTime(local_time, system_time)
+    {% end %}
   end
 
   def rtlTimeToSecondsSince1970(time : Win32cr::Foundation::LARGE_INTEGER*, elapsed_seconds : UInt32*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.RtlTimeToSecondsSince1970(time, elapsed_seconds)
+    {% end %}
   end
 
   def rtlFreeAnsiString(ansi_string : Win32cr::System::Kernel::STRING*) : Void
+    {% if !flag?(:docs) %}
     C.RtlFreeAnsiString(ansi_string)
+    {% end %}
   end
 
   def rtlFreeUnicodeString(unicode_string : Win32cr::Foundation::UNICODE_STRING*) : Void
+    {% if !flag?(:docs) %}
     C.RtlFreeUnicodeString(unicode_string)
+    {% end %}
   end
 
   def rtlFreeOemString(oem_string : Win32cr::System::Kernel::STRING*) : Void
+    {% if !flag?(:docs) %}
     C.RtlFreeOemString(oem_string)
+    {% end %}
   end
 
   def rtlInitString(destination_string : Win32cr::System::Kernel::STRING*, source_string : Int8*) : Void
+    {% if !flag?(:docs) %}
     C.RtlInitString(destination_string, source_string)
+    {% end %}
   end
 
   def rtlInitStringEx(destination_string : Win32cr::System::Kernel::STRING*, source_string : Int8*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.RtlInitStringEx(destination_string, source_string)
+    {% end %}
   end
 
   def rtlInitAnsiString(destination_string : Win32cr::System::Kernel::STRING*, source_string : Int8*) : Void
+    {% if !flag?(:docs) %}
     C.RtlInitAnsiString(destination_string, source_string)
+    {% end %}
   end
 
   def rtlInitAnsiStringEx(destination_string : Win32cr::System::Kernel::STRING*, source_string : Int8*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.RtlInitAnsiStringEx(destination_string, source_string)
+    {% end %}
   end
 
   def rtlInitUnicodeString(destination_string : Win32cr::Foundation::UNICODE_STRING*, source_string : Win32cr::Foundation::PWSTR) : Void
+    {% if !flag?(:docs) %}
     C.RtlInitUnicodeString(destination_string, source_string)
+    {% end %}
   end
 
   def rtlAnsiStringToUnicodeString(destination_string : Win32cr::Foundation::UNICODE_STRING*, source_string : Win32cr::System::Kernel::STRING*, allocate_destination_string : Win32cr::Foundation::BOOLEAN) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.RtlAnsiStringToUnicodeString(destination_string, source_string, allocate_destination_string)
+    {% end %}
   end
 
   def rtlUnicodeStringToAnsiString(destination_string : Win32cr::System::Kernel::STRING*, source_string : Win32cr::Foundation::UNICODE_STRING*, allocate_destination_string : Win32cr::Foundation::BOOLEAN) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.RtlUnicodeStringToAnsiString(destination_string, source_string, allocate_destination_string)
+    {% end %}
   end
 
   def rtlUnicodeStringToOemString(destination_string : Win32cr::System::Kernel::STRING*, source_string : Win32cr::Foundation::UNICODE_STRING*, allocate_destination_string : Win32cr::Foundation::BOOLEAN) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.RtlUnicodeStringToOemString(destination_string, source_string, allocate_destination_string)
+    {% end %}
   end
 
   def rtlUnicodeToMultiByteSize(bytes_in_multi_byte_string : UInt32*, unicode_string : Win32cr::Foundation::PWSTR, bytes_in_unicode_string : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.RtlUnicodeToMultiByteSize(bytes_in_multi_byte_string, unicode_string, bytes_in_unicode_string)
+    {% end %}
   end
 
   def rtlCharToInteger(string : Int8*, base : UInt32, value : UInt32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.RtlCharToInteger(string, base, value)
+    {% end %}
   end
 
   def rtlUniform(seed : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlUniform(seed)
+    {% end %}
   end
 
   def getFeatureEnabledState(featureId : UInt32, changeTime : Win32cr::System::WindowsProgramming::FEATURE_CHANGE_TIME) : Win32cr::System::WindowsProgramming::FEATURE_ENABLED_STATE
+    {% if !flag?(:docs) %}
     C.GetFeatureEnabledState(featureId, changeTime)
+    {% end %}
   end
 
   def recordFeatureUsage(featureId : UInt32, kind : UInt32, addend : UInt32, originName : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.RecordFeatureUsage(featureId, kind, addend, originName)
+    {% end %}
   end
 
   def recordFeatureError(featureId : UInt32, error : Win32cr::System::WindowsProgramming::FEATURE_ERROR*) : Void
+    {% if !flag?(:docs) %}
     C.RecordFeatureError(featureId, error)
+    {% end %}
   end
 
   def subscribeFeatureStateChangeNotification(subscription : Win32cr::System::WindowsProgramming::FEATURE_STATE_CHANGE_SUBSCRIPTION*, callback : Win32cr::System::WindowsProgramming::PFEATURE_STATE_CHANGE_CALLBACK, context : Void*) : Void
+    {% if !flag?(:docs) %}
     C.SubscribeFeatureStateChangeNotification(subscription, callback, context)
+    {% end %}
   end
 
   def unsubscribeFeatureStateChangeNotification(subscription : Win32cr::System::WindowsProgramming::FEATURE_STATE_CHANGE_SUBSCRIPTION) : Void
+    {% if !flag?(:docs) %}
     C.UnsubscribeFeatureStateChangeNotification(subscription)
+    {% end %}
   end
 
   def getFeatureVariant(featureId : UInt32, changeTime : Win32cr::System::WindowsProgramming::FEATURE_CHANGE_TIME, payloadId : UInt32*, hasNotification : Win32cr::Foundation::BOOL*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetFeatureVariant(featureId, changeTime, payloadId, hasNotification)
+    {% end %}
   end
 
   def dCIOpenProvider : Win32cr::Graphics::Gdi::HDC
+    {% if !flag?(:docs) %}
     C.DCIOpenProvider
+    {% end %}
   end
 
   def dCICloseProvider(hdc : Win32cr::Graphics::Gdi::HDC) : Void
+    {% if !flag?(:docs) %}
     C.DCICloseProvider(hdc)
+    {% end %}
   end
 
   def dCICreatePrimary(hdc : Win32cr::Graphics::Gdi::HDC, lplpSurface : Win32cr::System::WindowsProgramming::DCISURFACEINFO**) : Int32
+    {% if !flag?(:docs) %}
     C.DCICreatePrimary(hdc, lplpSurface)
+    {% end %}
   end
 
   def dCICreateOffscreen(hdc : Win32cr::Graphics::Gdi::HDC, dwCompression : UInt32, dwRedMask : UInt32, dwGreenMask : UInt32, dwBlueMask : UInt32, dwWidth : UInt32, dwHeight : UInt32, dwDCICaps : UInt32, dwBitCount : UInt32, lplpSurface : Win32cr::System::WindowsProgramming::DCIOFFSCREEN**) : Int32
+    {% if !flag?(:docs) %}
     C.DCICreateOffscreen(hdc, dwCompression, dwRedMask, dwGreenMask, dwBlueMask, dwWidth, dwHeight, dwDCICaps, dwBitCount, lplpSurface)
+    {% end %}
   end
 
   def dCICreateOverlay(hdc : Win32cr::Graphics::Gdi::HDC, lpOffscreenSurf : Void*, lplpSurface : Win32cr::System::WindowsProgramming::DCIOVERLAY**) : Int32
+    {% if !flag?(:docs) %}
     C.DCICreateOverlay(hdc, lpOffscreenSurf, lplpSurface)
+    {% end %}
   end
 
   def dCIEnum(hdc : Win32cr::Graphics::Gdi::HDC, lprDst : Win32cr::Foundation::RECT*, lprSrc : Win32cr::Foundation::RECT*, lpFnCallback : Void*, lpContext : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.DCIEnum(hdc, lprDst, lprSrc, lpFnCallback, lpContext)
+    {% end %}
   end
 
   def dCISetSrcDestClip(pdci : Win32cr::System::WindowsProgramming::DCIOFFSCREEN*, srcrc : Win32cr::Foundation::RECT*, destrc : Win32cr::Foundation::RECT*, prd : Win32cr::Graphics::Gdi::RGNDATA*) : Int32
+    {% if !flag?(:docs) %}
     C.DCISetSrcDestClip(pdci, srcrc, destrc, prd)
+    {% end %}
   end
 
   def winWatchOpen(hwnd : Win32cr::Foundation::HWND) : Win32cr::System::WindowsProgramming::HWINWATCH
+    {% if !flag?(:docs) %}
     C.WinWatchOpen(hwnd)
+    {% end %}
   end
 
   def winWatchClose(hWW : Win32cr::System::WindowsProgramming::HWINWATCH) : Void
+    {% if !flag?(:docs) %}
     C.WinWatchClose(hWW)
+    {% end %}
   end
 
   def winWatchGetClipList(hWW : Win32cr::System::WindowsProgramming::HWINWATCH, prc : Win32cr::Foundation::RECT*, size : UInt32, prd : Win32cr::Graphics::Gdi::RGNDATA*) : UInt32
+    {% if !flag?(:docs) %}
     C.WinWatchGetClipList(hWW, prc, size, prd)
+    {% end %}
   end
 
   def winWatchDidStatusChange(hWW : Win32cr::System::WindowsProgramming::HWINWATCH) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinWatchDidStatusChange(hWW)
+    {% end %}
   end
 
   def getWindowRegionData(hwnd : Win32cr::Foundation::HWND, size : UInt32, prd : Win32cr::Graphics::Gdi::RGNDATA*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetWindowRegionData(hwnd, size, prd)
+    {% end %}
   end
 
   def getDCRegionData(hdc : Win32cr::Graphics::Gdi::HDC, size : UInt32, prd : Win32cr::Graphics::Gdi::RGNDATA*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetDCRegionData(hdc, size, prd)
+    {% end %}
   end
 
   def winWatchNotify(hWW : Win32cr::System::WindowsProgramming::HWINWATCH, notify_callback : Win32cr::System::WindowsProgramming::WINWATCHNOTIFYPROC, notify_param : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WinWatchNotify(hWW, notify_callback, notify_param)
+    {% end %}
   end
 
   def dCIEndAccess(pdci : Win32cr::System::WindowsProgramming::DCISURFACEINFO*) : Void
+    {% if !flag?(:docs) %}
     C.DCIEndAccess(pdci)
+    {% end %}
   end
 
   def dCIBeginAccess(pdci : Win32cr::System::WindowsProgramming::DCISURFACEINFO*, x : Int32, y : Int32, dx : Int32, dy : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.DCIBeginAccess(pdci, x, y, dx, dy)
+    {% end %}
   end
 
   def dCIDestroy(pdci : Win32cr::System::WindowsProgramming::DCISURFACEINFO*) : Void
+    {% if !flag?(:docs) %}
     C.DCIDestroy(pdci)
+    {% end %}
   end
 
   def dCIDraw(pdci : Win32cr::System::WindowsProgramming::DCIOFFSCREEN*) : Int32
+    {% if !flag?(:docs) %}
     C.DCIDraw(pdci)
+    {% end %}
   end
 
   def dCISetClipList(pdci : Win32cr::System::WindowsProgramming::DCIOFFSCREEN*, prd : Win32cr::Graphics::Gdi::RGNDATA*) : Int32
+    {% if !flag?(:docs) %}
     C.DCISetClipList(pdci, prd)
+    {% end %}
   end
 
   def dCISetDestination(pdci : Win32cr::System::WindowsProgramming::DCIOFFSCREEN*, dst : Win32cr::Foundation::RECT*, src : Win32cr::Foundation::RECT*) : Int32
+    {% if !flag?(:docs) %}
     C.DCISetDestination(pdci, dst, src)
+    {% end %}
   end
 
   def gdiEntry13 : UInt32
+    {% if !flag?(:docs) %}
     C.GdiEntry13
+    {% end %}
   end
 
   def runSetupCommandA(hWnd : Win32cr::Foundation::HWND, szCmdName : Win32cr::Foundation::PSTR, szInfSection : Win32cr::Foundation::PSTR, szDir : Win32cr::Foundation::PSTR, lpszTitle : Win32cr::Foundation::PSTR, phEXE : Win32cr::Foundation::HANDLE*, dwFlags : UInt32, pvReserved : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RunSetupCommandA(hWnd, szCmdName, szInfSection, szDir, lpszTitle, phEXE, dwFlags, pvReserved)
+    {% end %}
   end
 
   def runSetupCommandW(hWnd : Win32cr::Foundation::HWND, szCmdName : Win32cr::Foundation::PWSTR, szInfSection : Win32cr::Foundation::PWSTR, szDir : Win32cr::Foundation::PWSTR, lpszTitle : Win32cr::Foundation::PWSTR, phEXE : Win32cr::Foundation::HANDLE*, dwFlags : UInt32, pvReserved : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RunSetupCommandW(hWnd, szCmdName, szInfSection, szDir, lpszTitle, phEXE, dwFlags, pvReserved)
+    {% end %}
   end
 
   def needRebootInit : UInt32
+    {% if !flag?(:docs) %}
     C.NeedRebootInit
+    {% end %}
   end
 
   def needReboot(dwRebootCheck : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.NeedReboot(dwRebootCheck)
+    {% end %}
   end
 
   def rebootCheckOnInstallA(hwnd : Win32cr::Foundation::HWND, pszINF : Win32cr::Foundation::PSTR, pszSec : Win32cr::Foundation::PSTR, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RebootCheckOnInstallA(hwnd, pszINF, pszSec, dwReserved)
+    {% end %}
   end
 
   def rebootCheckOnInstallW(hwnd : Win32cr::Foundation::HWND, pszINF : Win32cr::Foundation::PWSTR, pszSec : Win32cr::Foundation::PWSTR, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RebootCheckOnInstallW(hwnd, pszINF, pszSec, dwReserved)
+    {% end %}
   end
 
   def translateInfStringA(pszInfFilename : Win32cr::Foundation::PSTR, pszInstallSection : Win32cr::Foundation::PSTR, pszTranslateSection : Win32cr::Foundation::PSTR, pszTranslateKey : Win32cr::Foundation::PSTR, pszBuffer : UInt8*, cchBuffer : UInt32, pdwRequiredSize : UInt32*, pvReserved : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TranslateInfStringA(pszInfFilename, pszInstallSection, pszTranslateSection, pszTranslateKey, pszBuffer, cchBuffer, pdwRequiredSize, pvReserved)
+    {% end %}
   end
 
   def translateInfStringW(pszInfFilename : Win32cr::Foundation::PWSTR, pszInstallSection : Win32cr::Foundation::PWSTR, pszTranslateSection : Win32cr::Foundation::PWSTR, pszTranslateKey : Win32cr::Foundation::PWSTR, pszBuffer : UInt16*, cchBuffer : UInt32, pdwRequiredSize : UInt32*, pvReserved : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TranslateInfStringW(pszInfFilename, pszInstallSection, pszTranslateSection, pszTranslateKey, pszBuffer, cchBuffer, pdwRequiredSize, pvReserved)
+    {% end %}
   end
 
   def regInstallA(hmod : Win32cr::Foundation::HINSTANCE, pszSection : Win32cr::Foundation::PSTR, pstTable : Win32cr::System::WindowsProgramming::STRTABLEA*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RegInstallA(hmod, pszSection, pstTable)
+    {% end %}
   end
 
   def regInstallW(hmod : Win32cr::Foundation::HINSTANCE, pszSection : Win32cr::Foundation::PWSTR, pstTable : Win32cr::System::WindowsProgramming::STRTABLEW*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RegInstallW(hmod, pszSection, pstTable)
+    {% end %}
   end
 
   def launchINFSectionExW(hwnd : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, pszParms : Win32cr::Foundation::PWSTR, nShow : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.LaunchINFSectionExW(hwnd, hInstance, pszParms, nShow)
+    {% end %}
   end
 
   def executeCabA(hwnd : Win32cr::Foundation::HWND, pCab : Win32cr::System::WindowsProgramming::CABINFOA*, pReserved : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ExecuteCabA(hwnd, pCab, pReserved)
+    {% end %}
   end
 
   def executeCabW(hwnd : Win32cr::Foundation::HWND, pCab : Win32cr::System::WindowsProgramming::CABINFOW*, pReserved : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ExecuteCabW(hwnd, pCab, pReserved)
+    {% end %}
   end
 
   def advInstallFileA(hwnd : Win32cr::Foundation::HWND, lpszSourceDir : Win32cr::Foundation::PSTR, lpszSourceFile : Win32cr::Foundation::PSTR, lpszDestDir : Win32cr::Foundation::PSTR, lpszDestFile : Win32cr::Foundation::PSTR, dwFlags : UInt32, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AdvInstallFileA(hwnd, lpszSourceDir, lpszSourceFile, lpszDestDir, lpszDestFile, dwFlags, dwReserved)
+    {% end %}
   end
 
   def advInstallFileW(hwnd : Win32cr::Foundation::HWND, lpszSourceDir : Win32cr::Foundation::PWSTR, lpszSourceFile : Win32cr::Foundation::PWSTR, lpszDestDir : Win32cr::Foundation::PWSTR, lpszDestFile : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AdvInstallFileW(hwnd, lpszSourceDir, lpszSourceFile, lpszDestDir, lpszDestFile, dwFlags, dwReserved)
+    {% end %}
   end
 
   def regSaveRestoreA(hWnd : Win32cr::Foundation::HWND, pszTitleString : Win32cr::Foundation::PSTR, hkBckupKey : Win32cr::System::Registry::HKEY, pcszRootKey : Win32cr::Foundation::PSTR, pcszSubKey : Win32cr::Foundation::PSTR, pcszValueName : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RegSaveRestoreA(hWnd, pszTitleString, hkBckupKey, pcszRootKey, pcszSubKey, pcszValueName, dwFlags)
+    {% end %}
   end
 
   def regSaveRestoreW(hWnd : Win32cr::Foundation::HWND, pszTitleString : Win32cr::Foundation::PWSTR, hkBckupKey : Win32cr::System::Registry::HKEY, pcszRootKey : Win32cr::Foundation::PWSTR, pcszSubKey : Win32cr::Foundation::PWSTR, pcszValueName : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RegSaveRestoreW(hWnd, pszTitleString, hkBckupKey, pcszRootKey, pcszSubKey, pcszValueName, dwFlags)
+    {% end %}
   end
 
   def regSaveRestoreOnINFA(hWnd : Win32cr::Foundation::HWND, pszTitle : Win32cr::Foundation::PSTR, pszINF : Win32cr::Foundation::PSTR, pszSection : Win32cr::Foundation::PSTR, hHKLMBackKey : Win32cr::System::Registry::HKEY, hHKCUBackKey : Win32cr::System::Registry::HKEY, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RegSaveRestoreOnINFA(hWnd, pszTitle, pszINF, pszSection, hHKLMBackKey, hHKCUBackKey, dwFlags)
+    {% end %}
   end
 
   def regSaveRestoreOnINFW(hWnd : Win32cr::Foundation::HWND, pszTitle : Win32cr::Foundation::PWSTR, pszINF : Win32cr::Foundation::PWSTR, pszSection : Win32cr::Foundation::PWSTR, hHKLMBackKey : Win32cr::System::Registry::HKEY, hHKCUBackKey : Win32cr::System::Registry::HKEY, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RegSaveRestoreOnINFW(hWnd, pszTitle, pszINF, pszSection, hHKLMBackKey, hHKCUBackKey, dwFlags)
+    {% end %}
   end
 
   def regRestoreAllA(hWnd : Win32cr::Foundation::HWND, pszTitleString : Win32cr::Foundation::PSTR, hkBckupKey : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RegRestoreAllA(hWnd, pszTitleString, hkBckupKey)
+    {% end %}
   end
 
   def regRestoreAllW(hWnd : Win32cr::Foundation::HWND, pszTitleString : Win32cr::Foundation::PWSTR, hkBckupKey : Win32cr::System::Registry::HKEY) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RegRestoreAllW(hWnd, pszTitleString, hkBckupKey)
+    {% end %}
   end
 
   def fileSaveRestoreW(hDlg : Win32cr::Foundation::HWND, lpFileList : Win32cr::Foundation::PWSTR, lpDir : Win32cr::Foundation::PWSTR, lpBaseName : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FileSaveRestoreW(hDlg, lpFileList, lpDir, lpBaseName, dwFlags)
+    {% end %}
   end
 
   def fileSaveRestoreOnINFA(hWnd : Win32cr::Foundation::HWND, pszTitle : Win32cr::Foundation::PSTR, pszINF : Win32cr::Foundation::PSTR, pszSection : Win32cr::Foundation::PSTR, pszBackupDir : Win32cr::Foundation::PSTR, pszBaseBackupFile : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FileSaveRestoreOnINFA(hWnd, pszTitle, pszINF, pszSection, pszBackupDir, pszBaseBackupFile, dwFlags)
+    {% end %}
   end
 
   def fileSaveRestoreOnINFW(hWnd : Win32cr::Foundation::HWND, pszTitle : Win32cr::Foundation::PWSTR, pszINF : Win32cr::Foundation::PWSTR, pszSection : Win32cr::Foundation::PWSTR, pszBackupDir : Win32cr::Foundation::PWSTR, pszBaseBackupFile : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FileSaveRestoreOnINFW(hWnd, pszTitle, pszINF, pszSection, pszBackupDir, pszBaseBackupFile, dwFlags)
+    {% end %}
   end
 
   def addDelBackupEntryA(lpcszFileList : Win32cr::Foundation::PSTR, lpcszBackupDir : Win32cr::Foundation::PSTR, lpcszBaseName : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AddDelBackupEntryA(lpcszFileList, lpcszBackupDir, lpcszBaseName, dwFlags)
+    {% end %}
   end
 
   def addDelBackupEntryW(lpcszFileList : Win32cr::Foundation::PWSTR, lpcszBackupDir : Win32cr::Foundation::PWSTR, lpcszBaseName : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AddDelBackupEntryW(lpcszFileList, lpcszBackupDir, lpcszBaseName, dwFlags)
+    {% end %}
   end
 
   def fileSaveMarkNotExistA(lpFileList : Win32cr::Foundation::PSTR, lpDir : Win32cr::Foundation::PSTR, lpBaseName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FileSaveMarkNotExistA(lpFileList, lpDir, lpBaseName)
+    {% end %}
   end
 
   def fileSaveMarkNotExistW(lpFileList : Win32cr::Foundation::PWSTR, lpDir : Win32cr::Foundation::PWSTR, lpBaseName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FileSaveMarkNotExistW(lpFileList, lpDir, lpBaseName)
+    {% end %}
   end
 
   def getVersionFromFileA(lpszFilename : Win32cr::Foundation::PSTR, pdwMSVer : UInt32*, pdwLSVer : UInt32*, bVersion : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetVersionFromFileA(lpszFilename, pdwMSVer, pdwLSVer, bVersion)
+    {% end %}
   end
 
   def getVersionFromFileW(lpszFilename : Win32cr::Foundation::PWSTR, pdwMSVer : UInt32*, pdwLSVer : UInt32*, bVersion : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetVersionFromFileW(lpszFilename, pdwMSVer, pdwLSVer, bVersion)
+    {% end %}
   end
 
   def getVersionFromFileExA(lpszFilename : Win32cr::Foundation::PSTR, pdwMSVer : UInt32*, pdwLSVer : UInt32*, bVersion : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetVersionFromFileExA(lpszFilename, pdwMSVer, pdwLSVer, bVersion)
+    {% end %}
   end
 
   def getVersionFromFileExW(lpszFilename : Win32cr::Foundation::PWSTR, pdwMSVer : UInt32*, pdwLSVer : UInt32*, bVersion : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetVersionFromFileExW(lpszFilename, pdwMSVer, pdwLSVer, bVersion)
+    {% end %}
   end
 
   def isNTAdmin(dwReserved : UInt32, lpdwReserved : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsNTAdmin(dwReserved, lpdwReserved)
+    {% end %}
   end
 
   def delNodeA(pszFileOrDirName : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DelNodeA(pszFileOrDirName, dwFlags)
+    {% end %}
   end
 
   def delNodeW(pszFileOrDirName : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DelNodeW(pszFileOrDirName, dwFlags)
+    {% end %}
   end
 
   def delNodeRunDLL32W(hwnd : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, pszParms : Win32cr::Foundation::PWSTR, nShow : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DelNodeRunDLL32W(hwnd, hInstance, pszParms, nShow)
+    {% end %}
   end
 
   def openINFEngineA(pszInfFilename : Win32cr::Foundation::PSTR, pszInstallSection : Win32cr::Foundation::PSTR, dwFlags : UInt32, phInf : Void**, pvReserved : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.OpenINFEngineA(pszInfFilename, pszInstallSection, dwFlags, phInf, pvReserved)
+    {% end %}
   end
 
   def openINFEngineW(pszInfFilename : Win32cr::Foundation::PWSTR, pszInstallSection : Win32cr::Foundation::PWSTR, dwFlags : UInt32, phInf : Void**, pvReserved : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.OpenINFEngineW(pszInfFilename, pszInstallSection, dwFlags, phInf, pvReserved)
+    {% end %}
   end
 
   def translateInfStringExA(hInf : Void*, pszInfFilename : Win32cr::Foundation::PSTR, pszTranslateSection : Win32cr::Foundation::PSTR, pszTranslateKey : Win32cr::Foundation::PSTR, pszBuffer : UInt8*, dwBufferSize : UInt32, pdwRequiredSize : UInt32*, pvReserved : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TranslateInfStringExA(hInf, pszInfFilename, pszTranslateSection, pszTranslateKey, pszBuffer, dwBufferSize, pdwRequiredSize, pvReserved)
+    {% end %}
   end
 
   def translateInfStringExW(hInf : Void*, pszInfFilename : Win32cr::Foundation::PWSTR, pszTranslateSection : Win32cr::Foundation::PWSTR, pszTranslateKey : Win32cr::Foundation::PWSTR, pszBuffer : UInt16*, dwBufferSize : UInt32, pdwRequiredSize : UInt32*, pvReserved : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TranslateInfStringExW(hInf, pszInfFilename, pszTranslateSection, pszTranslateKey, pszBuffer, dwBufferSize, pdwRequiredSize, pvReserved)
+    {% end %}
   end
 
   def closeINFEngine(hInf : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CloseINFEngine(hInf)
+    {% end %}
   end
 
   def extractFilesA(pszCabName : Win32cr::Foundation::PSTR, pszExpandDir : Win32cr::Foundation::PSTR, dwFlags : UInt32, pszFileList : Win32cr::Foundation::PSTR, lpReserved : Void*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ExtractFilesA(pszCabName, pszExpandDir, dwFlags, pszFileList, lpReserved, dwReserved)
+    {% end %}
   end
 
   def extractFilesW(pszCabName : Win32cr::Foundation::PWSTR, pszExpandDir : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pszFileList : Win32cr::Foundation::PWSTR, lpReserved : Void*, dwReserved : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ExtractFilesW(pszCabName, pszExpandDir, dwFlags, pszFileList, lpReserved, dwReserved)
+    {% end %}
   end
 
   def launchINFSectionW(hwndOwner : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, pszParams : Win32cr::Foundation::PWSTR, nShow : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.LaunchINFSectionW(hwndOwner, hInstance, pszParams, nShow)
+    {% end %}
   end
 
   def userInstStubWrapperA(hwnd : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, pszParms : Win32cr::Foundation::PSTR, nShow : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UserInstStubWrapperA(hwnd, hInstance, pszParms, nShow)
+    {% end %}
   end
 
   def userInstStubWrapperW(hwnd : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, pszParms : Win32cr::Foundation::PWSTR, nShow : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UserInstStubWrapperW(hwnd, hInstance, pszParms, nShow)
+    {% end %}
   end
 
   def userUnInstStubWrapperA(hwnd : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, pszParms : Win32cr::Foundation::PSTR, nShow : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UserUnInstStubWrapperA(hwnd, hInstance, pszParms, nShow)
+    {% end %}
   end
 
   def userUnInstStubWrapperW(hwnd : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, pszParms : Win32cr::Foundation::PWSTR, nShow : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UserUnInstStubWrapperW(hwnd, hInstance, pszParms, nShow)
+    {% end %}
   end
 
   def setPerUserSecValuesA(pPerUser : Win32cr::System::WindowsProgramming::PERUSERSECTIONA*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetPerUserSecValuesA(pPerUser)
+    {% end %}
   end
 
   def setPerUserSecValuesW(pPerUser : Win32cr::System::WindowsProgramming::PERUSERSECTIONW*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetPerUserSecValuesW(pPerUser)
+    {% end %}
   end
 
   def sendIMEMessageExA(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.SendIMEMessageExA(param0, param1)
+    {% end %}
   end
 
   def sendIMEMessageExW(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.SendIMEMessageExW(param0, param1)
+    {% end %}
   end
 
   def iMPGetIMEA(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::System::WindowsProgramming::IMEPROA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IMPGetIMEA(param0, param1)
+    {% end %}
   end
 
   def iMPGetIMEW(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::System::WindowsProgramming::IMEPROW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IMPGetIMEW(param0, param1)
+    {% end %}
   end
 
   def iMPQueryIMEA(param0 : Win32cr::System::WindowsProgramming::IMEPROA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IMPQueryIMEA(param0)
+    {% end %}
   end
 
   def iMPQueryIMEW(param0 : Win32cr::System::WindowsProgramming::IMEPROW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IMPQueryIMEW(param0)
+    {% end %}
   end
 
   def iMPSetIMEA(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::System::WindowsProgramming::IMEPROA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IMPSetIMEA(param0, param1)
+    {% end %}
   end
 
   def iMPSetIMEW(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::System::WindowsProgramming::IMEPROW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IMPSetIMEW(param0, param1)
+    {% end %}
   end
 
   def wINNLSGetIMEHotkey(param0 : Win32cr::Foundation::HWND) : UInt32
+    {% if !flag?(:docs) %}
     C.WINNLSGetIMEHotkey(param0)
+    {% end %}
   end
 
   def wINNLSEnableIME(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WINNLSEnableIME(param0, param1)
+    {% end %}
   end
 
   def wINNLSGetEnableStatus(param0 : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WINNLSGetEnableStatus(param0)
+    {% end %}
   end
 
   def apphelpCheckShellObject(object_clsid : LibC::GUID*, bShimIfNecessary : Win32cr::Foundation::BOOL, pullFlags : UInt64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ApphelpCheckShellObject(object_clsid, bShimIfNecessary, pullFlags)
+    {% end %}
   end
 
   def wldpGetLockdownPolicy(hostInformation : Win32cr::System::WindowsProgramming::WLDP_HOST_INFORMATION*, lockdownState : UInt32*, lockdownFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WldpGetLockdownPolicy(hostInformation, lockdownState, lockdownFlags)
+    {% end %}
   end
 
   def wldpIsClassInApprovedList(classID : LibC::GUID*, hostInformation : Win32cr::System::WindowsProgramming::WLDP_HOST_INFORMATION*, isApproved : Win32cr::Foundation::BOOL*, optionalFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WldpIsClassInApprovedList(classID, hostInformation, isApproved, optionalFlags)
+    {% end %}
   end
 
   def wldpSetDynamicCodeTrust(fileHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WldpSetDynamicCodeTrust(fileHandle)
+    {% end %}
   end
 
   def wldpIsDynamicCodePolicyEnabled(isEnabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WldpIsDynamicCodePolicyEnabled(isEnabled)
+    {% end %}
   end
 
   def wldpQueryDynamicCodeTrust(fileHandle : Win32cr::Foundation::HANDLE, baseImage : Void*, imageSize : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WldpQueryDynamicCodeTrust(fileHandle, baseImage, imageSize)
+    {% end %}
   end
 
   def wldpQueryDeviceSecurityInformation(information : Win32cr::System::WindowsProgramming::WLDP_DEVICE_SECURITY_INFORMATION*, informationLength : UInt32, returnLength : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WldpQueryDeviceSecurityInformation(information, informationLength, returnLength)
+    {% end %}
   end
 
   @[Link("ntdll")]
@@ -2857,6 +3303,7 @@ module Win32cr::System::WindowsProgramming
   @[Link("user32")]
   @[Link("apphelp")]
   @[Link("wldp")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun RtlGetReturnAddressHijackTarget : LibC::UIntPtrT
@@ -3560,4 +4007,5 @@ module Win32cr::System::WindowsProgramming
     fun WldpQueryDeviceSecurityInformation(information : Win32cr::System::WindowsProgramming::WLDP_DEVICE_SECURITY_INFORMATION*, informationLength : UInt32, returnLength : UInt32*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

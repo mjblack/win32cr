@@ -3342,7 +3342,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTAPIVtbl,
+  record ITTAPIVtable,
     query_interface : Proc(ITTAPI*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTAPI*, UInt32),
     release : Proc(ITTAPI*, UInt32),
@@ -3369,7 +3369,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITTAPI, lpVtbl : ITTAPIVtbl* do
+  record ITTAPI, lpVtbl : ITTAPIVtable* do
     GUID = LibC::GUID.new(0xb1efc382_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITTAPI*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3444,7 +3444,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTAPI2Vtbl,
+  record ITTAPI2Vtable,
     query_interface : Proc(ITTAPI2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTAPI2*, UInt32),
     release : Proc(ITTAPI2*, UInt32),
@@ -3474,7 +3474,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITTAPI2, lpVtbl : ITTAPI2Vtbl* do
+  record ITTAPI2, lpVtbl : ITTAPI2Vtable* do
     GUID = LibC::GUID.new(0x54fbdc8c_u32, 0xd90f_u16, 0x4dad_u16, StaticArray[0x96_u8, 0x95_u8, 0xb3_u8, 0x73_u8, 0x9_u8, 0x7f_u8, 0x9_u8, 0x4b_u8])
     def query_interface(this : ITTAPI2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3558,7 +3558,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITMediaSupportVtbl,
+  record ITMediaSupportVtable,
     query_interface : Proc(ITMediaSupport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITMediaSupport*, UInt32),
     release : Proc(ITMediaSupport*, UInt32),
@@ -3571,7 +3571,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITMediaSupport, lpVtbl : ITMediaSupportVtbl* do
+  record ITMediaSupport, lpVtbl : ITMediaSupportVtable* do
     GUID = LibC::GUID.new(0xb1efc384_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITMediaSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3604,7 +3604,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITPluggableTerminalClassInfoVtbl,
+  record ITPluggableTerminalClassInfoVtable,
     query_interface : Proc(ITPluggableTerminalClassInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITPluggableTerminalClassInfo*, UInt32),
     release : Proc(ITPluggableTerminalClassInfo*, UInt32),
@@ -3622,7 +3622,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITPluggableTerminalClassInfo, lpVtbl : ITPluggableTerminalClassInfoVtbl* do
+  record ITPluggableTerminalClassInfo, lpVtbl : ITPluggableTerminalClassInfoVtable* do
     GUID = LibC::GUID.new(0x41757f4a_u32, 0xcf09_u16, 0x4b34_u16, StaticArray[0xbc_u8, 0x96_u8, 0xa_u8, 0x79_u8, 0xd2_u8, 0x39_u8, 0x0_u8, 0x76_u8])
     def query_interface(this : ITPluggableTerminalClassInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3670,7 +3670,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITPluggableTerminalSuperclassInfoVtbl,
+  record ITPluggableTerminalSuperclassInfoVtable,
     query_interface : Proc(ITPluggableTerminalSuperclassInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITPluggableTerminalSuperclassInfo*, UInt32),
     release : Proc(ITPluggableTerminalSuperclassInfo*, UInt32),
@@ -3683,7 +3683,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITPluggableTerminalSuperclassInfo, lpVtbl : ITPluggableTerminalSuperclassInfoVtbl* do
+  record ITPluggableTerminalSuperclassInfo, lpVtbl : ITPluggableTerminalSuperclassInfoVtable* do
     GUID = LibC::GUID.new(0x6d54e42c_u32, 0x4625_u16, 0x4359_u16, StaticArray[0xa6_u8, 0xf7_u8, 0x63_u8, 0x19_u8, 0x99_u8, 0x10_u8, 0x7e_u8, 0x5_u8])
     def query_interface(this : ITPluggableTerminalSuperclassInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3716,7 +3716,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTerminalSupportVtbl,
+  record ITTerminalSupportVtable,
     query_interface : Proc(ITTerminalSupport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTerminalSupport*, UInt32),
     release : Proc(ITTerminalSupport*, UInt32),
@@ -3733,7 +3733,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITTerminalSupport, lpVtbl : ITTerminalSupportVtbl* do
+  record ITTerminalSupport, lpVtbl : ITTerminalSupportVtable* do
     GUID = LibC::GUID.new(0xb1efc385_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITTerminalSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3778,7 +3778,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTerminalSupport2Vtbl,
+  record ITTerminalSupport2Vtable,
     query_interface : Proc(ITTerminalSupport2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTerminalSupport2*, UInt32),
     release : Proc(ITTerminalSupport2*, UInt32),
@@ -3799,7 +3799,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITTerminalSupport2, lpVtbl : ITTerminalSupport2Vtbl* do
+  record ITTerminalSupport2, lpVtbl : ITTerminalSupport2Vtable* do
     GUID = LibC::GUID.new(0xf3eb39bc_u32, 0x1b1f_u16, 0x4e99_u16, StaticArray[0xa0_u8, 0xc0_u8, 0x56_u8, 0x30_u8, 0x5c_u8, 0x4d_u8, 0xd5_u8, 0x91_u8])
     def query_interface(this : ITTerminalSupport2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3856,7 +3856,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAddressVtbl,
+  record ITAddressVtable,
     query_interface : Proc(ITAddress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAddress*, UInt32),
     release : Proc(ITAddress*, UInt32),
@@ -3882,7 +3882,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAddress, lpVtbl : ITAddressVtbl* do
+  record ITAddress, lpVtbl : ITAddressVtable* do
     GUID = LibC::GUID.new(0xb1efc386_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3954,7 +3954,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAddress2Vtbl,
+  record ITAddress2Vtable,
     query_interface : Proc(ITAddress2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAddress2*, UInt32),
     release : Proc(ITAddress2*, UInt32),
@@ -3990,7 +3990,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAddress2, lpVtbl : ITAddress2Vtbl* do
+  record ITAddress2, lpVtbl : ITAddress2Vtable* do
     GUID = LibC::GUID.new(0xb0ae5d9b_u32, 0xbe51_u16, 0x46c9_u16, StaticArray[0xb0_u8, 0xf7_u8, 0xdf_u8, 0xa8_u8, 0xa2_u8, 0x2a_u8, 0x8b_u8, 0xc4_u8])
     def query_interface(this : ITAddress2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4092,7 +4092,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAddressCapabilitiesVtbl,
+  record ITAddressCapabilitiesVtable,
     query_interface : Proc(ITAddressCapabilities*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAddressCapabilities*, UInt32),
     release : Proc(ITAddressCapabilities*, UInt32),
@@ -4111,7 +4111,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAddressCapabilities, lpVtbl : ITAddressCapabilitiesVtbl* do
+  record ITAddressCapabilities, lpVtbl : ITAddressCapabilitiesVtable* do
     GUID = LibC::GUID.new(0x8df232f5_u32, 0x821b_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x5c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITAddressCapabilities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4162,7 +4162,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITPhoneVtbl,
+  record ITPhoneVtable,
     query_interface : Proc(ITPhone*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITPhone*, UInt32),
     release : Proc(ITPhone*, UInt32),
@@ -4206,7 +4206,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITPhone, lpVtbl : ITPhoneVtbl* do
+  record ITPhone, lpVtbl : ITPhoneVtable* do
     GUID = LibC::GUID.new(0x9d48db4_u32, 0x10cc_u16, 0x4388_u16, StaticArray[0x9d_u8, 0xe7_u8, 0xa8_u8, 0x46_u8, 0x56_u8, 0x18_u8, 0x97_u8, 0x5a_u8])
     def query_interface(this : ITPhone*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4332,7 +4332,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAutomatedPhoneControlVtbl,
+  record ITAutomatedPhoneControlVtable,
     query_interface : Proc(ITAutomatedPhoneControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAutomatedPhoneControl*, UInt32),
     release : Proc(ITAutomatedPhoneControl*, UInt32),
@@ -4375,7 +4375,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAutomatedPhoneControl, lpVtbl : ITAutomatedPhoneControlVtbl* do
+  record ITAutomatedPhoneControl, lpVtbl : ITAutomatedPhoneControlVtable* do
     GUID = LibC::GUID.new(0x1ee1af0e_u32, 0x6159_u16, 0x4a61_u16, StaticArray[0xb7_u8, 0x9b_u8, 0x6a_u8, 0x4b_u8, 0xa3_u8, 0xfc_u8, 0x9d_u8, 0xfc_u8])
     def query_interface(this : ITAutomatedPhoneControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4498,7 +4498,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITBasicCallControlVtbl,
+  record ITBasicCallControlVtable,
     query_interface : Proc(ITBasicCallControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITBasicCallControl*, UInt32),
     release : Proc(ITBasicCallControl*, UInt32),
@@ -4527,7 +4527,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITBasicCallControl, lpVtbl : ITBasicCallControlVtbl* do
+  record ITBasicCallControl, lpVtbl : ITBasicCallControlVtable* do
     GUID = LibC::GUID.new(0xb1efc389_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITBasicCallControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4608,7 +4608,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCallInfoVtbl,
+  record ITCallInfoVtable,
     query_interface : Proc(ITCallInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCallInfo*, UInt32),
     release : Proc(ITCallInfo*, UInt32),
@@ -4632,7 +4632,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITCallInfo, lpVtbl : ITCallInfoVtbl* do
+  record ITCallInfo, lpVtbl : ITCallInfoVtable* do
     GUID = LibC::GUID.new(0x350f85d1_u32, 0x1227_u16, 0x11d3_u16, StaticArray[0x83_u8, 0xd4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITCallInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4698,7 +4698,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCallInfo2Vtbl,
+  record ITCallInfo2Vtable,
     query_interface : Proc(ITCallInfo2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCallInfo2*, UInt32),
     release : Proc(ITCallInfo2*, UInt32),
@@ -4724,7 +4724,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITCallInfo2, lpVtbl : ITCallInfo2Vtbl* do
+  record ITCallInfo2, lpVtbl : ITCallInfo2Vtable* do
     GUID = LibC::GUID.new(0x94d70ca6_u32, 0x7ab0_u16, 0x4daa_u16, StaticArray[0x81_u8, 0xca_u8, 0xb8_u8, 0xf8_u8, 0x64_u8, 0x3f_u8, 0xae_u8, 0xc1_u8])
     def query_interface(this : ITCallInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4796,7 +4796,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTerminalVtbl,
+  record ITTerminalVtable,
     query_interface : Proc(ITTerminal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTerminal*, UInt32),
     release : Proc(ITTerminal*, UInt32),
@@ -4813,7 +4813,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITTerminal, lpVtbl : ITTerminalVtbl* do
+  record ITTerminal, lpVtbl : ITTerminalVtable* do
     GUID = LibC::GUID.new(0xb1efc38a_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITTerminal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4858,7 +4858,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITMultiTrackTerminalVtbl,
+  record ITMultiTrackTerminalVtable,
     query_interface : Proc(ITMultiTrackTerminal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITMultiTrackTerminal*, UInt32),
     release : Proc(ITMultiTrackTerminal*, UInt32),
@@ -4875,7 +4875,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITMultiTrackTerminal, lpVtbl : ITMultiTrackTerminalVtbl* do
+  record ITMultiTrackTerminal, lpVtbl : ITMultiTrackTerminalVtable* do
     GUID = LibC::GUID.new(0xfe040091_u32, 0xade8_u16, 0x4072_u16, StaticArray[0x95_u8, 0xc9_u8, 0xbf_u8, 0x7d_u8, 0xe8_u8, 0xc5_u8, 0x4b_u8, 0x44_u8])
     def query_interface(this : ITMultiTrackTerminal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4920,7 +4920,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITFileTrackVtbl,
+  record ITFileTrackVtable,
     query_interface : Proc(ITFileTrack*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITFileTrack*, UInt32),
     release : Proc(ITFileTrack*, UInt32),
@@ -4937,7 +4937,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITFileTrack, lpVtbl : ITFileTrackVtbl* do
+  record ITFileTrack, lpVtbl : ITFileTrackVtable* do
     GUID = LibC::GUID.new(0x31ca6ea9_u32, 0xc08a_u16, 0x4bea_u16, StaticArray[0x88_u8, 0x11_u8, 0x8e_u8, 0x9c_u8, 0x1b_u8, 0xa3_u8, 0xea_u8, 0x3a_u8])
     def query_interface(this : ITFileTrack*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4982,7 +4982,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITMediaPlaybackVtbl,
+  record ITMediaPlaybackVtable,
     query_interface : Proc(ITMediaPlayback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITMediaPlayback*, UInt32),
     release : Proc(ITMediaPlayback*, UInt32),
@@ -4995,7 +4995,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITMediaPlayback, lpVtbl : ITMediaPlaybackVtbl* do
+  record ITMediaPlayback, lpVtbl : ITMediaPlaybackVtable* do
     GUID = LibC::GUID.new(0x627e8ae6_u32, 0xae4c_u16, 0x4a69_u16, StaticArray[0xbb_u8, 0x63_u8, 0x2a_u8, 0xd6_u8, 0x25_u8, 0x40_u8, 0x4b_u8, 0x77_u8])
     def query_interface(this : ITMediaPlayback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5028,7 +5028,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITMediaRecordVtbl,
+  record ITMediaRecordVtable,
     query_interface : Proc(ITMediaRecord*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITMediaRecord*, UInt32),
     release : Proc(ITMediaRecord*, UInt32),
@@ -5041,7 +5041,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITMediaRecord, lpVtbl : ITMediaRecordVtbl* do
+  record ITMediaRecord, lpVtbl : ITMediaRecordVtable* do
     GUID = LibC::GUID.new(0xf5dd4592_u32, 0x5476_u16, 0x4cc1_u16, StaticArray[0x9d_u8, 0x4d_u8, 0xfa_u8, 0xd3_u8, 0xee_u8, 0xfe_u8, 0x7d_u8, 0xb2_u8])
     def query_interface(this : ITMediaRecord*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5074,7 +5074,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITMediaControlVtbl,
+  record ITMediaControlVtable,
     query_interface : Proc(ITMediaControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITMediaControl*, UInt32),
     release : Proc(ITMediaControl*, UInt32),
@@ -5089,7 +5089,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITMediaControl, lpVtbl : ITMediaControlVtbl* do
+  record ITMediaControl, lpVtbl : ITMediaControlVtable* do
     GUID = LibC::GUID.new(0xc445dde8_u32, 0x5199_u16, 0x4bc7_u16, StaticArray[0x98_u8, 0x7_u8, 0x5f_u8, 0xfb_u8, 0x92_u8, 0xe4_u8, 0x2e_u8, 0x9_u8])
     def query_interface(this : ITMediaControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5128,7 +5128,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITBasicAudioTerminalVtbl,
+  record ITBasicAudioTerminalVtable,
     query_interface : Proc(ITBasicAudioTerminal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITBasicAudioTerminal*, UInt32),
     release : Proc(ITBasicAudioTerminal*, UInt32),
@@ -5143,7 +5143,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITBasicAudioTerminal, lpVtbl : ITBasicAudioTerminalVtbl* do
+  record ITBasicAudioTerminal, lpVtbl : ITBasicAudioTerminalVtable* do
     GUID = LibC::GUID.new(0xb1efc38d_u32, 0x9355_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITBasicAudioTerminal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5182,7 +5182,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITStaticAudioTerminalVtbl,
+  record ITStaticAudioTerminalVtable,
     query_interface : Proc(ITStaticAudioTerminal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITStaticAudioTerminal*, UInt32),
     release : Proc(ITStaticAudioTerminal*, UInt32),
@@ -5194,7 +5194,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITStaticAudioTerminal, lpVtbl : ITStaticAudioTerminalVtbl* do
+  record ITStaticAudioTerminal, lpVtbl : ITStaticAudioTerminalVtable* do
     GUID = LibC::GUID.new(0xa86b7871_u32, 0xd14c_u16, 0x48e6_u16, StaticArray[0x92_u8, 0x2e_u8, 0xa8_u8, 0xd1_u8, 0x5f_u8, 0x98_u8, 0x48_u8, 0x0_u8])
     def query_interface(this : ITStaticAudioTerminal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5224,7 +5224,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCallHubVtbl,
+  record ITCallHubVtable,
     query_interface : Proc(ITCallHub*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCallHub*, UInt32),
     release : Proc(ITCallHub*, UInt32),
@@ -5240,7 +5240,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITCallHub, lpVtbl : ITCallHubVtbl* do
+  record ITCallHub, lpVtbl : ITCallHubVtable* do
     GUID = LibC::GUID.new(0xa3c1544e_u32, 0x5b92_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x4e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITCallHub*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5282,7 +5282,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITLegacyAddressMediaControlVtbl,
+  record ITLegacyAddressMediaControlVtable,
     query_interface : Proc(ITLegacyAddressMediaControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITLegacyAddressMediaControl*, UInt32),
     release : Proc(ITLegacyAddressMediaControl*, UInt32),
@@ -5292,7 +5292,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITLegacyAddressMediaControl, lpVtbl : ITLegacyAddressMediaControlVtbl* do
+  record ITLegacyAddressMediaControl, lpVtbl : ITLegacyAddressMediaControlVtable* do
     GUID = LibC::GUID.new(0xab493640_u32, 0x4c0b_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x46_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITLegacyAddressMediaControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5316,7 +5316,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITPrivateEventVtbl,
+  record ITPrivateEventVtable,
     query_interface : Proc(ITPrivateEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITPrivateEvent*, UInt32),
     release : Proc(ITPrivateEvent*, UInt32),
@@ -5332,7 +5332,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITPrivateEvent, lpVtbl : ITPrivateEventVtbl* do
+  record ITPrivateEvent, lpVtbl : ITPrivateEventVtable* do
     GUID = LibC::GUID.new(0xe269cd0_u32, 0x10d4_u16, 0x4121_u16, StaticArray[0x9c_u8, 0x22_u8, 0x9c_u8, 0x85_u8, 0xd6_u8, 0x25_u8, 0x65_u8, 0xd_u8])
     def query_interface(this : ITPrivateEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5374,7 +5374,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITLegacyAddressMediaControl2Vtbl,
+  record ITLegacyAddressMediaControl2Vtable,
     query_interface : Proc(ITLegacyAddressMediaControl2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITLegacyAddressMediaControl2*, UInt32),
     release : Proc(ITLegacyAddressMediaControl2*, UInt32),
@@ -5386,7 +5386,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITLegacyAddressMediaControl2, lpVtbl : ITLegacyAddressMediaControl2Vtbl* do
+  record ITLegacyAddressMediaControl2, lpVtbl : ITLegacyAddressMediaControl2Vtable* do
     GUID = LibC::GUID.new(0xb0ee512b_u32, 0xa531_u16, 0x409e_u16, StaticArray[0x9d_u8, 0xd9_u8, 0x40_u8, 0x99_u8, 0xfe_u8, 0x86_u8, 0xc7_u8, 0x38_u8])
     def query_interface(this : ITLegacyAddressMediaControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5416,7 +5416,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITLegacyCallMediaControlVtbl,
+  record ITLegacyCallMediaControlVtable,
     query_interface : Proc(ITLegacyCallMediaControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITLegacyCallMediaControl*, UInt32),
     release : Proc(ITLegacyCallMediaControl*, UInt32),
@@ -5432,7 +5432,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITLegacyCallMediaControl, lpVtbl : ITLegacyCallMediaControlVtbl* do
+  record ITLegacyCallMediaControl, lpVtbl : ITLegacyCallMediaControlVtable* do
     GUID = LibC::GUID.new(0xd624582f_u32, 0xcc23_u16, 0x4436_u16, StaticArray[0xb8_u8, 0xa5_u8, 0x47_u8, 0xc6_u8, 0x25_u8, 0xc8_u8, 0x4_u8, 0x5d_u8])
     def query_interface(this : ITLegacyCallMediaControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5474,7 +5474,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITLegacyCallMediaControl2Vtbl,
+  record ITLegacyCallMediaControl2Vtable,
     query_interface : Proc(ITLegacyCallMediaControl2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITLegacyCallMediaControl2*, UInt32),
     release : Proc(ITLegacyCallMediaControl2*, UInt32),
@@ -5500,7 +5500,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITLegacyCallMediaControl2, lpVtbl : ITLegacyCallMediaControl2Vtbl* do
+  record ITLegacyCallMediaControl2, lpVtbl : ITLegacyCallMediaControl2Vtable* do
     GUID = LibC::GUID.new(0x57ca332d_u32, 0x7bc2_u16, 0x44f1_u16, StaticArray[0xa6_u8, 0xc_u8, 0x93_u8, 0x6f_u8, 0xe8_u8, 0xd7_u8, 0xce_u8, 0x73_u8])
     def query_interface(this : ITLegacyCallMediaControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5572,7 +5572,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITDetectToneVtbl,
+  record ITDetectToneVtable,
     query_interface : Proc(ITDetectTone*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITDetectTone*, UInt32),
     release : Proc(ITDetectTone*, UInt32),
@@ -5589,7 +5589,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITDetectTone, lpVtbl : ITDetectToneVtbl* do
+  record ITDetectTone, lpVtbl : ITDetectToneVtable* do
     GUID = LibC::GUID.new(0x961f79bd_u32, 0x3097_u16, 0x49df_u16, StaticArray[0xa1_u8, 0xd6_u8, 0x90_u8, 0x9b_u8, 0x77_u8, 0xe8_u8, 0x9c_u8, 0xa0_u8])
     def query_interface(this : ITDetectTone*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5634,7 +5634,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCustomToneVtbl,
+  record ITCustomToneVtable,
     query_interface : Proc(ITCustomTone*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCustomTone*, UInt32),
     release : Proc(ITCustomTone*, UInt32),
@@ -5653,7 +5653,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITCustomTone, lpVtbl : ITCustomToneVtbl* do
+  record ITCustomTone, lpVtbl : ITCustomToneVtable* do
     GUID = LibC::GUID.new(0x357ad764_u32, 0xb3c6_u16, 0x4b2a_u16, StaticArray[0x8f_u8, 0xa5_u8, 0x7_u8, 0x22_u8, 0x82_u8, 0x7a_u8, 0x92_u8, 0x54_u8])
     def query_interface(this : ITCustomTone*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5704,7 +5704,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumPhoneVtbl,
+  record IEnumPhoneVtable,
     query_interface : Proc(IEnumPhone*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumPhone*, UInt32),
     release : Proc(IEnumPhone*, UInt32),
@@ -5715,7 +5715,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumPhone, lpVtbl : IEnumPhoneVtbl* do
+  record IEnumPhone, lpVtbl : IEnumPhoneVtable* do
     GUID = LibC::GUID.new(0xf15b7669_u32, 0x4780_u16, 0x4595_u16, StaticArray[0x8c_u8, 0x89_u8, 0xfb_u8, 0x36_u8, 0x9c_u8, 0x8c_u8, 0xf7_u8, 0xaa_u8])
     def query_interface(this : IEnumPhone*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5742,7 +5742,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumTerminalVtbl,
+  record IEnumTerminalVtable,
     query_interface : Proc(IEnumTerminal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTerminal*, UInt32),
     release : Proc(IEnumTerminal*, UInt32),
@@ -5753,7 +5753,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumTerminal, lpVtbl : IEnumTerminalVtbl* do
+  record IEnumTerminal, lpVtbl : IEnumTerminalVtable* do
     GUID = LibC::GUID.new(0xae269cf4_u32, 0x935e_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : IEnumTerminal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5780,7 +5780,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumTerminalClassVtbl,
+  record IEnumTerminalClassVtable,
     query_interface : Proc(IEnumTerminalClass*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumTerminalClass*, UInt32),
     release : Proc(IEnumTerminalClass*, UInt32),
@@ -5791,7 +5791,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumTerminalClass, lpVtbl : IEnumTerminalClassVtbl* do
+  record IEnumTerminalClass, lpVtbl : IEnumTerminalClassVtable* do
     GUID = LibC::GUID.new(0xae269cf5_u32, 0x935e_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : IEnumTerminalClass*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5818,7 +5818,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumCallVtbl,
+  record IEnumCallVtable,
     query_interface : Proc(IEnumCall*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumCall*, UInt32),
     release : Proc(IEnumCall*, UInt32),
@@ -5829,7 +5829,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumCall, lpVtbl : IEnumCallVtbl* do
+  record IEnumCall, lpVtbl : IEnumCallVtable* do
     GUID = LibC::GUID.new(0xae269cf6_u32, 0x935e_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : IEnumCall*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5856,7 +5856,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumAddressVtbl,
+  record IEnumAddressVtable,
     query_interface : Proc(IEnumAddress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumAddress*, UInt32),
     release : Proc(IEnumAddress*, UInt32),
@@ -5867,7 +5867,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumAddress, lpVtbl : IEnumAddressVtbl* do
+  record IEnumAddress, lpVtbl : IEnumAddressVtable* do
     GUID = LibC::GUID.new(0x1666fca1_u32, 0x9363_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : IEnumAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5894,7 +5894,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumCallHubVtbl,
+  record IEnumCallHubVtable,
     query_interface : Proc(IEnumCallHub*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumCallHub*, UInt32),
     release : Proc(IEnumCallHub*, UInt32),
@@ -5905,7 +5905,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumCallHub, lpVtbl : IEnumCallHubVtbl* do
+  record IEnumCallHub, lpVtbl : IEnumCallHubVtable* do
     GUID = LibC::GUID.new(0xa3c15450_u32, 0x5b92_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x4e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : IEnumCallHub*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5932,7 +5932,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumBstrVtbl,
+  record IEnumBstrVtable,
     query_interface : Proc(IEnumBstr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumBstr*, UInt32),
     release : Proc(IEnumBstr*, UInt32),
@@ -5943,7 +5943,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumBstr, lpVtbl : IEnumBstrVtbl* do
+  record IEnumBstr, lpVtbl : IEnumBstrVtable* do
     GUID = LibC::GUID.new(0x35372049_u32, 0xbc6_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x33_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : IEnumBstr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5970,7 +5970,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumPluggableTerminalClassInfoVtbl,
+  record IEnumPluggableTerminalClassInfoVtable,
     query_interface : Proc(IEnumPluggableTerminalClassInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumPluggableTerminalClassInfo*, UInt32),
     release : Proc(IEnumPluggableTerminalClassInfo*, UInt32),
@@ -5981,7 +5981,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumPluggableTerminalClassInfo, lpVtbl : IEnumPluggableTerminalClassInfoVtbl* do
+  record IEnumPluggableTerminalClassInfo, lpVtbl : IEnumPluggableTerminalClassInfoVtable* do
     GUID = LibC::GUID.new(0x4567450c_u32, 0xdbee_u16, 0x4e3f_u16, StaticArray[0xaa_u8, 0xf5_u8, 0x37_u8, 0xbf_u8, 0x9e_u8, 0xbf_u8, 0x5e_u8, 0x29_u8])
     def query_interface(this : IEnumPluggableTerminalClassInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6008,7 +6008,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumPluggableSuperclassInfoVtbl,
+  record IEnumPluggableSuperclassInfoVtable,
     query_interface : Proc(IEnumPluggableSuperclassInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumPluggableSuperclassInfo*, UInt32),
     release : Proc(IEnumPluggableSuperclassInfo*, UInt32),
@@ -6019,7 +6019,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumPluggableSuperclassInfo, lpVtbl : IEnumPluggableSuperclassInfoVtbl* do
+  record IEnumPluggableSuperclassInfo, lpVtbl : IEnumPluggableSuperclassInfoVtable* do
     GUID = LibC::GUID.new(0xe9586a80_u32, 0x89e6_u16, 0x4cff_u16, StaticArray[0x93_u8, 0x1d_u8, 0x47_u8, 0x8d_u8, 0x57_u8, 0x51_u8, 0xf4_u8, 0xc0_u8])
     def query_interface(this : IEnumPluggableSuperclassInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6046,7 +6046,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITPhoneEventVtbl,
+  record ITPhoneEventVtable,
     query_interface : Proc(ITPhoneEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITPhoneEvent*, UInt32),
     release : Proc(ITPhoneEvent*, UInt32),
@@ -6066,7 +6066,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITPhoneEvent, lpVtbl : ITPhoneEventVtbl* do
+  record ITPhoneEvent, lpVtbl : ITPhoneEventVtable* do
     GUID = LibC::GUID.new(0x8f942dd8_u32, 0x64ed_u16, 0x4aaf_u16, StaticArray[0xa7_u8, 0x7d_u8, 0xb2_u8, 0x3d_u8, 0xb0_u8, 0x83_u8, 0x7e_u8, 0xad_u8])
     def query_interface(this : ITPhoneEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6120,7 +6120,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCallStateEventVtbl,
+  record ITCallStateEventVtable,
     query_interface : Proc(ITCallStateEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCallStateEvent*, UInt32),
     release : Proc(ITCallStateEvent*, UInt32),
@@ -6135,7 +6135,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITCallStateEvent, lpVtbl : ITCallStateEventVtbl* do
+  record ITCallStateEvent, lpVtbl : ITCallStateEventVtable* do
     GUID = LibC::GUID.new(0x62f47097_u32, 0x95c9_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x5d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITCallStateEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6174,7 +6174,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITPhoneDeviceSpecificEventVtbl,
+  record ITPhoneDeviceSpecificEventVtable,
     query_interface : Proc(ITPhoneDeviceSpecificEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITPhoneDeviceSpecificEvent*, UInt32),
     release : Proc(ITPhoneDeviceSpecificEvent*, UInt32),
@@ -6189,7 +6189,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITPhoneDeviceSpecificEvent, lpVtbl : ITPhoneDeviceSpecificEventVtbl* do
+  record ITPhoneDeviceSpecificEvent, lpVtbl : ITPhoneDeviceSpecificEventVtable* do
     GUID = LibC::GUID.new(0x63ffb2a6_u32, 0x872b_u16, 0x4cd3_u16, StaticArray[0xa5_u8, 0x1_u8, 0x32_u8, 0x6e_u8, 0x8f_u8, 0xb4_u8, 0xa_u8, 0xf7_u8])
     def query_interface(this : ITPhoneDeviceSpecificEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6228,7 +6228,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCallMediaEventVtbl,
+  record ITCallMediaEventVtable,
     query_interface : Proc(ITCallMediaEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCallMediaEvent*, UInt32),
     release : Proc(ITCallMediaEvent*, UInt32),
@@ -6245,7 +6245,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITCallMediaEvent, lpVtbl : ITCallMediaEventVtbl* do
+  record ITCallMediaEvent, lpVtbl : ITCallMediaEventVtable* do
     GUID = LibC::GUID.new(0xff36b87f_u32, 0xec3a_u16, 0x11d0_u16, StaticArray[0x8e_u8, 0xe4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITCallMediaEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6290,7 +6290,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITDigitDetectionEventVtbl,
+  record ITDigitDetectionEventVtable,
     query_interface : Proc(ITDigitDetectionEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITDigitDetectionEvent*, UInt32),
     release : Proc(ITDigitDetectionEvent*, UInt32),
@@ -6306,7 +6306,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITDigitDetectionEvent, lpVtbl : ITDigitDetectionEventVtbl* do
+  record ITDigitDetectionEvent, lpVtbl : ITDigitDetectionEventVtable* do
     GUID = LibC::GUID.new(0x80d3bfac_u32, 0x57d9_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x4a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITDigitDetectionEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6348,7 +6348,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITDigitGenerationEventVtbl,
+  record ITDigitGenerationEventVtable,
     query_interface : Proc(ITDigitGenerationEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITDigitGenerationEvent*, UInt32),
     release : Proc(ITDigitGenerationEvent*, UInt32),
@@ -6363,7 +6363,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITDigitGenerationEvent, lpVtbl : ITDigitGenerationEventVtbl* do
+  record ITDigitGenerationEvent, lpVtbl : ITDigitGenerationEventVtable* do
     GUID = LibC::GUID.new(0x80d3bfad_u32, 0x57d9_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x4a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITDigitGenerationEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6402,7 +6402,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITDigitsGatheredEventVtbl,
+  record ITDigitsGatheredEventVtable,
     query_interface : Proc(ITDigitsGatheredEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITDigitsGatheredEvent*, UInt32),
     release : Proc(ITDigitsGatheredEvent*, UInt32),
@@ -6418,7 +6418,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITDigitsGatheredEvent, lpVtbl : ITDigitsGatheredEventVtbl* do
+  record ITDigitsGatheredEvent, lpVtbl : ITDigitsGatheredEventVtable* do
     GUID = LibC::GUID.new(0xe52ec4c1_u32, 0xcba3_u16, 0x441a_u16, StaticArray[0x9e_u8, 0x6a_u8, 0x93_u8, 0xcb_u8, 0x90_u8, 0x9e_u8, 0x97_u8, 0x24_u8])
     def query_interface(this : ITDigitsGatheredEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6460,7 +6460,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITToneDetectionEventVtbl,
+  record ITToneDetectionEventVtable,
     query_interface : Proc(ITToneDetectionEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITToneDetectionEvent*, UInt32),
     release : Proc(ITToneDetectionEvent*, UInt32),
@@ -6475,7 +6475,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITToneDetectionEvent, lpVtbl : ITToneDetectionEventVtbl* do
+  record ITToneDetectionEvent, lpVtbl : ITToneDetectionEventVtable* do
     GUID = LibC::GUID.new(0x407e0faf_u32, 0xd047_u16, 0x4753_u16, StaticArray[0xb0_u8, 0xc6_u8, 0x8e_u8, 0x6_u8, 0x3_u8, 0x73_u8, 0xfe_u8, 0xcd_u8])
     def query_interface(this : ITToneDetectionEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6514,7 +6514,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTAPIObjectEventVtbl,
+  record ITTAPIObjectEventVtable,
     query_interface : Proc(ITTAPIObjectEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTAPIObjectEvent*, UInt32),
     release : Proc(ITTAPIObjectEvent*, UInt32),
@@ -6529,7 +6529,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITTAPIObjectEvent, lpVtbl : ITTAPIObjectEventVtbl* do
+  record ITTAPIObjectEvent, lpVtbl : ITTAPIObjectEventVtable* do
     GUID = LibC::GUID.new(0xf4854d48_u32, 0x937a_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x58_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITTAPIObjectEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6568,7 +6568,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTAPIObjectEvent2Vtbl,
+  record ITTAPIObjectEvent2Vtable,
     query_interface : Proc(ITTAPIObjectEvent2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTAPIObjectEvent2*, UInt32),
     release : Proc(ITTAPIObjectEvent2*, UInt32),
@@ -6584,7 +6584,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITTAPIObjectEvent2, lpVtbl : ITTAPIObjectEvent2Vtbl* do
+  record ITTAPIObjectEvent2, lpVtbl : ITTAPIObjectEvent2Vtable* do
     GUID = LibC::GUID.new(0x359dda6e_u32, 0x68ce_u16, 0x4383_u16, StaticArray[0xbf_u8, 0xb_u8, 0x16_u8, 0x91_u8, 0x33_u8, 0xc4_u8, 0x1b_u8, 0x46_u8])
     def query_interface(this : ITTAPIObjectEvent2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6626,7 +6626,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTAPIEventNotificationVtbl,
+  record ITTAPIEventNotificationVtable,
     query_interface : Proc(ITTAPIEventNotification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTAPIEventNotification*, UInt32),
     release : Proc(ITTAPIEventNotification*, UInt32),
@@ -6634,7 +6634,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITTAPIEventNotification, lpVtbl : ITTAPIEventNotificationVtbl* do
+  record ITTAPIEventNotification, lpVtbl : ITTAPIEventNotificationVtable* do
     GUID = LibC::GUID.new(0xeddb9426_u32, 0x3b91_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x30_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITTAPIEventNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6652,7 +6652,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCallHubEventVtbl,
+  record ITCallHubEventVtable,
     query_interface : Proc(ITCallHubEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCallHubEvent*, UInt32),
     release : Proc(ITCallHubEvent*, UInt32),
@@ -6666,7 +6666,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITCallHubEvent, lpVtbl : ITCallHubEventVtbl* do
+  record ITCallHubEvent, lpVtbl : ITCallHubEventVtable* do
     GUID = LibC::GUID.new(0xa3c15451_u32, 0x5b92_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x4e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITCallHubEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6702,7 +6702,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAddressEventVtbl,
+  record ITAddressEventVtable,
     query_interface : Proc(ITAddressEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAddressEvent*, UInt32),
     release : Proc(ITAddressEvent*, UInt32),
@@ -6716,7 +6716,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAddressEvent, lpVtbl : ITAddressEventVtbl* do
+  record ITAddressEvent, lpVtbl : ITAddressEventVtable* do
     GUID = LibC::GUID.new(0x831ce2d1_u32, 0x83b5_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x5c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITAddressEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6752,7 +6752,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAddressDeviceSpecificEventVtbl,
+  record ITAddressDeviceSpecificEventVtable,
     query_interface : Proc(ITAddressDeviceSpecificEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAddressDeviceSpecificEvent*, UInt32),
     release : Proc(ITAddressDeviceSpecificEvent*, UInt32),
@@ -6768,7 +6768,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAddressDeviceSpecificEvent, lpVtbl : ITAddressDeviceSpecificEventVtbl* do
+  record ITAddressDeviceSpecificEvent, lpVtbl : ITAddressDeviceSpecificEventVtable* do
     GUID = LibC::GUID.new(0x3acb216b_u32, 0x40bd_u16, 0x487a_u16, StaticArray[0x86_u8, 0x72_u8, 0x5c_u8, 0xe7_u8, 0x7b_u8, 0xd7_u8, 0xe3_u8, 0xa3_u8])
     def query_interface(this : ITAddressDeviceSpecificEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6810,7 +6810,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITFileTerminalEventVtbl,
+  record ITFileTerminalEventVtable,
     query_interface : Proc(ITFileTerminalEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITFileTerminalEvent*, UInt32),
     release : Proc(ITFileTerminalEvent*, UInt32),
@@ -6827,7 +6827,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITFileTerminalEvent, lpVtbl : ITFileTerminalEventVtbl* do
+  record ITFileTerminalEvent, lpVtbl : ITFileTerminalEventVtable* do
     GUID = LibC::GUID.new(0xe4a7fbac_u32, 0x8c17_u16, 0x4427_u16, StaticArray[0x9f_u8, 0x55_u8, 0x9f_u8, 0x58_u8, 0x9a_u8, 0xc8_u8, 0xaf_u8, 0x0_u8])
     def query_interface(this : ITFileTerminalEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6872,7 +6872,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTTSTerminalEventVtbl,
+  record ITTTSTerminalEventVtable,
     query_interface : Proc(ITTTSTerminalEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTTSTerminalEvent*, UInt32),
     release : Proc(ITTTSTerminalEvent*, UInt32),
@@ -6886,7 +6886,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITTTSTerminalEvent, lpVtbl : ITTTSTerminalEventVtbl* do
+  record ITTTSTerminalEvent, lpVtbl : ITTTSTerminalEventVtable* do
     GUID = LibC::GUID.new(0xd964788f_u32, 0x95a5_u16, 0x461d_u16, StaticArray[0xab_u8, 0xc_u8, 0xb9_u8, 0x90_u8, 0xa_u8, 0x6c_u8, 0x27_u8, 0x13_u8])
     def query_interface(this : ITTTSTerminalEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6922,7 +6922,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITASRTerminalEventVtbl,
+  record ITASRTerminalEventVtable,
     query_interface : Proc(ITASRTerminalEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITASRTerminalEvent*, UInt32),
     release : Proc(ITASRTerminalEvent*, UInt32),
@@ -6936,7 +6936,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITASRTerminalEvent, lpVtbl : ITASRTerminalEventVtbl* do
+  record ITASRTerminalEvent, lpVtbl : ITASRTerminalEventVtable* do
     GUID = LibC::GUID.new(0xee016a02_u32, 0x4fa9_u16, 0x467c_u16, StaticArray[0x93_u8, 0x3f_u8, 0x5a_u8, 0x15_u8, 0xb1_u8, 0x23_u8, 0x77_u8, 0xd7_u8])
     def query_interface(this : ITASRTerminalEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6972,7 +6972,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITToneTerminalEventVtbl,
+  record ITToneTerminalEventVtable,
     query_interface : Proc(ITToneTerminalEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITToneTerminalEvent*, UInt32),
     release : Proc(ITToneTerminalEvent*, UInt32),
@@ -6986,7 +6986,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITToneTerminalEvent, lpVtbl : ITToneTerminalEventVtbl* do
+  record ITToneTerminalEvent, lpVtbl : ITToneTerminalEventVtable* do
     GUID = LibC::GUID.new(0xe6f56009_u32, 0x611f_u16, 0x4945_u16, StaticArray[0xbb_u8, 0xd2_u8, 0x2d_u8, 0xc_u8, 0xe5_u8, 0x61_u8, 0x20_u8, 0x56_u8])
     def query_interface(this : ITToneTerminalEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7022,7 +7022,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITQOSEventVtbl,
+  record ITQOSEventVtable,
     query_interface : Proc(ITQOSEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITQOSEvent*, UInt32),
     release : Proc(ITQOSEvent*, UInt32),
@@ -7036,7 +7036,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITQOSEvent, lpVtbl : ITQOSEventVtbl* do
+  record ITQOSEvent, lpVtbl : ITQOSEventVtable* do
     GUID = LibC::GUID.new(0xcfa3357c_u32, 0xad77_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x68_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITQOSEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7072,7 +7072,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCallInfoChangeEventVtbl,
+  record ITCallInfoChangeEventVtable,
     query_interface : Proc(ITCallInfoChangeEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCallInfoChangeEvent*, UInt32),
     release : Proc(ITCallInfoChangeEvent*, UInt32),
@@ -7086,7 +7086,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITCallInfoChangeEvent, lpVtbl : ITCallInfoChangeEventVtbl* do
+  record ITCallInfoChangeEvent, lpVtbl : ITCallInfoChangeEventVtable* do
     GUID = LibC::GUID.new(0x5d4b65f9_u32, 0xe51c_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x2f_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITCallInfoChangeEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7122,7 +7122,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITRequestVtbl,
+  record ITRequestVtable,
     query_interface : Proc(ITRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITRequest*, UInt32),
     release : Proc(ITRequest*, UInt32),
@@ -7134,7 +7134,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITRequest, lpVtbl : ITRequestVtbl* do
+  record ITRequest, lpVtbl : ITRequestVtable* do
     GUID = LibC::GUID.new(0xac48ffdf_u32, 0xf8c4_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x30_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7164,7 +7164,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITRequestEventVtbl,
+  record ITRequestEventVtable,
     query_interface : Proc(ITRequestEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITRequestEvent*, UInt32),
     release : Proc(ITRequestEvent*, UInt32),
@@ -7181,7 +7181,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITRequestEvent, lpVtbl : ITRequestEventVtbl* do
+  record ITRequestEvent, lpVtbl : ITRequestEventVtable* do
     GUID = LibC::GUID.new(0xac48ffde_u32, 0xf8c4_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x30_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITRequestEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7226,7 +7226,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCollectionVtbl,
+  record ITCollectionVtable,
     query_interface : Proc(ITCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCollection*, UInt32),
     release : Proc(ITCollection*, UInt32),
@@ -7240,7 +7240,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITCollection, lpVtbl : ITCollectionVtbl* do
+  record ITCollection, lpVtbl : ITCollectionVtable* do
     GUID = LibC::GUID.new(0x5ec5acf2_u32, 0x9c02_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x62_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3c_u8, 0xca_u8, 0xbd_u8])
     def query_interface(this : ITCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7276,7 +7276,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCollection2Vtbl,
+  record ITCollection2Vtable,
     query_interface : Proc(ITCollection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCollection2*, UInt32),
     release : Proc(ITCollection2*, UInt32),
@@ -7292,7 +7292,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITCollection2, lpVtbl : ITCollection2Vtbl* do
+  record ITCollection2, lpVtbl : ITCollection2Vtable* do
     GUID = LibC::GUID.new(0xe6dddda5_u32, 0xa6d3_u16, 0x48ff_u16, StaticArray[0x87_u8, 0x37_u8, 0xd3_u8, 0x2f_u8, 0xc4_u8, 0xd9_u8, 0x54_u8, 0x77_u8])
     def query_interface(this : ITCollection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7334,7 +7334,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITForwardInformationVtbl,
+  record ITForwardInformationVtable,
     query_interface : Proc(ITForwardInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITForwardInformation*, UInt32),
     release : Proc(ITForwardInformation*, UInt32),
@@ -7352,7 +7352,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITForwardInformation, lpVtbl : ITForwardInformationVtbl* do
+  record ITForwardInformation, lpVtbl : ITForwardInformationVtable* do
     GUID = LibC::GUID.new(0x449f659e_u32, 0x88a3_u16, 0x11d1_u16, StaticArray[0xbb_u8, 0x5d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITForwardInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7400,7 +7400,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITForwardInformation2Vtbl,
+  record ITForwardInformation2Vtable,
     query_interface : Proc(ITForwardInformation2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITForwardInformation2*, UInt32),
     release : Proc(ITForwardInformation2*, UInt32),
@@ -7422,7 +7422,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITForwardInformation2, lpVtbl : ITForwardInformation2Vtbl* do
+  record ITForwardInformation2, lpVtbl : ITForwardInformation2Vtable* do
     GUID = LibC::GUID.new(0x5229b4ed_u32, 0xb260_u16, 0x4382_u16, StaticArray[0x8e_u8, 0x1a_u8, 0x5d_u8, 0xf3_u8, 0xa8_u8, 0xa4_u8, 0xcc_u8, 0xc0_u8])
     def query_interface(this : ITForwardInformation2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7482,7 +7482,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAddressTranslationVtbl,
+  record ITAddressTranslationVtable,
     query_interface : Proc(ITAddressTranslation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAddressTranslation*, UInt32),
     release : Proc(ITAddressTranslation*, UInt32),
@@ -7499,7 +7499,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAddressTranslation, lpVtbl : ITAddressTranslationVtbl* do
+  record ITAddressTranslation, lpVtbl : ITAddressTranslationVtable* do
     GUID = LibC::GUID.new(0xc4d8f03_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAddressTranslation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7544,7 +7544,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAddressTranslationInfoVtbl,
+  record ITAddressTranslationInfoVtable,
     query_interface : Proc(ITAddressTranslationInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAddressTranslationInfo*, UInt32),
     release : Proc(ITAddressTranslationInfo*, UInt32),
@@ -7560,7 +7560,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAddressTranslationInfo, lpVtbl : ITAddressTranslationInfoVtbl* do
+  record ITAddressTranslationInfo, lpVtbl : ITAddressTranslationInfoVtable* do
     GUID = LibC::GUID.new(0xafc15945_u32, 0x8d40_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAddressTranslationInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7602,7 +7602,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITLocationInfoVtbl,
+  record ITLocationInfoVtable,
     query_interface : Proc(ITLocationInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITLocationInfo*, UInt32),
     release : Proc(ITLocationInfo*, UInt32),
@@ -7624,7 +7624,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITLocationInfo, lpVtbl : ITLocationInfoVtbl* do
+  record ITLocationInfo, lpVtbl : ITLocationInfoVtable* do
     GUID = LibC::GUID.new(0xc4d8eff_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITLocationInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7684,7 +7684,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumLocationVtbl,
+  record IEnumLocationVtable,
     query_interface : Proc(IEnumLocation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumLocation*, UInt32),
     release : Proc(IEnumLocation*, UInt32),
@@ -7695,7 +7695,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumLocation, lpVtbl : IEnumLocationVtbl* do
+  record IEnumLocation, lpVtbl : IEnumLocationVtable* do
     GUID = LibC::GUID.new(0xc4d8f01_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumLocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7722,7 +7722,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCallingCardVtbl,
+  record ITCallingCardVtable,
     query_interface : Proc(ITCallingCard*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCallingCard*, UInt32),
     release : Proc(ITCallingCard*, UInt32),
@@ -7740,7 +7740,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITCallingCard, lpVtbl : ITCallingCardVtbl* do
+  record ITCallingCard, lpVtbl : ITCallingCardVtable* do
     GUID = LibC::GUID.new(0xc4d8f00_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITCallingCard*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7788,7 +7788,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumCallingCardVtbl,
+  record IEnumCallingCardVtable,
     query_interface : Proc(IEnumCallingCard*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumCallingCard*, UInt32),
     release : Proc(IEnumCallingCard*, UInt32),
@@ -7799,7 +7799,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumCallingCard, lpVtbl : IEnumCallingCardVtbl* do
+  record IEnumCallingCard, lpVtbl : IEnumCallingCardVtable* do
     GUID = LibC::GUID.new(0xc4d8f02_u32, 0x8ddb_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x9e_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumCallingCard*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7826,7 +7826,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITCallNotificationEventVtbl,
+  record ITCallNotificationEventVtable,
     query_interface : Proc(ITCallNotificationEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITCallNotificationEvent*, UInt32),
     release : Proc(ITCallNotificationEvent*, UInt32),
@@ -7840,7 +7840,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITCallNotificationEvent, lpVtbl : ITCallNotificationEventVtbl* do
+  record ITCallNotificationEvent, lpVtbl : ITCallNotificationEventVtable* do
     GUID = LibC::GUID.new(0x895801df_u32, 0x3dd6_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x30_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITCallNotificationEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7876,7 +7876,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITDispatchMapperVtbl,
+  record ITDispatchMapperVtable,
     query_interface : Proc(ITDispatchMapper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITDispatchMapper*, UInt32),
     release : Proc(ITDispatchMapper*, UInt32),
@@ -7888,7 +7888,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITDispatchMapper, lpVtbl : ITDispatchMapperVtbl* do
+  record ITDispatchMapper, lpVtbl : ITDispatchMapperVtable* do
     GUID = LibC::GUID.new(0xe9225295_u32, 0xc759_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0x2b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITDispatchMapper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7918,7 +7918,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITStreamControlVtbl,
+  record ITStreamControlVtable,
     query_interface : Proc(ITStreamControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITStreamControl*, UInt32),
     release : Proc(ITStreamControl*, UInt32),
@@ -7933,7 +7933,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITStreamControl, lpVtbl : ITStreamControlVtbl* do
+  record ITStreamControl, lpVtbl : ITStreamControlVtable* do
     GUID = LibC::GUID.new(0xee3bd604_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITStreamControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7972,7 +7972,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITStreamVtbl,
+  record ITStreamVtable,
     query_interface : Proc(ITStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITStream*, UInt32),
     release : Proc(ITStream*, UInt32),
@@ -7993,7 +7993,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITStream, lpVtbl : ITStreamVtbl* do
+  record ITStream, lpVtbl : ITStreamVtable* do
     GUID = LibC::GUID.new(0xee3bd605_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8050,7 +8050,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumStreamVtbl,
+  record IEnumStreamVtable,
     query_interface : Proc(IEnumStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumStream*, UInt32),
     release : Proc(IEnumStream*, UInt32),
@@ -8061,7 +8061,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumStream, lpVtbl : IEnumStreamVtbl* do
+  record IEnumStream, lpVtbl : IEnumStreamVtable* do
     GUID = LibC::GUID.new(0xee3bd606_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : IEnumStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8088,7 +8088,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITSubStreamControlVtbl,
+  record ITSubStreamControlVtable,
     query_interface : Proc(ITSubStreamControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITSubStreamControl*, UInt32),
     release : Proc(ITSubStreamControl*, UInt32),
@@ -8103,7 +8103,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITSubStreamControl, lpVtbl : ITSubStreamControlVtbl* do
+  record ITSubStreamControl, lpVtbl : ITSubStreamControlVtable* do
     GUID = LibC::GUID.new(0xee3bd607_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITSubStreamControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8142,7 +8142,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITSubStreamVtbl,
+  record ITSubStreamVtable,
     query_interface : Proc(ITSubStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITSubStream*, UInt32),
     release : Proc(ITSubStream*, UInt32),
@@ -8161,7 +8161,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITSubStream, lpVtbl : ITSubStreamVtbl* do
+  record ITSubStream, lpVtbl : ITSubStreamVtable* do
     GUID = LibC::GUID.new(0xee3bd608_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITSubStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8212,7 +8212,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumSubStreamVtbl,
+  record IEnumSubStreamVtable,
     query_interface : Proc(IEnumSubStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumSubStream*, UInt32),
     release : Proc(IEnumSubStream*, UInt32),
@@ -8223,7 +8223,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumSubStream, lpVtbl : IEnumSubStreamVtbl* do
+  record IEnumSubStream, lpVtbl : IEnumSubStreamVtable* do
     GUID = LibC::GUID.new(0xee3bd609_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : IEnumSubStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8250,7 +8250,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITLegacyWaveSupportVtbl,
+  record ITLegacyWaveSupportVtable,
     query_interface : Proc(ITLegacyWaveSupport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITLegacyWaveSupport*, UInt32),
     release : Proc(ITLegacyWaveSupport*, UInt32),
@@ -8262,7 +8262,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITLegacyWaveSupport, lpVtbl : ITLegacyWaveSupportVtbl* do
+  record ITLegacyWaveSupport, lpVtbl : ITLegacyWaveSupportVtable* do
     GUID = LibC::GUID.new(0x207823ea_u32, 0xe252_u16, 0x11d2_u16, StaticArray[0xb7_u8, 0x7e_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x13_u8, 0x53_u8, 0x81_u8])
     def query_interface(this : ITLegacyWaveSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8292,7 +8292,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITBasicCallControl2Vtbl,
+  record ITBasicCallControl2Vtable,
     query_interface : Proc(ITBasicCallControl2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITBasicCallControl2*, UInt32),
     release : Proc(ITBasicCallControl2*, UInt32),
@@ -8324,7 +8324,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITBasicCallControl2, lpVtbl : ITBasicCallControl2Vtbl* do
+  record ITBasicCallControl2, lpVtbl : ITBasicCallControl2Vtable* do
     GUID = LibC::GUID.new(0x161a4a56_u32, 0x1e99_u16, 0x4b3f_u16, StaticArray[0xa4_u8, 0x6a_u8, 0x16_u8, 0x8f_u8, 0x38_u8, 0xa5_u8, 0xee_u8, 0x4c_u8])
     def query_interface(this : ITBasicCallControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8414,7 +8414,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITScriptableAudioFormatVtbl,
+  record ITScriptableAudioFormatVtable,
     query_interface : Proc(ITScriptableAudioFormat*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITScriptableAudioFormat*, UInt32),
     release : Proc(ITScriptableAudioFormat*, UInt32),
@@ -8437,7 +8437,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITScriptableAudioFormat, lpVtbl : ITScriptableAudioFormatVtbl* do
+  record ITScriptableAudioFormat, lpVtbl : ITScriptableAudioFormatVtable* do
     GUID = LibC::GUID.new(0xb87658bd_u32, 0x3c59_u16, 0x4f64_u16, StaticArray[0xbe_u8, 0x74_u8, 0xae_u8, 0xde_u8, 0x3e_u8, 0x86_u8, 0xa8_u8, 0x1e_u8])
     def query_interface(this : ITScriptableAudioFormat*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8500,7 +8500,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAgentVtbl,
+  record ITAgentVtable,
     query_interface : Proc(ITAgent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAgent*, UInt32),
     release : Proc(ITAgent*, UInt32),
@@ -8528,7 +8528,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAgent, lpVtbl : ITAgentVtbl* do
+  record ITAgent, lpVtbl : ITAgentVtable* do
     GUID = LibC::GUID.new(0x5770ece5_u32, 0x4b27_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAgent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8606,7 +8606,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAgentSessionVtbl,
+  record ITAgentSessionVtable,
     query_interface : Proc(ITAgentSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAgentSession*, UInt32),
     release : Proc(ITAgentSession*, UInt32),
@@ -8634,7 +8634,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAgentSession, lpVtbl : ITAgentSessionVtbl* do
+  record ITAgentSession, lpVtbl : ITAgentSessionVtable* do
     GUID = LibC::GUID.new(0x5afc3147_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAgentSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8712,7 +8712,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITACDGroupVtbl,
+  record ITACDGroupVtable,
     query_interface : Proc(ITACDGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITACDGroup*, UInt32),
     release : Proc(ITACDGroup*, UInt32),
@@ -8726,7 +8726,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITACDGroup, lpVtbl : ITACDGroupVtbl* do
+  record ITACDGroup, lpVtbl : ITACDGroupVtable* do
     GUID = LibC::GUID.new(0x5afc3148_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITACDGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8762,7 +8762,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITQueueVtbl,
+  record ITQueueVtable,
     query_interface : Proc(ITQueue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITQueue*, UInt32),
     release : Proc(ITQueue*, UInt32),
@@ -8785,7 +8785,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITQueue, lpVtbl : ITQueueVtbl* do
+  record ITQueue, lpVtbl : ITQueueVtable* do
     GUID = LibC::GUID.new(0x5afc3149_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8848,7 +8848,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAgentEventVtbl,
+  record ITAgentEventVtable,
     query_interface : Proc(ITAgentEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAgentEvent*, UInt32),
     release : Proc(ITAgentEvent*, UInt32),
@@ -8861,7 +8861,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAgentEvent, lpVtbl : ITAgentEventVtbl* do
+  record ITAgentEvent, lpVtbl : ITAgentEventVtable* do
     GUID = LibC::GUID.new(0x5afc314a_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAgentEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8894,7 +8894,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAgentSessionEventVtbl,
+  record ITAgentSessionEventVtable,
     query_interface : Proc(ITAgentSessionEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAgentSessionEvent*, UInt32),
     release : Proc(ITAgentSessionEvent*, UInt32),
@@ -8907,7 +8907,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAgentSessionEvent, lpVtbl : ITAgentSessionEventVtbl* do
+  record ITAgentSessionEvent, lpVtbl : ITAgentSessionEventVtable* do
     GUID = LibC::GUID.new(0x5afc314b_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAgentSessionEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8940,7 +8940,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITACDGroupEventVtbl,
+  record ITACDGroupEventVtable,
     query_interface : Proc(ITACDGroupEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITACDGroupEvent*, UInt32),
     release : Proc(ITACDGroupEvent*, UInt32),
@@ -8953,7 +8953,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITACDGroupEvent, lpVtbl : ITACDGroupEventVtbl* do
+  record ITACDGroupEvent, lpVtbl : ITACDGroupEventVtable* do
     GUID = LibC::GUID.new(0x297f3032_u32, 0xbd11_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa7_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITACDGroupEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8986,7 +8986,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITQueueEventVtbl,
+  record ITQueueEventVtable,
     query_interface : Proc(ITQueueEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITQueueEvent*, UInt32),
     release : Proc(ITQueueEvent*, UInt32),
@@ -8999,7 +8999,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITQueueEvent, lpVtbl : ITQueueEventVtbl* do
+  record ITQueueEvent, lpVtbl : ITQueueEventVtable* do
     GUID = LibC::GUID.new(0x297f3033_u32, 0xbd11_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa7_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITQueueEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9032,7 +9032,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAgentHandlerEventVtbl,
+  record ITAgentHandlerEventVtable,
     query_interface : Proc(ITAgentHandlerEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAgentHandlerEvent*, UInt32),
     release : Proc(ITAgentHandlerEvent*, UInt32),
@@ -9045,7 +9045,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAgentHandlerEvent, lpVtbl : ITAgentHandlerEventVtbl* do
+  record ITAgentHandlerEvent, lpVtbl : ITAgentHandlerEventVtable* do
     GUID = LibC::GUID.new(0x297f3034_u32, 0xbd11_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa7_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAgentHandlerEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9078,7 +9078,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTAPICallCenterVtbl,
+  record ITTAPICallCenterVtable,
     query_interface : Proc(ITTAPICallCenter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTAPICallCenter*, UInt32),
     release : Proc(ITTAPICallCenter*, UInt32),
@@ -9091,7 +9091,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITTAPICallCenter, lpVtbl : ITTAPICallCenterVtbl* do
+  record ITTAPICallCenter, lpVtbl : ITTAPICallCenterVtable* do
     GUID = LibC::GUID.new(0x5afc3154_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITTAPICallCenter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9124,7 +9124,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAgentHandlerVtbl,
+  record ITAgentHandlerVtable,
     query_interface : Proc(ITAgentHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAgentHandler*, UInt32),
     release : Proc(ITAgentHandler*, UInt32),
@@ -9142,7 +9142,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAgentHandler, lpVtbl : ITAgentHandlerVtbl* do
+  record ITAgentHandler, lpVtbl : ITAgentHandlerVtable* do
     GUID = LibC::GUID.new(0x587e8c22_u32, 0x9802_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa4_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : ITAgentHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9190,7 +9190,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumAgentVtbl,
+  record IEnumAgentVtable,
     query_interface : Proc(IEnumAgent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumAgent*, UInt32),
     release : Proc(IEnumAgent*, UInt32),
@@ -9201,7 +9201,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumAgent, lpVtbl : IEnumAgentVtbl* do
+  record IEnumAgent, lpVtbl : IEnumAgentVtable* do
     GUID = LibC::GUID.new(0x5afc314d_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumAgent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9228,7 +9228,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumAgentSessionVtbl,
+  record IEnumAgentSessionVtable,
     query_interface : Proc(IEnumAgentSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumAgentSession*, UInt32),
     release : Proc(IEnumAgentSession*, UInt32),
@@ -9239,7 +9239,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumAgentSession, lpVtbl : IEnumAgentSessionVtbl* do
+  record IEnumAgentSession, lpVtbl : IEnumAgentSessionVtable* do
     GUID = LibC::GUID.new(0x5afc314e_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumAgentSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9266,7 +9266,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumQueueVtbl,
+  record IEnumQueueVtable,
     query_interface : Proc(IEnumQueue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumQueue*, UInt32),
     release : Proc(IEnumQueue*, UInt32),
@@ -9277,7 +9277,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumQueue, lpVtbl : IEnumQueueVtbl* do
+  record IEnumQueue, lpVtbl : IEnumQueueVtable* do
     GUID = LibC::GUID.new(0x5afc3158_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9304,7 +9304,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumACDGroupVtbl,
+  record IEnumACDGroupVtable,
     query_interface : Proc(IEnumACDGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumACDGroup*, UInt32),
     release : Proc(IEnumACDGroup*, UInt32),
@@ -9315,7 +9315,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumACDGroup, lpVtbl : IEnumACDGroupVtbl* do
+  record IEnumACDGroup, lpVtbl : IEnumACDGroupVtable* do
     GUID = LibC::GUID.new(0x5afc3157_u32, 0x4bcc_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x80_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumACDGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9342,7 +9342,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumAgentHandlerVtbl,
+  record IEnumAgentHandlerVtable,
     query_interface : Proc(IEnumAgentHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumAgentHandler*, UInt32),
     release : Proc(IEnumAgentHandler*, UInt32),
@@ -9353,7 +9353,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumAgentHandler, lpVtbl : IEnumAgentHandlerVtbl* do
+  record IEnumAgentHandler, lpVtbl : IEnumAgentHandlerVtable* do
     GUID = LibC::GUID.new(0x587e8c28_u32, 0x9802_u16, 0x11d1_u16, StaticArray[0xa0_u8, 0xa4_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x47_u8, 0xd3_u8])
     def query_interface(this : IEnumAgentHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9380,7 +9380,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAMMediaFormatVtbl,
+  record ITAMMediaFormatVtable,
     query_interface : Proc(ITAMMediaFormat*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAMMediaFormat*, UInt32),
     release : Proc(ITAMMediaFormat*, UInt32),
@@ -9389,7 +9389,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAMMediaFormat, lpVtbl : ITAMMediaFormatVtbl* do
+  record ITAMMediaFormat, lpVtbl : ITAMMediaFormatVtable* do
     GUID = LibC::GUID.new(0x364eb00_u32, 0x4a77_u16, 0x11d1_u16, StaticArray[0xa6_u8, 0x71_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0xc9_u8, 0xa2_u8, 0xe8_u8])
     def query_interface(this : ITAMMediaFormat*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9410,7 +9410,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITAllocatorPropertiesVtbl,
+  record ITAllocatorPropertiesVtable,
     query_interface : Proc(ITAllocatorProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITAllocatorProperties*, UInt32),
     release : Proc(ITAllocatorProperties*, UInt32),
@@ -9423,7 +9423,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITAllocatorProperties, lpVtbl : ITAllocatorPropertiesVtbl* do
+  record ITAllocatorProperties, lpVtbl : ITAllocatorPropertiesVtable* do
     GUID = LibC::GUID.new(0xc1bc3c90_u32, 0xbcfe_u16, 0x11d1_u16, StaticArray[0x97_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x1a_u8, 0xc0_u8])
     def query_interface(this : ITAllocatorProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9456,7 +9456,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITPluggableTerminalEventSinkVtbl,
+  record ITPluggableTerminalEventSinkVtable,
     query_interface : Proc(ITPluggableTerminalEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITPluggableTerminalEventSink*, UInt32),
     release : Proc(ITPluggableTerminalEventSink*, UInt32),
@@ -9464,7 +9464,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITPluggableTerminalEventSink, lpVtbl : ITPluggableTerminalEventSinkVtbl* do
+  record ITPluggableTerminalEventSink, lpVtbl : ITPluggableTerminalEventSinkVtable* do
     GUID = LibC::GUID.new(0x6e0887be_u32, 0xba1a_u16, 0x492e_u16, StaticArray[0xbd_u8, 0x10_u8, 0x40_u8, 0x20_u8, 0xec_u8, 0x5e_u8, 0x33_u8, 0xe0_u8])
     def query_interface(this : ITPluggableTerminalEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9482,7 +9482,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITPluggableTerminalEventSinkRegistrationVtbl,
+  record ITPluggableTerminalEventSinkRegistrationVtable,
     query_interface : Proc(ITPluggableTerminalEventSinkRegistration*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITPluggableTerminalEventSinkRegistration*, UInt32),
     release : Proc(ITPluggableTerminalEventSinkRegistration*, UInt32),
@@ -9491,7 +9491,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITPluggableTerminalEventSinkRegistration, lpVtbl : ITPluggableTerminalEventSinkRegistrationVtbl* do
+  record ITPluggableTerminalEventSinkRegistration, lpVtbl : ITPluggableTerminalEventSinkRegistrationVtable* do
     GUID = LibC::GUID.new(0xf7115709_u32, 0xa216_u16, 0x4957_u16, StaticArray[0xa7_u8, 0x59_u8, 0x6_u8, 0xa_u8, 0xb3_u8, 0x2a_u8, 0x90_u8, 0xd1_u8])
     def query_interface(this : ITPluggableTerminalEventSinkRegistration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9512,7 +9512,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITMSPAddressVtbl,
+  record ITMSPAddressVtable,
     query_interface : Proc(ITMSPAddress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITMSPAddress*, UInt32),
     release : Proc(ITMSPAddress*, UInt32),
@@ -9525,7 +9525,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITMSPAddress, lpVtbl : ITMSPAddressVtbl* do
+  record ITMSPAddress, lpVtbl : ITMSPAddressVtable* do
     GUID = LibC::GUID.new(0xee3bd600_u32, 0x3868_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x45_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x80_u8, 0x9f_u8])
     def query_interface(this : ITMSPAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9558,7 +9558,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITTAPIDispatchEventNotificationVtbl,
+  record ITTAPIDispatchEventNotificationVtable,
     query_interface : Proc(ITTAPIDispatchEventNotification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITTAPIDispatchEventNotification*, UInt32),
     release : Proc(ITTAPIDispatchEventNotification*, UInt32),
@@ -9569,7 +9569,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITTAPIDispatchEventNotification, lpVtbl : ITTAPIDispatchEventNotificationVtbl* do
+  record ITTAPIDispatchEventNotification, lpVtbl : ITTAPIDispatchEventNotificationVtable* do
     GUID = LibC::GUID.new(0x9f34325b_u32, 0x7e62_u16, 0x11d2_u16, StaticArray[0x94_u8, 0x57_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xc8_u8, 0x88_u8])
     def query_interface(this : ITTAPIDispatchEventNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9596,7 +9596,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITDirectoryObjectConferenceVtbl,
+  record ITDirectoryObjectConferenceVtable,
     query_interface : Proc(ITDirectoryObjectConference*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITDirectoryObjectConference*, UInt32),
     release : Proc(ITDirectoryObjectConference*, UInt32),
@@ -9622,7 +9622,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITDirectoryObjectConference, lpVtbl : ITDirectoryObjectConferenceVtbl* do
+  record ITDirectoryObjectConference, lpVtbl : ITDirectoryObjectConferenceVtable* do
     GUID = LibC::GUID.new(0xf1029e5d_u32, 0xcb5b_u16, 0x11d0_u16, StaticArray[0x8d_u8, 0x59_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x1a_u8, 0xc0_u8])
     def query_interface(this : ITDirectoryObjectConference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9694,7 +9694,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITDirectoryObjectUserVtbl,
+  record ITDirectoryObjectUserVtable,
     query_interface : Proc(ITDirectoryObjectUser*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITDirectoryObjectUser*, UInt32),
     release : Proc(ITDirectoryObjectUser*, UInt32),
@@ -9707,7 +9707,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITDirectoryObjectUser, lpVtbl : ITDirectoryObjectUserVtbl* do
+  record ITDirectoryObjectUser, lpVtbl : ITDirectoryObjectUserVtable* do
     GUID = LibC::GUID.new(0x34621d6f_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : ITDirectoryObjectUser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9740,7 +9740,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumDialableAddrsVtbl,
+  record IEnumDialableAddrsVtable,
     query_interface : Proc(IEnumDialableAddrs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumDialableAddrs*, UInt32),
     release : Proc(IEnumDialableAddrs*, UInt32),
@@ -9751,7 +9751,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumDialableAddrs, lpVtbl : IEnumDialableAddrsVtbl* do
+  record IEnumDialableAddrs, lpVtbl : IEnumDialableAddrsVtable* do
     GUID = LibC::GUID.new(0x34621d70_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : IEnumDialableAddrs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9778,7 +9778,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITDirectoryObjectVtbl,
+  record ITDirectoryObjectVtable,
     query_interface : Proc(ITDirectoryObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITDirectoryObject*, UInt32),
     release : Proc(ITDirectoryObject*, UInt32),
@@ -9796,7 +9796,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITDirectoryObject, lpVtbl : ITDirectoryObjectVtbl* do
+  record ITDirectoryObject, lpVtbl : ITDirectoryObjectVtable* do
     GUID = LibC::GUID.new(0x34621d6e_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : ITDirectoryObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9844,7 +9844,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumDirectoryObjectVtbl,
+  record IEnumDirectoryObjectVtable,
     query_interface : Proc(IEnumDirectoryObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumDirectoryObject*, UInt32),
     release : Proc(IEnumDirectoryObject*, UInt32),
@@ -9855,7 +9855,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumDirectoryObject, lpVtbl : IEnumDirectoryObjectVtbl* do
+  record IEnumDirectoryObject, lpVtbl : IEnumDirectoryObjectVtable* do
     GUID = LibC::GUID.new(0x6c9b64a_u32, 0x306d_u16, 0x11d1_u16, StaticArray[0x97_u8, 0x74_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x1a_u8, 0xc0_u8])
     def query_interface(this : IEnumDirectoryObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9882,7 +9882,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITILSConfigVtbl,
+  record ITILSConfigVtable,
     query_interface : Proc(ITILSConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITILSConfig*, UInt32),
     release : Proc(ITILSConfig*, UInt32),
@@ -9895,7 +9895,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITILSConfig, lpVtbl : ITILSConfigVtbl* do
+  record ITILSConfig, lpVtbl : ITILSConfigVtable* do
     GUID = LibC::GUID.new(0x34621d72_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : ITILSConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9928,7 +9928,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITDirectoryVtbl,
+  record ITDirectoryVtable,
     query_interface : Proc(ITDirectory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITDirectory*, UInt32),
     release : Proc(ITDirectory*, UInt32),
@@ -9953,7 +9953,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITDirectory, lpVtbl : ITDirectoryVtbl* do
+  record ITDirectory, lpVtbl : ITDirectoryVtable* do
     GUID = LibC::GUID.new(0x34621d6c_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : ITDirectory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10022,7 +10022,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumDirectoryVtbl,
+  record IEnumDirectoryVtable,
     query_interface : Proc(IEnumDirectory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumDirectory*, UInt32),
     release : Proc(IEnumDirectory*, UInt32),
@@ -10033,7 +10033,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumDirectory, lpVtbl : IEnumDirectoryVtbl* do
+  record IEnumDirectory, lpVtbl : IEnumDirectoryVtable* do
     GUID = LibC::GUID.new(0x34621d6d_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : IEnumDirectory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10060,7 +10060,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITRendezvousVtbl,
+  record ITRendezvousVtable,
     query_interface : Proc(ITRendezvous*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITRendezvous*, UInt32),
     release : Proc(ITRendezvous*, UInt32),
@@ -10075,7 +10075,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITRendezvous, lpVtbl : ITRendezvousVtbl* do
+  record ITRendezvous, lpVtbl : ITRendezvousVtable* do
     GUID = LibC::GUID.new(0x34621d6b_u32, 0x6cff_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xf7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1f_u8, 0xee_u8])
     def query_interface(this : ITRendezvous*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10114,7 +10114,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IMcastScopeVtbl,
+  record IMcastScopeVtable,
     query_interface : Proc(IMcastScope*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMcastScope*, UInt32),
     release : Proc(IMcastScope*, UInt32),
@@ -10130,7 +10130,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IMcastScope, lpVtbl : IMcastScopeVtbl* do
+  record IMcastScope, lpVtbl : IMcastScopeVtable* do
     GUID = LibC::GUID.new(0xdf0daef4_u32, 0xa289_u16, 0x11d1_u16, StaticArray[0x86_u8, 0x97_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xb0_u8, 0xe5_u8, 0xd2_u8])
     def query_interface(this : IMcastScope*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10172,7 +10172,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IMcastLeaseInfoVtbl,
+  record IMcastLeaseInfoVtable,
     query_interface : Proc(IMcastLeaseInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMcastLeaseInfo*, UInt32),
     release : Proc(IMcastLeaseInfo*, UInt32),
@@ -10193,7 +10193,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IMcastLeaseInfo, lpVtbl : IMcastLeaseInfoVtbl* do
+  record IMcastLeaseInfo, lpVtbl : IMcastLeaseInfoVtable* do
     GUID = LibC::GUID.new(0xdf0daefd_u32, 0xa289_u16, 0x11d1_u16, StaticArray[0x86_u8, 0x97_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xb0_u8, 0xe5_u8, 0xd2_u8])
     def query_interface(this : IMcastLeaseInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10250,7 +10250,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IEnumMcastScopeVtbl,
+  record IEnumMcastScopeVtable,
     query_interface : Proc(IEnumMcastScope*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumMcastScope*, UInt32),
     release : Proc(IEnumMcastScope*, UInt32),
@@ -10261,7 +10261,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IEnumMcastScope, lpVtbl : IEnumMcastScopeVtbl* do
+  record IEnumMcastScope, lpVtbl : IEnumMcastScopeVtable* do
     GUID = LibC::GUID.new(0xdf0daf09_u32, 0xa289_u16, 0x11d1_u16, StaticArray[0x86_u8, 0x97_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xb0_u8, 0xe5_u8, 0xd2_u8])
     def query_interface(this : IEnumMcastScope*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10288,7 +10288,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record IMcastAddressAllocationVtbl,
+  record IMcastAddressAllocationVtable,
     query_interface : Proc(IMcastAddressAllocation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMcastAddressAllocation*, UInt32),
     release : Proc(IMcastAddressAllocation*, UInt32),
@@ -10306,7 +10306,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record IMcastAddressAllocation, lpVtbl : IMcastAddressAllocationVtbl* do
+  record IMcastAddressAllocation, lpVtbl : IMcastAddressAllocationVtable* do
     GUID = LibC::GUID.new(0xdf0daef1_u32, 0xa289_u16, 0x11d1_u16, StaticArray[0x86_u8, 0x97_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xb0_u8, 0xe5_u8, 0xd2_u8])
     def query_interface(this : IMcastAddressAllocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10354,7 +10354,7 @@ module Win32cr::Devices::Tapi
   end
 
   @[Extern]
-  record ITnefVtbl,
+  record ITnefVtable,
     query_interface : Proc(ITnef*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITnef*, UInt32),
     release : Proc(ITnef*, UInt32),
@@ -10368,7 +10368,7 @@ module Win32cr::Devices::Tapi
 
 
   @[Extern]
-  record ITnef, lpVtbl : ITnefVtbl* do
+  record ITnef, lpVtbl : ITnefVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : ITnef*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10404,1015 +10404,1520 @@ module Win32cr::Devices::Tapi
   end
 
   def lineAccept(hCall : UInt32, lpsUserUserInfo : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineAccept(hCall, lpsUserUserInfo, dwSize)
+    {% end %}
   end
 
   def lineAddProvider(lpszProviderFilename : Win32cr::Foundation::PSTR, hwndOwner : Win32cr::Foundation::HWND, lpdwPermanentProviderID : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineAddProvider(lpszProviderFilename, hwndOwner, lpdwPermanentProviderID)
+    {% end %}
   end
 
   def lineAddProviderA(lpszProviderFilename : Win32cr::Foundation::PSTR, hwndOwner : Win32cr::Foundation::HWND, lpdwPermanentProviderID : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineAddProviderA(lpszProviderFilename, hwndOwner, lpdwPermanentProviderID)
+    {% end %}
   end
 
   def lineAddProviderW(lpszProviderFilename : Win32cr::Foundation::PWSTR, hwndOwner : Win32cr::Foundation::HWND, lpdwPermanentProviderID : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineAddProviderW(lpszProviderFilename, hwndOwner, lpdwPermanentProviderID)
+    {% end %}
   end
 
   def lineAddToConference(hConfCall : UInt32, hConsultCall : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineAddToConference(hConfCall, hConsultCall)
+    {% end %}
   end
 
   def lineAgentSpecific(hLine : UInt32, dwAddressID : UInt32, dwAgentExtensionIDIndex : UInt32, lpParams : Void*, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineAgentSpecific(hLine, dwAddressID, dwAgentExtensionIDIndex, lpParams, dwSize)
+    {% end %}
   end
 
   def lineAnswer(hCall : UInt32, lpsUserUserInfo : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineAnswer(hCall, lpsUserUserInfo, dwSize)
+    {% end %}
   end
 
   def lineBlindTransfer(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineBlindTransfer(hCall, lpszDestAddress, dwCountryCode)
+    {% end %}
   end
 
   def lineBlindTransferA(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineBlindTransferA(hCall, lpszDestAddress, dwCountryCode)
+    {% end %}
   end
 
   def lineBlindTransferW(hCall : UInt32, lpszDestAddressW : Win32cr::Foundation::PWSTR, dwCountryCode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineBlindTransferW(hCall, lpszDestAddressW, dwCountryCode)
+    {% end %}
   end
 
   def lineClose(hLine : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineClose(hLine)
+    {% end %}
   end
 
   def lineCompleteCall(hCall : UInt32, lpdwCompletionID : UInt32*, dwCompletionMode : UInt32, dwMessageID : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineCompleteCall(hCall, lpdwCompletionID, dwCompletionMode, dwMessageID)
+    {% end %}
   end
 
   def lineCompleteTransfer(hCall : UInt32, hConsultCall : UInt32, lphConfCall : UInt32*, dwTransferMode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineCompleteTransfer(hCall, hConsultCall, lphConfCall, dwTransferMode)
+    {% end %}
   end
 
   def lineConfigDialog(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineConfigDialog(dwDeviceID, hwndOwner, lpszDeviceClass)
+    {% end %}
   end
 
   def lineConfigDialogA(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineConfigDialogA(dwDeviceID, hwndOwner, lpszDeviceClass)
+    {% end %}
   end
 
   def lineConfigDialogW(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineConfigDialogW(dwDeviceID, hwndOwner, lpszDeviceClass)
+    {% end %}
   end
 
   def lineConfigDialogEdit(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR, lpDeviceConfigIn : Void*, dwSize : UInt32, lpDeviceConfigOut : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    {% if !flag?(:docs) %}
     C.lineConfigDialogEdit(dwDeviceID, hwndOwner, lpszDeviceClass, lpDeviceConfigIn, dwSize, lpDeviceConfigOut)
+    {% end %}
   end
 
   def lineConfigDialogEditA(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR, lpDeviceConfigIn : Void*, dwSize : UInt32, lpDeviceConfigOut : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    {% if !flag?(:docs) %}
     C.lineConfigDialogEditA(dwDeviceID, hwndOwner, lpszDeviceClass, lpDeviceConfigIn, dwSize, lpDeviceConfigOut)
+    {% end %}
   end
 
   def lineConfigDialogEditW(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PWSTR, lpDeviceConfigIn : Void*, dwSize : UInt32, lpDeviceConfigOut : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    {% if !flag?(:docs) %}
     C.lineConfigDialogEditW(dwDeviceID, hwndOwner, lpszDeviceClass, lpDeviceConfigIn, dwSize, lpDeviceConfigOut)
+    {% end %}
   end
 
   def lineConfigProvider(hwndOwner : Win32cr::Foundation::HWND, dwPermanentProviderID : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineConfigProvider(hwndOwner, dwPermanentProviderID)
+    {% end %}
   end
 
   def lineCreateAgentW(hLine : UInt32, lpszAgentID : Win32cr::Foundation::PWSTR, lpszAgentPIN : Win32cr::Foundation::PWSTR, lphAgent : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineCreateAgentW(hLine, lpszAgentID, lpszAgentPIN, lphAgent)
+    {% end %}
   end
 
   def lineCreateAgentA(hLine : UInt32, lpszAgentID : Win32cr::Foundation::PSTR, lpszAgentPIN : Win32cr::Foundation::PSTR, lphAgent : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineCreateAgentA(hLine, lpszAgentID, lpszAgentPIN, lphAgent)
+    {% end %}
   end
 
   def lineCreateAgentSessionW(hLine : UInt32, hAgent : UInt32, lpszAgentPIN : Win32cr::Foundation::PWSTR, dwWorkingAddressID : UInt32, lpGroupID : LibC::GUID*, lphAgentSession : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineCreateAgentSessionW(hLine, hAgent, lpszAgentPIN, dwWorkingAddressID, lpGroupID, lphAgentSession)
+    {% end %}
   end
 
   def lineCreateAgentSessionA(hLine : UInt32, hAgent : UInt32, lpszAgentPIN : Win32cr::Foundation::PSTR, dwWorkingAddressID : UInt32, lpGroupID : LibC::GUID*, lphAgentSession : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineCreateAgentSessionA(hLine, hAgent, lpszAgentPIN, dwWorkingAddressID, lpGroupID, lphAgentSession)
+    {% end %}
   end
 
   def lineDeallocateCall(hCall : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineDeallocateCall(hCall)
+    {% end %}
   end
 
   def lineDevSpecific(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, lpParams : Void*, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineDevSpecific(hLine, dwAddressID, hCall, lpParams, dwSize)
+    {% end %}
   end
 
   def lineDevSpecificFeature(hLine : UInt32, dwFeature : UInt32, lpParams : Void*, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineDevSpecificFeature(hLine, dwFeature, lpParams, dwSize)
+    {% end %}
   end
 
   def lineDial(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineDial(hCall, lpszDestAddress, dwCountryCode)
+    {% end %}
   end
 
   def lineDialA(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineDialA(hCall, lpszDestAddress, dwCountryCode)
+    {% end %}
   end
 
   def lineDialW(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PWSTR, dwCountryCode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineDialW(hCall, lpszDestAddress, dwCountryCode)
+    {% end %}
   end
 
   def lineDrop(hCall : UInt32, lpsUserUserInfo : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineDrop(hCall, lpsUserUserInfo, dwSize)
+    {% end %}
   end
 
   def lineForward(hLine : UInt32, bAllAddresses : UInt32, dwAddressID : UInt32, lpForwardList : Win32cr::Devices::Tapi::LINEFORWARDLIST*, dwNumRingsNoAnswer : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineForward(hLine, bAllAddresses, dwAddressID, lpForwardList, dwNumRingsNoAnswer, lphConsultCall, lpCallParams)
+    {% end %}
   end
 
   def lineForwardA(hLine : UInt32, bAllAddresses : UInt32, dwAddressID : UInt32, lpForwardList : Win32cr::Devices::Tapi::LINEFORWARDLIST*, dwNumRingsNoAnswer : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineForwardA(hLine, bAllAddresses, dwAddressID, lpForwardList, dwNumRingsNoAnswer, lphConsultCall, lpCallParams)
+    {% end %}
   end
 
   def lineForwardW(hLine : UInt32, bAllAddresses : UInt32, dwAddressID : UInt32, lpForwardList : Win32cr::Devices::Tapi::LINEFORWARDLIST*, dwNumRingsNoAnswer : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineForwardW(hLine, bAllAddresses, dwAddressID, lpForwardList, dwNumRingsNoAnswer, lphConsultCall, lpCallParams)
+    {% end %}
   end
 
   def lineGatherDigits(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : UInt8*, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGatherDigits(hCall, dwDigitModes, lpsDigits, dwNumDigits, lpszTerminationDigits, dwFirstDigitTimeout, dwInterDigitTimeout)
+    {% end %}
   end
 
   def lineGatherDigitsA(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : UInt8*, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGatherDigitsA(hCall, dwDigitModes, lpsDigits, dwNumDigits, lpszTerminationDigits, dwFirstDigitTimeout, dwInterDigitTimeout)
+    {% end %}
   end
 
   def lineGatherDigitsW(hCall : UInt32, dwDigitModes : UInt32, lpsDigits : UInt16*, dwNumDigits : UInt32, lpszTerminationDigits : Win32cr::Foundation::PWSTR, dwFirstDigitTimeout : UInt32, dwInterDigitTimeout : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGatherDigitsW(hCall, dwDigitModes, lpsDigits, dwNumDigits, lpszTerminationDigits, dwFirstDigitTimeout, dwInterDigitTimeout)
+    {% end %}
   end
 
   def lineGenerateDigits(hCall : UInt32, dwDigitMode : UInt32, lpszDigits : Win32cr::Foundation::PSTR, dwDuration : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGenerateDigits(hCall, dwDigitMode, lpszDigits, dwDuration)
+    {% end %}
   end
 
   def lineGenerateDigitsA(hCall : UInt32, dwDigitMode : UInt32, lpszDigits : Win32cr::Foundation::PSTR, dwDuration : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGenerateDigitsA(hCall, dwDigitMode, lpszDigits, dwDuration)
+    {% end %}
   end
 
   def lineGenerateDigitsW(hCall : UInt32, dwDigitMode : UInt32, lpszDigits : Win32cr::Foundation::PWSTR, dwDuration : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGenerateDigitsW(hCall, dwDigitMode, lpszDigits, dwDuration)
+    {% end %}
   end
 
   def lineGenerateTone(hCall : UInt32, dwToneMode : UInt32, dwDuration : UInt32, dwNumTones : UInt32, lpTones : Win32cr::Devices::Tapi::LINEGENERATETONE*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGenerateTone(hCall, dwToneMode, dwDuration, dwNumTones, lpTones)
+    {% end %}
   end
 
   def lineGetAddressCaps(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpAddressCaps : Win32cr::Devices::Tapi::LINEADDRESSCAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAddressCaps(hLineApp, dwDeviceID, dwAddressID, dwAPIVersion, dwExtVersion, lpAddressCaps)
+    {% end %}
   end
 
   def lineGetAddressCapsA(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpAddressCaps : Win32cr::Devices::Tapi::LINEADDRESSCAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAddressCapsA(hLineApp, dwDeviceID, dwAddressID, dwAPIVersion, dwExtVersion, lpAddressCaps)
+    {% end %}
   end
 
   def lineGetAddressCapsW(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpAddressCaps : Win32cr::Devices::Tapi::LINEADDRESSCAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAddressCapsW(hLineApp, dwDeviceID, dwAddressID, dwAPIVersion, dwExtVersion, lpAddressCaps)
+    {% end %}
   end
 
   def lineGetAddressID(hLine : UInt32, lpdwAddressID : UInt32*, dwAddressMode : UInt32, lpsAddress : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAddressID(hLine, lpdwAddressID, dwAddressMode, lpsAddress, dwSize)
+    {% end %}
   end
 
   def lineGetAddressIDA(hLine : UInt32, lpdwAddressID : UInt32*, dwAddressMode : UInt32, lpsAddress : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAddressIDA(hLine, lpdwAddressID, dwAddressMode, lpsAddress, dwSize)
+    {% end %}
   end
 
   def lineGetAddressIDW(hLine : UInt32, lpdwAddressID : UInt32*, dwAddressMode : UInt32, lpsAddress : Win32cr::Foundation::PWSTR, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAddressIDW(hLine, lpdwAddressID, dwAddressMode, lpsAddress, dwSize)
+    {% end %}
   end
 
   def lineGetAddressStatus(hLine : UInt32, dwAddressID : UInt32, lpAddressStatus : Win32cr::Devices::Tapi::LINEADDRESSSTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAddressStatus(hLine, dwAddressID, lpAddressStatus)
+    {% end %}
   end
 
   def lineGetAddressStatusA(hLine : UInt32, dwAddressID : UInt32, lpAddressStatus : Win32cr::Devices::Tapi::LINEADDRESSSTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAddressStatusA(hLine, dwAddressID, lpAddressStatus)
+    {% end %}
   end
 
   def lineGetAddressStatusW(hLine : UInt32, dwAddressID : UInt32, lpAddressStatus : Win32cr::Devices::Tapi::LINEADDRESSSTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAddressStatusW(hLine, dwAddressID, lpAddressStatus)
+    {% end %}
   end
 
   def lineGetAgentActivityListA(hLine : UInt32, dwAddressID : UInt32, lpAgentActivityList : Win32cr::Devices::Tapi::LINEAGENTACTIVITYLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentActivityListA(hLine, dwAddressID, lpAgentActivityList)
+    {% end %}
   end
 
   def lineGetAgentActivityListW(hLine : UInt32, dwAddressID : UInt32, lpAgentActivityList : Win32cr::Devices::Tapi::LINEAGENTACTIVITYLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentActivityListW(hLine, dwAddressID, lpAgentActivityList)
+    {% end %}
   end
 
   def lineGetAgentCapsA(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAppAPIVersion : UInt32, lpAgentCaps : Win32cr::Devices::Tapi::LINEAGENTCAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentCapsA(hLineApp, dwDeviceID, dwAddressID, dwAppAPIVersion, lpAgentCaps)
+    {% end %}
   end
 
   def lineGetAgentCapsW(hLineApp : UInt32, dwDeviceID : UInt32, dwAddressID : UInt32, dwAppAPIVersion : UInt32, lpAgentCaps : Win32cr::Devices::Tapi::LINEAGENTCAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentCapsW(hLineApp, dwDeviceID, dwAddressID, dwAppAPIVersion, lpAgentCaps)
+    {% end %}
   end
 
   def lineGetAgentGroupListA(hLine : UInt32, dwAddressID : UInt32, lpAgentGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentGroupListA(hLine, dwAddressID, lpAgentGroupList)
+    {% end %}
   end
 
   def lineGetAgentGroupListW(hLine : UInt32, dwAddressID : UInt32, lpAgentGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentGroupListW(hLine, dwAddressID, lpAgentGroupList)
+    {% end %}
   end
 
   def lineGetAgentInfo(hLine : UInt32, hAgent : UInt32, lpAgentInfo : Win32cr::Devices::Tapi::LINEAGENTINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentInfo(hLine, hAgent, lpAgentInfo)
+    {% end %}
   end
 
   def lineGetAgentSessionInfo(hLine : UInt32, hAgentSession : UInt32, lpAgentSessionInfo : Win32cr::Devices::Tapi::LINEAGENTSESSIONINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentSessionInfo(hLine, hAgentSession, lpAgentSessionInfo)
+    {% end %}
   end
 
   def lineGetAgentSessionList(hLine : UInt32, hAgent : UInt32, lpAgentSessionList : Win32cr::Devices::Tapi::LINEAGENTSESSIONLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentSessionList(hLine, hAgent, lpAgentSessionList)
+    {% end %}
   end
 
   def lineGetAgentStatusA(hLine : UInt32, dwAddressID : UInt32, lpAgentStatus : Win32cr::Devices::Tapi::LINEAGENTSTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentStatusA(hLine, dwAddressID, lpAgentStatus)
+    {% end %}
   end
 
   def lineGetAgentStatusW(hLine : UInt32, dwAddressID : UInt32, lpAgentStatus : Win32cr::Devices::Tapi::LINEAGENTSTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAgentStatusW(hLine, dwAddressID, lpAgentStatus)
+    {% end %}
   end
 
   def lineGetAppPriority(lpszAppFilename : Win32cr::Foundation::PSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpExtensionName : Win32cr::Devices::Tapi::VARSTRING*, lpdwPriority : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAppPriority(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpExtensionName, lpdwPriority)
+    {% end %}
   end
 
   def lineGetAppPriorityA(lpszAppFilename : Win32cr::Foundation::PSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpExtensionName : Win32cr::Devices::Tapi::VARSTRING*, lpdwPriority : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAppPriorityA(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpExtensionName, lpdwPriority)
+    {% end %}
   end
 
   def lineGetAppPriorityW(lpszAppFilename : Win32cr::Foundation::PWSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpExtensionName : Win32cr::Devices::Tapi::VARSTRING*, lpdwPriority : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetAppPriorityW(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpExtensionName, lpdwPriority)
+    {% end %}
   end
 
   def lineGetCallInfo(hCall : UInt32, lpCallInfo : Win32cr::Devices::Tapi::LINECALLINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetCallInfo(hCall, lpCallInfo)
+    {% end %}
   end
 
   def lineGetCallInfoA(hCall : UInt32, lpCallInfo : Win32cr::Devices::Tapi::LINECALLINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetCallInfoA(hCall, lpCallInfo)
+    {% end %}
   end
 
   def lineGetCallInfoW(hCall : UInt32, lpCallInfo : Win32cr::Devices::Tapi::LINECALLINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetCallInfoW(hCall, lpCallInfo)
+    {% end %}
   end
 
   def lineGetCallStatus(hCall : UInt32, lpCallStatus : Win32cr::Devices::Tapi::LINECALLSTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetCallStatus(hCall, lpCallStatus)
+    {% end %}
   end
 
   def lineGetConfRelatedCalls(hCall : UInt32, lpCallList : Win32cr::Devices::Tapi::LINECALLLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetConfRelatedCalls(hCall, lpCallList)
+    {% end %}
   end
 
   def lineGetCountry(dwCountryID : UInt32, dwAPIVersion : UInt32, lpLineCountryList : Win32cr::Devices::Tapi::LINECOUNTRYLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetCountry(dwCountryID, dwAPIVersion, lpLineCountryList)
+    {% end %}
   end
 
   def lineGetCountryA(dwCountryID : UInt32, dwAPIVersion : UInt32, lpLineCountryList : Win32cr::Devices::Tapi::LINECOUNTRYLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetCountryA(dwCountryID, dwAPIVersion, lpLineCountryList)
+    {% end %}
   end
 
   def lineGetCountryW(dwCountryID : UInt32, dwAPIVersion : UInt32, lpLineCountryList : Win32cr::Devices::Tapi::LINECOUNTRYLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetCountryW(dwCountryID, dwAPIVersion, lpLineCountryList)
+    {% end %}
   end
 
   def lineGetDevCaps(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpLineDevCaps : Win32cr::Devices::Tapi::LINEDEVCAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetDevCaps(hLineApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpLineDevCaps)
+    {% end %}
   end
 
   def lineGetDevCapsA(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpLineDevCaps : Win32cr::Devices::Tapi::LINEDEVCAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetDevCapsA(hLineApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpLineDevCaps)
+    {% end %}
   end
 
   def lineGetDevCapsW(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpLineDevCaps : Win32cr::Devices::Tapi::LINEDEVCAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetDevCapsW(hLineApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpLineDevCaps)
+    {% end %}
   end
 
   def lineGetDevConfig(dwDeviceID : UInt32, lpDeviceConfig : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetDevConfig(dwDeviceID, lpDeviceConfig, lpszDeviceClass)
+    {% end %}
   end
 
   def lineGetDevConfigA(dwDeviceID : UInt32, lpDeviceConfig : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetDevConfigA(dwDeviceID, lpDeviceConfig, lpszDeviceClass)
+    {% end %}
   end
 
   def lineGetDevConfigW(dwDeviceID : UInt32, lpDeviceConfig : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetDevConfigW(dwDeviceID, lpDeviceConfig, lpszDeviceClass)
+    {% end %}
   end
 
   def lineGetGroupListA(hLine : UInt32, lpGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetGroupListA(hLine, lpGroupList)
+    {% end %}
   end
 
   def lineGetGroupListW(hLine : UInt32, lpGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetGroupListW(hLine, lpGroupList)
+    {% end %}
   end
 
   def lineGetIcon(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetIcon(dwDeviceID, lpszDeviceClass, lphIcon)
+    {% end %}
   end
 
   def lineGetIconA(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetIconA(dwDeviceID, lpszDeviceClass, lphIcon)
+    {% end %}
   end
 
   def lineGetIconW(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PWSTR, lphIcon : LibC::IntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetIconW(dwDeviceID, lpszDeviceClass, lphIcon)
+    {% end %}
   end
 
   def lineGetID(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetID(hLine, dwAddressID, hCall, dwSelect, lpDeviceID, lpszDeviceClass)
+    {% end %}
   end
 
   def lineGetIDA(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetIDA(hLine, dwAddressID, hCall, dwSelect, lpDeviceID, lpszDeviceClass)
+    {% end %}
   end
 
   def lineGetIDW(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetIDW(hLine, dwAddressID, hCall, dwSelect, lpDeviceID, lpszDeviceClass)
+    {% end %}
   end
 
   def lineGetLineDevStatus(hLine : UInt32, lpLineDevStatus : Win32cr::Devices::Tapi::LINEDEVSTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetLineDevStatus(hLine, lpLineDevStatus)
+    {% end %}
   end
 
   def lineGetLineDevStatusA(hLine : UInt32, lpLineDevStatus : Win32cr::Devices::Tapi::LINEDEVSTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetLineDevStatusA(hLine, lpLineDevStatus)
+    {% end %}
   end
 
   def lineGetLineDevStatusW(hLine : UInt32, lpLineDevStatus : Win32cr::Devices::Tapi::LINEDEVSTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetLineDevStatusW(hLine, lpLineDevStatus)
+    {% end %}
   end
 
   def lineGetMessage(hLineApp : UInt32, lpMessage : Win32cr::Devices::Tapi::LINEMESSAGE*, dwTimeout : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetMessage(hLineApp, lpMessage, dwTimeout)
+    {% end %}
   end
 
   def lineGetNewCalls(hLine : UInt32, dwAddressID : UInt32, dwSelect : UInt32, lpCallList : Win32cr::Devices::Tapi::LINECALLLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetNewCalls(hLine, dwAddressID, dwSelect, lpCallList)
+    {% end %}
   end
 
   def lineGetNumRings(hLine : UInt32, dwAddressID : UInt32, lpdwNumRings : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetNumRings(hLine, dwAddressID, lpdwNumRings)
+    {% end %}
   end
 
   def lineGetProviderList(dwAPIVersion : UInt32, lpProviderList : Win32cr::Devices::Tapi::LINEPROVIDERLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetProviderList(dwAPIVersion, lpProviderList)
+    {% end %}
   end
 
   def lineGetProviderListA(dwAPIVersion : UInt32, lpProviderList : Win32cr::Devices::Tapi::LINEPROVIDERLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetProviderListA(dwAPIVersion, lpProviderList)
+    {% end %}
   end
 
   def lineGetProviderListW(dwAPIVersion : UInt32, lpProviderList : Win32cr::Devices::Tapi::LINEPROVIDERLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetProviderListW(dwAPIVersion, lpProviderList)
+    {% end %}
   end
 
   def lineGetProxyStatus(hLineApp : UInt32, dwDeviceID : UInt32, dwAppAPIVersion : UInt32, lpLineProxyReqestList : Win32cr::Devices::Tapi::LINEPROXYREQUESTLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetProxyStatus(hLineApp, dwDeviceID, dwAppAPIVersion, lpLineProxyReqestList)
+    {% end %}
   end
 
   def lineGetQueueInfo(hLine : UInt32, dwQueueID : UInt32, lpLineQueueInfo : Win32cr::Devices::Tapi::LINEQUEUEINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetQueueInfo(hLine, dwQueueID, lpLineQueueInfo)
+    {% end %}
   end
 
   def lineGetQueueListA(hLine : UInt32, lpGroupID : LibC::GUID*, lpQueueList : Win32cr::Devices::Tapi::LINEQUEUELIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetQueueListA(hLine, lpGroupID, lpQueueList)
+    {% end %}
   end
 
   def lineGetQueueListW(hLine : UInt32, lpGroupID : LibC::GUID*, lpQueueList : Win32cr::Devices::Tapi::LINEQUEUELIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetQueueListW(hLine, lpGroupID, lpQueueList)
+    {% end %}
   end
 
   def lineGetRequest(hLineApp : UInt32, dwRequestMode : UInt32, lpRequestBuffer : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetRequest(hLineApp, dwRequestMode, lpRequestBuffer)
+    {% end %}
   end
 
   def lineGetRequestA(hLineApp : UInt32, dwRequestMode : UInt32, lpRequestBuffer : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetRequestA(hLineApp, dwRequestMode, lpRequestBuffer)
+    {% end %}
   end
 
   def lineGetRequestW(hLineApp : UInt32, dwRequestMode : UInt32, lpRequestBuffer : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetRequestW(hLineApp, dwRequestMode, lpRequestBuffer)
+    {% end %}
   end
 
   def lineGetStatusMessages(hLine : UInt32, lpdwLineStates : UInt32*, lpdwAddressStates : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetStatusMessages(hLine, lpdwLineStates, lpdwAddressStates)
+    {% end %}
   end
 
   def lineGetTranslateCaps(hLineApp : UInt32, dwAPIVersion : UInt32, lpTranslateCaps : Win32cr::Devices::Tapi::LINETRANSLATECAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetTranslateCaps(hLineApp, dwAPIVersion, lpTranslateCaps)
+    {% end %}
   end
 
   def lineGetTranslateCapsA(hLineApp : UInt32, dwAPIVersion : UInt32, lpTranslateCaps : Win32cr::Devices::Tapi::LINETRANSLATECAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetTranslateCapsA(hLineApp, dwAPIVersion, lpTranslateCaps)
+    {% end %}
   end
 
   def lineGetTranslateCapsW(hLineApp : UInt32, dwAPIVersion : UInt32, lpTranslateCaps : Win32cr::Devices::Tapi::LINETRANSLATECAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineGetTranslateCapsW(hLineApp, dwAPIVersion, lpTranslateCaps)
+    {% end %}
   end
 
   def lineHandoff(hCall : UInt32, lpszFileName : Win32cr::Foundation::PSTR, dwMediaMode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineHandoff(hCall, lpszFileName, dwMediaMode)
+    {% end %}
   end
 
   def lineHandoffA(hCall : UInt32, lpszFileName : Win32cr::Foundation::PSTR, dwMediaMode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineHandoffA(hCall, lpszFileName, dwMediaMode)
+    {% end %}
   end
 
   def lineHandoffW(hCall : UInt32, lpszFileName : Win32cr::Foundation::PWSTR, dwMediaMode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineHandoffW(hCall, lpszFileName, dwMediaMode)
+    {% end %}
   end
 
   def lineHold(hCall : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineHold(hCall)
+    {% end %}
   end
 
   def lineInitialize(lphLineApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::LINECALLBACK, lpszAppName : Win32cr::Foundation::PSTR, lpdwNumDevs : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineInitialize(lphLineApp, hInstance, lpfnCallback, lpszAppName, lpdwNumDevs)
+    {% end %}
   end
 
   def lineInitializeExA(lphLineApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::LINECALLBACK, lpszFriendlyAppName : Win32cr::Foundation::PSTR, lpdwNumDevs : UInt32*, lpdwAPIVersion : UInt32*, lpLineInitializeExParams : Win32cr::Devices::Tapi::LINEINITIALIZEEXPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineInitializeExA(lphLineApp, hInstance, lpfnCallback, lpszFriendlyAppName, lpdwNumDevs, lpdwAPIVersion, lpLineInitializeExParams)
+    {% end %}
   end
 
   def lineInitializeExW(lphLineApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::LINECALLBACK, lpszFriendlyAppName : Win32cr::Foundation::PWSTR, lpdwNumDevs : UInt32*, lpdwAPIVersion : UInt32*, lpLineInitializeExParams : Win32cr::Devices::Tapi::LINEINITIALIZEEXPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineInitializeExW(lphLineApp, hInstance, lpfnCallback, lpszFriendlyAppName, lpdwNumDevs, lpdwAPIVersion, lpLineInitializeExParams)
+    {% end %}
   end
 
   def lineMakeCall(hLine : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineMakeCall(hLine, lphCall, lpszDestAddress, dwCountryCode, lpCallParams)
+    {% end %}
   end
 
   def lineMakeCallA(hLine : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineMakeCallA(hLine, lphCall, lpszDestAddress, dwCountryCode, lpCallParams)
+    {% end %}
   end
 
   def lineMakeCallW(hLine : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PWSTR, dwCountryCode : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineMakeCallW(hLine, lphCall, lpszDestAddress, dwCountryCode, lpCallParams)
+    {% end %}
   end
 
   def lineMonitorDigits(hCall : UInt32, dwDigitModes : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineMonitorDigits(hCall, dwDigitModes)
+    {% end %}
   end
 
   def lineMonitorMedia(hCall : UInt32, dwMediaModes : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineMonitorMedia(hCall, dwMediaModes)
+    {% end %}
   end
 
   def lineMonitorTones(hCall : UInt32, lpToneList : Win32cr::Devices::Tapi::LINEMONITORTONE*, dwNumEntries : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineMonitorTones(hCall, lpToneList, dwNumEntries)
+    {% end %}
   end
 
   def lineNegotiateAPIVersion(hLineApp : UInt32, dwDeviceID : UInt32, dwAPILowVersion : UInt32, dwAPIHighVersion : UInt32, lpdwAPIVersion : UInt32*, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*) : Int32
+    {% if !flag?(:docs) %}
     C.lineNegotiateAPIVersion(hLineApp, dwDeviceID, dwAPILowVersion, dwAPIHighVersion, lpdwAPIVersion, lpExtensionID)
+    {% end %}
   end
 
   def lineNegotiateExtVersion(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtLowVersion : UInt32, dwExtHighVersion : UInt32, lpdwExtVersion : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.lineNegotiateExtVersion(hLineApp, dwDeviceID, dwAPIVersion, dwExtLowVersion, dwExtHighVersion, lpdwExtVersion)
+    {% end %}
   end
 
   def lineOpen(hLineApp : UInt32, dwDeviceID : UInt32, lphLine : UInt32*, dwAPIVersion : UInt32, dwExtVersion : UInt32, dwCallbackInstance : LibC::UIntPtrT, dwPrivileges : UInt32, dwMediaModes : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineOpen(hLineApp, dwDeviceID, lphLine, dwAPIVersion, dwExtVersion, dwCallbackInstance, dwPrivileges, dwMediaModes, lpCallParams)
+    {% end %}
   end
 
   def lineOpenA(hLineApp : UInt32, dwDeviceID : UInt32, lphLine : UInt32*, dwAPIVersion : UInt32, dwExtVersion : UInt32, dwCallbackInstance : LibC::UIntPtrT, dwPrivileges : UInt32, dwMediaModes : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineOpenA(hLineApp, dwDeviceID, lphLine, dwAPIVersion, dwExtVersion, dwCallbackInstance, dwPrivileges, dwMediaModes, lpCallParams)
+    {% end %}
   end
 
   def lineOpenW(hLineApp : UInt32, dwDeviceID : UInt32, lphLine : UInt32*, dwAPIVersion : UInt32, dwExtVersion : UInt32, dwCallbackInstance : LibC::UIntPtrT, dwPrivileges : UInt32, dwMediaModes : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineOpenW(hLineApp, dwDeviceID, lphLine, dwAPIVersion, dwExtVersion, dwCallbackInstance, dwPrivileges, dwMediaModes, lpCallParams)
+    {% end %}
   end
 
   def linePark(hCall : UInt32, dwParkMode : UInt32, lpszDirAddress : Win32cr::Foundation::PSTR, lpNonDirAddress : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    {% if !flag?(:docs) %}
     C.linePark(hCall, dwParkMode, lpszDirAddress, lpNonDirAddress)
+    {% end %}
   end
 
   def lineParkA(hCall : UInt32, dwParkMode : UInt32, lpszDirAddress : Win32cr::Foundation::PSTR, lpNonDirAddress : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    {% if !flag?(:docs) %}
     C.lineParkA(hCall, dwParkMode, lpszDirAddress, lpNonDirAddress)
+    {% end %}
   end
 
   def lineParkW(hCall : UInt32, dwParkMode : UInt32, lpszDirAddress : Win32cr::Foundation::PWSTR, lpNonDirAddress : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    {% if !flag?(:docs) %}
     C.lineParkW(hCall, dwParkMode, lpszDirAddress, lpNonDirAddress)
+    {% end %}
   end
 
   def linePickup(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR, lpszGroupID : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.linePickup(hLine, dwAddressID, lphCall, lpszDestAddress, lpszGroupID)
+    {% end %}
   end
 
   def linePickupA(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR, lpszGroupID : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.linePickupA(hLine, dwAddressID, lphCall, lpszDestAddress, lpszGroupID)
+    {% end %}
   end
 
   def linePickupW(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PWSTR, lpszGroupID : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.linePickupW(hLine, dwAddressID, lphCall, lpszDestAddress, lpszGroupID)
+    {% end %}
   end
 
   def linePrepareAddToConference(hConfCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.linePrepareAddToConference(hConfCall, lphConsultCall, lpCallParams)
+    {% end %}
   end
 
   def linePrepareAddToConferenceA(hConfCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.linePrepareAddToConferenceA(hConfCall, lphConsultCall, lpCallParams)
+    {% end %}
   end
 
   def linePrepareAddToConferenceW(hConfCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.linePrepareAddToConferenceW(hConfCall, lphConsultCall, lpCallParams)
+    {% end %}
   end
 
   def lineProxyMessage(hLine : UInt32, hCall : UInt32, dwMsg : UInt32, dwParam1 : UInt32, dwParam2 : UInt32, dwParam3 : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineProxyMessage(hLine, hCall, dwMsg, dwParam1, dwParam2, dwParam3)
+    {% end %}
   end
 
   def lineProxyResponse(hLine : UInt32, lpProxyRequest : Win32cr::Devices::Tapi::LINEPROXYREQUEST*, dwResult : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineProxyResponse(hLine, lpProxyRequest, dwResult)
+    {% end %}
   end
 
   def lineRedirect(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineRedirect(hCall, lpszDestAddress, dwCountryCode)
+    {% end %}
   end
 
   def lineRedirectA(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, dwCountryCode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineRedirectA(hCall, lpszDestAddress, dwCountryCode)
+    {% end %}
   end
 
   def lineRedirectW(hCall : UInt32, lpszDestAddress : Win32cr::Foundation::PWSTR, dwCountryCode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineRedirectW(hCall, lpszDestAddress, dwCountryCode)
+    {% end %}
   end
 
   def lineRegisterRequestRecipient(hLineApp : UInt32, dwRegistrationInstance : UInt32, dwRequestMode : UInt32, bEnable : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineRegisterRequestRecipient(hLineApp, dwRegistrationInstance, dwRequestMode, bEnable)
+    {% end %}
   end
 
   def lineReleaseUserUserInfo(hCall : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineReleaseUserUserInfo(hCall)
+    {% end %}
   end
 
   def lineRemoveFromConference(hCall : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineRemoveFromConference(hCall)
+    {% end %}
   end
 
   def lineRemoveProvider(dwPermanentProviderID : UInt32, hwndOwner : Win32cr::Foundation::HWND) : Int32
+    {% if !flag?(:docs) %}
     C.lineRemoveProvider(dwPermanentProviderID, hwndOwner)
+    {% end %}
   end
 
   def lineSecureCall(hCall : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSecureCall(hCall)
+    {% end %}
   end
 
   def lineSendUserUserInfo(hCall : UInt32, lpsUserUserInfo : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSendUserUserInfo(hCall, lpsUserUserInfo, dwSize)
+    {% end %}
   end
 
   def lineSetAgentActivity(hLine : UInt32, dwAddressID : UInt32, dwActivityID : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAgentActivity(hLine, dwAddressID, dwActivityID)
+    {% end %}
   end
 
   def lineSetAgentGroup(hLine : UInt32, dwAddressID : UInt32, lpAgentGroupList : Win32cr::Devices::Tapi::LINEAGENTGROUPLIST*) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAgentGroup(hLine, dwAddressID, lpAgentGroupList)
+    {% end %}
   end
 
   def lineSetAgentMeasurementPeriod(hLine : UInt32, hAgent : UInt32, dwMeasurementPeriod : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAgentMeasurementPeriod(hLine, hAgent, dwMeasurementPeriod)
+    {% end %}
   end
 
   def lineSetAgentSessionState(hLine : UInt32, hAgentSession : UInt32, dwAgentSessionState : UInt32, dwNextAgentSessionState : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAgentSessionState(hLine, hAgentSession, dwAgentSessionState, dwNextAgentSessionState)
+    {% end %}
   end
 
   def lineSetAgentStateEx(hLine : UInt32, hAgent : UInt32, dwAgentState : UInt32, dwNextAgentState : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAgentStateEx(hLine, hAgent, dwAgentState, dwNextAgentState)
+    {% end %}
   end
 
   def lineSetAgentState(hLine : UInt32, dwAddressID : UInt32, dwAgentState : UInt32, dwNextAgentState : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAgentState(hLine, dwAddressID, dwAgentState, dwNextAgentState)
+    {% end %}
   end
 
   def lineSetAppPriority(lpszAppFilename : Win32cr::Foundation::PSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpszExtensionName : Win32cr::Foundation::PSTR, dwPriority : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAppPriority(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpszExtensionName, dwPriority)
+    {% end %}
   end
 
   def lineSetAppPriorityA(lpszAppFilename : Win32cr::Foundation::PSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpszExtensionName : Win32cr::Foundation::PSTR, dwPriority : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAppPriorityA(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpszExtensionName, dwPriority)
+    {% end %}
   end
 
   def lineSetAppPriorityW(lpszAppFilename : Win32cr::Foundation::PWSTR, dwMediaMode : UInt32, lpExtensionID : Win32cr::Devices::Tapi::LINEEXTENSIONID*, dwRequestMode : UInt32, lpszExtensionName : Win32cr::Foundation::PWSTR, dwPriority : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAppPriorityW(lpszAppFilename, dwMediaMode, lpExtensionID, dwRequestMode, lpszExtensionName, dwPriority)
+    {% end %}
   end
 
   def lineSetAppSpecific(hCall : UInt32, dwAppSpecific : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetAppSpecific(hCall, dwAppSpecific)
+    {% end %}
   end
 
   def lineSetCallData(hCall : UInt32, lpCallData : Void*, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetCallData(hCall, lpCallData, dwSize)
+    {% end %}
   end
 
   def lineSetCallParams(hCall : UInt32, dwBearerMode : UInt32, dwMinRate : UInt32, dwMaxRate : UInt32, lpDialParams : Win32cr::Devices::Tapi::LINEDIALPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetCallParams(hCall, dwBearerMode, dwMinRate, dwMaxRate, lpDialParams)
+    {% end %}
   end
 
   def lineSetCallPrivilege(hCall : UInt32, dwCallPrivilege : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetCallPrivilege(hCall, dwCallPrivilege)
+    {% end %}
   end
 
   def lineSetCallQualityOfService(hCall : UInt32, lpSendingFlowspec : Void*, dwSendingFlowspecSize : UInt32, lpReceivingFlowspec : Void*, dwReceivingFlowspecSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetCallQualityOfService(hCall, lpSendingFlowspec, dwSendingFlowspecSize, lpReceivingFlowspec, dwReceivingFlowspecSize)
+    {% end %}
   end
 
   def lineSetCallTreatment(hCall : UInt32, dwTreatment : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetCallTreatment(hCall, dwTreatment)
+    {% end %}
   end
 
   def lineSetCurrentLocation(hLineApp : UInt32, dwLocation : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetCurrentLocation(hLineApp, dwLocation)
+    {% end %}
   end
 
   def lineSetDevConfig(dwDeviceID : UInt32, lpDeviceConfig : Void*, dwSize : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetDevConfig(dwDeviceID, lpDeviceConfig, dwSize, lpszDeviceClass)
+    {% end %}
   end
 
   def lineSetDevConfigA(dwDeviceID : UInt32, lpDeviceConfig : Void*, dwSize : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetDevConfigA(dwDeviceID, lpDeviceConfig, dwSize, lpszDeviceClass)
+    {% end %}
   end
 
   def lineSetDevConfigW(dwDeviceID : UInt32, lpDeviceConfig : Void*, dwSize : UInt32, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetDevConfigW(dwDeviceID, lpDeviceConfig, dwSize, lpszDeviceClass)
+    {% end %}
   end
 
   def lineSetLineDevStatus(hLine : UInt32, dwStatusToChange : UInt32, fStatus : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetLineDevStatus(hLine, dwStatusToChange, fStatus)
+    {% end %}
   end
 
   def lineSetMediaControl(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, lpDigitList : Win32cr::Devices::Tapi::LINEMEDIACONTROLDIGIT*, dwDigitNumEntries : UInt32, lpMediaList : Win32cr::Devices::Tapi::LINEMEDIACONTROLMEDIA*, dwMediaNumEntries : UInt32, lpToneList : Win32cr::Devices::Tapi::LINEMEDIACONTROLTONE*, dwToneNumEntries : UInt32, lpCallStateList : Win32cr::Devices::Tapi::LINEMEDIACONTROLCALLSTATE*, dwCallStateNumEntries : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetMediaControl(hLine, dwAddressID, hCall, dwSelect, lpDigitList, dwDigitNumEntries, lpMediaList, dwMediaNumEntries, lpToneList, dwToneNumEntries, lpCallStateList, dwCallStateNumEntries)
+    {% end %}
   end
 
   def lineSetMediaMode(hCall : UInt32, dwMediaModes : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetMediaMode(hCall, dwMediaModes)
+    {% end %}
   end
 
   def lineSetQueueMeasurementPeriod(hLine : UInt32, dwQueueID : UInt32, dwMeasurementPeriod : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetQueueMeasurementPeriod(hLine, dwQueueID, dwMeasurementPeriod)
+    {% end %}
   end
 
   def lineSetNumRings(hLine : UInt32, dwAddressID : UInt32, dwNumRings : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetNumRings(hLine, dwAddressID, dwNumRings)
+    {% end %}
   end
 
   def lineSetStatusMessages(hLine : UInt32, dwLineStates : UInt32, dwAddressStates : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetStatusMessages(hLine, dwLineStates, dwAddressStates)
+    {% end %}
   end
 
   def lineSetTerminal(hLine : UInt32, dwAddressID : UInt32, hCall : UInt32, dwSelect : UInt32, dwTerminalModes : UInt32, dwTerminalID : UInt32, bEnable : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetTerminal(hLine, dwAddressID, hCall, dwSelect, dwTerminalModes, dwTerminalID, bEnable)
+    {% end %}
   end
 
   def lineSetTollList(hLineApp : UInt32, dwDeviceID : UInt32, lpszAddressIn : Win32cr::Foundation::PSTR, dwTollListOption : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetTollList(hLineApp, dwDeviceID, lpszAddressIn, dwTollListOption)
+    {% end %}
   end
 
   def lineSetTollListA(hLineApp : UInt32, dwDeviceID : UInt32, lpszAddressIn : Win32cr::Foundation::PSTR, dwTollListOption : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetTollListA(hLineApp, dwDeviceID, lpszAddressIn, dwTollListOption)
+    {% end %}
   end
 
   def lineSetTollListW(hLineApp : UInt32, dwDeviceID : UInt32, lpszAddressInW : Win32cr::Foundation::PWSTR, dwTollListOption : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetTollListW(hLineApp, dwDeviceID, lpszAddressInW, dwTollListOption)
+    {% end %}
   end
 
   def lineSetupConference(hCall : UInt32, hLine : UInt32, lphConfCall : UInt32*, lphConsultCall : UInt32*, dwNumParties : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetupConference(hCall, hLine, lphConfCall, lphConsultCall, dwNumParties, lpCallParams)
+    {% end %}
   end
 
   def lineSetupConferenceA(hCall : UInt32, hLine : UInt32, lphConfCall : UInt32*, lphConsultCall : UInt32*, dwNumParties : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetupConferenceA(hCall, hLine, lphConfCall, lphConsultCall, dwNumParties, lpCallParams)
+    {% end %}
   end
 
   def lineSetupConferenceW(hCall : UInt32, hLine : UInt32, lphConfCall : UInt32*, lphConsultCall : UInt32*, dwNumParties : UInt32, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetupConferenceW(hCall, hLine, lphConfCall, lphConsultCall, dwNumParties, lpCallParams)
+    {% end %}
   end
 
   def lineSetupTransfer(hCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetupTransfer(hCall, lphConsultCall, lpCallParams)
+    {% end %}
   end
 
   def lineSetupTransferA(hCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetupTransferA(hCall, lphConsultCall, lpCallParams)
+    {% end %}
   end
 
   def lineSetupTransferW(hCall : UInt32, lphConsultCall : UInt32*, lpCallParams : Win32cr::Devices::Tapi::LINECALLPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.lineSetupTransferW(hCall, lphConsultCall, lpCallParams)
+    {% end %}
   end
 
   def lineShutdown(hLineApp : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineShutdown(hLineApp)
+    {% end %}
   end
 
   def lineSwapHold(hActiveCall : UInt32, hHeldCall : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineSwapHold(hActiveCall, hHeldCall)
+    {% end %}
   end
 
   def lineTranslateAddress(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, lpszAddressIn : Win32cr::Foundation::PSTR, dwCard : UInt32, dwTranslateOptions : UInt32, lpTranslateOutput : Win32cr::Devices::Tapi::LINETRANSLATEOUTPUT*) : Int32
+    {% if !flag?(:docs) %}
     C.lineTranslateAddress(hLineApp, dwDeviceID, dwAPIVersion, lpszAddressIn, dwCard, dwTranslateOptions, lpTranslateOutput)
+    {% end %}
   end
 
   def lineTranslateAddressA(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, lpszAddressIn : Win32cr::Foundation::PSTR, dwCard : UInt32, dwTranslateOptions : UInt32, lpTranslateOutput : Win32cr::Devices::Tapi::LINETRANSLATEOUTPUT*) : Int32
+    {% if !flag?(:docs) %}
     C.lineTranslateAddressA(hLineApp, dwDeviceID, dwAPIVersion, lpszAddressIn, dwCard, dwTranslateOptions, lpTranslateOutput)
+    {% end %}
   end
 
   def lineTranslateAddressW(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, lpszAddressIn : Win32cr::Foundation::PWSTR, dwCard : UInt32, dwTranslateOptions : UInt32, lpTranslateOutput : Win32cr::Devices::Tapi::LINETRANSLATEOUTPUT*) : Int32
+    {% if !flag?(:docs) %}
     C.lineTranslateAddressW(hLineApp, dwDeviceID, dwAPIVersion, lpszAddressIn, dwCard, dwTranslateOptions, lpTranslateOutput)
+    {% end %}
   end
 
   def lineTranslateDialog(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszAddressIn : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineTranslateDialog(hLineApp, dwDeviceID, dwAPIVersion, hwndOwner, lpszAddressIn)
+    {% end %}
   end
 
   def lineTranslateDialogA(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszAddressIn : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineTranslateDialogA(hLineApp, dwDeviceID, dwAPIVersion, hwndOwner, lpszAddressIn)
+    {% end %}
   end
 
   def lineTranslateDialogW(hLineApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszAddressIn : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineTranslateDialogW(hLineApp, dwDeviceID, dwAPIVersion, hwndOwner, lpszAddressIn)
+    {% end %}
   end
 
   def lineUncompleteCall(hLine : UInt32, dwCompletionID : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineUncompleteCall(hLine, dwCompletionID)
+    {% end %}
   end
 
   def lineUnhold(hCall : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.lineUnhold(hCall)
+    {% end %}
   end
 
   def lineUnpark(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineUnpark(hLine, dwAddressID, lphCall, lpszDestAddress)
+    {% end %}
   end
 
   def lineUnparkA(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineUnparkA(hLine, dwAddressID, lphCall, lpszDestAddress)
+    {% end %}
   end
 
   def lineUnparkW(hLine : UInt32, dwAddressID : UInt32, lphCall : UInt32*, lpszDestAddress : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lineUnparkW(hLine, dwAddressID, lphCall, lpszDestAddress)
+    {% end %}
   end
 
   def phoneClose(hPhone : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneClose(hPhone)
+    {% end %}
   end
 
   def phoneConfigDialog(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.phoneConfigDialog(dwDeviceID, hwndOwner, lpszDeviceClass)
+    {% end %}
   end
 
   def phoneConfigDialogA(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.phoneConfigDialogA(dwDeviceID, hwndOwner, lpszDeviceClass)
+    {% end %}
   end
 
   def phoneConfigDialogW(dwDeviceID : UInt32, hwndOwner : Win32cr::Foundation::HWND, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.phoneConfigDialogW(dwDeviceID, hwndOwner, lpszDeviceClass)
+    {% end %}
   end
 
   def phoneDevSpecific(hPhone : UInt32, lpParams : Void*, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneDevSpecific(hPhone, lpParams, dwSize)
+    {% end %}
   end
 
   def phoneGetButtonInfo(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetButtonInfo(hPhone, dwButtonLampID, lpButtonInfo)
+    {% end %}
   end
 
   def phoneGetButtonInfoA(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetButtonInfoA(hPhone, dwButtonLampID, lpButtonInfo)
+    {% end %}
   end
 
   def phoneGetButtonInfoW(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetButtonInfoW(hPhone, dwButtonLampID, lpButtonInfo)
+    {% end %}
   end
 
   def phoneGetData(hPhone : UInt32, dwDataID : UInt32, lpData : Void*, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetData(hPhone, dwDataID, lpData, dwSize)
+    {% end %}
   end
 
   def phoneGetDevCaps(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpPhoneCaps : Win32cr::Devices::Tapi::PHONECAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetDevCaps(hPhoneApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpPhoneCaps)
+    {% end %}
   end
 
   def phoneGetDevCapsA(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpPhoneCaps : Win32cr::Devices::Tapi::PHONECAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetDevCapsA(hPhoneApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpPhoneCaps)
+    {% end %}
   end
 
   def phoneGetDevCapsW(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtVersion : UInt32, lpPhoneCaps : Win32cr::Devices::Tapi::PHONECAPS*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetDevCapsW(hPhoneApp, dwDeviceID, dwAPIVersion, dwExtVersion, lpPhoneCaps)
+    {% end %}
   end
 
   def phoneGetDisplay(hPhone : UInt32, lpDisplay : Win32cr::Devices::Tapi::VARSTRING*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetDisplay(hPhone, lpDisplay)
+    {% end %}
   end
 
   def phoneGetGain(hPhone : UInt32, dwHookSwitchDev : UInt32, lpdwGain : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetGain(hPhone, dwHookSwitchDev, lpdwGain)
+    {% end %}
   end
 
   def phoneGetHookSwitch(hPhone : UInt32, lpdwHookSwitchDevs : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetHookSwitch(hPhone, lpdwHookSwitchDevs)
+    {% end %}
   end
 
   def phoneGetIcon(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetIcon(dwDeviceID, lpszDeviceClass, lphIcon)
+    {% end %}
   end
 
   def phoneGetIconA(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PSTR, lphIcon : LibC::IntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetIconA(dwDeviceID, lpszDeviceClass, lphIcon)
+    {% end %}
   end
 
   def phoneGetIconW(dwDeviceID : UInt32, lpszDeviceClass : Win32cr::Foundation::PWSTR, lphIcon : LibC::IntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetIconW(dwDeviceID, lpszDeviceClass, lphIcon)
+    {% end %}
   end
 
   def phoneGetID(hPhone : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetID(hPhone, lpDeviceID, lpszDeviceClass)
+    {% end %}
   end
 
   def phoneGetIDA(hPhone : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetIDA(hPhone, lpDeviceID, lpszDeviceClass)
+    {% end %}
   end
 
   def phoneGetIDW(hPhone : UInt32, lpDeviceID : Win32cr::Devices::Tapi::VARSTRING*, lpszDeviceClass : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetIDW(hPhone, lpDeviceID, lpszDeviceClass)
+    {% end %}
   end
 
   def phoneGetLamp(hPhone : UInt32, dwButtonLampID : UInt32, lpdwLampMode : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetLamp(hPhone, dwButtonLampID, lpdwLampMode)
+    {% end %}
   end
 
   def phoneGetMessage(hPhoneApp : UInt32, lpMessage : Win32cr::Devices::Tapi::PHONEMESSAGE*, dwTimeout : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetMessage(hPhoneApp, lpMessage, dwTimeout)
+    {% end %}
   end
 
   def phoneGetRing(hPhone : UInt32, lpdwRingMode : UInt32*, lpdwVolume : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetRing(hPhone, lpdwRingMode, lpdwVolume)
+    {% end %}
   end
 
   def phoneGetStatus(hPhone : UInt32, lpPhoneStatus : Win32cr::Devices::Tapi::PHONESTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetStatus(hPhone, lpPhoneStatus)
+    {% end %}
   end
 
   def phoneGetStatusA(hPhone : UInt32, lpPhoneStatus : Win32cr::Devices::Tapi::PHONESTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetStatusA(hPhone, lpPhoneStatus)
+    {% end %}
   end
 
   def phoneGetStatusW(hPhone : UInt32, lpPhoneStatus : Win32cr::Devices::Tapi::PHONESTATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetStatusW(hPhone, lpPhoneStatus)
+    {% end %}
   end
 
   def phoneGetStatusMessages(hPhone : UInt32, lpdwPhoneStates : UInt32*, lpdwButtonModes : UInt32*, lpdwButtonStates : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetStatusMessages(hPhone, lpdwPhoneStates, lpdwButtonModes, lpdwButtonStates)
+    {% end %}
   end
 
   def phoneGetVolume(hPhone : UInt32, dwHookSwitchDev : UInt32, lpdwVolume : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneGetVolume(hPhone, dwHookSwitchDev, lpdwVolume)
+    {% end %}
   end
 
   def phoneInitialize(lphPhoneApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::PHONECALLBACK, lpszAppName : Win32cr::Foundation::PSTR, lpdwNumDevs : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneInitialize(lphPhoneApp, hInstance, lpfnCallback, lpszAppName, lpdwNumDevs)
+    {% end %}
   end
 
   def phoneInitializeExA(lphPhoneApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::PHONECALLBACK, lpszFriendlyAppName : Win32cr::Foundation::PSTR, lpdwNumDevs : UInt32*, lpdwAPIVersion : UInt32*, lpPhoneInitializeExParams : Win32cr::Devices::Tapi::PHONEINITIALIZEEXPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneInitializeExA(lphPhoneApp, hInstance, lpfnCallback, lpszFriendlyAppName, lpdwNumDevs, lpdwAPIVersion, lpPhoneInitializeExParams)
+    {% end %}
   end
 
   def phoneInitializeExW(lphPhoneApp : UInt32*, hInstance : Win32cr::Foundation::HINSTANCE, lpfnCallback : Win32cr::Devices::Tapi::PHONECALLBACK, lpszFriendlyAppName : Win32cr::Foundation::PWSTR, lpdwNumDevs : UInt32*, lpdwAPIVersion : UInt32*, lpPhoneInitializeExParams : Win32cr::Devices::Tapi::PHONEINITIALIZEEXPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneInitializeExW(lphPhoneApp, hInstance, lpfnCallback, lpszFriendlyAppName, lpdwNumDevs, lpdwAPIVersion, lpPhoneInitializeExParams)
+    {% end %}
   end
 
   def phoneNegotiateAPIVersion(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPILowVersion : UInt32, dwAPIHighVersion : UInt32, lpdwAPIVersion : UInt32*, lpExtensionID : Win32cr::Devices::Tapi::PHONEEXTENSIONID*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneNegotiateAPIVersion(hPhoneApp, dwDeviceID, dwAPILowVersion, dwAPIHighVersion, lpdwAPIVersion, lpExtensionID)
+    {% end %}
   end
 
   def phoneNegotiateExtVersion(hPhoneApp : UInt32, dwDeviceID : UInt32, dwAPIVersion : UInt32, dwExtLowVersion : UInt32, dwExtHighVersion : UInt32, lpdwExtVersion : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneNegotiateExtVersion(hPhoneApp, dwDeviceID, dwAPIVersion, dwExtLowVersion, dwExtHighVersion, lpdwExtVersion)
+    {% end %}
   end
 
   def phoneOpen(hPhoneApp : UInt32, dwDeviceID : UInt32, lphPhone : UInt32*, dwAPIVersion : UInt32, dwExtVersion : UInt32, dwCallbackInstance : LibC::UIntPtrT, dwPrivilege : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneOpen(hPhoneApp, dwDeviceID, lphPhone, dwAPIVersion, dwExtVersion, dwCallbackInstance, dwPrivilege)
+    {% end %}
   end
 
   def phoneSetButtonInfo(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetButtonInfo(hPhone, dwButtonLampID, lpButtonInfo)
+    {% end %}
   end
 
   def phoneSetButtonInfoA(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetButtonInfoA(hPhone, dwButtonLampID, lpButtonInfo)
+    {% end %}
   end
 
   def phoneSetButtonInfoW(hPhone : UInt32, dwButtonLampID : UInt32, lpButtonInfo : Win32cr::Devices::Tapi::PHONEBUTTONINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetButtonInfoW(hPhone, dwButtonLampID, lpButtonInfo)
+    {% end %}
   end
 
   def phoneSetData(hPhone : UInt32, dwDataID : UInt32, lpData : Void*, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetData(hPhone, dwDataID, lpData, dwSize)
+    {% end %}
   end
 
   def phoneSetDisplay(hPhone : UInt32, dwRow : UInt32, dwColumn : UInt32, lpsDisplay : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetDisplay(hPhone, dwRow, dwColumn, lpsDisplay, dwSize)
+    {% end %}
   end
 
   def phoneSetGain(hPhone : UInt32, dwHookSwitchDev : UInt32, dwGain : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetGain(hPhone, dwHookSwitchDev, dwGain)
+    {% end %}
   end
 
   def phoneSetHookSwitch(hPhone : UInt32, dwHookSwitchDevs : UInt32, dwHookSwitchMode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetHookSwitch(hPhone, dwHookSwitchDevs, dwHookSwitchMode)
+    {% end %}
   end
 
   def phoneSetLamp(hPhone : UInt32, dwButtonLampID : UInt32, dwLampMode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetLamp(hPhone, dwButtonLampID, dwLampMode)
+    {% end %}
   end
 
   def phoneSetRing(hPhone : UInt32, dwRingMode : UInt32, dwVolume : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetRing(hPhone, dwRingMode, dwVolume)
+    {% end %}
   end
 
   def phoneSetStatusMessages(hPhone : UInt32, dwPhoneStates : UInt32, dwButtonModes : UInt32, dwButtonStates : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetStatusMessages(hPhone, dwPhoneStates, dwButtonModes, dwButtonStates)
+    {% end %}
   end
 
   def phoneSetVolume(hPhone : UInt32, dwHookSwitchDev : UInt32, dwVolume : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneSetVolume(hPhone, dwHookSwitchDev, dwVolume)
+    {% end %}
   end
 
   def phoneShutdown(hPhoneApp : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.phoneShutdown(hPhoneApp)
+    {% end %}
   end
 
   def tapiGetLocationInfo(lpszCountryCode : UInt8*, lpszCityCode : UInt8*) : Int32
+    {% if !flag?(:docs) %}
     C.tapiGetLocationInfo(lpszCountryCode, lpszCityCode)
+    {% end %}
   end
 
   def tapiGetLocationInfoA(lpszCountryCode : UInt8*, lpszCityCode : UInt8*) : Int32
+    {% if !flag?(:docs) %}
     C.tapiGetLocationInfoA(lpszCountryCode, lpszCityCode)
+    {% end %}
   end
 
   def tapiGetLocationInfoW(lpszCountryCodeW : UInt16*, lpszCityCodeW : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.tapiGetLocationInfoW(lpszCountryCodeW, lpszCityCodeW)
+    {% end %}
   end
 
   def tapiRequestDrop(hwnd : Win32cr::Foundation::HWND, wRequestID : Win32cr::Foundation::WPARAM) : Int32
+    {% if !flag?(:docs) %}
     C.tapiRequestDrop(hwnd, wRequestID)
+    {% end %}
   end
 
   def tapiRequestMakeCall(lpszDestAddress : Win32cr::Foundation::PSTR, lpszAppName : Win32cr::Foundation::PSTR, lpszCalledParty : Win32cr::Foundation::PSTR, lpszComment : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.tapiRequestMakeCall(lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+    {% end %}
   end
 
   def tapiRequestMakeCallA(lpszDestAddress : Win32cr::Foundation::PSTR, lpszAppName : Win32cr::Foundation::PSTR, lpszCalledParty : Win32cr::Foundation::PSTR, lpszComment : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.tapiRequestMakeCallA(lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+    {% end %}
   end
 
   def tapiRequestMakeCallW(lpszDestAddress : Win32cr::Foundation::PWSTR, lpszAppName : Win32cr::Foundation::PWSTR, lpszCalledParty : Win32cr::Foundation::PWSTR, lpszComment : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.tapiRequestMakeCallW(lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+    {% end %}
   end
 
   def tapiRequestMediaCall(hwnd : Win32cr::Foundation::HWND, wRequestID : Win32cr::Foundation::WPARAM, lpszDeviceClass : Win32cr::Foundation::PSTR, lpDeviceID : Win32cr::Foundation::PSTR, dwSize : UInt32, dwSecure : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, lpszAppName : Win32cr::Foundation::PSTR, lpszCalledParty : Win32cr::Foundation::PSTR, lpszComment : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.tapiRequestMediaCall(hwnd, wRequestID, lpszDeviceClass, lpDeviceID, dwSize, dwSecure, lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+    {% end %}
   end
 
   def tapiRequestMediaCallA(hwnd : Win32cr::Foundation::HWND, wRequestID : Win32cr::Foundation::WPARAM, lpszDeviceClass : Win32cr::Foundation::PSTR, lpDeviceID : Win32cr::Foundation::PSTR, dwSize : UInt32, dwSecure : UInt32, lpszDestAddress : Win32cr::Foundation::PSTR, lpszAppName : Win32cr::Foundation::PSTR, lpszCalledParty : Win32cr::Foundation::PSTR, lpszComment : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.tapiRequestMediaCallA(hwnd, wRequestID, lpszDeviceClass, lpDeviceID, dwSize, dwSecure, lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+    {% end %}
   end
 
   def tapiRequestMediaCallW(hwnd : Win32cr::Foundation::HWND, wRequestID : Win32cr::Foundation::WPARAM, lpszDeviceClass : Win32cr::Foundation::PWSTR, lpDeviceID : Win32cr::Foundation::PWSTR, dwSize : UInt32, dwSecure : UInt32, lpszDestAddress : Win32cr::Foundation::PWSTR, lpszAppName : Win32cr::Foundation::PWSTR, lpszCalledParty : Win32cr::Foundation::PWSTR, lpszComment : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.tapiRequestMediaCallW(hwnd, wRequestID, lpszDeviceClass, lpDeviceID, dwSize, dwSecure, lpszDestAddress, lpszAppName, lpszCalledParty, lpszComment)
+    {% end %}
   end
 
   def openTnefStream(lpvSupport : Void*, lpStream : Void*, lpszStreamName : Int8*, ulFlags : UInt32, lpMessage : Void*, wKeyVal : UInt16, lppTNEF : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.OpenTnefStream(lpvSupport, lpStream, lpszStreamName, ulFlags, lpMessage, wKeyVal, lppTNEF)
+    {% end %}
   end
 
   def openTnefStreamEx(lpvSupport : Void*, lpStream : Void*, lpszStreamName : Int8*, ulFlags : UInt32, lpMessage : Void*, wKeyVal : UInt16, lpAdressBook : Void*, lppTNEF : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.OpenTnefStreamEx(lpvSupport, lpStream, lpszStreamName, ulFlags, lpMessage, wKeyVal, lpAdressBook, lppTNEF)
+    {% end %}
   end
 
   def getTnefStreamCodepage(lpStream : Void*, lpulCodepage : UInt32*, lpulSubCodepage : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetTnefStreamCodepage(lpStream, lpulCodepage, lpulSubCodepage)
+    {% end %}
   end
 
   @[Link("tapi32")]
   @[Link("mapi32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun lineAccept(hCall : UInt32, lpsUserUserInfo : Win32cr::Foundation::PSTR, dwSize : UInt32) : Int32
@@ -12171,4 +12676,5 @@ module Win32cr::Devices::Tapi
     fun GetTnefStreamCodepage(lpStream : Void*, lpulCodepage : UInt32*, lpulSubCodepage : UInt32*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

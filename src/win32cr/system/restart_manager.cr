@@ -97,50 +97,73 @@ module Win32cr::System::RestartManager
   end
 
   def rmStartSession(pSessionHandle : UInt32*, dwSessionFlags : UInt32, strSessionKey : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RmStartSession(pSessionHandle, dwSessionFlags, strSessionKey)
+    {% end %}
   end
 
   def rmJoinSession(pSessionHandle : UInt32*, strSessionKey : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RmJoinSession(pSessionHandle, strSessionKey)
+    {% end %}
   end
 
   def rmEndSession(dwSessionHandle : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RmEndSession(dwSessionHandle)
+    {% end %}
   end
 
   def rmRegisterResources(dwSessionHandle : UInt32, nFiles : UInt32, rgsFileNames : Win32cr::Foundation::PWSTR*, nApplications : UInt32, rgApplications : Win32cr::System::RestartManager::RM_UNIQUE_PROCESS*, nServices : UInt32, rgsServiceNames : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.RmRegisterResources(dwSessionHandle, nFiles, rgsFileNames, nApplications, rgApplications, nServices, rgsServiceNames)
+    {% end %}
   end
 
   def rmGetList(dwSessionHandle : UInt32, pnProcInfoNeeded : UInt32*, pnProcInfo : UInt32*, rgAffectedApps : Win32cr::System::RestartManager::RM_PROCESS_INFO*, lpdwRebootReasons : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RmGetList(dwSessionHandle, pnProcInfoNeeded, pnProcInfo, rgAffectedApps, lpdwRebootReasons)
+    {% end %}
   end
 
   def rmShutdown(dwSessionHandle : UInt32, lActionFlags : UInt32, fnStatus : Win32cr::System::RestartManager::RM_WRITE_STATUS_CALLBACK) : UInt32
+    {% if !flag?(:docs) %}
     C.RmShutdown(dwSessionHandle, lActionFlags, fnStatus)
+    {% end %}
   end
 
   def rmRestart(dwSessionHandle : UInt32, dwRestartFlags : UInt32, fnStatus : Win32cr::System::RestartManager::RM_WRITE_STATUS_CALLBACK) : UInt32
+    {% if !flag?(:docs) %}
     C.RmRestart(dwSessionHandle, dwRestartFlags, fnStatus)
+    {% end %}
   end
 
   def rmCancelCurrentTask(dwSessionHandle : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RmCancelCurrentTask(dwSessionHandle)
+    {% end %}
   end
 
   def rmAddFilter(dwSessionHandle : UInt32, strModuleName : Win32cr::Foundation::PWSTR, pProcess : Win32cr::System::RestartManager::RM_UNIQUE_PROCESS*, strServiceShortName : Win32cr::Foundation::PWSTR, filter_action : Win32cr::System::RestartManager::RM_FILTER_ACTION) : UInt32
+    {% if !flag?(:docs) %}
     C.RmAddFilter(dwSessionHandle, strModuleName, pProcess, strServiceShortName, filter_action)
+    {% end %}
   end
 
   def rmRemoveFilter(dwSessionHandle : UInt32, strModuleName : Win32cr::Foundation::PWSTR, pProcess : Win32cr::System::RestartManager::RM_UNIQUE_PROCESS*, strServiceShortName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RmRemoveFilter(dwSessionHandle, strModuleName, pProcess, strServiceShortName)
+    {% end %}
   end
 
   def rmGetFilterList(dwSessionHandle : UInt32, pbFilterBuf : UInt8*, cbFilterBuf : UInt32, cbFilterBufNeeded : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RmGetFilterList(dwSessionHandle, pbFilterBuf, cbFilterBuf, cbFilterBufNeeded)
+    {% end %}
   end
 
   @[Link("rstrtmgr")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun RmStartSession(pSessionHandle : UInt32*, dwSessionFlags : UInt32, strSessionKey : Win32cr::Foundation::PWSTR) : UInt32
@@ -176,4 +199,5 @@ module Win32cr::System::RestartManager
     fun RmGetFilterList(dwSessionHandle : UInt32, pbFilterBuf : UInt8*, cbFilterBuf : UInt32, cbFilterBufNeeded : UInt32*) : UInt32
 
   end
+  {% end %}
 end

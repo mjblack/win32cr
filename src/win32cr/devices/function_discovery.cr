@@ -429,7 +429,7 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionDiscoveryNotificationVtbl,
+  record IFunctionDiscoveryNotificationVtable,
     query_interface : Proc(IFunctionDiscoveryNotification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionDiscoveryNotification*, UInt32),
     release : Proc(IFunctionDiscoveryNotification*, UInt32),
@@ -439,7 +439,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IFunctionDiscoveryNotification, lpVtbl : IFunctionDiscoveryNotificationVtbl* do
+  record IFunctionDiscoveryNotification, lpVtbl : IFunctionDiscoveryNotificationVtable* do
     GUID = LibC::GUID.new(0x5f6c1ba8_u32, 0x5330_u16, 0x422e_u16, StaticArray[0xa3_u8, 0x68_u8, 0x57_u8, 0x2b_u8, 0x24_u8, 0x4d_u8, 0x3f_u8, 0x87_u8])
     def query_interface(this : IFunctionDiscoveryNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -463,7 +463,7 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionDiscoveryVtbl,
+  record IFunctionDiscoveryVtable,
     query_interface : Proc(IFunctionDiscovery*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionDiscovery*, UInt32),
     release : Proc(IFunctionDiscovery*, UInt32),
@@ -476,7 +476,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IFunctionDiscovery, lpVtbl : IFunctionDiscoveryVtbl* do
+  record IFunctionDiscovery, lpVtbl : IFunctionDiscoveryVtable* do
     GUID = LibC::GUID.new(0x4df99b70_u32, 0xe148_u16, 0x4432_u16, StaticArray[0xb0_u8, 0x4_u8, 0x4c_u8, 0x9e_u8, 0xeb_u8, 0x53_u8, 0x5a_u8, 0x5e_u8])
     def query_interface(this : IFunctionDiscovery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -509,7 +509,7 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionInstanceVtbl,
+  record IFunctionInstanceVtable,
     query_interface : Proc(IFunctionInstance*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionInstance*, UInt32),
     release : Proc(IFunctionInstance*, UInt32),
@@ -521,7 +521,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IFunctionInstance, lpVtbl : IFunctionInstanceVtbl* do
+  record IFunctionInstance, lpVtbl : IFunctionInstanceVtable* do
     GUID = LibC::GUID.new(0x33591c10_u32, 0xbed_u16, 0x4f02_u16, StaticArray[0xb0_u8, 0xab_u8, 0x15_u8, 0x30_u8, 0xd5_u8, 0x53_u8, 0x3e_u8, 0xe9_u8])
     def query_interface(this : IFunctionInstance*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -551,7 +551,7 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionInstanceCollectionVtbl,
+  record IFunctionInstanceCollectionVtable,
     query_interface : Proc(IFunctionInstanceCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionInstanceCollection*, UInt32),
     release : Proc(IFunctionInstanceCollection*, UInt32),
@@ -565,7 +565,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IFunctionInstanceCollection, lpVtbl : IFunctionInstanceCollectionVtbl* do
+  record IFunctionInstanceCollection, lpVtbl : IFunctionInstanceCollectionVtable* do
     GUID = LibC::GUID.new(0xf0a3d895_u32, 0x855c_u16, 0x42a2_u16, StaticArray[0x94_u8, 0x8d_u8, 0x2f_u8, 0x97_u8, 0xd4_u8, 0x50_u8, 0xec_u8, 0xb1_u8])
     def query_interface(this : IFunctionInstanceCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -601,7 +601,7 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IPropertyStoreCollectionVtbl,
+  record IPropertyStoreCollectionVtable,
     query_interface : Proc(IPropertyStoreCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPropertyStoreCollection*, UInt32),
     release : Proc(IPropertyStoreCollection*, UInt32),
@@ -615,7 +615,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IPropertyStoreCollection, lpVtbl : IPropertyStoreCollectionVtbl* do
+  record IPropertyStoreCollection, lpVtbl : IPropertyStoreCollectionVtable* do
     GUID = LibC::GUID.new(0xd14d9c30_u32, 0x12d2_u16, 0x42d8_u16, StaticArray[0xbc_u8, 0xe4_u8, 0xc6_u8, 0xc_u8, 0x2b_u8, 0xb2_u8, 0x26_u8, 0xfa_u8])
     def query_interface(this : IPropertyStoreCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -651,7 +651,7 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionInstanceQueryVtbl,
+  record IFunctionInstanceQueryVtable,
     query_interface : Proc(IFunctionInstanceQuery*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionInstanceQuery*, UInt32),
     release : Proc(IFunctionInstanceQuery*, UInt32),
@@ -659,7 +659,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IFunctionInstanceQuery, lpVtbl : IFunctionInstanceQueryVtbl* do
+  record IFunctionInstanceQuery, lpVtbl : IFunctionInstanceQueryVtable* do
     GUID = LibC::GUID.new(0x6242bc6b_u32, 0x90ec_u16, 0x4b37_u16, StaticArray[0xbb_u8, 0x46_u8, 0xe2_u8, 0x29_u8, 0xfd_u8, 0x84_u8, 0xed_u8, 0x95_u8])
     def query_interface(this : IFunctionInstanceQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -677,7 +677,7 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionInstanceCollectionQueryVtbl,
+  record IFunctionInstanceCollectionQueryVtable,
     query_interface : Proc(IFunctionInstanceCollectionQuery*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionInstanceCollectionQuery*, UInt32),
     release : Proc(IFunctionInstanceCollectionQuery*, UInt32),
@@ -687,7 +687,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IFunctionInstanceCollectionQuery, lpVtbl : IFunctionInstanceCollectionQueryVtbl* do
+  record IFunctionInstanceCollectionQuery, lpVtbl : IFunctionInstanceCollectionQueryVtable* do
     GUID = LibC::GUID.new(0x57cc6fd2_u32, 0xc09a_u16, 0x4289_u16, StaticArray[0xbb_u8, 0x72_u8, 0x25_u8, 0xf0_u8, 0x41_u8, 0x42_u8, 0x5_u8, 0x8e_u8])
     def query_interface(this : IFunctionInstanceCollectionQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -711,7 +711,7 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionDiscoveryProviderVtbl,
+  record IFunctionDiscoveryProviderVtable,
     query_interface : Proc(IFunctionDiscoveryProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionDiscoveryProvider*, UInt32),
     release : Proc(IFunctionDiscoveryProvider*, UInt32),
@@ -726,7 +726,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IFunctionDiscoveryProvider, lpVtbl : IFunctionDiscoveryProviderVtbl* do
+  record IFunctionDiscoveryProvider, lpVtbl : IFunctionDiscoveryProviderVtable* do
     GUID = LibC::GUID.new(0xdcde394f_u32, 0x1478_u16, 0x4813_u16, StaticArray[0xa4_u8, 0x2_u8, 0xf6_u8, 0xfb_u8, 0x10_u8, 0x65_u8, 0x72_u8, 0x22_u8])
     def query_interface(this : IFunctionDiscoveryProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -765,7 +765,7 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IProviderPropertiesVtbl,
+  record IProviderPropertiesVtable,
     query_interface : Proc(IProviderProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProviderProperties*, UInt32),
     release : Proc(IProviderProperties*, UInt32),
@@ -776,7 +776,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IProviderProperties, lpVtbl : IProviderPropertiesVtbl* do
+  record IProviderProperties, lpVtbl : IProviderPropertiesVtable* do
     GUID = LibC::GUID.new(0xcf986ea6_u32, 0x3b5f_u16, 0x4c5f_u16, StaticArray[0xb8_u8, 0x8a_u8, 0x2f_u8, 0x8b_u8, 0x20_u8, 0xce_u8, 0xef_u8, 0x17_u8])
     def query_interface(this : IProviderProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -803,7 +803,7 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IProviderPublishingVtbl,
+  record IProviderPublishingVtable,
     query_interface : Proc(IProviderPublishing*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProviderPublishing*, UInt32),
     release : Proc(IProviderPublishing*, UInt32),
@@ -812,7 +812,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IProviderPublishing, lpVtbl : IProviderPublishingVtbl* do
+  record IProviderPublishing, lpVtbl : IProviderPublishingVtable* do
     GUID = LibC::GUID.new(0xcd1b9a04_u32, 0x206c_u16, 0x4a05_u16, StaticArray[0xa0_u8, 0xc8_u8, 0x16_u8, 0x35_u8, 0xa2_u8, 0x1a_u8, 0x2b_u8, 0x7c_u8])
     def query_interface(this : IProviderPublishing*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -833,7 +833,7 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionDiscoveryProviderFactoryVtbl,
+  record IFunctionDiscoveryProviderFactoryVtable,
     query_interface : Proc(IFunctionDiscoveryProviderFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionDiscoveryProviderFactory*, UInt32),
     release : Proc(IFunctionDiscoveryProviderFactory*, UInt32),
@@ -843,7 +843,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IFunctionDiscoveryProviderFactory, lpVtbl : IFunctionDiscoveryProviderFactoryVtbl* do
+  record IFunctionDiscoveryProviderFactory, lpVtbl : IFunctionDiscoveryProviderFactoryVtable* do
     GUID = LibC::GUID.new(0x86443ff0_u32, 0x1ad5_u16, 0x4e68_u16, StaticArray[0xa4_u8, 0x5a_u8, 0x40_u8, 0xc2_u8, 0xc3_u8, 0x29_u8, 0xde_u8, 0x3b_u8])
     def query_interface(this : IFunctionDiscoveryProviderFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -867,7 +867,7 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionDiscoveryProviderQueryVtbl,
+  record IFunctionDiscoveryProviderQueryVtable,
     query_interface : Proc(IFunctionDiscoveryProviderQuery*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionDiscoveryProviderQuery*, UInt32),
     release : Proc(IFunctionDiscoveryProviderQuery*, UInt32),
@@ -878,7 +878,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IFunctionDiscoveryProviderQuery, lpVtbl : IFunctionDiscoveryProviderQueryVtbl* do
+  record IFunctionDiscoveryProviderQuery, lpVtbl : IFunctionDiscoveryProviderQueryVtable* do
     GUID = LibC::GUID.new(0x6876ea98_u32, 0xbaec_u16, 0x46db_u16, StaticArray[0xbc_u8, 0x20_u8, 0x75_u8, 0xa7_u8, 0x6e_u8, 0x26_u8, 0x7a_u8, 0x3a_u8])
     def query_interface(this : IFunctionDiscoveryProviderQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -905,7 +905,7 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IProviderQueryConstraintCollectionVtbl,
+  record IProviderQueryConstraintCollectionVtable,
     query_interface : Proc(IProviderQueryConstraintCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProviderQueryConstraintCollection*, UInt32),
     release : Proc(IProviderQueryConstraintCollection*, UInt32),
@@ -918,7 +918,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IProviderQueryConstraintCollection, lpVtbl : IProviderQueryConstraintCollectionVtbl* do
+  record IProviderQueryConstraintCollection, lpVtbl : IProviderQueryConstraintCollectionVtable* do
     GUID = LibC::GUID.new(0x9c243e11_u32, 0x3261_u16, 0x4bcd_u16, StaticArray[0xb9_u8, 0x22_u8, 0x84_u8, 0xa8_u8, 0x73_u8, 0xd4_u8, 0x60_u8, 0xae_u8])
     def query_interface(this : IProviderQueryConstraintCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -951,7 +951,7 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IProviderPropertyConstraintCollectionVtbl,
+  record IProviderPropertyConstraintCollectionVtable,
     query_interface : Proc(IProviderPropertyConstraintCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProviderPropertyConstraintCollection*, UInt32),
     release : Proc(IProviderPropertyConstraintCollection*, UInt32),
@@ -964,7 +964,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IProviderPropertyConstraintCollection, lpVtbl : IProviderPropertyConstraintCollectionVtbl* do
+  record IProviderPropertyConstraintCollection, lpVtbl : IProviderPropertyConstraintCollectionVtable* do
     GUID = LibC::GUID.new(0xf4fae42f_u32, 0x5778_u16, 0x4a13_u16, StaticArray[0x85_u8, 0x40_u8, 0xb5_u8, 0xfd_u8, 0x8c_u8, 0x13_u8, 0x98_u8, 0xdd_u8])
     def query_interface(this : IProviderPropertyConstraintCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -997,7 +997,7 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IFunctionDiscoveryServiceProviderVtbl,
+  record IFunctionDiscoveryServiceProviderVtable,
     query_interface : Proc(IFunctionDiscoveryServiceProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFunctionDiscoveryServiceProvider*, UInt32),
     release : Proc(IFunctionDiscoveryServiceProvider*, UInt32),
@@ -1005,7 +1005,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IFunctionDiscoveryServiceProvider, lpVtbl : IFunctionDiscoveryServiceProviderVtbl* do
+  record IFunctionDiscoveryServiceProvider, lpVtbl : IFunctionDiscoveryServiceProviderVtable* do
     GUID = LibC::GUID.new(0x4c81ed02_u32, 0x1b04_u16, 0x43f2_u16, StaticArray[0xa4_u8, 0x51_u8, 0x69_u8, 0x96_u8, 0x6c_u8, 0xbc_u8, 0xd1_u8, 0xc2_u8])
     def query_interface(this : IFunctionDiscoveryServiceProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1023,7 +1023,7 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IPNPXAssociationVtbl,
+  record IPNPXAssociationVtable,
     query_interface : Proc(IPNPXAssociation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPNPXAssociation*, UInt32),
     release : Proc(IPNPXAssociation*, UInt32),
@@ -1033,7 +1033,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IPNPXAssociation, lpVtbl : IPNPXAssociationVtbl* do
+  record IPNPXAssociation, lpVtbl : IPNPXAssociationVtable* do
     GUID = LibC::GUID.new(0xbd7e521_u32, 0x4da6_u16, 0x42d5_u16, StaticArray[0x81_u8, 0xba_u8, 0x19_u8, 0x81_u8, 0xb6_u8, 0xb9_u8, 0x40_u8, 0x75_u8])
     def query_interface(this : IPNPXAssociation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1057,7 +1057,7 @@ module Win32cr::Devices::FunctionDiscovery
   end
 
   @[Extern]
-  record IPNPXDeviceAssociationVtbl,
+  record IPNPXDeviceAssociationVtable,
     query_interface : Proc(IPNPXDeviceAssociation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPNPXDeviceAssociation*, UInt32),
     release : Proc(IPNPXDeviceAssociation*, UInt32),
@@ -1067,7 +1067,7 @@ module Win32cr::Devices::FunctionDiscovery
 
 
   @[Extern]
-  record IPNPXDeviceAssociation, lpVtbl : IPNPXDeviceAssociationVtbl* do
+  record IPNPXDeviceAssociation, lpVtbl : IPNPXDeviceAssociationVtable* do
     GUID = LibC::GUID.new(0xeed366d0_u32, 0x35b8_u16, 0x4fc5_u16, StaticArray[0x8d_u8, 0x20_u8, 0x7e_u8, 0x5b_u8, 0xd3_u8, 0x1f_u8, 0x6d_u8, 0xed_u8])
     def query_interface(this : IPNPXDeviceAssociation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

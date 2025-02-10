@@ -57,7 +57,7 @@ module Win32cr::System::ServerBackup
   end
 
   @[Extern]
-  record IWsbApplicationBackupSupportVtbl,
+  record IWsbApplicationBackupSupportVtable,
     query_interface : Proc(IWsbApplicationBackupSupport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWsbApplicationBackupSupport*, UInt32),
     release : Proc(IWsbApplicationBackupSupport*, UInt32),
@@ -65,7 +65,7 @@ module Win32cr::System::ServerBackup
 
 
   @[Extern]
-  record IWsbApplicationBackupSupport, lpVtbl : IWsbApplicationBackupSupportVtbl* do
+  record IWsbApplicationBackupSupport, lpVtbl : IWsbApplicationBackupSupportVtable* do
     GUID = LibC::GUID.new(0x1eff3510_u32, 0x4a27_u16, 0x46ad_u16, StaticArray[0xb9_u8, 0xe0_u8, 0x8_u8, 0x33_u8, 0x2f_u8, 0xf_u8, 0x4f_u8, 0x6d_u8])
     def query_interface(this : IWsbApplicationBackupSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -83,7 +83,7 @@ module Win32cr::System::ServerBackup
   end
 
   @[Extern]
-  record IWsbApplicationRestoreSupportVtbl,
+  record IWsbApplicationRestoreSupportVtable,
     query_interface : Proc(IWsbApplicationRestoreSupport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWsbApplicationRestoreSupport*, UInt32),
     release : Proc(IWsbApplicationRestoreSupport*, UInt32),
@@ -94,7 +94,7 @@ module Win32cr::System::ServerBackup
 
 
   @[Extern]
-  record IWsbApplicationRestoreSupport, lpVtbl : IWsbApplicationRestoreSupportVtbl* do
+  record IWsbApplicationRestoreSupport, lpVtbl : IWsbApplicationRestoreSupportVtable* do
     GUID = LibC::GUID.new(0x8d3bdb38_u32, 0x4ee8_u16, 0x4718_u16, StaticArray[0x85_u8, 0xf9_u8, 0xc7_u8, 0xdb_u8, 0xc4_u8, 0xab_u8, 0x77_u8, 0xaa_u8])
     def query_interface(this : IWsbApplicationRestoreSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -121,7 +121,7 @@ module Win32cr::System::ServerBackup
   end
 
   @[Extern]
-  record IWsbApplicationAsyncVtbl,
+  record IWsbApplicationAsyncVtable,
     query_interface : Proc(IWsbApplicationAsync*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWsbApplicationAsync*, UInt32),
     release : Proc(IWsbApplicationAsync*, UInt32),
@@ -130,7 +130,7 @@ module Win32cr::System::ServerBackup
 
 
   @[Extern]
-  record IWsbApplicationAsync, lpVtbl : IWsbApplicationAsyncVtbl* do
+  record IWsbApplicationAsync, lpVtbl : IWsbApplicationAsyncVtable* do
     GUID = LibC::GUID.new(0x843f6f7_u32, 0x895c_u16, 0x44a6_u16, StaticArray[0xb0_u8, 0xc2_u8, 0x5_u8, 0xa5_u8, 0x2_u8, 0x2a_u8, 0xa3_u8, 0xa1_u8])
     def query_interface(this : IWsbApplicationAsync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

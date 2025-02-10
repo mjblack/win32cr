@@ -2517,7 +2517,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IQueryFormVtbl,
+  record IQueryFormVtable,
     query_interface : Proc(IQueryForm*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IQueryForm*, UInt32),
     release : Proc(IQueryForm*, UInt32),
@@ -2527,7 +2527,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IQueryForm, lpVtbl : IQueryFormVtbl* do
+  record IQueryForm, lpVtbl : IQueryFormVtable* do
     GUID = LibC::GUID.new(0x8cfcee30_u32, 0x39bd_u16, 0x11d0_u16, StaticArray[0xb8_u8, 0xd1_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0xab_u8, 0x2d_u8, 0xbb_u8])
     def query_interface(this : IQueryForm*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2551,7 +2551,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IPersistQueryVtbl,
+  record IPersistQueryVtable,
     query_interface : Proc(IPersistQuery*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPersistQuery*, UInt32),
     release : Proc(IPersistQuery*, UInt32),
@@ -2566,7 +2566,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IPersistQuery, lpVtbl : IPersistQueryVtbl* do
+  record IPersistQuery, lpVtbl : IPersistQueryVtable* do
     GUID = LibC::GUID.new(0x1a3114b8_u32, 0xa62e_u16, 0x11d0_u16, StaticArray[0xa6_u8, 0xc5_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x6_u8, 0xaf_u8, 0x45_u8])
     def query_interface(this : IPersistQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2605,7 +2605,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record ICommonQueryVtbl,
+  record ICommonQueryVtable,
     query_interface : Proc(ICommonQuery*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICommonQuery*, UInt32),
     release : Proc(ICommonQuery*, UInt32),
@@ -2613,7 +2613,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record ICommonQuery, lpVtbl : ICommonQueryVtbl* do
+  record ICommonQuery, lpVtbl : ICommonQueryVtable* do
     GUID = LibC::GUID.new(0xab50dec0_u32, 0x6f1d_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0xc4_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xc1_u8, 0x6e_u8, 0x65_u8])
     def query_interface(this : ICommonQuery*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2631,7 +2631,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsVtbl,
+  record IADsVtable,
     query_interface : Proc(IADs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADs*, UInt32),
     release : Proc(IADs*, UInt32),
@@ -2655,7 +2655,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADs, lpVtbl : IADsVtbl* do
+  record IADs, lpVtbl : IADsVtable* do
     GUID = LibC::GUID.new(0xfd8256d0_u32, 0xfd15_u16, 0x11ce_u16, StaticArray[0xab_u8, 0xc4_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
     def query_interface(this : IADs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2721,7 +2721,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsContainerVtbl,
+  record IADsContainerVtable,
     query_interface : Proc(IADsContainer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsContainer*, UInt32),
     release : Proc(IADsContainer*, UInt32),
@@ -2743,7 +2743,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsContainer, lpVtbl : IADsContainerVtbl* do
+  record IADsContainer, lpVtbl : IADsContainerVtable* do
     GUID = LibC::GUID.new(0x1677d0_u32, 0xfd16_u16, 0x11ce_u16, StaticArray[0xab_u8, 0xc4_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
     def query_interface(this : IADsContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2803,7 +2803,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsCollectionVtbl,
+  record IADsCollectionVtable,
     query_interface : Proc(IADsCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsCollection*, UInt32),
     release : Proc(IADsCollection*, UInt32),
@@ -2818,7 +2818,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsCollection, lpVtbl : IADsCollectionVtbl* do
+  record IADsCollection, lpVtbl : IADsCollectionVtable* do
     GUID = LibC::GUID.new(0x72b945e0_u32, 0x253b_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2857,7 +2857,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsMembersVtbl,
+  record IADsMembersVtable,
     query_interface : Proc(IADsMembers*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsMembers*, UInt32),
     release : Proc(IADsMembers*, UInt32),
@@ -2872,7 +2872,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsMembers, lpVtbl : IADsMembersVtbl* do
+  record IADsMembers, lpVtbl : IADsMembersVtable* do
     GUID = LibC::GUID.new(0x451a0030_u32, 0x72ec_u16, 0x11cf_u16, StaticArray[0xb0_u8, 0x3b_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6e_u8, 0x9_u8, 0x75_u8])
     def query_interface(this : IADsMembers*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2911,7 +2911,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsPropertyListVtbl,
+  record IADsPropertyListVtable,
     query_interface : Proc(IADsPropertyList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsPropertyList*, UInt32),
     release : Proc(IADsPropertyList*, UInt32),
@@ -2931,7 +2931,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsPropertyList, lpVtbl : IADsPropertyListVtbl* do
+  record IADsPropertyList, lpVtbl : IADsPropertyListVtable* do
     GUID = LibC::GUID.new(0xc6f602b6_u32, 0x8f69_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x28_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsPropertyList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2985,7 +2985,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsPropertyEntryVtbl,
+  record IADsPropertyEntryVtable,
     query_interface : Proc(IADsPropertyEntry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsPropertyEntry*, UInt32),
     release : Proc(IADsPropertyEntry*, UInt32),
@@ -3005,7 +3005,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsPropertyEntry, lpVtbl : IADsPropertyEntryVtbl* do
+  record IADsPropertyEntry, lpVtbl : IADsPropertyEntryVtable* do
     GUID = LibC::GUID.new(0x5792c8e_u32, 0x941f_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x29_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsPropertyEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3059,7 +3059,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsPropertyValueVtbl,
+  record IADsPropertyValueVtable,
     query_interface : Proc(IADsPropertyValue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsPropertyValue*, UInt32),
     release : Proc(IADsPropertyValue*, UInt32),
@@ -3095,7 +3095,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsPropertyValue, lpVtbl : IADsPropertyValueVtbl* do
+  record IADsPropertyValue, lpVtbl : IADsPropertyValueVtable* do
     GUID = LibC::GUID.new(0x79fa9ad0_u32, 0xa97c_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x34_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsPropertyValue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3197,7 +3197,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsPropertyValue2Vtbl,
+  record IADsPropertyValue2Vtable,
     query_interface : Proc(IADsPropertyValue2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsPropertyValue2*, UInt32),
     release : Proc(IADsPropertyValue2*, UInt32),
@@ -3210,7 +3210,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsPropertyValue2, lpVtbl : IADsPropertyValue2Vtbl* do
+  record IADsPropertyValue2, lpVtbl : IADsPropertyValue2Vtable* do
     GUID = LibC::GUID.new(0x306e831c_u32, 0x5bc7_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsPropertyValue2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3243,7 +3243,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IPrivateDispatchVtbl,
+  record IPrivateDispatchVtable,
     query_interface : Proc(IPrivateDispatch*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrivateDispatch*, UInt32),
     release : Proc(IPrivateDispatch*, UInt32),
@@ -3255,7 +3255,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IPrivateDispatch, lpVtbl : IPrivateDispatchVtbl* do
+  record IPrivateDispatch, lpVtbl : IPrivateDispatchVtable* do
     GUID = LibC::GUID.new(0x86ab4bbe_u32, 0x65f6_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0x13_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IPrivateDispatch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3285,7 +3285,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IPrivateUnknownVtbl,
+  record IPrivateUnknownVtable,
     query_interface : Proc(IPrivateUnknown*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrivateUnknown*, UInt32),
     release : Proc(IPrivateUnknown*, UInt32),
@@ -3294,7 +3294,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IPrivateUnknown, lpVtbl : IPrivateUnknownVtbl* do
+  record IPrivateUnknown, lpVtbl : IPrivateUnknownVtable* do
     GUID = LibC::GUID.new(0x89126bab_u32, 0x6ead_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0x18_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IPrivateUnknown*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3315,7 +3315,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsExtensionVtbl,
+  record IADsExtensionVtable,
     query_interface : Proc(IADsExtension*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsExtension*, UInt32),
     release : Proc(IADsExtension*, UInt32),
@@ -3325,7 +3325,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsExtension, lpVtbl : IADsExtensionVtbl* do
+  record IADsExtension, lpVtbl : IADsExtensionVtable* do
     GUID = LibC::GUID.new(0x3d35553c_u32, 0xd2b0_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0x7b_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x93_u8, 0xa0_u8])
     def query_interface(this : IADsExtension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3349,7 +3349,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsDeleteOpsVtbl,
+  record IADsDeleteOpsVtable,
     query_interface : Proc(IADsDeleteOps*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsDeleteOps*, UInt32),
     release : Proc(IADsDeleteOps*, UInt32),
@@ -3361,7 +3361,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsDeleteOps, lpVtbl : IADsDeleteOpsVtbl* do
+  record IADsDeleteOps, lpVtbl : IADsDeleteOpsVtable* do
     GUID = LibC::GUID.new(0xb2bd0902_u32, 0x8878_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0x21_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsDeleteOps*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3391,7 +3391,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsNamespacesVtbl,
+  record IADsNamespacesVtable,
     query_interface : Proc(IADsNamespaces*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsNamespaces*, UInt32),
     release : Proc(IADsNamespaces*, UInt32),
@@ -3417,7 +3417,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsNamespaces, lpVtbl : IADsNamespacesVtbl* do
+  record IADsNamespaces, lpVtbl : IADsNamespacesVtable* do
     GUID = LibC::GUID.new(0x28b96ba0_u32, 0xb330_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0xad_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsNamespaces*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3489,7 +3489,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsClassVtbl,
+  record IADsClassVtable,
     query_interface : Proc(IADsClass*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsClass*, UInt32),
     release : Proc(IADsClass*, UInt32),
@@ -3543,7 +3543,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsClass, lpVtbl : IADsClassVtbl* do
+  record IADsClass, lpVtbl : IADsClassVtable* do
     GUID = LibC::GUID.new(0xc8f93dd0_u32, 0x4ae0_u16, 0x11cf_u16, StaticArray[0x9e_u8, 0x73_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0x56_u8, 0x91_u8])
     def query_interface(this : IADsClass*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3699,7 +3699,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsPropertyVtbl,
+  record IADsPropertyVtable,
     query_interface : Proc(IADsProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsProperty*, UInt32),
     release : Proc(IADsProperty*, UInt32),
@@ -3734,7 +3734,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsProperty, lpVtbl : IADsPropertyVtbl* do
+  record IADsProperty, lpVtbl : IADsPropertyVtable* do
     GUID = LibC::GUID.new(0xc8f93dd3_u32, 0x4ae0_u16, 0x11cf_u16, StaticArray[0x9e_u8, 0x73_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0x56_u8, 0x91_u8])
     def query_interface(this : IADsProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3833,7 +3833,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsSyntaxVtbl,
+  record IADsSyntaxVtable,
     query_interface : Proc(IADsSyntax*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsSyntax*, UInt32),
     release : Proc(IADsSyntax*, UInt32),
@@ -3859,7 +3859,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsSyntax, lpVtbl : IADsSyntaxVtbl* do
+  record IADsSyntax, lpVtbl : IADsSyntaxVtable* do
     GUID = LibC::GUID.new(0xc8f93dd2_u32, 0x4ae0_u16, 0x11cf_u16, StaticArray[0x9e_u8, 0x73_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4a_u8, 0x56_u8, 0x91_u8])
     def query_interface(this : IADsSyntax*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3931,7 +3931,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsLocalityVtbl,
+  record IADsLocalityVtable,
     query_interface : Proc(IADsLocality*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsLocality*, UInt32),
     release : Proc(IADsLocality*, UInt32),
@@ -3963,7 +3963,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsLocality, lpVtbl : IADsLocalityVtbl* do
+  record IADsLocality, lpVtbl : IADsLocalityVtable* do
     GUID = LibC::GUID.new(0xa05e03a2_u32, 0xeffe_u16, 0x11cf_u16, StaticArray[0x8a_u8, 0xbc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsLocality*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4053,7 +4053,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsOVtbl,
+  record IADsOVtable,
     query_interface : Proc(IADsO*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsO*, UInt32),
     release : Proc(IADsO*, UInt32),
@@ -4089,7 +4089,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsO, lpVtbl : IADsOVtbl* do
+  record IADsO, lpVtbl : IADsOVtable* do
     GUID = LibC::GUID.new(0xa1cd2dc6_u32, 0xeffe_u16, 0x11cf_u16, StaticArray[0x8a_u8, 0xbc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsO*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4191,7 +4191,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsOUVtbl,
+  record IADsOUVtable,
     query_interface : Proc(IADsOU*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsOU*, UInt32),
     release : Proc(IADsOU*, UInt32),
@@ -4229,7 +4229,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsOU, lpVtbl : IADsOUVtbl* do
+  record IADsOU, lpVtbl : IADsOUVtable* do
     GUID = LibC::GUID.new(0xa2f733b8_u32, 0xeffe_u16, 0x11cf_u16, StaticArray[0x8a_u8, 0xbc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsOU*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4337,7 +4337,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsDomainVtbl,
+  record IADsDomainVtable,
     query_interface : Proc(IADsDomain*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsDomain*, UInt32),
     release : Proc(IADsDomain*, UInt32),
@@ -4378,7 +4378,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsDomain, lpVtbl : IADsDomainVtbl* do
+  record IADsDomain, lpVtbl : IADsDomainVtable* do
     GUID = LibC::GUID.new(0xe4c220_u32, 0xfd16_u16, 0x11ce_u16, StaticArray[0xab_u8, 0xc4_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
     def query_interface(this : IADsDomain*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4495,7 +4495,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsComputerVtbl,
+  record IADsComputerVtable,
     query_interface : Proc(IADsComputer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsComputer*, UInt32),
     release : Proc(IADsComputer*, UInt32),
@@ -4551,7 +4551,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsComputer, lpVtbl : IADsComputerVtbl* do
+  record IADsComputer, lpVtbl : IADsComputerVtable* do
     GUID = LibC::GUID.new(0xefe3cc70_u32, 0x1d9f_u16, 0x11cf_u16, StaticArray[0xb1_u8, 0xf3_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
     def query_interface(this : IADsComputer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4713,7 +4713,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsComputerOperationsVtbl,
+  record IADsComputerOperationsVtable,
     query_interface : Proc(IADsComputerOperations*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsComputerOperations*, UInt32),
     release : Proc(IADsComputerOperations*, UInt32),
@@ -4739,7 +4739,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsComputerOperations, lpVtbl : IADsComputerOperationsVtbl* do
+  record IADsComputerOperations, lpVtbl : IADsComputerOperationsVtable* do
     GUID = LibC::GUID.new(0xef497680_u32, 0x1d9f_u16, 0x11cf_u16, StaticArray[0xb1_u8, 0xf3_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
     def query_interface(this : IADsComputerOperations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4811,7 +4811,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsGroupVtbl,
+  record IADsGroupVtable,
     query_interface : Proc(IADsGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsGroup*, UInt32),
     release : Proc(IADsGroup*, UInt32),
@@ -4841,7 +4841,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsGroup, lpVtbl : IADsGroupVtbl* do
+  record IADsGroup, lpVtbl : IADsGroupVtable* do
     GUID = LibC::GUID.new(0x27636b00_u32, 0x410f_u16, 0x11cf_u16, StaticArray[0xb1_u8, 0xff_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
     def query_interface(this : IADsGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4925,7 +4925,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsUserVtbl,
+  record IADsUserVtable,
     query_interface : Proc(IADsUser*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsUser*, UInt32),
     release : Proc(IADsUser*, UInt32),
@@ -5040,7 +5040,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsUser, lpVtbl : IADsUserVtbl* do
+  record IADsUser, lpVtbl : IADsUserVtable* do
     GUID = LibC::GUID.new(0x3e37e320_u32, 0x17e2_u16, 0x11cf_u16, StaticArray[0xab_u8, 0xc4_u8, 0x2_u8, 0x60_u8, 0x8c_u8, 0x9e_u8, 0x75_u8, 0x53_u8])
     def query_interface(this : IADsUser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5379,7 +5379,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsPrintQueueVtbl,
+  record IADsPrintQueueVtable,
     query_interface : Proc(IADsPrintQueue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsPrintQueue*, UInt32),
     release : Proc(IADsPrintQueue*, UInt32),
@@ -5429,7 +5429,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsPrintQueue, lpVtbl : IADsPrintQueueVtbl* do
+  record IADsPrintQueue, lpVtbl : IADsPrintQueueVtable* do
     GUID = LibC::GUID.new(0xb15160d0_u32, 0x1226_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x85_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsPrintQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5573,7 +5573,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsPrintQueueOperationsVtbl,
+  record IADsPrintQueueOperationsVtable,
     query_interface : Proc(IADsPrintQueueOperations*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsPrintQueueOperations*, UInt32),
     release : Proc(IADsPrintQueueOperations*, UInt32),
@@ -5602,7 +5602,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsPrintQueueOperations, lpVtbl : IADsPrintQueueOperationsVtbl* do
+  record IADsPrintQueueOperations, lpVtbl : IADsPrintQueueOperationsVtable* do
     GUID = LibC::GUID.new(0x124be5c0_u32, 0x156e_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x86_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsPrintQueueOperations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5683,7 +5683,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsPrintJobVtbl,
+  record IADsPrintJobVtable,
     query_interface : Proc(IADsPrintJob*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsPrintJob*, UInt32),
     release : Proc(IADsPrintJob*, UInt32),
@@ -5725,7 +5725,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsPrintJob, lpVtbl : IADsPrintJobVtbl* do
+  record IADsPrintJob, lpVtbl : IADsPrintJobVtable* do
     GUID = LibC::GUID.new(0x32fb6780_u32, 0x1ed0_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsPrintJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5845,7 +5845,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsPrintJobOperationsVtbl,
+  record IADsPrintJobOperationsVtable,
     query_interface : Proc(IADsPrintJobOperations*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsPrintJobOperations*, UInt32),
     release : Proc(IADsPrintJobOperations*, UInt32),
@@ -5876,7 +5876,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsPrintJobOperations, lpVtbl : IADsPrintJobOperationsVtbl* do
+  record IADsPrintJobOperations, lpVtbl : IADsPrintJobOperationsVtable* do
     GUID = LibC::GUID.new(0x9a52db30_u32, 0x1ecf_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsPrintJobOperations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5963,7 +5963,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsServiceVtbl,
+  record IADsServiceVtable,
     query_interface : Proc(IADsService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsService*, UInt32),
     release : Proc(IADsService*, UInt32),
@@ -6011,7 +6011,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsService, lpVtbl : IADsServiceVtbl* do
+  record IADsService, lpVtbl : IADsServiceVtable* do
     GUID = LibC::GUID.new(0x68af66e0_u32, 0x31ca_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x8a_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6149,7 +6149,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsServiceOperationsVtbl,
+  record IADsServiceOperationsVtable,
     query_interface : Proc(IADsServiceOperations*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsServiceOperations*, UInt32),
     release : Proc(IADsServiceOperations*, UInt32),
@@ -6179,7 +6179,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsServiceOperations, lpVtbl : IADsServiceOperationsVtbl* do
+  record IADsServiceOperations, lpVtbl : IADsServiceOperationsVtable* do
     GUID = LibC::GUID.new(0x5d7b33f0_u32, 0x31ca_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x8a_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsServiceOperations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6263,7 +6263,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsFileServiceVtbl,
+  record IADsFileServiceVtable,
     query_interface : Proc(IADsFileService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsFileService*, UInt32),
     release : Proc(IADsFileService*, UInt32),
@@ -6315,7 +6315,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsFileService, lpVtbl : IADsFileServiceVtbl* do
+  record IADsFileService, lpVtbl : IADsFileServiceVtable* do
     GUID = LibC::GUID.new(0xa89d1900_u32, 0x31ca_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x8a_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsFileService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6465,7 +6465,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsFileServiceOperationsVtbl,
+  record IADsFileServiceOperationsVtable,
     query_interface : Proc(IADsFileServiceOperations*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsFileServiceOperations*, UInt32),
     release : Proc(IADsFileServiceOperations*, UInt32),
@@ -6497,7 +6497,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsFileServiceOperations, lpVtbl : IADsFileServiceOperationsVtbl* do
+  record IADsFileServiceOperations, lpVtbl : IADsFileServiceOperationsVtable* do
     GUID = LibC::GUID.new(0xa02ded10_u32, 0x31ca_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x8a_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsFileServiceOperations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6587,7 +6587,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsFileShareVtbl,
+  record IADsFileShareVtable,
     query_interface : Proc(IADsFileShare*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsFileShare*, UInt32),
     release : Proc(IADsFileShare*, UInt32),
@@ -6620,7 +6620,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsFileShare, lpVtbl : IADsFileShareVtbl* do
+  record IADsFileShare, lpVtbl : IADsFileShareVtable* do
     GUID = LibC::GUID.new(0xeb6dcaf0_u32, 0x4b83_u16, 0x11cf_u16, StaticArray[0xa9_u8, 0x95_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xc1_u8, 0x49_u8])
     def query_interface(this : IADsFileShare*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6713,7 +6713,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsSessionVtbl,
+  record IADsSessionVtable,
     query_interface : Proc(IADsSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsSession*, UInt32),
     release : Proc(IADsSession*, UInt32),
@@ -6743,7 +6743,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsSession, lpVtbl : IADsSessionVtbl* do
+  record IADsSession, lpVtbl : IADsSessionVtable* do
     GUID = LibC::GUID.new(0x398b7da0_u32, 0x4aab_u16, 0x11cf_u16, StaticArray[0xae_u8, 0x2c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6e_u8, 0xbf_u8, 0xb9_u8])
     def query_interface(this : IADsSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6827,7 +6827,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsResourceVtbl,
+  record IADsResourceVtable,
     query_interface : Proc(IADsResource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsResource*, UInt32),
     release : Proc(IADsResource*, UInt32),
@@ -6855,7 +6855,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsResource, lpVtbl : IADsResourceVtbl* do
+  record IADsResource, lpVtbl : IADsResourceVtable* do
     GUID = LibC::GUID.new(0x34a05b20_u32, 0x4aab_u16, 0x11cf_u16, StaticArray[0xae_u8, 0x2c_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6e_u8, 0xbf_u8, 0xb9_u8])
     def query_interface(this : IADsResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6933,7 +6933,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsOpenDSObjectVtbl,
+  record IADsOpenDSObjectVtable,
     query_interface : Proc(IADsOpenDSObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsOpenDSObject*, UInt32),
     release : Proc(IADsOpenDSObject*, UInt32),
@@ -6945,7 +6945,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsOpenDSObject, lpVtbl : IADsOpenDSObjectVtbl* do
+  record IADsOpenDSObject, lpVtbl : IADsOpenDSObjectVtable* do
     GUID = LibC::GUID.new(0xddf2891e_u32, 0xf9c_u16, 0x11d0_u16, StaticArray[0x8a_u8, 0xd4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsOpenDSObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6975,7 +6975,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IDirectoryObjectVtbl,
+  record IDirectoryObjectVtable,
     query_interface : Proc(IDirectoryObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectoryObject*, UInt32),
     release : Proc(IDirectoryObject*, UInt32),
@@ -6987,7 +6987,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IDirectoryObject, lpVtbl : IDirectoryObjectVtbl* do
+  record IDirectoryObject, lpVtbl : IDirectoryObjectVtable* do
     GUID = LibC::GUID.new(0xe798de2c_u32, 0x22e4_u16, 0x11d0_u16, StaticArray[0x84_u8, 0xfe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IDirectoryObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7017,7 +7017,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IDirectorySearchVtbl,
+  record IDirectorySearchVtable,
     query_interface : Proc(IDirectorySearch*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectorySearch*, UInt32),
     release : Proc(IDirectorySearch*, UInt32),
@@ -7034,7 +7034,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IDirectorySearch, lpVtbl : IDirectorySearchVtbl* do
+  record IDirectorySearch, lpVtbl : IDirectorySearchVtable* do
     GUID = LibC::GUID.new(0x109ba8ec_u32, 0x92f0_u16, 0x11d0_u16, StaticArray[0xa7_u8, 0x90_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0xa8_u8])
     def query_interface(this : IDirectorySearch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7079,7 +7079,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IDirectorySchemaMgmtVtbl,
+  record IDirectorySchemaMgmtVtable,
     query_interface : Proc(IDirectorySchemaMgmt*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectorySchemaMgmt*, UInt32),
     release : Proc(IDirectorySchemaMgmt*, UInt32),
@@ -7094,7 +7094,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IDirectorySchemaMgmt, lpVtbl : IDirectorySchemaMgmtVtbl* do
+  record IDirectorySchemaMgmt, lpVtbl : IDirectorySchemaMgmtVtable* do
     GUID = LibC::GUID.new(0x75db3b9c_u32, 0xa4d8_u16, 0x11d0_u16, StaticArray[0xa7_u8, 0x9c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0xa8_u8])
     def query_interface(this : IDirectorySchemaMgmt*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7133,7 +7133,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsAggregateeVtbl,
+  record IADsAggregateeVtable,
     query_interface : Proc(IADsAggregatee*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsAggregatee*, UInt32),
     release : Proc(IADsAggregatee*, UInt32),
@@ -7144,7 +7144,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsAggregatee, lpVtbl : IADsAggregateeVtbl* do
+  record IADsAggregatee, lpVtbl : IADsAggregateeVtable* do
     GUID = LibC::GUID.new(0x1346ce8c_u32, 0x9039_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x28_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsAggregatee*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7171,7 +7171,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsAggregatorVtbl,
+  record IADsAggregatorVtable,
     query_interface : Proc(IADsAggregator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsAggregator*, UInt32),
     release : Proc(IADsAggregator*, UInt32),
@@ -7180,7 +7180,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsAggregator, lpVtbl : IADsAggregatorVtbl* do
+  record IADsAggregator, lpVtbl : IADsAggregatorVtable* do
     GUID = LibC::GUID.new(0x52db5fb0_u32, 0x941f_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x29_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsAggregator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7201,7 +7201,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsAccessControlEntryVtbl,
+  record IADsAccessControlEntryVtable,
     query_interface : Proc(IADsAccessControlEntry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsAccessControlEntry*, UInt32),
     release : Proc(IADsAccessControlEntry*, UInt32),
@@ -7226,7 +7226,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsAccessControlEntry, lpVtbl : IADsAccessControlEntryVtbl* do
+  record IADsAccessControlEntry, lpVtbl : IADsAccessControlEntryVtable* do
     GUID = LibC::GUID.new(0xb4f3a14c_u32, 0x9bdd_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x2c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsAccessControlEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7295,7 +7295,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsAccessControlListVtbl,
+  record IADsAccessControlListVtable,
     query_interface : Proc(IADsAccessControlList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsAccessControlList*, UInt32),
     release : Proc(IADsAccessControlList*, UInt32),
@@ -7314,7 +7314,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsAccessControlList, lpVtbl : IADsAccessControlListVtbl* do
+  record IADsAccessControlList, lpVtbl : IADsAccessControlListVtable* do
     GUID = LibC::GUID.new(0xb7ee91cc_u32, 0x9bdd_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x2c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsAccessControlList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7365,7 +7365,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsSecurityDescriptorVtbl,
+  record IADsSecurityDescriptorVtable,
     query_interface : Proc(IADsSecurityDescriptor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsSecurityDescriptor*, UInt32),
     release : Proc(IADsSecurityDescriptor*, UInt32),
@@ -7397,7 +7397,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsSecurityDescriptor, lpVtbl : IADsSecurityDescriptorVtbl* do
+  record IADsSecurityDescriptor, lpVtbl : IADsSecurityDescriptorVtable* do
     GUID = LibC::GUID.new(0xb8c787ca_u32, 0x9bdd_u16, 0x11d0_u16, StaticArray[0x85_u8, 0x2c_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsSecurityDescriptor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7487,7 +7487,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsLargeIntegerVtbl,
+  record IADsLargeIntegerVtable,
     query_interface : Proc(IADsLargeInteger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsLargeInteger*, UInt32),
     release : Proc(IADsLargeInteger*, UInt32),
@@ -7502,7 +7502,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsLargeInteger, lpVtbl : IADsLargeIntegerVtbl* do
+  record IADsLargeInteger, lpVtbl : IADsLargeIntegerVtable* do
     GUID = LibC::GUID.new(0x9068270b_u32, 0x939_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0xe1_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x3_u8])
     def query_interface(this : IADsLargeInteger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7541,7 +7541,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsNameTranslateVtbl,
+  record IADsNameTranslateVtable,
     query_interface : Proc(IADsNameTranslate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsNameTranslate*, UInt32),
     release : Proc(IADsNameTranslate*, UInt32),
@@ -7559,7 +7559,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsNameTranslate, lpVtbl : IADsNameTranslateVtbl* do
+  record IADsNameTranslate, lpVtbl : IADsNameTranslateVtable* do
     GUID = LibC::GUID.new(0xb1b272a3_u32, 0x3625_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xa4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsNameTranslate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7607,7 +7607,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsCaseIgnoreListVtbl,
+  record IADsCaseIgnoreListVtable,
     query_interface : Proc(IADsCaseIgnoreList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsCaseIgnoreList*, UInt32),
     release : Proc(IADsCaseIgnoreList*, UInt32),
@@ -7620,7 +7620,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsCaseIgnoreList, lpVtbl : IADsCaseIgnoreListVtbl* do
+  record IADsCaseIgnoreList, lpVtbl : IADsCaseIgnoreListVtable* do
     GUID = LibC::GUID.new(0x7b66b533_u32, 0x4680_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsCaseIgnoreList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7653,7 +7653,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsFaxNumberVtbl,
+  record IADsFaxNumberVtable,
     query_interface : Proc(IADsFaxNumber*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsFaxNumber*, UInt32),
     release : Proc(IADsFaxNumber*, UInt32),
@@ -7668,7 +7668,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsFaxNumber, lpVtbl : IADsFaxNumberVtbl* do
+  record IADsFaxNumber, lpVtbl : IADsFaxNumberVtable* do
     GUID = LibC::GUID.new(0xa910dea9_u32, 0x4680_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsFaxNumber*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7707,7 +7707,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsNetAddressVtbl,
+  record IADsNetAddressVtable,
     query_interface : Proc(IADsNetAddress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsNetAddress*, UInt32),
     release : Proc(IADsNetAddress*, UInt32),
@@ -7722,7 +7722,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsNetAddress, lpVtbl : IADsNetAddressVtbl* do
+  record IADsNetAddress, lpVtbl : IADsNetAddressVtable* do
     GUID = LibC::GUID.new(0xb21a50a9_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsNetAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7761,7 +7761,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsOctetListVtbl,
+  record IADsOctetListVtable,
     query_interface : Proc(IADsOctetList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsOctetList*, UInt32),
     release : Proc(IADsOctetList*, UInt32),
@@ -7774,7 +7774,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsOctetList, lpVtbl : IADsOctetListVtbl* do
+  record IADsOctetList, lpVtbl : IADsOctetListVtable* do
     GUID = LibC::GUID.new(0x7b28b80f_u32, 0x4680_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsOctetList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7807,7 +7807,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsEmailVtbl,
+  record IADsEmailVtable,
     query_interface : Proc(IADsEmail*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsEmail*, UInt32),
     release : Proc(IADsEmail*, UInt32),
@@ -7822,7 +7822,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsEmail, lpVtbl : IADsEmailVtbl* do
+  record IADsEmail, lpVtbl : IADsEmailVtable* do
     GUID = LibC::GUID.new(0x97af011a_u32, 0x478e_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsEmail*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7861,7 +7861,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsPathVtbl,
+  record IADsPathVtable,
     query_interface : Proc(IADsPath*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsPath*, UInt32),
     release : Proc(IADsPath*, UInt32),
@@ -7878,7 +7878,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsPath, lpVtbl : IADsPathVtbl* do
+  record IADsPath, lpVtbl : IADsPathVtable* do
     GUID = LibC::GUID.new(0xb287fcd5_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsPath*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7923,7 +7923,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsReplicaPointerVtbl,
+  record IADsReplicaPointerVtable,
     query_interface : Proc(IADsReplicaPointer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsReplicaPointer*, UInt32),
     release : Proc(IADsReplicaPointer*, UInt32),
@@ -7944,7 +7944,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsReplicaPointer, lpVtbl : IADsReplicaPointerVtbl* do
+  record IADsReplicaPointer, lpVtbl : IADsReplicaPointerVtable* do
     GUID = LibC::GUID.new(0xf60fb803_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsReplicaPointer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8001,7 +8001,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsAclVtbl,
+  record IADsAclVtable,
     query_interface : Proc(IADsAcl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsAcl*, UInt32),
     release : Proc(IADsAcl*, UInt32),
@@ -8019,7 +8019,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsAcl, lpVtbl : IADsAclVtbl* do
+  record IADsAcl, lpVtbl : IADsAclVtable* do
     GUID = LibC::GUID.new(0x8452d3ab_u32, 0x869_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0x77_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsAcl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8067,7 +8067,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsTimestampVtbl,
+  record IADsTimestampVtable,
     query_interface : Proc(IADsTimestamp*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsTimestamp*, UInt32),
     release : Proc(IADsTimestamp*, UInt32),
@@ -8082,7 +8082,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsTimestamp, lpVtbl : IADsTimestampVtbl* do
+  record IADsTimestamp, lpVtbl : IADsTimestampVtable* do
     GUID = LibC::GUID.new(0xb2f5a901_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsTimestamp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8121,7 +8121,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsPostalAddressVtbl,
+  record IADsPostalAddressVtable,
     query_interface : Proc(IADsPostalAddress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsPostalAddress*, UInt32),
     release : Proc(IADsPostalAddress*, UInt32),
@@ -8134,7 +8134,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsPostalAddress, lpVtbl : IADsPostalAddressVtbl* do
+  record IADsPostalAddress, lpVtbl : IADsPostalAddressVtable* do
     GUID = LibC::GUID.new(0x7adecf29_u32, 0x4680_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsPostalAddress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8167,7 +8167,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsBackLinkVtbl,
+  record IADsBackLinkVtable,
     query_interface : Proc(IADsBackLink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsBackLink*, UInt32),
     release : Proc(IADsBackLink*, UInt32),
@@ -8182,7 +8182,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsBackLink, lpVtbl : IADsBackLinkVtbl* do
+  record IADsBackLink, lpVtbl : IADsBackLinkVtable* do
     GUID = LibC::GUID.new(0xfd1302bd_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsBackLink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8221,7 +8221,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsTypedNameVtbl,
+  record IADsTypedNameVtable,
     query_interface : Proc(IADsTypedName*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsTypedName*, UInt32),
     release : Proc(IADsTypedName*, UInt32),
@@ -8238,7 +8238,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsTypedName, lpVtbl : IADsTypedNameVtbl* do
+  record IADsTypedName, lpVtbl : IADsTypedNameVtable* do
     GUID = LibC::GUID.new(0xb371a349_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsTypedName*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8283,7 +8283,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsHoldVtbl,
+  record IADsHoldVtable,
     query_interface : Proc(IADsHold*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsHold*, UInt32),
     release : Proc(IADsHold*, UInt32),
@@ -8298,7 +8298,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsHold, lpVtbl : IADsHoldVtbl* do
+  record IADsHold, lpVtbl : IADsHoldVtable* do
     GUID = LibC::GUID.new(0xb3eb3b37_u32, 0x4080_u16, 0x11d1_u16, StaticArray[0xa3_u8, 0xac_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsHold*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8337,7 +8337,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsObjectOptionsVtbl,
+  record IADsObjectOptionsVtable,
     query_interface : Proc(IADsObjectOptions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsObjectOptions*, UInt32),
     release : Proc(IADsObjectOptions*, UInt32),
@@ -8350,7 +8350,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsObjectOptions, lpVtbl : IADsObjectOptionsVtbl* do
+  record IADsObjectOptions, lpVtbl : IADsObjectOptionsVtable* do
     GUID = LibC::GUID.new(0x46f14fda_u32, 0x232b_u16, 0x11d1_u16, StaticArray[0xa8_u8, 0x8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0xa8_u8])
     def query_interface(this : IADsObjectOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8383,7 +8383,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsPathnameVtbl,
+  record IADsPathnameVtable,
     query_interface : Proc(IADsPathname*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsPathname*, UInt32),
     release : Proc(IADsPathname*, UInt32),
@@ -8405,7 +8405,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsPathname, lpVtbl : IADsPathnameVtbl* do
+  record IADsPathname, lpVtbl : IADsPathnameVtable* do
     GUID = LibC::GUID.new(0xd592aed4_u32, 0xf420_u16, 0x11d0_u16, StaticArray[0xa3_u8, 0x6e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x50_u8, 0xdc_u8])
     def query_interface(this : IADsPathname*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8465,7 +8465,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsADSystemInfoVtbl,
+  record IADsADSystemInfoVtable,
     query_interface : Proc(IADsADSystemInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsADSystemInfo*, UInt32),
     release : Proc(IADsADSystemInfo*, UInt32),
@@ -8489,7 +8489,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsADSystemInfo, lpVtbl : IADsADSystemInfoVtbl* do
+  record IADsADSystemInfo, lpVtbl : IADsADSystemInfoVtable* do
     GUID = LibC::GUID.new(0x5bb11929_u32, 0xafd1_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xb9_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x36_u8, 0x9e_u8])
     def query_interface(this : IADsADSystemInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8555,7 +8555,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsWinNTSystemInfoVtbl,
+  record IADsWinNTSystemInfoVtable,
     query_interface : Proc(IADsWinNTSystemInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsWinNTSystemInfo*, UInt32),
     release : Proc(IADsWinNTSystemInfo*, UInt32),
@@ -8570,7 +8570,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsWinNTSystemInfo, lpVtbl : IADsWinNTSystemInfoVtbl* do
+  record IADsWinNTSystemInfo, lpVtbl : IADsWinNTSystemInfoVtable* do
     GUID = LibC::GUID.new(0x6c6d65dc_u32, 0xafd1_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xb9_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x36_u8, 0x9e_u8])
     def query_interface(this : IADsWinNTSystemInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8609,7 +8609,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsDNWithBinaryVtbl,
+  record IADsDNWithBinaryVtable,
     query_interface : Proc(IADsDNWithBinary*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsDNWithBinary*, UInt32),
     release : Proc(IADsDNWithBinary*, UInt32),
@@ -8624,7 +8624,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsDNWithBinary, lpVtbl : IADsDNWithBinaryVtbl* do
+  record IADsDNWithBinary, lpVtbl : IADsDNWithBinaryVtable* do
     GUID = LibC::GUID.new(0x7e99c0a2_u32, 0xf935_u16, 0x11d2_u16, StaticArray[0xba_u8, 0x96_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xd0_u8, 0xd1_u8])
     def query_interface(this : IADsDNWithBinary*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8663,7 +8663,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsDNWithStringVtbl,
+  record IADsDNWithStringVtable,
     query_interface : Proc(IADsDNWithString*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsDNWithString*, UInt32),
     release : Proc(IADsDNWithString*, UInt32),
@@ -8678,7 +8678,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsDNWithString, lpVtbl : IADsDNWithStringVtbl* do
+  record IADsDNWithString, lpVtbl : IADsDNWithStringVtable* do
     GUID = LibC::GUID.new(0x370df02e_u32, 0xf934_u16, 0x11d2_u16, StaticArray[0xba_u8, 0x96_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xd0_u8, 0xd1_u8])
     def query_interface(this : IADsDNWithString*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8717,7 +8717,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IADsSecurityUtilityVtbl,
+  record IADsSecurityUtilityVtable,
     query_interface : Proc(IADsSecurityUtility*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IADsSecurityUtility*, UInt32),
     release : Proc(IADsSecurityUtility*, UInt32),
@@ -8733,7 +8733,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IADsSecurityUtility, lpVtbl : IADsSecurityUtilityVtbl* do
+  record IADsSecurityUtility, lpVtbl : IADsSecurityUtilityVtable* do
     GUID = LibC::GUID.new(0xa63251b2_u32, 0x5f21_u16, 0x474b_u16, StaticArray[0xab_u8, 0x52_u8, 0x4a_u8, 0x8e_u8, 0xfa_u8, 0xd1_u8, 0x8_u8, 0x95_u8])
     def query_interface(this : IADsSecurityUtility*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8775,7 +8775,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IDsBrowseDomainTreeVtbl,
+  record IDsBrowseDomainTreeVtable,
     query_interface : Proc(IDsBrowseDomainTree*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDsBrowseDomainTree*, UInt32),
     release : Proc(IDsBrowseDomainTree*, UInt32),
@@ -8787,7 +8787,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IDsBrowseDomainTree, lpVtbl : IDsBrowseDomainTreeVtbl* do
+  record IDsBrowseDomainTree, lpVtbl : IDsBrowseDomainTreeVtable* do
     GUID = LibC::GUID.new(0x7cabcf1e_u32, 0x78f5_u16, 0x11d2_u16, StaticArray[0x96_u8, 0xc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x1a_u8, 0x86_u8])
     def query_interface(this : IDsBrowseDomainTree*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8817,7 +8817,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IDsDisplaySpecifierVtbl,
+  record IDsDisplaySpecifierVtable,
     query_interface : Proc(IDsDisplaySpecifier*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDsDisplaySpecifier*, UInt32),
     release : Proc(IDsDisplaySpecifier*, UInt32),
@@ -8835,7 +8835,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IDsDisplaySpecifier, lpVtbl : IDsDisplaySpecifierVtbl* do
+  record IDsDisplaySpecifier, lpVtbl : IDsDisplaySpecifierVtable* do
     GUID = LibC::GUID.new(0x1ab4a8c0_u32, 0x6a0b_u16, 0x11d2_u16, StaticArray[0xad_u8, 0x49_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x1a_u8, 0x86_u8])
     def query_interface(this : IDsDisplaySpecifier*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8883,7 +8883,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IDsObjectPickerVtbl,
+  record IDsObjectPickerVtable,
     query_interface : Proc(IDsObjectPicker*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDsObjectPicker*, UInt32),
     release : Proc(IDsObjectPicker*, UInt32),
@@ -8892,7 +8892,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IDsObjectPicker, lpVtbl : IDsObjectPickerVtbl* do
+  record IDsObjectPicker, lpVtbl : IDsObjectPickerVtable* do
     GUID = LibC::GUID.new(0xc87e64e_u32, 0x3b7a_u16, 0x11d2_u16, StaticArray[0xb9_u8, 0xe0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xdb_u8, 0xf7_u8])
     def query_interface(this : IDsObjectPicker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8913,7 +8913,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IDsObjectPickerCredentialsVtbl,
+  record IDsObjectPickerCredentialsVtable,
     query_interface : Proc(IDsObjectPickerCredentials*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDsObjectPickerCredentials*, UInt32),
     release : Proc(IDsObjectPickerCredentials*, UInt32),
@@ -8923,7 +8923,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IDsObjectPickerCredentials, lpVtbl : IDsObjectPickerCredentialsVtbl* do
+  record IDsObjectPickerCredentials, lpVtbl : IDsObjectPickerCredentialsVtable* do
     GUID = LibC::GUID.new(0xe2d3ec9b_u32, 0xd041_u16, 0x445a_u16, StaticArray[0x8f_u8, 0x16_u8, 0x47_u8, 0x48_u8, 0xde_u8, 0x8f_u8, 0xb1_u8, 0xcf_u8])
     def query_interface(this : IDsObjectPickerCredentials*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8947,7 +8947,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IDsAdminCreateObjVtbl,
+  record IDsAdminCreateObjVtable,
     query_interface : Proc(IDsAdminCreateObj*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDsAdminCreateObj*, UInt32),
     release : Proc(IDsAdminCreateObj*, UInt32),
@@ -8956,7 +8956,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IDsAdminCreateObj, lpVtbl : IDsAdminCreateObjVtbl* do
+  record IDsAdminCreateObj, lpVtbl : IDsAdminCreateObjVtable* do
     GUID = LibC::GUID.new(0x53554a38_u32, 0xf902_u16, 0x11d2_u16, StaticArray[0x82_u8, 0xb9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x92_u8, 0x8b_u8])
     def query_interface(this : IDsAdminCreateObj*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8977,7 +8977,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IDsAdminNewObjVtbl,
+  record IDsAdminNewObjVtable,
     query_interface : Proc(IDsAdminNewObj*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDsAdminNewObj*, UInt32),
     release : Proc(IDsAdminNewObj*, UInt32),
@@ -8986,7 +8986,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IDsAdminNewObj, lpVtbl : IDsAdminNewObjVtbl* do
+  record IDsAdminNewObj, lpVtbl : IDsAdminNewObjVtable* do
     GUID = LibC::GUID.new(0xf2573587_u32, 0xe6fc_u16, 0x11d2_u16, StaticArray[0x82_u8, 0xaf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x92_u8, 0x8b_u8])
     def query_interface(this : IDsAdminNewObj*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9007,7 +9007,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IDsAdminNewObjPrimarySiteVtbl,
+  record IDsAdminNewObjPrimarySiteVtable,
     query_interface : Proc(IDsAdminNewObjPrimarySite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDsAdminNewObjPrimarySite*, UInt32),
     release : Proc(IDsAdminNewObjPrimarySite*, UInt32),
@@ -9016,7 +9016,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IDsAdminNewObjPrimarySite, lpVtbl : IDsAdminNewObjPrimarySiteVtbl* do
+  record IDsAdminNewObjPrimarySite, lpVtbl : IDsAdminNewObjPrimarySiteVtable* do
     GUID = LibC::GUID.new(0xbe2b487e_u32, 0xf904_u16, 0x11d2_u16, StaticArray[0x82_u8, 0xb9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x92_u8, 0x8b_u8])
     def query_interface(this : IDsAdminNewObjPrimarySite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9037,7 +9037,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IDsAdminNewObjExtVtbl,
+  record IDsAdminNewObjExtVtable,
     query_interface : Proc(IDsAdminNewObjExt*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDsAdminNewObjExt*, UInt32),
     release : Proc(IDsAdminNewObjExt*, UInt32),
@@ -9050,7 +9050,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IDsAdminNewObjExt, lpVtbl : IDsAdminNewObjExtVtbl* do
+  record IDsAdminNewObjExt, lpVtbl : IDsAdminNewObjExtVtable* do
     GUID = LibC::GUID.new(0x6088eae2_u32, 0xe7bf_u16, 0x11d2_u16, StaticArray[0x82_u8, 0xaf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x92_u8, 0x8b_u8])
     def query_interface(this : IDsAdminNewObjExt*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9083,7 +9083,7 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   @[Extern]
-  record IDsAdminNotifyHandlerVtbl,
+  record IDsAdminNotifyHandlerVtable,
     query_interface : Proc(IDsAdminNotifyHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDsAdminNotifyHandler*, UInt32),
     release : Proc(IDsAdminNotifyHandler*, UInt32),
@@ -9094,7 +9094,7 @@ module Win32cr::Networking::ActiveDirectory
 
 
   @[Extern]
-  record IDsAdminNotifyHandler, lpVtbl : IDsAdminNotifyHandlerVtbl* do
+  record IDsAdminNotifyHandler, lpVtbl : IDsAdminNotifyHandlerVtable* do
     GUID = LibC::GUID.new(0xe4a2b8b3_u32, 0x5a18_u16, 0x11d2_u16, StaticArray[0x97_u8, 0xc1_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa0_u8, 0x6d_u8, 0x2d_u8])
     def query_interface(this : IDsAdminNotifyHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9121,635 +9121,951 @@ module Win32cr::Networking::ActiveDirectory
   end
 
   def aDsGetObject(lpszPathName : Win32cr::Foundation::PWSTR, riid : LibC::GUID*, ppObject : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ADsGetObject(lpszPathName, riid, ppObject)
+    {% end %}
   end
 
   def aDsBuildEnumerator(pADsContainer : Void*, ppEnumVariant : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ADsBuildEnumerator(pADsContainer, ppEnumVariant)
+    {% end %}
   end
 
   def aDsFreeEnumerator(pEnumVariant : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ADsFreeEnumerator(pEnumVariant)
+    {% end %}
   end
 
   def aDsEnumerateNext(pEnumVariant : Void*, cElements : UInt32, pvar : Win32cr::System::Com::VARIANT*, pcElementsFetched : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ADsEnumerateNext(pEnumVariant, cElements, pvar, pcElementsFetched)
+    {% end %}
   end
 
   def aDsBuildVarArrayStr(lppPathNames : Win32cr::Foundation::PWSTR*, dwPathNames : UInt32, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ADsBuildVarArrayStr(lppPathNames, dwPathNames, pVar)
+    {% end %}
   end
 
   def aDsBuildVarArrayInt(lpdwObjectTypes : UInt32*, dwObjectTypes : UInt32, pVar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ADsBuildVarArrayInt(lpdwObjectTypes, dwObjectTypes, pVar)
+    {% end %}
   end
 
   def aDsOpenObject(lpszPathName : Win32cr::Foundation::PWSTR, lpszUserName : Win32cr::Foundation::PWSTR, lpszPassword : Win32cr::Foundation::PWSTR, dwReserved : Win32cr::Networking::ActiveDirectory::ADS_AUTHENTICATION_ENUM, riid : LibC::GUID*, ppObject : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ADsOpenObject(lpszPathName, lpszUserName, lpszPassword, dwReserved, riid, ppObject)
+    {% end %}
   end
 
   def aDsGetLastError(lpError : UInt32*, lpErrorBuf : UInt16*, dwErrorBufLen : UInt32, lpNameBuf : UInt16*, dwNameBufLen : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ADsGetLastError(lpError, lpErrorBuf, dwErrorBufLen, lpNameBuf, dwNameBufLen)
+    {% end %}
   end
 
   def aDsSetLastError(dwErr : UInt32, pszError : Win32cr::Foundation::PWSTR, pszProvider : Win32cr::Foundation::PWSTR) : Void
+    {% if !flag?(:docs) %}
     C.ADsSetLastError(dwErr, pszError, pszProvider)
+    {% end %}
   end
 
   def allocADsMem(cb : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.AllocADsMem(cb)
+    {% end %}
   end
 
   def freeADsMem(pMem : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FreeADsMem(pMem)
+    {% end %}
   end
 
   def reallocADsMem(pOldMem : Void*, cbOld : UInt32, cbNew : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.ReallocADsMem(pOldMem, cbOld, cbNew)
+    {% end %}
   end
 
   def allocADsStr(pStr : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.AllocADsStr(pStr)
+    {% end %}
   end
 
   def freeADsStr(pStr : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FreeADsStr(pStr)
+    {% end %}
   end
 
   def reallocADsStr(ppStr : Win32cr::Foundation::PWSTR*, pStr : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReallocADsStr(ppStr, pStr)
+    {% end %}
   end
 
   def aDsEncodeBinaryData(pbSrcData : UInt8*, dwSrcLen : UInt32, ppszDestData : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ADsEncodeBinaryData(pbSrcData, dwSrcLen, ppszDestData)
+    {% end %}
   end
 
   def aDsDecodeBinaryData(szSrcData : Win32cr::Foundation::PWSTR, ppbDestData : UInt8**, pdwDestLen : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ADsDecodeBinaryData(szSrcData, ppbDestData, pdwDestLen)
+    {% end %}
   end
 
   def propVariantToAdsType(pVariant : Win32cr::System::Com::VARIANT*, dwNumVariant : UInt32, ppAdsValues : Win32cr::Networking::ActiveDirectory::ADSVALUE**, pdwNumValues : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PropVariantToAdsType(pVariant, dwNumVariant, ppAdsValues, pdwNumValues)
+    {% end %}
   end
 
   def adsTypeToPropVariant(pAdsValues : Win32cr::Networking::ActiveDirectory::ADSVALUE*, dwNumValues : UInt32, pVariant : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AdsTypeToPropVariant(pAdsValues, dwNumValues, pVariant)
+    {% end %}
   end
 
   def adsFreeAdsValues(pAdsValues : Win32cr::Networking::ActiveDirectory::ADSVALUE*, dwNumValues : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.AdsFreeAdsValues(pAdsValues, dwNumValues)
+    {% end %}
   end
 
   def binarySDToSecurityDescriptor(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pVarsec : Win32cr::System::Com::VARIANT*, pszServerName : Win32cr::Foundation::PWSTR, userName : Win32cr::Foundation::PWSTR, passWord : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BinarySDToSecurityDescriptor(pSecurityDescriptor, pVarsec, pszServerName, userName, passWord, dwFlags)
+    {% end %}
   end
 
   def securityDescriptorToBinarySD(vVarSecDes : Win32cr::System::Com::VARIANT, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*, pdwSDLength : UInt32*, pszServerName : Win32cr::Foundation::PWSTR, userName : Win32cr::Foundation::PWSTR, passWord : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SecurityDescriptorToBinarySD(vVarSecDes, ppSecurityDescriptor, pdwSDLength, pszServerName, userName, passWord, dwFlags)
+    {% end %}
   end
 
   def dsBrowseForContainerW(pInfo : Win32cr::Networking::ActiveDirectory::DSBROWSEINFOW*) : Int32
+    {% if !flag?(:docs) %}
     C.DsBrowseForContainerW(pInfo)
+    {% end %}
   end
 
   def dsBrowseForContainerA(pInfo : Win32cr::Networking::ActiveDirectory::DSBROWSEINFOA*) : Int32
+    {% if !flag?(:docs) %}
     C.DsBrowseForContainerA(pInfo)
+    {% end %}
   end
 
   def dsGetIcon(dwFlags : UInt32, pszObjectClass : Win32cr::Foundation::PWSTR, cxImage : Int32, cyImage : Int32) : Win32cr::UI::WindowsAndMessaging::HICON
+    {% if !flag?(:docs) %}
     C.DsGetIcon(dwFlags, pszObjectClass, cxImage, cyImage)
+    {% end %}
   end
 
   def dsGetFriendlyClassName(pszObjectClass : Win32cr::Foundation::PWSTR, pszBuffer : UInt16*, cchBuffer : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DsGetFriendlyClassName(pszObjectClass, pszBuffer, cchBuffer)
+    {% end %}
   end
 
   def aDsPropCreateNotifyObj(pAppThdDataObj : Void*, pwzADsObjName : Win32cr::Foundation::PWSTR, phNotifyObj : Win32cr::Foundation::HWND*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ADsPropCreateNotifyObj(pAppThdDataObj, pwzADsObjName, phNotifyObj)
+    {% end %}
   end
 
   def aDsPropGetInitInfo(hNotifyObj : Win32cr::Foundation::HWND, pInitParams : Win32cr::Networking::ActiveDirectory::ADSPROPINITPARAMS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ADsPropGetInitInfo(hNotifyObj, pInitParams)
+    {% end %}
   end
 
   def aDsPropSetHwndWithTitle(hNotifyObj : Win32cr::Foundation::HWND, hPage : Win32cr::Foundation::HWND, ptzTitle : Int8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ADsPropSetHwndWithTitle(hNotifyObj, hPage, ptzTitle)
+    {% end %}
   end
 
   def aDsPropSetHwnd(hNotifyObj : Win32cr::Foundation::HWND, hPage : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ADsPropSetHwnd(hNotifyObj, hPage)
+    {% end %}
   end
 
   def aDsPropCheckIfWritable(pwzAttr : Win32cr::Foundation::PWSTR, pWritableAttrs : Win32cr::Networking::ActiveDirectory::ADS_ATTR_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ADsPropCheckIfWritable(pwzAttr, pWritableAttrs)
+    {% end %}
   end
 
   def aDsPropSendErrorMessage(hNotifyObj : Win32cr::Foundation::HWND, pError : Win32cr::Networking::ActiveDirectory::ADSPROPERROR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ADsPropSendErrorMessage(hNotifyObj, pError)
+    {% end %}
   end
 
   def aDsPropShowErrorDialog(hNotifyObj : Win32cr::Foundation::HWND, hPage : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ADsPropShowErrorDialog(hNotifyObj, hPage)
+    {% end %}
   end
 
   def dsMakeSpnW(service_class : Win32cr::Foundation::PWSTR, service_name : Win32cr::Foundation::PWSTR, instance_name : Win32cr::Foundation::PWSTR, instance_port : UInt16, referrer : Win32cr::Foundation::PWSTR, pcSpnLength : UInt32*, pszSpn : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsMakeSpnW(service_class, service_name, instance_name, instance_port, referrer, pcSpnLength, pszSpn)
+    {% end %}
   end
 
   def dsMakeSpnA(service_class : Win32cr::Foundation::PSTR, service_name : Win32cr::Foundation::PSTR, instance_name : Win32cr::Foundation::PSTR, instance_port : UInt16, referrer : Win32cr::Foundation::PSTR, pcSpnLength : UInt32*, pszSpn : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsMakeSpnA(service_class, service_name, instance_name, instance_port, referrer, pcSpnLength, pszSpn)
+    {% end %}
   end
 
   def dsCrackSpnA(pszSpn : Win32cr::Foundation::PSTR, pcServiceClass : UInt32*, service_class : UInt8*, pcServiceName : UInt32*, service_name : UInt8*, pcInstanceName : UInt32*, instance_name : UInt8*, pInstancePort : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsCrackSpnA(pszSpn, pcServiceClass, service_class, pcServiceName, service_name, pcInstanceName, instance_name, pInstancePort)
+    {% end %}
   end
 
   def dsCrackSpnW(pszSpn : Win32cr::Foundation::PWSTR, pcServiceClass : UInt32*, service_class : UInt16*, pcServiceName : UInt32*, service_name : UInt16*, pcInstanceName : UInt32*, instance_name : UInt16*, pInstancePort : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsCrackSpnW(pszSpn, pcServiceClass, service_class, pcServiceName, service_name, pcInstanceName, instance_name, pInstancePort)
+    {% end %}
   end
 
   def dsQuoteRdnValueW(cUnquotedRdnValueLength : UInt32, psUnquotedRdnValue : UInt16*, pcQuotedRdnValueLength : UInt32*, psQuotedRdnValue : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsQuoteRdnValueW(cUnquotedRdnValueLength, psUnquotedRdnValue, pcQuotedRdnValueLength, psQuotedRdnValue)
+    {% end %}
   end
 
   def dsQuoteRdnValueA(cUnquotedRdnValueLength : UInt32, psUnquotedRdnValue : UInt8*, pcQuotedRdnValueLength : UInt32*, psQuotedRdnValue : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsQuoteRdnValueA(cUnquotedRdnValueLength, psUnquotedRdnValue, pcQuotedRdnValueLength, psQuotedRdnValue)
+    {% end %}
   end
 
   def dsUnquoteRdnValueW(cQuotedRdnValueLength : UInt32, psQuotedRdnValue : UInt16*, pcUnquotedRdnValueLength : UInt32*, psUnquotedRdnValue : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsUnquoteRdnValueW(cQuotedRdnValueLength, psQuotedRdnValue, pcUnquotedRdnValueLength, psUnquotedRdnValue)
+    {% end %}
   end
 
   def dsUnquoteRdnValueA(cQuotedRdnValueLength : UInt32, psQuotedRdnValue : UInt8*, pcUnquotedRdnValueLength : UInt32*, psUnquotedRdnValue : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsUnquoteRdnValueA(cQuotedRdnValueLength, psQuotedRdnValue, pcUnquotedRdnValueLength, psUnquotedRdnValue)
+    {% end %}
   end
 
   def dsGetRdnW(ppDN : Win32cr::Foundation::PWSTR*, pcDN : UInt32*, ppKey : Win32cr::Foundation::PWSTR*, pcKey : UInt32*, ppVal : Win32cr::Foundation::PWSTR*, pcVal : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsGetRdnW(ppDN, pcDN, ppKey, pcKey, ppVal, pcVal)
+    {% end %}
   end
 
   def dsCrackUnquotedMangledRdnW(pszRDN : UInt16*, cchRDN : UInt32, pGuid : LibC::GUID*, peDsMangleFor : Win32cr::Networking::ActiveDirectory::DS_MANGLE_FOR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DsCrackUnquotedMangledRdnW(pszRDN, cchRDN, pGuid, peDsMangleFor)
+    {% end %}
   end
 
   def dsCrackUnquotedMangledRdnA(pszRDN : UInt8*, cchRDN : UInt32, pGuid : LibC::GUID*, peDsMangleFor : Win32cr::Networking::ActiveDirectory::DS_MANGLE_FOR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DsCrackUnquotedMangledRdnA(pszRDN, cchRDN, pGuid, peDsMangleFor)
+    {% end %}
   end
 
   def dsIsMangledRdnValueW(pszRdn : UInt16*, cRdn : UInt32, eDsMangleForDesired : Win32cr::Networking::ActiveDirectory::DS_MANGLE_FOR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DsIsMangledRdnValueW(pszRdn, cRdn, eDsMangleForDesired)
+    {% end %}
   end
 
   def dsIsMangledRdnValueA(pszRdn : UInt8*, cRdn : UInt32, eDsMangleForDesired : Win32cr::Networking::ActiveDirectory::DS_MANGLE_FOR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DsIsMangledRdnValueA(pszRdn, cRdn, eDsMangleForDesired)
+    {% end %}
   end
 
   def dsIsMangledDnA(pszDn : Win32cr::Foundation::PSTR, eDsMangleFor : Win32cr::Networking::ActiveDirectory::DS_MANGLE_FOR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DsIsMangledDnA(pszDn, eDsMangleFor)
+    {% end %}
   end
 
   def dsIsMangledDnW(pszDn : Win32cr::Foundation::PWSTR, eDsMangleFor : Win32cr::Networking::ActiveDirectory::DS_MANGLE_FOR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DsIsMangledDnW(pszDn, eDsMangleFor)
+    {% end %}
   end
 
   def dsCrackSpn2A(pszSpn : UInt8*, cSpn : UInt32, pcServiceClass : UInt32*, service_class : UInt8*, pcServiceName : UInt32*, service_name : UInt8*, pcInstanceName : UInt32*, instance_name : UInt8*, pInstancePort : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsCrackSpn2A(pszSpn, cSpn, pcServiceClass, service_class, pcServiceName, service_name, pcInstanceName, instance_name, pInstancePort)
+    {% end %}
   end
 
   def dsCrackSpn2W(pszSpn : UInt16*, cSpn : UInt32, pcServiceClass : UInt32*, service_class : UInt16*, pcServiceName : UInt32*, service_name : UInt16*, pcInstanceName : UInt32*, instance_name : UInt16*, pInstancePort : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsCrackSpn2W(pszSpn, cSpn, pcServiceClass, service_class, pcServiceName, service_name, pcInstanceName, instance_name, pInstancePort)
+    {% end %}
   end
 
   def dsCrackSpn3W(pszSpn : Win32cr::Foundation::PWSTR, cSpn : UInt32, pcHostName : UInt32*, host_name : UInt16*, pcInstanceName : UInt32*, instance_name : UInt16*, pPortNumber : UInt16*, pcDomainName : UInt32*, domain_name : UInt16*, pcRealmName : UInt32*, realm_name : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsCrackSpn3W(pszSpn, cSpn, pcHostName, host_name, pcInstanceName, instance_name, pPortNumber, pcDomainName, domain_name, pcRealmName, realm_name)
+    {% end %}
   end
 
   def dsCrackSpn4W(pszSpn : Win32cr::Foundation::PWSTR, cSpn : UInt32, pcHostName : UInt32*, host_name : UInt16*, pcInstanceName : UInt32*, instance_name : UInt16*, pcPortName : UInt32*, port_name : UInt16*, pcDomainName : UInt32*, domain_name : UInt16*, pcRealmName : UInt32*, realm_name : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsCrackSpn4W(pszSpn, cSpn, pcHostName, host_name, pcInstanceName, instance_name, pcPortName, port_name, pcDomainName, domain_name, pcRealmName, realm_name)
+    {% end %}
   end
 
   def dsBindW(domain_controller_name : Win32cr::Foundation::PWSTR, dns_domain_name : Win32cr::Foundation::PWSTR, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsBindW(domain_controller_name, dns_domain_name, phDS)
+    {% end %}
   end
 
   def dsBindA(domain_controller_name : Win32cr::Foundation::PSTR, dns_domain_name : Win32cr::Foundation::PSTR, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsBindA(domain_controller_name, dns_domain_name, phDS)
+    {% end %}
   end
 
   def dsBindWithCredW(domain_controller_name : Win32cr::Foundation::PWSTR, dns_domain_name : Win32cr::Foundation::PWSTR, auth_identity : Void*, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsBindWithCredW(domain_controller_name, dns_domain_name, auth_identity, phDS)
+    {% end %}
   end
 
   def dsBindWithCredA(domain_controller_name : Win32cr::Foundation::PSTR, dns_domain_name : Win32cr::Foundation::PSTR, auth_identity : Void*, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsBindWithCredA(domain_controller_name, dns_domain_name, auth_identity, phDS)
+    {% end %}
   end
 
   def dsBindWithSpnW(domain_controller_name : Win32cr::Foundation::PWSTR, dns_domain_name : Win32cr::Foundation::PWSTR, auth_identity : Void*, service_principal_name : Win32cr::Foundation::PWSTR, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsBindWithSpnW(domain_controller_name, dns_domain_name, auth_identity, service_principal_name, phDS)
+    {% end %}
   end
 
   def dsBindWithSpnA(domain_controller_name : Win32cr::Foundation::PSTR, dns_domain_name : Win32cr::Foundation::PSTR, auth_identity : Void*, service_principal_name : Win32cr::Foundation::PSTR, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsBindWithSpnA(domain_controller_name, dns_domain_name, auth_identity, service_principal_name, phDS)
+    {% end %}
   end
 
   def dsBindWithSpnExW(domain_controller_name : Win32cr::Foundation::PWSTR, dns_domain_name : Win32cr::Foundation::PWSTR, auth_identity : Void*, service_principal_name : Win32cr::Foundation::PWSTR, bind_flags : UInt32, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsBindWithSpnExW(domain_controller_name, dns_domain_name, auth_identity, service_principal_name, bind_flags, phDS)
+    {% end %}
   end
 
   def dsBindWithSpnExA(domain_controller_name : Win32cr::Foundation::PSTR, dns_domain_name : Win32cr::Foundation::PSTR, auth_identity : Void*, service_principal_name : Win32cr::Foundation::PSTR, bind_flags : UInt32, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsBindWithSpnExA(domain_controller_name, dns_domain_name, auth_identity, service_principal_name, bind_flags, phDS)
+    {% end %}
   end
 
   def dsBindByInstanceW(server_name : Win32cr::Foundation::PWSTR, annotation__ : Win32cr::Foundation::PWSTR, instance_guid : LibC::GUID*, dns_domain_name : Win32cr::Foundation::PWSTR, auth_identity : Void*, service_principal_name : Win32cr::Foundation::PWSTR, bind_flags : UInt32, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsBindByInstanceW(server_name, annotation__, instance_guid, dns_domain_name, auth_identity, service_principal_name, bind_flags, phDS)
+    {% end %}
   end
 
   def dsBindByInstanceA(server_name : Win32cr::Foundation::PSTR, annotation__ : Win32cr::Foundation::PSTR, instance_guid : LibC::GUID*, dns_domain_name : Win32cr::Foundation::PSTR, auth_identity : Void*, service_principal_name : Win32cr::Foundation::PSTR, bind_flags : UInt32, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsBindByInstanceA(server_name, annotation__, instance_guid, dns_domain_name, auth_identity, service_principal_name, bind_flags, phDS)
+    {% end %}
   end
 
   def dsBindToISTGW(site_name : Win32cr::Foundation::PWSTR, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsBindToISTGW(site_name, phDS)
+    {% end %}
   end
 
   def dsBindToISTGA(site_name : Win32cr::Foundation::PSTR, phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsBindToISTGA(site_name, phDS)
+    {% end %}
   end
 
   def dsBindingSetTimeout(hDS : Win32cr::Foundation::HANDLE, cTimeoutSecs : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DsBindingSetTimeout(hDS, cTimeoutSecs)
+    {% end %}
   end
 
   def dsUnBindW(phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsUnBindW(phDS)
+    {% end %}
   end
 
   def dsUnBindA(phDS : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsUnBindA(phDS)
+    {% end %}
   end
 
   def dsMakePasswordCredentialsW(user : Win32cr::Foundation::PWSTR, domain : Win32cr::Foundation::PWSTR, password : Win32cr::Foundation::PWSTR, pAuthIdentity : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsMakePasswordCredentialsW(user, domain, password, pAuthIdentity)
+    {% end %}
   end
 
   def dsMakePasswordCredentialsA(user : Win32cr::Foundation::PSTR, domain : Win32cr::Foundation::PSTR, password : Win32cr::Foundation::PSTR, pAuthIdentity : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsMakePasswordCredentialsA(user, domain, password, pAuthIdentity)
+    {% end %}
   end
 
   def dsFreePasswordCredentials(auth_identity : Void*) : Void
+    {% if !flag?(:docs) %}
     C.DsFreePasswordCredentials(auth_identity)
+    {% end %}
   end
 
   def dsCrackNamesW(hDS : Win32cr::Foundation::HANDLE, flags : Win32cr::Networking::ActiveDirectory::DS_NAME_FLAGS, formatOffered : Win32cr::Networking::ActiveDirectory::DS_NAME_FORMAT, formatDesired : Win32cr::Networking::ActiveDirectory::DS_NAME_FORMAT, cNames : UInt32, rpNames : Win32cr::Foundation::PWSTR*, ppResult : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsCrackNamesW(hDS, flags, formatOffered, formatDesired, cNames, rpNames, ppResult)
+    {% end %}
   end
 
   def dsCrackNamesA(hDS : Win32cr::Foundation::HANDLE, flags : Win32cr::Networking::ActiveDirectory::DS_NAME_FLAGS, formatOffered : Win32cr::Networking::ActiveDirectory::DS_NAME_FORMAT, formatDesired : Win32cr::Networking::ActiveDirectory::DS_NAME_FORMAT, cNames : UInt32, rpNames : Win32cr::Foundation::PSTR*, ppResult : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsCrackNamesA(hDS, flags, formatOffered, formatDesired, cNames, rpNames, ppResult)
+    {% end %}
   end
 
   def dsFreeNameResultW(pResult : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW*) : Void
+    {% if !flag?(:docs) %}
     C.DsFreeNameResultW(pResult)
+    {% end %}
   end
 
   def dsFreeNameResultA(pResult : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA*) : Void
+    {% if !flag?(:docs) %}
     C.DsFreeNameResultA(pResult)
+    {% end %}
   end
 
   def dsGetSpnA(service_type : Win32cr::Networking::ActiveDirectory::DS_SPN_NAME_TYPE, service_class : Win32cr::Foundation::PSTR, service_name : Win32cr::Foundation::PSTR, instance_port : UInt16, cInstanceNames : UInt16, pInstanceNames : Win32cr::Foundation::PSTR*, pInstancePorts : UInt16*, pcSpn : UInt32*, prpszSpn : Win32cr::Foundation::PSTR**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsGetSpnA(service_type, service_class, service_name, instance_port, cInstanceNames, pInstanceNames, pInstancePorts, pcSpn, prpszSpn)
+    {% end %}
   end
 
   def dsGetSpnW(service_type : Win32cr::Networking::ActiveDirectory::DS_SPN_NAME_TYPE, service_class : Win32cr::Foundation::PWSTR, service_name : Win32cr::Foundation::PWSTR, instance_port : UInt16, cInstanceNames : UInt16, pInstanceNames : Win32cr::Foundation::PWSTR*, pInstancePorts : UInt16*, pcSpn : UInt32*, prpszSpn : Win32cr::Foundation::PWSTR**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsGetSpnW(service_type, service_class, service_name, instance_port, cInstanceNames, pInstanceNames, pInstancePorts, pcSpn, prpszSpn)
+    {% end %}
   end
 
   def dsFreeSpnArrayA(cSpn : UInt32, rpszSpn : Win32cr::Foundation::PSTR*) : Void
+    {% if !flag?(:docs) %}
     C.DsFreeSpnArrayA(cSpn, rpszSpn)
+    {% end %}
   end
 
   def dsFreeSpnArrayW(cSpn : UInt32, rpszSpn : Win32cr::Foundation::PWSTR*) : Void
+    {% if !flag?(:docs) %}
     C.DsFreeSpnArrayW(cSpn, rpszSpn)
+    {% end %}
   end
 
   def dsWriteAccountSpnA(hDS : Win32cr::Foundation::HANDLE, operation : Win32cr::Networking::ActiveDirectory::DS_SPN_WRITE_OP, pszAccount : Win32cr::Foundation::PSTR, cSpn : UInt32, rpszSpn : Win32cr::Foundation::PSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsWriteAccountSpnA(hDS, operation, pszAccount, cSpn, rpszSpn)
+    {% end %}
   end
 
   def dsWriteAccountSpnW(hDS : Win32cr::Foundation::HANDLE, operation : Win32cr::Networking::ActiveDirectory::DS_SPN_WRITE_OP, pszAccount : Win32cr::Foundation::PWSTR, cSpn : UInt32, rpszSpn : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsWriteAccountSpnW(hDS, operation, pszAccount, cSpn, rpszSpn)
+    {% end %}
   end
 
   def dsClientMakeSpnForTargetServerW(service_class : Win32cr::Foundation::PWSTR, service_name : Win32cr::Foundation::PWSTR, pcSpnLength : UInt32*, pszSpn : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsClientMakeSpnForTargetServerW(service_class, service_name, pcSpnLength, pszSpn)
+    {% end %}
   end
 
   def dsClientMakeSpnForTargetServerA(service_class : Win32cr::Foundation::PSTR, service_name : Win32cr::Foundation::PSTR, pcSpnLength : UInt32*, pszSpn : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsClientMakeSpnForTargetServerA(service_class, service_name, pcSpnLength, pszSpn)
+    {% end %}
   end
 
   def dsServerRegisterSpnA(operation : Win32cr::Networking::ActiveDirectory::DS_SPN_WRITE_OP, service_class : Win32cr::Foundation::PSTR, user_object_dn : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.DsServerRegisterSpnA(operation, service_class, user_object_dn)
+    {% end %}
   end
 
   def dsServerRegisterSpnW(operation : Win32cr::Networking::ActiveDirectory::DS_SPN_WRITE_OP, service_class : Win32cr::Foundation::PWSTR, user_object_dn : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.DsServerRegisterSpnW(operation, service_class, user_object_dn)
+    {% end %}
   end
 
   def dsReplicaSyncA(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PSTR, pUuidDsaSrc : LibC::GUID*, options : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DsReplicaSyncA(hDS, name_context, pUuidDsaSrc, options)
+    {% end %}
   end
 
   def dsReplicaSyncW(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PWSTR, pUuidDsaSrc : LibC::GUID*, options : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DsReplicaSyncW(hDS, name_context, pUuidDsaSrc, options)
+    {% end %}
   end
 
   def dsReplicaAddA(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PSTR, source_dsa_dn : Win32cr::Foundation::PSTR, transport_dn : Win32cr::Foundation::PSTR, source_dsa_address : Win32cr::Foundation::PSTR, pSchedule : Win32cr::Networking::ActiveDirectory::SCHEDULE*, options : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DsReplicaAddA(hDS, name_context, source_dsa_dn, transport_dn, source_dsa_address, pSchedule, options)
+    {% end %}
   end
 
   def dsReplicaAddW(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PWSTR, source_dsa_dn : Win32cr::Foundation::PWSTR, transport_dn : Win32cr::Foundation::PWSTR, source_dsa_address : Win32cr::Foundation::PWSTR, pSchedule : Win32cr::Networking::ActiveDirectory::SCHEDULE*, options : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DsReplicaAddW(hDS, name_context, source_dsa_dn, transport_dn, source_dsa_address, pSchedule, options)
+    {% end %}
   end
 
   def dsReplicaDelA(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PSTR, dsa_src : Win32cr::Foundation::PSTR, options : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DsReplicaDelA(hDS, name_context, dsa_src, options)
+    {% end %}
   end
 
   def dsReplicaDelW(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PWSTR, dsa_src : Win32cr::Foundation::PWSTR, options : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DsReplicaDelW(hDS, name_context, dsa_src, options)
+    {% end %}
   end
 
   def dsReplicaModifyA(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PSTR, pUuidSourceDsa : LibC::GUID*, transport_dn : Win32cr::Foundation::PSTR, source_dsa_address : Win32cr::Foundation::PSTR, pSchedule : Win32cr::Networking::ActiveDirectory::SCHEDULE*, replica_flags : UInt32, modify_fields : UInt32, options : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DsReplicaModifyA(hDS, name_context, pUuidSourceDsa, transport_dn, source_dsa_address, pSchedule, replica_flags, modify_fields, options)
+    {% end %}
   end
 
   def dsReplicaModifyW(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PWSTR, pUuidSourceDsa : LibC::GUID*, transport_dn : Win32cr::Foundation::PWSTR, source_dsa_address : Win32cr::Foundation::PWSTR, pSchedule : Win32cr::Networking::ActiveDirectory::SCHEDULE*, replica_flags : UInt32, modify_fields : UInt32, options : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DsReplicaModifyW(hDS, name_context, pUuidSourceDsa, transport_dn, source_dsa_address, pSchedule, replica_flags, modify_fields, options)
+    {% end %}
   end
 
   def dsReplicaUpdateRefsA(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PSTR, dsa_dest : Win32cr::Foundation::PSTR, pUuidDsaDest : LibC::GUID*, options : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DsReplicaUpdateRefsA(hDS, name_context, dsa_dest, pUuidDsaDest, options)
+    {% end %}
   end
 
   def dsReplicaUpdateRefsW(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PWSTR, dsa_dest : Win32cr::Foundation::PWSTR, pUuidDsaDest : LibC::GUID*, options : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DsReplicaUpdateRefsW(hDS, name_context, dsa_dest, pUuidDsaDest, options)
+    {% end %}
   end
 
   def dsReplicaSyncAllA(hDS : Win32cr::Foundation::HANDLE, pszNameContext : Win32cr::Foundation::PSTR, ulFlags : UInt32, pFnCallBack : LibC::IntPtrT, pCallbackData : Void*, pErrors : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_ERRINFOA***) : UInt32
+    {% if !flag?(:docs) %}
     C.DsReplicaSyncAllA(hDS, pszNameContext, ulFlags, pFnCallBack, pCallbackData, pErrors)
+    {% end %}
   end
 
   def dsReplicaSyncAllW(hDS : Win32cr::Foundation::HANDLE, pszNameContext : Win32cr::Foundation::PWSTR, ulFlags : UInt32, pFnCallBack : LibC::IntPtrT, pCallbackData : Void*, pErrors : Win32cr::Networking::ActiveDirectory::DS_REPSYNCALL_ERRINFOW***) : UInt32
+    {% if !flag?(:docs) %}
     C.DsReplicaSyncAllW(hDS, pszNameContext, ulFlags, pFnCallBack, pCallbackData, pErrors)
+    {% end %}
   end
 
   def dsRemoveDsServerW(hDs : Win32cr::Foundation::HANDLE, server_dn : Win32cr::Foundation::PWSTR, domain_dn : Win32cr::Foundation::PWSTR, fLastDcInDomain : Win32cr::Foundation::BOOL*, fCommit : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.DsRemoveDsServerW(hDs, server_dn, domain_dn, fLastDcInDomain, fCommit)
+    {% end %}
   end
 
   def dsRemoveDsServerA(hDs : Win32cr::Foundation::HANDLE, server_dn : Win32cr::Foundation::PSTR, domain_dn : Win32cr::Foundation::PSTR, fLastDcInDomain : Win32cr::Foundation::BOOL*, fCommit : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.DsRemoveDsServerA(hDs, server_dn, domain_dn, fLastDcInDomain, fCommit)
+    {% end %}
   end
 
   def dsRemoveDsDomainW(hDs : Win32cr::Foundation::HANDLE, domain_dn : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.DsRemoveDsDomainW(hDs, domain_dn)
+    {% end %}
   end
 
   def dsRemoveDsDomainA(hDs : Win32cr::Foundation::HANDLE, domain_dn : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.DsRemoveDsDomainA(hDs, domain_dn)
+    {% end %}
   end
 
   def dsListSitesA(hDs : Win32cr::Foundation::HANDLE, ppSites : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsListSitesA(hDs, ppSites)
+    {% end %}
   end
 
   def dsListSitesW(hDs : Win32cr::Foundation::HANDLE, ppSites : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsListSitesW(hDs, ppSites)
+    {% end %}
   end
 
   def dsListServersInSiteA(hDs : Win32cr::Foundation::HANDLE, site : Win32cr::Foundation::PSTR, ppServers : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsListServersInSiteA(hDs, site, ppServers)
+    {% end %}
   end
 
   def dsListServersInSiteW(hDs : Win32cr::Foundation::HANDLE, site : Win32cr::Foundation::PWSTR, ppServers : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsListServersInSiteW(hDs, site, ppServers)
+    {% end %}
   end
 
   def dsListDomainsInSiteA(hDs : Win32cr::Foundation::HANDLE, site : Win32cr::Foundation::PSTR, ppDomains : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsListDomainsInSiteA(hDs, site, ppDomains)
+    {% end %}
   end
 
   def dsListDomainsInSiteW(hDs : Win32cr::Foundation::HANDLE, site : Win32cr::Foundation::PWSTR, ppDomains : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsListDomainsInSiteW(hDs, site, ppDomains)
+    {% end %}
   end
 
   def dsListServersForDomainInSiteA(hDs : Win32cr::Foundation::HANDLE, domain : Win32cr::Foundation::PSTR, site : Win32cr::Foundation::PSTR, ppServers : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsListServersForDomainInSiteA(hDs, domain, site, ppServers)
+    {% end %}
   end
 
   def dsListServersForDomainInSiteW(hDs : Win32cr::Foundation::HANDLE, domain : Win32cr::Foundation::PWSTR, site : Win32cr::Foundation::PWSTR, ppServers : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsListServersForDomainInSiteW(hDs, domain, site, ppServers)
+    {% end %}
   end
 
   def dsListInfoForServerA(hDs : Win32cr::Foundation::HANDLE, server : Win32cr::Foundation::PSTR, ppInfo : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsListInfoForServerA(hDs, server, ppInfo)
+    {% end %}
   end
 
   def dsListInfoForServerW(hDs : Win32cr::Foundation::HANDLE, server : Win32cr::Foundation::PWSTR, ppInfo : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsListInfoForServerW(hDs, server, ppInfo)
+    {% end %}
   end
 
   def dsListRolesA(hDs : Win32cr::Foundation::HANDLE, ppRoles : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTA**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsListRolesA(hDs, ppRoles)
+    {% end %}
   end
 
   def dsListRolesW(hDs : Win32cr::Foundation::HANDLE, ppRoles : Win32cr::Networking::ActiveDirectory::DS_NAME_RESULTW**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsListRolesW(hDs, ppRoles)
+    {% end %}
   end
 
   def dsQuerySitesByCostW(hDS : Win32cr::Foundation::HANDLE, pwszFromSite : Win32cr::Foundation::PWSTR, rgwszToSites : Win32cr::Foundation::PWSTR*, cToSites : UInt32, dwFlags : UInt32, prgSiteInfo : Win32cr::Networking::ActiveDirectory::DS_SITE_COST_INFO**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsQuerySitesByCostW(hDS, pwszFromSite, rgwszToSites, cToSites, dwFlags, prgSiteInfo)
+    {% end %}
   end
 
   def dsQuerySitesByCostA(hDS : Win32cr::Foundation::HANDLE, pszFromSite : Win32cr::Foundation::PSTR, rgszToSites : Win32cr::Foundation::PSTR*, cToSites : UInt32, dwFlags : UInt32, prgSiteInfo : Win32cr::Networking::ActiveDirectory::DS_SITE_COST_INFO**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsQuerySitesByCostA(hDS, pszFromSite, rgszToSites, cToSites, dwFlags, prgSiteInfo)
+    {% end %}
   end
 
   def dsQuerySitesFree(rgSiteInfo : Win32cr::Networking::ActiveDirectory::DS_SITE_COST_INFO*) : Void
+    {% if !flag?(:docs) %}
     C.DsQuerySitesFree(rgSiteInfo)
+    {% end %}
   end
 
   def dsMapSchemaGuidsA(hDs : Win32cr::Foundation::HANDLE, cGuids : UInt32, rGuids : LibC::GUID*, ppGuidMap : Win32cr::Networking::ActiveDirectory::DS_SCHEMA_GUID_MAPA**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsMapSchemaGuidsA(hDs, cGuids, rGuids, ppGuidMap)
+    {% end %}
   end
 
   def dsFreeSchemaGuidMapA(pGuidMap : Win32cr::Networking::ActiveDirectory::DS_SCHEMA_GUID_MAPA*) : Void
+    {% if !flag?(:docs) %}
     C.DsFreeSchemaGuidMapA(pGuidMap)
+    {% end %}
   end
 
   def dsMapSchemaGuidsW(hDs : Win32cr::Foundation::HANDLE, cGuids : UInt32, rGuids : LibC::GUID*, ppGuidMap : Win32cr::Networking::ActiveDirectory::DS_SCHEMA_GUID_MAPW**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsMapSchemaGuidsW(hDs, cGuids, rGuids, ppGuidMap)
+    {% end %}
   end
 
   def dsFreeSchemaGuidMapW(pGuidMap : Win32cr::Networking::ActiveDirectory::DS_SCHEMA_GUID_MAPW*) : Void
+    {% if !flag?(:docs) %}
     C.DsFreeSchemaGuidMapW(pGuidMap)
+    {% end %}
   end
 
   def dsGetDomainControllerInfoA(hDs : Win32cr::Foundation::HANDLE, domain_name : Win32cr::Foundation::PSTR, info_level : UInt32, pcOut : UInt32*, ppInfo : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsGetDomainControllerInfoA(hDs, domain_name, info_level, pcOut, ppInfo)
+    {% end %}
   end
 
   def dsGetDomainControllerInfoW(hDs : Win32cr::Foundation::HANDLE, domain_name : Win32cr::Foundation::PWSTR, info_level : UInt32, pcOut : UInt32*, ppInfo : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsGetDomainControllerInfoW(hDs, domain_name, info_level, pcOut, ppInfo)
+    {% end %}
   end
 
   def dsFreeDomainControllerInfoA(info_level : UInt32, cInfo : UInt32, pInfo : Void*) : Void
+    {% if !flag?(:docs) %}
     C.DsFreeDomainControllerInfoA(info_level, cInfo, pInfo)
+    {% end %}
   end
 
   def dsFreeDomainControllerInfoW(info_level : UInt32, cInfo : UInt32, pInfo : Void*) : Void
+    {% if !flag?(:docs) %}
     C.DsFreeDomainControllerInfoW(info_level, cInfo, pInfo)
+    {% end %}
   end
 
   def dsReplicaConsistencyCheck(hDS : Win32cr::Foundation::HANDLE, task_id : Win32cr::Networking::ActiveDirectory::DS_KCC_TASKID, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DsReplicaConsistencyCheck(hDS, task_id, dwFlags)
+    {% end %}
   end
 
   def dsReplicaVerifyObjectsW(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PWSTR, pUuidDsaSrc : LibC::GUID*, ulOptions : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DsReplicaVerifyObjectsW(hDS, name_context, pUuidDsaSrc, ulOptions)
+    {% end %}
   end
 
   def dsReplicaVerifyObjectsA(hDS : Win32cr::Foundation::HANDLE, name_context : Win32cr::Foundation::PSTR, pUuidDsaSrc : LibC::GUID*, ulOptions : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DsReplicaVerifyObjectsA(hDS, name_context, pUuidDsaSrc, ulOptions)
+    {% end %}
   end
 
   def dsReplicaGetInfoW(hDS : Win32cr::Foundation::HANDLE, info_type : Win32cr::Networking::ActiveDirectory::DS_REPL_INFO_TYPE, pszObject : Win32cr::Foundation::PWSTR, puuidForSourceDsaObjGuid : LibC::GUID*, ppInfo : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsReplicaGetInfoW(hDS, info_type, pszObject, puuidForSourceDsaObjGuid, ppInfo)
+    {% end %}
   end
 
   def dsReplicaGetInfo2W(hDS : Win32cr::Foundation::HANDLE, info_type : Win32cr::Networking::ActiveDirectory::DS_REPL_INFO_TYPE, pszObject : Win32cr::Foundation::PWSTR, puuidForSourceDsaObjGuid : LibC::GUID*, pszAttributeName : Win32cr::Foundation::PWSTR, pszValue : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwEnumerationContext : UInt32, ppInfo : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsReplicaGetInfo2W(hDS, info_type, pszObject, puuidForSourceDsaObjGuid, pszAttributeName, pszValue, dwFlags, dwEnumerationContext, ppInfo)
+    {% end %}
   end
 
   def dsReplicaFreeInfo(info_type : Win32cr::Networking::ActiveDirectory::DS_REPL_INFO_TYPE, pInfo : Void*) : Void
+    {% if !flag?(:docs) %}
     C.DsReplicaFreeInfo(info_type, pInfo)
+    {% end %}
   end
 
   def dsAddSidHistoryW(hDS : Win32cr::Foundation::HANDLE, flags : UInt32, src_domain : Win32cr::Foundation::PWSTR, src_principal : Win32cr::Foundation::PWSTR, src_domain_controller : Win32cr::Foundation::PWSTR, src_domain_creds : Void*, dst_domain : Win32cr::Foundation::PWSTR, dst_principal : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.DsAddSidHistoryW(hDS, flags, src_domain, src_principal, src_domain_controller, src_domain_creds, dst_domain, dst_principal)
+    {% end %}
   end
 
   def dsAddSidHistoryA(hDS : Win32cr::Foundation::HANDLE, flags : UInt32, src_domain : Win32cr::Foundation::PSTR, src_principal : Win32cr::Foundation::PSTR, src_domain_controller : Win32cr::Foundation::PSTR, src_domain_creds : Void*, dst_domain : Win32cr::Foundation::PSTR, dst_principal : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.DsAddSidHistoryA(hDS, flags, src_domain, src_principal, src_domain_controller, src_domain_creds, dst_domain, dst_principal)
+    {% end %}
   end
 
   def dsInheritSecurityIdentityW(hDS : Win32cr::Foundation::HANDLE, flags : UInt32, src_principal : Win32cr::Foundation::PWSTR, dst_principal : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.DsInheritSecurityIdentityW(hDS, flags, src_principal, dst_principal)
+    {% end %}
   end
 
   def dsInheritSecurityIdentityA(hDS : Win32cr::Foundation::HANDLE, flags : UInt32, src_principal : Win32cr::Foundation::PSTR, dst_principal : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.DsInheritSecurityIdentityA(hDS, flags, src_principal, dst_principal)
+    {% end %}
   end
 
   def dsRoleGetPrimaryDomainInformation(lpServer : Win32cr::Foundation::PWSTR, info_level : Win32cr::Networking::ActiveDirectory::DSROLE_PRIMARY_DOMAIN_INFO_LEVEL, buffer : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsRoleGetPrimaryDomainInformation(lpServer, info_level, buffer)
+    {% end %}
   end
 
   def dsRoleFreeMemory(buffer : Void*) : Void
+    {% if !flag?(:docs) %}
     C.DsRoleFreeMemory(buffer)
+    {% end %}
   end
 
   def dsGetDcNameA(computer_name : Win32cr::Foundation::PSTR, domain_name : Win32cr::Foundation::PSTR, domain_guid : LibC::GUID*, site_name : Win32cr::Foundation::PSTR, flags : UInt32, domain_controller_info : Win32cr::Networking::ActiveDirectory::DOMAIN_CONTROLLER_INFOA**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsGetDcNameA(computer_name, domain_name, domain_guid, site_name, flags, domain_controller_info)
+    {% end %}
   end
 
   def dsGetDcNameW(computer_name : Win32cr::Foundation::PWSTR, domain_name : Win32cr::Foundation::PWSTR, domain_guid : LibC::GUID*, site_name : Win32cr::Foundation::PWSTR, flags : UInt32, domain_controller_info : Win32cr::Networking::ActiveDirectory::DOMAIN_CONTROLLER_INFOW**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsGetDcNameW(computer_name, domain_name, domain_guid, site_name, flags, domain_controller_info)
+    {% end %}
   end
 
   def dsGetSiteNameA(computer_name : Win32cr::Foundation::PSTR, site_name : Win32cr::Foundation::PSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsGetSiteNameA(computer_name, site_name)
+    {% end %}
   end
 
   def dsGetSiteNameW(computer_name : Win32cr::Foundation::PWSTR, site_name : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsGetSiteNameW(computer_name, site_name)
+    {% end %}
   end
 
   def dsValidateSubnetNameW(subnet_name : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.DsValidateSubnetNameW(subnet_name)
+    {% end %}
   end
 
   def dsValidateSubnetNameA(subnet_name : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.DsValidateSubnetNameA(subnet_name)
+    {% end %}
   end
 
   def dsAddressToSiteNamesW(computer_name : Win32cr::Foundation::PWSTR, entry_count : UInt32, socket_addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS*, site_names : Win32cr::Foundation::PWSTR**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsAddressToSiteNamesW(computer_name, entry_count, socket_addresses, site_names)
+    {% end %}
   end
 
   def dsAddressToSiteNamesA(computer_name : Win32cr::Foundation::PSTR, entry_count : UInt32, socket_addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS*, site_names : Win32cr::Foundation::PSTR**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsAddressToSiteNamesA(computer_name, entry_count, socket_addresses, site_names)
+    {% end %}
   end
 
   def dsAddressToSiteNamesExW(computer_name : Win32cr::Foundation::PWSTR, entry_count : UInt32, socket_addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS*, site_names : Win32cr::Foundation::PWSTR**, subnet_names : Win32cr::Foundation::PWSTR**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsAddressToSiteNamesExW(computer_name, entry_count, socket_addresses, site_names, subnet_names)
+    {% end %}
   end
 
   def dsAddressToSiteNamesExA(computer_name : Win32cr::Foundation::PSTR, entry_count : UInt32, socket_addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS*, site_names : Win32cr::Foundation::PSTR**, subnet_names : Win32cr::Foundation::PSTR**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsAddressToSiteNamesExA(computer_name, entry_count, socket_addresses, site_names, subnet_names)
+    {% end %}
   end
 
   def dsEnumerateDomainTrustsW(server_name : Win32cr::Foundation::PWSTR, flags : UInt32, domains : Win32cr::Networking::ActiveDirectory::DS_DOMAIN_TRUSTSW**, domain_count : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsEnumerateDomainTrustsW(server_name, flags, domains, domain_count)
+    {% end %}
   end
 
   def dsEnumerateDomainTrustsA(server_name : Win32cr::Foundation::PSTR, flags : UInt32, domains : Win32cr::Networking::ActiveDirectory::DS_DOMAIN_TRUSTSA**, domain_count : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsEnumerateDomainTrustsA(server_name, flags, domains, domain_count)
+    {% end %}
   end
 
   def dsGetForestTrustInformationW(server_name : Win32cr::Foundation::PWSTR, trusted_domain_name : Win32cr::Foundation::PWSTR, flags : UInt32, forest_trust_info : Win32cr::Security::Authentication::Identity::LSA_FOREST_TRUST_INFORMATION**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsGetForestTrustInformationW(server_name, trusted_domain_name, flags, forest_trust_info)
+    {% end %}
   end
 
   def dsMergeForestTrustInformationW(domain_name : Win32cr::Foundation::PWSTR, new_forest_trust_info : Win32cr::Security::Authentication::Identity::LSA_FOREST_TRUST_INFORMATION*, old_forest_trust_info : Win32cr::Security::Authentication::Identity::LSA_FOREST_TRUST_INFORMATION*, merged_forest_trust_info : Win32cr::Security::Authentication::Identity::LSA_FOREST_TRUST_INFORMATION**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsMergeForestTrustInformationW(domain_name, new_forest_trust_info, old_forest_trust_info, merged_forest_trust_info)
+    {% end %}
   end
 
   def dsGetDcSiteCoverageW(server_name : Win32cr::Foundation::PWSTR, entry_count : UInt32*, site_names : Win32cr::Foundation::PWSTR**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsGetDcSiteCoverageW(server_name, entry_count, site_names)
+    {% end %}
   end
 
   def dsGetDcSiteCoverageA(server_name : Win32cr::Foundation::PSTR, entry_count : UInt32*, site_names : Win32cr::Foundation::PSTR**) : UInt32
+    {% if !flag?(:docs) %}
     C.DsGetDcSiteCoverageA(server_name, entry_count, site_names)
+    {% end %}
   end
 
   def dsDeregisterDnsHostRecordsW(server_name : Win32cr::Foundation::PWSTR, dns_domain_name : Win32cr::Foundation::PWSTR, domain_guid : LibC::GUID*, dsa_guid : LibC::GUID*, dns_host_name : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.DsDeregisterDnsHostRecordsW(server_name, dns_domain_name, domain_guid, dsa_guid, dns_host_name)
+    {% end %}
   end
 
   def dsDeregisterDnsHostRecordsA(server_name : Win32cr::Foundation::PSTR, dns_domain_name : Win32cr::Foundation::PSTR, domain_guid : LibC::GUID*, dsa_guid : LibC::GUID*, dns_host_name : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.DsDeregisterDnsHostRecordsA(server_name, dns_domain_name, domain_guid, dsa_guid, dns_host_name)
+    {% end %}
   end
 
   def dsGetDcOpenW(dns_name : Win32cr::Foundation::PWSTR, option_flags : UInt32, site_name : Win32cr::Foundation::PWSTR, domain_guid : LibC::GUID*, dns_forest_name : Win32cr::Foundation::PWSTR, dc_flags : UInt32, ret_get_dc_context : Win32cr::Networking::ActiveDirectory::GetDcContextHandle*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsGetDcOpenW(dns_name, option_flags, site_name, domain_guid, dns_forest_name, dc_flags, ret_get_dc_context)
+    {% end %}
   end
 
   def dsGetDcOpenA(dns_name : Win32cr::Foundation::PSTR, option_flags : UInt32, site_name : Win32cr::Foundation::PSTR, domain_guid : LibC::GUID*, dns_forest_name : Win32cr::Foundation::PSTR, dc_flags : UInt32, ret_get_dc_context : Win32cr::Networking::ActiveDirectory::GetDcContextHandle*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsGetDcOpenA(dns_name, option_flags, site_name, domain_guid, dns_forest_name, dc_flags, ret_get_dc_context)
+    {% end %}
   end
 
   def dsGetDcNextW(get_dc_context_handle : Win32cr::Foundation::HANDLE, sock_address_count : UInt32*, sock_addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS**, dns_host_name : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsGetDcNextW(get_dc_context_handle, sock_address_count, sock_addresses, dns_host_name)
+    {% end %}
   end
 
   def dsGetDcNextA(get_dc_context_handle : Win32cr::Foundation::HANDLE, sock_address_count : UInt32*, sock_addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS**, dns_host_name : Win32cr::Foundation::PSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.DsGetDcNextA(get_dc_context_handle, sock_address_count, sock_addresses, dns_host_name)
+    {% end %}
   end
 
   def dsGetDcCloseW(get_dc_context_handle : Win32cr::Networking::ActiveDirectory::GetDcContextHandle) : Void
+    {% if !flag?(:docs) %}
     C.DsGetDcCloseW(get_dc_context_handle)
+    {% end %}
   end
 
   @[Link("activeds")]
@@ -9758,6 +10074,7 @@ module Win32cr::Networking::ActiveDirectory
   @[Link("dsparse")]
   @[Link("ntdsapi")]
   @[Link("netapi32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun ADsGetObject(lpszPathName : Win32cr::Foundation::PWSTR, riid : LibC::GUID*, ppObject : Void**) : Win32cr::Foundation::HRESULT
@@ -10234,4 +10551,5 @@ module Win32cr::Networking::ActiveDirectory
     fun DsGetDcCloseW(get_dc_context_handle : Win32cr::Networking::ActiveDirectory::GetDcContextHandle) : Void
 
   end
+  {% end %}
 end

@@ -732,7 +732,7 @@ module Win32cr::Graphics::Direct3D
   end
 
   @[Extern]
-  record ID3DBlobVtbl,
+  record ID3DBlobVtable,
     query_interface : Proc(ID3DBlob*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3DBlob*, UInt32),
     release : Proc(ID3DBlob*, UInt32),
@@ -741,7 +741,7 @@ module Win32cr::Graphics::Direct3D
 
 
   @[Extern]
-  record ID3DBlob, lpVtbl : ID3DBlobVtbl* do
+  record ID3DBlob, lpVtbl : ID3DBlobVtable* do
     GUID = LibC::GUID.new(0x8ba5fb08_u32, 0x5195_u16, 0x40e2_u16, StaticArray[0xac_u8, 0x58_u8, 0xd_u8, 0x98_u8, 0x9c_u8, 0x3a_u8, 0x1_u8, 0x2_u8])
     def query_interface(this : ID3DBlob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -762,7 +762,7 @@ module Win32cr::Graphics::Direct3D
   end
 
   @[Extern]
-  record ID3DDestructionNotifierVtbl,
+  record ID3DDestructionNotifierVtable,
     query_interface : Proc(ID3DDestructionNotifier*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3DDestructionNotifier*, UInt32),
     release : Proc(ID3DDestructionNotifier*, UInt32),
@@ -771,7 +771,7 @@ module Win32cr::Graphics::Direct3D
 
 
   @[Extern]
-  record ID3DDestructionNotifier, lpVtbl : ID3DDestructionNotifierVtbl* do
+  record ID3DDestructionNotifier, lpVtbl : ID3DDestructionNotifierVtable* do
     GUID = LibC::GUID.new(0xa06eb39a_u32, 0x50da_u16, 0x425b_u16, StaticArray[0x8c_u8, 0x31_u8, 0x4e_u8, 0xec_u8, 0xd6_u8, 0xc2_u8, 0x70_u8, 0xf3_u8])
     def query_interface(this : ID3DDestructionNotifier*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -792,13 +792,13 @@ module Win32cr::Graphics::Direct3D
   end
 
   @[Extern]
-  record ID3DIncludeVtbl,
+  record ID3DIncludeVtable,
     open : Proc(ID3DInclude*, Win32cr::Graphics::Direct3D::D3D_INCLUDE_TYPE, Win32cr::Foundation::PSTR, Void*, Void**, UInt32*, Win32cr::Foundation::HRESULT),
     close : Proc(ID3DInclude*, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record ID3DInclude, lpVtbl : ID3DIncludeVtbl* do
+  record ID3DInclude, lpVtbl : ID3DIncludeVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def open(this : ID3DInclude*, include_type : Win32cr::Graphics::Direct3D::D3D_INCLUDE_TYPE, pFileName : Win32cr::Foundation::PSTR, pParentData : Void*, ppData : Void**, pBytes : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.open.call(this, include_type, pFileName, pParentData, ppData, pBytes)

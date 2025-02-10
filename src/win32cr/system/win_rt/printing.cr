@@ -9,7 +9,7 @@ module Win32cr::System::WinRT::Printing
 
 
   @[Extern]
-  record IPrinting3DManagerInteropVtbl,
+  record IPrinting3DManagerInteropVtable,
     query_interface : Proc(IPrinting3DManagerInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrinting3DManagerInterop*, UInt32),
     release : Proc(IPrinting3DManagerInterop*, UInt32),
@@ -21,7 +21,7 @@ module Win32cr::System::WinRT::Printing
 
 
   @[Extern]
-  record IPrinting3DManagerInterop, lpVtbl : IPrinting3DManagerInteropVtbl* do
+  record IPrinting3DManagerInterop, lpVtbl : IPrinting3DManagerInteropVtable* do
     GUID = LibC::GUID.new(0x9ca31010_u32, 0x1484_u16, 0x4587_u16, StaticArray[0xb2_u8, 0x6b_u8, 0xdd_u8, 0xdf_u8, 0x9f_u8, 0x9c_u8, 0xae_u8, 0xcd_u8])
     def query_interface(this : IPrinting3DManagerInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -51,7 +51,7 @@ module Win32cr::System::WinRT::Printing
   end
 
   @[Extern]
-  record IPrintManagerInteropVtbl,
+  record IPrintManagerInteropVtable,
     query_interface : Proc(IPrintManagerInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrintManagerInterop*, UInt32),
     release : Proc(IPrintManagerInterop*, UInt32),
@@ -63,7 +63,7 @@ module Win32cr::System::WinRT::Printing
 
 
   @[Extern]
-  record IPrintManagerInterop, lpVtbl : IPrintManagerInteropVtbl* do
+  record IPrintManagerInterop, lpVtbl : IPrintManagerInteropVtable* do
     GUID = LibC::GUID.new(0xc5435a42_u32, 0x8d43_u16, 0x4e7b_u16, StaticArray[0xa6_u8, 0x8a_u8, 0xef_u8, 0x31_u8, 0x1e_u8, 0x39_u8, 0x20_u8, 0x87_u8])
     def query_interface(this : IPrintManagerInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -93,7 +93,7 @@ module Win32cr::System::WinRT::Printing
   end
 
   @[Extern]
-  record IPrintWorkflowXpsReceiverVtbl,
+  record IPrintWorkflowXpsReceiverVtable,
     query_interface : Proc(IPrintWorkflowXpsReceiver*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrintWorkflowXpsReceiver*, UInt32),
     release : Proc(IPrintWorkflowXpsReceiver*, UInt32),
@@ -105,7 +105,7 @@ module Win32cr::System::WinRT::Printing
 
 
   @[Extern]
-  record IPrintWorkflowXpsReceiver, lpVtbl : IPrintWorkflowXpsReceiverVtbl* do
+  record IPrintWorkflowXpsReceiver, lpVtbl : IPrintWorkflowXpsReceiverVtable* do
     GUID = LibC::GUID.new(0x4097374_u32, 0x77b8_u16, 0x47f6_u16, StaticArray[0x81_u8, 0x67_u8, 0xaa_u8, 0xe2_u8, 0x9d_u8, 0x4c_u8, 0xf8_u8, 0x4b_u8])
     def query_interface(this : IPrintWorkflowXpsReceiver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -135,7 +135,7 @@ module Win32cr::System::WinRT::Printing
   end
 
   @[Extern]
-  record IPrintWorkflowXpsReceiver2Vtbl,
+  record IPrintWorkflowXpsReceiver2Vtable,
     query_interface : Proc(IPrintWorkflowXpsReceiver2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrintWorkflowXpsReceiver2*, UInt32),
     release : Proc(IPrintWorkflowXpsReceiver2*, UInt32),
@@ -148,7 +148,7 @@ module Win32cr::System::WinRT::Printing
 
 
   @[Extern]
-  record IPrintWorkflowXpsReceiver2, lpVtbl : IPrintWorkflowXpsReceiver2Vtbl* do
+  record IPrintWorkflowXpsReceiver2, lpVtbl : IPrintWorkflowXpsReceiver2Vtable* do
     GUID = LibC::GUID.new(0x23bcc0c_u32, 0xdfab_u16, 0x4a61_u16, StaticArray[0xb0_u8, 0x74_u8, 0x49_u8, 0xc_u8, 0x69_u8, 0x95_u8, 0x58_u8, 0xd_u8])
     def query_interface(this : IPrintWorkflowXpsReceiver2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -181,7 +181,7 @@ module Win32cr::System::WinRT::Printing
   end
 
   @[Extern]
-  record IPrintWorkflowObjectModelSourceFileContentNativeVtbl,
+  record IPrintWorkflowObjectModelSourceFileContentNativeVtable,
     query_interface : Proc(IPrintWorkflowObjectModelSourceFileContentNative*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrintWorkflowObjectModelSourceFileContentNative*, UInt32),
     release : Proc(IPrintWorkflowObjectModelSourceFileContentNative*, UInt32),
@@ -190,7 +190,7 @@ module Win32cr::System::WinRT::Printing
 
 
   @[Extern]
-  record IPrintWorkflowObjectModelSourceFileContentNative, lpVtbl : IPrintWorkflowObjectModelSourceFileContentNativeVtbl* do
+  record IPrintWorkflowObjectModelSourceFileContentNative, lpVtbl : IPrintWorkflowObjectModelSourceFileContentNativeVtable* do
     GUID = LibC::GUID.new(0x68c9e477_u32, 0x993e_u16, 0x4052_u16, StaticArray[0x8a_u8, 0xc6_u8, 0x45_u8, 0x4e_u8, 0xff_u8, 0x58_u8, 0xdb_u8, 0x9d_u8])
     def query_interface(this : IPrintWorkflowObjectModelSourceFileContentNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -211,7 +211,7 @@ module Win32cr::System::WinRT::Printing
   end
 
   @[Extern]
-  record IPrintWorkflowXpsObjectModelTargetPackageNativeVtbl,
+  record IPrintWorkflowXpsObjectModelTargetPackageNativeVtable,
     query_interface : Proc(IPrintWorkflowXpsObjectModelTargetPackageNative*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrintWorkflowXpsObjectModelTargetPackageNative*, UInt32),
     release : Proc(IPrintWorkflowXpsObjectModelTargetPackageNative*, UInt32),
@@ -219,7 +219,7 @@ module Win32cr::System::WinRT::Printing
 
 
   @[Extern]
-  record IPrintWorkflowXpsObjectModelTargetPackageNative, lpVtbl : IPrintWorkflowXpsObjectModelTargetPackageNativeVtbl* do
+  record IPrintWorkflowXpsObjectModelTargetPackageNative, lpVtbl : IPrintWorkflowXpsObjectModelTargetPackageNativeVtable* do
     GUID = LibC::GUID.new(0x7d96bc74_u32, 0x9b54_u16, 0x4ca1_u16, StaticArray[0xad_u8, 0x3a_u8, 0x97_u8, 0x9c_u8, 0x3d_u8, 0x44_u8, 0xdd_u8, 0xac_u8])
     def query_interface(this : IPrintWorkflowXpsObjectModelTargetPackageNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -237,7 +237,7 @@ module Win32cr::System::WinRT::Printing
   end
 
   @[Extern]
-  record IPrintWorkflowConfigurationNativeVtbl,
+  record IPrintWorkflowConfigurationNativeVtable,
     query_interface : Proc(IPrintWorkflowConfigurationNative*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrintWorkflowConfigurationNative*, UInt32),
     release : Proc(IPrintWorkflowConfigurationNative*, UInt32),
@@ -247,7 +247,7 @@ module Win32cr::System::WinRT::Printing
 
 
   @[Extern]
-  record IPrintWorkflowConfigurationNative, lpVtbl : IPrintWorkflowConfigurationNativeVtbl* do
+  record IPrintWorkflowConfigurationNative, lpVtbl : IPrintWorkflowConfigurationNativeVtable* do
     GUID = LibC::GUID.new(0xc056be0a_u32, 0x9ee2_u16, 0x450a_u16, StaticArray[0x98_u8, 0x23_u8, 0x96_u8, 0x4f_u8, 0x0_u8, 0x6_u8, 0xf2_u8, 0xbb_u8])
     def query_interface(this : IPrintWorkflowConfigurationNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

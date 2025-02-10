@@ -157,7 +157,7 @@ module Win32cr::System::SideShow
   end
 
   @[Extern]
-  record ISideShowSessionVtbl,
+  record ISideShowSessionVtable,
     query_interface : Proc(ISideShowSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISideShowSession*, UInt32),
     release : Proc(ISideShowSession*, UInt32),
@@ -166,7 +166,7 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  record ISideShowSession, lpVtbl : ISideShowSessionVtbl* do
+  record ISideShowSession, lpVtbl : ISideShowSessionVtable* do
     GUID = LibC::GUID.new(0xe22331ee_u32, 0x9e7d_u16, 0x4922_u16, StaticArray[0x9f_u8, 0xc2_u8, 0xab_u8, 0x7a_u8, 0xa4_u8, 0x1c_u8, 0xe4_u8, 0x91_u8])
     def query_interface(this : ISideShowSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -187,7 +187,7 @@ module Win32cr::System::SideShow
   end
 
   @[Extern]
-  record ISideShowNotificationManagerVtbl,
+  record ISideShowNotificationManagerVtable,
     query_interface : Proc(ISideShowNotificationManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISideShowNotificationManager*, UInt32),
     release : Proc(ISideShowNotificationManager*, UInt32),
@@ -197,7 +197,7 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  record ISideShowNotificationManager, lpVtbl : ISideShowNotificationManagerVtbl* do
+  record ISideShowNotificationManager, lpVtbl : ISideShowNotificationManagerVtable* do
     GUID = LibC::GUID.new(0x63cea909_u32, 0xf2b9_u16, 0x4302_u16, StaticArray[0xb5_u8, 0xe1_u8, 0xc6_u8, 0x8e_u8, 0x6d_u8, 0x9a_u8, 0xb8_u8, 0x33_u8])
     def query_interface(this : ISideShowNotificationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -221,7 +221,7 @@ module Win32cr::System::SideShow
   end
 
   @[Extern]
-  record ISideShowNotificationVtbl,
+  record ISideShowNotificationVtable,
     query_interface : Proc(ISideShowNotification*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISideShowNotification*, UInt32),
     release : Proc(ISideShowNotification*, UInt32),
@@ -238,7 +238,7 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  record ISideShowNotification, lpVtbl : ISideShowNotificationVtbl* do
+  record ISideShowNotification, lpVtbl : ISideShowNotificationVtable* do
     GUID = LibC::GUID.new(0x3c93300_u32, 0x8ab2_u16, 0x41c5_u16, StaticArray[0x9b_u8, 0x79_u8, 0x46_u8, 0x12_u8, 0x7a_u8, 0x30_u8, 0xe1_u8, 0x48_u8])
     def query_interface(this : ISideShowNotification*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -283,7 +283,7 @@ module Win32cr::System::SideShow
   end
 
   @[Extern]
-  record ISideShowContentManagerVtbl,
+  record ISideShowContentManagerVtable,
     query_interface : Proc(ISideShowContentManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISideShowContentManager*, UInt32),
     release : Proc(ISideShowContentManager*, UInt32),
@@ -295,7 +295,7 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  record ISideShowContentManager, lpVtbl : ISideShowContentManagerVtbl* do
+  record ISideShowContentManager, lpVtbl : ISideShowContentManagerVtable* do
     GUID = LibC::GUID.new(0xa5d5b66b_u32, 0xeef9_u16, 0x41db_u16, StaticArray[0x8d_u8, 0x7e_u8, 0xe1_u8, 0x7c_u8, 0x33_u8, 0xab_u8, 0x10_u8, 0xb0_u8])
     def query_interface(this : ISideShowContentManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -325,7 +325,7 @@ module Win32cr::System::SideShow
   end
 
   @[Extern]
-  record ISideShowContentVtbl,
+  record ISideShowContentVtable,
     query_interface : Proc(ISideShowContent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISideShowContent*, UInt32),
     release : Proc(ISideShowContent*, UInt32),
@@ -335,7 +335,7 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  record ISideShowContent, lpVtbl : ISideShowContentVtbl* do
+  record ISideShowContent, lpVtbl : ISideShowContentVtable* do
     GUID = LibC::GUID.new(0xc18552ed_u32, 0x74ff_u16, 0x4fec_u16, StaticArray[0xbe_u8, 0x7_u8, 0x4c_u8, 0xfe_u8, 0xd2_u8, 0x9d_u8, 0x48_u8, 0x87_u8])
     def query_interface(this : ISideShowContent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -359,7 +359,7 @@ module Win32cr::System::SideShow
   end
 
   @[Extern]
-  record ISideShowEventsVtbl,
+  record ISideShowEventsVtable,
     query_interface : Proc(ISideShowEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISideShowEvents*, UInt32),
     release : Proc(ISideShowEvents*, UInt32),
@@ -370,7 +370,7 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  record ISideShowEvents, lpVtbl : ISideShowEventsVtbl* do
+  record ISideShowEvents, lpVtbl : ISideShowEventsVtable* do
     GUID = LibC::GUID.new(0x61feca4c_u32, 0xdeb4_u16, 0x4a7e_u16, StaticArray[0x8d_u8, 0x75_u8, 0x51_u8, 0xf1_u8, 0x13_u8, 0x2d_u8, 0x61_u8, 0x5b_u8])
     def query_interface(this : ISideShowEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -397,7 +397,7 @@ module Win32cr::System::SideShow
   end
 
   @[Extern]
-  record ISideShowCapabilitiesVtbl,
+  record ISideShowCapabilitiesVtable,
     query_interface : Proc(ISideShowCapabilities*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISideShowCapabilities*, UInt32),
     release : Proc(ISideShowCapabilities*, UInt32),
@@ -405,7 +405,7 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  record ISideShowCapabilities, lpVtbl : ISideShowCapabilitiesVtbl* do
+  record ISideShowCapabilities, lpVtbl : ISideShowCapabilitiesVtable* do
     GUID = LibC::GUID.new(0x535e1379_u32, 0xc09e_u16, 0x4a54_u16, StaticArray[0xa5_u8, 0x11_u8, 0x59_u8, 0x7b_u8, 0xab_u8, 0x3a_u8, 0x72_u8, 0xb8_u8])
     def query_interface(this : ISideShowCapabilities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -423,7 +423,7 @@ module Win32cr::System::SideShow
   end
 
   @[Extern]
-  record ISideShowCapabilitiesCollectionVtbl,
+  record ISideShowCapabilitiesCollectionVtable,
     query_interface : Proc(ISideShowCapabilitiesCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISideShowCapabilitiesCollection*, UInt32),
     release : Proc(ISideShowCapabilitiesCollection*, UInt32),
@@ -432,7 +432,7 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  record ISideShowCapabilitiesCollection, lpVtbl : ISideShowCapabilitiesCollectionVtbl* do
+  record ISideShowCapabilitiesCollection, lpVtbl : ISideShowCapabilitiesCollectionVtable* do
     GUID = LibC::GUID.new(0x50305597_u32, 0x5e0d_u16, 0x4ff7_u16, StaticArray[0xb3_u8, 0xaf_u8, 0x33_u8, 0xd0_u8, 0xd9_u8, 0xbd_u8, 0x52_u8, 0xdd_u8])
     def query_interface(this : ISideShowCapabilitiesCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -453,7 +453,7 @@ module Win32cr::System::SideShow
   end
 
   @[Extern]
-  record ISideShowBulkCapabilitiesVtbl,
+  record ISideShowBulkCapabilitiesVtable,
     query_interface : Proc(ISideShowBulkCapabilities*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISideShowBulkCapabilities*, UInt32),
     release : Proc(ISideShowBulkCapabilities*, UInt32),
@@ -462,7 +462,7 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  record ISideShowBulkCapabilities, lpVtbl : ISideShowBulkCapabilitiesVtbl* do
+  record ISideShowBulkCapabilities, lpVtbl : ISideShowBulkCapabilitiesVtable* do
     GUID = LibC::GUID.new(0x3a2b7fbc_u32, 0x3ad5_u16, 0x48bd_u16, StaticArray[0xbb_u8, 0xf1_u8, 0xe_u8, 0x6c_u8, 0xfb_u8, 0xd1_u8, 0x8_u8, 0x7_u8])
     def query_interface(this : ISideShowBulkCapabilities*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -483,7 +483,7 @@ module Win32cr::System::SideShow
   end
 
   @[Extern]
-  record ISideShowKeyCollectionVtbl,
+  record ISideShowKeyCollectionVtable,
     query_interface : Proc(ISideShowKeyCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISideShowKeyCollection*, UInt32),
     release : Proc(ISideShowKeyCollection*, UInt32),
@@ -495,7 +495,7 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  record ISideShowKeyCollection, lpVtbl : ISideShowKeyCollectionVtbl* do
+  record ISideShowKeyCollection, lpVtbl : ISideShowKeyCollectionVtable* do
     GUID = LibC::GUID.new(0x45473bc_u32, 0xa37b_u16, 0x4957_u16, StaticArray[0xb1_u8, 0x44_u8, 0x68_u8, 0x10_u8, 0x54_u8, 0x11_u8, 0xed_u8, 0x8e_u8])
     def query_interface(this : ISideShowKeyCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -525,7 +525,7 @@ module Win32cr::System::SideShow
   end
 
   @[Extern]
-  record ISideShowPropVariantCollectionVtbl,
+  record ISideShowPropVariantCollectionVtable,
     query_interface : Proc(ISideShowPropVariantCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISideShowPropVariantCollection*, UInt32),
     release : Proc(ISideShowPropVariantCollection*, UInt32),
@@ -537,7 +537,7 @@ module Win32cr::System::SideShow
 
 
   @[Extern]
-  record ISideShowPropVariantCollection, lpVtbl : ISideShowPropVariantCollectionVtbl* do
+  record ISideShowPropVariantCollection, lpVtbl : ISideShowPropVariantCollectionVtable* do
     GUID = LibC::GUID.new(0x2ea7a549_u32, 0x7bff_u16, 0x4aae_u16, StaticArray[0xba_u8, 0xb0_u8, 0x22_u8, 0xd4_u8, 0x31_u8, 0x11_u8, 0xde_u8, 0x49_u8])
     def query_interface(this : ISideShowPropVariantCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

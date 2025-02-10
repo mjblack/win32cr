@@ -197,38 +197,55 @@ module Win32cr::NetworkManagement::NetShell
   end
 
   def matchEnumTag(hModule : Win32cr::Foundation::HANDLE, pwcArg : Win32cr::Foundation::PWSTR, dwNumArg : UInt32, pEnumTable : Win32cr::NetworkManagement::NetShell::TOKEN_VALUE*, pdwValue : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MatchEnumTag(hModule, pwcArg, dwNumArg, pEnumTable, pdwValue)
+    {% end %}
   end
 
   def matchToken(pwszUserToken : Win32cr::Foundation::PWSTR, pwszCmdToken : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MatchToken(pwszUserToken, pwszCmdToken)
+    {% end %}
   end
 
   def preprocessCommand(hModule : Win32cr::Foundation::HANDLE, ppwcArguments : Win32cr::Foundation::PWSTR*, dwCurrentIndex : UInt32, dwArgCount : UInt32, pttTags : Win32cr::NetworkManagement::NetShell::TAG_TYPE*, dwTagCount : UInt32, dwMinArgs : UInt32, dwMaxArgs : UInt32, pdwTagType : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.PreprocessCommand(hModule, ppwcArguments, dwCurrentIndex, dwArgCount, pttTags, dwTagCount, dwMinArgs, dwMaxArgs, pdwTagType)
+    {% end %}
   end
 
   def printError(hModule : Win32cr::Foundation::HANDLE, dwErrId : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.PrintError(hModule, dwErrId)
+    {% end %}
   end
 
   def printMessageFromModule(hModule : Win32cr::Foundation::HANDLE, dwMsgId : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.PrintMessageFromModule(hModule, dwMsgId)
+    {% end %}
   end
 
   def printMessage(pwszFormat : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.PrintMessage(pwszFormat)
+    {% end %}
   end
 
   def registerContext(pChildContext : Win32cr::NetworkManagement::NetShell::NS_CONTEXT_ATTRIBUTES*) : UInt32
+    {% if !flag?(:docs) %}
     C.RegisterContext(pChildContext)
+    {% end %}
   end
 
   def registerHelper(pguidParentContext : LibC::GUID*, pfnRegisterSubContext : Win32cr::NetworkManagement::NetShell::NS_HELPER_ATTRIBUTES*) : UInt32
+    {% if !flag?(:docs) %}
     C.RegisterHelper(pguidParentContext, pfnRegisterSubContext)
+    {% end %}
   end
 
   @[Link("netsh")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun MatchEnumTag(hModule : Win32cr::Foundation::HANDLE, pwcArg : Win32cr::Foundation::PWSTR, dwNumArg : UInt32, pEnumTable : Win32cr::NetworkManagement::NetShell::TOKEN_VALUE*, pdwValue : UInt32*) : UInt32
@@ -255,4 +272,5 @@ module Win32cr::NetworkManagement::NetShell
     fun RegisterHelper(pguidParentContext : LibC::GUID*, pfnRegisterSubContext : Win32cr::NetworkManagement::NetShell::NS_HELPER_ATTRIBUTES*) : UInt32
 
   end
+  {% end %}
 end

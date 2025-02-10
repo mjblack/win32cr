@@ -2105,7 +2105,7 @@ module Win32cr::Networking::WinInet
   end
 
   @[Extern]
-  record IDialEventSinkVtbl,
+  record IDialEventSinkVtable,
     query_interface : Proc(IDialEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDialEventSink*, UInt32),
     release : Proc(IDialEventSink*, UInt32),
@@ -2113,7 +2113,7 @@ module Win32cr::Networking::WinInet
 
 
   @[Extern]
-  record IDialEventSink, lpVtbl : IDialEventSinkVtbl* do
+  record IDialEventSink, lpVtbl : IDialEventSinkVtable* do
     GUID = LibC::GUID.new(0x2d86f4ff_u32, 0x6e2d_u16, 0x4488_u16, StaticArray[0xb2_u8, 0xe9_u8, 0x69_u8, 0x34_u8, 0xaf_u8, 0xd4_u8, 0x1b_u8, 0xea_u8])
     def query_interface(this : IDialEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2131,7 +2131,7 @@ module Win32cr::Networking::WinInet
   end
 
   @[Extern]
-  record IDialEngineVtbl,
+  record IDialEngineVtable,
     query_interface : Proc(IDialEngine*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDialEngine*, UInt32),
     release : Proc(IDialEngine*, UInt32),
@@ -2145,7 +2145,7 @@ module Win32cr::Networking::WinInet
 
 
   @[Extern]
-  record IDialEngine, lpVtbl : IDialEngineVtbl* do
+  record IDialEngine, lpVtbl : IDialEngineVtable* do
     GUID = LibC::GUID.new(0x39fd782b_u32, 0x7905_u16, 0x40d5_u16, StaticArray[0x91_u8, 0x48_u8, 0x3c_u8, 0x9b_u8, 0x19_u8, 0x4_u8, 0x23_u8, 0xd5_u8])
     def query_interface(this : IDialEngine*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2181,7 +2181,7 @@ module Win32cr::Networking::WinInet
   end
 
   @[Extern]
-  record IDialBrandingVtbl,
+  record IDialBrandingVtable,
     query_interface : Proc(IDialBranding*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDialBranding*, UInt32),
     release : Proc(IDialBranding*, UInt32),
@@ -2190,7 +2190,7 @@ module Win32cr::Networking::WinInet
 
 
   @[Extern]
-  record IDialBranding, lpVtbl : IDialBrandingVtbl* do
+  record IDialBranding, lpVtbl : IDialBrandingVtable* do
     GUID = LibC::GUID.new(0x8aecafa9_u32, 0x4306_u16, 0x43cc_u16, StaticArray[0x8c_u8, 0x5a_u8, 0x76_u8, 0x5f_u8, 0x29_u8, 0x79_u8, 0xcc_u8, 0x16_u8])
     def query_interface(this : IDialBranding*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2211,7 +2211,7 @@ module Win32cr::Networking::WinInet
   end
 
   @[Extern]
-  record IProofOfPossessionCookieInfoManagerVtbl,
+  record IProofOfPossessionCookieInfoManagerVtable,
     query_interface : Proc(IProofOfPossessionCookieInfoManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProofOfPossessionCookieInfoManager*, UInt32),
     release : Proc(IProofOfPossessionCookieInfoManager*, UInt32),
@@ -2219,7 +2219,7 @@ module Win32cr::Networking::WinInet
 
 
   @[Extern]
-  record IProofOfPossessionCookieInfoManager, lpVtbl : IProofOfPossessionCookieInfoManagerVtbl* do
+  record IProofOfPossessionCookieInfoManager, lpVtbl : IProofOfPossessionCookieInfoManagerVtable* do
     GUID = LibC::GUID.new(0xcdaece56_u32, 0x4edf_u16, 0x43df_u16, StaticArray[0xb1_u8, 0x13_u8, 0x88_u8, 0xe4_u8, 0x55_u8, 0x6f_u8, 0xa1_u8, 0xbb_u8])
     def query_interface(this : IProofOfPossessionCookieInfoManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2237,7 +2237,7 @@ module Win32cr::Networking::WinInet
   end
 
   @[Extern]
-  record IProofOfPossessionCookieInfoManager2Vtbl,
+  record IProofOfPossessionCookieInfoManager2Vtable,
     query_interface : Proc(IProofOfPossessionCookieInfoManager2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProofOfPossessionCookieInfoManager2*, UInt32),
     release : Proc(IProofOfPossessionCookieInfoManager2*, UInt32),
@@ -2245,7 +2245,7 @@ module Win32cr::Networking::WinInet
 
 
   @[Extern]
-  record IProofOfPossessionCookieInfoManager2, lpVtbl : IProofOfPossessionCookieInfoManager2Vtbl* do
+  record IProofOfPossessionCookieInfoManager2, lpVtbl : IProofOfPossessionCookieInfoManager2Vtable* do
     GUID = LibC::GUID.new(0x15e41407_u32, 0xb42f_u16, 0x4ae7_u16, StaticArray[0x99_u8, 0x66_u8, 0x34_u8, 0xa0_u8, 0x87_u8, 0xb2_u8, 0xd7_u8, 0x13_u8])
     def query_interface(this : IProofOfPossessionCookieInfoManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2263,1190 +2263,1783 @@ module Win32cr::Networking::WinInet
   end
 
   def internetTimeFromSystemTimeA(pst : Win32cr::Foundation::SYSTEMTIME*, dwRFC : UInt32, lpszTime : Win32cr::Foundation::PSTR, cbTime : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetTimeFromSystemTimeA(pst, dwRFC, lpszTime, cbTime)
+    {% end %}
   end
 
   def internetTimeFromSystemTimeW(pst : Win32cr::Foundation::SYSTEMTIME*, dwRFC : UInt32, lpszTime : Win32cr::Foundation::PWSTR, cbTime : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetTimeFromSystemTimeW(pst, dwRFC, lpszTime, cbTime)
+    {% end %}
   end
 
   def internetTimeFromSystemTime(pst : Win32cr::Foundation::SYSTEMTIME*, dwRFC : UInt32, lpszTime : Win32cr::Foundation::PSTR, cbTime : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetTimeFromSystemTime(pst, dwRFC, lpszTime, cbTime)
+    {% end %}
   end
 
   def internetTimeToSystemTimeA(lpszTime : Win32cr::Foundation::PSTR, pst : Win32cr::Foundation::SYSTEMTIME*, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetTimeToSystemTimeA(lpszTime, pst, dwReserved)
+    {% end %}
   end
 
   def internetTimeToSystemTimeW(lpszTime : Win32cr::Foundation::PWSTR, pst : Win32cr::Foundation::SYSTEMTIME*, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetTimeToSystemTimeW(lpszTime, pst, dwReserved)
+    {% end %}
   end
 
   def internetTimeToSystemTime(lpszTime : Win32cr::Foundation::PSTR, pst : Win32cr::Foundation::SYSTEMTIME*, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetTimeToSystemTime(lpszTime, pst, dwReserved)
+    {% end %}
   end
 
   def internetCrackUrlA(lpszUrl : UInt8*, dwUrlLength : UInt32, dwFlags : Win32cr::Networking::WinHttp::WIN_HTTP_CREATE_URL_FLAGS, lpUrlComponents : Win32cr::Networking::WinInet::URL_COMPONENTSA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetCrackUrlA(lpszUrl, dwUrlLength, dwFlags, lpUrlComponents)
+    {% end %}
   end
 
   def internetCrackUrlW(lpszUrl : UInt16*, dwUrlLength : UInt32, dwFlags : Win32cr::Networking::WinHttp::WIN_HTTP_CREATE_URL_FLAGS, lpUrlComponents : Win32cr::Networking::WinInet::URL_COMPONENTSW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetCrackUrlW(lpszUrl, dwUrlLength, dwFlags, lpUrlComponents)
+    {% end %}
   end
 
   def internetCreateUrlA(lpUrlComponents : Win32cr::Networking::WinInet::URL_COMPONENTSA*, dwFlags : UInt32, lpszUrl : UInt8*, lpdwUrlLength : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetCreateUrlA(lpUrlComponents, dwFlags, lpszUrl, lpdwUrlLength)
+    {% end %}
   end
 
   def internetCreateUrlW(lpUrlComponents : Win32cr::Networking::WinInet::URL_COMPONENTSW*, dwFlags : UInt32, lpszUrl : UInt16*, lpdwUrlLength : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetCreateUrlW(lpUrlComponents, dwFlags, lpszUrl, lpdwUrlLength)
+    {% end %}
   end
 
   def internetCanonicalizeUrlA(lpszUrl : Win32cr::Foundation::PSTR, lpszBuffer : UInt8*, lpdwBufferLength : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetCanonicalizeUrlA(lpszUrl, lpszBuffer, lpdwBufferLength, dwFlags)
+    {% end %}
   end
 
   def internetCanonicalizeUrlW(lpszUrl : Win32cr::Foundation::PWSTR, lpszBuffer : UInt16*, lpdwBufferLength : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetCanonicalizeUrlW(lpszUrl, lpszBuffer, lpdwBufferLength, dwFlags)
+    {% end %}
   end
 
   def internetCombineUrlA(lpszBaseUrl : Win32cr::Foundation::PSTR, lpszRelativeUrl : Win32cr::Foundation::PSTR, lpszBuffer : UInt8*, lpdwBufferLength : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetCombineUrlA(lpszBaseUrl, lpszRelativeUrl, lpszBuffer, lpdwBufferLength, dwFlags)
+    {% end %}
   end
 
   def internetCombineUrlW(lpszBaseUrl : Win32cr::Foundation::PWSTR, lpszRelativeUrl : Win32cr::Foundation::PWSTR, lpszBuffer : UInt16*, lpdwBufferLength : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetCombineUrlW(lpszBaseUrl, lpszRelativeUrl, lpszBuffer, lpdwBufferLength, dwFlags)
+    {% end %}
   end
 
   def internetOpenA(lpszAgent : Win32cr::Foundation::PSTR, dwAccessType : UInt32, lpszProxy : Win32cr::Foundation::PSTR, lpszProxyBypass : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.InternetOpenA(lpszAgent, dwAccessType, lpszProxy, lpszProxyBypass, dwFlags)
+    {% end %}
   end
 
   def internetOpenW(lpszAgent : Win32cr::Foundation::PWSTR, dwAccessType : UInt32, lpszProxy : Win32cr::Foundation::PWSTR, lpszProxyBypass : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.InternetOpenW(lpszAgent, dwAccessType, lpszProxy, lpszProxyBypass, dwFlags)
+    {% end %}
   end
 
   def internetCloseHandle(hInternet : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetCloseHandle(hInternet)
+    {% end %}
   end
 
   def internetConnectA(hInternet : Void*, lpszServerName : Win32cr::Foundation::PSTR, nServerPort : UInt16, lpszUserName : Win32cr::Foundation::PSTR, lpszPassword : Win32cr::Foundation::PSTR, dwService : UInt32, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.InternetConnectA(hInternet, lpszServerName, nServerPort, lpszUserName, lpszPassword, dwService, dwFlags, dwContext)
+    {% end %}
   end
 
   def internetConnectW(hInternet : Void*, lpszServerName : Win32cr::Foundation::PWSTR, nServerPort : UInt16, lpszUserName : Win32cr::Foundation::PWSTR, lpszPassword : Win32cr::Foundation::PWSTR, dwService : UInt32, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.InternetConnectW(hInternet, lpszServerName, nServerPort, lpszUserName, lpszPassword, dwService, dwFlags, dwContext)
+    {% end %}
   end
 
   def internetOpenUrlA(hInternet : Void*, lpszUrl : Win32cr::Foundation::PSTR, lpszHeaders : UInt8*, dwHeadersLength : UInt32, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.InternetOpenUrlA(hInternet, lpszUrl, lpszHeaders, dwHeadersLength, dwFlags, dwContext)
+    {% end %}
   end
 
   def internetOpenUrlW(hInternet : Void*, lpszUrl : Win32cr::Foundation::PWSTR, lpszHeaders : UInt16*, dwHeadersLength : UInt32, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.InternetOpenUrlW(hInternet, lpszUrl, lpszHeaders, dwHeadersLength, dwFlags, dwContext)
+    {% end %}
   end
 
   def internetReadFile(hFile : Void*, lpBuffer : Void*, dwNumberOfBytesToRead : UInt32, lpdwNumberOfBytesRead : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetReadFile(hFile, lpBuffer, dwNumberOfBytesToRead, lpdwNumberOfBytesRead)
+    {% end %}
   end
 
   def internetReadFileExA(hFile : Void*, lpBuffersOut : Win32cr::Networking::WinInet::INTERNET_BUFFERSA*, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetReadFileExA(hFile, lpBuffersOut, dwFlags, dwContext)
+    {% end %}
   end
 
   def internetReadFileExW(hFile : Void*, lpBuffersOut : Win32cr::Networking::WinInet::INTERNET_BUFFERSW*, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetReadFileExW(hFile, lpBuffersOut, dwFlags, dwContext)
+    {% end %}
   end
 
   def internetSetFilePointer(hFile : Void*, lDistanceToMove : Int32, lpDistanceToMoveHigh : Int32*, dwMoveMethod : UInt32, dwContext : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.InternetSetFilePointer(hFile, lDistanceToMove, lpDistanceToMoveHigh, dwMoveMethod, dwContext)
+    {% end %}
   end
 
   def internetWriteFile(hFile : Void*, lpBuffer : Void*, dwNumberOfBytesToWrite : UInt32, lpdwNumberOfBytesWritten : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetWriteFile(hFile, lpBuffer, dwNumberOfBytesToWrite, lpdwNumberOfBytesWritten)
+    {% end %}
   end
 
   def internetQueryDataAvailable(hFile : Void*, lpdwNumberOfBytesAvailable : UInt32*, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetQueryDataAvailable(hFile, lpdwNumberOfBytesAvailable, dwFlags, dwContext)
+    {% end %}
   end
 
   def internetFindNextFileA(hFind : Void*, lpvFindData : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetFindNextFileA(hFind, lpvFindData)
+    {% end %}
   end
 
   def internetFindNextFileW(hFind : Void*, lpvFindData : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetFindNextFileW(hFind, lpvFindData)
+    {% end %}
   end
 
   def internetQueryOptionA(hInternet : Void*, dwOption : UInt32, lpBuffer : Void*, lpdwBufferLength : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetQueryOptionA(hInternet, dwOption, lpBuffer, lpdwBufferLength)
+    {% end %}
   end
 
   def internetQueryOptionW(hInternet : Void*, dwOption : UInt32, lpBuffer : Void*, lpdwBufferLength : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetQueryOptionW(hInternet, dwOption, lpBuffer, lpdwBufferLength)
+    {% end %}
   end
 
   def internetSetOptionA(hInternet : Void*, dwOption : UInt32, lpBuffer : Void*, dwBufferLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetSetOptionA(hInternet, dwOption, lpBuffer, dwBufferLength)
+    {% end %}
   end
 
   def internetSetOptionW(hInternet : Void*, dwOption : UInt32, lpBuffer : Void*, dwBufferLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetSetOptionW(hInternet, dwOption, lpBuffer, dwBufferLength)
+    {% end %}
   end
 
   def internetSetOptionExA(hInternet : Void*, dwOption : UInt32, lpBuffer : Void*, dwBufferLength : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetSetOptionExA(hInternet, dwOption, lpBuffer, dwBufferLength, dwFlags)
+    {% end %}
   end
 
   def internetSetOptionExW(hInternet : Void*, dwOption : UInt32, lpBuffer : Void*, dwBufferLength : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetSetOptionExW(hInternet, dwOption, lpBuffer, dwBufferLength, dwFlags)
+    {% end %}
   end
 
   def internetLockRequestFile(hInternet : Void*, lphLockRequestInfo : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetLockRequestFile(hInternet, lphLockRequestInfo)
+    {% end %}
   end
 
   def internetUnlockRequestFile(hLockRequestInfo : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetUnlockRequestFile(hLockRequestInfo)
+    {% end %}
   end
 
   def internetGetLastResponseInfoA(lpdwError : UInt32*, lpszBuffer : UInt8*, lpdwBufferLength : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetGetLastResponseInfoA(lpdwError, lpszBuffer, lpdwBufferLength)
+    {% end %}
   end
 
   def internetGetLastResponseInfoW(lpdwError : UInt32*, lpszBuffer : UInt16*, lpdwBufferLength : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetGetLastResponseInfoW(lpdwError, lpszBuffer, lpdwBufferLength)
+    {% end %}
   end
 
   def internetSetStatusCallbackA(hInternet : Void*, lpfnInternetCallback : Win32cr::Networking::WinInet::LPINTERNET_STATUS_CALLBACK) : Win32cr::Networking::WinInet::LPINTERNET_STATUS_CALLBACK
+    {% if !flag?(:docs) %}
     C.InternetSetStatusCallbackA(hInternet, lpfnInternetCallback)
+    {% end %}
   end
 
   def internetSetStatusCallbackW(hInternet : Void*, lpfnInternetCallback : Win32cr::Networking::WinInet::LPINTERNET_STATUS_CALLBACK) : Win32cr::Networking::WinInet::LPINTERNET_STATUS_CALLBACK
+    {% if !flag?(:docs) %}
     C.InternetSetStatusCallbackW(hInternet, lpfnInternetCallback)
+    {% end %}
   end
 
   def internetSetStatusCallback(hInternet : Void*, lpfnInternetCallback : Win32cr::Networking::WinInet::LPINTERNET_STATUS_CALLBACK) : Win32cr::Networking::WinInet::LPINTERNET_STATUS_CALLBACK
+    {% if !flag?(:docs) %}
     C.InternetSetStatusCallback(hInternet, lpfnInternetCallback)
+    {% end %}
   end
 
   def ftpFindFirstFileA(hConnect : Void*, lpszSearchFile : Win32cr::Foundation::PSTR, lpFindFileData : Win32cr::Storage::FileSystem::WIN32_FIND_DATAA*, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.FtpFindFirstFileA(hConnect, lpszSearchFile, lpFindFileData, dwFlags, dwContext)
+    {% end %}
   end
 
   def ftpFindFirstFileW(hConnect : Void*, lpszSearchFile : Win32cr::Foundation::PWSTR, lpFindFileData : Win32cr::Storage::FileSystem::WIN32_FIND_DATAW*, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.FtpFindFirstFileW(hConnect, lpszSearchFile, lpFindFileData, dwFlags, dwContext)
+    {% end %}
   end
 
   def ftpGetFileA(hConnect : Void*, lpszRemoteFile : Win32cr::Foundation::PSTR, lpszNewFile : Win32cr::Foundation::PSTR, fFailIfExists : Win32cr::Foundation::BOOL, dwFlagsAndAttributes : UInt32, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpGetFileA(hConnect, lpszRemoteFile, lpszNewFile, fFailIfExists, dwFlagsAndAttributes, dwFlags, dwContext)
+    {% end %}
   end
 
   def ftpGetFileW(hConnect : Void*, lpszRemoteFile : Win32cr::Foundation::PWSTR, lpszNewFile : Win32cr::Foundation::PWSTR, fFailIfExists : Win32cr::Foundation::BOOL, dwFlagsAndAttributes : UInt32, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpGetFileW(hConnect, lpszRemoteFile, lpszNewFile, fFailIfExists, dwFlagsAndAttributes, dwFlags, dwContext)
+    {% end %}
   end
 
   def ftpPutFileA(hConnect : Void*, lpszLocalFile : Win32cr::Foundation::PSTR, lpszNewRemoteFile : Win32cr::Foundation::PSTR, dwFlags : Win32cr::Networking::WinInet::FTP_FLAGS, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpPutFileA(hConnect, lpszLocalFile, lpszNewRemoteFile, dwFlags, dwContext)
+    {% end %}
   end
 
   def ftpPutFileW(hConnect : Void*, lpszLocalFile : Win32cr::Foundation::PWSTR, lpszNewRemoteFile : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Networking::WinInet::FTP_FLAGS, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpPutFileW(hConnect, lpszLocalFile, lpszNewRemoteFile, dwFlags, dwContext)
+    {% end %}
   end
 
   def ftpGetFileEx(hFtpSession : Void*, lpszRemoteFile : Win32cr::Foundation::PSTR, lpszNewFile : Win32cr::Foundation::PWSTR, fFailIfExists : Win32cr::Foundation::BOOL, dwFlagsAndAttributes : UInt32, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpGetFileEx(hFtpSession, lpszRemoteFile, lpszNewFile, fFailIfExists, dwFlagsAndAttributes, dwFlags, dwContext)
+    {% end %}
   end
 
   def ftpPutFileEx(hFtpSession : Void*, lpszLocalFile : Win32cr::Foundation::PWSTR, lpszNewRemoteFile : Win32cr::Foundation::PSTR, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpPutFileEx(hFtpSession, lpszLocalFile, lpszNewRemoteFile, dwFlags, dwContext)
+    {% end %}
   end
 
   def ftpDeleteFileA(hConnect : Void*, lpszFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpDeleteFileA(hConnect, lpszFileName)
+    {% end %}
   end
 
   def ftpDeleteFileW(hConnect : Void*, lpszFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpDeleteFileW(hConnect, lpszFileName)
+    {% end %}
   end
 
   def ftpRenameFileA(hConnect : Void*, lpszExisting : Win32cr::Foundation::PSTR, lpszNew : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpRenameFileA(hConnect, lpszExisting, lpszNew)
+    {% end %}
   end
 
   def ftpRenameFileW(hConnect : Void*, lpszExisting : Win32cr::Foundation::PWSTR, lpszNew : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpRenameFileW(hConnect, lpszExisting, lpszNew)
+    {% end %}
   end
 
   def ftpOpenFileA(hConnect : Void*, lpszFileName : Win32cr::Foundation::PSTR, dwAccess : UInt32, dwFlags : Win32cr::Networking::WinInet::FTP_FLAGS, dwContext : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.FtpOpenFileA(hConnect, lpszFileName, dwAccess, dwFlags, dwContext)
+    {% end %}
   end
 
   def ftpOpenFileW(hConnect : Void*, lpszFileName : Win32cr::Foundation::PWSTR, dwAccess : UInt32, dwFlags : Win32cr::Networking::WinInet::FTP_FLAGS, dwContext : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.FtpOpenFileW(hConnect, lpszFileName, dwAccess, dwFlags, dwContext)
+    {% end %}
   end
 
   def ftpCreateDirectoryA(hConnect : Void*, lpszDirectory : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpCreateDirectoryA(hConnect, lpszDirectory)
+    {% end %}
   end
 
   def ftpCreateDirectoryW(hConnect : Void*, lpszDirectory : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpCreateDirectoryW(hConnect, lpszDirectory)
+    {% end %}
   end
 
   def ftpRemoveDirectoryA(hConnect : Void*, lpszDirectory : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpRemoveDirectoryA(hConnect, lpszDirectory)
+    {% end %}
   end
 
   def ftpRemoveDirectoryW(hConnect : Void*, lpszDirectory : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpRemoveDirectoryW(hConnect, lpszDirectory)
+    {% end %}
   end
 
   def ftpSetCurrentDirectoryA(hConnect : Void*, lpszDirectory : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpSetCurrentDirectoryA(hConnect, lpszDirectory)
+    {% end %}
   end
 
   def ftpSetCurrentDirectoryW(hConnect : Void*, lpszDirectory : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpSetCurrentDirectoryW(hConnect, lpszDirectory)
+    {% end %}
   end
 
   def ftpGetCurrentDirectoryA(hConnect : Void*, lpszCurrentDirectory : UInt8*, lpdwCurrentDirectory : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpGetCurrentDirectoryA(hConnect, lpszCurrentDirectory, lpdwCurrentDirectory)
+    {% end %}
   end
 
   def ftpGetCurrentDirectoryW(hConnect : Void*, lpszCurrentDirectory : UInt16*, lpdwCurrentDirectory : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpGetCurrentDirectoryW(hConnect, lpszCurrentDirectory, lpdwCurrentDirectory)
+    {% end %}
   end
 
   def ftpCommandA(hConnect : Void*, fExpectResponse : Win32cr::Foundation::BOOL, dwFlags : Win32cr::Networking::WinInet::FTP_FLAGS, lpszCommand : Win32cr::Foundation::PSTR, dwContext : LibC::UIntPtrT, phFtpCommand : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpCommandA(hConnect, fExpectResponse, dwFlags, lpszCommand, dwContext, phFtpCommand)
+    {% end %}
   end
 
   def ftpCommandW(hConnect : Void*, fExpectResponse : Win32cr::Foundation::BOOL, dwFlags : Win32cr::Networking::WinInet::FTP_FLAGS, lpszCommand : Win32cr::Foundation::PWSTR, dwContext : LibC::UIntPtrT, phFtpCommand : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FtpCommandW(hConnect, fExpectResponse, dwFlags, lpszCommand, dwContext, phFtpCommand)
+    {% end %}
   end
 
   def ftpGetFileSize(hFile : Void*, lpdwFileSizeHigh : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.FtpGetFileSize(hFile, lpdwFileSizeHigh)
+    {% end %}
   end
 
   def gopherCreateLocatorA(lpszHost : Win32cr::Foundation::PSTR, nServerPort : UInt16, lpszDisplayString : Win32cr::Foundation::PSTR, lpszSelectorString : Win32cr::Foundation::PSTR, dwGopherType : UInt32, lpszLocator : UInt8*, lpdwBufferLength : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GopherCreateLocatorA(lpszHost, nServerPort, lpszDisplayString, lpszSelectorString, dwGopherType, lpszLocator, lpdwBufferLength)
+    {% end %}
   end
 
   def gopherCreateLocatorW(lpszHost : Win32cr::Foundation::PWSTR, nServerPort : UInt16, lpszDisplayString : Win32cr::Foundation::PWSTR, lpszSelectorString : Win32cr::Foundation::PWSTR, dwGopherType : UInt32, lpszLocator : UInt16*, lpdwBufferLength : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GopherCreateLocatorW(lpszHost, nServerPort, lpszDisplayString, lpszSelectorString, dwGopherType, lpszLocator, lpdwBufferLength)
+    {% end %}
   end
 
   def gopherGetLocatorTypeA(lpszLocator : Win32cr::Foundation::PSTR, lpdwGopherType : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GopherGetLocatorTypeA(lpszLocator, lpdwGopherType)
+    {% end %}
   end
 
   def gopherGetLocatorTypeW(lpszLocator : Win32cr::Foundation::PWSTR, lpdwGopherType : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GopherGetLocatorTypeW(lpszLocator, lpdwGopherType)
+    {% end %}
   end
 
   def gopherFindFirstFileA(hConnect : Void*, lpszLocator : Win32cr::Foundation::PSTR, lpszSearchString : Win32cr::Foundation::PSTR, lpFindData : Win32cr::Networking::WinInet::GOPHER_FIND_DATAA*, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.GopherFindFirstFileA(hConnect, lpszLocator, lpszSearchString, lpFindData, dwFlags, dwContext)
+    {% end %}
   end
 
   def gopherFindFirstFileW(hConnect : Void*, lpszLocator : Win32cr::Foundation::PWSTR, lpszSearchString : Win32cr::Foundation::PWSTR, lpFindData : Win32cr::Networking::WinInet::GOPHER_FIND_DATAW*, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.GopherFindFirstFileW(hConnect, lpszLocator, lpszSearchString, lpFindData, dwFlags, dwContext)
+    {% end %}
   end
 
   def gopherOpenFileA(hConnect : Void*, lpszLocator : Win32cr::Foundation::PSTR, lpszView : Win32cr::Foundation::PSTR, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.GopherOpenFileA(hConnect, lpszLocator, lpszView, dwFlags, dwContext)
+    {% end %}
   end
 
   def gopherOpenFileW(hConnect : Void*, lpszLocator : Win32cr::Foundation::PWSTR, lpszView : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.GopherOpenFileW(hConnect, lpszLocator, lpszView, dwFlags, dwContext)
+    {% end %}
   end
 
   def gopherGetAttributeA(hConnect : Void*, lpszLocator : Win32cr::Foundation::PSTR, lpszAttributeName : Win32cr::Foundation::PSTR, lpBuffer : UInt8*, dwBufferLength : UInt32, lpdwCharactersReturned : UInt32*, lpfnEnumerator : Win32cr::Networking::WinInet::GOPHER_ATTRIBUTE_ENUMERATOR, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GopherGetAttributeA(hConnect, lpszLocator, lpszAttributeName, lpBuffer, dwBufferLength, lpdwCharactersReturned, lpfnEnumerator, dwContext)
+    {% end %}
   end
 
   def gopherGetAttributeW(hConnect : Void*, lpszLocator : Win32cr::Foundation::PWSTR, lpszAttributeName : Win32cr::Foundation::PWSTR, lpBuffer : UInt8*, dwBufferLength : UInt32, lpdwCharactersReturned : UInt32*, lpfnEnumerator : Win32cr::Networking::WinInet::GOPHER_ATTRIBUTE_ENUMERATOR, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GopherGetAttributeW(hConnect, lpszLocator, lpszAttributeName, lpBuffer, dwBufferLength, lpdwCharactersReturned, lpfnEnumerator, dwContext)
+    {% end %}
   end
 
   def httpOpenRequestA(hConnect : Void*, lpszVerb : Win32cr::Foundation::PSTR, lpszObjectName : Win32cr::Foundation::PSTR, lpszVersion : Win32cr::Foundation::PSTR, lpszReferrer : Win32cr::Foundation::PSTR, lplpszAcceptTypes : Win32cr::Foundation::PSTR*, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.HttpOpenRequestA(hConnect, lpszVerb, lpszObjectName, lpszVersion, lpszReferrer, lplpszAcceptTypes, dwFlags, dwContext)
+    {% end %}
   end
 
   def httpOpenRequestW(hConnect : Void*, lpszVerb : Win32cr::Foundation::PWSTR, lpszObjectName : Win32cr::Foundation::PWSTR, lpszVersion : Win32cr::Foundation::PWSTR, lpszReferrer : Win32cr::Foundation::PWSTR, lplpszAcceptTypes : Win32cr::Foundation::PWSTR*, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.HttpOpenRequestW(hConnect, lpszVerb, lpszObjectName, lpszVersion, lpszReferrer, lplpszAcceptTypes, dwFlags, dwContext)
+    {% end %}
   end
 
   def httpAddRequestHeadersA(hRequest : Void*, lpszHeaders : UInt8*, dwHeadersLength : UInt32, dwModifiers : Win32cr::Networking::WinInet::HTTP_ADDREQ_FLAG) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HttpAddRequestHeadersA(hRequest, lpszHeaders, dwHeadersLength, dwModifiers)
+    {% end %}
   end
 
   def httpAddRequestHeadersW(hRequest : Void*, lpszHeaders : UInt16*, dwHeadersLength : UInt32, dwModifiers : Win32cr::Networking::WinInet::HTTP_ADDREQ_FLAG) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HttpAddRequestHeadersW(hRequest, lpszHeaders, dwHeadersLength, dwModifiers)
+    {% end %}
   end
 
   def httpSendRequestA(hRequest : Void*, lpszHeaders : UInt8*, dwHeadersLength : UInt32, lpOptional : Void*, dwOptionalLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HttpSendRequestA(hRequest, lpszHeaders, dwHeadersLength, lpOptional, dwOptionalLength)
+    {% end %}
   end
 
   def httpSendRequestW(hRequest : Void*, lpszHeaders : UInt16*, dwHeadersLength : UInt32, lpOptional : Void*, dwOptionalLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HttpSendRequestW(hRequest, lpszHeaders, dwHeadersLength, lpOptional, dwOptionalLength)
+    {% end %}
   end
 
   def httpSendRequestExA(hRequest : Void*, lpBuffersIn : Win32cr::Networking::WinInet::INTERNET_BUFFERSA*, lpBuffersOut : Win32cr::Networking::WinInet::INTERNET_BUFFERSA*, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HttpSendRequestExA(hRequest, lpBuffersIn, lpBuffersOut, dwFlags, dwContext)
+    {% end %}
   end
 
   def httpSendRequestExW(hRequest : Void*, lpBuffersIn : Win32cr::Networking::WinInet::INTERNET_BUFFERSW*, lpBuffersOut : Win32cr::Networking::WinInet::INTERNET_BUFFERSW*, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HttpSendRequestExW(hRequest, lpBuffersIn, lpBuffersOut, dwFlags, dwContext)
+    {% end %}
   end
 
   def httpEndRequestA(hRequest : Void*, lpBuffersOut : Win32cr::Networking::WinInet::INTERNET_BUFFERSA*, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HttpEndRequestA(hRequest, lpBuffersOut, dwFlags, dwContext)
+    {% end %}
   end
 
   def httpEndRequestW(hRequest : Void*, lpBuffersOut : Win32cr::Networking::WinInet::INTERNET_BUFFERSW*, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HttpEndRequestW(hRequest, lpBuffersOut, dwFlags, dwContext)
+    {% end %}
   end
 
   def httpQueryInfoA(hRequest : Void*, dwInfoLevel : UInt32, lpBuffer : Void*, lpdwBufferLength : UInt32*, lpdwIndex : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HttpQueryInfoA(hRequest, dwInfoLevel, lpBuffer, lpdwBufferLength, lpdwIndex)
+    {% end %}
   end
 
   def httpQueryInfoW(hRequest : Void*, dwInfoLevel : UInt32, lpBuffer : Void*, lpdwBufferLength : UInt32*, lpdwIndex : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HttpQueryInfoW(hRequest, dwInfoLevel, lpBuffer, lpdwBufferLength, lpdwIndex)
+    {% end %}
   end
 
   def internetSetCookieA(lpszUrl : Win32cr::Foundation::PSTR, lpszCookieName : Win32cr::Foundation::PSTR, lpszCookieData : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetSetCookieA(lpszUrl, lpszCookieName, lpszCookieData)
+    {% end %}
   end
 
   def internetSetCookieW(lpszUrl : Win32cr::Foundation::PWSTR, lpszCookieName : Win32cr::Foundation::PWSTR, lpszCookieData : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetSetCookieW(lpszUrl, lpszCookieName, lpszCookieData)
+    {% end %}
   end
 
   def internetGetCookieA(lpszUrl : Win32cr::Foundation::PSTR, lpszCookieName : Win32cr::Foundation::PSTR, lpszCookieData : UInt8*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetGetCookieA(lpszUrl, lpszCookieName, lpszCookieData, lpdwSize)
+    {% end %}
   end
 
   def internetGetCookieW(lpszUrl : Win32cr::Foundation::PWSTR, lpszCookieName : Win32cr::Foundation::PWSTR, lpszCookieData : UInt16*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetGetCookieW(lpszUrl, lpszCookieName, lpszCookieData, lpdwSize)
+    {% end %}
   end
 
   def internetSetCookieExA(lpszUrl : Win32cr::Foundation::PSTR, lpszCookieName : Win32cr::Foundation::PSTR, lpszCookieData : Win32cr::Foundation::PSTR, dwFlags : UInt32, dwReserved : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.InternetSetCookieExA(lpszUrl, lpszCookieName, lpszCookieData, dwFlags, dwReserved)
+    {% end %}
   end
 
   def internetSetCookieExW(lpszUrl : Win32cr::Foundation::PWSTR, lpszCookieName : Win32cr::Foundation::PWSTR, lpszCookieData : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwReserved : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.InternetSetCookieExW(lpszUrl, lpszCookieName, lpszCookieData, dwFlags, dwReserved)
+    {% end %}
   end
 
   def internetGetCookieExA(lpszUrl : Win32cr::Foundation::PSTR, lpszCookieName : Win32cr::Foundation::PSTR, lpszCookieData : UInt8*, lpdwSize : UInt32*, dwFlags : Win32cr::Networking::WinInet::INTERNET_COOKIE_FLAGS, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetGetCookieExA(lpszUrl, lpszCookieName, lpszCookieData, lpdwSize, dwFlags, lpReserved)
+    {% end %}
   end
 
   def internetGetCookieExW(lpszUrl : Win32cr::Foundation::PWSTR, lpszCookieName : Win32cr::Foundation::PWSTR, lpszCookieData : UInt16*, lpdwSize : UInt32*, dwFlags : Win32cr::Networking::WinInet::INTERNET_COOKIE_FLAGS, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetGetCookieExW(lpszUrl, lpszCookieName, lpszCookieData, lpdwSize, dwFlags, lpReserved)
+    {% end %}
   end
 
   def internetFreeCookies(pCookies : Win32cr::Networking::WinInet::INTERNET_COOKIE2*, dwCookieCount : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.InternetFreeCookies(pCookies, dwCookieCount)
+    {% end %}
   end
 
   def internetGetCookieEx2(pcwszUrl : Win32cr::Foundation::PWSTR, pcwszCookieName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, ppCookies : Win32cr::Networking::WinInet::INTERNET_COOKIE2**, pdwCookieCount : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.InternetGetCookieEx2(pcwszUrl, pcwszCookieName, dwFlags, ppCookies, pdwCookieCount)
+    {% end %}
   end
 
   def internetSetCookieEx2(pcwszUrl : Win32cr::Foundation::PWSTR, pCookie : Win32cr::Networking::WinInet::INTERNET_COOKIE2*, pcwszP3PPolicy : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pdwCookieState : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.InternetSetCookieEx2(pcwszUrl, pCookie, pcwszP3PPolicy, dwFlags, pdwCookieState)
+    {% end %}
   end
 
   def internetAttemptConnect(dwReserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.InternetAttemptConnect(dwReserved)
+    {% end %}
   end
 
   def internetCheckConnectionA(lpszUrl : Win32cr::Foundation::PSTR, dwFlags : UInt32, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetCheckConnectionA(lpszUrl, dwFlags, dwReserved)
+    {% end %}
   end
 
   def internetCheckConnectionW(lpszUrl : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetCheckConnectionW(lpszUrl, dwFlags, dwReserved)
+    {% end %}
   end
 
   def resumeSuspendedDownload(hRequest : Void*, dwResultCode : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ResumeSuspendedDownload(hRequest, dwResultCode)
+    {% end %}
   end
 
   def internetErrorDlg(hWnd : Win32cr::Foundation::HWND, hRequest : Void*, dwError : UInt32, dwFlags : UInt32, lppvData : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.InternetErrorDlg(hWnd, hRequest, dwError, dwFlags, lppvData)
+    {% end %}
   end
 
   def internetConfirmZoneCrossingA(hWnd : Win32cr::Foundation::HWND, szUrlPrev : Win32cr::Foundation::PSTR, szUrlNew : Win32cr::Foundation::PSTR, bPost : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.InternetConfirmZoneCrossingA(hWnd, szUrlPrev, szUrlNew, bPost)
+    {% end %}
   end
 
   def internetConfirmZoneCrossingW(hWnd : Win32cr::Foundation::HWND, szUrlPrev : Win32cr::Foundation::PWSTR, szUrlNew : Win32cr::Foundation::PWSTR, bPost : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.InternetConfirmZoneCrossingW(hWnd, szUrlPrev, szUrlNew, bPost)
+    {% end %}
   end
 
   def internetConfirmZoneCrossing(hWnd : Win32cr::Foundation::HWND, szUrlPrev : Win32cr::Foundation::PSTR, szUrlNew : Win32cr::Foundation::PSTR, bPost : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.InternetConfirmZoneCrossing(hWnd, szUrlPrev, szUrlNew, bPost)
+    {% end %}
   end
 
   def createUrlCacheEntryA(lpszUrlName : Win32cr::Foundation::PSTR, dwExpectedFileSize : UInt32, lpszFileExtension : Win32cr::Foundation::PSTR, lpszFileName : UInt8*, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateUrlCacheEntryA(lpszUrlName, dwExpectedFileSize, lpszFileExtension, lpszFileName, dwReserved)
+    {% end %}
   end
 
   def createUrlCacheEntryW(lpszUrlName : Win32cr::Foundation::PWSTR, dwExpectedFileSize : UInt32, lpszFileExtension : Win32cr::Foundation::PWSTR, lpszFileName : UInt16*, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateUrlCacheEntryW(lpszUrlName, dwExpectedFileSize, lpszFileExtension, lpszFileName, dwReserved)
+    {% end %}
   end
 
   def commitUrlCacheEntryA(lpszUrlName : Win32cr::Foundation::PSTR, lpszLocalFileName : Win32cr::Foundation::PSTR, expire_time : Win32cr::Foundation::FILETIME, last_modified_time : Win32cr::Foundation::FILETIME, cache_entry_type : UInt32, lpHeaderInfo : UInt8*, cchHeaderInfo : UInt32, lpszFileExtension : Win32cr::Foundation::PSTR, lpszOriginalUrl : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CommitUrlCacheEntryA(lpszUrlName, lpszLocalFileName, expire_time, last_modified_time, cache_entry_type, lpHeaderInfo, cchHeaderInfo, lpszFileExtension, lpszOriginalUrl)
+    {% end %}
   end
 
   def commitUrlCacheEntryW(lpszUrlName : Win32cr::Foundation::PWSTR, lpszLocalFileName : Win32cr::Foundation::PWSTR, expire_time : Win32cr::Foundation::FILETIME, last_modified_time : Win32cr::Foundation::FILETIME, cache_entry_type : UInt32, lpszHeaderInfo : UInt16*, cchHeaderInfo : UInt32, lpszFileExtension : Win32cr::Foundation::PWSTR, lpszOriginalUrl : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CommitUrlCacheEntryW(lpszUrlName, lpszLocalFileName, expire_time, last_modified_time, cache_entry_type, lpszHeaderInfo, cchHeaderInfo, lpszFileExtension, lpszOriginalUrl)
+    {% end %}
   end
 
   def retrieveUrlCacheEntryFileA(lpszUrlName : Win32cr::Foundation::PSTR, lpCacheEntryInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOA*, lpcbCacheEntryInfo : UInt32*, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RetrieveUrlCacheEntryFileA(lpszUrlName, lpCacheEntryInfo, lpcbCacheEntryInfo, dwReserved)
+    {% end %}
   end
 
   def retrieveUrlCacheEntryFileW(lpszUrlName : Win32cr::Foundation::PWSTR, lpCacheEntryInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOW*, lpcbCacheEntryInfo : UInt32*, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RetrieveUrlCacheEntryFileW(lpszUrlName, lpCacheEntryInfo, lpcbCacheEntryInfo, dwReserved)
+    {% end %}
   end
 
   def unlockUrlCacheEntryFileA(lpszUrlName : Win32cr::Foundation::PSTR, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnlockUrlCacheEntryFileA(lpszUrlName, dwReserved)
+    {% end %}
   end
 
   def unlockUrlCacheEntryFileW(lpszUrlName : Win32cr::Foundation::PWSTR, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnlockUrlCacheEntryFileW(lpszUrlName, dwReserved)
+    {% end %}
   end
 
   def unlockUrlCacheEntryFile(lpszUrlName : Win32cr::Foundation::PSTR, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnlockUrlCacheEntryFile(lpszUrlName, dwReserved)
+    {% end %}
   end
 
   def retrieveUrlCacheEntryStreamA(lpszUrlName : Win32cr::Foundation::PSTR, lpCacheEntryInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOA*, lpcbCacheEntryInfo : UInt32*, fRandomRead : Win32cr::Foundation::BOOL, dwReserved : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.RetrieveUrlCacheEntryStreamA(lpszUrlName, lpCacheEntryInfo, lpcbCacheEntryInfo, fRandomRead, dwReserved)
+    {% end %}
   end
 
   def retrieveUrlCacheEntryStreamW(lpszUrlName : Win32cr::Foundation::PWSTR, lpCacheEntryInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOW*, lpcbCacheEntryInfo : UInt32*, fRandomRead : Win32cr::Foundation::BOOL, dwReserved : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.RetrieveUrlCacheEntryStreamW(lpszUrlName, lpCacheEntryInfo, lpcbCacheEntryInfo, fRandomRead, dwReserved)
+    {% end %}
   end
 
   def readUrlCacheEntryStream(hUrlCacheStream : Win32cr::Foundation::HANDLE, dwLocation : UInt32, lpBuffer : Void*, lpdwLen : UInt32*, reserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReadUrlCacheEntryStream(hUrlCacheStream, dwLocation, lpBuffer, lpdwLen, reserved)
+    {% end %}
   end
 
   def readUrlCacheEntryStreamEx(hUrlCacheStream : Win32cr::Foundation::HANDLE, qwLocation : UInt64, lpBuffer : Void*, lpdwLen : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReadUrlCacheEntryStreamEx(hUrlCacheStream, qwLocation, lpBuffer, lpdwLen)
+    {% end %}
   end
 
   def unlockUrlCacheEntryStream(hUrlCacheStream : Win32cr::Foundation::HANDLE, reserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnlockUrlCacheEntryStream(hUrlCacheStream, reserved)
+    {% end %}
   end
 
   def getUrlCacheEntryInfoA(lpszUrlName : Win32cr::Foundation::PSTR, lpCacheEntryInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOA*, lpcbCacheEntryInfo : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUrlCacheEntryInfoA(lpszUrlName, lpCacheEntryInfo, lpcbCacheEntryInfo)
+    {% end %}
   end
 
   def getUrlCacheEntryInfoW(lpszUrlName : Win32cr::Foundation::PWSTR, lpCacheEntryInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOW*, lpcbCacheEntryInfo : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUrlCacheEntryInfoW(lpszUrlName, lpCacheEntryInfo, lpcbCacheEntryInfo)
+    {% end %}
   end
 
   def findFirstUrlCacheGroup(dwFlags : UInt32, dwFilter : UInt32, lpSearchCondition : Void*, dwSearchCondition : UInt32, lpGroupId : Int64*, lpReserved : Void*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.FindFirstUrlCacheGroup(dwFlags, dwFilter, lpSearchCondition, dwSearchCondition, lpGroupId, lpReserved)
+    {% end %}
   end
 
   def findNextUrlCacheGroup(hFind : Win32cr::Foundation::HANDLE, lpGroupId : Int64*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FindNextUrlCacheGroup(hFind, lpGroupId, lpReserved)
+    {% end %}
   end
 
   def getUrlCacheGroupAttributeA(gid : Int64, dwFlags : UInt32, dwAttributes : UInt32, lpGroupInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_GROUP_INFOA*, lpcbGroupInfo : UInt32*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUrlCacheGroupAttributeA(gid, dwFlags, dwAttributes, lpGroupInfo, lpcbGroupInfo, lpReserved)
+    {% end %}
   end
 
   def getUrlCacheGroupAttributeW(gid : Int64, dwFlags : UInt32, dwAttributes : UInt32, lpGroupInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_GROUP_INFOW*, lpcbGroupInfo : UInt32*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUrlCacheGroupAttributeW(gid, dwFlags, dwAttributes, lpGroupInfo, lpcbGroupInfo, lpReserved)
+    {% end %}
   end
 
   def setUrlCacheGroupAttributeA(gid : Int64, dwFlags : UInt32, dwAttributes : UInt32, lpGroupInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_GROUP_INFOA*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetUrlCacheGroupAttributeA(gid, dwFlags, dwAttributes, lpGroupInfo, lpReserved)
+    {% end %}
   end
 
   def setUrlCacheGroupAttributeW(gid : Int64, dwFlags : UInt32, dwAttributes : UInt32, lpGroupInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_GROUP_INFOW*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetUrlCacheGroupAttributeW(gid, dwFlags, dwAttributes, lpGroupInfo, lpReserved)
+    {% end %}
   end
 
   def getUrlCacheEntryInfoExA(lpszUrl : Win32cr::Foundation::PSTR, lpCacheEntryInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOA*, lpcbCacheEntryInfo : UInt32*, lpszRedirectUrl : Win32cr::Foundation::PSTR, lpcbRedirectUrl : UInt32*, lpReserved : Void*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUrlCacheEntryInfoExA(lpszUrl, lpCacheEntryInfo, lpcbCacheEntryInfo, lpszRedirectUrl, lpcbRedirectUrl, lpReserved, dwFlags)
+    {% end %}
   end
 
   def getUrlCacheEntryInfoExW(lpszUrl : Win32cr::Foundation::PWSTR, lpCacheEntryInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOW*, lpcbCacheEntryInfo : UInt32*, lpszRedirectUrl : Win32cr::Foundation::PWSTR, lpcbRedirectUrl : UInt32*, lpReserved : Void*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUrlCacheEntryInfoExW(lpszUrl, lpCacheEntryInfo, lpcbCacheEntryInfo, lpszRedirectUrl, lpcbRedirectUrl, lpReserved, dwFlags)
+    {% end %}
   end
 
   def setUrlCacheEntryInfoA(lpszUrlName : Win32cr::Foundation::PSTR, lpCacheEntryInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOA*, dwFieldControl : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetUrlCacheEntryInfoA(lpszUrlName, lpCacheEntryInfo, dwFieldControl)
+    {% end %}
   end
 
   def setUrlCacheEntryInfoW(lpszUrlName : Win32cr::Foundation::PWSTR, lpCacheEntryInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOW*, dwFieldControl : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetUrlCacheEntryInfoW(lpszUrlName, lpCacheEntryInfo, dwFieldControl)
+    {% end %}
   end
 
   def createUrlCacheGroup(dwFlags : UInt32, lpReserved : Void*) : Int64
+    {% if !flag?(:docs) %}
     C.CreateUrlCacheGroup(dwFlags, lpReserved)
+    {% end %}
   end
 
   def deleteUrlCacheGroup(group_id : Int64, dwFlags : UInt32, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteUrlCacheGroup(group_id, dwFlags, lpReserved)
+    {% end %}
   end
 
   def setUrlCacheEntryGroupA(lpszUrlName : Win32cr::Foundation::PSTR, dwFlags : UInt32, group_id : Int64, pbGroupAttributes : UInt8*, cbGroupAttributes : UInt32, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetUrlCacheEntryGroupA(lpszUrlName, dwFlags, group_id, pbGroupAttributes, cbGroupAttributes, lpReserved)
+    {% end %}
   end
 
   def setUrlCacheEntryGroupW(lpszUrlName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, group_id : Int64, pbGroupAttributes : UInt8*, cbGroupAttributes : UInt32, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetUrlCacheEntryGroupW(lpszUrlName, dwFlags, group_id, pbGroupAttributes, cbGroupAttributes, lpReserved)
+    {% end %}
   end
 
   def setUrlCacheEntryGroup(lpszUrlName : Win32cr::Foundation::PSTR, dwFlags : UInt32, group_id : Int64, pbGroupAttributes : UInt8*, cbGroupAttributes : UInt32, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetUrlCacheEntryGroup(lpszUrlName, dwFlags, group_id, pbGroupAttributes, cbGroupAttributes, lpReserved)
+    {% end %}
   end
 
   def findFirstUrlCacheEntryExA(lpszUrlSearchPattern : Win32cr::Foundation::PSTR, dwFlags : UInt32, dwFilter : UInt32, group_id : Int64, lpFirstCacheEntryInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOA*, lpcbCacheEntryInfo : UInt32*, lpGroupAttributes : Void*, lpcbGroupAttributes : UInt32*, lpReserved : Void*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.FindFirstUrlCacheEntryExA(lpszUrlSearchPattern, dwFlags, dwFilter, group_id, lpFirstCacheEntryInfo, lpcbCacheEntryInfo, lpGroupAttributes, lpcbGroupAttributes, lpReserved)
+    {% end %}
   end
 
   def findFirstUrlCacheEntryExW(lpszUrlSearchPattern : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwFilter : UInt32, group_id : Int64, lpFirstCacheEntryInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOW*, lpcbCacheEntryInfo : UInt32*, lpGroupAttributes : Void*, lpcbGroupAttributes : UInt32*, lpReserved : Void*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.FindFirstUrlCacheEntryExW(lpszUrlSearchPattern, dwFlags, dwFilter, group_id, lpFirstCacheEntryInfo, lpcbCacheEntryInfo, lpGroupAttributes, lpcbGroupAttributes, lpReserved)
+    {% end %}
   end
 
   def findNextUrlCacheEntryExA(hEnumHandle : Win32cr::Foundation::HANDLE, lpNextCacheEntryInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOA*, lpcbCacheEntryInfo : UInt32*, lpGroupAttributes : Void*, lpcbGroupAttributes : UInt32*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FindNextUrlCacheEntryExA(hEnumHandle, lpNextCacheEntryInfo, lpcbCacheEntryInfo, lpGroupAttributes, lpcbGroupAttributes, lpReserved)
+    {% end %}
   end
 
   def findNextUrlCacheEntryExW(hEnumHandle : Win32cr::Foundation::HANDLE, lpNextCacheEntryInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOW*, lpcbCacheEntryInfo : UInt32*, lpGroupAttributes : Void*, lpcbGroupAttributes : UInt32*, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FindNextUrlCacheEntryExW(hEnumHandle, lpNextCacheEntryInfo, lpcbCacheEntryInfo, lpGroupAttributes, lpcbGroupAttributes, lpReserved)
+    {% end %}
   end
 
   def findFirstUrlCacheEntryA(lpszUrlSearchPattern : Win32cr::Foundation::PSTR, lpFirstCacheEntryInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOA*, lpcbCacheEntryInfo : UInt32*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.FindFirstUrlCacheEntryA(lpszUrlSearchPattern, lpFirstCacheEntryInfo, lpcbCacheEntryInfo)
+    {% end %}
   end
 
   def findFirstUrlCacheEntryW(lpszUrlSearchPattern : Win32cr::Foundation::PWSTR, lpFirstCacheEntryInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOW*, lpcbCacheEntryInfo : UInt32*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.FindFirstUrlCacheEntryW(lpszUrlSearchPattern, lpFirstCacheEntryInfo, lpcbCacheEntryInfo)
+    {% end %}
   end
 
   def findNextUrlCacheEntryA(hEnumHandle : Win32cr::Foundation::HANDLE, lpNextCacheEntryInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOA*, lpcbCacheEntryInfo : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FindNextUrlCacheEntryA(hEnumHandle, lpNextCacheEntryInfo, lpcbCacheEntryInfo)
+    {% end %}
   end
 
   def findNextUrlCacheEntryW(hEnumHandle : Win32cr::Foundation::HANDLE, lpNextCacheEntryInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_ENTRY_INFOW*, lpcbCacheEntryInfo : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FindNextUrlCacheEntryW(hEnumHandle, lpNextCacheEntryInfo, lpcbCacheEntryInfo)
+    {% end %}
   end
 
   def findCloseUrlCache(hEnumHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FindCloseUrlCache(hEnumHandle)
+    {% end %}
   end
 
   def deleteUrlCacheEntryA(lpszUrlName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteUrlCacheEntryA(lpszUrlName)
+    {% end %}
   end
 
   def deleteUrlCacheEntryW(lpszUrlName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteUrlCacheEntryW(lpszUrlName)
+    {% end %}
   end
 
   def deleteUrlCacheEntry(lpszUrlName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteUrlCacheEntry(lpszUrlName)
+    {% end %}
   end
 
   def internetDialA(hwndParent : Win32cr::Foundation::HWND, lpszConnectoid : Win32cr::Foundation::PSTR, dwFlags : UInt32, lpdwConnection : LibC::UIntPtrT*, dwReserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.InternetDialA(hwndParent, lpszConnectoid, dwFlags, lpdwConnection, dwReserved)
+    {% end %}
   end
 
   def internetDialW(hwndParent : Win32cr::Foundation::HWND, lpszConnectoid : Win32cr::Foundation::PWSTR, dwFlags : UInt32, lpdwConnection : LibC::UIntPtrT*, dwReserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.InternetDialW(hwndParent, lpszConnectoid, dwFlags, lpdwConnection, dwReserved)
+    {% end %}
   end
 
   def internetDial(hwndParent : Win32cr::Foundation::HWND, lpszConnectoid : Win32cr::Foundation::PSTR, dwFlags : UInt32, lpdwConnection : UInt32*, dwReserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.InternetDial(hwndParent, lpszConnectoid, dwFlags, lpdwConnection, dwReserved)
+    {% end %}
   end
 
   def internetHangUp(dwConnection : LibC::UIntPtrT, dwReserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.InternetHangUp(dwConnection, dwReserved)
+    {% end %}
   end
 
   def internetGoOnlineA(lpszURL : Win32cr::Foundation::PSTR, hwndParent : Win32cr::Foundation::HWND, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetGoOnlineA(lpszURL, hwndParent, dwFlags)
+    {% end %}
   end
 
   def internetGoOnlineW(lpszURL : Win32cr::Foundation::PWSTR, hwndParent : Win32cr::Foundation::HWND, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetGoOnlineW(lpszURL, hwndParent, dwFlags)
+    {% end %}
   end
 
   def internetGoOnline(lpszURL : Win32cr::Foundation::PSTR, hwndParent : Win32cr::Foundation::HWND, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetGoOnline(lpszURL, hwndParent, dwFlags)
+    {% end %}
   end
 
   def internetAutodial(dwFlags : Win32cr::Networking::WinInet::INTERNET_AUTODIAL, hwndParent : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetAutodial(dwFlags, hwndParent)
+    {% end %}
   end
 
   def internetAutodialHangup(dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetAutodialHangup(dwReserved)
+    {% end %}
   end
 
   def internetGetConnectedState(lpdwFlags : Win32cr::Networking::WinInet::INTERNET_CONNECTION*, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetGetConnectedState(lpdwFlags, dwReserved)
+    {% end %}
   end
 
   def internetGetConnectedStateExA(lpdwFlags : Win32cr::Networking::WinInet::INTERNET_CONNECTION*, lpszConnectionName : UInt8*, cchNameLen : UInt32, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetGetConnectedStateExA(lpdwFlags, lpszConnectionName, cchNameLen, dwReserved)
+    {% end %}
   end
 
   def internetGetConnectedStateExW(lpdwFlags : Win32cr::Networking::WinInet::INTERNET_CONNECTION*, lpszConnectionName : UInt16*, cchNameLen : UInt32, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetGetConnectedStateExW(lpdwFlags, lpszConnectionName, cchNameLen, dwReserved)
+    {% end %}
   end
 
   def deleteWpadCacheForNetworks(param0 : Win32cr::Networking::WinInet::WPAD_CACHE_DELETE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteWpadCacheForNetworks(param0)
+    {% end %}
   end
 
   def internetInitializeAutoProxyDll(dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetInitializeAutoProxyDll(dwReserved)
+    {% end %}
   end
 
   def detectAutoProxyUrl(pszAutoProxyUrl : UInt8*, cchAutoProxyUrl : UInt32, dwDetectFlags : Win32cr::Networking::WinInet::PROXY_AUTO_DETECT_TYPE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DetectAutoProxyUrl(pszAutoProxyUrl, cchAutoProxyUrl, dwDetectFlags)
+    {% end %}
   end
 
   def createMD5SSOHash(pszChallengeInfo : Win32cr::Foundation::PWSTR, pwszRealm : Win32cr::Foundation::PWSTR, pwszTarget : Win32cr::Foundation::PWSTR, pbHexHash : UInt8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateMD5SSOHash(pszChallengeInfo, pwszRealm, pwszTarget, pbHexHash)
+    {% end %}
   end
 
   def internetGetConnectedStateEx(lpdwFlags : Win32cr::Networking::WinInet::INTERNET_CONNECTION*, lpszConnectionName : UInt8*, dwNameLen : UInt32, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetGetConnectedStateEx(lpdwFlags, lpszConnectionName, dwNameLen, dwReserved)
+    {% end %}
   end
 
   def internetSetDialStateA(lpszConnectoid : Win32cr::Foundation::PSTR, dwState : UInt32, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetSetDialStateA(lpszConnectoid, dwState, dwReserved)
+    {% end %}
   end
 
   def internetSetDialStateW(lpszConnectoid : Win32cr::Foundation::PWSTR, dwState : UInt32, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetSetDialStateW(lpszConnectoid, dwState, dwReserved)
+    {% end %}
   end
 
   def internetSetDialState(lpszConnectoid : Win32cr::Foundation::PSTR, dwState : UInt32, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetSetDialState(lpszConnectoid, dwState, dwReserved)
+    {% end %}
   end
 
   def internetSetPerSiteCookieDecisionA(pchHostName : Win32cr::Foundation::PSTR, dwDecision : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetSetPerSiteCookieDecisionA(pchHostName, dwDecision)
+    {% end %}
   end
 
   def internetSetPerSiteCookieDecisionW(pchHostName : Win32cr::Foundation::PWSTR, dwDecision : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetSetPerSiteCookieDecisionW(pchHostName, dwDecision)
+    {% end %}
   end
 
   def internetGetPerSiteCookieDecisionA(pchHostName : Win32cr::Foundation::PSTR, pResult : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetGetPerSiteCookieDecisionA(pchHostName, pResult)
+    {% end %}
   end
 
   def internetGetPerSiteCookieDecisionW(pchHostName : Win32cr::Foundation::PWSTR, pResult : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetGetPerSiteCookieDecisionW(pchHostName, pResult)
+    {% end %}
   end
 
   def internetClearAllPerSiteCookieDecisions : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetClearAllPerSiteCookieDecisions
+    {% end %}
   end
 
   def internetEnumPerSiteCookieDecisionA(pszSiteName : UInt8*, pcSiteNameSize : UInt32*, pdwDecision : UInt32*, dwIndex : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetEnumPerSiteCookieDecisionA(pszSiteName, pcSiteNameSize, pdwDecision, dwIndex)
+    {% end %}
   end
 
   def internetEnumPerSiteCookieDecisionW(pszSiteName : UInt16*, pcSiteNameSize : UInt32*, pdwDecision : UInt32*, dwIndex : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetEnumPerSiteCookieDecisionW(pszSiteName, pcSiteNameSize, pdwDecision, dwIndex)
+    {% end %}
   end
 
   def privacySetZonePreferenceW(dwZone : UInt32, dwType : UInt32, dwTemplate : UInt32, pszPreference : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.PrivacySetZonePreferenceW(dwZone, dwType, dwTemplate, pszPreference)
+    {% end %}
   end
 
   def privacyGetZonePreferenceW(dwZone : UInt32, dwType : UInt32, pdwTemplate : UInt32*, pszBuffer : UInt16*, pdwBufferLength : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.PrivacyGetZonePreferenceW(dwZone, dwType, pdwTemplate, pszBuffer, pdwBufferLength)
+    {% end %}
   end
 
   def httpIsHostHstsEnabled(pcwszUrl : Win32cr::Foundation::PWSTR, pfIsHsts : Win32cr::Foundation::BOOL*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpIsHostHstsEnabled(pcwszUrl, pfIsHsts)
+    {% end %}
   end
 
   def internetAlgIdToStringA(ai : UInt32, lpstr : UInt8*, lpdwstrLength : UInt32*, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetAlgIdToStringA(ai, lpstr, lpdwstrLength, dwReserved)
+    {% end %}
   end
 
   def internetAlgIdToStringW(ai : UInt32, lpstr : UInt16*, lpdwstrLength : UInt32*, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetAlgIdToStringW(ai, lpstr, lpdwstrLength, dwReserved)
+    {% end %}
   end
 
   def internetSecurityProtocolToStringA(dwProtocol : UInt32, lpstr : UInt8*, lpdwstrLength : UInt32*, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetSecurityProtocolToStringA(dwProtocol, lpstr, lpdwstrLength, dwReserved)
+    {% end %}
   end
 
   def internetSecurityProtocolToStringW(dwProtocol : UInt32, lpstr : UInt16*, lpdwstrLength : UInt32*, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetSecurityProtocolToStringW(dwProtocol, lpstr, lpdwstrLength, dwReserved)
+    {% end %}
   end
 
   def internetGetSecurityInfoByURLA(lpszURL : Win32cr::Foundation::PSTR, ppCertChain : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT**, pdwSecureFlags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetGetSecurityInfoByURLA(lpszURL, ppCertChain, pdwSecureFlags)
+    {% end %}
   end
 
   def internetGetSecurityInfoByURLW(lpszURL : Win32cr::Foundation::PWSTR, ppCertChain : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT**, pdwSecureFlags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetGetSecurityInfoByURLW(lpszURL, ppCertChain, pdwSecureFlags)
+    {% end %}
   end
 
   def internetGetSecurityInfoByURL(lpszURL : Win32cr::Foundation::PSTR, ppCertChain : Win32cr::Security::Cryptography::CERT_CHAIN_CONTEXT**, pdwSecureFlags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetGetSecurityInfoByURL(lpszURL, ppCertChain, pdwSecureFlags)
+    {% end %}
   end
 
   def showSecurityInfo(hWndParent : Win32cr::Foundation::HWND, pSecurityInfo : Win32cr::Networking::WinInet::INTERNET_SECURITY_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.ShowSecurityInfo(hWndParent, pSecurityInfo)
+    {% end %}
   end
 
   def showX509EncodedCertificate(hWndParent : Win32cr::Foundation::HWND, lpCert : UInt8*, cbCert : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ShowX509EncodedCertificate(hWndParent, lpCert, cbCert)
+    {% end %}
   end
 
   def showClientAuthCerts(hWndParent : Win32cr::Foundation::HWND) : UInt32
+    {% if !flag?(:docs) %}
     C.ShowClientAuthCerts(hWndParent)
+    {% end %}
   end
 
   def parseX509EncodedCertificateForListBoxEntry(lpCert : UInt8*, cbCert : UInt32, lpszListBoxEntry : UInt8*, lpdwListBoxEntry : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ParseX509EncodedCertificateForListBoxEntry(lpCert, cbCert, lpszListBoxEntry, lpdwListBoxEntry)
+    {% end %}
   end
 
   def internetShowSecurityInfoByURLA(lpszURL : Win32cr::Foundation::PSTR, hwndParent : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetShowSecurityInfoByURLA(lpszURL, hwndParent)
+    {% end %}
   end
 
   def internetShowSecurityInfoByURLW(lpszURL : Win32cr::Foundation::PWSTR, hwndParent : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetShowSecurityInfoByURLW(lpszURL, hwndParent)
+    {% end %}
   end
 
   def internetShowSecurityInfoByURL(lpszURL : Win32cr::Foundation::PSTR, hwndParent : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetShowSecurityInfoByURL(lpszURL, hwndParent)
+    {% end %}
   end
 
   def internetFortezzaCommand(dwCommand : UInt32, hwnd : Win32cr::Foundation::HWND, dwReserved : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetFortezzaCommand(dwCommand, hwnd, dwReserved)
+    {% end %}
   end
 
   def internetQueryFortezzaStatus(pdwStatus : UInt32*, dwReserved : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetQueryFortezzaStatus(pdwStatus, dwReserved)
+    {% end %}
   end
 
   def internetWriteFileExA(hFile : Void*, lpBuffersIn : Win32cr::Networking::WinInet::INTERNET_BUFFERSA*, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetWriteFileExA(hFile, lpBuffersIn, dwFlags, dwContext)
+    {% end %}
   end
 
   def internetWriteFileExW(hFile : Void*, lpBuffersIn : Win32cr::Networking::WinInet::INTERNET_BUFFERSW*, dwFlags : UInt32, dwContext : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InternetWriteFileExW(hFile, lpBuffersIn, dwFlags, dwContext)
+    {% end %}
   end
 
   def findP3PPolicySymbol(pszSymbol : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.FindP3PPolicySymbol(pszSymbol)
+    {% end %}
   end
 
   def httpGetServerCredentials(pwszUrl : Win32cr::Foundation::PWSTR, ppwszUserName : Win32cr::Foundation::PWSTR*, ppwszPassword : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpGetServerCredentials(pwszUrl, ppwszUserName, ppwszPassword)
+    {% end %}
   end
 
   def httpPushEnable(hRequest : Void*, pTransportSetting : Win32cr::Networking::WinInet::HTTP_PUSH_TRANSPORT_SETTING*, phWait : Win32cr::Networking::WinInet::HTTP_PUSH_WAIT_HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpPushEnable(hRequest, pTransportSetting, phWait)
+    {% end %}
   end
 
   def httpPushWait(hWait : Win32cr::Networking::WinInet::HTTP_PUSH_WAIT_HANDLE, eType : Win32cr::Networking::WinInet::HTTP_PUSH_WAIT_TYPE, pNotificationStatus : Win32cr::Networking::WinInet::HTTP_PUSH_NOTIFICATION_STATUS*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpPushWait(hWait, eType, pNotificationStatus)
+    {% end %}
   end
 
   def httpPushClose(hWait : Win32cr::Networking::WinInet::HTTP_PUSH_WAIT_HANDLE) : Void
+    {% if !flag?(:docs) %}
     C.HttpPushClose(hWait)
+    {% end %}
   end
 
   def httpCheckDavComplianceA(lpszUrl : Win32cr::Foundation::PSTR, lpszComplianceToken : Win32cr::Foundation::PSTR, lpfFound : Int32*, hWnd : Win32cr::Foundation::HWND, lpvReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HttpCheckDavComplianceA(lpszUrl, lpszComplianceToken, lpfFound, hWnd, lpvReserved)
+    {% end %}
   end
 
   def httpCheckDavComplianceW(lpszUrl : Win32cr::Foundation::PWSTR, lpszComplianceToken : Win32cr::Foundation::PWSTR, lpfFound : Int32*, hWnd : Win32cr::Foundation::HWND, lpvReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HttpCheckDavComplianceW(lpszUrl, lpszComplianceToken, lpfFound, hWnd, lpvReserved)
+    {% end %}
   end
 
   def isUrlCacheEntryExpiredA(lpszUrlName : Win32cr::Foundation::PSTR, dwFlags : UInt32, pftLastModified : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsUrlCacheEntryExpiredA(lpszUrlName, dwFlags, pftLastModified)
+    {% end %}
   end
 
   def isUrlCacheEntryExpiredW(lpszUrlName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pftLastModified : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsUrlCacheEntryExpiredW(lpszUrlName, dwFlags, pftLastModified)
+    {% end %}
   end
 
   def createUrlCacheEntryExW(lpszUrlName : Win32cr::Foundation::PWSTR, dwExpectedFileSize : UInt32, lpszFileExtension : Win32cr::Foundation::PWSTR, lpszFileName : UInt16*, dwReserved : UInt32, fPreserveIncomingFileName : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateUrlCacheEntryExW(lpszUrlName, dwExpectedFileSize, lpszFileExtension, lpszFileName, dwReserved, fPreserveIncomingFileName)
+    {% end %}
   end
 
   def getUrlCacheEntryBinaryBlob(pwszUrlName : Win32cr::Foundation::PWSTR, dwType : UInt32*, pftExpireTime : Win32cr::Foundation::FILETIME*, pftAccessTime : Win32cr::Foundation::FILETIME*, pftModifiedTime : Win32cr::Foundation::FILETIME*, ppbBlob : UInt8**, pcbBlob : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetUrlCacheEntryBinaryBlob(pwszUrlName, dwType, pftExpireTime, pftAccessTime, pftModifiedTime, ppbBlob, pcbBlob)
+    {% end %}
   end
 
   def commitUrlCacheEntryBinaryBlob(pwszUrlName : Win32cr::Foundation::PWSTR, dwType : UInt32, ftExpireTime : Win32cr::Foundation::FILETIME, ftModifiedTime : Win32cr::Foundation::FILETIME, pbBlob : UInt8*, cbBlob : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CommitUrlCacheEntryBinaryBlob(pwszUrlName, dwType, ftExpireTime, ftModifiedTime, pbBlob, cbBlob)
+    {% end %}
   end
 
   def createUrlCacheContainerA(name : Win32cr::Foundation::PSTR, lpCachePrefix : Win32cr::Foundation::PSTR, lpszCachePath : Win32cr::Foundation::PSTR, kb_cache_limit : UInt32, dwContainerType : UInt32, dwOptions : UInt32, pvBuffer : Void*, cbBuffer : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateUrlCacheContainerA(name, lpCachePrefix, lpszCachePath, kb_cache_limit, dwContainerType, dwOptions, pvBuffer, cbBuffer)
+    {% end %}
   end
 
   def createUrlCacheContainerW(name : Win32cr::Foundation::PWSTR, lpCachePrefix : Win32cr::Foundation::PWSTR, lpszCachePath : Win32cr::Foundation::PWSTR, kb_cache_limit : UInt32, dwContainerType : UInt32, dwOptions : UInt32, pvBuffer : Void*, cbBuffer : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateUrlCacheContainerW(name, lpCachePrefix, lpszCachePath, kb_cache_limit, dwContainerType, dwOptions, pvBuffer, cbBuffer)
+    {% end %}
   end
 
   def deleteUrlCacheContainerA(name : Win32cr::Foundation::PSTR, dwOptions : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteUrlCacheContainerA(name, dwOptions)
+    {% end %}
   end
 
   def deleteUrlCacheContainerW(name : Win32cr::Foundation::PWSTR, dwOptions : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteUrlCacheContainerW(name, dwOptions)
+    {% end %}
   end
 
   def findFirstUrlCacheContainerA(pdwModified : UInt32*, lpContainerInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_CONTAINER_INFOA*, lpcbContainerInfo : UInt32*, dwOptions : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.FindFirstUrlCacheContainerA(pdwModified, lpContainerInfo, lpcbContainerInfo, dwOptions)
+    {% end %}
   end
 
   def findFirstUrlCacheContainerW(pdwModified : UInt32*, lpContainerInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_CONTAINER_INFOW*, lpcbContainerInfo : UInt32*, dwOptions : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.FindFirstUrlCacheContainerW(pdwModified, lpContainerInfo, lpcbContainerInfo, dwOptions)
+    {% end %}
   end
 
   def findNextUrlCacheContainerA(hEnumHandle : Win32cr::Foundation::HANDLE, lpContainerInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_CONTAINER_INFOA*, lpcbContainerInfo : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FindNextUrlCacheContainerA(hEnumHandle, lpContainerInfo, lpcbContainerInfo)
+    {% end %}
   end
 
   def findNextUrlCacheContainerW(hEnumHandle : Win32cr::Foundation::HANDLE, lpContainerInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_CONTAINER_INFOW*, lpcbContainerInfo : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FindNextUrlCacheContainerW(hEnumHandle, lpContainerInfo, lpcbContainerInfo)
+    {% end %}
   end
 
   def freeUrlCacheSpaceA(lpszCachePath : Win32cr::Foundation::PSTR, dwSize : UInt32, dwFilter : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FreeUrlCacheSpaceA(lpszCachePath, dwSize, dwFilter)
+    {% end %}
   end
 
   def freeUrlCacheSpaceW(lpszCachePath : Win32cr::Foundation::PWSTR, dwSize : UInt32, dwFilter : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FreeUrlCacheSpaceW(lpszCachePath, dwSize, dwFilter)
+    {% end %}
   end
 
   def urlCacheFreeGlobalSpace(ullTargetSize : UInt64, dwFilter : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.UrlCacheFreeGlobalSpace(ullTargetSize, dwFilter)
+    {% end %}
   end
 
   def urlCacheGetGlobalCacheSize(dwFilter : UInt32, pullSize : UInt64*, pullLimit : UInt64*) : UInt32
+    {% if !flag?(:docs) %}
     C.UrlCacheGetGlobalCacheSize(dwFilter, pullSize, pullLimit)
+    {% end %}
   end
 
   def getUrlCacheConfigInfoA(lpCacheConfigInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_CONFIG_INFOA*, lpcbCacheConfigInfo : UInt32*, dwFieldControl : Win32cr::Networking::WinInet::CACHE_CONFIG) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUrlCacheConfigInfoA(lpCacheConfigInfo, lpcbCacheConfigInfo, dwFieldControl)
+    {% end %}
   end
 
   def getUrlCacheConfigInfoW(lpCacheConfigInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_CONFIG_INFOW*, lpcbCacheConfigInfo : UInt32*, dwFieldControl : Win32cr::Networking::WinInet::CACHE_CONFIG) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUrlCacheConfigInfoW(lpCacheConfigInfo, lpcbCacheConfigInfo, dwFieldControl)
+    {% end %}
   end
 
   def setUrlCacheConfigInfoA(lpCacheConfigInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_CONFIG_INFOA*, dwFieldControl : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetUrlCacheConfigInfoA(lpCacheConfigInfo, dwFieldControl)
+    {% end %}
   end
 
   def setUrlCacheConfigInfoW(lpCacheConfigInfo : Win32cr::Networking::WinInet::INTERNET_CACHE_CONFIG_INFOW*, dwFieldControl : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetUrlCacheConfigInfoW(lpCacheConfigInfo, dwFieldControl)
+    {% end %}
   end
 
   def runOnceUrlCache(hwnd : Win32cr::Foundation::HWND, hinst : Win32cr::Foundation::HINSTANCE, lpszCmd : Win32cr::Foundation::PSTR, nCmdShow : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.RunOnceUrlCache(hwnd, hinst, lpszCmd, nCmdShow)
+    {% end %}
   end
 
   def deleteIE3Cache(hwnd : Win32cr::Foundation::HWND, hinst : Win32cr::Foundation::HINSTANCE, lpszCmd : Win32cr::Foundation::PSTR, nCmdShow : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.DeleteIE3Cache(hwnd, hinst, lpszCmd, nCmdShow)
+    {% end %}
   end
 
   def updateUrlCacheContentPath(szNewPath : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UpdateUrlCacheContentPath(szNewPath)
+    {% end %}
   end
 
   def registerUrlCacheNotification(hWnd : Win32cr::Foundation::HWND, uMsg : UInt32, gid : Int64, dwOpsFilter : UInt32, dwReserved : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RegisterUrlCacheNotification(hWnd, uMsg, gid, dwOpsFilter, dwReserved)
+    {% end %}
   end
 
   def getUrlCacheHeaderData(nIdx : UInt32, lpdwData : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUrlCacheHeaderData(nIdx, lpdwData)
+    {% end %}
   end
 
   def setUrlCacheHeaderData(nIdx : UInt32, dwData : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetUrlCacheHeaderData(nIdx, dwData)
+    {% end %}
   end
 
   def incrementUrlCacheHeaderData(nIdx : UInt32, lpdwData : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IncrementUrlCacheHeaderData(nIdx, lpdwData)
+    {% end %}
   end
 
   def loadUrlCacheContent : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LoadUrlCacheContent
+    {% end %}
   end
 
   def appCacheLookup(pwszUrl : Win32cr::Foundation::PWSTR, dwFlags : UInt32, phAppCache : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.AppCacheLookup(pwszUrl, dwFlags, phAppCache)
+    {% end %}
   end
 
   def appCacheCheckManifest(pwszMasterUrl : Win32cr::Foundation::PWSTR, pwszManifestUrl : Win32cr::Foundation::PWSTR, pbManifestData : UInt8*, dwManifestDataSize : UInt32, pbManifestResponseHeaders : UInt8*, dwManifestResponseHeadersSize : UInt32, peState : Win32cr::Networking::WinInet::APP_CACHE_STATE*, phNewAppCache : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.AppCacheCheckManifest(pwszMasterUrl, pwszManifestUrl, pbManifestData, dwManifestDataSize, pbManifestResponseHeaders, dwManifestResponseHeadersSize, peState, phNewAppCache)
+    {% end %}
   end
 
   def appCacheGetDownloadList(hAppCache : Void*, pDownloadList : Win32cr::Networking::WinInet::APP_CACHE_DOWNLOAD_LIST*) : UInt32
+    {% if !flag?(:docs) %}
     C.AppCacheGetDownloadList(hAppCache, pDownloadList)
+    {% end %}
   end
 
   def appCacheFreeDownloadList(pDownloadList : Win32cr::Networking::WinInet::APP_CACHE_DOWNLOAD_LIST*) : Void
+    {% if !flag?(:docs) %}
     C.AppCacheFreeDownloadList(pDownloadList)
+    {% end %}
   end
 
   def appCacheFinalize(hAppCache : Void*, pbManifestData : UInt8*, dwManifestDataSize : UInt32, peState : Win32cr::Networking::WinInet::APP_CACHE_FINALIZE_STATE*) : UInt32
+    {% if !flag?(:docs) %}
     C.AppCacheFinalize(hAppCache, pbManifestData, dwManifestDataSize, peState)
+    {% end %}
   end
 
   def appCacheGetFallbackUrl(hAppCache : Void*, pwszUrl : Win32cr::Foundation::PWSTR, ppwszFallbackUrl : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.AppCacheGetFallbackUrl(hAppCache, pwszUrl, ppwszFallbackUrl)
+    {% end %}
   end
 
   def appCacheGetManifestUrl(hAppCache : Void*, ppwszManifestUrl : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.AppCacheGetManifestUrl(hAppCache, ppwszManifestUrl)
+    {% end %}
   end
 
   def appCacheDuplicateHandle(hAppCache : Void*, phDuplicatedAppCache : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.AppCacheDuplicateHandle(hAppCache, phDuplicatedAppCache)
+    {% end %}
   end
 
   def appCacheCloseHandle(hAppCache : Void*) : Void
+    {% if !flag?(:docs) %}
     C.AppCacheCloseHandle(hAppCache)
+    {% end %}
   end
 
   def appCacheFreeGroupList(pAppCacheGroupList : Win32cr::Networking::WinInet::APP_CACHE_GROUP_LIST*) : Void
+    {% if !flag?(:docs) %}
     C.AppCacheFreeGroupList(pAppCacheGroupList)
+    {% end %}
   end
 
   def appCacheGetGroupList(pAppCacheGroupList : Win32cr::Networking::WinInet::APP_CACHE_GROUP_LIST*) : UInt32
+    {% if !flag?(:docs) %}
     C.AppCacheGetGroupList(pAppCacheGroupList)
+    {% end %}
   end
 
   def appCacheGetInfo(hAppCache : Void*, pAppCacheInfo : Win32cr::Networking::WinInet::APP_CACHE_GROUP_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.AppCacheGetInfo(hAppCache, pAppCacheInfo)
+    {% end %}
   end
 
   def appCacheDeleteGroup(pwszManifestUrl : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.AppCacheDeleteGroup(pwszManifestUrl)
+    {% end %}
   end
 
   def appCacheFreeSpace(ftCutOff : Win32cr::Foundation::FILETIME) : UInt32
+    {% if !flag?(:docs) %}
     C.AppCacheFreeSpace(ftCutOff)
+    {% end %}
   end
 
   def appCacheGetIEGroupList(pAppCacheGroupList : Win32cr::Networking::WinInet::APP_CACHE_GROUP_LIST*) : UInt32
+    {% if !flag?(:docs) %}
     C.AppCacheGetIEGroupList(pAppCacheGroupList)
+    {% end %}
   end
 
   def appCacheDeleteIEGroup(pwszManifestUrl : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.AppCacheDeleteIEGroup(pwszManifestUrl)
+    {% end %}
   end
 
   def appCacheFreeIESpace(ftCutOff : Win32cr::Foundation::FILETIME) : UInt32
+    {% if !flag?(:docs) %}
     C.AppCacheFreeIESpace(ftCutOff)
+    {% end %}
   end
 
   def appCacheCreateAndCommitFile(hAppCache : Void*, pwszSourceFilePath : Win32cr::Foundation::PWSTR, pwszUrl : Win32cr::Foundation::PWSTR, pbResponseHeaders : UInt8*, dwResponseHeadersSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.AppCacheCreateAndCommitFile(hAppCache, pwszSourceFilePath, pwszUrl, pbResponseHeaders, dwResponseHeadersSize)
+    {% end %}
   end
 
   def httpOpenDependencyHandle(hRequestHandle : Void*, fBackground : Win32cr::Foundation::BOOL, phDependencyHandle : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpOpenDependencyHandle(hRequestHandle, fBackground, phDependencyHandle)
+    {% end %}
   end
 
   def httpCloseDependencyHandle(hDependencyHandle : Void*) : Void
+    {% if !flag?(:docs) %}
     C.HttpCloseDependencyHandle(hDependencyHandle)
+    {% end %}
   end
 
   def httpDuplicateDependencyHandle(hDependencyHandle : Void*, phDuplicatedDependencyHandle : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpDuplicateDependencyHandle(hDependencyHandle, phDuplicatedDependencyHandle)
+    {% end %}
   end
 
   def httpIndicatePageLoadComplete(hDependencyHandle : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.HttpIndicatePageLoadComplete(hDependencyHandle)
+    {% end %}
   end
 
   def urlCacheFreeEntryInfo(pCacheEntryInfo : Win32cr::Networking::WinInet::URLCACHE_ENTRY_INFO*) : Void
+    {% if !flag?(:docs) %}
     C.UrlCacheFreeEntryInfo(pCacheEntryInfo)
+    {% end %}
   end
 
   def urlCacheGetEntryInfo(hAppCache : Void*, pcwszUrl : Win32cr::Foundation::PWSTR, pCacheEntryInfo : Win32cr::Networking::WinInet::URLCACHE_ENTRY_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.UrlCacheGetEntryInfo(hAppCache, pcwszUrl, pCacheEntryInfo)
+    {% end %}
   end
 
   def urlCacheCloseEntryHandle(hEntryFile : Void*) : Void
+    {% if !flag?(:docs) %}
     C.UrlCacheCloseEntryHandle(hEntryFile)
+    {% end %}
   end
 
   def urlCacheRetrieveEntryFile(hAppCache : Void*, pcwszUrl : Win32cr::Foundation::PWSTR, pCacheEntryInfo : Win32cr::Networking::WinInet::URLCACHE_ENTRY_INFO*, phEntryFile : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.UrlCacheRetrieveEntryFile(hAppCache, pcwszUrl, pCacheEntryInfo, phEntryFile)
+    {% end %}
   end
 
   def urlCacheReadEntryStream(hUrlCacheStream : Void*, ullLocation : UInt64, pBuffer : Void*, dwBufferLen : UInt32, pdwBufferLen : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.UrlCacheReadEntryStream(hUrlCacheStream, ullLocation, pBuffer, dwBufferLen, pdwBufferLen)
+    {% end %}
   end
 
   def urlCacheRetrieveEntryStream(hAppCache : Void*, pcwszUrl : Win32cr::Foundation::PWSTR, fRandomRead : Win32cr::Foundation::BOOL, pCacheEntryInfo : Win32cr::Networking::WinInet::URLCACHE_ENTRY_INFO*, phEntryStream : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.UrlCacheRetrieveEntryStream(hAppCache, pcwszUrl, fRandomRead, pCacheEntryInfo, phEntryStream)
+    {% end %}
   end
 
   def urlCacheUpdateEntryExtraData(hAppCache : Void*, pcwszUrl : Win32cr::Foundation::PWSTR, pbExtraData : UInt8*, cbExtraData : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.UrlCacheUpdateEntryExtraData(hAppCache, pcwszUrl, pbExtraData, cbExtraData)
+    {% end %}
   end
 
   def urlCacheCreateContainer(pwszName : Win32cr::Foundation::PWSTR, pwszPrefix : Win32cr::Foundation::PWSTR, pwszDirectory : Win32cr::Foundation::PWSTR, ullLimit : UInt64, dwOptions : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.UrlCacheCreateContainer(pwszName, pwszPrefix, pwszDirectory, ullLimit, dwOptions)
+    {% end %}
   end
 
   def urlCacheCheckEntriesExist(rgpwszUrls : Win32cr::Foundation::PWSTR*, cEntries : UInt32, rgfExist : Win32cr::Foundation::BOOL*) : UInt32
+    {% if !flag?(:docs) %}
     C.UrlCacheCheckEntriesExist(rgpwszUrls, cEntries, rgfExist)
+    {% end %}
   end
 
   def urlCacheGetContentPaths(pppwszDirectories : Win32cr::Foundation::PWSTR**, pcDirectories : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.UrlCacheGetContentPaths(pppwszDirectories, pcDirectories)
+    {% end %}
   end
 
   def urlCacheGetGlobalLimit(limitType : Win32cr::Networking::WinInet::URL_CACHE_LIMIT_TYPE, pullLimit : UInt64*) : UInt32
+    {% if !flag?(:docs) %}
     C.UrlCacheGetGlobalLimit(limitType, pullLimit)
+    {% end %}
   end
 
   def urlCacheSetGlobalLimit(limitType : Win32cr::Networking::WinInet::URL_CACHE_LIMIT_TYPE, ullLimit : UInt64) : UInt32
+    {% if !flag?(:docs) %}
     C.UrlCacheSetGlobalLimit(limitType, ullLimit)
+    {% end %}
   end
 
   def urlCacheReloadSettings : UInt32
+    {% if !flag?(:docs) %}
     C.UrlCacheReloadSettings
+    {% end %}
   end
 
   def urlCacheContainerSetEntryMaximumAge(pwszPrefix : Win32cr::Foundation::PWSTR, dwEntryMaxAge : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.UrlCacheContainerSetEntryMaximumAge(pwszPrefix, dwEntryMaxAge)
+    {% end %}
   end
 
   def urlCacheFindFirstEntry(pwszPrefix : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwFilter : UInt32, group_id : Int64, pCacheEntryInfo : Win32cr::Networking::WinInet::URLCACHE_ENTRY_INFO*, phFind : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.UrlCacheFindFirstEntry(pwszPrefix, dwFlags, dwFilter, group_id, pCacheEntryInfo, phFind)
+    {% end %}
   end
 
   def urlCacheFindNextEntry(hFind : Win32cr::Foundation::HANDLE, pCacheEntryInfo : Win32cr::Networking::WinInet::URLCACHE_ENTRY_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.UrlCacheFindNextEntry(hFind, pCacheEntryInfo)
+    {% end %}
   end
 
   def urlCacheServer : UInt32
+    {% if !flag?(:docs) %}
     C.UrlCacheServer
+    {% end %}
   end
 
   def readGuidsForConnectedNetworks(pcNetworks : UInt32*, pppwszNetworkGuids : Win32cr::Foundation::PWSTR**, pppbstrNetworkNames : Win32cr::Foundation::BSTR**, pppwszGWMacs : Win32cr::Foundation::PWSTR**, pcGatewayMacs : UInt32*, pdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReadGuidsForConnectedNetworks(pcNetworks, pppwszNetworkGuids, pppbstrNetworkNames, pppwszGWMacs, pcGatewayMacs, pdwFlags)
+    {% end %}
   end
 
   def isHostInProxyBypassList(tScheme : Win32cr::Networking::WinInet::INTERNET_SCHEME, lpszHost : UInt8*, cchHost : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsHostInProxyBypassList(tScheme, lpszHost, cchHost)
+    {% end %}
   end
 
   def internetFreeProxyInfoList(pProxyInfoList : Win32cr::Networking::WinInet::WININET_PROXY_INFO_LIST*) : Void
+    {% if !flag?(:docs) %}
     C.InternetFreeProxyInfoList(pProxyInfoList)
+    {% end %}
   end
 
   def internetGetProxyForUrl(hInternet : Void*, pcwszUrl : Win32cr::Foundation::PWSTR, pProxyInfoList : Win32cr::Networking::WinInet::WININET_PROXY_INFO_LIST*) : UInt32
+    {% if !flag?(:docs) %}
     C.InternetGetProxyForUrl(hInternet, pcwszUrl, pProxyInfoList)
+    {% end %}
   end
 
   def doConnectoidsExist : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DoConnectoidsExist
+    {% end %}
   end
 
   def getDiskInfoA(pszPath : Win32cr::Foundation::PSTR, pdwClusterSize : UInt32*, pdlAvail : UInt64*, pdlTotal : UInt64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetDiskInfoA(pszPath, pdwClusterSize, pdlAvail, pdlTotal)
+    {% end %}
   end
 
   def performOperationOverUrlCacheA(pszUrlSearchPattern : Win32cr::Foundation::PSTR, dwFlags : UInt32, dwFilter : UInt32, group_id : Int64, pReserved1 : Void*, pdwReserved2 : UInt32*, pReserved3 : Void*, op : Win32cr::Networking::WinInet::CACHE_OPERATOR, pOperatorData : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PerformOperationOverUrlCacheA(pszUrlSearchPattern, dwFlags, dwFilter, group_id, pReserved1, pdwReserved2, pReserved3, op, pOperatorData)
+    {% end %}
   end
 
   def isProfilesEnabled : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsProfilesEnabled
+    {% end %}
   end
 
   def internalInternetGetCookie(lpszUrl : Win32cr::Foundation::PSTR, lpszCookieData : UInt8*, lpdwDataSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.InternalInternetGetCookie(lpszUrl, lpszCookieData, lpdwDataSize)
+    {% end %}
   end
 
   def importCookieFileA(szFilename : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImportCookieFileA(szFilename)
+    {% end %}
   end
 
   def importCookieFileW(szFilename : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImportCookieFileW(szFilename)
+    {% end %}
   end
 
   def exportCookieFileA(szFilename : Win32cr::Foundation::PSTR, fAppend : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ExportCookieFileA(szFilename, fAppend)
+    {% end %}
   end
 
   def exportCookieFileW(szFilename : Win32cr::Foundation::PWSTR, fAppend : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ExportCookieFileW(szFilename, fAppend)
+    {% end %}
   end
 
   def isDomainLegalCookieDomainA(pchDomain : Win32cr::Foundation::PSTR, pchFullDomain : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsDomainLegalCookieDomainA(pchDomain, pchFullDomain)
+    {% end %}
   end
 
   def isDomainLegalCookieDomainW(pchDomain : Win32cr::Foundation::PWSTR, pchFullDomain : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsDomainLegalCookieDomainW(pchDomain, pchFullDomain)
+    {% end %}
   end
 
   def httpWebSocketCompleteUpgrade(hRequest : Void*, dwContext : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.HttpWebSocketCompleteUpgrade(hRequest, dwContext)
+    {% end %}
   end
 
   def httpWebSocketSend(hWebSocket : Void*, buffer_type : Win32cr::Networking::WinInet::HTTP_WEB_SOCKET_BUFFER_TYPE, pvBuffer : Void*, dwBufferLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HttpWebSocketSend(hWebSocket, buffer_type, pvBuffer, dwBufferLength)
+    {% end %}
   end
 
   def httpWebSocketReceive(hWebSocket : Void*, pvBuffer : Void*, dwBufferLength : UInt32, pdwBytesRead : UInt32*, pBufferType : Win32cr::Networking::WinInet::HTTP_WEB_SOCKET_BUFFER_TYPE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HttpWebSocketReceive(hWebSocket, pvBuffer, dwBufferLength, pdwBytesRead, pBufferType)
+    {% end %}
   end
 
   def httpWebSocketClose(hWebSocket : Void*, usStatus : UInt16, pvReason : Void*, dwReasonLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HttpWebSocketClose(hWebSocket, usStatus, pvReason, dwReasonLength)
+    {% end %}
   end
 
   def httpWebSocketShutdown(hWebSocket : Void*, usStatus : UInt16, pvReason : Void*, dwReasonLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HttpWebSocketShutdown(hWebSocket, usStatus, pvReason, dwReasonLength)
+    {% end %}
   end
 
   def httpWebSocketQueryCloseStatus(hWebSocket : Void*, pusStatus : UInt16*, pvReason : Void*, dwReasonLength : UInt32, pdwReasonLengthConsumed : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HttpWebSocketQueryCloseStatus(hWebSocket, pusStatus, pvReason, dwReasonLength, pdwReasonLengthConsumed)
+    {% end %}
   end
 
   def internetConvertUrlFromWireToWideChar(pcszUrl : UInt8*, cchUrl : UInt32, pcwszBaseUrl : Win32cr::Foundation::PWSTR, dwCodePageHost : UInt32, dwCodePagePath : UInt32, fEncodePathExtra : Win32cr::Foundation::BOOL, dwCodePageExtra : UInt32, ppwszConvertedUrl : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.InternetConvertUrlFromWireToWideChar(pcszUrl, cchUrl, pcwszBaseUrl, dwCodePageHost, dwCodePagePath, fEncodePathExtra, dwCodePageExtra, ppwszConvertedUrl)
+    {% end %}
   end
 
   @[Link("wininet")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun InternetTimeFromSystemTimeA(pst : Win32cr::Foundation::SYSTEMTIME*, dwRFC : UInt32, lpszTime : Win32cr::Foundation::PSTR, cbTime : UInt32) : Win32cr::Foundation::BOOL
@@ -4337,4 +4930,5 @@ module Win32cr::Networking::WinInet
     fun InternetConvertUrlFromWireToWideChar(pcszUrl : UInt8*, cchUrl : UInt32, pcwszBaseUrl : Win32cr::Foundation::PWSTR, dwCodePageHost : UInt32, dwCodePagePath : UInt32, fEncodePathExtra : Win32cr::Foundation::BOOL, dwCodePageExtra : UInt32, ppwszConvertedUrl : Win32cr::Foundation::PWSTR*) : UInt32
 
   end
+  {% end %}
 end

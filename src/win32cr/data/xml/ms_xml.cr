@@ -872,7 +872,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMImplementationVtbl,
+  record IXMLDOMImplementationVtable,
     query_interface : Proc(IXMLDOMImplementation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMImplementation*, UInt32),
     release : Proc(IXMLDOMImplementation*, UInt32),
@@ -884,7 +884,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMImplementation, lpVtbl : IXMLDOMImplementationVtbl* do
+  record IXMLDOMImplementation, lpVtbl : IXMLDOMImplementationVtable* do
     GUID = LibC::GUID.new(0x2933bf8f_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMImplementation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -914,7 +914,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMNodeVtbl,
+  record IXMLDOMNodeVtable,
     query_interface : Proc(IXMLDOMNode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMNode*, UInt32),
     release : Proc(IXMLDOMNode*, UInt32),
@@ -961,7 +961,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMNode, lpVtbl : IXMLDOMNodeVtbl* do
+  record IXMLDOMNode, lpVtbl : IXMLDOMNodeVtable* do
     GUID = LibC::GUID.new(0x2933bf80_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMNode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1096,7 +1096,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMDocumentFragmentVtbl,
+  record IXMLDOMDocumentFragmentVtable,
     query_interface : Proc(IXMLDOMDocumentFragment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMDocumentFragment*, UInt32),
     release : Proc(IXMLDOMDocumentFragment*, UInt32),
@@ -1143,7 +1143,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMDocumentFragment, lpVtbl : IXMLDOMDocumentFragmentVtbl* do
+  record IXMLDOMDocumentFragment, lpVtbl : IXMLDOMDocumentFragmentVtable* do
     GUID = LibC::GUID.new(0x3efaa413_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
     def query_interface(this : IXMLDOMDocumentFragment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1278,7 +1278,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMDocumentVtbl,
+  record IXMLDOMDocumentVtable,
     query_interface : Proc(IXMLDOMDocument*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMDocument*, UInt32),
     release : Proc(IXMLDOMDocument*, UInt32),
@@ -1358,7 +1358,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMDocument, lpVtbl : IXMLDOMDocumentVtbl* do
+  record IXMLDOMDocument, lpVtbl : IXMLDOMDocumentVtable* do
     GUID = LibC::GUID.new(0x2933bf81_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1592,7 +1592,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMNodeListVtbl,
+  record IXMLDOMNodeListVtable,
     query_interface : Proc(IXMLDOMNodeList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMNodeList*, UInt32),
     release : Proc(IXMLDOMNodeList*, UInt32),
@@ -1608,7 +1608,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMNodeList, lpVtbl : IXMLDOMNodeListVtbl* do
+  record IXMLDOMNodeList, lpVtbl : IXMLDOMNodeListVtable* do
     GUID = LibC::GUID.new(0x2933bf82_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMNodeList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1650,7 +1650,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMNamedNodeMapVtbl,
+  record IXMLDOMNamedNodeMapVtable,
     query_interface : Proc(IXMLDOMNamedNodeMap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMNamedNodeMap*, UInt32),
     release : Proc(IXMLDOMNamedNodeMap*, UInt32),
@@ -1671,7 +1671,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMNamedNodeMap, lpVtbl : IXMLDOMNamedNodeMapVtbl* do
+  record IXMLDOMNamedNodeMap, lpVtbl : IXMLDOMNamedNodeMapVtable* do
     GUID = LibC::GUID.new(0x2933bf83_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMNamedNodeMap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1728,7 +1728,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMCharacterDataVtbl,
+  record IXMLDOMCharacterDataVtable,
     query_interface : Proc(IXMLDOMCharacterData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMCharacterData*, UInt32),
     release : Proc(IXMLDOMCharacterData*, UInt32),
@@ -1783,7 +1783,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMCharacterData, lpVtbl : IXMLDOMCharacterDataVtbl* do
+  record IXMLDOMCharacterData, lpVtbl : IXMLDOMCharacterDataVtable* do
     GUID = LibC::GUID.new(0x2933bf84_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMCharacterData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1942,7 +1942,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMAttributeVtbl,
+  record IXMLDOMAttributeVtable,
     query_interface : Proc(IXMLDOMAttribute*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMAttribute*, UInt32),
     release : Proc(IXMLDOMAttribute*, UInt32),
@@ -1992,7 +1992,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMAttribute, lpVtbl : IXMLDOMAttributeVtbl* do
+  record IXMLDOMAttribute, lpVtbl : IXMLDOMAttributeVtable* do
     GUID = LibC::GUID.new(0x2933bf85_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMAttribute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2136,7 +2136,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMElementVtbl,
+  record IXMLDOMElementVtable,
     query_interface : Proc(IXMLDOMElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMElement*, UInt32),
     release : Proc(IXMLDOMElement*, UInt32),
@@ -2192,7 +2192,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMElement, lpVtbl : IXMLDOMElementVtbl* do
+  record IXMLDOMElement, lpVtbl : IXMLDOMElementVtable* do
     GUID = LibC::GUID.new(0x2933bf86_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2354,7 +2354,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMTextVtbl,
+  record IXMLDOMTextVtable,
     query_interface : Proc(IXMLDOMText*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMText*, UInt32),
     release : Proc(IXMLDOMText*, UInt32),
@@ -2410,7 +2410,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMText, lpVtbl : IXMLDOMTextVtbl* do
+  record IXMLDOMText, lpVtbl : IXMLDOMTextVtable* do
     GUID = LibC::GUID.new(0x2933bf87_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMText*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2572,7 +2572,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMCommentVtbl,
+  record IXMLDOMCommentVtable,
     query_interface : Proc(IXMLDOMComment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMComment*, UInt32),
     release : Proc(IXMLDOMComment*, UInt32),
@@ -2627,7 +2627,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMComment, lpVtbl : IXMLDOMCommentVtbl* do
+  record IXMLDOMComment, lpVtbl : IXMLDOMCommentVtable* do
     GUID = LibC::GUID.new(0x2933bf88_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMComment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2786,7 +2786,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMProcessingInstructionVtbl,
+  record IXMLDOMProcessingInstructionVtable,
     query_interface : Proc(IXMLDOMProcessingInstruction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMProcessingInstruction*, UInt32),
     release : Proc(IXMLDOMProcessingInstruction*, UInt32),
@@ -2836,7 +2836,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMProcessingInstruction, lpVtbl : IXMLDOMProcessingInstructionVtbl* do
+  record IXMLDOMProcessingInstruction, lpVtbl : IXMLDOMProcessingInstructionVtable* do
     GUID = LibC::GUID.new(0x2933bf89_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMProcessingInstruction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2980,7 +2980,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMCDATASectionVtbl,
+  record IXMLDOMCDATASectionVtable,
     query_interface : Proc(IXMLDOMCDATASection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMCDATASection*, UInt32),
     release : Proc(IXMLDOMCDATASection*, UInt32),
@@ -3036,7 +3036,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMCDATASection, lpVtbl : IXMLDOMCDATASectionVtbl* do
+  record IXMLDOMCDATASection, lpVtbl : IXMLDOMCDATASectionVtable* do
     GUID = LibC::GUID.new(0x2933bf8a_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMCDATASection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3198,7 +3198,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMDocumentTypeVtbl,
+  record IXMLDOMDocumentTypeVtable,
     query_interface : Proc(IXMLDOMDocumentType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMDocumentType*, UInt32),
     release : Proc(IXMLDOMDocumentType*, UInt32),
@@ -3248,7 +3248,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMDocumentType, lpVtbl : IXMLDOMDocumentTypeVtbl* do
+  record IXMLDOMDocumentType, lpVtbl : IXMLDOMDocumentTypeVtable* do
     GUID = LibC::GUID.new(0x2933bf8b_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMDocumentType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3392,7 +3392,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMNotationVtbl,
+  record IXMLDOMNotationVtable,
     query_interface : Proc(IXMLDOMNotation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMNotation*, UInt32),
     release : Proc(IXMLDOMNotation*, UInt32),
@@ -3441,7 +3441,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMNotation, lpVtbl : IXMLDOMNotationVtbl* do
+  record IXMLDOMNotation, lpVtbl : IXMLDOMNotationVtable* do
     GUID = LibC::GUID.new(0x2933bf8c_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMNotation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3582,7 +3582,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMEntityVtbl,
+  record IXMLDOMEntityVtable,
     query_interface : Proc(IXMLDOMEntity*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMEntity*, UInt32),
     release : Proc(IXMLDOMEntity*, UInt32),
@@ -3632,7 +3632,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMEntity, lpVtbl : IXMLDOMEntityVtbl* do
+  record IXMLDOMEntity, lpVtbl : IXMLDOMEntityVtable* do
     GUID = LibC::GUID.new(0x2933bf8d_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMEntity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3776,7 +3776,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMEntityReferenceVtbl,
+  record IXMLDOMEntityReferenceVtable,
     query_interface : Proc(IXMLDOMEntityReference*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMEntityReference*, UInt32),
     release : Proc(IXMLDOMEntityReference*, UInt32),
@@ -3823,7 +3823,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMEntityReference, lpVtbl : IXMLDOMEntityReferenceVtbl* do
+  record IXMLDOMEntityReference, lpVtbl : IXMLDOMEntityReferenceVtable* do
     GUID = LibC::GUID.new(0x2933bf8e_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMEntityReference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3958,7 +3958,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMParseErrorVtbl,
+  record IXMLDOMParseErrorVtable,
     query_interface : Proc(IXMLDOMParseError*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMParseError*, UInt32),
     release : Proc(IXMLDOMParseError*, UInt32),
@@ -3976,7 +3976,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMParseError, lpVtbl : IXMLDOMParseErrorVtbl* do
+  record IXMLDOMParseError, lpVtbl : IXMLDOMParseErrorVtable* do
     GUID = LibC::GUID.new(0x3efaa426_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
     def query_interface(this : IXMLDOMParseError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4024,7 +4024,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXTLRuntimeVtbl,
+  record IXTLRuntimeVtable,
     query_interface : Proc(IXTLRuntime*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXTLRuntime*, UInt32),
     release : Proc(IXTLRuntime*, UInt32),
@@ -4080,7 +4080,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXTLRuntime, lpVtbl : IXTLRuntimeVtbl* do
+  record IXTLRuntime, lpVtbl : IXTLRuntimeVtable* do
     GUID = LibC::GUID.new(0x3efaa425_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
     def query_interface(this : IXTLRuntime*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4242,7 +4242,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record XMLDOMDocumentEventsVtbl,
+  record XMLDOMDocumentEventsVtable,
     query_interface : Proc(XMLDOMDocumentEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(XMLDOMDocumentEvents*, UInt32),
     release : Proc(XMLDOMDocumentEvents*, UInt32),
@@ -4253,7 +4253,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record XMLDOMDocumentEvents, lpVtbl : XMLDOMDocumentEventsVtbl* do
+  record XMLDOMDocumentEvents, lpVtbl : XMLDOMDocumentEventsVtable* do
     GUID = LibC::GUID.new(0x3efaa427_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
     def query_interface(this : XMLDOMDocumentEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4280,7 +4280,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLHttpRequestVtbl,
+  record IXMLHttpRequestVtable,
     query_interface : Proc(IXMLHttpRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLHttpRequest*, UInt32),
     release : Proc(IXMLHttpRequest*, UInt32),
@@ -4305,7 +4305,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLHttpRequest, lpVtbl : IXMLHttpRequestVtbl* do
+  record IXMLHttpRequest, lpVtbl : IXMLHttpRequestVtable* do
     GUID = LibC::GUID.new(0xed8c108d_u32, 0x4349_u16, 0x11d2_u16, StaticArray[0x91_u8, 0xa4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x69_u8, 0xe8_u8])
     def query_interface(this : IXMLHttpRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4374,7 +4374,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDSOControlVtbl,
+  record IXMLDSOControlVtable,
     query_interface : Proc(IXMLDSOControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDSOControl*, UInt32),
     release : Proc(IXMLDSOControl*, UInt32),
@@ -4390,7 +4390,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDSOControl, lpVtbl : IXMLDSOControlVtbl* do
+  record IXMLDSOControl, lpVtbl : IXMLDSOControlVtable* do
     GUID = LibC::GUID.new(0x310afa62_u32, 0x575_u16, 0x11d2_u16, StaticArray[0x9c_u8, 0xa9_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0xec_u8, 0x3d_u8, 0x39_u8])
     def query_interface(this : IXMLDSOControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4432,7 +4432,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLElementCollectionVtbl,
+  record IXMLElementCollectionVtable,
     query_interface : Proc(IXMLElementCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLElementCollection*, UInt32),
     release : Proc(IXMLElementCollection*, UInt32),
@@ -4447,7 +4447,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLElementCollection, lpVtbl : IXMLElementCollectionVtbl* do
+  record IXMLElementCollection, lpVtbl : IXMLElementCollectionVtable* do
     GUID = LibC::GUID.new(0x65725580_u32, 0x9b5d_u16, 0x11d0_u16, StaticArray[0x9b_u8, 0xfe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9c_u8, 0x8e_u8])
     def query_interface(this : IXMLElementCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4486,7 +4486,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDocumentVtbl,
+  record IXMLDocumentVtable,
     query_interface : Proc(IXMLDocument*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDocument*, UInt32),
     release : Proc(IXMLDocument*, UInt32),
@@ -4511,7 +4511,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDocument, lpVtbl : IXMLDocumentVtbl* do
+  record IXMLDocument, lpVtbl : IXMLDocumentVtable* do
     GUID = LibC::GUID.new(0xf52e2b61_u32, 0x18a1_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0x5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x49_u8, 0x91_u8, 0x6b_u8])
     def query_interface(this : IXMLDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4580,7 +4580,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDocument2Vtbl,
+  record IXMLDocument2Vtable,
     query_interface : Proc(IXMLDocument2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDocument2*, UInt32),
     release : Proc(IXMLDocument2*, UInt32),
@@ -4607,7 +4607,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDocument2, lpVtbl : IXMLDocument2Vtbl* do
+  record IXMLDocument2, lpVtbl : IXMLDocument2Vtable* do
     GUID = LibC::GUID.new(0x2b8de2fe_u32, 0x8d2d_u16, 0x11d1_u16, StaticArray[0xb2_u8, 0xfc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x15_u8, 0xa9_u8])
     def query_interface(this : IXMLDocument2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4682,7 +4682,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLElementVtbl,
+  record IXMLElementVtable,
     query_interface : Proc(IXMLElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLElement*, UInt32),
     release : Proc(IXMLElement*, UInt32),
@@ -4705,7 +4705,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLElement, lpVtbl : IXMLElementVtbl* do
+  record IXMLElement, lpVtbl : IXMLElementVtable* do
     GUID = LibC::GUID.new(0x3f7f31ac_u32, 0xe15f_u16, 0x11d0_u16, StaticArray[0x9c_u8, 0x25_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9c_u8, 0x8e_u8])
     def query_interface(this : IXMLElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4768,7 +4768,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLElement2Vtbl,
+  record IXMLElement2Vtable,
     query_interface : Proc(IXMLElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLElement2*, UInt32),
     release : Proc(IXMLElement2*, UInt32),
@@ -4792,7 +4792,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLElement2, lpVtbl : IXMLElement2Vtbl* do
+  record IXMLElement2, lpVtbl : IXMLElement2Vtable* do
     GUID = LibC::GUID.new(0x2b8de2ff_u32, 0x8d2d_u16, 0x11d1_u16, StaticArray[0xb2_u8, 0xfc_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x15_u8, 0xa9_u8])
     def query_interface(this : IXMLElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4858,7 +4858,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLAttributeVtbl,
+  record IXMLAttributeVtable,
     query_interface : Proc(IXMLAttribute*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLAttribute*, UInt32),
     release : Proc(IXMLAttribute*, UInt32),
@@ -4871,7 +4871,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLAttribute, lpVtbl : IXMLAttributeVtbl* do
+  record IXMLAttribute, lpVtbl : IXMLAttributeVtable* do
     GUID = LibC::GUID.new(0xd4d4a0fc_u32, 0x3b73_u16, 0x11d1_u16, StaticArray[0xb2_u8, 0xb4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x25_u8, 0x96_u8])
     def query_interface(this : IXMLAttribute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4904,7 +4904,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLErrorVtbl,
+  record IXMLErrorVtable,
     query_interface : Proc(IXMLError*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLError*, UInt32),
     release : Proc(IXMLError*, UInt32),
@@ -4912,7 +4912,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLError, lpVtbl : IXMLErrorVtbl* do
+  record IXMLError, lpVtbl : IXMLErrorVtable* do
     GUID = LibC::GUID.new(0x948c5ad3_u32, 0xc58d_u16, 0x11d0_u16, StaticArray[0x9c_u8, 0xb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9c_u8, 0x8e_u8])
     def query_interface(this : IXMLError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4930,7 +4930,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMDocument2Vtbl,
+  record IXMLDOMDocument2Vtable,
     query_interface : Proc(IXMLDOMDocument2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMDocument2*, UInt32),
     release : Proc(IXMLDOMDocument2*, UInt32),
@@ -5016,7 +5016,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMDocument2, lpVtbl : IXMLDOMDocument2Vtbl* do
+  record IXMLDOMDocument2, lpVtbl : IXMLDOMDocument2Vtable* do
     GUID = LibC::GUID.new(0x2933bf95_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMDocument2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5268,7 +5268,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMDocument3Vtbl,
+  record IXMLDOMDocument3Vtable,
     query_interface : Proc(IXMLDOMDocument3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMDocument3*, UInt32),
     release : Proc(IXMLDOMDocument3*, UInt32),
@@ -5356,7 +5356,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMDocument3, lpVtbl : IXMLDOMDocument3Vtbl* do
+  record IXMLDOMDocument3, lpVtbl : IXMLDOMDocument3Vtable* do
     GUID = LibC::GUID.new(0x2933bf96_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXMLDOMDocument3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5614,7 +5614,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMSchemaCollectionVtbl,
+  record IXMLDOMSchemaCollectionVtable,
     query_interface : Proc(IXMLDOMSchemaCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMSchemaCollection*, UInt32),
     release : Proc(IXMLDOMSchemaCollection*, UInt32),
@@ -5632,7 +5632,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMSchemaCollection, lpVtbl : IXMLDOMSchemaCollectionVtbl* do
+  record IXMLDOMSchemaCollection, lpVtbl : IXMLDOMSchemaCollectionVtable* do
     GUID = LibC::GUID.new(0x373984c8_u32, 0xb845_u16, 0x449b_u16, StaticArray[0x91_u8, 0xe7_u8, 0x45_u8, 0xac_u8, 0x83_u8, 0x3_u8, 0x6a_u8, 0xde_u8])
     def query_interface(this : IXMLDOMSchemaCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5680,7 +5680,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMSelectionVtbl,
+  record IXMLDOMSelectionVtable,
     query_interface : Proc(IXMLDOMSelection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMSelection*, UInt32),
     release : Proc(IXMLDOMSelection*, UInt32),
@@ -5707,7 +5707,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMSelection, lpVtbl : IXMLDOMSelectionVtbl* do
+  record IXMLDOMSelection, lpVtbl : IXMLDOMSelectionVtable* do
     GUID = LibC::GUID.new(0xaa634fc7_u32, 0x5888_u16, 0x44a7_u16, StaticArray[0xa2_u8, 0x57_u8, 0x3a_u8, 0x47_u8, 0x15_u8, 0xd_u8, 0x3a_u8, 0xe_u8])
     def query_interface(this : IXMLDOMSelection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5782,7 +5782,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMParseError2Vtbl,
+  record IXMLDOMParseError2Vtable,
     query_interface : Proc(IXMLDOMParseError2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMParseError2*, UInt32),
     release : Proc(IXMLDOMParseError2*, UInt32),
@@ -5804,7 +5804,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMParseError2, lpVtbl : IXMLDOMParseError2Vtbl* do
+  record IXMLDOMParseError2, lpVtbl : IXMLDOMParseError2Vtable* do
     GUID = LibC::GUID.new(0x3efaa428_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
     def query_interface(this : IXMLDOMParseError2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5864,7 +5864,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMParseErrorCollectionVtbl,
+  record IXMLDOMParseErrorCollectionVtable,
     query_interface : Proc(IXMLDOMParseErrorCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMParseErrorCollection*, UInt32),
     release : Proc(IXMLDOMParseErrorCollection*, UInt32),
@@ -5880,7 +5880,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMParseErrorCollection, lpVtbl : IXMLDOMParseErrorCollectionVtbl* do
+  record IXMLDOMParseErrorCollection, lpVtbl : IXMLDOMParseErrorCollectionVtable* do
     GUID = LibC::GUID.new(0x3efaa429_u32, 0x272f_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x6f_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x7a_u8, 0x77_u8, 0x82_u8])
     def query_interface(this : IXMLDOMParseErrorCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5922,7 +5922,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXSLProcessorVtbl,
+  record IXSLProcessorVtable,
     query_interface : Proc(IXSLProcessor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXSLProcessor*, UInt32),
     release : Proc(IXSLProcessor*, UInt32),
@@ -5947,7 +5947,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXSLProcessor, lpVtbl : IXSLProcessorVtbl* do
+  record IXSLProcessor, lpVtbl : IXSLProcessorVtable* do
     GUID = LibC::GUID.new(0x2933bf92_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXSLProcessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6016,7 +6016,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXSLTemplateVtbl,
+  record IXSLTemplateVtable,
     query_interface : Proc(IXSLTemplate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXSLTemplate*, UInt32),
     release : Proc(IXSLTemplate*, UInt32),
@@ -6030,7 +6030,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXSLTemplate, lpVtbl : IXSLTemplateVtbl* do
+  record IXSLTemplate, lpVtbl : IXSLTemplateVtable* do
     GUID = LibC::GUID.new(0x2933bf93_u32, 0x7b36_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0xe_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x98_u8, 0x3e_u8, 0x60_u8])
     def query_interface(this : IXSLTemplate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6066,7 +6066,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLHTTPRequestVtbl,
+  record IXMLHTTPRequestVtable,
     query_interface : Proc(IXMLHTTPRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLHTTPRequest*, UInt32),
     release : Proc(IXMLHTTPRequest*, UInt32),
@@ -6091,7 +6091,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLHTTPRequest, lpVtbl : IXMLHTTPRequestVtbl* do
+  record IXMLHTTPRequest, lpVtbl : IXMLHTTPRequestVtable* do
     GUID = LibC::GUID.new(0xed8c108d_u32, 0x4349_u16, 0x11d2_u16, StaticArray[0x91_u8, 0xa4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x69_u8, 0xe8_u8])
     def query_interface(this : IXMLHTTPRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6160,7 +6160,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IServerXMLHTTPRequestVtbl,
+  record IServerXMLHTTPRequestVtable,
     query_interface : Proc(IServerXMLHTTPRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IServerXMLHTTPRequest*, UInt32),
     release : Proc(IServerXMLHTTPRequest*, UInt32),
@@ -6189,7 +6189,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IServerXMLHTTPRequest, lpVtbl : IServerXMLHTTPRequestVtbl* do
+  record IServerXMLHTTPRequest, lpVtbl : IServerXMLHTTPRequestVtable* do
     GUID = LibC::GUID.new(0x2e9196bf_u32, 0x13ba_u16, 0x4dd4_u16, StaticArray[0x91_u8, 0xca_u8, 0x6c_u8, 0x57_u8, 0x1f_u8, 0x28_u8, 0x14_u8, 0x95_u8])
     def query_interface(this : IServerXMLHTTPRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6270,7 +6270,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IServerXMLHTTPRequest2Vtbl,
+  record IServerXMLHTTPRequest2Vtable,
     query_interface : Proc(IServerXMLHTTPRequest2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IServerXMLHTTPRequest2*, UInt32),
     release : Proc(IServerXMLHTTPRequest2*, UInt32),
@@ -6301,7 +6301,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IServerXMLHTTPRequest2, lpVtbl : IServerXMLHTTPRequest2Vtbl* do
+  record IServerXMLHTTPRequest2, lpVtbl : IServerXMLHTTPRequest2Vtable* do
     GUID = LibC::GUID.new(0x2e01311b_u32, 0xc322_u16, 0x4b0a_u16, StaticArray[0xbd_u8, 0x77_u8, 0xb9_u8, 0xc_u8, 0xfd_u8, 0xc8_u8, 0xdc_u8, 0xe7_u8])
     def query_interface(this : IServerXMLHTTPRequest2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6388,7 +6388,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXXMLReaderVtbl,
+  record ISAXXMLReaderVtable,
     query_interface : Proc(ISAXXMLReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXXMLReader*, UInt32),
     release : Proc(ISAXXMLReader*, UInt32),
@@ -6413,7 +6413,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISAXXMLReader, lpVtbl : ISAXXMLReaderVtbl* do
+  record ISAXXMLReader, lpVtbl : ISAXXMLReaderVtable* do
     GUID = LibC::GUID.new(0xa4f96ed0_u32, 0xf829_u16, 0x476e_u16, StaticArray[0x81_u8, 0xc0_u8, 0xcd_u8, 0xc7_u8, 0xbd_u8, 0x2a_u8, 0x8_u8, 0x2_u8])
     def query_interface(this : ISAXXMLReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6482,7 +6482,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXXMLFilterVtbl,
+  record ISAXXMLFilterVtable,
     query_interface : Proc(ISAXXMLFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXXMLFilter*, UInt32),
     release : Proc(ISAXXMLFilter*, UInt32),
@@ -6509,7 +6509,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISAXXMLFilter, lpVtbl : ISAXXMLFilterVtbl* do
+  record ISAXXMLFilter, lpVtbl : ISAXXMLFilterVtable* do
     GUID = LibC::GUID.new(0x70409222_u32, 0xca09_u16, 0x4475_u16, StaticArray[0xac_u8, 0xb8_u8, 0x40_u8, 0x31_u8, 0x2f_u8, 0xe8_u8, 0xd1_u8, 0x45_u8])
     def query_interface(this : ISAXXMLFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6584,7 +6584,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXLocatorVtbl,
+  record ISAXLocatorVtable,
     query_interface : Proc(ISAXLocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXLocator*, UInt32),
     release : Proc(ISAXLocator*, UInt32),
@@ -6595,7 +6595,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISAXLocator, lpVtbl : ISAXLocatorVtbl* do
+  record ISAXLocator, lpVtbl : ISAXLocatorVtable* do
     GUID = LibC::GUID.new(0x9b7e472a_u32, 0xde4_u16, 0x4640_u16, StaticArray[0xbf_u8, 0xf3_u8, 0x84_u8, 0xd3_u8, 0x8a_u8, 0x5_u8, 0x1c_u8, 0x31_u8])
     def query_interface(this : ISAXLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6622,7 +6622,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXEntityResolverVtbl,
+  record ISAXEntityResolverVtable,
     query_interface : Proc(ISAXEntityResolver*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXEntityResolver*, UInt32),
     release : Proc(ISAXEntityResolver*, UInt32),
@@ -6630,7 +6630,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISAXEntityResolver, lpVtbl : ISAXEntityResolverVtbl* do
+  record ISAXEntityResolver, lpVtbl : ISAXEntityResolverVtable* do
     GUID = LibC::GUID.new(0x99bca7bd_u32, 0xe8c4_u16, 0x4d5f_u16, StaticArray[0xa0_u8, 0xcf_u8, 0x6d_u8, 0x90_u8, 0x79_u8, 0x1_u8, 0xff_u8, 0x7_u8])
     def query_interface(this : ISAXEntityResolver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6648,7 +6648,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXContentHandlerVtbl,
+  record ISAXContentHandlerVtable,
     query_interface : Proc(ISAXContentHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXContentHandler*, UInt32),
     release : Proc(ISAXContentHandler*, UInt32),
@@ -6666,7 +6666,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISAXContentHandler, lpVtbl : ISAXContentHandlerVtbl* do
+  record ISAXContentHandler, lpVtbl : ISAXContentHandlerVtable* do
     GUID = LibC::GUID.new(0x1545cdfa_u32, 0x9e4e_u16, 0x4497_u16, StaticArray[0xa8_u8, 0xa4_u8, 0x2b_u8, 0xf7_u8, 0xd0_u8, 0x11_u8, 0x2c_u8, 0x44_u8])
     def query_interface(this : ISAXContentHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6714,7 +6714,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXDTDHandlerVtbl,
+  record ISAXDTDHandlerVtable,
     query_interface : Proc(ISAXDTDHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXDTDHandler*, UInt32),
     release : Proc(ISAXDTDHandler*, UInt32),
@@ -6723,7 +6723,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISAXDTDHandler, lpVtbl : ISAXDTDHandlerVtbl* do
+  record ISAXDTDHandler, lpVtbl : ISAXDTDHandlerVtable* do
     GUID = LibC::GUID.new(0xe15c1baf_u32, 0xafb3_u16, 0x4d60_u16, StaticArray[0x8c_u8, 0x36_u8, 0x19_u8, 0xa8_u8, 0xc4_u8, 0x5d_u8, 0xef_u8, 0xed_u8])
     def query_interface(this : ISAXDTDHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6744,7 +6744,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXErrorHandlerVtbl,
+  record ISAXErrorHandlerVtable,
     query_interface : Proc(ISAXErrorHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXErrorHandler*, UInt32),
     release : Proc(ISAXErrorHandler*, UInt32),
@@ -6754,7 +6754,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISAXErrorHandler, lpVtbl : ISAXErrorHandlerVtbl* do
+  record ISAXErrorHandler, lpVtbl : ISAXErrorHandlerVtable* do
     GUID = LibC::GUID.new(0xa60511c4_u32, 0xccf5_u16, 0x479e_u16, StaticArray[0x98_u8, 0xa3_u8, 0xdc_u8, 0x8d_u8, 0xc5_u8, 0x45_u8, 0xb7_u8, 0xd0_u8])
     def query_interface(this : ISAXErrorHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6778,7 +6778,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXLexicalHandlerVtbl,
+  record ISAXLexicalHandlerVtable,
     query_interface : Proc(ISAXLexicalHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXLexicalHandler*, UInt32),
     release : Proc(ISAXLexicalHandler*, UInt32),
@@ -6792,7 +6792,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISAXLexicalHandler, lpVtbl : ISAXLexicalHandlerVtbl* do
+  record ISAXLexicalHandler, lpVtbl : ISAXLexicalHandlerVtable* do
     GUID = LibC::GUID.new(0x7f85d5f5_u32, 0x47a8_u16, 0x4497_u16, StaticArray[0xbd_u8, 0xa5_u8, 0x84_u8, 0xba_u8, 0x4_u8, 0x81_u8, 0x9e_u8, 0xa6_u8])
     def query_interface(this : ISAXLexicalHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6828,7 +6828,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXDeclHandlerVtbl,
+  record ISAXDeclHandlerVtable,
     query_interface : Proc(ISAXDeclHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXDeclHandler*, UInt32),
     release : Proc(ISAXDeclHandler*, UInt32),
@@ -6839,7 +6839,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISAXDeclHandler, lpVtbl : ISAXDeclHandlerVtbl* do
+  record ISAXDeclHandler, lpVtbl : ISAXDeclHandlerVtable* do
     GUID = LibC::GUID.new(0x862629ac_u32, 0x771a_u16, 0x47b2_u16, StaticArray[0x83_u8, 0x37_u8, 0x4e_u8, 0x68_u8, 0x43_u8, 0xc1_u8, 0xbe_u8, 0x90_u8])
     def query_interface(this : ISAXDeclHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6866,7 +6866,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISAXAttributesVtbl,
+  record ISAXAttributesVtable,
     query_interface : Proc(ISAXAttributes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISAXAttributes*, UInt32),
     release : Proc(ISAXAttributes*, UInt32),
@@ -6886,7 +6886,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISAXAttributes, lpVtbl : ISAXAttributesVtbl* do
+  record ISAXAttributes, lpVtbl : ISAXAttributesVtable* do
     GUID = LibC::GUID.new(0xf078abe1_u32, 0x45d2_u16, 0x4832_u16, StaticArray[0x91_u8, 0xea_u8, 0x44_u8, 0x66_u8, 0xce_u8, 0x2f_u8, 0x25_u8, 0xc9_u8])
     def query_interface(this : ISAXAttributes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6940,7 +6940,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXXMLReaderVtbl,
+  record IVBSAXXMLReaderVtable,
     query_interface : Proc(IVBSAXXMLReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXXMLReader*, UInt32),
     release : Proc(IVBSAXXMLReader*, UInt32),
@@ -6969,7 +6969,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IVBSAXXMLReader, lpVtbl : IVBSAXXMLReaderVtbl* do
+  record IVBSAXXMLReader, lpVtbl : IVBSAXXMLReaderVtable* do
     GUID = LibC::GUID.new(0x8c033caa_u32, 0x6cd6_u16, 0x4f73_u16, StaticArray[0xb7_u8, 0x28_u8, 0x45_u8, 0x31_u8, 0xaf_u8, 0x74_u8, 0x94_u8, 0x5f_u8])
     def query_interface(this : IVBSAXXMLReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7050,7 +7050,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXXMLFilterVtbl,
+  record IVBSAXXMLFilterVtable,
     query_interface : Proc(IVBSAXXMLFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXXMLFilter*, UInt32),
     release : Proc(IVBSAXXMLFilter*, UInt32),
@@ -7063,7 +7063,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IVBSAXXMLFilter, lpVtbl : IVBSAXXMLFilterVtbl* do
+  record IVBSAXXMLFilter, lpVtbl : IVBSAXXMLFilterVtable* do
     GUID = LibC::GUID.new(0x1299eb1b_u32, 0x5b88_u16, 0x433e_u16, StaticArray[0x82_u8, 0xde_u8, 0x82_u8, 0xca_u8, 0x75_u8, 0xad_u8, 0x4e_u8, 0x4_u8])
     def query_interface(this : IVBSAXXMLFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7096,7 +7096,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXLocatorVtbl,
+  record IVBSAXLocatorVtable,
     query_interface : Proc(IVBSAXLocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXLocator*, UInt32),
     release : Proc(IVBSAXLocator*, UInt32),
@@ -7111,7 +7111,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IVBSAXLocator, lpVtbl : IVBSAXLocatorVtbl* do
+  record IVBSAXLocator, lpVtbl : IVBSAXLocatorVtable* do
     GUID = LibC::GUID.new(0x796e7ac5_u32, 0x5aa2_u16, 0x4eff_u16, StaticArray[0xac_u8, 0xad_u8, 0x3f_u8, 0xaa_u8, 0xf0_u8, 0x1a_u8, 0x32_u8, 0x88_u8])
     def query_interface(this : IVBSAXLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7150,7 +7150,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXEntityResolverVtbl,
+  record IVBSAXEntityResolverVtable,
     query_interface : Proc(IVBSAXEntityResolver*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXEntityResolver*, UInt32),
     release : Proc(IVBSAXEntityResolver*, UInt32),
@@ -7162,7 +7162,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IVBSAXEntityResolver, lpVtbl : IVBSAXEntityResolverVtbl* do
+  record IVBSAXEntityResolver, lpVtbl : IVBSAXEntityResolverVtable* do
     GUID = LibC::GUID.new(0xc05d096_u32, 0xf45b_u16, 0x4aca_u16, StaticArray[0xad_u8, 0x1a_u8, 0xaa_u8, 0xb_u8, 0xc2_u8, 0x55_u8, 0x18_u8, 0xdc_u8])
     def query_interface(this : IVBSAXEntityResolver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7192,7 +7192,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXContentHandlerVtbl,
+  record IVBSAXContentHandlerVtable,
     query_interface : Proc(IVBSAXContentHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXContentHandler*, UInt32),
     release : Proc(IVBSAXContentHandler*, UInt32),
@@ -7214,7 +7214,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IVBSAXContentHandler, lpVtbl : IVBSAXContentHandlerVtbl* do
+  record IVBSAXContentHandler, lpVtbl : IVBSAXContentHandlerVtable* do
     GUID = LibC::GUID.new(0x2ed7290a_u32, 0x4dd5_u16, 0x4b46_u16, StaticArray[0xbb_u8, 0x26_u8, 0x4e_u8, 0x41_u8, 0x55_u8, 0xe7_u8, 0x7f_u8, 0xaa_u8])
     def query_interface(this : IVBSAXContentHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7274,7 +7274,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXDTDHandlerVtbl,
+  record IVBSAXDTDHandlerVtable,
     query_interface : Proc(IVBSAXDTDHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXDTDHandler*, UInt32),
     release : Proc(IVBSAXDTDHandler*, UInt32),
@@ -7287,7 +7287,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IVBSAXDTDHandler, lpVtbl : IVBSAXDTDHandlerVtbl* do
+  record IVBSAXDTDHandler, lpVtbl : IVBSAXDTDHandlerVtable* do
     GUID = LibC::GUID.new(0x24fb3297_u32, 0x302d_u16, 0x4620_u16, StaticArray[0xba_u8, 0x39_u8, 0x3a_u8, 0x73_u8, 0x2d_u8, 0x85_u8, 0x5_u8, 0x58_u8])
     def query_interface(this : IVBSAXDTDHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7320,7 +7320,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXErrorHandlerVtbl,
+  record IVBSAXErrorHandlerVtable,
     query_interface : Proc(IVBSAXErrorHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXErrorHandler*, UInt32),
     release : Proc(IVBSAXErrorHandler*, UInt32),
@@ -7334,7 +7334,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IVBSAXErrorHandler, lpVtbl : IVBSAXErrorHandlerVtbl* do
+  record IVBSAXErrorHandler, lpVtbl : IVBSAXErrorHandlerVtable* do
     GUID = LibC::GUID.new(0xd963d3fe_u32, 0x173c_u16, 0x4862_u16, StaticArray[0x90_u8, 0x95_u8, 0xb9_u8, 0x2f_u8, 0x66_u8, 0x99_u8, 0x5f_u8, 0x52_u8])
     def query_interface(this : IVBSAXErrorHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7370,7 +7370,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXLexicalHandlerVtbl,
+  record IVBSAXLexicalHandlerVtable,
     query_interface : Proc(IVBSAXLexicalHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXLexicalHandler*, UInt32),
     release : Proc(IVBSAXLexicalHandler*, UInt32),
@@ -7388,7 +7388,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IVBSAXLexicalHandler, lpVtbl : IVBSAXLexicalHandlerVtbl* do
+  record IVBSAXLexicalHandler, lpVtbl : IVBSAXLexicalHandlerVtable* do
     GUID = LibC::GUID.new(0x32aac35_u32, 0x8c0e_u16, 0x4d9d_u16, StaticArray[0x97_u8, 0x9f_u8, 0xe3_u8, 0xb7_u8, 0x2_u8, 0x93_u8, 0x55_u8, 0x76_u8])
     def query_interface(this : IVBSAXLexicalHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7436,7 +7436,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXDeclHandlerVtbl,
+  record IVBSAXDeclHandlerVtable,
     query_interface : Proc(IVBSAXDeclHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXDeclHandler*, UInt32),
     release : Proc(IVBSAXDeclHandler*, UInt32),
@@ -7451,7 +7451,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IVBSAXDeclHandler, lpVtbl : IVBSAXDeclHandlerVtbl* do
+  record IVBSAXDeclHandler, lpVtbl : IVBSAXDeclHandlerVtable* do
     GUID = LibC::GUID.new(0xe8917260_u32, 0x7579_u16, 0x4be1_u16, StaticArray[0xb5_u8, 0xdd_u8, 0x7a_u8, 0xfb_u8, 0xfa_u8, 0x6f_u8, 0x7_u8, 0x7b_u8])
     def query_interface(this : IVBSAXDeclHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7490,7 +7490,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBSAXAttributesVtbl,
+  record IVBSAXAttributesVtable,
     query_interface : Proc(IVBSAXAttributes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBSAXAttributes*, UInt32),
     release : Proc(IVBSAXAttributes*, UInt32),
@@ -7513,7 +7513,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IVBSAXAttributes, lpVtbl : IVBSAXAttributesVtbl* do
+  record IVBSAXAttributes, lpVtbl : IVBSAXAttributesVtable* do
     GUID = LibC::GUID.new(0x10dc0586_u32, 0x132b_u16, 0x4cac_u16, StaticArray[0x8b_u8, 0xb3_u8, 0xdb_u8, 0x0_u8, 0xac_u8, 0x8b_u8, 0x7e_u8, 0xe0_u8])
     def query_interface(this : IVBSAXAttributes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7576,7 +7576,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IMXWriterVtbl,
+  record IMXWriterVtable,
     query_interface : Proc(IMXWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMXWriter*, UInt32),
     release : Proc(IMXWriter*, UInt32),
@@ -7604,7 +7604,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IMXWriter, lpVtbl : IMXWriterVtbl* do
+  record IMXWriter, lpVtbl : IMXWriterVtable* do
     GUID = LibC::GUID.new(0x4d7ff4ba_u32, 0x1565_u16, 0x4ea8_u16, StaticArray[0x94_u8, 0xe1_u8, 0x6e_u8, 0x72_u8, 0x4a_u8, 0x46_u8, 0xf9_u8, 0x8d_u8])
     def query_interface(this : IMXWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7682,7 +7682,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IMXAttributesVtbl,
+  record IMXAttributesVtable,
     query_interface : Proc(IMXAttributes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMXAttributes*, UInt32),
     release : Proc(IMXAttributes*, UInt32),
@@ -7704,7 +7704,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IMXAttributes, lpVtbl : IMXAttributesVtbl* do
+  record IMXAttributes, lpVtbl : IMXAttributesVtable* do
     GUID = LibC::GUID.new(0xf10d27cc_u32, 0x3ec0_u16, 0x415c_u16, StaticArray[0x8e_u8, 0xd8_u8, 0x77_u8, 0xab_u8, 0x1c_u8, 0x5e_u8, 0x72_u8, 0x62_u8])
     def query_interface(this : IMXAttributes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7764,7 +7764,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IMXReaderControlVtbl,
+  record IMXReaderControlVtable,
     query_interface : Proc(IMXReaderControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMXReaderControl*, UInt32),
     release : Proc(IMXReaderControl*, UInt32),
@@ -7778,7 +7778,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IMXReaderControl, lpVtbl : IMXReaderControlVtbl* do
+  record IMXReaderControl, lpVtbl : IMXReaderControlVtable* do
     GUID = LibC::GUID.new(0x808f4e35_u32, 0x8d5a_u16, 0x4fbe_u16, StaticArray[0x84_u8, 0x66_u8, 0x33_u8, 0xa4_u8, 0x12_u8, 0x79_u8, 0xed_u8, 0x30_u8])
     def query_interface(this : IMXReaderControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7814,7 +7814,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IMXSchemaDeclHandlerVtbl,
+  record IMXSchemaDeclHandlerVtable,
     query_interface : Proc(IMXSchemaDeclHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMXSchemaDeclHandler*, UInt32),
     release : Proc(IMXSchemaDeclHandler*, UInt32),
@@ -7826,7 +7826,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IMXSchemaDeclHandler, lpVtbl : IMXSchemaDeclHandlerVtbl* do
+  record IMXSchemaDeclHandler, lpVtbl : IMXSchemaDeclHandlerVtable* do
     GUID = LibC::GUID.new(0xfa4bb38c_u32, 0xfaf9_u16, 0x4cca_u16, StaticArray[0x93_u8, 0x2_u8, 0xd1_u8, 0xdd_u8, 0xf_u8, 0xe5_u8, 0x20_u8, 0xdb_u8])
     def query_interface(this : IMXSchemaDeclHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7856,7 +7856,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IMXNamespacePrefixesVtbl,
+  record IMXNamespacePrefixesVtable,
     query_interface : Proc(IMXNamespacePrefixes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMXNamespacePrefixes*, UInt32),
     release : Proc(IMXNamespacePrefixes*, UInt32),
@@ -7870,7 +7870,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IMXNamespacePrefixes, lpVtbl : IMXNamespacePrefixesVtbl* do
+  record IMXNamespacePrefixes, lpVtbl : IMXNamespacePrefixesVtable* do
     GUID = LibC::GUID.new(0xc90352f4_u32, 0x643c_u16, 0x4fbc_u16, StaticArray[0xbb_u8, 0x23_u8, 0xe9_u8, 0x96_u8, 0xeb_u8, 0x2d_u8, 0x51_u8, 0xfd_u8])
     def query_interface(this : IMXNamespacePrefixes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7906,7 +7906,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IVBMXNamespaceManagerVtbl,
+  record IVBMXNamespaceManagerVtable,
     query_interface : Proc(IVBMXNamespaceManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVBMXNamespaceManager*, UInt32),
     release : Proc(IVBMXNamespaceManager*, UInt32),
@@ -7928,7 +7928,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IVBMXNamespaceManager, lpVtbl : IVBMXNamespaceManagerVtbl* do
+  record IVBMXNamespaceManager, lpVtbl : IVBMXNamespaceManagerVtable* do
     GUID = LibC::GUID.new(0xc90352f5_u32, 0x643c_u16, 0x4fbc_u16, StaticArray[0xbb_u8, 0x23_u8, 0xe9_u8, 0x96_u8, 0xeb_u8, 0x2d_u8, 0x51_u8, 0xfd_u8])
     def query_interface(this : IVBMXNamespaceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7988,7 +7988,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IMXNamespaceManagerVtbl,
+  record IMXNamespaceManagerVtable,
     query_interface : Proc(IMXNamespaceManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMXNamespaceManager*, UInt32),
     release : Proc(IMXNamespaceManager*, UInt32),
@@ -8005,7 +8005,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IMXNamespaceManager, lpVtbl : IMXNamespaceManagerVtbl* do
+  record IMXNamespaceManager, lpVtbl : IMXNamespaceManagerVtable* do
     GUID = LibC::GUID.new(0xc90352f6_u32, 0x643c_u16, 0x4fbc_u16, StaticArray[0xbb_u8, 0x23_u8, 0xe9_u8, 0x96_u8, 0xeb_u8, 0x2d_u8, 0x51_u8, 0xfd_u8])
     def query_interface(this : IMXNamespaceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8050,7 +8050,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IMXXMLFilterVtbl,
+  record IMXXMLFilterVtable,
     query_interface : Proc(IMXXMLFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMXXMLFilter*, UInt32),
     release : Proc(IMXXMLFilter*, UInt32),
@@ -8073,7 +8073,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IMXXMLFilter, lpVtbl : IMXXMLFilterVtbl* do
+  record IMXXMLFilter, lpVtbl : IMXXMLFilterVtable* do
     GUID = LibC::GUID.new(0xc90352f7_u32, 0x643c_u16, 0x4fbc_u16, StaticArray[0xbb_u8, 0x23_u8, 0xe9_u8, 0x96_u8, 0xeb_u8, 0x2d_u8, 0x51_u8, 0xfd_u8])
     def query_interface(this : IMXXMLFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8136,7 +8136,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLDOMSchemaCollection2Vtbl,
+  record IXMLDOMSchemaCollection2Vtable,
     query_interface : Proc(IXMLDOMSchemaCollection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLDOMSchemaCollection2*, UInt32),
     release : Proc(IXMLDOMSchemaCollection2*, UInt32),
@@ -8159,7 +8159,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLDOMSchemaCollection2, lpVtbl : IXMLDOMSchemaCollection2Vtbl* do
+  record IXMLDOMSchemaCollection2, lpVtbl : IXMLDOMSchemaCollection2Vtable* do
     GUID = LibC::GUID.new(0x50ea08b0_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : IXMLDOMSchemaCollection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8222,7 +8222,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaStringCollectionVtbl,
+  record ISchemaStringCollectionVtable,
     query_interface : Proc(ISchemaStringCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaStringCollection*, UInt32),
     release : Proc(ISchemaStringCollection*, UInt32),
@@ -8236,7 +8236,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISchemaStringCollection, lpVtbl : ISchemaStringCollectionVtbl* do
+  record ISchemaStringCollection, lpVtbl : ISchemaStringCollectionVtable* do
     GUID = LibC::GUID.new(0x50ea08b1_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaStringCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8272,7 +8272,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaItemCollectionVtbl,
+  record ISchemaItemCollectionVtable,
     query_interface : Proc(ISchemaItemCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaItemCollection*, UInt32),
     release : Proc(ISchemaItemCollection*, UInt32),
@@ -8288,7 +8288,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISchemaItemCollection, lpVtbl : ISchemaItemCollectionVtbl* do
+  record ISchemaItemCollection, lpVtbl : ISchemaItemCollectionVtable* do
     GUID = LibC::GUID.new(0x50ea08b2_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaItemCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8330,7 +8330,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaItemVtbl,
+  record ISchemaItemVtable,
     query_interface : Proc(ISchemaItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaItem*, UInt32),
     release : Proc(ISchemaItem*, UInt32),
@@ -8348,7 +8348,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISchemaItem, lpVtbl : ISchemaItemVtbl* do
+  record ISchemaItem, lpVtbl : ISchemaItemVtable* do
     GUID = LibC::GUID.new(0x50ea08b3_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8396,7 +8396,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaVtbl,
+  record ISchemaVtable,
     query_interface : Proc(ISchema*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchema*, UInt32),
     release : Proc(ISchema*, UInt32),
@@ -8423,7 +8423,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISchema, lpVtbl : ISchemaVtbl* do
+  record ISchema, lpVtbl : ISchemaVtable* do
     GUID = LibC::GUID.new(0x50ea08b4_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchema*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8498,7 +8498,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaParticleVtbl,
+  record ISchemaParticleVtable,
     query_interface : Proc(ISchemaParticle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaParticle*, UInt32),
     release : Proc(ISchemaParticle*, UInt32),
@@ -8518,7 +8518,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISchemaParticle, lpVtbl : ISchemaParticleVtbl* do
+  record ISchemaParticle, lpVtbl : ISchemaParticleVtable* do
     GUID = LibC::GUID.new(0x50ea08b5_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaParticle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8572,7 +8572,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaAttributeVtbl,
+  record ISchemaAttributeVtable,
     query_interface : Proc(ISchemaAttribute*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaAttribute*, UInt32),
     release : Proc(ISchemaAttribute*, UInt32),
@@ -8596,7 +8596,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISchemaAttribute, lpVtbl : ISchemaAttributeVtbl* do
+  record ISchemaAttribute, lpVtbl : ISchemaAttributeVtable* do
     GUID = LibC::GUID.new(0x50ea08b6_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaAttribute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8662,7 +8662,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaElementVtbl,
+  record ISchemaElementVtable,
     query_interface : Proc(ISchemaElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaElement*, UInt32),
     release : Proc(ISchemaElement*, UInt32),
@@ -8693,7 +8693,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISchemaElement, lpVtbl : ISchemaElementVtbl* do
+  record ISchemaElement, lpVtbl : ISchemaElementVtable* do
     GUID = LibC::GUID.new(0x50ea08b7_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8780,7 +8780,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaTypeVtbl,
+  record ISchemaTypeVtable,
     query_interface : Proc(ISchemaType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaType*, UInt32),
     release : Proc(ISchemaType*, UInt32),
@@ -8815,7 +8815,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISchemaType, lpVtbl : ISchemaTypeVtbl* do
+  record ISchemaType, lpVtbl : ISchemaTypeVtable* do
     GUID = LibC::GUID.new(0x50ea08b8_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8914,7 +8914,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaComplexTypeVtbl,
+  record ISchemaComplexTypeVtable,
     query_interface : Proc(ISchemaComplexType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaComplexType*, UInt32),
     release : Proc(ISchemaComplexType*, UInt32),
@@ -8955,7 +8955,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISchemaComplexType, lpVtbl : ISchemaComplexTypeVtbl* do
+  record ISchemaComplexType, lpVtbl : ISchemaComplexTypeVtable* do
     GUID = LibC::GUID.new(0x50ea08b9_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaComplexType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9072,7 +9072,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaAttributeGroupVtbl,
+  record ISchemaAttributeGroupVtable,
     query_interface : Proc(ISchemaAttributeGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaAttributeGroup*, UInt32),
     release : Proc(ISchemaAttributeGroup*, UInt32),
@@ -9092,7 +9092,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISchemaAttributeGroup, lpVtbl : ISchemaAttributeGroupVtbl* do
+  record ISchemaAttributeGroup, lpVtbl : ISchemaAttributeGroupVtable* do
     GUID = LibC::GUID.new(0x50ea08ba_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaAttributeGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9146,7 +9146,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaModelGroupVtbl,
+  record ISchemaModelGroupVtable,
     query_interface : Proc(ISchemaModelGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaModelGroup*, UInt32),
     release : Proc(ISchemaModelGroup*, UInt32),
@@ -9167,7 +9167,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISchemaModelGroup, lpVtbl : ISchemaModelGroupVtbl* do
+  record ISchemaModelGroup, lpVtbl : ISchemaModelGroupVtable* do
     GUID = LibC::GUID.new(0x50ea08bb_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaModelGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9224,7 +9224,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaAnyVtbl,
+  record ISchemaAnyVtable,
     query_interface : Proc(ISchemaAny*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaAny*, UInt32),
     release : Proc(ISchemaAny*, UInt32),
@@ -9246,7 +9246,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISchemaAny, lpVtbl : ISchemaAnyVtbl* do
+  record ISchemaAny, lpVtbl : ISchemaAnyVtable* do
     GUID = LibC::GUID.new(0x50ea08bc_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaAny*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9306,7 +9306,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaIdentityConstraintVtbl,
+  record ISchemaIdentityConstraintVtable,
     query_interface : Proc(ISchemaIdentityConstraint*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaIdentityConstraint*, UInt32),
     release : Proc(ISchemaIdentityConstraint*, UInt32),
@@ -9327,7 +9327,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISchemaIdentityConstraint, lpVtbl : ISchemaIdentityConstraintVtbl* do
+  record ISchemaIdentityConstraint, lpVtbl : ISchemaIdentityConstraintVtable* do
     GUID = LibC::GUID.new(0x50ea08bd_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaIdentityConstraint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9384,7 +9384,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record ISchemaNotationVtbl,
+  record ISchemaNotationVtable,
     query_interface : Proc(ISchemaNotation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaNotation*, UInt32),
     release : Proc(ISchemaNotation*, UInt32),
@@ -9404,7 +9404,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record ISchemaNotation, lpVtbl : ISchemaNotationVtbl* do
+  record ISchemaNotation, lpVtbl : ISchemaNotationVtable* do
     GUID = LibC::GUID.new(0x50ea08be_u32, 0xdd1b_u16, 0x4664_u16, StaticArray[0x9a_u8, 0x50_u8, 0xc2_u8, 0xf4_u8, 0xf_u8, 0x4b_u8, 0xd7_u8, 0x9a_u8])
     def query_interface(this : ISchemaNotation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9458,7 +9458,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLHTTPRequest2CallbackVtbl,
+  record IXMLHTTPRequest2CallbackVtable,
     query_interface : Proc(IXMLHTTPRequest2Callback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLHTTPRequest2Callback*, UInt32),
     release : Proc(IXMLHTTPRequest2Callback*, UInt32),
@@ -9470,7 +9470,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLHTTPRequest2Callback, lpVtbl : IXMLHTTPRequest2CallbackVtbl* do
+  record IXMLHTTPRequest2Callback, lpVtbl : IXMLHTTPRequest2CallbackVtable* do
     GUID = LibC::GUID.new(0xa44a9299_u32, 0xe321_u16, 0x40de_u16, StaticArray[0x88_u8, 0x66_u8, 0x34_u8, 0x1b_u8, 0x41_u8, 0x66_u8, 0x91_u8, 0x62_u8])
     def query_interface(this : IXMLHTTPRequest2Callback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9500,7 +9500,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLHTTPRequest2Vtbl,
+  record IXMLHTTPRequest2Vtable,
     query_interface : Proc(IXMLHTTPRequest2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLHTTPRequest2*, UInt32),
     release : Proc(IXMLHTTPRequest2*, UInt32),
@@ -9517,7 +9517,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLHTTPRequest2, lpVtbl : IXMLHTTPRequest2Vtbl* do
+  record IXMLHTTPRequest2, lpVtbl : IXMLHTTPRequest2Vtable* do
     GUID = LibC::GUID.new(0xe5d37dc0_u32, 0x552a_u16, 0x4d52_u16, StaticArray[0x9c_u8, 0xc0_u8, 0xa1_u8, 0x4d_u8, 0x54_u8, 0x6f_u8, 0xbd_u8, 0x4_u8])
     def query_interface(this : IXMLHTTPRequest2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9562,7 +9562,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLHTTPRequest3CallbackVtbl,
+  record IXMLHTTPRequest3CallbackVtable,
     query_interface : Proc(IXMLHTTPRequest3Callback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLHTTPRequest3Callback*, UInt32),
     release : Proc(IXMLHTTPRequest3Callback*, UInt32),
@@ -9576,7 +9576,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLHTTPRequest3Callback, lpVtbl : IXMLHTTPRequest3CallbackVtbl* do
+  record IXMLHTTPRequest3Callback, lpVtbl : IXMLHTTPRequest3CallbackVtable* do
     GUID = LibC::GUID.new(0xb9e57830_u32, 0x8c6c_u16, 0x4a6f_u16, StaticArray[0x9c_u8, 0x13_u8, 0x47_u8, 0x77_u8, 0x2b_u8, 0xb0_u8, 0x47_u8, 0xbb_u8])
     def query_interface(this : IXMLHTTPRequest3Callback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9612,7 +9612,7 @@ module Win32cr::Data::Xml::MsXml
   end
 
   @[Extern]
-  record IXMLHTTPRequest3Vtbl,
+  record IXMLHTTPRequest3Vtable,
     query_interface : Proc(IXMLHTTPRequest3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLHTTPRequest3*, UInt32),
     release : Proc(IXMLHTTPRequest3*, UInt32),
@@ -9630,7 +9630,7 @@ module Win32cr::Data::Xml::MsXml
 
 
   @[Extern]
-  record IXMLHTTPRequest3, lpVtbl : IXMLHTTPRequest3Vtbl* do
+  record IXMLHTTPRequest3, lpVtbl : IXMLHTTPRequest3Vtable* do
     GUID = LibC::GUID.new(0xa1c9feee_u32, 0x617_u16, 0x4f23_u16, StaticArray[0x9d_u8, 0x58_u8, 0x89_u8, 0x61_u8, 0xea_u8, 0x43_u8, 0x56_u8, 0x7c_u8])
     def query_interface(this : IXMLHTTPRequest3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

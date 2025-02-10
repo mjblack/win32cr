@@ -20,7 +20,7 @@ module Win32cr::System::WinRT::Graphics::Direct2D
   end
 
   @[Extern]
-  record IGraphicsEffectD2D1InteropVtbl,
+  record IGraphicsEffectD2D1InteropVtable,
     query_interface : Proc(IGraphicsEffectD2D1Interop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGraphicsEffectD2D1Interop*, UInt32),
     release : Proc(IGraphicsEffectD2D1Interop*, UInt32),
@@ -33,7 +33,7 @@ module Win32cr::System::WinRT::Graphics::Direct2D
 
 
   @[Extern]
-  record IGraphicsEffectD2D1Interop, lpVtbl : IGraphicsEffectD2D1InteropVtbl* do
+  record IGraphicsEffectD2D1Interop, lpVtbl : IGraphicsEffectD2D1InteropVtable* do
     GUID = LibC::GUID.new(0x2fc57384_u32, 0xa068_u16, 0x44d7_u16, StaticArray[0xa3_u8, 0x31_u8, 0x30_u8, 0x98_u8, 0x2f_u8, 0xcf_u8, 0x71_u8, 0x77_u8])
     def query_interface(this : IGraphicsEffectD2D1Interop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66,7 +66,7 @@ module Win32cr::System::WinRT::Graphics::Direct2D
   end
 
   @[Extern]
-  record IGeometrySource2DInteropVtbl,
+  record IGeometrySource2DInteropVtable,
     query_interface : Proc(IGeometrySource2DInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGeometrySource2DInterop*, UInt32),
     release : Proc(IGeometrySource2DInterop*, UInt32),
@@ -75,7 +75,7 @@ module Win32cr::System::WinRT::Graphics::Direct2D
 
 
   @[Extern]
-  record IGeometrySource2DInterop, lpVtbl : IGeometrySource2DInteropVtbl* do
+  record IGeometrySource2DInterop, lpVtbl : IGeometrySource2DInteropVtable* do
     GUID = LibC::GUID.new(0x657af73_u32, 0x53fd_u16, 0x47cf_u16, StaticArray[0x84_u8, 0xff_u8, 0xc8_u8, 0x49_u8, 0x2d_u8, 0x2a_u8, 0x80_u8, 0xa3_u8])
     def query_interface(this : IGeometrySource2DInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

@@ -152,34 +152,49 @@ module Win32cr::UI::Input::XboxController
   end
 
   def xInputGetState(dwUserIndex : UInt32, pState : Win32cr::UI::Input::XboxController::XINPUT_STATE*) : UInt32
+    {% if !flag?(:docs) %}
     C.XInputGetState(dwUserIndex, pState)
+    {% end %}
   end
 
   def xInputSetState(dwUserIndex : UInt32, pVibration : Win32cr::UI::Input::XboxController::XINPUT_VIBRATION*) : UInt32
+    {% if !flag?(:docs) %}
     C.XInputSetState(dwUserIndex, pVibration)
+    {% end %}
   end
 
   def xInputGetCapabilities(dwUserIndex : UInt32, dwFlags : UInt32, pCapabilities : Win32cr::UI::Input::XboxController::XINPUT_CAPABILITIES*) : UInt32
+    {% if !flag?(:docs) %}
     C.XInputGetCapabilities(dwUserIndex, dwFlags, pCapabilities)
+    {% end %}
   end
 
   def xInputEnable(enable : Win32cr::Foundation::BOOL) : Void
+    {% if !flag?(:docs) %}
     C.XInputEnable(enable)
+    {% end %}
   end
 
   def xInputGetAudioDeviceIds(dwUserIndex : UInt32, pRenderDeviceId : UInt16*, pRenderCount : UInt32*, pCaptureDeviceId : UInt16*, pCaptureCount : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.XInputGetAudioDeviceIds(dwUserIndex, pRenderDeviceId, pRenderCount, pCaptureDeviceId, pCaptureCount)
+    {% end %}
   end
 
   def xInputGetBatteryInformation(dwUserIndex : UInt32, devType : UInt8, pBatteryInformation : Win32cr::UI::Input::XboxController::XINPUT_BATTERY_INFORMATION*) : UInt32
+    {% if !flag?(:docs) %}
     C.XInputGetBatteryInformation(dwUserIndex, devType, pBatteryInformation)
+    {% end %}
   end
 
   def xInputGetKeystroke(dwUserIndex : UInt32, dwReserved : UInt32, pKeystroke : Win32cr::UI::Input::XboxController::XINPUT_KEYSTROKE*) : UInt32
+    {% if !flag?(:docs) %}
     C.XInputGetKeystroke(dwUserIndex, dwReserved, pKeystroke)
+    {% end %}
   end
 
   @[Link("xinputuap")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun XInputGetState(dwUserIndex : UInt32, pState : Win32cr::UI::Input::XboxController::XINPUT_STATE*) : UInt32
@@ -203,4 +218,5 @@ module Win32cr::UI::Input::XboxController
     fun XInputGetKeystroke(dwUserIndex : UInt32, dwReserved : UInt32, pKeystroke : Win32cr::UI::Input::XboxController::XINPUT_KEYSTROKE*) : UInt32
 
   end
+  {% end %}
 end

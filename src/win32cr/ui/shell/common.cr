@@ -128,7 +128,7 @@ module Win32cr::UI::Shell::Common
   end
 
   @[Extern]
-  record IObjectArrayVtbl,
+  record IObjectArrayVtable,
     query_interface : Proc(IObjectArray*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IObjectArray*, UInt32),
     release : Proc(IObjectArray*, UInt32),
@@ -137,7 +137,7 @@ module Win32cr::UI::Shell::Common
 
 
   @[Extern]
-  record IObjectArray, lpVtbl : IObjectArrayVtbl* do
+  record IObjectArray, lpVtbl : IObjectArrayVtable* do
     GUID = LibC::GUID.new(0x92ca9dcd_u32, 0x5622_u16, 0x4bba_u16, StaticArray[0xa8_u8, 0x5_u8, 0x5e_u8, 0x9f_u8, 0x54_u8, 0x1b_u8, 0xd8_u8, 0xc9_u8])
     def query_interface(this : IObjectArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -158,7 +158,7 @@ module Win32cr::UI::Shell::Common
   end
 
   @[Extern]
-  record IObjectCollectionVtbl,
+  record IObjectCollectionVtable,
     query_interface : Proc(IObjectCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IObjectCollection*, UInt32),
     release : Proc(IObjectCollection*, UInt32),
@@ -171,7 +171,7 @@ module Win32cr::UI::Shell::Common
 
 
   @[Extern]
-  record IObjectCollection, lpVtbl : IObjectCollectionVtbl* do
+  record IObjectCollection, lpVtbl : IObjectCollectionVtable* do
     GUID = LibC::GUID.new(0x5632b1a4_u32, 0xe38a_u16, 0x400a_u16, StaticArray[0x92_u8, 0x8a_u8, 0xd4_u8, 0xcd_u8, 0x63_u8, 0x23_u8, 0x2_u8, 0x95_u8])
     def query_interface(this : IObjectCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

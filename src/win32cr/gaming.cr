@@ -88,7 +88,7 @@ module Win32cr::Gaming
   end
 
   @[Extern]
-  record IGameExplorerVtbl,
+  record IGameExplorerVtable,
     query_interface : Proc(IGameExplorer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGameExplorer*, UInt32),
     release : Proc(IGameExplorer*, UInt32),
@@ -99,7 +99,7 @@ module Win32cr::Gaming
 
 
   @[Extern]
-  record IGameExplorer, lpVtbl : IGameExplorerVtbl* do
+  record IGameExplorer, lpVtbl : IGameExplorerVtable* do
     GUID = LibC::GUID.new(0xe7b2fb72_u32, 0xd728_u16, 0x49b3_u16, StaticArray[0xa5_u8, 0xf2_u8, 0x18_u8, 0xeb_u8, 0xf5_u8, 0xf1_u8, 0x34_u8, 0x9e_u8])
     def query_interface(this : IGameExplorer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -126,7 +126,7 @@ module Win32cr::Gaming
   end
 
   @[Extern]
-  record IGameStatisticsVtbl,
+  record IGameStatisticsVtable,
     query_interface : Proc(IGameStatistics*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGameStatistics*, UInt32),
     release : Proc(IGameStatistics*, UInt32),
@@ -145,7 +145,7 @@ module Win32cr::Gaming
 
 
   @[Extern]
-  record IGameStatistics, lpVtbl : IGameStatisticsVtbl* do
+  record IGameStatistics, lpVtbl : IGameStatisticsVtable* do
     GUID = LibC::GUID.new(0x3887c9ca_u32, 0x4a0_u16, 0x42ae_u16, StaticArray[0xbc_u8, 0x4c_u8, 0x5f_u8, 0xa6_u8, 0xc7_u8, 0x72_u8, 0x11_u8, 0x45_u8])
     def query_interface(this : IGameStatistics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -196,7 +196,7 @@ module Win32cr::Gaming
   end
 
   @[Extern]
-  record IGameStatisticsMgrVtbl,
+  record IGameStatisticsMgrVtable,
     query_interface : Proc(IGameStatisticsMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGameStatisticsMgr*, UInt32),
     release : Proc(IGameStatisticsMgr*, UInt32),
@@ -205,7 +205,7 @@ module Win32cr::Gaming
 
 
   @[Extern]
-  record IGameStatisticsMgr, lpVtbl : IGameStatisticsMgrVtbl* do
+  record IGameStatisticsMgr, lpVtbl : IGameStatisticsMgrVtable* do
     GUID = LibC::GUID.new(0xaff3ea11_u32, 0xe70e_u16, 0x407d_u16, StaticArray[0x95_u8, 0xdd_u8, 0x35_u8, 0xe6_u8, 0x12_u8, 0xc4_u8, 0x1c_u8, 0xe2_u8])
     def query_interface(this : IGameStatisticsMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -226,7 +226,7 @@ module Win32cr::Gaming
   end
 
   @[Extern]
-  record IGameExplorer2Vtbl,
+  record IGameExplorer2Vtable,
     query_interface : Proc(IGameExplorer2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGameExplorer2*, UInt32),
     release : Proc(IGameExplorer2*, UInt32),
@@ -236,7 +236,7 @@ module Win32cr::Gaming
 
 
   @[Extern]
-  record IGameExplorer2, lpVtbl : IGameExplorer2Vtbl* do
+  record IGameExplorer2, lpVtbl : IGameExplorer2Vtable* do
     GUID = LibC::GUID.new(0x86874aa7_u32, 0xa1ed_u16, 0x450d_u16, StaticArray[0xa7_u8, 0xeb_u8, 0xb8_u8, 0x9e_u8, 0x20_u8, 0xb2_u8, 0xff_u8, 0xf3_u8])
     def query_interface(this : IGameExplorer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -260,7 +260,7 @@ module Win32cr::Gaming
   end
 
   @[Extern]
-  record IXblIdpAuthManagerVtbl,
+  record IXblIdpAuthManagerVtable,
     query_interface : Proc(IXblIdpAuthManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXblIdpAuthManager*, UInt32),
     release : Proc(IXblIdpAuthManager*, UInt32),
@@ -273,7 +273,7 @@ module Win32cr::Gaming
 
 
   @[Extern]
-  record IXblIdpAuthManager, lpVtbl : IXblIdpAuthManagerVtbl* do
+  record IXblIdpAuthManager, lpVtbl : IXblIdpAuthManagerVtable* do
     GUID = LibC::GUID.new(0xeb5ddb08_u32, 0x8bbf_u16, 0x449b_u16, StaticArray[0xac_u8, 0x21_u8, 0xb0_u8, 0x2d_u8, 0xde_u8, 0xb3_u8, 0xb1_u8, 0x36_u8])
     def query_interface(this : IXblIdpAuthManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -306,7 +306,7 @@ module Win32cr::Gaming
   end
 
   @[Extern]
-  record IXblIdpAuthTokenResultVtbl,
+  record IXblIdpAuthTokenResultVtable,
     query_interface : Proc(IXblIdpAuthTokenResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXblIdpAuthTokenResult*, UInt32),
     release : Proc(IXblIdpAuthTokenResult*, UInt32),
@@ -333,7 +333,7 @@ module Win32cr::Gaming
 
 
   @[Extern]
-  record IXblIdpAuthTokenResult, lpVtbl : IXblIdpAuthTokenResultVtbl* do
+  record IXblIdpAuthTokenResult, lpVtbl : IXblIdpAuthTokenResultVtable* do
     GUID = LibC::GUID.new(0x46ce0225_u32, 0xf267_u16, 0x4d68_u16, StaticArray[0xb2_u8, 0x99_u8, 0xb2_u8, 0x76_u8, 0x25_u8, 0x52_u8, 0xde_u8, 0xc1_u8])
     def query_interface(this : IXblIdpAuthTokenResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -408,7 +408,7 @@ module Win32cr::Gaming
   end
 
   @[Extern]
-  record IXblIdpAuthTokenResult2Vtbl,
+  record IXblIdpAuthTokenResult2Vtable,
     query_interface : Proc(IXblIdpAuthTokenResult2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXblIdpAuthTokenResult2*, UInt32),
     release : Proc(IXblIdpAuthTokenResult2*, UInt32),
@@ -418,7 +418,7 @@ module Win32cr::Gaming
 
 
   @[Extern]
-  record IXblIdpAuthTokenResult2, lpVtbl : IXblIdpAuthTokenResult2Vtbl* do
+  record IXblIdpAuthTokenResult2, lpVtbl : IXblIdpAuthTokenResult2Vtable* do
     GUID = LibC::GUID.new(0x75d760b0_u32, 0x60b9_u16, 0x412d_u16, StaticArray[0x99_u8, 0x4f_u8, 0x26_u8, 0xb2_u8, 0xcd_u8, 0x5f_u8, 0x78_u8, 0x12_u8])
     def query_interface(this : IXblIdpAuthTokenResult2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -442,125 +442,186 @@ module Win32cr::Gaming
   end
 
   def hasExpandedResources(hasExpandedResources : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HasExpandedResources(hasExpandedResources)
+    {% end %}
   end
 
   def getExpandedResourceExclusiveCpuCount(exclusiveCpuCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetExpandedResourceExclusiveCpuCount(exclusiveCpuCount)
+    {% end %}
   end
 
   def releaseExclusiveCpuSets : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ReleaseExclusiveCpuSets
+    {% end %}
   end
 
   def getGamingDeviceModelInformation(information : Win32cr::Gaming::GAMING_DEVICE_MODEL_INFORMATION*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetGamingDeviceModelInformation(information)
+    {% end %}
   end
 
   def showGameInviteUI(serviceConfigurationId : Win32cr::System::WinRT::HSTRING, sessionTemplateName : Win32cr::System::WinRT::HSTRING, sessionId : Win32cr::System::WinRT::HSTRING, invitationDisplayText : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowGameInviteUI(serviceConfigurationId, sessionTemplateName, sessionId, invitationDisplayText, completionRoutine, context)
+    {% end %}
   end
 
   def showPlayerPickerUI(promptDisplayText : Win32cr::System::WinRT::HSTRING, xuids : Win32cr::System::WinRT::HSTRING*, xuidsCount : LibC::UIntPtrT, preSelectedXuids : Win32cr::System::WinRT::HSTRING*, preSelectedXuidsCount : LibC::UIntPtrT, minSelectionCount : LibC::UIntPtrT, maxSelectionCount : LibC::UIntPtrT, completionRoutine : Win32cr::Gaming::PlayerPickerUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowPlayerPickerUI(promptDisplayText, xuids, xuidsCount, preSelectedXuids, preSelectedXuidsCount, minSelectionCount, maxSelectionCount, completionRoutine, context)
+    {% end %}
   end
 
   def showProfileCardUI(targetUserXuid : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowProfileCardUI(targetUserXuid, completionRoutine, context)
+    {% end %}
   end
 
   def showChangeFriendRelationshipUI(targetUserXuid : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowChangeFriendRelationshipUI(targetUserXuid, completionRoutine, context)
+    {% end %}
   end
 
   def showTitleAchievementsUI(titleId : UInt32, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowTitleAchievementsUI(titleId, completionRoutine, context)
+    {% end %}
   end
 
   def processPendingGameUI(waitForCompletion : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ProcessPendingGameUI(waitForCompletion)
+    {% end %}
   end
 
   def tryCancelPendingGameUI : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TryCancelPendingGameUI
+    {% end %}
   end
 
   def checkGamingPrivilegeWithUI(privilegeId : UInt32, scope : Win32cr::System::WinRT::HSTRING, policy : Win32cr::System::WinRT::HSTRING, friendlyMessage : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CheckGamingPrivilegeWithUI(privilegeId, scope, policy, friendlyMessage, completionRoutine, context)
+    {% end %}
   end
 
   def checkGamingPrivilegeSilently(privilegeId : UInt32, scope : Win32cr::System::WinRT::HSTRING, policy : Win32cr::System::WinRT::HSTRING, hasPrivilege : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CheckGamingPrivilegeSilently(privilegeId, scope, policy, hasPrivilege)
+    {% end %}
   end
 
   def showGameInviteUIForUser(user : Void*, serviceConfigurationId : Win32cr::System::WinRT::HSTRING, sessionTemplateName : Win32cr::System::WinRT::HSTRING, sessionId : Win32cr::System::WinRT::HSTRING, invitationDisplayText : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowGameInviteUIForUser(user, serviceConfigurationId, sessionTemplateName, sessionId, invitationDisplayText, completionRoutine, context)
+    {% end %}
   end
 
   def showPlayerPickerUIForUser(user : Void*, promptDisplayText : Win32cr::System::WinRT::HSTRING, xuids : Win32cr::System::WinRT::HSTRING*, xuidsCount : LibC::UIntPtrT, preSelectedXuids : Win32cr::System::WinRT::HSTRING*, preSelectedXuidsCount : LibC::UIntPtrT, minSelectionCount : LibC::UIntPtrT, maxSelectionCount : LibC::UIntPtrT, completionRoutine : Win32cr::Gaming::PlayerPickerUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowPlayerPickerUIForUser(user, promptDisplayText, xuids, xuidsCount, preSelectedXuids, preSelectedXuidsCount, minSelectionCount, maxSelectionCount, completionRoutine, context)
+    {% end %}
   end
 
   def showProfileCardUIForUser(user : Void*, targetUserXuid : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowProfileCardUIForUser(user, targetUserXuid, completionRoutine, context)
+    {% end %}
   end
 
   def showChangeFriendRelationshipUIForUser(user : Void*, targetUserXuid : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowChangeFriendRelationshipUIForUser(user, targetUserXuid, completionRoutine, context)
+    {% end %}
   end
 
   def showTitleAchievementsUIForUser(user : Void*, titleId : UInt32, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowTitleAchievementsUIForUser(user, titleId, completionRoutine, context)
+    {% end %}
   end
 
   def checkGamingPrivilegeWithUIForUser(user : Void*, privilegeId : UInt32, scope : Win32cr::System::WinRT::HSTRING, policy : Win32cr::System::WinRT::HSTRING, friendlyMessage : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CheckGamingPrivilegeWithUIForUser(user, privilegeId, scope, policy, friendlyMessage, completionRoutine, context)
+    {% end %}
   end
 
   def checkGamingPrivilegeSilentlyForUser(user : Void*, privilegeId : UInt32, scope : Win32cr::System::WinRT::HSTRING, policy : Win32cr::System::WinRT::HSTRING, hasPrivilege : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CheckGamingPrivilegeSilentlyForUser(user, privilegeId, scope, policy, hasPrivilege)
+    {% end %}
   end
 
   def showGameInviteUIWithContext(serviceConfigurationId : Win32cr::System::WinRT::HSTRING, sessionTemplateName : Win32cr::System::WinRT::HSTRING, sessionId : Win32cr::System::WinRT::HSTRING, invitationDisplayText : Win32cr::System::WinRT::HSTRING, customActivationContext : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowGameInviteUIWithContext(serviceConfigurationId, sessionTemplateName, sessionId, invitationDisplayText, customActivationContext, completionRoutine, context)
+    {% end %}
   end
 
   def showGameInviteUIWithContextForUser(user : Void*, serviceConfigurationId : Win32cr::System::WinRT::HSTRING, sessionTemplateName : Win32cr::System::WinRT::HSTRING, sessionId : Win32cr::System::WinRT::HSTRING, invitationDisplayText : Win32cr::System::WinRT::HSTRING, customActivationContext : Win32cr::System::WinRT::HSTRING, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowGameInviteUIWithContextForUser(user, serviceConfigurationId, sessionTemplateName, sessionId, invitationDisplayText, customActivationContext, completionRoutine, context)
+    {% end %}
   end
 
   def showGameInfoUI(titleId : UInt32, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowGameInfoUI(titleId, completionRoutine, context)
+    {% end %}
   end
 
   def showGameInfoUIForUser(user : Void*, titleId : UInt32, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowGameInfoUIForUser(user, titleId, completionRoutine, context)
+    {% end %}
   end
 
   def showFindFriendsUI(completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowFindFriendsUI(completionRoutine, context)
+    {% end %}
   end
 
   def showFindFriendsUIForUser(user : Void*, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowFindFriendsUIForUser(user, completionRoutine, context)
+    {% end %}
   end
 
   def showCustomizeUserProfileUI(completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowCustomizeUserProfileUI(completionRoutine, context)
+    {% end %}
   end
 
   def showCustomizeUserProfileUIForUser(user : Void*, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowCustomizeUserProfileUIForUser(user, completionRoutine, context)
+    {% end %}
   end
 
   def showUserSettingsUI(completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowUserSettingsUI(completionRoutine, context)
+    {% end %}
   end
 
   def showUserSettingsUIForUser(user : Void*, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ShowUserSettingsUIForUser(user, completionRoutine, context)
+    {% end %}
   end
 
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun HasExpandedResources(hasExpandedResources : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
@@ -653,4 +714,5 @@ module Win32cr::Gaming
     fun ShowUserSettingsUIForUser(user : Void*, completionRoutine : Win32cr::Gaming::GameUICompletionRoutine, context : Void*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

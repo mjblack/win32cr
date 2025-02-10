@@ -10044,23 +10044,11 @@ module Win32cr::Web::MsHtml
     end
   end
 
-  @[Extern]
-  struct HTMLPersistEvents
-    def initialize()
-    end
-  end
+  alias HTMLPersistEvents = Void
 
-  @[Extern]
-  struct LayoutRectEvents
-    def initialize()
-    end
-  end
+  alias LayoutRectEvents = Void
 
-  @[Extern]
-  struct HostDialogHelper
-    def initialize()
-    end
-  end
+  alias HostDialogHelper = Void
 
   @[Extern]
   struct DOCHOSTUIINFO
@@ -10087,7 +10075,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFiltersCollectionVtbl,
+  record IHTMLFiltersCollectionVtable,
     query_interface : Proc(IHTMLFiltersCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFiltersCollection*, UInt32),
     release : Proc(IHTMLFiltersCollection*, UInt32),
@@ -10101,7 +10089,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFiltersCollection, lpVtbl : IHTMLFiltersCollectionVtbl* do
+  record IHTMLFiltersCollection, lpVtbl : IHTMLFiltersCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f3ee_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFiltersCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10137,7 +10125,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IIE70DispatchExVtbl,
+  record IIE70DispatchExVtable,
     query_interface : Proc(IIE70DispatchEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIE70DispatchEx*, UInt32),
     release : Proc(IIE70DispatchEx*, UInt32),
@@ -10156,7 +10144,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IIE70DispatchEx, lpVtbl : IIE70DispatchExVtbl* do
+  record IIE70DispatchEx, lpVtbl : IIE70DispatchExVtable* do
     GUID = LibC::GUID.new(0x3051046b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IIE70DispatchEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10207,7 +10195,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IIE80DispatchExVtbl,
+  record IIE80DispatchExVtable,
     query_interface : Proc(IIE80DispatchEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIE80DispatchEx*, UInt32),
     release : Proc(IIE80DispatchEx*, UInt32),
@@ -10226,7 +10214,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IIE80DispatchEx, lpVtbl : IIE80DispatchExVtbl* do
+  record IIE80DispatchEx, lpVtbl : IIE80DispatchExVtable* do
     GUID = LibC::GUID.new(0x3051046c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IIE80DispatchEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10277,7 +10265,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLEventObjVtbl,
+  record IHTMLEventObjVtable,
     query_interface : Proc(IHTMLEventObj*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLEventObj*, UInt32),
     release : Proc(IHTMLEventObj*, UInt32),
@@ -10313,7 +10301,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLEventObj, lpVtbl : IHTMLEventObjVtbl* do
+  record IHTMLEventObj, lpVtbl : IHTMLEventObjVtable* do
     GUID = LibC::GUID.new(0x3050f32d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLEventObj*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10415,7 +10403,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementBehaviorSiteVtbl,
+  record IElementBehaviorSiteVtable,
     query_interface : Proc(IElementBehaviorSite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementBehaviorSite*, UInt32),
     release : Proc(IElementBehaviorSite*, UInt32),
@@ -10424,7 +10412,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementBehaviorSite, lpVtbl : IElementBehaviorSiteVtbl* do
+  record IElementBehaviorSite, lpVtbl : IElementBehaviorSiteVtable* do
     GUID = LibC::GUID.new(0x3050f427_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementBehaviorSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10445,7 +10433,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementBehaviorVtbl,
+  record IElementBehaviorVtable,
     query_interface : Proc(IElementBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementBehavior*, UInt32),
     release : Proc(IElementBehavior*, UInt32),
@@ -10455,7 +10443,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementBehavior, lpVtbl : IElementBehaviorVtbl* do
+  record IElementBehavior, lpVtbl : IElementBehaviorVtable* do
     GUID = LibC::GUID.new(0x3050f425_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10479,7 +10467,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementBehaviorFactoryVtbl,
+  record IElementBehaviorFactoryVtable,
     query_interface : Proc(IElementBehaviorFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementBehaviorFactory*, UInt32),
     release : Proc(IElementBehaviorFactory*, UInt32),
@@ -10487,7 +10475,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementBehaviorFactory, lpVtbl : IElementBehaviorFactoryVtbl* do
+  record IElementBehaviorFactory, lpVtbl : IElementBehaviorFactoryVtable* do
     GUID = LibC::GUID.new(0x3050f429_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementBehaviorFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10505,7 +10493,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementBehaviorSiteOMVtbl,
+  record IElementBehaviorSiteOMVtable,
     query_interface : Proc(IElementBehaviorSiteOM*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementBehaviorSiteOM*, UInt32),
     release : Proc(IElementBehaviorSiteOM*, UInt32),
@@ -10518,7 +10506,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementBehaviorSiteOM, lpVtbl : IElementBehaviorSiteOMVtbl* do
+  record IElementBehaviorSiteOM, lpVtbl : IElementBehaviorSiteOMVtable* do
     GUID = LibC::GUID.new(0x3050f489_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementBehaviorSiteOM*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10551,7 +10539,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementBehaviorRenderVtbl,
+  record IElementBehaviorRenderVtable,
     query_interface : Proc(IElementBehaviorRender*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementBehaviorRender*, UInt32),
     release : Proc(IElementBehaviorRender*, UInt32),
@@ -10561,7 +10549,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementBehaviorRender, lpVtbl : IElementBehaviorRenderVtbl* do
+  record IElementBehaviorRender, lpVtbl : IElementBehaviorRenderVtable* do
     GUID = LibC::GUID.new(0x3050f4aa_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementBehaviorRender*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10585,7 +10573,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementBehaviorSiteRenderVtbl,
+  record IElementBehaviorSiteRenderVtable,
     query_interface : Proc(IElementBehaviorSiteRender*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementBehaviorSiteRender*, UInt32),
     release : Proc(IElementBehaviorSiteRender*, UInt32),
@@ -10595,7 +10583,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementBehaviorSiteRender, lpVtbl : IElementBehaviorSiteRenderVtbl* do
+  record IElementBehaviorSiteRender, lpVtbl : IElementBehaviorSiteRenderVtable* do
     GUID = LibC::GUID.new(0x3050f4a7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementBehaviorSiteRender*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10619,7 +10607,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMEventVtbl,
+  record IDOMEventVtable,
     query_interface : Proc(IDOMEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMEvent*, UInt32),
     release : Proc(IDOMEvent*, UInt32),
@@ -10646,7 +10634,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMEvent, lpVtbl : IDOMEventVtbl* do
+  record IDOMEvent, lpVtbl : IDOMEventVtable* do
     GUID = LibC::GUID.new(0x305104ba_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10721,7 +10709,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDOMConstructorVtbl,
+  record IHTMLDOMConstructorVtable,
     query_interface : Proc(IHTMLDOMConstructor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDOMConstructor*, UInt32),
     release : Proc(IHTMLDOMConstructor*, UInt32),
@@ -10737,7 +10725,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDOMConstructor, lpVtbl : IHTMLDOMConstructorVtbl* do
+  record IHTMLDOMConstructor, lpVtbl : IHTMLDOMConstructorVtable* do
     GUID = LibC::GUID.new(0x3051049b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDOMConstructor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10779,7 +10767,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleSheetRuleVtbl,
+  record IHTMLStyleSheetRuleVtable,
     query_interface : Proc(IHTMLStyleSheetRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleSheetRule*, UInt32),
     release : Proc(IHTMLStyleSheetRule*, UInt32),
@@ -10794,7 +10782,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleSheetRule, lpVtbl : IHTMLStyleSheetRuleVtbl* do
+  record IHTMLStyleSheetRule, lpVtbl : IHTMLStyleSheetRuleVtable* do
     GUID = LibC::GUID.new(0x3050f357_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleSheetRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10833,7 +10821,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCSSStyleDeclarationVtbl,
+  record IHTMLCSSStyleDeclarationVtable,
     query_interface : Proc(IHTMLCSSStyleDeclaration*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCSSStyleDeclaration*, UInt32),
     release : Proc(IHTMLCSSStyleDeclaration*, UInt32),
@@ -11218,7 +11206,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCSSStyleDeclaration, lpVtbl : IHTMLCSSStyleDeclarationVtbl* do
+  record IHTMLCSSStyleDeclaration, lpVtbl : IHTMLCSSStyleDeclarationVtable* do
     GUID = LibC::GUID.new(0x30510740_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLCSSStyleDeclaration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12367,7 +12355,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCSSStyleDeclaration2Vtbl,
+  record IHTMLCSSStyleDeclaration2Vtable,
     query_interface : Proc(IHTMLCSSStyleDeclaration2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCSSStyleDeclaration2*, UInt32),
     release : Proc(IHTMLCSSStyleDeclaration2*, UInt32),
@@ -12606,7 +12594,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCSSStyleDeclaration2, lpVtbl : IHTMLCSSStyleDeclaration2Vtbl* do
+  record IHTMLCSSStyleDeclaration2, lpVtbl : IHTMLCSSStyleDeclaration2Vtable* do
     GUID = LibC::GUID.new(0x305107d1_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLCSSStyleDeclaration2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13317,7 +13305,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCSSStyleDeclaration3Vtbl,
+  record IHTMLCSSStyleDeclaration3Vtable,
     query_interface : Proc(IHTMLCSSStyleDeclaration3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCSSStyleDeclaration3*, UInt32),
     release : Proc(IHTMLCSSStyleDeclaration3*, UInt32),
@@ -13368,7 +13356,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCSSStyleDeclaration3, lpVtbl : IHTMLCSSStyleDeclaration3Vtbl* do
+  record IHTMLCSSStyleDeclaration3, lpVtbl : IHTMLCSSStyleDeclaration3Vtable* do
     GUID = LibC::GUID.new(0x3051085c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLCSSStyleDeclaration3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13515,7 +13503,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCSSStyleDeclaration4Vtbl,
+  record IHTMLCSSStyleDeclaration4Vtable,
     query_interface : Proc(IHTMLCSSStyleDeclaration4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCSSStyleDeclaration4*, UInt32),
     release : Proc(IHTMLCSSStyleDeclaration4*, UInt32),
@@ -13616,7 +13604,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCSSStyleDeclaration4, lpVtbl : IHTMLCSSStyleDeclaration4Vtbl* do
+  record IHTMLCSSStyleDeclaration4, lpVtbl : IHTMLCSSStyleDeclaration4Vtable* do
     GUID = LibC::GUID.new(0xd6100f3b_u32, 0x27c8_u16, 0x4132_u16, StaticArray[0xaf_u8, 0xea_u8, 0xf0_u8, 0xe4_u8, 0xb1_u8, 0xe0_u8, 0x0_u8, 0x60_u8])
     def query_interface(this : IHTMLCSSStyleDeclaration4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13913,7 +13901,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleEnabledVtbl,
+  record IHTMLStyleEnabledVtable,
     query_interface : Proc(IHTMLStyleEnabled*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleEnabled*, UInt32),
     release : Proc(IHTMLStyleEnabled*, UInt32),
@@ -13926,7 +13914,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleEnabled, lpVtbl : IHTMLStyleEnabledVtbl* do
+  record IHTMLStyleEnabled, lpVtbl : IHTMLStyleEnabledVtable* do
     GUID = LibC::GUID.new(0x305104c2_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleEnabled*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13959,7 +13947,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLCSSStyleDeclarationVtbl,
+  record DispHTMLCSSStyleDeclarationVtable,
     query_interface : Proc(DispHTMLCSSStyleDeclaration*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLCSSStyleDeclaration*, UInt32),
     release : Proc(DispHTMLCSSStyleDeclaration*, UInt32),
@@ -13970,7 +13958,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLCSSStyleDeclaration, lpVtbl : DispHTMLCSSStyleDeclarationVtbl* do
+  record DispHTMLCSSStyleDeclaration, lpVtbl : DispHTMLCSSStyleDeclarationVtable* do
     GUID = LibC::GUID.new(0x3059009a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLCSSStyleDeclaration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13997,7 +13985,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleVtbl,
+  record IHTMLStyleVtable,
     query_interface : Proc(IHTMLStyle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyle*, UInt32),
     release : Proc(IHTMLStyle*, UInt32),
@@ -14187,7 +14175,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyle, lpVtbl : IHTMLStyleVtbl* do
+  record IHTMLStyle, lpVtbl : IHTMLStyleVtable* do
     GUID = LibC::GUID.new(0x3050f25e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14751,7 +14739,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyle2Vtbl,
+  record IHTMLStyle2Vtable,
     query_interface : Proc(IHTMLStyle2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyle2*, UInt32),
     release : Proc(IHTMLStyle2*, UInt32),
@@ -14825,7 +14813,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyle2, lpVtbl : IHTMLStyle2Vtbl* do
+  record IHTMLStyle2, lpVtbl : IHTMLStyle2Vtable* do
     GUID = LibC::GUID.new(0x3050f4a2_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyle2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15041,7 +15029,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyle3Vtbl,
+  record IHTMLStyle3Vtable,
     query_interface : Proc(IHTMLStyle3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyle3*, UInt32),
     release : Proc(IHTMLStyle3*, UInt32),
@@ -15082,7 +15070,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyle3, lpVtbl : IHTMLStyle3Vtbl* do
+  record IHTMLStyle3, lpVtbl : IHTMLStyle3Vtable* do
     GUID = LibC::GUID.new(0x3050f656_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyle3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15199,7 +15187,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyle4Vtbl,
+  record IHTMLStyle4Vtable,
     query_interface : Proc(IHTMLStyle4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyle4*, UInt32),
     release : Proc(IHTMLStyle4*, UInt32),
@@ -15214,7 +15202,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyle4, lpVtbl : IHTMLStyle4Vtbl* do
+  record IHTMLStyle4, lpVtbl : IHTMLStyle4Vtable* do
     GUID = LibC::GUID.new(0x3050f816_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyle4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15253,7 +15241,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyle5Vtbl,
+  record IHTMLStyle5Vtable,
     query_interface : Proc(IHTMLStyle5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyle5*, UInt32),
     release : Proc(IHTMLStyle5*, UInt32),
@@ -15272,7 +15260,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyle5, lpVtbl : IHTMLStyle5Vtbl* do
+  record IHTMLStyle5, lpVtbl : IHTMLStyle5Vtable* do
     GUID = LibC::GUID.new(0x3050f33a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyle5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15323,7 +15311,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyle6Vtbl,
+  record IHTMLStyle6Vtable,
     query_interface : Proc(IHTMLStyle6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyle6*, UInt32),
     release : Proc(IHTMLStyle6*, UInt32),
@@ -15366,7 +15354,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyle6, lpVtbl : IHTMLStyle6Vtbl* do
+  record IHTMLStyle6, lpVtbl : IHTMLStyle6Vtable* do
     GUID = LibC::GUID.new(0x30510480_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyle6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15489,7 +15477,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLRuleStyleVtbl,
+  record IHTMLRuleStyleVtable,
     query_interface : Proc(IHTMLRuleStyle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLRuleStyle*, UInt32),
     release : Proc(IHTMLRuleStyle*, UInt32),
@@ -15662,7 +15650,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLRuleStyle, lpVtbl : IHTMLRuleStyleVtbl* do
+  record IHTMLRuleStyle, lpVtbl : IHTMLRuleStyleVtable* do
     GUID = LibC::GUID.new(0x3050f3cf_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLRuleStyle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16175,7 +16163,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLRuleStyle2Vtbl,
+  record IHTMLRuleStyle2Vtable,
     query_interface : Proc(IHTMLRuleStyle2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLRuleStyle2*, UInt32),
     release : Proc(IHTMLRuleStyle2*, UInt32),
@@ -16246,7 +16234,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLRuleStyle2, lpVtbl : IHTMLRuleStyle2Vtbl* do
+  record IHTMLRuleStyle2, lpVtbl : IHTMLRuleStyle2Vtable* do
     GUID = LibC::GUID.new(0x3050f4ac_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLRuleStyle2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16453,7 +16441,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLRuleStyle3Vtbl,
+  record IHTMLRuleStyle3Vtable,
     query_interface : Proc(IHTMLRuleStyle3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLRuleStyle3*, UInt32),
     release : Proc(IHTMLRuleStyle3*, UInt32),
@@ -16494,7 +16482,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLRuleStyle3, lpVtbl : IHTMLRuleStyle3Vtbl* do
+  record IHTMLRuleStyle3, lpVtbl : IHTMLRuleStyle3Vtable* do
     GUID = LibC::GUID.new(0x3050f657_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLRuleStyle3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16611,7 +16599,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLRuleStyle4Vtbl,
+  record IHTMLRuleStyle4Vtable,
     query_interface : Proc(IHTMLRuleStyle4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLRuleStyle4*, UInt32),
     release : Proc(IHTMLRuleStyle4*, UInt32),
@@ -16626,7 +16614,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLRuleStyle4, lpVtbl : IHTMLRuleStyle4Vtbl* do
+  record IHTMLRuleStyle4, lpVtbl : IHTMLRuleStyle4Vtable* do
     GUID = LibC::GUID.new(0x3050f817_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLRuleStyle4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16665,7 +16653,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLRuleStyle5Vtbl,
+  record IHTMLRuleStyle5Vtable,
     query_interface : Proc(IHTMLRuleStyle5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLRuleStyle5*, UInt32),
     release : Proc(IHTMLRuleStyle5*, UInt32),
@@ -16684,7 +16672,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLRuleStyle5, lpVtbl : IHTMLRuleStyle5Vtbl* do
+  record IHTMLRuleStyle5, lpVtbl : IHTMLRuleStyle5Vtable* do
     GUID = LibC::GUID.new(0x3050f335_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLRuleStyle5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16735,7 +16723,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLRuleStyle6Vtbl,
+  record IHTMLRuleStyle6Vtable,
     query_interface : Proc(IHTMLRuleStyle6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLRuleStyle6*, UInt32),
     release : Proc(IHTMLRuleStyle6*, UInt32),
@@ -16778,7 +16766,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLRuleStyle6, lpVtbl : IHTMLRuleStyle6Vtbl* do
+  record IHTMLRuleStyle6, lpVtbl : IHTMLRuleStyle6Vtable* do
     GUID = LibC::GUID.new(0x30510471_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLRuleStyle6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16901,7 +16889,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLStyleVtbl,
+  record DispHTMLStyleVtable,
     query_interface : Proc(DispHTMLStyle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLStyle*, UInt32),
     release : Proc(DispHTMLStyle*, UInt32),
@@ -16912,7 +16900,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLStyle, lpVtbl : DispHTMLStyleVtbl* do
+  record DispHTMLStyle, lpVtbl : DispHTMLStyleVtable* do
     GUID = LibC::GUID.new(0x3050f55a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLStyle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16939,7 +16927,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLRuleStyleVtbl,
+  record DispHTMLRuleStyleVtable,
     query_interface : Proc(DispHTMLRuleStyle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLRuleStyle*, UInt32),
     release : Proc(DispHTMLRuleStyle*, UInt32),
@@ -16950,7 +16938,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLRuleStyle, lpVtbl : DispHTMLRuleStyleVtbl* do
+  record DispHTMLRuleStyle, lpVtbl : DispHTMLRuleStyleVtable* do
     GUID = LibC::GUID.new(0x3050f55c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLRuleStyle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16977,7 +16965,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleSheetRulesCollectionVtbl,
+  record IHTMLStyleSheetRulesCollectionVtable,
     query_interface : Proc(IHTMLStyleSheetRulesCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleSheetRulesCollection*, UInt32),
     release : Proc(IHTMLStyleSheetRulesCollection*, UInt32),
@@ -16990,7 +16978,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleSheetRulesCollection, lpVtbl : IHTMLStyleSheetRulesCollectionVtbl* do
+  record IHTMLStyleSheetRulesCollection, lpVtbl : IHTMLStyleSheetRulesCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f2e5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleSheetRulesCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17023,7 +17011,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleSheetVtbl,
+  record IHTMLStyleSheetVtable,
     query_interface : Proc(IHTMLStyleSheet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleSheet*, UInt32),
     release : Proc(IHTMLStyleSheet*, UInt32),
@@ -17055,7 +17043,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleSheet, lpVtbl : IHTMLStyleSheetVtbl* do
+  record IHTMLStyleSheet, lpVtbl : IHTMLStyleSheetVtable* do
     GUID = LibC::GUID.new(0x3050f2e3_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleSheet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17145,7 +17133,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCSSRuleVtbl,
+  record IHTMLCSSRuleVtable,
     query_interface : Proc(IHTMLCSSRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCSSRule*, UInt32),
     release : Proc(IHTMLCSSRule*, UInt32),
@@ -17161,7 +17149,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCSSRule, lpVtbl : IHTMLCSSRuleVtbl* do
+  record IHTMLCSSRule, lpVtbl : IHTMLCSSRuleVtable* do
     GUID = LibC::GUID.new(0x305106e9_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLCSSRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17203,7 +17191,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCSSImportRuleVtbl,
+  record IHTMLCSSImportRuleVtable,
     query_interface : Proc(IHTMLCSSImportRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCSSImportRule*, UInt32),
     release : Proc(IHTMLCSSImportRule*, UInt32),
@@ -17218,7 +17206,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCSSImportRule, lpVtbl : IHTMLCSSImportRuleVtbl* do
+  record IHTMLCSSImportRule, lpVtbl : IHTMLCSSImportRuleVtable* do
     GUID = LibC::GUID.new(0x305106ea_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLCSSImportRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17257,7 +17245,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCSSMediaRuleVtbl,
+  record IHTMLCSSMediaRuleVtable,
     query_interface : Proc(IHTMLCSSMediaRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCSSMediaRule*, UInt32),
     release : Proc(IHTMLCSSMediaRule*, UInt32),
@@ -17273,7 +17261,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCSSMediaRule, lpVtbl : IHTMLCSSMediaRuleVtbl* do
+  record IHTMLCSSMediaRule, lpVtbl : IHTMLCSSMediaRuleVtable* do
     GUID = LibC::GUID.new(0x305106eb_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLCSSMediaRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17315,7 +17303,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCSSMediaListVtbl,
+  record IHTMLCSSMediaListVtable,
     query_interface : Proc(IHTMLCSSMediaList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCSSMediaList*, UInt32),
     release : Proc(IHTMLCSSMediaList*, UInt32),
@@ -17332,7 +17320,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCSSMediaList, lpVtbl : IHTMLCSSMediaListVtbl* do
+  record IHTMLCSSMediaList, lpVtbl : IHTMLCSSMediaListVtable* do
     GUID = LibC::GUID.new(0x30510731_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLCSSMediaList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17377,7 +17365,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCSSNamespaceRuleVtbl,
+  record IHTMLCSSNamespaceRuleVtable,
     query_interface : Proc(IHTMLCSSNamespaceRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCSSNamespaceRule*, UInt32),
     release : Proc(IHTMLCSSNamespaceRule*, UInt32),
@@ -17390,7 +17378,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCSSNamespaceRule, lpVtbl : IHTMLCSSNamespaceRuleVtbl* do
+  record IHTMLCSSNamespaceRule, lpVtbl : IHTMLCSSNamespaceRuleVtable* do
     GUID = LibC::GUID.new(0x305106ee_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLCSSNamespaceRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17423,7 +17411,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLMSCSSKeyframeRuleVtbl,
+  record IHTMLMSCSSKeyframeRuleVtable,
     query_interface : Proc(IHTMLMSCSSKeyframeRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLMSCSSKeyframeRule*, UInt32),
     release : Proc(IHTMLMSCSSKeyframeRule*, UInt32),
@@ -17437,7 +17425,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLMSCSSKeyframeRule, lpVtbl : IHTMLMSCSSKeyframeRuleVtbl* do
+  record IHTMLMSCSSKeyframeRule, lpVtbl : IHTMLMSCSSKeyframeRuleVtable* do
     GUID = LibC::GUID.new(0x3051080c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLMSCSSKeyframeRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17473,7 +17461,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLMSCSSKeyframesRuleVtbl,
+  record IHTMLMSCSSKeyframesRuleVtable,
     query_interface : Proc(IHTMLMSCSSKeyframesRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLMSCSSKeyframesRule*, UInt32),
     release : Proc(IHTMLMSCSSKeyframesRule*, UInt32),
@@ -17490,7 +17478,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLMSCSSKeyframesRule, lpVtbl : IHTMLMSCSSKeyframesRuleVtbl* do
+  record IHTMLMSCSSKeyframesRule, lpVtbl : IHTMLMSCSSKeyframesRuleVtable* do
     GUID = LibC::GUID.new(0x3051080d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLMSCSSKeyframesRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17535,7 +17523,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLCSSRuleVtbl,
+  record DispHTMLCSSRuleVtable,
     query_interface : Proc(DispHTMLCSSRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLCSSRule*, UInt32),
     release : Proc(DispHTMLCSSRule*, UInt32),
@@ -17546,7 +17534,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLCSSRule, lpVtbl : DispHTMLCSSRuleVtbl* do
+  record DispHTMLCSSRule, lpVtbl : DispHTMLCSSRuleVtable* do
     GUID = LibC::GUID.new(0x3059007d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLCSSRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17573,7 +17561,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLCSSImportRuleVtbl,
+  record DispHTMLCSSImportRuleVtable,
     query_interface : Proc(DispHTMLCSSImportRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLCSSImportRule*, UInt32),
     release : Proc(DispHTMLCSSImportRule*, UInt32),
@@ -17584,7 +17572,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLCSSImportRule, lpVtbl : DispHTMLCSSImportRuleVtbl* do
+  record DispHTMLCSSImportRule, lpVtbl : DispHTMLCSSImportRuleVtable* do
     GUID = LibC::GUID.new(0x3059007e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLCSSImportRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17611,7 +17599,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLCSSMediaRuleVtbl,
+  record DispHTMLCSSMediaRuleVtable,
     query_interface : Proc(DispHTMLCSSMediaRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLCSSMediaRule*, UInt32),
     release : Proc(DispHTMLCSSMediaRule*, UInt32),
@@ -17622,7 +17610,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLCSSMediaRule, lpVtbl : DispHTMLCSSMediaRuleVtbl* do
+  record DispHTMLCSSMediaRule, lpVtbl : DispHTMLCSSMediaRuleVtable* do
     GUID = LibC::GUID.new(0x3059007f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLCSSMediaRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17649,7 +17637,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLCSSMediaListVtbl,
+  record DispHTMLCSSMediaListVtable,
     query_interface : Proc(DispHTMLCSSMediaList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLCSSMediaList*, UInt32),
     release : Proc(DispHTMLCSSMediaList*, UInt32),
@@ -17660,7 +17648,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLCSSMediaList, lpVtbl : DispHTMLCSSMediaListVtbl* do
+  record DispHTMLCSSMediaList, lpVtbl : DispHTMLCSSMediaListVtable* do
     GUID = LibC::GUID.new(0x30590097_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLCSSMediaList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17687,7 +17675,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLCSSNamespaceRuleVtbl,
+  record DispHTMLCSSNamespaceRuleVtable,
     query_interface : Proc(DispHTMLCSSNamespaceRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLCSSNamespaceRule*, UInt32),
     release : Proc(DispHTMLCSSNamespaceRule*, UInt32),
@@ -17698,7 +17686,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLCSSNamespaceRule, lpVtbl : DispHTMLCSSNamespaceRuleVtbl* do
+  record DispHTMLCSSNamespaceRule, lpVtbl : DispHTMLCSSNamespaceRuleVtable* do
     GUID = LibC::GUID.new(0x30590080_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLCSSNamespaceRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17725,7 +17713,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLMSCSSKeyframeRuleVtbl,
+  record DispHTMLMSCSSKeyframeRuleVtable,
     query_interface : Proc(DispHTMLMSCSSKeyframeRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLMSCSSKeyframeRule*, UInt32),
     release : Proc(DispHTMLMSCSSKeyframeRule*, UInt32),
@@ -17736,7 +17724,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLMSCSSKeyframeRule, lpVtbl : DispHTMLMSCSSKeyframeRuleVtbl* do
+  record DispHTMLMSCSSKeyframeRule, lpVtbl : DispHTMLMSCSSKeyframeRuleVtable* do
     GUID = LibC::GUID.new(0x305900de_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLMSCSSKeyframeRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17763,7 +17751,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLMSCSSKeyframesRuleVtbl,
+  record DispHTMLMSCSSKeyframesRuleVtable,
     query_interface : Proc(DispHTMLMSCSSKeyframesRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLMSCSSKeyframesRule*, UInt32),
     release : Proc(DispHTMLMSCSSKeyframesRule*, UInt32),
@@ -17774,7 +17762,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLMSCSSKeyframesRule, lpVtbl : DispHTMLMSCSSKeyframesRuleVtbl* do
+  record DispHTMLMSCSSKeyframesRule, lpVtbl : DispHTMLMSCSSKeyframesRuleVtable* do
     GUID = LibC::GUID.new(0x305900df_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLMSCSSKeyframesRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17801,7 +17789,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLRenderStyleVtbl,
+  record IHTMLRenderStyleVtable,
     query_interface : Proc(IHTMLRenderStyle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLRenderStyle*, UInt32),
     release : Proc(IHTMLRenderStyle*, UInt32),
@@ -17830,7 +17818,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLRenderStyle, lpVtbl : IHTMLRenderStyleVtbl* do
+  record IHTMLRenderStyle, lpVtbl : IHTMLRenderStyleVtable* do
     GUID = LibC::GUID.new(0x3050f6ae_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLRenderStyle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17911,7 +17899,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLRenderStyleVtbl,
+  record DispHTMLRenderStyleVtable,
     query_interface : Proc(DispHTMLRenderStyle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLRenderStyle*, UInt32),
     release : Proc(DispHTMLRenderStyle*, UInt32),
@@ -17922,7 +17910,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLRenderStyle, lpVtbl : DispHTMLRenderStyleVtbl* do
+  record DispHTMLRenderStyle, lpVtbl : DispHTMLRenderStyleVtable* do
     GUID = LibC::GUID.new(0x3050f58b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLRenderStyle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17949,7 +17937,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCurrentStyleVtbl,
+  record IHTMLCurrentStyleVtable,
     query_interface : Proc(IHTMLCurrentStyle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCurrentStyle*, UInt32),
     release : Proc(IHTMLCurrentStyle*, UInt32),
@@ -18051,7 +18039,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCurrentStyle, lpVtbl : IHTMLCurrentStyleVtbl* do
+  record IHTMLCurrentStyle, lpVtbl : IHTMLCurrentStyleVtable* do
     GUID = LibC::GUID.new(0x3050f3db_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLCurrentStyle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18351,7 +18339,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCurrentStyle2Vtbl,
+  record IHTMLCurrentStyle2Vtable,
     query_interface : Proc(IHTMLCurrentStyle2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCurrentStyle2*, UInt32),
     release : Proc(IHTMLCurrentStyle2*, UInt32),
@@ -18380,7 +18368,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCurrentStyle2, lpVtbl : IHTMLCurrentStyle2Vtbl* do
+  record IHTMLCurrentStyle2, lpVtbl : IHTMLCurrentStyle2Vtable* do
     GUID = LibC::GUID.new(0x3050f658_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLCurrentStyle2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18461,7 +18449,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCurrentStyle3Vtbl,
+  record IHTMLCurrentStyle3Vtable,
     query_interface : Proc(IHTMLCurrentStyle3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCurrentStyle3*, UInt32),
     release : Proc(IHTMLCurrentStyle3*, UInt32),
@@ -18476,7 +18464,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCurrentStyle3, lpVtbl : IHTMLCurrentStyle3Vtbl* do
+  record IHTMLCurrentStyle3, lpVtbl : IHTMLCurrentStyle3Vtable* do
     GUID = LibC::GUID.new(0x3050f818_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLCurrentStyle3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18515,7 +18503,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCurrentStyle4Vtbl,
+  record IHTMLCurrentStyle4Vtable,
     query_interface : Proc(IHTMLCurrentStyle4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCurrentStyle4*, UInt32),
     release : Proc(IHTMLCurrentStyle4*, UInt32),
@@ -18530,7 +18518,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCurrentStyle4, lpVtbl : IHTMLCurrentStyle4Vtbl* do
+  record IHTMLCurrentStyle4, lpVtbl : IHTMLCurrentStyle4Vtable* do
     GUID = LibC::GUID.new(0x3050f33b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLCurrentStyle4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18569,7 +18557,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCurrentStyle5Vtbl,
+  record IHTMLCurrentStyle5Vtable,
     query_interface : Proc(IHTMLCurrentStyle5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCurrentStyle5*, UInt32),
     release : Proc(IHTMLCurrentStyle5*, UInt32),
@@ -18593,7 +18581,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCurrentStyle5, lpVtbl : IHTMLCurrentStyle5Vtbl* do
+  record IHTMLCurrentStyle5, lpVtbl : IHTMLCurrentStyle5Vtable* do
     GUID = LibC::GUID.new(0x30510481_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLCurrentStyle5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18659,7 +18647,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLCurrentStyleVtbl,
+  record DispHTMLCurrentStyleVtable,
     query_interface : Proc(DispHTMLCurrentStyle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLCurrentStyle*, UInt32),
     release : Proc(DispHTMLCurrentStyle*, UInt32),
@@ -18670,7 +18658,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLCurrentStyle, lpVtbl : DispHTMLCurrentStyleVtbl* do
+  record DispHTMLCurrentStyle, lpVtbl : DispHTMLCurrentStyleVtable* do
     GUID = LibC::GUID.new(0x3050f557_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLCurrentStyle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18697,7 +18685,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLElementVtbl,
+  record IHTMLElementVtable,
     query_interface : Proc(IHTMLElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLElement*, UInt32),
     release : Proc(IHTMLElement*, UInt32),
@@ -18795,7 +18783,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLElement, lpVtbl : IHTMLElementVtbl* do
+  record IHTMLElement, lpVtbl : IHTMLElementVtable* do
     GUID = LibC::GUID.new(0x3050f1ff_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19083,7 +19071,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLRectVtbl,
+  record IHTMLRectVtable,
     query_interface : Proc(IHTMLRect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLRect*, UInt32),
     release : Proc(IHTMLRect*, UInt32),
@@ -19102,7 +19090,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLRect, lpVtbl : IHTMLRectVtbl* do
+  record IHTMLRect, lpVtbl : IHTMLRectVtable* do
     GUID = LibC::GUID.new(0x3050f4a3_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLRect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19153,7 +19141,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLRect2Vtbl,
+  record IHTMLRect2Vtable,
     query_interface : Proc(IHTMLRect2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLRect2*, UInt32),
     release : Proc(IHTMLRect2*, UInt32),
@@ -19166,7 +19154,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLRect2, lpVtbl : IHTMLRect2Vtbl* do
+  record IHTMLRect2, lpVtbl : IHTMLRect2Vtable* do
     GUID = LibC::GUID.new(0x3051076c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLRect2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19199,7 +19187,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLRectCollectionVtbl,
+  record IHTMLRectCollectionVtable,
     query_interface : Proc(IHTMLRectCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLRectCollection*, UInt32),
     release : Proc(IHTMLRectCollection*, UInt32),
@@ -19213,7 +19201,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLRectCollection, lpVtbl : IHTMLRectCollectionVtbl* do
+  record IHTMLRectCollection, lpVtbl : IHTMLRectCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f4a4_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLRectCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19249,7 +19237,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLElementCollectionVtbl,
+  record IHTMLElementCollectionVtable,
     query_interface : Proc(IHTMLElementCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLElementCollection*, UInt32),
     release : Proc(IHTMLElementCollection*, UInt32),
@@ -19266,7 +19254,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLElementCollection, lpVtbl : IHTMLElementCollectionVtbl* do
+  record IHTMLElementCollection, lpVtbl : IHTMLElementCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f21f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLElementCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19311,7 +19299,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLElement2Vtbl,
+  record IHTMLElement2Vtable,
     query_interface : Proc(IHTMLElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLElement2*, UInt32),
     release : Proc(IHTMLElement2*, UInt32),
@@ -19420,7 +19408,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLElement2, lpVtbl : IHTMLElement2Vtbl* do
+  record IHTMLElement2, lpVtbl : IHTMLElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f434_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19741,7 +19729,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLAttributeCollection3Vtbl,
+  record IHTMLAttributeCollection3Vtable,
     query_interface : Proc(IHTMLAttributeCollection3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLAttributeCollection3*, UInt32),
     release : Proc(IHTMLAttributeCollection3*, UInt32),
@@ -19757,7 +19745,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLAttributeCollection3, lpVtbl : IHTMLAttributeCollection3Vtbl* do
+  record IHTMLAttributeCollection3, lpVtbl : IHTMLAttributeCollection3Vtable* do
     GUID = LibC::GUID.new(0x30510469_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLAttributeCollection3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19799,7 +19787,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMDocumentTypeVtbl,
+  record IDOMDocumentTypeVtable,
     query_interface : Proc(IDOMDocumentType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMDocumentType*, UInt32),
     release : Proc(IDOMDocumentType*, UInt32),
@@ -19816,7 +19804,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMDocumentType, lpVtbl : IDOMDocumentTypeVtbl* do
+  record IDOMDocumentType, lpVtbl : IDOMDocumentTypeVtable* do
     GUID = LibC::GUID.new(0x30510738_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMDocumentType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19861,7 +19849,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDocument7Vtbl,
+  record IHTMLDocument7Vtable,
     query_interface : Proc(IHTMLDocument7*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDocument7*, UInt32),
     release : Proc(IHTMLDocument7*, UInt32),
@@ -19976,7 +19964,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDocument7, lpVtbl : IHTMLDocument7Vtbl* do
+  record IHTMLDocument7, lpVtbl : IHTMLDocument7Vtable* do
     GUID = LibC::GUID.new(0x305104b8_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDocument7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20315,7 +20303,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDOMNodeVtbl,
+  record IHTMLDOMNodeVtable,
     query_interface : Proc(IHTMLDOMNode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDOMNode*, UInt32),
     release : Proc(IHTMLDOMNode*, UInt32),
@@ -20346,7 +20334,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDOMNode, lpVtbl : IHTMLDOMNodeVtbl* do
+  record IHTMLDOMNode, lpVtbl : IHTMLDOMNodeVtable* do
     GUID = LibC::GUID.new(0x3050f5da_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDOMNode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20433,7 +20421,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDOMNode2Vtbl,
+  record IHTMLDOMNode2Vtable,
     query_interface : Proc(IHTMLDOMNode2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDOMNode2*, UInt32),
     release : Proc(IHTMLDOMNode2*, UInt32),
@@ -20445,7 +20433,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDOMNode2, lpVtbl : IHTMLDOMNode2Vtbl* do
+  record IHTMLDOMNode2, lpVtbl : IHTMLDOMNode2Vtable* do
     GUID = LibC::GUID.new(0x3050f80b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDOMNode2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20475,7 +20463,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDOMNode3Vtbl,
+  record IHTMLDOMNode3Vtable,
     query_interface : Proc(IHTMLDOMNode3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDOMNode3*, UInt32),
     release : Proc(IHTMLDOMNode3*, UInt32),
@@ -20503,7 +20491,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDOMNode3, lpVtbl : IHTMLDOMNode3Vtbl* do
+  record IHTMLDOMNode3, lpVtbl : IHTMLDOMNode3Vtable* do
     GUID = LibC::GUID.new(0x305106e0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDOMNode3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20581,7 +20569,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDOMAttributeVtbl,
+  record IHTMLDOMAttributeVtable,
     query_interface : Proc(IHTMLDOMAttribute*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDOMAttribute*, UInt32),
     release : Proc(IHTMLDOMAttribute*, UInt32),
@@ -20596,7 +20584,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDOMAttribute, lpVtbl : IHTMLDOMAttributeVtbl* do
+  record IHTMLDOMAttribute, lpVtbl : IHTMLDOMAttributeVtable* do
     GUID = LibC::GUID.new(0x3050f4b0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDOMAttribute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20635,7 +20623,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDOMAttribute2Vtbl,
+  record IHTMLDOMAttribute2Vtable,
     query_interface : Proc(IHTMLDOMAttribute2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDOMAttribute2*, UInt32),
     release : Proc(IHTMLDOMAttribute2*, UInt32),
@@ -20665,7 +20653,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDOMAttribute2, lpVtbl : IHTMLDOMAttribute2Vtbl* do
+  record IHTMLDOMAttribute2, lpVtbl : IHTMLDOMAttribute2Vtable* do
     GUID = LibC::GUID.new(0x3050f810_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDOMAttribute2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20749,7 +20737,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDOMAttribute3Vtbl,
+  record IHTMLDOMAttribute3Vtable,
     query_interface : Proc(IHTMLDOMAttribute3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDOMAttribute3*, UInt32),
     release : Proc(IHTMLDOMAttribute3*, UInt32),
@@ -20766,7 +20754,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDOMAttribute3, lpVtbl : IHTMLDOMAttribute3Vtbl* do
+  record IHTMLDOMAttribute3, lpVtbl : IHTMLDOMAttribute3Vtable* do
     GUID = LibC::GUID.new(0x30510468_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDOMAttribute3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20811,7 +20799,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDOMAttribute4Vtbl,
+  record IHTMLDOMAttribute4Vtable,
     query_interface : Proc(IHTMLDOMAttribute4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDOMAttribute4*, UInt32),
     release : Proc(IHTMLDOMAttribute4*, UInt32),
@@ -20835,7 +20823,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDOMAttribute4, lpVtbl : IHTMLDOMAttribute4Vtbl* do
+  record IHTMLDOMAttribute4, lpVtbl : IHTMLDOMAttribute4Vtable* do
     GUID = LibC::GUID.new(0x305106f9_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDOMAttribute4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20901,7 +20889,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDOMTextNodeVtbl,
+  record IHTMLDOMTextNodeVtable,
     query_interface : Proc(IHTMLDOMTextNode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDOMTextNode*, UInt32),
     release : Proc(IHTMLDOMTextNode*, UInt32),
@@ -20917,7 +20905,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDOMTextNode, lpVtbl : IHTMLDOMTextNodeVtbl* do
+  record IHTMLDOMTextNode, lpVtbl : IHTMLDOMTextNodeVtable* do
     GUID = LibC::GUID.new(0x3050f4b1_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDOMTextNode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20959,7 +20947,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDOMTextNode2Vtbl,
+  record IHTMLDOMTextNode2Vtable,
     query_interface : Proc(IHTMLDOMTextNode2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDOMTextNode2*, UInt32),
     release : Proc(IHTMLDOMTextNode2*, UInt32),
@@ -20975,7 +20963,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDOMTextNode2, lpVtbl : IHTMLDOMTextNode2Vtbl* do
+  record IHTMLDOMTextNode2, lpVtbl : IHTMLDOMTextNode2Vtable* do
     GUID = LibC::GUID.new(0x3050f809_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDOMTextNode2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21017,7 +21005,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDOMTextNode3Vtbl,
+  record IHTMLDOMTextNode3Vtable,
     query_interface : Proc(IHTMLDOMTextNode3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDOMTextNode3*, UInt32),
     release : Proc(IHTMLDOMTextNode3*, UInt32),
@@ -21037,7 +21025,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDOMTextNode3, lpVtbl : IHTMLDOMTextNode3Vtbl* do
+  record IHTMLDOMTextNode3, lpVtbl : IHTMLDOMTextNode3Vtable* do
     GUID = LibC::GUID.new(0x3051073e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDOMTextNode3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21091,7 +21079,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDOMImplementationVtbl,
+  record IHTMLDOMImplementationVtable,
     query_interface : Proc(IHTMLDOMImplementation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDOMImplementation*, UInt32),
     release : Proc(IHTMLDOMImplementation*, UInt32),
@@ -21103,7 +21091,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDOMImplementation, lpVtbl : IHTMLDOMImplementationVtbl* do
+  record IHTMLDOMImplementation, lpVtbl : IHTMLDOMImplementationVtable* do
     GUID = LibC::GUID.new(0x3050f80d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDOMImplementation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21133,7 +21121,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDOMImplementation2Vtbl,
+  record IHTMLDOMImplementation2Vtable,
     query_interface : Proc(IHTMLDOMImplementation2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDOMImplementation2*, UInt32),
     release : Proc(IHTMLDOMImplementation2*, UInt32),
@@ -21148,7 +21136,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDOMImplementation2, lpVtbl : IHTMLDOMImplementation2Vtbl* do
+  record IHTMLDOMImplementation2, lpVtbl : IHTMLDOMImplementation2Vtable* do
     GUID = LibC::GUID.new(0x3051073c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDOMImplementation2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21187,7 +21175,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLDOMAttributeVtbl,
+  record DispHTMLDOMAttributeVtable,
     query_interface : Proc(DispHTMLDOMAttribute*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLDOMAttribute*, UInt32),
     release : Proc(DispHTMLDOMAttribute*, UInt32),
@@ -21198,7 +21186,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLDOMAttribute, lpVtbl : DispHTMLDOMAttributeVtbl* do
+  record DispHTMLDOMAttribute, lpVtbl : DispHTMLDOMAttributeVtable* do
     GUID = LibC::GUID.new(0x3050f564_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLDOMAttribute*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21225,7 +21213,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLDOMTextNodeVtbl,
+  record DispHTMLDOMTextNodeVtable,
     query_interface : Proc(DispHTMLDOMTextNode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLDOMTextNode*, UInt32),
     release : Proc(DispHTMLDOMTextNode*, UInt32),
@@ -21236,7 +21224,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLDOMTextNode, lpVtbl : DispHTMLDOMTextNodeVtbl* do
+  record DispHTMLDOMTextNode, lpVtbl : DispHTMLDOMTextNodeVtable* do
     GUID = LibC::GUID.new(0x3050f565_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLDOMTextNode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21263,7 +21251,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLDOMImplementationVtbl,
+  record DispHTMLDOMImplementationVtable,
     query_interface : Proc(DispHTMLDOMImplementation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLDOMImplementation*, UInt32),
     release : Proc(DispHTMLDOMImplementation*, UInt32),
@@ -21274,7 +21262,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLDOMImplementation, lpVtbl : DispHTMLDOMImplementationVtbl* do
+  record DispHTMLDOMImplementation, lpVtbl : DispHTMLDOMImplementationVtable* do
     GUID = LibC::GUID.new(0x3050f58f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLDOMImplementation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21301,7 +21289,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLAttributeCollectionVtbl,
+  record IHTMLAttributeCollectionVtable,
     query_interface : Proc(IHTMLAttributeCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLAttributeCollection*, UInt32),
     release : Proc(IHTMLAttributeCollection*, UInt32),
@@ -21315,7 +21303,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLAttributeCollection, lpVtbl : IHTMLAttributeCollectionVtbl* do
+  record IHTMLAttributeCollection, lpVtbl : IHTMLAttributeCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f4c3_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLAttributeCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21351,7 +21339,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLAttributeCollection2Vtbl,
+  record IHTMLAttributeCollection2Vtable,
     query_interface : Proc(IHTMLAttributeCollection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLAttributeCollection2*, UInt32),
     release : Proc(IHTMLAttributeCollection2*, UInt32),
@@ -21365,7 +21353,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLAttributeCollection2, lpVtbl : IHTMLAttributeCollection2Vtbl* do
+  record IHTMLAttributeCollection2, lpVtbl : IHTMLAttributeCollection2Vtable* do
     GUID = LibC::GUID.new(0x3050f80a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLAttributeCollection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21401,7 +21389,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLAttributeCollection4Vtbl,
+  record IHTMLAttributeCollection4Vtable,
     query_interface : Proc(IHTMLAttributeCollection4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLAttributeCollection4*, UInt32),
     release : Proc(IHTMLAttributeCollection4*, UInt32),
@@ -21420,7 +21408,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLAttributeCollection4, lpVtbl : IHTMLAttributeCollection4Vtbl* do
+  record IHTMLAttributeCollection4, lpVtbl : IHTMLAttributeCollection4Vtable* do
     GUID = LibC::GUID.new(0x305106fa_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLAttributeCollection4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21471,7 +21459,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDOMChildrenCollectionVtbl,
+  record IHTMLDOMChildrenCollectionVtable,
     query_interface : Proc(IHTMLDOMChildrenCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDOMChildrenCollection*, UInt32),
     release : Proc(IHTMLDOMChildrenCollection*, UInt32),
@@ -21485,7 +21473,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDOMChildrenCollection, lpVtbl : IHTMLDOMChildrenCollectionVtbl* do
+  record IHTMLDOMChildrenCollection, lpVtbl : IHTMLDOMChildrenCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f5ab_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDOMChildrenCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21521,7 +21509,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDOMChildrenCollection2Vtbl,
+  record IHTMLDOMChildrenCollection2Vtable,
     query_interface : Proc(IHTMLDOMChildrenCollection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDOMChildrenCollection2*, UInt32),
     release : Proc(IHTMLDOMChildrenCollection2*, UInt32),
@@ -21533,7 +21521,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDOMChildrenCollection2, lpVtbl : IHTMLDOMChildrenCollection2Vtbl* do
+  record IHTMLDOMChildrenCollection2, lpVtbl : IHTMLDOMChildrenCollection2Vtable* do
     GUID = LibC::GUID.new(0x30510791_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDOMChildrenCollection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21563,7 +21551,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLAttributeCollectionVtbl,
+  record DispHTMLAttributeCollectionVtable,
     query_interface : Proc(DispHTMLAttributeCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLAttributeCollection*, UInt32),
     release : Proc(DispHTMLAttributeCollection*, UInt32),
@@ -21574,7 +21562,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLAttributeCollection, lpVtbl : DispHTMLAttributeCollectionVtbl* do
+  record DispHTMLAttributeCollection, lpVtbl : DispHTMLAttributeCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f56c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLAttributeCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21601,7 +21589,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispStaticNodeListVtbl,
+  record DispStaticNodeListVtable,
     query_interface : Proc(DispStaticNodeList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispStaticNodeList*, UInt32),
     release : Proc(DispStaticNodeList*, UInt32),
@@ -21612,7 +21600,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispStaticNodeList, lpVtbl : DispStaticNodeListVtbl* do
+  record DispStaticNodeList, lpVtbl : DispStaticNodeListVtable* do
     GUID = LibC::GUID.new(0x3050f59b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispStaticNodeList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21639,7 +21627,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMChildrenCollectionVtbl,
+  record DispDOMChildrenCollectionVtable,
     query_interface : Proc(DispDOMChildrenCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMChildrenCollection*, UInt32),
     release : Proc(DispDOMChildrenCollection*, UInt32),
@@ -21650,7 +21638,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMChildrenCollection, lpVtbl : DispDOMChildrenCollectionVtbl* do
+  record DispDOMChildrenCollection, lpVtbl : DispDOMChildrenCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f577_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMChildrenCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21677,7 +21665,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLElementEvents4Vtbl,
+  record HTMLElementEvents4Vtable,
     query_interface : Proc(HTMLElementEvents4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLElementEvents4*, UInt32),
     release : Proc(HTMLElementEvents4*, UInt32),
@@ -21688,7 +21676,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLElementEvents4, lpVtbl : HTMLElementEvents4Vtbl* do
+  record HTMLElementEvents4, lpVtbl : HTMLElementEvents4Vtable* do
     GUID = LibC::GUID.new(0x3051075e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLElementEvents4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21715,7 +21703,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLElementEvents3Vtbl,
+  record HTMLElementEvents3Vtable,
     query_interface : Proc(HTMLElementEvents3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLElementEvents3*, UInt32),
     release : Proc(HTMLElementEvents3*, UInt32),
@@ -21726,7 +21714,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLElementEvents3, lpVtbl : HTMLElementEvents3Vtbl* do
+  record HTMLElementEvents3, lpVtbl : HTMLElementEvents3Vtable* do
     GUID = LibC::GUID.new(0x3050f59f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLElementEvents3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21753,7 +21741,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLElementEvents2Vtbl,
+  record HTMLElementEvents2Vtable,
     query_interface : Proc(HTMLElementEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLElementEvents2*, UInt32),
     release : Proc(HTMLElementEvents2*, UInt32),
@@ -21764,7 +21752,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLElementEvents2, lpVtbl : HTMLElementEvents2Vtbl* do
+  record HTMLElementEvents2, lpVtbl : HTMLElementEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f60f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLElementEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21791,7 +21779,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLElementEventsVtbl,
+  record HTMLElementEventsVtable,
     query_interface : Proc(HTMLElementEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLElementEvents*, UInt32),
     release : Proc(HTMLElementEvents*, UInt32),
@@ -21802,7 +21790,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLElementEvents, lpVtbl : HTMLElementEventsVtbl* do
+  record HTMLElementEvents, lpVtbl : HTMLElementEventsVtable* do
     GUID = LibC::GUID.new(0x3050f33c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLElementEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21829,7 +21817,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IRulesAppliedCollectionVtbl,
+  record IRulesAppliedCollectionVtable,
     query_interface : Proc(IRulesAppliedCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRulesAppliedCollection*, UInt32),
     release : Proc(IRulesAppliedCollection*, UInt32),
@@ -21848,7 +21836,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IRulesAppliedCollection, lpVtbl : IRulesAppliedCollectionVtbl* do
+  record IRulesAppliedCollection, lpVtbl : IRulesAppliedCollectionVtable* do
     GUID = LibC::GUID.new(0x305104be_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IRulesAppliedCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21899,7 +21887,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLElement3Vtbl,
+  record IHTMLElement3Vtable,
     query_interface : Proc(IHTMLElement3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLElement3*, UInt32),
     release : Proc(IHTMLElement3*, UInt32),
@@ -21953,7 +21941,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLElement3, lpVtbl : IHTMLElement3Vtbl* do
+  record IHTMLElement3, lpVtbl : IHTMLElement3Vtable* do
     GUID = LibC::GUID.new(0x3050f673_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLElement3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22109,7 +22097,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLElement4Vtbl,
+  record IHTMLElement4Vtable,
     query_interface : Proc(IHTMLElement4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLElement4*, UInt32),
     release : Proc(IHTMLElement4*, UInt32),
@@ -22132,7 +22120,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLElement4, lpVtbl : IHTMLElement4Vtbl* do
+  record IHTMLElement4, lpVtbl : IHTMLElement4Vtable* do
     GUID = LibC::GUID.new(0x3050f80f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLElement4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22195,7 +22183,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementSelectorVtbl,
+  record IElementSelectorVtable,
     query_interface : Proc(IElementSelector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementSelector*, UInt32),
     release : Proc(IElementSelector*, UInt32),
@@ -22208,7 +22196,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementSelector, lpVtbl : IElementSelectorVtbl* do
+  record IElementSelector, lpVtbl : IElementSelectorVtable* do
     GUID = LibC::GUID.new(0x30510463_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementSelector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22241,7 +22229,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLElementRenderVtbl,
+  record IHTMLElementRenderVtable,
     query_interface : Proc(IHTMLElementRender*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLElementRender*, UInt32),
     release : Proc(IHTMLElementRender*, UInt32),
@@ -22250,7 +22238,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLElementRender, lpVtbl : IHTMLElementRenderVtbl* do
+  record IHTMLElementRender, lpVtbl : IHTMLElementRenderVtable* do
     GUID = LibC::GUID.new(0x3050f669_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLElementRender*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22271,7 +22259,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLUniqueNameVtbl,
+  record IHTMLUniqueNameVtable,
     query_interface : Proc(IHTMLUniqueName*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLUniqueName*, UInt32),
     release : Proc(IHTMLUniqueName*, UInt32),
@@ -22284,7 +22272,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLUniqueName, lpVtbl : IHTMLUniqueNameVtbl* do
+  record IHTMLUniqueName, lpVtbl : IHTMLUniqueNameVtable* do
     GUID = LibC::GUID.new(0x3050f4d0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLUniqueName*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22317,7 +22305,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLElement5Vtbl,
+  record IHTMLElement5Vtable,
     query_interface : Proc(IHTMLElement5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLElement5*, UInt32),
     release : Proc(IHTMLElement5*, UInt32),
@@ -22393,7 +22381,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLElement5, lpVtbl : IHTMLElement5Vtbl* do
+  record IHTMLElement5, lpVtbl : IHTMLElement5Vtable* do
     GUID = LibC::GUID.new(0x3051045d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLElement5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22615,7 +22603,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLElement6Vtbl,
+  record IHTMLElement6Vtable,
     query_interface : Proc(IHTMLElement6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLElement6*, UInt32),
     release : Proc(IHTMLElement6*, UInt32),
@@ -22701,7 +22689,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLElement6, lpVtbl : IHTMLElement6Vtbl* do
+  record IHTMLElement6, lpVtbl : IHTMLElement6Vtable* do
     GUID = LibC::GUID.new(0x305106f8_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLElement6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22953,7 +22941,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLElement7Vtbl,
+  record IHTMLElement7Vtable,
     query_interface : Proc(IHTMLElement7*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLElement7*, UInt32),
     release : Proc(IHTMLElement7*, UInt32),
@@ -23018,7 +23006,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLElement7, lpVtbl : IHTMLElement7Vtbl* do
+  record IHTMLElement7, lpVtbl : IHTMLElement7Vtable* do
     GUID = LibC::GUID.new(0x305107aa_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLElement7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23207,7 +23195,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLElementAppliedStylesVtbl,
+  record IHTMLElementAppliedStylesVtable,
     query_interface : Proc(IHTMLElementAppliedStyles*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLElementAppliedStyles*, UInt32),
     release : Proc(IHTMLElementAppliedStyles*, UInt32),
@@ -23220,7 +23208,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLElementAppliedStyles, lpVtbl : IHTMLElementAppliedStylesVtbl* do
+  record IHTMLElementAppliedStyles, lpVtbl : IHTMLElementAppliedStylesVtable* do
     GUID = LibC::GUID.new(0x305104bd_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLElementAppliedStyles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23253,7 +23241,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementTraversalVtbl,
+  record IElementTraversalVtable,
     query_interface : Proc(IElementTraversal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementTraversal*, UInt32),
     release : Proc(IElementTraversal*, UInt32),
@@ -23269,7 +23257,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementTraversal, lpVtbl : IElementTraversalVtbl* do
+  record IElementTraversal, lpVtbl : IElementTraversalVtable* do
     GUID = LibC::GUID.new(0x30510736_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementTraversal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23311,7 +23299,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDatabindingVtbl,
+  record IHTMLDatabindingVtable,
     query_interface : Proc(IHTMLDatabinding*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDatabinding*, UInt32),
     release : Proc(IHTMLDatabinding*, UInt32),
@@ -23328,7 +23316,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDatabinding, lpVtbl : IHTMLDatabindingVtbl* do
+  record IHTMLDatabinding, lpVtbl : IHTMLDatabindingVtable* do
     GUID = LibC::GUID.new(0x3050f3f2_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDatabinding*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23373,7 +23361,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDocumentVtbl,
+  record IHTMLDocumentVtable,
     query_interface : Proc(IHTMLDocument*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDocument*, UInt32),
     release : Proc(IHTMLDocument*, UInt32),
@@ -23385,7 +23373,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDocument, lpVtbl : IHTMLDocumentVtbl* do
+  record IHTMLDocument, lpVtbl : IHTMLDocumentVtable* do
     GUID = LibC::GUID.new(0x626fc520_u32, 0xa41e_u16, 0x11cf_u16, StaticArray[0xa7_u8, 0x31_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x8_u8, 0x26_u8, 0x37_u8])
     def query_interface(this : IHTMLDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23415,7 +23403,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLElementDefaultsVtbl,
+  record IHTMLElementDefaultsVtable,
     query_interface : Proc(IHTMLElementDefaults*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLElementDefaults*, UInt32),
     release : Proc(IHTMLElementDefaults*, UInt32),
@@ -23447,7 +23435,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLElementDefaults, lpVtbl : IHTMLElementDefaultsVtbl* do
+  record IHTMLElementDefaults, lpVtbl : IHTMLElementDefaultsVtable* do
     GUID = LibC::GUID.new(0x3050f6c9_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLElementDefaults*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23537,7 +23525,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLDefaultsVtbl,
+  record DispHTMLDefaultsVtable,
     query_interface : Proc(DispHTMLDefaults*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLDefaults*, UInt32),
     release : Proc(DispHTMLDefaults*, UInt32),
@@ -23548,7 +23536,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLDefaults, lpVtbl : DispHTMLDefaultsVtbl* do
+  record DispHTMLDefaults, lpVtbl : DispHTMLDefaultsVtable* do
     GUID = LibC::GUID.new(0x3050f58c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLDefaults*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23575,7 +23563,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTCDefaultDispatchVtbl,
+  record IHTCDefaultDispatchVtable,
     query_interface : Proc(IHTCDefaultDispatch*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTCDefaultDispatch*, UInt32),
     release : Proc(IHTCDefaultDispatch*, UInt32),
@@ -23590,7 +23578,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTCDefaultDispatch, lpVtbl : IHTCDefaultDispatchVtbl* do
+  record IHTCDefaultDispatch, lpVtbl : IHTCDefaultDispatchVtable* do
     GUID = LibC::GUID.new(0x3050f4fd_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTCDefaultDispatch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23629,7 +23617,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTCPropertyBehaviorVtbl,
+  record IHTCPropertyBehaviorVtable,
     query_interface : Proc(IHTCPropertyBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTCPropertyBehavior*, UInt32),
     release : Proc(IHTCPropertyBehavior*, UInt32),
@@ -23643,7 +23631,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTCPropertyBehavior, lpVtbl : IHTCPropertyBehaviorVtbl* do
+  record IHTCPropertyBehavior, lpVtbl : IHTCPropertyBehaviorVtable* do
     GUID = LibC::GUID.new(0x3050f5df_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTCPropertyBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23679,7 +23667,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTCMethodBehaviorVtbl,
+  record IHTCMethodBehaviorVtable,
     query_interface : Proc(IHTCMethodBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTCMethodBehavior*, UInt32),
     release : Proc(IHTCMethodBehavior*, UInt32),
@@ -23690,7 +23678,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTCMethodBehavior, lpVtbl : IHTCMethodBehaviorVtbl* do
+  record IHTCMethodBehavior, lpVtbl : IHTCMethodBehaviorVtable* do
     GUID = LibC::GUID.new(0x3050f631_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTCMethodBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23717,7 +23705,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTCEventBehaviorVtbl,
+  record IHTCEventBehaviorVtable,
     query_interface : Proc(IHTCEventBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTCEventBehavior*, UInt32),
     release : Proc(IHTCEventBehavior*, UInt32),
@@ -23729,7 +23717,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTCEventBehavior, lpVtbl : IHTCEventBehaviorVtbl* do
+  record IHTCEventBehavior, lpVtbl : IHTCEventBehaviorVtable* do
     GUID = LibC::GUID.new(0x3050f4ff_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTCEventBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23759,7 +23747,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTCAttachBehaviorVtbl,
+  record IHTCAttachBehaviorVtable,
     query_interface : Proc(IHTCAttachBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTCAttachBehavior*, UInt32),
     release : Proc(IHTCAttachBehavior*, UInt32),
@@ -23772,7 +23760,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTCAttachBehavior, lpVtbl : IHTCAttachBehaviorVtbl* do
+  record IHTCAttachBehavior, lpVtbl : IHTCAttachBehaviorVtable* do
     GUID = LibC::GUID.new(0x3050f5f4_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTCAttachBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23805,7 +23793,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTCAttachBehavior2Vtbl,
+  record IHTCAttachBehavior2Vtable,
     query_interface : Proc(IHTCAttachBehavior2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTCAttachBehavior2*, UInt32),
     release : Proc(IHTCAttachBehavior2*, UInt32),
@@ -23817,7 +23805,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTCAttachBehavior2, lpVtbl : IHTCAttachBehavior2Vtbl* do
+  record IHTCAttachBehavior2, lpVtbl : IHTCAttachBehavior2Vtable* do
     GUID = LibC::GUID.new(0x3050f7eb_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTCAttachBehavior2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23847,7 +23835,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTCDescBehaviorVtbl,
+  record IHTCDescBehaviorVtable,
     query_interface : Proc(IHTCDescBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTCDescBehavior*, UInt32),
     release : Proc(IHTCDescBehavior*, UInt32),
@@ -23860,7 +23848,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTCDescBehavior, lpVtbl : IHTCDescBehaviorVtbl* do
+  record IHTCDescBehavior, lpVtbl : IHTCDescBehaviorVtable* do
     GUID = LibC::GUID.new(0x3050f5dc_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTCDescBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23893,7 +23881,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTCDefaultDispatchVtbl,
+  record DispHTCDefaultDispatchVtable,
     query_interface : Proc(DispHTCDefaultDispatch*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTCDefaultDispatch*, UInt32),
     release : Proc(DispHTCDefaultDispatch*, UInt32),
@@ -23904,7 +23892,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTCDefaultDispatch, lpVtbl : DispHTCDefaultDispatchVtbl* do
+  record DispHTCDefaultDispatch, lpVtbl : DispHTCDefaultDispatchVtable* do
     GUID = LibC::GUID.new(0x3050f573_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTCDefaultDispatch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23931,7 +23919,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTCPropertyBehaviorVtbl,
+  record DispHTCPropertyBehaviorVtable,
     query_interface : Proc(DispHTCPropertyBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTCPropertyBehavior*, UInt32),
     release : Proc(DispHTCPropertyBehavior*, UInt32),
@@ -23942,7 +23930,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTCPropertyBehavior, lpVtbl : DispHTCPropertyBehaviorVtbl* do
+  record DispHTCPropertyBehavior, lpVtbl : DispHTCPropertyBehaviorVtable* do
     GUID = LibC::GUID.new(0x3050f57f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTCPropertyBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23969,7 +23957,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTCMethodBehaviorVtbl,
+  record DispHTCMethodBehaviorVtable,
     query_interface : Proc(DispHTCMethodBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTCMethodBehavior*, UInt32),
     release : Proc(DispHTCMethodBehavior*, UInt32),
@@ -23980,7 +23968,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTCMethodBehavior, lpVtbl : DispHTCMethodBehaviorVtbl* do
+  record DispHTCMethodBehavior, lpVtbl : DispHTCMethodBehaviorVtable* do
     GUID = LibC::GUID.new(0x3050f587_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTCMethodBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24007,7 +23995,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTCEventBehaviorVtbl,
+  record DispHTCEventBehaviorVtable,
     query_interface : Proc(DispHTCEventBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTCEventBehavior*, UInt32),
     release : Proc(DispHTCEventBehavior*, UInt32),
@@ -24018,7 +24006,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTCEventBehavior, lpVtbl : DispHTCEventBehaviorVtbl* do
+  record DispHTCEventBehavior, lpVtbl : DispHTCEventBehaviorVtable* do
     GUID = LibC::GUID.new(0x3050f574_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTCEventBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24045,7 +24033,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTCAttachBehaviorVtbl,
+  record DispHTCAttachBehaviorVtable,
     query_interface : Proc(DispHTCAttachBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTCAttachBehavior*, UInt32),
     release : Proc(DispHTCAttachBehavior*, UInt32),
@@ -24056,7 +24044,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTCAttachBehavior, lpVtbl : DispHTCAttachBehaviorVtbl* do
+  record DispHTCAttachBehavior, lpVtbl : DispHTCAttachBehaviorVtable* do
     GUID = LibC::GUID.new(0x3050f583_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTCAttachBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24083,7 +24071,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTCDescBehaviorVtbl,
+  record DispHTCDescBehaviorVtable,
     query_interface : Proc(DispHTCDescBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTCDescBehavior*, UInt32),
     release : Proc(DispHTCDescBehavior*, UInt32),
@@ -24094,7 +24082,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTCDescBehavior, lpVtbl : DispHTCDescBehaviorVtbl* do
+  record DispHTCDescBehavior, lpVtbl : DispHTCDescBehaviorVtable* do
     GUID = LibC::GUID.new(0x3050f57e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTCDescBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24121,7 +24109,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLUrnCollectionVtbl,
+  record IHTMLUrnCollectionVtable,
     query_interface : Proc(IHTMLUrnCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLUrnCollection*, UInt32),
     release : Proc(IHTMLUrnCollection*, UInt32),
@@ -24134,7 +24122,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLUrnCollection, lpVtbl : IHTMLUrnCollectionVtbl* do
+  record IHTMLUrnCollection, lpVtbl : IHTMLUrnCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f5e2_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLUrnCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24167,7 +24155,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLUrnCollectionVtbl,
+  record DispHTMLUrnCollectionVtable,
     query_interface : Proc(DispHTMLUrnCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLUrnCollection*, UInt32),
     release : Proc(DispHTMLUrnCollection*, UInt32),
@@ -24178,7 +24166,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLUrnCollection, lpVtbl : DispHTMLUrnCollectionVtbl* do
+  record DispHTMLUrnCollection, lpVtbl : DispHTMLUrnCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f551_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLUrnCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24205,7 +24193,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLGenericElementVtbl,
+  record IHTMLGenericElementVtable,
     query_interface : Proc(IHTMLGenericElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLGenericElement*, UInt32),
     release : Proc(IHTMLGenericElement*, UInt32),
@@ -24218,7 +24206,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLGenericElement, lpVtbl : IHTMLGenericElementVtbl* do
+  record IHTMLGenericElement, lpVtbl : IHTMLGenericElementVtable* do
     GUID = LibC::GUID.new(0x3050f4b7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLGenericElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24251,7 +24239,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLGenericElementVtbl,
+  record DispHTMLGenericElementVtable,
     query_interface : Proc(DispHTMLGenericElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLGenericElement*, UInt32),
     release : Proc(DispHTMLGenericElement*, UInt32),
@@ -24262,7 +24250,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLGenericElement, lpVtbl : DispHTMLGenericElementVtbl* do
+  record DispHTMLGenericElement, lpVtbl : DispHTMLGenericElementVtable* do
     GUID = LibC::GUID.new(0x3050f563_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLGenericElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24289,7 +24277,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleSheetRuleAppliedVtbl,
+  record IHTMLStyleSheetRuleAppliedVtable,
     query_interface : Proc(IHTMLStyleSheetRuleApplied*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleSheetRuleApplied*, UInt32),
     release : Proc(IHTMLStyleSheetRuleApplied*, UInt32),
@@ -24302,7 +24290,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleSheetRuleApplied, lpVtbl : IHTMLStyleSheetRuleAppliedVtbl* do
+  record IHTMLStyleSheetRuleApplied, lpVtbl : IHTMLStyleSheetRuleAppliedVtable* do
     GUID = LibC::GUID.new(0x305104c1_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleSheetRuleApplied*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24335,7 +24323,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleSheetRule2Vtbl,
+  record IHTMLStyleSheetRule2Vtable,
     query_interface : Proc(IHTMLStyleSheetRule2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleSheetRule2*, UInt32),
     release : Proc(IHTMLStyleSheetRule2*, UInt32),
@@ -24348,7 +24336,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleSheetRule2, lpVtbl : IHTMLStyleSheetRule2Vtbl* do
+  record IHTMLStyleSheetRule2, lpVtbl : IHTMLStyleSheetRule2Vtable* do
     GUID = LibC::GUID.new(0x305106fd_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleSheetRule2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24381,7 +24369,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleSheetRulesCollection2Vtbl,
+  record IHTMLStyleSheetRulesCollection2Vtable,
     query_interface : Proc(IHTMLStyleSheetRulesCollection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleSheetRulesCollection2*, UInt32),
     release : Proc(IHTMLStyleSheetRulesCollection2*, UInt32),
@@ -24394,7 +24382,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleSheetRulesCollection2, lpVtbl : IHTMLStyleSheetRulesCollection2Vtbl* do
+  record IHTMLStyleSheetRulesCollection2, lpVtbl : IHTMLStyleSheetRulesCollection2Vtable* do
     GUID = LibC::GUID.new(0x305106e8_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleSheetRulesCollection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24427,7 +24415,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLStyleSheetRuleVtbl,
+  record DispHTMLStyleSheetRuleVtable,
     query_interface : Proc(DispHTMLStyleSheetRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLStyleSheetRule*, UInt32),
     release : Proc(DispHTMLStyleSheetRule*, UInt32),
@@ -24438,7 +24426,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLStyleSheetRule, lpVtbl : DispHTMLStyleSheetRuleVtbl* do
+  record DispHTMLStyleSheetRule, lpVtbl : DispHTMLStyleSheetRuleVtable* do
     GUID = LibC::GUID.new(0x3050f50e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLStyleSheetRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24465,7 +24453,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLStyleSheetRulesCollectionVtbl,
+  record DispHTMLStyleSheetRulesCollectionVtable,
     query_interface : Proc(DispHTMLStyleSheetRulesCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLStyleSheetRulesCollection*, UInt32),
     release : Proc(DispHTMLStyleSheetRulesCollection*, UInt32),
@@ -24476,7 +24464,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLStyleSheetRulesCollection, lpVtbl : DispHTMLStyleSheetRulesCollectionVtbl* do
+  record DispHTMLStyleSheetRulesCollection, lpVtbl : DispHTMLStyleSheetRulesCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f52f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLStyleSheetRulesCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24503,7 +24491,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleSheetPageVtbl,
+  record IHTMLStyleSheetPageVtable,
     query_interface : Proc(IHTMLStyleSheetPage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleSheetPage*, UInt32),
     release : Proc(IHTMLStyleSheetPage*, UInt32),
@@ -24516,7 +24504,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleSheetPage, lpVtbl : IHTMLStyleSheetPageVtbl* do
+  record IHTMLStyleSheetPage, lpVtbl : IHTMLStyleSheetPageVtable* do
     GUID = LibC::GUID.new(0x3050f7ee_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleSheetPage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24549,7 +24537,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleSheetPage2Vtbl,
+  record IHTMLStyleSheetPage2Vtable,
     query_interface : Proc(IHTMLStyleSheetPage2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleSheetPage2*, UInt32),
     release : Proc(IHTMLStyleSheetPage2*, UInt32),
@@ -24563,7 +24551,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleSheetPage2, lpVtbl : IHTMLStyleSheetPage2Vtbl* do
+  record IHTMLStyleSheetPage2, lpVtbl : IHTMLStyleSheetPage2Vtable* do
     GUID = LibC::GUID.new(0x305106ed_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleSheetPage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24599,7 +24587,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleSheetPagesCollectionVtbl,
+  record IHTMLStyleSheetPagesCollectionVtable,
     query_interface : Proc(IHTMLStyleSheetPagesCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleSheetPagesCollection*, UInt32),
     release : Proc(IHTMLStyleSheetPagesCollection*, UInt32),
@@ -24612,7 +24600,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleSheetPagesCollection, lpVtbl : IHTMLStyleSheetPagesCollectionVtbl* do
+  record IHTMLStyleSheetPagesCollection, lpVtbl : IHTMLStyleSheetPagesCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f7f0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleSheetPagesCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24645,7 +24633,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLStyleSheetPageVtbl,
+  record DispHTMLStyleSheetPageVtable,
     query_interface : Proc(DispHTMLStyleSheetPage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLStyleSheetPage*, UInt32),
     release : Proc(DispHTMLStyleSheetPage*, UInt32),
@@ -24656,7 +24644,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLStyleSheetPage, lpVtbl : DispHTMLStyleSheetPageVtbl* do
+  record DispHTMLStyleSheetPage, lpVtbl : DispHTMLStyleSheetPageVtable* do
     GUID = LibC::GUID.new(0x3050f540_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLStyleSheetPage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24683,7 +24671,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLStyleSheetPagesCollectionVtbl,
+  record DispHTMLStyleSheetPagesCollectionVtable,
     query_interface : Proc(DispHTMLStyleSheetPagesCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLStyleSheetPagesCollection*, UInt32),
     release : Proc(DispHTMLStyleSheetPagesCollection*, UInt32),
@@ -24694,7 +24682,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLStyleSheetPagesCollection, lpVtbl : DispHTMLStyleSheetPagesCollectionVtbl* do
+  record DispHTMLStyleSheetPagesCollection, lpVtbl : DispHTMLStyleSheetPagesCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f543_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLStyleSheetPagesCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24721,7 +24709,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleSheetsCollectionVtbl,
+  record IHTMLStyleSheetsCollectionVtable,
     query_interface : Proc(IHTMLStyleSheetsCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleSheetsCollection*, UInt32),
     release : Proc(IHTMLStyleSheetsCollection*, UInt32),
@@ -24735,7 +24723,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleSheetsCollection, lpVtbl : IHTMLStyleSheetsCollectionVtbl* do
+  record IHTMLStyleSheetsCollection, lpVtbl : IHTMLStyleSheetsCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f37e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleSheetsCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24771,7 +24759,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleSheet2Vtbl,
+  record IHTMLStyleSheet2Vtable,
     query_interface : Proc(IHTMLStyleSheet2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleSheet2*, UInt32),
     release : Proc(IHTMLStyleSheet2*, UInt32),
@@ -24784,7 +24772,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleSheet2, lpVtbl : IHTMLStyleSheet2Vtbl* do
+  record IHTMLStyleSheet2, lpVtbl : IHTMLStyleSheet2Vtable* do
     GUID = LibC::GUID.new(0x3050f3d1_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleSheet2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24817,7 +24805,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleSheet3Vtbl,
+  record IHTMLStyleSheet3Vtable,
     query_interface : Proc(IHTMLStyleSheet3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleSheet3*, UInt32),
     release : Proc(IHTMLStyleSheet3*, UInt32),
@@ -24832,7 +24820,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleSheet3, lpVtbl : IHTMLStyleSheet3Vtbl* do
+  record IHTMLStyleSheet3, lpVtbl : IHTMLStyleSheet3Vtable* do
     GUID = LibC::GUID.new(0x30510496_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleSheet3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24871,7 +24859,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleSheet4Vtbl,
+  record IHTMLStyleSheet4Vtable,
     query_interface : Proc(IHTMLStyleSheet4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleSheet4*, UInt32),
     release : Proc(IHTMLStyleSheet4*, UInt32),
@@ -24891,7 +24879,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleSheet4, lpVtbl : IHTMLStyleSheet4Vtbl* do
+  record IHTMLStyleSheet4, lpVtbl : IHTMLStyleSheet4Vtable* do
     GUID = LibC::GUID.new(0x305106f4_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleSheet4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24945,7 +24933,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLStyleSheetVtbl,
+  record DispHTMLStyleSheetVtable,
     query_interface : Proc(DispHTMLStyleSheet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLStyleSheet*, UInt32),
     release : Proc(DispHTMLStyleSheet*, UInt32),
@@ -24956,7 +24944,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLStyleSheet, lpVtbl : DispHTMLStyleSheetVtbl* do
+  record DispHTMLStyleSheet, lpVtbl : DispHTMLStyleSheetVtable* do
     GUID = LibC::GUID.new(0x3050f58d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLStyleSheet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24983,7 +24971,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleSheetsCollection2Vtbl,
+  record IHTMLStyleSheetsCollection2Vtable,
     query_interface : Proc(IHTMLStyleSheetsCollection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleSheetsCollection2*, UInt32),
     release : Proc(IHTMLStyleSheetsCollection2*, UInt32),
@@ -24995,7 +24983,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleSheetsCollection2, lpVtbl : IHTMLStyleSheetsCollection2Vtbl* do
+  record IHTMLStyleSheetsCollection2, lpVtbl : IHTMLStyleSheetsCollection2Vtable* do
     GUID = LibC::GUID.new(0x305106e7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleSheetsCollection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25025,7 +25013,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLStyleSheetsCollectionVtbl,
+  record DispHTMLStyleSheetsCollectionVtable,
     query_interface : Proc(DispHTMLStyleSheetsCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLStyleSheetsCollection*, UInt32),
     release : Proc(DispHTMLStyleSheetsCollection*, UInt32),
@@ -25036,7 +25024,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLStyleSheetsCollection, lpVtbl : DispHTMLStyleSheetsCollectionVtbl* do
+  record DispHTMLStyleSheetsCollection, lpVtbl : DispHTMLStyleSheetsCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f547_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLStyleSheetsCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25063,7 +25051,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLLinkElementEvents2Vtbl,
+  record HTMLLinkElementEvents2Vtable,
     query_interface : Proc(HTMLLinkElementEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLLinkElementEvents2*, UInt32),
     release : Proc(HTMLLinkElementEvents2*, UInt32),
@@ -25074,7 +25062,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLLinkElementEvents2, lpVtbl : HTMLLinkElementEvents2Vtbl* do
+  record HTMLLinkElementEvents2, lpVtbl : HTMLLinkElementEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f61d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLLinkElementEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25101,7 +25089,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLLinkElementEventsVtbl,
+  record HTMLLinkElementEventsVtable,
     query_interface : Proc(HTMLLinkElementEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLLinkElementEvents*, UInt32),
     release : Proc(HTMLLinkElementEvents*, UInt32),
@@ -25112,7 +25100,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLLinkElementEvents, lpVtbl : HTMLLinkElementEventsVtbl* do
+  record HTMLLinkElementEvents, lpVtbl : HTMLLinkElementEventsVtable* do
     GUID = LibC::GUID.new(0x3050f3cc_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLLinkElementEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25139,7 +25127,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLLinkElementVtbl,
+  record IHTMLLinkElementVtable,
     query_interface : Proc(IHTMLLinkElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLLinkElement*, UInt32),
     release : Proc(IHTMLLinkElement*, UInt32),
@@ -25170,7 +25158,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLLinkElement, lpVtbl : IHTMLLinkElementVtbl* do
+  record IHTMLLinkElement, lpVtbl : IHTMLLinkElementVtable* do
     GUID = LibC::GUID.new(0x3050f205_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLLinkElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25257,7 +25245,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLLinkElement2Vtbl,
+  record IHTMLLinkElement2Vtable,
     query_interface : Proc(IHTMLLinkElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLLinkElement2*, UInt32),
     release : Proc(IHTMLLinkElement2*, UInt32),
@@ -25270,7 +25258,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLLinkElement2, lpVtbl : IHTMLLinkElement2Vtbl* do
+  record IHTMLLinkElement2, lpVtbl : IHTMLLinkElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f4e5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLLinkElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25303,7 +25291,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLLinkElement3Vtbl,
+  record IHTMLLinkElement3Vtable,
     query_interface : Proc(IHTMLLinkElement3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLLinkElement3*, UInt32),
     release : Proc(IHTMLLinkElement3*, UInt32),
@@ -25318,7 +25306,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLLinkElement3, lpVtbl : IHTMLLinkElement3Vtbl* do
+  record IHTMLLinkElement3, lpVtbl : IHTMLLinkElement3Vtable* do
     GUID = LibC::GUID.new(0x3050f81e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLLinkElement3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25357,7 +25345,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLLinkElement4Vtbl,
+  record IHTMLLinkElement4Vtable,
     query_interface : Proc(IHTMLLinkElement4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLLinkElement4*, UInt32),
     release : Proc(IHTMLLinkElement4*, UInt32),
@@ -25370,7 +25358,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLLinkElement4, lpVtbl : IHTMLLinkElement4Vtbl* do
+  record IHTMLLinkElement4, lpVtbl : IHTMLLinkElement4Vtable* do
     GUID = LibC::GUID.new(0x3051043a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLLinkElement4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25403,7 +25391,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLLinkElement5Vtbl,
+  record IHTMLLinkElement5Vtable,
     query_interface : Proc(IHTMLLinkElement5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLLinkElement5*, UInt32),
     release : Proc(IHTMLLinkElement5*, UInt32),
@@ -25415,7 +25403,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLLinkElement5, lpVtbl : IHTMLLinkElement5Vtbl* do
+  record IHTMLLinkElement5, lpVtbl : IHTMLLinkElement5Vtable* do
     GUID = LibC::GUID.new(0x30510726_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLLinkElement5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25445,7 +25433,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLLinkElementVtbl,
+  record DispHTMLLinkElementVtable,
     query_interface : Proc(DispHTMLLinkElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLLinkElement*, UInt32),
     release : Proc(DispHTMLLinkElement*, UInt32),
@@ -25456,7 +25444,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLLinkElement, lpVtbl : DispHTMLLinkElementVtbl* do
+  record DispHTMLLinkElement, lpVtbl : DispHTMLLinkElementVtable* do
     GUID = LibC::GUID.new(0x3050f524_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLLinkElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25483,7 +25471,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTxtRangeVtbl,
+  record IHTMLTxtRangeVtable,
     query_interface : Proc(IHTMLTxtRange*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTxtRange*, UInt32),
     release : Proc(IHTMLTxtRange*, UInt32),
@@ -25524,7 +25512,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTxtRange, lpVtbl : IHTMLTxtRangeVtbl* do
+  record IHTMLTxtRange, lpVtbl : IHTMLTxtRangeVtable* do
     GUID = LibC::GUID.new(0x3050f220_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTxtRange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25641,7 +25629,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTextRangeMetricsVtbl,
+  record IHTMLTextRangeMetricsVtable,
     query_interface : Proc(IHTMLTextRangeMetrics*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTextRangeMetrics*, UInt32),
     release : Proc(IHTMLTextRangeMetrics*, UInt32),
@@ -25658,7 +25646,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTextRangeMetrics, lpVtbl : IHTMLTextRangeMetricsVtbl* do
+  record IHTMLTextRangeMetrics, lpVtbl : IHTMLTextRangeMetricsVtable* do
     GUID = LibC::GUID.new(0x3050f40b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTextRangeMetrics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25703,7 +25691,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTextRangeMetrics2Vtbl,
+  record IHTMLTextRangeMetrics2Vtable,
     query_interface : Proc(IHTMLTextRangeMetrics2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTextRangeMetrics2*, UInt32),
     release : Proc(IHTMLTextRangeMetrics2*, UInt32),
@@ -25716,7 +25704,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTextRangeMetrics2, lpVtbl : IHTMLTextRangeMetrics2Vtbl* do
+  record IHTMLTextRangeMetrics2, lpVtbl : IHTMLTextRangeMetrics2Vtable* do
     GUID = LibC::GUID.new(0x3050f4a6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTextRangeMetrics2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25749,7 +25737,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTxtRangeCollectionVtbl,
+  record IHTMLTxtRangeCollectionVtable,
     query_interface : Proc(IHTMLTxtRangeCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTxtRangeCollection*, UInt32),
     release : Proc(IHTMLTxtRangeCollection*, UInt32),
@@ -25763,7 +25751,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTxtRangeCollection, lpVtbl : IHTMLTxtRangeCollectionVtbl* do
+  record IHTMLTxtRangeCollection, lpVtbl : IHTMLTxtRangeCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f7ed_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTxtRangeCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25799,7 +25787,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDOMRangeVtbl,
+  record IHTMLDOMRangeVtable,
     query_interface : Proc(IHTMLDOMRange*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDOMRange*, UInt32),
     release : Proc(IHTMLDOMRange*, UInt32),
@@ -25836,7 +25824,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDOMRange, lpVtbl : IHTMLDOMRangeVtbl* do
+  record IHTMLDOMRange, lpVtbl : IHTMLDOMRangeVtable* do
     GUID = LibC::GUID.new(0x305104ae_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDOMRange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25941,7 +25929,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLDOMRangeVtbl,
+  record DispHTMLDOMRangeVtable,
     query_interface : Proc(DispHTMLDOMRange*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLDOMRange*, UInt32),
     release : Proc(DispHTMLDOMRange*, UInt32),
@@ -25952,7 +25940,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLDOMRange, lpVtbl : DispHTMLDOMRangeVtbl* do
+  record DispHTMLDOMRange, lpVtbl : DispHTMLDOMRangeVtable* do
     GUID = LibC::GUID.new(0x3050f5a3_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLDOMRange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25979,7 +25967,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLFormElementEvents2Vtbl,
+  record HTMLFormElementEvents2Vtable,
     query_interface : Proc(HTMLFormElementEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLFormElementEvents2*, UInt32),
     release : Proc(HTMLFormElementEvents2*, UInt32),
@@ -25990,7 +25978,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLFormElementEvents2, lpVtbl : HTMLFormElementEvents2Vtbl* do
+  record HTMLFormElementEvents2, lpVtbl : HTMLFormElementEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f614_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLFormElementEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26017,7 +26005,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLFormElementEventsVtbl,
+  record HTMLFormElementEventsVtable,
     query_interface : Proc(HTMLFormElementEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLFormElementEvents*, UInt32),
     release : Proc(HTMLFormElementEvents*, UInt32),
@@ -26028,7 +26016,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLFormElementEvents, lpVtbl : HTMLFormElementEventsVtbl* do
+  record HTMLFormElementEvents, lpVtbl : HTMLFormElementEventsVtable* do
     GUID = LibC::GUID.new(0x3050f364_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLFormElementEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26055,7 +26043,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFormElementVtbl,
+  record IHTMLFormElementVtable,
     query_interface : Proc(IHTMLFormElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFormElement*, UInt32),
     release : Proc(IHTMLFormElement*, UInt32),
@@ -26090,7 +26078,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFormElement, lpVtbl : IHTMLFormElementVtbl* do
+  record IHTMLFormElement, lpVtbl : IHTMLFormElementVtable* do
     GUID = LibC::GUID.new(0x3050f1f7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFormElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26189,7 +26177,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFormElement2Vtbl,
+  record IHTMLFormElement2Vtable,
     query_interface : Proc(IHTMLFormElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFormElement2*, UInt32),
     release : Proc(IHTMLFormElement2*, UInt32),
@@ -26203,7 +26191,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFormElement2, lpVtbl : IHTMLFormElement2Vtbl* do
+  record IHTMLFormElement2, lpVtbl : IHTMLFormElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f4f6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFormElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26239,7 +26227,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFormElement3Vtbl,
+  record IHTMLFormElement3Vtable,
     query_interface : Proc(IHTMLFormElement3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFormElement3*, UInt32),
     release : Proc(IHTMLFormElement3*, UInt32),
@@ -26251,7 +26239,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFormElement3, lpVtbl : IHTMLFormElement3Vtbl* do
+  record IHTMLFormElement3, lpVtbl : IHTMLFormElement3Vtable* do
     GUID = LibC::GUID.new(0x3050f836_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFormElement3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26281,7 +26269,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLSubmitDataVtbl,
+  record IHTMLSubmitDataVtable,
     query_interface : Proc(IHTMLSubmitData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLSubmitData*, UInt32),
     release : Proc(IHTMLSubmitData*, UInt32),
@@ -26295,7 +26283,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLSubmitData, lpVtbl : IHTMLSubmitDataVtbl* do
+  record IHTMLSubmitData, lpVtbl : IHTMLSubmitDataVtable* do
     GUID = LibC::GUID.new(0x3050f645_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLSubmitData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26331,7 +26319,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFormElement4Vtbl,
+  record IHTMLFormElement4Vtable,
     query_interface : Proc(IHTMLFormElement4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFormElement4*, UInt32),
     release : Proc(IHTMLFormElement4*, UInt32),
@@ -26344,7 +26332,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFormElement4, lpVtbl : IHTMLFormElement4Vtbl* do
+  record IHTMLFormElement4, lpVtbl : IHTMLFormElement4Vtable* do
     GUID = LibC::GUID.new(0x3051042c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFormElement4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26377,7 +26365,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLFormElementVtbl,
+  record DispHTMLFormElementVtable,
     query_interface : Proc(DispHTMLFormElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLFormElement*, UInt32),
     release : Proc(DispHTMLFormElement*, UInt32),
@@ -26388,7 +26376,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLFormElement, lpVtbl : DispHTMLFormElementVtbl* do
+  record DispHTMLFormElement, lpVtbl : DispHTMLFormElementVtable* do
     GUID = LibC::GUID.new(0x3050f510_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLFormElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26415,7 +26403,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLControlElementEvents2Vtbl,
+  record HTMLControlElementEvents2Vtable,
     query_interface : Proc(HTMLControlElementEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLControlElementEvents2*, UInt32),
     release : Proc(HTMLControlElementEvents2*, UInt32),
@@ -26426,7 +26414,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLControlElementEvents2, lpVtbl : HTMLControlElementEvents2Vtbl* do
+  record HTMLControlElementEvents2, lpVtbl : HTMLControlElementEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f612_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLControlElementEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26453,7 +26441,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLControlElementEventsVtbl,
+  record HTMLControlElementEventsVtable,
     query_interface : Proc(HTMLControlElementEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLControlElementEvents*, UInt32),
     release : Proc(HTMLControlElementEvents*, UInt32),
@@ -26464,7 +26452,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLControlElementEvents, lpVtbl : HTMLControlElementEventsVtbl* do
+  record HTMLControlElementEvents, lpVtbl : HTMLControlElementEventsVtable* do
     GUID = LibC::GUID.new(0x3050f4ea_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLControlElementEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26491,7 +26479,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLControlElementVtbl,
+  record IHTMLControlElementVtable,
     query_interface : Proc(IHTMLControlElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLControlElement*, UInt32),
     release : Proc(IHTMLControlElement*, UInt32),
@@ -26520,7 +26508,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLControlElement, lpVtbl : IHTMLControlElementVtbl* do
+  record IHTMLControlElement, lpVtbl : IHTMLControlElementVtable* do
     GUID = LibC::GUID.new(0x3050f4e9_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLControlElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26601,7 +26589,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTextElementVtbl,
+  record IHTMLTextElementVtable,
     query_interface : Proc(IHTMLTextElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTextElement*, UInt32),
     release : Proc(IHTMLTextElement*, UInt32),
@@ -26612,7 +26600,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTextElement, lpVtbl : IHTMLTextElementVtbl* do
+  record IHTMLTextElement, lpVtbl : IHTMLTextElementVtable* do
     GUID = LibC::GUID.new(0x3050f218_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTextElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26639,7 +26627,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLTextElementVtbl,
+  record DispHTMLTextElementVtable,
     query_interface : Proc(DispHTMLTextElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLTextElement*, UInt32),
     release : Proc(DispHTMLTextElement*, UInt32),
@@ -26650,7 +26638,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLTextElement, lpVtbl : DispHTMLTextElementVtbl* do
+  record DispHTMLTextElement, lpVtbl : DispHTMLTextElementVtable* do
     GUID = LibC::GUID.new(0x3050f537_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLTextElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26677,7 +26665,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLTextContainerEvents2Vtbl,
+  record HTMLTextContainerEvents2Vtable,
     query_interface : Proc(HTMLTextContainerEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLTextContainerEvents2*, UInt32),
     release : Proc(HTMLTextContainerEvents2*, UInt32),
@@ -26688,7 +26676,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLTextContainerEvents2, lpVtbl : HTMLTextContainerEvents2Vtbl* do
+  record HTMLTextContainerEvents2, lpVtbl : HTMLTextContainerEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f624_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLTextContainerEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26715,7 +26703,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLTextContainerEventsVtbl,
+  record HTMLTextContainerEventsVtable,
     query_interface : Proc(HTMLTextContainerEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLTextContainerEvents*, UInt32),
     release : Proc(HTMLTextContainerEvents*, UInt32),
@@ -26726,7 +26714,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLTextContainerEvents, lpVtbl : HTMLTextContainerEventsVtbl* do
+  record HTMLTextContainerEvents, lpVtbl : HTMLTextContainerEventsVtable* do
     GUID = LibC::GUID.new(0x1ff6aa72_u32, 0x5842_u16, 0x11cf_u16, StaticArray[0xa7_u8, 0x7_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xc0_u8, 0x9_u8, 0x8d_u8])
     def query_interface(this : HTMLTextContainerEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26753,7 +26741,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTextContainerVtbl,
+  record IHTMLTextContainerVtable,
     query_interface : Proc(IHTMLTextContainer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTextContainer*, UInt32),
     release : Proc(IHTMLTextContainer*, UInt32),
@@ -26773,7 +26761,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTextContainer, lpVtbl : IHTMLTextContainerVtbl* do
+  record IHTMLTextContainer, lpVtbl : IHTMLTextContainerVtable* do
     GUID = LibC::GUID.new(0x3050f230_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTextContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26827,7 +26815,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLControlRangeVtbl,
+  record IHTMLControlRangeVtable,
     query_interface : Proc(IHTMLControlRange*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLControlRange*, UInt32),
     release : Proc(IHTMLControlRange*, UInt32),
@@ -26853,7 +26841,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLControlRange, lpVtbl : IHTMLControlRangeVtbl* do
+  record IHTMLControlRange, lpVtbl : IHTMLControlRangeVtable* do
     GUID = LibC::GUID.new(0x3050f29c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLControlRange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26925,7 +26913,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLControlRange2Vtbl,
+  record IHTMLControlRange2Vtable,
     query_interface : Proc(IHTMLControlRange2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLControlRange2*, UInt32),
     release : Proc(IHTMLControlRange2*, UInt32),
@@ -26937,7 +26925,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLControlRange2, lpVtbl : IHTMLControlRange2Vtbl* do
+  record IHTMLControlRange2, lpVtbl : IHTMLControlRange2Vtable* do
     GUID = LibC::GUID.new(0x3050f65e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLControlRange2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26967,7 +26955,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLImgEvents2Vtbl,
+  record HTMLImgEvents2Vtable,
     query_interface : Proc(HTMLImgEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLImgEvents2*, UInt32),
     release : Proc(HTMLImgEvents2*, UInt32),
@@ -26978,7 +26966,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLImgEvents2, lpVtbl : HTMLImgEvents2Vtbl* do
+  record HTMLImgEvents2, lpVtbl : HTMLImgEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f616_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLImgEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27005,7 +26993,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLImgEventsVtbl,
+  record HTMLImgEventsVtable,
     query_interface : Proc(HTMLImgEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLImgEvents*, UInt32),
     release : Proc(HTMLImgEvents*, UInt32),
@@ -27016,7 +27004,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLImgEvents, lpVtbl : HTMLImgEventsVtbl* do
+  record HTMLImgEvents, lpVtbl : HTMLImgEventsVtable* do
     GUID = LibC::GUID.new(0x3050f25b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLImgEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27043,7 +27031,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLImgElementVtbl,
+  record IHTMLImgElementVtable,
     query_interface : Proc(IHTMLImgElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLImgElement*, UInt32),
     release : Proc(IHTMLImgElement*, UInt32),
@@ -27102,7 +27090,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLImgElement, lpVtbl : IHTMLImgElementVtbl* do
+  record IHTMLImgElement, lpVtbl : IHTMLImgElementVtable* do
     GUID = LibC::GUID.new(0x3050f240_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLImgElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27273,7 +27261,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLImgElement2Vtbl,
+  record IHTMLImgElement2Vtable,
     query_interface : Proc(IHTMLImgElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLImgElement2*, UInt32),
     release : Proc(IHTMLImgElement2*, UInt32),
@@ -27286,7 +27274,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLImgElement2, lpVtbl : IHTMLImgElement2Vtbl* do
+  record IHTMLImgElement2, lpVtbl : IHTMLImgElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f826_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLImgElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27319,7 +27307,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLImgElement3Vtbl,
+  record IHTMLImgElement3Vtable,
     query_interface : Proc(IHTMLImgElement3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLImgElement3*, UInt32),
     release : Proc(IHTMLImgElement3*, UInt32),
@@ -27338,7 +27326,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLImgElement3, lpVtbl : IHTMLImgElement3Vtbl* do
+  record IHTMLImgElement3, lpVtbl : IHTMLImgElement3Vtable* do
     GUID = LibC::GUID.new(0x30510434_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLImgElement3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27389,7 +27377,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLImgElement4Vtbl,
+  record IHTMLImgElement4Vtable,
     query_interface : Proc(IHTMLImgElement4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLImgElement4*, UInt32),
     release : Proc(IHTMLImgElement4*, UInt32),
@@ -27402,7 +27390,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLImgElement4, lpVtbl : IHTMLImgElement4Vtbl* do
+  record IHTMLImgElement4, lpVtbl : IHTMLImgElement4Vtable* do
     GUID = LibC::GUID.new(0x305107f6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLImgElement4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27435,7 +27423,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLMSImgElementVtbl,
+  record IHTMLMSImgElementVtable,
     query_interface : Proc(IHTMLMSImgElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLMSImgElement*, UInt32),
     release : Proc(IHTMLMSImgElement*, UInt32),
@@ -27450,7 +27438,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLMSImgElement, lpVtbl : IHTMLMSImgElementVtbl* do
+  record IHTMLMSImgElement, lpVtbl : IHTMLMSImgElementVtable* do
     GUID = LibC::GUID.new(0x30510793_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLMSImgElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27489,7 +27477,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLImageElementFactoryVtbl,
+  record IHTMLImageElementFactoryVtable,
     query_interface : Proc(IHTMLImageElementFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLImageElementFactory*, UInt32),
     release : Proc(IHTMLImageElementFactory*, UInt32),
@@ -27501,7 +27489,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLImageElementFactory, lpVtbl : IHTMLImageElementFactoryVtbl* do
+  record IHTMLImageElementFactory, lpVtbl : IHTMLImageElementFactoryVtable* do
     GUID = LibC::GUID.new(0x3050f38e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLImageElementFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27531,7 +27519,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLImgVtbl,
+  record DispHTMLImgVtable,
     query_interface : Proc(DispHTMLImg*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLImg*, UInt32),
     release : Proc(DispHTMLImg*, UInt32),
@@ -27542,7 +27530,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLImg, lpVtbl : DispHTMLImgVtbl* do
+  record DispHTMLImg, lpVtbl : DispHTMLImgVtable* do
     GUID = LibC::GUID.new(0x3050f51c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLImg*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27569,7 +27557,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLBodyElementVtbl,
+  record IHTMLBodyElementVtable,
     query_interface : Proc(IHTMLBodyElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLBodyElement*, UInt32),
     release : Proc(IHTMLBodyElement*, UInt32),
@@ -27615,7 +27603,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLBodyElement, lpVtbl : IHTMLBodyElementVtbl* do
+  record IHTMLBodyElement, lpVtbl : IHTMLBodyElementVtable* do
     GUID = LibC::GUID.new(0x3050f1d8_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLBodyElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27747,7 +27735,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLBodyElement2Vtbl,
+  record IHTMLBodyElement2Vtable,
     query_interface : Proc(IHTMLBodyElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLBodyElement2*, UInt32),
     release : Proc(IHTMLBodyElement2*, UInt32),
@@ -27762,7 +27750,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLBodyElement2, lpVtbl : IHTMLBodyElement2Vtbl* do
+  record IHTMLBodyElement2, lpVtbl : IHTMLBodyElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f5c5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLBodyElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27801,7 +27789,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLBodyElement3Vtbl,
+  record IHTMLBodyElement3Vtable,
     query_interface : Proc(IHTMLBodyElement3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLBodyElement3*, UInt32),
     release : Proc(IHTMLBodyElement3*, UInt32),
@@ -27820,7 +27808,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLBodyElement3, lpVtbl : IHTMLBodyElement3Vtbl* do
+  record IHTMLBodyElement3, lpVtbl : IHTMLBodyElement3Vtable* do
     GUID = LibC::GUID.new(0x30510422_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLBodyElement3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27871,7 +27859,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLBodyElement4Vtbl,
+  record IHTMLBodyElement4Vtable,
     query_interface : Proc(IHTMLBodyElement4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLBodyElement4*, UInt32),
     release : Proc(IHTMLBodyElement4*, UInt32),
@@ -27886,7 +27874,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLBodyElement4, lpVtbl : IHTMLBodyElement4Vtbl* do
+  record IHTMLBodyElement4, lpVtbl : IHTMLBodyElement4Vtable* do
     GUID = LibC::GUID.new(0x30510795_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLBodyElement4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27925,7 +27913,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLBodyElement5Vtbl,
+  record IHTMLBodyElement5Vtable,
     query_interface : Proc(IHTMLBodyElement5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLBodyElement5*, UInt32),
     release : Proc(IHTMLBodyElement5*, UInt32),
@@ -27938,7 +27926,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLBodyElement5, lpVtbl : IHTMLBodyElement5Vtbl* do
+  record IHTMLBodyElement5, lpVtbl : IHTMLBodyElement5Vtable* do
     GUID = LibC::GUID.new(0x30510822_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLBodyElement5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27971,7 +27959,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLBodyVtbl,
+  record DispHTMLBodyVtable,
     query_interface : Proc(DispHTMLBody*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLBody*, UInt32),
     release : Proc(DispHTMLBody*, UInt32),
@@ -27982,7 +27970,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLBody, lpVtbl : DispHTMLBodyVtbl* do
+  record DispHTMLBody, lpVtbl : DispHTMLBodyVtable* do
     GUID = LibC::GUID.new(0x3050f507_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLBody*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28009,7 +27997,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFontElementVtbl,
+  record IHTMLFontElementVtable,
     query_interface : Proc(IHTMLFontElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFontElement*, UInt32),
     release : Proc(IHTMLFontElement*, UInt32),
@@ -28026,7 +28014,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFontElement, lpVtbl : IHTMLFontElementVtbl* do
+  record IHTMLFontElement, lpVtbl : IHTMLFontElementVtable* do
     GUID = LibC::GUID.new(0x3050f1d9_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFontElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28071,7 +28059,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLFontElementVtbl,
+  record DispHTMLFontElementVtable,
     query_interface : Proc(DispHTMLFontElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLFontElement*, UInt32),
     release : Proc(DispHTMLFontElement*, UInt32),
@@ -28082,7 +28070,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLFontElement, lpVtbl : DispHTMLFontElementVtbl* do
+  record DispHTMLFontElement, lpVtbl : DispHTMLFontElementVtable* do
     GUID = LibC::GUID.new(0x3050f512_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLFontElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28109,7 +28097,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLAnchorEvents2Vtbl,
+  record HTMLAnchorEvents2Vtable,
     query_interface : Proc(HTMLAnchorEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLAnchorEvents2*, UInt32),
     release : Proc(HTMLAnchorEvents2*, UInt32),
@@ -28120,7 +28108,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLAnchorEvents2, lpVtbl : HTMLAnchorEvents2Vtbl* do
+  record HTMLAnchorEvents2, lpVtbl : HTMLAnchorEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f610_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLAnchorEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28147,7 +28135,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLAnchorEventsVtbl,
+  record HTMLAnchorEventsVtable,
     query_interface : Proc(HTMLAnchorEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLAnchorEvents*, UInt32),
     release : Proc(HTMLAnchorEvents*, UInt32),
@@ -28158,7 +28146,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLAnchorEvents, lpVtbl : HTMLAnchorEventsVtbl* do
+  record HTMLAnchorEvents, lpVtbl : HTMLAnchorEventsVtable* do
     GUID = LibC::GUID.new(0x3050f29d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLAnchorEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28185,7 +28173,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLAnchorElementVtbl,
+  record IHTMLAnchorElementVtable,
     query_interface : Proc(IHTMLAnchorElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLAnchorElement*, UInt32),
     release : Proc(IHTMLAnchorElement*, UInt32),
@@ -28237,7 +28225,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLAnchorElement, lpVtbl : IHTMLAnchorElementVtbl* do
+  record IHTMLAnchorElement, lpVtbl : IHTMLAnchorElementVtable* do
     GUID = LibC::GUID.new(0x3050f1da_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLAnchorElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28387,7 +28375,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLAnchorElement2Vtbl,
+  record IHTMLAnchorElement2Vtable,
     query_interface : Proc(IHTMLAnchorElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLAnchorElement2*, UInt32),
     release : Proc(IHTMLAnchorElement2*, UInt32),
@@ -28408,7 +28396,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLAnchorElement2, lpVtbl : IHTMLAnchorElement2Vtbl* do
+  record IHTMLAnchorElement2, lpVtbl : IHTMLAnchorElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f825_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLAnchorElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28465,7 +28453,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLAnchorElement3Vtbl,
+  record IHTMLAnchorElement3Vtable,
     query_interface : Proc(IHTMLAnchorElement3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLAnchorElement3*, UInt32),
     release : Proc(IHTMLAnchorElement3*, UInt32),
@@ -28482,7 +28470,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLAnchorElement3, lpVtbl : IHTMLAnchorElement3Vtbl* do
+  record IHTMLAnchorElement3, lpVtbl : IHTMLAnchorElement3Vtable* do
     GUID = LibC::GUID.new(0x3051041d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLAnchorElement3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28527,7 +28515,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLAnchorElementVtbl,
+  record DispHTMLAnchorElementVtable,
     query_interface : Proc(DispHTMLAnchorElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLAnchorElement*, UInt32),
     release : Proc(DispHTMLAnchorElement*, UInt32),
@@ -28538,7 +28526,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLAnchorElement, lpVtbl : DispHTMLAnchorElementVtbl* do
+  record DispHTMLAnchorElement, lpVtbl : DispHTMLAnchorElementVtable* do
     GUID = LibC::GUID.new(0x3050f502_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLAnchorElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28565,7 +28553,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLLabelEvents2Vtbl,
+  record HTMLLabelEvents2Vtable,
     query_interface : Proc(HTMLLabelEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLLabelEvents2*, UInt32),
     release : Proc(HTMLLabelEvents2*, UInt32),
@@ -28576,7 +28564,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLLabelEvents2, lpVtbl : HTMLLabelEvents2Vtbl* do
+  record HTMLLabelEvents2, lpVtbl : HTMLLabelEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f61c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLLabelEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28603,7 +28591,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLLabelEventsVtbl,
+  record HTMLLabelEventsVtable,
     query_interface : Proc(HTMLLabelEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLLabelEvents*, UInt32),
     release : Proc(HTMLLabelEvents*, UInt32),
@@ -28614,7 +28602,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLLabelEvents, lpVtbl : HTMLLabelEventsVtbl* do
+  record HTMLLabelEvents, lpVtbl : HTMLLabelEventsVtable* do
     GUID = LibC::GUID.new(0x3050f329_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLLabelEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28641,7 +28629,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLLabelElementVtbl,
+  record IHTMLLabelElementVtable,
     query_interface : Proc(IHTMLLabelElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLLabelElement*, UInt32),
     release : Proc(IHTMLLabelElement*, UInt32),
@@ -28656,7 +28644,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLLabelElement, lpVtbl : IHTMLLabelElementVtbl* do
+  record IHTMLLabelElement, lpVtbl : IHTMLLabelElementVtable* do
     GUID = LibC::GUID.new(0x3050f32a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLLabelElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28695,7 +28683,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLLabelElement2Vtbl,
+  record IHTMLLabelElement2Vtable,
     query_interface : Proc(IHTMLLabelElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLLabelElement2*, UInt32),
     release : Proc(IHTMLLabelElement2*, UInt32),
@@ -28707,7 +28695,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLLabelElement2, lpVtbl : IHTMLLabelElement2Vtbl* do
+  record IHTMLLabelElement2, lpVtbl : IHTMLLabelElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f832_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLLabelElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28737,7 +28725,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLLabelElementVtbl,
+  record DispHTMLLabelElementVtable,
     query_interface : Proc(DispHTMLLabelElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLLabelElement*, UInt32),
     release : Proc(DispHTMLLabelElement*, UInt32),
@@ -28748,7 +28736,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLLabelElement, lpVtbl : DispHTMLLabelElementVtbl* do
+  record DispHTMLLabelElement, lpVtbl : DispHTMLLabelElementVtable* do
     GUID = LibC::GUID.new(0x3050f522_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLLabelElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28775,7 +28763,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLListElementVtbl,
+  record IHTMLListElementVtable,
     query_interface : Proc(IHTMLListElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLListElement*, UInt32),
     release : Proc(IHTMLListElement*, UInt32),
@@ -28786,7 +28774,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLListElement, lpVtbl : IHTMLListElementVtbl* do
+  record IHTMLListElement, lpVtbl : IHTMLListElementVtable* do
     GUID = LibC::GUID.new(0x3050f20e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLListElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28813,7 +28801,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLListElement2Vtbl,
+  record IHTMLListElement2Vtable,
     query_interface : Proc(IHTMLListElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLListElement2*, UInt32),
     release : Proc(IHTMLListElement2*, UInt32),
@@ -28826,7 +28814,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLListElement2, lpVtbl : IHTMLListElement2Vtbl* do
+  record IHTMLListElement2, lpVtbl : IHTMLListElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f822_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLListElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28859,7 +28847,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLListElementVtbl,
+  record DispHTMLListElementVtable,
     query_interface : Proc(DispHTMLListElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLListElement*, UInt32),
     release : Proc(DispHTMLListElement*, UInt32),
@@ -28870,7 +28858,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLListElement, lpVtbl : DispHTMLListElementVtbl* do
+  record DispHTMLListElement, lpVtbl : DispHTMLListElementVtable* do
     GUID = LibC::GUID.new(0x3050f525_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLListElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28897,7 +28885,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLUListElementVtbl,
+  record IHTMLUListElementVtable,
     query_interface : Proc(IHTMLUListElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLUListElement*, UInt32),
     release : Proc(IHTMLUListElement*, UInt32),
@@ -28912,7 +28900,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLUListElement, lpVtbl : IHTMLUListElementVtbl* do
+  record IHTMLUListElement, lpVtbl : IHTMLUListElementVtable* do
     GUID = LibC::GUID.new(0x3050f1dd_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLUListElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28951,7 +28939,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLUListElementVtbl,
+  record DispHTMLUListElementVtable,
     query_interface : Proc(DispHTMLUListElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLUListElement*, UInt32),
     release : Proc(DispHTMLUListElement*, UInt32),
@@ -28962,7 +28950,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLUListElement, lpVtbl : DispHTMLUListElementVtbl* do
+  record DispHTMLUListElement, lpVtbl : DispHTMLUListElementVtable* do
     GUID = LibC::GUID.new(0x3050f538_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLUListElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28989,7 +28977,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLOListElementVtbl,
+  record IHTMLOListElementVtable,
     query_interface : Proc(IHTMLOListElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLOListElement*, UInt32),
     release : Proc(IHTMLOListElement*, UInt32),
@@ -29006,7 +28994,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLOListElement, lpVtbl : IHTMLOListElementVtbl* do
+  record IHTMLOListElement, lpVtbl : IHTMLOListElementVtable* do
     GUID = LibC::GUID.new(0x3050f1de_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLOListElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29051,7 +29039,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLOListElementVtbl,
+  record DispHTMLOListElementVtable,
     query_interface : Proc(DispHTMLOListElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLOListElement*, UInt32),
     release : Proc(DispHTMLOListElement*, UInt32),
@@ -29062,7 +29050,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLOListElement, lpVtbl : DispHTMLOListElementVtbl* do
+  record DispHTMLOListElement, lpVtbl : DispHTMLOListElementVtable* do
     GUID = LibC::GUID.new(0x3050f52a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLOListElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29089,7 +29077,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLLIElementVtbl,
+  record IHTMLLIElementVtable,
     query_interface : Proc(IHTMLLIElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLLIElement*, UInt32),
     release : Proc(IHTMLLIElement*, UInt32),
@@ -29104,7 +29092,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLLIElement, lpVtbl : IHTMLLIElementVtbl* do
+  record IHTMLLIElement, lpVtbl : IHTMLLIElementVtable* do
     GUID = LibC::GUID.new(0x3050f1e0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLLIElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29143,7 +29131,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLLIElementVtbl,
+  record DispHTMLLIElementVtable,
     query_interface : Proc(DispHTMLLIElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLLIElement*, UInt32),
     release : Proc(DispHTMLLIElement*, UInt32),
@@ -29154,7 +29142,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLLIElement, lpVtbl : DispHTMLLIElementVtbl* do
+  record DispHTMLLIElement, lpVtbl : DispHTMLLIElementVtable* do
     GUID = LibC::GUID.new(0x3050f523_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLLIElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29181,7 +29169,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLBlockElementVtbl,
+  record IHTMLBlockElementVtable,
     query_interface : Proc(IHTMLBlockElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLBlockElement*, UInt32),
     release : Proc(IHTMLBlockElement*, UInt32),
@@ -29194,7 +29182,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLBlockElement, lpVtbl : IHTMLBlockElementVtbl* do
+  record IHTMLBlockElement, lpVtbl : IHTMLBlockElementVtable* do
     GUID = LibC::GUID.new(0x3050f208_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLBlockElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29227,7 +29215,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLBlockElement2Vtbl,
+  record IHTMLBlockElement2Vtable,
     query_interface : Proc(IHTMLBlockElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLBlockElement2*, UInt32),
     release : Proc(IHTMLBlockElement2*, UInt32),
@@ -29242,7 +29230,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLBlockElement2, lpVtbl : IHTMLBlockElement2Vtbl* do
+  record IHTMLBlockElement2, lpVtbl : IHTMLBlockElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f823_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLBlockElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29281,7 +29269,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLBlockElement3Vtbl,
+  record IHTMLBlockElement3Vtable,
     query_interface : Proc(IHTMLBlockElement3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLBlockElement3*, UInt32),
     release : Proc(IHTMLBlockElement3*, UInt32),
@@ -29294,7 +29282,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLBlockElement3, lpVtbl : IHTMLBlockElement3Vtbl* do
+  record IHTMLBlockElement3, lpVtbl : IHTMLBlockElement3Vtable* do
     GUID = LibC::GUID.new(0x30510494_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLBlockElement3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29327,7 +29315,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLBlockElementVtbl,
+  record DispHTMLBlockElementVtable,
     query_interface : Proc(DispHTMLBlockElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLBlockElement*, UInt32),
     release : Proc(DispHTMLBlockElement*, UInt32),
@@ -29338,7 +29326,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLBlockElement, lpVtbl : DispHTMLBlockElementVtbl* do
+  record DispHTMLBlockElement, lpVtbl : DispHTMLBlockElementVtable* do
     GUID = LibC::GUID.new(0x3050f506_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLBlockElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29365,7 +29353,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDivElementVtbl,
+  record IHTMLDivElementVtable,
     query_interface : Proc(IHTMLDivElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDivElement*, UInt32),
     release : Proc(IHTMLDivElement*, UInt32),
@@ -29380,7 +29368,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDivElement, lpVtbl : IHTMLDivElementVtbl* do
+  record IHTMLDivElement, lpVtbl : IHTMLDivElementVtable* do
     GUID = LibC::GUID.new(0x3050f200_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDivElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29419,7 +29407,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLDivElementVtbl,
+  record DispHTMLDivElementVtable,
     query_interface : Proc(DispHTMLDivElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLDivElement*, UInt32),
     release : Proc(DispHTMLDivElement*, UInt32),
@@ -29430,7 +29418,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLDivElement, lpVtbl : DispHTMLDivElementVtbl* do
+  record DispHTMLDivElement, lpVtbl : DispHTMLDivElementVtable* do
     GUID = LibC::GUID.new(0x3050f50c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLDivElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29457,7 +29445,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDDElementVtbl,
+  record IHTMLDDElementVtable,
     query_interface : Proc(IHTMLDDElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDDElement*, UInt32),
     release : Proc(IHTMLDDElement*, UInt32),
@@ -29470,7 +29458,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDDElement, lpVtbl : IHTMLDDElementVtbl* do
+  record IHTMLDDElement, lpVtbl : IHTMLDDElementVtable* do
     GUID = LibC::GUID.new(0x3050f1f2_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDDElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29503,7 +29491,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLDDElementVtbl,
+  record DispHTMLDDElementVtable,
     query_interface : Proc(DispHTMLDDElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLDDElement*, UInt32),
     release : Proc(DispHTMLDDElement*, UInt32),
@@ -29514,7 +29502,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLDDElement, lpVtbl : DispHTMLDDElementVtbl* do
+  record DispHTMLDDElement, lpVtbl : DispHTMLDDElementVtable* do
     GUID = LibC::GUID.new(0x3050f50b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLDDElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29541,7 +29529,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDTElementVtbl,
+  record IHTMLDTElementVtable,
     query_interface : Proc(IHTMLDTElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDTElement*, UInt32),
     release : Proc(IHTMLDTElement*, UInt32),
@@ -29554,7 +29542,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDTElement, lpVtbl : IHTMLDTElementVtbl* do
+  record IHTMLDTElement, lpVtbl : IHTMLDTElementVtable* do
     GUID = LibC::GUID.new(0x3050f1f3_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDTElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29587,7 +29575,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLDTElementVtbl,
+  record DispHTMLDTElementVtable,
     query_interface : Proc(DispHTMLDTElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLDTElement*, UInt32),
     release : Proc(DispHTMLDTElement*, UInt32),
@@ -29598,7 +29586,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLDTElement, lpVtbl : DispHTMLDTElementVtbl* do
+  record DispHTMLDTElement, lpVtbl : DispHTMLDTElementVtable* do
     GUID = LibC::GUID.new(0x3050f50d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLDTElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29625,7 +29613,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLBRElementVtbl,
+  record IHTMLBRElementVtable,
     query_interface : Proc(IHTMLBRElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLBRElement*, UInt32),
     release : Proc(IHTMLBRElement*, UInt32),
@@ -29638,7 +29626,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLBRElement, lpVtbl : IHTMLBRElementVtbl* do
+  record IHTMLBRElement, lpVtbl : IHTMLBRElementVtable* do
     GUID = LibC::GUID.new(0x3050f1f0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLBRElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29671,7 +29659,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLBRElementVtbl,
+  record DispHTMLBRElementVtable,
     query_interface : Proc(DispHTMLBRElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLBRElement*, UInt32),
     release : Proc(DispHTMLBRElement*, UInt32),
@@ -29682,7 +29670,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLBRElement, lpVtbl : DispHTMLBRElementVtbl* do
+  record DispHTMLBRElement, lpVtbl : DispHTMLBRElementVtable* do
     GUID = LibC::GUID.new(0x3050f53a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLBRElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29709,7 +29697,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDListElementVtbl,
+  record IHTMLDListElementVtable,
     query_interface : Proc(IHTMLDListElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDListElement*, UInt32),
     release : Proc(IHTMLDListElement*, UInt32),
@@ -29722,7 +29710,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDListElement, lpVtbl : IHTMLDListElementVtbl* do
+  record IHTMLDListElement, lpVtbl : IHTMLDListElementVtable* do
     GUID = LibC::GUID.new(0x3050f1f1_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDListElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29755,7 +29743,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLDListElementVtbl,
+  record DispHTMLDListElementVtable,
     query_interface : Proc(DispHTMLDListElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLDListElement*, UInt32),
     release : Proc(DispHTMLDListElement*, UInt32),
@@ -29766,7 +29754,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLDListElement, lpVtbl : DispHTMLDListElementVtbl* do
+  record DispHTMLDListElement, lpVtbl : DispHTMLDListElementVtable* do
     GUID = LibC::GUID.new(0x3050f53b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLDListElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29793,7 +29781,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLHRElementVtbl,
+  record IHTMLHRElementVtable,
     query_interface : Proc(IHTMLHRElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLHRElement*, UInt32),
     release : Proc(IHTMLHRElement*, UInt32),
@@ -29814,7 +29802,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLHRElement, lpVtbl : IHTMLHRElementVtbl* do
+  record IHTMLHRElement, lpVtbl : IHTMLHRElementVtable* do
     GUID = LibC::GUID.new(0x3050f1f4_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLHRElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29871,7 +29859,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLHRElementVtbl,
+  record DispHTMLHRElementVtable,
     query_interface : Proc(DispHTMLHRElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLHRElement*, UInt32),
     release : Proc(DispHTMLHRElement*, UInt32),
@@ -29882,7 +29870,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLHRElement, lpVtbl : DispHTMLHRElementVtbl* do
+  record DispHTMLHRElement, lpVtbl : DispHTMLHRElementVtable* do
     GUID = LibC::GUID.new(0x3050f53d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLHRElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29909,7 +29897,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLParaElementVtbl,
+  record IHTMLParaElementVtable,
     query_interface : Proc(IHTMLParaElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLParaElement*, UInt32),
     release : Proc(IHTMLParaElement*, UInt32),
@@ -29922,7 +29910,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLParaElement, lpVtbl : IHTMLParaElementVtbl* do
+  record IHTMLParaElement, lpVtbl : IHTMLParaElementVtable* do
     GUID = LibC::GUID.new(0x3050f1f5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLParaElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29955,7 +29943,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLParaElementVtbl,
+  record DispHTMLParaElementVtable,
     query_interface : Proc(DispHTMLParaElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLParaElement*, UInt32),
     release : Proc(DispHTMLParaElement*, UInt32),
@@ -29966,7 +29954,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLParaElement, lpVtbl : DispHTMLParaElementVtbl* do
+  record DispHTMLParaElement, lpVtbl : DispHTMLParaElementVtable* do
     GUID = LibC::GUID.new(0x3050f52c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLParaElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29993,7 +29981,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLElementCollection2Vtbl,
+  record IHTMLElementCollection2Vtable,
     query_interface : Proc(IHTMLElementCollection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLElementCollection2*, UInt32),
     release : Proc(IHTMLElementCollection2*, UInt32),
@@ -30005,7 +29993,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLElementCollection2, lpVtbl : IHTMLElementCollection2Vtbl* do
+  record IHTMLElementCollection2, lpVtbl : IHTMLElementCollection2Vtable* do
     GUID = LibC::GUID.new(0x3050f5ee_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLElementCollection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30035,7 +30023,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLElementCollection3Vtbl,
+  record IHTMLElementCollection3Vtable,
     query_interface : Proc(IHTMLElementCollection3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLElementCollection3*, UInt32),
     release : Proc(IHTMLElementCollection3*, UInt32),
@@ -30047,7 +30035,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLElementCollection3, lpVtbl : IHTMLElementCollection3Vtbl* do
+  record IHTMLElementCollection3, lpVtbl : IHTMLElementCollection3Vtable* do
     GUID = LibC::GUID.new(0x3050f835_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLElementCollection3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30077,7 +30065,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLElementCollection4Vtbl,
+  record IHTMLElementCollection4Vtable,
     query_interface : Proc(IHTMLElementCollection4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLElementCollection4*, UInt32),
     release : Proc(IHTMLElementCollection4*, UInt32),
@@ -30091,7 +30079,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLElementCollection4, lpVtbl : IHTMLElementCollection4Vtbl* do
+  record IHTMLElementCollection4, lpVtbl : IHTMLElementCollection4Vtable* do
     GUID = LibC::GUID.new(0x30510425_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLElementCollection4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30127,7 +30115,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLElementCollectionVtbl,
+  record DispHTMLElementCollectionVtable,
     query_interface : Proc(DispHTMLElementCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLElementCollection*, UInt32),
     release : Proc(DispHTMLElementCollection*, UInt32),
@@ -30138,7 +30126,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLElementCollection, lpVtbl : DispHTMLElementCollectionVtbl* do
+  record DispHTMLElementCollection, lpVtbl : DispHTMLElementCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f56b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLElementCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30165,7 +30153,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLHeaderElementVtbl,
+  record IHTMLHeaderElementVtable,
     query_interface : Proc(IHTMLHeaderElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLHeaderElement*, UInt32),
     release : Proc(IHTMLHeaderElement*, UInt32),
@@ -30178,7 +30166,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLHeaderElement, lpVtbl : IHTMLHeaderElementVtbl* do
+  record IHTMLHeaderElement, lpVtbl : IHTMLHeaderElementVtable* do
     GUID = LibC::GUID.new(0x3050f1f6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLHeaderElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30211,7 +30199,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLHeaderElementVtbl,
+  record DispHTMLHeaderElementVtable,
     query_interface : Proc(DispHTMLHeaderElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLHeaderElement*, UInt32),
     release : Proc(DispHTMLHeaderElement*, UInt32),
@@ -30222,7 +30210,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLHeaderElement, lpVtbl : DispHTMLHeaderElementVtbl* do
+  record DispHTMLHeaderElement, lpVtbl : DispHTMLHeaderElementVtable* do
     GUID = LibC::GUID.new(0x3050f515_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLHeaderElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30249,7 +30237,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLSelectElementEvents2Vtbl,
+  record HTMLSelectElementEvents2Vtable,
     query_interface : Proc(HTMLSelectElementEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLSelectElementEvents2*, UInt32),
     release : Proc(HTMLSelectElementEvents2*, UInt32),
@@ -30260,7 +30248,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLSelectElementEvents2, lpVtbl : HTMLSelectElementEvents2Vtbl* do
+  record HTMLSelectElementEvents2, lpVtbl : HTMLSelectElementEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f622_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLSelectElementEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30287,7 +30275,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLSelectElementEventsVtbl,
+  record HTMLSelectElementEventsVtable,
     query_interface : Proc(HTMLSelectElementEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLSelectElementEvents*, UInt32),
     release : Proc(HTMLSelectElementEvents*, UInt32),
@@ -30298,7 +30286,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLSelectElementEvents, lpVtbl : HTMLSelectElementEventsVtbl* do
+  record HTMLSelectElementEvents, lpVtbl : HTMLSelectElementEventsVtable* do
     GUID = LibC::GUID.new(0x3050f302_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLSelectElementEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30325,7 +30313,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLOptionElementVtbl,
+  record IHTMLOptionElementVtable,
     query_interface : Proc(IHTMLOptionElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLOptionElement*, UInt32),
     release : Proc(IHTMLOptionElement*, UInt32),
@@ -30347,7 +30335,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLOptionElement, lpVtbl : IHTMLOptionElementVtbl* do
+  record IHTMLOptionElement, lpVtbl : IHTMLOptionElementVtable* do
     GUID = LibC::GUID.new(0x3050f211_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLOptionElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30407,7 +30395,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLSelectElementExVtbl,
+  record IHTMLSelectElementExVtable,
     query_interface : Proc(IHTMLSelectElementEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLSelectElementEx*, UInt32),
     release : Proc(IHTMLSelectElementEx*, UInt32),
@@ -30418,7 +30406,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLSelectElementEx, lpVtbl : IHTMLSelectElementExVtbl* do
+  record IHTMLSelectElementEx, lpVtbl : IHTMLSelectElementExVtable* do
     GUID = LibC::GUID.new(0x3050f2d1_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLSelectElementEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30445,7 +30433,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLSelectElementVtbl,
+  record IHTMLSelectElementVtable,
     query_interface : Proc(IHTMLSelectElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLSelectElement*, UInt32),
     release : Proc(IHTMLSelectElement*, UInt32),
@@ -30480,7 +30468,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLSelectElement, lpVtbl : IHTMLSelectElementVtbl* do
+  record IHTMLSelectElement, lpVtbl : IHTMLSelectElementVtable* do
     GUID = LibC::GUID.new(0x3050f244_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLSelectElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30579,7 +30567,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLSelectElement2Vtbl,
+  record IHTMLSelectElement2Vtable,
     query_interface : Proc(IHTMLSelectElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLSelectElement2*, UInt32),
     release : Proc(IHTMLSelectElement2*, UInt32),
@@ -30591,7 +30579,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLSelectElement2, lpVtbl : IHTMLSelectElement2Vtbl* do
+  record IHTMLSelectElement2, lpVtbl : IHTMLSelectElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f5ed_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLSelectElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30621,7 +30609,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLSelectElement4Vtbl,
+  record IHTMLSelectElement4Vtable,
     query_interface : Proc(IHTMLSelectElement4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLSelectElement4*, UInt32),
     release : Proc(IHTMLSelectElement4*, UInt32),
@@ -30633,7 +30621,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLSelectElement4, lpVtbl : IHTMLSelectElement4Vtbl* do
+  record IHTMLSelectElement4, lpVtbl : IHTMLSelectElement4Vtable* do
     GUID = LibC::GUID.new(0x3050f838_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLSelectElement4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30663,7 +30651,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLSelectElement5Vtbl,
+  record IHTMLSelectElement5Vtable,
     query_interface : Proc(IHTMLSelectElement5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLSelectElement5*, UInt32),
     release : Proc(IHTMLSelectElement5*, UInt32),
@@ -30675,7 +30663,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLSelectElement5, lpVtbl : IHTMLSelectElement5Vtbl* do
+  record IHTMLSelectElement5, lpVtbl : IHTMLSelectElement5Vtable* do
     GUID = LibC::GUID.new(0x3051049d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLSelectElement5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30705,7 +30693,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLSelectElement6Vtbl,
+  record IHTMLSelectElement6Vtable,
     query_interface : Proc(IHTMLSelectElement6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLSelectElement6*, UInt32),
     release : Proc(IHTMLSelectElement6*, UInt32),
@@ -30719,7 +30707,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLSelectElement6, lpVtbl : IHTMLSelectElement6Vtbl* do
+  record IHTMLSelectElement6, lpVtbl : IHTMLSelectElement6Vtable* do
     GUID = LibC::GUID.new(0x30510760_u32, 0x98b6_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLSelectElement6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30755,7 +30743,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLSelectElementVtbl,
+  record DispHTMLSelectElementVtable,
     query_interface : Proc(DispHTMLSelectElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLSelectElement*, UInt32),
     release : Proc(DispHTMLSelectElement*, UInt32),
@@ -30766,7 +30754,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLSelectElement, lpVtbl : DispHTMLSelectElementVtbl* do
+  record DispHTMLSelectElement, lpVtbl : DispHTMLSelectElementVtable* do
     GUID = LibC::GUID.new(0x3050f531_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLSelectElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30793,7 +30781,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLWndSelectElementVtbl,
+  record DispHTMLWndSelectElementVtable,
     query_interface : Proc(DispHTMLWndSelectElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLWndSelectElement*, UInt32),
     release : Proc(DispHTMLWndSelectElement*, UInt32),
@@ -30804,7 +30792,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLWndSelectElement, lpVtbl : DispHTMLWndSelectElementVtbl* do
+  record DispHTMLWndSelectElement, lpVtbl : DispHTMLWndSelectElementVtable* do
     GUID = LibC::GUID.new(0x3050f597_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLWndSelectElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30831,7 +30819,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLSelectionObjectVtbl,
+  record IHTMLSelectionObjectVtable,
     query_interface : Proc(IHTMLSelectionObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLSelectionObject*, UInt32),
     release : Proc(IHTMLSelectionObject*, UInt32),
@@ -30846,7 +30834,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLSelectionObject, lpVtbl : IHTMLSelectionObjectVtbl* do
+  record IHTMLSelectionObject, lpVtbl : IHTMLSelectionObjectVtable* do
     GUID = LibC::GUID.new(0x3050f25a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLSelectionObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30885,7 +30873,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLSelectionObject2Vtbl,
+  record IHTMLSelectionObject2Vtable,
     query_interface : Proc(IHTMLSelectionObject2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLSelectionObject2*, UInt32),
     release : Proc(IHTMLSelectionObject2*, UInt32),
@@ -30898,7 +30886,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLSelectionObject2, lpVtbl : IHTMLSelectionObject2Vtbl* do
+  record IHTMLSelectionObject2, lpVtbl : IHTMLSelectionObject2Vtable* do
     GUID = LibC::GUID.new(0x3050f7ec_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLSelectionObject2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -30931,7 +30919,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLSelectionVtbl,
+  record IHTMLSelectionVtable,
     query_interface : Proc(IHTMLSelection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLSelection*, UInt32),
     release : Proc(IHTMLSelection*, UInt32),
@@ -30958,7 +30946,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLSelection, lpVtbl : IHTMLSelectionVtbl* do
+  record IHTMLSelection, lpVtbl : IHTMLSelectionVtable* do
     GUID = LibC::GUID.new(0x305104b6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLSelection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31033,7 +31021,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLOptionElement3Vtbl,
+  record IHTMLOptionElement3Vtable,
     query_interface : Proc(IHTMLOptionElement3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLOptionElement3*, UInt32),
     release : Proc(IHTMLOptionElement3*, UInt32),
@@ -31046,7 +31034,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLOptionElement3, lpVtbl : IHTMLOptionElement3Vtbl* do
+  record IHTMLOptionElement3, lpVtbl : IHTMLOptionElement3Vtable* do
     GUID = LibC::GUID.new(0x3050f820_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLOptionElement3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31079,7 +31067,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLOptionElement4Vtbl,
+  record IHTMLOptionElement4Vtable,
     query_interface : Proc(IHTMLOptionElement4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLOptionElement4*, UInt32),
     release : Proc(IHTMLOptionElement4*, UInt32),
@@ -31092,7 +31080,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLOptionElement4, lpVtbl : IHTMLOptionElement4Vtbl* do
+  record IHTMLOptionElement4, lpVtbl : IHTMLOptionElement4Vtable* do
     GUID = LibC::GUID.new(0x305107b4_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLOptionElement4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31125,7 +31113,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLOptionElementFactoryVtbl,
+  record IHTMLOptionElementFactoryVtable,
     query_interface : Proc(IHTMLOptionElementFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLOptionElementFactory*, UInt32),
     release : Proc(IHTMLOptionElementFactory*, UInt32),
@@ -31137,7 +31125,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLOptionElementFactory, lpVtbl : IHTMLOptionElementFactoryVtbl* do
+  record IHTMLOptionElementFactory, lpVtbl : IHTMLOptionElementFactoryVtable* do
     GUID = LibC::GUID.new(0x3050f38c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLOptionElementFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31167,7 +31155,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLOptionElementVtbl,
+  record DispHTMLOptionElementVtable,
     query_interface : Proc(DispHTMLOptionElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLOptionElement*, UInt32),
     release : Proc(DispHTMLOptionElement*, UInt32),
@@ -31178,7 +31166,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLOptionElement, lpVtbl : DispHTMLOptionElementVtbl* do
+  record DispHTMLOptionElement, lpVtbl : DispHTMLOptionElementVtable* do
     GUID = LibC::GUID.new(0x3050f52b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLOptionElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31205,7 +31193,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLWndOptionElementVtbl,
+  record DispHTMLWndOptionElementVtable,
     query_interface : Proc(DispHTMLWndOptionElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLWndOptionElement*, UInt32),
     release : Proc(DispHTMLWndOptionElement*, UInt32),
@@ -31216,7 +31204,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLWndOptionElement, lpVtbl : DispHTMLWndOptionElementVtbl* do
+  record DispHTMLWndOptionElement, lpVtbl : DispHTMLWndOptionElementVtable* do
     GUID = LibC::GUID.new(0x3050f598_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLWndOptionElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31243,7 +31231,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLButtonElementEvents2Vtbl,
+  record HTMLButtonElementEvents2Vtable,
     query_interface : Proc(HTMLButtonElementEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLButtonElementEvents2*, UInt32),
     release : Proc(HTMLButtonElementEvents2*, UInt32),
@@ -31254,7 +31242,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLButtonElementEvents2, lpVtbl : HTMLButtonElementEvents2Vtbl* do
+  record HTMLButtonElementEvents2, lpVtbl : HTMLButtonElementEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f617_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLButtonElementEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31281,7 +31269,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLButtonElementEventsVtbl,
+  record HTMLButtonElementEventsVtable,
     query_interface : Proc(HTMLButtonElementEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLButtonElementEvents*, UInt32),
     release : Proc(HTMLButtonElementEvents*, UInt32),
@@ -31292,7 +31280,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLButtonElementEvents, lpVtbl : HTMLButtonElementEventsVtbl* do
+  record HTMLButtonElementEvents, lpVtbl : HTMLButtonElementEventsVtable* do
     GUID = LibC::GUID.new(0x3050f2b3_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLButtonElementEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31319,7 +31307,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLInputTextElementEvents2Vtbl,
+  record HTMLInputTextElementEvents2Vtable,
     query_interface : Proc(HTMLInputTextElementEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLInputTextElementEvents2*, UInt32),
     release : Proc(HTMLInputTextElementEvents2*, UInt32),
@@ -31330,7 +31318,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLInputTextElementEvents2, lpVtbl : HTMLInputTextElementEvents2Vtbl* do
+  record HTMLInputTextElementEvents2, lpVtbl : HTMLInputTextElementEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f618_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLInputTextElementEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31357,7 +31345,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLOptionButtonElementEvents2Vtbl,
+  record HTMLOptionButtonElementEvents2Vtable,
     query_interface : Proc(HTMLOptionButtonElementEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLOptionButtonElementEvents2*, UInt32),
     release : Proc(HTMLOptionButtonElementEvents2*, UInt32),
@@ -31368,7 +31356,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLOptionButtonElementEvents2, lpVtbl : HTMLOptionButtonElementEvents2Vtbl* do
+  record HTMLOptionButtonElementEvents2, lpVtbl : HTMLOptionButtonElementEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f619_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLOptionButtonElementEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31395,7 +31383,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLInputFileElementEvents2Vtbl,
+  record HTMLInputFileElementEvents2Vtable,
     query_interface : Proc(HTMLInputFileElementEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLInputFileElementEvents2*, UInt32),
     release : Proc(HTMLInputFileElementEvents2*, UInt32),
@@ -31406,7 +31394,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLInputFileElementEvents2, lpVtbl : HTMLInputFileElementEvents2Vtbl* do
+  record HTMLInputFileElementEvents2, lpVtbl : HTMLInputFileElementEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f61a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLInputFileElementEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31433,7 +31421,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLInputImageEvents2Vtbl,
+  record HTMLInputImageEvents2Vtable,
     query_interface : Proc(HTMLInputImageEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLInputImageEvents2*, UInt32),
     release : Proc(HTMLInputImageEvents2*, UInt32),
@@ -31444,7 +31432,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLInputImageEvents2, lpVtbl : HTMLInputImageEvents2Vtbl* do
+  record HTMLInputImageEvents2, lpVtbl : HTMLInputImageEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f61b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLInputImageEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31471,7 +31459,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLInputTextElementEventsVtbl,
+  record HTMLInputTextElementEventsVtable,
     query_interface : Proc(HTMLInputTextElementEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLInputTextElementEvents*, UInt32),
     release : Proc(HTMLInputTextElementEvents*, UInt32),
@@ -31482,7 +31470,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLInputTextElementEvents, lpVtbl : HTMLInputTextElementEventsVtbl* do
+  record HTMLInputTextElementEvents, lpVtbl : HTMLInputTextElementEventsVtable* do
     GUID = LibC::GUID.new(0x3050f2a7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLInputTextElementEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31509,7 +31497,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLOptionButtonElementEventsVtbl,
+  record HTMLOptionButtonElementEventsVtable,
     query_interface : Proc(HTMLOptionButtonElementEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLOptionButtonElementEvents*, UInt32),
     release : Proc(HTMLOptionButtonElementEvents*, UInt32),
@@ -31520,7 +31508,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLOptionButtonElementEvents, lpVtbl : HTMLOptionButtonElementEventsVtbl* do
+  record HTMLOptionButtonElementEvents, lpVtbl : HTMLOptionButtonElementEventsVtable* do
     GUID = LibC::GUID.new(0x3050f2bd_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLOptionButtonElementEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31547,7 +31535,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLInputFileElementEventsVtbl,
+  record HTMLInputFileElementEventsVtable,
     query_interface : Proc(HTMLInputFileElementEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLInputFileElementEvents*, UInt32),
     release : Proc(HTMLInputFileElementEvents*, UInt32),
@@ -31558,7 +31546,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLInputFileElementEvents, lpVtbl : HTMLInputFileElementEventsVtbl* do
+  record HTMLInputFileElementEvents, lpVtbl : HTMLInputFileElementEventsVtable* do
     GUID = LibC::GUID.new(0x3050f2af_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLInputFileElementEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31585,7 +31573,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLInputImageEventsVtbl,
+  record HTMLInputImageEventsVtable,
     query_interface : Proc(HTMLInputImageEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLInputImageEvents*, UInt32),
     release : Proc(HTMLInputImageEvents*, UInt32),
@@ -31596,7 +31584,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLInputImageEvents, lpVtbl : HTMLInputImageEventsVtbl* do
+  record HTMLInputImageEvents, lpVtbl : HTMLInputImageEventsVtable* do
     GUID = LibC::GUID.new(0x3050f2c3_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLInputImageEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31623,7 +31611,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLInputElementVtbl,
+  record IHTMLInputElementVtable,
     query_interface : Proc(IHTMLInputElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLInputElement*, UInt32),
     release : Proc(IHTMLInputElement*, UInt32),
@@ -31699,7 +31687,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLInputElement, lpVtbl : IHTMLInputElementVtbl* do
+  record IHTMLInputElement, lpVtbl : IHTMLInputElementVtable* do
     GUID = LibC::GUID.new(0x3050f5d2_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLInputElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31921,7 +31909,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLInputElement2Vtbl,
+  record IHTMLInputElement2Vtable,
     query_interface : Proc(IHTMLInputElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLInputElement2*, UInt32),
     release : Proc(IHTMLInputElement2*, UInt32),
@@ -31936,7 +31924,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLInputElement2, lpVtbl : IHTMLInputElement2Vtbl* do
+  record IHTMLInputElement2, lpVtbl : IHTMLInputElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f821_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLInputElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -31975,7 +31963,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLInputElement3Vtbl,
+  record IHTMLInputElement3Vtable,
     query_interface : Proc(IHTMLInputElement3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLInputElement3*, UInt32),
     release : Proc(IHTMLInputElement3*, UInt32),
@@ -31994,7 +31982,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLInputElement3, lpVtbl : IHTMLInputElement3Vtbl* do
+  record IHTMLInputElement3, lpVtbl : IHTMLInputElement3Vtable* do
     GUID = LibC::GUID.new(0x30510435_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLInputElement3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32045,7 +32033,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLInputButtonElementVtbl,
+  record IHTMLInputButtonElementVtable,
     query_interface : Proc(IHTMLInputButtonElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLInputButtonElement*, UInt32),
     release : Proc(IHTMLInputButtonElement*, UInt32),
@@ -32067,7 +32055,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLInputButtonElement, lpVtbl : IHTMLInputButtonElementVtbl* do
+  record IHTMLInputButtonElement, lpVtbl : IHTMLInputButtonElementVtable* do
     GUID = LibC::GUID.new(0x3050f2b2_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLInputButtonElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32127,7 +32115,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLInputHiddenElementVtbl,
+  record IHTMLInputHiddenElementVtable,
     query_interface : Proc(IHTMLInputHiddenElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLInputHiddenElement*, UInt32),
     release : Proc(IHTMLInputHiddenElement*, UInt32),
@@ -32149,7 +32137,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLInputHiddenElement, lpVtbl : IHTMLInputHiddenElementVtbl* do
+  record IHTMLInputHiddenElement, lpVtbl : IHTMLInputHiddenElementVtable* do
     GUID = LibC::GUID.new(0x3050f2a4_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLInputHiddenElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32209,7 +32197,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLInputTextElementVtbl,
+  record IHTMLInputTextElementVtable,
     query_interface : Proc(IHTMLInputTextElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLInputTextElement*, UInt32),
     release : Proc(IHTMLInputTextElement*, UInt32),
@@ -32244,7 +32232,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLInputTextElement, lpVtbl : IHTMLInputTextElementVtbl* do
+  record IHTMLInputTextElement, lpVtbl : IHTMLInputTextElementVtable* do
     GUID = LibC::GUID.new(0x3050f2a6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLInputTextElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32343,7 +32331,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLInputTextElement2Vtbl,
+  record IHTMLInputTextElement2Vtable,
     query_interface : Proc(IHTMLInputTextElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLInputTextElement2*, UInt32),
     release : Proc(IHTMLInputTextElement2*, UInt32),
@@ -32359,7 +32347,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLInputTextElement2, lpVtbl : IHTMLInputTextElement2Vtbl* do
+  record IHTMLInputTextElement2, lpVtbl : IHTMLInputTextElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f2d2_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLInputTextElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32401,7 +32389,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLInputFileElementVtbl,
+  record IHTMLInputFileElementVtable,
     query_interface : Proc(IHTMLInputFileElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLInputFileElement*, UInt32),
     release : Proc(IHTMLInputFileElement*, UInt32),
@@ -32431,7 +32419,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLInputFileElement, lpVtbl : IHTMLInputFileElementVtbl* do
+  record IHTMLInputFileElement, lpVtbl : IHTMLInputFileElementVtable* do
     GUID = LibC::GUID.new(0x3050f2ad_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLInputFileElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32515,7 +32503,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLOptionButtonElementVtbl,
+  record IHTMLOptionButtonElementVtable,
     query_interface : Proc(IHTMLOptionButtonElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLOptionButtonElement*, UInt32),
     release : Proc(IHTMLOptionButtonElement*, UInt32),
@@ -32544,7 +32532,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLOptionButtonElement, lpVtbl : IHTMLOptionButtonElementVtbl* do
+  record IHTMLOptionButtonElement, lpVtbl : IHTMLOptionButtonElementVtable* do
     GUID = LibC::GUID.new(0x3050f2bc_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLOptionButtonElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32625,7 +32613,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLInputImageVtbl,
+  record IHTMLInputImageVtable,
     query_interface : Proc(IHTMLInputImage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLInputImage*, UInt32),
     release : Proc(IHTMLInputImage*, UInt32),
@@ -32675,7 +32663,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLInputImage, lpVtbl : IHTMLInputImageVtbl* do
+  record IHTMLInputImage, lpVtbl : IHTMLInputImageVtable* do
     GUID = LibC::GUID.new(0x3050f2c2_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLInputImage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32819,7 +32807,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLInputRangeElementVtbl,
+  record IHTMLInputRangeElementVtable,
     query_interface : Proc(IHTMLInputRangeElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLInputRangeElement*, UInt32),
     release : Proc(IHTMLInputRangeElement*, UInt32),
@@ -32849,7 +32837,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLInputRangeElement, lpVtbl : IHTMLInputRangeElementVtbl* do
+  record IHTMLInputRangeElement, lpVtbl : IHTMLInputRangeElementVtable* do
     GUID = LibC::GUID.new(0x3050f2d4_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLInputRangeElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32933,7 +32921,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLInputElementVtbl,
+  record DispHTMLInputElementVtable,
     query_interface : Proc(DispHTMLInputElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLInputElement*, UInt32),
     release : Proc(DispHTMLInputElement*, UInt32),
@@ -32944,7 +32932,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLInputElement, lpVtbl : DispHTMLInputElementVtbl* do
+  record DispHTMLInputElement, lpVtbl : DispHTMLInputElementVtable* do
     GUID = LibC::GUID.new(0x3050f57d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLInputElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -32971,7 +32959,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTextAreaElementVtbl,
+  record IHTMLTextAreaElementVtable,
     query_interface : Proc(IHTMLTextAreaElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTextAreaElement*, UInt32),
     release : Proc(IHTMLTextAreaElement*, UInt32),
@@ -33008,7 +32996,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTextAreaElement, lpVtbl : IHTMLTextAreaElementVtbl* do
+  record IHTMLTextAreaElement, lpVtbl : IHTMLTextAreaElementVtable* do
     GUID = LibC::GUID.new(0x3050f2aa_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTextAreaElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33113,7 +33101,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTextAreaElement2Vtbl,
+  record IHTMLTextAreaElement2Vtable,
     query_interface : Proc(IHTMLTextAreaElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTextAreaElement2*, UInt32),
     release : Proc(IHTMLTextAreaElement2*, UInt32),
@@ -33129,7 +33117,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTextAreaElement2, lpVtbl : IHTMLTextAreaElement2Vtbl* do
+  record IHTMLTextAreaElement2, lpVtbl : IHTMLTextAreaElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f2d3_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTextAreaElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33171,7 +33159,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLTextAreaElementVtbl,
+  record DispHTMLTextAreaElementVtable,
     query_interface : Proc(DispHTMLTextAreaElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLTextAreaElement*, UInt32),
     release : Proc(DispHTMLTextAreaElement*, UInt32),
@@ -33182,7 +33170,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLTextAreaElement, lpVtbl : DispHTMLTextAreaElementVtbl* do
+  record DispHTMLTextAreaElement, lpVtbl : DispHTMLTextAreaElementVtable* do
     GUID = LibC::GUID.new(0x3050f521_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLTextAreaElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33209,7 +33197,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLRichtextElementVtbl,
+  record DispHTMLRichtextElementVtable,
     query_interface : Proc(DispHTMLRichtextElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLRichtextElement*, UInt32),
     release : Proc(DispHTMLRichtextElement*, UInt32),
@@ -33220,7 +33208,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLRichtextElement, lpVtbl : DispHTMLRichtextElementVtbl* do
+  record DispHTMLRichtextElement, lpVtbl : DispHTMLRichtextElementVtable* do
     GUID = LibC::GUID.new(0x3050f54d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLRichtextElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33247,7 +33235,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLButtonElementVtbl,
+  record IHTMLButtonElementVtable,
     query_interface : Proc(IHTMLButtonElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLButtonElement*, UInt32),
     release : Proc(IHTMLButtonElement*, UInt32),
@@ -33269,7 +33257,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLButtonElement, lpVtbl : IHTMLButtonElementVtbl* do
+  record IHTMLButtonElement, lpVtbl : IHTMLButtonElementVtable* do
     GUID = LibC::GUID.new(0x3050f2bb_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLButtonElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33329,7 +33317,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLButtonElement2Vtbl,
+  record IHTMLButtonElement2Vtable,
     query_interface : Proc(IHTMLButtonElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLButtonElement2*, UInt32),
     release : Proc(IHTMLButtonElement2*, UInt32),
@@ -33342,7 +33330,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLButtonElement2, lpVtbl : IHTMLButtonElement2Vtbl* do
+  record IHTMLButtonElement2, lpVtbl : IHTMLButtonElement2Vtable* do
     GUID = LibC::GUID.new(0x305106f3_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLButtonElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33375,7 +33363,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLButtonElementVtbl,
+  record DispHTMLButtonElementVtable,
     query_interface : Proc(DispHTMLButtonElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLButtonElement*, UInt32),
     release : Proc(DispHTMLButtonElement*, UInt32),
@@ -33386,7 +33374,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLButtonElement, lpVtbl : DispHTMLButtonElementVtbl* do
+  record DispHTMLButtonElement, lpVtbl : DispHTMLButtonElementVtable* do
     GUID = LibC::GUID.new(0x3050f51f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLButtonElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33413,7 +33401,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLMarqueeElementEvents2Vtbl,
+  record HTMLMarqueeElementEvents2Vtable,
     query_interface : Proc(HTMLMarqueeElementEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLMarqueeElementEvents2*, UInt32),
     release : Proc(HTMLMarqueeElementEvents2*, UInt32),
@@ -33424,7 +33412,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLMarqueeElementEvents2, lpVtbl : HTMLMarqueeElementEvents2Vtbl* do
+  record HTMLMarqueeElementEvents2, lpVtbl : HTMLMarqueeElementEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f61f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLMarqueeElementEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33451,7 +33439,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLMarqueeElementEventsVtbl,
+  record HTMLMarqueeElementEventsVtable,
     query_interface : Proc(HTMLMarqueeElementEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLMarqueeElementEvents*, UInt32),
     release : Proc(HTMLMarqueeElementEvents*, UInt32),
@@ -33462,7 +33450,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLMarqueeElementEvents, lpVtbl : HTMLMarqueeElementEventsVtbl* do
+  record HTMLMarqueeElementEvents, lpVtbl : HTMLMarqueeElementEventsVtable* do
     GUID = LibC::GUID.new(0x3050f2b8_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLMarqueeElementEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33489,7 +33477,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLMarqueeElementVtbl,
+  record IHTMLMarqueeElementVtable,
     query_interface : Proc(IHTMLMarqueeElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLMarqueeElement*, UInt32),
     release : Proc(IHTMLMarqueeElement*, UInt32),
@@ -33530,7 +33518,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLMarqueeElement, lpVtbl : IHTMLMarqueeElementVtbl* do
+  record IHTMLMarqueeElement, lpVtbl : IHTMLMarqueeElementVtable* do
     GUID = LibC::GUID.new(0x3050f2b5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLMarqueeElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33647,7 +33635,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLMarqueeElementVtbl,
+  record DispHTMLMarqueeElementVtable,
     query_interface : Proc(DispHTMLMarqueeElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLMarqueeElement*, UInt32),
     release : Proc(DispHTMLMarqueeElement*, UInt32),
@@ -33658,7 +33646,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLMarqueeElement, lpVtbl : DispHTMLMarqueeElementVtbl* do
+  record DispHTMLMarqueeElement, lpVtbl : DispHTMLMarqueeElementVtable* do
     GUID = LibC::GUID.new(0x3050f527_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLMarqueeElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33685,7 +33673,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLHtmlElementVtbl,
+  record IHTMLHtmlElementVtable,
     query_interface : Proc(IHTMLHtmlElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLHtmlElement*, UInt32),
     release : Proc(IHTMLHtmlElement*, UInt32),
@@ -33698,7 +33686,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLHtmlElement, lpVtbl : IHTMLHtmlElementVtbl* do
+  record IHTMLHtmlElement, lpVtbl : IHTMLHtmlElementVtable* do
     GUID = LibC::GUID.new(0x3050f81c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLHtmlElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33731,7 +33719,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLHeadElementVtbl,
+  record IHTMLHeadElementVtable,
     query_interface : Proc(IHTMLHeadElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLHeadElement*, UInt32),
     release : Proc(IHTMLHeadElement*, UInt32),
@@ -33744,7 +33732,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLHeadElement, lpVtbl : IHTMLHeadElementVtbl* do
+  record IHTMLHeadElement, lpVtbl : IHTMLHeadElementVtable* do
     GUID = LibC::GUID.new(0x3050f81d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLHeadElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33777,7 +33765,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLHeadElement2Vtbl,
+  record IHTMLHeadElement2Vtable,
     query_interface : Proc(IHTMLHeadElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLHeadElement2*, UInt32),
     release : Proc(IHTMLHeadElement2*, UInt32),
@@ -33790,7 +33778,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLHeadElement2, lpVtbl : IHTMLHeadElement2Vtbl* do
+  record IHTMLHeadElement2, lpVtbl : IHTMLHeadElement2Vtable* do
     GUID = LibC::GUID.new(0x3051042f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLHeadElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33823,7 +33811,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTitleElementVtbl,
+  record IHTMLTitleElementVtable,
     query_interface : Proc(IHTMLTitleElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTitleElement*, UInt32),
     release : Proc(IHTMLTitleElement*, UInt32),
@@ -33836,7 +33824,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTitleElement, lpVtbl : IHTMLTitleElementVtbl* do
+  record IHTMLTitleElement, lpVtbl : IHTMLTitleElementVtable* do
     GUID = LibC::GUID.new(0x3050f322_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTitleElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33869,7 +33857,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLMetaElementVtbl,
+  record IHTMLMetaElementVtable,
     query_interface : Proc(IHTMLMetaElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLMetaElement*, UInt32),
     release : Proc(IHTMLMetaElement*, UInt32),
@@ -33890,7 +33878,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLMetaElement, lpVtbl : IHTMLMetaElementVtbl* do
+  record IHTMLMetaElement, lpVtbl : IHTMLMetaElementVtable* do
     GUID = LibC::GUID.new(0x3050f203_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLMetaElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33947,7 +33935,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLMetaElement2Vtbl,
+  record IHTMLMetaElement2Vtable,
     query_interface : Proc(IHTMLMetaElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLMetaElement2*, UInt32),
     release : Proc(IHTMLMetaElement2*, UInt32),
@@ -33960,7 +33948,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLMetaElement2, lpVtbl : IHTMLMetaElement2Vtbl* do
+  record IHTMLMetaElement2, lpVtbl : IHTMLMetaElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f81f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLMetaElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -33993,7 +33981,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLMetaElement3Vtbl,
+  record IHTMLMetaElement3Vtable,
     query_interface : Proc(IHTMLMetaElement3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLMetaElement3*, UInt32),
     release : Proc(IHTMLMetaElement3*, UInt32),
@@ -34006,7 +33994,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLMetaElement3, lpVtbl : IHTMLMetaElement3Vtbl* do
+  record IHTMLMetaElement3, lpVtbl : IHTMLMetaElement3Vtable* do
     GUID = LibC::GUID.new(0x30510495_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLMetaElement3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34039,7 +34027,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLBaseElementVtbl,
+  record IHTMLBaseElementVtable,
     query_interface : Proc(IHTMLBaseElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLBaseElement*, UInt32),
     release : Proc(IHTMLBaseElement*, UInt32),
@@ -34054,7 +34042,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLBaseElement, lpVtbl : IHTMLBaseElementVtbl* do
+  record IHTMLBaseElement, lpVtbl : IHTMLBaseElementVtable* do
     GUID = LibC::GUID.new(0x3050f204_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLBaseElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34093,7 +34081,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLBaseElement2Vtbl,
+  record IHTMLBaseElement2Vtable,
     query_interface : Proc(IHTMLBaseElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLBaseElement2*, UInt32),
     release : Proc(IHTMLBaseElement2*, UInt32),
@@ -34106,7 +34094,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLBaseElement2, lpVtbl : IHTMLBaseElement2Vtbl* do
+  record IHTMLBaseElement2, lpVtbl : IHTMLBaseElement2Vtable* do
     GUID = LibC::GUID.new(0x30510420_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLBaseElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34139,7 +34127,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLHtmlElementVtbl,
+  record DispHTMLHtmlElementVtable,
     query_interface : Proc(DispHTMLHtmlElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLHtmlElement*, UInt32),
     release : Proc(DispHTMLHtmlElement*, UInt32),
@@ -34150,7 +34138,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLHtmlElement, lpVtbl : DispHTMLHtmlElementVtbl* do
+  record DispHTMLHtmlElement, lpVtbl : DispHTMLHtmlElementVtable* do
     GUID = LibC::GUID.new(0x3050f560_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLHtmlElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34177,7 +34165,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLHeadElementVtbl,
+  record DispHTMLHeadElementVtable,
     query_interface : Proc(DispHTMLHeadElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLHeadElement*, UInt32),
     release : Proc(DispHTMLHeadElement*, UInt32),
@@ -34188,7 +34176,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLHeadElement, lpVtbl : DispHTMLHeadElementVtbl* do
+  record DispHTMLHeadElement, lpVtbl : DispHTMLHeadElementVtable* do
     GUID = LibC::GUID.new(0x3050f561_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLHeadElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34215,7 +34203,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLTitleElementVtbl,
+  record DispHTMLTitleElementVtable,
     query_interface : Proc(DispHTMLTitleElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLTitleElement*, UInt32),
     release : Proc(DispHTMLTitleElement*, UInt32),
@@ -34226,7 +34214,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLTitleElement, lpVtbl : DispHTMLTitleElementVtbl* do
+  record DispHTMLTitleElement, lpVtbl : DispHTMLTitleElementVtable* do
     GUID = LibC::GUID.new(0x3050f516_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLTitleElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34253,7 +34241,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLMetaElementVtbl,
+  record DispHTMLMetaElementVtable,
     query_interface : Proc(DispHTMLMetaElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLMetaElement*, UInt32),
     release : Proc(DispHTMLMetaElement*, UInt32),
@@ -34264,7 +34252,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLMetaElement, lpVtbl : DispHTMLMetaElementVtbl* do
+  record DispHTMLMetaElement, lpVtbl : DispHTMLMetaElementVtable* do
     GUID = LibC::GUID.new(0x3050f517_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLMetaElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34291,7 +34279,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLBaseElementVtbl,
+  record DispHTMLBaseElementVtable,
     query_interface : Proc(DispHTMLBaseElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLBaseElement*, UInt32),
     release : Proc(DispHTMLBaseElement*, UInt32),
@@ -34302,7 +34290,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLBaseElement, lpVtbl : DispHTMLBaseElementVtbl* do
+  record DispHTMLBaseElement, lpVtbl : DispHTMLBaseElementVtable* do
     GUID = LibC::GUID.new(0x3050f518_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLBaseElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34329,7 +34317,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLIsIndexElementVtbl,
+  record IHTMLIsIndexElementVtable,
     query_interface : Proc(IHTMLIsIndexElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLIsIndexElement*, UInt32),
     release : Proc(IHTMLIsIndexElement*, UInt32),
@@ -34344,7 +34332,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLIsIndexElement, lpVtbl : IHTMLIsIndexElementVtbl* do
+  record IHTMLIsIndexElement, lpVtbl : IHTMLIsIndexElementVtable* do
     GUID = LibC::GUID.new(0x3050f206_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLIsIndexElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34383,7 +34371,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLIsIndexElement2Vtbl,
+  record IHTMLIsIndexElement2Vtable,
     query_interface : Proc(IHTMLIsIndexElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLIsIndexElement2*, UInt32),
     release : Proc(IHTMLIsIndexElement2*, UInt32),
@@ -34395,7 +34383,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLIsIndexElement2, lpVtbl : IHTMLIsIndexElement2Vtbl* do
+  record IHTMLIsIndexElement2, lpVtbl : IHTMLIsIndexElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f82f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLIsIndexElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34425,7 +34413,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLNextIdElementVtbl,
+  record IHTMLNextIdElementVtable,
     query_interface : Proc(IHTMLNextIdElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLNextIdElement*, UInt32),
     release : Proc(IHTMLNextIdElement*, UInt32),
@@ -34438,7 +34426,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLNextIdElement, lpVtbl : IHTMLNextIdElementVtbl* do
+  record IHTMLNextIdElement, lpVtbl : IHTMLNextIdElementVtable* do
     GUID = LibC::GUID.new(0x3050f207_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLNextIdElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34471,7 +34459,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLIsIndexElementVtbl,
+  record DispHTMLIsIndexElementVtable,
     query_interface : Proc(DispHTMLIsIndexElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLIsIndexElement*, UInt32),
     release : Proc(DispHTMLIsIndexElement*, UInt32),
@@ -34482,7 +34470,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLIsIndexElement, lpVtbl : DispHTMLIsIndexElementVtbl* do
+  record DispHTMLIsIndexElement, lpVtbl : DispHTMLIsIndexElementVtable* do
     GUID = LibC::GUID.new(0x3050f519_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLIsIndexElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34509,7 +34497,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLNextIdElementVtbl,
+  record DispHTMLNextIdElementVtable,
     query_interface : Proc(DispHTMLNextIdElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLNextIdElement*, UInt32),
     release : Proc(DispHTMLNextIdElement*, UInt32),
@@ -34520,7 +34508,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLNextIdElement, lpVtbl : DispHTMLNextIdElementVtbl* do
+  record DispHTMLNextIdElement, lpVtbl : DispHTMLNextIdElementVtable* do
     GUID = LibC::GUID.new(0x3050f51a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLNextIdElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34547,7 +34535,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLBaseFontElementVtbl,
+  record IHTMLBaseFontElementVtable,
     query_interface : Proc(IHTMLBaseFontElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLBaseFontElement*, UInt32),
     release : Proc(IHTMLBaseFontElement*, UInt32),
@@ -34564,7 +34552,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLBaseFontElement, lpVtbl : IHTMLBaseFontElementVtbl* do
+  record IHTMLBaseFontElement, lpVtbl : IHTMLBaseFontElementVtable* do
     GUID = LibC::GUID.new(0x3050f202_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLBaseFontElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34609,7 +34597,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLBaseFontElementVtbl,
+  record DispHTMLBaseFontElementVtable,
     query_interface : Proc(DispHTMLBaseFontElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLBaseFontElement*, UInt32),
     release : Proc(DispHTMLBaseFontElement*, UInt32),
@@ -34620,7 +34608,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLBaseFontElement, lpVtbl : DispHTMLBaseFontElementVtbl* do
+  record DispHTMLBaseFontElement, lpVtbl : DispHTMLBaseFontElementVtable* do
     GUID = LibC::GUID.new(0x3050f504_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLBaseFontElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34647,7 +34635,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLUnknownElementVtbl,
+  record IHTMLUnknownElementVtable,
     query_interface : Proc(IHTMLUnknownElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLUnknownElement*, UInt32),
     release : Proc(IHTMLUnknownElement*, UInt32),
@@ -34658,7 +34646,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLUnknownElement, lpVtbl : IHTMLUnknownElementVtbl* do
+  record IHTMLUnknownElement, lpVtbl : IHTMLUnknownElementVtable* do
     GUID = LibC::GUID.new(0x3050f209_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLUnknownElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34685,7 +34673,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLUnknownElementVtbl,
+  record DispHTMLUnknownElementVtable,
     query_interface : Proc(DispHTMLUnknownElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLUnknownElement*, UInt32),
     release : Proc(DispHTMLUnknownElement*, UInt32),
@@ -34696,7 +34684,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLUnknownElement, lpVtbl : DispHTMLUnknownElementVtbl* do
+  record DispHTMLUnknownElement, lpVtbl : DispHTMLUnknownElementVtable* do
     GUID = LibC::GUID.new(0x3050f539_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLUnknownElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34723,7 +34711,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IWebGeolocationVtbl,
+  record IWebGeolocationVtable,
     query_interface : Proc(IWebGeolocation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebGeolocation*, UInt32),
     release : Proc(IWebGeolocation*, UInt32),
@@ -34737,7 +34725,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IWebGeolocation, lpVtbl : IWebGeolocationVtbl* do
+  record IWebGeolocation, lpVtbl : IWebGeolocationVtable* do
     GUID = LibC::GUID.new(0x305107c5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IWebGeolocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34773,7 +34761,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLMimeTypesCollectionVtbl,
+  record IHTMLMimeTypesCollectionVtable,
     query_interface : Proc(IHTMLMimeTypesCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLMimeTypesCollection*, UInt32),
     release : Proc(IHTMLMimeTypesCollection*, UInt32),
@@ -34785,7 +34773,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLMimeTypesCollection, lpVtbl : IHTMLMimeTypesCollectionVtbl* do
+  record IHTMLMimeTypesCollection, lpVtbl : IHTMLMimeTypesCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f3fc_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLMimeTypesCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34815,7 +34803,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLPluginsCollectionVtbl,
+  record IHTMLPluginsCollectionVtable,
     query_interface : Proc(IHTMLPluginsCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLPluginsCollection*, UInt32),
     release : Proc(IHTMLPluginsCollection*, UInt32),
@@ -34828,7 +34816,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLPluginsCollection, lpVtbl : IHTMLPluginsCollectionVtbl* do
+  record IHTMLPluginsCollection, lpVtbl : IHTMLPluginsCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f3fd_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLPluginsCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34861,7 +34849,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IOmHistoryVtbl,
+  record IOmHistoryVtable,
     query_interface : Proc(IOmHistory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOmHistory*, UInt32),
     release : Proc(IOmHistory*, UInt32),
@@ -34876,7 +34864,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IOmHistory, lpVtbl : IOmHistoryVtbl* do
+  record IOmHistory, lpVtbl : IOmHistoryVtable* do
     GUID = LibC::GUID.new(0xfeceaaa2_u32, 0x8405_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0xa1_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0x6d_u8, 0xa6_u8])
     def query_interface(this : IOmHistory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34915,7 +34903,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLOpsProfileVtbl,
+  record IHTMLOpsProfileVtable,
     query_interface : Proc(IHTMLOpsProfile*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLOpsProfile*, UInt32),
     release : Proc(IHTMLOpsProfile*, UInt32),
@@ -34935,7 +34923,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLOpsProfile, lpVtbl : IHTMLOpsProfileVtbl* do
+  record IHTMLOpsProfile, lpVtbl : IHTMLOpsProfileVtable* do
     GUID = LibC::GUID.new(0x3050f401_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLOpsProfile*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34989,7 +34977,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IOmNavigatorVtbl,
+  record IOmNavigatorVtable,
     query_interface : Proc(IOmNavigator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOmNavigator*, UInt32),
     release : Proc(IOmNavigator*, UInt32),
@@ -35020,7 +35008,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IOmNavigator, lpVtbl : IOmNavigatorVtbl* do
+  record IOmNavigator, lpVtbl : IOmNavigatorVtable* do
     GUID = LibC::GUID.new(0xfeceaaa5_u32, 0x8405_u16, 0x11cf_u16, StaticArray[0x8b_u8, 0xa1_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0x6d_u8, 0xa6_u8])
     def query_interface(this : IOmNavigator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35107,7 +35095,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record INavigatorGeolocationVtbl,
+  record INavigatorGeolocationVtable,
     query_interface : Proc(INavigatorGeolocation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INavigatorGeolocation*, UInt32),
     release : Proc(INavigatorGeolocation*, UInt32),
@@ -35119,7 +35107,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record INavigatorGeolocation, lpVtbl : INavigatorGeolocationVtbl* do
+  record INavigatorGeolocation, lpVtbl : INavigatorGeolocationVtable* do
     GUID = LibC::GUID.new(0x305107cf_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : INavigatorGeolocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35149,7 +35137,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record INavigatorDoNotTrackVtbl,
+  record INavigatorDoNotTrackVtable,
     query_interface : Proc(INavigatorDoNotTrack*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INavigatorDoNotTrack*, UInt32),
     release : Proc(INavigatorDoNotTrack*, UInt32),
@@ -35161,7 +35149,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record INavigatorDoNotTrack, lpVtbl : INavigatorDoNotTrackVtbl* do
+  record INavigatorDoNotTrack, lpVtbl : INavigatorDoNotTrackVtable* do
     GUID = LibC::GUID.new(0x30510804_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : INavigatorDoNotTrack*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35191,7 +35179,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLLocationVtbl,
+  record IHTMLLocationVtable,
     query_interface : Proc(IHTMLLocation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLLocation*, UInt32),
     release : Proc(IHTMLLocation*, UInt32),
@@ -35222,7 +35210,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLLocation, lpVtbl : IHTMLLocationVtbl* do
+  record IHTMLLocation, lpVtbl : IHTMLLocationVtable* do
     GUID = LibC::GUID.new(0x163bb1e0_u32, 0x6e00_u16, 0x11cf_u16, StaticArray[0x83_u8, 0x7a_u8, 0x48_u8, 0xdc_u8, 0x4_u8, 0xc1_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IHTMLLocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35309,7 +35297,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLHistoryVtbl,
+  record DispHTMLHistoryVtable,
     query_interface : Proc(DispHTMLHistory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLHistory*, UInt32),
     release : Proc(DispHTMLHistory*, UInt32),
@@ -35320,7 +35308,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLHistory, lpVtbl : DispHTMLHistoryVtbl* do
+  record DispHTMLHistory, lpVtbl : DispHTMLHistoryVtable* do
     GUID = LibC::GUID.new(0x3050f549_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLHistory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35347,7 +35335,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLNavigatorVtbl,
+  record DispHTMLNavigatorVtable,
     query_interface : Proc(DispHTMLNavigator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLNavigator*, UInt32),
     release : Proc(DispHTMLNavigator*, UInt32),
@@ -35358,7 +35346,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLNavigator, lpVtbl : DispHTMLNavigatorVtbl* do
+  record DispHTMLNavigator, lpVtbl : DispHTMLNavigatorVtable* do
     GUID = LibC::GUID.new(0x3050f54c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLNavigator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35385,7 +35373,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLLocationVtbl,
+  record DispHTMLLocationVtable,
     query_interface : Proc(DispHTMLLocation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLLocation*, UInt32),
     release : Proc(DispHTMLLocation*, UInt32),
@@ -35396,7 +35384,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLLocation, lpVtbl : DispHTMLLocationVtbl* do
+  record DispHTMLLocation, lpVtbl : DispHTMLLocationVtable* do
     GUID = LibC::GUID.new(0x3050f54e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLLocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35423,7 +35411,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispCPluginsVtbl,
+  record DispCPluginsVtable,
     query_interface : Proc(DispCPlugins*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispCPlugins*, UInt32),
     release : Proc(DispCPlugins*, UInt32),
@@ -35434,7 +35422,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispCPlugins, lpVtbl : DispCPluginsVtbl* do
+  record DispCPlugins, lpVtbl : DispCPluginsVtable* do
     GUID = LibC::GUID.new(0x3050f54a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispCPlugins*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35461,7 +35449,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLBookmarkCollectionVtbl,
+  record IHTMLBookmarkCollectionVtable,
     query_interface : Proc(IHTMLBookmarkCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLBookmarkCollection*, UInt32),
     release : Proc(IHTMLBookmarkCollection*, UInt32),
@@ -35475,7 +35463,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLBookmarkCollection, lpVtbl : IHTMLBookmarkCollectionVtbl* do
+  record IHTMLBookmarkCollection, lpVtbl : IHTMLBookmarkCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f4ce_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLBookmarkCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35511,7 +35499,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDataTransferVtbl,
+  record IHTMLDataTransferVtable,
     query_interface : Proc(IHTMLDataTransfer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDataTransfer*, UInt32),
     release : Proc(IHTMLDataTransfer*, UInt32),
@@ -35529,7 +35517,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDataTransfer, lpVtbl : IHTMLDataTransferVtbl* do
+  record IHTMLDataTransfer, lpVtbl : IHTMLDataTransferVtable* do
     GUID = LibC::GUID.new(0x3050f4b3_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDataTransfer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35577,7 +35565,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLEventObj2Vtbl,
+  record IHTMLEventObj2Vtable,
     query_interface : Proc(IHTMLEventObj2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLEventObj2*, UInt32),
     release : Proc(IHTMLEventObj2*, UInt32),
@@ -35644,7 +35632,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLEventObj2, lpVtbl : IHTMLEventObj2Vtbl* do
+  record IHTMLEventObj2, lpVtbl : IHTMLEventObj2Vtable* do
     GUID = LibC::GUID.new(0x3050f48b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLEventObj2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35839,7 +35827,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLEventObj3Vtbl,
+  record IHTMLEventObj3Vtable,
     query_interface : Proc(IHTMLEventObj3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLEventObj3*, UInt32),
     release : Proc(IHTMLEventObj3*, UInt32),
@@ -35866,7 +35854,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLEventObj3, lpVtbl : IHTMLEventObj3Vtbl* do
+  record IHTMLEventObj3, lpVtbl : IHTMLEventObj3Vtable* do
     GUID = LibC::GUID.new(0x3050f680_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLEventObj3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35941,7 +35929,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLEventObj4Vtbl,
+  record IHTMLEventObj4Vtable,
     query_interface : Proc(IHTMLEventObj4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLEventObj4*, UInt32),
     release : Proc(IHTMLEventObj4*, UInt32),
@@ -35953,7 +35941,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLEventObj4, lpVtbl : IHTMLEventObj4Vtbl* do
+  record IHTMLEventObj4, lpVtbl : IHTMLEventObj4Vtable* do
     GUID = LibC::GUID.new(0x3050f814_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLEventObj4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -35983,7 +35971,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLEventObj5Vtbl,
+  record IHTMLEventObj5Vtable,
     query_interface : Proc(IHTMLEventObj5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLEventObj5*, UInt32),
     release : Proc(IHTMLEventObj5*, UInt32),
@@ -36003,7 +35991,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLEventObj5, lpVtbl : IHTMLEventObj5Vtbl* do
+  record IHTMLEventObj5, lpVtbl : IHTMLEventObj5Vtable* do
     GUID = LibC::GUID.new(0x30510478_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLEventObj5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36057,7 +36045,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLEventObj6Vtbl,
+  record IHTMLEventObj6Vtable,
     query_interface : Proc(IHTMLEventObj6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLEventObj6*, UInt32),
     release : Proc(IHTMLEventObj6*, UInt32),
@@ -36070,7 +36058,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLEventObj6, lpVtbl : IHTMLEventObj6Vtbl* do
+  record IHTMLEventObj6, lpVtbl : IHTMLEventObj6Vtable* do
     GUID = LibC::GUID.new(0x30510734_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLEventObj6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36103,7 +36091,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispCEventObjVtbl,
+  record DispCEventObjVtable,
     query_interface : Proc(DispCEventObj*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispCEventObj*, UInt32),
     release : Proc(DispCEventObj*, UInt32),
@@ -36114,7 +36102,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispCEventObj, lpVtbl : DispCEventObjVtbl* do
+  record DispCEventObj, lpVtbl : DispCEventObjVtable* do
     GUID = LibC::GUID.new(0x3050f558_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispCEventObj*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36141,7 +36129,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleMediaVtbl,
+  record IHTMLStyleMediaVtable,
     query_interface : Proc(IHTMLStyleMedia*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleMedia*, UInt32),
     release : Proc(IHTMLStyleMedia*, UInt32),
@@ -36154,7 +36142,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleMedia, lpVtbl : IHTMLStyleMediaVtbl* do
+  record IHTMLStyleMedia, lpVtbl : IHTMLStyleMediaVtable* do
     GUID = LibC::GUID.new(0x3051074b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleMedia*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36187,7 +36175,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLStyleMediaVtbl,
+  record DispHTMLStyleMediaVtable,
     query_interface : Proc(DispHTMLStyleMedia*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLStyleMedia*, UInt32),
     release : Proc(DispHTMLStyleMedia*, UInt32),
@@ -36198,7 +36186,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLStyleMedia, lpVtbl : DispHTMLStyleMediaVtbl* do
+  record DispHTMLStyleMedia, lpVtbl : DispHTMLStyleMediaVtable* do
     GUID = LibC::GUID.new(0x3059009e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLStyleMedia*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36225,7 +36213,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFramesCollection2Vtbl,
+  record IHTMLFramesCollection2Vtable,
     query_interface : Proc(IHTMLFramesCollection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFramesCollection2*, UInt32),
     release : Proc(IHTMLFramesCollection2*, UInt32),
@@ -36238,7 +36226,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFramesCollection2, lpVtbl : IHTMLFramesCollection2Vtbl* do
+  record IHTMLFramesCollection2, lpVtbl : IHTMLFramesCollection2Vtable* do
     GUID = LibC::GUID.new(0x332c4426_u32, 0x26cb_u16, 0x11d0_u16, StaticArray[0xb4_u8, 0x83_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x1_u8, 0x19_u8])
     def query_interface(this : IHTMLFramesCollection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36271,7 +36259,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLWindowEvents3Vtbl,
+  record HTMLWindowEvents3Vtable,
     query_interface : Proc(HTMLWindowEvents3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLWindowEvents3*, UInt32),
     release : Proc(HTMLWindowEvents3*, UInt32),
@@ -36282,7 +36270,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLWindowEvents3, lpVtbl : HTMLWindowEvents3Vtbl* do
+  record HTMLWindowEvents3, lpVtbl : HTMLWindowEvents3Vtable* do
     GUID = LibC::GUID.new(0x3050f5a1_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLWindowEvents3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36309,7 +36297,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLWindowEvents2Vtbl,
+  record HTMLWindowEvents2Vtable,
     query_interface : Proc(HTMLWindowEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLWindowEvents2*, UInt32),
     release : Proc(HTMLWindowEvents2*, UInt32),
@@ -36320,7 +36308,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLWindowEvents2, lpVtbl : HTMLWindowEvents2Vtbl* do
+  record HTMLWindowEvents2, lpVtbl : HTMLWindowEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f625_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLWindowEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36347,7 +36335,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLWindowEventsVtbl,
+  record HTMLWindowEventsVtable,
     query_interface : Proc(HTMLWindowEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLWindowEvents*, UInt32),
     release : Proc(HTMLWindowEvents*, UInt32),
@@ -36358,7 +36346,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLWindowEvents, lpVtbl : HTMLWindowEventsVtbl* do
+  record HTMLWindowEvents, lpVtbl : HTMLWindowEventsVtable* do
     GUID = LibC::GUID.new(0x96a0a4e0_u32, 0xd062_u16, 0x11cf_u16, StaticArray[0x94_u8, 0xb6_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x60_u8, 0x27_u8, 0x5c_u8])
     def query_interface(this : HTMLWindowEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36385,7 +36373,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDocument2Vtbl,
+  record IHTMLDocument2Vtable,
     query_interface : Proc(IHTMLDocument2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDocument2*, UInt32),
     release : Proc(IHTMLDocument2*, UInt32),
@@ -36505,7 +36493,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDocument2, lpVtbl : IHTMLDocument2Vtbl* do
+  record IHTMLDocument2, lpVtbl : IHTMLDocument2Vtable* do
     GUID = LibC::GUID.new(0x332c4425_u32, 0x26cb_u16, 0x11d0_u16, StaticArray[0xb4_u8, 0x83_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x1_u8, 0x19_u8])
     def query_interface(this : IHTMLDocument2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -36859,7 +36847,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLWindow2Vtbl,
+  record IHTMLWindow2Vtable,
     query_interface : Proc(IHTMLWindow2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLWindow2*, UInt32),
     release : Proc(IHTMLWindow2*, UInt32),
@@ -36940,7 +36928,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLWindow2, lpVtbl : IHTMLWindow2Vtbl* do
+  record IHTMLWindow2, lpVtbl : IHTMLWindow2Vtable* do
     GUID = LibC::GUID.new(0x332c4427_u32, 0x26cb_u16, 0x11d0_u16, StaticArray[0xb4_u8, 0x83_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x1_u8, 0x19_u8])
     def query_interface(this : IHTMLWindow2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37177,7 +37165,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLWindow3Vtbl,
+  record IHTMLWindow3Vtable,
     query_interface : Proc(IHTMLWindow3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLWindow3*, UInt32),
     release : Proc(IHTMLWindow3*, UInt32),
@@ -37201,7 +37189,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLWindow3, lpVtbl : IHTMLWindow3Vtbl* do
+  record IHTMLWindow3, lpVtbl : IHTMLWindow3Vtable* do
     GUID = LibC::GUID.new(0x3050f4ae_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLWindow3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37267,7 +37255,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFrameBaseVtbl,
+  record IHTMLFrameBaseVtable,
     query_interface : Proc(IHTMLFrameBase*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFrameBase*, UInt32),
     release : Proc(IHTMLFrameBase*, UInt32),
@@ -37296,7 +37284,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFrameBase, lpVtbl : IHTMLFrameBaseVtbl* do
+  record IHTMLFrameBase, lpVtbl : IHTMLFrameBaseVtable* do
     GUID = LibC::GUID.new(0x3050f311_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFrameBase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37377,7 +37365,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStorageVtbl,
+  record IHTMLStorageVtable,
     query_interface : Proc(IHTMLStorage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStorage*, UInt32),
     release : Proc(IHTMLStorage*, UInt32),
@@ -37395,7 +37383,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStorage, lpVtbl : IHTMLStorageVtbl* do
+  record IHTMLStorage, lpVtbl : IHTMLStorageVtable* do
     GUID = LibC::GUID.new(0x30510474_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37443,7 +37431,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLPerformanceVtbl,
+  record IHTMLPerformanceVtable,
     query_interface : Proc(IHTMLPerformance*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLPerformance*, UInt32),
     release : Proc(IHTMLPerformance*, UInt32),
@@ -37458,7 +37446,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLPerformance, lpVtbl : IHTMLPerformanceVtbl* do
+  record IHTMLPerformance, lpVtbl : IHTMLPerformanceVtable* do
     GUID = LibC::GUID.new(0x3051074e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLPerformance*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37497,7 +37485,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLApplicationCacheVtbl,
+  record IHTMLApplicationCacheVtable,
     query_interface : Proc(IHTMLApplicationCache*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLApplicationCache*, UInt32),
     release : Proc(IHTMLApplicationCache*, UInt32),
@@ -37528,7 +37516,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLApplicationCache, lpVtbl : IHTMLApplicationCacheVtbl* do
+  record IHTMLApplicationCache, lpVtbl : IHTMLApplicationCacheVtable* do
     GUID = LibC::GUID.new(0x30510828_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLApplicationCache*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37615,7 +37603,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLScreenVtbl,
+  record IHTMLScreenVtable,
     query_interface : Proc(IHTMLScreen*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLScreen*, UInt32),
     release : Proc(IHTMLScreen*, UInt32),
@@ -37636,7 +37624,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLScreen, lpVtbl : IHTMLScreenVtbl* do
+  record IHTMLScreen, lpVtbl : IHTMLScreenVtable* do
     GUID = LibC::GUID.new(0x3050f35c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLScreen*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37693,7 +37681,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLScreen2Vtbl,
+  record IHTMLScreen2Vtable,
     query_interface : Proc(IHTMLScreen2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLScreen2*, UInt32),
     release : Proc(IHTMLScreen2*, UInt32),
@@ -37708,7 +37696,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLScreen2, lpVtbl : IHTMLScreen2Vtbl* do
+  record IHTMLScreen2, lpVtbl : IHTMLScreen2Vtable* do
     GUID = LibC::GUID.new(0x3050f84a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLScreen2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37747,7 +37735,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLScreen3Vtbl,
+  record IHTMLScreen3Vtable,
     query_interface : Proc(IHTMLScreen3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLScreen3*, UInt32),
     release : Proc(IHTMLScreen3*, UInt32),
@@ -37760,7 +37748,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLScreen3, lpVtbl : IHTMLScreen3Vtbl* do
+  record IHTMLScreen3, lpVtbl : IHTMLScreen3Vtable* do
     GUID = LibC::GUID.new(0x305104a1_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLScreen3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37793,7 +37781,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLScreen4Vtbl,
+  record IHTMLScreen4Vtable,
     query_interface : Proc(IHTMLScreen4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLScreen4*, UInt32),
     release : Proc(IHTMLScreen4*, UInt32),
@@ -37805,7 +37793,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLScreen4, lpVtbl : IHTMLScreen4Vtbl* do
+  record IHTMLScreen4, lpVtbl : IHTMLScreen4Vtable* do
     GUID = LibC::GUID.new(0x3051076b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLScreen4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37835,7 +37823,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLWindow4Vtbl,
+  record IHTMLWindow4Vtable,
     query_interface : Proc(IHTMLWindow4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLWindow4*, UInt32),
     release : Proc(IHTMLWindow4*, UInt32),
@@ -37848,7 +37836,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLWindow4, lpVtbl : IHTMLWindow4Vtbl* do
+  record IHTMLWindow4, lpVtbl : IHTMLWindow4Vtable* do
     GUID = LibC::GUID.new(0x3050f6cf_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLWindow4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37881,7 +37869,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLWindow5Vtbl,
+  record IHTMLWindow5Vtable,
     query_interface : Proc(IHTMLWindow5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLWindow5*, UInt32),
     release : Proc(IHTMLWindow5*, UInt32),
@@ -37894,7 +37882,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLWindow5, lpVtbl : IHTMLWindow5Vtbl* do
+  record IHTMLWindow5, lpVtbl : IHTMLWindow5Vtable* do
     GUID = LibC::GUID.new(0x3051040e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLWindow5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -37927,7 +37915,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLWindow6Vtbl,
+  record IHTMLWindow6Vtable,
     query_interface : Proc(IHTMLWindow6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLWindow6*, UInt32),
     release : Proc(IHTMLWindow6*, UInt32),
@@ -37950,7 +37938,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLWindow6, lpVtbl : IHTMLWindow6Vtbl* do
+  record IHTMLWindow6, lpVtbl : IHTMLWindow6Vtable* do
     GUID = LibC::GUID.new(0x30510453_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLWindow6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38013,7 +38001,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLWindow7Vtbl,
+  record IHTMLWindow7Vtable,
     query_interface : Proc(IHTMLWindow7*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLWindow7*, UInt32),
     release : Proc(IHTMLWindow7*, UInt32),
@@ -38143,7 +38131,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLWindow7, lpVtbl : IHTMLWindow7Vtbl* do
+  record IHTMLWindow7, lpVtbl : IHTMLWindow7Vtable* do
     GUID = LibC::GUID.new(0x305104b7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLWindow7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38527,7 +38515,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLWindow8Vtbl,
+  record IHTMLWindow8Vtable,
     query_interface : Proc(IHTMLWindow8*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLWindow8*, UInt32),
     release : Proc(IHTMLWindow8*, UInt32),
@@ -38569,7 +38557,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLWindow8, lpVtbl : IHTMLWindow8Vtbl* do
+  record IHTMLWindow8, lpVtbl : IHTMLWindow8Vtable* do
     GUID = LibC::GUID.new(0x305107ab_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLWindow8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38689,7 +38677,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLScreenVtbl,
+  record DispHTMLScreenVtable,
     query_interface : Proc(DispHTMLScreen*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLScreen*, UInt32),
     release : Proc(DispHTMLScreen*, UInt32),
@@ -38700,7 +38688,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLScreen, lpVtbl : DispHTMLScreenVtbl* do
+  record DispHTMLScreen, lpVtbl : DispHTMLScreenVtable* do
     GUID = LibC::GUID.new(0x3050f591_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLScreen*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38727,7 +38715,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLWindow2Vtbl,
+  record DispHTMLWindow2Vtable,
     query_interface : Proc(DispHTMLWindow2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLWindow2*, UInt32),
     release : Proc(DispHTMLWindow2*, UInt32),
@@ -38738,7 +38726,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLWindow2, lpVtbl : DispHTMLWindow2Vtbl* do
+  record DispHTMLWindow2, lpVtbl : DispHTMLWindow2Vtable* do
     GUID = LibC::GUID.new(0x3050f55d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLWindow2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38765,7 +38753,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLWindowProxyVtbl,
+  record DispHTMLWindowProxyVtable,
     query_interface : Proc(DispHTMLWindowProxy*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLWindowProxy*, UInt32),
     release : Proc(DispHTMLWindowProxy*, UInt32),
@@ -38776,7 +38764,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLWindowProxy, lpVtbl : DispHTMLWindowProxyVtbl* do
+  record DispHTMLWindowProxy, lpVtbl : DispHTMLWindowProxyVtable* do
     GUID = LibC::GUID.new(0x3050f55e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLWindowProxy*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38803,7 +38791,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDocumentCompatibleInfoVtbl,
+  record IHTMLDocumentCompatibleInfoVtable,
     query_interface : Proc(IHTMLDocumentCompatibleInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDocumentCompatibleInfo*, UInt32),
     release : Proc(IHTMLDocumentCompatibleInfo*, UInt32),
@@ -38816,7 +38804,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDocumentCompatibleInfo, lpVtbl : IHTMLDocumentCompatibleInfoVtbl* do
+  record IHTMLDocumentCompatibleInfo, lpVtbl : IHTMLDocumentCompatibleInfoVtable* do
     GUID = LibC::GUID.new(0x3051041a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDocumentCompatibleInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38849,7 +38837,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDocumentCompatibleInfoCollectionVtbl,
+  record IHTMLDocumentCompatibleInfoCollectionVtable,
     query_interface : Proc(IHTMLDocumentCompatibleInfoCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDocumentCompatibleInfoCollection*, UInt32),
     release : Proc(IHTMLDocumentCompatibleInfoCollection*, UInt32),
@@ -38862,7 +38850,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDocumentCompatibleInfoCollection, lpVtbl : IHTMLDocumentCompatibleInfoCollectionVtbl* do
+  record IHTMLDocumentCompatibleInfoCollection, lpVtbl : IHTMLDocumentCompatibleInfoCollectionVtable* do
     GUID = LibC::GUID.new(0x30510418_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDocumentCompatibleInfoCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38895,7 +38883,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLDocumentCompatibleInfoVtbl,
+  record DispHTMLDocumentCompatibleInfoVtable,
     query_interface : Proc(DispHTMLDocumentCompatibleInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLDocumentCompatibleInfo*, UInt32),
     release : Proc(DispHTMLDocumentCompatibleInfo*, UInt32),
@@ -38906,7 +38894,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLDocumentCompatibleInfo, lpVtbl : DispHTMLDocumentCompatibleInfoVtbl* do
+  record DispHTMLDocumentCompatibleInfo, lpVtbl : DispHTMLDocumentCompatibleInfoVtable* do
     GUID = LibC::GUID.new(0x3050f53e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLDocumentCompatibleInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38933,7 +38921,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLDocumentCompatibleInfoCollectionVtbl,
+  record DispHTMLDocumentCompatibleInfoCollectionVtable,
     query_interface : Proc(DispHTMLDocumentCompatibleInfoCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLDocumentCompatibleInfoCollection*, UInt32),
     release : Proc(DispHTMLDocumentCompatibleInfoCollection*, UInt32),
@@ -38944,7 +38932,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLDocumentCompatibleInfoCollection, lpVtbl : DispHTMLDocumentCompatibleInfoCollectionVtbl* do
+  record DispHTMLDocumentCompatibleInfoCollection, lpVtbl : DispHTMLDocumentCompatibleInfoCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f53f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLDocumentCompatibleInfoCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -38971,7 +38959,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLDocumentEvents4Vtbl,
+  record HTMLDocumentEvents4Vtable,
     query_interface : Proc(HTMLDocumentEvents4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLDocumentEvents4*, UInt32),
     release : Proc(HTMLDocumentEvents4*, UInt32),
@@ -38982,7 +38970,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLDocumentEvents4, lpVtbl : HTMLDocumentEvents4Vtbl* do
+  record HTMLDocumentEvents4, lpVtbl : HTMLDocumentEvents4Vtable* do
     GUID = LibC::GUID.new(0x30510737_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLDocumentEvents4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39009,7 +38997,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLDocumentEvents3Vtbl,
+  record HTMLDocumentEvents3Vtable,
     query_interface : Proc(HTMLDocumentEvents3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLDocumentEvents3*, UInt32),
     release : Proc(HTMLDocumentEvents3*, UInt32),
@@ -39020,7 +39008,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLDocumentEvents3, lpVtbl : HTMLDocumentEvents3Vtbl* do
+  record HTMLDocumentEvents3, lpVtbl : HTMLDocumentEvents3Vtable* do
     GUID = LibC::GUID.new(0x3050f5a0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLDocumentEvents3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39047,7 +39035,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLDocumentEvents2Vtbl,
+  record HTMLDocumentEvents2Vtable,
     query_interface : Proc(HTMLDocumentEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLDocumentEvents2*, UInt32),
     release : Proc(HTMLDocumentEvents2*, UInt32),
@@ -39058,7 +39046,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLDocumentEvents2, lpVtbl : HTMLDocumentEvents2Vtbl* do
+  record HTMLDocumentEvents2, lpVtbl : HTMLDocumentEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f613_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLDocumentEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39085,7 +39073,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLDocumentEventsVtbl,
+  record HTMLDocumentEventsVtable,
     query_interface : Proc(HTMLDocumentEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLDocumentEvents*, UInt32),
     release : Proc(HTMLDocumentEvents*, UInt32),
@@ -39096,7 +39084,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLDocumentEvents, lpVtbl : HTMLDocumentEventsVtbl* do
+  record HTMLDocumentEvents, lpVtbl : HTMLDocumentEventsVtable* do
     GUID = LibC::GUID.new(0x3050f260_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLDocumentEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39123,7 +39111,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGSVGElementVtbl,
+  record ISVGSVGElementVtable,
     query_interface : Proc(ISVGSVGElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGSVGElement*, UInt32),
     release : Proc(ISVGSVGElement*, UInt32),
@@ -39187,7 +39175,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGSVGElement, lpVtbl : ISVGSVGElementVtbl* do
+  record ISVGSVGElement, lpVtbl : ISVGSVGElementVtable* do
     GUID = LibC::GUID.new(0x305104e7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGSVGElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39373,7 +39361,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMNodeIteratorVtbl,
+  record IDOMNodeIteratorVtable,
     query_interface : Proc(IDOMNodeIterator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMNodeIterator*, UInt32),
     release : Proc(IDOMNodeIterator*, UInt32),
@@ -39391,7 +39379,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMNodeIterator, lpVtbl : IDOMNodeIteratorVtbl* do
+  record IDOMNodeIterator, lpVtbl : IDOMNodeIteratorVtable* do
     GUID = LibC::GUID.new(0x30510746_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMNodeIterator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39439,7 +39427,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMTreeWalkerVtbl,
+  record IDOMTreeWalkerVtable,
     query_interface : Proc(IDOMTreeWalker*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMTreeWalker*, UInt32),
     release : Proc(IDOMTreeWalker*, UInt32),
@@ -39463,7 +39451,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMTreeWalker, lpVtbl : IDOMTreeWalkerVtbl* do
+  record IDOMTreeWalker, lpVtbl : IDOMTreeWalkerVtable* do
     GUID = LibC::GUID.new(0x30510748_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMTreeWalker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39529,7 +39517,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMProcessingInstructionVtbl,
+  record IDOMProcessingInstructionVtable,
     query_interface : Proc(IDOMProcessingInstruction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMProcessingInstruction*, UInt32),
     release : Proc(IDOMProcessingInstruction*, UInt32),
@@ -39543,7 +39531,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMProcessingInstruction, lpVtbl : IDOMProcessingInstructionVtbl* do
+  record IDOMProcessingInstruction, lpVtbl : IDOMProcessingInstructionVtable* do
     GUID = LibC::GUID.new(0x30510742_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMProcessingInstruction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39579,7 +39567,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDocument3Vtbl,
+  record IHTMLDocument3Vtable,
     query_interface : Proc(IHTMLDocument3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDocument3*, UInt32),
     release : Proc(IHTMLDocument3*, UInt32),
@@ -39631,7 +39619,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDocument3, lpVtbl : IHTMLDocument3Vtbl* do
+  record IHTMLDocument3, lpVtbl : IHTMLDocument3Vtable* do
     GUID = LibC::GUID.new(0x3050f485_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDocument3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39781,7 +39769,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDocument4Vtbl,
+  record IHTMLDocument4Vtable,
     query_interface : Proc(IHTMLDocument4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDocument4*, UInt32),
     release : Proc(IHTMLDocument4*, UInt32),
@@ -39806,7 +39794,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDocument4, lpVtbl : IHTMLDocument4Vtbl* do
+  record IHTMLDocument4, lpVtbl : IHTMLDocument4Vtable* do
     GUID = LibC::GUID.new(0x3050f69a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDocument4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39875,7 +39863,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDocument5Vtbl,
+  record IHTMLDocument5Vtable,
     query_interface : Proc(IHTMLDocument5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDocument5*, UInt32),
     release : Proc(IHTMLDocument5*, UInt32),
@@ -39905,7 +39893,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDocument5, lpVtbl : IHTMLDocument5Vtbl* do
+  record IHTMLDocument5, lpVtbl : IHTMLDocument5Vtable* do
     GUID = LibC::GUID.new(0x3050f80c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDocument5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39989,7 +39977,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDocument6Vtbl,
+  record IHTMLDocument6Vtable,
     query_interface : Proc(IHTMLDocument6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDocument6*, UInt32),
     release : Proc(IHTMLDocument6*, UInt32),
@@ -40008,7 +39996,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDocument6, lpVtbl : IHTMLDocument6Vtbl* do
+  record IHTMLDocument6, lpVtbl : IHTMLDocument6Vtable* do
     GUID = LibC::GUID.new(0x30510417_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDocument6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40059,7 +40047,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDocument8Vtbl,
+  record IHTMLDocument8Vtable,
     query_interface : Proc(IHTMLDocument8*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDocument8*, UInt32),
     release : Proc(IHTMLDocument8*, UInt32),
@@ -40106,7 +40094,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDocument8, lpVtbl : IHTMLDocument8Vtbl* do
+  record IHTMLDocument8, lpVtbl : IHTMLDocument8Vtable* do
     GUID = LibC::GUID.new(0x305107d0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDocument8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40241,7 +40229,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDocumentEventVtbl,
+  record IDocumentEventVtable,
     query_interface : Proc(IDocumentEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDocumentEvent*, UInt32),
     release : Proc(IDocumentEvent*, UInt32),
@@ -40253,7 +40241,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDocumentEvent, lpVtbl : IDocumentEventVtbl* do
+  record IDocumentEvent, lpVtbl : IDocumentEventVtable* do
     GUID = LibC::GUID.new(0x305104bc_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDocumentEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40283,7 +40271,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDocumentRangeVtbl,
+  record IDocumentRangeVtable,
     query_interface : Proc(IDocumentRange*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDocumentRange*, UInt32),
     release : Proc(IDocumentRange*, UInt32),
@@ -40295,7 +40283,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDocumentRange, lpVtbl : IDocumentRangeVtbl* do
+  record IDocumentRange, lpVtbl : IDocumentRangeVtable* do
     GUID = LibC::GUID.new(0x305104af_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDocumentRange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40325,7 +40313,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDocumentSelectorVtbl,
+  record IDocumentSelectorVtable,
     query_interface : Proc(IDocumentSelector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDocumentSelector*, UInt32),
     release : Proc(IDocumentSelector*, UInt32),
@@ -40338,7 +40326,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDocumentSelector, lpVtbl : IDocumentSelectorVtbl* do
+  record IDocumentSelector, lpVtbl : IDocumentSelectorVtable* do
     GUID = LibC::GUID.new(0x30510462_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDocumentSelector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40371,7 +40359,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDocumentTraversalVtbl,
+  record IDocumentTraversalVtable,
     query_interface : Proc(IDocumentTraversal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDocumentTraversal*, UInt32),
     release : Proc(IDocumentTraversal*, UInt32),
@@ -40384,7 +40372,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDocumentTraversal, lpVtbl : IDocumentTraversalVtbl* do
+  record IDocumentTraversal, lpVtbl : IDocumentTraversalVtable* do
     GUID = LibC::GUID.new(0x30510744_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDocumentTraversal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40417,7 +40405,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLDocumentVtbl,
+  record DispHTMLDocumentVtable,
     query_interface : Proc(DispHTMLDocument*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLDocument*, UInt32),
     release : Proc(DispHTMLDocument*, UInt32),
@@ -40428,7 +40416,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLDocument, lpVtbl : DispHTMLDocumentVtbl* do
+  record DispHTMLDocument, lpVtbl : DispHTMLDocumentVtable* do
     GUID = LibC::GUID.new(0x3050f55f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40455,7 +40443,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DWebBridgeEventsVtbl,
+  record DWebBridgeEventsVtable,
     query_interface : Proc(DWebBridgeEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DWebBridgeEvents*, UInt32),
     release : Proc(DWebBridgeEvents*, UInt32),
@@ -40466,7 +40454,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DWebBridgeEvents, lpVtbl : DWebBridgeEventsVtbl* do
+  record DWebBridgeEvents, lpVtbl : DWebBridgeEventsVtable* do
     GUID = LibC::GUID.new(0xa6d897ff_u32, 0xa95_u16, 0x11d1_u16, StaticArray[0xb0_u8, 0xba_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x16_u8, 0x6e_u8, 0x11_u8])
     def query_interface(this : DWebBridgeEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40493,7 +40481,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IWebBridgeVtbl,
+  record IWebBridgeVtable,
     query_interface : Proc(IWebBridge*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebBridge*, UInt32),
     release : Proc(IWebBridge*, UInt32),
@@ -40513,7 +40501,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IWebBridge, lpVtbl : IWebBridgeVtbl* do
+  record IWebBridge, lpVtbl : IWebBridgeVtable* do
     GUID = LibC::GUID.new(0xae24fdad_u32, 0x3c6_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x76_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x44_u8, 0xf3_u8, 0x89_u8])
     def query_interface(this : IWebBridge*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40567,7 +40555,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IWBScriptControlVtbl,
+  record IWBScriptControlVtable,
     query_interface : Proc(IWBScriptControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWBScriptControl*, UInt32),
     release : Proc(IWBScriptControl*, UInt32),
@@ -40590,7 +40578,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IWBScriptControl, lpVtbl : IWBScriptControlVtbl* do
+  record IWBScriptControl, lpVtbl : IWBScriptControlVtable* do
     GUID = LibC::GUID.new(0xa5170870_u32, 0xcf8_u16, 0x11d1_u16, StaticArray[0x8b_u8, 0x91_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x44_u8, 0xf3_u8, 0x89_u8])
     def query_interface(this : IWBScriptControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40653,7 +40641,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLEmbedElementVtbl,
+  record IHTMLEmbedElementVtable,
     query_interface : Proc(IHTMLEmbedElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLEmbedElement*, UInt32),
     release : Proc(IHTMLEmbedElement*, UInt32),
@@ -40678,7 +40666,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLEmbedElement, lpVtbl : IHTMLEmbedElementVtbl* do
+  record IHTMLEmbedElement, lpVtbl : IHTMLEmbedElementVtable* do
     GUID = LibC::GUID.new(0x3050f25f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLEmbedElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40747,7 +40735,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLEmbedElement2Vtbl,
+  record IHTMLEmbedElement2Vtable,
     query_interface : Proc(IHTMLEmbedElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLEmbedElement2*, UInt32),
     release : Proc(IHTMLEmbedElement2*, UInt32),
@@ -40761,7 +40749,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLEmbedElement2, lpVtbl : IHTMLEmbedElement2Vtbl* do
+  record IHTMLEmbedElement2, lpVtbl : IHTMLEmbedElement2Vtable* do
     GUID = LibC::GUID.new(0x30510493_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLEmbedElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40797,7 +40785,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLEmbedVtbl,
+  record DispHTMLEmbedVtable,
     query_interface : Proc(DispHTMLEmbed*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLEmbed*, UInt32),
     release : Proc(DispHTMLEmbed*, UInt32),
@@ -40808,7 +40796,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLEmbed, lpVtbl : DispHTMLEmbedVtbl* do
+  record DispHTMLEmbed, lpVtbl : DispHTMLEmbedVtable* do
     GUID = LibC::GUID.new(0x3050f52e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLEmbed*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40835,7 +40823,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLMapEvents2Vtbl,
+  record HTMLMapEvents2Vtable,
     query_interface : Proc(HTMLMapEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLMapEvents2*, UInt32),
     release : Proc(HTMLMapEvents2*, UInt32),
@@ -40846,7 +40834,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLMapEvents2, lpVtbl : HTMLMapEvents2Vtbl* do
+  record HTMLMapEvents2, lpVtbl : HTMLMapEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f61e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLMapEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40873,7 +40861,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLMapEventsVtbl,
+  record HTMLMapEventsVtable,
     query_interface : Proc(HTMLMapEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLMapEvents*, UInt32),
     release : Proc(HTMLMapEvents*, UInt32),
@@ -40884,7 +40872,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLMapEvents, lpVtbl : HTMLMapEventsVtbl* do
+  record HTMLMapEvents, lpVtbl : HTMLMapEventsVtable* do
     GUID = LibC::GUID.new(0x3050f3ba_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLMapEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40911,7 +40899,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLAreasCollectionVtbl,
+  record IHTMLAreasCollectionVtable,
     query_interface : Proc(IHTMLAreasCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLAreasCollection*, UInt32),
     release : Proc(IHTMLAreasCollection*, UInt32),
@@ -40929,7 +40917,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLAreasCollection, lpVtbl : IHTMLAreasCollectionVtbl* do
+  record IHTMLAreasCollection, lpVtbl : IHTMLAreasCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f383_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLAreasCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -40977,7 +40965,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLAreasCollection2Vtbl,
+  record IHTMLAreasCollection2Vtable,
     query_interface : Proc(IHTMLAreasCollection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLAreasCollection2*, UInt32),
     release : Proc(IHTMLAreasCollection2*, UInt32),
@@ -40989,7 +40977,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLAreasCollection2, lpVtbl : IHTMLAreasCollection2Vtbl* do
+  record IHTMLAreasCollection2, lpVtbl : IHTMLAreasCollection2Vtable* do
     GUID = LibC::GUID.new(0x3050f5ec_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLAreasCollection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41019,7 +41007,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLAreasCollection3Vtbl,
+  record IHTMLAreasCollection3Vtable,
     query_interface : Proc(IHTMLAreasCollection3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLAreasCollection3*, UInt32),
     release : Proc(IHTMLAreasCollection3*, UInt32),
@@ -41031,7 +41019,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLAreasCollection3, lpVtbl : IHTMLAreasCollection3Vtbl* do
+  record IHTMLAreasCollection3, lpVtbl : IHTMLAreasCollection3Vtable* do
     GUID = LibC::GUID.new(0x3050f837_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLAreasCollection3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41061,7 +41049,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLAreasCollection4Vtbl,
+  record IHTMLAreasCollection4Vtable,
     query_interface : Proc(IHTMLAreasCollection4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLAreasCollection4*, UInt32),
     release : Proc(IHTMLAreasCollection4*, UInt32),
@@ -41075,7 +41063,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLAreasCollection4, lpVtbl : IHTMLAreasCollection4Vtbl* do
+  record IHTMLAreasCollection4, lpVtbl : IHTMLAreasCollection4Vtable* do
     GUID = LibC::GUID.new(0x30510492_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLAreasCollection4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41111,7 +41099,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLMapElementVtbl,
+  record IHTMLMapElementVtable,
     query_interface : Proc(IHTMLMapElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLMapElement*, UInt32),
     release : Proc(IHTMLMapElement*, UInt32),
@@ -41125,7 +41113,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLMapElement, lpVtbl : IHTMLMapElementVtbl* do
+  record IHTMLMapElement, lpVtbl : IHTMLMapElementVtable* do
     GUID = LibC::GUID.new(0x3050f266_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLMapElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41161,7 +41149,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLAreasCollectionVtbl,
+  record DispHTMLAreasCollectionVtable,
     query_interface : Proc(DispHTMLAreasCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLAreasCollection*, UInt32),
     release : Proc(DispHTMLAreasCollection*, UInt32),
@@ -41172,7 +41160,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLAreasCollection, lpVtbl : DispHTMLAreasCollectionVtbl* do
+  record DispHTMLAreasCollection, lpVtbl : DispHTMLAreasCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f56a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLAreasCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41199,7 +41187,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLMapElementVtbl,
+  record DispHTMLMapElementVtable,
     query_interface : Proc(DispHTMLMapElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLMapElement*, UInt32),
     release : Proc(DispHTMLMapElement*, UInt32),
@@ -41210,7 +41198,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLMapElement, lpVtbl : DispHTMLMapElementVtbl* do
+  record DispHTMLMapElement, lpVtbl : DispHTMLMapElementVtable* do
     GUID = LibC::GUID.new(0x3050f526_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLMapElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41237,7 +41225,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLAreaEvents2Vtbl,
+  record HTMLAreaEvents2Vtable,
     query_interface : Proc(HTMLAreaEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLAreaEvents2*, UInt32),
     release : Proc(HTMLAreaEvents2*, UInt32),
@@ -41248,7 +41236,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLAreaEvents2, lpVtbl : HTMLAreaEvents2Vtbl* do
+  record HTMLAreaEvents2, lpVtbl : HTMLAreaEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f611_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLAreaEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41275,7 +41263,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLAreaEventsVtbl,
+  record HTMLAreaEventsVtable,
     query_interface : Proc(HTMLAreaEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLAreaEvents*, UInt32),
     release : Proc(HTMLAreaEvents*, UInt32),
@@ -41286,7 +41274,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLAreaEvents, lpVtbl : HTMLAreaEventsVtbl* do
+  record HTMLAreaEvents, lpVtbl : HTMLAreaEventsVtable* do
     GUID = LibC::GUID.new(0x3050f366_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLAreaEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41313,7 +41301,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLAreaElementVtbl,
+  record IHTMLAreaElementVtable,
     query_interface : Proc(IHTMLAreaElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLAreaElement*, UInt32),
     release : Proc(IHTMLAreaElement*, UInt32),
@@ -41358,7 +41346,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLAreaElement, lpVtbl : IHTMLAreaElementVtbl* do
+  record IHTMLAreaElement, lpVtbl : IHTMLAreaElementVtable* do
     GUID = LibC::GUID.new(0x3050f265_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLAreaElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41487,7 +41475,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLAreaElement2Vtbl,
+  record IHTMLAreaElement2Vtable,
     query_interface : Proc(IHTMLAreaElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLAreaElement2*, UInt32),
     release : Proc(IHTMLAreaElement2*, UInt32),
@@ -41504,7 +41492,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLAreaElement2, lpVtbl : IHTMLAreaElement2Vtbl* do
+  record IHTMLAreaElement2, lpVtbl : IHTMLAreaElement2Vtable* do
     GUID = LibC::GUID.new(0x3051041f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLAreaElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41549,7 +41537,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLAreaElementVtbl,
+  record DispHTMLAreaElementVtable,
     query_interface : Proc(DispHTMLAreaElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLAreaElement*, UInt32),
     release : Proc(DispHTMLAreaElement*, UInt32),
@@ -41560,7 +41548,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLAreaElement, lpVtbl : DispHTMLAreaElementVtbl* do
+  record DispHTMLAreaElement, lpVtbl : DispHTMLAreaElementVtable* do
     GUID = LibC::GUID.new(0x3050f503_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLAreaElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41587,7 +41575,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTableCaptionVtbl,
+  record IHTMLTableCaptionVtable,
     query_interface : Proc(IHTMLTableCaption*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTableCaption*, UInt32),
     release : Proc(IHTMLTableCaption*, UInt32),
@@ -41602,7 +41590,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTableCaption, lpVtbl : IHTMLTableCaptionVtbl* do
+  record IHTMLTableCaption, lpVtbl : IHTMLTableCaptionVtable* do
     GUID = LibC::GUID.new(0x3050f2eb_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTableCaption*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41641,7 +41629,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLTableCaptionVtbl,
+  record DispHTMLTableCaptionVtable,
     query_interface : Proc(DispHTMLTableCaption*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLTableCaption*, UInt32),
     release : Proc(DispHTMLTableCaption*, UInt32),
@@ -41652,7 +41640,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLTableCaption, lpVtbl : DispHTMLTableCaptionVtbl* do
+  record DispHTMLTableCaption, lpVtbl : DispHTMLTableCaptionVtable* do
     GUID = LibC::GUID.new(0x3050f508_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLTableCaption*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41679,7 +41667,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCommentElementVtbl,
+  record IHTMLCommentElementVtable,
     query_interface : Proc(IHTMLCommentElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCommentElement*, UInt32),
     release : Proc(IHTMLCommentElement*, UInt32),
@@ -41694,7 +41682,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCommentElement, lpVtbl : IHTMLCommentElementVtbl* do
+  record IHTMLCommentElement, lpVtbl : IHTMLCommentElementVtable* do
     GUID = LibC::GUID.new(0x3050f20c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLCommentElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41733,7 +41721,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCommentElement2Vtbl,
+  record IHTMLCommentElement2Vtable,
     query_interface : Proc(IHTMLCommentElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCommentElement2*, UInt32),
     release : Proc(IHTMLCommentElement2*, UInt32),
@@ -41752,7 +41740,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCommentElement2, lpVtbl : IHTMLCommentElement2Vtbl* do
+  record IHTMLCommentElement2, lpVtbl : IHTMLCommentElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f813_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLCommentElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41803,7 +41791,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCommentElement3Vtbl,
+  record IHTMLCommentElement3Vtable,
     query_interface : Proc(IHTMLCommentElement3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCommentElement3*, UInt32),
     release : Proc(IHTMLCommentElement3*, UInt32),
@@ -41818,7 +41806,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCommentElement3, lpVtbl : IHTMLCommentElement3Vtbl* do
+  record IHTMLCommentElement3, lpVtbl : IHTMLCommentElement3Vtable* do
     GUID = LibC::GUID.new(0x3051073f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLCommentElement3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41857,7 +41845,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLCommentElementVtbl,
+  record DispHTMLCommentElementVtable,
     query_interface : Proc(DispHTMLCommentElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLCommentElement*, UInt32),
     release : Proc(DispHTMLCommentElement*, UInt32),
@@ -41868,7 +41856,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLCommentElement, lpVtbl : DispHTMLCommentElementVtbl* do
+  record DispHTMLCommentElement, lpVtbl : DispHTMLCommentElementVtable* do
     GUID = LibC::GUID.new(0x3050f50a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLCommentElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41895,7 +41883,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLPhraseElementVtbl,
+  record IHTMLPhraseElementVtable,
     query_interface : Proc(IHTMLPhraseElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLPhraseElement*, UInt32),
     release : Proc(IHTMLPhraseElement*, UInt32),
@@ -41906,7 +41894,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLPhraseElement, lpVtbl : IHTMLPhraseElementVtbl* do
+  record IHTMLPhraseElement, lpVtbl : IHTMLPhraseElementVtable* do
     GUID = LibC::GUID.new(0x3050f20a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLPhraseElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41933,7 +41921,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLPhraseElement2Vtbl,
+  record IHTMLPhraseElement2Vtable,
     query_interface : Proc(IHTMLPhraseElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLPhraseElement2*, UInt32),
     release : Proc(IHTMLPhraseElement2*, UInt32),
@@ -41948,7 +41936,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLPhraseElement2, lpVtbl : IHTMLPhraseElement2Vtbl* do
+  record IHTMLPhraseElement2, lpVtbl : IHTMLPhraseElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f824_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLPhraseElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41987,7 +41975,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLPhraseElement3Vtbl,
+  record IHTMLPhraseElement3Vtable,
     query_interface : Proc(IHTMLPhraseElement3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLPhraseElement3*, UInt32),
     release : Proc(IHTMLPhraseElement3*, UInt32),
@@ -42000,7 +41988,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLPhraseElement3, lpVtbl : IHTMLPhraseElement3Vtbl* do
+  record IHTMLPhraseElement3, lpVtbl : IHTMLPhraseElement3Vtable* do
     GUID = LibC::GUID.new(0x3051043d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLPhraseElement3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42033,7 +42021,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLSpanElementVtbl,
+  record IHTMLSpanElementVtable,
     query_interface : Proc(IHTMLSpanElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLSpanElement*, UInt32),
     release : Proc(IHTMLSpanElement*, UInt32),
@@ -42044,7 +42032,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLSpanElement, lpVtbl : IHTMLSpanElementVtbl* do
+  record IHTMLSpanElement, lpVtbl : IHTMLSpanElementVtable* do
     GUID = LibC::GUID.new(0x3050f3f3_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLSpanElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42071,7 +42059,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLPhraseElementVtbl,
+  record DispHTMLPhraseElementVtable,
     query_interface : Proc(DispHTMLPhraseElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLPhraseElement*, UInt32),
     release : Proc(DispHTMLPhraseElement*, UInt32),
@@ -42082,7 +42070,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLPhraseElement, lpVtbl : DispHTMLPhraseElementVtbl* do
+  record DispHTMLPhraseElement, lpVtbl : DispHTMLPhraseElementVtable* do
     GUID = LibC::GUID.new(0x3050f52d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLPhraseElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42109,7 +42097,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLSpanElementVtbl,
+  record DispHTMLSpanElementVtable,
     query_interface : Proc(DispHTMLSpanElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLSpanElement*, UInt32),
     release : Proc(DispHTMLSpanElement*, UInt32),
@@ -42120,7 +42108,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLSpanElement, lpVtbl : DispHTMLSpanElementVtbl* do
+  record DispHTMLSpanElement, lpVtbl : DispHTMLSpanElementVtable* do
     GUID = LibC::GUID.new(0x3050f548_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLSpanElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42147,7 +42135,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLTableEvents2Vtbl,
+  record HTMLTableEvents2Vtable,
     query_interface : Proc(HTMLTableEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLTableEvents2*, UInt32),
     release : Proc(HTMLTableEvents2*, UInt32),
@@ -42158,7 +42146,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLTableEvents2, lpVtbl : HTMLTableEvents2Vtbl* do
+  record HTMLTableEvents2, lpVtbl : HTMLTableEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f623_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLTableEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42185,7 +42173,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLTableEventsVtbl,
+  record HTMLTableEventsVtable,
     query_interface : Proc(HTMLTableEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLTableEvents*, UInt32),
     release : Proc(HTMLTableEvents*, UInt32),
@@ -42196,7 +42184,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLTableEvents, lpVtbl : HTMLTableEventsVtbl* do
+  record HTMLTableEvents, lpVtbl : HTMLTableEventsVtable* do
     GUID = LibC::GUID.new(0x3050f407_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLTableEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42223,7 +42211,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTableSectionVtbl,
+  record IHTMLTableSectionVtable,
     query_interface : Proc(IHTMLTableSection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTableSection*, UInt32),
     release : Proc(IHTMLTableSection*, UInt32),
@@ -42243,7 +42231,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTableSection, lpVtbl : IHTMLTableSectionVtbl* do
+  record IHTMLTableSection, lpVtbl : IHTMLTableSectionVtable* do
     GUID = LibC::GUID.new(0x3050f23b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTableSection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42297,7 +42285,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTableVtbl,
+  record IHTMLTableVtable,
     query_interface : Proc(IHTMLTable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTable*, UInt32),
     release : Proc(IHTMLTable*, UInt32),
@@ -42357,7 +42345,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTable, lpVtbl : IHTMLTableVtbl* do
+  record IHTMLTable, lpVtbl : IHTMLTableVtable* do
     GUID = LibC::GUID.new(0x3050f21e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42531,7 +42519,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTable2Vtbl,
+  record IHTMLTable2Vtable,
     query_interface : Proc(IHTMLTable2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTable2*, UInt32),
     release : Proc(IHTMLTable2*, UInt32),
@@ -42546,7 +42534,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTable2, lpVtbl : IHTMLTable2Vtbl* do
+  record IHTMLTable2, lpVtbl : IHTMLTable2Vtable* do
     GUID = LibC::GUID.new(0x3050f4ad_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTable2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42585,7 +42573,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTable3Vtbl,
+  record IHTMLTable3Vtable,
     query_interface : Proc(IHTMLTable3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTable3*, UInt32),
     release : Proc(IHTMLTable3*, UInt32),
@@ -42598,7 +42586,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTable3, lpVtbl : IHTMLTable3Vtbl* do
+  record IHTMLTable3, lpVtbl : IHTMLTable3Vtable* do
     GUID = LibC::GUID.new(0x3050f829_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTable3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42631,7 +42619,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTable4Vtbl,
+  record IHTMLTable4Vtable,
     query_interface : Proc(IHTMLTable4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTable4*, UInt32),
     release : Proc(IHTMLTable4*, UInt32),
@@ -42651,7 +42639,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTable4, lpVtbl : IHTMLTable4Vtbl* do
+  record IHTMLTable4, lpVtbl : IHTMLTable4Vtable* do
     GUID = LibC::GUID.new(0x305106c2_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTable4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42705,7 +42693,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTableColVtbl,
+  record IHTMLTableColVtable,
     query_interface : Proc(IHTMLTableCol*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTableCol*, UInt32),
     release : Proc(IHTMLTableCol*, UInt32),
@@ -42724,7 +42712,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTableCol, lpVtbl : IHTMLTableColVtbl* do
+  record IHTMLTableCol, lpVtbl : IHTMLTableColVtable* do
     GUID = LibC::GUID.new(0x3050f23a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTableCol*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42775,7 +42763,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTableCol2Vtbl,
+  record IHTMLTableCol2Vtable,
     query_interface : Proc(IHTMLTableCol2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTableCol2*, UInt32),
     release : Proc(IHTMLTableCol2*, UInt32),
@@ -42790,7 +42778,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTableCol2, lpVtbl : IHTMLTableCol2Vtbl* do
+  record IHTMLTableCol2, lpVtbl : IHTMLTableCol2Vtable* do
     GUID = LibC::GUID.new(0x3050f82a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTableCol2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42829,7 +42817,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTableCol3Vtbl,
+  record IHTMLTableCol3Vtable,
     query_interface : Proc(IHTMLTableCol3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTableCol3*, UInt32),
     release : Proc(IHTMLTableCol3*, UInt32),
@@ -42844,7 +42832,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTableCol3, lpVtbl : IHTMLTableCol3Vtbl* do
+  record IHTMLTableCol3, lpVtbl : IHTMLTableCol3Vtable* do
     GUID = LibC::GUID.new(0x305106c4_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTableCol3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42883,7 +42871,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTableSection2Vtbl,
+  record IHTMLTableSection2Vtable,
     query_interface : Proc(IHTMLTableSection2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTableSection2*, UInt32),
     release : Proc(IHTMLTableSection2*, UInt32),
@@ -42895,7 +42883,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTableSection2, lpVtbl : IHTMLTableSection2Vtbl* do
+  record IHTMLTableSection2, lpVtbl : IHTMLTableSection2Vtable* do
     GUID = LibC::GUID.new(0x3050f5c7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTableSection2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42925,7 +42913,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTableSection3Vtbl,
+  record IHTMLTableSection3Vtable,
     query_interface : Proc(IHTMLTableSection3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTableSection3*, UInt32),
     release : Proc(IHTMLTableSection3*, UInt32),
@@ -42940,7 +42928,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTableSection3, lpVtbl : IHTMLTableSection3Vtbl* do
+  record IHTMLTableSection3, lpVtbl : IHTMLTableSection3Vtable* do
     GUID = LibC::GUID.new(0x3050f82b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTableSection3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42979,7 +42967,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTableSection4Vtbl,
+  record IHTMLTableSection4Vtable,
     query_interface : Proc(IHTMLTableSection4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTableSection4*, UInt32),
     release : Proc(IHTMLTableSection4*, UInt32),
@@ -42996,7 +42984,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTableSection4, lpVtbl : IHTMLTableSection4Vtbl* do
+  record IHTMLTableSection4, lpVtbl : IHTMLTableSection4Vtable* do
     GUID = LibC::GUID.new(0x305106c5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTableSection4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43041,7 +43029,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTableRowVtbl,
+  record IHTMLTableRowVtable,
     query_interface : Proc(IHTMLTableRow*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTableRow*, UInt32),
     release : Proc(IHTMLTableRow*, UInt32),
@@ -43069,7 +43057,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTableRow, lpVtbl : IHTMLTableRowVtbl* do
+  record IHTMLTableRow, lpVtbl : IHTMLTableRowVtable* do
     GUID = LibC::GUID.new(0x3050f23c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTableRow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43147,7 +43135,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTableRow2Vtbl,
+  record IHTMLTableRow2Vtable,
     query_interface : Proc(IHTMLTableRow2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTableRow2*, UInt32),
     release : Proc(IHTMLTableRow2*, UInt32),
@@ -43160,7 +43148,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTableRow2, lpVtbl : IHTMLTableRow2Vtbl* do
+  record IHTMLTableRow2, lpVtbl : IHTMLTableRow2Vtable* do
     GUID = LibC::GUID.new(0x3050f4a1_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTableRow2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43193,7 +43181,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTableRow3Vtbl,
+  record IHTMLTableRow3Vtable,
     query_interface : Proc(IHTMLTableRow3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTableRow3*, UInt32),
     release : Proc(IHTMLTableRow3*, UInt32),
@@ -43208,7 +43196,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTableRow3, lpVtbl : IHTMLTableRow3Vtbl* do
+  record IHTMLTableRow3, lpVtbl : IHTMLTableRow3Vtable* do
     GUID = LibC::GUID.new(0x3050f82c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTableRow3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43247,7 +43235,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTableRow4Vtbl,
+  record IHTMLTableRow4Vtable,
     query_interface : Proc(IHTMLTableRow4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTableRow4*, UInt32),
     release : Proc(IHTMLTableRow4*, UInt32),
@@ -43264,7 +43252,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTableRow4, lpVtbl : IHTMLTableRow4Vtbl* do
+  record IHTMLTableRow4, lpVtbl : IHTMLTableRow4Vtable* do
     GUID = LibC::GUID.new(0x305106c6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTableRow4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43309,7 +43297,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTableRowMetricsVtbl,
+  record IHTMLTableRowMetricsVtable,
     query_interface : Proc(IHTMLTableRowMetrics*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTableRowMetrics*, UInt32),
     release : Proc(IHTMLTableRowMetrics*, UInt32),
@@ -43324,7 +43312,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTableRowMetrics, lpVtbl : IHTMLTableRowMetricsVtbl* do
+  record IHTMLTableRowMetrics, lpVtbl : IHTMLTableRowMetricsVtable* do
     GUID = LibC::GUID.new(0x3050f413_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTableRowMetrics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43363,7 +43351,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTableCellVtbl,
+  record IHTMLTableCellVtable,
     query_interface : Proc(IHTMLTableCell*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTableCell*, UInt32),
     release : Proc(IHTMLTableCell*, UInt32),
@@ -43399,7 +43387,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTableCell, lpVtbl : IHTMLTableCellVtbl* do
+  record IHTMLTableCell, lpVtbl : IHTMLTableCellVtable* do
     GUID = LibC::GUID.new(0x3050f23d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTableCell*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43501,7 +43489,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTableCell2Vtbl,
+  record IHTMLTableCell2Vtable,
     query_interface : Proc(IHTMLTableCell2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTableCell2*, UInt32),
     release : Proc(IHTMLTableCell2*, UInt32),
@@ -43524,7 +43512,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTableCell2, lpVtbl : IHTMLTableCell2Vtbl* do
+  record IHTMLTableCell2, lpVtbl : IHTMLTableCell2Vtable* do
     GUID = LibC::GUID.new(0x3050f82d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTableCell2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43587,7 +43575,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTableCell3Vtbl,
+  record IHTMLTableCell3Vtable,
     query_interface : Proc(IHTMLTableCell3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTableCell3*, UInt32),
     release : Proc(IHTMLTableCell3*, UInt32),
@@ -43602,7 +43590,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTableCell3, lpVtbl : IHTMLTableCell3Vtbl* do
+  record IHTMLTableCell3, lpVtbl : IHTMLTableCell3Vtable* do
     GUID = LibC::GUID.new(0x305106c7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTableCell3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43641,7 +43629,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLTableVtbl,
+  record DispHTMLTableVtable,
     query_interface : Proc(DispHTMLTable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLTable*, UInt32),
     release : Proc(DispHTMLTable*, UInt32),
@@ -43652,7 +43640,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLTable, lpVtbl : DispHTMLTableVtbl* do
+  record DispHTMLTable, lpVtbl : DispHTMLTableVtable* do
     GUID = LibC::GUID.new(0x3050f532_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLTable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43679,7 +43667,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLTableColVtbl,
+  record DispHTMLTableColVtable,
     query_interface : Proc(DispHTMLTableCol*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLTableCol*, UInt32),
     release : Proc(DispHTMLTableCol*, UInt32),
@@ -43690,7 +43678,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLTableCol, lpVtbl : DispHTMLTableColVtbl* do
+  record DispHTMLTableCol, lpVtbl : DispHTMLTableColVtable* do
     GUID = LibC::GUID.new(0x3050f533_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLTableCol*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43717,7 +43705,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLTableSectionVtbl,
+  record DispHTMLTableSectionVtable,
     query_interface : Proc(DispHTMLTableSection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLTableSection*, UInt32),
     release : Proc(DispHTMLTableSection*, UInt32),
@@ -43728,7 +43716,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLTableSection, lpVtbl : DispHTMLTableSectionVtbl* do
+  record DispHTMLTableSection, lpVtbl : DispHTMLTableSectionVtable* do
     GUID = LibC::GUID.new(0x3050f534_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLTableSection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43755,7 +43743,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLTableRowVtbl,
+  record DispHTMLTableRowVtable,
     query_interface : Proc(DispHTMLTableRow*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLTableRow*, UInt32),
     release : Proc(DispHTMLTableRow*, UInt32),
@@ -43766,7 +43754,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLTableRow, lpVtbl : DispHTMLTableRowVtbl* do
+  record DispHTMLTableRow, lpVtbl : DispHTMLTableRowVtable* do
     GUID = LibC::GUID.new(0x3050f535_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLTableRow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43793,7 +43781,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLTableCellVtbl,
+  record DispHTMLTableCellVtable,
     query_interface : Proc(DispHTMLTableCell*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLTableCell*, UInt32),
     release : Proc(DispHTMLTableCell*, UInt32),
@@ -43804,7 +43792,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLTableCell, lpVtbl : DispHTMLTableCellVtbl* do
+  record DispHTMLTableCell, lpVtbl : DispHTMLTableCellVtable* do
     GUID = LibC::GUID.new(0x3050f536_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLTableCell*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43831,7 +43819,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLScriptEvents2Vtbl,
+  record HTMLScriptEvents2Vtable,
     query_interface : Proc(HTMLScriptEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLScriptEvents2*, UInt32),
     release : Proc(HTMLScriptEvents2*, UInt32),
@@ -43842,7 +43830,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLScriptEvents2, lpVtbl : HTMLScriptEvents2Vtbl* do
+  record HTMLScriptEvents2, lpVtbl : HTMLScriptEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f621_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLScriptEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43869,7 +43857,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLScriptEventsVtbl,
+  record HTMLScriptEventsVtable,
     query_interface : Proc(HTMLScriptEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLScriptEvents*, UInt32),
     release : Proc(HTMLScriptEvents*, UInt32),
@@ -43880,7 +43868,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLScriptEvents, lpVtbl : HTMLScriptEventsVtbl* do
+  record HTMLScriptEvents, lpVtbl : HTMLScriptEventsVtable* do
     GUID = LibC::GUID.new(0x3050f3e2_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLScriptEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -43907,7 +43895,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLScriptElementVtbl,
+  record IHTMLScriptElementVtable,
     query_interface : Proc(IHTMLScriptElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLScriptElement*, UInt32),
     release : Proc(IHTMLScriptElement*, UInt32),
@@ -43933,7 +43921,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLScriptElement, lpVtbl : IHTMLScriptElementVtbl* do
+  record IHTMLScriptElement, lpVtbl : IHTMLScriptElementVtable* do
     GUID = LibC::GUID.new(0x3050f28b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLScriptElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44005,7 +43993,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLScriptElement2Vtbl,
+  record IHTMLScriptElement2Vtable,
     query_interface : Proc(IHTMLScriptElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLScriptElement2*, UInt32),
     release : Proc(IHTMLScriptElement2*, UInt32),
@@ -44018,7 +44006,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLScriptElement2, lpVtbl : IHTMLScriptElement2Vtbl* do
+  record IHTMLScriptElement2, lpVtbl : IHTMLScriptElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f828_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLScriptElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44051,7 +44039,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLScriptElement3Vtbl,
+  record IHTMLScriptElement3Vtable,
     query_interface : Proc(IHTMLScriptElement3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLScriptElement3*, UInt32),
     release : Proc(IHTMLScriptElement3*, UInt32),
@@ -44064,7 +44052,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLScriptElement3, lpVtbl : IHTMLScriptElement3Vtbl* do
+  record IHTMLScriptElement3, lpVtbl : IHTMLScriptElement3Vtable* do
     GUID = LibC::GUID.new(0x30510447_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLScriptElement3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44097,7 +44085,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLScriptElement4Vtbl,
+  record IHTMLScriptElement4Vtable,
     query_interface : Proc(IHTMLScriptElement4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLScriptElement4*, UInt32),
     release : Proc(IHTMLScriptElement4*, UInt32),
@@ -44109,7 +44097,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLScriptElement4, lpVtbl : IHTMLScriptElement4Vtbl* do
+  record IHTMLScriptElement4, lpVtbl : IHTMLScriptElement4Vtable* do
     GUID = LibC::GUID.new(0x30510801_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLScriptElement4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44139,7 +44127,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLScriptElementVtbl,
+  record DispHTMLScriptElementVtable,
     query_interface : Proc(DispHTMLScriptElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLScriptElement*, UInt32),
     release : Proc(DispHTMLScriptElement*, UInt32),
@@ -44150,7 +44138,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLScriptElement, lpVtbl : DispHTMLScriptElementVtbl* do
+  record DispHTMLScriptElement, lpVtbl : DispHTMLScriptElementVtable* do
     GUID = LibC::GUID.new(0x3050f530_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLScriptElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44177,7 +44165,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLNoShowElementVtbl,
+  record IHTMLNoShowElementVtable,
     query_interface : Proc(IHTMLNoShowElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLNoShowElement*, UInt32),
     release : Proc(IHTMLNoShowElement*, UInt32),
@@ -44188,7 +44176,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLNoShowElement, lpVtbl : IHTMLNoShowElementVtbl* do
+  record IHTMLNoShowElement, lpVtbl : IHTMLNoShowElementVtable* do
     GUID = LibC::GUID.new(0x3050f38a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLNoShowElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44215,7 +44203,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLNoShowElementVtbl,
+  record DispHTMLNoShowElementVtable,
     query_interface : Proc(DispHTMLNoShowElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLNoShowElement*, UInt32),
     release : Proc(DispHTMLNoShowElement*, UInt32),
@@ -44226,7 +44214,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLNoShowElement, lpVtbl : DispHTMLNoShowElementVtbl* do
+  record DispHTMLNoShowElement, lpVtbl : DispHTMLNoShowElementVtable* do
     GUID = LibC::GUID.new(0x3050f528_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLNoShowElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44253,7 +44241,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLObjectElementEvents2Vtbl,
+  record HTMLObjectElementEvents2Vtable,
     query_interface : Proc(HTMLObjectElementEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLObjectElementEvents2*, UInt32),
     release : Proc(HTMLObjectElementEvents2*, UInt32),
@@ -44264,7 +44252,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLObjectElementEvents2, lpVtbl : HTMLObjectElementEvents2Vtbl* do
+  record HTMLObjectElementEvents2, lpVtbl : HTMLObjectElementEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f620_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLObjectElementEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44291,7 +44279,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLObjectElementEventsVtbl,
+  record HTMLObjectElementEventsVtable,
     query_interface : Proc(HTMLObjectElementEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLObjectElementEvents*, UInt32),
     release : Proc(HTMLObjectElementEvents*, UInt32),
@@ -44302,7 +44290,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLObjectElementEvents, lpVtbl : HTMLObjectElementEventsVtbl* do
+  record HTMLObjectElementEvents, lpVtbl : HTMLObjectElementEventsVtable* do
     GUID = LibC::GUID.new(0x3050f3c4_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLObjectElementEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44329,7 +44317,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLObjectElementVtbl,
+  record IHTMLObjectElementVtable,
     query_interface : Proc(IHTMLObjectElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLObjectElement*, UInt32),
     release : Proc(IHTMLObjectElement*, UInt32),
@@ -44374,7 +44362,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLObjectElement, lpVtbl : IHTMLObjectElementVtbl* do
+  record IHTMLObjectElement, lpVtbl : IHTMLObjectElementVtable* do
     GUID = LibC::GUID.new(0x3050f24f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLObjectElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44503,7 +44491,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLObjectElement2Vtbl,
+  record IHTMLObjectElement2Vtable,
     query_interface : Proc(IHTMLObjectElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLObjectElement2*, UInt32),
     release : Proc(IHTMLObjectElement2*, UInt32),
@@ -44519,7 +44507,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLObjectElement2, lpVtbl : IHTMLObjectElement2Vtbl* do
+  record IHTMLObjectElement2, lpVtbl : IHTMLObjectElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f4cd_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLObjectElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44561,7 +44549,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLObjectElement3Vtbl,
+  record IHTMLObjectElement3Vtable,
     query_interface : Proc(IHTMLObjectElement3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLObjectElement3*, UInt32),
     release : Proc(IHTMLObjectElement3*, UInt32),
@@ -44584,7 +44572,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLObjectElement3, lpVtbl : IHTMLObjectElement3Vtbl* do
+  record IHTMLObjectElement3, lpVtbl : IHTMLObjectElement3Vtable* do
     GUID = LibC::GUID.new(0x3050f827_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLObjectElement3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44647,7 +44635,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLObjectElement4Vtbl,
+  record IHTMLObjectElement4Vtable,
     query_interface : Proc(IHTMLObjectElement4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLObjectElement4*, UInt32),
     release : Proc(IHTMLObjectElement4*, UInt32),
@@ -44663,7 +44651,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLObjectElement4, lpVtbl : IHTMLObjectElement4Vtbl* do
+  record IHTMLObjectElement4, lpVtbl : IHTMLObjectElement4Vtable* do
     GUID = LibC::GUID.new(0x3051043e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLObjectElement4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44705,7 +44693,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLObjectElement5Vtbl,
+  record IHTMLObjectElement5Vtable,
     query_interface : Proc(IHTMLObjectElement5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLObjectElement5*, UInt32),
     release : Proc(IHTMLObjectElement5*, UInt32),
@@ -44718,7 +44706,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLObjectElement5, lpVtbl : IHTMLObjectElement5Vtbl* do
+  record IHTMLObjectElement5, lpVtbl : IHTMLObjectElement5Vtable* do
     GUID = LibC::GUID.new(0x305104b5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLObjectElement5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44751,7 +44739,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLParamElementVtbl,
+  record IHTMLParamElementVtable,
     query_interface : Proc(IHTMLParamElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLParamElement*, UInt32),
     release : Proc(IHTMLParamElement*, UInt32),
@@ -44770,7 +44758,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLParamElement, lpVtbl : IHTMLParamElementVtbl* do
+  record IHTMLParamElement, lpVtbl : IHTMLParamElementVtable* do
     GUID = LibC::GUID.new(0x3050f83d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLParamElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44821,7 +44809,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLParamElement2Vtbl,
+  record IHTMLParamElement2Vtable,
     query_interface : Proc(IHTMLParamElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLParamElement2*, UInt32),
     release : Proc(IHTMLParamElement2*, UInt32),
@@ -44840,7 +44828,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLParamElement2, lpVtbl : IHTMLParamElement2Vtbl* do
+  record IHTMLParamElement2, lpVtbl : IHTMLParamElement2Vtable* do
     GUID = LibC::GUID.new(0x30510444_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLParamElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44891,7 +44879,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLObjectElementVtbl,
+  record DispHTMLObjectElementVtable,
     query_interface : Proc(DispHTMLObjectElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLObjectElement*, UInt32),
     release : Proc(DispHTMLObjectElement*, UInt32),
@@ -44902,7 +44890,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLObjectElement, lpVtbl : DispHTMLObjectElementVtbl* do
+  record DispHTMLObjectElement, lpVtbl : DispHTMLObjectElementVtable* do
     GUID = LibC::GUID.new(0x3050f529_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLObjectElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44929,7 +44917,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLParamElementVtbl,
+  record DispHTMLParamElementVtable,
     query_interface : Proc(DispHTMLParamElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLParamElement*, UInt32),
     release : Proc(DispHTMLParamElement*, UInt32),
@@ -44940,7 +44928,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLParamElement, lpVtbl : DispHTMLParamElementVtbl* do
+  record DispHTMLParamElement, lpVtbl : DispHTMLParamElementVtable* do
     GUID = LibC::GUID.new(0x3050f590_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLParamElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44967,7 +44955,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLFrameSiteEvents2Vtbl,
+  record HTMLFrameSiteEvents2Vtable,
     query_interface : Proc(HTMLFrameSiteEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLFrameSiteEvents2*, UInt32),
     release : Proc(HTMLFrameSiteEvents2*, UInt32),
@@ -44978,7 +44966,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLFrameSiteEvents2, lpVtbl : HTMLFrameSiteEvents2Vtbl* do
+  record HTMLFrameSiteEvents2, lpVtbl : HTMLFrameSiteEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f7ff_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLFrameSiteEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45005,7 +44993,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLFrameSiteEventsVtbl,
+  record HTMLFrameSiteEventsVtable,
     query_interface : Proc(HTMLFrameSiteEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLFrameSiteEvents*, UInt32),
     release : Proc(HTMLFrameSiteEvents*, UInt32),
@@ -45016,7 +45004,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLFrameSiteEvents, lpVtbl : HTMLFrameSiteEventsVtbl* do
+  record HTMLFrameSiteEvents, lpVtbl : HTMLFrameSiteEventsVtable* do
     GUID = LibC::GUID.new(0x3050f800_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLFrameSiteEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45043,7 +45031,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFrameBase2Vtbl,
+  record IHTMLFrameBase2Vtable,
     query_interface : Proc(IHTMLFrameBase2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFrameBase2*, UInt32),
     release : Proc(IHTMLFrameBase2*, UInt32),
@@ -45062,7 +45050,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFrameBase2, lpVtbl : IHTMLFrameBase2Vtbl* do
+  record IHTMLFrameBase2, lpVtbl : IHTMLFrameBase2Vtable* do
     GUID = LibC::GUID.new(0x3050f6db_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFrameBase2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45113,7 +45101,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFrameBase3Vtbl,
+  record IHTMLFrameBase3Vtable,
     query_interface : Proc(IHTMLFrameBase3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFrameBase3*, UInt32),
     release : Proc(IHTMLFrameBase3*, UInt32),
@@ -45126,7 +45114,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFrameBase3, lpVtbl : IHTMLFrameBase3Vtbl* do
+  record IHTMLFrameBase3, lpVtbl : IHTMLFrameBase3Vtable* do
     GUID = LibC::GUID.new(0x3050f82e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFrameBase3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45159,7 +45147,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLFrameBaseVtbl,
+  record DispHTMLFrameBaseVtable,
     query_interface : Proc(DispHTMLFrameBase*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLFrameBase*, UInt32),
     release : Proc(DispHTMLFrameBase*, UInt32),
@@ -45170,7 +45158,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLFrameBase, lpVtbl : DispHTMLFrameBaseVtbl* do
+  record DispHTMLFrameBase, lpVtbl : DispHTMLFrameBaseVtable* do
     GUID = LibC::GUID.new(0x3050f541_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLFrameBase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45197,7 +45185,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFrameElementVtbl,
+  record IHTMLFrameElementVtable,
     query_interface : Proc(IHTMLFrameElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFrameElement*, UInt32),
     release : Proc(IHTMLFrameElement*, UInt32),
@@ -45210,7 +45198,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFrameElement, lpVtbl : IHTMLFrameElementVtbl* do
+  record IHTMLFrameElement, lpVtbl : IHTMLFrameElementVtable* do
     GUID = LibC::GUID.new(0x3050f313_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFrameElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45243,7 +45231,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFrameElement2Vtbl,
+  record IHTMLFrameElement2Vtable,
     query_interface : Proc(IHTMLFrameElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFrameElement2*, UInt32),
     release : Proc(IHTMLFrameElement2*, UInt32),
@@ -45258,7 +45246,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFrameElement2, lpVtbl : IHTMLFrameElement2Vtbl* do
+  record IHTMLFrameElement2, lpVtbl : IHTMLFrameElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f7f5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFrameElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45297,7 +45285,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFrameElement3Vtbl,
+  record IHTMLFrameElement3Vtable,
     query_interface : Proc(IHTMLFrameElement3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFrameElement3*, UInt32),
     release : Proc(IHTMLFrameElement3*, UInt32),
@@ -45315,7 +45303,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFrameElement3, lpVtbl : IHTMLFrameElement3Vtbl* do
+  record IHTMLFrameElement3, lpVtbl : IHTMLFrameElement3Vtable* do
     GUID = LibC::GUID.new(0x3051042d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFrameElement3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45363,7 +45351,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLFrameElementVtbl,
+  record DispHTMLFrameElementVtable,
     query_interface : Proc(DispHTMLFrameElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLFrameElement*, UInt32),
     release : Proc(DispHTMLFrameElement*, UInt32),
@@ -45374,7 +45362,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLFrameElement, lpVtbl : DispHTMLFrameElementVtbl* do
+  record DispHTMLFrameElement, lpVtbl : DispHTMLFrameElementVtable* do
     GUID = LibC::GUID.new(0x3050f513_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLFrameElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45401,7 +45389,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLIFrameElementVtbl,
+  record IHTMLIFrameElementVtable,
     query_interface : Proc(IHTMLIFrameElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLIFrameElement*, UInt32),
     release : Proc(IHTMLIFrameElement*, UInt32),
@@ -45418,7 +45406,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLIFrameElement, lpVtbl : IHTMLIFrameElementVtbl* do
+  record IHTMLIFrameElement, lpVtbl : IHTMLIFrameElementVtable* do
     GUID = LibC::GUID.new(0x3050f315_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLIFrameElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45463,7 +45451,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLIFrameElement2Vtbl,
+  record IHTMLIFrameElement2Vtable,
     query_interface : Proc(IHTMLIFrameElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLIFrameElement2*, UInt32),
     release : Proc(IHTMLIFrameElement2*, UInt32),
@@ -45478,7 +45466,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLIFrameElement2, lpVtbl : IHTMLIFrameElement2Vtbl* do
+  record IHTMLIFrameElement2, lpVtbl : IHTMLIFrameElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f4e6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLIFrameElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45517,7 +45505,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLIFrameElement3Vtbl,
+  record IHTMLIFrameElement3Vtable,
     query_interface : Proc(IHTMLIFrameElement3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLIFrameElement3*, UInt32),
     release : Proc(IHTMLIFrameElement3*, UInt32),
@@ -45535,7 +45523,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLIFrameElement3, lpVtbl : IHTMLIFrameElement3Vtbl* do
+  record IHTMLIFrameElement3, lpVtbl : IHTMLIFrameElement3Vtable* do
     GUID = LibC::GUID.new(0x30510433_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLIFrameElement3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45583,7 +45571,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLIFrameVtbl,
+  record DispHTMLIFrameVtable,
     query_interface : Proc(DispHTMLIFrame*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLIFrame*, UInt32),
     release : Proc(DispHTMLIFrame*, UInt32),
@@ -45594,7 +45582,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLIFrame, lpVtbl : DispHTMLIFrameVtbl* do
+  record DispHTMLIFrame, lpVtbl : DispHTMLIFrameVtable* do
     GUID = LibC::GUID.new(0x3050f51b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLIFrame*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45621,7 +45609,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDivPositionVtbl,
+  record IHTMLDivPositionVtable,
     query_interface : Proc(IHTMLDivPosition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDivPosition*, UInt32),
     release : Proc(IHTMLDivPosition*, UInt32),
@@ -45634,7 +45622,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDivPosition, lpVtbl : IHTMLDivPositionVtbl* do
+  record IHTMLDivPosition, lpVtbl : IHTMLDivPositionVtable* do
     GUID = LibC::GUID.new(0x3050f212_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDivPosition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45667,7 +45655,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFieldSetElementVtbl,
+  record IHTMLFieldSetElementVtable,
     query_interface : Proc(IHTMLFieldSetElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFieldSetElement*, UInt32),
     release : Proc(IHTMLFieldSetElement*, UInt32),
@@ -45680,7 +45668,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFieldSetElement, lpVtbl : IHTMLFieldSetElementVtbl* do
+  record IHTMLFieldSetElement, lpVtbl : IHTMLFieldSetElementVtable* do
     GUID = LibC::GUID.new(0x3050f3e7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFieldSetElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45713,7 +45701,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFieldSetElement2Vtbl,
+  record IHTMLFieldSetElement2Vtable,
     query_interface : Proc(IHTMLFieldSetElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFieldSetElement2*, UInt32),
     release : Proc(IHTMLFieldSetElement2*, UInt32),
@@ -45725,7 +45713,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFieldSetElement2, lpVtbl : IHTMLFieldSetElement2Vtbl* do
+  record IHTMLFieldSetElement2, lpVtbl : IHTMLFieldSetElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f833_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFieldSetElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45755,7 +45743,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLLegendElementVtbl,
+  record IHTMLLegendElementVtable,
     query_interface : Proc(IHTMLLegendElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLLegendElement*, UInt32),
     release : Proc(IHTMLLegendElement*, UInt32),
@@ -45768,7 +45756,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLLegendElement, lpVtbl : IHTMLLegendElementVtbl* do
+  record IHTMLLegendElement, lpVtbl : IHTMLLegendElementVtable* do
     GUID = LibC::GUID.new(0x3050f3ea_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLLegendElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45801,7 +45789,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLLegendElement2Vtbl,
+  record IHTMLLegendElement2Vtable,
     query_interface : Proc(IHTMLLegendElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLLegendElement2*, UInt32),
     release : Proc(IHTMLLegendElement2*, UInt32),
@@ -45813,7 +45801,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLLegendElement2, lpVtbl : IHTMLLegendElement2Vtbl* do
+  record IHTMLLegendElement2, lpVtbl : IHTMLLegendElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f834_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLLegendElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45843,7 +45831,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLDivPositionVtbl,
+  record DispHTMLDivPositionVtable,
     query_interface : Proc(DispHTMLDivPosition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLDivPosition*, UInt32),
     release : Proc(DispHTMLDivPosition*, UInt32),
@@ -45854,7 +45842,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLDivPosition, lpVtbl : DispHTMLDivPositionVtbl* do
+  record DispHTMLDivPosition, lpVtbl : DispHTMLDivPositionVtable* do
     GUID = LibC::GUID.new(0x3050f50f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLDivPosition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45881,7 +45869,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLFieldSetElementVtbl,
+  record DispHTMLFieldSetElementVtable,
     query_interface : Proc(DispHTMLFieldSetElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLFieldSetElement*, UInt32),
     release : Proc(DispHTMLFieldSetElement*, UInt32),
@@ -45892,7 +45880,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLFieldSetElement, lpVtbl : DispHTMLFieldSetElementVtbl* do
+  record DispHTMLFieldSetElement, lpVtbl : DispHTMLFieldSetElementVtable* do
     GUID = LibC::GUID.new(0x3050f545_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLFieldSetElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45919,7 +45907,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLLegendElementVtbl,
+  record DispHTMLLegendElementVtable,
     query_interface : Proc(DispHTMLLegendElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLLegendElement*, UInt32),
     release : Proc(DispHTMLLegendElement*, UInt32),
@@ -45930,7 +45918,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLLegendElement, lpVtbl : DispHTMLLegendElementVtbl* do
+  record DispHTMLLegendElement, lpVtbl : DispHTMLLegendElementVtable* do
     GUID = LibC::GUID.new(0x3050f546_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLLegendElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -45957,7 +45945,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLSpanFlowVtbl,
+  record IHTMLSpanFlowVtable,
     query_interface : Proc(IHTMLSpanFlow*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLSpanFlow*, UInt32),
     release : Proc(IHTMLSpanFlow*, UInt32),
@@ -45970,7 +45958,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLSpanFlow, lpVtbl : IHTMLSpanFlowVtbl* do
+  record IHTMLSpanFlow, lpVtbl : IHTMLSpanFlowVtable* do
     GUID = LibC::GUID.new(0x3050f3e5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLSpanFlow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -46003,7 +45991,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLSpanFlowVtbl,
+  record DispHTMLSpanFlowVtable,
     query_interface : Proc(DispHTMLSpanFlow*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLSpanFlow*, UInt32),
     release : Proc(DispHTMLSpanFlow*, UInt32),
@@ -46014,7 +46002,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLSpanFlow, lpVtbl : DispHTMLSpanFlowVtbl* do
+  record DispHTMLSpanFlow, lpVtbl : DispHTMLSpanFlowVtable* do
     GUID = LibC::GUID.new(0x3050f544_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLSpanFlow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -46041,7 +46029,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFrameSetElementVtbl,
+  record IHTMLFrameSetElementVtable,
     query_interface : Proc(IHTMLFrameSetElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFrameSetElement*, UInt32),
     release : Proc(IHTMLFrameSetElement*, UInt32),
@@ -46072,7 +46060,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFrameSetElement, lpVtbl : IHTMLFrameSetElementVtbl* do
+  record IHTMLFrameSetElement, lpVtbl : IHTMLFrameSetElementVtable* do
     GUID = LibC::GUID.new(0x3050f319_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFrameSetElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -46159,7 +46147,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFrameSetElement2Vtbl,
+  record IHTMLFrameSetElement2Vtable,
     query_interface : Proc(IHTMLFrameSetElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFrameSetElement2*, UInt32),
     release : Proc(IHTMLFrameSetElement2*, UInt32),
@@ -46174,7 +46162,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFrameSetElement2, lpVtbl : IHTMLFrameSetElement2Vtbl* do
+  record IHTMLFrameSetElement2, lpVtbl : IHTMLFrameSetElement2Vtable* do
     GUID = LibC::GUID.new(0x3050f5c6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFrameSetElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -46213,7 +46201,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFrameSetElement3Vtbl,
+  record IHTMLFrameSetElement3Vtable,
     query_interface : Proc(IHTMLFrameSetElement3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFrameSetElement3*, UInt32),
     release : Proc(IHTMLFrameSetElement3*, UInt32),
@@ -46234,7 +46222,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFrameSetElement3, lpVtbl : IHTMLFrameSetElement3Vtbl* do
+  record IHTMLFrameSetElement3, lpVtbl : IHTMLFrameSetElement3Vtable* do
     GUID = LibC::GUID.new(0x30510796_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFrameSetElement3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -46291,7 +46279,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLFrameSetSiteVtbl,
+  record DispHTMLFrameSetSiteVtable,
     query_interface : Proc(DispHTMLFrameSetSite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLFrameSetSite*, UInt32),
     release : Proc(DispHTMLFrameSetSite*, UInt32),
@@ -46302,7 +46290,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLFrameSetSite, lpVtbl : DispHTMLFrameSetSiteVtbl* do
+  record DispHTMLFrameSetSite, lpVtbl : DispHTMLFrameSetSiteVtable* do
     GUID = LibC::GUID.new(0x3050f514_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLFrameSetSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -46329,7 +46317,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLBGsoundVtbl,
+  record IHTMLBGsoundVtable,
     query_interface : Proc(IHTMLBGsound*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLBGsound*, UInt32),
     release : Proc(IHTMLBGsound*, UInt32),
@@ -46348,7 +46336,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLBGsound, lpVtbl : IHTMLBGsoundVtbl* do
+  record IHTMLBGsound, lpVtbl : IHTMLBGsoundVtable* do
     GUID = LibC::GUID.new(0x3050f369_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLBGsound*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -46399,7 +46387,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLBGsoundVtbl,
+  record DispHTMLBGsoundVtable,
     query_interface : Proc(DispHTMLBGsound*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLBGsound*, UInt32),
     release : Proc(DispHTMLBGsound*, UInt32),
@@ -46410,7 +46398,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLBGsound, lpVtbl : DispHTMLBGsoundVtbl* do
+  record DispHTMLBGsound, lpVtbl : DispHTMLBGsoundVtable* do
     GUID = LibC::GUID.new(0x3050f53c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLBGsound*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -46437,7 +46425,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFontNamesCollectionVtbl,
+  record IHTMLFontNamesCollectionVtable,
     query_interface : Proc(IHTMLFontNamesCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFontNamesCollection*, UInt32),
     release : Proc(IHTMLFontNamesCollection*, UInt32),
@@ -46451,7 +46439,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFontNamesCollection, lpVtbl : IHTMLFontNamesCollectionVtbl* do
+  record IHTMLFontNamesCollection, lpVtbl : IHTMLFontNamesCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f376_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFontNamesCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -46487,7 +46475,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLFontSizesCollectionVtbl,
+  record IHTMLFontSizesCollectionVtable,
     query_interface : Proc(IHTMLFontSizesCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLFontSizesCollection*, UInt32),
     release : Proc(IHTMLFontSizesCollection*, UInt32),
@@ -46502,7 +46490,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLFontSizesCollection, lpVtbl : IHTMLFontSizesCollectionVtbl* do
+  record IHTMLFontSizesCollection, lpVtbl : IHTMLFontSizesCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f377_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLFontSizesCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -46541,7 +46529,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLOptionsHolderVtbl,
+  record IHTMLOptionsHolderVtable,
     query_interface : Proc(IHTMLOptionsHolder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLOptionsHolder*, UInt32),
     release : Proc(IHTMLOptionsHolder*, UInt32),
@@ -46579,7 +46567,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLOptionsHolder, lpVtbl : IHTMLOptionsHolderVtbl* do
+  record IHTMLOptionsHolder, lpVtbl : IHTMLOptionsHolderVtable* do
     GUID = LibC::GUID.new(0x3050f378_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLOptionsHolder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -46687,7 +46675,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLStyleElementEvents2Vtbl,
+  record HTMLStyleElementEvents2Vtable,
     query_interface : Proc(HTMLStyleElementEvents2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLStyleElementEvents2*, UInt32),
     release : Proc(HTMLStyleElementEvents2*, UInt32),
@@ -46698,7 +46686,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLStyleElementEvents2, lpVtbl : HTMLStyleElementEvents2Vtbl* do
+  record HTMLStyleElementEvents2, lpVtbl : HTMLStyleElementEvents2Vtable* do
     GUID = LibC::GUID.new(0x3050f615_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLStyleElementEvents2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -46725,7 +46713,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLStyleElementEventsVtbl,
+  record HTMLStyleElementEventsVtable,
     query_interface : Proc(HTMLStyleElementEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLStyleElementEvents*, UInt32),
     release : Proc(HTMLStyleElementEvents*, UInt32),
@@ -46736,7 +46724,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLStyleElementEvents, lpVtbl : HTMLStyleElementEventsVtbl* do
+  record HTMLStyleElementEvents, lpVtbl : HTMLStyleElementEventsVtable* do
     GUID = LibC::GUID.new(0x3050f3cb_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLStyleElementEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -46763,7 +46751,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleElementVtbl,
+  record IHTMLStyleElementVtable,
     query_interface : Proc(IHTMLStyleElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleElement*, UInt32),
     release : Proc(IHTMLStyleElement*, UInt32),
@@ -46788,7 +46776,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleElement, lpVtbl : IHTMLStyleElementVtbl* do
+  record IHTMLStyleElement, lpVtbl : IHTMLStyleElementVtable* do
     GUID = LibC::GUID.new(0x3050f375_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -46857,7 +46845,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleElement2Vtbl,
+  record IHTMLStyleElement2Vtable,
     query_interface : Proc(IHTMLStyleElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleElement2*, UInt32),
     release : Proc(IHTMLStyleElement2*, UInt32),
@@ -46869,7 +46857,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleElement2, lpVtbl : IHTMLStyleElement2Vtbl* do
+  record IHTMLStyleElement2, lpVtbl : IHTMLStyleElement2Vtable* do
     GUID = LibC::GUID.new(0x3051072a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -46899,7 +46887,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLStyleElementVtbl,
+  record DispHTMLStyleElementVtable,
     query_interface : Proc(DispHTMLStyleElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLStyleElement*, UInt32),
     release : Proc(DispHTMLStyleElement*, UInt32),
@@ -46910,7 +46898,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLStyleElement, lpVtbl : DispHTMLStyleElementVtbl* do
+  record DispHTMLStyleElement, lpVtbl : DispHTMLStyleElementVtable* do
     GUID = LibC::GUID.new(0x3050f511_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLStyleElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -46937,7 +46925,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleFontFaceVtbl,
+  record IHTMLStyleFontFaceVtable,
     query_interface : Proc(IHTMLStyleFontFace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleFontFace*, UInt32),
     release : Proc(IHTMLStyleFontFace*, UInt32),
@@ -46950,7 +46938,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleFontFace, lpVtbl : IHTMLStyleFontFaceVtbl* do
+  record IHTMLStyleFontFace, lpVtbl : IHTMLStyleFontFaceVtable* do
     GUID = LibC::GUID.new(0x3050f3d5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleFontFace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -46983,7 +46971,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleFontFace2Vtbl,
+  record IHTMLStyleFontFace2Vtable,
     query_interface : Proc(IHTMLStyleFontFace2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleFontFace2*, UInt32),
     release : Proc(IHTMLStyleFontFace2*, UInt32),
@@ -46995,7 +46983,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleFontFace2, lpVtbl : IHTMLStyleFontFace2Vtbl* do
+  record IHTMLStyleFontFace2, lpVtbl : IHTMLStyleFontFace2Vtable* do
     GUID = LibC::GUID.new(0x305106ec_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleFontFace2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47025,7 +47013,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLStyleFontFaceVtbl,
+  record DispHTMLStyleFontFaceVtable,
     query_interface : Proc(DispHTMLStyleFontFace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLStyleFontFace*, UInt32),
     release : Proc(DispHTMLStyleFontFace*, UInt32),
@@ -47036,7 +47024,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLStyleFontFace, lpVtbl : DispHTMLStyleFontFaceVtbl* do
+  record DispHTMLStyleFontFace, lpVtbl : DispHTMLStyleFontFaceVtable* do
     GUID = LibC::GUID.new(0x30590081_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLStyleFontFace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47063,7 +47051,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLXDomainRequestVtbl,
+  record IHTMLXDomainRequestVtable,
     query_interface : Proc(IHTMLXDomainRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLXDomainRequest*, UInt32),
     release : Proc(IHTMLXDomainRequest*, UInt32),
@@ -47089,7 +47077,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLXDomainRequest, lpVtbl : IHTMLXDomainRequestVtbl* do
+  record IHTMLXDomainRequest, lpVtbl : IHTMLXDomainRequestVtable* do
     GUID = LibC::GUID.new(0x30510454_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLXDomainRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47161,7 +47149,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLXDomainRequestFactoryVtbl,
+  record IHTMLXDomainRequestFactoryVtable,
     query_interface : Proc(IHTMLXDomainRequestFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLXDomainRequestFactory*, UInt32),
     release : Proc(IHTMLXDomainRequestFactory*, UInt32),
@@ -47173,7 +47161,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLXDomainRequestFactory, lpVtbl : IHTMLXDomainRequestFactoryVtbl* do
+  record IHTMLXDomainRequestFactory, lpVtbl : IHTMLXDomainRequestFactoryVtable* do
     GUID = LibC::GUID.new(0x30510456_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLXDomainRequestFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47203,7 +47191,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispXDomainRequestVtbl,
+  record DispXDomainRequestVtable,
     query_interface : Proc(DispXDomainRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispXDomainRequest*, UInt32),
     release : Proc(DispXDomainRequest*, UInt32),
@@ -47214,7 +47202,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispXDomainRequest, lpVtbl : DispXDomainRequestVtbl* do
+  record DispXDomainRequest, lpVtbl : DispXDomainRequestVtable* do
     GUID = LibC::GUID.new(0x3050f599_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispXDomainRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47241,7 +47229,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStorage2Vtbl,
+  record IHTMLStorage2Vtable,
     query_interface : Proc(IHTMLStorage2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStorage2*, UInt32),
     release : Proc(IHTMLStorage2*, UInt32),
@@ -47253,7 +47241,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStorage2, lpVtbl : IHTMLStorage2Vtbl* do
+  record IHTMLStorage2, lpVtbl : IHTMLStorage2Vtable* do
     GUID = LibC::GUID.new(0x30510799_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStorage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47283,7 +47271,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLStorageVtbl,
+  record DispHTMLStorageVtable,
     query_interface : Proc(DispHTMLStorage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLStorage*, UInt32),
     release : Proc(DispHTMLStorage*, UInt32),
@@ -47294,7 +47282,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLStorage, lpVtbl : DispHTMLStorageVtbl* do
+  record DispHTMLStorage, lpVtbl : DispHTMLStorageVtable* do
     GUID = LibC::GUID.new(0x3050f59d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47321,7 +47309,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IEventTargetVtbl,
+  record IEventTargetVtable,
     query_interface : Proc(IEventTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEventTarget*, UInt32),
     release : Proc(IEventTarget*, UInt32),
@@ -47335,7 +47323,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IEventTarget, lpVtbl : IEventTargetVtbl* do
+  record IEventTarget, lpVtbl : IEventTargetVtable* do
     GUID = LibC::GUID.new(0x305104b9_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IEventTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47371,7 +47359,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMEventVtbl,
+  record DispDOMEventVtable,
     query_interface : Proc(DispDOMEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMEvent*, UInt32),
     release : Proc(DispDOMEvent*, UInt32),
@@ -47382,7 +47370,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMEvent, lpVtbl : DispDOMEventVtbl* do
+  record DispDOMEvent, lpVtbl : DispDOMEventVtable* do
     GUID = LibC::GUID.new(0x3050f5a2_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47409,7 +47397,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMUIEventVtbl,
+  record IDOMUIEventVtable,
     query_interface : Proc(IDOMUIEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMUIEvent*, UInt32),
     release : Proc(IDOMUIEvent*, UInt32),
@@ -47423,7 +47411,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMUIEvent, lpVtbl : IDOMUIEventVtbl* do
+  record IDOMUIEvent, lpVtbl : IDOMUIEventVtable* do
     GUID = LibC::GUID.new(0x305106ca_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMUIEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47459,7 +47447,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMUIEventVtbl,
+  record DispDOMUIEventVtable,
     query_interface : Proc(DispDOMUIEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMUIEvent*, UInt32),
     release : Proc(DispDOMUIEvent*, UInt32),
@@ -47470,7 +47458,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMUIEvent, lpVtbl : DispDOMUIEventVtbl* do
+  record DispDOMUIEvent, lpVtbl : DispDOMUIEventVtable* do
     GUID = LibC::GUID.new(0x30590072_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMUIEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47497,7 +47485,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMMouseEventVtbl,
+  record IDOMMouseEventVtable,
     query_interface : Proc(IDOMMouseEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMMouseEvent*, UInt32),
     release : Proc(IDOMMouseEvent*, UInt32),
@@ -47532,7 +47520,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMMouseEvent, lpVtbl : IDOMMouseEventVtbl* do
+  record IDOMMouseEvent, lpVtbl : IDOMMouseEventVtable* do
     GUID = LibC::GUID.new(0x305106ce_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMMouseEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47631,7 +47619,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMMouseEventVtbl,
+  record DispDOMMouseEventVtable,
     query_interface : Proc(DispDOMMouseEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMMouseEvent*, UInt32),
     release : Proc(DispDOMMouseEvent*, UInt32),
@@ -47642,7 +47630,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMMouseEvent, lpVtbl : DispDOMMouseEventVtbl* do
+  record DispDOMMouseEvent, lpVtbl : DispDOMMouseEventVtable* do
     GUID = LibC::GUID.new(0x30590073_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMMouseEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47669,7 +47657,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMDragEventVtbl,
+  record IDOMDragEventVtable,
     query_interface : Proc(IDOMDragEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMDragEvent*, UInt32),
     release : Proc(IDOMDragEvent*, UInt32),
@@ -47682,7 +47670,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMDragEvent, lpVtbl : IDOMDragEventVtbl* do
+  record IDOMDragEvent, lpVtbl : IDOMDragEventVtable* do
     GUID = LibC::GUID.new(0x30510761_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMDragEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47715,7 +47703,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMDragEventVtbl,
+  record DispDOMDragEventVtable,
     query_interface : Proc(DispDOMDragEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMDragEvent*, UInt32),
     release : Proc(DispDOMDragEvent*, UInt32),
@@ -47726,7 +47714,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMDragEvent, lpVtbl : DispDOMDragEventVtbl* do
+  record DispDOMDragEvent, lpVtbl : DispDOMDragEventVtable* do
     GUID = LibC::GUID.new(0x305900a7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMDragEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47753,7 +47741,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMMouseWheelEventVtbl,
+  record IDOMMouseWheelEventVtable,
     query_interface : Proc(IDOMMouseWheelEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMMouseWheelEvent*, UInt32),
     release : Proc(IDOMMouseWheelEvent*, UInt32),
@@ -47766,7 +47754,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMMouseWheelEvent, lpVtbl : IDOMMouseWheelEventVtbl* do
+  record IDOMMouseWheelEvent, lpVtbl : IDOMMouseWheelEventVtable* do
     GUID = LibC::GUID.new(0x305106d0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMMouseWheelEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47799,7 +47787,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMMouseWheelEventVtbl,
+  record DispDOMMouseWheelEventVtable,
     query_interface : Proc(DispDOMMouseWheelEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMMouseWheelEvent*, UInt32),
     release : Proc(DispDOMMouseWheelEvent*, UInt32),
@@ -47810,7 +47798,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMMouseWheelEvent, lpVtbl : DispDOMMouseWheelEventVtbl* do
+  record DispDOMMouseWheelEvent, lpVtbl : DispDOMMouseWheelEventVtable* do
     GUID = LibC::GUID.new(0x30590074_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMMouseWheelEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47837,7 +47825,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMWheelEventVtbl,
+  record IDOMWheelEventVtable,
     query_interface : Proc(IDOMWheelEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMWheelEvent*, UInt32),
     release : Proc(IDOMWheelEvent*, UInt32),
@@ -47853,7 +47841,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMWheelEvent, lpVtbl : IDOMWheelEventVtbl* do
+  record IDOMWheelEvent, lpVtbl : IDOMWheelEventVtable* do
     GUID = LibC::GUID.new(0x305106d2_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMWheelEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47895,7 +47883,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMWheelEventVtbl,
+  record DispDOMWheelEventVtable,
     query_interface : Proc(DispDOMWheelEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMWheelEvent*, UInt32),
     release : Proc(DispDOMWheelEvent*, UInt32),
@@ -47906,7 +47894,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMWheelEvent, lpVtbl : DispDOMWheelEventVtbl* do
+  record DispDOMWheelEvent, lpVtbl : DispDOMWheelEventVtable* do
     GUID = LibC::GUID.new(0x30590075_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMWheelEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47933,7 +47921,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMTextEventVtbl,
+  record IDOMTextEventVtable,
     query_interface : Proc(IDOMTextEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMTextEvent*, UInt32),
     release : Proc(IDOMTextEvent*, UInt32),
@@ -47948,7 +47936,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMTextEvent, lpVtbl : IDOMTextEventVtbl* do
+  record IDOMTextEvent, lpVtbl : IDOMTextEventVtable* do
     GUID = LibC::GUID.new(0x305106d4_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMTextEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -47987,7 +47975,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMTextEventVtbl,
+  record DispDOMTextEventVtable,
     query_interface : Proc(DispDOMTextEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMTextEvent*, UInt32),
     release : Proc(DispDOMTextEvent*, UInt32),
@@ -47998,7 +47986,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMTextEvent, lpVtbl : DispDOMTextEventVtbl* do
+  record DispDOMTextEvent, lpVtbl : DispDOMTextEventVtable* do
     GUID = LibC::GUID.new(0x30590076_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMTextEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48025,7 +48013,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMKeyboardEventVtbl,
+  record IDOMKeyboardEventVtable,
     query_interface : Proc(IDOMKeyboardEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMKeyboardEvent*, UInt32),
     release : Proc(IDOMKeyboardEvent*, UInt32),
@@ -48050,7 +48038,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMKeyboardEvent, lpVtbl : IDOMKeyboardEventVtbl* do
+  record IDOMKeyboardEvent, lpVtbl : IDOMKeyboardEventVtable* do
     GUID = LibC::GUID.new(0x305106d6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMKeyboardEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48119,7 +48107,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMKeyboardEventVtbl,
+  record DispDOMKeyboardEventVtable,
     query_interface : Proc(DispDOMKeyboardEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMKeyboardEvent*, UInt32),
     release : Proc(DispDOMKeyboardEvent*, UInt32),
@@ -48130,7 +48118,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMKeyboardEvent, lpVtbl : DispDOMKeyboardEventVtbl* do
+  record DispDOMKeyboardEvent, lpVtbl : DispDOMKeyboardEventVtable* do
     GUID = LibC::GUID.new(0x30590077_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMKeyboardEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48157,7 +48145,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMCompositionEventVtbl,
+  record IDOMCompositionEventVtable,
     query_interface : Proc(IDOMCompositionEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMCompositionEvent*, UInt32),
     release : Proc(IDOMCompositionEvent*, UInt32),
@@ -48171,7 +48159,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMCompositionEvent, lpVtbl : IDOMCompositionEventVtbl* do
+  record IDOMCompositionEvent, lpVtbl : IDOMCompositionEventVtable* do
     GUID = LibC::GUID.new(0x305106d8_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMCompositionEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48207,7 +48195,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMCompositionEventVtbl,
+  record DispDOMCompositionEventVtable,
     query_interface : Proc(DispDOMCompositionEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMCompositionEvent*, UInt32),
     release : Proc(DispDOMCompositionEvent*, UInt32),
@@ -48218,7 +48206,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMCompositionEvent, lpVtbl : DispDOMCompositionEventVtbl* do
+  record DispDOMCompositionEvent, lpVtbl : DispDOMCompositionEventVtable* do
     GUID = LibC::GUID.new(0x30590078_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMCompositionEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48245,7 +48233,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMMutationEventVtbl,
+  record IDOMMutationEventVtable,
     query_interface : Proc(IDOMMutationEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMMutationEvent*, UInt32),
     release : Proc(IDOMMutationEvent*, UInt32),
@@ -48262,7 +48250,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMMutationEvent, lpVtbl : IDOMMutationEventVtbl* do
+  record IDOMMutationEvent, lpVtbl : IDOMMutationEventVtable* do
     GUID = LibC::GUID.new(0x305106da_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMMutationEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48307,7 +48295,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMMutationEventVtbl,
+  record DispDOMMutationEventVtable,
     query_interface : Proc(DispDOMMutationEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMMutationEvent*, UInt32),
     release : Proc(DispDOMMutationEvent*, UInt32),
@@ -48318,7 +48306,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMMutationEvent, lpVtbl : DispDOMMutationEventVtbl* do
+  record DispDOMMutationEvent, lpVtbl : DispDOMMutationEventVtable* do
     GUID = LibC::GUID.new(0x30590079_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMMutationEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48345,7 +48333,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMBeforeUnloadEventVtbl,
+  record IDOMBeforeUnloadEventVtable,
     query_interface : Proc(IDOMBeforeUnloadEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMBeforeUnloadEvent*, UInt32),
     release : Proc(IDOMBeforeUnloadEvent*, UInt32),
@@ -48358,7 +48346,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMBeforeUnloadEvent, lpVtbl : IDOMBeforeUnloadEventVtbl* do
+  record IDOMBeforeUnloadEvent, lpVtbl : IDOMBeforeUnloadEventVtable* do
     GUID = LibC::GUID.new(0x30510763_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMBeforeUnloadEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48391,7 +48379,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMBeforeUnloadEventVtbl,
+  record DispDOMBeforeUnloadEventVtable,
     query_interface : Proc(DispDOMBeforeUnloadEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMBeforeUnloadEvent*, UInt32),
     release : Proc(DispDOMBeforeUnloadEvent*, UInt32),
@@ -48402,7 +48390,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMBeforeUnloadEvent, lpVtbl : DispDOMBeforeUnloadEventVtbl* do
+  record DispDOMBeforeUnloadEvent, lpVtbl : DispDOMBeforeUnloadEventVtable* do
     GUID = LibC::GUID.new(0x305900a8_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMBeforeUnloadEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48429,7 +48417,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMFocusEventVtbl,
+  record IDOMFocusEventVtable,
     query_interface : Proc(IDOMFocusEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMFocusEvent*, UInt32),
     release : Proc(IDOMFocusEvent*, UInt32),
@@ -48442,7 +48430,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMFocusEvent, lpVtbl : IDOMFocusEventVtbl* do
+  record IDOMFocusEvent, lpVtbl : IDOMFocusEventVtable* do
     GUID = LibC::GUID.new(0x305106cc_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMFocusEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48475,7 +48463,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMFocusEventVtbl,
+  record DispDOMFocusEventVtable,
     query_interface : Proc(DispDOMFocusEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMFocusEvent*, UInt32),
     release : Proc(DispDOMFocusEvent*, UInt32),
@@ -48486,7 +48474,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMFocusEvent, lpVtbl : DispDOMFocusEventVtbl* do
+  record DispDOMFocusEvent, lpVtbl : DispDOMFocusEventVtable* do
     GUID = LibC::GUID.new(0x30590071_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMFocusEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48513,7 +48501,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMCustomEventVtbl,
+  record IDOMCustomEventVtable,
     query_interface : Proc(IDOMCustomEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMCustomEvent*, UInt32),
     release : Proc(IDOMCustomEvent*, UInt32),
@@ -48526,7 +48514,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMCustomEvent, lpVtbl : IDOMCustomEventVtbl* do
+  record IDOMCustomEvent, lpVtbl : IDOMCustomEventVtable* do
     GUID = LibC::GUID.new(0x305106de_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMCustomEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48559,7 +48547,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMCustomEventVtbl,
+  record DispDOMCustomEventVtable,
     query_interface : Proc(DispDOMCustomEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMCustomEvent*, UInt32),
     release : Proc(DispDOMCustomEvent*, UInt32),
@@ -48570,7 +48558,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMCustomEvent, lpVtbl : DispDOMCustomEventVtbl* do
+  record DispDOMCustomEvent, lpVtbl : DispDOMCustomEventVtable* do
     GUID = LibC::GUID.new(0x3059007c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMCustomEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48597,7 +48585,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ICanvasGradientVtbl,
+  record ICanvasGradientVtable,
     query_interface : Proc(ICanvasGradient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICanvasGradient*, UInt32),
     release : Proc(ICanvasGradient*, UInt32),
@@ -48609,7 +48597,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ICanvasGradient, lpVtbl : ICanvasGradientVtbl* do
+  record ICanvasGradient, lpVtbl : ICanvasGradientVtable* do
     GUID = LibC::GUID.new(0x30510714_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ICanvasGradient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48639,7 +48627,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ICanvasPatternVtbl,
+  record ICanvasPatternVtable,
     query_interface : Proc(ICanvasPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICanvasPattern*, UInt32),
     release : Proc(ICanvasPattern*, UInt32),
@@ -48650,7 +48638,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ICanvasPattern, lpVtbl : ICanvasPatternVtbl* do
+  record ICanvasPattern, lpVtbl : ICanvasPatternVtable* do
     GUID = LibC::GUID.new(0x30510716_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ICanvasPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48677,7 +48665,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ICanvasTextMetricsVtbl,
+  record ICanvasTextMetricsVtable,
     query_interface : Proc(ICanvasTextMetrics*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICanvasTextMetrics*, UInt32),
     release : Proc(ICanvasTextMetrics*, UInt32),
@@ -48689,7 +48677,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ICanvasTextMetrics, lpVtbl : ICanvasTextMetricsVtbl* do
+  record ICanvasTextMetrics, lpVtbl : ICanvasTextMetricsVtable* do
     GUID = LibC::GUID.new(0x30510718_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ICanvasTextMetrics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48719,7 +48707,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ICanvasImageDataVtbl,
+  record ICanvasImageDataVtable,
     query_interface : Proc(ICanvasImageData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICanvasImageData*, UInt32),
     release : Proc(ICanvasImageData*, UInt32),
@@ -48733,7 +48721,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ICanvasImageData, lpVtbl : ICanvasImageDataVtbl* do
+  record ICanvasImageData, lpVtbl : ICanvasImageDataVtable* do
     GUID = LibC::GUID.new(0x3051071a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ICanvasImageData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48769,7 +48757,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ICanvasPixelArrayVtbl,
+  record ICanvasPixelArrayVtable,
     query_interface : Proc(ICanvasPixelArray*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICanvasPixelArray*, UInt32),
     release : Proc(ICanvasPixelArray*, UInt32),
@@ -48781,7 +48769,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ICanvasPixelArray, lpVtbl : ICanvasPixelArrayVtbl* do
+  record ICanvasPixelArray, lpVtbl : ICanvasPixelArrayVtable* do
     GUID = LibC::GUID.new(0x3051071c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ICanvasPixelArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48811,7 +48799,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCanvasElementVtbl,
+  record IHTMLCanvasElementVtable,
     query_interface : Proc(IHTMLCanvasElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCanvasElement*, UInt32),
     release : Proc(IHTMLCanvasElement*, UInt32),
@@ -48828,7 +48816,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCanvasElement, lpVtbl : IHTMLCanvasElementVtbl* do
+  record IHTMLCanvasElement, lpVtbl : IHTMLCanvasElementVtable* do
     GUID = LibC::GUID.new(0x305106e4_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLCanvasElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -48873,7 +48861,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ICanvasRenderingContext2DVtbl,
+  record ICanvasRenderingContext2DVtable,
     query_interface : Proc(ICanvasRenderingContext2D*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICanvasRenderingContext2D*, UInt32),
     release : Proc(ICanvasRenderingContext2D*, UInt32),
@@ -48948,7 +48936,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ICanvasRenderingContext2D, lpVtbl : ICanvasRenderingContext2DVtbl* do
+  record ICanvasRenderingContext2D, lpVtbl : ICanvasRenderingContext2DVtable* do
     GUID = LibC::GUID.new(0x305106ff_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ICanvasRenderingContext2D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49167,7 +49155,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispCanvasGradientVtbl,
+  record DispCanvasGradientVtable,
     query_interface : Proc(DispCanvasGradient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispCanvasGradient*, UInt32),
     release : Proc(DispCanvasGradient*, UInt32),
@@ -49178,7 +49166,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispCanvasGradient, lpVtbl : DispCanvasGradientVtbl* do
+  record DispCanvasGradient, lpVtbl : DispCanvasGradientVtable* do
     GUID = LibC::GUID.new(0x3059008c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispCanvasGradient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49205,7 +49193,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispCanvasPatternVtbl,
+  record DispCanvasPatternVtable,
     query_interface : Proc(DispCanvasPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispCanvasPattern*, UInt32),
     release : Proc(DispCanvasPattern*, UInt32),
@@ -49216,7 +49204,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispCanvasPattern, lpVtbl : DispCanvasPatternVtbl* do
+  record DispCanvasPattern, lpVtbl : DispCanvasPatternVtable* do
     GUID = LibC::GUID.new(0x3059008d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispCanvasPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49243,7 +49231,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispCanvasTextMetricsVtbl,
+  record DispCanvasTextMetricsVtable,
     query_interface : Proc(DispCanvasTextMetrics*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispCanvasTextMetrics*, UInt32),
     release : Proc(DispCanvasTextMetrics*, UInt32),
@@ -49254,7 +49242,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispCanvasTextMetrics, lpVtbl : DispCanvasTextMetricsVtbl* do
+  record DispCanvasTextMetrics, lpVtbl : DispCanvasTextMetricsVtable* do
     GUID = LibC::GUID.new(0x3059008e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispCanvasTextMetrics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49281,7 +49269,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispCanvasImageDataVtbl,
+  record DispCanvasImageDataVtable,
     query_interface : Proc(DispCanvasImageData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispCanvasImageData*, UInt32),
     release : Proc(DispCanvasImageData*, UInt32),
@@ -49292,7 +49280,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispCanvasImageData, lpVtbl : DispCanvasImageDataVtbl* do
+  record DispCanvasImageData, lpVtbl : DispCanvasImageDataVtable* do
     GUID = LibC::GUID.new(0x3059008f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispCanvasImageData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49319,7 +49307,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispCanvasRenderingContext2DVtbl,
+  record DispCanvasRenderingContext2DVtable,
     query_interface : Proc(DispCanvasRenderingContext2D*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispCanvasRenderingContext2D*, UInt32),
     release : Proc(DispCanvasRenderingContext2D*, UInt32),
@@ -49330,7 +49318,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispCanvasRenderingContext2D, lpVtbl : DispCanvasRenderingContext2DVtbl* do
+  record DispCanvasRenderingContext2D, lpVtbl : DispCanvasRenderingContext2DVtable* do
     GUID = LibC::GUID.new(0x30590082_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispCanvasRenderingContext2D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49357,7 +49345,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLCanvasElementVtbl,
+  record DispHTMLCanvasElementVtable,
     query_interface : Proc(DispHTMLCanvasElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLCanvasElement*, UInt32),
     release : Proc(DispHTMLCanvasElement*, UInt32),
@@ -49368,7 +49356,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLCanvasElement, lpVtbl : DispHTMLCanvasElementVtbl* do
+  record DispHTMLCanvasElement, lpVtbl : DispHTMLCanvasElementVtable* do
     GUID = LibC::GUID.new(0x3059007b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLCanvasElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49395,7 +49383,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMProgressEventVtbl,
+  record IDOMProgressEventVtable,
     query_interface : Proc(IDOMProgressEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMProgressEvent*, UInt32),
     release : Proc(IDOMProgressEvent*, UInt32),
@@ -49410,7 +49398,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMProgressEvent, lpVtbl : IDOMProgressEventVtbl* do
+  record IDOMProgressEvent, lpVtbl : IDOMProgressEventVtable* do
     GUID = LibC::GUID.new(0x3051071e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMProgressEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49449,7 +49437,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMProgressEventVtbl,
+  record DispDOMProgressEventVtable,
     query_interface : Proc(DispDOMProgressEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMProgressEvent*, UInt32),
     release : Proc(DispDOMProgressEvent*, UInt32),
@@ -49460,7 +49448,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMProgressEvent, lpVtbl : DispDOMProgressEventVtbl* do
+  record DispDOMProgressEvent, lpVtbl : DispDOMProgressEventVtable* do
     GUID = LibC::GUID.new(0x30590091_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMProgressEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49487,7 +49475,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMMessageEventVtbl,
+  record IDOMMessageEventVtable,
     query_interface : Proc(IDOMMessageEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMMessageEvent*, UInt32),
     release : Proc(IDOMMessageEvent*, UInt32),
@@ -49502,7 +49490,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMMessageEvent, lpVtbl : IDOMMessageEventVtbl* do
+  record IDOMMessageEvent, lpVtbl : IDOMMessageEventVtable* do
     GUID = LibC::GUID.new(0x30510720_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMMessageEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49541,7 +49529,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMMessageEventVtbl,
+  record DispDOMMessageEventVtable,
     query_interface : Proc(DispDOMMessageEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMMessageEvent*, UInt32),
     release : Proc(DispDOMMessageEvent*, UInt32),
@@ -49552,7 +49540,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMMessageEvent, lpVtbl : DispDOMMessageEventVtbl* do
+  record DispDOMMessageEvent, lpVtbl : DispDOMMessageEventVtable* do
     GUID = LibC::GUID.new(0x30590092_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMMessageEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49579,7 +49567,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMSiteModeEventVtbl,
+  record IDOMSiteModeEventVtable,
     query_interface : Proc(IDOMSiteModeEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMSiteModeEvent*, UInt32),
     release : Proc(IDOMSiteModeEvent*, UInt32),
@@ -49592,7 +49580,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMSiteModeEvent, lpVtbl : IDOMSiteModeEventVtbl* do
+  record IDOMSiteModeEvent, lpVtbl : IDOMSiteModeEventVtable* do
     GUID = LibC::GUID.new(0x30510765_u32, 0x98b6_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMSiteModeEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49625,7 +49613,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMSiteModeEventVtbl,
+  record DispDOMSiteModeEventVtable,
     query_interface : Proc(DispDOMSiteModeEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMSiteModeEvent*, UInt32),
     release : Proc(DispDOMSiteModeEvent*, UInt32),
@@ -49636,7 +49624,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMSiteModeEvent, lpVtbl : DispDOMSiteModeEventVtbl* do
+  record DispDOMSiteModeEvent, lpVtbl : DispDOMSiteModeEventVtable* do
     GUID = LibC::GUID.new(0x305900a9_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMSiteModeEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49663,7 +49651,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMStorageEventVtbl,
+  record IDOMStorageEventVtable,
     query_interface : Proc(IDOMStorageEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMStorageEvent*, UInt32),
     release : Proc(IDOMStorageEvent*, UInt32),
@@ -49680,7 +49668,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMStorageEvent, lpVtbl : IDOMStorageEventVtbl* do
+  record IDOMStorageEvent, lpVtbl : IDOMStorageEventVtable* do
     GUID = LibC::GUID.new(0x30510722_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMStorageEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49725,7 +49713,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMStorageEventVtbl,
+  record DispDOMStorageEventVtable,
     query_interface : Proc(DispDOMStorageEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMStorageEvent*, UInt32),
     release : Proc(DispDOMStorageEvent*, UInt32),
@@ -49736,7 +49724,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMStorageEvent, lpVtbl : DispDOMStorageEventVtbl* do
+  record DispDOMStorageEvent, lpVtbl : DispDOMStorageEventVtable* do
     GUID = LibC::GUID.new(0x30590093_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMStorageEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49763,7 +49751,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IXMLHttpRequestEventTargetVtbl,
+  record IXMLHttpRequestEventTargetVtable,
     query_interface : Proc(IXMLHttpRequestEventTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLHttpRequestEventTarget*, UInt32),
     release : Proc(IXMLHttpRequestEventTarget*, UInt32),
@@ -49774,7 +49762,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IXMLHttpRequestEventTarget, lpVtbl : IXMLHttpRequestEventTargetVtbl* do
+  record IXMLHttpRequestEventTarget, lpVtbl : IXMLHttpRequestEventTargetVtable* do
     GUID = LibC::GUID.new(0x30510830_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IXMLHttpRequestEventTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49801,7 +49789,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispXMLHttpRequestEventTargetVtbl,
+  record DispXMLHttpRequestEventTargetVtable,
     query_interface : Proc(DispXMLHttpRequestEventTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispXMLHttpRequestEventTarget*, UInt32),
     release : Proc(DispXMLHttpRequestEventTarget*, UInt32),
@@ -49812,7 +49800,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispXMLHttpRequestEventTarget, lpVtbl : DispXMLHttpRequestEventTargetVtbl* do
+  record DispXMLHttpRequestEventTarget, lpVtbl : DispXMLHttpRequestEventTargetVtable* do
     GUID = LibC::GUID.new(0x305900e7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispXMLHttpRequestEventTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49839,7 +49827,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLXMLHttpRequestEventsVtbl,
+  record HTMLXMLHttpRequestEventsVtable,
     query_interface : Proc(HTMLXMLHttpRequestEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLXMLHttpRequestEvents*, UInt32),
     release : Proc(HTMLXMLHttpRequestEvents*, UInt32),
@@ -49850,7 +49838,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLXMLHttpRequestEvents, lpVtbl : HTMLXMLHttpRequestEventsVtbl* do
+  record HTMLXMLHttpRequestEvents, lpVtbl : HTMLXMLHttpRequestEventsVtable* do
     GUID = LibC::GUID.new(0x30510498_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLXMLHttpRequestEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49877,7 +49865,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLXMLHttpRequestVtbl,
+  record IHTMLXMLHttpRequestVtable,
     query_interface : Proc(IHTMLXMLHttpRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLXMLHttpRequest*, UInt32),
     release : Proc(IHTMLXMLHttpRequest*, UInt32),
@@ -49902,7 +49890,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLXMLHttpRequest, lpVtbl : IHTMLXMLHttpRequestVtbl* do
+  record IHTMLXMLHttpRequest, lpVtbl : IHTMLXMLHttpRequestVtable* do
     GUID = LibC::GUID.new(0x3051040a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLXMLHttpRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -49971,7 +49959,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLXMLHttpRequest2Vtbl,
+  record IHTMLXMLHttpRequest2Vtable,
     query_interface : Proc(IHTMLXMLHttpRequest2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLXMLHttpRequest2*, UInt32),
     release : Proc(IHTMLXMLHttpRequest2*, UInt32),
@@ -49986,7 +49974,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLXMLHttpRequest2, lpVtbl : IHTMLXMLHttpRequest2Vtbl* do
+  record IHTMLXMLHttpRequest2, lpVtbl : IHTMLXMLHttpRequest2Vtable* do
     GUID = LibC::GUID.new(0x30510482_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLXMLHttpRequest2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -50025,7 +50013,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLXMLHttpRequestFactoryVtbl,
+  record IHTMLXMLHttpRequestFactoryVtable,
     query_interface : Proc(IHTMLXMLHttpRequestFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLXMLHttpRequestFactory*, UInt32),
     release : Proc(IHTMLXMLHttpRequestFactory*, UInt32),
@@ -50037,7 +50025,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLXMLHttpRequestFactory, lpVtbl : IHTMLXMLHttpRequestFactoryVtbl* do
+  record IHTMLXMLHttpRequestFactory, lpVtbl : IHTMLXMLHttpRequestFactoryVtable* do
     GUID = LibC::GUID.new(0x3051040c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLXMLHttpRequestFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -50067,7 +50055,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLXMLHttpRequestVtbl,
+  record DispHTMLXMLHttpRequestVtable,
     query_interface : Proc(DispHTMLXMLHttpRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLXMLHttpRequest*, UInt32),
     release : Proc(DispHTMLXMLHttpRequest*, UInt32),
@@ -50078,7 +50066,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLXMLHttpRequest, lpVtbl : DispHTMLXMLHttpRequestVtbl* do
+  record DispHTMLXMLHttpRequest, lpVtbl : DispHTMLXMLHttpRequestVtable* do
     GUID = LibC::GUID.new(0x3050f596_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLXMLHttpRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -50105,7 +50093,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGAngleVtbl,
+  record ISVGAngleVtable,
     query_interface : Proc(ISVGAngle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGAngle*, UInt32),
     release : Proc(ISVGAngle*, UInt32),
@@ -50126,7 +50114,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGAngle, lpVtbl : ISVGAngleVtbl* do
+  record ISVGAngle, lpVtbl : ISVGAngleVtable* do
     GUID = LibC::GUID.new(0x305104d3_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGAngle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -50183,7 +50171,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGElementVtbl,
+  record ISVGElementVtable,
     query_interface : Proc(ISVGElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGElement*, UInt32),
     release : Proc(ISVGElement*, UInt32),
@@ -50202,7 +50190,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGElement, lpVtbl : ISVGElementVtbl* do
+  record ISVGElement, lpVtbl : ISVGElementVtable* do
     GUID = LibC::GUID.new(0x305104c5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -50253,7 +50241,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGRectVtbl,
+  record ISVGRectVtable,
     query_interface : Proc(ISVGRect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGRect*, UInt32),
     release : Proc(ISVGRect*, UInt32),
@@ -50272,7 +50260,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGRect, lpVtbl : ISVGRectVtbl* do
+  record ISVGRect, lpVtbl : ISVGRectVtable* do
     GUID = LibC::GUID.new(0x305104d7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGRect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -50323,7 +50311,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGMatrixVtbl,
+  record ISVGMatrixVtable,
     query_interface : Proc(ISVGMatrix*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGMatrix*, UInt32),
     release : Proc(ISVGMatrix*, UInt32),
@@ -50357,7 +50345,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGMatrix, lpVtbl : ISVGMatrixVtbl* do
+  record ISVGMatrix, lpVtbl : ISVGMatrixVtable* do
     GUID = LibC::GUID.new(0x305104f6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGMatrix*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -50453,7 +50441,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGStringListVtbl,
+  record ISVGStringListVtable,
     query_interface : Proc(ISVGStringList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGStringList*, UInt32),
     release : Proc(ISVGStringList*, UInt32),
@@ -50473,7 +50461,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGStringList, lpVtbl : ISVGStringListVtbl* do
+  record ISVGStringList, lpVtbl : ISVGStringListVtable* do
     GUID = LibC::GUID.new(0x305104c8_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGStringList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -50527,7 +50515,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGAnimatedRectVtbl,
+  record ISVGAnimatedRectVtable,
     query_interface : Proc(ISVGAnimatedRect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGAnimatedRect*, UInt32),
     release : Proc(ISVGAnimatedRect*, UInt32),
@@ -50542,7 +50530,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGAnimatedRect, lpVtbl : ISVGAnimatedRectVtbl* do
+  record ISVGAnimatedRect, lpVtbl : ISVGAnimatedRectVtable* do
     GUID = LibC::GUID.new(0x305104d8_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGAnimatedRect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -50581,7 +50569,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGAnimatedStringVtbl,
+  record ISVGAnimatedStringVtable,
     query_interface : Proc(ISVGAnimatedString*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGAnimatedString*, UInt32),
     release : Proc(ISVGAnimatedString*, UInt32),
@@ -50595,7 +50583,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGAnimatedString, lpVtbl : ISVGAnimatedStringVtbl* do
+  record ISVGAnimatedString, lpVtbl : ISVGAnimatedStringVtable* do
     GUID = LibC::GUID.new(0x305104c7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGAnimatedString*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -50631,7 +50619,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGAnimatedBooleanVtbl,
+  record ISVGAnimatedBooleanVtable,
     query_interface : Proc(ISVGAnimatedBoolean*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGAnimatedBoolean*, UInt32),
     release : Proc(ISVGAnimatedBoolean*, UInt32),
@@ -50646,7 +50634,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGAnimatedBoolean, lpVtbl : ISVGAnimatedBooleanVtbl* do
+  record ISVGAnimatedBoolean, lpVtbl : ISVGAnimatedBooleanVtable* do
     GUID = LibC::GUID.new(0x305104c6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGAnimatedBoolean*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -50685,7 +50673,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGAnimatedTransformListVtbl,
+  record ISVGAnimatedTransformListVtable,
     query_interface : Proc(ISVGAnimatedTransformList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGAnimatedTransformList*, UInt32),
     release : Proc(ISVGAnimatedTransformList*, UInt32),
@@ -50700,7 +50688,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGAnimatedTransformList, lpVtbl : ISVGAnimatedTransformListVtbl* do
+  record ISVGAnimatedTransformList, lpVtbl : ISVGAnimatedTransformListVtable* do
     GUID = LibC::GUID.new(0x305104f9_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGAnimatedTransformList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -50739,7 +50727,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGAnimatedPreserveAspectRatioVtbl,
+  record ISVGAnimatedPreserveAspectRatioVtable,
     query_interface : Proc(ISVGAnimatedPreserveAspectRatio*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGAnimatedPreserveAspectRatio*, UInt32),
     release : Proc(ISVGAnimatedPreserveAspectRatio*, UInt32),
@@ -50754,7 +50742,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGAnimatedPreserveAspectRatio, lpVtbl : ISVGAnimatedPreserveAspectRatioVtbl* do
+  record ISVGAnimatedPreserveAspectRatio, lpVtbl : ISVGAnimatedPreserveAspectRatioVtable* do
     GUID = LibC::GUID.new(0x305104fb_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGAnimatedPreserveAspectRatio*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -50793,7 +50781,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGStylableVtbl,
+  record ISVGStylableVtable,
     query_interface : Proc(ISVGStylable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGStylable*, UInt32),
     release : Proc(ISVGStylable*, UInt32),
@@ -50805,7 +50793,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGStylable, lpVtbl : ISVGStylableVtbl* do
+  record ISVGStylable, lpVtbl : ISVGStylableVtable* do
     GUID = LibC::GUID.new(0x305104da_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGStylable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -50835,7 +50823,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGLocatableVtbl,
+  record ISVGLocatableVtable,
     query_interface : Proc(ISVGLocatable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGLocatable*, UInt32),
     release : Proc(ISVGLocatable*, UInt32),
@@ -50852,7 +50840,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGLocatable, lpVtbl : ISVGLocatableVtbl* do
+  record ISVGLocatable, lpVtbl : ISVGLocatableVtable* do
     GUID = LibC::GUID.new(0x305104db_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGLocatable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -50897,7 +50885,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGTransformableVtbl,
+  record ISVGTransformableVtable,
     query_interface : Proc(ISVGTransformable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGTransformable*, UInt32),
     release : Proc(ISVGTransformable*, UInt32),
@@ -50909,7 +50897,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGTransformable, lpVtbl : ISVGTransformableVtbl* do
+  record ISVGTransformable, lpVtbl : ISVGTransformableVtable* do
     GUID = LibC::GUID.new(0x305104dc_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGTransformable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -50939,7 +50927,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGTestsVtbl,
+  record ISVGTestsVtable,
     query_interface : Proc(ISVGTests*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGTests*, UInt32),
     release : Proc(ISVGTests*, UInt32),
@@ -50954,7 +50942,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGTests, lpVtbl : ISVGTestsVtbl* do
+  record ISVGTests, lpVtbl : ISVGTestsVtable* do
     GUID = LibC::GUID.new(0x305104dd_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGTests*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -50993,7 +50981,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGLangSpaceVtbl,
+  record ISVGLangSpaceVtable,
     query_interface : Proc(ISVGLangSpace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGLangSpace*, UInt32),
     release : Proc(ISVGLangSpace*, UInt32),
@@ -51008,7 +50996,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGLangSpace, lpVtbl : ISVGLangSpaceVtbl* do
+  record ISVGLangSpace, lpVtbl : ISVGLangSpaceVtable* do
     GUID = LibC::GUID.new(0x305104de_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGLangSpace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -51047,7 +51035,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGExternalResourcesRequiredVtbl,
+  record ISVGExternalResourcesRequiredVtable,
     query_interface : Proc(ISVGExternalResourcesRequired*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGExternalResourcesRequired*, UInt32),
     release : Proc(ISVGExternalResourcesRequired*, UInt32),
@@ -51059,7 +51047,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGExternalResourcesRequired, lpVtbl : ISVGExternalResourcesRequiredVtbl* do
+  record ISVGExternalResourcesRequired, lpVtbl : ISVGExternalResourcesRequiredVtable* do
     GUID = LibC::GUID.new(0x305104df_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGExternalResourcesRequired*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -51089,7 +51077,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGFitToViewBoxVtbl,
+  record ISVGFitToViewBoxVtable,
     query_interface : Proc(ISVGFitToViewBox*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGFitToViewBox*, UInt32),
     release : Proc(ISVGFitToViewBox*, UInt32),
@@ -51103,7 +51091,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGFitToViewBox, lpVtbl : ISVGFitToViewBoxVtbl* do
+  record ISVGFitToViewBox, lpVtbl : ISVGFitToViewBoxVtable* do
     GUID = LibC::GUID.new(0x305104e0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGFitToViewBox*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -51139,7 +51127,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGZoomAndPanVtbl,
+  record ISVGZoomAndPanVtable,
     query_interface : Proc(ISVGZoomAndPan*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGZoomAndPan*, UInt32),
     release : Proc(ISVGZoomAndPan*, UInt32),
@@ -51151,7 +51139,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGZoomAndPan, lpVtbl : ISVGZoomAndPanVtbl* do
+  record ISVGZoomAndPan, lpVtbl : ISVGZoomAndPanVtable* do
     GUID = LibC::GUID.new(0x305104e1_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGZoomAndPan*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -51181,7 +51169,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGURIReferenceVtbl,
+  record ISVGURIReferenceVtable,
     query_interface : Proc(ISVGURIReference*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGURIReference*, UInt32),
     release : Proc(ISVGURIReference*, UInt32),
@@ -51193,7 +51181,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGURIReference, lpVtbl : ISVGURIReferenceVtbl* do
+  record ISVGURIReference, lpVtbl : ISVGURIReferenceVtable* do
     GUID = LibC::GUID.new(0x305104e3_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGURIReference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -51223,7 +51211,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGAnimatedAngleVtbl,
+  record ISVGAnimatedAngleVtable,
     query_interface : Proc(ISVGAnimatedAngle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGAnimatedAngle*, UInt32),
     release : Proc(ISVGAnimatedAngle*, UInt32),
@@ -51238,7 +51226,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGAnimatedAngle, lpVtbl : ISVGAnimatedAngleVtbl* do
+  record ISVGAnimatedAngle, lpVtbl : ISVGAnimatedAngleVtable* do
     GUID = LibC::GUID.new(0x305104d4_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGAnimatedAngle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -51277,7 +51265,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGTransformListVtbl,
+  record ISVGTransformListVtable,
     query_interface : Proc(ISVGTransformList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGTransformList*, UInt32),
     release : Proc(ISVGTransformList*, UInt32),
@@ -51299,7 +51287,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGTransformList, lpVtbl : ISVGTransformListVtbl* do
+  record ISVGTransformList, lpVtbl : ISVGTransformListVtable* do
     GUID = LibC::GUID.new(0x305104f8_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGTransformList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -51359,7 +51347,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGAnimatedEnumerationVtbl,
+  record ISVGAnimatedEnumerationVtable,
     query_interface : Proc(ISVGAnimatedEnumeration*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGAnimatedEnumeration*, UInt32),
     release : Proc(ISVGAnimatedEnumeration*, UInt32),
@@ -51374,7 +51362,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGAnimatedEnumeration, lpVtbl : ISVGAnimatedEnumerationVtbl* do
+  record ISVGAnimatedEnumeration, lpVtbl : ISVGAnimatedEnumerationVtable* do
     GUID = LibC::GUID.new(0x305104c9_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGAnimatedEnumeration*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -51413,7 +51401,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGAnimatedIntegerVtbl,
+  record ISVGAnimatedIntegerVtable,
     query_interface : Proc(ISVGAnimatedInteger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGAnimatedInteger*, UInt32),
     release : Proc(ISVGAnimatedInteger*, UInt32),
@@ -51428,7 +51416,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGAnimatedInteger, lpVtbl : ISVGAnimatedIntegerVtbl* do
+  record ISVGAnimatedInteger, lpVtbl : ISVGAnimatedIntegerVtable* do
     GUID = LibC::GUID.new(0x305104ca_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGAnimatedInteger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -51467,7 +51455,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGLengthVtbl,
+  record ISVGLengthVtable,
     query_interface : Proc(ISVGLength*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGLength*, UInt32),
     release : Proc(ISVGLength*, UInt32),
@@ -51488,7 +51476,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGLength, lpVtbl : ISVGLengthVtbl* do
+  record ISVGLength, lpVtbl : ISVGLengthVtable* do
     GUID = LibC::GUID.new(0x305104cf_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGLength*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -51545,7 +51533,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGAnimatedLengthVtbl,
+  record ISVGAnimatedLengthVtable,
     query_interface : Proc(ISVGAnimatedLength*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGAnimatedLength*, UInt32),
     release : Proc(ISVGAnimatedLength*, UInt32),
@@ -51560,7 +51548,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGAnimatedLength, lpVtbl : ISVGAnimatedLengthVtbl* do
+  record ISVGAnimatedLength, lpVtbl : ISVGAnimatedLengthVtable* do
     GUID = LibC::GUID.new(0x305104d0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGAnimatedLength*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -51599,7 +51587,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGLengthListVtbl,
+  record ISVGLengthListVtable,
     query_interface : Proc(ISVGLengthList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGLengthList*, UInt32),
     release : Proc(ISVGLengthList*, UInt32),
@@ -51619,7 +51607,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGLengthList, lpVtbl : ISVGLengthListVtbl* do
+  record ISVGLengthList, lpVtbl : ISVGLengthListVtable* do
     GUID = LibC::GUID.new(0x305104d1_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGLengthList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -51673,7 +51661,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGAnimatedLengthListVtbl,
+  record ISVGAnimatedLengthListVtable,
     query_interface : Proc(ISVGAnimatedLengthList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGAnimatedLengthList*, UInt32),
     release : Proc(ISVGAnimatedLengthList*, UInt32),
@@ -51688,7 +51676,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGAnimatedLengthList, lpVtbl : ISVGAnimatedLengthListVtbl* do
+  record ISVGAnimatedLengthList, lpVtbl : ISVGAnimatedLengthListVtable* do
     GUID = LibC::GUID.new(0x305104d2_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGAnimatedLengthList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -51727,7 +51715,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGNumberVtbl,
+  record ISVGNumberVtable,
     query_interface : Proc(ISVGNumber*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGNumber*, UInt32),
     release : Proc(ISVGNumber*, UInt32),
@@ -51740,7 +51728,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGNumber, lpVtbl : ISVGNumberVtbl* do
+  record ISVGNumber, lpVtbl : ISVGNumberVtable* do
     GUID = LibC::GUID.new(0x305104cb_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGNumber*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -51773,7 +51761,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGAnimatedNumberVtbl,
+  record ISVGAnimatedNumberVtable,
     query_interface : Proc(ISVGAnimatedNumber*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGAnimatedNumber*, UInt32),
     release : Proc(ISVGAnimatedNumber*, UInt32),
@@ -51788,7 +51776,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGAnimatedNumber, lpVtbl : ISVGAnimatedNumberVtbl* do
+  record ISVGAnimatedNumber, lpVtbl : ISVGAnimatedNumberVtable* do
     GUID = LibC::GUID.new(0x305104cc_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGAnimatedNumber*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -51827,7 +51815,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGNumberListVtbl,
+  record ISVGNumberListVtable,
     query_interface : Proc(ISVGNumberList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGNumberList*, UInt32),
     release : Proc(ISVGNumberList*, UInt32),
@@ -51847,7 +51835,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGNumberList, lpVtbl : ISVGNumberListVtbl* do
+  record ISVGNumberList, lpVtbl : ISVGNumberListVtable* do
     GUID = LibC::GUID.new(0x305104cd_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGNumberList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -51901,7 +51889,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGAnimatedNumberListVtbl,
+  record ISVGAnimatedNumberListVtable,
     query_interface : Proc(ISVGAnimatedNumberList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGAnimatedNumberList*, UInt32),
     release : Proc(ISVGAnimatedNumberList*, UInt32),
@@ -51916,7 +51904,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGAnimatedNumberList, lpVtbl : ISVGAnimatedNumberListVtbl* do
+  record ISVGAnimatedNumberList, lpVtbl : ISVGAnimatedNumberListVtable* do
     GUID = LibC::GUID.new(0x305104ce_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGAnimatedNumberList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -51955,7 +51943,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGClipPathElementVtbl,
+  record ISVGClipPathElementVtable,
     query_interface : Proc(ISVGClipPathElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGClipPathElement*, UInt32),
     release : Proc(ISVGClipPathElement*, UInt32),
@@ -51968,7 +51956,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGClipPathElement, lpVtbl : ISVGClipPathElementVtbl* do
+  record ISVGClipPathElement, lpVtbl : ISVGClipPathElementVtable* do
     GUID = LibC::GUID.new(0x3051052d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGClipPathElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52001,7 +51989,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGClipPathElementVtbl,
+  record DispSVGClipPathElementVtable,
     query_interface : Proc(DispSVGClipPathElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGClipPathElement*, UInt32),
     release : Proc(DispSVGClipPathElement*, UInt32),
@@ -52012,7 +52000,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGClipPathElement, lpVtbl : DispSVGClipPathElementVtbl* do
+  record DispSVGClipPathElement, lpVtbl : DispSVGClipPathElementVtable* do
     GUID = LibC::GUID.new(0x3059003b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGClipPathElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52039,7 +52027,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGDocumentVtbl,
+  record ISVGDocumentVtable,
     query_interface : Proc(ISVGDocument*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGDocument*, UInt32),
     release : Proc(ISVGDocument*, UInt32),
@@ -52051,7 +52039,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGDocument, lpVtbl : ISVGDocumentVtbl* do
+  record ISVGDocument, lpVtbl : ISVGDocumentVtable* do
     GUID = LibC::GUID.new(0x305104e6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52081,7 +52069,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IGetSVGDocumentVtbl,
+  record IGetSVGDocumentVtable,
     query_interface : Proc(IGetSVGDocument*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGetSVGDocument*, UInt32),
     release : Proc(IGetSVGDocument*, UInt32),
@@ -52093,7 +52081,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IGetSVGDocument, lpVtbl : IGetSVGDocumentVtbl* do
+  record IGetSVGDocument, lpVtbl : IGetSVGDocumentVtable* do
     GUID = LibC::GUID.new(0x305105ab_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IGetSVGDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52123,7 +52111,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGElementVtbl,
+  record DispSVGElementVtable,
     query_interface : Proc(DispSVGElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGElement*, UInt32),
     release : Proc(DispSVGElement*, UInt32),
@@ -52134,7 +52122,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGElement, lpVtbl : DispSVGElementVtbl* do
+  record DispSVGElement, lpVtbl : DispSVGElementVtable* do
     GUID = LibC::GUID.new(0x30590000_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52161,7 +52149,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IICCSVGColorVtbl,
+  record IICCSVGColorVtable,
     query_interface : Proc(IICCSVGColor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IICCSVGColor*, UInt32),
     release : Proc(IICCSVGColor*, UInt32),
@@ -52172,7 +52160,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IICCSVGColor, lpVtbl : IICCSVGColorVtbl* do
+  record IICCSVGColor, lpVtbl : IICCSVGColorVtable* do
     GUID = LibC::GUID.new(0x305104d6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IICCSVGColor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52199,7 +52187,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPaintVtbl,
+  record ISVGPaintVtable,
     query_interface : Proc(ISVGPaint*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPaint*, UInt32),
     release : Proc(ISVGPaint*, UInt32),
@@ -52210,7 +52198,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPaint, lpVtbl : ISVGPaintVtbl* do
+  record ISVGPaint, lpVtbl : ISVGPaintVtable* do
     GUID = LibC::GUID.new(0x30510524_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPaint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52237,7 +52225,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPatternElementVtbl,
+  record ISVGPatternElementVtable,
     query_interface : Proc(ISVGPatternElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPatternElement*, UInt32),
     release : Proc(ISVGPatternElement*, UInt32),
@@ -52262,7 +52250,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPatternElement, lpVtbl : ISVGPatternElementVtbl* do
+  record ISVGPatternElement, lpVtbl : ISVGPatternElementVtable* do
     GUID = LibC::GUID.new(0x3051052c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPatternElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52331,7 +52319,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPatternElementVtbl,
+  record DispSVGPatternElementVtable,
     query_interface : Proc(DispSVGPatternElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPatternElement*, UInt32),
     release : Proc(DispSVGPatternElement*, UInt32),
@@ -52342,7 +52330,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPatternElement, lpVtbl : DispSVGPatternElementVtbl* do
+  record DispSVGPatternElement, lpVtbl : DispSVGPatternElementVtable* do
     GUID = LibC::GUID.new(0x3059002c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPatternElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52369,7 +52357,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegVtbl,
+  record ISVGPathSegVtable,
     query_interface : Proc(ISVGPathSeg*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSeg*, UInt32),
     release : Proc(ISVGPathSeg*, UInt32),
@@ -52383,7 +52371,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSeg, lpVtbl : ISVGPathSegVtbl* do
+  record ISVGPathSeg, lpVtbl : ISVGPathSegVtable* do
     GUID = LibC::GUID.new(0x305104fc_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSeg*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52419,7 +52407,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegArcAbsVtbl,
+  record ISVGPathSegArcAbsVtable,
     query_interface : Proc(ISVGPathSegArcAbs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegArcAbs*, UInt32),
     release : Proc(ISVGPathSegArcAbs*, UInt32),
@@ -52444,7 +52432,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegArcAbs, lpVtbl : ISVGPathSegArcAbsVtbl* do
+  record ISVGPathSegArcAbs, lpVtbl : ISVGPathSegArcAbsVtable* do
     GUID = LibC::GUID.new(0x30510506_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegArcAbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52513,7 +52501,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegArcRelVtbl,
+  record ISVGPathSegArcRelVtable,
     query_interface : Proc(ISVGPathSegArcRel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegArcRel*, UInt32),
     release : Proc(ISVGPathSegArcRel*, UInt32),
@@ -52538,7 +52526,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegArcRel, lpVtbl : ISVGPathSegArcRelVtbl* do
+  record ISVGPathSegArcRel, lpVtbl : ISVGPathSegArcRelVtable* do
     GUID = LibC::GUID.new(0x30510507_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegArcRel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52607,7 +52595,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegClosePathVtbl,
+  record ISVGPathSegClosePathVtable,
     query_interface : Proc(ISVGPathSegClosePath*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegClosePath*, UInt32),
     release : Proc(ISVGPathSegClosePath*, UInt32),
@@ -52618,7 +52606,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegClosePath, lpVtbl : ISVGPathSegClosePathVtbl* do
+  record ISVGPathSegClosePath, lpVtbl : ISVGPathSegClosePathVtable* do
     GUID = LibC::GUID.new(0x305104fd_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegClosePath*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52645,7 +52633,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegMovetoAbsVtbl,
+  record ISVGPathSegMovetoAbsVtable,
     query_interface : Proc(ISVGPathSegMovetoAbs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegMovetoAbs*, UInt32),
     release : Proc(ISVGPathSegMovetoAbs*, UInt32),
@@ -52660,7 +52648,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegMovetoAbs, lpVtbl : ISVGPathSegMovetoAbsVtbl* do
+  record ISVGPathSegMovetoAbs, lpVtbl : ISVGPathSegMovetoAbsVtable* do
     GUID = LibC::GUID.new(0x305104fe_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegMovetoAbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52699,7 +52687,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegMovetoRelVtbl,
+  record ISVGPathSegMovetoRelVtable,
     query_interface : Proc(ISVGPathSegMovetoRel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegMovetoRel*, UInt32),
     release : Proc(ISVGPathSegMovetoRel*, UInt32),
@@ -52714,7 +52702,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegMovetoRel, lpVtbl : ISVGPathSegMovetoRelVtbl* do
+  record ISVGPathSegMovetoRel, lpVtbl : ISVGPathSegMovetoRelVtable* do
     GUID = LibC::GUID.new(0x305104ff_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegMovetoRel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52753,7 +52741,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegLinetoAbsVtbl,
+  record ISVGPathSegLinetoAbsVtable,
     query_interface : Proc(ISVGPathSegLinetoAbs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegLinetoAbs*, UInt32),
     release : Proc(ISVGPathSegLinetoAbs*, UInt32),
@@ -52768,7 +52756,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegLinetoAbs, lpVtbl : ISVGPathSegLinetoAbsVtbl* do
+  record ISVGPathSegLinetoAbs, lpVtbl : ISVGPathSegLinetoAbsVtable* do
     GUID = LibC::GUID.new(0x30510500_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegLinetoAbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52807,7 +52795,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegLinetoRelVtbl,
+  record ISVGPathSegLinetoRelVtable,
     query_interface : Proc(ISVGPathSegLinetoRel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegLinetoRel*, UInt32),
     release : Proc(ISVGPathSegLinetoRel*, UInt32),
@@ -52822,7 +52810,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegLinetoRel, lpVtbl : ISVGPathSegLinetoRelVtbl* do
+  record ISVGPathSegLinetoRel, lpVtbl : ISVGPathSegLinetoRelVtable* do
     GUID = LibC::GUID.new(0x30510501_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegLinetoRel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52861,7 +52849,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegCurvetoCubicAbsVtbl,
+  record ISVGPathSegCurvetoCubicAbsVtable,
     query_interface : Proc(ISVGPathSegCurvetoCubicAbs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegCurvetoCubicAbs*, UInt32),
     release : Proc(ISVGPathSegCurvetoCubicAbs*, UInt32),
@@ -52884,7 +52872,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegCurvetoCubicAbs, lpVtbl : ISVGPathSegCurvetoCubicAbsVtbl* do
+  record ISVGPathSegCurvetoCubicAbs, lpVtbl : ISVGPathSegCurvetoCubicAbsVtable* do
     GUID = LibC::GUID.new(0x30510502_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegCurvetoCubicAbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52947,7 +52935,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegCurvetoCubicRelVtbl,
+  record ISVGPathSegCurvetoCubicRelVtable,
     query_interface : Proc(ISVGPathSegCurvetoCubicRel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegCurvetoCubicRel*, UInt32),
     release : Proc(ISVGPathSegCurvetoCubicRel*, UInt32),
@@ -52970,7 +52958,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegCurvetoCubicRel, lpVtbl : ISVGPathSegCurvetoCubicRelVtbl* do
+  record ISVGPathSegCurvetoCubicRel, lpVtbl : ISVGPathSegCurvetoCubicRelVtable* do
     GUID = LibC::GUID.new(0x30510503_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegCurvetoCubicRel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53033,7 +53021,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegCurvetoCubicSmoothAbsVtbl,
+  record ISVGPathSegCurvetoCubicSmoothAbsVtable,
     query_interface : Proc(ISVGPathSegCurvetoCubicSmoothAbs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegCurvetoCubicSmoothAbs*, UInt32),
     release : Proc(ISVGPathSegCurvetoCubicSmoothAbs*, UInt32),
@@ -53052,7 +53040,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegCurvetoCubicSmoothAbs, lpVtbl : ISVGPathSegCurvetoCubicSmoothAbsVtbl* do
+  record ISVGPathSegCurvetoCubicSmoothAbs, lpVtbl : ISVGPathSegCurvetoCubicSmoothAbsVtable* do
     GUID = LibC::GUID.new(0x3051050c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegCurvetoCubicSmoothAbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53103,7 +53091,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegCurvetoCubicSmoothRelVtbl,
+  record ISVGPathSegCurvetoCubicSmoothRelVtable,
     query_interface : Proc(ISVGPathSegCurvetoCubicSmoothRel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegCurvetoCubicSmoothRel*, UInt32),
     release : Proc(ISVGPathSegCurvetoCubicSmoothRel*, UInt32),
@@ -53122,7 +53110,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegCurvetoCubicSmoothRel, lpVtbl : ISVGPathSegCurvetoCubicSmoothRelVtbl* do
+  record ISVGPathSegCurvetoCubicSmoothRel, lpVtbl : ISVGPathSegCurvetoCubicSmoothRelVtable* do
     GUID = LibC::GUID.new(0x3051050d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegCurvetoCubicSmoothRel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53173,7 +53161,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegCurvetoQuadraticAbsVtbl,
+  record ISVGPathSegCurvetoQuadraticAbsVtable,
     query_interface : Proc(ISVGPathSegCurvetoQuadraticAbs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegCurvetoQuadraticAbs*, UInt32),
     release : Proc(ISVGPathSegCurvetoQuadraticAbs*, UInt32),
@@ -53192,7 +53180,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegCurvetoQuadraticAbs, lpVtbl : ISVGPathSegCurvetoQuadraticAbsVtbl* do
+  record ISVGPathSegCurvetoQuadraticAbs, lpVtbl : ISVGPathSegCurvetoQuadraticAbsVtable* do
     GUID = LibC::GUID.new(0x30510504_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegCurvetoQuadraticAbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53243,7 +53231,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegCurvetoQuadraticRelVtbl,
+  record ISVGPathSegCurvetoQuadraticRelVtable,
     query_interface : Proc(ISVGPathSegCurvetoQuadraticRel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegCurvetoQuadraticRel*, UInt32),
     release : Proc(ISVGPathSegCurvetoQuadraticRel*, UInt32),
@@ -53262,7 +53250,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegCurvetoQuadraticRel, lpVtbl : ISVGPathSegCurvetoQuadraticRelVtbl* do
+  record ISVGPathSegCurvetoQuadraticRel, lpVtbl : ISVGPathSegCurvetoQuadraticRelVtable* do
     GUID = LibC::GUID.new(0x30510505_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegCurvetoQuadraticRel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53313,7 +53301,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegCurvetoQuadraticSmoothAbsVtbl,
+  record ISVGPathSegCurvetoQuadraticSmoothAbsVtable,
     query_interface : Proc(ISVGPathSegCurvetoQuadraticSmoothAbs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegCurvetoQuadraticSmoothAbs*, UInt32),
     release : Proc(ISVGPathSegCurvetoQuadraticSmoothAbs*, UInt32),
@@ -53328,7 +53316,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegCurvetoQuadraticSmoothAbs, lpVtbl : ISVGPathSegCurvetoQuadraticSmoothAbsVtbl* do
+  record ISVGPathSegCurvetoQuadraticSmoothAbs, lpVtbl : ISVGPathSegCurvetoQuadraticSmoothAbsVtable* do
     GUID = LibC::GUID.new(0x3051050e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegCurvetoQuadraticSmoothAbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53367,7 +53355,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegCurvetoQuadraticSmoothRelVtbl,
+  record ISVGPathSegCurvetoQuadraticSmoothRelVtable,
     query_interface : Proc(ISVGPathSegCurvetoQuadraticSmoothRel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegCurvetoQuadraticSmoothRel*, UInt32),
     release : Proc(ISVGPathSegCurvetoQuadraticSmoothRel*, UInt32),
@@ -53382,7 +53370,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegCurvetoQuadraticSmoothRel, lpVtbl : ISVGPathSegCurvetoQuadraticSmoothRelVtbl* do
+  record ISVGPathSegCurvetoQuadraticSmoothRel, lpVtbl : ISVGPathSegCurvetoQuadraticSmoothRelVtable* do
     GUID = LibC::GUID.new(0x3051050f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegCurvetoQuadraticSmoothRel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53421,7 +53409,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegLinetoHorizontalAbsVtbl,
+  record ISVGPathSegLinetoHorizontalAbsVtable,
     query_interface : Proc(ISVGPathSegLinetoHorizontalAbs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegLinetoHorizontalAbs*, UInt32),
     release : Proc(ISVGPathSegLinetoHorizontalAbs*, UInt32),
@@ -53434,7 +53422,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegLinetoHorizontalAbs, lpVtbl : ISVGPathSegLinetoHorizontalAbsVtbl* do
+  record ISVGPathSegLinetoHorizontalAbs, lpVtbl : ISVGPathSegLinetoHorizontalAbsVtable* do
     GUID = LibC::GUID.new(0x30510508_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegLinetoHorizontalAbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53467,7 +53455,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegLinetoHorizontalRelVtbl,
+  record ISVGPathSegLinetoHorizontalRelVtable,
     query_interface : Proc(ISVGPathSegLinetoHorizontalRel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegLinetoHorizontalRel*, UInt32),
     release : Proc(ISVGPathSegLinetoHorizontalRel*, UInt32),
@@ -53480,7 +53468,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegLinetoHorizontalRel, lpVtbl : ISVGPathSegLinetoHorizontalRelVtbl* do
+  record ISVGPathSegLinetoHorizontalRel, lpVtbl : ISVGPathSegLinetoHorizontalRelVtable* do
     GUID = LibC::GUID.new(0x30510509_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegLinetoHorizontalRel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53513,7 +53501,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegLinetoVerticalAbsVtbl,
+  record ISVGPathSegLinetoVerticalAbsVtable,
     query_interface : Proc(ISVGPathSegLinetoVerticalAbs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegLinetoVerticalAbs*, UInt32),
     release : Proc(ISVGPathSegLinetoVerticalAbs*, UInt32),
@@ -53526,7 +53514,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegLinetoVerticalAbs, lpVtbl : ISVGPathSegLinetoVerticalAbsVtbl* do
+  record ISVGPathSegLinetoVerticalAbs, lpVtbl : ISVGPathSegLinetoVerticalAbsVtable* do
     GUID = LibC::GUID.new(0x3051050a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegLinetoVerticalAbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53559,7 +53547,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegLinetoVerticalRelVtbl,
+  record ISVGPathSegLinetoVerticalRelVtable,
     query_interface : Proc(ISVGPathSegLinetoVerticalRel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegLinetoVerticalRel*, UInt32),
     release : Proc(ISVGPathSegLinetoVerticalRel*, UInt32),
@@ -53572,7 +53560,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegLinetoVerticalRel, lpVtbl : ISVGPathSegLinetoVerticalRelVtbl* do
+  record ISVGPathSegLinetoVerticalRel, lpVtbl : ISVGPathSegLinetoVerticalRelVtable* do
     GUID = LibC::GUID.new(0x3051050b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegLinetoVerticalRel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53605,7 +53593,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegArcAbsVtbl,
+  record DispSVGPathSegArcAbsVtable,
     query_interface : Proc(DispSVGPathSegArcAbs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegArcAbs*, UInt32),
     release : Proc(DispSVGPathSegArcAbs*, UInt32),
@@ -53616,7 +53604,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegArcAbs, lpVtbl : DispSVGPathSegArcAbsVtbl* do
+  record DispSVGPathSegArcAbs, lpVtbl : DispSVGPathSegArcAbsVtable* do
     GUID = LibC::GUID.new(0x30590013_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegArcAbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53643,7 +53631,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegArcRelVtbl,
+  record DispSVGPathSegArcRelVtable,
     query_interface : Proc(DispSVGPathSegArcRel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegArcRel*, UInt32),
     release : Proc(DispSVGPathSegArcRel*, UInt32),
@@ -53654,7 +53642,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegArcRel, lpVtbl : DispSVGPathSegArcRelVtbl* do
+  record DispSVGPathSegArcRel, lpVtbl : DispSVGPathSegArcRelVtable* do
     GUID = LibC::GUID.new(0x30590014_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegArcRel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53681,7 +53669,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegClosePathVtbl,
+  record DispSVGPathSegClosePathVtable,
     query_interface : Proc(DispSVGPathSegClosePath*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegClosePath*, UInt32),
     release : Proc(DispSVGPathSegClosePath*, UInt32),
@@ -53692,7 +53680,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegClosePath, lpVtbl : DispSVGPathSegClosePathVtbl* do
+  record DispSVGPathSegClosePath, lpVtbl : DispSVGPathSegClosePathVtable* do
     GUID = LibC::GUID.new(0x30590015_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegClosePath*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53719,7 +53707,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegMovetoAbsVtbl,
+  record DispSVGPathSegMovetoAbsVtable,
     query_interface : Proc(DispSVGPathSegMovetoAbs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegMovetoAbs*, UInt32),
     release : Proc(DispSVGPathSegMovetoAbs*, UInt32),
@@ -53730,7 +53718,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegMovetoAbs, lpVtbl : DispSVGPathSegMovetoAbsVtbl* do
+  record DispSVGPathSegMovetoAbs, lpVtbl : DispSVGPathSegMovetoAbsVtable* do
     GUID = LibC::GUID.new(0x30590024_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegMovetoAbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53757,7 +53745,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegMovetoRelVtbl,
+  record DispSVGPathSegMovetoRelVtable,
     query_interface : Proc(DispSVGPathSegMovetoRel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegMovetoRel*, UInt32),
     release : Proc(DispSVGPathSegMovetoRel*, UInt32),
@@ -53768,7 +53756,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegMovetoRel, lpVtbl : DispSVGPathSegMovetoRelVtbl* do
+  record DispSVGPathSegMovetoRel, lpVtbl : DispSVGPathSegMovetoRelVtable* do
     GUID = LibC::GUID.new(0x30590025_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegMovetoRel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53795,7 +53783,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegLinetoAbsVtbl,
+  record DispSVGPathSegLinetoAbsVtable,
     query_interface : Proc(DispSVGPathSegLinetoAbs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegLinetoAbs*, UInt32),
     release : Proc(DispSVGPathSegLinetoAbs*, UInt32),
@@ -53806,7 +53794,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegLinetoAbs, lpVtbl : DispSVGPathSegLinetoAbsVtbl* do
+  record DispSVGPathSegLinetoAbs, lpVtbl : DispSVGPathSegLinetoAbsVtable* do
     GUID = LibC::GUID.new(0x3059001e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegLinetoAbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53833,7 +53821,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegLinetoRelVtbl,
+  record DispSVGPathSegLinetoRelVtable,
     query_interface : Proc(DispSVGPathSegLinetoRel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegLinetoRel*, UInt32),
     release : Proc(DispSVGPathSegLinetoRel*, UInt32),
@@ -53844,7 +53832,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegLinetoRel, lpVtbl : DispSVGPathSegLinetoRelVtbl* do
+  record DispSVGPathSegLinetoRel, lpVtbl : DispSVGPathSegLinetoRelVtable* do
     GUID = LibC::GUID.new(0x30590021_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegLinetoRel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53871,7 +53859,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegCurvetoCubicAbsVtbl,
+  record DispSVGPathSegCurvetoCubicAbsVtable,
     query_interface : Proc(DispSVGPathSegCurvetoCubicAbs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegCurvetoCubicAbs*, UInt32),
     release : Proc(DispSVGPathSegCurvetoCubicAbs*, UInt32),
@@ -53882,7 +53870,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegCurvetoCubicAbs, lpVtbl : DispSVGPathSegCurvetoCubicAbsVtbl* do
+  record DispSVGPathSegCurvetoCubicAbs, lpVtbl : DispSVGPathSegCurvetoCubicAbsVtable* do
     GUID = LibC::GUID.new(0x30590016_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegCurvetoCubicAbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53909,7 +53897,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegCurvetoCubicRelVtbl,
+  record DispSVGPathSegCurvetoCubicRelVtable,
     query_interface : Proc(DispSVGPathSegCurvetoCubicRel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegCurvetoCubicRel*, UInt32),
     release : Proc(DispSVGPathSegCurvetoCubicRel*, UInt32),
@@ -53920,7 +53908,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegCurvetoCubicRel, lpVtbl : DispSVGPathSegCurvetoCubicRelVtbl* do
+  record DispSVGPathSegCurvetoCubicRel, lpVtbl : DispSVGPathSegCurvetoCubicRelVtable* do
     GUID = LibC::GUID.new(0x30590017_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegCurvetoCubicRel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53947,7 +53935,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegCurvetoCubicSmoothAbsVtbl,
+  record DispSVGPathSegCurvetoCubicSmoothAbsVtable,
     query_interface : Proc(DispSVGPathSegCurvetoCubicSmoothAbs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegCurvetoCubicSmoothAbs*, UInt32),
     release : Proc(DispSVGPathSegCurvetoCubicSmoothAbs*, UInt32),
@@ -53958,7 +53946,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegCurvetoCubicSmoothAbs, lpVtbl : DispSVGPathSegCurvetoCubicSmoothAbsVtbl* do
+  record DispSVGPathSegCurvetoCubicSmoothAbs, lpVtbl : DispSVGPathSegCurvetoCubicSmoothAbsVtable* do
     GUID = LibC::GUID.new(0x30590018_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegCurvetoCubicSmoothAbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -53985,7 +53973,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegCurvetoCubicSmoothRelVtbl,
+  record DispSVGPathSegCurvetoCubicSmoothRelVtable,
     query_interface : Proc(DispSVGPathSegCurvetoCubicSmoothRel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegCurvetoCubicSmoothRel*, UInt32),
     release : Proc(DispSVGPathSegCurvetoCubicSmoothRel*, UInt32),
@@ -53996,7 +53984,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegCurvetoCubicSmoothRel, lpVtbl : DispSVGPathSegCurvetoCubicSmoothRelVtbl* do
+  record DispSVGPathSegCurvetoCubicSmoothRel, lpVtbl : DispSVGPathSegCurvetoCubicSmoothRelVtable* do
     GUID = LibC::GUID.new(0x30590019_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegCurvetoCubicSmoothRel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54023,7 +54011,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegCurvetoQuadraticAbsVtbl,
+  record DispSVGPathSegCurvetoQuadraticAbsVtable,
     query_interface : Proc(DispSVGPathSegCurvetoQuadraticAbs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegCurvetoQuadraticAbs*, UInt32),
     release : Proc(DispSVGPathSegCurvetoQuadraticAbs*, UInt32),
@@ -54034,7 +54022,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegCurvetoQuadraticAbs, lpVtbl : DispSVGPathSegCurvetoQuadraticAbsVtbl* do
+  record DispSVGPathSegCurvetoQuadraticAbs, lpVtbl : DispSVGPathSegCurvetoQuadraticAbsVtable* do
     GUID = LibC::GUID.new(0x3059001a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegCurvetoQuadraticAbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54061,7 +54049,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegCurvetoQuadraticRelVtbl,
+  record DispSVGPathSegCurvetoQuadraticRelVtable,
     query_interface : Proc(DispSVGPathSegCurvetoQuadraticRel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegCurvetoQuadraticRel*, UInt32),
     release : Proc(DispSVGPathSegCurvetoQuadraticRel*, UInt32),
@@ -54072,7 +54060,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegCurvetoQuadraticRel, lpVtbl : DispSVGPathSegCurvetoQuadraticRelVtbl* do
+  record DispSVGPathSegCurvetoQuadraticRel, lpVtbl : DispSVGPathSegCurvetoQuadraticRelVtable* do
     GUID = LibC::GUID.new(0x3059001b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegCurvetoQuadraticRel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54099,7 +54087,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegCurvetoQuadraticSmoothAbsVtbl,
+  record DispSVGPathSegCurvetoQuadraticSmoothAbsVtable,
     query_interface : Proc(DispSVGPathSegCurvetoQuadraticSmoothAbs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegCurvetoQuadraticSmoothAbs*, UInt32),
     release : Proc(DispSVGPathSegCurvetoQuadraticSmoothAbs*, UInt32),
@@ -54110,7 +54098,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegCurvetoQuadraticSmoothAbs, lpVtbl : DispSVGPathSegCurvetoQuadraticSmoothAbsVtbl* do
+  record DispSVGPathSegCurvetoQuadraticSmoothAbs, lpVtbl : DispSVGPathSegCurvetoQuadraticSmoothAbsVtable* do
     GUID = LibC::GUID.new(0x3059001c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegCurvetoQuadraticSmoothAbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54137,7 +54125,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegCurvetoQuadraticSmoothRelVtbl,
+  record DispSVGPathSegCurvetoQuadraticSmoothRelVtable,
     query_interface : Proc(DispSVGPathSegCurvetoQuadraticSmoothRel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegCurvetoQuadraticSmoothRel*, UInt32),
     release : Proc(DispSVGPathSegCurvetoQuadraticSmoothRel*, UInt32),
@@ -54148,7 +54136,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegCurvetoQuadraticSmoothRel, lpVtbl : DispSVGPathSegCurvetoQuadraticSmoothRelVtbl* do
+  record DispSVGPathSegCurvetoQuadraticSmoothRel, lpVtbl : DispSVGPathSegCurvetoQuadraticSmoothRelVtable* do
     GUID = LibC::GUID.new(0x3059001d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegCurvetoQuadraticSmoothRel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54175,7 +54163,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegLinetoHorizontalAbsVtbl,
+  record DispSVGPathSegLinetoHorizontalAbsVtable,
     query_interface : Proc(DispSVGPathSegLinetoHorizontalAbs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegLinetoHorizontalAbs*, UInt32),
     release : Proc(DispSVGPathSegLinetoHorizontalAbs*, UInt32),
@@ -54186,7 +54174,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegLinetoHorizontalAbs, lpVtbl : DispSVGPathSegLinetoHorizontalAbsVtbl* do
+  record DispSVGPathSegLinetoHorizontalAbs, lpVtbl : DispSVGPathSegLinetoHorizontalAbsVtable* do
     GUID = LibC::GUID.new(0x3059001f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegLinetoHorizontalAbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54213,7 +54201,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegLinetoHorizontalRelVtbl,
+  record DispSVGPathSegLinetoHorizontalRelVtable,
     query_interface : Proc(DispSVGPathSegLinetoHorizontalRel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegLinetoHorizontalRel*, UInt32),
     release : Proc(DispSVGPathSegLinetoHorizontalRel*, UInt32),
@@ -54224,7 +54212,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegLinetoHorizontalRel, lpVtbl : DispSVGPathSegLinetoHorizontalRelVtbl* do
+  record DispSVGPathSegLinetoHorizontalRel, lpVtbl : DispSVGPathSegLinetoHorizontalRelVtable* do
     GUID = LibC::GUID.new(0x30590020_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegLinetoHorizontalRel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54251,7 +54239,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegLinetoVerticalAbsVtbl,
+  record DispSVGPathSegLinetoVerticalAbsVtable,
     query_interface : Proc(DispSVGPathSegLinetoVerticalAbs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegLinetoVerticalAbs*, UInt32),
     release : Proc(DispSVGPathSegLinetoVerticalAbs*, UInt32),
@@ -54262,7 +54250,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegLinetoVerticalAbs, lpVtbl : DispSVGPathSegLinetoVerticalAbsVtbl* do
+  record DispSVGPathSegLinetoVerticalAbs, lpVtbl : DispSVGPathSegLinetoVerticalAbsVtable* do
     GUID = LibC::GUID.new(0x30590022_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegLinetoVerticalAbs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54289,7 +54277,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathSegLinetoVerticalRelVtbl,
+  record DispSVGPathSegLinetoVerticalRelVtable,
     query_interface : Proc(DispSVGPathSegLinetoVerticalRel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathSegLinetoVerticalRel*, UInt32),
     release : Proc(DispSVGPathSegLinetoVerticalRel*, UInt32),
@@ -54300,7 +54288,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathSegLinetoVerticalRel, lpVtbl : DispSVGPathSegLinetoVerticalRelVtbl* do
+  record DispSVGPathSegLinetoVerticalRel, lpVtbl : DispSVGPathSegLinetoVerticalRelVtable* do
     GUID = LibC::GUID.new(0x30590023_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathSegLinetoVerticalRel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54327,7 +54315,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathSegListVtbl,
+  record ISVGPathSegListVtable,
     query_interface : Proc(ISVGPathSegList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathSegList*, UInt32),
     release : Proc(ISVGPathSegList*, UInt32),
@@ -54347,7 +54335,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathSegList, lpVtbl : ISVGPathSegListVtbl* do
+  record ISVGPathSegList, lpVtbl : ISVGPathSegListVtable* do
     GUID = LibC::GUID.new(0x30510510_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathSegList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54401,7 +54389,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPointVtbl,
+  record ISVGPointVtable,
     query_interface : Proc(ISVGPoint*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPoint*, UInt32),
     release : Proc(ISVGPoint*, UInt32),
@@ -54417,7 +54405,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPoint, lpVtbl : ISVGPointVtbl* do
+  record ISVGPoint, lpVtbl : ISVGPointVtable* do
     GUID = LibC::GUID.new(0x305104f4_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPoint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54459,7 +54447,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPointListVtbl,
+  record ISVGPointListVtable,
     query_interface : Proc(ISVGPointList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPointList*, UInt32),
     release : Proc(ISVGPointList*, UInt32),
@@ -54479,7 +54467,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPointList, lpVtbl : ISVGPointListVtbl* do
+  record ISVGPointList, lpVtbl : ISVGPointListVtable* do
     GUID = LibC::GUID.new(0x305104f5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPointList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54533,7 +54521,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGViewSpecVtbl,
+  record ISVGViewSpecVtable,
     query_interface : Proc(ISVGViewSpec*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGViewSpec*, UInt32),
     release : Proc(ISVGViewSpec*, UInt32),
@@ -54544,7 +54532,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGViewSpec, lpVtbl : ISVGViewSpecVtbl* do
+  record ISVGViewSpec, lpVtbl : ISVGViewSpecVtable* do
     GUID = LibC::GUID.new(0x305104e2_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGViewSpec*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54571,7 +54559,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGTransformVtbl,
+  record ISVGTransformVtable,
     query_interface : Proc(ISVGTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGTransform*, UInt32),
     release : Proc(ISVGTransform*, UInt32),
@@ -54594,7 +54582,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGTransform, lpVtbl : ISVGTransformVtbl* do
+  record ISVGTransform, lpVtbl : ISVGTransformVtable* do
     GUID = LibC::GUID.new(0x305104f7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54657,7 +54645,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGSVGElementVtbl,
+  record DispSVGSVGElementVtable,
     query_interface : Proc(DispSVGSVGElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGSVGElement*, UInt32),
     release : Proc(DispSVGSVGElement*, UInt32),
@@ -54668,7 +54656,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGSVGElement, lpVtbl : DispSVGSVGElementVtbl* do
+  record DispSVGSVGElement, lpVtbl : DispSVGSVGElementVtable* do
     GUID = LibC::GUID.new(0x30590001_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGSVGElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54695,7 +54683,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGElementInstanceVtbl,
+  record ISVGElementInstanceVtable,
     query_interface : Proc(ISVGElementInstance*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGElementInstance*, UInt32),
     release : Proc(ISVGElementInstance*, UInt32),
@@ -54714,7 +54702,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGElementInstance, lpVtbl : ISVGElementInstanceVtbl* do
+  record ISVGElementInstance, lpVtbl : ISVGElementInstanceVtable* do
     GUID = LibC::GUID.new(0x305104ee_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGElementInstance*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54765,7 +54753,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGUseElementVtbl,
+  record ISVGUseElementVtable,
     query_interface : Proc(ISVGUseElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGUseElement*, UInt32),
     release : Proc(ISVGUseElement*, UInt32),
@@ -54788,7 +54776,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGUseElement, lpVtbl : ISVGUseElementVtbl* do
+  record ISVGUseElement, lpVtbl : ISVGUseElementVtable* do
     GUID = LibC::GUID.new(0x305104ed_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGUseElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54851,7 +54839,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGUseElementVtbl,
+  record DispSVGUseElementVtable,
     query_interface : Proc(DispSVGUseElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGUseElement*, UInt32),
     release : Proc(DispSVGUseElement*, UInt32),
@@ -54862,7 +54850,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGUseElement, lpVtbl : DispSVGUseElementVtbl* do
+  record DispSVGUseElement, lpVtbl : DispSVGUseElementVtable* do
     GUID = LibC::GUID.new(0x30590010_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGUseElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54889,7 +54877,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLStyleSheetRulesAppliedCollectionVtbl,
+  record IHTMLStyleSheetRulesAppliedCollectionVtable,
     query_interface : Proc(IHTMLStyleSheetRulesAppliedCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLStyleSheetRulesAppliedCollection*, UInt32),
     release : Proc(IHTMLStyleSheetRulesAppliedCollection*, UInt32),
@@ -54905,7 +54893,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLStyleSheetRulesAppliedCollection, lpVtbl : IHTMLStyleSheetRulesAppliedCollectionVtbl* do
+  record IHTMLStyleSheetRulesAppliedCollection, lpVtbl : IHTMLStyleSheetRulesAppliedCollectionVtable* do
     GUID = LibC::GUID.new(0x305104c0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLStyleSheetRulesAppliedCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54947,7 +54935,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IRulesAppliedVtbl,
+  record IRulesAppliedVtable,
     query_interface : Proc(IRulesApplied*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRulesApplied*, UInt32),
     release : Proc(IRulesApplied*, UInt32),
@@ -54964,7 +54952,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IRulesApplied, lpVtbl : IRulesAppliedVtbl* do
+  record IRulesApplied, lpVtbl : IRulesAppliedVtable* do
     GUID = LibC::GUID.new(0x305104bf_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IRulesApplied*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55009,7 +54997,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLStyleSheetRulesAppliedCollectionVtbl,
+  record DispHTMLStyleSheetRulesAppliedCollectionVtable,
     query_interface : Proc(DispHTMLStyleSheetRulesAppliedCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLStyleSheetRulesAppliedCollection*, UInt32),
     release : Proc(DispHTMLStyleSheetRulesAppliedCollection*, UInt32),
@@ -55020,7 +55008,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLStyleSheetRulesAppliedCollection, lpVtbl : DispHTMLStyleSheetRulesAppliedCollectionVtbl* do
+  record DispHTMLStyleSheetRulesAppliedCollection, lpVtbl : DispHTMLStyleSheetRulesAppliedCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f5a6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLStyleSheetRulesAppliedCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55047,7 +55035,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispRulesAppliedVtbl,
+  record DispRulesAppliedVtable,
     query_interface : Proc(DispRulesApplied*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispRulesApplied*, UInt32),
     release : Proc(DispRulesApplied*, UInt32),
@@ -55058,7 +55046,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispRulesApplied, lpVtbl : DispRulesAppliedVtbl* do
+  record DispRulesApplied, lpVtbl : DispRulesAppliedVtable* do
     GUID = LibC::GUID.new(0x3050f5a5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispRulesApplied*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55085,7 +55073,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispRulesAppliedCollectionVtbl,
+  record DispRulesAppliedCollectionVtable,
     query_interface : Proc(DispRulesAppliedCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispRulesAppliedCollection*, UInt32),
     release : Proc(DispRulesAppliedCollection*, UInt32),
@@ -55096,7 +55084,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispRulesAppliedCollection, lpVtbl : DispRulesAppliedCollectionVtbl* do
+  record DispRulesAppliedCollection, lpVtbl : DispRulesAppliedCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f5a4_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispRulesAppliedCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55123,7 +55111,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLW3CComputedStyleVtbl,
+  record DispHTMLW3CComputedStyleVtable,
     query_interface : Proc(DispHTMLW3CComputedStyle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLW3CComputedStyle*, UInt32),
     release : Proc(DispHTMLW3CComputedStyle*, UInt32),
@@ -55134,7 +55122,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLW3CComputedStyle, lpVtbl : DispHTMLW3CComputedStyleVtbl* do
+  record DispHTMLW3CComputedStyle, lpVtbl : DispHTMLW3CComputedStyleVtable* do
     GUID = LibC::GUID.new(0x30590070_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLW3CComputedStyle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55161,7 +55149,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGAnimatedPointsVtbl,
+  record ISVGAnimatedPointsVtable,
     query_interface : Proc(ISVGAnimatedPoints*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGAnimatedPoints*, UInt32),
     release : Proc(ISVGAnimatedPoints*, UInt32),
@@ -55176,7 +55164,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGAnimatedPoints, lpVtbl : ISVGAnimatedPointsVtbl* do
+  record ISVGAnimatedPoints, lpVtbl : ISVGAnimatedPointsVtable* do
     GUID = LibC::GUID.new(0x30510517_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGAnimatedPoints*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55215,7 +55203,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGCircleElementVtbl,
+  record ISVGCircleElementVtable,
     query_interface : Proc(ISVGCircleElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGCircleElement*, UInt32),
     release : Proc(ISVGCircleElement*, UInt32),
@@ -55232,7 +55220,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGCircleElement, lpVtbl : ISVGCircleElementVtbl* do
+  record ISVGCircleElement, lpVtbl : ISVGCircleElementVtable* do
     GUID = LibC::GUID.new(0x30510514_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGCircleElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55277,7 +55265,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGEllipseElementVtbl,
+  record ISVGEllipseElementVtable,
     query_interface : Proc(ISVGEllipseElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGEllipseElement*, UInt32),
     release : Proc(ISVGEllipseElement*, UInt32),
@@ -55296,7 +55284,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGEllipseElement, lpVtbl : ISVGEllipseElementVtbl* do
+  record ISVGEllipseElement, lpVtbl : ISVGEllipseElementVtable* do
     GUID = LibC::GUID.new(0x30510515_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGEllipseElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55347,7 +55335,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGLineElementVtbl,
+  record ISVGLineElementVtable,
     query_interface : Proc(ISVGLineElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGLineElement*, UInt32),
     release : Proc(ISVGLineElement*, UInt32),
@@ -55366,7 +55354,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGLineElement, lpVtbl : ISVGLineElementVtbl* do
+  record ISVGLineElement, lpVtbl : ISVGLineElementVtable* do
     GUID = LibC::GUID.new(0x30510516_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGLineElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55417,7 +55405,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGRectElementVtbl,
+  record ISVGRectElementVtable,
     query_interface : Proc(ISVGRectElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGRectElement*, UInt32),
     release : Proc(ISVGRectElement*, UInt32),
@@ -55440,7 +55428,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGRectElement, lpVtbl : ISVGRectElementVtbl* do
+  record ISVGRectElement, lpVtbl : ISVGRectElementVtable* do
     GUID = LibC::GUID.new(0x30510513_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGRectElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55503,7 +55491,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPolygonElementVtbl,
+  record ISVGPolygonElementVtable,
     query_interface : Proc(ISVGPolygonElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPolygonElement*, UInt32),
     release : Proc(ISVGPolygonElement*, UInt32),
@@ -55514,7 +55502,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPolygonElement, lpVtbl : ISVGPolygonElementVtbl* do
+  record ISVGPolygonElement, lpVtbl : ISVGPolygonElementVtable* do
     GUID = LibC::GUID.new(0x30510519_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPolygonElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55541,7 +55529,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPolylineElementVtbl,
+  record ISVGPolylineElementVtable,
     query_interface : Proc(ISVGPolylineElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPolylineElement*, UInt32),
     release : Proc(ISVGPolylineElement*, UInt32),
@@ -55552,7 +55540,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPolylineElement, lpVtbl : ISVGPolylineElementVtbl* do
+  record ISVGPolylineElement, lpVtbl : ISVGPolylineElementVtable* do
     GUID = LibC::GUID.new(0x30510518_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPolylineElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55579,7 +55567,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGCircleElementVtbl,
+  record DispSVGCircleElementVtable,
     query_interface : Proc(DispSVGCircleElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGCircleElement*, UInt32),
     release : Proc(DispSVGCircleElement*, UInt32),
@@ -55590,7 +55578,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGCircleElement, lpVtbl : DispSVGCircleElementVtbl* do
+  record DispSVGCircleElement, lpVtbl : DispSVGCircleElementVtable* do
     GUID = LibC::GUID.new(0x3059000a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGCircleElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55617,7 +55605,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGEllipseElementVtbl,
+  record DispSVGEllipseElementVtable,
     query_interface : Proc(DispSVGEllipseElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGEllipseElement*, UInt32),
     release : Proc(DispSVGEllipseElement*, UInt32),
@@ -55628,7 +55616,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGEllipseElement, lpVtbl : DispSVGEllipseElementVtbl* do
+  record DispSVGEllipseElement, lpVtbl : DispSVGEllipseElementVtable* do
     GUID = LibC::GUID.new(0x3059000b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGEllipseElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55655,7 +55643,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGLineElementVtbl,
+  record DispSVGLineElementVtable,
     query_interface : Proc(DispSVGLineElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGLineElement*, UInt32),
     release : Proc(DispSVGLineElement*, UInt32),
@@ -55666,7 +55654,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGLineElement, lpVtbl : DispSVGLineElementVtbl* do
+  record DispSVGLineElement, lpVtbl : DispSVGLineElementVtable* do
     GUID = LibC::GUID.new(0x3059000c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGLineElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55693,7 +55681,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGRectElementVtbl,
+  record DispSVGRectElementVtable,
     query_interface : Proc(DispSVGRectElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGRectElement*, UInt32),
     release : Proc(DispSVGRectElement*, UInt32),
@@ -55704,7 +55692,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGRectElement, lpVtbl : DispSVGRectElementVtbl* do
+  record DispSVGRectElement, lpVtbl : DispSVGRectElementVtable* do
     GUID = LibC::GUID.new(0x30590009_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGRectElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55731,7 +55719,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPolygonElementVtbl,
+  record DispSVGPolygonElementVtable,
     query_interface : Proc(DispSVGPolygonElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPolygonElement*, UInt32),
     release : Proc(DispSVGPolygonElement*, UInt32),
@@ -55742,7 +55730,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPolygonElement, lpVtbl : DispSVGPolygonElementVtbl* do
+  record DispSVGPolygonElement, lpVtbl : DispSVGPolygonElementVtable* do
     GUID = LibC::GUID.new(0x3059000d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPolygonElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55769,7 +55757,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPolylineElementVtbl,
+  record DispSVGPolylineElementVtable,
     query_interface : Proc(DispSVGPolylineElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPolylineElement*, UInt32),
     release : Proc(DispSVGPolylineElement*, UInt32),
@@ -55780,7 +55768,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPolylineElement, lpVtbl : DispSVGPolylineElementVtbl* do
+  record DispSVGPolylineElement, lpVtbl : DispSVGPolylineElementVtable* do
     GUID = LibC::GUID.new(0x3059000e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPolylineElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55807,7 +55795,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGGElementVtbl,
+  record ISVGGElementVtable,
     query_interface : Proc(ISVGGElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGGElement*, UInt32),
     release : Proc(ISVGGElement*, UInt32),
@@ -55818,7 +55806,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGGElement, lpVtbl : ISVGGElementVtbl* do
+  record ISVGGElement, lpVtbl : ISVGGElementVtable* do
     GUID = LibC::GUID.new(0x305104e8_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGGElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55845,7 +55833,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGGElementVtbl,
+  record DispSVGGElementVtable,
     query_interface : Proc(DispSVGGElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGGElement*, UInt32),
     release : Proc(DispSVGGElement*, UInt32),
@@ -55856,7 +55844,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGGElement, lpVtbl : DispSVGGElementVtbl* do
+  record DispSVGGElement, lpVtbl : DispSVGGElementVtable* do
     GUID = LibC::GUID.new(0x30590002_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGGElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55883,7 +55871,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGSymbolElementVtbl,
+  record ISVGSymbolElementVtable,
     query_interface : Proc(ISVGSymbolElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGSymbolElement*, UInt32),
     release : Proc(ISVGSymbolElement*, UInt32),
@@ -55894,7 +55882,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGSymbolElement, lpVtbl : ISVGSymbolElementVtbl* do
+  record ISVGSymbolElement, lpVtbl : ISVGSymbolElementVtable* do
     GUID = LibC::GUID.new(0x305104ec_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGSymbolElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55921,7 +55909,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGSymbolElementVtbl,
+  record DispSVGSymbolElementVtable,
     query_interface : Proc(DispSVGSymbolElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGSymbolElement*, UInt32),
     release : Proc(DispSVGSymbolElement*, UInt32),
@@ -55932,7 +55920,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGSymbolElement, lpVtbl : DispSVGSymbolElementVtbl* do
+  record DispSVGSymbolElement, lpVtbl : DispSVGSymbolElementVtable* do
     GUID = LibC::GUID.new(0x30590004_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGSymbolElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55959,7 +55947,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGDefsElementVtbl,
+  record ISVGDefsElementVtable,
     query_interface : Proc(ISVGDefsElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGDefsElement*, UInt32),
     release : Proc(ISVGDefsElement*, UInt32),
@@ -55970,7 +55958,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGDefsElement, lpVtbl : ISVGDefsElementVtbl* do
+  record ISVGDefsElement, lpVtbl : ISVGDefsElementVtable* do
     GUID = LibC::GUID.new(0x305104e9_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGDefsElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -55997,7 +55985,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGDefsElementVtbl,
+  record DispSVGDefsElementVtable,
     query_interface : Proc(DispSVGDefsElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGDefsElement*, UInt32),
     release : Proc(DispSVGDefsElement*, UInt32),
@@ -56008,7 +55996,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGDefsElement, lpVtbl : DispSVGDefsElementVtbl* do
+  record DispSVGDefsElement, lpVtbl : DispSVGDefsElementVtable* do
     GUID = LibC::GUID.new(0x30590003_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGDefsElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -56035,7 +56023,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGAnimatedPathDataVtbl,
+  record ISVGAnimatedPathDataVtable,
     query_interface : Proc(ISVGAnimatedPathData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGAnimatedPathData*, UInt32),
     release : Proc(ISVGAnimatedPathData*, UInt32),
@@ -56054,7 +56042,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGAnimatedPathData, lpVtbl : ISVGAnimatedPathDataVtbl* do
+  record ISVGAnimatedPathData, lpVtbl : ISVGAnimatedPathDataVtable* do
     GUID = LibC::GUID.new(0x30510511_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGAnimatedPathData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -56105,7 +56093,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPathElementVtbl,
+  record ISVGPathElementVtable,
     query_interface : Proc(ISVGPathElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPathElement*, UInt32),
     release : Proc(ISVGPathElement*, UInt32),
@@ -56140,7 +56128,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPathElement, lpVtbl : ISVGPathElementVtbl* do
+  record ISVGPathElement, lpVtbl : ISVGPathElementVtable* do
     GUID = LibC::GUID.new(0x30510512_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPathElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -56239,7 +56227,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGPathElementVtbl,
+  record DispSVGPathElementVtable,
     query_interface : Proc(DispSVGPathElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGPathElement*, UInt32),
     release : Proc(DispSVGPathElement*, UInt32),
@@ -56250,7 +56238,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGPathElement, lpVtbl : DispSVGPathElementVtbl* do
+  record DispSVGPathElement, lpVtbl : DispSVGPathElementVtable* do
     GUID = LibC::GUID.new(0x30590011_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGPathElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -56277,7 +56265,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGPreserveAspectRatioVtbl,
+  record ISVGPreserveAspectRatioVtable,
     query_interface : Proc(ISVGPreserveAspectRatio*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGPreserveAspectRatio*, UInt32),
     release : Proc(ISVGPreserveAspectRatio*, UInt32),
@@ -56292,7 +56280,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGPreserveAspectRatio, lpVtbl : ISVGPreserveAspectRatioVtbl* do
+  record ISVGPreserveAspectRatio, lpVtbl : ISVGPreserveAspectRatioVtable* do
     GUID = LibC::GUID.new(0x305104fa_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGPreserveAspectRatio*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -56331,7 +56319,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGTextElementVtbl,
+  record ISVGTextElementVtable,
     query_interface : Proc(ISVGTextElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGTextElement*, UInt32),
     release : Proc(ISVGTextElement*, UInt32),
@@ -56342,7 +56330,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGTextElement, lpVtbl : ISVGTextElementVtbl* do
+  record ISVGTextElement, lpVtbl : ISVGTextElementVtable* do
     GUID = LibC::GUID.new(0x3051051c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGTextElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -56369,7 +56357,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGTextElementVtbl,
+  record DispSVGTextElementVtable,
     query_interface : Proc(DispSVGTextElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGTextElement*, UInt32),
     release : Proc(DispSVGTextElement*, UInt32),
@@ -56380,7 +56368,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGTextElement, lpVtbl : DispSVGTextElementVtbl* do
+  record DispSVGTextElement, lpVtbl : DispSVGTextElementVtable* do
     GUID = LibC::GUID.new(0x30590037_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGTextElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -56407,7 +56395,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGImageElementVtbl,
+  record ISVGImageElementVtable,
     query_interface : Proc(ISVGImageElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGImageElement*, UInt32),
     release : Proc(ISVGImageElement*, UInt32),
@@ -56426,7 +56414,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGImageElement, lpVtbl : ISVGImageElementVtbl* do
+  record ISVGImageElement, lpVtbl : ISVGImageElementVtable* do
     GUID = LibC::GUID.new(0x305104f0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGImageElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -56477,7 +56465,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGImageElementVtbl,
+  record DispSVGImageElementVtable,
     query_interface : Proc(DispSVGImageElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGImageElement*, UInt32),
     release : Proc(DispSVGImageElement*, UInt32),
@@ -56488,7 +56476,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGImageElement, lpVtbl : DispSVGImageElementVtbl* do
+  record DispSVGImageElement, lpVtbl : DispSVGImageElementVtable* do
     GUID = LibC::GUID.new(0x30590027_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGImageElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -56515,7 +56503,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGStopElementVtbl,
+  record ISVGStopElementVtable,
     query_interface : Proc(ISVGStopElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGStopElement*, UInt32),
     release : Proc(ISVGStopElement*, UInt32),
@@ -56528,7 +56516,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGStopElement, lpVtbl : ISVGStopElementVtbl* do
+  record ISVGStopElement, lpVtbl : ISVGStopElementVtable* do
     GUID = LibC::GUID.new(0x3051052b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGStopElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -56561,7 +56549,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGStopElementVtbl,
+  record DispSVGStopElementVtable,
     query_interface : Proc(DispSVGStopElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGStopElement*, UInt32),
     release : Proc(DispSVGStopElement*, UInt32),
@@ -56572,7 +56560,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGStopElement, lpVtbl : DispSVGStopElementVtbl* do
+  record DispSVGStopElement, lpVtbl : DispSVGStopElementVtable* do
     GUID = LibC::GUID.new(0x3059002d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGStopElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -56599,7 +56587,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGGradientElementVtbl,
+  record ISVGGradientElementVtable,
     query_interface : Proc(ISVGGradientElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGGradientElement*, UInt32),
     release : Proc(ISVGGradientElement*, UInt32),
@@ -56616,7 +56604,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGGradientElement, lpVtbl : ISVGGradientElementVtbl* do
+  record ISVGGradientElement, lpVtbl : ISVGGradientElementVtable* do
     GUID = LibC::GUID.new(0x30510528_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGGradientElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -56661,7 +56649,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGGradientElementVtbl,
+  record DispSVGGradientElementVtable,
     query_interface : Proc(DispSVGGradientElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGGradientElement*, UInt32),
     release : Proc(DispSVGGradientElement*, UInt32),
@@ -56672,7 +56660,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGGradientElement, lpVtbl : DispSVGGradientElementVtbl* do
+  record DispSVGGradientElement, lpVtbl : DispSVGGradientElementVtable* do
     GUID = LibC::GUID.new(0x3059002e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGGradientElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -56699,7 +56687,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGLinearGradientElementVtbl,
+  record ISVGLinearGradientElementVtable,
     query_interface : Proc(ISVGLinearGradientElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGLinearGradientElement*, UInt32),
     release : Proc(ISVGLinearGradientElement*, UInt32),
@@ -56718,7 +56706,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGLinearGradientElement, lpVtbl : ISVGLinearGradientElementVtbl* do
+  record ISVGLinearGradientElement, lpVtbl : ISVGLinearGradientElementVtable* do
     GUID = LibC::GUID.new(0x30510529_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGLinearGradientElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -56769,7 +56757,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGLinearGradientElementVtbl,
+  record DispSVGLinearGradientElementVtable,
     query_interface : Proc(DispSVGLinearGradientElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGLinearGradientElement*, UInt32),
     release : Proc(DispSVGLinearGradientElement*, UInt32),
@@ -56780,7 +56768,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGLinearGradientElement, lpVtbl : DispSVGLinearGradientElementVtbl* do
+  record DispSVGLinearGradientElement, lpVtbl : DispSVGLinearGradientElementVtable* do
     GUID = LibC::GUID.new(0x3059002a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGLinearGradientElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -56807,7 +56795,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGRadialGradientElementVtbl,
+  record ISVGRadialGradientElementVtable,
     query_interface : Proc(ISVGRadialGradientElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGRadialGradientElement*, UInt32),
     release : Proc(ISVGRadialGradientElement*, UInt32),
@@ -56828,7 +56816,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGRadialGradientElement, lpVtbl : ISVGRadialGradientElementVtbl* do
+  record ISVGRadialGradientElement, lpVtbl : ISVGRadialGradientElementVtable* do
     GUID = LibC::GUID.new(0x3051052a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGRadialGradientElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -56885,7 +56873,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGRadialGradientElementVtbl,
+  record DispSVGRadialGradientElementVtable,
     query_interface : Proc(DispSVGRadialGradientElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGRadialGradientElement*, UInt32),
     release : Proc(DispSVGRadialGradientElement*, UInt32),
@@ -56896,7 +56884,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGRadialGradientElement, lpVtbl : DispSVGRadialGradientElementVtbl* do
+  record DispSVGRadialGradientElement, lpVtbl : DispSVGRadialGradientElementVtable* do
     GUID = LibC::GUID.new(0x3059002b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGRadialGradientElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -56923,7 +56911,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGMaskElementVtbl,
+  record ISVGMaskElementVtable,
     query_interface : Proc(ISVGMaskElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGMaskElement*, UInt32),
     release : Proc(ISVGMaskElement*, UInt32),
@@ -56946,7 +56934,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGMaskElement, lpVtbl : ISVGMaskElementVtbl* do
+  record ISVGMaskElement, lpVtbl : ISVGMaskElementVtable* do
     GUID = LibC::GUID.new(0x3051052e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGMaskElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -57009,7 +56997,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGMaskElementVtbl,
+  record DispSVGMaskElementVtable,
     query_interface : Proc(DispSVGMaskElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGMaskElement*, UInt32),
     release : Proc(DispSVGMaskElement*, UInt32),
@@ -57020,7 +57008,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGMaskElement, lpVtbl : DispSVGMaskElementVtbl* do
+  record DispSVGMaskElement, lpVtbl : DispSVGMaskElementVtable* do
     GUID = LibC::GUID.new(0x3059003c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGMaskElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -57047,7 +57035,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGMarkerElementVtbl,
+  record ISVGMarkerElementVtable,
     query_interface : Proc(ISVGMarkerElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGMarkerElement*, UInt32),
     release : Proc(ISVGMarkerElement*, UInt32),
@@ -57074,7 +57062,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGMarkerElement, lpVtbl : ISVGMarkerElementVtbl* do
+  record ISVGMarkerElement, lpVtbl : ISVGMarkerElementVtable* do
     GUID = LibC::GUID.new(0x30510525_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGMarkerElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -57149,7 +57137,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGMarkerElementVtbl,
+  record DispSVGMarkerElementVtable,
     query_interface : Proc(DispSVGMarkerElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGMarkerElement*, UInt32),
     release : Proc(DispSVGMarkerElement*, UInt32),
@@ -57160,7 +57148,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGMarkerElement, lpVtbl : DispSVGMarkerElementVtbl* do
+  record DispSVGMarkerElement, lpVtbl : DispSVGMarkerElementVtable* do
     GUID = LibC::GUID.new(0x30590036_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGMarkerElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -57187,7 +57175,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGZoomEventVtbl,
+  record ISVGZoomEventVtable,
     query_interface : Proc(ISVGZoomEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGZoomEvent*, UInt32),
     release : Proc(ISVGZoomEvent*, UInt32),
@@ -57203,7 +57191,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGZoomEvent, lpVtbl : ISVGZoomEventVtbl* do
+  record ISVGZoomEvent, lpVtbl : ISVGZoomEventVtable* do
     GUID = LibC::GUID.new(0x3051054e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGZoomEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -57245,7 +57233,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGZoomEventVtbl,
+  record DispSVGZoomEventVtable,
     query_interface : Proc(DispSVGZoomEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGZoomEvent*, UInt32),
     release : Proc(DispSVGZoomEvent*, UInt32),
@@ -57256,7 +57244,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGZoomEvent, lpVtbl : DispSVGZoomEventVtbl* do
+  record DispSVGZoomEvent, lpVtbl : DispSVGZoomEventVtable* do
     GUID = LibC::GUID.new(0x30590031_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGZoomEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -57283,7 +57271,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGAElementVtbl,
+  record ISVGAElementVtable,
     query_interface : Proc(ISVGAElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGAElement*, UInt32),
     release : Proc(ISVGAElement*, UInt32),
@@ -57296,7 +57284,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGAElement, lpVtbl : ISVGAElementVtbl* do
+  record ISVGAElement, lpVtbl : ISVGAElementVtable* do
     GUID = LibC::GUID.new(0x3051054b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGAElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -57329,7 +57317,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGAElementVtbl,
+  record DispSVGAElementVtable,
     query_interface : Proc(DispSVGAElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGAElement*, UInt32),
     release : Proc(DispSVGAElement*, UInt32),
@@ -57340,7 +57328,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGAElement, lpVtbl : DispSVGAElementVtbl* do
+  record DispSVGAElement, lpVtbl : DispSVGAElementVtable* do
     GUID = LibC::GUID.new(0x30590033_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGAElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -57367,7 +57355,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGViewElementVtbl,
+  record ISVGViewElementVtable,
     query_interface : Proc(ISVGViewElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGViewElement*, UInt32),
     release : Proc(ISVGViewElement*, UInt32),
@@ -57380,7 +57368,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGViewElement, lpVtbl : ISVGViewElementVtbl* do
+  record ISVGViewElement, lpVtbl : ISVGViewElementVtable* do
     GUID = LibC::GUID.new(0x3051054c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGViewElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -57413,7 +57401,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGViewElementVtbl,
+  record DispSVGViewElementVtable,
     query_interface : Proc(DispSVGViewElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGViewElement*, UInt32),
     release : Proc(DispSVGViewElement*, UInt32),
@@ -57424,7 +57412,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGViewElement, lpVtbl : DispSVGViewElementVtbl* do
+  record DispSVGViewElement, lpVtbl : DispSVGViewElementVtable* do
     GUID = LibC::GUID.new(0x30590034_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGViewElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -57451,7 +57439,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLMediaErrorVtbl,
+  record IHTMLMediaErrorVtable,
     query_interface : Proc(IHTMLMediaError*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLMediaError*, UInt32),
     release : Proc(IHTMLMediaError*, UInt32),
@@ -57463,7 +57451,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLMediaError, lpVtbl : IHTMLMediaErrorVtbl* do
+  record IHTMLMediaError, lpVtbl : IHTMLMediaErrorVtable* do
     GUID = LibC::GUID.new(0x30510704_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLMediaError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -57493,7 +57481,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTimeRangesVtbl,
+  record IHTMLTimeRangesVtable,
     query_interface : Proc(IHTMLTimeRanges*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTimeRanges*, UInt32),
     release : Proc(IHTMLTimeRanges*, UInt32),
@@ -57507,7 +57495,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTimeRanges, lpVtbl : IHTMLTimeRangesVtbl* do
+  record IHTMLTimeRanges, lpVtbl : IHTMLTimeRangesVtable* do
     GUID = LibC::GUID.new(0x30510705_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTimeRanges*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -57543,7 +57531,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLTimeRanges2Vtbl,
+  record IHTMLTimeRanges2Vtable,
     query_interface : Proc(IHTMLTimeRanges2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLTimeRanges2*, UInt32),
     release : Proc(IHTMLTimeRanges2*, UInt32),
@@ -57556,7 +57544,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLTimeRanges2, lpVtbl : IHTMLTimeRanges2Vtbl* do
+  record IHTMLTimeRanges2, lpVtbl : IHTMLTimeRanges2Vtable* do
     GUID = LibC::GUID.new(0x3051080b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLTimeRanges2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -57589,7 +57577,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLMediaElementVtbl,
+  record IHTMLMediaElementVtable,
     query_interface : Proc(IHTMLMediaElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLMediaElement*, UInt32),
     release : Proc(IHTMLMediaElement*, UInt32),
@@ -57637,7 +57625,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLMediaElement, lpVtbl : IHTMLMediaElementVtbl* do
+  record IHTMLMediaElement, lpVtbl : IHTMLMediaElementVtable* do
     GUID = LibC::GUID.new(0x30510706_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLMediaElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -57775,7 +57763,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLMediaElement2Vtbl,
+  record IHTMLMediaElement2Vtable,
     query_interface : Proc(IHTMLMediaElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLMediaElement2*, UInt32),
     release : Proc(IHTMLMediaElement2*, UInt32),
@@ -57796,7 +57784,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLMediaElement2, lpVtbl : IHTMLMediaElement2Vtbl* do
+  record IHTMLMediaElement2, lpVtbl : IHTMLMediaElement2Vtable* do
     GUID = LibC::GUID.new(0x30510809_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLMediaElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -57853,7 +57841,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLMSMediaElementVtbl,
+  record IHTMLMSMediaElementVtable,
     query_interface : Proc(IHTMLMSMediaElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLMSMediaElement*, UInt32),
     release : Proc(IHTMLMSMediaElement*, UInt32),
@@ -57868,7 +57856,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLMSMediaElement, lpVtbl : IHTMLMSMediaElementVtbl* do
+  record IHTMLMSMediaElement, lpVtbl : IHTMLMSMediaElementVtable* do
     GUID = LibC::GUID.new(0x30510792_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLMSMediaElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -57907,7 +57895,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLSourceElementVtbl,
+  record IHTMLSourceElementVtable,
     query_interface : Proc(IHTMLSourceElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLSourceElement*, UInt32),
     release : Proc(IHTMLSourceElement*, UInt32),
@@ -57924,7 +57912,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLSourceElement, lpVtbl : IHTMLSourceElementVtbl* do
+  record IHTMLSourceElement, lpVtbl : IHTMLSourceElementVtable* do
     GUID = LibC::GUID.new(0x30510707_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLSourceElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -57969,7 +57957,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLAudioElementVtbl,
+  record IHTMLAudioElementVtable,
     query_interface : Proc(IHTMLAudioElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLAudioElement*, UInt32),
     release : Proc(IHTMLAudioElement*, UInt32),
@@ -57980,7 +57968,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLAudioElement, lpVtbl : IHTMLAudioElementVtbl* do
+  record IHTMLAudioElement, lpVtbl : IHTMLAudioElementVtable* do
     GUID = LibC::GUID.new(0x30510708_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLAudioElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58007,7 +57995,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLVideoElementVtbl,
+  record IHTMLVideoElementVtable,
     query_interface : Proc(IHTMLVideoElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLVideoElement*, UInt32),
     release : Proc(IHTMLVideoElement*, UInt32),
@@ -58026,7 +58014,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLVideoElement, lpVtbl : IHTMLVideoElementVtbl* do
+  record IHTMLVideoElement, lpVtbl : IHTMLVideoElementVtable* do
     GUID = LibC::GUID.new(0x30510709_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLVideoElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58077,7 +58065,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLAudioElementFactoryVtbl,
+  record IHTMLAudioElementFactoryVtable,
     query_interface : Proc(IHTMLAudioElementFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLAudioElementFactory*, UInt32),
     release : Proc(IHTMLAudioElementFactory*, UInt32),
@@ -58089,7 +58077,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLAudioElementFactory, lpVtbl : IHTMLAudioElementFactoryVtbl* do
+  record IHTMLAudioElementFactory, lpVtbl : IHTMLAudioElementFactoryVtable* do
     GUID = LibC::GUID.new(0x305107eb_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLAudioElementFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58119,7 +58107,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLMediaErrorVtbl,
+  record DispHTMLMediaErrorVtable,
     query_interface : Proc(DispHTMLMediaError*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLMediaError*, UInt32),
     release : Proc(DispHTMLMediaError*, UInt32),
@@ -58130,7 +58118,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLMediaError, lpVtbl : DispHTMLMediaErrorVtbl* do
+  record DispHTMLMediaError, lpVtbl : DispHTMLMediaErrorVtable* do
     GUID = LibC::GUID.new(0x30590086_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLMediaError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58157,7 +58145,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLTimeRangesVtbl,
+  record DispHTMLTimeRangesVtable,
     query_interface : Proc(DispHTMLTimeRanges*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLTimeRanges*, UInt32),
     release : Proc(DispHTMLTimeRanges*, UInt32),
@@ -58168,7 +58156,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLTimeRanges, lpVtbl : DispHTMLTimeRangesVtbl* do
+  record DispHTMLTimeRanges, lpVtbl : DispHTMLTimeRangesVtable* do
     GUID = LibC::GUID.new(0x30590087_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLTimeRanges*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58195,7 +58183,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLMediaElementVtbl,
+  record DispHTMLMediaElementVtable,
     query_interface : Proc(DispHTMLMediaElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLMediaElement*, UInt32),
     release : Proc(DispHTMLMediaElement*, UInt32),
@@ -58206,7 +58194,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLMediaElement, lpVtbl : DispHTMLMediaElementVtbl* do
+  record DispHTMLMediaElement, lpVtbl : DispHTMLMediaElementVtable* do
     GUID = LibC::GUID.new(0x30590088_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLMediaElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58233,7 +58221,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLSourceElementVtbl,
+  record DispHTMLSourceElementVtable,
     query_interface : Proc(DispHTMLSourceElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLSourceElement*, UInt32),
     release : Proc(DispHTMLSourceElement*, UInt32),
@@ -58244,7 +58232,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLSourceElement, lpVtbl : DispHTMLSourceElementVtbl* do
+  record DispHTMLSourceElement, lpVtbl : DispHTMLSourceElementVtable* do
     GUID = LibC::GUID.new(0x30590089_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLSourceElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58271,7 +58259,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLAudioElementVtbl,
+  record DispHTMLAudioElementVtable,
     query_interface : Proc(DispHTMLAudioElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLAudioElement*, UInt32),
     release : Proc(DispHTMLAudioElement*, UInt32),
@@ -58282,7 +58270,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLAudioElement, lpVtbl : DispHTMLAudioElementVtbl* do
+  record DispHTMLAudioElement, lpVtbl : DispHTMLAudioElementVtable* do
     GUID = LibC::GUID.new(0x3059008a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLAudioElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58309,7 +58297,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLVideoElementVtbl,
+  record DispHTMLVideoElementVtable,
     query_interface : Proc(DispHTMLVideoElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLVideoElement*, UInt32),
     release : Proc(DispHTMLVideoElement*, UInt32),
@@ -58320,7 +58308,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLVideoElement, lpVtbl : DispHTMLVideoElementVtbl* do
+  record DispHTMLVideoElement, lpVtbl : DispHTMLVideoElementVtable* do
     GUID = LibC::GUID.new(0x3059008b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLVideoElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58347,7 +58335,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGSwitchElementVtbl,
+  record ISVGSwitchElementVtable,
     query_interface : Proc(ISVGSwitchElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGSwitchElement*, UInt32),
     release : Proc(ISVGSwitchElement*, UInt32),
@@ -58358,7 +58346,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGSwitchElement, lpVtbl : ISVGSwitchElementVtbl* do
+  record ISVGSwitchElement, lpVtbl : ISVGSwitchElementVtable* do
     GUID = LibC::GUID.new(0x305104f1_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGSwitchElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58385,7 +58373,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGSwitchElementVtbl,
+  record DispSVGSwitchElementVtable,
     query_interface : Proc(DispSVGSwitchElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGSwitchElement*, UInt32),
     release : Proc(DispSVGSwitchElement*, UInt32),
@@ -58396,7 +58384,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGSwitchElement, lpVtbl : DispSVGSwitchElementVtbl* do
+  record DispSVGSwitchElement, lpVtbl : DispSVGSwitchElementVtable* do
     GUID = LibC::GUID.new(0x30590030_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGSwitchElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58423,7 +58411,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGDescElementVtbl,
+  record ISVGDescElementVtable,
     query_interface : Proc(ISVGDescElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGDescElement*, UInt32),
     release : Proc(ISVGDescElement*, UInt32),
@@ -58434,7 +58422,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGDescElement, lpVtbl : ISVGDescElementVtbl* do
+  record ISVGDescElement, lpVtbl : ISVGDescElementVtable* do
     GUID = LibC::GUID.new(0x305104ea_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGDescElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58461,7 +58449,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGDescElementVtbl,
+  record DispSVGDescElementVtable,
     query_interface : Proc(DispSVGDescElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGDescElement*, UInt32),
     release : Proc(DispSVGDescElement*, UInt32),
@@ -58472,7 +58460,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGDescElement, lpVtbl : DispSVGDescElementVtbl* do
+  record DispSVGDescElement, lpVtbl : DispSVGDescElementVtable* do
     GUID = LibC::GUID.new(0x30590005_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGDescElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58499,7 +58487,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGTitleElementVtbl,
+  record ISVGTitleElementVtable,
     query_interface : Proc(ISVGTitleElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGTitleElement*, UInt32),
     release : Proc(ISVGTitleElement*, UInt32),
@@ -58510,7 +58498,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGTitleElement, lpVtbl : ISVGTitleElementVtbl* do
+  record ISVGTitleElement, lpVtbl : ISVGTitleElementVtable* do
     GUID = LibC::GUID.new(0x305104eb_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGTitleElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58537,7 +58525,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGTitleElementVtbl,
+  record DispSVGTitleElementVtable,
     query_interface : Proc(DispSVGTitleElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGTitleElement*, UInt32),
     release : Proc(DispSVGTitleElement*, UInt32),
@@ -58548,7 +58536,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGTitleElement, lpVtbl : DispSVGTitleElementVtbl* do
+  record DispSVGTitleElement, lpVtbl : DispSVGTitleElementVtable* do
     GUID = LibC::GUID.new(0x30590006_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGTitleElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58575,7 +58563,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGMetadataElementVtbl,
+  record ISVGMetadataElementVtable,
     query_interface : Proc(ISVGMetadataElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGMetadataElement*, UInt32),
     release : Proc(ISVGMetadataElement*, UInt32),
@@ -58586,7 +58574,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGMetadataElement, lpVtbl : ISVGMetadataElementVtbl* do
+  record ISVGMetadataElement, lpVtbl : ISVGMetadataElementVtable* do
     GUID = LibC::GUID.new(0x30510560_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGMetadataElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58613,7 +58601,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGMetadataElementVtbl,
+  record DispSVGMetadataElementVtable,
     query_interface : Proc(DispSVGMetadataElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGMetadataElement*, UInt32),
     release : Proc(DispSVGMetadataElement*, UInt32),
@@ -58624,7 +58612,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGMetadataElement, lpVtbl : DispSVGMetadataElementVtbl* do
+  record DispSVGMetadataElement, lpVtbl : DispSVGMetadataElementVtable* do
     GUID = LibC::GUID.new(0x3059002f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGMetadataElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58651,7 +58639,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGElementInstanceListVtbl,
+  record ISVGElementInstanceListVtable,
     query_interface : Proc(ISVGElementInstanceList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGElementInstanceList*, UInt32),
     release : Proc(ISVGElementInstanceList*, UInt32),
@@ -58664,7 +58652,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGElementInstanceList, lpVtbl : ISVGElementInstanceListVtbl* do
+  record ISVGElementInstanceList, lpVtbl : ISVGElementInstanceListVtable* do
     GUID = LibC::GUID.new(0x305104ef_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGElementInstanceList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58697,7 +58685,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGElementInstanceVtbl,
+  record DispSVGElementInstanceVtable,
     query_interface : Proc(DispSVGElementInstance*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGElementInstance*, UInt32),
     release : Proc(DispSVGElementInstance*, UInt32),
@@ -58708,7 +58696,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGElementInstance, lpVtbl : DispSVGElementInstanceVtbl* do
+  record DispSVGElementInstance, lpVtbl : DispSVGElementInstanceVtable* do
     GUID = LibC::GUID.new(0x30590007_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGElementInstance*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58735,7 +58723,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGElementInstanceListVtbl,
+  record DispSVGElementInstanceListVtable,
     query_interface : Proc(DispSVGElementInstanceList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGElementInstanceList*, UInt32),
     release : Proc(DispSVGElementInstanceList*, UInt32),
@@ -58746,7 +58734,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGElementInstanceList, lpVtbl : DispSVGElementInstanceListVtbl* do
+  record DispSVGElementInstanceList, lpVtbl : DispSVGElementInstanceListVtable* do
     GUID = LibC::GUID.new(0x30590008_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGElementInstanceList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58773,7 +58761,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMExceptionVtbl,
+  record IDOMExceptionVtable,
     query_interface : Proc(IDOMException*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMException*, UInt32),
     release : Proc(IDOMException*, UInt32),
@@ -58787,7 +58775,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMException, lpVtbl : IDOMExceptionVtbl* do
+  record IDOMException, lpVtbl : IDOMExceptionVtable* do
     GUID = LibC::GUID.new(0x3051072b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMException*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58823,7 +58811,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMExceptionVtbl,
+  record DispDOMExceptionVtable,
     query_interface : Proc(DispDOMException*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMException*, UInt32),
     release : Proc(DispDOMException*, UInt32),
@@ -58834,7 +58822,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMException, lpVtbl : DispDOMExceptionVtbl* do
+  record DispDOMException, lpVtbl : DispDOMExceptionVtable* do
     GUID = LibC::GUID.new(0x30590094_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMException*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58861,7 +58849,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IRangeExceptionVtbl,
+  record IRangeExceptionVtable,
     query_interface : Proc(IRangeException*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRangeException*, UInt32),
     release : Proc(IRangeException*, UInt32),
@@ -58875,7 +58863,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IRangeException, lpVtbl : IRangeExceptionVtbl* do
+  record IRangeException, lpVtbl : IRangeExceptionVtable* do
     GUID = LibC::GUID.new(0x3051072d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IRangeException*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58911,7 +58899,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispRangeExceptionVtbl,
+  record DispRangeExceptionVtable,
     query_interface : Proc(DispRangeException*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispRangeException*, UInt32),
     release : Proc(DispRangeException*, UInt32),
@@ -58922,7 +58910,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispRangeException, lpVtbl : DispRangeExceptionVtbl* do
+  record DispRangeException, lpVtbl : DispRangeExceptionVtable* do
     GUID = LibC::GUID.new(0x30590095_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispRangeException*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58949,7 +58937,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGExceptionVtbl,
+  record ISVGExceptionVtable,
     query_interface : Proc(ISVGException*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGException*, UInt32),
     release : Proc(ISVGException*, UInt32),
@@ -58963,7 +58951,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGException, lpVtbl : ISVGExceptionVtbl* do
+  record ISVGException, lpVtbl : ISVGExceptionVtable* do
     GUID = LibC::GUID.new(0x3051072f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGException*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58999,7 +58987,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGExceptionVtbl,
+  record DispSVGExceptionVtable,
     query_interface : Proc(DispSVGException*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGException*, UInt32),
     release : Proc(DispSVGException*, UInt32),
@@ -59010,7 +58998,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGException, lpVtbl : DispSVGExceptionVtbl* do
+  record DispSVGException, lpVtbl : DispSVGExceptionVtable* do
     GUID = LibC::GUID.new(0x30590096_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGException*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59037,7 +59025,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IEventExceptionVtbl,
+  record IEventExceptionVtable,
     query_interface : Proc(IEventException*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEventException*, UInt32),
     release : Proc(IEventException*, UInt32),
@@ -59051,7 +59039,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IEventException, lpVtbl : IEventExceptionVtbl* do
+  record IEventException, lpVtbl : IEventExceptionVtable* do
     GUID = LibC::GUID.new(0x3051073a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IEventException*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59087,7 +59075,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispEventExceptionVtbl,
+  record DispEventExceptionVtable,
     query_interface : Proc(DispEventException*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispEventException*, UInt32),
     release : Proc(DispEventException*, UInt32),
@@ -59098,7 +59086,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispEventException, lpVtbl : DispEventExceptionVtbl* do
+  record DispEventException, lpVtbl : DispEventExceptionVtable* do
     GUID = LibC::GUID.new(0x30590099_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispEventException*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59125,7 +59113,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGScriptElementVtbl,
+  record ISVGScriptElementVtable,
     query_interface : Proc(ISVGScriptElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGScriptElement*, UInt32),
     release : Proc(ISVGScriptElement*, UInt32),
@@ -59138,7 +59126,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGScriptElement, lpVtbl : ISVGScriptElementVtbl* do
+  record ISVGScriptElement, lpVtbl : ISVGScriptElementVtable* do
     GUID = LibC::GUID.new(0x3051054d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGScriptElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59171,7 +59159,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGScriptElementVtbl,
+  record DispSVGScriptElementVtable,
     query_interface : Proc(DispSVGScriptElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGScriptElement*, UInt32),
     release : Proc(DispSVGScriptElement*, UInt32),
@@ -59182,7 +59170,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGScriptElement, lpVtbl : DispSVGScriptElementVtbl* do
+  record DispSVGScriptElement, lpVtbl : DispSVGScriptElementVtable* do
     GUID = LibC::GUID.new(0x30590039_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGScriptElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59209,7 +59197,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGStyleElementVtbl,
+  record ISVGStyleElementVtable,
     query_interface : Proc(ISVGStyleElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGStyleElement*, UInt32),
     release : Proc(ISVGStyleElement*, UInt32),
@@ -59224,7 +59212,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGStyleElement, lpVtbl : ISVGStyleElementVtbl* do
+  record ISVGStyleElement, lpVtbl : ISVGStyleElementVtable* do
     GUID = LibC::GUID.new(0x305104f3_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGStyleElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59263,7 +59251,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGStyleElementVtbl,
+  record DispSVGStyleElementVtable,
     query_interface : Proc(DispSVGStyleElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGStyleElement*, UInt32),
     release : Proc(DispSVGStyleElement*, UInt32),
@@ -59274,7 +59262,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGStyleElement, lpVtbl : DispSVGStyleElementVtbl* do
+  record DispSVGStyleElement, lpVtbl : DispSVGStyleElementVtable* do
     GUID = LibC::GUID.new(0x30590029_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGStyleElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59301,7 +59289,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGTextContentElementVtbl,
+  record ISVGTextContentElementVtable,
     query_interface : Proc(ISVGTextContentElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGTextContentElement*, UInt32),
     release : Proc(ISVGTextContentElement*, UInt32),
@@ -59325,7 +59313,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGTextContentElement, lpVtbl : ISVGTextContentElementVtbl* do
+  record ISVGTextContentElement, lpVtbl : ISVGTextContentElementVtable* do
     GUID = LibC::GUID.new(0x3051051a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGTextContentElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59391,7 +59379,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGTextContentElementVtbl,
+  record DispSVGTextContentElementVtable,
     query_interface : Proc(DispSVGTextContentElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGTextContentElement*, UInt32),
     release : Proc(DispSVGTextContentElement*, UInt32),
@@ -59402,7 +59390,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGTextContentElement, lpVtbl : DispSVGTextContentElementVtbl* do
+  record DispSVGTextContentElement, lpVtbl : DispSVGTextContentElementVtable* do
     GUID = LibC::GUID.new(0x30590035_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGTextContentElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59429,7 +59417,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGTextPositioningElementVtbl,
+  record ISVGTextPositioningElementVtable,
     query_interface : Proc(ISVGTextPositioningElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGTextPositioningElement*, UInt32),
     release : Proc(ISVGTextPositioningElement*, UInt32),
@@ -59450,7 +59438,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGTextPositioningElement, lpVtbl : ISVGTextPositioningElementVtbl* do
+  record ISVGTextPositioningElement, lpVtbl : ISVGTextPositioningElementVtable* do
     GUID = LibC::GUID.new(0x3051051b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGTextPositioningElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59507,7 +59495,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGTextPositioningElementVtbl,
+  record DispSVGTextPositioningElementVtable,
     query_interface : Proc(DispSVGTextPositioningElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGTextPositioningElement*, UInt32),
     release : Proc(DispSVGTextPositioningElement*, UInt32),
@@ -59518,7 +59506,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGTextPositioningElement, lpVtbl : DispSVGTextPositioningElementVtbl* do
+  record DispSVGTextPositioningElement, lpVtbl : DispSVGTextPositioningElementVtable* do
     GUID = LibC::GUID.new(0x30590038_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGTextPositioningElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59545,7 +59533,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMDocumentTypeVtbl,
+  record DispDOMDocumentTypeVtable,
     query_interface : Proc(DispDOMDocumentType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMDocumentType*, UInt32),
     release : Proc(DispDOMDocumentType*, UInt32),
@@ -59556,7 +59544,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMDocumentType, lpVtbl : DispDOMDocumentTypeVtbl* do
+  record DispDOMDocumentType, lpVtbl : DispDOMDocumentTypeVtable* do
     GUID = LibC::GUID.new(0x30590098_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMDocumentType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59583,7 +59571,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispNodeIteratorVtbl,
+  record DispNodeIteratorVtable,
     query_interface : Proc(DispNodeIterator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispNodeIterator*, UInt32),
     release : Proc(DispNodeIterator*, UInt32),
@@ -59594,7 +59582,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispNodeIterator, lpVtbl : DispNodeIteratorVtbl* do
+  record DispNodeIterator, lpVtbl : DispNodeIteratorVtable* do
     GUID = LibC::GUID.new(0x3059009c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispNodeIterator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59621,7 +59609,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispTreeWalkerVtbl,
+  record DispTreeWalkerVtable,
     query_interface : Proc(DispTreeWalker*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispTreeWalker*, UInt32),
     release : Proc(DispTreeWalker*, UInt32),
@@ -59632,7 +59620,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispTreeWalker, lpVtbl : DispTreeWalkerVtbl* do
+  record DispTreeWalker, lpVtbl : DispTreeWalkerVtable* do
     GUID = LibC::GUID.new(0x3059009d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispTreeWalker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59659,7 +59647,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMProcessingInstructionVtbl,
+  record DispDOMProcessingInstructionVtable,
     query_interface : Proc(DispDOMProcessingInstruction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMProcessingInstruction*, UInt32),
     release : Proc(DispDOMProcessingInstruction*, UInt32),
@@ -59670,7 +59658,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMProcessingInstruction, lpVtbl : DispDOMProcessingInstructionVtbl* do
+  record DispDOMProcessingInstruction, lpVtbl : DispDOMProcessingInstructionVtable* do
     GUID = LibC::GUID.new(0x3059009b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMProcessingInstruction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59697,7 +59685,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLPerformanceNavigationVtbl,
+  record IHTMLPerformanceNavigationVtable,
     query_interface : Proc(IHTMLPerformanceNavigation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLPerformanceNavigation*, UInt32),
     release : Proc(IHTMLPerformanceNavigation*, UInt32),
@@ -59712,7 +59700,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLPerformanceNavigation, lpVtbl : IHTMLPerformanceNavigationVtbl* do
+  record IHTMLPerformanceNavigation, lpVtbl : IHTMLPerformanceNavigationVtable* do
     GUID = LibC::GUID.new(0x30510750_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLPerformanceNavigation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59751,7 +59739,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLPerformanceTimingVtbl,
+  record IHTMLPerformanceTimingVtable,
     query_interface : Proc(IHTMLPerformanceTiming*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLPerformanceTiming*, UInt32),
     release : Proc(IHTMLPerformanceTiming*, UInt32),
@@ -59785,7 +59773,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLPerformanceTiming, lpVtbl : IHTMLPerformanceTimingVtbl* do
+  record IHTMLPerformanceTiming, lpVtbl : IHTMLPerformanceTimingVtable* do
     GUID = LibC::GUID.new(0x30510752_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLPerformanceTiming*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59881,7 +59869,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLPerformanceVtbl,
+  record DispHTMLPerformanceVtable,
     query_interface : Proc(DispHTMLPerformance*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLPerformance*, UInt32),
     release : Proc(DispHTMLPerformance*, UInt32),
@@ -59892,7 +59880,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLPerformance, lpVtbl : DispHTMLPerformanceVtbl* do
+  record DispHTMLPerformance, lpVtbl : DispHTMLPerformanceVtable* do
     GUID = LibC::GUID.new(0x3059009f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLPerformance*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59919,7 +59907,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLPerformanceNavigationVtbl,
+  record DispHTMLPerformanceNavigationVtable,
     query_interface : Proc(DispHTMLPerformanceNavigation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLPerformanceNavigation*, UInt32),
     release : Proc(DispHTMLPerformanceNavigation*, UInt32),
@@ -59930,7 +59918,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLPerformanceNavigation, lpVtbl : DispHTMLPerformanceNavigationVtbl* do
+  record DispHTMLPerformanceNavigation, lpVtbl : DispHTMLPerformanceNavigationVtable* do
     GUID = LibC::GUID.new(0x305900a0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLPerformanceNavigation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59957,7 +59945,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLPerformanceTimingVtbl,
+  record DispHTMLPerformanceTimingVtable,
     query_interface : Proc(DispHTMLPerformanceTiming*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLPerformanceTiming*, UInt32),
     release : Proc(DispHTMLPerformanceTiming*, UInt32),
@@ -59968,7 +59956,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLPerformanceTiming, lpVtbl : DispHTMLPerformanceTimingVtbl* do
+  record DispHTMLPerformanceTiming, lpVtbl : DispHTMLPerformanceTimingVtable* do
     GUID = LibC::GUID.new(0x305900a1_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLPerformanceTiming*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59995,7 +59983,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGTSpanElementVtbl,
+  record ISVGTSpanElementVtable,
     query_interface : Proc(ISVGTSpanElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGTSpanElement*, UInt32),
     release : Proc(ISVGTSpanElement*, UInt32),
@@ -60006,7 +59994,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGTSpanElement, lpVtbl : ISVGTSpanElementVtbl* do
+  record ISVGTSpanElement, lpVtbl : ISVGTSpanElementVtable* do
     GUID = LibC::GUID.new(0x3051051d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGTSpanElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -60033,7 +60021,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGTSpanElementVtbl,
+  record DispSVGTSpanElementVtable,
     query_interface : Proc(DispSVGTSpanElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGTSpanElement*, UInt32),
     release : Proc(DispSVGTSpanElement*, UInt32),
@@ -60044,7 +60032,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGTSpanElement, lpVtbl : DispSVGTSpanElementVtbl* do
+  record DispSVGTSpanElement, lpVtbl : DispSVGTSpanElementVtable* do
     GUID = LibC::GUID.new(0x3059003a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGTSpanElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -60071,7 +60059,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ITemplatePrinterVtbl,
+  record ITemplatePrinterVtable,
     query_interface : Proc(ITemplatePrinter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITemplatePrinter*, UInt32),
     release : Proc(ITemplatePrinter*, UInt32),
@@ -60137,7 +60125,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ITemplatePrinter, lpVtbl : ITemplatePrinterVtbl* do
+  record ITemplatePrinter, lpVtbl : ITemplatePrinterVtable* do
     GUID = LibC::GUID.new(0x3050f6b4_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ITemplatePrinter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -60329,7 +60317,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ITemplatePrinter2Vtbl,
+  record ITemplatePrinter2Vtable,
     query_interface : Proc(ITemplatePrinter2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITemplatePrinter2*, UInt32),
     release : Proc(ITemplatePrinter2*, UInt32),
@@ -60404,7 +60392,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ITemplatePrinter2, lpVtbl : ITemplatePrinter2Vtbl* do
+  record ITemplatePrinter2, lpVtbl : ITemplatePrinter2Vtable* do
     GUID = LibC::GUID.new(0x3050f83f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ITemplatePrinter2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -60623,7 +60611,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ITemplatePrinter3Vtbl,
+  record ITemplatePrinter3Vtable,
     query_interface : Proc(ITemplatePrinter3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITemplatePrinter3*, UInt32),
     release : Proc(ITemplatePrinter3*, UInt32),
@@ -60708,7 +60696,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ITemplatePrinter3, lpVtbl : ITemplatePrinter3Vtbl* do
+  record ITemplatePrinter3, lpVtbl : ITemplatePrinter3Vtable* do
     GUID = LibC::GUID.new(0x305104a3_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ITemplatePrinter3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -60957,7 +60945,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IPrintManagerTemplatePrinterVtbl,
+  record IPrintManagerTemplatePrinterVtable,
     query_interface : Proc(IPrintManagerTemplatePrinter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrintManagerTemplatePrinter*, UInt32),
     release : Proc(IPrintManagerTemplatePrinter*, UInt32),
@@ -60974,7 +60962,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IPrintManagerTemplatePrinter, lpVtbl : IPrintManagerTemplatePrinterVtbl* do
+  record IPrintManagerTemplatePrinter, lpVtbl : IPrintManagerTemplatePrinterVtable* do
     GUID = LibC::GUID.new(0xf633be14_u32, 0x9eff_u16, 0x4c4d_u16, StaticArray[0x92_u8, 0x9e_u8, 0x5_u8, 0x71_u8, 0x7b_u8, 0x21_u8, 0xb3_u8, 0xe6_u8])
     def query_interface(this : IPrintManagerTemplatePrinter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61019,7 +61007,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IPrintManagerTemplatePrinter2Vtbl,
+  record IPrintManagerTemplatePrinter2Vtable,
     query_interface : Proc(IPrintManagerTemplatePrinter2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrintManagerTemplatePrinter2*, UInt32),
     release : Proc(IPrintManagerTemplatePrinter2*, UInt32),
@@ -61039,7 +61027,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IPrintManagerTemplatePrinter2, lpVtbl : IPrintManagerTemplatePrinter2Vtbl* do
+  record IPrintManagerTemplatePrinter2, lpVtbl : IPrintManagerTemplatePrinter2Vtable* do
     GUID = LibC::GUID.new(0xc6403497_u32, 0x7493_u16, 0x4f09_u16, StaticArray[0x80_u8, 0x16_u8, 0x54_u8, 0xb0_u8, 0x3e_u8, 0x9b_u8, 0xda_u8, 0x69_u8])
     def query_interface(this : IPrintManagerTemplatePrinter2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61093,7 +61081,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispCPrintManagerTemplatePrinterVtbl,
+  record DispCPrintManagerTemplatePrinterVtable,
     query_interface : Proc(DispCPrintManagerTemplatePrinter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispCPrintManagerTemplatePrinter*, UInt32),
     release : Proc(DispCPrintManagerTemplatePrinter*, UInt32),
@@ -61104,7 +61092,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispCPrintManagerTemplatePrinter, lpVtbl : DispCPrintManagerTemplatePrinterVtbl* do
+  record DispCPrintManagerTemplatePrinter, lpVtbl : DispCPrintManagerTemplatePrinterVtable* do
     GUID = LibC::GUID.new(0x305900e9_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispCPrintManagerTemplatePrinter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61131,7 +61119,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISVGTextPathElementVtbl,
+  record ISVGTextPathElementVtable,
     query_interface : Proc(ISVGTextPathElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISVGTextPathElement*, UInt32),
     release : Proc(ISVGTextPathElement*, UInt32),
@@ -61148,7 +61136,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISVGTextPathElement, lpVtbl : ISVGTextPathElementVtbl* do
+  record ISVGTextPathElement, lpVtbl : ISVGTextPathElementVtable* do
     GUID = LibC::GUID.new(0x3051051f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISVGTextPathElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61193,7 +61181,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispSVGTextPathElementVtbl,
+  record DispSVGTextPathElementVtable,
     query_interface : Proc(DispSVGTextPathElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispSVGTextPathElement*, UInt32),
     release : Proc(DispSVGTextPathElement*, UInt32),
@@ -61204,7 +61192,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispSVGTextPathElement, lpVtbl : DispSVGTextPathElementVtbl* do
+  record DispSVGTextPathElement, lpVtbl : DispSVGTextPathElementVtable* do
     GUID = LibC::GUID.new(0x3059003d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispSVGTextPathElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61231,7 +61219,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMXmlSerializerVtbl,
+  record IDOMXmlSerializerVtable,
     query_interface : Proc(IDOMXmlSerializer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMXmlSerializer*, UInt32),
     release : Proc(IDOMXmlSerializer*, UInt32),
@@ -61243,7 +61231,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMXmlSerializer, lpVtbl : IDOMXmlSerializerVtbl* do
+  record IDOMXmlSerializer, lpVtbl : IDOMXmlSerializerVtable* do
     GUID = LibC::GUID.new(0x3051077d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMXmlSerializer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61273,7 +61261,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMParserVtbl,
+  record IDOMParserVtable,
     query_interface : Proc(IDOMParser*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMParser*, UInt32),
     release : Proc(IDOMParser*, UInt32),
@@ -61285,7 +61273,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMParser, lpVtbl : IDOMParserVtbl* do
+  record IDOMParser, lpVtbl : IDOMParserVtable* do
     GUID = LibC::GUID.new(0x30510781_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMParser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61315,7 +61303,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispXMLSerializerVtbl,
+  record DispXMLSerializerVtable,
     query_interface : Proc(DispXMLSerializer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispXMLSerializer*, UInt32),
     release : Proc(DispXMLSerializer*, UInt32),
@@ -61326,7 +61314,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispXMLSerializer, lpVtbl : DispXMLSerializerVtbl* do
+  record DispXMLSerializer, lpVtbl : DispXMLSerializerVtable* do
     GUID = LibC::GUID.new(0x305900ad_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispXMLSerializer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61353,7 +61341,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMParserVtbl,
+  record DispDOMParserVtable,
     query_interface : Proc(DispDOMParser*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMParser*, UInt32),
     release : Proc(DispDOMParser*, UInt32),
@@ -61364,7 +61352,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMParser, lpVtbl : DispDOMParserVtbl* do
+  record DispDOMParser, lpVtbl : DispDOMParserVtable* do
     GUID = LibC::GUID.new(0x305900ae_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMParser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61391,7 +61379,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMXmlSerializerFactoryVtbl,
+  record IDOMXmlSerializerFactoryVtable,
     query_interface : Proc(IDOMXmlSerializerFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMXmlSerializerFactory*, UInt32),
     release : Proc(IDOMXmlSerializerFactory*, UInt32),
@@ -61403,7 +61391,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMXmlSerializerFactory, lpVtbl : IDOMXmlSerializerFactoryVtbl* do
+  record IDOMXmlSerializerFactory, lpVtbl : IDOMXmlSerializerFactoryVtable* do
     GUID = LibC::GUID.new(0x3051077f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMXmlSerializerFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61433,7 +61421,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMParserFactoryVtbl,
+  record IDOMParserFactoryVtable,
     query_interface : Proc(IDOMParserFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMParserFactory*, UInt32),
     release : Proc(IDOMParserFactory*, UInt32),
@@ -61445,7 +61433,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMParserFactory, lpVtbl : IDOMParserFactoryVtbl* do
+  record IDOMParserFactory, lpVtbl : IDOMParserFactoryVtable* do
     GUID = LibC::GUID.new(0x30510783_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMParserFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61475,7 +61463,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLSemanticElementVtbl,
+  record DispHTMLSemanticElementVtable,
     query_interface : Proc(DispHTMLSemanticElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLSemanticElement*, UInt32),
     release : Proc(DispHTMLSemanticElement*, UInt32),
@@ -61486,7 +61474,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLSemanticElement, lpVtbl : DispHTMLSemanticElementVtbl* do
+  record DispHTMLSemanticElement, lpVtbl : DispHTMLSemanticElementVtable* do
     GUID = LibC::GUID.new(0x305900ba_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLSemanticElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61513,7 +61501,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLProgressElementVtbl,
+  record IHTMLProgressElementVtable,
     query_interface : Proc(IHTMLProgressElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLProgressElement*, UInt32),
     release : Proc(IHTMLProgressElement*, UInt32),
@@ -61530,7 +61518,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLProgressElement, lpVtbl : IHTMLProgressElementVtbl* do
+  record IHTMLProgressElement, lpVtbl : IHTMLProgressElementVtable* do
     GUID = LibC::GUID.new(0x3050f2d6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLProgressElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61575,7 +61563,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLProgressElementVtbl,
+  record DispHTMLProgressElementVtable,
     query_interface : Proc(DispHTMLProgressElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLProgressElement*, UInt32),
     release : Proc(DispHTMLProgressElement*, UInt32),
@@ -61586,7 +61574,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLProgressElement, lpVtbl : DispHTMLProgressElementVtbl* do
+  record DispHTMLProgressElement, lpVtbl : DispHTMLProgressElementVtable* do
     GUID = LibC::GUID.new(0x305900af_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLProgressElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61613,7 +61601,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMMSTransitionEventVtbl,
+  record IDOMMSTransitionEventVtable,
     query_interface : Proc(IDOMMSTransitionEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMMSTransitionEvent*, UInt32),
     release : Proc(IDOMMSTransitionEvent*, UInt32),
@@ -61627,7 +61615,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMMSTransitionEvent, lpVtbl : IDOMMSTransitionEventVtbl* do
+  record IDOMMSTransitionEvent, lpVtbl : IDOMMSTransitionEventVtable* do
     GUID = LibC::GUID.new(0x305107b5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMMSTransitionEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61663,7 +61651,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMMSTransitionEventVtbl,
+  record DispDOMMSTransitionEventVtable,
     query_interface : Proc(DispDOMMSTransitionEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMMSTransitionEvent*, UInt32),
     release : Proc(DispDOMMSTransitionEvent*, UInt32),
@@ -61674,7 +61662,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMMSTransitionEvent, lpVtbl : DispDOMMSTransitionEventVtbl* do
+  record DispDOMMSTransitionEvent, lpVtbl : DispDOMMSTransitionEventVtable* do
     GUID = LibC::GUID.new(0x305900bb_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMMSTransitionEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61701,7 +61689,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMMSAnimationEventVtbl,
+  record IDOMMSAnimationEventVtable,
     query_interface : Proc(IDOMMSAnimationEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMMSAnimationEvent*, UInt32),
     release : Proc(IDOMMSAnimationEvent*, UInt32),
@@ -61715,7 +61703,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMMSAnimationEvent, lpVtbl : IDOMMSAnimationEventVtbl* do
+  record IDOMMSAnimationEvent, lpVtbl : IDOMMSAnimationEventVtable* do
     GUID = LibC::GUID.new(0x305107b7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMMSAnimationEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61751,7 +61739,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMMSAnimationEventVtbl,
+  record DispDOMMSAnimationEventVtable,
     query_interface : Proc(DispDOMMSAnimationEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMMSAnimationEvent*, UInt32),
     release : Proc(DispDOMMSAnimationEvent*, UInt32),
@@ -61762,7 +61750,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMMSAnimationEvent, lpVtbl : DispDOMMSAnimationEventVtbl* do
+  record DispDOMMSAnimationEvent, lpVtbl : DispDOMMSAnimationEventVtable* do
     GUID = LibC::GUID.new(0x305900bc_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMMSAnimationEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61789,7 +61777,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IWebGeocoordinatesVtbl,
+  record IWebGeocoordinatesVtable,
     query_interface : Proc(IWebGeocoordinates*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebGeocoordinates*, UInt32),
     release : Proc(IWebGeocoordinates*, UInt32),
@@ -61807,7 +61795,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IWebGeocoordinates, lpVtbl : IWebGeocoordinatesVtbl* do
+  record IWebGeocoordinates, lpVtbl : IWebGeocoordinatesVtable* do
     GUID = LibC::GUID.new(0x305107c7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IWebGeocoordinates*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61855,7 +61843,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IWebGeopositionErrorVtbl,
+  record IWebGeopositionErrorVtable,
     query_interface : Proc(IWebGeopositionError*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebGeopositionError*, UInt32),
     release : Proc(IWebGeopositionError*, UInt32),
@@ -61868,7 +61856,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IWebGeopositionError, lpVtbl : IWebGeopositionErrorVtbl* do
+  record IWebGeopositionError, lpVtbl : IWebGeopositionErrorVtable* do
     GUID = LibC::GUID.new(0x305107c9_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IWebGeopositionError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61901,7 +61889,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IWebGeopositionVtbl,
+  record IWebGeopositionVtable,
     query_interface : Proc(IWebGeoposition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebGeoposition*, UInt32),
     release : Proc(IWebGeoposition*, UInt32),
@@ -61914,7 +61902,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IWebGeoposition, lpVtbl : IWebGeopositionVtbl* do
+  record IWebGeoposition, lpVtbl : IWebGeopositionVtable* do
     GUID = LibC::GUID.new(0x305107cd_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IWebGeoposition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61947,7 +61935,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispWebGeolocationVtbl,
+  record DispWebGeolocationVtable,
     query_interface : Proc(DispWebGeolocation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispWebGeolocation*, UInt32),
     release : Proc(DispWebGeolocation*, UInt32),
@@ -61958,7 +61946,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispWebGeolocation, lpVtbl : DispWebGeolocationVtbl* do
+  record DispWebGeolocation, lpVtbl : DispWebGeolocationVtable* do
     GUID = LibC::GUID.new(0x305900bd_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispWebGeolocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -61985,7 +61973,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispWebGeocoordinatesVtbl,
+  record DispWebGeocoordinatesVtable,
     query_interface : Proc(DispWebGeocoordinates*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispWebGeocoordinates*, UInt32),
     release : Proc(DispWebGeocoordinates*, UInt32),
@@ -61996,7 +61984,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispWebGeocoordinates, lpVtbl : DispWebGeocoordinatesVtbl* do
+  record DispWebGeocoordinates, lpVtbl : DispWebGeocoordinatesVtable* do
     GUID = LibC::GUID.new(0x305900be_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispWebGeocoordinates*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62023,7 +62011,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispWebGeopositionErrorVtbl,
+  record DispWebGeopositionErrorVtable,
     query_interface : Proc(DispWebGeopositionError*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispWebGeopositionError*, UInt32),
     release : Proc(DispWebGeopositionError*, UInt32),
@@ -62034,7 +62022,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispWebGeopositionError, lpVtbl : DispWebGeopositionErrorVtbl* do
+  record DispWebGeopositionError, lpVtbl : DispWebGeopositionErrorVtable* do
     GUID = LibC::GUID.new(0x305900bf_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispWebGeopositionError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62061,7 +62049,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispWebGeopositionVtbl,
+  record DispWebGeopositionVtable,
     query_interface : Proc(DispWebGeoposition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispWebGeoposition*, UInt32),
     release : Proc(DispWebGeoposition*, UInt32),
@@ -62072,7 +62060,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispWebGeoposition, lpVtbl : DispWebGeopositionVtbl* do
+  record DispWebGeoposition, lpVtbl : DispWebGeopositionVtable* do
     GUID = LibC::GUID.new(0x305900c1_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispWebGeoposition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62099,7 +62087,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IClientCapsVtbl,
+  record IClientCapsVtable,
     query_interface : Proc(IClientCaps*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IClientCaps*, UInt32),
     release : Proc(IClientCaps*, UInt32),
@@ -62131,7 +62119,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IClientCaps, lpVtbl : IClientCapsVtbl* do
+  record IClientCaps, lpVtbl : IClientCapsVtable* do
     GUID = LibC::GUID.new(0x7e8bc44d_u32, 0xaeff_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xc2_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xbf_u8, 0xc4_u8])
     def query_interface(this : IClientCaps*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62221,7 +62209,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMMSManipulationEventVtbl,
+  record IDOMMSManipulationEventVtable,
     query_interface : Proc(IDOMMSManipulationEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMMSManipulationEvent*, UInt32),
     release : Proc(IDOMMSManipulationEvent*, UInt32),
@@ -62235,7 +62223,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMMSManipulationEvent, lpVtbl : IDOMMSManipulationEventVtbl* do
+  record IDOMMSManipulationEvent, lpVtbl : IDOMMSManipulationEventVtable* do
     GUID = LibC::GUID.new(0x30510816_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMMSManipulationEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62271,7 +62259,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMMSManipulationEventVtbl,
+  record DispDOMMSManipulationEventVtable,
     query_interface : Proc(DispDOMMSManipulationEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMMSManipulationEvent*, UInt32),
     release : Proc(DispDOMMSManipulationEvent*, UInt32),
@@ -62282,7 +62270,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMMSManipulationEvent, lpVtbl : DispDOMMSManipulationEventVtbl* do
+  record DispDOMMSManipulationEvent, lpVtbl : DispDOMMSManipulationEventVtable* do
     GUID = LibC::GUID.new(0x305900e1_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMMSManipulationEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62309,7 +62297,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMCloseEventVtbl,
+  record IDOMCloseEventVtable,
     query_interface : Proc(IDOMCloseEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMCloseEvent*, UInt32),
     release : Proc(IDOMCloseEvent*, UInt32),
@@ -62322,7 +62310,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMCloseEvent, lpVtbl : IDOMCloseEventVtbl* do
+  record IDOMCloseEvent, lpVtbl : IDOMCloseEventVtable* do
     GUID = LibC::GUID.new(0x305107ff_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMCloseEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62355,7 +62343,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispDOMCloseEventVtbl,
+  record DispDOMCloseEventVtable,
     query_interface : Proc(DispDOMCloseEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispDOMCloseEvent*, UInt32),
     release : Proc(DispDOMCloseEvent*, UInt32),
@@ -62366,7 +62354,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispDOMCloseEvent, lpVtbl : DispDOMCloseEventVtbl* do
+  record DispDOMCloseEvent, lpVtbl : DispDOMCloseEventVtable* do
     GUID = LibC::GUID.new(0x305900dc_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispDOMCloseEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62393,7 +62381,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispApplicationCacheVtbl,
+  record DispApplicationCacheVtable,
     query_interface : Proc(DispApplicationCache*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispApplicationCache*, UInt32),
     release : Proc(DispApplicationCache*, UInt32),
@@ -62404,7 +62392,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispApplicationCache, lpVtbl : DispApplicationCacheVtbl* do
+  record DispApplicationCache, lpVtbl : DispApplicationCacheVtable* do
     GUID = LibC::GUID.new(0x305900e4_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispApplicationCache*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62431,7 +62419,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ICSSFilterSiteVtbl,
+  record ICSSFilterSiteVtable,
     query_interface : Proc(ICSSFilterSite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICSSFilterSite*, UInt32),
     release : Proc(ICSSFilterSite*, UInt32),
@@ -62440,7 +62428,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ICSSFilterSite, lpVtbl : ICSSFilterSiteVtbl* do
+  record ICSSFilterSite, lpVtbl : ICSSFilterSiteVtable* do
     GUID = LibC::GUID.new(0x3050f3ed_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ICSSFilterSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62461,7 +62449,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IMarkupPointerVtbl,
+  record IMarkupPointerVtable,
     query_interface : Proc(IMarkupPointer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMarkupPointer*, UInt32),
     release : Proc(IMarkupPointer*, UInt32),
@@ -62489,7 +62477,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IMarkupPointer, lpVtbl : IMarkupPointerVtbl* do
+  record IMarkupPointer, lpVtbl : IMarkupPointerVtable* do
     GUID = LibC::GUID.new(0x3050f49f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IMarkupPointer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62567,7 +62555,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IMarkupContainerVtbl,
+  record IMarkupContainerVtable,
     query_interface : Proc(IMarkupContainer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMarkupContainer*, UInt32),
     release : Proc(IMarkupContainer*, UInt32),
@@ -62575,7 +62563,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IMarkupContainer, lpVtbl : IMarkupContainerVtbl* do
+  record IMarkupContainer, lpVtbl : IMarkupContainerVtable* do
     GUID = LibC::GUID.new(0x3050f5f9_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IMarkupContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62593,7 +62581,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IMarkupContainer2Vtbl,
+  record IMarkupContainer2Vtable,
     query_interface : Proc(IMarkupContainer2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMarkupContainer2*, UInt32),
     release : Proc(IMarkupContainer2*, UInt32),
@@ -62607,7 +62595,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IMarkupContainer2, lpVtbl : IMarkupContainer2Vtbl* do
+  record IMarkupContainer2, lpVtbl : IMarkupContainer2Vtable* do
     GUID = LibC::GUID.new(0x3050f648_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IMarkupContainer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62643,7 +62631,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLChangeLogVtbl,
+  record IHTMLChangeLogVtable,
     query_interface : Proc(IHTMLChangeLog*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLChangeLog*, UInt32),
     release : Proc(IHTMLChangeLog*, UInt32),
@@ -62651,7 +62639,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLChangeLog, lpVtbl : IHTMLChangeLogVtbl* do
+  record IHTMLChangeLog, lpVtbl : IHTMLChangeLogVtable* do
     GUID = LibC::GUID.new(0x3050f649_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLChangeLog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62669,7 +62657,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLChangeSinkVtbl,
+  record IHTMLChangeSinkVtable,
     query_interface : Proc(IHTMLChangeSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLChangeSink*, UInt32),
     release : Proc(IHTMLChangeSink*, UInt32),
@@ -62677,7 +62665,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLChangeSink, lpVtbl : IHTMLChangeSinkVtbl* do
+  record IHTMLChangeSink, lpVtbl : IHTMLChangeSinkVtable* do
     GUID = LibC::GUID.new(0x3050f64a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLChangeSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62695,7 +62683,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISegmentListVtbl,
+  record ISegmentListVtable,
     query_interface : Proc(ISegmentList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISegmentList*, UInt32),
     release : Proc(ISegmentList*, UInt32),
@@ -62705,7 +62693,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISegmentList, lpVtbl : ISegmentListVtbl* do
+  record ISegmentList, lpVtbl : ISegmentListVtable* do
     GUID = LibC::GUID.new(0x3050f605_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISegmentList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62729,7 +62717,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISegmentListIteratorVtbl,
+  record ISegmentListIteratorVtable,
     query_interface : Proc(ISegmentListIterator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISegmentListIterator*, UInt32),
     release : Proc(ISegmentListIterator*, UInt32),
@@ -62740,7 +62728,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISegmentListIterator, lpVtbl : ISegmentListIteratorVtbl* do
+  record ISegmentListIterator, lpVtbl : ISegmentListIteratorVtable* do
     GUID = LibC::GUID.new(0x3050f692_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISegmentListIterator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62767,7 +62755,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLCaretVtbl,
+  record IHTMLCaretVtable,
     query_interface : Proc(IHTMLCaret*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLCaret*, UInt32),
     release : Proc(IHTMLCaret*, UInt32),
@@ -62786,7 +62774,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLCaret, lpVtbl : IHTMLCaretVtbl* do
+  record IHTMLCaret, lpVtbl : IHTMLCaretVtable* do
     GUID = LibC::GUID.new(0x3050f604_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLCaret*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62837,7 +62825,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISegmentVtbl,
+  record ISegmentVtable,
     query_interface : Proc(ISegment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISegment*, UInt32),
     release : Proc(ISegment*, UInt32),
@@ -62845,7 +62833,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISegment, lpVtbl : ISegmentVtbl* do
+  record ISegment, lpVtbl : ISegmentVtable* do
     GUID = LibC::GUID.new(0x3050f683_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISegment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62863,7 +62851,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementSegmentVtbl,
+  record IElementSegmentVtable,
     query_interface : Proc(IElementSegment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementSegment*, UInt32),
     release : Proc(IElementSegment*, UInt32),
@@ -62874,7 +62862,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementSegment, lpVtbl : IElementSegmentVtbl* do
+  record IElementSegment, lpVtbl : IElementSegmentVtable* do
     GUID = LibC::GUID.new(0x3050f68f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementSegment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62901,7 +62889,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHighlightSegmentVtbl,
+  record IHighlightSegmentVtable,
     query_interface : Proc(IHighlightSegment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHighlightSegment*, UInt32),
     release : Proc(IHighlightSegment*, UInt32),
@@ -62909,7 +62897,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHighlightSegment, lpVtbl : IHighlightSegmentVtbl* do
+  record IHighlightSegment, lpVtbl : IHighlightSegmentVtable* do
     GUID = LibC::GUID.new(0x3050f690_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHighlightSegment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62927,7 +62915,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHighlightRenderingServicesVtbl,
+  record IHighlightRenderingServicesVtable,
     query_interface : Proc(IHighlightRenderingServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHighlightRenderingServices*, UInt32),
     release : Proc(IHighlightRenderingServices*, UInt32),
@@ -62937,7 +62925,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHighlightRenderingServices, lpVtbl : IHighlightRenderingServicesVtbl* do
+  record IHighlightRenderingServices, lpVtbl : IHighlightRenderingServicesVtable* do
     GUID = LibC::GUID.new(0x3050f606_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHighlightRenderingServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -62961,7 +62949,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ILineInfoVtbl,
+  record ILineInfoVtable,
     query_interface : Proc(ILineInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILineInfo*, UInt32),
     release : Proc(ILineInfo*, UInt32),
@@ -62973,7 +62961,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ILineInfo, lpVtbl : ILineInfoVtbl* do
+  record ILineInfo, lpVtbl : ILineInfoVtable* do
     GUID = LibC::GUID.new(0x3050f7e2_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ILineInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63003,7 +62991,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDisplayPointerVtbl,
+  record IDisplayPointerVtable,
     query_interface : Proc(IDisplayPointer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDisplayPointer*, UInt32),
     release : Proc(IDisplayPointer*, UInt32),
@@ -63029,7 +63017,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDisplayPointer, lpVtbl : IDisplayPointerVtbl* do
+  record IDisplayPointer, lpVtbl : IDisplayPointerVtable* do
     GUID = LibC::GUID.new(0x3050f69e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDisplayPointer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63101,7 +63089,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDisplayServicesVtbl,
+  record IDisplayServicesVtable,
     query_interface : Proc(IDisplayServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDisplayServices*, UInt32),
     release : Proc(IDisplayServices*, UInt32),
@@ -63115,7 +63103,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDisplayServices, lpVtbl : IDisplayServicesVtbl* do
+  record IDisplayServices, lpVtbl : IDisplayServicesVtable* do
     GUID = LibC::GUID.new(0x3050f69d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDisplayServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63151,7 +63139,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHtmlDlgSafeHelperVtbl,
+  record IHtmlDlgSafeHelperVtable,
     query_interface : Proc(IHtmlDlgSafeHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHtmlDlgSafeHelper*, UInt32),
     release : Proc(IHtmlDlgSafeHelper*, UInt32),
@@ -63166,7 +63154,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHtmlDlgSafeHelper, lpVtbl : IHtmlDlgSafeHelperVtbl* do
+  record IHtmlDlgSafeHelper, lpVtbl : IHtmlDlgSafeHelperVtable* do
     GUID = LibC::GUID.new(0x3050f81a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHtmlDlgSafeHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63205,7 +63193,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IBlockFormatsVtbl,
+  record IBlockFormatsVtable,
     query_interface : Proc(IBlockFormats*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBlockFormats*, UInt32),
     release : Proc(IBlockFormats*, UInt32),
@@ -63219,7 +63207,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IBlockFormats, lpVtbl : IBlockFormatsVtbl* do
+  record IBlockFormats, lpVtbl : IBlockFormatsVtable* do
     GUID = LibC::GUID.new(0x3050f830_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IBlockFormats*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63255,7 +63243,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IFontNamesVtbl,
+  record IFontNamesVtable,
     query_interface : Proc(IFontNames*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFontNames*, UInt32),
     release : Proc(IFontNames*, UInt32),
@@ -63269,7 +63257,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IFontNames, lpVtbl : IFontNamesVtbl* do
+  record IFontNames, lpVtbl : IFontNamesVtable* do
     GUID = LibC::GUID.new(0x3050f839_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IFontNames*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63305,7 +63293,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ICSSFilterVtbl,
+  record ICSSFilterVtable,
     query_interface : Proc(ICSSFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICSSFilter*, UInt32),
     release : Proc(ICSSFilter*, UInt32),
@@ -63314,7 +63302,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ICSSFilter, lpVtbl : ICSSFilterVtbl* do
+  record ICSSFilter, lpVtbl : ICSSFilterVtable* do
     GUID = LibC::GUID.new(0x3050f3ec_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ICSSFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63335,7 +63323,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISecureUrlHostVtbl,
+  record ISecureUrlHostVtable,
     query_interface : Proc(ISecureUrlHost*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISecureUrlHost*, UInt32),
     release : Proc(ISecureUrlHost*, UInt32),
@@ -63343,7 +63331,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISecureUrlHost, lpVtbl : ISecureUrlHostVtbl* do
+  record ISecureUrlHost, lpVtbl : ISecureUrlHostVtable* do
     GUID = LibC::GUID.new(0xc81984c4_u32, 0x74c8_u16, 0x11d2_u16, StaticArray[0xba_u8, 0xa9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x4_u8, 0xe_u8])
     def query_interface(this : ISecureUrlHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63361,7 +63349,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IMarkupServicesVtbl,
+  record IMarkupServicesVtable,
     query_interface : Proc(IMarkupServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMarkupServices*, UInt32),
     release : Proc(IMarkupServices*, UInt32),
@@ -63388,7 +63376,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IMarkupServices, lpVtbl : IMarkupServicesVtbl* do
+  record IMarkupServices, lpVtbl : IMarkupServicesVtable* do
     GUID = LibC::GUID.new(0x3050f4a0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IMarkupServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63463,7 +63451,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IMarkupServices2Vtbl,
+  record IMarkupServices2Vtable,
     query_interface : Proc(IMarkupServices2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMarkupServices2*, UInt32),
     release : Proc(IMarkupServices2*, UInt32),
@@ -63493,7 +63481,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IMarkupServices2, lpVtbl : IMarkupServices2Vtbl* do
+  record IMarkupServices2, lpVtbl : IMarkupServices2Vtable* do
     GUID = LibC::GUID.new(0x3050f682_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IMarkupServices2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63577,7 +63565,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLChangePlaybackVtbl,
+  record IHTMLChangePlaybackVtable,
     query_interface : Proc(IHTMLChangePlayback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLChangePlayback*, UInt32),
     release : Proc(IHTMLChangePlayback*, UInt32),
@@ -63585,7 +63573,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLChangePlayback, lpVtbl : IHTMLChangePlaybackVtbl* do
+  record IHTMLChangePlayback, lpVtbl : IHTMLChangePlaybackVtable* do
     GUID = LibC::GUID.new(0x3050f6e0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLChangePlayback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63603,7 +63591,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IMarkupPointer2Vtbl,
+  record IMarkupPointer2Vtable,
     query_interface : Proc(IMarkupPointer2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMarkupPointer2*, UInt32),
     release : Proc(IMarkupPointer2*, UInt32),
@@ -63637,7 +63625,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IMarkupPointer2, lpVtbl : IMarkupPointer2Vtbl* do
+  record IMarkupPointer2, lpVtbl : IMarkupPointer2Vtable* do
     GUID = LibC::GUID.new(0x3050f675_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IMarkupPointer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63733,7 +63721,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IMarkupTextFragsVtbl,
+  record IMarkupTextFragsVtable,
     query_interface : Proc(IMarkupTextFrags*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMarkupTextFrags*, UInt32),
     release : Proc(IMarkupTextFrags*, UInt32),
@@ -63745,7 +63733,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IMarkupTextFrags, lpVtbl : IMarkupTextFragsVtbl* do
+  record IMarkupTextFrags, lpVtbl : IMarkupTextFragsVtable* do
     GUID = LibC::GUID.new(0x3050f5fa_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IMarkupTextFrags*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63775,7 +63763,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IXMLGenericParseVtbl,
+  record IXMLGenericParseVtable,
     query_interface : Proc(IXMLGenericParse*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXMLGenericParse*, UInt32),
     release : Proc(IXMLGenericParse*, UInt32),
@@ -63783,7 +63771,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IXMLGenericParse, lpVtbl : IXMLGenericParseVtbl* do
+  record IXMLGenericParse, lpVtbl : IXMLGenericParseVtable* do
     GUID = LibC::GUID.new(0xe4e23071_u32, 0x4d07_u16, 0x11d2_u16, StaticArray[0xae_u8, 0x76_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x3b_u8, 0xc1_u8, 0x99_u8])
     def query_interface(this : IXMLGenericParse*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63801,7 +63789,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLEditHostVtbl,
+  record IHTMLEditHostVtable,
     query_interface : Proc(IHTMLEditHost*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLEditHost*, UInt32),
     release : Proc(IHTMLEditHost*, UInt32),
@@ -63809,7 +63797,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLEditHost, lpVtbl : IHTMLEditHostVtbl* do
+  record IHTMLEditHost, lpVtbl : IHTMLEditHostVtable* do
     GUID = LibC::GUID.new(0x3050f6a0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLEditHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63827,7 +63815,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLEditHost2Vtbl,
+  record IHTMLEditHost2Vtable,
     query_interface : Proc(IHTMLEditHost2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLEditHost2*, UInt32),
     release : Proc(IHTMLEditHost2*, UInt32),
@@ -63836,7 +63824,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLEditHost2, lpVtbl : IHTMLEditHost2Vtbl* do
+  record IHTMLEditHost2, lpVtbl : IHTMLEditHost2Vtable* do
     GUID = LibC::GUID.new(0x3050f848_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xd_u8])
     def query_interface(this : IHTMLEditHost2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63857,7 +63845,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISequenceNumberVtbl,
+  record ISequenceNumberVtable,
     query_interface : Proc(ISequenceNumber*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISequenceNumber*, UInt32),
     release : Proc(ISequenceNumber*, UInt32),
@@ -63865,7 +63853,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISequenceNumber, lpVtbl : ISequenceNumberVtbl* do
+  record ISequenceNumber, lpVtbl : ISequenceNumberVtable* do
     GUID = LibC::GUID.new(0x3050f6c1_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISequenceNumber*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63883,7 +63871,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IIMEServicesVtbl,
+  record IIMEServicesVtable,
     query_interface : Proc(IIMEServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIMEServices*, UInt32),
     release : Proc(IIMEServices*, UInt32),
@@ -63891,7 +63879,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IIMEServices, lpVtbl : IIMEServicesVtbl* do
+  record IIMEServices, lpVtbl : IIMEServicesVtable* do
     GUID = LibC::GUID.new(0x3050f6ca_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IIMEServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63909,7 +63897,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISelectionServicesListenerVtbl,
+  record ISelectionServicesListenerVtable,
     query_interface : Proc(ISelectionServicesListener*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISelectionServicesListener*, UInt32),
     release : Proc(ISelectionServicesListener*, UInt32),
@@ -63921,7 +63909,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISelectionServicesListener, lpVtbl : ISelectionServicesListenerVtbl* do
+  record ISelectionServicesListener, lpVtbl : ISelectionServicesListenerVtable* do
     GUID = LibC::GUID.new(0x3050f699_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISelectionServicesListener*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63951,7 +63939,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISelectionServicesVtbl,
+  record ISelectionServicesVtable,
     query_interface : Proc(ISelectionServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISelectionServices*, UInt32),
     release : Proc(ISelectionServices*, UInt32),
@@ -63964,7 +63952,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISelectionServices, lpVtbl : ISelectionServicesVtbl* do
+  record ISelectionServices, lpVtbl : ISelectionServicesVtable* do
     GUID = LibC::GUID.new(0x3050f684_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISelectionServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -63997,7 +63985,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLEditDesignerVtbl,
+  record IHTMLEditDesignerVtable,
     query_interface : Proc(IHTMLEditDesigner*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLEditDesigner*, UInt32),
     release : Proc(IHTMLEditDesigner*, UInt32),
@@ -64008,7 +63996,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLEditDesigner, lpVtbl : IHTMLEditDesignerVtbl* do
+  record IHTMLEditDesigner, lpVtbl : IHTMLEditDesignerVtable* do
     GUID = LibC::GUID.new(0x3050f662_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLEditDesigner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64035,7 +64023,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLEditServicesVtbl,
+  record IHTMLEditServicesVtable,
     query_interface : Proc(IHTMLEditServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLEditServices*, UInt32),
     release : Proc(IHTMLEditServices*, UInt32),
@@ -64048,7 +64036,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLEditServices, lpVtbl : IHTMLEditServicesVtbl* do
+  record IHTMLEditServices, lpVtbl : IHTMLEditServicesVtable* do
     GUID = LibC::GUID.new(0x3050f663_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLEditServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64081,7 +64069,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLEditServices2Vtbl,
+  record IHTMLEditServices2Vtable,
     query_interface : Proc(IHTMLEditServices2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLEditServices2*, UInt32),
     release : Proc(IHTMLEditServices2*, UInt32),
@@ -64098,7 +64086,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLEditServices2, lpVtbl : IHTMLEditServices2Vtbl* do
+  record IHTMLEditServices2, lpVtbl : IHTMLEditServices2Vtable* do
     GUID = LibC::GUID.new(0x3050f812_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLEditServices2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64143,7 +64131,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLComputedStyleVtbl,
+  record IHTMLComputedStyleVtable,
     query_interface : Proc(IHTMLComputedStyle*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLComputedStyle*, UInt32),
     release : Proc(IHTMLComputedStyle*, UInt32),
@@ -64169,7 +64157,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLComputedStyle, lpVtbl : IHTMLComputedStyleVtbl* do
+  record IHTMLComputedStyle, lpVtbl : IHTMLComputedStyleVtable* do
     GUID = LibC::GUID.new(0x3050f6c3_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLComputedStyle*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64241,7 +64229,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDeveloperConsoleMessageReceiverVtbl,
+  record IDeveloperConsoleMessageReceiverVtable,
     query_interface : Proc(IDeveloperConsoleMessageReceiver*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDeveloperConsoleMessageReceiver*, UInt32),
     release : Proc(IDeveloperConsoleMessageReceiver*, UInt32),
@@ -64252,7 +64240,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDeveloperConsoleMessageReceiver, lpVtbl : IDeveloperConsoleMessageReceiverVtbl* do
+  record IDeveloperConsoleMessageReceiver, lpVtbl : IDeveloperConsoleMessageReceiverVtable* do
     GUID = LibC::GUID.new(0x30510808_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDeveloperConsoleMessageReceiver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64279,7 +64267,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IScriptEventHandlerVtbl,
+  record IScriptEventHandlerVtable,
     query_interface : Proc(IScriptEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IScriptEventHandler*, UInt32),
     release : Proc(IScriptEventHandler*, UInt32),
@@ -64291,7 +64279,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IScriptEventHandler, lpVtbl : IScriptEventHandlerVtbl* do
+  record IScriptEventHandler, lpVtbl : IScriptEventHandlerVtable* do
     GUID = LibC::GUID.new(0x3051083a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IScriptEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64321,7 +64309,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDebugCallbackNotificationHandlerVtbl,
+  record IDebugCallbackNotificationHandlerVtable,
     query_interface : Proc(IDebugCallbackNotificationHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugCallbackNotificationHandler*, UInt32),
     release : Proc(IDebugCallbackNotificationHandler*, UInt32),
@@ -64335,7 +64323,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDebugCallbackNotificationHandler, lpVtbl : IDebugCallbackNotificationHandlerVtbl* do
+  record IDebugCallbackNotificationHandler, lpVtbl : IDebugCallbackNotificationHandlerVtable* do
     GUID = LibC::GUID.new(0x30510842_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDebugCallbackNotificationHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64371,7 +64359,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IScriptEventHandlerSourceInfoVtbl,
+  record IScriptEventHandlerSourceInfoVtable,
     query_interface : Proc(IScriptEventHandlerSourceInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IScriptEventHandlerSourceInfo*, UInt32),
     release : Proc(IScriptEventHandlerSourceInfo*, UInt32),
@@ -64379,7 +64367,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IScriptEventHandlerSourceInfo, lpVtbl : IScriptEventHandlerSourceInfoVtbl* do
+  record IScriptEventHandlerSourceInfo, lpVtbl : IScriptEventHandlerSourceInfoVtable* do
     GUID = LibC::GUID.new(0x30510841_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IScriptEventHandlerSourceInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64397,7 +64385,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDOMEventRegistrationCallbackVtbl,
+  record IDOMEventRegistrationCallbackVtable,
     query_interface : Proc(IDOMEventRegistrationCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDOMEventRegistrationCallback*, UInt32),
     release : Proc(IDOMEventRegistrationCallback*, UInt32),
@@ -64406,7 +64394,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDOMEventRegistrationCallback, lpVtbl : IDOMEventRegistrationCallbackVtbl* do
+  record IDOMEventRegistrationCallback, lpVtbl : IDOMEventRegistrationCallbackVtable* do
     GUID = LibC::GUID.new(0x3051083b_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDOMEventRegistrationCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64427,7 +64415,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IEventTarget2Vtbl,
+  record IEventTarget2Vtable,
     query_interface : Proc(IEventTarget2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEventTarget2*, UInt32),
     release : Proc(IEventTarget2*, UInt32),
@@ -64438,7 +64426,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IEventTarget2, lpVtbl : IEventTarget2Vtbl* do
+  record IEventTarget2, lpVtbl : IEventTarget2Vtable* do
     GUID = LibC::GUID.new(0x30510839_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IEventTarget2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64465,7 +64453,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record HTMLNamespaceEventsVtbl,
+  record HTMLNamespaceEventsVtable,
     query_interface : Proc(HTMLNamespaceEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(HTMLNamespaceEvents*, UInt32),
     release : Proc(HTMLNamespaceEvents*, UInt32),
@@ -64476,7 +64464,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record HTMLNamespaceEvents, lpVtbl : HTMLNamespaceEventsVtbl* do
+  record HTMLNamespaceEvents, lpVtbl : HTMLNamespaceEventsVtable* do
     GUID = LibC::GUID.new(0x3050f6bd_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : HTMLNamespaceEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64503,7 +64491,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLNamespaceVtbl,
+  record IHTMLNamespaceVtable,
     query_interface : Proc(IHTMLNamespace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLNamespace*, UInt32),
     release : Proc(IHTMLNamespace*, UInt32),
@@ -64523,7 +64511,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLNamespace, lpVtbl : IHTMLNamespaceVtbl* do
+  record IHTMLNamespace, lpVtbl : IHTMLNamespaceVtable* do
     GUID = LibC::GUID.new(0x3050f6bb_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLNamespace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64577,7 +64565,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLNamespaceCollectionVtbl,
+  record IHTMLNamespaceCollectionVtable,
     query_interface : Proc(IHTMLNamespaceCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLNamespaceCollection*, UInt32),
     release : Proc(IHTMLNamespaceCollection*, UInt32),
@@ -64591,7 +64579,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLNamespaceCollection, lpVtbl : IHTMLNamespaceCollectionVtbl* do
+  record IHTMLNamespaceCollection, lpVtbl : IHTMLNamespaceCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f6b8_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLNamespaceCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64627,7 +64615,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLNamespaceVtbl,
+  record DispHTMLNamespaceVtable,
     query_interface : Proc(DispHTMLNamespace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLNamespace*, UInt32),
     release : Proc(DispHTMLNamespace*, UInt32),
@@ -64638,7 +64626,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLNamespace, lpVtbl : DispHTMLNamespaceVtbl* do
+  record DispHTMLNamespace, lpVtbl : DispHTMLNamespaceVtable* do
     GUID = LibC::GUID.new(0x3050f54f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLNamespace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64665,7 +64653,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLNamespaceCollectionVtbl,
+  record DispHTMLNamespaceCollectionVtable,
     query_interface : Proc(DispHTMLNamespaceCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLNamespaceCollection*, UInt32),
     release : Proc(DispHTMLNamespaceCollection*, UInt32),
@@ -64676,7 +64664,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLNamespaceCollection, lpVtbl : DispHTMLNamespaceCollectionVtbl* do
+  record DispHTMLNamespaceCollection, lpVtbl : DispHTMLNamespaceCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f550_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLNamespaceCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64703,7 +64691,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLPainterVtbl,
+  record IHTMLPainterVtable,
     query_interface : Proc(IHTMLPainter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLPainter*, UInt32),
     release : Proc(IHTMLPainter*, UInt32),
@@ -64714,7 +64702,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLPainter, lpVtbl : IHTMLPainterVtbl* do
+  record IHTMLPainter, lpVtbl : IHTMLPainterVtable* do
     GUID = LibC::GUID.new(0x3050f6a6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLPainter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64741,7 +64729,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLPaintSiteVtbl,
+  record IHTMLPaintSiteVtable,
     query_interface : Proc(IHTMLPaintSite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLPaintSite*, UInt32),
     release : Proc(IHTMLPaintSite*, UInt32),
@@ -64755,7 +64743,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLPaintSite, lpVtbl : IHTMLPaintSiteVtbl* do
+  record IHTMLPaintSite, lpVtbl : IHTMLPaintSiteVtable* do
     GUID = LibC::GUID.new(0x3050f6a7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLPaintSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64791,7 +64779,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLPainterEventInfoVtbl,
+  record IHTMLPainterEventInfoVtable,
     query_interface : Proc(IHTMLPainterEventInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLPainterEventInfo*, UInt32),
     release : Proc(IHTMLPainterEventInfo*, UInt32),
@@ -64802,7 +64790,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLPainterEventInfo, lpVtbl : IHTMLPainterEventInfoVtbl* do
+  record IHTMLPainterEventInfo, lpVtbl : IHTMLPainterEventInfoVtable* do
     GUID = LibC::GUID.new(0x3050f6df_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLPainterEventInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64829,7 +64817,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLPainterOverlayVtbl,
+  record IHTMLPainterOverlayVtable,
     query_interface : Proc(IHTMLPainterOverlay*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLPainterOverlay*, UInt32),
     release : Proc(IHTMLPainterOverlay*, UInt32),
@@ -64837,7 +64825,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLPainterOverlay, lpVtbl : IHTMLPainterOverlayVtbl* do
+  record IHTMLPainterOverlay, lpVtbl : IHTMLPainterOverlayVtable* do
     GUID = LibC::GUID.new(0x3050f7e3_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLPainterOverlay*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64855,7 +64843,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLIPrintCollectionVtbl,
+  record IHTMLIPrintCollectionVtable,
     query_interface : Proc(IHTMLIPrintCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLIPrintCollection*, UInt32),
     release : Proc(IHTMLIPrintCollection*, UInt32),
@@ -64869,7 +64857,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLIPrintCollection, lpVtbl : IHTMLIPrintCollectionVtbl* do
+  record IHTMLIPrintCollection, lpVtbl : IHTMLIPrintCollectionVtable* do
     GUID = LibC::GUID.new(0x3050f6b5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLIPrintCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64905,7 +64893,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IEnumPrivacyRecordsVtbl,
+  record IEnumPrivacyRecordsVtable,
     query_interface : Proc(IEnumPrivacyRecords*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumPrivacyRecords*, UInt32),
     release : Proc(IEnumPrivacyRecords*, UInt32),
@@ -64916,7 +64904,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IEnumPrivacyRecords, lpVtbl : IEnumPrivacyRecordsVtbl* do
+  record IEnumPrivacyRecords, lpVtbl : IEnumPrivacyRecordsVtable* do
     GUID = LibC::GUID.new(0x3050f844_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IEnumPrivacyRecords*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64943,7 +64931,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IWPCBlockedUrlsVtbl,
+  record IWPCBlockedUrlsVtable,
     query_interface : Proc(IWPCBlockedUrls*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWPCBlockedUrls*, UInt32),
     release : Proc(IWPCBlockedUrls*, UInt32),
@@ -64952,7 +64940,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IWPCBlockedUrls, lpVtbl : IWPCBlockedUrlsVtbl* do
+  record IWPCBlockedUrls, lpVtbl : IWPCBlockedUrlsVtable* do
     GUID = LibC::GUID.new(0x30510413_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IWPCBlockedUrls*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -64973,7 +64961,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDOMConstructorCollectionVtbl,
+  record IHTMLDOMConstructorCollectionVtable,
     query_interface : Proc(IHTMLDOMConstructorCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDOMConstructorCollection*, UInt32),
     release : Proc(IHTMLDOMConstructorCollection*, UInt32),
@@ -65090,7 +65078,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDOMConstructorCollection, lpVtbl : IHTMLDOMConstructorCollectionVtbl* do
+  record IHTMLDOMConstructorCollection, lpVtbl : IHTMLDOMConstructorCollectionVtable* do
     GUID = LibC::GUID.new(0x3051049c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDOMConstructorCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -65435,7 +65423,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDialogVtbl,
+  record IHTMLDialogVtable,
     query_interface : Proc(IHTMLDialog*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDialog*, UInt32),
     release : Proc(IHTMLDialog*, UInt32),
@@ -65460,7 +65448,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDialog, lpVtbl : IHTMLDialogVtbl* do
+  record IHTMLDialog, lpVtbl : IHTMLDialogVtable* do
     GUID = LibC::GUID.new(0x3050f216_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDialog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -65529,7 +65517,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDialog2Vtbl,
+  record IHTMLDialog2Vtable,
     query_interface : Proc(IHTMLDialog2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDialog2*, UInt32),
     release : Proc(IHTMLDialog2*, UInt32),
@@ -65544,7 +65532,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDialog2, lpVtbl : IHTMLDialog2Vtbl* do
+  record IHTMLDialog2, lpVtbl : IHTMLDialog2Vtable* do
     GUID = LibC::GUID.new(0x3050f5e0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDialog2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -65583,7 +65571,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLDialog3Vtbl,
+  record IHTMLDialog3Vtable,
     query_interface : Proc(IHTMLDialog3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLDialog3*, UInt32),
     release : Proc(IHTMLDialog3*, UInt32),
@@ -65598,7 +65586,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLDialog3, lpVtbl : IHTMLDialog3Vtbl* do
+  record IHTMLDialog3, lpVtbl : IHTMLDialog3Vtable* do
     GUID = LibC::GUID.new(0x3050f388_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLDialog3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -65637,7 +65625,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLModelessInitVtbl,
+  record IHTMLModelessInitVtable,
     query_interface : Proc(IHTMLModelessInit*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLModelessInit*, UInt32),
     release : Proc(IHTMLModelessInit*, UInt32),
@@ -65652,7 +65640,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLModelessInit, lpVtbl : IHTMLModelessInitVtbl* do
+  record IHTMLModelessInit, lpVtbl : IHTMLModelessInitVtable* do
     GUID = LibC::GUID.new(0x3050f5e4_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLModelessInit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -65691,7 +65679,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLPopupVtbl,
+  record IHTMLPopupVtable,
     query_interface : Proc(IHTMLPopup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLPopup*, UInt32),
     release : Proc(IHTMLPopup*, UInt32),
@@ -65706,7 +65694,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLPopup, lpVtbl : IHTMLPopupVtbl* do
+  record IHTMLPopup, lpVtbl : IHTMLPopupVtable* do
     GUID = LibC::GUID.new(0x3050f666_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLPopup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -65745,7 +65733,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLPopupVtbl,
+  record DispHTMLPopupVtable,
     query_interface : Proc(DispHTMLPopup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLPopup*, UInt32),
     release : Proc(DispHTMLPopup*, UInt32),
@@ -65756,7 +65744,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLPopup, lpVtbl : DispHTMLPopupVtbl* do
+  record DispHTMLPopup, lpVtbl : DispHTMLPopupVtable* do
     GUID = LibC::GUID.new(0x3050f589_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLPopup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -65783,7 +65771,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLAppBehaviorVtbl,
+  record IHTMLAppBehaviorVtable,
     query_interface : Proc(IHTMLAppBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLAppBehavior*, UInt32),
     release : Proc(IHTMLAppBehavior*, UInt32),
@@ -65819,7 +65807,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLAppBehavior, lpVtbl : IHTMLAppBehaviorVtbl* do
+  record IHTMLAppBehavior, lpVtbl : IHTMLAppBehaviorVtable* do
     GUID = LibC::GUID.new(0x3050f5ca_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLAppBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -65921,7 +65909,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLAppBehavior2Vtbl,
+  record IHTMLAppBehavior2Vtable,
     query_interface : Proc(IHTMLAppBehavior2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLAppBehavior2*, UInt32),
     release : Proc(IHTMLAppBehavior2*, UInt32),
@@ -65942,7 +65930,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLAppBehavior2, lpVtbl : IHTMLAppBehavior2Vtbl* do
+  record IHTMLAppBehavior2, lpVtbl : IHTMLAppBehavior2Vtable* do
     GUID = LibC::GUID.new(0x3050f5c9_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLAppBehavior2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -65999,7 +65987,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLAppBehavior3Vtbl,
+  record IHTMLAppBehavior3Vtable,
     query_interface : Proc(IHTMLAppBehavior3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLAppBehavior3*, UInt32),
     release : Proc(IHTMLAppBehavior3*, UInt32),
@@ -66012,7 +66000,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLAppBehavior3, lpVtbl : IHTMLAppBehavior3Vtbl* do
+  record IHTMLAppBehavior3, lpVtbl : IHTMLAppBehavior3Vtable* do
     GUID = LibC::GUID.new(0x3050f5cd_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLAppBehavior3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66045,7 +66033,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispHTMLAppBehaviorVtbl,
+  record DispHTMLAppBehaviorVtable,
     query_interface : Proc(DispHTMLAppBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispHTMLAppBehavior*, UInt32),
     release : Proc(DispHTMLAppBehavior*, UInt32),
@@ -66056,7 +66044,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispHTMLAppBehavior, lpVtbl : DispHTMLAppBehaviorVtbl* do
+  record DispHTMLAppBehavior, lpVtbl : DispHTMLAppBehaviorVtable* do
     GUID = LibC::GUID.new(0x3050f57c_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispHTMLAppBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66083,7 +66071,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispIHTMLInputButtonElementVtbl,
+  record DispIHTMLInputButtonElementVtable,
     query_interface : Proc(DispIHTMLInputButtonElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispIHTMLInputButtonElement*, UInt32),
     release : Proc(DispIHTMLInputButtonElement*, UInt32),
@@ -66094,7 +66082,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispIHTMLInputButtonElement, lpVtbl : DispIHTMLInputButtonElementVtbl* do
+  record DispIHTMLInputButtonElement, lpVtbl : DispIHTMLInputButtonElementVtable* do
     GUID = LibC::GUID.new(0x3050f51e_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispIHTMLInputButtonElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66121,7 +66109,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispIHTMLInputTextElementVtbl,
+  record DispIHTMLInputTextElementVtable,
     query_interface : Proc(DispIHTMLInputTextElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispIHTMLInputTextElement*, UInt32),
     release : Proc(DispIHTMLInputTextElement*, UInt32),
@@ -66132,7 +66120,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispIHTMLInputTextElement, lpVtbl : DispIHTMLInputTextElementVtbl* do
+  record DispIHTMLInputTextElement, lpVtbl : DispIHTMLInputTextElementVtable* do
     GUID = LibC::GUID.new(0x3050f520_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispIHTMLInputTextElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66159,7 +66147,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispIHTMLInputFileElementVtbl,
+  record DispIHTMLInputFileElementVtable,
     query_interface : Proc(DispIHTMLInputFileElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispIHTMLInputFileElement*, UInt32),
     release : Proc(DispIHTMLInputFileElement*, UInt32),
@@ -66170,7 +66158,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispIHTMLInputFileElement, lpVtbl : DispIHTMLInputFileElementVtbl* do
+  record DispIHTMLInputFileElement, lpVtbl : DispIHTMLInputFileElementVtable* do
     GUID = LibC::GUID.new(0x3050f542_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispIHTMLInputFileElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66197,7 +66185,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispIHTMLOptionButtonElementVtbl,
+  record DispIHTMLOptionButtonElementVtable,
     query_interface : Proc(DispIHTMLOptionButtonElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispIHTMLOptionButtonElement*, UInt32),
     release : Proc(DispIHTMLOptionButtonElement*, UInt32),
@@ -66208,7 +66196,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispIHTMLOptionButtonElement, lpVtbl : DispIHTMLOptionButtonElementVtbl* do
+  record DispIHTMLOptionButtonElement, lpVtbl : DispIHTMLOptionButtonElementVtable* do
     GUID = LibC::GUID.new(0x3050f509_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispIHTMLOptionButtonElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66235,7 +66223,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record DispIHTMLInputImageVtbl,
+  record DispIHTMLInputImageVtable,
     query_interface : Proc(DispIHTMLInputImage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DispIHTMLInputImage*, UInt32),
     release : Proc(DispIHTMLInputImage*, UInt32),
@@ -66246,7 +66234,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record DispIHTMLInputImage, lpVtbl : DispIHTMLInputImageVtbl* do
+  record DispIHTMLInputImage, lpVtbl : DispIHTMLInputImageVtable* do
     GUID = LibC::GUID.new(0x3050f51d_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : DispIHTMLInputImage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66273,7 +66261,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementNamespaceVtbl,
+  record IElementNamespaceVtable,
     query_interface : Proc(IElementNamespace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementNamespace*, UInt32),
     release : Proc(IElementNamespace*, UInt32),
@@ -66281,7 +66269,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementNamespace, lpVtbl : IElementNamespaceVtbl* do
+  record IElementNamespace, lpVtbl : IElementNamespaceVtable* do
     GUID = LibC::GUID.new(0x3050f671_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementNamespace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66299,7 +66287,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementNamespaceTableVtbl,
+  record IElementNamespaceTableVtable,
     query_interface : Proc(IElementNamespaceTable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementNamespaceTable*, UInt32),
     release : Proc(IElementNamespaceTable*, UInt32),
@@ -66307,7 +66295,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementNamespaceTable, lpVtbl : IElementNamespaceTableVtbl* do
+  record IElementNamespaceTable, lpVtbl : IElementNamespaceTableVtable* do
     GUID = LibC::GUID.new(0x3050f670_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementNamespaceTable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66325,7 +66313,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementNamespaceFactoryVtbl,
+  record IElementNamespaceFactoryVtable,
     query_interface : Proc(IElementNamespaceFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementNamespaceFactory*, UInt32),
     release : Proc(IElementNamespaceFactory*, UInt32),
@@ -66333,7 +66321,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementNamespaceFactory, lpVtbl : IElementNamespaceFactoryVtbl* do
+  record IElementNamespaceFactory, lpVtbl : IElementNamespaceFactoryVtable* do
     GUID = LibC::GUID.new(0x3050f672_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementNamespaceFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66351,7 +66339,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementNamespaceFactory2Vtbl,
+  record IElementNamespaceFactory2Vtable,
     query_interface : Proc(IElementNamespaceFactory2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementNamespaceFactory2*, UInt32),
     release : Proc(IElementNamespaceFactory2*, UInt32),
@@ -66360,7 +66348,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementNamespaceFactory2, lpVtbl : IElementNamespaceFactory2Vtbl* do
+  record IElementNamespaceFactory2, lpVtbl : IElementNamespaceFactory2Vtable* do
     GUID = LibC::GUID.new(0x3050f805_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementNamespaceFactory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66381,7 +66369,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementNamespaceFactoryCallbackVtbl,
+  record IElementNamespaceFactoryCallbackVtable,
     query_interface : Proc(IElementNamespaceFactoryCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementNamespaceFactoryCallback*, UInt32),
     release : Proc(IElementNamespaceFactoryCallback*, UInt32),
@@ -66389,7 +66377,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementNamespaceFactoryCallback, lpVtbl : IElementNamespaceFactoryCallbackVtbl* do
+  record IElementNamespaceFactoryCallback, lpVtbl : IElementNamespaceFactoryCallbackVtable* do
     GUID = LibC::GUID.new(0x3050f7fd_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementNamespaceFactoryCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66407,7 +66395,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementBehaviorSiteOM2Vtbl,
+  record IElementBehaviorSiteOM2Vtable,
     query_interface : Proc(IElementBehaviorSiteOM2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementBehaviorSiteOM2*, UInt32),
     release : Proc(IElementBehaviorSiteOM2*, UInt32),
@@ -66421,7 +66409,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementBehaviorSiteOM2, lpVtbl : IElementBehaviorSiteOM2Vtbl* do
+  record IElementBehaviorSiteOM2, lpVtbl : IElementBehaviorSiteOM2Vtable* do
     GUID = LibC::GUID.new(0x3050f659_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementBehaviorSiteOM2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66457,7 +66445,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementBehaviorCategoryVtbl,
+  record IElementBehaviorCategoryVtable,
     query_interface : Proc(IElementBehaviorCategory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementBehaviorCategory*, UInt32),
     release : Proc(IElementBehaviorCategory*, UInt32),
@@ -66465,7 +66453,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementBehaviorCategory, lpVtbl : IElementBehaviorCategoryVtbl* do
+  record IElementBehaviorCategory, lpVtbl : IElementBehaviorCategoryVtable* do
     GUID = LibC::GUID.new(0x3050f4ed_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementBehaviorCategory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66483,7 +66471,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementBehaviorSiteCategoryVtbl,
+  record IElementBehaviorSiteCategoryVtable,
     query_interface : Proc(IElementBehaviorSiteCategory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementBehaviorSiteCategory*, UInt32),
     release : Proc(IElementBehaviorSiteCategory*, UInt32),
@@ -66491,7 +66479,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementBehaviorSiteCategory, lpVtbl : IElementBehaviorSiteCategoryVtbl* do
+  record IElementBehaviorSiteCategory, lpVtbl : IElementBehaviorSiteCategoryVtable* do
     GUID = LibC::GUID.new(0x3050f4ee_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementBehaviorSiteCategory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66509,7 +66497,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementBehaviorSubmitVtbl,
+  record IElementBehaviorSubmitVtable,
     query_interface : Proc(IElementBehaviorSubmit*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementBehaviorSubmit*, UInt32),
     release : Proc(IElementBehaviorSubmit*, UInt32),
@@ -66518,7 +66506,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementBehaviorSubmit, lpVtbl : IElementBehaviorSubmitVtbl* do
+  record IElementBehaviorSubmit, lpVtbl : IElementBehaviorSubmitVtable* do
     GUID = LibC::GUID.new(0x3050f646_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementBehaviorSubmit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66539,7 +66527,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementBehaviorFocusVtbl,
+  record IElementBehaviorFocusVtable,
     query_interface : Proc(IElementBehaviorFocus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementBehaviorFocus*, UInt32),
     release : Proc(IElementBehaviorFocus*, UInt32),
@@ -66547,7 +66535,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementBehaviorFocus, lpVtbl : IElementBehaviorFocusVtbl* do
+  record IElementBehaviorFocus, lpVtbl : IElementBehaviorFocusVtable* do
     GUID = LibC::GUID.new(0x3050f6b6_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementBehaviorFocus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66565,7 +66553,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementBehaviorLayoutVtbl,
+  record IElementBehaviorLayoutVtable,
     query_interface : Proc(IElementBehaviorLayout*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementBehaviorLayout*, UInt32),
     release : Proc(IElementBehaviorLayout*, UInt32),
@@ -66576,7 +66564,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementBehaviorLayout, lpVtbl : IElementBehaviorLayoutVtbl* do
+  record IElementBehaviorLayout, lpVtbl : IElementBehaviorLayoutVtable* do
     GUID = LibC::GUID.new(0x3050f6ba_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementBehaviorLayout*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66603,7 +66591,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementBehaviorLayout2Vtbl,
+  record IElementBehaviorLayout2Vtable,
     query_interface : Proc(IElementBehaviorLayout2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementBehaviorLayout2*, UInt32),
     release : Proc(IElementBehaviorLayout2*, UInt32),
@@ -66611,7 +66599,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementBehaviorLayout2, lpVtbl : IElementBehaviorLayout2Vtbl* do
+  record IElementBehaviorLayout2, lpVtbl : IElementBehaviorLayout2Vtable* do
     GUID = LibC::GUID.new(0x3050f846_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementBehaviorLayout2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66629,7 +66617,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementBehaviorSiteLayoutVtbl,
+  record IElementBehaviorSiteLayoutVtable,
     query_interface : Proc(IElementBehaviorSiteLayout*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementBehaviorSiteLayout*, UInt32),
     release : Proc(IElementBehaviorSiteLayout*, UInt32),
@@ -66639,7 +66627,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementBehaviorSiteLayout, lpVtbl : IElementBehaviorSiteLayoutVtbl* do
+  record IElementBehaviorSiteLayout, lpVtbl : IElementBehaviorSiteLayoutVtable* do
     GUID = LibC::GUID.new(0x3050f6b7_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementBehaviorSiteLayout*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66663,7 +66651,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IElementBehaviorSiteLayout2Vtbl,
+  record IElementBehaviorSiteLayout2Vtable,
     query_interface : Proc(IElementBehaviorSiteLayout2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IElementBehaviorSiteLayout2*, UInt32),
     release : Proc(IElementBehaviorSiteLayout2*, UInt32),
@@ -66671,7 +66659,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IElementBehaviorSiteLayout2, lpVtbl : IElementBehaviorSiteLayout2Vtbl* do
+  record IElementBehaviorSiteLayout2, lpVtbl : IElementBehaviorSiteLayout2Vtable* do
     GUID = LibC::GUID.new(0x3050f847_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IElementBehaviorSiteLayout2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66689,7 +66677,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHostBehaviorInitVtbl,
+  record IHostBehaviorInitVtable,
     query_interface : Proc(IHostBehaviorInit*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHostBehaviorInit*, UInt32),
     release : Proc(IHostBehaviorInit*, UInt32),
@@ -66697,7 +66685,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHostBehaviorInit, lpVtbl : IHostBehaviorInitVtbl* do
+  record IHostBehaviorInit, lpVtbl : IHostBehaviorInitVtable* do
     GUID = LibC::GUID.new(0x3050f842_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHostBehaviorInit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66715,7 +66703,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISurfacePresenterVtbl,
+  record ISurfacePresenterVtable,
     query_interface : Proc(ISurfacePresenter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISurfacePresenter*, UInt32),
     release : Proc(ISurfacePresenter*, UInt32),
@@ -66725,7 +66713,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISurfacePresenter, lpVtbl : ISurfacePresenterVtbl* do
+  record ISurfacePresenter, lpVtbl : ISurfacePresenterVtable* do
     GUID = LibC::GUID.new(0x305106e2_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISurfacePresenter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66749,7 +66737,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IViewObjectPresentSiteVtbl,
+  record IViewObjectPresentSiteVtable,
     query_interface : Proc(IViewObjectPresentSite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IViewObjectPresentSite*, UInt32),
     release : Proc(IViewObjectPresentSite*, UInt32),
@@ -66759,7 +66747,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IViewObjectPresentSite, lpVtbl : IViewObjectPresentSiteVtbl* do
+  record IViewObjectPresentSite, lpVtbl : IViewObjectPresentSiteVtable* do
     GUID = LibC::GUID.new(0x305106e1_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IViewObjectPresentSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66783,7 +66771,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ICanvasPixelArrayDataVtbl,
+  record ICanvasPixelArrayDataVtable,
     query_interface : Proc(ICanvasPixelArrayData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICanvasPixelArrayData*, UInt32),
     release : Proc(ICanvasPixelArrayData*, UInt32),
@@ -66791,7 +66779,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ICanvasPixelArrayData, lpVtbl : ICanvasPixelArrayDataVtbl* do
+  record ICanvasPixelArrayData, lpVtbl : ICanvasPixelArrayDataVtable* do
     GUID = LibC::GUID.new(0x305107f9_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ICanvasPixelArrayData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66809,7 +66797,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IViewObjectPrintVtbl,
+  record IViewObjectPrintVtable,
     query_interface : Proc(IViewObjectPrint*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IViewObjectPrint*, UInt32),
     release : Proc(IViewObjectPrint*, UInt32),
@@ -66817,7 +66805,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IViewObjectPrint, lpVtbl : IViewObjectPrintVtbl* do
+  record IViewObjectPrint, lpVtbl : IViewObjectPrintVtable* do
     GUID = LibC::GUID.new(0x305106e3_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IViewObjectPrint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66835,7 +66823,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IViewObjectPresentNotifySiteVtbl,
+  record IViewObjectPresentNotifySiteVtable,
     query_interface : Proc(IViewObjectPresentNotifySite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IViewObjectPresentNotifySite*, UInt32),
     release : Proc(IViewObjectPresentNotifySite*, UInt32),
@@ -66846,7 +66834,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IViewObjectPresentNotifySite, lpVtbl : IViewObjectPresentNotifySiteVtbl* do
+  record IViewObjectPresentNotifySite, lpVtbl : IViewObjectPresentNotifySiteVtable* do
     GUID = LibC::GUID.new(0x305107fa_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IViewObjectPresentNotifySite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66873,7 +66861,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IViewObjectPresentNotifyVtbl,
+  record IViewObjectPresentNotifyVtable,
     query_interface : Proc(IViewObjectPresentNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IViewObjectPresentNotify*, UInt32),
     release : Proc(IViewObjectPresentNotify*, UInt32),
@@ -66881,7 +66869,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IViewObjectPresentNotify, lpVtbl : IViewObjectPresentNotifyVtbl* do
+  record IViewObjectPresentNotify, lpVtbl : IViewObjectPresentNotifyVtable* do
     GUID = LibC::GUID.new(0x305107f8_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IViewObjectPresentNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66899,7 +66887,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ITrackingProtectionVtbl,
+  record ITrackingProtectionVtable,
     query_interface : Proc(ITrackingProtection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITrackingProtection*, UInt32),
     release : Proc(ITrackingProtection*, UInt32),
@@ -66908,7 +66896,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ITrackingProtection, lpVtbl : ITrackingProtectionVtbl* do
+  record ITrackingProtection, lpVtbl : ITrackingProtectionVtable* do
     GUID = LibC::GUID.new(0x30510803_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ITrackingProtection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66929,7 +66917,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IBFCacheableVtbl,
+  record IBFCacheableVtable,
     query_interface : Proc(IBFCacheable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBFCacheable*, UInt32),
     release : Proc(IBFCacheable*, UInt32),
@@ -66938,7 +66926,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IBFCacheable, lpVtbl : IBFCacheableVtbl* do
+  record IBFCacheable, lpVtbl : IBFCacheableVtable* do
     GUID = LibC::GUID.new(0x30510861_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IBFCacheable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -66959,7 +66947,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDocObjectServiceVtbl,
+  record IDocObjectServiceVtable,
     query_interface : Proc(IDocObjectService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDocObjectService*, UInt32),
     release : Proc(IDocObjectService*, UInt32),
@@ -66976,7 +66964,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDocObjectService, lpVtbl : IDocObjectServiceVtbl* do
+  record IDocObjectService, lpVtbl : IDocObjectServiceVtable* do
     GUID = LibC::GUID.new(0x3050f801_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDocObjectService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67021,7 +67009,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDownloadManagerVtbl,
+  record IDownloadManagerVtable,
     query_interface : Proc(IDownloadManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDownloadManager*, UInt32),
     release : Proc(IDownloadManager*, UInt32),
@@ -67029,7 +67017,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDownloadManager, lpVtbl : IDownloadManagerVtbl* do
+  record IDownloadManager, lpVtbl : IDownloadManagerVtable* do
     GUID = LibC::GUID.new(0x988934a4_u32, 0x64b_u16, 0x11d3_u16, StaticArray[0xbb_u8, 0x80_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0x35_u8, 0xe7_u8, 0xf9_u8])
     def query_interface(this : IDownloadManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67047,7 +67035,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IExtensionValidationVtbl,
+  record IExtensionValidationVtable,
     query_interface : Proc(IExtensionValidation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IExtensionValidation*, UInt32),
     release : Proc(IExtensionValidation*, UInt32),
@@ -67056,7 +67044,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IExtensionValidation, lpVtbl : IExtensionValidationVtbl* do
+  record IExtensionValidation, lpVtbl : IExtensionValidationVtable* do
     GUID = LibC::GUID.new(0x7d33f73d_u32, 0x8525_u16, 0x4e0f_u16, StaticArray[0x87_u8, 0xdb_u8, 0x83_u8, 0x2_u8, 0x88_u8, 0xba_u8, 0xff_u8, 0x44_u8])
     def query_interface(this : IExtensionValidation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67077,7 +67065,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHomePageSettingVtbl,
+  record IHomePageSettingVtable,
     query_interface : Proc(IHomePageSetting*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHomePageSetting*, UInt32),
     release : Proc(IHomePageSetting*, UInt32),
@@ -67087,7 +67075,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHomePageSetting, lpVtbl : IHomePageSettingVtbl* do
+  record IHomePageSetting, lpVtbl : IHomePageSettingVtable* do
     GUID = LibC::GUID.new(0xfdfc244f_u32, 0x18fa_u16, 0x4ff2_u16, StaticArray[0xb0_u8, 0x8e_u8, 0x1d_u8, 0x61_u8, 0x8f_u8, 0x3f_u8, 0xfb_u8, 0xe4_u8])
     def query_interface(this : IHomePageSetting*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67111,7 +67099,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ITargetNotifyVtbl,
+  record ITargetNotifyVtable,
     query_interface : Proc(ITargetNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITargetNotify*, UInt32),
     release : Proc(ITargetNotify*, UInt32),
@@ -67120,7 +67108,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ITargetNotify, lpVtbl : ITargetNotifyVtbl* do
+  record ITargetNotify, lpVtbl : ITargetNotifyVtable* do
     GUID = LibC::GUID.new(0x863a99a0_u32, 0x21bc_u16, 0x11d0_u16, StaticArray[0x82_u8, 0xb4_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xc_u8, 0x29_u8, 0xc5_u8])
     def query_interface(this : ITargetNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67141,7 +67129,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ITargetNotify2Vtbl,
+  record ITargetNotify2Vtable,
     query_interface : Proc(ITargetNotify2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITargetNotify2*, UInt32),
     release : Proc(ITargetNotify2*, UInt32),
@@ -67151,7 +67139,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ITargetNotify2, lpVtbl : ITargetNotify2Vtbl* do
+  record ITargetNotify2, lpVtbl : ITargetNotify2Vtable* do
     GUID = LibC::GUID.new(0x3050f6b1_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ITargetNotify2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67175,7 +67163,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ITargetFrame2Vtbl,
+  record ITargetFrame2Vtable,
     query_interface : Proc(ITargetFrame2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITargetFrame2*, UInt32),
     release : Proc(ITargetFrame2*, UInt32),
@@ -67194,7 +67182,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ITargetFrame2, lpVtbl : ITargetFrame2Vtbl* do
+  record ITargetFrame2, lpVtbl : ITargetFrame2Vtable* do
     GUID = LibC::GUID.new(0x86d52e11_u32, 0x94a8_u16, 0x11d0_u16, StaticArray[0x82_u8, 0xaf_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd5_u8, 0xae_u8, 0x38_u8])
     def query_interface(this : ITargetFrame2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67245,7 +67233,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ITargetContainerVtbl,
+  record ITargetContainerVtable,
     query_interface : Proc(ITargetContainer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITargetContainer*, UInt32),
     release : Proc(ITargetContainer*, UInt32),
@@ -67254,7 +67242,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ITargetContainer, lpVtbl : ITargetContainerVtbl* do
+  record ITargetContainer, lpVtbl : ITargetContainerVtable* do
     GUID = LibC::GUID.new(0x7847ec01_u32, 0x2bec_u16, 0x11d0_u16, StaticArray[0x82_u8, 0xb4_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xc_u8, 0x29_u8, 0xc5_u8])
     def query_interface(this : ITargetContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67275,7 +67263,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ITargetFrameVtbl,
+  record ITargetFrameVtable,
     query_interface : Proc(ITargetFrame*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITargetFrame*, UInt32),
     release : Proc(ITargetFrame*, UInt32),
@@ -67296,7 +67284,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ITargetFrame, lpVtbl : ITargetFrameVtbl* do
+  record ITargetFrame, lpVtbl : ITargetFrameVtable* do
     GUID = LibC::GUID.new(0xd5f78c80_u32, 0x5252_u16, 0x11cf_u16, StaticArray[0x90_u8, 0xfa_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x42_u8, 0x10_u8, 0x6e_u8])
     def query_interface(this : ITargetFrame*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67353,7 +67341,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ITargetEmbeddingVtbl,
+  record ITargetEmbeddingVtable,
     query_interface : Proc(ITargetEmbedding*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITargetEmbedding*, UInt32),
     release : Proc(ITargetEmbedding*, UInt32),
@@ -67361,7 +67349,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ITargetEmbedding, lpVtbl : ITargetEmbeddingVtbl* do
+  record ITargetEmbedding, lpVtbl : ITargetEmbeddingVtable* do
     GUID = LibC::GUID.new(0x548793c0_u32, 0x9e74_u16, 0x11cf_u16, StaticArray[0x96_u8, 0x55_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0x49_u8, 0x23_u8])
     def query_interface(this : ITargetEmbedding*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67379,7 +67367,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ITargetFramePrivVtbl,
+  record ITargetFramePrivVtable,
     query_interface : Proc(ITargetFramePriv*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITargetFramePriv*, UInt32),
     release : Proc(ITargetFramePriv*, UInt32),
@@ -67392,7 +67380,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ITargetFramePriv, lpVtbl : ITargetFramePrivVtbl* do
+  record ITargetFramePriv, lpVtbl : ITargetFramePrivVtable* do
     GUID = LibC::GUID.new(0x9216e421_u32, 0x2bf5_u16, 0x11d0_u16, StaticArray[0x82_u8, 0xb4_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xc_u8, 0x29_u8, 0xc5_u8])
     def query_interface(this : ITargetFramePriv*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67425,7 +67413,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ITargetFramePriv2Vtbl,
+  record ITargetFramePriv2Vtable,
     query_interface : Proc(ITargetFramePriv2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITargetFramePriv2*, UInt32),
     release : Proc(ITargetFramePriv2*, UInt32),
@@ -67439,7 +67427,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ITargetFramePriv2, lpVtbl : ITargetFramePriv2Vtbl* do
+  record ITargetFramePriv2, lpVtbl : ITargetFramePriv2Vtable* do
     GUID = LibC::GUID.new(0xb2c867e6_u32, 0x69d6_u16, 0x46f2_u16, StaticArray[0xa6_u8, 0x11_u8, 0xde_u8, 0xd9_u8, 0xa4_u8, 0xbd_u8, 0x7f_u8, 0xef_u8])
     def query_interface(this : ITargetFramePriv2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67475,7 +67463,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISurfacePresenterFlipBufferVtbl,
+  record ISurfacePresenterFlipBufferVtable,
     query_interface : Proc(ISurfacePresenterFlipBuffer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISurfacePresenterFlipBuffer*, UInt32),
     release : Proc(ISurfacePresenterFlipBuffer*, UInt32),
@@ -67484,7 +67472,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISurfacePresenterFlipBuffer, lpVtbl : ISurfacePresenterFlipBufferVtbl* do
+  record ISurfacePresenterFlipBuffer, lpVtbl : ISurfacePresenterFlipBufferVtable* do
     GUID = LibC::GUID.new(0xe43f4a08_u32, 0x8bbc_u16, 0x4665_u16, StaticArray[0xac_u8, 0x92_u8, 0xc5_u8, 0x5c_u8, 0xe6_u8, 0x1f_u8, 0xd7_u8, 0xe7_u8])
     def query_interface(this : ISurfacePresenterFlipBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67505,7 +67493,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISurfacePresenterFlipVtbl,
+  record ISurfacePresenterFlipVtable,
     query_interface : Proc(ISurfacePresenterFlip*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISurfacePresenterFlip*, UInt32),
     release : Proc(ISurfacePresenterFlip*, UInt32),
@@ -67514,7 +67502,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISurfacePresenterFlip, lpVtbl : ISurfacePresenterFlipVtbl* do
+  record ISurfacePresenterFlip, lpVtbl : ISurfacePresenterFlipVtable* do
     GUID = LibC::GUID.new(0x30510848_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISurfacePresenterFlip*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67535,7 +67523,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISurfacePresenterFlip2Vtbl,
+  record ISurfacePresenterFlip2Vtable,
     query_interface : Proc(ISurfacePresenterFlip2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISurfacePresenterFlip2*, UInt32),
     release : Proc(ISurfacePresenterFlip2*, UInt32),
@@ -67543,7 +67531,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISurfacePresenterFlip2, lpVtbl : ISurfacePresenterFlip2Vtbl* do
+  record ISurfacePresenterFlip2, lpVtbl : ISurfacePresenterFlip2Vtable* do
     GUID = LibC::GUID.new(0x30510865_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ISurfacePresenterFlip2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67561,7 +67549,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IViewObjectPresentFlipSiteVtbl,
+  record IViewObjectPresentFlipSiteVtable,
     query_interface : Proc(IViewObjectPresentFlipSite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IViewObjectPresentFlipSite*, UInt32),
     release : Proc(IViewObjectPresentFlipSite*, UInt32),
@@ -67576,7 +67564,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IViewObjectPresentFlipSite, lpVtbl : IViewObjectPresentFlipSiteVtbl* do
+  record IViewObjectPresentFlipSite, lpVtbl : IViewObjectPresentFlipSiteVtable* do
     GUID = LibC::GUID.new(0x30510846_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IViewObjectPresentFlipSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67615,7 +67603,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IViewObjectPresentFlipSite2Vtbl,
+  record IViewObjectPresentFlipSite2Vtable,
     query_interface : Proc(IViewObjectPresentFlipSite2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IViewObjectPresentFlipSite2*, UInt32),
     release : Proc(IViewObjectPresentFlipSite2*, UInt32),
@@ -67623,7 +67611,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IViewObjectPresentFlipSite2, lpVtbl : IViewObjectPresentFlipSite2Vtbl* do
+  record IViewObjectPresentFlipSite2, lpVtbl : IViewObjectPresentFlipSite2Vtable* do
     GUID = LibC::GUID.new(0xaad0cbf1_u32, 0xe7fd_u16, 0x4f12_u16, StaticArray[0x89_u8, 0x2_u8, 0xc7_u8, 0x81_u8, 0x32_u8, 0xa8_u8, 0xe0_u8, 0x1d_u8])
     def query_interface(this : IViewObjectPresentFlipSite2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67641,7 +67629,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IViewObjectPresentFlipVtbl,
+  record IViewObjectPresentFlipVtable,
     query_interface : Proc(IViewObjectPresentFlip*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IViewObjectPresentFlip*, UInt32),
     release : Proc(IViewObjectPresentFlip*, UInt32),
@@ -67651,7 +67639,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IViewObjectPresentFlip, lpVtbl : IViewObjectPresentFlipVtbl* do
+  record IViewObjectPresentFlip, lpVtbl : IViewObjectPresentFlipVtable* do
     GUID = LibC::GUID.new(0x30510847_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IViewObjectPresentFlip*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67675,7 +67663,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IViewObjectPresentFlip2Vtbl,
+  record IViewObjectPresentFlip2Vtable,
     query_interface : Proc(IViewObjectPresentFlip2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IViewObjectPresentFlip2*, UInt32),
     release : Proc(IViewObjectPresentFlip2*, UInt32),
@@ -67683,7 +67671,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IViewObjectPresentFlip2, lpVtbl : IViewObjectPresentFlip2Vtbl* do
+  record IViewObjectPresentFlip2, lpVtbl : IViewObjectPresentFlip2Vtable* do
     GUID = LibC::GUID.new(0x30510856_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IViewObjectPresentFlip2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67701,7 +67689,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IActiveXUIHandlerSite2Vtbl,
+  record IActiveXUIHandlerSite2Vtable,
     query_interface : Proc(IActiveXUIHandlerSite2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveXUIHandlerSite2*, UInt32),
     release : Proc(IActiveXUIHandlerSite2*, UInt32),
@@ -67710,7 +67698,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IActiveXUIHandlerSite2, lpVtbl : IActiveXUIHandlerSite2Vtbl* do
+  record IActiveXUIHandlerSite2, lpVtbl : IActiveXUIHandlerSite2Vtable* do
     GUID = LibC::GUID.new(0x7e3707b2_u32, 0xd087_u16, 0x4542_u16, StaticArray[0xac_u8, 0x1f_u8, 0xa0_u8, 0xd2_u8, 0xfc_u8, 0xd0_u8, 0x80_u8, 0xfd_u8])
     def query_interface(this : IActiveXUIHandlerSite2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67731,7 +67719,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ICaretPositionProviderVtbl,
+  record ICaretPositionProviderVtable,
     query_interface : Proc(ICaretPositionProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICaretPositionProvider*, UInt32),
     release : Proc(ICaretPositionProvider*, UInt32),
@@ -67739,7 +67727,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ICaretPositionProvider, lpVtbl : ICaretPositionProviderVtbl* do
+  record ICaretPositionProvider, lpVtbl : ICaretPositionProviderVtable* do
     GUID = LibC::GUID.new(0x58da43a2_u32, 0x108e_u16, 0x4d5b_u16, StaticArray[0x9f_u8, 0x75_u8, 0xe5_u8, 0xf7_u8, 0x4f_u8, 0x93_u8, 0xff_u8, 0xf5_u8])
     def query_interface(this : ICaretPositionProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67757,7 +67745,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ITridentTouchInputVtbl,
+  record ITridentTouchInputVtable,
     query_interface : Proc(ITridentTouchInput*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITridentTouchInput*, UInt32),
     release : Proc(ITridentTouchInput*, UInt32),
@@ -67765,7 +67753,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ITridentTouchInput, lpVtbl : ITridentTouchInputVtbl* do
+  record ITridentTouchInput, lpVtbl : ITridentTouchInputVtable* do
     GUID = LibC::GUID.new(0x30510850_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ITridentTouchInput*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67783,7 +67771,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ITridentTouchInputSiteVtbl,
+  record ITridentTouchInputSiteVtable,
     query_interface : Proc(ITridentTouchInputSite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITridentTouchInputSite*, UInt32),
     release : Proc(ITridentTouchInputSite*, UInt32),
@@ -67792,7 +67780,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ITridentTouchInputSite, lpVtbl : ITridentTouchInputSiteVtbl* do
+  record ITridentTouchInputSite, lpVtbl : ITridentTouchInputSiteVtable* do
     GUID = LibC::GUID.new(0x30510849_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ITridentTouchInputSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67813,7 +67801,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IMediaActivityNotifySiteVtbl,
+  record IMediaActivityNotifySiteVtable,
     query_interface : Proc(IMediaActivityNotifySite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMediaActivityNotifySite*, UInt32),
     release : Proc(IMediaActivityNotifySite*, UInt32),
@@ -67822,7 +67810,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IMediaActivityNotifySite, lpVtbl : IMediaActivityNotifySiteVtbl* do
+  record IMediaActivityNotifySite, lpVtbl : IMediaActivityNotifySiteVtable* do
     GUID = LibC::GUID.new(0x8165cfef_u32, 0x179d_u16, 0x46c2_u16, StaticArray[0xbc_u8, 0x71_u8, 0x3f_u8, 0xa7_u8, 0x26_u8, 0xdc_u8, 0x1f_u8, 0x8d_u8])
     def query_interface(this : IMediaActivityNotifySite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67843,7 +67831,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IAudioSessionSiteVtbl,
+  record IAudioSessionSiteVtable,
     query_interface : Proc(IAudioSessionSite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAudioSessionSite*, UInt32),
     release : Proc(IAudioSessionSite*, UInt32),
@@ -67853,7 +67841,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IAudioSessionSite, lpVtbl : IAudioSessionSiteVtbl* do
+  record IAudioSessionSite, lpVtbl : IAudioSessionSiteVtable* do
     GUID = LibC::GUID.new(0xd7d8b684_u32, 0xd02d_u16, 0x4517_u16, StaticArray[0xb6_u8, 0xb7_u8, 0x19_u8, 0xe3_u8, 0xdf_u8, 0xe2_u8, 0x9c_u8, 0x45_u8])
     def query_interface(this : IAudioSessionSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67877,7 +67865,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IPrintTaskRequestHandlerVtbl,
+  record IPrintTaskRequestHandlerVtable,
     query_interface : Proc(IPrintTaskRequestHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrintTaskRequestHandler*, UInt32),
     release : Proc(IPrintTaskRequestHandler*, UInt32),
@@ -67885,7 +67873,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IPrintTaskRequestHandler, lpVtbl : IPrintTaskRequestHandlerVtbl* do
+  record IPrintTaskRequestHandler, lpVtbl : IPrintTaskRequestHandlerVtable* do
     GUID = LibC::GUID.new(0x191cd340_u32, 0xcf36_u16, 0x44ff_u16, StaticArray[0xbd_u8, 0x53_u8, 0xd1_u8, 0xb7_u8, 0x1_u8, 0x79_u8, 0x9d_u8, 0x9b_u8])
     def query_interface(this : IPrintTaskRequestHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67903,7 +67891,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IPrintTaskRequestFactoryVtbl,
+  record IPrintTaskRequestFactoryVtable,
     query_interface : Proc(IPrintTaskRequestFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrintTaskRequestFactory*, UInt32),
     release : Proc(IPrintTaskRequestFactory*, UInt32),
@@ -67911,7 +67899,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IPrintTaskRequestFactory, lpVtbl : IPrintTaskRequestFactoryVtbl* do
+  record IPrintTaskRequestFactory, lpVtbl : IPrintTaskRequestFactoryVtable* do
     GUID = LibC::GUID.new(0xbb516745_u32, 0x8c34_u16, 0x4f8b_u16, StaticArray[0x96_u8, 0x5_u8, 0x68_u8, 0x4d_u8, 0xcb_u8, 0x14_u8, 0x4b_u8, 0xe5_u8])
     def query_interface(this : IPrintTaskRequestFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67929,7 +67917,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IScrollableContextMenuVtbl,
+  record IScrollableContextMenuVtable,
     query_interface : Proc(IScrollableContextMenu*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IScrollableContextMenu*, UInt32),
     release : Proc(IScrollableContextMenu*, UInt32),
@@ -67938,7 +67926,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IScrollableContextMenu, lpVtbl : IScrollableContextMenuVtbl* do
+  record IScrollableContextMenu, lpVtbl : IScrollableContextMenuVtable* do
     GUID = LibC::GUID.new(0x30510854_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IScrollableContextMenu*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67959,7 +67947,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IScrollableContextMenu2Vtbl,
+  record IScrollableContextMenu2Vtable,
     query_interface : Proc(IScrollableContextMenu2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IScrollableContextMenu2*, UInt32),
     release : Proc(IScrollableContextMenu2*, UInt32),
@@ -67970,7 +67958,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IScrollableContextMenu2, lpVtbl : IScrollableContextMenu2Vtbl* do
+  record IScrollableContextMenu2, lpVtbl : IScrollableContextMenu2Vtable* do
     GUID = LibC::GUID.new(0xf77e9056_u32, 0x8674_u16, 0x4936_u16, StaticArray[0x92_u8, 0x4c_u8, 0xe_u8, 0x4a_u8, 0x6_u8, 0xfa_u8, 0x63_u8, 0x4a_u8])
     def query_interface(this : IScrollableContextMenu2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -67997,7 +67985,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IActiveXUIHandlerSiteVtbl,
+  record IActiveXUIHandlerSiteVtable,
     query_interface : Proc(IActiveXUIHandlerSite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveXUIHandlerSite*, UInt32),
     release : Proc(IActiveXUIHandlerSite*, UInt32),
@@ -68006,7 +67994,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IActiveXUIHandlerSite, lpVtbl : IActiveXUIHandlerSiteVtbl* do
+  record IActiveXUIHandlerSite, lpVtbl : IActiveXUIHandlerSiteVtable* do
     GUID = LibC::GUID.new(0x30510853_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IActiveXUIHandlerSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68027,7 +68015,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IActiveXUIHandlerSite3Vtbl,
+  record IActiveXUIHandlerSite3Vtable,
     query_interface : Proc(IActiveXUIHandlerSite3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveXUIHandlerSite3*, UInt32),
     release : Proc(IActiveXUIHandlerSite3*, UInt32),
@@ -68035,7 +68023,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IActiveXUIHandlerSite3, lpVtbl : IActiveXUIHandlerSite3Vtbl* do
+  record IActiveXUIHandlerSite3, lpVtbl : IActiveXUIHandlerSite3Vtable* do
     GUID = LibC::GUID.new(0x7904009a_u32, 0x1238_u16, 0x47f4_u16, StaticArray[0x90_u8, 0x1c_u8, 0x87_u8, 0x13_u8, 0x75_u8, 0xc3_u8, 0x46_u8, 0x8_u8])
     def query_interface(this : IActiveXUIHandlerSite3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68053,7 +68041,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IEnumManagerFramesVtbl,
+  record IEnumManagerFramesVtable,
     query_interface : Proc(IEnumManagerFrames*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumManagerFrames*, UInt32),
     release : Proc(IEnumManagerFrames*, UInt32),
@@ -68065,7 +68053,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IEnumManagerFrames, lpVtbl : IEnumManagerFramesVtbl* do
+  record IEnumManagerFrames, lpVtbl : IEnumManagerFramesVtable* do
     GUID = LibC::GUID.new(0x3caa826a_u32, 0x9b1f_u16, 0x4a79_u16, StaticArray[0xbc_u8, 0x81_u8, 0xf0_u8, 0x43_u8, 0xd_u8, 0xed_u8, 0x16_u8, 0x48_u8])
     def query_interface(this : IEnumManagerFrames*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68095,7 +68083,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IInternetExplorerManagerVtbl,
+  record IInternetExplorerManagerVtable,
     query_interface : Proc(IInternetExplorerManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInternetExplorerManager*, UInt32),
     release : Proc(IInternetExplorerManager*, UInt32),
@@ -68103,7 +68091,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IInternetExplorerManager, lpVtbl : IInternetExplorerManagerVtbl* do
+  record IInternetExplorerManager, lpVtbl : IInternetExplorerManagerVtable* do
     GUID = LibC::GUID.new(0xacc84351_u32, 0x4ff_u16, 0x44f9_u16, StaticArray[0xb2_u8, 0x3f_u8, 0x65_u8, 0x5e_u8, 0xd1_u8, 0x68_u8, 0xc6_u8, 0xd5_u8])
     def query_interface(this : IInternetExplorerManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68121,7 +68109,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IInternetExplorerManager2Vtbl,
+  record IInternetExplorerManager2Vtable,
     query_interface : Proc(IInternetExplorerManager2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInternetExplorerManager2*, UInt32),
     release : Proc(IInternetExplorerManager2*, UInt32),
@@ -68129,7 +68117,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IInternetExplorerManager2, lpVtbl : IInternetExplorerManager2Vtbl* do
+  record IInternetExplorerManager2, lpVtbl : IInternetExplorerManager2Vtable* do
     GUID = LibC::GUID.new(0xdfbb5136_u32, 0x9259_u16, 0x4895_u16, StaticArray[0xb4_u8, 0xa7_u8, 0xc1_u8, 0x93_u8, 0x44_u8, 0x29_u8, 0x91_u8, 0x9a_u8])
     def query_interface(this : IInternetExplorerManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68147,7 +68135,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IIEWebDriverSiteVtbl,
+  record IIEWebDriverSiteVtable,
     query_interface : Proc(IIEWebDriverSite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIEWebDriverSite*, UInt32),
     release : Proc(IIEWebDriverSite*, UInt32),
@@ -68161,7 +68149,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IIEWebDriverSite, lpVtbl : IIEWebDriverSiteVtbl* do
+  record IIEWebDriverSite, lpVtbl : IIEWebDriverSiteVtable* do
     GUID = LibC::GUID.new(0xffb84444_u32, 0x453d_u16, 0x4fbc_u16, StaticArray[0x9f_u8, 0x9d_u8, 0x8d_u8, 0xb5_u8, 0xc4_u8, 0x71_u8, 0xec_u8, 0x75_u8])
     def query_interface(this : IIEWebDriverSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68197,7 +68185,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IIEWebDriverManagerVtbl,
+  record IIEWebDriverManagerVtable,
     query_interface : Proc(IIEWebDriverManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIEWebDriverManager*, UInt32),
     release : Proc(IIEWebDriverManager*, UInt32),
@@ -68209,7 +68197,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IIEWebDriverManager, lpVtbl : IIEWebDriverManagerVtbl* do
+  record IIEWebDriverManager, lpVtbl : IIEWebDriverManagerVtable* do
     GUID = LibC::GUID.new(0xbd1dc630_u32, 0x6590_u16, 0x4ca2_u16, StaticArray[0xa2_u8, 0x93_u8, 0x6b_u8, 0xc7_u8, 0x2b_u8, 0x24_u8, 0x38_u8, 0xd8_u8])
     def query_interface(this : IIEWebDriverManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68239,14 +68227,14 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IPeerFactoryVtbl,
+  record IPeerFactoryVtable,
     query_interface : Proc(IPeerFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPeerFactory*, UInt32),
     release : Proc(IPeerFactory*, UInt32)
 
 
   @[Extern]
-  record IPeerFactory, lpVtbl : IPeerFactoryVtbl* do
+  record IPeerFactory, lpVtbl : IPeerFactoryVtable* do
     GUID = LibC::GUID.new(0x6663f9d3_u32, 0xb482_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xc6_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xbf_u8, 0xc4_u8])
     def query_interface(this : IPeerFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68261,7 +68249,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHomePageVtbl,
+  record IHomePageVtable,
     query_interface : Proc(IHomePage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHomePage*, UInt32),
     release : Proc(IHomePage*, UInt32),
@@ -68275,7 +68263,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHomePage, lpVtbl : IHomePageVtbl* do
+  record IHomePage, lpVtbl : IHomePageVtable* do
     GUID = LibC::GUID.new(0x766bf2af_u32, 0xd650_u16, 0x11d1_u16, StaticArray[0x98_u8, 0x11_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x1d_u8, 0x2e_u8])
     def query_interface(this : IHomePage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68311,7 +68299,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IIntelliFormsVtbl,
+  record IIntelliFormsVtable,
     query_interface : Proc(IIntelliForms*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIntelliForms*, UInt32),
     release : Proc(IIntelliForms*, UInt32),
@@ -68324,7 +68312,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IIntelliForms, lpVtbl : IIntelliFormsVtbl* do
+  record IIntelliForms, lpVtbl : IIntelliFormsVtable* do
     GUID = LibC::GUID.new(0x9b9f68e6_u32, 0x1aaa_u16, 0x11d2_u16, StaticArray[0xbc_u8, 0xa5_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x29_u8, 0xdb_u8])
     def query_interface(this : IIntelliForms*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68357,7 +68345,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IwfoldersVtbl,
+  record IwfoldersVtable,
     query_interface : Proc(Iwfolders*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(Iwfolders*, UInt32),
     release : Proc(Iwfolders*, UInt32),
@@ -68371,7 +68359,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record Iwfolders, lpVtbl : IwfoldersVtbl* do
+  record Iwfolders, lpVtbl : IwfoldersVtable* do
     GUID = LibC::GUID.new(0xbae31f98_u32, 0x1b81_u16, 0x11d2_u16, StaticArray[0xa9_u8, 0x7a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xcb_u8, 0x2_u8])
     def query_interface(this : Iwfolders*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68407,7 +68395,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IAnchorClickVtbl,
+  record IAnchorClickVtable,
     query_interface : Proc(IAnchorClick*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAnchorClick*, UInt32),
     release : Proc(IAnchorClick*, UInt32),
@@ -68419,7 +68407,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IAnchorClick, lpVtbl : IAnchorClickVtbl* do
+  record IAnchorClick, lpVtbl : IAnchorClickVtable* do
     GUID = LibC::GUID.new(0x13d5413b_u32, 0x33b9_u16, 0x11d2_u16, StaticArray[0x95_u8, 0xa7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8e_u8, 0xcb_u8, 0x2_u8])
     def query_interface(this : IAnchorClick*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68449,7 +68437,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLUserDataOMVtbl,
+  record IHTMLUserDataOMVtable,
     query_interface : Proc(IHTMLUserDataOM*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLUserDataOM*, UInt32),
     release : Proc(IHTMLUserDataOM*, UInt32),
@@ -68468,7 +68456,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLUserDataOM, lpVtbl : IHTMLUserDataOMVtbl* do
+  record IHTMLUserDataOM, lpVtbl : IHTMLUserDataOMVtable* do
     GUID = LibC::GUID.new(0x3050f48f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLUserDataOM*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68519,7 +68507,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLPersistDataOMVtbl,
+  record IHTMLPersistDataOMVtable,
     query_interface : Proc(IHTMLPersistDataOM*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLPersistDataOM*, UInt32),
     release : Proc(IHTMLPersistDataOM*, UInt32),
@@ -68534,7 +68522,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLPersistDataOM, lpVtbl : IHTMLPersistDataOMVtbl* do
+  record IHTMLPersistDataOM, lpVtbl : IHTMLPersistDataOMVtable* do
     GUID = LibC::GUID.new(0x3050f4c0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLPersistDataOM*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68573,7 +68561,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLPersistDataVtbl,
+  record IHTMLPersistDataVtable,
     query_interface : Proc(IHTMLPersistData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLPersistData*, UInt32),
     release : Proc(IHTMLPersistData*, UInt32),
@@ -68583,7 +68571,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLPersistData, lpVtbl : IHTMLPersistDataVtbl* do
+  record IHTMLPersistData, lpVtbl : IHTMLPersistDataVtable* do
     GUID = LibC::GUID.new(0x3050f4c5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLPersistData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68607,7 +68595,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDownloadBehaviorVtbl,
+  record IDownloadBehaviorVtable,
     query_interface : Proc(IDownloadBehavior*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDownloadBehavior*, UInt32),
     release : Proc(IDownloadBehavior*, UInt32),
@@ -68619,7 +68607,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDownloadBehavior, lpVtbl : IDownloadBehaviorVtbl* do
+  record IDownloadBehavior, lpVtbl : IDownloadBehaviorVtable* do
     GUID = LibC::GUID.new(0x3050f5bd_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDownloadBehavior*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68649,7 +68637,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ILayoutRectVtbl,
+  record ILayoutRectVtable,
     query_interface : Proc(ILayoutRect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILayoutRect*, UInt32),
     release : Proc(ILayoutRect*, UInt32),
@@ -68671,7 +68659,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ILayoutRect, lpVtbl : ILayoutRectVtbl* do
+  record ILayoutRect, lpVtbl : ILayoutRectVtable* do
     GUID = LibC::GUID.new(0x3050f665_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ILayoutRect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68731,7 +68719,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDeviceRectVtbl,
+  record IDeviceRectVtable,
     query_interface : Proc(IDeviceRect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDeviceRect*, UInt32),
     release : Proc(IDeviceRect*, UInt32),
@@ -68742,7 +68730,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDeviceRect, lpVtbl : IDeviceRectVtbl* do
+  record IDeviceRect, lpVtbl : IDeviceRectVtable* do
     GUID = LibC::GUID.new(0x3050f6d5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDeviceRect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68769,7 +68757,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHeaderFooterVtbl,
+  record IHeaderFooterVtable,
     query_interface : Proc(IHeaderFooter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHeaderFooter*, UInt32),
     release : Proc(IHeaderFooter*, UInt32),
@@ -68802,7 +68790,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHeaderFooter, lpVtbl : IHeaderFooterVtbl* do
+  record IHeaderFooter, lpVtbl : IHeaderFooterVtable* do
     GUID = LibC::GUID.new(0x3050f6ce_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHeaderFooter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -68895,7 +68883,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHeaderFooter2Vtbl,
+  record IHeaderFooter2Vtable,
     query_interface : Proc(IHeaderFooter2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHeaderFooter2*, UInt32),
     release : Proc(IHeaderFooter2*, UInt32),
@@ -68930,7 +68918,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHeaderFooter2, lpVtbl : IHeaderFooter2Vtbl* do
+  record IHeaderFooter2, lpVtbl : IHeaderFooter2Vtable* do
     GUID = LibC::GUID.new(0x305104a5_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHeaderFooter2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69029,7 +69017,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHostDialogHelperVtbl,
+  record IHostDialogHelperVtable,
     query_interface : Proc(IHostDialogHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHostDialogHelper*, UInt32),
     release : Proc(IHostDialogHelper*, UInt32),
@@ -69037,7 +69025,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHostDialogHelper, lpVtbl : IHostDialogHelperVtbl* do
+  record IHostDialogHelper, lpVtbl : IHostDialogHelperVtable* do
     GUID = LibC::GUID.new(0x53dec138_u32, 0xa51e_u16, 0x11d2_u16, StaticArray[0x86_u8, 0x1e_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x5c_u8, 0x89_u8])
     def query_interface(this : IHostDialogHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69055,7 +69043,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDocHostUIHandlerVtbl,
+  record IDocHostUIHandlerVtable,
     query_interface : Proc(IDocHostUIHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDocHostUIHandler*, UInt32),
     release : Proc(IDocHostUIHandler*, UInt32),
@@ -69077,7 +69065,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDocHostUIHandler, lpVtbl : IDocHostUIHandlerVtbl* do
+  record IDocHostUIHandler, lpVtbl : IDocHostUIHandlerVtable* do
     GUID = LibC::GUID.new(0xbd3f23c0_u32, 0xd43e_u16, 0x11cf_u16, StaticArray[0x89_u8, 0x3b_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0x1a_u8])
     def query_interface(this : IDocHostUIHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69137,7 +69125,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDocHostUIHandler2Vtbl,
+  record IDocHostUIHandler2Vtable,
     query_interface : Proc(IDocHostUIHandler2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDocHostUIHandler2*, UInt32),
     release : Proc(IDocHostUIHandler2*, UInt32),
@@ -69160,7 +69148,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDocHostUIHandler2, lpVtbl : IDocHostUIHandler2Vtbl* do
+  record IDocHostUIHandler2, lpVtbl : IDocHostUIHandler2Vtable* do
     GUID = LibC::GUID.new(0x3050f6d0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDocHostUIHandler2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69223,7 +69211,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ICustomDocVtbl,
+  record ICustomDocVtable,
     query_interface : Proc(ICustomDoc*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICustomDoc*, UInt32),
     release : Proc(ICustomDoc*, UInt32),
@@ -69231,7 +69219,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ICustomDoc, lpVtbl : ICustomDocVtbl* do
+  record ICustomDoc, lpVtbl : ICustomDocVtable* do
     GUID = LibC::GUID.new(0x3050f3f0_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ICustomDoc*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69249,7 +69237,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDocHostShowUIVtbl,
+  record IDocHostShowUIVtable,
     query_interface : Proc(IDocHostShowUI*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDocHostShowUI*, UInt32),
     release : Proc(IDocHostShowUI*, UInt32),
@@ -69258,7 +69246,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDocHostShowUI, lpVtbl : IDocHostShowUIVtbl* do
+  record IDocHostShowUI, lpVtbl : IDocHostShowUIVtable* do
     GUID = LibC::GUID.new(0xc4d244b0_u32, 0xd43e_u16, 0x11cf_u16, StaticArray[0x89_u8, 0x3b_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0x1a_u8])
     def query_interface(this : IDocHostShowUI*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69279,7 +69267,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IClassFactoryExVtbl,
+  record IClassFactoryExVtable,
     query_interface : Proc(IClassFactoryEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IClassFactoryEx*, UInt32),
     release : Proc(IClassFactoryEx*, UInt32),
@@ -69289,7 +69277,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IClassFactoryEx, lpVtbl : IClassFactoryExVtbl* do
+  record IClassFactoryEx, lpVtbl : IClassFactoryExVtable* do
     GUID = LibC::GUID.new(0x342d1ea0_u32, 0xae25_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xc5_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xc3_u8, 0xfb_u8, 0xfc_u8])
     def query_interface(this : IClassFactoryEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69313,7 +69301,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IHTMLOMWindowServicesVtbl,
+  record IHTMLOMWindowServicesVtable,
     query_interface : Proc(IHTMLOMWindowServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHTMLOMWindowServices*, UInt32),
     release : Proc(IHTMLOMWindowServices*, UInt32),
@@ -69324,7 +69312,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IHTMLOMWindowServices, lpVtbl : IHTMLOMWindowServicesVtbl* do
+  record IHTMLOMWindowServices, lpVtbl : IHTMLOMWindowServicesVtable* do
     GUID = LibC::GUID.new(0x3050f5fc_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IHTMLOMWindowServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69351,7 +69339,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDiagnosticsScriptEngineSiteVtbl,
+  record IDiagnosticsScriptEngineSiteVtable,
     query_interface : Proc(IDiagnosticsScriptEngineSite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDiagnosticsScriptEngineSite*, UInt32),
     release : Proc(IDiagnosticsScriptEngineSite*, UInt32),
@@ -69360,7 +69348,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDiagnosticsScriptEngineSite, lpVtbl : IDiagnosticsScriptEngineSiteVtbl* do
+  record IDiagnosticsScriptEngineSite, lpVtbl : IDiagnosticsScriptEngineSiteVtable* do
     GUID = LibC::GUID.new(0x30510858_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDiagnosticsScriptEngineSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69381,7 +69369,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDiagnosticsScriptEngineVtbl,
+  record IDiagnosticsScriptEngineVtable,
     query_interface : Proc(IDiagnosticsScriptEngine*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDiagnosticsScriptEngine*, UInt32),
     release : Proc(IDiagnosticsScriptEngine*, UInt32),
@@ -69391,7 +69379,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDiagnosticsScriptEngine, lpVtbl : IDiagnosticsScriptEngineVtbl* do
+  record IDiagnosticsScriptEngine, lpVtbl : IDiagnosticsScriptEngineVtable* do
     GUID = LibC::GUID.new(0x30510859_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDiagnosticsScriptEngine*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69415,7 +69403,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDiagnosticsScriptEngineProviderVtbl,
+  record IDiagnosticsScriptEngineProviderVtable,
     query_interface : Proc(IDiagnosticsScriptEngineProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDiagnosticsScriptEngineProvider*, UInt32),
     release : Proc(IDiagnosticsScriptEngineProvider*, UInt32),
@@ -69423,7 +69411,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDiagnosticsScriptEngineProvider, lpVtbl : IDiagnosticsScriptEngineProviderVtbl* do
+  record IDiagnosticsScriptEngineProvider, lpVtbl : IDiagnosticsScriptEngineProviderVtable* do
     GUID = LibC::GUID.new(0x3051085a_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : IDiagnosticsScriptEngineProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69441,7 +69429,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IOpenServiceActivityInputVtbl,
+  record IOpenServiceActivityInputVtable,
     query_interface : Proc(IOpenServiceActivityInput*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpenServiceActivityInput*, UInt32),
     release : Proc(IOpenServiceActivityInput*, UInt32),
@@ -69451,7 +69439,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IOpenServiceActivityInput, lpVtbl : IOpenServiceActivityInputVtbl* do
+  record IOpenServiceActivityInput, lpVtbl : IOpenServiceActivityInputVtable* do
     GUID = LibC::GUID.new(0x75cb4db9_u32, 0x6da0_u16, 0x4da3_u16, StaticArray[0x83_u8, 0xce_u8, 0x42_u8, 0x2b_u8, 0x6a_u8, 0x43_u8, 0x33_u8, 0x46_u8])
     def query_interface(this : IOpenServiceActivityInput*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69475,7 +69463,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IOpenServiceActivityOutputContextVtbl,
+  record IOpenServiceActivityOutputContextVtable,
     query_interface : Proc(IOpenServiceActivityOutputContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpenServiceActivityOutputContext*, UInt32),
     release : Proc(IOpenServiceActivityOutputContext*, UInt32),
@@ -69484,7 +69472,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IOpenServiceActivityOutputContext, lpVtbl : IOpenServiceActivityOutputContextVtbl* do
+  record IOpenServiceActivityOutputContext, lpVtbl : IOpenServiceActivityOutputContextVtable* do
     GUID = LibC::GUID.new(0xe289deab_u32, 0xf709_u16, 0x49a9_u16, StaticArray[0xb9_u8, 0x9e_u8, 0x28_u8, 0x23_u8, 0x64_u8, 0x7_u8, 0x45_u8, 0x71_u8])
     def query_interface(this : IOpenServiceActivityOutputContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69505,7 +69493,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IOpenServiceVtbl,
+  record IOpenServiceVtable,
     query_interface : Proc(IOpenService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpenService*, UInt32),
     release : Proc(IOpenService*, UInt32),
@@ -69515,7 +69503,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IOpenService, lpVtbl : IOpenServiceVtbl* do
+  record IOpenService, lpVtbl : IOpenServiceVtable* do
     GUID = LibC::GUID.new(0xc2952ed1_u32, 0x6a89_u16, 0x4606_u16, StaticArray[0x92_u8, 0x5f_u8, 0x1e_u8, 0xd8_u8, 0xb4_u8, 0xbe_u8, 0x6_u8, 0x30_u8])
     def query_interface(this : IOpenService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69539,7 +69527,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IOpenServiceManagerVtbl,
+  record IOpenServiceManagerVtable,
     query_interface : Proc(IOpenServiceManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpenServiceManager*, UInt32),
     release : Proc(IOpenServiceManager*, UInt32),
@@ -69549,7 +69537,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IOpenServiceManager, lpVtbl : IOpenServiceManagerVtbl* do
+  record IOpenServiceManager, lpVtbl : IOpenServiceManagerVtable* do
     GUID = LibC::GUID.new(0x5664125f_u32, 0x4e10_u16, 0x4e90_u16, StaticArray[0x98_u8, 0xe4_u8, 0xe4_u8, 0x51_u8, 0x3d_u8, 0x95_u8, 0x5a_u8, 0x14_u8])
     def query_interface(this : IOpenServiceManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69573,7 +69561,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IOpenServiceActivityVtbl,
+  record IOpenServiceActivityVtable,
     query_interface : Proc(IOpenServiceActivity*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpenServiceActivity*, UInt32),
     release : Proc(IOpenServiceActivity*, UInt32),
@@ -69601,7 +69589,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IOpenServiceActivity, lpVtbl : IOpenServiceActivityVtbl* do
+  record IOpenServiceActivity, lpVtbl : IOpenServiceActivityVtable* do
     GUID = LibC::GUID.new(0x13645c88_u32, 0x221a_u16, 0x4905_u16, StaticArray[0x8e_u8, 0xd1_u8, 0x4f_u8, 0x51_u8, 0x12_u8, 0xcf_u8, 0xc1_u8, 0x8_u8])
     def query_interface(this : IOpenServiceActivity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69679,7 +69667,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IEnumOpenServiceActivityVtbl,
+  record IEnumOpenServiceActivityVtable,
     query_interface : Proc(IEnumOpenServiceActivity*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumOpenServiceActivity*, UInt32),
     release : Proc(IEnumOpenServiceActivity*, UInt32),
@@ -69690,7 +69678,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IEnumOpenServiceActivity, lpVtbl : IEnumOpenServiceActivityVtbl* do
+  record IEnumOpenServiceActivity, lpVtbl : IEnumOpenServiceActivityVtable* do
     GUID = LibC::GUID.new(0xa436d7d2_u32, 0x17c3_u16, 0x4ef4_u16, StaticArray[0xa1_u8, 0xe8_u8, 0x5c_u8, 0x86_u8, 0xfa_u8, 0xff_u8, 0x26_u8, 0xc0_u8])
     def query_interface(this : IEnumOpenServiceActivity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69717,7 +69705,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IOpenServiceActivityCategoryVtbl,
+  record IOpenServiceActivityCategoryVtable,
     query_interface : Proc(IOpenServiceActivityCategory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpenServiceActivityCategory*, UInt32),
     release : Proc(IOpenServiceActivityCategory*, UInt32),
@@ -69729,7 +69717,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IOpenServiceActivityCategory, lpVtbl : IOpenServiceActivityCategoryVtbl* do
+  record IOpenServiceActivityCategory, lpVtbl : IOpenServiceActivityCategoryVtable* do
     GUID = LibC::GUID.new(0x850af9d6_u32, 0x7309_u16, 0x40b5_u16, StaticArray[0xbd_u8, 0xb8_u8, 0x78_u8, 0x6c_u8, 0x10_u8, 0x6b_u8, 0x21_u8, 0x53_u8])
     def query_interface(this : IOpenServiceActivityCategory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69759,7 +69747,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IEnumOpenServiceActivityCategoryVtbl,
+  record IEnumOpenServiceActivityCategoryVtable,
     query_interface : Proc(IEnumOpenServiceActivityCategory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumOpenServiceActivityCategory*, UInt32),
     release : Proc(IEnumOpenServiceActivityCategory*, UInt32),
@@ -69770,7 +69758,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IEnumOpenServiceActivityCategory, lpVtbl : IEnumOpenServiceActivityCategoryVtbl* do
+  record IEnumOpenServiceActivityCategory, lpVtbl : IEnumOpenServiceActivityCategoryVtable* do
     GUID = LibC::GUID.new(0x33627a56_u32, 0x8c9a_u16, 0x4430_u16, StaticArray[0x8f_u8, 0xd1_u8, 0xb5_u8, 0xf5_u8, 0xc7_u8, 0x71_u8, 0xaf_u8, 0xb6_u8])
     def query_interface(this : IEnumOpenServiceActivityCategory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69797,7 +69785,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IOpenServiceActivityManagerVtbl,
+  record IOpenServiceActivityManagerVtable,
     query_interface : Proc(IOpenServiceActivityManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpenServiceActivityManager*, UInt32),
     release : Proc(IOpenServiceActivityManager*, UInt32),
@@ -69808,7 +69796,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IOpenServiceActivityManager, lpVtbl : IOpenServiceActivityManagerVtbl* do
+  record IOpenServiceActivityManager, lpVtbl : IOpenServiceActivityManagerVtable* do
     GUID = LibC::GUID.new(0x8a2d0a9d_u32, 0xe920_u16, 0x4bdc_u16, StaticArray[0xa2_u8, 0x91_u8, 0xd3_u8, 0xf_u8, 0x65_u8, 0xb_u8, 0xc4_u8, 0xf1_u8])
     def query_interface(this : IOpenServiceActivityManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69835,7 +69823,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IPersistHistoryVtbl,
+  record IPersistHistoryVtable,
     query_interface : Proc(IPersistHistory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPersistHistory*, UInt32),
     release : Proc(IPersistHistory*, UInt32),
@@ -69847,7 +69835,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IPersistHistory, lpVtbl : IPersistHistoryVtbl* do
+  record IPersistHistory, lpVtbl : IPersistHistoryVtable* do
     GUID = LibC::GUID.new(0x91a565c1_u32, 0xe38f_u16, 0x11d0_u16, StaticArray[0x94_u8, 0xbf_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x5c_u8, 0xbf_u8])
     def query_interface(this : IPersistHistory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69877,7 +69865,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IEnumSTATURLVtbl,
+  record IEnumSTATURLVtable,
     query_interface : Proc(IEnumSTATURL*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumSTATURL*, UInt32),
     release : Proc(IEnumSTATURL*, UInt32),
@@ -69889,7 +69877,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IEnumSTATURL, lpVtbl : IEnumSTATURLVtbl* do
+  record IEnumSTATURL, lpVtbl : IEnumSTATURLVtable* do
     GUID = LibC::GUID.new(0x3c374a42_u32, 0xbae4_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0x7d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x69_u8, 0x46_u8, 0xee_u8])
     def query_interface(this : IEnumSTATURL*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69919,7 +69907,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IUrlHistoryStgVtbl,
+  record IUrlHistoryStgVtable,
     query_interface : Proc(IUrlHistoryStg*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUrlHistoryStg*, UInt32),
     release : Proc(IUrlHistoryStg*, UInt32),
@@ -69931,7 +69919,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IUrlHistoryStg, lpVtbl : IUrlHistoryStgVtbl* do
+  record IUrlHistoryStg, lpVtbl : IUrlHistoryStgVtable* do
     GUID = LibC::GUID.new(0x3c374a41_u32, 0xbae4_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0x7d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x69_u8, 0x46_u8, 0xee_u8])
     def query_interface(this : IUrlHistoryStg*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -69961,7 +69949,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IUrlHistoryStg2Vtbl,
+  record IUrlHistoryStg2Vtable,
     query_interface : Proc(IUrlHistoryStg2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUrlHistoryStg2*, UInt32),
     release : Proc(IUrlHistoryStg2*, UInt32),
@@ -69975,7 +69963,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IUrlHistoryStg2, lpVtbl : IUrlHistoryStg2Vtbl* do
+  record IUrlHistoryStg2, lpVtbl : IUrlHistoryStg2Vtable* do
     GUID = LibC::GUID.new(0xafa0dc11_u32, 0xc313_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x1a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd5_u8, 0xae_u8, 0x38_u8])
     def query_interface(this : IUrlHistoryStg2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -70011,7 +69999,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IUrlHistoryNotifyVtbl,
+  record IUrlHistoryNotifyVtable,
     query_interface : Proc(IUrlHistoryNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUrlHistoryNotify*, UInt32),
     release : Proc(IUrlHistoryNotify*, UInt32),
@@ -70020,7 +70008,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IUrlHistoryNotify, lpVtbl : IUrlHistoryNotifyVtbl* do
+  record IUrlHistoryNotify, lpVtbl : IUrlHistoryNotifyVtable* do
     GUID = LibC::GUID.new(0xbc40bec1_u32, 0xc493_u16, 0x11d0_u16, StaticArray[0x83_u8, 0x1b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd5_u8, 0xae_u8, 0x38_u8])
     def query_interface(this : IUrlHistoryNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -70041,7 +70029,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IWebBrowserEventsServiceVtbl,
+  record IWebBrowserEventsServiceVtable,
     query_interface : Proc(IWebBrowserEventsService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebBrowserEventsService*, UInt32),
     release : Proc(IWebBrowserEventsService*, UInt32),
@@ -70053,7 +70041,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IWebBrowserEventsService, lpVtbl : IWebBrowserEventsServiceVtbl* do
+  record IWebBrowserEventsService, lpVtbl : IWebBrowserEventsServiceVtable* do
     GUID = LibC::GUID.new(0x54a8f188_u32, 0x9ebd_u16, 0x4795_u16, StaticArray[0xad_u8, 0x16_u8, 0x9b_u8, 0x49_u8, 0x45_u8, 0x11_u8, 0x96_u8, 0x36_u8])
     def query_interface(this : IWebBrowserEventsService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -70083,7 +70071,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IWebBrowserEventsUrlServiceVtbl,
+  record IWebBrowserEventsUrlServiceVtable,
     query_interface : Proc(IWebBrowserEventsUrlService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebBrowserEventsUrlService*, UInt32),
     release : Proc(IWebBrowserEventsUrlService*, UInt32),
@@ -70091,7 +70079,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IWebBrowserEventsUrlService, lpVtbl : IWebBrowserEventsUrlServiceVtbl* do
+  record IWebBrowserEventsUrlService, lpVtbl : IWebBrowserEventsUrlServiceVtable* do
     GUID = LibC::GUID.new(0x87cc5d04_u32, 0xeafa_u16, 0x4833_u16, StaticArray[0x98_u8, 0x20_u8, 0x8f_u8, 0x98_u8, 0x65_u8, 0x30_u8, 0xcc_u8, 0x0_u8])
     def query_interface(this : IWebBrowserEventsUrlService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -70109,7 +70097,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ITimerServiceVtbl,
+  record ITimerServiceVtable,
     query_interface : Proc(ITimerService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITimerService*, UInt32),
     release : Proc(ITimerService*, UInt32),
@@ -70119,7 +70107,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ITimerService, lpVtbl : ITimerServiceVtbl* do
+  record ITimerService, lpVtbl : ITimerServiceVtable* do
     GUID = LibC::GUID.new(0x3050f35f_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ITimerService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -70143,7 +70131,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ITimerVtbl,
+  record ITimerVtable,
     query_interface : Proc(ITimer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITimer*, UInt32),
     release : Proc(ITimer*, UInt32),
@@ -70154,7 +70142,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ITimer, lpVtbl : ITimerVtbl* do
+  record ITimer, lpVtbl : ITimerVtable* do
     GUID = LibC::GUID.new(0x3050f360_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ITimer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -70181,7 +70169,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ITimerExVtbl,
+  record ITimerExVtable,
     query_interface : Proc(ITimerEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITimerEx*, UInt32),
     release : Proc(ITimerEx*, UInt32),
@@ -70193,7 +70181,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ITimerEx, lpVtbl : ITimerExVtbl* do
+  record ITimerEx, lpVtbl : ITimerExVtable* do
     GUID = LibC::GUID.new(0x30510414_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ITimerEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -70223,7 +70211,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ITimerSinkVtbl,
+  record ITimerSinkVtable,
     query_interface : Proc(ITimerSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITimerSink*, UInt32),
     release : Proc(ITimerSink*, UInt32),
@@ -70231,7 +70219,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ITimerSink, lpVtbl : ITimerSinkVtbl* do
+  record ITimerSink, lpVtbl : ITimerSinkVtable* do
     GUID = LibC::GUID.new(0x3050f361_u32, 0x98b5_u16, 0x11cf_u16, StaticArray[0xbb_u8, 0x82_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xbd_u8, 0xce_u8, 0xb_u8])
     def query_interface(this : ITimerSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -70249,7 +70237,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IMapMIMEToCLSIDVtbl,
+  record IMapMIMEToCLSIDVtable,
     query_interface : Proc(IMapMIMEToCLSID*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMapMIMEToCLSID*, UInt32),
     release : Proc(IMapMIMEToCLSID*, UInt32),
@@ -70259,7 +70247,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IMapMIMEToCLSID, lpVtbl : IMapMIMEToCLSIDVtbl* do
+  record IMapMIMEToCLSID, lpVtbl : IMapMIMEToCLSIDVtable* do
     GUID = LibC::GUID.new(0xd9e89500_u32, 0x30fa_u16, 0x11d0_u16, StaticArray[0xb7_u8, 0x24_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6c_u8, 0x1a_u8, 0x1_u8])
     def query_interface(this : IMapMIMEToCLSID*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -70283,7 +70271,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IImageDecodeFilterVtbl,
+  record IImageDecodeFilterVtable,
     query_interface : Proc(IImageDecodeFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IImageDecodeFilter*, UInt32),
     release : Proc(IImageDecodeFilter*, UInt32),
@@ -70293,7 +70281,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IImageDecodeFilter, lpVtbl : IImageDecodeFilterVtbl* do
+  record IImageDecodeFilter, lpVtbl : IImageDecodeFilterVtable* do
     GUID = LibC::GUID.new(0xa3ccedf3_u32, 0x2de2_u16, 0x11d0_u16, StaticArray[0x86_u8, 0xf4_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x13_u8, 0xf7_u8, 0x50_u8])
     def query_interface(this : IImageDecodeFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -70317,7 +70305,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IImageDecodeEventSinkVtbl,
+  record IImageDecodeEventSinkVtable,
     query_interface : Proc(IImageDecodeEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IImageDecodeEventSink*, UInt32),
     release : Proc(IImageDecodeEventSink*, UInt32),
@@ -70330,7 +70318,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IImageDecodeEventSink, lpVtbl : IImageDecodeEventSinkVtbl* do
+  record IImageDecodeEventSink, lpVtbl : IImageDecodeEventSinkVtable* do
     GUID = LibC::GUID.new(0xbaa342a0_u32, 0x2ded_u16, 0x11d0_u16, StaticArray[0x86_u8, 0xf4_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x13_u8, 0xf7_u8, 0x50_u8])
     def query_interface(this : IImageDecodeEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -70363,7 +70351,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IImageDecodeEventSink2Vtbl,
+  record IImageDecodeEventSink2Vtable,
     query_interface : Proc(IImageDecodeEventSink2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IImageDecodeEventSink2*, UInt32),
     release : Proc(IImageDecodeEventSink2*, UInt32),
@@ -70377,7 +70365,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IImageDecodeEventSink2, lpVtbl : IImageDecodeEventSink2Vtbl* do
+  record IImageDecodeEventSink2, lpVtbl : IImageDecodeEventSink2Vtable* do
     GUID = LibC::GUID.new(0x8ebd8a57_u32, 0x8a96_u16, 0x48c9_u16, StaticArray[0x84_u8, 0xa6_u8, 0x96_u8, 0x2e_u8, 0x2d_u8, 0xb9_u8, 0xc9_u8, 0x31_u8])
     def query_interface(this : IImageDecodeEventSink2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -70413,7 +70401,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record ISniffStreamVtbl,
+  record ISniffStreamVtable,
     query_interface : Proc(ISniffStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISniffStream*, UInt32),
     release : Proc(ISniffStream*, UInt32),
@@ -70422,7 +70410,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record ISniffStream, lpVtbl : ISniffStreamVtbl* do
+  record ISniffStream, lpVtbl : ISniffStreamVtable* do
     GUID = LibC::GUID.new(0x4ef17940_u32, 0x30e0_u16, 0x11d0_u16, StaticArray[0xb7_u8, 0x24_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6c_u8, 0x1a_u8, 0x1_u8])
     def query_interface(this : ISniffStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -70443,7 +70431,7 @@ module Win32cr::Web::MsHtml
   end
 
   @[Extern]
-  record IDithererImplVtbl,
+  record IDithererImplVtable,
     query_interface : Proc(IDithererImpl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDithererImpl*, UInt32),
     release : Proc(IDithererImpl*, UInt32),
@@ -70452,7 +70440,7 @@ module Win32cr::Web::MsHtml
 
 
   @[Extern]
-  record IDithererImpl, lpVtbl : IDithererImplVtbl* do
+  record IDithererImpl, lpVtbl : IDithererImplVtable* do
     GUID = LibC::GUID.new(0x7c48e840_u32, 0x3910_u16, 0x11d0_u16, StaticArray[0x86_u8, 0xfc_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x13_u8, 0xf7_u8, 0x50_u8])
     def query_interface(this : IDithererImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -70473,124 +70461,183 @@ module Win32cr::Web::MsHtml
   end
 
   def ratingEnable(hwndParent : Win32cr::Foundation::HWND, pszUsername : Win32cr::Foundation::PSTR, fEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingEnable(hwndParent, pszUsername, fEnable)
+    {% end %}
   end
 
   def ratingEnableW(hwndParent : Win32cr::Foundation::HWND, pszUsername : Win32cr::Foundation::PWSTR, fEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingEnableW(hwndParent, pszUsername, fEnable)
+    {% end %}
   end
 
   def ratingCheckUserAccess(pszUsername : Win32cr::Foundation::PSTR, pszURL : Win32cr::Foundation::PSTR, pszRatingInfo : Win32cr::Foundation::PSTR, pData : UInt8*, cbData : UInt32, ppRatingDetails : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingCheckUserAccess(pszUsername, pszURL, pszRatingInfo, pData, cbData, ppRatingDetails)
+    {% end %}
   end
 
   def ratingCheckUserAccessW(pszUsername : Win32cr::Foundation::PWSTR, pszURL : Win32cr::Foundation::PWSTR, pszRatingInfo : Win32cr::Foundation::PWSTR, pData : UInt8*, cbData : UInt32, ppRatingDetails : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingCheckUserAccessW(pszUsername, pszURL, pszRatingInfo, pData, cbData, ppRatingDetails)
+    {% end %}
   end
 
   def ratingAccessDeniedDialog(hDlg : Win32cr::Foundation::HWND, pszUsername : Win32cr::Foundation::PSTR, pszContentDescription : Win32cr::Foundation::PSTR, pRatingDetails : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingAccessDeniedDialog(hDlg, pszUsername, pszContentDescription, pRatingDetails)
+    {% end %}
   end
 
   def ratingAccessDeniedDialogW(hDlg : Win32cr::Foundation::HWND, pszUsername : Win32cr::Foundation::PWSTR, pszContentDescription : Win32cr::Foundation::PWSTR, pRatingDetails : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingAccessDeniedDialogW(hDlg, pszUsername, pszContentDescription, pRatingDetails)
+    {% end %}
   end
 
   def ratingAccessDeniedDialog2(hDlg : Win32cr::Foundation::HWND, pszUsername : Win32cr::Foundation::PSTR, pRatingDetails : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingAccessDeniedDialog2(hDlg, pszUsername, pRatingDetails)
+    {% end %}
   end
 
   def ratingAccessDeniedDialog2W(hDlg : Win32cr::Foundation::HWND, pszUsername : Win32cr::Foundation::PWSTR, pRatingDetails : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingAccessDeniedDialog2W(hDlg, pszUsername, pRatingDetails)
+    {% end %}
   end
 
   def ratingFreeDetails(pRatingDetails : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingFreeDetails(pRatingDetails)
+    {% end %}
   end
 
   def ratingObtainCancel(hRatingObtainQuery : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingObtainCancel(hRatingObtainQuery)
+    {% end %}
   end
 
   def ratingObtainQuery(pszTargetUrl : Win32cr::Foundation::PSTR, dwUserData : UInt32, fCallback : LibC::IntPtrT, phRatingObtainQuery : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingObtainQuery(pszTargetUrl, dwUserData, fCallback, phRatingObtainQuery)
+    {% end %}
   end
 
   def ratingObtainQueryW(pszTargetUrl : Win32cr::Foundation::PWSTR, dwUserData : UInt32, fCallback : LibC::IntPtrT, phRatingObtainQuery : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingObtainQueryW(pszTargetUrl, dwUserData, fCallback, phRatingObtainQuery)
+    {% end %}
   end
 
   def ratingSetupUI(hDlg : Win32cr::Foundation::HWND, pszUsername : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingSetupUI(hDlg, pszUsername)
+    {% end %}
   end
 
   def ratingSetupUIW(hDlg : Win32cr::Foundation::HWND, pszUsername : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingSetupUIW(hDlg, pszUsername)
+    {% end %}
   end
 
   def ratingAddToApprovedSites(hDlg : Win32cr::Foundation::HWND, cbPasswordBlob : UInt32, pbPasswordBlob : UInt8*, lpszUrl : Win32cr::Foundation::PWSTR, fAlwaysNever : Win32cr::Foundation::BOOL, fSitePage : Win32cr::Foundation::BOOL, fApprovedSitesEnforced : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingAddToApprovedSites(hDlg, cbPasswordBlob, pbPasswordBlob, lpszUrl, fAlwaysNever, fSitePage, fApprovedSitesEnforced)
+    {% end %}
   end
 
   def ratingClickedOnPRFInternal(hWndOwner : Win32cr::Foundation::HWND, param1 : Win32cr::Foundation::HINSTANCE, lpszFileName : Win32cr::Foundation::PSTR, nShow : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingClickedOnPRFInternal(hWndOwner, param1, lpszFileName, nShow)
+    {% end %}
   end
 
   def ratingClickedOnRATInternal(hWndOwner : Win32cr::Foundation::HWND, param1 : Win32cr::Foundation::HINSTANCE, lpszFileName : Win32cr::Foundation::PSTR, nShow : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingClickedOnRATInternal(hWndOwner, param1, lpszFileName, nShow)
+    {% end %}
   end
 
   def ratingEnabledQuery : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingEnabledQuery
+    {% end %}
   end
 
   def ratingInit : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RatingInit
+    {% end %}
   end
 
   def createMIMEMap(ppMap : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateMIMEMap(ppMap)
+    {% end %}
   end
 
   def decodeImage(pStream : Void*, pMap : Void*, pEventSink : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DecodeImage(pStream, pMap, pEventSink)
+    {% end %}
   end
 
   def sniffStream(pInStream : Void*, pnFormat : UInt32*, ppOutStream : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SniffStream(pInStream, pnFormat, ppOutStream)
+    {% end %}
   end
 
   def getMaxMIMEIDBytes(pnMaxBytes : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetMaxMIMEIDBytes(pnMaxBytes)
+    {% end %}
   end
 
   def identifyMIMEType(pbBytes : UInt8*, nBytes : UInt32, pnFormat : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.IdentifyMIMEType(pbBytes, nBytes, pnFormat)
+    {% end %}
   end
 
   def computeInvCMAP(pRGBColors : Win32cr::Graphics::Gdi::RGBQUAD*, nColors : UInt32, pInvTable : UInt8*, cbTable : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ComputeInvCMAP(pRGBColors, nColors, pInvTable, cbTable)
+    {% end %}
   end
 
   def ditherTo8(pDestBits : UInt8*, nDestPitch : Int32, pSrcBits : UInt8*, nSrcPitch : Int32, bfidSrc : LibC::GUID*, prgbDestColors : Win32cr::Graphics::Gdi::RGBQUAD*, prgbSrcColors : Win32cr::Graphics::Gdi::RGBQUAD*, pbDestInvMap : UInt8*, x : Int32, y : Int32, cx : Int32, cy : Int32, lDestTrans : Int32, lSrcTrans : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DitherTo8(pDestBits, nDestPitch, pSrcBits, nSrcPitch, bfidSrc, prgbDestColors, prgbSrcColors, pbDestInvMap, x, y, cx, cy, lDestTrans, lSrcTrans)
+    {% end %}
   end
 
   def createDDrawSurfaceOnDIB(hbmDib : Win32cr::Graphics::Gdi::HBITMAP, ppSurface : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateDDrawSurfaceOnDIB(hbmDib, ppSurface)
+    {% end %}
   end
 
   def decodeImageEx(pStream : Void*, pMap : Void*, pEventSink : Void*, pszMIMETypeParam : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DecodeImageEx(pStream, pMap, pEventSink, pszMIMETypeParam)
+    {% end %}
   end
 
   def doPrivacyDlg(hwndOwner : Win32cr::Foundation::HWND, pszUrl : Win32cr::Foundation::PWSTR, pPrivacyEnum : Void*, fReportAllSites : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DoPrivacyDlg(hwndOwner, pszUrl, pPrivacyEnum, fReportAllSites)
+    {% end %}
   end
 
   @[Link("msrating")]
   @[Link("imgutil")]
   @[Link("shdocvw")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun RatingEnable(hwndParent : Win32cr::Foundation::HWND, pszUsername : Win32cr::Foundation::PSTR, fEnable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
@@ -70680,4 +70727,5 @@ module Win32cr::Web::MsHtml
     fun DoPrivacyDlg(hwndOwner : Win32cr::Foundation::HWND, pszUrl : Win32cr::Foundation::PWSTR, pPrivacyEnum : Void*, fReportAllSites : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

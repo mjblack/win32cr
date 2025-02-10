@@ -123,7 +123,7 @@ module Win32cr::Storage::DataDeduplication
   end
 
   @[Extern]
-  record IDedupReadFileCallbackVtbl,
+  record IDedupReadFileCallbackVtable,
     query_interface : Proc(IDedupReadFileCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDedupReadFileCallback*, UInt32),
     release : Proc(IDedupReadFileCallback*, UInt32),
@@ -133,7 +133,7 @@ module Win32cr::Storage::DataDeduplication
 
 
   @[Extern]
-  record IDedupReadFileCallback, lpVtbl : IDedupReadFileCallbackVtbl* do
+  record IDedupReadFileCallback, lpVtbl : IDedupReadFileCallbackVtable* do
     GUID = LibC::GUID.new(0x7bacc67a_u32, 0x2f1d_u16, 0x42d0_u16, StaticArray[0x89_u8, 0x7e_u8, 0x6f_u8, 0xf6_u8, 0x2d_u8, 0xd5_u8, 0x33_u8, 0xbb_u8])
     def query_interface(this : IDedupReadFileCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -157,7 +157,7 @@ module Win32cr::Storage::DataDeduplication
   end
 
   @[Extern]
-  record IDedupBackupSupportVtbl,
+  record IDedupBackupSupportVtable,
     query_interface : Proc(IDedupBackupSupport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDedupBackupSupport*, UInt32),
     release : Proc(IDedupBackupSupport*, UInt32),
@@ -165,7 +165,7 @@ module Win32cr::Storage::DataDeduplication
 
 
   @[Extern]
-  record IDedupBackupSupport, lpVtbl : IDedupBackupSupportVtbl* do
+  record IDedupBackupSupport, lpVtbl : IDedupBackupSupportVtable* do
     GUID = LibC::GUID.new(0xc719d963_u32, 0x2b2d_u16, 0x415e_u16, StaticArray[0xac_u8, 0xf7_u8, 0x7e_u8, 0xb7_u8, 0xca_u8, 0x59_u8, 0x6f_u8, 0xf4_u8])
     def query_interface(this : IDedupBackupSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -183,7 +183,7 @@ module Win32cr::Storage::DataDeduplication
   end
 
   @[Extern]
-  record IDedupChunkLibraryVtbl,
+  record IDedupChunkLibraryVtable,
     query_interface : Proc(IDedupChunkLibrary*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDedupChunkLibrary*, UInt32),
     release : Proc(IDedupChunkLibrary*, UInt32),
@@ -194,7 +194,7 @@ module Win32cr::Storage::DataDeduplication
 
 
   @[Extern]
-  record IDedupChunkLibrary, lpVtbl : IDedupChunkLibraryVtbl* do
+  record IDedupChunkLibrary, lpVtbl : IDedupChunkLibraryVtable* do
     GUID = LibC::GUID.new(0xbb5144d7_u32, 0x2720_u16, 0x4dcc_u16, StaticArray[0x87_u8, 0x77_u8, 0x78_u8, 0x59_u8, 0x74_u8, 0x16_u8, 0xec_u8, 0x23_u8])
     def query_interface(this : IDedupChunkLibrary*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -221,7 +221,7 @@ module Win32cr::Storage::DataDeduplication
   end
 
   @[Extern]
-  record IDedupIterateChunksHash32Vtbl,
+  record IDedupIterateChunksHash32Vtable,
     query_interface : Proc(IDedupIterateChunksHash32*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDedupIterateChunksHash32*, UInt32),
     release : Proc(IDedupIterateChunksHash32*, UInt32),
@@ -232,7 +232,7 @@ module Win32cr::Storage::DataDeduplication
 
 
   @[Extern]
-  record IDedupIterateChunksHash32, lpVtbl : IDedupIterateChunksHash32Vtbl* do
+  record IDedupIterateChunksHash32, lpVtbl : IDedupIterateChunksHash32Vtable* do
     GUID = LibC::GUID.new(0x90b584d3_u32, 0x72aa_u16, 0x400f_u16, StaticArray[0x97_u8, 0x67_u8, 0xca_u8, 0xd8_u8, 0x66_u8, 0xa5_u8, 0xa2_u8, 0xd8_u8])
     def query_interface(this : IDedupIterateChunksHash32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -259,7 +259,7 @@ module Win32cr::Storage::DataDeduplication
   end
 
   @[Extern]
-  record IDedupDataPortVtbl,
+  record IDedupDataPortVtable,
     query_interface : Proc(IDedupDataPort*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDedupDataPort*, UInt32),
     release : Proc(IDedupDataPort*, UInt32),
@@ -278,7 +278,7 @@ module Win32cr::Storage::DataDeduplication
 
 
   @[Extern]
-  record IDedupDataPort, lpVtbl : IDedupDataPortVtbl* do
+  record IDedupDataPort, lpVtbl : IDedupDataPortVtable* do
     GUID = LibC::GUID.new(0x7963d734_u32, 0x40a9_u16, 0x4ea3_u16, StaticArray[0xbb_u8, 0xf6_u8, 0x5a_u8, 0x89_u8, 0xd2_u8, 0x6f_u8, 0x7a_u8, 0xe8_u8])
     def query_interface(this : IDedupDataPort*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -329,7 +329,7 @@ module Win32cr::Storage::DataDeduplication
   end
 
   @[Extern]
-  record IDedupDataPortManagerVtbl,
+  record IDedupDataPortManagerVtable,
     query_interface : Proc(IDedupDataPortManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDedupDataPortManager*, UInt32),
     release : Proc(IDedupDataPortManager*, UInt32),
@@ -339,7 +339,7 @@ module Win32cr::Storage::DataDeduplication
 
 
   @[Extern]
-  record IDedupDataPortManager, lpVtbl : IDedupDataPortManagerVtbl* do
+  record IDedupDataPortManager, lpVtbl : IDedupDataPortManagerVtable* do
     GUID = LibC::GUID.new(0x44677452_u32, 0xb90a_u16, 0x445e_u16, StaticArray[0x81_u8, 0x92_u8, 0xcd_u8, 0xcf_u8, 0xe8_u8, 0x15_u8, 0x11_u8, 0xfb_u8])
     def query_interface(this : IDedupDataPortManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

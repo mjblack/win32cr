@@ -53,7 +53,7 @@ module Win32cr::System::UpdateAssessment
   end
 
   @[Extern]
-  record IWaaSAssessorVtbl,
+  record IWaaSAssessorVtable,
     query_interface : Proc(IWaaSAssessor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWaaSAssessor*, UInt32),
     release : Proc(IWaaSAssessor*, UInt32),
@@ -61,7 +61,7 @@ module Win32cr::System::UpdateAssessment
 
 
   @[Extern]
-  record IWaaSAssessor, lpVtbl : IWaaSAssessorVtbl* do
+  record IWaaSAssessor, lpVtbl : IWaaSAssessorVtable* do
     GUID = LibC::GUID.new(0x2347bbef_u32, 0x1a3b_u16, 0x45a4_u16, StaticArray[0x90_u8, 0x2d_u8, 0x3e_u8, 0x9_u8, 0xc2_u8, 0x69_u8, 0xb4_u8, 0x5e_u8])
     def query_interface(this : IWaaSAssessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

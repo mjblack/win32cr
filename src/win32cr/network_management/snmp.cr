@@ -324,344 +324,513 @@ module Win32cr::NetworkManagement::Snmp
   end
 
   def snmpUtilOidCpy(pOidDst : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*, pOidSrc : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*) : Int32
+    {% if !flag?(:docs) %}
     C.SnmpUtilOidCpy(pOidDst, pOidSrc)
+    {% end %}
   end
 
   def snmpUtilOidAppend(pOidDst : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*, pOidSrc : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*) : Int32
+    {% if !flag?(:docs) %}
     C.SnmpUtilOidAppend(pOidDst, pOidSrc)
+    {% end %}
   end
 
   def snmpUtilOidNCmp(pOid1 : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*, pOid2 : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*, nSubIds : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SnmpUtilOidNCmp(pOid1, pOid2, nSubIds)
+    {% end %}
   end
 
   def snmpUtilOidCmp(pOid1 : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*, pOid2 : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*) : Int32
+    {% if !flag?(:docs) %}
     C.SnmpUtilOidCmp(pOid1, pOid2)
+    {% end %}
   end
 
   def snmpUtilOidFree(pOid : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*) : Void
+    {% if !flag?(:docs) %}
     C.SnmpUtilOidFree(pOid)
+    {% end %}
   end
 
   def snmpUtilOctetsCmp(pOctets1 : Win32cr::NetworkManagement::Snmp::AsnOctetString*, pOctets2 : Win32cr::NetworkManagement::Snmp::AsnOctetString*) : Int32
+    {% if !flag?(:docs) %}
     C.SnmpUtilOctetsCmp(pOctets1, pOctets2)
+    {% end %}
   end
 
   def snmpUtilOctetsNCmp(pOctets1 : Win32cr::NetworkManagement::Snmp::AsnOctetString*, pOctets2 : Win32cr::NetworkManagement::Snmp::AsnOctetString*, nChars : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SnmpUtilOctetsNCmp(pOctets1, pOctets2, nChars)
+    {% end %}
   end
 
   def snmpUtilOctetsCpy(pOctetsDst : Win32cr::NetworkManagement::Snmp::AsnOctetString*, pOctetsSrc : Win32cr::NetworkManagement::Snmp::AsnOctetString*) : Int32
+    {% if !flag?(:docs) %}
     C.SnmpUtilOctetsCpy(pOctetsDst, pOctetsSrc)
+    {% end %}
   end
 
   def snmpUtilOctetsFree(pOctets : Win32cr::NetworkManagement::Snmp::AsnOctetString*) : Void
+    {% if !flag?(:docs) %}
     C.SnmpUtilOctetsFree(pOctets)
+    {% end %}
   end
 
   def snmpUtilAsnAnyCpy(pAnyDst : Win32cr::NetworkManagement::Snmp::AsnAny*, pAnySrc : Win32cr::NetworkManagement::Snmp::AsnAny*) : Int32
+    {% if !flag?(:docs) %}
     C.SnmpUtilAsnAnyCpy(pAnyDst, pAnySrc)
+    {% end %}
   end
 
   def snmpUtilAsnAnyFree(pAny : Win32cr::NetworkManagement::Snmp::AsnAny*) : Void
+    {% if !flag?(:docs) %}
     C.SnmpUtilAsnAnyFree(pAny)
+    {% end %}
   end
 
   def snmpUtilVarBindCpy(pVbDst : Win32cr::NetworkManagement::Snmp::SnmpVarBind*, pVbSrc : Win32cr::NetworkManagement::Snmp::SnmpVarBind*) : Int32
+    {% if !flag?(:docs) %}
     C.SnmpUtilVarBindCpy(pVbDst, pVbSrc)
+    {% end %}
   end
 
   def snmpUtilVarBindFree(pVb : Win32cr::NetworkManagement::Snmp::SnmpVarBind*) : Void
+    {% if !flag?(:docs) %}
     C.SnmpUtilVarBindFree(pVb)
+    {% end %}
   end
 
   def snmpUtilVarBindListCpy(pVblDst : Win32cr::NetworkManagement::Snmp::SnmpVarBindList*, pVblSrc : Win32cr::NetworkManagement::Snmp::SnmpVarBindList*) : Int32
+    {% if !flag?(:docs) %}
     C.SnmpUtilVarBindListCpy(pVblDst, pVblSrc)
+    {% end %}
   end
 
   def snmpUtilVarBindListFree(pVbl : Win32cr::NetworkManagement::Snmp::SnmpVarBindList*) : Void
+    {% if !flag?(:docs) %}
     C.SnmpUtilVarBindListFree(pVbl)
+    {% end %}
   end
 
   def snmpUtilMemFree(pMem : Void*) : Void
+    {% if !flag?(:docs) %}
     C.SnmpUtilMemFree(pMem)
+    {% end %}
   end
 
   def snmpUtilMemAlloc(nBytes : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.SnmpUtilMemAlloc(nBytes)
+    {% end %}
   end
 
   def snmpUtilMemReAlloc(pMem : Void*, nBytes : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.SnmpUtilMemReAlloc(pMem, nBytes)
+    {% end %}
   end
 
   def snmpUtilOidToA(oid : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.SnmpUtilOidToA(oid)
+    {% end %}
   end
 
   def snmpUtilIdsToA(ids : UInt32*, id_length : UInt32) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.SnmpUtilIdsToA(ids, id_length)
+    {% end %}
   end
 
   def snmpUtilPrintOid(oid : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*) : Void
+    {% if !flag?(:docs) %}
     C.SnmpUtilPrintOid(oid)
+    {% end %}
   end
 
   def snmpUtilPrintAsnAny(pAny : Win32cr::NetworkManagement::Snmp::AsnAny*) : Void
+    {% if !flag?(:docs) %}
     C.SnmpUtilPrintAsnAny(pAny)
+    {% end %}
   end
 
   def snmpSvcGetUptime : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpSvcGetUptime
+    {% end %}
   end
 
   def snmpSvcSetLogLevel(nLogLevel : Win32cr::NetworkManagement::Snmp::SNMP_LOG) : Void
+    {% if !flag?(:docs) %}
     C.SnmpSvcSetLogLevel(nLogLevel)
+    {% end %}
   end
 
   def snmpSvcSetLogType(nLogType : Win32cr::NetworkManagement::Snmp::SNMP_OUTPUT_LOG_TYPE) : Void
+    {% if !flag?(:docs) %}
     C.SnmpSvcSetLogType(nLogType)
+    {% end %}
   end
 
   def snmpUtilDbgPrint(nLogLevel : Win32cr::NetworkManagement::Snmp::SNMP_LOG, szFormat : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.SnmpUtilDbgPrint(nLogLevel, szFormat)
+    {% end %}
   end
 
   def snmpMgrOpen(lpAgentAddress : Win32cr::Foundation::PSTR, lpAgentCommunity : Win32cr::Foundation::PSTR, nTimeOut : Int32, nRetries : Int32) : Void*
+    {% if !flag?(:docs) %}
     C.SnmpMgrOpen(lpAgentAddress, lpAgentCommunity, nTimeOut, nRetries)
+    {% end %}
   end
 
   def snmpMgrCtl(session : Void*, dwCtlCode : UInt32, lpvInBuffer : Void*, cbInBuffer : UInt32, lpvOUTBuffer : Void*, cbOUTBuffer : UInt32, lpcbBytesReturned : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SnmpMgrCtl(session, dwCtlCode, lpvInBuffer, cbInBuffer, lpvOUTBuffer, cbOUTBuffer, lpcbBytesReturned)
+    {% end %}
   end
 
   def snmpMgrClose(session : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SnmpMgrClose(session)
+    {% end %}
   end
 
   def snmpMgrRequest(session : Void*, requestType : UInt8, variableBindings : Win32cr::NetworkManagement::Snmp::SnmpVarBindList*, errorStatus : Win32cr::NetworkManagement::Snmp::SNMP_ERROR_STATUS*, errorIndex : Int32*) : Int32
+    {% if !flag?(:docs) %}
     C.SnmpMgrRequest(session, requestType, variableBindings, errorStatus, errorIndex)
+    {% end %}
   end
 
   def snmpMgrStrToOid(string : Win32cr::Foundation::PSTR, oid : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SnmpMgrStrToOid(string, oid)
+    {% end %}
   end
 
   def snmpMgrOidToStr(oid : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*, string : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SnmpMgrOidToStr(oid, string)
+    {% end %}
   end
 
   def snmpMgrTrapListen(phTrapAvailable : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SnmpMgrTrapListen(phTrapAvailable)
+    {% end %}
   end
 
   def snmpMgrGetTrap(enterprise : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*, ip_address : Win32cr::NetworkManagement::Snmp::AsnOctetString*, genericTrap : Win32cr::NetworkManagement::Snmp::SNMP_GENERICTRAP*, specificTrap : Int32*, timeStamp : UInt32*, variableBindings : Win32cr::NetworkManagement::Snmp::SnmpVarBindList*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SnmpMgrGetTrap(enterprise, ip_address, genericTrap, specificTrap, timeStamp, variableBindings)
+    {% end %}
   end
 
   def snmpMgrGetTrapEx(enterprise : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*, agentAddress : Win32cr::NetworkManagement::Snmp::AsnOctetString*, sourceAddress : Win32cr::NetworkManagement::Snmp::AsnOctetString*, genericTrap : Win32cr::NetworkManagement::Snmp::SNMP_GENERICTRAP*, specificTrap : Int32*, community : Win32cr::NetworkManagement::Snmp::AsnOctetString*, timeStamp : UInt32*, variableBindings : Win32cr::NetworkManagement::Snmp::SnmpVarBindList*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SnmpMgrGetTrapEx(enterprise, agentAddress, sourceAddress, genericTrap, specificTrap, community, timeStamp, variableBindings)
+    {% end %}
   end
 
   def snmpGetTranslateMode(nTranslateMode : Win32cr::NetworkManagement::Snmp::SNMP_API_TRANSLATE_MODE*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpGetTranslateMode(nTranslateMode)
+    {% end %}
   end
 
   def snmpSetTranslateMode(nTranslateMode : Win32cr::NetworkManagement::Snmp::SNMP_API_TRANSLATE_MODE) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpSetTranslateMode(nTranslateMode)
+    {% end %}
   end
 
   def snmpGetRetransmitMode(nRetransmitMode : Win32cr::NetworkManagement::Snmp::SNMP_STATUS*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpGetRetransmitMode(nRetransmitMode)
+    {% end %}
   end
 
   def snmpSetRetransmitMode(nRetransmitMode : Win32cr::NetworkManagement::Snmp::SNMP_STATUS) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpSetRetransmitMode(nRetransmitMode)
+    {% end %}
   end
 
   def snmpGetTimeout(hEntity : LibC::IntPtrT, nPolicyTimeout : UInt32*, nActualTimeout : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpGetTimeout(hEntity, nPolicyTimeout, nActualTimeout)
+    {% end %}
   end
 
   def snmpSetTimeout(hEntity : LibC::IntPtrT, nPolicyTimeout : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpSetTimeout(hEntity, nPolicyTimeout)
+    {% end %}
   end
 
   def snmpGetRetry(hEntity : LibC::IntPtrT, nPolicyRetry : UInt32*, nActualRetry : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpGetRetry(hEntity, nPolicyRetry, nActualRetry)
+    {% end %}
   end
 
   def snmpSetRetry(hEntity : LibC::IntPtrT, nPolicyRetry : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpSetRetry(hEntity, nPolicyRetry)
+    {% end %}
   end
 
   def snmpGetVendorInfo(vendorInfo : Win32cr::NetworkManagement::Snmp::Smivendorinfo*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpGetVendorInfo(vendorInfo)
+    {% end %}
   end
 
   def snmpStartup(nMajorVersion : UInt32*, nMinorVersion : UInt32*, nLevel : UInt32*, nTranslateMode : Win32cr::NetworkManagement::Snmp::SNMP_API_TRANSLATE_MODE*, nRetransmitMode : Win32cr::NetworkManagement::Snmp::SNMP_STATUS*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpStartup(nMajorVersion, nMinorVersion, nLevel, nTranslateMode, nRetransmitMode)
+    {% end %}
   end
 
   def snmpCleanup : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpCleanup
+    {% end %}
   end
 
   def snmpOpen(hWnd : Win32cr::Foundation::HWND, wMsg : UInt32) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.SnmpOpen(hWnd, wMsg)
+    {% end %}
   end
 
   def snmpClose(session : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpClose(session)
+    {% end %}
   end
 
   def snmpSendMsg(session : LibC::IntPtrT, srcEntity : LibC::IntPtrT, dstEntity : LibC::IntPtrT, context : LibC::IntPtrT, pdu : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpSendMsg(session, srcEntity, dstEntity, context, pdu)
+    {% end %}
   end
 
   def snmpRecvMsg(session : LibC::IntPtrT, srcEntity : LibC::IntPtrT*, dstEntity : LibC::IntPtrT*, context : LibC::IntPtrT*, pdu : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpRecvMsg(session, srcEntity, dstEntity, context, pdu)
+    {% end %}
   end
 
   def snmpRegister(session : LibC::IntPtrT, srcEntity : LibC::IntPtrT, dstEntity : LibC::IntPtrT, context : LibC::IntPtrT, notification : Win32cr::NetworkManagement::Snmp::Smioid*, state : Win32cr::NetworkManagement::Snmp::SNMP_STATUS) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpRegister(session, srcEntity, dstEntity, context, notification, state)
+    {% end %}
   end
 
   def snmpCreateSession(hWnd : Win32cr::Foundation::HWND, wMsg : UInt32, fCallBack : Win32cr::NetworkManagement::Snmp::SNMPAPI_CALLBACK, lpClientData : Void*) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.SnmpCreateSession(hWnd, wMsg, fCallBack, lpClientData)
+    {% end %}
   end
 
   def snmpListen(hEntity : LibC::IntPtrT, lStatus : Win32cr::NetworkManagement::Snmp::SNMP_STATUS) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpListen(hEntity, lStatus)
+    {% end %}
   end
 
   def snmpListenEx(hEntity : LibC::IntPtrT, lStatus : UInt32, nUseEntityAddr : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpListenEx(hEntity, lStatus, nUseEntityAddr)
+    {% end %}
   end
 
   def snmpCancelMsg(session : LibC::IntPtrT, reqId : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpCancelMsg(session, reqId)
+    {% end %}
   end
 
   def snmpStartupEx(nMajorVersion : UInt32*, nMinorVersion : UInt32*, nLevel : UInt32*, nTranslateMode : Win32cr::NetworkManagement::Snmp::SNMP_API_TRANSLATE_MODE*, nRetransmitMode : Win32cr::NetworkManagement::Snmp::SNMP_STATUS*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpStartupEx(nMajorVersion, nMinorVersion, nLevel, nTranslateMode, nRetransmitMode)
+    {% end %}
   end
 
   def snmpCleanupEx : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpCleanupEx
+    {% end %}
   end
 
   def snmpStrToEntity(session : LibC::IntPtrT, string : Win32cr::Foundation::PSTR) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.SnmpStrToEntity(session, string)
+    {% end %}
   end
 
   def snmpEntityToStr(entity : LibC::IntPtrT, size : UInt32, string : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpEntityToStr(entity, size, string)
+    {% end %}
   end
 
   def snmpFreeEntity(entity : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpFreeEntity(entity)
+    {% end %}
   end
 
   def snmpStrToContext(session : LibC::IntPtrT, string : Win32cr::NetworkManagement::Snmp::Smioctets*) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.SnmpStrToContext(session, string)
+    {% end %}
   end
 
   def snmpContextToStr(context : LibC::IntPtrT, string : Win32cr::NetworkManagement::Snmp::Smioctets*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpContextToStr(context, string)
+    {% end %}
   end
 
   def snmpFreeContext(context : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpFreeContext(context)
+    {% end %}
   end
 
   def snmpSetPort(hEntity : LibC::IntPtrT, nPort : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpSetPort(hEntity, nPort)
+    {% end %}
   end
 
   def snmpCreatePdu(session : LibC::IntPtrT, pdu_type : Win32cr::NetworkManagement::Snmp::SNMP_PDU_TYPE, request_id : Int32, error_status : Int32, error_index : Int32, varbindlist : LibC::IntPtrT) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.SnmpCreatePdu(session, pdu_type, request_id, error_status, error_index, varbindlist)
+    {% end %}
   end
 
   def snmpGetPduData(pdu : LibC::IntPtrT, pdu_type : Win32cr::NetworkManagement::Snmp::SNMP_PDU_TYPE*, request_id : Int32*, error_status : Win32cr::NetworkManagement::Snmp::SNMP_ERROR*, error_index : Int32*, varbindlist : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpGetPduData(pdu, pdu_type, request_id, error_status, error_index, varbindlist)
+    {% end %}
   end
 
   def snmpSetPduData(pdu : LibC::IntPtrT, pdu_type : Int32*, request_id : Int32*, non_repeaters : Int32*, max_repetitions : Int32*, varbindlist : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpSetPduData(pdu, pdu_type, request_id, non_repeaters, max_repetitions, varbindlist)
+    {% end %}
   end
 
   def snmpDuplicatePdu(session : LibC::IntPtrT, pdu : LibC::IntPtrT) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.SnmpDuplicatePdu(session, pdu)
+    {% end %}
   end
 
   def snmpFreePdu(pdu : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpFreePdu(pdu)
+    {% end %}
   end
 
   def snmpCreateVbl(session : LibC::IntPtrT, name : Win32cr::NetworkManagement::Snmp::Smioid*, value : Win32cr::NetworkManagement::Snmp::Smivalue*) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.SnmpCreateVbl(session, name, value)
+    {% end %}
   end
 
   def snmpDuplicateVbl(session : LibC::IntPtrT, vbl : LibC::IntPtrT) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.SnmpDuplicateVbl(session, vbl)
+    {% end %}
   end
 
   def snmpFreeVbl(vbl : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpFreeVbl(vbl)
+    {% end %}
   end
 
   def snmpCountVbl(vbl : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpCountVbl(vbl)
+    {% end %}
   end
 
   def snmpGetVb(vbl : LibC::IntPtrT, index : UInt32, name : Win32cr::NetworkManagement::Snmp::Smioid*, value : Win32cr::NetworkManagement::Snmp::Smivalue*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpGetVb(vbl, index, name, value)
+    {% end %}
   end
 
   def snmpSetVb(vbl : LibC::IntPtrT, index : UInt32, name : Win32cr::NetworkManagement::Snmp::Smioid*, value : Win32cr::NetworkManagement::Snmp::Smivalue*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpSetVb(vbl, index, name, value)
+    {% end %}
   end
 
   def snmpDeleteVb(vbl : LibC::IntPtrT, index : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpDeleteVb(vbl, index)
+    {% end %}
   end
 
   def snmpGetLastError(session : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpGetLastError(session)
+    {% end %}
   end
 
   def snmpStrToOid(string : Win32cr::Foundation::PSTR, dstOID : Win32cr::NetworkManagement::Snmp::Smioid*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpStrToOid(string, dstOID)
+    {% end %}
   end
 
   def snmpOidToStr(srcOID : Win32cr::NetworkManagement::Snmp::Smioid*, size : UInt32, string : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpOidToStr(srcOID, size, string)
+    {% end %}
   end
 
   def snmpOidCopy(srcOID : Win32cr::NetworkManagement::Snmp::Smioid*, dstOID : Win32cr::NetworkManagement::Snmp::Smioid*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpOidCopy(srcOID, dstOID)
+    {% end %}
   end
 
   def snmpOidCompare(xOID : Win32cr::NetworkManagement::Snmp::Smioid*, yOID : Win32cr::NetworkManagement::Snmp::Smioid*, maxlen : UInt32, result : Int32*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpOidCompare(xOID, yOID, maxlen, result)
+    {% end %}
   end
 
   def snmpEncodeMsg(session : LibC::IntPtrT, srcEntity : LibC::IntPtrT, dstEntity : LibC::IntPtrT, context : LibC::IntPtrT, pdu : LibC::IntPtrT, msgBufDesc : Win32cr::NetworkManagement::Snmp::Smioctets*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpEncodeMsg(session, srcEntity, dstEntity, context, pdu, msgBufDesc)
+    {% end %}
   end
 
   def snmpDecodeMsg(session : LibC::IntPtrT, srcEntity : LibC::IntPtrT*, dstEntity : LibC::IntPtrT*, context : LibC::IntPtrT*, pdu : LibC::IntPtrT*, msgBufDesc : Win32cr::NetworkManagement::Snmp::Smioctets*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpDecodeMsg(session, srcEntity, dstEntity, context, pdu, msgBufDesc)
+    {% end %}
   end
 
   def snmpFreeDescriptor(syntax : UInt32, descriptor : Win32cr::NetworkManagement::Snmp::Smioctets*) : UInt32
+    {% if !flag?(:docs) %}
     C.SnmpFreeDescriptor(syntax, descriptor)
+    {% end %}
   end
 
   @[Link("snmpapi")]
   @[Link("mgmtapi")]
   @[Link("wsnmp32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun SnmpUtilOidCpy(pOidDst : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*, pOidSrc : Win32cr::NetworkManagement::Snmp::AsnObjectIdentifier*) : Int32
@@ -916,4 +1085,5 @@ module Win32cr::NetworkManagement::Snmp
     fun SnmpFreeDescriptor(syntax : UInt32, descriptor : Win32cr::NetworkManagement::Snmp::Smioctets*) : UInt32
 
   end
+  {% end %}
 end

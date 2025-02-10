@@ -15,7 +15,7 @@ module Win32cr::UI::Input::Ink
   end
 
   @[Extern]
-  record IInkCommitRequestHandlerVtbl,
+  record IInkCommitRequestHandlerVtable,
     query_interface : Proc(IInkCommitRequestHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkCommitRequestHandler*, UInt32),
     release : Proc(IInkCommitRequestHandler*, UInt32),
@@ -23,7 +23,7 @@ module Win32cr::UI::Input::Ink
 
 
   @[Extern]
-  record IInkCommitRequestHandler, lpVtbl : IInkCommitRequestHandlerVtbl* do
+  record IInkCommitRequestHandler, lpVtbl : IInkCommitRequestHandlerVtable* do
     GUID = LibC::GUID.new(0xfabea3fc_u32, 0xb108_u16, 0x45b6_u16, StaticArray[0xa9_u8, 0xfc_u8, 0x8d_u8, 0x8_u8, 0xfa_u8, 0x9f_u8, 0x85_u8, 0xcf_u8])
     def query_interface(this : IInkCommitRequestHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -41,7 +41,7 @@ module Win32cr::UI::Input::Ink
   end
 
   @[Extern]
-  record IInkPresenterDesktopVtbl,
+  record IInkPresenterDesktopVtable,
     query_interface : Proc(IInkPresenterDesktop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkPresenterDesktop*, UInt32),
     release : Proc(IInkPresenterDesktop*, UInt32),
@@ -53,7 +53,7 @@ module Win32cr::UI::Input::Ink
 
 
   @[Extern]
-  record IInkPresenterDesktop, lpVtbl : IInkPresenterDesktopVtbl* do
+  record IInkPresenterDesktop, lpVtbl : IInkPresenterDesktopVtable* do
     GUID = LibC::GUID.new(0x73f3c0d9_u32, 0x2e8b_u16, 0x48f3_u16, StaticArray[0x89_u8, 0x5e_u8, 0x20_u8, 0xcb_u8, 0xd2_u8, 0x7b_u8, 0x72_u8, 0x3b_u8])
     def query_interface(this : IInkPresenterDesktop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -83,7 +83,7 @@ module Win32cr::UI::Input::Ink
   end
 
   @[Extern]
-  record IInkHostWorkItemVtbl,
+  record IInkHostWorkItemVtable,
     query_interface : Proc(IInkHostWorkItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkHostWorkItem*, UInt32),
     release : Proc(IInkHostWorkItem*, UInt32),
@@ -91,7 +91,7 @@ module Win32cr::UI::Input::Ink
 
 
   @[Extern]
-  record IInkHostWorkItem, lpVtbl : IInkHostWorkItemVtbl* do
+  record IInkHostWorkItem, lpVtbl : IInkHostWorkItemVtable* do
     GUID = LibC::GUID.new(0xccda0a9a_u32, 0x1b78_u16, 0x4632_u16, StaticArray[0xbb_u8, 0x96_u8, 0x97_u8, 0x80_u8, 0x6_u8, 0x62_u8, 0xe2_u8, 0x6c_u8])
     def query_interface(this : IInkHostWorkItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -109,7 +109,7 @@ module Win32cr::UI::Input::Ink
   end
 
   @[Extern]
-  record IInkDesktopHostVtbl,
+  record IInkDesktopHostVtable,
     query_interface : Proc(IInkDesktopHost*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkDesktopHost*, UInt32),
     release : Proc(IInkDesktopHost*, UInt32),
@@ -119,7 +119,7 @@ module Win32cr::UI::Input::Ink
 
 
   @[Extern]
-  record IInkDesktopHost, lpVtbl : IInkDesktopHostVtbl* do
+  record IInkDesktopHost, lpVtbl : IInkDesktopHostVtable* do
     GUID = LibC::GUID.new(0x4ce7d875_u32, 0xa981_u16, 0x4140_u16, StaticArray[0xa1_u8, 0xff_u8, 0xad_u8, 0x93_u8, 0x25_u8, 0x8e_u8, 0x8d_u8, 0x59_u8])
     def query_interface(this : IInkDesktopHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -143,7 +143,7 @@ module Win32cr::UI::Input::Ink
   end
 
   @[Extern]
-  record IInkD2DRendererVtbl,
+  record IInkD2DRendererVtable,
     query_interface : Proc(IInkD2DRenderer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkD2DRenderer*, UInt32),
     release : Proc(IInkD2DRenderer*, UInt32),
@@ -151,7 +151,7 @@ module Win32cr::UI::Input::Ink
 
 
   @[Extern]
-  record IInkD2DRenderer, lpVtbl : IInkD2DRendererVtbl* do
+  record IInkD2DRenderer, lpVtbl : IInkD2DRendererVtable* do
     GUID = LibC::GUID.new(0x407fb1de_u32, 0xf85a_u16, 0x4150_u16, StaticArray[0x97_u8, 0xcf_u8, 0xb7_u8, 0xfb_u8, 0x27_u8, 0x4f_u8, 0xb4_u8, 0xf8_u8])
     def query_interface(this : IInkD2DRenderer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -169,7 +169,7 @@ module Win32cr::UI::Input::Ink
   end
 
   @[Extern]
-  record IInkD2DRenderer2Vtbl,
+  record IInkD2DRenderer2Vtable,
     query_interface : Proc(IInkD2DRenderer2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInkD2DRenderer2*, UInt32),
     release : Proc(IInkD2DRenderer2*, UInt32),
@@ -177,7 +177,7 @@ module Win32cr::UI::Input::Ink
 
 
   @[Extern]
-  record IInkD2DRenderer2, lpVtbl : IInkD2DRenderer2Vtbl* do
+  record IInkD2DRenderer2, lpVtbl : IInkD2DRenderer2Vtable* do
     GUID = LibC::GUID.new(0xa95dcd9_u32, 0x4578_u16, 0x4b71_u16, StaticArray[0xb2_u8, 0xb_u8, 0xbf_u8, 0x66_u8, 0x4d_u8, 0x4b_u8, 0xfe_u8, 0xee_u8])
     def query_interface(this : IInkD2DRenderer2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

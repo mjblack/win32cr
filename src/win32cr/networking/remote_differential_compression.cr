@@ -177,7 +177,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
   end
 
   @[Extern]
-  record IRdcGeneratorParametersVtbl,
+  record IRdcGeneratorParametersVtable,
     query_interface : Proc(IRdcGeneratorParameters*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRdcGeneratorParameters*, UInt32),
     release : Proc(IRdcGeneratorParameters*, UInt32),
@@ -188,7 +188,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  record IRdcGeneratorParameters, lpVtbl : IRdcGeneratorParametersVtbl* do
+  record IRdcGeneratorParameters, lpVtbl : IRdcGeneratorParametersVtable* do
     GUID = LibC::GUID.new(0x96236a71_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IRdcGeneratorParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -215,7 +215,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
   end
 
   @[Extern]
-  record IRdcGeneratorFilterMaxParametersVtbl,
+  record IRdcGeneratorFilterMaxParametersVtable,
     query_interface : Proc(IRdcGeneratorFilterMaxParameters*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRdcGeneratorFilterMaxParameters*, UInt32),
     release : Proc(IRdcGeneratorFilterMaxParameters*, UInt32),
@@ -226,7 +226,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  record IRdcGeneratorFilterMaxParameters, lpVtbl : IRdcGeneratorFilterMaxParametersVtbl* do
+  record IRdcGeneratorFilterMaxParameters, lpVtbl : IRdcGeneratorFilterMaxParametersVtable* do
     GUID = LibC::GUID.new(0x96236a72_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IRdcGeneratorFilterMaxParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -253,7 +253,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
   end
 
   @[Extern]
-  record IRdcGeneratorVtbl,
+  record IRdcGeneratorVtable,
     query_interface : Proc(IRdcGenerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRdcGenerator*, UInt32),
     release : Proc(IRdcGenerator*, UInt32),
@@ -262,7 +262,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  record IRdcGenerator, lpVtbl : IRdcGeneratorVtbl* do
+  record IRdcGenerator, lpVtbl : IRdcGeneratorVtable* do
     GUID = LibC::GUID.new(0x96236a73_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IRdcGenerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -283,7 +283,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
   end
 
   @[Extern]
-  record IRdcFileReaderVtbl,
+  record IRdcFileReaderVtable,
     query_interface : Proc(IRdcFileReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRdcFileReader*, UInt32),
     release : Proc(IRdcFileReader*, UInt32),
@@ -293,7 +293,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  record IRdcFileReader, lpVtbl : IRdcFileReaderVtbl* do
+  record IRdcFileReader, lpVtbl : IRdcFileReaderVtable* do
     GUID = LibC::GUID.new(0x96236a74_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IRdcFileReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -317,7 +317,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
   end
 
   @[Extern]
-  record IRdcFileWriterVtbl,
+  record IRdcFileWriterVtable,
     query_interface : Proc(IRdcFileWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRdcFileWriter*, UInt32),
     release : Proc(IRdcFileWriter*, UInt32),
@@ -330,7 +330,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  record IRdcFileWriter, lpVtbl : IRdcFileWriterVtbl* do
+  record IRdcFileWriter, lpVtbl : IRdcFileWriterVtable* do
     GUID = LibC::GUID.new(0x96236a75_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IRdcFileWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -363,7 +363,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
   end
 
   @[Extern]
-  record IRdcSignatureReaderVtbl,
+  record IRdcSignatureReaderVtable,
     query_interface : Proc(IRdcSignatureReader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRdcSignatureReader*, UInt32),
     release : Proc(IRdcSignatureReader*, UInt32),
@@ -372,7 +372,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  record IRdcSignatureReader, lpVtbl : IRdcSignatureReaderVtbl* do
+  record IRdcSignatureReader, lpVtbl : IRdcSignatureReaderVtable* do
     GUID = LibC::GUID.new(0x96236a76_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IRdcSignatureReader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -393,7 +393,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
   end
 
   @[Extern]
-  record IRdcComparatorVtbl,
+  record IRdcComparatorVtable,
     query_interface : Proc(IRdcComparator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRdcComparator*, UInt32),
     release : Proc(IRdcComparator*, UInt32),
@@ -401,7 +401,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  record IRdcComparator, lpVtbl : IRdcComparatorVtbl* do
+  record IRdcComparator, lpVtbl : IRdcComparatorVtable* do
     GUID = LibC::GUID.new(0x96236a77_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IRdcComparator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -419,7 +419,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
   end
 
   @[Extern]
-  record IRdcLibraryVtbl,
+  record IRdcLibraryVtable,
     query_interface : Proc(IRdcLibrary*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRdcLibrary*, UInt32),
     release : Proc(IRdcLibrary*, UInt32),
@@ -433,7 +433,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  record IRdcLibrary, lpVtbl : IRdcLibraryVtbl* do
+  record IRdcLibrary, lpVtbl : IRdcLibraryVtable* do
     GUID = LibC::GUID.new(0x96236a78_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IRdcLibrary*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -469,7 +469,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
   end
 
   @[Extern]
-  record ISimilarityReportProgressVtbl,
+  record ISimilarityReportProgressVtable,
     query_interface : Proc(ISimilarityReportProgress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISimilarityReportProgress*, UInt32),
     release : Proc(ISimilarityReportProgress*, UInt32),
@@ -477,7 +477,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  record ISimilarityReportProgress, lpVtbl : ISimilarityReportProgressVtbl* do
+  record ISimilarityReportProgress, lpVtbl : ISimilarityReportProgressVtable* do
     GUID = LibC::GUID.new(0x96236a7a_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : ISimilarityReportProgress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -495,7 +495,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
   end
 
   @[Extern]
-  record ISimilarityTableDumpStateVtbl,
+  record ISimilarityTableDumpStateVtable,
     query_interface : Proc(ISimilarityTableDumpState*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISimilarityTableDumpState*, UInt32),
     release : Proc(ISimilarityTableDumpState*, UInt32),
@@ -503,7 +503,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  record ISimilarityTableDumpState, lpVtbl : ISimilarityTableDumpStateVtbl* do
+  record ISimilarityTableDumpState, lpVtbl : ISimilarityTableDumpStateVtable* do
     GUID = LibC::GUID.new(0x96236a7b_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : ISimilarityTableDumpState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -521,7 +521,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
   end
 
   @[Extern]
-  record ISimilarityTraitsMappedViewVtbl,
+  record ISimilarityTraitsMappedViewVtable,
     query_interface : Proc(ISimilarityTraitsMappedView*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISimilarityTraitsMappedView*, UInt32),
     release : Proc(ISimilarityTraitsMappedView*, UInt32),
@@ -532,7 +532,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  record ISimilarityTraitsMappedView, lpVtbl : ISimilarityTraitsMappedViewVtbl* do
+  record ISimilarityTraitsMappedView, lpVtbl : ISimilarityTraitsMappedViewVtable* do
     GUID = LibC::GUID.new(0x96236a7c_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : ISimilarityTraitsMappedView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -559,7 +559,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
   end
 
   @[Extern]
-  record ISimilarityTraitsMappingVtbl,
+  record ISimilarityTraitsMappingVtable,
     query_interface : Proc(ISimilarityTraitsMapping*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISimilarityTraitsMapping*, UInt32),
     release : Proc(ISimilarityTraitsMapping*, UInt32),
@@ -573,7 +573,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  record ISimilarityTraitsMapping, lpVtbl : ISimilarityTraitsMappingVtbl* do
+  record ISimilarityTraitsMapping, lpVtbl : ISimilarityTraitsMappingVtable* do
     GUID = LibC::GUID.new(0x96236a7d_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : ISimilarityTraitsMapping*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -609,7 +609,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
   end
 
   @[Extern]
-  record ISimilarityTraitsTableVtbl,
+  record ISimilarityTraitsTableVtable,
     query_interface : Proc(ISimilarityTraitsTable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISimilarityTraitsTable*, UInt32),
     release : Proc(ISimilarityTraitsTable*, UInt32),
@@ -623,7 +623,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  record ISimilarityTraitsTable, lpVtbl : ISimilarityTraitsTableVtbl* do
+  record ISimilarityTraitsTable, lpVtbl : ISimilarityTraitsTableVtable* do
     GUID = LibC::GUID.new(0x96236a7e_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : ISimilarityTraitsTable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -659,7 +659,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
   end
 
   @[Extern]
-  record ISimilarityFileIdTableVtbl,
+  record ISimilarityFileIdTableVtable,
     query_interface : Proc(ISimilarityFileIdTable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISimilarityFileIdTable*, UInt32),
     release : Proc(ISimilarityFileIdTable*, UInt32),
@@ -673,7 +673,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  record ISimilarityFileIdTable, lpVtbl : ISimilarityFileIdTableVtbl* do
+  record ISimilarityFileIdTable, lpVtbl : ISimilarityFileIdTableVtable* do
     GUID = LibC::GUID.new(0x96236a7f_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : ISimilarityFileIdTable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -709,7 +709,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
   end
 
   @[Extern]
-  record IRdcSimilarityGeneratorVtbl,
+  record IRdcSimilarityGeneratorVtable,
     query_interface : Proc(IRdcSimilarityGenerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRdcSimilarityGenerator*, UInt32),
     release : Proc(IRdcSimilarityGenerator*, UInt32),
@@ -718,7 +718,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  record IRdcSimilarityGenerator, lpVtbl : IRdcSimilarityGeneratorVtbl* do
+  record IRdcSimilarityGenerator, lpVtbl : IRdcSimilarityGeneratorVtable* do
     GUID = LibC::GUID.new(0x96236a80_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IRdcSimilarityGenerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -739,7 +739,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
   end
 
   @[Extern]
-  record IFindSimilarResultsVtbl,
+  record IFindSimilarResultsVtable,
     query_interface : Proc(IFindSimilarResults*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFindSimilarResults*, UInt32),
     release : Proc(IFindSimilarResults*, UInt32),
@@ -748,7 +748,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  record IFindSimilarResults, lpVtbl : IFindSimilarResultsVtbl* do
+  record IFindSimilarResults, lpVtbl : IFindSimilarResultsVtable* do
     GUID = LibC::GUID.new(0x96236a81_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : IFindSimilarResults*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -769,7 +769,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
   end
 
   @[Extern]
-  record ISimilarityVtbl,
+  record ISimilarityVtable,
     query_interface : Proc(ISimilarity*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISimilarity*, UInt32),
     release : Proc(ISimilarity*, UInt32),
@@ -783,7 +783,7 @@ module Win32cr::Networking::RemoteDifferentialCompression
 
 
   @[Extern]
-  record ISimilarity, lpVtbl : ISimilarityVtbl* do
+  record ISimilarity, lpVtbl : ISimilarityVtable* do
     GUID = LibC::GUID.new(0x96236a83_u32, 0x9dbc_u16, 0x11da_u16, StaticArray[0x9e_u8, 0x3f_u8, 0x0_u8, 0x11_u8, 0x11_u8, 0x4a_u8, 0xe3_u8, 0x11_u8])
     def query_interface(this : ISimilarity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

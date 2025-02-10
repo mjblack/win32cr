@@ -100,63 +100,92 @@ module Win32cr::System::Shutdown
   end
 
   def initiateSystemShutdownA(lpMachineName : Win32cr::Foundation::PSTR, lpMessage : Win32cr::Foundation::PSTR, dwTimeout : UInt32, bForceAppsClosed : Win32cr::Foundation::BOOL, bRebootAfterShutdown : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitiateSystemShutdownA(lpMachineName, lpMessage, dwTimeout, bForceAppsClosed, bRebootAfterShutdown)
+    {% end %}
   end
 
   def initiateSystemShutdownW(lpMachineName : Win32cr::Foundation::PWSTR, lpMessage : Win32cr::Foundation::PWSTR, dwTimeout : UInt32, bForceAppsClosed : Win32cr::Foundation::BOOL, bRebootAfterShutdown : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitiateSystemShutdownW(lpMachineName, lpMessage, dwTimeout, bForceAppsClosed, bRebootAfterShutdown)
+    {% end %}
   end
 
   def abortSystemShutdownA(lpMachineName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AbortSystemShutdownA(lpMachineName)
+    {% end %}
   end
 
   def abortSystemShutdownW(lpMachineName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AbortSystemShutdownW(lpMachineName)
+    {% end %}
   end
 
   def initiateSystemShutdownExA(lpMachineName : Win32cr::Foundation::PSTR, lpMessage : Win32cr::Foundation::PSTR, dwTimeout : UInt32, bForceAppsClosed : Win32cr::Foundation::BOOL, bRebootAfterShutdown : Win32cr::Foundation::BOOL, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitiateSystemShutdownExA(lpMachineName, lpMessage, dwTimeout, bForceAppsClosed, bRebootAfterShutdown, dwReason)
+    {% end %}
   end
 
   def initiateSystemShutdownExW(lpMachineName : Win32cr::Foundation::PWSTR, lpMessage : Win32cr::Foundation::PWSTR, dwTimeout : UInt32, bForceAppsClosed : Win32cr::Foundation::BOOL, bRebootAfterShutdown : Win32cr::Foundation::BOOL, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitiateSystemShutdownExW(lpMachineName, lpMessage, dwTimeout, bForceAppsClosed, bRebootAfterShutdown, dwReason)
+    {% end %}
   end
 
   def initiateShutdownA(lpMachineName : Win32cr::Foundation::PSTR, lpMessage : Win32cr::Foundation::PSTR, dwGracePeriod : UInt32, dwShutdownFlags : Win32cr::System::Shutdown::SHUTDOWN_FLAGS, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : UInt32
+    {% if !flag?(:docs) %}
     C.InitiateShutdownA(lpMachineName, lpMessage, dwGracePeriod, dwShutdownFlags, dwReason)
+    {% end %}
   end
 
   def initiateShutdownW(lpMachineName : Win32cr::Foundation::PWSTR, lpMessage : Win32cr::Foundation::PWSTR, dwGracePeriod : UInt32, dwShutdownFlags : Win32cr::System::Shutdown::SHUTDOWN_FLAGS, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : UInt32
+    {% if !flag?(:docs) %}
     C.InitiateShutdownW(lpMachineName, lpMessage, dwGracePeriod, dwShutdownFlags, dwReason)
+    {% end %}
   end
 
   def checkForHiberboot(pHiberboot : Win32cr::Foundation::BOOLEAN*, bClearFlag : Win32cr::Foundation::BOOLEAN) : UInt32
+    {% if !flag?(:docs) %}
     C.CheckForHiberboot(pHiberboot, bClearFlag)
+    {% end %}
   end
 
   def exitWindowsEx(uFlags : Win32cr::System::Shutdown::EXIT_WINDOWS_FLAGS, dwReason : Win32cr::System::Shutdown::SHUTDOWN_REASON) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ExitWindowsEx(uFlags, dwReason)
+    {% end %}
   end
 
   def lockWorkStation : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LockWorkStation
+    {% end %}
   end
 
   def shutdownBlockReasonCreate(hWnd : Win32cr::Foundation::HWND, pwszReason : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ShutdownBlockReasonCreate(hWnd, pwszReason)
+    {% end %}
   end
 
   def shutdownBlockReasonQuery(hWnd : Win32cr::Foundation::HWND, pwszBuff : UInt16*, pcchBuff : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ShutdownBlockReasonQuery(hWnd, pwszBuff, pcchBuff)
+    {% end %}
   end
 
   def shutdownBlockReasonDestroy(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ShutdownBlockReasonDestroy(hWnd)
+    {% end %}
   end
 
   @[Link("advapi32")]
   @[Link("user32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun InitiateSystemShutdownA(lpMachineName : Win32cr::Foundation::PSTR, lpMessage : Win32cr::Foundation::PSTR, dwTimeout : UInt32, bForceAppsClosed : Win32cr::Foundation::BOOL, bRebootAfterShutdown : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
@@ -201,4 +230,5 @@ module Win32cr::System::Shutdown
     fun ShutdownBlockReasonDestroy(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

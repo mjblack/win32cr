@@ -6,7 +6,7 @@ module Win32cr::UI::Input::Radial
 
 
   @[Extern]
-  record IRadialControllerInteropVtbl,
+  record IRadialControllerInteropVtable,
     query_interface : Proc(IRadialControllerInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRadialControllerInterop*, UInt32),
     release : Proc(IRadialControllerInterop*, UInt32),
@@ -17,7 +17,7 @@ module Win32cr::UI::Input::Radial
 
 
   @[Extern]
-  record IRadialControllerInterop, lpVtbl : IRadialControllerInteropVtbl* do
+  record IRadialControllerInterop, lpVtbl : IRadialControllerInteropVtable* do
     GUID = LibC::GUID.new(0x1b0535c9_u32, 0x57ad_u16, 0x45c1_u16, StaticArray[0x9d_u8, 0x79_u8, 0xad_u8, 0x5c_u8, 0x34_u8, 0x36_u8, 0x5_u8, 0x13_u8])
     def query_interface(this : IRadialControllerInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44,7 +44,7 @@ module Win32cr::UI::Input::Radial
   end
 
   @[Extern]
-  record IRadialControllerConfigurationInteropVtbl,
+  record IRadialControllerConfigurationInteropVtable,
     query_interface : Proc(IRadialControllerConfigurationInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRadialControllerConfigurationInterop*, UInt32),
     release : Proc(IRadialControllerConfigurationInterop*, UInt32),
@@ -55,7 +55,7 @@ module Win32cr::UI::Input::Radial
 
 
   @[Extern]
-  record IRadialControllerConfigurationInterop, lpVtbl : IRadialControllerConfigurationInteropVtbl* do
+  record IRadialControllerConfigurationInterop, lpVtbl : IRadialControllerConfigurationInteropVtable* do
     GUID = LibC::GUID.new(0x787cdaac_u32, 0x3186_u16, 0x476d_u16, StaticArray[0x87_u8, 0xe4_u8, 0xb9_u8, 0x37_u8, 0x4a_u8, 0x7b_u8, 0x99_u8, 0x70_u8])
     def query_interface(this : IRadialControllerConfigurationInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -82,7 +82,7 @@ module Win32cr::UI::Input::Radial
   end
 
   @[Extern]
-  record IRadialControllerIndependentInputSourceInteropVtbl,
+  record IRadialControllerIndependentInputSourceInteropVtable,
     query_interface : Proc(IRadialControllerIndependentInputSourceInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRadialControllerIndependentInputSourceInterop*, UInt32),
     release : Proc(IRadialControllerIndependentInputSourceInterop*, UInt32),
@@ -93,7 +93,7 @@ module Win32cr::UI::Input::Radial
 
 
   @[Extern]
-  record IRadialControllerIndependentInputSourceInterop, lpVtbl : IRadialControllerIndependentInputSourceInteropVtbl* do
+  record IRadialControllerIndependentInputSourceInterop, lpVtbl : IRadialControllerIndependentInputSourceInteropVtable* do
     GUID = LibC::GUID.new(0x3d577eff_u32, 0x4cee_u16, 0x11e6_u16, StaticArray[0xb5_u8, 0x35_u8, 0x0_u8, 0x1b_u8, 0xdc_u8, 0x6_u8, 0xab_u8, 0x3b_u8])
     def query_interface(this : IRadialControllerIndependentInputSourceInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

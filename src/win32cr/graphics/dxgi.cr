@@ -935,7 +935,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIObjectVtbl,
+  record IDXGIObjectVtable,
     query_interface : Proc(IDXGIObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIObject*, UInt32),
     release : Proc(IDXGIObject*, UInt32),
@@ -946,7 +946,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIObject, lpVtbl : IDXGIObjectVtbl* do
+  record IDXGIObject, lpVtbl : IDXGIObjectVtable* do
     GUID = LibC::GUID.new(0xaec22fb8_u32, 0x76f3_u16, 0x4639_u16, StaticArray[0x9b_u8, 0xe0_u8, 0x28_u8, 0xeb_u8, 0x43_u8, 0xa6_u8, 0x7a_u8, 0x2e_u8])
     def query_interface(this : IDXGIObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -973,7 +973,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIDeviceSubObjectVtbl,
+  record IDXGIDeviceSubObjectVtable,
     query_interface : Proc(IDXGIDeviceSubObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIDeviceSubObject*, UInt32),
     release : Proc(IDXGIDeviceSubObject*, UInt32),
@@ -985,7 +985,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIDeviceSubObject, lpVtbl : IDXGIDeviceSubObjectVtbl* do
+  record IDXGIDeviceSubObject, lpVtbl : IDXGIDeviceSubObjectVtable* do
     GUID = LibC::GUID.new(0x3d3e0379_u32, 0xf9de_u16, 0x4d58_u16, StaticArray[0xbb_u8, 0x6c_u8, 0x18_u8, 0xd6_u8, 0x29_u8, 0x92_u8, 0xf1_u8, 0xa6_u8])
     def query_interface(this : IDXGIDeviceSubObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1015,7 +1015,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIResourceVtbl,
+  record IDXGIResourceVtable,
     query_interface : Proc(IDXGIResource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIResource*, UInt32),
     release : Proc(IDXGIResource*, UInt32),
@@ -1031,7 +1031,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIResource, lpVtbl : IDXGIResourceVtbl* do
+  record IDXGIResource, lpVtbl : IDXGIResourceVtable* do
     GUID = LibC::GUID.new(0x35f3ab4_u32, 0x482e_u16, 0x4e50_u16, StaticArray[0xb4_u8, 0x1f_u8, 0x8a_u8, 0x7f_u8, 0x8b_u8, 0xd8_u8, 0x96_u8, 0xb_u8])
     def query_interface(this : IDXGIResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1073,7 +1073,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIKeyedMutexVtbl,
+  record IDXGIKeyedMutexVtable,
     query_interface : Proc(IDXGIKeyedMutex*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIKeyedMutex*, UInt32),
     release : Proc(IDXGIKeyedMutex*, UInt32),
@@ -1087,7 +1087,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIKeyedMutex, lpVtbl : IDXGIKeyedMutexVtbl* do
+  record IDXGIKeyedMutex, lpVtbl : IDXGIKeyedMutexVtable* do
     GUID = LibC::GUID.new(0x9d8e1289_u32, 0xd7b3_u16, 0x465f_u16, StaticArray[0x81_u8, 0x26_u8, 0x25_u8, 0xe_u8, 0x34_u8, 0x9a_u8, 0xf8_u8, 0x5d_u8])
     def query_interface(this : IDXGIKeyedMutex*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1123,7 +1123,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGISurfaceVtbl,
+  record IDXGISurfaceVtable,
     query_interface : Proc(IDXGISurface*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGISurface*, UInt32),
     release : Proc(IDXGISurface*, UInt32),
@@ -1138,7 +1138,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGISurface, lpVtbl : IDXGISurfaceVtbl* do
+  record IDXGISurface, lpVtbl : IDXGISurfaceVtable* do
     GUID = LibC::GUID.new(0xcafcb56c_u32, 0x6ac3_u16, 0x4889_u16, StaticArray[0xbf_u8, 0x47_u8, 0x9e_u8, 0x23_u8, 0xbb_u8, 0xd2_u8, 0x60_u8, 0xec_u8])
     def query_interface(this : IDXGISurface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1177,7 +1177,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGISurface1Vtbl,
+  record IDXGISurface1Vtable,
     query_interface : Proc(IDXGISurface1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGISurface1*, UInt32),
     release : Proc(IDXGISurface1*, UInt32),
@@ -1194,7 +1194,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGISurface1, lpVtbl : IDXGISurface1Vtbl* do
+  record IDXGISurface1, lpVtbl : IDXGISurface1Vtable* do
     GUID = LibC::GUID.new(0x4ae63092_u32, 0x6327_u16, 0x4c1b_u16, StaticArray[0x80_u8, 0xae_u8, 0xbf_u8, 0xe1_u8, 0x2e_u8, 0xa3_u8, 0x2b_u8, 0x86_u8])
     def query_interface(this : IDXGISurface1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1239,7 +1239,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIAdapterVtbl,
+  record IDXGIAdapterVtable,
     query_interface : Proc(IDXGIAdapter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIAdapter*, UInt32),
     release : Proc(IDXGIAdapter*, UInt32),
@@ -1253,7 +1253,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIAdapter, lpVtbl : IDXGIAdapterVtbl* do
+  record IDXGIAdapter, lpVtbl : IDXGIAdapterVtable* do
     GUID = LibC::GUID.new(0x2411e7e1_u32, 0x12ac_u16, 0x4ccf_u16, StaticArray[0xbd_u8, 0x14_u8, 0x97_u8, 0x98_u8, 0xe8_u8, 0x53_u8, 0x4d_u8, 0xc0_u8])
     def query_interface(this : IDXGIAdapter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1289,7 +1289,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIOutputVtbl,
+  record IDXGIOutputVtable,
     query_interface : Proc(IDXGIOutput*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIOutput*, UInt32),
     release : Proc(IDXGIOutput*, UInt32),
@@ -1312,7 +1312,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIOutput, lpVtbl : IDXGIOutputVtbl* do
+  record IDXGIOutput, lpVtbl : IDXGIOutputVtable* do
     GUID = LibC::GUID.new(0xae02eedb_u32, 0xc735_u16, 0x4690_u16, StaticArray[0x8d_u8, 0x52_u8, 0x5a_u8, 0x8d_u8, 0xc2_u8, 0x2_u8, 0x13_u8, 0xaa_u8])
     def query_interface(this : IDXGIOutput*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1375,7 +1375,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGISwapChainVtbl,
+  record IDXGISwapChainVtable,
     query_interface : Proc(IDXGISwapChain*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGISwapChain*, UInt32),
     release : Proc(IDXGISwapChain*, UInt32),
@@ -1397,7 +1397,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGISwapChain, lpVtbl : IDXGISwapChainVtbl* do
+  record IDXGISwapChain, lpVtbl : IDXGISwapChainVtable* do
     GUID = LibC::GUID.new(0x310d36a0_u32, 0xd2e7_u16, 0x4c0a_u16, StaticArray[0xaa_u8, 0x4_u8, 0x6a_u8, 0x9d_u8, 0x23_u8, 0xb8_u8, 0x88_u8, 0x6a_u8])
     def query_interface(this : IDXGISwapChain*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1457,7 +1457,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIFactoryVtbl,
+  record IDXGIFactoryVtable,
     query_interface : Proc(IDXGIFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIFactory*, UInt32),
     release : Proc(IDXGIFactory*, UInt32),
@@ -1473,7 +1473,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIFactory, lpVtbl : IDXGIFactoryVtbl* do
+  record IDXGIFactory, lpVtbl : IDXGIFactoryVtable* do
     GUID = LibC::GUID.new(0x7b7166ec_u32, 0x21c7_u16, 0x44ae_u16, StaticArray[0xb2_u8, 0x1a_u8, 0xc9_u8, 0xae_u8, 0x32_u8, 0x1a_u8, 0xe3_u8, 0x69_u8])
     def query_interface(this : IDXGIFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1515,7 +1515,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIDeviceVtbl,
+  record IDXGIDeviceVtable,
     query_interface : Proc(IDXGIDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIDevice*, UInt32),
     release : Proc(IDXGIDevice*, UInt32),
@@ -1531,7 +1531,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIDevice, lpVtbl : IDXGIDeviceVtbl* do
+  record IDXGIDevice, lpVtbl : IDXGIDeviceVtable* do
     GUID = LibC::GUID.new(0x54ec77fa_u32, 0x1377_u16, 0x44e6_u16, StaticArray[0x8c_u8, 0x32_u8, 0x88_u8, 0xfd_u8, 0x5f_u8, 0x44_u8, 0xc8_u8, 0x4c_u8])
     def query_interface(this : IDXGIDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1573,7 +1573,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIFactory1Vtbl,
+  record IDXGIFactory1Vtable,
     query_interface : Proc(IDXGIFactory1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIFactory1*, UInt32),
     release : Proc(IDXGIFactory1*, UInt32),
@@ -1591,7 +1591,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIFactory1, lpVtbl : IDXGIFactory1Vtbl* do
+  record IDXGIFactory1, lpVtbl : IDXGIFactory1Vtable* do
     GUID = LibC::GUID.new(0x770aae78_u32, 0xf26f_u16, 0x4dba_u16, StaticArray[0xa8_u8, 0x29_u8, 0x25_u8, 0x3c_u8, 0x83_u8, 0xd1_u8, 0xb3_u8, 0x87_u8])
     def query_interface(this : IDXGIFactory1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1639,7 +1639,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIAdapter1Vtbl,
+  record IDXGIAdapter1Vtable,
     query_interface : Proc(IDXGIAdapter1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIAdapter1*, UInt32),
     release : Proc(IDXGIAdapter1*, UInt32),
@@ -1654,7 +1654,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIAdapter1, lpVtbl : IDXGIAdapter1Vtbl* do
+  record IDXGIAdapter1, lpVtbl : IDXGIAdapter1Vtable* do
     GUID = LibC::GUID.new(0x29038f61_u32, 0x3839_u16, 0x4626_u16, StaticArray[0x91_u8, 0xfd_u8, 0x8_u8, 0x68_u8, 0x79_u8, 0x1_u8, 0x1a_u8, 0x5_u8])
     def query_interface(this : IDXGIAdapter1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1693,7 +1693,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIDevice1Vtbl,
+  record IDXGIDevice1Vtable,
     query_interface : Proc(IDXGIDevice1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIDevice1*, UInt32),
     release : Proc(IDXGIDevice1*, UInt32),
@@ -1711,7 +1711,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIDevice1, lpVtbl : IDXGIDevice1Vtbl* do
+  record IDXGIDevice1, lpVtbl : IDXGIDevice1Vtable* do
     GUID = LibC::GUID.new(0x77db970f_u32, 0x6276_u16, 0x48ba_u16, StaticArray[0xba_u8, 0x28_u8, 0x7_u8, 0x1_u8, 0x43_u8, 0xb4_u8, 0x39_u8, 0x2c_u8])
     def query_interface(this : IDXGIDevice1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1759,7 +1759,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIDisplayControlVtbl,
+  record IDXGIDisplayControlVtable,
     query_interface : Proc(IDXGIDisplayControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIDisplayControl*, UInt32),
     release : Proc(IDXGIDisplayControl*, UInt32),
@@ -1768,7 +1768,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIDisplayControl, lpVtbl : IDXGIDisplayControlVtbl* do
+  record IDXGIDisplayControl, lpVtbl : IDXGIDisplayControlVtable* do
     GUID = LibC::GUID.new(0xea9dbf1a_u32, 0xc88e_u16, 0x4486_u16, StaticArray[0x85_u8, 0x4a_u8, 0x98_u8, 0xaa_u8, 0x1_u8, 0x38_u8, 0xf3_u8, 0xc_u8])
     def query_interface(this : IDXGIDisplayControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1789,7 +1789,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIOutputDuplicationVtbl,
+  record IDXGIOutputDuplicationVtable,
     query_interface : Proc(IDXGIOutputDuplication*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIOutputDuplication*, UInt32),
     release : Proc(IDXGIOutputDuplication*, UInt32),
@@ -1808,7 +1808,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIOutputDuplication, lpVtbl : IDXGIOutputDuplicationVtbl* do
+  record IDXGIOutputDuplication, lpVtbl : IDXGIOutputDuplicationVtable* do
     GUID = LibC::GUID.new(0x191cfac3_u32, 0xa341_u16, 0x470d_u16, StaticArray[0xb2_u8, 0x6e_u8, 0xa8_u8, 0x64_u8, 0xf4_u8, 0x28_u8, 0x31_u8, 0x9c_u8])
     def query_interface(this : IDXGIOutputDuplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1859,7 +1859,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGISurface2Vtbl,
+  record IDXGISurface2Vtable,
     query_interface : Proc(IDXGISurface2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGISurface2*, UInt32),
     release : Proc(IDXGISurface2*, UInt32),
@@ -1877,7 +1877,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGISurface2, lpVtbl : IDXGISurface2Vtbl* do
+  record IDXGISurface2, lpVtbl : IDXGISurface2Vtable* do
     GUID = LibC::GUID.new(0xaba496dd_u32, 0xb617_u16, 0x4cb8_u16, StaticArray[0xa8_u8, 0x66_u8, 0xbc_u8, 0x44_u8, 0xd7_u8, 0xeb_u8, 0x1f_u8, 0xa2_u8])
     def query_interface(this : IDXGISurface2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1925,7 +1925,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIResource1Vtbl,
+  record IDXGIResource1Vtable,
     query_interface : Proc(IDXGIResource1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIResource1*, UInt32),
     release : Proc(IDXGIResource1*, UInt32),
@@ -1943,7 +1943,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIResource1, lpVtbl : IDXGIResource1Vtbl* do
+  record IDXGIResource1, lpVtbl : IDXGIResource1Vtable* do
     GUID = LibC::GUID.new(0x30961379_u32, 0x4609_u16, 0x4a41_u16, StaticArray[0x99_u8, 0x8e_u8, 0x54_u8, 0xfe_u8, 0x56_u8, 0x7e_u8, 0xe0_u8, 0xc1_u8])
     def query_interface(this : IDXGIResource1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1991,7 +1991,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIDevice2Vtbl,
+  record IDXGIDevice2Vtable,
     query_interface : Proc(IDXGIDevice2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIDevice2*, UInt32),
     release : Proc(IDXGIDevice2*, UInt32),
@@ -2012,7 +2012,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIDevice2, lpVtbl : IDXGIDevice2Vtbl* do
+  record IDXGIDevice2, lpVtbl : IDXGIDevice2Vtable* do
     GUID = LibC::GUID.new(0x5008617_u32, 0xfbfd_u16, 0x4051_u16, StaticArray[0xa7_u8, 0x90_u8, 0x14_u8, 0x48_u8, 0x84_u8, 0xb4_u8, 0xf6_u8, 0xa9_u8])
     def query_interface(this : IDXGIDevice2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2069,7 +2069,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGISwapChain1Vtbl,
+  record IDXGISwapChain1Vtable,
     query_interface : Proc(IDXGISwapChain1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGISwapChain1*, UInt32),
     release : Proc(IDXGISwapChain1*, UInt32),
@@ -2102,7 +2102,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGISwapChain1, lpVtbl : IDXGISwapChain1Vtbl* do
+  record IDXGISwapChain1, lpVtbl : IDXGISwapChain1Vtable* do
     GUID = LibC::GUID.new(0x790a45f7_u32, 0xd42_u16, 0x4876_u16, StaticArray[0x98_u8, 0x3a_u8, 0xa_u8, 0x55_u8, 0xcf_u8, 0xe6_u8, 0xf4_u8, 0xaa_u8])
     def query_interface(this : IDXGISwapChain1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2195,7 +2195,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIFactory2Vtbl,
+  record IDXGIFactory2Vtable,
     query_interface : Proc(IDXGIFactory2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIFactory2*, UInt32),
     release : Proc(IDXGIFactory2*, UInt32),
@@ -2224,7 +2224,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIFactory2, lpVtbl : IDXGIFactory2Vtbl* do
+  record IDXGIFactory2, lpVtbl : IDXGIFactory2Vtable* do
     GUID = LibC::GUID.new(0x50c83a1c_u32, 0xe072_u16, 0x4c48_u16, StaticArray[0x87_u8, 0xb0_u8, 0x36_u8, 0x30_u8, 0xfa_u8, 0x36_u8, 0xa6_u8, 0xd0_u8])
     def query_interface(this : IDXGIFactory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2305,7 +2305,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIAdapter2Vtbl,
+  record IDXGIAdapter2Vtable,
     query_interface : Proc(IDXGIAdapter2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIAdapter2*, UInt32),
     release : Proc(IDXGIAdapter2*, UInt32),
@@ -2321,7 +2321,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIAdapter2, lpVtbl : IDXGIAdapter2Vtbl* do
+  record IDXGIAdapter2, lpVtbl : IDXGIAdapter2Vtable* do
     GUID = LibC::GUID.new(0xaa1ae0a_u32, 0xfa0e_u16, 0x4b84_u16, StaticArray[0x86_u8, 0x44_u8, 0xe0_u8, 0x5f_u8, 0xf8_u8, 0xe5_u8, 0xac_u8, 0xb5_u8])
     def query_interface(this : IDXGIAdapter2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2363,7 +2363,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIOutput1Vtbl,
+  record IDXGIOutput1Vtable,
     query_interface : Proc(IDXGIOutput1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIOutput1*, UInt32),
     release : Proc(IDXGIOutput1*, UInt32),
@@ -2390,7 +2390,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIOutput1, lpVtbl : IDXGIOutput1Vtbl* do
+  record IDXGIOutput1, lpVtbl : IDXGIOutput1Vtable* do
     GUID = LibC::GUID.new(0xcddea8_u32, 0x939b_u16, 0x4b83_u16, StaticArray[0xa3_u8, 0x40_u8, 0xa6_u8, 0x85_u8, 0x22_u8, 0x66_u8, 0x66_u8, 0xcc_u8])
     def query_interface(this : IDXGIOutput1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2465,7 +2465,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIDevice3Vtbl,
+  record IDXGIDevice3Vtable,
     query_interface : Proc(IDXGIDevice3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIDevice3*, UInt32),
     release : Proc(IDXGIDevice3*, UInt32),
@@ -2487,7 +2487,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIDevice3, lpVtbl : IDXGIDevice3Vtbl* do
+  record IDXGIDevice3, lpVtbl : IDXGIDevice3Vtable* do
     GUID = LibC::GUID.new(0x6007896c_u32, 0x3244_u16, 0x4afd_u16, StaticArray[0xbf_u8, 0x18_u8, 0xa6_u8, 0xd3_u8, 0xbe_u8, 0xda_u8, 0x50_u8, 0x23_u8])
     def query_interface(this : IDXGIDevice3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2547,7 +2547,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGISwapChain2Vtbl,
+  record IDXGISwapChain2Vtable,
     query_interface : Proc(IDXGISwapChain2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGISwapChain2*, UInt32),
     release : Proc(IDXGISwapChain2*, UInt32),
@@ -2587,7 +2587,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGISwapChain2, lpVtbl : IDXGISwapChain2Vtbl* do
+  record IDXGISwapChain2, lpVtbl : IDXGISwapChain2Vtable* do
     GUID = LibC::GUID.new(0xa8be2ac4_u32, 0x199f_u16, 0x4946_u16, StaticArray[0xb3_u8, 0x31_u8, 0x79_u8, 0x59_u8, 0x9f_u8, 0xb9_u8, 0x8d_u8, 0xe7_u8])
     def query_interface(this : IDXGISwapChain2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2701,7 +2701,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIOutput2Vtbl,
+  record IDXGIOutput2Vtable,
     query_interface : Proc(IDXGIOutput2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIOutput2*, UInt32),
     release : Proc(IDXGIOutput2*, UInt32),
@@ -2729,7 +2729,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIOutput2, lpVtbl : IDXGIOutput2Vtbl* do
+  record IDXGIOutput2, lpVtbl : IDXGIOutput2Vtable* do
     GUID = LibC::GUID.new(0x595e39d1_u32, 0x2724_u16, 0x4663_u16, StaticArray[0x99_u8, 0xb1_u8, 0xda_u8, 0x96_u8, 0x9d_u8, 0xe2_u8, 0x83_u8, 0x64_u8])
     def query_interface(this : IDXGIOutput2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2807,7 +2807,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIFactory3Vtbl,
+  record IDXGIFactory3Vtable,
     query_interface : Proc(IDXGIFactory3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIFactory3*, UInt32),
     release : Proc(IDXGIFactory3*, UInt32),
@@ -2837,7 +2837,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIFactory3, lpVtbl : IDXGIFactory3Vtbl* do
+  record IDXGIFactory3, lpVtbl : IDXGIFactory3Vtable* do
     GUID = LibC::GUID.new(0x25483823_u32, 0xcd46_u16, 0x4c7d_u16, StaticArray[0x86_u8, 0xca_u8, 0x47_u8, 0xaa_u8, 0x95_u8, 0xb8_u8, 0x37_u8, 0xbd_u8])
     def query_interface(this : IDXGIFactory3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2921,7 +2921,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIDecodeSwapChainVtbl,
+  record IDXGIDecodeSwapChainVtable,
     query_interface : Proc(IDXGIDecodeSwapChain*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIDecodeSwapChain*, UInt32),
     release : Proc(IDXGIDecodeSwapChain*, UInt32),
@@ -2937,7 +2937,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIDecodeSwapChain, lpVtbl : IDXGIDecodeSwapChainVtbl* do
+  record IDXGIDecodeSwapChain, lpVtbl : IDXGIDecodeSwapChainVtable* do
     GUID = LibC::GUID.new(0x2633066b_u32, 0x4514_u16, 0x4c7a_u16, StaticArray[0x8f_u8, 0xd8_u8, 0x12_u8, 0xea_u8, 0x98_u8, 0x5_u8, 0x9d_u8, 0x18_u8])
     def query_interface(this : IDXGIDecodeSwapChain*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2979,7 +2979,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIFactoryMediaVtbl,
+  record IDXGIFactoryMediaVtable,
     query_interface : Proc(IDXGIFactoryMedia*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIFactoryMedia*, UInt32),
     release : Proc(IDXGIFactoryMedia*, UInt32),
@@ -2988,7 +2988,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIFactoryMedia, lpVtbl : IDXGIFactoryMediaVtbl* do
+  record IDXGIFactoryMedia, lpVtbl : IDXGIFactoryMediaVtable* do
     GUID = LibC::GUID.new(0x41e7d1f2_u32, 0xa591_u16, 0x4f7b_u16, StaticArray[0xa2_u8, 0xe5_u8, 0xfa_u8, 0x9c_u8, 0x84_u8, 0x3e_u8, 0x1c_u8, 0x12_u8])
     def query_interface(this : IDXGIFactoryMedia*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3009,7 +3009,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGISwapChainMediaVtbl,
+  record IDXGISwapChainMediaVtable,
     query_interface : Proc(IDXGISwapChainMedia*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGISwapChainMedia*, UInt32),
     release : Proc(IDXGISwapChainMedia*, UInt32),
@@ -3019,7 +3019,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGISwapChainMedia, lpVtbl : IDXGISwapChainMediaVtbl* do
+  record IDXGISwapChainMedia, lpVtbl : IDXGISwapChainMediaVtable* do
     GUID = LibC::GUID.new(0xdd95b90b_u32, 0xf05f_u16, 0x4f6a_u16, StaticArray[0xbd_u8, 0x65_u8, 0x25_u8, 0xbf_u8, 0xb2_u8, 0x64_u8, 0xbd_u8, 0x84_u8])
     def query_interface(this : IDXGISwapChainMedia*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3043,7 +3043,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIOutput3Vtbl,
+  record IDXGIOutput3Vtable,
     query_interface : Proc(IDXGIOutput3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIOutput3*, UInt32),
     release : Proc(IDXGIOutput3*, UInt32),
@@ -3072,7 +3072,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIOutput3, lpVtbl : IDXGIOutput3Vtbl* do
+  record IDXGIOutput3, lpVtbl : IDXGIOutput3Vtable* do
     GUID = LibC::GUID.new(0x8a6bb301_u32, 0x7e7e_u16, 0x41f4_u16, StaticArray[0xa8_u8, 0xe0_u8, 0x5b_u8, 0x32_u8, 0xf7_u8, 0xf9_u8, 0x9b_u8, 0x18_u8])
     def query_interface(this : IDXGIOutput3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3153,7 +3153,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGISwapChain3Vtbl,
+  record IDXGISwapChain3Vtable,
     query_interface : Proc(IDXGISwapChain3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGISwapChain3*, UInt32),
     release : Proc(IDXGISwapChain3*, UInt32),
@@ -3197,7 +3197,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGISwapChain3, lpVtbl : IDXGISwapChain3Vtbl* do
+  record IDXGISwapChain3, lpVtbl : IDXGISwapChain3Vtable* do
     GUID = LibC::GUID.new(0x94d99bdb_u32, 0xf1f8_u16, 0x4ab0_u16, StaticArray[0xb2_u8, 0x36_u8, 0x7d_u8, 0xa0_u8, 0x17_u8, 0xe_u8, 0xda_u8, 0xb1_u8])
     def query_interface(this : IDXGISwapChain3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3323,7 +3323,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIOutput4Vtbl,
+  record IDXGIOutput4Vtable,
     query_interface : Proc(IDXGIOutput4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIOutput4*, UInt32),
     release : Proc(IDXGIOutput4*, UInt32),
@@ -3353,7 +3353,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIOutput4, lpVtbl : IDXGIOutput4Vtbl* do
+  record IDXGIOutput4, lpVtbl : IDXGIOutput4Vtable* do
     GUID = LibC::GUID.new(0xdc7dca35_u32, 0x2196_u16, 0x414d_u16, StaticArray[0x9f_u8, 0x53_u8, 0x61_u8, 0x78_u8, 0x84_u8, 0x3_u8, 0x2a_u8, 0x60_u8])
     def query_interface(this : IDXGIOutput4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3437,7 +3437,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIFactory4Vtbl,
+  record IDXGIFactory4Vtable,
     query_interface : Proc(IDXGIFactory4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIFactory4*, UInt32),
     release : Proc(IDXGIFactory4*, UInt32),
@@ -3469,7 +3469,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIFactory4, lpVtbl : IDXGIFactory4Vtbl* do
+  record IDXGIFactory4, lpVtbl : IDXGIFactory4Vtable* do
     GUID = LibC::GUID.new(0x1bc6ea02_u32, 0xef36_u16, 0x464f_u16, StaticArray[0xbf_u8, 0xc_u8, 0x21_u8, 0xca_u8, 0x39_u8, 0xe5_u8, 0x16_u8, 0x8a_u8])
     def query_interface(this : IDXGIFactory4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3559,7 +3559,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIAdapter3Vtbl,
+  record IDXGIAdapter3Vtable,
     query_interface : Proc(IDXGIAdapter3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIAdapter3*, UInt32),
     release : Proc(IDXGIAdapter3*, UInt32),
@@ -3581,7 +3581,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIAdapter3, lpVtbl : IDXGIAdapter3Vtbl* do
+  record IDXGIAdapter3, lpVtbl : IDXGIAdapter3Vtable* do
     GUID = LibC::GUID.new(0x645967a4_u32, 0x1392_u16, 0x4310_u16, StaticArray[0xa7_u8, 0x98_u8, 0x80_u8, 0x53_u8, 0xce_u8, 0x3e_u8, 0x93_u8, 0xfd_u8])
     def query_interface(this : IDXGIAdapter3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3641,7 +3641,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIOutput5Vtbl,
+  record IDXGIOutput5Vtable,
     query_interface : Proc(IDXGIOutput5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIOutput5*, UInt32),
     release : Proc(IDXGIOutput5*, UInt32),
@@ -3672,7 +3672,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIOutput5, lpVtbl : IDXGIOutput5Vtbl* do
+  record IDXGIOutput5, lpVtbl : IDXGIOutput5Vtable* do
     GUID = LibC::GUID.new(0x80a07424_u32, 0xab52_u16, 0x42eb_u16, StaticArray[0x83_u8, 0x3c_u8, 0xc_u8, 0x42_u8, 0xfd_u8, 0x28_u8, 0x2d_u8, 0x98_u8])
     def query_interface(this : IDXGIOutput5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3759,7 +3759,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGISwapChain4Vtbl,
+  record IDXGISwapChain4Vtable,
     query_interface : Proc(IDXGISwapChain4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGISwapChain4*, UInt32),
     release : Proc(IDXGISwapChain4*, UInt32),
@@ -3804,7 +3804,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGISwapChain4, lpVtbl : IDXGISwapChain4Vtbl* do
+  record IDXGISwapChain4, lpVtbl : IDXGISwapChain4Vtable* do
     GUID = LibC::GUID.new(0x3d585d5a_u32, 0xbd4a_u16, 0x489e_u16, StaticArray[0xb1_u8, 0xf4_u8, 0x3d_u8, 0xbc_u8, 0xb6_u8, 0x45_u8, 0x2f_u8, 0xfb_u8])
     def query_interface(this : IDXGISwapChain4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3933,7 +3933,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIDevice4Vtbl,
+  record IDXGIDevice4Vtable,
     query_interface : Proc(IDXGIDevice4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIDevice4*, UInt32),
     release : Proc(IDXGIDevice4*, UInt32),
@@ -3957,7 +3957,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIDevice4, lpVtbl : IDXGIDevice4Vtbl* do
+  record IDXGIDevice4, lpVtbl : IDXGIDevice4Vtable* do
     GUID = LibC::GUID.new(0x95b4f95f_u32, 0xd8da_u16, 0x4ca4_u16, StaticArray[0x9e_u8, 0xe6_u8, 0x3b_u8, 0x76_u8, 0xd5_u8, 0x96_u8, 0x8a_u8, 0x10_u8])
     def query_interface(this : IDXGIDevice4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4023,7 +4023,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIFactory5Vtbl,
+  record IDXGIFactory5Vtable,
     query_interface : Proc(IDXGIFactory5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIFactory5*, UInt32),
     release : Proc(IDXGIFactory5*, UInt32),
@@ -4056,7 +4056,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIFactory5, lpVtbl : IDXGIFactory5Vtbl* do
+  record IDXGIFactory5, lpVtbl : IDXGIFactory5Vtable* do
     GUID = LibC::GUID.new(0x7632e1f5_u32, 0xee65_u16, 0x4dca_u16, StaticArray[0x87_u8, 0xfd_u8, 0x84_u8, 0xcd_u8, 0x75_u8, 0xf8_u8, 0x83_u8, 0x8d_u8])
     def query_interface(this : IDXGIFactory5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4149,7 +4149,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIAdapter4Vtbl,
+  record IDXGIAdapter4Vtable,
     query_interface : Proc(IDXGIAdapter4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIAdapter4*, UInt32),
     release : Proc(IDXGIAdapter4*, UInt32),
@@ -4172,7 +4172,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIAdapter4, lpVtbl : IDXGIAdapter4Vtbl* do
+  record IDXGIAdapter4, lpVtbl : IDXGIAdapter4Vtable* do
     GUID = LibC::GUID.new(0x3c8d99d1_u32, 0x4fbf_u16, 0x4181_u16, StaticArray[0xa8_u8, 0x2c_u8, 0xaf_u8, 0x66_u8, 0xbf_u8, 0x7b_u8, 0xd2_u8, 0x4e_u8])
     def query_interface(this : IDXGIAdapter4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4235,7 +4235,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIOutput6Vtbl,
+  record IDXGIOutput6Vtable,
     query_interface : Proc(IDXGIOutput6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIOutput6*, UInt32),
     release : Proc(IDXGIOutput6*, UInt32),
@@ -4268,7 +4268,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIOutput6, lpVtbl : IDXGIOutput6Vtbl* do
+  record IDXGIOutput6, lpVtbl : IDXGIOutput6Vtable* do
     GUID = LibC::GUID.new(0x68346e8_u32, 0xaaec_u16, 0x4b84_u16, StaticArray[0xad_u8, 0xd7_u8, 0x13_u8, 0x7f_u8, 0x51_u8, 0x3f_u8, 0x77_u8, 0xa1_u8])
     def query_interface(this : IDXGIOutput6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4361,7 +4361,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIFactory6Vtbl,
+  record IDXGIFactory6Vtable,
     query_interface : Proc(IDXGIFactory6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIFactory6*, UInt32),
     release : Proc(IDXGIFactory6*, UInt32),
@@ -4395,7 +4395,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIFactory6, lpVtbl : IDXGIFactory6Vtbl* do
+  record IDXGIFactory6, lpVtbl : IDXGIFactory6Vtable* do
     GUID = LibC::GUID.new(0xc1b6694f_u32, 0xff09_u16, 0x44a9_u16, StaticArray[0xb0_u8, 0x3c_u8, 0x77_u8, 0x90_u8, 0xa_u8, 0xa_u8, 0x1d_u8, 0x17_u8])
     def query_interface(this : IDXGIFactory6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4491,7 +4491,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIFactory7Vtbl,
+  record IDXGIFactory7Vtable,
     query_interface : Proc(IDXGIFactory7*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIFactory7*, UInt32),
     release : Proc(IDXGIFactory7*, UInt32),
@@ -4527,7 +4527,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIFactory7, lpVtbl : IDXGIFactory7Vtbl* do
+  record IDXGIFactory7, lpVtbl : IDXGIFactory7Vtable* do
     GUID = LibC::GUID.new(0xa4966eed_u32, 0x76db_u16, 0x44da_u16, StaticArray[0x84_u8, 0xc1_u8, 0xee_u8, 0x9a_u8, 0x7a_u8, 0xfb_u8, 0x20_u8, 0xa8_u8])
     def query_interface(this : IDXGIFactory7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4629,7 +4629,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIInfoQueueVtbl,
+  record IDXGIInfoQueueVtable,
     query_interface : Proc(IDXGIInfoQueue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIInfoQueue*, UInt32),
     release : Proc(IDXGIInfoQueue*, UInt32),
@@ -4673,7 +4673,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIInfoQueue, lpVtbl : IDXGIInfoQueueVtbl* do
+  record IDXGIInfoQueue, lpVtbl : IDXGIInfoQueueVtable* do
     GUID = LibC::GUID.new(0xd67441c7_u32, 0x672a_u16, 0x476f_u16, StaticArray[0x9e_u8, 0x82_u8, 0xcd_u8, 0x55_u8, 0xb4_u8, 0x49_u8, 0x49_u8, 0xce_u8])
     def query_interface(this : IDXGIInfoQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4799,7 +4799,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIDebugVtbl,
+  record IDXGIDebugVtable,
     query_interface : Proc(IDXGIDebug*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIDebug*, UInt32),
     release : Proc(IDXGIDebug*, UInt32),
@@ -4807,7 +4807,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIDebug, lpVtbl : IDXGIDebugVtbl* do
+  record IDXGIDebug, lpVtbl : IDXGIDebugVtable* do
     GUID = LibC::GUID.new(0x119e7452_u32, 0xde9e_u16, 0x40fe_u16, StaticArray[0x88_u8, 0x6_u8, 0x88_u8, 0xf9_u8, 0xc_u8, 0x12_u8, 0xb4_u8, 0x41_u8])
     def query_interface(this : IDXGIDebug*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4825,7 +4825,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGIDebug1Vtbl,
+  record IDXGIDebug1Vtable,
     query_interface : Proc(IDXGIDebug1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGIDebug1*, UInt32),
     release : Proc(IDXGIDebug1*, UInt32),
@@ -4836,7 +4836,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGIDebug1, lpVtbl : IDXGIDebug1Vtbl* do
+  record IDXGIDebug1, lpVtbl : IDXGIDebug1Vtable* do
     GUID = LibC::GUID.new(0xc5a05f0c_u32, 0x16f2_u16, 0x4adf_u16, StaticArray[0x9f_u8, 0x4d_u8, 0xa8_u8, 0xc4_u8, 0xd5_u8, 0x8a_u8, 0xc5_u8, 0x50_u8])
     def query_interface(this : IDXGIDebug1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4863,7 +4863,7 @@ module Win32cr::Graphics::Dxgi
   end
 
   @[Extern]
-  record IDXGraphicsAnalysisVtbl,
+  record IDXGraphicsAnalysisVtable,
     query_interface : Proc(IDXGraphicsAnalysis*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXGraphicsAnalysis*, UInt32),
     release : Proc(IDXGraphicsAnalysis*, UInt32),
@@ -4872,7 +4872,7 @@ module Win32cr::Graphics::Dxgi
 
 
   @[Extern]
-  record IDXGraphicsAnalysis, lpVtbl : IDXGraphicsAnalysisVtbl* do
+  record IDXGraphicsAnalysis, lpVtbl : IDXGraphicsAnalysisVtable* do
     GUID = LibC::GUID.new(0x9f251514_u32, 0x9d4d_u16, 0x4902_u16, StaticArray[0x9d_u8, 0x60_u8, 0x18_u8, 0x98_u8, 0x8a_u8, 0xb7_u8, 0xd4_u8, 0xb5_u8])
     def query_interface(this : IDXGraphicsAnalysis*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4893,26 +4893,37 @@ module Win32cr::Graphics::Dxgi
   end
 
   def createDXGIFactory(riid : LibC::GUID*, ppFactory : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateDXGIFactory(riid, ppFactory)
+    {% end %}
   end
 
   def createDXGIFactory1(riid : LibC::GUID*, ppFactory : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateDXGIFactory1(riid, ppFactory)
+    {% end %}
   end
 
   def createDXGIFactory2(flags : UInt32, riid : LibC::GUID*, ppFactory : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateDXGIFactory2(flags, riid, ppFactory)
+    {% end %}
   end
 
   def dXGIGetDebugInterface1(flags : UInt32, riid : LibC::GUID*, pDebug : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DXGIGetDebugInterface1(flags, riid, pDebug)
+    {% end %}
   end
 
   def dXGIDeclareAdapterRemovalSupport : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DXGIDeclareAdapterRemovalSupport
+    {% end %}
   end
 
   @[Link("dxgi")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CreateDXGIFactory(riid : LibC::GUID*, ppFactory : Void**) : Win32cr::Foundation::HRESULT
@@ -4930,4 +4941,5 @@ module Win32cr::Graphics::Dxgi
     fun DXGIDeclareAdapterRemovalSupport : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

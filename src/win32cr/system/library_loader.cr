@@ -79,11 +79,15 @@ module Win32cr::System::LibraryLoader
   end
 
   def disableThreadLibraryCalls(hLibModule : Win32cr::Foundation::HINSTANCE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DisableThreadLibraryCalls(hLibModule)
+    {% end %}
   end
 
   def findResourceExW(hModule : Win32cr::Foundation::HINSTANCE, lpType : Win32cr::Foundation::PWSTR, lpName : Win32cr::Foundation::PWSTR, wLanguage : UInt16) : Win32cr::Foundation::HRSRC
+    {% if !flag?(:docs) %}
     C.FindResourceExW(hModule, lpType, lpName, wLanguage)
+    {% end %}
   end
 
   #def freeLibrary(hLibModule : Win32cr::Foundation::HINSTANCE) : Win32cr::Foundation::BOOL
@@ -91,15 +95,21 @@ module Win32cr::System::LibraryLoader
   #end
 
   def freeLibraryAndExitThread(hLibModule : Win32cr::Foundation::HINSTANCE, dwExitCode : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.FreeLibraryAndExitThread(hLibModule, dwExitCode)
+    {% end %}
   end
 
   def freeResource(hResData : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FreeResource(hResData)
+    {% end %}
   end
 
   def getModuleFileNameA(hModule : Win32cr::Foundation::HINSTANCE, lpFilename : UInt8*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetModuleFileNameA(hModule, lpFilename, nSize)
+    {% end %}
   end
 
   #def getModuleFileNameW(hModule : Win32cr::Foundation::HINSTANCE, lpFilename : UInt16*, nSize : UInt32) : UInt32
@@ -107,15 +117,21 @@ module Win32cr::System::LibraryLoader
   #end
 
   def getModuleHandleA(lpModuleName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HINSTANCE
+    {% if !flag?(:docs) %}
     C.GetModuleHandleA(lpModuleName)
+    {% end %}
   end
 
   def getModuleHandleW(lpModuleName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HINSTANCE
+    {% if !flag?(:docs) %}
     C.GetModuleHandleW(lpModuleName)
+    {% end %}
   end
 
   def getModuleHandleExA(dwFlags : UInt32, lpModuleName : Win32cr::Foundation::PSTR, phModule : Win32cr::Foundation::HINSTANCE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetModuleHandleExA(dwFlags, lpModuleName, phModule)
+    {% end %}
   end
 
   #def getModuleHandleExW(dwFlags : UInt32, lpModuleName : Win32cr::Foundation::PWSTR, phModule : Win32cr::Foundation::HINSTANCE*) : Win32cr::Foundation::BOOL
@@ -127,7 +143,9 @@ module Win32cr::System::LibraryLoader
   #end
 
   def loadLibraryExA(lpLibFileName : Win32cr::Foundation::PSTR, hFile : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::LibraryLoader::LOAD_LIBRARY_FLAGS) : Win32cr::Foundation::HINSTANCE
+    {% if !flag?(:docs) %}
     C.LoadLibraryExA(lpLibFileName, hFile, dwFlags)
+    {% end %}
   end
 
   #def loadLibraryExW(lpLibFileName : Win32cr::Foundation::PWSTR, hFile : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::LibraryLoader::LOAD_LIBRARY_FLAGS) : Win32cr::Foundation::HINSTANCE
@@ -135,146 +153,217 @@ module Win32cr::System::LibraryLoader
   #end
 
   def loadResource(hModule : Win32cr::Foundation::HINSTANCE, hResInfo : Win32cr::Foundation::HRSRC) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.LoadResource(hModule, hResInfo)
+    {% end %}
   end
 
   def lockResource(hResData : LibC::IntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.LockResource(hResData)
+    {% end %}
   end
 
   def sizeofResource(hModule : Win32cr::Foundation::HINSTANCE, hResInfo : Win32cr::Foundation::HRSRC) : UInt32
+    {% if !flag?(:docs) %}
     C.SizeofResource(hModule, hResInfo)
+    {% end %}
   end
 
   def addDllDirectory(new_directory : Win32cr::Foundation::PWSTR) : Void*
+    {% if !flag?(:docs) %}
     C.AddDllDirectory(new_directory)
+    {% end %}
   end
 
   def removeDllDirectory(cookie : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RemoveDllDirectory(cookie)
+    {% end %}
   end
 
   def setDefaultDllDirectories(directory_flags : Win32cr::System::LibraryLoader::LOAD_LIBRARY_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetDefaultDllDirectories(directory_flags)
+    {% end %}
   end
 
   def enumResourceLanguagesExA(hModule : Win32cr::Foundation::HINSTANCE, lpType : Win32cr::Foundation::PSTR, lpName : Win32cr::Foundation::PSTR, lpEnumFunc : Win32cr::System::LibraryLoader::ENUMRESLANGPROCA, lParam : LibC::IntPtrT, dwFlags : UInt32, lang_id : UInt16) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumResourceLanguagesExA(hModule, lpType, lpName, lpEnumFunc, lParam, dwFlags, lang_id)
+    {% end %}
   end
 
   def enumResourceLanguagesExW(hModule : Win32cr::Foundation::HINSTANCE, lpType : Win32cr::Foundation::PWSTR, lpName : Win32cr::Foundation::PWSTR, lpEnumFunc : Win32cr::System::LibraryLoader::ENUMRESLANGPROCW, lParam : LibC::IntPtrT, dwFlags : UInt32, lang_id : UInt16) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumResourceLanguagesExW(hModule, lpType, lpName, lpEnumFunc, lParam, dwFlags, lang_id)
+    {% end %}
   end
 
   def enumResourceNamesExA(hModule : Win32cr::Foundation::HINSTANCE, lpType : Win32cr::Foundation::PSTR, lpEnumFunc : Win32cr::System::LibraryLoader::ENUMRESNAMEPROCA, lParam : LibC::IntPtrT, dwFlags : UInt32, lang_id : UInt16) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumResourceNamesExA(hModule, lpType, lpEnumFunc, lParam, dwFlags, lang_id)
+    {% end %}
   end
 
   def enumResourceNamesExW(hModule : Win32cr::Foundation::HINSTANCE, lpType : Win32cr::Foundation::PWSTR, lpEnumFunc : Win32cr::System::LibraryLoader::ENUMRESNAMEPROCW, lParam : LibC::IntPtrT, dwFlags : UInt32, lang_id : UInt16) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumResourceNamesExW(hModule, lpType, lpEnumFunc, lParam, dwFlags, lang_id)
+    {% end %}
   end
 
   def enumResourceTypesExA(hModule : Win32cr::Foundation::HINSTANCE, lpEnumFunc : Win32cr::System::LibraryLoader::ENUMRESTYPEPROCA, lParam : LibC::IntPtrT, dwFlags : UInt32, lang_id : UInt16) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumResourceTypesExA(hModule, lpEnumFunc, lParam, dwFlags, lang_id)
+    {% end %}
   end
 
   def enumResourceTypesExW(hModule : Win32cr::Foundation::HINSTANCE, lpEnumFunc : Win32cr::System::LibraryLoader::ENUMRESTYPEPROCW, lParam : LibC::IntPtrT, dwFlags : UInt32, lang_id : UInt16) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumResourceTypesExW(hModule, lpEnumFunc, lParam, dwFlags, lang_id)
+    {% end %}
   end
 
   def findResourceW(hModule : Win32cr::Foundation::HINSTANCE, lpName : Win32cr::Foundation::PWSTR, lpType : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRSRC
+    {% if !flag?(:docs) %}
     C.FindResourceW(hModule, lpName, lpType)
+    {% end %}
   end
 
   def loadLibraryA(lpLibFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HINSTANCE
+    {% if !flag?(:docs) %}
     C.LoadLibraryA(lpLibFileName)
+    {% end %}
   end
 
   def loadLibraryW(lpLibFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HINSTANCE
+    {% if !flag?(:docs) %}
     C.LoadLibraryW(lpLibFileName)
+    {% end %}
   end
 
   def enumResourceNamesW(hModule : Win32cr::Foundation::HINSTANCE, lpType : Win32cr::Foundation::PWSTR, lpEnumFunc : Win32cr::System::LibraryLoader::ENUMRESNAMEPROCW, lParam : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumResourceNamesW(hModule, lpType, lpEnumFunc, lParam)
+    {% end %}
   end
 
   def enumResourceNamesA(hModule : Win32cr::Foundation::HINSTANCE, lpType : Win32cr::Foundation::PSTR, lpEnumFunc : Win32cr::System::LibraryLoader::ENUMRESNAMEPROCA, lParam : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumResourceNamesA(hModule, lpType, lpEnumFunc, lParam)
+    {% end %}
   end
 
   def loadModule(lpModuleName : Win32cr::Foundation::PSTR, lpParameterBlock : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.LoadModule(lpModuleName, lpParameterBlock)
+    {% end %}
   end
 
   def loadPackagedLibrary(lpwLibFileName : Win32cr::Foundation::PWSTR, reserved : UInt32) : Win32cr::Foundation::HINSTANCE
+    {% if !flag?(:docs) %}
     C.LoadPackagedLibrary(lpwLibFileName, reserved)
+    {% end %}
   end
 
   def findResourceA(hModule : Win32cr::Foundation::HINSTANCE, lpName : Win32cr::Foundation::PSTR, lpType : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRSRC
+    {% if !flag?(:docs) %}
     C.FindResourceA(hModule, lpName, lpType)
+    {% end %}
   end
 
   def findResourceExA(hModule : Win32cr::Foundation::HINSTANCE, lpType : Win32cr::Foundation::PSTR, lpName : Win32cr::Foundation::PSTR, wLanguage : UInt16) : Win32cr::Foundation::HRSRC
+    {% if !flag?(:docs) %}
     C.FindResourceExA(hModule, lpType, lpName, wLanguage)
+    {% end %}
   end
 
   def enumResourceTypesA(hModule : Win32cr::Foundation::HINSTANCE, lpEnumFunc : Win32cr::System::LibraryLoader::ENUMRESTYPEPROCA, lParam : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumResourceTypesA(hModule, lpEnumFunc, lParam)
+    {% end %}
   end
 
   def enumResourceTypesW(hModule : Win32cr::Foundation::HINSTANCE, lpEnumFunc : Win32cr::System::LibraryLoader::ENUMRESTYPEPROCW, lParam : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumResourceTypesW(hModule, lpEnumFunc, lParam)
+    {% end %}
   end
 
   def enumResourceLanguagesA(hModule : Win32cr::Foundation::HINSTANCE, lpType : Win32cr::Foundation::PSTR, lpName : Win32cr::Foundation::PSTR, lpEnumFunc : Win32cr::System::LibraryLoader::ENUMRESLANGPROCA, lParam : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumResourceLanguagesA(hModule, lpType, lpName, lpEnumFunc, lParam)
+    {% end %}
   end
 
   def enumResourceLanguagesW(hModule : Win32cr::Foundation::HINSTANCE, lpType : Win32cr::Foundation::PWSTR, lpName : Win32cr::Foundation::PWSTR, lpEnumFunc : Win32cr::System::LibraryLoader::ENUMRESLANGPROCW, lParam : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumResourceLanguagesW(hModule, lpType, lpName, lpEnumFunc, lParam)
+    {% end %}
   end
 
   def beginUpdateResourceA(pFileName : Win32cr::Foundation::PSTR, bDeleteExistingResources : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.BeginUpdateResourceA(pFileName, bDeleteExistingResources)
+    {% end %}
   end
 
   def beginUpdateResourceW(pFileName : Win32cr::Foundation::PWSTR, bDeleteExistingResources : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.BeginUpdateResourceW(pFileName, bDeleteExistingResources)
+    {% end %}
   end
 
   def updateResourceA(hUpdate : Win32cr::Foundation::HANDLE, lpType : Win32cr::Foundation::PSTR, lpName : Win32cr::Foundation::PSTR, wLanguage : UInt16, lpData : Void*, cb : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UpdateResourceA(hUpdate, lpType, lpName, wLanguage, lpData, cb)
+    {% end %}
   end
 
   def updateResourceW(hUpdate : Win32cr::Foundation::HANDLE, lpType : Win32cr::Foundation::PWSTR, lpName : Win32cr::Foundation::PWSTR, wLanguage : UInt16, lpData : Void*, cb : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UpdateResourceW(hUpdate, lpType, lpName, wLanguage, lpData, cb)
+    {% end %}
   end
 
   def endUpdateResourceA(hUpdate : Win32cr::Foundation::HANDLE, fDiscard : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EndUpdateResourceA(hUpdate, fDiscard)
+    {% end %}
   end
 
   def endUpdateResourceW(hUpdate : Win32cr::Foundation::HANDLE, fDiscard : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EndUpdateResourceW(hUpdate, fDiscard)
+    {% end %}
   end
 
   def setDllDirectoryA(lpPathName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetDllDirectoryA(lpPathName)
+    {% end %}
   end
 
   def setDllDirectoryW(lpPathName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetDllDirectoryW(lpPathName)
+    {% end %}
   end
 
   def getDllDirectoryA(nBufferLength : UInt32, lpBuffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetDllDirectoryA(nBufferLength, lpBuffer)
+    {% end %}
   end
 
   def getDllDirectoryW(nBufferLength : UInt32, lpBuffer : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetDllDirectoryW(nBufferLength, lpBuffer)
+    {% end %}
   end
 
   @[Link("kernel32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun DisableThreadLibraryCalls(hLibModule : Win32cr::Foundation::HINSTANCE) : Win32cr::Foundation::BOOL
@@ -429,4 +518,5 @@ module Win32cr::System::LibraryLoader
     fun GetDllDirectoryW(nBufferLength : UInt32, lpBuffer : UInt16*) : UInt32
 
   end
+  {% end %}
 end

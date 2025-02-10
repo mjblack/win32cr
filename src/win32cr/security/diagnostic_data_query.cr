@@ -146,146 +146,217 @@ module Win32cr::Security::DiagnosticDataQuery
   end
 
   def ddqCreateSession(accessLevel : Win32cr::Security::DiagnosticDataQuery::DdqAccessLevel, hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqCreateSession(accessLevel, hSession)
+    {% end %}
   end
 
   def ddqCloseSession(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqCloseSession(hSession)
+    {% end %}
   end
 
   def ddqGetSessionAccessLevel(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION, accessLevel : Win32cr::Security::DiagnosticDataQuery::DdqAccessLevel*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetSessionAccessLevel(hSession, accessLevel)
+    {% end %}
   end
 
   def ddqGetDiagnosticDataAccessLevelAllowed(accessLevel : Win32cr::Security::DiagnosticDataQuery::DdqAccessLevel*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticDataAccessLevelAllowed(accessLevel)
+    {% end %}
   end
 
   def ddqGetDiagnosticRecordStats(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION, searchCriteria : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_DATA_SEARCH_CRITERIA*, recordCount : UInt32*, minRowId : Int64*, maxRowId : Int64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticRecordStats(hSession, searchCriteria, recordCount, minRowId, maxRowId)
+    {% end %}
   end
 
   def ddqGetDiagnosticRecordPayload(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION, rowId : Int64, payload : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticRecordPayload(hSession, rowId, payload)
+    {% end %}
   end
 
   def ddqGetDiagnosticRecordLocaleTags(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION, locale : Win32cr::Foundation::PWSTR, hTagDescription : Win32cr::Security::HDIAGNOSTIC_EVENT_TAG_DESCRIPTION*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticRecordLocaleTags(hSession, locale, hTagDescription)
+    {% end %}
   end
 
   def ddqFreeDiagnosticRecordLocaleTags(hTagDescription : Win32cr::Security::HDIAGNOSTIC_EVENT_TAG_DESCRIPTION) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqFreeDiagnosticRecordLocaleTags(hTagDescription)
+    {% end %}
   end
 
   def ddqGetDiagnosticRecordLocaleTagAtIndex(hTagDescription : Win32cr::Security::HDIAGNOSTIC_EVENT_TAG_DESCRIPTION, index : UInt32, tagDescription : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_DATA_EVENT_TAG_DESCRIPTION*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticRecordLocaleTagAtIndex(hTagDescription, index, tagDescription)
+    {% end %}
   end
 
   def ddqGetDiagnosticRecordLocaleTagCount(hTagDescription : Win32cr::Security::HDIAGNOSTIC_EVENT_TAG_DESCRIPTION, tagDescriptionCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticRecordLocaleTagCount(hTagDescription, tagDescriptionCount)
+    {% end %}
   end
 
   def ddqGetDiagnosticRecordProducers(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION, hProducerDescription : Win32cr::Security::HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticRecordProducers(hSession, hProducerDescription)
+    {% end %}
   end
 
   def ddqFreeDiagnosticRecordProducers(hProducerDescription : Win32cr::Security::HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqFreeDiagnosticRecordProducers(hProducerDescription)
+    {% end %}
   end
 
   def ddqGetDiagnosticRecordProducerAtIndex(hProducerDescription : Win32cr::Security::HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION, index : UInt32, producerDescription : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_DATA_EVENT_PRODUCER_DESCRIPTION*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticRecordProducerAtIndex(hProducerDescription, index, producerDescription)
+    {% end %}
   end
 
   def ddqGetDiagnosticRecordProducerCount(hProducerDescription : Win32cr::Security::HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION, producerDescriptionCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticRecordProducerCount(hProducerDescription, producerDescriptionCount)
+    {% end %}
   end
 
   def ddqGetDiagnosticRecordProducerCategories(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION, producerName : Win32cr::Foundation::PWSTR, hCategoryDescription : Win32cr::Security::HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticRecordProducerCategories(hSession, producerName, hCategoryDescription)
+    {% end %}
   end
 
   def ddqFreeDiagnosticRecordProducerCategories(hCategoryDescription : Win32cr::Security::HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqFreeDiagnosticRecordProducerCategories(hCategoryDescription)
+    {% end %}
   end
 
   def ddqGetDiagnosticRecordCategoryAtIndex(hCategoryDescription : Win32cr::Security::HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION, index : UInt32, categoryDescription : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_DATA_EVENT_CATEGORY_DESCRIPTION*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticRecordCategoryAtIndex(hCategoryDescription, index, categoryDescription)
+    {% end %}
   end
 
   def ddqGetDiagnosticRecordCategoryCount(hCategoryDescription : Win32cr::Security::HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION, categoryDescriptionCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticRecordCategoryCount(hCategoryDescription, categoryDescriptionCount)
+    {% end %}
   end
 
   def ddqIsDiagnosticRecordSampledIn(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION, providerGroup : LibC::GUID*, providerId : LibC::GUID*, providerName : Win32cr::Foundation::PWSTR, eventId : UInt32*, eventName : Win32cr::Foundation::PWSTR, eventVersion : UInt32*, eventKeywords : UInt64*, isSampledIn : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqIsDiagnosticRecordSampledIn(hSession, providerGroup, providerId, providerName, eventId, eventName, eventVersion, eventKeywords, isSampledIn)
+    {% end %}
   end
 
   def ddqGetDiagnosticRecordPage(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION, searchCriteria : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_DATA_SEARCH_CRITERIA*, offset : UInt32, pageRecordCount : UInt32, baseRowId : Int64, hRecord : Win32cr::Security::HDIAGNOSTIC_RECORD*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticRecordPage(hSession, searchCriteria, offset, pageRecordCount, baseRowId, hRecord)
+    {% end %}
   end
 
   def ddqFreeDiagnosticRecordPage(hRecord : Win32cr::Security::HDIAGNOSTIC_RECORD) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqFreeDiagnosticRecordPage(hRecord)
+    {% end %}
   end
 
   def ddqGetDiagnosticRecordAtIndex(hRecord : Win32cr::Security::HDIAGNOSTIC_RECORD, index : UInt32, record : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_DATA_RECORD*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticRecordAtIndex(hRecord, index, record)
+    {% end %}
   end
 
   def ddqGetDiagnosticRecordCount(hRecord : Win32cr::Security::HDIAGNOSTIC_RECORD, recordCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticRecordCount(hRecord, recordCount)
+    {% end %}
   end
 
   def ddqGetDiagnosticReportStoreReportCount(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType : UInt32, reportCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticReportStoreReportCount(hSession, reportStoreType, reportCount)
+    {% end %}
   end
 
   def ddqCancelDiagnosticRecordOperation(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqCancelDiagnosticRecordOperation(hSession)
+    {% end %}
   end
 
   def ddqGetDiagnosticReport(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType : UInt32, hReport : Win32cr::Security::HDIAGNOSTIC_REPORT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticReport(hSession, reportStoreType, hReport)
+    {% end %}
   end
 
   def ddqFreeDiagnosticReport(hReport : Win32cr::Security::HDIAGNOSTIC_REPORT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqFreeDiagnosticReport(hReport)
+    {% end %}
   end
 
   def ddqGetDiagnosticReportAtIndex(hReport : Win32cr::Security::HDIAGNOSTIC_REPORT, index : UInt32, report : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_REPORT_DATA*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticReportAtIndex(hReport, index, report)
+    {% end %}
   end
 
   def ddqGetDiagnosticReportCount(hReport : Win32cr::Security::HDIAGNOSTIC_REPORT, reportCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticReportCount(hReport, reportCount)
+    {% end %}
   end
 
   def ddqExtractDiagnosticReport(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION, reportStoreType : UInt32, reportKey : Win32cr::Foundation::PWSTR, destinationPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqExtractDiagnosticReport(hSession, reportStoreType, reportKey, destinationPath)
+    {% end %}
   end
 
   def ddqGetDiagnosticRecordTagDistribution(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames : Win32cr::Foundation::PWSTR*, producerNameCount : UInt32, tagStats : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_DATA_EVENT_TAG_STATS**, statCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticRecordTagDistribution(hSession, producerNames, producerNameCount, tagStats, statCount)
+    {% end %}
   end
 
   def ddqGetDiagnosticRecordBinaryDistribution(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames : Win32cr::Foundation::PWSTR*, producerNameCount : UInt32, topNBinaries : UInt32, binaryStats : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_DATA_EVENT_BINARY_STATS**, statCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticRecordBinaryDistribution(hSession, producerNames, producerNameCount, topNBinaries, binaryStats, statCount)
+    {% end %}
   end
 
   def ddqGetDiagnosticRecordSummary(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION, producerNames : Win32cr::Foundation::PWSTR*, producerNameCount : UInt32, generalStats : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_DATA_GENERAL_STATS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetDiagnosticRecordSummary(hSession, producerNames, producerNameCount, generalStats)
+    {% end %}
   end
 
   def ddqSetTranscriptConfiguration(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION, desiredConfig : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATION*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqSetTranscriptConfiguration(hSession, desiredConfig)
+    {% end %}
   end
 
   def ddqGetTranscriptConfiguration(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION, currentConfig : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATION*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DdqGetTranscriptConfiguration(hSession, currentConfig)
+    {% end %}
   end
 
   @[Link("diagnosticdataquery")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun DdqCreateSession(accessLevel : Win32cr::Security::DiagnosticDataQuery::DdqAccessLevel, hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION*) : Win32cr::Foundation::HRESULT
@@ -393,4 +464,5 @@ module Win32cr::Security::DiagnosticDataQuery
     fun DdqGetTranscriptConfiguration(hSession : Win32cr::Security::HDIAGNOSTIC_DATA_QUERY_SESSION, currentConfig : Win32cr::Security::DiagnosticDataQuery::DIAGNOSTIC_DATA_EVENT_TRANSCRIPT_CONFIGURATION*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

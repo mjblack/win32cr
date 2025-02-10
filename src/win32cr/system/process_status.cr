@@ -175,114 +175,169 @@ module Win32cr::System::ProcessStatus
   end
 
   def k32EnumProcesses(lpidProcess : UInt32*, cb : UInt32, lpcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.K32EnumProcesses(lpidProcess, cb, lpcbNeeded)
+    {% end %}
   end
 
   def k32EnumProcessModules(hProcess : Win32cr::Foundation::HANDLE, lphModule : Win32cr::Foundation::HINSTANCE*, cb : UInt32, lpcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.K32EnumProcessModules(hProcess, lphModule, cb, lpcbNeeded)
+    {% end %}
   end
 
   def k32EnumProcessModulesEx(hProcess : Win32cr::Foundation::HANDLE, lphModule : Win32cr::Foundation::HINSTANCE*, cb : UInt32, lpcbNeeded : UInt32*, dwFilterFlag : Win32cr::System::ProcessStatus::ENUM_PROCESS_MODULES_EX_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.K32EnumProcessModulesEx(hProcess, lphModule, cb, lpcbNeeded, dwFilterFlag)
+    {% end %}
   end
 
   def k32GetModuleBaseNameA(hProcess : Win32cr::Foundation::HANDLE, hModule : Win32cr::Foundation::HINSTANCE, lpBaseName : UInt8*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.K32GetModuleBaseNameA(hProcess, hModule, lpBaseName, nSize)
+    {% end %}
   end
 
   def k32GetModuleBaseNameW(hProcess : Win32cr::Foundation::HANDLE, hModule : Win32cr::Foundation::HINSTANCE, lpBaseName : UInt16*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.K32GetModuleBaseNameW(hProcess, hModule, lpBaseName, nSize)
+    {% end %}
   end
 
   def k32GetModuleFileNameExA(hProcess : Win32cr::Foundation::HANDLE, hModule : Win32cr::Foundation::HINSTANCE, lpFilename : UInt8*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.K32GetModuleFileNameExA(hProcess, hModule, lpFilename, nSize)
+    {% end %}
   end
 
   def k32GetModuleFileNameExW(hProcess : Win32cr::Foundation::HANDLE, hModule : Win32cr::Foundation::HINSTANCE, lpFilename : UInt16*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.K32GetModuleFileNameExW(hProcess, hModule, lpFilename, nSize)
+    {% end %}
   end
 
   def k32GetModuleInformation(hProcess : Win32cr::Foundation::HANDLE, hModule : Win32cr::Foundation::HINSTANCE, lpmodinfo : Win32cr::System::ProcessStatus::MODULEINFO*, cb : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.K32GetModuleInformation(hProcess, hModule, lpmodinfo, cb)
+    {% end %}
   end
 
   def k32EmptyWorkingSet(hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.K32EmptyWorkingSet(hProcess)
+    {% end %}
   end
 
   def k32InitializeProcessForWsWatch(hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.K32InitializeProcessForWsWatch(hProcess)
+    {% end %}
   end
 
   def k32GetWsChanges(hProcess : Win32cr::Foundation::HANDLE, lpWatchInfo : Win32cr::System::ProcessStatus::PSAPI_WS_WATCH_INFORMATION*, cb : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.K32GetWsChanges(hProcess, lpWatchInfo, cb)
+    {% end %}
   end
 
   def k32GetWsChangesEx(hProcess : Win32cr::Foundation::HANDLE, lpWatchInfoEx : Win32cr::System::ProcessStatus::PSAPI_WS_WATCH_INFORMATION_EX*, cb : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.K32GetWsChangesEx(hProcess, lpWatchInfoEx, cb)
+    {% end %}
   end
 
   def k32GetMappedFileNameW(hProcess : Win32cr::Foundation::HANDLE, lpv : Void*, lpFilename : UInt16*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.K32GetMappedFileNameW(hProcess, lpv, lpFilename, nSize)
+    {% end %}
   end
 
   def k32GetMappedFileNameA(hProcess : Win32cr::Foundation::HANDLE, lpv : Void*, lpFilename : UInt8*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.K32GetMappedFileNameA(hProcess, lpv, lpFilename, nSize)
+    {% end %}
   end
 
   def k32EnumDeviceDrivers(lpImageBase : Void**, cb : UInt32, lpcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.K32EnumDeviceDrivers(lpImageBase, cb, lpcbNeeded)
+    {% end %}
   end
 
   def k32GetDeviceDriverBaseNameA(image_base : Void*, lpFilename : UInt8*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.K32GetDeviceDriverBaseNameA(image_base, lpFilename, nSize)
+    {% end %}
   end
 
   def k32GetDeviceDriverBaseNameW(image_base : Void*, lpBaseName : UInt16*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.K32GetDeviceDriverBaseNameW(image_base, lpBaseName, nSize)
+    {% end %}
   end
 
   def k32GetDeviceDriverFileNameA(image_base : Void*, lpFilename : UInt8*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.K32GetDeviceDriverFileNameA(image_base, lpFilename, nSize)
+    {% end %}
   end
 
   def k32GetDeviceDriverFileNameW(image_base : Void*, lpFilename : UInt16*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.K32GetDeviceDriverFileNameW(image_base, lpFilename, nSize)
+    {% end %}
   end
 
   def k32QueryWorkingSet(hProcess : Win32cr::Foundation::HANDLE, pv : Void*, cb : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.K32QueryWorkingSet(hProcess, pv, cb)
+    {% end %}
   end
 
   def k32QueryWorkingSetEx(hProcess : Win32cr::Foundation::HANDLE, pv : Void*, cb : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.K32QueryWorkingSetEx(hProcess, pv, cb)
+    {% end %}
   end
 
   def k32GetProcessMemoryInfo(process : Win32cr::Foundation::HANDLE, ppsmemCounters : Win32cr::System::ProcessStatus::PROCESS_MEMORY_COUNTERS*, cb : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.K32GetProcessMemoryInfo(process, ppsmemCounters, cb)
+    {% end %}
   end
 
   def k32GetPerformanceInfo(pPerformanceInformation : Win32cr::System::ProcessStatus::PERFORMANCE_INFORMATION*, cb : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.K32GetPerformanceInfo(pPerformanceInformation, cb)
+    {% end %}
   end
 
   def k32EnumPageFilesW(pCallBackRoutine : Win32cr::System::ProcessStatus::PENUM_PAGE_FILE_CALLBACKW, pContext : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.K32EnumPageFilesW(pCallBackRoutine, pContext)
+    {% end %}
   end
 
   def k32EnumPageFilesA(pCallBackRoutine : Win32cr::System::ProcessStatus::PENUM_PAGE_FILE_CALLBACKA, pContext : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.K32EnumPageFilesA(pCallBackRoutine, pContext)
+    {% end %}
   end
 
   def k32GetProcessImageFileNameA(hProcess : Win32cr::Foundation::HANDLE, lpImageFileName : UInt8*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.K32GetProcessImageFileNameA(hProcess, lpImageFileName, nSize)
+    {% end %}
   end
 
   def k32GetProcessImageFileNameW(hProcess : Win32cr::Foundation::HANDLE, lpImageFileName : UInt16*, nSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.K32GetProcessImageFileNameW(hProcess, lpImageFileName, nSize)
+    {% end %}
   end
 
   @[Link("kernel32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun K32EnumProcesses(lpidProcess : UInt32*, cb : UInt32, lpcbNeeded : UInt32*) : Win32cr::Foundation::BOOL
@@ -366,4 +421,5 @@ module Win32cr::System::ProcessStatus
     fun K32GetProcessImageFileNameW(hProcess : Win32cr::Foundation::HANDLE, lpImageFileName : UInt16*, nSize : UInt32) : UInt32
 
   end
+  {% end %}
 end

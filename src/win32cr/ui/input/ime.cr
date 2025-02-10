@@ -1415,7 +1415,7 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IFEClassFactoryVtbl,
+  record IFEClassFactoryVtable,
     query_interface : Proc(IFEClassFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFEClassFactory*, UInt32),
     release : Proc(IFEClassFactory*, UInt32),
@@ -1424,7 +1424,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IFEClassFactory, lpVtbl : IFEClassFactoryVtbl* do
+  record IFEClassFactory, lpVtbl : IFEClassFactoryVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IFEClassFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1445,7 +1445,7 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IFECommonVtbl,
+  record IFECommonVtable,
     query_interface : Proc(IFECommon*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFECommon*, UInt32),
     release : Proc(IFECommon*, UInt32),
@@ -1456,7 +1456,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IFECommon, lpVtbl : IFECommonVtbl* do
+  record IFECommon, lpVtbl : IFECommonVtable* do
     GUID = LibC::GUID.new(0x19f7151_u32, 0xe6db_u16, 0x11d0_u16, StaticArray[0x83_u8, 0xc3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xdd_u8, 0xb8_u8, 0x2e_u8])
     def query_interface(this : IFECommon*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1483,7 +1483,7 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IFELanguageVtbl,
+  record IFELanguageVtable,
     query_interface : Proc(IFELanguage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFELanguage*, UInt32),
     release : Proc(IFELanguage*, UInt32),
@@ -1496,7 +1496,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IFELanguage, lpVtbl : IFELanguageVtbl* do
+  record IFELanguage, lpVtbl : IFELanguageVtable* do
     GUID = LibC::GUID.new(0x19f7152_u32, 0xe6db_u16, 0x11d0_u16, StaticArray[0x83_u8, 0xc3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xdd_u8, 0xb8_u8, 0x2e_u8])
     def query_interface(this : IFELanguage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1529,7 +1529,7 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IFEDictionaryVtbl,
+  record IFEDictionaryVtable,
     query_interface : Proc(IFEDictionary*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFEDictionary*, UInt32),
     release : Proc(IFEDictionary*, UInt32),
@@ -1553,7 +1553,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IFEDictionary, lpVtbl : IFEDictionaryVtbl* do
+  record IFEDictionary, lpVtbl : IFEDictionaryVtable* do
     GUID = LibC::GUID.new(0x19f7153_u32, 0xe6db_u16, 0x11d0_u16, StaticArray[0x83_u8, 0xc3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xdd_u8, 0xb8_u8, 0x2e_u8])
     def query_interface(this : IFEDictionary*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1619,7 +1619,7 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IImeSpecifyAppletsVtbl,
+  record IImeSpecifyAppletsVtable,
     query_interface : Proc(IImeSpecifyApplets*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IImeSpecifyApplets*, UInt32),
     release : Proc(IImeSpecifyApplets*, UInt32),
@@ -1627,7 +1627,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IImeSpecifyApplets, lpVtbl : IImeSpecifyAppletsVtbl* do
+  record IImeSpecifyApplets, lpVtbl : IImeSpecifyAppletsVtable* do
     GUID = LibC::GUID.new(0x5d8e643c_u32, 0xc3a9_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xef_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc_u8, 0x8b_u8, 0x6d_u8])
     def query_interface(this : IImeSpecifyApplets*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1645,7 +1645,7 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IImePadAppletVtbl,
+  record IImePadAppletVtable,
     query_interface : Proc(IImePadApplet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IImePadApplet*, UInt32),
     release : Proc(IImePadApplet*, UInt32),
@@ -1657,7 +1657,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IImePadApplet, lpVtbl : IImePadAppletVtbl* do
+  record IImePadApplet, lpVtbl : IImePadAppletVtable* do
     GUID = LibC::GUID.new(0x5d8e643b_u32, 0xc3a9_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xef_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc_u8, 0x8b_u8, 0x6d_u8])
     def query_interface(this : IImePadApplet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1687,7 +1687,7 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IImePadVtbl,
+  record IImePadVtable,
     query_interface : Proc(IImePad*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IImePad*, UInt32),
     release : Proc(IImePad*, UInt32),
@@ -1695,7 +1695,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IImePad, lpVtbl : IImePadVtbl* do
+  record IImePad, lpVtbl : IImePadVtable* do
     GUID = LibC::GUID.new(0x5d8e643a_u32, 0xc3a9_u16, 0x11d1_u16, StaticArray[0xaf_u8, 0xef_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc_u8, 0x8b_u8, 0x6d_u8])
     def query_interface(this : IImePad*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1713,7 +1713,7 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IImePlugInDictDictionaryListVtbl,
+  record IImePlugInDictDictionaryListVtable,
     query_interface : Proc(IImePlugInDictDictionaryList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IImePlugInDictDictionaryList*, UInt32),
     release : Proc(IImePlugInDictDictionaryList*, UInt32),
@@ -1722,7 +1722,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IImePlugInDictDictionaryList, lpVtbl : IImePlugInDictDictionaryListVtbl* do
+  record IImePlugInDictDictionaryList, lpVtbl : IImePlugInDictDictionaryListVtable* do
     GUID = LibC::GUID.new(0x98752974_u32, 0xb0a6_u16, 0x489b_u16, StaticArray[0x8f_u8, 0x6f_u8, 0xbf_u8, 0xf3_u8, 0x76_u8, 0x9c_u8, 0x8e_u8, 0xeb_u8])
     def query_interface(this : IImePlugInDictDictionaryList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1743,7 +1743,7 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IEnumRegisterWordAVtbl,
+  record IEnumRegisterWordAVtable,
     query_interface : Proc(IEnumRegisterWordA*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumRegisterWordA*, UInt32),
     release : Proc(IEnumRegisterWordA*, UInt32),
@@ -1754,7 +1754,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IEnumRegisterWordA, lpVtbl : IEnumRegisterWordAVtbl* do
+  record IEnumRegisterWordA, lpVtbl : IEnumRegisterWordAVtable* do
     GUID = LibC::GUID.new(0x8c03412_u32, 0xf96b_u16, 0x11d0_u16, StaticArray[0xa4_u8, 0x75_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
     def query_interface(this : IEnumRegisterWordA*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1781,7 +1781,7 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IEnumRegisterWordWVtbl,
+  record IEnumRegisterWordWVtable,
     query_interface : Proc(IEnumRegisterWordW*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumRegisterWordW*, UInt32),
     release : Proc(IEnumRegisterWordW*, UInt32),
@@ -1792,7 +1792,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IEnumRegisterWordW, lpVtbl : IEnumRegisterWordWVtbl* do
+  record IEnumRegisterWordW, lpVtbl : IEnumRegisterWordWVtable* do
     GUID = LibC::GUID.new(0x4955dd31_u32, 0xb159_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xcf_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
     def query_interface(this : IEnumRegisterWordW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1819,7 +1819,7 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IEnumInputContextVtbl,
+  record IEnumInputContextVtable,
     query_interface : Proc(IEnumInputContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumInputContext*, UInt32),
     release : Proc(IEnumInputContext*, UInt32),
@@ -1830,7 +1830,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IEnumInputContext, lpVtbl : IEnumInputContextVtbl* do
+  record IEnumInputContext, lpVtbl : IEnumInputContextVtable* do
     GUID = LibC::GUID.new(0x9b5eab0_u32, 0xf997_u16, 0x11d1_u16, StaticArray[0x93_u8, 0xd4_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : IEnumInputContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1857,7 +1857,7 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IActiveIMMRegistrarVtbl,
+  record IActiveIMMRegistrarVtable,
     query_interface : Proc(IActiveIMMRegistrar*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveIMMRegistrar*, UInt32),
     release : Proc(IActiveIMMRegistrar*, UInt32),
@@ -1866,7 +1866,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IActiveIMMRegistrar, lpVtbl : IActiveIMMRegistrarVtbl* do
+  record IActiveIMMRegistrar, lpVtbl : IActiveIMMRegistrarVtable* do
     GUID = LibC::GUID.new(0xb3458082_u32, 0xbd00_u16, 0x11d1_u16, StaticArray[0x93_u8, 0x9b_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : IActiveIMMRegistrar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1887,7 +1887,7 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IActiveIMMMessagePumpOwnerVtbl,
+  record IActiveIMMMessagePumpOwnerVtable,
     query_interface : Proc(IActiveIMMMessagePumpOwner*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveIMMMessagePumpOwner*, UInt32),
     release : Proc(IActiveIMMMessagePumpOwner*, UInt32),
@@ -1899,7 +1899,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IActiveIMMMessagePumpOwner, lpVtbl : IActiveIMMMessagePumpOwnerVtbl* do
+  record IActiveIMMMessagePumpOwner, lpVtbl : IActiveIMMMessagePumpOwnerVtable* do
     GUID = LibC::GUID.new(0xb5cf2cfa_u32, 0x8aeb_u16, 0x11d1_u16, StaticArray[0x93_u8, 0x64_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : IActiveIMMMessagePumpOwner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1929,7 +1929,7 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IActiveIMMAppVtbl,
+  record IActiveIMMAppVtable,
     query_interface : Proc(IActiveIMMApp*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveIMMApp*, UInt32),
     release : Proc(IActiveIMMApp*, UInt32),
@@ -2004,7 +2004,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IActiveIMMApp, lpVtbl : IActiveIMMAppVtbl* do
+  record IActiveIMMApp, lpVtbl : IActiveIMMAppVtable* do
     GUID = LibC::GUID.new(0x8c0e040_u32, 0x62d1_u16, 0x11d1_u16, StaticArray[0x93_u8, 0x26_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : IActiveIMMApp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2223,7 +2223,7 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IActiveIMMIMEVtbl,
+  record IActiveIMMIMEVtable,
     query_interface : Proc(IActiveIMMIME*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveIMMIME*, UInt32),
     release : Proc(IActiveIMMIME*, UInt32),
@@ -2318,7 +2318,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IActiveIMMIME, lpVtbl : IActiveIMMIMEVtbl* do
+  record IActiveIMMIME, lpVtbl : IActiveIMMIMEVtable* do
     GUID = LibC::GUID.new(0x8c03411_u32, 0xf96b_u16, 0x11d0_u16, StaticArray[0xa4_u8, 0x75_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
     def query_interface(this : IActiveIMMIME*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2597,7 +2597,7 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IActiveIMEVtbl,
+  record IActiveIMEVtable,
     query_interface : Proc(IActiveIME*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveIME*, UInt32),
     release : Proc(IActiveIME*, UInt32),
@@ -2621,7 +2621,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IActiveIME, lpVtbl : IActiveIMEVtbl* do
+  record IActiveIME, lpVtbl : IActiveIMEVtable* do
     GUID = LibC::GUID.new(0x6fe20962_u32, 0xd077_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xe7_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6b_u8, 0xcc_u8, 0x59_u8])
     def query_interface(this : IActiveIME*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2687,7 +2687,7 @@ module Win32cr::UI::Input::Ime
   end
 
   @[Extern]
-  record IActiveIME2Vtbl,
+  record IActiveIME2Vtable,
     query_interface : Proc(IActiveIME2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveIME2*, UInt32),
     release : Proc(IActiveIME2*, UInt32),
@@ -2713,7 +2713,7 @@ module Win32cr::UI::Input::Ime
 
 
   @[Extern]
-  record IActiveIME2, lpVtbl : IActiveIME2Vtbl* do
+  record IActiveIME2, lpVtbl : IActiveIME2Vtable* do
     GUID = LibC::GUID.new(0xe1c4bf0e_u32, 0x2d53_u16, 0x11d2_u16, StaticArray[0x93_u8, 0xe1_u8, 0x0_u8, 0x60_u8, 0xb0_u8, 0x67_u8, 0xb8_u8, 0x6e_u8])
     def query_interface(this : IActiveIME2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2785,334 +2785,499 @@ module Win32cr::UI::Input::Ime
   end
 
   def immInstallIMEA(lpszIMEFileName : Win32cr::Foundation::PSTR, lpszLayoutText : Win32cr::Foundation::PSTR) : Win32cr::UI::TextServices::HKL
+    {% if !flag?(:docs) %}
     C.ImmInstallIMEA(lpszIMEFileName, lpszLayoutText)
+    {% end %}
   end
 
   def immInstallIMEW(lpszIMEFileName : Win32cr::Foundation::PWSTR, lpszLayoutText : Win32cr::Foundation::PWSTR) : Win32cr::UI::TextServices::HKL
+    {% if !flag?(:docs) %}
     C.ImmInstallIMEW(lpszIMEFileName, lpszLayoutText)
+    {% end %}
   end
 
   def immGetDefaultIMEWnd(param0 : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.ImmGetDefaultIMEWnd(param0)
+    {% end %}
   end
 
   def immGetDescriptionA(param0 : Win32cr::UI::TextServices::HKL, lpszDescription : UInt8*, uBufLen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetDescriptionA(param0, lpszDescription, uBufLen)
+    {% end %}
   end
 
   def immGetDescriptionW(param0 : Win32cr::UI::TextServices::HKL, lpszDescription : UInt16*, uBufLen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetDescriptionW(param0, lpszDescription, uBufLen)
+    {% end %}
   end
 
   def immGetIMEFileNameA(param0 : Win32cr::UI::TextServices::HKL, lpszFileName : UInt8*, uBufLen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetIMEFileNameA(param0, lpszFileName, uBufLen)
+    {% end %}
   end
 
   def immGetIMEFileNameW(param0 : Win32cr::UI::TextServices::HKL, lpszFileName : UInt16*, uBufLen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetIMEFileNameW(param0, lpszFileName, uBufLen)
+    {% end %}
   end
 
   def immGetProperty(param0 : Win32cr::UI::TextServices::HKL, param1 : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetProperty(param0, param1)
+    {% end %}
   end
 
   def immIsIME(param0 : Win32cr::UI::TextServices::HKL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmIsIME(param0)
+    {% end %}
   end
 
   def immSimulateHotKey(param0 : Win32cr::Foundation::HWND, param1 : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSimulateHotKey(param0, param1)
+    {% end %}
   end
 
   def immCreateContext : Win32cr::Globalization::HIMC
+    {% if !flag?(:docs) %}
     C.ImmCreateContext
+    {% end %}
   end
 
   def immDestroyContext(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmDestroyContext(param0)
+    {% end %}
   end
 
   def immGetContext(param0 : Win32cr::Foundation::HWND) : Win32cr::Globalization::HIMC
+    {% if !flag?(:docs) %}
     C.ImmGetContext(param0)
+    {% end %}
   end
 
   def immReleaseContext(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmReleaseContext(param0, param1)
+    {% end %}
   end
 
   def immAssociateContext(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Globalization::HIMC) : Win32cr::Globalization::HIMC
+    {% if !flag?(:docs) %}
     C.ImmAssociateContext(param0, param1)
+    {% end %}
   end
 
   def immAssociateContextEx(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Globalization::HIMC, param2 : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmAssociateContextEx(param0, param1, param2)
+    {% end %}
   end
 
   def immGetCompositionStringA(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, lpBuf : Void*, dwBufLen : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.ImmGetCompositionStringA(param0, param1, lpBuf, dwBufLen)
+    {% end %}
   end
 
   def immGetCompositionStringW(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, lpBuf : Void*, dwBufLen : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.ImmGetCompositionStringW(param0, param1, lpBuf, dwBufLen)
+    {% end %}
   end
 
   def immSetCompositionStringA(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::SET_COMPOSITION_STRING_TYPE, lpComp : Void*, dwCompLen : UInt32, lpRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetCompositionStringA(param0, dwIndex, lpComp, dwCompLen, lpRead, dwReadLen)
+    {% end %}
   end
 
   def immSetCompositionStringW(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::SET_COMPOSITION_STRING_TYPE, lpComp : Void*, dwCompLen : UInt32, lpRead : Void*, dwReadLen : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetCompositionStringW(param0, dwIndex, lpComp, dwCompLen, lpRead, dwReadLen)
+    {% end %}
   end
 
   def immGetCandidateListCountA(param0 : Win32cr::Globalization::HIMC, lpdwListCount : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetCandidateListCountA(param0, lpdwListCount)
+    {% end %}
   end
 
   def immGetCandidateListCountW(param0 : Win32cr::Globalization::HIMC, lpdwListCount : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetCandidateListCountW(param0, lpdwListCount)
+    {% end %}
   end
 
   def immGetCandidateListA(param0 : Win32cr::Globalization::HIMC, deIndex : UInt32, lpCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetCandidateListA(param0, deIndex, lpCandList, dwBufLen)
+    {% end %}
   end
 
   def immGetCandidateListW(param0 : Win32cr::Globalization::HIMC, deIndex : UInt32, lpCandList : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetCandidateListW(param0, deIndex, lpCandList, dwBufLen)
+    {% end %}
   end
 
   def immGetGuideLineA(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::GET_GUIDE_LINE_TYPE, lpBuf : Win32cr::Foundation::PSTR, dwBufLen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetGuideLineA(param0, dwIndex, lpBuf, dwBufLen)
+    {% end %}
   end
 
   def immGetGuideLineW(param0 : Win32cr::Globalization::HIMC, dwIndex : Win32cr::UI::Input::Ime::GET_GUIDE_LINE_TYPE, lpBuf : Win32cr::Foundation::PWSTR, dwBufLen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetGuideLineW(param0, dwIndex, lpBuf, dwBufLen)
+    {% end %}
   end
 
   def immGetConversionStatus(param0 : Win32cr::Globalization::HIMC, lpfdwConversion : UInt32*, lpfdwSentence : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmGetConversionStatus(param0, lpfdwConversion, lpfdwSentence)
+    {% end %}
   end
 
   def immSetConversionStatus(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, param2 : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetConversionStatus(param0, param1, param2)
+    {% end %}
   end
 
   def immGetOpenStatus(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmGetOpenStatus(param0)
+    {% end %}
   end
 
   def immSetOpenStatus(param0 : Win32cr::Globalization::HIMC, param1 : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetOpenStatus(param0, param1)
+    {% end %}
   end
 
   def immGetCompositionFontA(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmGetCompositionFontA(param0, lplf)
+    {% end %}
   end
 
   def immGetCompositionFontW(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmGetCompositionFontW(param0, lplf)
+    {% end %}
   end
 
   def immSetCompositionFontA(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetCompositionFontA(param0, lplf)
+    {% end %}
   end
 
   def immSetCompositionFontW(param0 : Win32cr::Globalization::HIMC, lplf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetCompositionFontW(param0, lplf)
+    {% end %}
   end
 
   def immConfigureIMEA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Foundation::HWND, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmConfigureIMEA(param0, param1, param2, param3)
+    {% end %}
   end
 
   def immConfigureIMEW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Foundation::HWND, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmConfigureIMEW(param0, param1, param2, param3)
+    {% end %}
   end
 
   def immEscapeA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.ImmEscapeA(param0, param1, param2, param3)
+    {% end %}
   end
 
   def immEscapeW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, param2 : UInt32, param3 : Void*) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.ImmEscapeW(param0, param1, param2, param3)
+    {% end %}
   end
 
   def immGetConversionListA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, lpSrc : Win32cr::Foundation::PSTR, lpDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32, uFlag : Win32cr::UI::Input::Ime::GET_CONVERSION_LIST_FLAG) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetConversionListA(param0, param1, lpSrc, lpDst, dwBufLen, uFlag)
+    {% end %}
   end
 
   def immGetConversionListW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::Globalization::HIMC, lpSrc : Win32cr::Foundation::PWSTR, lpDst : Win32cr::UI::Input::Ime::CANDIDATELIST*, dwBufLen : UInt32, uFlag : Win32cr::UI::Input::Ime::GET_CONVERSION_LIST_FLAG) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetConversionListW(param0, param1, lpSrc, lpDst, dwBufLen, uFlag)
+    {% end %}
   end
 
   def immNotifyIME(param0 : Win32cr::Globalization::HIMC, dwAction : Win32cr::UI::Input::Ime::NOTIFY_IME_ACTION, dwIndex : Win32cr::UI::Input::Ime::NOTIFY_IME_INDEX, dwValue : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmNotifyIME(param0, dwAction, dwIndex, dwValue)
+    {% end %}
   end
 
   def immGetStatusWindowPos(param0 : Win32cr::Globalization::HIMC, lpptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmGetStatusWindowPos(param0, lpptPos)
+    {% end %}
   end
 
   def immSetStatusWindowPos(param0 : Win32cr::Globalization::HIMC, lpptPos : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetStatusWindowPos(param0, lpptPos)
+    {% end %}
   end
 
   def immGetCompositionWindow(param0 : Win32cr::Globalization::HIMC, lpCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmGetCompositionWindow(param0, lpCompForm)
+    {% end %}
   end
 
   def immSetCompositionWindow(param0 : Win32cr::Globalization::HIMC, lpCompForm : Win32cr::UI::Input::Ime::COMPOSITIONFORM*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetCompositionWindow(param0, lpCompForm)
+    {% end %}
   end
 
   def immGetCandidateWindow(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, lpCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmGetCandidateWindow(param0, param1, lpCandidate)
+    {% end %}
   end
 
   def immSetCandidateWindow(param0 : Win32cr::Globalization::HIMC, lpCandidate : Win32cr::UI::Input::Ime::CANDIDATEFORM*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetCandidateWindow(param0, lpCandidate)
+    {% end %}
   end
 
   def immIsUIMessageA(param0 : Win32cr::Foundation::HWND, param1 : UInt32, param2 : Win32cr::Foundation::WPARAM, param3 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmIsUIMessageA(param0, param1, param2, param3)
+    {% end %}
   end
 
   def immIsUIMessageW(param0 : Win32cr::Foundation::HWND, param1 : UInt32, param2 : Win32cr::Foundation::WPARAM, param3 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmIsUIMessageW(param0, param1, param2, param3)
+    {% end %}
   end
 
   def immGetVirtualKey(param0 : Win32cr::Foundation::HWND) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetVirtualKey(param0)
+    {% end %}
   end
 
   def immRegisterWordA(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PSTR, param2 : UInt32, lpszRegister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmRegisterWordA(param0, lpszReading, param2, lpszRegister)
+    {% end %}
   end
 
   def immRegisterWordW(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PWSTR, param2 : UInt32, lpszRegister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmRegisterWordW(param0, lpszReading, param2, lpszRegister)
+    {% end %}
   end
 
   def immUnregisterWordA(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PSTR, param2 : UInt32, lpszUnregister : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmUnregisterWordA(param0, lpszReading, param2, lpszUnregister)
+    {% end %}
   end
 
   def immUnregisterWordW(param0 : Win32cr::UI::TextServices::HKL, lpszReading : Win32cr::Foundation::PWSTR, param2 : UInt32, lpszUnregister : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmUnregisterWordW(param0, lpszReading, param2, lpszUnregister)
+    {% end %}
   end
 
   def immGetRegisterWordStyleA(param0 : Win32cr::UI::TextServices::HKL, nItem : UInt32, lpStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFA*) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetRegisterWordStyleA(param0, nItem, lpStyleBuf)
+    {% end %}
   end
 
   def immGetRegisterWordStyleW(param0 : Win32cr::UI::TextServices::HKL, nItem : UInt32, lpStyleBuf : Win32cr::UI::Input::Ime::STYLEBUFW*) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetRegisterWordStyleW(param0, nItem, lpStyleBuf)
+    {% end %}
   end
 
   def immEnumRegisterWordA(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::UI::Input::Ime::REGISTERWORDENUMPROCA, lpszReading : Win32cr::Foundation::PSTR, param3 : UInt32, lpszRegister : Win32cr::Foundation::PSTR, param5 : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmEnumRegisterWordA(param0, param1, lpszReading, param3, lpszRegister, param5)
+    {% end %}
   end
 
   def immEnumRegisterWordW(param0 : Win32cr::UI::TextServices::HKL, param1 : Win32cr::UI::Input::Ime::REGISTERWORDENUMPROCW, lpszReading : Win32cr::Foundation::PWSTR, param3 : UInt32, lpszRegister : Win32cr::Foundation::PWSTR, param5 : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmEnumRegisterWordW(param0, param1, lpszReading, param3, lpszRegister, param5)
+    {% end %}
   end
 
   def immDisableIME(param0 : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmDisableIME(param0)
+    {% end %}
   end
 
   def immEnumInputContext(idThread : UInt32, lpfn : Win32cr::UI::Input::Ime::IMCENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmEnumInputContext(idThread, lpfn, lParam)
+    {% end %}
   end
 
   def immGetImeMenuItemsA(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, param2 : UInt32, lpImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, lpImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOA*, dwSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetImeMenuItemsA(param0, param1, param2, lpImeParentMenu, lpImeMenu, dwSize)
+    {% end %}
   end
 
   def immGetImeMenuItemsW(param0 : Win32cr::Globalization::HIMC, param1 : UInt32, param2 : UInt32, lpImeParentMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, lpImeMenu : Win32cr::UI::Input::Ime::IMEMENUITEMINFOW*, dwSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetImeMenuItemsW(param0, param1, param2, lpImeParentMenu, lpImeMenu, dwSize)
+    {% end %}
   end
 
   def immDisableTextFrameService(idThread : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmDisableTextFrameService(idThread)
+    {% end %}
   end
 
   def immDisableLegacyIME : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmDisableLegacyIME
+    {% end %}
   end
 
   def immGetHotKey(param0 : UInt32, lpuModifiers : UInt32*, lpuVKey : UInt32*, phKL : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmGetHotKey(param0, lpuModifiers, lpuVKey, phKL)
+    {% end %}
   end
 
   def immSetHotKey(param0 : UInt32, param1 : UInt32, param2 : UInt32, param3 : Win32cr::UI::TextServices::HKL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmSetHotKey(param0, param1, param2, param3)
+    {% end %}
   end
 
   def immGenerateMessage(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmGenerateMessage(param0)
+    {% end %}
   end
 
   def immRequestMessageA(param0 : Win32cr::Globalization::HIMC, param1 : Win32cr::Foundation::WPARAM, param2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.ImmRequestMessageA(param0, param1, param2)
+    {% end %}
   end
 
   def immRequestMessageW(param0 : Win32cr::Globalization::HIMC, param1 : Win32cr::Foundation::WPARAM, param2 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.ImmRequestMessageW(param0, param1, param2)
+    {% end %}
   end
 
   def immCreateSoftKeyboard(param0 : UInt32, param1 : Win32cr::Foundation::HWND, param2 : Int32, param3 : Int32) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.ImmCreateSoftKeyboard(param0, param1, param2, param3)
+    {% end %}
   end
 
   def immDestroySoftKeyboard(param0 : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmDestroySoftKeyboard(param0)
+    {% end %}
   end
 
   def immShowSoftKeyboard(param0 : Win32cr::Foundation::HWND, param1 : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmShowSoftKeyboard(param0, param1)
+    {% end %}
   end
 
   def immLockIMC(param0 : Win32cr::Globalization::HIMC) : Win32cr::UI::Input::Ime::INPUTCONTEXT*
+    {% if !flag?(:docs) %}
     C.ImmLockIMC(param0)
+    {% end %}
   end
 
   def immUnlockIMC(param0 : Win32cr::Globalization::HIMC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmUnlockIMC(param0)
+    {% end %}
   end
 
   def immGetIMCLockCount(param0 : Win32cr::Globalization::HIMC) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetIMCLockCount(param0)
+    {% end %}
   end
 
   def immCreateIMCC(param0 : UInt32) : Win32cr::Globalization::HIMCC
+    {% if !flag?(:docs) %}
     C.ImmCreateIMCC(param0)
+    {% end %}
   end
 
   def immDestroyIMCC(param0 : Win32cr::Globalization::HIMCC) : Win32cr::Globalization::HIMCC
+    {% if !flag?(:docs) %}
     C.ImmDestroyIMCC(param0)
+    {% end %}
   end
 
   def immLockIMCC(param0 : Win32cr::Globalization::HIMCC) : Void*
+    {% if !flag?(:docs) %}
     C.ImmLockIMCC(param0)
+    {% end %}
   end
 
   def immUnlockIMCC(param0 : Win32cr::Globalization::HIMCC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImmUnlockIMCC(param0)
+    {% end %}
   end
 
   def immGetIMCCLockCount(param0 : Win32cr::Globalization::HIMCC) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetIMCCLockCount(param0)
+    {% end %}
   end
 
   def immReSizeIMCC(param0 : Win32cr::Globalization::HIMCC, param1 : UInt32) : Win32cr::Globalization::HIMCC
+    {% if !flag?(:docs) %}
     C.ImmReSizeIMCC(param0, param1)
+    {% end %}
   end
 
   def immGetIMCCSize(param0 : Win32cr::Globalization::HIMCC) : UInt32
+    {% if !flag?(:docs) %}
     C.ImmGetIMCCSize(param0)
+    {% end %}
   end
 
   @[Link("imm32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun ImmInstallIMEA(lpszIMEFileName : Win32cr::Foundation::PSTR, lpszLayoutText : Win32cr::Foundation::PSTR) : Win32cr::UI::TextServices::HKL
@@ -3361,4 +3526,5 @@ module Win32cr::UI::Input::Ime
     fun ImmGetIMCCSize(param0 : Win32cr::Globalization::HIMCC) : UInt32
 
   end
+  {% end %}
 end

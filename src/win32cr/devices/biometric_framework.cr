@@ -1394,23 +1394,11 @@ module Win32cr::Devices::BiometricFramework
     end
   end
 
-  @[Extern]
-  struct WINIBIO_SENSOR_CONTEXT_
-    def initialize()
-    end
-  end
+  alias WINIBIO_SENSOR_CONTEXT_ = Void
 
-  @[Extern]
-  struct WINIBIO_ENGINE_CONTEXT_
-    def initialize()
-    end
-  end
+  alias WINIBIO_ENGINE_CONTEXT_ = Void
 
-  @[Extern]
-  struct WINIBIO_STORAGE_CONTEXT_
-    def initialize()
-    end
-  end
+  alias WINIBIO_STORAGE_CONTEXT_ = Void
 
   @[Extern]
   struct WINBIO_STORAGE_RECORD
@@ -1777,222 +1765,331 @@ module Win32cr::Devices::BiometricFramework
   end
 
   def winBioEnumServiceProviders(factor : UInt32, bsp_schema_array : Win32cr::Devices::BiometricFramework::WINBIO_BSP_SCHEMA**, bsp_count : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnumServiceProviders(factor, bsp_schema_array, bsp_count)
+    {% end %}
   end
 
   def winBioEnumBiometricUnits(factor : UInt32, unit_schema_array : Win32cr::Devices::BiometricFramework::WINBIO_UNIT_SCHEMA**, unit_count : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnumBiometricUnits(factor, unit_schema_array, unit_count)
+    {% end %}
   end
 
   def winBioEnumDatabases(factor : UInt32, storage_schema_array : Win32cr::Devices::BiometricFramework::WINBIO_STORAGE_SCHEMA**, storage_count : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnumDatabases(factor, storage_schema_array, storage_count)
+    {% end %}
   end
 
   def winBioAsyncOpenFramework(notification_method : Win32cr::Devices::BiometricFramework::WINBIO_ASYNC_NOTIFICATION_METHOD, target_window : Win32cr::Foundation::HWND, message_code : UInt32, callback_routine : Win32cr::Devices::BiometricFramework::PWINBIO_ASYNC_COMPLETION_CALLBACK, user_data : Void*, asynchronous_open : Win32cr::Foundation::BOOL, framework_handle : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioAsyncOpenFramework(notification_method, target_window, message_code, callback_routine, user_data, asynchronous_open, framework_handle)
+    {% end %}
   end
 
   def winBioCloseFramework(framework_handle : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioCloseFramework(framework_handle)
+    {% end %}
   end
 
   def winBioAsyncEnumServiceProviders(framework_handle : UInt32, factor : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioAsyncEnumServiceProviders(framework_handle, factor)
+    {% end %}
   end
 
   def winBioAsyncEnumBiometricUnits(framework_handle : UInt32, factor : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioAsyncEnumBiometricUnits(framework_handle, factor)
+    {% end %}
   end
 
   def winBioAsyncEnumDatabases(framework_handle : UInt32, factor : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioAsyncEnumDatabases(framework_handle, factor)
+    {% end %}
   end
 
   def winBioAsyncMonitorFrameworkChanges(framework_handle : UInt32, change_types : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioAsyncMonitorFrameworkChanges(framework_handle, change_types)
+    {% end %}
   end
 
   def winBioOpenSession(factor : UInt32, pool_type : Win32cr::Devices::BiometricFramework::WINBIO_POOL, flags : UInt32, unit_array : UInt32*, unit_count : LibC::UIntPtrT, database_id : LibC::GUID*, session_handle : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioOpenSession(factor, pool_type, flags, unit_array, unit_count, database_id, session_handle)
+    {% end %}
   end
 
   def winBioAsyncOpenSession(factor : UInt32, pool_type : Win32cr::Devices::BiometricFramework::WINBIO_POOL, flags : UInt32, unit_array : UInt32*, unit_count : LibC::UIntPtrT, database_id : LibC::GUID*, notification_method : Win32cr::Devices::BiometricFramework::WINBIO_ASYNC_NOTIFICATION_METHOD, target_window : Win32cr::Foundation::HWND, message_code : UInt32, callback_routine : Win32cr::Devices::BiometricFramework::PWINBIO_ASYNC_COMPLETION_CALLBACK, user_data : Void*, asynchronous_open : Win32cr::Foundation::BOOL, session_handle : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioAsyncOpenSession(factor, pool_type, flags, unit_array, unit_count, database_id, notification_method, target_window, message_code, callback_routine, user_data, asynchronous_open, session_handle)
+    {% end %}
   end
 
   def winBioCloseSession(session_handle : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioCloseSession(session_handle)
+    {% end %}
   end
 
   def winBioVerify(session_handle : UInt32, identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY*, sub_factor : UInt8, unit_id : UInt32*, match : UInt8*, reject_detail : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioVerify(session_handle, identity, sub_factor, unit_id, match, reject_detail)
+    {% end %}
   end
 
   def winBioVerifyWithCallback(session_handle : UInt32, identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY*, sub_factor : UInt8, verify_callback : Win32cr::Devices::BiometricFramework::PWINBIO_VERIFY_CALLBACK, verify_callback_context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioVerifyWithCallback(session_handle, identity, sub_factor, verify_callback, verify_callback_context)
+    {% end %}
   end
 
   def winBioIdentify(session_handle : UInt32, unit_id : UInt32*, identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY*, sub_factor : UInt8*, reject_detail : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioIdentify(session_handle, unit_id, identity, sub_factor, reject_detail)
+    {% end %}
   end
 
   def winBioIdentifyWithCallback(session_handle : UInt32, identify_callback : Win32cr::Devices::BiometricFramework::PWINBIO_IDENTIFY_CALLBACK, identify_callback_context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioIdentifyWithCallback(session_handle, identify_callback, identify_callback_context)
+    {% end %}
   end
 
   def winBioWait(session_handle : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioWait(session_handle)
+    {% end %}
   end
 
   def winBioCancel(session_handle : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioCancel(session_handle)
+    {% end %}
   end
 
   def winBioLocateSensor(session_handle : UInt32, unit_id : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioLocateSensor(session_handle, unit_id)
+    {% end %}
   end
 
   def winBioLocateSensorWithCallback(session_handle : UInt32, locate_callback : Win32cr::Devices::BiometricFramework::PWINBIO_LOCATE_SENSOR_CALLBACK, locate_callback_context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioLocateSensorWithCallback(session_handle, locate_callback, locate_callback_context)
+    {% end %}
   end
 
   def winBioEnrollBegin(session_handle : UInt32, sub_factor : UInt8, unit_id : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnrollBegin(session_handle, sub_factor, unit_id)
+    {% end %}
   end
 
   def winBioEnrollSelect(session_handle : UInt32, selector_value : UInt64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnrollSelect(session_handle, selector_value)
+    {% end %}
   end
 
   def winBioEnrollCapture(session_handle : UInt32, reject_detail : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnrollCapture(session_handle, reject_detail)
+    {% end %}
   end
 
   def winBioEnrollCaptureWithCallback(session_handle : UInt32, enroll_callback : Win32cr::Devices::BiometricFramework::PWINBIO_ENROLL_CAPTURE_CALLBACK, enroll_callback_context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnrollCaptureWithCallback(session_handle, enroll_callback, enroll_callback_context)
+    {% end %}
   end
 
   def winBioEnrollCommit(session_handle : UInt32, identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY*, is_new_template : UInt8*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnrollCommit(session_handle, identity, is_new_template)
+    {% end %}
   end
 
   def winBioEnrollDiscard(session_handle : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnrollDiscard(session_handle)
+    {% end %}
   end
 
   def winBioEnumEnrollments(session_handle : UInt32, unit_id : UInt32, identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY*, sub_factor_array : UInt8**, sub_factor_count : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioEnumEnrollments(session_handle, unit_id, identity, sub_factor_array, sub_factor_count)
+    {% end %}
   end
 
   def winBioImproveBegin(session_handle : UInt32, unit_id : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioImproveBegin(session_handle, unit_id)
+    {% end %}
   end
 
   def winBioImproveEnd(session_handle : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioImproveEnd(session_handle)
+    {% end %}
   end
 
   def winBioRegisterEventMonitor(session_handle : UInt32, event_mask : UInt32, event_callback : Win32cr::Devices::BiometricFramework::PWINBIO_EVENT_CALLBACK, event_callback_context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioRegisterEventMonitor(session_handle, event_mask, event_callback, event_callback_context)
+    {% end %}
   end
 
   def winBioUnregisterEventMonitor(session_handle : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioUnregisterEventMonitor(session_handle)
+    {% end %}
   end
 
   def winBioMonitorPresence(session_handle : UInt32, unit_id : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioMonitorPresence(session_handle, unit_id)
+    {% end %}
   end
 
   def winBioCaptureSample(session_handle : UInt32, purpose : UInt8, flags : UInt8, unit_id : UInt32*, sample : Win32cr::Devices::BiometricFramework::WINBIO_BIR**, sample_size : LibC::UIntPtrT*, reject_detail : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioCaptureSample(session_handle, purpose, flags, unit_id, sample, sample_size, reject_detail)
+    {% end %}
   end
 
   def winBioCaptureSampleWithCallback(session_handle : UInt32, purpose : UInt8, flags : UInt8, capture_callback : Win32cr::Devices::BiometricFramework::PWINBIO_CAPTURE_CALLBACK, capture_callback_context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioCaptureSampleWithCallback(session_handle, purpose, flags, capture_callback, capture_callback_context)
+    {% end %}
   end
 
   def winBioDeleteTemplate(session_handle : UInt32, unit_id : UInt32, identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY*, sub_factor : UInt8) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioDeleteTemplate(session_handle, unit_id, identity, sub_factor)
+    {% end %}
   end
 
   def winBioLockUnit(session_handle : UInt32, unit_id : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioLockUnit(session_handle, unit_id)
+    {% end %}
   end
 
   def winBioUnlockUnit(session_handle : UInt32, unit_id : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioUnlockUnit(session_handle, unit_id)
+    {% end %}
   end
 
   def winBioControlUnit(session_handle : UInt32, unit_id : UInt32, component : Win32cr::Devices::BiometricFramework::WINBIO_COMPONENT, control_code : UInt32, send_buffer : UInt8*, send_buffer_size : LibC::UIntPtrT, receive_buffer : UInt8*, receive_buffer_size : LibC::UIntPtrT, receive_data_size : LibC::UIntPtrT*, operation_status : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioControlUnit(session_handle, unit_id, component, control_code, send_buffer, send_buffer_size, receive_buffer, receive_buffer_size, receive_data_size, operation_status)
+    {% end %}
   end
 
   def winBioControlUnitPrivileged(session_handle : UInt32, unit_id : UInt32, component : Win32cr::Devices::BiometricFramework::WINBIO_COMPONENT, control_code : UInt32, send_buffer : UInt8*, send_buffer_size : LibC::UIntPtrT, receive_buffer : UInt8*, receive_buffer_size : LibC::UIntPtrT, receive_data_size : LibC::UIntPtrT*, operation_status : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioControlUnitPrivileged(session_handle, unit_id, component, control_code, send_buffer, send_buffer_size, receive_buffer, receive_buffer_size, receive_data_size, operation_status)
+    {% end %}
   end
 
   def winBioGetProperty(session_handle : UInt32, property_type : UInt32, property_id : UInt32, unit_id : UInt32, identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY*, sub_factor : UInt8, property_buffer : Void**, property_buffer_size : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioGetProperty(session_handle, property_type, property_id, unit_id, identity, sub_factor, property_buffer, property_buffer_size)
+    {% end %}
   end
 
   def winBioSetProperty(session_handle : UInt32, property_type : UInt32, property_id : UInt32, unit_id : UInt32, identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY*, sub_factor : UInt8, property_buffer : Void*, property_buffer_size : LibC::UIntPtrT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioSetProperty(session_handle, property_type, property_id, unit_id, identity, sub_factor, property_buffer, property_buffer_size)
+    {% end %}
   end
 
   def winBioFree(address : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioFree(address)
+    {% end %}
   end
 
   def winBioSetCredential(type__ : Win32cr::Devices::BiometricFramework::WINBIO_CREDENTIAL_TYPE, credential : UInt8*, credential_size : LibC::UIntPtrT, format : Win32cr::Devices::BiometricFramework::WINBIO_CREDENTIAL_FORMAT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioSetCredential(type__, credential, credential_size, format)
+    {% end %}
   end
 
   def winBioRemoveCredential(identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, type__ : Win32cr::Devices::BiometricFramework::WINBIO_CREDENTIAL_TYPE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioRemoveCredential(identity, type__)
+    {% end %}
   end
 
   def winBioRemoveAllCredentials : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioRemoveAllCredentials
+    {% end %}
   end
 
   def winBioRemoveAllDomainCredentials : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioRemoveAllDomainCredentials
+    {% end %}
   end
 
   def winBioGetCredentialState(identity : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY, type__ : Win32cr::Devices::BiometricFramework::WINBIO_CREDENTIAL_TYPE, credential_state : Win32cr::Devices::BiometricFramework::WINBIO_CREDENTIAL_STATE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioGetCredentialState(identity, type__, credential_state)
+    {% end %}
   end
 
   def winBioLogonIdentifiedUser(session_handle : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioLogonIdentifiedUser(session_handle)
+    {% end %}
   end
 
   def winBioGetEnrolledFactors(account_owner : Win32cr::Devices::BiometricFramework::WINBIO_IDENTITY*, enrolled_factors : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioGetEnrolledFactors(account_owner, enrolled_factors)
+    {% end %}
   end
 
   def winBioGetEnabledSetting(value : UInt8*, source : Win32cr::Devices::BiometricFramework::WINBIO_SETTING_SOURCE*) : Void
+    {% if !flag?(:docs) %}
     C.WinBioGetEnabledSetting(value, source)
+    {% end %}
   end
 
   def winBioGetLogonSetting(value : UInt8*, source : Win32cr::Devices::BiometricFramework::WINBIO_SETTING_SOURCE*) : Void
+    {% if !flag?(:docs) %}
     C.WinBioGetLogonSetting(value, source)
+    {% end %}
   end
 
   def winBioGetDomainLogonSetting(value : UInt8*, source : Win32cr::Devices::BiometricFramework::WINBIO_SETTING_SOURCE*) : Void
+    {% if !flag?(:docs) %}
     C.WinBioGetDomainLogonSetting(value, source)
+    {% end %}
   end
 
   def winBioAcquireFocus : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioAcquireFocus
+    {% end %}
   end
 
   def winBioReleaseFocus : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WinBioReleaseFocus
+    {% end %}
   end
 
   @[Link("winbio")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WinBioEnumServiceProviders(factor : UInt32, bsp_schema_array : Win32cr::Devices::BiometricFramework::WINBIO_BSP_SCHEMA**, bsp_count : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
@@ -2157,4 +2254,5 @@ module Win32cr::Devices::BiometricFramework
     fun WinBioReleaseFocus : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

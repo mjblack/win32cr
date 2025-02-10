@@ -756,7 +756,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
   end
 
   @[Extern]
-  record ISdoMachineVtbl,
+  record ISdoMachineVtable,
     query_interface : Proc(ISdoMachine*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISdoMachine*, UInt32),
     release : Proc(ISdoMachine*, UInt32),
@@ -776,7 +776,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
 
 
   @[Extern]
-  record ISdoMachine, lpVtbl : ISdoMachineVtbl* do
+  record ISdoMachine, lpVtbl : ISdoMachineVtable* do
     GUID = LibC::GUID.new(0x479f6e75_u32, 0x49a2_u16, 0x11d2_u16, StaticArray[0x8e_u8, 0xca_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xf5_u8, 0x19_u8])
     def query_interface(this : ISdoMachine*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -830,7 +830,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
   end
 
   @[Extern]
-  record ISdoMachine2Vtbl,
+  record ISdoMachine2Vtable,
     query_interface : Proc(ISdoMachine2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISdoMachine2*, UInt32),
     release : Proc(ISdoMachine2*, UInt32),
@@ -855,7 +855,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
 
 
   @[Extern]
-  record ISdoMachine2, lpVtbl : ISdoMachine2Vtbl* do
+  record ISdoMachine2, lpVtbl : ISdoMachine2Vtable* do
     GUID = LibC::GUID.new(0x518e5ffe_u32, 0xd8ce_u16, 0x4f7e_u16, StaticArray[0xa5_u8, 0xdb_u8, 0xb4_u8, 0xa_u8, 0x35_u8, 0x41_u8, 0x9d_u8, 0x3b_u8])
     def query_interface(this : ISdoMachine2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -924,7 +924,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
   end
 
   @[Extern]
-  record ISdoServiceControlVtbl,
+  record ISdoServiceControlVtable,
     query_interface : Proc(ISdoServiceControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISdoServiceControl*, UInt32),
     release : Proc(ISdoServiceControl*, UInt32),
@@ -939,7 +939,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
 
 
   @[Extern]
-  record ISdoServiceControl, lpVtbl : ISdoServiceControlVtbl* do
+  record ISdoServiceControl, lpVtbl : ISdoServiceControlVtable* do
     GUID = LibC::GUID.new(0x479f6e74_u32, 0x49a2_u16, 0x11d2_u16, StaticArray[0x8e_u8, 0xca_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xf5_u8, 0x19_u8])
     def query_interface(this : ISdoServiceControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -978,7 +978,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
   end
 
   @[Extern]
-  record ISdoVtbl,
+  record ISdoVtable,
     query_interface : Proc(ISdo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISdo*, UInt32),
     release : Proc(ISdo*, UInt32),
@@ -996,7 +996,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
 
 
   @[Extern]
-  record ISdo, lpVtbl : ISdoVtbl* do
+  record ISdo, lpVtbl : ISdoVtable* do
     GUID = LibC::GUID.new(0x56bc53de_u32, 0x96db_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x3f_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : ISdo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1044,7 +1044,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
   end
 
   @[Extern]
-  record ISdoCollectionVtbl,
+  record ISdoCollectionVtable,
     query_interface : Proc(ISdoCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISdoCollection*, UInt32),
     release : Proc(ISdoCollection*, UInt32),
@@ -1063,7 +1063,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
 
 
   @[Extern]
-  record ISdoCollection, lpVtbl : ISdoCollectionVtbl* do
+  record ISdoCollection, lpVtbl : ISdoCollectionVtable* do
     GUID = LibC::GUID.new(0x56bc53e2_u32, 0x96db_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x3f_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : ISdoCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1114,7 +1114,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
   end
 
   @[Extern]
-  record ITemplateSdoVtbl,
+  record ITemplateSdoVtable,
     query_interface : Proc(ITemplateSdo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITemplateSdo*, UInt32),
     release : Proc(ITemplateSdo*, UInt32),
@@ -1135,7 +1135,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
 
 
   @[Extern]
-  record ITemplateSdo, lpVtbl : ITemplateSdoVtbl* do
+  record ITemplateSdo, lpVtbl : ITemplateSdoVtable* do
     GUID = LibC::GUID.new(0x8aa85302_u32, 0xd2e2_u16, 0x4e20_u16, StaticArray[0x8b_u8, 0x1f_u8, 0xa5_u8, 0x71_u8, 0xe4_u8, 0x37_u8, 0xd6_u8, 0xc9_u8])
     def query_interface(this : ITemplateSdo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1192,7 +1192,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
   end
 
   @[Extern]
-  record ISdoDictionaryOldVtbl,
+  record ISdoDictionaryOldVtable,
     query_interface : Proc(ISdoDictionaryOld*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISdoDictionaryOld*, UInt32),
     release : Proc(ISdoDictionaryOld*, UInt32),
@@ -1208,7 +1208,7 @@ module Win32cr::NetworkManagement::NetworkPolicyServer
 
 
   @[Extern]
-  record ISdoDictionaryOld, lpVtbl : ISdoDictionaryOldVtbl* do
+  record ISdoDictionaryOld, lpVtbl : ISdoDictionaryOldVtable* do
     GUID = LibC::GUID.new(0xd432e5f4_u32, 0x53d8_u16, 0x11d2_u16, StaticArray[0x9a_u8, 0x3a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb9_u8, 0x98_u8, 0xac_u8])
     def query_interface(this : ISdoDictionaryOld*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

@@ -321,82 +321,121 @@ module Win32cr::Storage::ProjectedFileSystem
   end
 
   def prjStartVirtualizing(virtualizationRootPath : Win32cr::Foundation::PWSTR, callbacks : Win32cr::Storage::ProjectedFileSystem::PRJ_CALLBACKS*, instanceContext : Void*, options : Win32cr::Storage::ProjectedFileSystem::PRJ_STARTVIRTUALIZING_OPTIONS*, namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PrjStartVirtualizing(virtualizationRootPath, callbacks, instanceContext, options, namespaceVirtualizationContext)
+    {% end %}
   end
 
   def prjStopVirtualizing(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT) : Void
+    {% if !flag?(:docs) %}
     C.PrjStopVirtualizing(namespaceVirtualizationContext)
+    {% end %}
   end
 
   def prjClearNegativePathCache(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, totalEntryNumber : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PrjClearNegativePathCache(namespaceVirtualizationContext, totalEntryNumber)
+    {% end %}
   end
 
   def prjGetVirtualizationInstanceInfo(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, virtualizationInstanceInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_VIRTUALIZATION_INSTANCE_INFO*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PrjGetVirtualizationInstanceInfo(namespaceVirtualizationContext, virtualizationInstanceInfo)
+    {% end %}
   end
 
   def prjMarkDirectoryAsPlaceholder(rootPathName : Win32cr::Foundation::PWSTR, targetPathName : Win32cr::Foundation::PWSTR, versionInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_PLACEHOLDER_VERSION_INFO*, virtualizationInstanceID : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PrjMarkDirectoryAsPlaceholder(rootPathName, targetPathName, versionInfo, virtualizationInstanceID)
+    {% end %}
   end
 
   def prjWritePlaceholderInfo(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName : Win32cr::Foundation::PWSTR, placeholderInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_PLACEHOLDER_INFO*, placeholderInfoSize : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PrjWritePlaceholderInfo(namespaceVirtualizationContext, destinationFileName, placeholderInfo, placeholderInfoSize)
+    {% end %}
   end
 
   def prjWritePlaceholderInfo2(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName : Win32cr::Foundation::PWSTR, placeholderInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_PLACEHOLDER_INFO*, placeholderInfoSize : UInt32, extended_info : Win32cr::Storage::ProjectedFileSystem::PRJ_EXTENDED_INFO*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PrjWritePlaceholderInfo2(namespaceVirtualizationContext, destinationFileName, placeholderInfo, placeholderInfoSize, extended_info)
+    {% end %}
   end
 
   def prjUpdateFileIfNeeded(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName : Win32cr::Foundation::PWSTR, placeholderInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_PLACEHOLDER_INFO*, placeholderInfoSize : UInt32, updateFlags : Win32cr::Storage::ProjectedFileSystem::PRJ_UPDATE_TYPES, failureReason : Win32cr::Storage::ProjectedFileSystem::PRJ_UPDATE_FAILURE_CAUSES*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PrjUpdateFileIfNeeded(namespaceVirtualizationContext, destinationFileName, placeholderInfo, placeholderInfoSize, updateFlags, failureReason)
+    {% end %}
   end
 
   def prjDeleteFile(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, destinationFileName : Win32cr::Foundation::PWSTR, updateFlags : Win32cr::Storage::ProjectedFileSystem::PRJ_UPDATE_TYPES, failureReason : Win32cr::Storage::ProjectedFileSystem::PRJ_UPDATE_FAILURE_CAUSES*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PrjDeleteFile(namespaceVirtualizationContext, destinationFileName, updateFlags, failureReason)
+    {% end %}
   end
 
   def prjWriteFileData(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, dataStreamId : LibC::GUID*, buffer : Void*, byteOffset : UInt64, length : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PrjWriteFileData(namespaceVirtualizationContext, dataStreamId, buffer, byteOffset, length)
+    {% end %}
   end
 
   def prjGetOnDiskFileState(destinationFileName : Win32cr::Foundation::PWSTR, fileState : Win32cr::Storage::ProjectedFileSystem::PRJ_FILE_STATE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PrjGetOnDiskFileState(destinationFileName, fileState)
+    {% end %}
   end
 
   def prjAllocateAlignedBuffer(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, size : LibC::UIntPtrT) : Void*
+    {% if !flag?(:docs) %}
     C.PrjAllocateAlignedBuffer(namespaceVirtualizationContext, size)
+    {% end %}
   end
 
   def prjFreeAlignedBuffer(buffer : Void*) : Void
+    {% if !flag?(:docs) %}
     C.PrjFreeAlignedBuffer(buffer)
+    {% end %}
   end
 
   def prjCompleteCommand(namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT, commandId : Int32, completionResult : Win32cr::Foundation::HRESULT, extendedParameters : Win32cr::Storage::ProjectedFileSystem::PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PrjCompleteCommand(namespaceVirtualizationContext, commandId, completionResult, extendedParameters)
+    {% end %}
   end
 
   def prjFillDirEntryBuffer(fileName : Win32cr::Foundation::PWSTR, fileBasicInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_FILE_BASIC_INFO*, dirEntryBufferHandle : Win32cr::Storage::ProjectedFileSystem::PRJ_DIR_ENTRY_BUFFER_HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PrjFillDirEntryBuffer(fileName, fileBasicInfo, dirEntryBufferHandle)
+    {% end %}
   end
 
   def prjFillDirEntryBuffer2(dirEntryBufferHandle : Win32cr::Storage::ProjectedFileSystem::PRJ_DIR_ENTRY_BUFFER_HANDLE, fileName : Win32cr::Foundation::PWSTR, fileBasicInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_FILE_BASIC_INFO*, extendedInfo : Win32cr::Storage::ProjectedFileSystem::PRJ_EXTENDED_INFO*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PrjFillDirEntryBuffer2(dirEntryBufferHandle, fileName, fileBasicInfo, extendedInfo)
+    {% end %}
   end
 
   def prjFileNameMatch(fileNameToCheck : Win32cr::Foundation::PWSTR, pattern : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.PrjFileNameMatch(fileNameToCheck, pattern)
+    {% end %}
   end
 
   def prjFileNameCompare(fileName1 : Win32cr::Foundation::PWSTR, fileName2 : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.PrjFileNameCompare(fileName1, fileName2)
+    {% end %}
   end
 
   def prjDoesNameContainWildCards(fileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.PrjDoesNameContainWildCards(fileName)
+    {% end %}
   end
 
   @[Link("projectedfslib")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun PrjStartVirtualizing(virtualizationRootPath : Win32cr::Foundation::PWSTR, callbacks : Win32cr::Storage::ProjectedFileSystem::PRJ_CALLBACKS*, instanceContext : Void*, options : Win32cr::Storage::ProjectedFileSystem::PRJ_STARTVIRTUALIZING_OPTIONS*, namespaceVirtualizationContext : Win32cr::Storage::ProjectedFileSystem::PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT*) : Win32cr::Foundation::HRESULT
@@ -456,4 +495,5 @@ module Win32cr::Storage::ProjectedFileSystem
     fun PrjDoesNameContainWildCards(fileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOLEAN
 
   end
+  {% end %}
 end

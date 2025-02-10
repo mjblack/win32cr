@@ -113,263 +113,392 @@ module Win32cr::System::HostComputeSystem
   end
 
   def hcsEnumerateComputeSystems(query : Win32cr::Foundation::PWSTR, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsEnumerateComputeSystems(query, operation)
+    {% end %}
   end
 
   def hcsEnumerateComputeSystemsInNamespace(idNamespace : Win32cr::Foundation::PWSTR, query : Win32cr::Foundation::PWSTR, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsEnumerateComputeSystemsInNamespace(idNamespace, query, operation)
+    {% end %}
   end
 
   def hcsCreateOperation(context : Void*, callback : Win32cr::System::HostComputeSystem::HCS_OPERATION_COMPLETION) : Win32cr::System::HostComputeSystem::HCS_OPERATION
+    {% if !flag?(:docs) %}
     C.HcsCreateOperation(context, callback)
+    {% end %}
   end
 
   def hcsCloseOperation(operation : Win32cr::System::HostComputeSystem::HCS_OPERATION) : Void
+    {% if !flag?(:docs) %}
     C.HcsCloseOperation(operation)
+    {% end %}
   end
 
   def hcsGetOperationContext(operation : Win32cr::System::HostComputeSystem::HCS_OPERATION) : Void*
+    {% if !flag?(:docs) %}
     C.HcsGetOperationContext(operation)
+    {% end %}
   end
 
   def hcsSetOperationContext(operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsSetOperationContext(operation, context)
+    {% end %}
   end
 
   def hcsGetComputeSystemFromOperation(operation : Win32cr::System::HostComputeSystem::HCS_OPERATION) : Win32cr::System::HostComputeSystem::HCS_SYSTEM
+    {% if !flag?(:docs) %}
     C.HcsGetComputeSystemFromOperation(operation)
+    {% end %}
   end
 
   def hcsGetProcessFromOperation(operation : Win32cr::System::HostComputeSystem::HCS_OPERATION) : Win32cr::System::HostComputeSystem::HCS_PROCESS
+    {% if !flag?(:docs) %}
     C.HcsGetProcessFromOperation(operation)
+    {% end %}
   end
 
   def hcsGetOperationType(operation : Win32cr::System::HostComputeSystem::HCS_OPERATION) : Win32cr::System::HostComputeSystem::HCS_OPERATION_TYPE
+    {% if !flag?(:docs) %}
     C.HcsGetOperationType(operation)
+    {% end %}
   end
 
   def hcsGetOperationId(operation : Win32cr::System::HostComputeSystem::HCS_OPERATION) : UInt64
+    {% if !flag?(:docs) %}
     C.HcsGetOperationId(operation)
+    {% end %}
   end
 
   def hcsGetOperationResult(operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, resultDocument : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsGetOperationResult(operation, resultDocument)
+    {% end %}
   end
 
   def hcsGetOperationResultAndProcessInfo(operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, processInformation : Win32cr::System::HostComputeSystem::HCS_PROCESS_INFORMATION*, resultDocument : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsGetOperationResultAndProcessInfo(operation, processInformation, resultDocument)
+    {% end %}
   end
 
   def hcsGetProcessorCompatibilityFromSavedState(runtime_file_name : Win32cr::Foundation::PWSTR, processor_features_string : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsGetProcessorCompatibilityFromSavedState(runtime_file_name, processor_features_string)
+    {% end %}
   end
 
   def hcsWaitForOperationResult(operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, timeoutMs : UInt32, resultDocument : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsWaitForOperationResult(operation, timeoutMs, resultDocument)
+    {% end %}
   end
 
   def hcsWaitForOperationResultAndProcessInfo(operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, timeoutMs : UInt32, processInformation : Win32cr::System::HostComputeSystem::HCS_PROCESS_INFORMATION*, resultDocument : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsWaitForOperationResultAndProcessInfo(operation, timeoutMs, processInformation, resultDocument)
+    {% end %}
   end
 
   def hcsSetOperationCallback(operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, context : Void*, callback : Win32cr::System::HostComputeSystem::HCS_OPERATION_COMPLETION) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsSetOperationCallback(operation, context, callback)
+    {% end %}
   end
 
   def hcsCancelOperation(operation : Win32cr::System::HostComputeSystem::HCS_OPERATION) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsCancelOperation(operation)
+    {% end %}
   end
 
   def hcsCreateComputeSystem(id : Win32cr::Foundation::PWSTR, configuration : Win32cr::Foundation::PWSTR, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, securityDescriptor : Win32cr::Security::SECURITY_DESCRIPTOR*, computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsCreateComputeSystem(id, configuration, operation, securityDescriptor, computeSystem)
+    {% end %}
   end
 
   def hcsCreateComputeSystemInNamespace(idNamespace : Win32cr::Foundation::PWSTR, id : Win32cr::Foundation::PWSTR, configuration : Win32cr::Foundation::PWSTR, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, options : Win32cr::System::HostComputeSystem::HCS_CREATE_OPTIONS*, computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsCreateComputeSystemInNamespace(idNamespace, id, configuration, operation, options, computeSystem)
+    {% end %}
   end
 
   def hcsOpenComputeSystem(id : Win32cr::Foundation::PWSTR, requestedAccess : UInt32, computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsOpenComputeSystem(id, requestedAccess, computeSystem)
+    {% end %}
   end
 
   def hcsOpenComputeSystemInNamespace(idNamespace : Win32cr::Foundation::PWSTR, id : Win32cr::Foundation::PWSTR, requestedAccess : UInt32, computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsOpenComputeSystemInNamespace(idNamespace, id, requestedAccess, computeSystem)
+    {% end %}
   end
 
   def hcsCloseComputeSystem(computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM) : Void
+    {% if !flag?(:docs) %}
     C.HcsCloseComputeSystem(computeSystem)
+    {% end %}
   end
 
   def hcsStartComputeSystem(computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, options : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsStartComputeSystem(computeSystem, operation, options)
+    {% end %}
   end
 
   def hcsShutDownComputeSystem(computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, options : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsShutDownComputeSystem(computeSystem, operation, options)
+    {% end %}
   end
 
   def hcsTerminateComputeSystem(computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, options : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsTerminateComputeSystem(computeSystem, operation, options)
+    {% end %}
   end
 
   def hcsCrashComputeSystem(computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, options : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsCrashComputeSystem(computeSystem, operation, options)
+    {% end %}
   end
 
   def hcsPauseComputeSystem(computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, options : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsPauseComputeSystem(computeSystem, operation, options)
+    {% end %}
   end
 
   def hcsResumeComputeSystem(computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, options : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsResumeComputeSystem(computeSystem, operation, options)
+    {% end %}
   end
 
   def hcsSaveComputeSystem(computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, options : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsSaveComputeSystem(computeSystem, operation, options)
+    {% end %}
   end
 
   def hcsGetComputeSystemProperties(computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, propertyQuery : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsGetComputeSystemProperties(computeSystem, operation, propertyQuery)
+    {% end %}
   end
 
   def hcsModifyComputeSystem(computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, configuration : Win32cr::Foundation::PWSTR, identity : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsModifyComputeSystem(computeSystem, operation, configuration, identity)
+    {% end %}
   end
 
   def hcsWaitForComputeSystemExit(computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM, timeoutMs : UInt32, result : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsWaitForComputeSystemExit(computeSystem, timeoutMs, result)
+    {% end %}
   end
 
   def hcsSetComputeSystemCallback(computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM, callbackOptions : Win32cr::System::HostComputeSystem::HCS_EVENT_OPTIONS, context : Void*, callback : Win32cr::System::HostComputeSystem::HCS_EVENT_CALLBACK) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsSetComputeSystemCallback(computeSystem, callbackOptions, context, callback)
+    {% end %}
   end
 
   def hcsCreateProcess(computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM, processParameters : Win32cr::Foundation::PWSTR, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, securityDescriptor : Win32cr::Security::SECURITY_DESCRIPTOR*, process : Win32cr::System::HostComputeSystem::HCS_PROCESS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsCreateProcess(computeSystem, processParameters, operation, securityDescriptor, process)
+    {% end %}
   end
 
   def hcsOpenProcess(computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM, processId : UInt32, requestedAccess : UInt32, process : Win32cr::System::HostComputeSystem::HCS_PROCESS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsOpenProcess(computeSystem, processId, requestedAccess, process)
+    {% end %}
   end
 
   def hcsCloseProcess(process : Win32cr::System::HostComputeSystem::HCS_PROCESS) : Void
+    {% if !flag?(:docs) %}
     C.HcsCloseProcess(process)
+    {% end %}
   end
 
   def hcsTerminateProcess(process : Win32cr::System::HostComputeSystem::HCS_PROCESS, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, options : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsTerminateProcess(process, operation, options)
+    {% end %}
   end
 
   def hcsSignalProcess(process : Win32cr::System::HostComputeSystem::HCS_PROCESS, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, options : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsSignalProcess(process, operation, options)
+    {% end %}
   end
 
   def hcsGetProcessInfo(process : Win32cr::System::HostComputeSystem::HCS_PROCESS, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsGetProcessInfo(process, operation)
+    {% end %}
   end
 
   def hcsGetProcessProperties(process : Win32cr::System::HostComputeSystem::HCS_PROCESS, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, propertyQuery : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsGetProcessProperties(process, operation, propertyQuery)
+    {% end %}
   end
 
   def hcsModifyProcess(process : Win32cr::System::HostComputeSystem::HCS_PROCESS, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION, settings : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsModifyProcess(process, operation, settings)
+    {% end %}
   end
 
   def hcsSetProcessCallback(process : Win32cr::System::HostComputeSystem::HCS_PROCESS, callbackOptions : Win32cr::System::HostComputeSystem::HCS_EVENT_OPTIONS, context : Void*, callback : Win32cr::System::HostComputeSystem::HCS_EVENT_CALLBACK) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsSetProcessCallback(process, callbackOptions, context, callback)
+    {% end %}
   end
 
   def hcsWaitForProcessExit(computeSystem : Win32cr::System::HostComputeSystem::HCS_PROCESS, timeoutMs : UInt32, result : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsWaitForProcessExit(computeSystem, timeoutMs, result)
+    {% end %}
   end
 
   def hcsGetServiceProperties(propertyQuery : Win32cr::Foundation::PWSTR, result : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsGetServiceProperties(propertyQuery, result)
+    {% end %}
   end
 
   def hcsModifyServiceSettings(settings : Win32cr::Foundation::PWSTR, result : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsModifyServiceSettings(settings, result)
+    {% end %}
   end
 
   def hcsSubmitWerReport(settings : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsSubmitWerReport(settings)
+    {% end %}
   end
 
   def hcsCreateEmptyGuestStateFile(guestStateFilePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsCreateEmptyGuestStateFile(guestStateFilePath)
+    {% end %}
   end
 
   def hcsCreateEmptyRuntimeStateFile(runtimeStateFilePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsCreateEmptyRuntimeStateFile(runtimeStateFilePath)
+    {% end %}
   end
 
   def hcsGrantVmAccess(vmId : Win32cr::Foundation::PWSTR, filePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsGrantVmAccess(vmId, filePath)
+    {% end %}
   end
 
   def hcsRevokeVmAccess(vmId : Win32cr::Foundation::PWSTR, filePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsRevokeVmAccess(vmId, filePath)
+    {% end %}
   end
 
   def hcsGrantVmGroupAccess(filePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsGrantVmGroupAccess(filePath)
+    {% end %}
   end
 
   def hcsRevokeVmGroupAccess(filePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsRevokeVmGroupAccess(filePath)
+    {% end %}
   end
 
   def hcsImportLayer(layerPath : Win32cr::Foundation::PWSTR, sourceFolderPath : Win32cr::Foundation::PWSTR, layerData : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsImportLayer(layerPath, sourceFolderPath, layerData)
+    {% end %}
   end
 
   def hcsExportLayer(layerPath : Win32cr::Foundation::PWSTR, exportFolderPath : Win32cr::Foundation::PWSTR, layerData : Win32cr::Foundation::PWSTR, options : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsExportLayer(layerPath, exportFolderPath, layerData, options)
+    {% end %}
   end
 
   def hcsExportLegacyWritableLayer(writableLayerMountPath : Win32cr::Foundation::PWSTR, writableLayerFolderPath : Win32cr::Foundation::PWSTR, exportFolderPath : Win32cr::Foundation::PWSTR, layerData : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsExportLegacyWritableLayer(writableLayerMountPath, writableLayerFolderPath, exportFolderPath, layerData)
+    {% end %}
   end
 
   def hcsDestroyLayer(layerPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsDestroyLayer(layerPath)
+    {% end %}
   end
 
   def hcsSetupBaseOSLayer(layerPath : Win32cr::Foundation::PWSTR, vhdHandle : Win32cr::Foundation::HANDLE, options : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsSetupBaseOSLayer(layerPath, vhdHandle, options)
+    {% end %}
   end
 
   def hcsInitializeWritableLayer(writableLayerPath : Win32cr::Foundation::PWSTR, layerData : Win32cr::Foundation::PWSTR, options : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsInitializeWritableLayer(writableLayerPath, layerData, options)
+    {% end %}
   end
 
   def hcsInitializeLegacyWritableLayer(writableLayerMountPath : Win32cr::Foundation::PWSTR, writableLayerFolderPath : Win32cr::Foundation::PWSTR, layerData : Win32cr::Foundation::PWSTR, options : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsInitializeLegacyWritableLayer(writableLayerMountPath, writableLayerFolderPath, layerData, options)
+    {% end %}
   end
 
   def hcsAttachLayerStorageFilter(layerPath : Win32cr::Foundation::PWSTR, layerData : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsAttachLayerStorageFilter(layerPath, layerData)
+    {% end %}
   end
 
   def hcsDetachLayerStorageFilter(layerPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsDetachLayerStorageFilter(layerPath)
+    {% end %}
   end
 
   def hcsFormatWritableLayerVhd(vhdHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsFormatWritableLayerVhd(vhdHandle)
+    {% end %}
   end
 
   def hcsGetLayerVhdMountPath(vhdHandle : Win32cr::Foundation::HANDLE, mountPath : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsGetLayerVhdMountPath(vhdHandle, mountPath)
+    {% end %}
   end
 
   def hcsSetupBaseOSVolume(layerPath : Win32cr::Foundation::PWSTR, volumePath : Win32cr::Foundation::PWSTR, options : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HcsSetupBaseOSVolume(layerPath, volumePath, options)
+    {% end %}
   end
 
   @[Link("computecore")]
   @[Link("computestorage")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun HcsEnumerateComputeSystems(query : Win32cr::Foundation::PWSTR, operation : Win32cr::System::HostComputeSystem::HCS_OPERATION) : Win32cr::Foundation::HRESULT
@@ -564,4 +693,5 @@ module Win32cr::System::HostComputeSystem
     fun HcsSetupBaseOSVolume(layerPath : Win32cr::Foundation::PWSTR, volumePath : Win32cr::Foundation::PWSTR, options : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

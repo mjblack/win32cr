@@ -8,7 +8,7 @@ module Win32cr::System::WinRT::Direct3D11
 
 
   @[Extern]
-  record IDirect3DDxgiInterfaceAccessVtbl,
+  record IDirect3DDxgiInterfaceAccessVtable,
     query_interface : Proc(IDirect3DDxgiInterfaceAccess*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DDxgiInterfaceAccess*, UInt32),
     release : Proc(IDirect3DDxgiInterfaceAccess*, UInt32),
@@ -16,7 +16,7 @@ module Win32cr::System::WinRT::Direct3D11
 
 
   @[Extern]
-  record IDirect3DDxgiInterfaceAccess, lpVtbl : IDirect3DDxgiInterfaceAccessVtbl* do
+  record IDirect3DDxgiInterfaceAccess, lpVtbl : IDirect3DDxgiInterfaceAccessVtable* do
     GUID = LibC::GUID.new(0xa9b3d012_u32, 0x3df2_u16, 0x4ee3_u16, StaticArray[0xb8_u8, 0xd1_u8, 0x86_u8, 0x95_u8, 0xf4_u8, 0x57_u8, 0xd3_u8, 0xc1_u8])
     def query_interface(this : IDirect3DDxgiInterfaceAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -34,14 +34,19 @@ module Win32cr::System::WinRT::Direct3D11
   end
 
   def createDirect3D11DeviceFromDXGIDevice(dxgiDevice : Void*, graphicsDevice : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateDirect3D11DeviceFromDXGIDevice(dxgiDevice, graphicsDevice)
+    {% end %}
   end
 
   def createDirect3D11SurfaceFromDXGISurface(dgxiSurface : Void*, graphicsSurface : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateDirect3D11SurfaceFromDXGISurface(dgxiSurface, graphicsSurface)
+    {% end %}
   end
 
   @[Link("d3d11")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CreateDirect3D11DeviceFromDXGIDevice(dxgiDevice : Void*, graphicsDevice : Void**) : Win32cr::Foundation::HRESULT
@@ -50,4 +55,5 @@ module Win32cr::System::WinRT::Direct3D11
     fun CreateDirect3D11SurfaceFromDXGISurface(dgxiSurface : Void*, graphicsSurface : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

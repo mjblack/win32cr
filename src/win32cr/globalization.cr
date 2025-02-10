@@ -3965,29 +3965,13 @@ module Win32cr::Globalization
     end
   end
 
-  @[Extern]
-  struct UEnumeration
-    def initialize()
-    end
-  end
+  alias UEnumeration = Void
 
-  @[Extern]
-  struct UResourceBundle
-    def initialize()
-    end
-  end
+  alias UResourceBundle = Void
 
-  @[Extern]
-  struct ULocaleDisplayNames
-    def initialize()
-    end
-  end
+  alias ULocaleDisplayNames = Void
 
-  @[Extern]
-  struct UCPMap
-    def initialize()
-    end
-  end
+  alias UCPMap = Void
 
   @[Extern(union: true)]
   struct UCPTrieData
@@ -4018,17 +4002,9 @@ module Win32cr::Globalization
     end
   end
 
-  @[Extern]
-  struct UMutableCPTrie
-    def initialize()
-    end
-  end
+  alias UMutableCPTrie = Void
 
-  @[Extern]
-  struct UConverter
-    def initialize()
-    end
-  end
+  alias UConverter = Void
 
   @[Extern]
   struct UConverterFromUnicodeArgs
@@ -4058,23 +4034,11 @@ module Win32cr::Globalization
     end
   end
 
-  @[Extern]
-  struct USet
-    def initialize()
-    end
-  end
+  alias USet = Void
 
-  @[Extern]
-  struct UBiDi
-    def initialize()
-    end
-  end
+  alias UBiDi = Void
 
-  @[Extern]
-  struct UBiDiTransform
-    def initialize()
-    end
-  end
+  alias UBiDiTransform = Void
 
   @[Extern]
   struct UTextFuncs
@@ -4138,29 +4102,13 @@ module Win32cr::Globalization
     end
   end
 
-  @[Extern]
-  struct UNormalizer2
-    def initialize()
-    end
-  end
+  alias UNormalizer2 = Void
 
-  @[Extern]
-  struct UConverterSelector
-    def initialize()
-    end
-  end
+  alias UConverterSelector = Void
 
-  @[Extern]
-  struct UBreakIterator
-    def initialize()
-    end
-  end
+  alias UBreakIterator = Void
 
-  @[Extern]
-  struct UCaseMap
-    def initialize()
-    end
-  end
+  alias UCaseMap = Void
 
   @[Extern]
   struct UParseError
@@ -4172,17 +4120,9 @@ module Win32cr::Globalization
     end
   end
 
-  @[Extern]
-  struct UStringPrepProfile
-    def initialize()
-    end
-  end
+  alias UStringPrepProfile = Void
 
-  @[Extern]
-  struct UIDNA
-    def initialize()
-    end
-  end
+  alias UIDNA = Void
 
   @[Extern]
   struct UIDNAInfo
@@ -4196,161 +4136,57 @@ module Win32cr::Globalization
     end
   end
 
-  @[Extern]
-  struct UCollator
-    def initialize()
-    end
-  end
+  alias UCollator = Void
 
-  @[Extern]
-  struct UCollationElements
-    def initialize()
-    end
-  end
+  alias UCollationElements = Void
 
-  @[Extern]
-  struct UCharsetDetector
-    def initialize()
-    end
-  end
+  alias UCharsetDetector = Void
 
-  @[Extern]
-  struct UCharsetMatch
-    def initialize()
-    end
-  end
+  alias UCharsetMatch = Void
 
-  @[Extern]
-  struct UFieldPositionIterator
-    def initialize()
-    end
-  end
+  alias UFieldPositionIterator = Void
 
-  @[Extern]
-  struct UConstrainedFieldPosition
-    def initialize()
-    end
-  end
+  alias UConstrainedFieldPosition = Void
 
-  @[Extern]
-  struct UFormattedValue
-    def initialize()
-    end
-  end
+  alias UFormattedValue = Void
 
-  @[Extern]
-  struct UDateIntervalFormat
-    def initialize()
-    end
-  end
+  alias UDateIntervalFormat = Void
 
-  @[Extern]
-  struct UFormattedDateInterval
-    def initialize()
-    end
-  end
+  alias UFormattedDateInterval = Void
 
-  @[Extern]
-  struct UGenderInfo
-    def initialize()
-    end
-  end
+  alias UGenderInfo = Void
 
-  @[Extern]
-  struct UListFormatter
-    def initialize()
-    end
-  end
+  alias UListFormatter = Void
 
-  @[Extern]
-  struct UFormattedList
-    def initialize()
-    end
-  end
+  alias UFormattedList = Void
 
-  @[Extern]
-  struct ULocaleData
-    def initialize()
-    end
-  end
+  alias ULocaleData = Void
 
-  @[Extern]
-  struct UDateFormatSymbols
-    def initialize()
-    end
-  end
+  alias UDateFormatSymbols = Void
 
-  @[Extern]
-  struct UNumberFormatter
-    def initialize()
-    end
-  end
+  alias UNumberFormatter = Void
 
-  @[Extern]
-  struct UFormattedNumber
-    def initialize()
-    end
-  end
+  alias UFormattedNumber = Void
 
-  @[Extern]
-  struct UNumberingSystem
-    def initialize()
-    end
-  end
+  alias UNumberingSystem = Void
 
-  @[Extern]
-  struct UFormattedNumberRange
-    def initialize()
-    end
-  end
+  alias UFormattedNumberRange = Void
 
-  @[Extern]
-  struct UPluralRules
-    def initialize()
-    end
-  end
+  alias UPluralRules = Void
 
-  @[Extern]
-  struct URegularExpression
-    def initialize()
-    end
-  end
+  alias URegularExpression = Void
 
-  @[Extern]
-  struct URegion
-    def initialize()
-    end
-  end
+  alias URegion = Void
 
-  @[Extern]
-  struct URelativeDateTimeFormatter
-    def initialize()
-    end
-  end
+  alias URelativeDateTimeFormatter = Void
 
-  @[Extern]
-  struct UFormattedRelativeDateTime
-    def initialize()
-    end
-  end
+  alias UFormattedRelativeDateTime = Void
 
-  @[Extern]
-  struct UStringSearch
-    def initialize()
-    end
-  end
+  alias UStringSearch = Void
 
-  @[Extern]
-  struct USpoofChecker
-    def initialize()
-    end
-  end
+  alias USpoofChecker = Void
 
-  @[Extern]
-  struct USpoofCheckResult
-    def initialize()
-    end
-  end
+  alias USpoofCheckResult = Void
 
   @[Extern]
   struct UTransPosition
@@ -4362,17 +4198,9 @@ module Win32cr::Globalization
     end
   end
 
-  @[Extern]
-  struct UHashtable
-    def initialize()
-    end
-  end
+  alias UHashtable = Void
 
-  @[Extern]
-  struct USearch
-    def initialize()
-    end
-  end
+  alias USearch = Void
 
   @[Extern]
   struct MIMECPINFO
@@ -4446,7 +4274,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record ISpellingErrorVtbl,
+  record ISpellingErrorVtable,
     query_interface : Proc(ISpellingError*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISpellingError*, UInt32),
     release : Proc(ISpellingError*, UInt32),
@@ -4457,7 +4285,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record ISpellingError, lpVtbl : ISpellingErrorVtbl* do
+  record ISpellingError, lpVtbl : ISpellingErrorVtable* do
     GUID = LibC::GUID.new(0xb7c82d61_u32, 0xfbe8_u16, 0x4b47_u16, StaticArray[0x9b_u8, 0x27_u8, 0x6c_u8, 0xd_u8, 0x2e_u8, 0xd_u8, 0xe0_u8, 0xa3_u8])
     def query_interface(this : ISpellingError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4484,7 +4312,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IEnumSpellingErrorVtbl,
+  record IEnumSpellingErrorVtable,
     query_interface : Proc(IEnumSpellingError*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumSpellingError*, UInt32),
     release : Proc(IEnumSpellingError*, UInt32),
@@ -4492,7 +4320,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IEnumSpellingError, lpVtbl : IEnumSpellingErrorVtbl* do
+  record IEnumSpellingError, lpVtbl : IEnumSpellingErrorVtable* do
     GUID = LibC::GUID.new(0x803e3bd4_u32, 0x2828_u16, 0x4410_u16, StaticArray[0x82_u8, 0x90_u8, 0x41_u8, 0x8d_u8, 0x1d_u8, 0x73_u8, 0xc7_u8, 0x62_u8])
     def query_interface(this : IEnumSpellingError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4510,7 +4338,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IOptionDescriptionVtbl,
+  record IOptionDescriptionVtable,
     query_interface : Proc(IOptionDescription*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOptionDescription*, UInt32),
     release : Proc(IOptionDescription*, UInt32),
@@ -4521,7 +4349,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IOptionDescription, lpVtbl : IOptionDescriptionVtbl* do
+  record IOptionDescription, lpVtbl : IOptionDescriptionVtable* do
     GUID = LibC::GUID.new(0x432e5f85_u32, 0x35cf_u16, 0x4606_u16, StaticArray[0xa8_u8, 0x1_u8, 0x6f_u8, 0x70_u8, 0x27_u8, 0x7e_u8, 0x1d_u8, 0x7a_u8])
     def query_interface(this : IOptionDescription*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4548,7 +4376,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record ISpellCheckerChangedEventHandlerVtbl,
+  record ISpellCheckerChangedEventHandlerVtable,
     query_interface : Proc(ISpellCheckerChangedEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISpellCheckerChangedEventHandler*, UInt32),
     release : Proc(ISpellCheckerChangedEventHandler*, UInt32),
@@ -4556,7 +4384,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record ISpellCheckerChangedEventHandler, lpVtbl : ISpellCheckerChangedEventHandlerVtbl* do
+  record ISpellCheckerChangedEventHandler, lpVtbl : ISpellCheckerChangedEventHandlerVtable* do
     GUID = LibC::GUID.new(0xb83a5b0_u32, 0x792f_u16, 0x4eab_u16, StaticArray[0x97_u8, 0x99_u8, 0xac_u8, 0xf5_u8, 0x2c_u8, 0x5e_u8, 0xd0_u8, 0x8a_u8])
     def query_interface(this : ISpellCheckerChangedEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4574,7 +4402,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record ISpellCheckerVtbl,
+  record ISpellCheckerVtable,
     query_interface : Proc(ISpellChecker*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISpellChecker*, UInt32),
     release : Proc(ISpellChecker*, UInt32),
@@ -4595,7 +4423,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record ISpellChecker, lpVtbl : ISpellCheckerVtbl* do
+  record ISpellChecker, lpVtbl : ISpellCheckerVtable* do
     GUID = LibC::GUID.new(0xb6fd0b71_u32, 0xe2bc_u16, 0x4653_u16, StaticArray[0x8d_u8, 0x5_u8, 0xf1_u8, 0x97_u8, 0xe4_u8, 0x12_u8, 0x77_u8, 0xb_u8])
     def query_interface(this : ISpellChecker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4652,7 +4480,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record ISpellChecker2Vtbl,
+  record ISpellChecker2Vtable,
     query_interface : Proc(ISpellChecker2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISpellChecker2*, UInt32),
     release : Proc(ISpellChecker2*, UInt32),
@@ -4674,7 +4502,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record ISpellChecker2, lpVtbl : ISpellChecker2Vtbl* do
+  record ISpellChecker2, lpVtbl : ISpellChecker2Vtable* do
     GUID = LibC::GUID.new(0xe7ed1c71_u32, 0x87f7_u16, 0x4378_u16, StaticArray[0xa8_u8, 0x40_u8, 0xc9_u8, 0x20_u8, 0xd_u8, 0xac_u8, 0xee_u8, 0x47_u8])
     def query_interface(this : ISpellChecker2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4734,7 +4562,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record ISpellCheckerFactoryVtbl,
+  record ISpellCheckerFactoryVtable,
     query_interface : Proc(ISpellCheckerFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISpellCheckerFactory*, UInt32),
     release : Proc(ISpellCheckerFactory*, UInt32),
@@ -4744,7 +4572,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record ISpellCheckerFactory, lpVtbl : ISpellCheckerFactoryVtbl* do
+  record ISpellCheckerFactory, lpVtbl : ISpellCheckerFactoryVtable* do
     GUID = LibC::GUID.new(0x8e018a9d_u32, 0x2415_u16, 0x4677_u16, StaticArray[0xbf_u8, 0x8_u8, 0x79_u8, 0x4e_u8, 0xa6_u8, 0x1f_u8, 0x94_u8, 0xbb_u8])
     def query_interface(this : ISpellCheckerFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4768,7 +4596,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IUserDictionariesRegistrarVtbl,
+  record IUserDictionariesRegistrarVtable,
     query_interface : Proc(IUserDictionariesRegistrar*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUserDictionariesRegistrar*, UInt32),
     release : Proc(IUserDictionariesRegistrar*, UInt32),
@@ -4777,7 +4605,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IUserDictionariesRegistrar, lpVtbl : IUserDictionariesRegistrarVtbl* do
+  record IUserDictionariesRegistrar, lpVtbl : IUserDictionariesRegistrarVtable* do
     GUID = LibC::GUID.new(0xaa176b85_u32, 0xe12_u16, 0x4844_u16, StaticArray[0x8e_u8, 0x1a_u8, 0xee_u8, 0xf1_u8, 0xda_u8, 0x77_u8, 0xf5_u8, 0x86_u8])
     def query_interface(this : IUserDictionariesRegistrar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4798,7 +4626,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record ISpellCheckProviderVtbl,
+  record ISpellCheckProviderVtable,
     query_interface : Proc(ISpellCheckProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISpellCheckProvider*, UInt32),
     release : Proc(ISpellCheckProvider*, UInt32),
@@ -4815,7 +4643,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record ISpellCheckProvider, lpVtbl : ISpellCheckProviderVtbl* do
+  record ISpellCheckProvider, lpVtbl : ISpellCheckProviderVtable* do
     GUID = LibC::GUID.new(0x73e976e0_u32, 0x8ed4_u16, 0x4eb1_u16, StaticArray[0x80_u8, 0xd7_u8, 0x1b_u8, 0xe0_u8, 0xa1_u8, 0x6b_u8, 0xc_u8, 0x38_u8])
     def query_interface(this : ISpellCheckProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4860,7 +4688,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IComprehensiveSpellCheckProviderVtbl,
+  record IComprehensiveSpellCheckProviderVtable,
     query_interface : Proc(IComprehensiveSpellCheckProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IComprehensiveSpellCheckProvider*, UInt32),
     release : Proc(IComprehensiveSpellCheckProvider*, UInt32),
@@ -4868,7 +4696,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IComprehensiveSpellCheckProvider, lpVtbl : IComprehensiveSpellCheckProviderVtbl* do
+  record IComprehensiveSpellCheckProvider, lpVtbl : IComprehensiveSpellCheckProviderVtable* do
     GUID = LibC::GUID.new(0xc58f8de_u32, 0x8e94_u16, 0x479e_u16, StaticArray[0x97_u8, 0x17_u8, 0x70_u8, 0xc4_u8, 0x2c_u8, 0x4a_u8, 0xd2_u8, 0xc3_u8])
     def query_interface(this : IComprehensiveSpellCheckProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4886,7 +4714,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record ISpellCheckProviderFactoryVtbl,
+  record ISpellCheckProviderFactoryVtable,
     query_interface : Proc(ISpellCheckProviderFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISpellCheckProviderFactory*, UInt32),
     release : Proc(ISpellCheckProviderFactory*, UInt32),
@@ -4896,7 +4724,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record ISpellCheckProviderFactory, lpVtbl : ISpellCheckProviderFactoryVtbl* do
+  record ISpellCheckProviderFactory, lpVtbl : ISpellCheckProviderFactoryVtable* do
     GUID = LibC::GUID.new(0x9f671e11_u32, 0x77d6_u16, 0x4c92_u16, StaticArray[0xae_u8, 0xfb_u8, 0x61_u8, 0x52_u8, 0x15_u8, 0xe3_u8, 0xa4_u8, 0xbe_u8])
     def query_interface(this : ISpellCheckProviderFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4920,7 +4748,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IMLangStringBufWVtbl,
+  record IMLangStringBufWVtable,
     query_interface : Proc(IMLangStringBufW*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLangStringBufW*, UInt32),
     release : Proc(IMLangStringBufW*, UInt32),
@@ -4932,7 +4760,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IMLangStringBufW, lpVtbl : IMLangStringBufWVtbl* do
+  record IMLangStringBufW, lpVtbl : IMLangStringBufWVtable* do
     GUID = LibC::GUID.new(0xd24acd21_u32, 0xba72_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
     def query_interface(this : IMLangStringBufW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4962,7 +4790,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IMLangStringBufAVtbl,
+  record IMLangStringBufAVtable,
     query_interface : Proc(IMLangStringBufA*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLangStringBufA*, UInt32),
     release : Proc(IMLangStringBufA*, UInt32),
@@ -4974,7 +4802,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IMLangStringBufA, lpVtbl : IMLangStringBufAVtbl* do
+  record IMLangStringBufA, lpVtbl : IMLangStringBufAVtable* do
     GUID = LibC::GUID.new(0xd24acd23_u32, 0xba72_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
     def query_interface(this : IMLangStringBufA*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5004,7 +4832,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IMLangStringVtbl,
+  record IMLangStringVtable,
     query_interface : Proc(IMLangString*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLangString*, UInt32),
     release : Proc(IMLangString*, UInt32),
@@ -5015,7 +4843,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IMLangString, lpVtbl : IMLangStringVtbl* do
+  record IMLangString, lpVtbl : IMLangStringVtable* do
     GUID = LibC::GUID.new(0xc04d65ce_u32, 0xb70d_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
     def query_interface(this : IMLangString*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5042,7 +4870,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IMLangStringWStrVtbl,
+  record IMLangStringWStrVtable,
     query_interface : Proc(IMLangStringWStr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLangStringWStr*, UInt32),
     release : Proc(IMLangStringWStr*, UInt32),
@@ -5061,7 +4889,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IMLangStringWStr, lpVtbl : IMLangStringWStrVtbl* do
+  record IMLangStringWStr, lpVtbl : IMLangStringWStrVtable* do
     GUID = LibC::GUID.new(0xc04d65d0_u32, 0xb70d_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
     def query_interface(this : IMLangStringWStr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5112,7 +4940,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IMLangStringAStrVtbl,
+  record IMLangStringAStrVtable,
     query_interface : Proc(IMLangStringAStr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLangStringAStr*, UInt32),
     release : Proc(IMLangStringAStr*, UInt32),
@@ -5131,7 +4959,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IMLangStringAStr, lpVtbl : IMLangStringAStrVtbl* do
+  record IMLangStringAStr, lpVtbl : IMLangStringAStrVtable* do
     GUID = LibC::GUID.new(0xc04d65d2_u32, 0xb70d_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
     def query_interface(this : IMLangStringAStr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5182,7 +5010,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IMLangLineBreakConsoleVtbl,
+  record IMLangLineBreakConsoleVtable,
     query_interface : Proc(IMLangLineBreakConsole*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLangLineBreakConsole*, UInt32),
     release : Proc(IMLangLineBreakConsole*, UInt32),
@@ -5192,7 +5020,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IMLangLineBreakConsole, lpVtbl : IMLangLineBreakConsoleVtbl* do
+  record IMLangLineBreakConsole, lpVtbl : IMLangLineBreakConsoleVtable* do
     GUID = LibC::GUID.new(0xf5be2ee1_u32, 0xbfd7_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
     def query_interface(this : IMLangLineBreakConsole*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5216,7 +5044,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IEnumCodePageVtbl,
+  record IEnumCodePageVtable,
     query_interface : Proc(IEnumCodePage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumCodePage*, UInt32),
     release : Proc(IEnumCodePage*, UInt32),
@@ -5227,7 +5055,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IEnumCodePage, lpVtbl : IEnumCodePageVtbl* do
+  record IEnumCodePage, lpVtbl : IEnumCodePageVtable* do
     GUID = LibC::GUID.new(0x275c23e3_u32, 0x3747_u16, 0x11d0_u16, StaticArray[0x9f_u8, 0xea_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3f_u8, 0x86_u8, 0x46_u8])
     def query_interface(this : IEnumCodePage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5254,7 +5082,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IEnumRfc1766Vtbl,
+  record IEnumRfc1766Vtable,
     query_interface : Proc(IEnumRfc1766*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumRfc1766*, UInt32),
     release : Proc(IEnumRfc1766*, UInt32),
@@ -5265,7 +5093,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IEnumRfc1766, lpVtbl : IEnumRfc1766Vtbl* do
+  record IEnumRfc1766, lpVtbl : IEnumRfc1766Vtable* do
     GUID = LibC::GUID.new(0x3dc39d1d_u32, 0xc030_u16, 0x11d0_u16, StaticArray[0xb8_u8, 0x1b_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xb3_u8, 0x1f_u8])
     def query_interface(this : IEnumRfc1766*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5292,7 +5120,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IEnumScriptVtbl,
+  record IEnumScriptVtable,
     query_interface : Proc(IEnumScript*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumScript*, UInt32),
     release : Proc(IEnumScript*, UInt32),
@@ -5303,7 +5131,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IEnumScript, lpVtbl : IEnumScriptVtbl* do
+  record IEnumScript, lpVtbl : IEnumScriptVtable* do
     GUID = LibC::GUID.new(0xae5f1430_u32, 0x388b_u16, 0x11d2_u16, StaticArray[0x83_u8, 0x80_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8f_u8, 0x5d_u8, 0xa1_u8])
     def query_interface(this : IEnumScript*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5330,7 +5158,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IMLangConvertCharsetVtbl,
+  record IMLangConvertCharsetVtable,
     query_interface : Proc(IMLangConvertCharset*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLangConvertCharset*, UInt32),
     release : Proc(IMLangConvertCharset*, UInt32),
@@ -5344,7 +5172,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IMLangConvertCharset, lpVtbl : IMLangConvertCharsetVtbl* do
+  record IMLangConvertCharset, lpVtbl : IMLangConvertCharsetVtable* do
     GUID = LibC::GUID.new(0xd66d6f98_u32, 0xcdaa_u16, 0x11d0_u16, StaticArray[0xb8_u8, 0x22_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0xb3_u8, 0x1f_u8])
     def query_interface(this : IMLangConvertCharset*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5380,7 +5208,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IMultiLanguageVtbl,
+  record IMultiLanguageVtable,
     query_interface : Proc(IMultiLanguage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMultiLanguage*, UInt32),
     release : Proc(IMultiLanguage*, UInt32),
@@ -5402,7 +5230,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IMultiLanguage, lpVtbl : IMultiLanguageVtbl* do
+  record IMultiLanguage, lpVtbl : IMultiLanguageVtable* do
     GUID = LibC::GUID.new(0x275c23e1_u32, 0x3747_u16, 0x11d0_u16, StaticArray[0x9f_u8, 0xea_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x3f_u8, 0x86_u8, 0x46_u8])
     def query_interface(this : IMultiLanguage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5462,7 +5290,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IMultiLanguage2Vtbl,
+  record IMultiLanguage2Vtable,
     query_interface : Proc(IMultiLanguage2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMultiLanguage2*, UInt32),
     release : Proc(IMultiLanguage2*, UInt32),
@@ -5496,7 +5324,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IMultiLanguage2, lpVtbl : IMultiLanguage2Vtbl* do
+  record IMultiLanguage2, lpVtbl : IMultiLanguage2Vtable* do
     GUID = LibC::GUID.new(0xdccfc164_u32, 0x2b38_u16, 0x11d2_u16, StaticArray[0xb7_u8, 0xec_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8f_u8, 0x5d_u8, 0x9a_u8])
     def query_interface(this : IMultiLanguage2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5592,7 +5420,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IMLangCodePagesVtbl,
+  record IMLangCodePagesVtable,
     query_interface : Proc(IMLangCodePages*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLangCodePages*, UInt32),
     release : Proc(IMLangCodePages*, UInt32),
@@ -5603,7 +5431,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IMLangCodePages, lpVtbl : IMLangCodePagesVtbl* do
+  record IMLangCodePages, lpVtbl : IMLangCodePagesVtable* do
     GUID = LibC::GUID.new(0x359f3443_u32, 0xbd4a_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
     def query_interface(this : IMLangCodePages*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5630,7 +5458,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IMLangFontLinkVtbl,
+  record IMLangFontLinkVtable,
     query_interface : Proc(IMLangFontLink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLangFontLink*, UInt32),
     release : Proc(IMLangFontLink*, UInt32),
@@ -5645,7 +5473,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IMLangFontLink, lpVtbl : IMLangFontLinkVtbl* do
+  record IMLangFontLink, lpVtbl : IMLangFontLinkVtable* do
     GUID = LibC::GUID.new(0x359f3441_u32, 0xbd4a_u16, 0x11d0_u16, StaticArray[0xb1_u8, 0x88_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0xc9_u8, 0x69_u8])
     def query_interface(this : IMLangFontLink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5684,7 +5512,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IMLangFontLink2Vtbl,
+  record IMLangFontLink2Vtable,
     query_interface : Proc(IMLangFontLink2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMLangFontLink2*, UInt32),
     release : Proc(IMLangFontLink2*, UInt32),
@@ -5702,7 +5530,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IMLangFontLink2, lpVtbl : IMLangFontLink2Vtbl* do
+  record IMLangFontLink2, lpVtbl : IMLangFontLink2Vtable* do
     GUID = LibC::GUID.new(0xdccfc162_u32, 0x2b38_u16, 0x11d2_u16, StaticArray[0xb7_u8, 0xec_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x8f_u8, 0x5d_u8, 0x9a_u8])
     def query_interface(this : IMLangFontLink2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5750,7 +5578,7 @@ module Win32cr::Globalization
   end
 
   @[Extern]
-  record IMultiLanguage3Vtbl,
+  record IMultiLanguage3Vtable,
     query_interface : Proc(IMultiLanguage3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMultiLanguage3*, UInt32),
     release : Proc(IMultiLanguage3*, UInt32),
@@ -5786,7 +5614,7 @@ module Win32cr::Globalization
 
 
   @[Extern]
-  record IMultiLanguage3, lpVtbl : IMultiLanguage3Vtbl* do
+  record IMultiLanguage3, lpVtbl : IMultiLanguage3Vtable* do
     GUID = LibC::GUID.new(0x4e5868ab_u32, 0xb157_u16, 0x4623_u16, StaticArray[0x9a_u8, 0xcc_u8, 0x6a_u8, 0x1d_u8, 0x9c_u8, 0xae_u8, 0xbe_u8, 0x4_u8])
     def query_interface(this : IMultiLanguage3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5888,67 +5716,99 @@ module Win32cr::Globalization
   end
 
   def getTextCharset(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    {% if !flag?(:docs) %}
     C.GetTextCharset(hdc)
+    {% end %}
   end
 
   def getTextCharsetInfo(hdc : Win32cr::Graphics::Gdi::HDC, lpSig : Win32cr::Globalization::FONTSIGNATURE*, dwFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.GetTextCharsetInfo(hdc, lpSig, dwFlags)
+    {% end %}
   end
 
   def translateCharsetInfo(lpSrc : UInt32*, lpCs : Win32cr::Globalization::CHARSETINFO*, dwFlags : Win32cr::Globalization::TRANSLATE_CHARSET_INFO_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TranslateCharsetInfo(lpSrc, lpCs, dwFlags)
+    {% end %}
   end
 
   def getDateFormatA(locale : UInt32, dwFlags : UInt32, lpDate : Win32cr::Foundation::SYSTEMTIME*, lpFormat : Win32cr::Foundation::PSTR, lpDateStr : UInt8*, cchDate : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetDateFormatA(locale, dwFlags, lpDate, lpFormat, lpDateStr, cchDate)
+    {% end %}
   end
 
   def getDateFormatW(locale : UInt32, dwFlags : UInt32, lpDate : Win32cr::Foundation::SYSTEMTIME*, lpFormat : Win32cr::Foundation::PWSTR, lpDateStr : UInt16*, cchDate : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetDateFormatW(locale, dwFlags, lpDate, lpFormat, lpDateStr, cchDate)
+    {% end %}
   end
 
   def getTimeFormatA(locale : UInt32, dwFlags : UInt32, lpTime : Win32cr::Foundation::SYSTEMTIME*, lpFormat : Win32cr::Foundation::PSTR, lpTimeStr : UInt8*, cchTime : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetTimeFormatA(locale, dwFlags, lpTime, lpFormat, lpTimeStr, cchTime)
+    {% end %}
   end
 
   def getTimeFormatW(locale : UInt32, dwFlags : UInt32, lpTime : Win32cr::Foundation::SYSTEMTIME*, lpFormat : Win32cr::Foundation::PWSTR, lpTimeStr : UInt16*, cchTime : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetTimeFormatW(locale, dwFlags, lpTime, lpFormat, lpTimeStr, cchTime)
+    {% end %}
   end
 
   def getTimeFormatEx(lpLocaleName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Globalization::TIME_FORMAT_FLAGS, lpTime : Win32cr::Foundation::SYSTEMTIME*, lpFormat : Win32cr::Foundation::PWSTR, lpTimeStr : UInt16*, cchTime : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetTimeFormatEx(lpLocaleName, dwFlags, lpTime, lpFormat, lpTimeStr, cchTime)
+    {% end %}
   end
 
   def getDateFormatEx(lpLocaleName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Globalization::ENUM_DATE_FORMATS_FLAGS, lpDate : Win32cr::Foundation::SYSTEMTIME*, lpFormat : Win32cr::Foundation::PWSTR, lpDateStr : UInt16*, cchDate : Int32, lpCalendar : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.GetDateFormatEx(lpLocaleName, dwFlags, lpDate, lpFormat, lpDateStr, cchDate, lpCalendar)
+    {% end %}
   end
 
   def getDurationFormatEx(lpLocaleName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, lpDuration : Win32cr::Foundation::SYSTEMTIME*, ullDuration : UInt64, lpFormat : Win32cr::Foundation::PWSTR, lpDurationStr : UInt16*, cchDuration : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetDurationFormatEx(lpLocaleName, dwFlags, lpDuration, ullDuration, lpFormat, lpDurationStr, cchDuration)
+    {% end %}
   end
 
   def compareStringEx(lpLocaleName : Win32cr::Foundation::PWSTR, dwCmpFlags : Win32cr::Globalization::COMPARE_STRING_FLAGS, lpString1 : UInt16*, cchCount1 : Int32, lpString2 : UInt16*, cchCount2 : Int32, lpVersionInformation : Win32cr::Globalization::NLSVERSIONINFO*, lpReserved : Void*, lParam : Win32cr::Foundation::LPARAM) : Int32
+    {% if !flag?(:docs) %}
     C.CompareStringEx(lpLocaleName, dwCmpFlags, lpString1, cchCount1, lpString2, cchCount2, lpVersionInformation, lpReserved, lParam)
+    {% end %}
   end
 
   def compareStringOrdinal(lpString1 : UInt16*, cchCount1 : Int32, lpString2 : UInt16*, cchCount2 : Int32, bIgnoreCase : Win32cr::Foundation::BOOL) : Int32
+    {% if !flag?(:docs) %}
     C.CompareStringOrdinal(lpString1, cchCount1, lpString2, cchCount2, bIgnoreCase)
+    {% end %}
   end
 
   def compareStringW(locale : UInt32, dwCmpFlags : UInt32, lpString1 : UInt16*, cchCount1 : Int32, lpString2 : UInt16*, cchCount2 : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.CompareStringW(locale, dwCmpFlags, lpString1, cchCount1, lpString2, cchCount2)
+    {% end %}
   end
 
   def foldStringW(dwMapFlags : Win32cr::Globalization::FOLD_STRING_MAP_FLAGS, lpSrcStr : UInt16*, cchSrc : Int32, lpDestStr : UInt16*, cchDest : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.FoldStringW(dwMapFlags, lpSrcStr, cchSrc, lpDestStr, cchDest)
+    {% end %}
   end
 
   def getStringTypeExW(locale : UInt32, dwInfoType : UInt32, lpSrcStr : UInt16*, cchSrc : Int32, lpCharType : UInt16*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetStringTypeExW(locale, dwInfoType, lpSrcStr, cchSrc, lpCharType)
+    {% end %}
   end
 
   def getStringTypeW(dwInfoType : UInt32, lpSrcStr : UInt16*, cchSrc : Int32, lpCharType : UInt16*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetStringTypeW(dwInfoType, lpSrcStr, cchSrc, lpCharType)
+    {% end %}
   end
 
   #def multiByteToWideChar(code_page : UInt32, dwFlags : Win32cr::Globalization::MULTI_BYTE_TO_WIDE_CHAR_FLAGS, lpMultiByteStr : UInt8*, cbMultiByte : Int32, lpWideCharStr : UInt16*, cchWideChar : Int32) : Int32
@@ -5964,4779 +5824,7167 @@ module Win32cr::Globalization
   #end
 
   def getACP : UInt32
+    {% if !flag?(:docs) %}
     C.GetACP
+    {% end %}
   end
 
   def getOEMCP : UInt32
+    {% if !flag?(:docs) %}
     C.GetOEMCP
+    {% end %}
   end
 
   def getCPInfo(code_page : UInt32, lpCPInfo : Win32cr::Globalization::CPINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCPInfo(code_page, lpCPInfo)
+    {% end %}
   end
 
   def getCPInfoExA(code_page : UInt32, dwFlags : UInt32, lpCPInfoEx : Win32cr::Globalization::CPINFOEXA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCPInfoExA(code_page, dwFlags, lpCPInfoEx)
+    {% end %}
   end
 
   def getCPInfoExW(code_page : UInt32, dwFlags : UInt32, lpCPInfoEx : Win32cr::Globalization::CPINFOEXW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCPInfoExW(code_page, dwFlags, lpCPInfoEx)
+    {% end %}
   end
 
   def compareStringA(locale : UInt32, dwCmpFlags : UInt32, lpString1 : Int8*, cchCount1 : Int32, lpString2 : Int8*, cchCount2 : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.CompareStringA(locale, dwCmpFlags, lpString1, cchCount1, lpString2, cchCount2)
+    {% end %}
   end
 
   def findNLSString(locale : UInt32, dwFindNLSStringFlags : UInt32, lpStringSource : UInt16*, cchSource : Int32, lpStringValue : UInt16*, cchValue : Int32, pcchFound : Int32*) : Int32
+    {% if !flag?(:docs) %}
     C.FindNLSString(locale, dwFindNLSStringFlags, lpStringSource, cchSource, lpStringValue, cchValue, pcchFound)
+    {% end %}
   end
 
   def lCMapStringW(locale : UInt32, dwMapFlags : UInt32, lpSrcStr : UInt16*, cchSrc : Int32, lpDestStr : Win32cr::Foundation::PWSTR, cchDest : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.LCMapStringW(locale, dwMapFlags, lpSrcStr, cchSrc, lpDestStr, cchDest)
+    {% end %}
   end
 
   def lCMapStringA(locale : UInt32, dwMapFlags : UInt32, lpSrcStr : UInt8*, cchSrc : Int32, lpDestStr : Win32cr::Foundation::PSTR, cchDest : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.LCMapStringA(locale, dwMapFlags, lpSrcStr, cchSrc, lpDestStr, cchDest)
+    {% end %}
   end
 
   def getLocaleInfoW(locale : UInt32, lc_type : UInt32, lpLCData : UInt16*, cchData : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetLocaleInfoW(locale, lc_type, lpLCData, cchData)
+    {% end %}
   end
 
   def getLocaleInfoA(locale : UInt32, lc_type : UInt32, lpLCData : UInt8*, cchData : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetLocaleInfoA(locale, lc_type, lpLCData, cchData)
+    {% end %}
   end
 
   def setLocaleInfoA(locale : UInt32, lc_type : UInt32, lpLCData : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetLocaleInfoA(locale, lc_type, lpLCData)
+    {% end %}
   end
 
   def setLocaleInfoW(locale : UInt32, lc_type : UInt32, lpLCData : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetLocaleInfoW(locale, lc_type, lpLCData)
+    {% end %}
   end
 
   def getCalendarInfoA(locale : UInt32, calendar : UInt32, cal_type : UInt32, lpCalData : UInt8*, cchData : Int32, lpValue : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetCalendarInfoA(locale, calendar, cal_type, lpCalData, cchData, lpValue)
+    {% end %}
   end
 
   def getCalendarInfoW(locale : UInt32, calendar : UInt32, cal_type : UInt32, lpCalData : UInt16*, cchData : Int32, lpValue : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetCalendarInfoW(locale, calendar, cal_type, lpCalData, cchData, lpValue)
+    {% end %}
   end
 
   def setCalendarInfoA(locale : UInt32, calendar : UInt32, cal_type : UInt32, lpCalData : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetCalendarInfoA(locale, calendar, cal_type, lpCalData)
+    {% end %}
   end
 
   def setCalendarInfoW(locale : UInt32, calendar : UInt32, cal_type : UInt32, lpCalData : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetCalendarInfoW(locale, calendar, cal_type, lpCalData)
+    {% end %}
   end
 
   def isDBCSLeadByte(test_char : UInt8) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsDBCSLeadByte(test_char)
+    {% end %}
   end
 
   def isDBCSLeadByteEx(code_page : UInt32, test_char : UInt8) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsDBCSLeadByteEx(code_page, test_char)
+    {% end %}
   end
 
   def localeNameToLCID(lpName : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.LocaleNameToLCID(lpName, dwFlags)
+    {% end %}
   end
 
   def lCIDToLocaleName(locale : UInt32, lpName : UInt16*, cchName : Int32, dwFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.LCIDToLocaleName(locale, lpName, cchName, dwFlags)
+    {% end %}
   end
 
   def getDurationFormat(locale : UInt32, dwFlags : UInt32, lpDuration : Win32cr::Foundation::SYSTEMTIME*, ullDuration : UInt64, lpFormat : Win32cr::Foundation::PWSTR, lpDurationStr : UInt16*, cchDuration : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetDurationFormat(locale, dwFlags, lpDuration, ullDuration, lpFormat, lpDurationStr, cchDuration)
+    {% end %}
   end
 
   def getNumberFormatA(locale : UInt32, dwFlags : UInt32, lpValue : Win32cr::Foundation::PSTR, lpFormat : Win32cr::Globalization::NUMBERFMTA*, lpNumberStr : UInt8*, cchNumber : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetNumberFormatA(locale, dwFlags, lpValue, lpFormat, lpNumberStr, cchNumber)
+    {% end %}
   end
 
   def getNumberFormatW(locale : UInt32, dwFlags : UInt32, lpValue : Win32cr::Foundation::PWSTR, lpFormat : Win32cr::Globalization::NUMBERFMTW*, lpNumberStr : UInt16*, cchNumber : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetNumberFormatW(locale, dwFlags, lpValue, lpFormat, lpNumberStr, cchNumber)
+    {% end %}
   end
 
   def getCurrencyFormatA(locale : UInt32, dwFlags : UInt32, lpValue : Win32cr::Foundation::PSTR, lpFormat : Win32cr::Globalization::CURRENCYFMTA*, lpCurrencyStr : UInt8*, cchCurrency : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetCurrencyFormatA(locale, dwFlags, lpValue, lpFormat, lpCurrencyStr, cchCurrency)
+    {% end %}
   end
 
   def getCurrencyFormatW(locale : UInt32, dwFlags : UInt32, lpValue : Win32cr::Foundation::PWSTR, lpFormat : Win32cr::Globalization::CURRENCYFMTW*, lpCurrencyStr : UInt16*, cchCurrency : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetCurrencyFormatW(locale, dwFlags, lpValue, lpFormat, lpCurrencyStr, cchCurrency)
+    {% end %}
   end
 
   def enumCalendarInfoA(lpCalInfoEnumProc : Win32cr::Globalization::CALINFO_ENUMPROCA, locale : UInt32, calendar : UInt32, cal_type : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumCalendarInfoA(lpCalInfoEnumProc, locale, calendar, cal_type)
+    {% end %}
   end
 
   def enumCalendarInfoW(lpCalInfoEnumProc : Win32cr::Globalization::CALINFO_ENUMPROCW, locale : UInt32, calendar : UInt32, cal_type : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumCalendarInfoW(lpCalInfoEnumProc, locale, calendar, cal_type)
+    {% end %}
   end
 
   def enumCalendarInfoExA(lpCalInfoEnumProcEx : Win32cr::Globalization::CALINFO_ENUMPROCEXA, locale : UInt32, calendar : UInt32, cal_type : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumCalendarInfoExA(lpCalInfoEnumProcEx, locale, calendar, cal_type)
+    {% end %}
   end
 
   def enumCalendarInfoExW(lpCalInfoEnumProcEx : Win32cr::Globalization::CALINFO_ENUMPROCEXW, locale : UInt32, calendar : UInt32, cal_type : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumCalendarInfoExW(lpCalInfoEnumProcEx, locale, calendar, cal_type)
+    {% end %}
   end
 
   def enumTimeFormatsA(lpTimeFmtEnumProc : Win32cr::Globalization::TIMEFMT_ENUMPROCA, locale : UInt32, dwFlags : Win32cr::Globalization::TIME_FORMAT_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumTimeFormatsA(lpTimeFmtEnumProc, locale, dwFlags)
+    {% end %}
   end
 
   def enumTimeFormatsW(lpTimeFmtEnumProc : Win32cr::Globalization::TIMEFMT_ENUMPROCW, locale : UInt32, dwFlags : Win32cr::Globalization::TIME_FORMAT_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumTimeFormatsW(lpTimeFmtEnumProc, locale, dwFlags)
+    {% end %}
   end
 
   def enumDateFormatsA(lpDateFmtEnumProc : Win32cr::Globalization::DATEFMT_ENUMPROCA, locale : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumDateFormatsA(lpDateFmtEnumProc, locale, dwFlags)
+    {% end %}
   end
 
   def enumDateFormatsW(lpDateFmtEnumProc : Win32cr::Globalization::DATEFMT_ENUMPROCW, locale : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumDateFormatsW(lpDateFmtEnumProc, locale, dwFlags)
+    {% end %}
   end
 
   def enumDateFormatsExA(lpDateFmtEnumProcEx : Win32cr::Globalization::DATEFMT_ENUMPROCEXA, locale : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumDateFormatsExA(lpDateFmtEnumProcEx, locale, dwFlags)
+    {% end %}
   end
 
   def enumDateFormatsExW(lpDateFmtEnumProcEx : Win32cr::Globalization::DATEFMT_ENUMPROCEXW, locale : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumDateFormatsExW(lpDateFmtEnumProcEx, locale, dwFlags)
+    {% end %}
   end
 
   def isValidLanguageGroup(language_group : UInt32, dwFlags : Win32cr::Globalization::ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsValidLanguageGroup(language_group, dwFlags)
+    {% end %}
   end
 
   def getNLSVersion(function : UInt32, locale : UInt32, lpVersionInformation : Win32cr::Globalization::NLSVERSIONINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetNLSVersion(function, locale, lpVersionInformation)
+    {% end %}
   end
 
   def isValidLocale(locale : UInt32, dwFlags : Win32cr::Globalization::IS_VALID_LOCALE_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsValidLocale(locale, dwFlags)
+    {% end %}
   end
 
   def getGeoInfoA(location : Int32, geo_type : UInt32, lpGeoData : UInt8*, cchData : Int32, lang_id : UInt16) : Int32
+    {% if !flag?(:docs) %}
     C.GetGeoInfoA(location, geo_type, lpGeoData, cchData, lang_id)
+    {% end %}
   end
 
   def getGeoInfoW(location : Int32, geo_type : UInt32, lpGeoData : UInt16*, cchData : Int32, lang_id : UInt16) : Int32
+    {% if !flag?(:docs) %}
     C.GetGeoInfoW(location, geo_type, lpGeoData, cchData, lang_id)
+    {% end %}
   end
 
   def getGeoInfoEx(location : Win32cr::Foundation::PWSTR, geoType : UInt32, geoData : UInt16*, geoDataCount : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetGeoInfoEx(location, geoType, geoData, geoDataCount)
+    {% end %}
   end
 
   def enumSystemGeoID(geo_class : UInt32, parent_geo_id : Int32, lpGeoEnumProc : Win32cr::Globalization::GEO_ENUMPROC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumSystemGeoID(geo_class, parent_geo_id, lpGeoEnumProc)
+    {% end %}
   end
 
   def enumSystemGeoNames(geoClass : UInt32, geoEnumProc : Win32cr::Globalization::GEO_ENUMNAMEPROC, data : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumSystemGeoNames(geoClass, geoEnumProc, data)
+    {% end %}
   end
 
   def getUserGeoID(geo_class : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.GetUserGeoID(geo_class)
+    {% end %}
   end
 
   def getUserDefaultGeoName(geoName : UInt16*, geoNameCount : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetUserDefaultGeoName(geoName, geoNameCount)
+    {% end %}
   end
 
   def setUserGeoID(geo_id : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetUserGeoID(geo_id)
+    {% end %}
   end
 
   def setUserGeoName(geoName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetUserGeoName(geoName)
+    {% end %}
   end
 
   def convertDefaultLocale(locale : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ConvertDefaultLocale(locale)
+    {% end %}
   end
 
   def getSystemDefaultUILanguage : UInt16
+    {% if !flag?(:docs) %}
     C.GetSystemDefaultUILanguage
+    {% end %}
   end
 
   def getThreadLocale : UInt32
+    {% if !flag?(:docs) %}
     C.GetThreadLocale
+    {% end %}
   end
 
   def setThreadLocale(locale : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetThreadLocale(locale)
+    {% end %}
   end
 
   def getUserDefaultUILanguage : UInt16
+    {% if !flag?(:docs) %}
     C.GetUserDefaultUILanguage
+    {% end %}
   end
 
   def getUserDefaultLangID : UInt16
+    {% if !flag?(:docs) %}
     C.GetUserDefaultLangID
+    {% end %}
   end
 
   def getSystemDefaultLangID : UInt16
+    {% if !flag?(:docs) %}
     C.GetSystemDefaultLangID
+    {% end %}
   end
 
   def getSystemDefaultLCID : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemDefaultLCID
+    {% end %}
   end
 
   def getUserDefaultLCID : UInt32
+    {% if !flag?(:docs) %}
     C.GetUserDefaultLCID
+    {% end %}
   end
 
   def setThreadUILanguage(lang_id : UInt16) : UInt16
+    {% if !flag?(:docs) %}
     C.SetThreadUILanguage(lang_id)
+    {% end %}
   end
 
   def getThreadUILanguage : UInt16
+    {% if !flag?(:docs) %}
     C.GetThreadUILanguage
+    {% end %}
   end
 
   def getProcessPreferredUILanguages(dwFlags : UInt32, pulNumLanguages : UInt32*, pwszLanguagesBuffer : UInt16*, pcchLanguagesBuffer : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetProcessPreferredUILanguages(dwFlags, pulNumLanguages, pwszLanguagesBuffer, pcchLanguagesBuffer)
+    {% end %}
   end
 
   def setProcessPreferredUILanguages(dwFlags : UInt32, pwszLanguagesBuffer : Win32cr::Foundation::PWSTR, pulNumLanguages : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessPreferredUILanguages(dwFlags, pwszLanguagesBuffer, pulNumLanguages)
+    {% end %}
   end
 
   def getUserPreferredUILanguages(dwFlags : UInt32, pulNumLanguages : UInt32*, pwszLanguagesBuffer : UInt16*, pcchLanguagesBuffer : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUserPreferredUILanguages(dwFlags, pulNumLanguages, pwszLanguagesBuffer, pcchLanguagesBuffer)
+    {% end %}
   end
 
   def getSystemPreferredUILanguages(dwFlags : UInt32, pulNumLanguages : UInt32*, pwszLanguagesBuffer : UInt16*, pcchLanguagesBuffer : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSystemPreferredUILanguages(dwFlags, pulNumLanguages, pwszLanguagesBuffer, pcchLanguagesBuffer)
+    {% end %}
   end
 
   def getThreadPreferredUILanguages(dwFlags : UInt32, pulNumLanguages : UInt32*, pwszLanguagesBuffer : UInt16*, pcchLanguagesBuffer : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetThreadPreferredUILanguages(dwFlags, pulNumLanguages, pwszLanguagesBuffer, pcchLanguagesBuffer)
+    {% end %}
   end
 
   def setThreadPreferredUILanguages(dwFlags : UInt32, pwszLanguagesBuffer : Win32cr::Foundation::PWSTR, pulNumLanguages : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetThreadPreferredUILanguages(dwFlags, pwszLanguagesBuffer, pulNumLanguages)
+    {% end %}
   end
 
   def getFileMUIInfo(dwFlags : UInt32, pcwszFilePath : Win32cr::Foundation::PWSTR, pFileMUIInfo : Win32cr::Globalization::FILEMUIINFO*, pcbFileMUIInfo : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetFileMUIInfo(dwFlags, pcwszFilePath, pFileMUIInfo, pcbFileMUIInfo)
+    {% end %}
   end
 
   def getFileMUIPath(dwFlags : UInt32, pcwszFilePath : Win32cr::Foundation::PWSTR, pwszLanguage : UInt16*, pcchLanguage : UInt32*, pwszFileMUIPath : UInt16*, pcchFileMUIPath : UInt32*, pululEnumerator : UInt64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetFileMUIPath(dwFlags, pcwszFilePath, pwszLanguage, pcchLanguage, pwszFileMUIPath, pcchFileMUIPath, pululEnumerator)
+    {% end %}
   end
 
   def getUILanguageInfo(dwFlags : UInt32, pwmszLanguage : Win32cr::Foundation::PWSTR, pwszFallbackLanguages : UInt16*, pcchFallbackLanguages : UInt32*, pAttributes : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUILanguageInfo(dwFlags, pwmszLanguage, pwszFallbackLanguages, pcchFallbackLanguages, pAttributes)
+    {% end %}
   end
 
   def setThreadPreferredUILanguages2(flags : UInt32, languages : Win32cr::Foundation::PWSTR, numLanguagesSet : UInt32*, snapshot : Win32cr::Globalization::HSAVEDUILANGUAGES*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetThreadPreferredUILanguages2(flags, languages, numLanguagesSet, snapshot)
+    {% end %}
   end
 
   def restoreThreadPreferredUILanguages(snapshot : Win32cr::Globalization::HSAVEDUILANGUAGES) : Void
+    {% if !flag?(:docs) %}
     C.RestoreThreadPreferredUILanguages(snapshot)
+    {% end %}
   end
 
   def notifyUILanguageChange(dwFlags : UInt32, pcwstrNewLanguage : Win32cr::Foundation::PWSTR, pcwstrPreviousLanguage : Win32cr::Foundation::PWSTR, dwReserved : UInt32, pdwStatusRtrn : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.NotifyUILanguageChange(dwFlags, pcwstrNewLanguage, pcwstrPreviousLanguage, dwReserved, pdwStatusRtrn)
+    {% end %}
   end
 
   def getStringTypeExA(locale : UInt32, dwInfoType : UInt32, lpSrcStr : UInt8*, cchSrc : Int32, lpCharType : UInt16*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetStringTypeExA(locale, dwInfoType, lpSrcStr, cchSrc, lpCharType)
+    {% end %}
   end
 
   def getStringTypeA(locale : UInt32, dwInfoType : UInt32, lpSrcStr : UInt8*, cchSrc : Int32, lpCharType : UInt16*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetStringTypeA(locale, dwInfoType, lpSrcStr, cchSrc, lpCharType)
+    {% end %}
   end
 
   def foldStringA(dwMapFlags : Win32cr::Globalization::FOLD_STRING_MAP_FLAGS, lpSrcStr : UInt8*, cchSrc : Int32, lpDestStr : UInt8*, cchDest : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.FoldStringA(dwMapFlags, lpSrcStr, cchSrc, lpDestStr, cchDest)
+    {% end %}
   end
 
   def enumSystemLocalesA(lpLocaleEnumProc : Win32cr::Globalization::LOCALE_ENUMPROCA, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumSystemLocalesA(lpLocaleEnumProc, dwFlags)
+    {% end %}
   end
 
   def enumSystemLocalesW(lpLocaleEnumProc : Win32cr::Globalization::LOCALE_ENUMPROCW, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumSystemLocalesW(lpLocaleEnumProc, dwFlags)
+    {% end %}
   end
 
   def enumSystemLanguageGroupsA(lpLanguageGroupEnumProc : Win32cr::Globalization::LANGUAGEGROUP_ENUMPROCA, dwFlags : Win32cr::Globalization::ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS, lParam : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumSystemLanguageGroupsA(lpLanguageGroupEnumProc, dwFlags, lParam)
+    {% end %}
   end
 
   def enumSystemLanguageGroupsW(lpLanguageGroupEnumProc : Win32cr::Globalization::LANGUAGEGROUP_ENUMPROCW, dwFlags : Win32cr::Globalization::ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS, lParam : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumSystemLanguageGroupsW(lpLanguageGroupEnumProc, dwFlags, lParam)
+    {% end %}
   end
 
   def enumLanguageGroupLocalesA(lpLangGroupLocaleEnumProc : Win32cr::Globalization::LANGGROUPLOCALE_ENUMPROCA, language_group : UInt32, dwFlags : UInt32, lParam : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumLanguageGroupLocalesA(lpLangGroupLocaleEnumProc, language_group, dwFlags, lParam)
+    {% end %}
   end
 
   def enumLanguageGroupLocalesW(lpLangGroupLocaleEnumProc : Win32cr::Globalization::LANGGROUPLOCALE_ENUMPROCW, language_group : UInt32, dwFlags : UInt32, lParam : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumLanguageGroupLocalesW(lpLangGroupLocaleEnumProc, language_group, dwFlags, lParam)
+    {% end %}
   end
 
   def enumUILanguagesA(lpUILanguageEnumProc : Win32cr::Globalization::UILANGUAGE_ENUMPROCA, dwFlags : UInt32, lParam : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumUILanguagesA(lpUILanguageEnumProc, dwFlags, lParam)
+    {% end %}
   end
 
   def enumUILanguagesW(lpUILanguageEnumProc : Win32cr::Globalization::UILANGUAGE_ENUMPROCW, dwFlags : UInt32, lParam : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumUILanguagesW(lpUILanguageEnumProc, dwFlags, lParam)
+    {% end %}
   end
 
   def enumSystemCodePagesA(lpCodePageEnumProc : Win32cr::Globalization::CODEPAGE_ENUMPROCA, dwFlags : Win32cr::Globalization::ENUM_SYSTEM_CODE_PAGES_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumSystemCodePagesA(lpCodePageEnumProc, dwFlags)
+    {% end %}
   end
 
   def enumSystemCodePagesW(lpCodePageEnumProc : Win32cr::Globalization::CODEPAGE_ENUMPROCW, dwFlags : Win32cr::Globalization::ENUM_SYSTEM_CODE_PAGES_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumSystemCodePagesW(lpCodePageEnumProc, dwFlags)
+    {% end %}
   end
 
   def idnToAscii(dwFlags : UInt32, lpUnicodeCharStr : UInt16*, cchUnicodeChar : Int32, lpASCIICharStr : UInt16*, cchASCIIChar : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.IdnToAscii(dwFlags, lpUnicodeCharStr, cchUnicodeChar, lpASCIICharStr, cchASCIIChar)
+    {% end %}
   end
 
   def idnToUnicode(dwFlags : UInt32, lpASCIICharStr : UInt16*, cchASCIIChar : Int32, lpUnicodeCharStr : UInt16*, cchUnicodeChar : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.IdnToUnicode(dwFlags, lpASCIICharStr, cchASCIIChar, lpUnicodeCharStr, cchUnicodeChar)
+    {% end %}
   end
 
   def idnToNameprepUnicode(dwFlags : UInt32, lpUnicodeCharStr : UInt16*, cchUnicodeChar : Int32, lpNameprepCharStr : UInt16*, cchNameprepChar : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.IdnToNameprepUnicode(dwFlags, lpUnicodeCharStr, cchUnicodeChar, lpNameprepCharStr, cchNameprepChar)
+    {% end %}
   end
 
   def normalizeString(norm_form : Win32cr::Globalization::NORM_FORM, lpSrcString : UInt16*, cwSrcLength : Int32, lpDstString : UInt16*, cwDstLength : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.NormalizeString(norm_form, lpSrcString, cwSrcLength, lpDstString, cwDstLength)
+    {% end %}
   end
 
   def isNormalizedString(norm_form : Win32cr::Globalization::NORM_FORM, lpString : UInt16*, cwLength : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsNormalizedString(norm_form, lpString, cwLength)
+    {% end %}
   end
 
   def verifyScripts(dwFlags : UInt32, lpLocaleScripts : Win32cr::Foundation::PWSTR, cchLocaleScripts : Int32, lpTestScripts : Win32cr::Foundation::PWSTR, cchTestScripts : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.VerifyScripts(dwFlags, lpLocaleScripts, cchLocaleScripts, lpTestScripts, cchTestScripts)
+    {% end %}
   end
 
   def getStringScripts(dwFlags : UInt32, lpString : Win32cr::Foundation::PWSTR, cchString : Int32, lpScripts : UInt16*, cchScripts : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetStringScripts(dwFlags, lpString, cchString, lpScripts, cchScripts)
+    {% end %}
   end
 
   def getLocaleInfoEx(lpLocaleName : Win32cr::Foundation::PWSTR, lc_type : UInt32, lpLCData : UInt16*, cchData : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetLocaleInfoEx(lpLocaleName, lc_type, lpLCData, cchData)
+    {% end %}
   end
 
   def getCalendarInfoEx(lpLocaleName : Win32cr::Foundation::PWSTR, calendar : UInt32, lpReserved : Win32cr::Foundation::PWSTR, cal_type : UInt32, lpCalData : UInt16*, cchData : Int32, lpValue : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetCalendarInfoEx(lpLocaleName, calendar, lpReserved, cal_type, lpCalData, cchData, lpValue)
+    {% end %}
   end
 
   def getNumberFormatEx(lpLocaleName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, lpValue : Win32cr::Foundation::PWSTR, lpFormat : Win32cr::Globalization::NUMBERFMTW*, lpNumberStr : UInt16*, cchNumber : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetNumberFormatEx(lpLocaleName, dwFlags, lpValue, lpFormat, lpNumberStr, cchNumber)
+    {% end %}
   end
 
   def getCurrencyFormatEx(lpLocaleName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, lpValue : Win32cr::Foundation::PWSTR, lpFormat : Win32cr::Globalization::CURRENCYFMTW*, lpCurrencyStr : UInt16*, cchCurrency : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetCurrencyFormatEx(lpLocaleName, dwFlags, lpValue, lpFormat, lpCurrencyStr, cchCurrency)
+    {% end %}
   end
 
   def getUserDefaultLocaleName(lpLocaleName : UInt16*, cchLocaleName : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetUserDefaultLocaleName(lpLocaleName, cchLocaleName)
+    {% end %}
   end
 
   def getSystemDefaultLocaleName(lpLocaleName : UInt16*, cchLocaleName : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetSystemDefaultLocaleName(lpLocaleName, cchLocaleName)
+    {% end %}
   end
 
   def isNLSDefinedString(function : UInt32, dwFlags : UInt32, lpVersionInformation : Win32cr::Globalization::NLSVERSIONINFO*, lpString : UInt16*, cchStr : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsNLSDefinedString(function, dwFlags, lpVersionInformation, lpString, cchStr)
+    {% end %}
   end
 
   def getNLSVersionEx(function : UInt32, lpLocaleName : Win32cr::Foundation::PWSTR, lpVersionInformation : Win32cr::Globalization::NLSVERSIONINFOEX*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetNLSVersionEx(function, lpLocaleName, lpVersionInformation)
+    {% end %}
   end
 
   def isValidNLSVersion(function : UInt32, lpLocaleName : Win32cr::Foundation::PWSTR, lpVersionInformation : Win32cr::Globalization::NLSVERSIONINFOEX*) : UInt32
+    {% if !flag?(:docs) %}
     C.IsValidNLSVersion(function, lpLocaleName, lpVersionInformation)
+    {% end %}
   end
 
   def findNLSStringEx(lpLocaleName : Win32cr::Foundation::PWSTR, dwFindNLSStringFlags : UInt32, lpStringSource : UInt16*, cchSource : Int32, lpStringValue : UInt16*, cchValue : Int32, pcchFound : Int32*, lpVersionInformation : Win32cr::Globalization::NLSVERSIONINFO*, lpReserved : Void*, sortHandle : Win32cr::Foundation::LPARAM) : Int32
+    {% if !flag?(:docs) %}
     C.FindNLSStringEx(lpLocaleName, dwFindNLSStringFlags, lpStringSource, cchSource, lpStringValue, cchValue, pcchFound, lpVersionInformation, lpReserved, sortHandle)
+    {% end %}
   end
 
   def lCMapStringEx(lpLocaleName : Win32cr::Foundation::PWSTR, dwMapFlags : UInt32, lpSrcStr : UInt16*, cchSrc : Int32, lpDestStr : UInt16*, cchDest : Int32, lpVersionInformation : Win32cr::Globalization::NLSVERSIONINFO*, lpReserved : Void*, sortHandle : Win32cr::Foundation::LPARAM) : Int32
+    {% if !flag?(:docs) %}
     C.LCMapStringEx(lpLocaleName, dwMapFlags, lpSrcStr, cchSrc, lpDestStr, cchDest, lpVersionInformation, lpReserved, sortHandle)
+    {% end %}
   end
 
   def isValidLocaleName(lpLocaleName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsValidLocaleName(lpLocaleName)
+    {% end %}
   end
 
   def enumCalendarInfoExEx(pCalInfoEnumProcExEx : Win32cr::Globalization::CALINFO_ENUMPROCEXEX, lpLocaleName : Win32cr::Foundation::PWSTR, calendar : UInt32, lpReserved : Win32cr::Foundation::PWSTR, cal_type : UInt32, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumCalendarInfoExEx(pCalInfoEnumProcExEx, lpLocaleName, calendar, lpReserved, cal_type, lParam)
+    {% end %}
   end
 
   def enumDateFormatsExEx(lpDateFmtEnumProcExEx : Win32cr::Globalization::DATEFMT_ENUMPROCEXEX, lpLocaleName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::Globalization::ENUM_DATE_FORMATS_FLAGS, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumDateFormatsExEx(lpDateFmtEnumProcExEx, lpLocaleName, dwFlags, lParam)
+    {% end %}
   end
 
   def enumTimeFormatsEx(lpTimeFmtEnumProcEx : Win32cr::Globalization::TIMEFMT_ENUMPROCEX, lpLocaleName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumTimeFormatsEx(lpTimeFmtEnumProcEx, lpLocaleName, dwFlags, lParam)
+    {% end %}
   end
 
   def enumSystemLocalesEx(lpLocaleEnumProcEx : Win32cr::Globalization::LOCALE_ENUMPROCEX, dwFlags : UInt32, lParam : Win32cr::Foundation::LPARAM, lpReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumSystemLocalesEx(lpLocaleEnumProcEx, dwFlags, lParam, lpReserved)
+    {% end %}
   end
 
   def resolveLocaleName(lpNameToResolve : Win32cr::Foundation::PWSTR, lpLocaleName : UInt16*, cchLocaleName : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.ResolveLocaleName(lpNameToResolve, lpLocaleName, cchLocaleName)
+    {% end %}
   end
 
   def mappingGetServices(pOptions : Win32cr::Globalization::MAPPING_ENUM_OPTIONS*, prgServices : Win32cr::Globalization::MAPPING_SERVICE_INFO**, pdwServicesCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MappingGetServices(pOptions, prgServices, pdwServicesCount)
+    {% end %}
   end
 
   def mappingFreeServices(pServiceInfo : Win32cr::Globalization::MAPPING_SERVICE_INFO*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MappingFreeServices(pServiceInfo)
+    {% end %}
   end
 
   def mappingRecognizeText(pServiceInfo : Win32cr::Globalization::MAPPING_SERVICE_INFO*, pszText : UInt16*, dwLength : UInt32, dwIndex : UInt32, pOptions : Win32cr::Globalization::MAPPING_OPTIONS*, pbag : Win32cr::Globalization::MAPPING_PROPERTY_BAG*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MappingRecognizeText(pServiceInfo, pszText, dwLength, dwIndex, pOptions, pbag)
+    {% end %}
   end
 
   def mappingDoAction(pBag : Win32cr::Globalization::MAPPING_PROPERTY_BAG*, dwRangeIndex : UInt32, pszActionId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MappingDoAction(pBag, dwRangeIndex, pszActionId)
+    {% end %}
   end
 
   def mappingFreePropertyBag(pBag : Win32cr::Globalization::MAPPING_PROPERTY_BAG*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MappingFreePropertyBag(pBag)
+    {% end %}
   end
 
   def scriptFreeCache(psc : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptFreeCache(psc)
+    {% end %}
   end
 
   def scriptItemize(pwcInChars : UInt16*, cInChars : Int32, cMaxItems : Int32, psControl : Win32cr::Globalization::SCRIPT_CONTROL*, psState : Win32cr::Globalization::SCRIPT_STATE*, pItems : Win32cr::Globalization::SCRIPT_ITEM*, pcItems : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptItemize(pwcInChars, cInChars, cMaxItems, psControl, psState, pItems, pcItems)
+    {% end %}
   end
 
   def scriptLayout(cRuns : Int32, pbLevel : UInt8*, piVisualToLogical : Int32*, piLogicalToVisual : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptLayout(cRuns, pbLevel, piVisualToLogical, piLogicalToVisual)
+    {% end %}
   end
 
   def scriptShape(hdc : Win32cr::Graphics::Gdi::HDC, psc : Void**, pwcChars : UInt16*, cChars : Int32, cMaxGlyphs : Int32, psa : Win32cr::Globalization::SCRIPT_ANALYSIS*, pwOutGlyphs : UInt16*, pwLogClust : UInt16*, psva : Win32cr::Globalization::SCRIPT_VISATTR*, pcGlyphs : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptShape(hdc, psc, pwcChars, cChars, cMaxGlyphs, psa, pwOutGlyphs, pwLogClust, psva, pcGlyphs)
+    {% end %}
   end
 
   def scriptPlace(hdc : Win32cr::Graphics::Gdi::HDC, psc : Void**, pwGlyphs : UInt16*, cGlyphs : Int32, psva : Win32cr::Globalization::SCRIPT_VISATTR*, psa : Win32cr::Globalization::SCRIPT_ANALYSIS*, piAdvance : Int32*, pGoffset : Win32cr::Globalization::GOFFSET*, pABC : Win32cr::Graphics::Gdi::ABC*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptPlace(hdc, psc, pwGlyphs, cGlyphs, psva, psa, piAdvance, pGoffset, pABC)
+    {% end %}
   end
 
   def scriptTextOut(hdc : Win32cr::Graphics::Gdi::HDC, psc : Void**, x : Int32, y : Int32, fuOptions : UInt32, lprc : Win32cr::Foundation::RECT*, psa : Win32cr::Globalization::SCRIPT_ANALYSIS*, pwcReserved : Win32cr::Foundation::PWSTR, iReserved : Int32, pwGlyphs : UInt16*, cGlyphs : Int32, piAdvance : Int32*, piJustify : Int32*, pGoffset : Win32cr::Globalization::GOFFSET*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptTextOut(hdc, psc, x, y, fuOptions, lprc, psa, pwcReserved, iReserved, pwGlyphs, cGlyphs, piAdvance, piJustify, pGoffset)
+    {% end %}
   end
 
   def scriptJustify(psva : Win32cr::Globalization::SCRIPT_VISATTR*, piAdvance : Int32*, cGlyphs : Int32, iDx : Int32, iMinKashida : Int32, piJustify : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptJustify(psva, piAdvance, cGlyphs, iDx, iMinKashida, piJustify)
+    {% end %}
   end
 
   def scriptBreak(pwcChars : UInt16*, cChars : Int32, psa : Win32cr::Globalization::SCRIPT_ANALYSIS*, psla : Win32cr::Globalization::SCRIPT_LOGATTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptBreak(pwcChars, cChars, psa, psla)
+    {% end %}
   end
 
   def scriptCPtoX(iCP : Int32, fTrailing : Win32cr::Foundation::BOOL, cChars : Int32, cGlyphs : Int32, pwLogClust : UInt16*, psva : Win32cr::Globalization::SCRIPT_VISATTR*, piAdvance : Int32*, psa : Win32cr::Globalization::SCRIPT_ANALYSIS*, piX : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptCPtoX(iCP, fTrailing, cChars, cGlyphs, pwLogClust, psva, piAdvance, psa, piX)
+    {% end %}
   end
 
   def scriptXtoCP(iX : Int32, cChars : Int32, cGlyphs : Int32, pwLogClust : UInt16*, psva : Win32cr::Globalization::SCRIPT_VISATTR*, piAdvance : Int32*, psa : Win32cr::Globalization::SCRIPT_ANALYSIS*, piCP : Int32*, piTrailing : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptXtoCP(iX, cChars, cGlyphs, pwLogClust, psva, piAdvance, psa, piCP, piTrailing)
+    {% end %}
   end
 
   def scriptGetLogicalWidths(psa : Win32cr::Globalization::SCRIPT_ANALYSIS*, cChars : Int32, cGlyphs : Int32, piGlyphWidth : Int32*, pwLogClust : UInt16*, psva : Win32cr::Globalization::SCRIPT_VISATTR*, piDx : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptGetLogicalWidths(psa, cChars, cGlyphs, piGlyphWidth, pwLogClust, psva, piDx)
+    {% end %}
   end
 
   def scriptApplyLogicalWidth(piDx : Int32*, cChars : Int32, cGlyphs : Int32, pwLogClust : UInt16*, psva : Win32cr::Globalization::SCRIPT_VISATTR*, piAdvance : Int32*, psa : Win32cr::Globalization::SCRIPT_ANALYSIS*, pABC : Win32cr::Graphics::Gdi::ABC*, piJustify : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptApplyLogicalWidth(piDx, cChars, cGlyphs, pwLogClust, psva, piAdvance, psa, pABC, piJustify)
+    {% end %}
   end
 
   def scriptGetCMap(hdc : Win32cr::Graphics::Gdi::HDC, psc : Void**, pwcInChars : UInt16*, cChars : Int32, dwFlags : UInt32, pwOutGlyphs : UInt16*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptGetCMap(hdc, psc, pwcInChars, cChars, dwFlags, pwOutGlyphs)
+    {% end %}
   end
 
   def scriptGetGlyphABCWidth(hdc : Win32cr::Graphics::Gdi::HDC, psc : Void**, wGlyph : UInt16, pABC : Win32cr::Graphics::Gdi::ABC*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptGetGlyphABCWidth(hdc, psc, wGlyph, pABC)
+    {% end %}
   end
 
   def scriptGetProperties(ppSp : Win32cr::Globalization::SCRIPT_PROPERTIES***, piNumScripts : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptGetProperties(ppSp, piNumScripts)
+    {% end %}
   end
 
   def scriptGetFontProperties(hdc : Win32cr::Graphics::Gdi::HDC, psc : Void**, sfp : Win32cr::Globalization::SCRIPT_FONTPROPERTIES*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptGetFontProperties(hdc, psc, sfp)
+    {% end %}
   end
 
   def scriptCacheGetHeight(hdc : Win32cr::Graphics::Gdi::HDC, psc : Void**, tmHeight : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptCacheGetHeight(hdc, psc, tmHeight)
+    {% end %}
   end
 
   def scriptStringAnalyse(hdc : Win32cr::Graphics::Gdi::HDC, pString : Void*, cString : Int32, cGlyphs : Int32, iCharset : Int32, dwFlags : UInt32, iReqWidth : Int32, psControl : Win32cr::Globalization::SCRIPT_CONTROL*, psState : Win32cr::Globalization::SCRIPT_STATE*, piDx : Int32*, pTabdef : Win32cr::Globalization::SCRIPT_TABDEF*, pbInClass : UInt8*, pssa : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptStringAnalyse(hdc, pString, cString, cGlyphs, iCharset, dwFlags, iReqWidth, psControl, psState, piDx, pTabdef, pbInClass, pssa)
+    {% end %}
   end
 
   def scriptStringFree(pssa : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptStringFree(pssa)
+    {% end %}
   end
 
   def scriptStringPSize(ssa : Void*) : Win32cr::Foundation::SIZE*
+    {% if !flag?(:docs) %}
     C.ScriptString_pSize(ssa)
+    {% end %}
   end
 
   def scriptStringPcOutChars(ssa : Void*) : Int32*
+    {% if !flag?(:docs) %}
     C.ScriptString_pcOutChars(ssa)
+    {% end %}
   end
 
   def scriptStringPLogAttr(ssa : Void*) : Win32cr::Globalization::SCRIPT_LOGATTR*
+    {% if !flag?(:docs) %}
     C.ScriptString_pLogAttr(ssa)
+    {% end %}
   end
 
   def scriptStringGetOrder(ssa : Void*, puOrder : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptStringGetOrder(ssa, puOrder)
+    {% end %}
   end
 
   def scriptStringCPtoX(ssa : Void*, icp : Int32, fTrailing : Win32cr::Foundation::BOOL, pX : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptStringCPtoX(ssa, icp, fTrailing, pX)
+    {% end %}
   end
 
   def scriptStringXtoCP(ssa : Void*, iX : Int32, piCh : Int32*, piTrailing : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptStringXtoCP(ssa, iX, piCh, piTrailing)
+    {% end %}
   end
 
   def scriptStringGetLogicalWidths(ssa : Void*, piDx : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptStringGetLogicalWidths(ssa, piDx)
+    {% end %}
   end
 
   def scriptStringValidate(ssa : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptStringValidate(ssa)
+    {% end %}
   end
 
   def scriptStringOut(ssa : Void*, iX : Int32, iY : Int32, uOptions : Win32cr::Graphics::Gdi::ETO_OPTIONS, prc : Win32cr::Foundation::RECT*, iMinSel : Int32, iMaxSel : Int32, fDisabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptStringOut(ssa, iX, iY, uOptions, prc, iMinSel, iMaxSel, fDisabled)
+    {% end %}
   end
 
   def scriptIsComplex(pwcInChars : UInt16*, cInChars : Int32, dwFlags : Win32cr::Globalization::SCRIPT_IS_COMPLEX_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptIsComplex(pwcInChars, cInChars, dwFlags)
+    {% end %}
   end
 
   def scriptRecordDigitSubstitution(locale : UInt32, psds : Win32cr::Globalization::SCRIPT_DIGITSUBSTITUTE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptRecordDigitSubstitution(locale, psds)
+    {% end %}
   end
 
   def scriptApplyDigitSubstitution(psds : Win32cr::Globalization::SCRIPT_DIGITSUBSTITUTE*, psc : Win32cr::Globalization::SCRIPT_CONTROL*, pss : Win32cr::Globalization::SCRIPT_STATE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptApplyDigitSubstitution(psds, psc, pss)
+    {% end %}
   end
 
   def scriptShapeOpenType(hdc : Win32cr::Graphics::Gdi::HDC, psc : Void**, psa : Win32cr::Globalization::SCRIPT_ANALYSIS*, tagScript : UInt32, tagLangSys : UInt32, rcRangeChars : Int32*, rpRangeProperties : Win32cr::Globalization::Textrange_properties**, cRanges : Int32, pwcChars : UInt16*, cChars : Int32, cMaxGlyphs : Int32, pwLogClust : UInt16*, pCharProps : Win32cr::Globalization::Script_charprop*, pwOutGlyphs : UInt16*, pOutGlyphProps : Win32cr::Globalization::Script_glyphprop*, pcGlyphs : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptShapeOpenType(hdc, psc, psa, tagScript, tagLangSys, rcRangeChars, rpRangeProperties, cRanges, pwcChars, cChars, cMaxGlyphs, pwLogClust, pCharProps, pwOutGlyphs, pOutGlyphProps, pcGlyphs)
+    {% end %}
   end
 
   def scriptPlaceOpenType(hdc : Win32cr::Graphics::Gdi::HDC, psc : Void**, psa : Win32cr::Globalization::SCRIPT_ANALYSIS*, tagScript : UInt32, tagLangSys : UInt32, rcRangeChars : Int32*, rpRangeProperties : Win32cr::Globalization::Textrange_properties**, cRanges : Int32, pwcChars : UInt16*, pwLogClust : UInt16*, pCharProps : Win32cr::Globalization::Script_charprop*, cChars : Int32, pwGlyphs : UInt16*, pGlyphProps : Win32cr::Globalization::Script_glyphprop*, cGlyphs : Int32, piAdvance : Int32*, pGoffset : Win32cr::Globalization::GOFFSET*, pABC : Win32cr::Graphics::Gdi::ABC*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptPlaceOpenType(hdc, psc, psa, tagScript, tagLangSys, rcRangeChars, rpRangeProperties, cRanges, pwcChars, pwLogClust, pCharProps, cChars, pwGlyphs, pGlyphProps, cGlyphs, piAdvance, pGoffset, pABC)
+    {% end %}
   end
 
   def scriptItemizeOpenType(pwcInChars : UInt16*, cInChars : Int32, cMaxItems : Int32, psControl : Win32cr::Globalization::SCRIPT_CONTROL*, psState : Win32cr::Globalization::SCRIPT_STATE*, pItems : Win32cr::Globalization::SCRIPT_ITEM*, pScriptTags : UInt32*, pcItems : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptItemizeOpenType(pwcInChars, cInChars, cMaxItems, psControl, psState, pItems, pScriptTags, pcItems)
+    {% end %}
   end
 
   def scriptGetFontScriptTags(hdc : Win32cr::Graphics::Gdi::HDC, psc : Void**, psa : Win32cr::Globalization::SCRIPT_ANALYSIS*, cMaxTags : Int32, pScriptTags : UInt32*, pcTags : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptGetFontScriptTags(hdc, psc, psa, cMaxTags, pScriptTags, pcTags)
+    {% end %}
   end
 
   def scriptGetFontLanguageTags(hdc : Win32cr::Graphics::Gdi::HDC, psc : Void**, psa : Win32cr::Globalization::SCRIPT_ANALYSIS*, tagScript : UInt32, cMaxTags : Int32, pLangsysTags : UInt32*, pcTags : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptGetFontLanguageTags(hdc, psc, psa, tagScript, cMaxTags, pLangsysTags, pcTags)
+    {% end %}
   end
 
   def scriptGetFontFeatureTags(hdc : Win32cr::Graphics::Gdi::HDC, psc : Void**, psa : Win32cr::Globalization::SCRIPT_ANALYSIS*, tagScript : UInt32, tagLangSys : UInt32, cMaxTags : Int32, pFeatureTags : UInt32*, pcTags : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptGetFontFeatureTags(hdc, psc, psa, tagScript, tagLangSys, cMaxTags, pFeatureTags, pcTags)
+    {% end %}
   end
 
   def scriptGetFontAlternateGlyphs(hdc : Win32cr::Graphics::Gdi::HDC, psc : Void**, psa : Win32cr::Globalization::SCRIPT_ANALYSIS*, tagScript : UInt32, tagLangSys : UInt32, tagFeature : UInt32, wGlyphId : UInt16, cMaxAlternates : Int32, pAlternateGlyphs : UInt16*, pcAlternates : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptGetFontAlternateGlyphs(hdc, psc, psa, tagScript, tagLangSys, tagFeature, wGlyphId, cMaxAlternates, pAlternateGlyphs, pcAlternates)
+    {% end %}
   end
 
   def scriptSubstituteSingleGlyph(hdc : Win32cr::Graphics::Gdi::HDC, psc : Void**, psa : Win32cr::Globalization::SCRIPT_ANALYSIS*, tagScript : UInt32, tagLangSys : UInt32, tagFeature : UInt32, lParameter : Int32, wGlyphId : UInt16, pwOutGlyphId : UInt16*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptSubstituteSingleGlyph(hdc, psc, psa, tagScript, tagLangSys, tagFeature, lParameter, wGlyphId, pwOutGlyphId)
+    {% end %}
   end
 
   def scriptPositionSingleGlyph(hdc : Win32cr::Graphics::Gdi::HDC, psc : Void**, psa : Win32cr::Globalization::SCRIPT_ANALYSIS*, tagScript : UInt32, tagLangSys : UInt32, tagFeature : UInt32, lParameter : Int32, wGlyphId : UInt16, iAdvance : Int32, g_offset : Win32cr::Globalization::GOFFSET, piOutAdvance : Int32*, pOutGoffset : Win32cr::Globalization::GOFFSET*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScriptPositionSingleGlyph(hdc, psc, psa, tagScript, tagLangSys, tagFeature, lParameter, wGlyphId, iAdvance, g_offset, piOutAdvance, pOutGoffset)
+    {% end %}
   end
 
   def utf8NextCharSafeBody(s : UInt8*, pi : Int32*, length : Int32, c : Int32, strict : Int8) : Int32
+    {% if !flag?(:docs) %}
     C.utf8_nextCharSafeBody(s, pi, length, c, strict)
+    {% end %}
   end
 
   def utf8AppendCharSafeBody(s : UInt8*, i : Int32, length : Int32, c : Int32, pIsError : Int8*) : Int32
+    {% if !flag?(:docs) %}
     C.utf8_appendCharSafeBody(s, i, length, c, pIsError)
+    {% end %}
   end
 
   def utf8PrevCharSafeBody(s : UInt8*, start : Int32, pi : Int32*, c : Int32, strict : Int8) : Int32
+    {% if !flag?(:docs) %}
     C.utf8_prevCharSafeBody(s, start, pi, c, strict)
+    {% end %}
   end
 
   def utf8Back1SafeBody(s : UInt8*, start : Int32, i : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.utf8_back1SafeBody(s, start, i)
+    {% end %}
   end
 
   def uVersionFromString(versionArray : UInt8*, versionString : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.u_versionFromString(versionArray, versionString)
+    {% end %}
   end
 
   def uVersionFromUString(versionArray : UInt8*, versionString : UInt16*) : Void
+    {% if !flag?(:docs) %}
     C.u_versionFromUString(versionArray, versionString)
+    {% end %}
   end
 
   def uVersionToString(versionArray : UInt8*, versionString : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.u_versionToString(versionArray, versionString)
+    {% end %}
   end
 
   def uGetVersion(versionArray : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.u_getVersion(versionArray)
+    {% end %}
   end
 
   def uErrorName(code : Win32cr::Globalization::UErrorCode) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.u_errorName(code)
+    {% end %}
   end
 
   def utraceSetLevel(traceLevel : Int32) : Void
+    {% if !flag?(:docs) %}
     C.utrace_setLevel(traceLevel)
+    {% end %}
   end
 
   def utraceGetLevel : Int32
+    {% if !flag?(:docs) %}
     C.utrace_getLevel
+    {% end %}
   end
 
   def utraceSetFunctions(context : Void*, e : Win32cr::Globalization::UTraceEntry, x : Win32cr::Globalization::UTraceExit, d : Win32cr::Globalization::UTraceData) : Void
+    {% if !flag?(:docs) %}
     C.utrace_setFunctions(context, e, x, d)
+    {% end %}
   end
 
   def utraceGetFunctions(context : Void**, e : Win32cr::Globalization::UTraceEntry*, x : Win32cr::Globalization::UTraceExit*, d : Win32cr::Globalization::UTraceData*) : Void
+    {% if !flag?(:docs) %}
     C.utrace_getFunctions(context, e, x, d)
+    {% end %}
   end
 
   def utraceVformat(outBuf : Win32cr::Foundation::PSTR, capacity : Int32, indent : Int32, fmt : Win32cr::Foundation::PSTR, args : Int8*) : Int32
+    {% if !flag?(:docs) %}
     C.utrace_vformat(outBuf, capacity, indent, fmt, args)
+    {% end %}
   end
 
   def utraceFormat(outBuf : Win32cr::Foundation::PSTR, capacity : Int32, indent : Int32, fmt : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.utrace_format(outBuf, capacity, indent, fmt)
+    {% end %}
   end
 
   def utraceFunctionName(fnNumber : Int32) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.utrace_functionName(fnNumber)
+    {% end %}
   end
 
   def uShapeArabic(source : UInt16*, sourceLength : Int32, dest : UInt16*, destSize : Int32, options : UInt32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.u_shapeArabic(source, sourceLength, dest, destSize, options, pErrorCode)
+    {% end %}
   end
 
   def uscriptGetCode(nameOrAbbrOrLocale : Win32cr::Foundation::PSTR, fillIn : Win32cr::Globalization::UScriptCode*, capacity : Int32, err : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uscript_getCode(nameOrAbbrOrLocale, fillIn, capacity, err)
+    {% end %}
   end
 
   def uscriptGetName(scriptCode : Win32cr::Globalization::UScriptCode) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.uscript_getName(scriptCode)
+    {% end %}
   end
 
   def uscriptGetShortName(scriptCode : Win32cr::Globalization::UScriptCode) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.uscript_getShortName(scriptCode)
+    {% end %}
   end
 
   def uscriptGetScript(codepoint : Int32, err : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UScriptCode
+    {% if !flag?(:docs) %}
     C.uscript_getScript(codepoint, err)
+    {% end %}
   end
 
   def uscriptHasScript(c : Int32, sc : Win32cr::Globalization::UScriptCode) : Int8
+    {% if !flag?(:docs) %}
     C.uscript_hasScript(c, sc)
+    {% end %}
   end
 
   def uscriptGetScriptExtensions(c : Int32, scripts : Win32cr::Globalization::UScriptCode*, capacity : Int32, errorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uscript_getScriptExtensions(c, scripts, capacity, errorCode)
+    {% end %}
   end
 
   def uscriptGetSampleString(script : Win32cr::Globalization::UScriptCode, dest : UInt16*, capacity : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uscript_getSampleString(script, dest, capacity, pErrorCode)
+    {% end %}
   end
 
   def uscriptGetUsage(script : Win32cr::Globalization::UScriptCode) : Win32cr::Globalization::UScriptUsage
+    {% if !flag?(:docs) %}
     C.uscript_getUsage(script)
+    {% end %}
   end
 
   def uscriptIsRightToLeft(script : Win32cr::Globalization::UScriptCode) : Int8
+    {% if !flag?(:docs) %}
     C.uscript_isRightToLeft(script)
+    {% end %}
   end
 
   def uscriptBreaksBetweenLetters(script : Win32cr::Globalization::UScriptCode) : Int8
+    {% if !flag?(:docs) %}
     C.uscript_breaksBetweenLetters(script)
+    {% end %}
   end
 
   def uscriptIsCased(script : Win32cr::Globalization::UScriptCode) : Int8
+    {% if !flag?(:docs) %}
     C.uscript_isCased(script)
+    {% end %}
   end
 
   def uiterCurrent32(iter : Win32cr::Globalization::UCharIterator*) : Int32
+    {% if !flag?(:docs) %}
     C.uiter_current32(iter)
+    {% end %}
   end
 
   def uiterNext32(iter : Win32cr::Globalization::UCharIterator*) : Int32
+    {% if !flag?(:docs) %}
     C.uiter_next32(iter)
+    {% end %}
   end
 
   def uiterPrevious32(iter : Win32cr::Globalization::UCharIterator*) : Int32
+    {% if !flag?(:docs) %}
     C.uiter_previous32(iter)
+    {% end %}
   end
 
   def uiterGetState(iter : Win32cr::Globalization::UCharIterator*) : UInt32
+    {% if !flag?(:docs) %}
     C.uiter_getState(iter)
+    {% end %}
   end
 
   def uiterSetState(iter : Win32cr::Globalization::UCharIterator*, state : UInt32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uiter_setState(iter, state, pErrorCode)
+    {% end %}
   end
 
   def uiterSetString(iter : Win32cr::Globalization::UCharIterator*, s : UInt16*, length : Int32) : Void
+    {% if !flag?(:docs) %}
     C.uiter_setString(iter, s, length)
+    {% end %}
   end
 
   def uiterSetUTF16BE(iter : Win32cr::Globalization::UCharIterator*, s : Win32cr::Foundation::PSTR, length : Int32) : Void
+    {% if !flag?(:docs) %}
     C.uiter_setUTF16BE(iter, s, length)
+    {% end %}
   end
 
   def uiterSetUTF8(iter : Win32cr::Globalization::UCharIterator*, s : Win32cr::Foundation::PSTR, length : Int32) : Void
+    {% if !flag?(:docs) %}
     C.uiter_setUTF8(iter, s, length)
+    {% end %}
   end
 
   def uenumClose(en : Win32cr::Globalization::UEnumeration*) : Void
+    {% if !flag?(:docs) %}
     C.uenum_close(en)
+    {% end %}
   end
 
   def uenumCount(en : Win32cr::Globalization::UEnumeration*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uenum_count(en, status)
+    {% end %}
   end
 
   def uenumUnext(en : Win32cr::Globalization::UEnumeration*, resultLength : Int32*, status : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.uenum_unext(en, resultLength, status)
+    {% end %}
   end
 
   def uenumNext(en : Win32cr::Globalization::UEnumeration*, resultLength : Int32*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.uenum_next(en, resultLength, status)
+    {% end %}
   end
 
   def uenumReset(en : Win32cr::Globalization::UEnumeration*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uenum_reset(en, status)
+    {% end %}
   end
 
   def uenumOpenUCharStringsEnumeration(strings : UInt16**, count : Int32, ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.uenum_openUCharStringsEnumeration(strings, count, ec)
+    {% end %}
   end
 
   def uenumOpenCharStringsEnumeration(strings : Int8**, count : Int32, ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.uenum_openCharStringsEnumeration(strings, count, ec)
+    {% end %}
   end
 
   def ulocGetDefault : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.uloc_getDefault
+    {% end %}
   end
 
   def ulocSetDefault(localeID : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uloc_setDefault(localeID, status)
+    {% end %}
   end
 
   def ulocGetLanguage(localeID : Win32cr::Foundation::PSTR, language : Win32cr::Foundation::PSTR, languageCapacity : Int32, err : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_getLanguage(localeID, language, languageCapacity, err)
+    {% end %}
   end
 
   def ulocGetScript(localeID : Win32cr::Foundation::PSTR, script : Win32cr::Foundation::PSTR, scriptCapacity : Int32, err : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_getScript(localeID, script, scriptCapacity, err)
+    {% end %}
   end
 
   def ulocGetCountry(localeID : Win32cr::Foundation::PSTR, country : Win32cr::Foundation::PSTR, countryCapacity : Int32, err : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_getCountry(localeID, country, countryCapacity, err)
+    {% end %}
   end
 
   def ulocGetVariant(localeID : Win32cr::Foundation::PSTR, variant : Win32cr::Foundation::PSTR, variantCapacity : Int32, err : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_getVariant(localeID, variant, variantCapacity, err)
+    {% end %}
   end
 
   def ulocGetName(localeID : Win32cr::Foundation::PSTR, name : Win32cr::Foundation::PSTR, nameCapacity : Int32, err : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_getName(localeID, name, nameCapacity, err)
+    {% end %}
   end
 
   def ulocCanonicalize(localeID : Win32cr::Foundation::PSTR, name : Win32cr::Foundation::PSTR, nameCapacity : Int32, err : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_canonicalize(localeID, name, nameCapacity, err)
+    {% end %}
   end
 
   def ulocGetISO3Language(localeID : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.uloc_getISO3Language(localeID)
+    {% end %}
   end
 
   def ulocGetISO3Country(localeID : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.uloc_getISO3Country(localeID)
+    {% end %}
   end
 
   def ulocGetLCID(localeID : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.uloc_getLCID(localeID)
+    {% end %}
   end
 
   def ulocGetDisplayLanguage(locale : Win32cr::Foundation::PSTR, displayLocale : Win32cr::Foundation::PSTR, language : UInt16*, languageCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_getDisplayLanguage(locale, displayLocale, language, languageCapacity, status)
+    {% end %}
   end
 
   def ulocGetDisplayScript(locale : Win32cr::Foundation::PSTR, displayLocale : Win32cr::Foundation::PSTR, script : UInt16*, scriptCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_getDisplayScript(locale, displayLocale, script, scriptCapacity, status)
+    {% end %}
   end
 
   def ulocGetDisplayCountry(locale : Win32cr::Foundation::PSTR, displayLocale : Win32cr::Foundation::PSTR, country : UInt16*, countryCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_getDisplayCountry(locale, displayLocale, country, countryCapacity, status)
+    {% end %}
   end
 
   def ulocGetDisplayVariant(locale : Win32cr::Foundation::PSTR, displayLocale : Win32cr::Foundation::PSTR, variant : UInt16*, variantCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_getDisplayVariant(locale, displayLocale, variant, variantCapacity, status)
+    {% end %}
   end
 
   def ulocGetDisplayKeyword(keyword : Win32cr::Foundation::PSTR, displayLocale : Win32cr::Foundation::PSTR, dest : UInt16*, destCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_getDisplayKeyword(keyword, displayLocale, dest, destCapacity, status)
+    {% end %}
   end
 
   def ulocGetDisplayKeywordValue(locale : Win32cr::Foundation::PSTR, keyword : Win32cr::Foundation::PSTR, displayLocale : Win32cr::Foundation::PSTR, dest : UInt16*, destCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_getDisplayKeywordValue(locale, keyword, displayLocale, dest, destCapacity, status)
+    {% end %}
   end
 
   def ulocGetDisplayName(localeID : Win32cr::Foundation::PSTR, inLocaleID : Win32cr::Foundation::PSTR, result : UInt16*, maxResultSize : Int32, err : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_getDisplayName(localeID, inLocaleID, result, maxResultSize, err)
+    {% end %}
   end
 
   def ulocGetAvailable(n : Int32) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.uloc_getAvailable(n)
+    {% end %}
   end
 
   def ulocCountAvailable : Int32
+    {% if !flag?(:docs) %}
     C.uloc_countAvailable
+    {% end %}
   end
 
   def ulocOpenAvailableByType(type__ : Win32cr::Globalization::ULocAvailableType, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.uloc_openAvailableByType(type__, status)
+    {% end %}
   end
 
   def ulocGetISOLanguages : Int8**
+    {% if !flag?(:docs) %}
     C.uloc_getISOLanguages
+    {% end %}
   end
 
   def ulocGetISOCountries : Int8**
+    {% if !flag?(:docs) %}
     C.uloc_getISOCountries
+    {% end %}
   end
 
   def ulocGetParent(localeID : Win32cr::Foundation::PSTR, parent : Win32cr::Foundation::PSTR, parentCapacity : Int32, err : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_getParent(localeID, parent, parentCapacity, err)
+    {% end %}
   end
 
   def ulocGetBaseName(localeID : Win32cr::Foundation::PSTR, name : Win32cr::Foundation::PSTR, nameCapacity : Int32, err : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_getBaseName(localeID, name, nameCapacity, err)
+    {% end %}
   end
 
   def ulocOpenKeywords(localeID : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.uloc_openKeywords(localeID, status)
+    {% end %}
   end
 
   def ulocGetKeywordValue(localeID : Win32cr::Foundation::PSTR, keywordName : Win32cr::Foundation::PSTR, buffer : Win32cr::Foundation::PSTR, bufferCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_getKeywordValue(localeID, keywordName, buffer, bufferCapacity, status)
+    {% end %}
   end
 
   def ulocSetKeywordValue(keywordName : Win32cr::Foundation::PSTR, keywordValue : Win32cr::Foundation::PSTR, buffer : Win32cr::Foundation::PSTR, bufferCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_setKeywordValue(keywordName, keywordValue, buffer, bufferCapacity, status)
+    {% end %}
   end
 
   def ulocIsRightToLeft(locale : Win32cr::Foundation::PSTR) : Int8
+    {% if !flag?(:docs) %}
     C.uloc_isRightToLeft(locale)
+    {% end %}
   end
 
   def ulocGetCharacterOrientation(localeId : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::ULayoutType
+    {% if !flag?(:docs) %}
     C.uloc_getCharacterOrientation(localeId, status)
+    {% end %}
   end
 
   def ulocGetLineOrientation(localeId : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::ULayoutType
+    {% if !flag?(:docs) %}
     C.uloc_getLineOrientation(localeId, status)
+    {% end %}
   end
 
   def ulocAcceptLanguageFromHTTP(result : Win32cr::Foundation::PSTR, resultAvailable : Int32, outResult : Win32cr::Globalization::UAcceptResult*, httpAcceptLanguage : Win32cr::Foundation::PSTR, availableLocales : Win32cr::Globalization::UEnumeration*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_acceptLanguageFromHTTP(result, resultAvailable, outResult, httpAcceptLanguage, availableLocales, status)
+    {% end %}
   end
 
   def ulocAcceptLanguage(result : Win32cr::Foundation::PSTR, resultAvailable : Int32, outResult : Win32cr::Globalization::UAcceptResult*, acceptList : Int8**, acceptListCount : Int32, availableLocales : Win32cr::Globalization::UEnumeration*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_acceptLanguage(result, resultAvailable, outResult, acceptList, acceptListCount, availableLocales, status)
+    {% end %}
   end
 
   def ulocGetLocaleForLCID(hostID : UInt32, locale : Win32cr::Foundation::PSTR, localeCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_getLocaleForLCID(hostID, locale, localeCapacity, status)
+    {% end %}
   end
 
   def ulocAddLikelySubtags(localeID : Win32cr::Foundation::PSTR, maximizedLocaleID : Win32cr::Foundation::PSTR, maximizedLocaleIDCapacity : Int32, err : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_addLikelySubtags(localeID, maximizedLocaleID, maximizedLocaleIDCapacity, err)
+    {% end %}
   end
 
   def ulocMinimizeSubtags(localeID : Win32cr::Foundation::PSTR, minimizedLocaleID : Win32cr::Foundation::PSTR, minimizedLocaleIDCapacity : Int32, err : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_minimizeSubtags(localeID, minimizedLocaleID, minimizedLocaleIDCapacity, err)
+    {% end %}
   end
 
   def ulocForLanguageTag(langtag : Win32cr::Foundation::PSTR, localeID : Win32cr::Foundation::PSTR, localeIDCapacity : Int32, parsedLength : Int32*, err : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_forLanguageTag(langtag, localeID, localeIDCapacity, parsedLength, err)
+    {% end %}
   end
 
   def ulocToLanguageTag(localeID : Win32cr::Foundation::PSTR, langtag : Win32cr::Foundation::PSTR, langtagCapacity : Int32, strict : Int8, err : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uloc_toLanguageTag(localeID, langtag, langtagCapacity, strict, err)
+    {% end %}
   end
 
   def ulocToUnicodeLocaleKey(keyword : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.uloc_toUnicodeLocaleKey(keyword)
+    {% end %}
   end
 
   def ulocToUnicodeLocaleType(keyword : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.uloc_toUnicodeLocaleType(keyword, value)
+    {% end %}
   end
 
   def ulocToLegacyKey(keyword : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.uloc_toLegacyKey(keyword)
+    {% end %}
   end
 
   def ulocToLegacyType(keyword : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.uloc_toLegacyType(keyword, value)
+    {% end %}
   end
 
   def uresOpen(packageName : Win32cr::Foundation::PSTR, locale : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UResourceBundle*
+    {% if !flag?(:docs) %}
     C.ures_open(packageName, locale, status)
+    {% end %}
   end
 
   def uresOpenDirect(packageName : Win32cr::Foundation::PSTR, locale : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UResourceBundle*
+    {% if !flag?(:docs) %}
     C.ures_openDirect(packageName, locale, status)
+    {% end %}
   end
 
   def uresOpenU(packageName : UInt16*, locale : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UResourceBundle*
+    {% if !flag?(:docs) %}
     C.ures_openU(packageName, locale, status)
+    {% end %}
   end
 
   def uresClose(resourceBundle : Win32cr::Globalization::UResourceBundle*) : Void
+    {% if !flag?(:docs) %}
     C.ures_close(resourceBundle)
+    {% end %}
   end
 
   def uresGetVersion(resB : Win32cr::Globalization::UResourceBundle*, versionInfo : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.ures_getVersion(resB, versionInfo)
+    {% end %}
   end
 
   def uresGetLocaleByType(resourceBundle : Win32cr::Globalization::UResourceBundle*, type__ : Win32cr::Globalization::ULocDataLocaleType, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ures_getLocaleByType(resourceBundle, type__, status)
+    {% end %}
   end
 
   def uresGetString(resourceBundle : Win32cr::Globalization::UResourceBundle*, len : Int32*, status : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.ures_getString(resourceBundle, len, status)
+    {% end %}
   end
 
   def uresGetUTF8String(resB : Win32cr::Globalization::UResourceBundle*, dest : Win32cr::Foundation::PSTR, length : Int32*, forceCopy : Int8, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ures_getUTF8String(resB, dest, length, forceCopy, status)
+    {% end %}
   end
 
   def uresGetBinary(resourceBundle : Win32cr::Globalization::UResourceBundle*, len : Int32*, status : Win32cr::Globalization::UErrorCode*) : UInt8*
+    {% if !flag?(:docs) %}
     C.ures_getBinary(resourceBundle, len, status)
+    {% end %}
   end
 
   def uresGetIntVector(resourceBundle : Win32cr::Globalization::UResourceBundle*, len : Int32*, status : Win32cr::Globalization::UErrorCode*) : Int32*
+    {% if !flag?(:docs) %}
     C.ures_getIntVector(resourceBundle, len, status)
+    {% end %}
   end
 
   def uresGetUInt(resourceBundle : Win32cr::Globalization::UResourceBundle*, status : Win32cr::Globalization::UErrorCode*) : UInt32
+    {% if !flag?(:docs) %}
     C.ures_getUInt(resourceBundle, status)
+    {% end %}
   end
 
   def uresGetInt(resourceBundle : Win32cr::Globalization::UResourceBundle*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ures_getInt(resourceBundle, status)
+    {% end %}
   end
 
   def uresGetSize(resourceBundle : Win32cr::Globalization::UResourceBundle*) : Int32
+    {% if !flag?(:docs) %}
     C.ures_getSize(resourceBundle)
+    {% end %}
   end
 
   def uresGetType(resourceBundle : Win32cr::Globalization::UResourceBundle*) : Win32cr::Globalization::UResType
+    {% if !flag?(:docs) %}
     C.ures_getType(resourceBundle)
+    {% end %}
   end
 
   def uresGetKey(resourceBundle : Win32cr::Globalization::UResourceBundle*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ures_getKey(resourceBundle)
+    {% end %}
   end
 
   def uresResetIterator(resourceBundle : Win32cr::Globalization::UResourceBundle*) : Void
+    {% if !flag?(:docs) %}
     C.ures_resetIterator(resourceBundle)
+    {% end %}
   end
 
   def uresHasNext(resourceBundle : Win32cr::Globalization::UResourceBundle*) : Int8
+    {% if !flag?(:docs) %}
     C.ures_hasNext(resourceBundle)
+    {% end %}
   end
 
   def uresGetNextResource(resourceBundle : Win32cr::Globalization::UResourceBundle*, fillIn : Win32cr::Globalization::UResourceBundle*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UResourceBundle*
+    {% if !flag?(:docs) %}
     C.ures_getNextResource(resourceBundle, fillIn, status)
+    {% end %}
   end
 
   def uresGetNextString(resourceBundle : Win32cr::Globalization::UResourceBundle*, len : Int32*, key : Int8**, status : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.ures_getNextString(resourceBundle, len, key, status)
+    {% end %}
   end
 
   def uresGetByIndex(resourceBundle : Win32cr::Globalization::UResourceBundle*, indexR : Int32, fillIn : Win32cr::Globalization::UResourceBundle*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UResourceBundle*
+    {% if !flag?(:docs) %}
     C.ures_getByIndex(resourceBundle, indexR, fillIn, status)
+    {% end %}
   end
 
   def uresGetStringByIndex(resourceBundle : Win32cr::Globalization::UResourceBundle*, indexS : Int32, len : Int32*, status : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.ures_getStringByIndex(resourceBundle, indexS, len, status)
+    {% end %}
   end
 
   def uresGetUTF8StringByIndex(resB : Win32cr::Globalization::UResourceBundle*, stringIndex : Int32, dest : Win32cr::Foundation::PSTR, pLength : Int32*, forceCopy : Int8, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ures_getUTF8StringByIndex(resB, stringIndex, dest, pLength, forceCopy, status)
+    {% end %}
   end
 
   def uresGetByKey(resourceBundle : Win32cr::Globalization::UResourceBundle*, key : Win32cr::Foundation::PSTR, fillIn : Win32cr::Globalization::UResourceBundle*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UResourceBundle*
+    {% if !flag?(:docs) %}
     C.ures_getByKey(resourceBundle, key, fillIn, status)
+    {% end %}
   end
 
   def uresGetStringByKey(resB : Win32cr::Globalization::UResourceBundle*, key : Win32cr::Foundation::PSTR, len : Int32*, status : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.ures_getStringByKey(resB, key, len, status)
+    {% end %}
   end
 
   def uresGetUTF8StringByKey(resB : Win32cr::Globalization::UResourceBundle*, key : Win32cr::Foundation::PSTR, dest : Win32cr::Foundation::PSTR, pLength : Int32*, forceCopy : Int8, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ures_getUTF8StringByKey(resB, key, dest, pLength, forceCopy, status)
+    {% end %}
   end
 
   def uresOpenAvailableLocales(packageName : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.ures_openAvailableLocales(packageName, status)
+    {% end %}
   end
 
   def uldnOpen(locale : Win32cr::Foundation::PSTR, dialectHandling : Win32cr::Globalization::UDialectHandling, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::ULocaleDisplayNames*
+    {% if !flag?(:docs) %}
     C.uldn_open(locale, dialectHandling, pErrorCode)
+    {% end %}
   end
 
   def uldnClose(ldn : Win32cr::Globalization::ULocaleDisplayNames*) : Void
+    {% if !flag?(:docs) %}
     C.uldn_close(ldn)
+    {% end %}
   end
 
   def uldnGetLocale(ldn : Win32cr::Globalization::ULocaleDisplayNames*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.uldn_getLocale(ldn)
+    {% end %}
   end
 
   def uldnGetDialectHandling(ldn : Win32cr::Globalization::ULocaleDisplayNames*) : Win32cr::Globalization::UDialectHandling
+    {% if !flag?(:docs) %}
     C.uldn_getDialectHandling(ldn)
+    {% end %}
   end
 
   def uldnLocaleDisplayName(ldn : Win32cr::Globalization::ULocaleDisplayNames*, locale : Win32cr::Foundation::PSTR, result : UInt16*, maxResultSize : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uldn_localeDisplayName(ldn, locale, result, maxResultSize, pErrorCode)
+    {% end %}
   end
 
   def uldnLanguageDisplayName(ldn : Win32cr::Globalization::ULocaleDisplayNames*, lang : Win32cr::Foundation::PSTR, result : UInt16*, maxResultSize : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uldn_languageDisplayName(ldn, lang, result, maxResultSize, pErrorCode)
+    {% end %}
   end
 
   def uldnScriptDisplayName(ldn : Win32cr::Globalization::ULocaleDisplayNames*, script : Win32cr::Foundation::PSTR, result : UInt16*, maxResultSize : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uldn_scriptDisplayName(ldn, script, result, maxResultSize, pErrorCode)
+    {% end %}
   end
 
   def uldnScriptCodeDisplayName(ldn : Win32cr::Globalization::ULocaleDisplayNames*, scriptCode : Win32cr::Globalization::UScriptCode, result : UInt16*, maxResultSize : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uldn_scriptCodeDisplayName(ldn, scriptCode, result, maxResultSize, pErrorCode)
+    {% end %}
   end
 
   def uldnRegionDisplayName(ldn : Win32cr::Globalization::ULocaleDisplayNames*, region : Win32cr::Foundation::PSTR, result : UInt16*, maxResultSize : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uldn_regionDisplayName(ldn, region, result, maxResultSize, pErrorCode)
+    {% end %}
   end
 
   def uldnVariantDisplayName(ldn : Win32cr::Globalization::ULocaleDisplayNames*, variant : Win32cr::Foundation::PSTR, result : UInt16*, maxResultSize : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uldn_variantDisplayName(ldn, variant, result, maxResultSize, pErrorCode)
+    {% end %}
   end
 
   def uldnKeyDisplayName(ldn : Win32cr::Globalization::ULocaleDisplayNames*, key : Win32cr::Foundation::PSTR, result : UInt16*, maxResultSize : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uldn_keyDisplayName(ldn, key, result, maxResultSize, pErrorCode)
+    {% end %}
   end
 
   def uldnKeyValueDisplayName(ldn : Win32cr::Globalization::ULocaleDisplayNames*, key : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR, result : UInt16*, maxResultSize : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uldn_keyValueDisplayName(ldn, key, value, result, maxResultSize, pErrorCode)
+    {% end %}
   end
 
   def uldnOpenForContext(locale : Win32cr::Foundation::PSTR, contexts : Win32cr::Globalization::UDisplayContext*, length : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::ULocaleDisplayNames*
+    {% if !flag?(:docs) %}
     C.uldn_openForContext(locale, contexts, length, pErrorCode)
+    {% end %}
   end
 
   def uldnGetContext(ldn : Win32cr::Globalization::ULocaleDisplayNames*, type__ : Win32cr::Globalization::UDisplayContextType, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UDisplayContext
+    {% if !flag?(:docs) %}
     C.uldn_getContext(ldn, type__, pErrorCode)
+    {% end %}
   end
 
   def ucurrForLocale(locale : Win32cr::Foundation::PSTR, buff : UInt16*, buffCapacity : Int32, ec : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucurr_forLocale(locale, buff, buffCapacity, ec)
+    {% end %}
   end
 
   def ucurrRegister(isoCode : UInt16*, locale : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Void*
+    {% if !flag?(:docs) %}
     C.ucurr_register(isoCode, locale, status)
+    {% end %}
   end
 
   def ucurrUnregister(key : Void*, status : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.ucurr_unregister(key, status)
+    {% end %}
   end
 
   def ucurrGetName(currency : UInt16*, locale : Win32cr::Foundation::PSTR, nameStyle : Win32cr::Globalization::UCurrNameStyle, isChoiceFormat : Int8*, len : Int32*, ec : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.ucurr_getName(currency, locale, nameStyle, isChoiceFormat, len, ec)
+    {% end %}
   end
 
   def ucurrGetPluralName(currency : UInt16*, locale : Win32cr::Foundation::PSTR, isChoiceFormat : Int8*, pluralCount : Win32cr::Foundation::PSTR, len : Int32*, ec : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.ucurr_getPluralName(currency, locale, isChoiceFormat, pluralCount, len, ec)
+    {% end %}
   end
 
   def ucurrGetDefaultFractionDigits(currency : UInt16*, ec : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucurr_getDefaultFractionDigits(currency, ec)
+    {% end %}
   end
 
   def ucurrGetDefaultFractionDigitsForUsage(currency : UInt16*, usage : Win32cr::Globalization::UCurrencyUsage, ec : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucurr_getDefaultFractionDigitsForUsage(currency, usage, ec)
+    {% end %}
   end
 
   def ucurrGetRoundingIncrement(currency : UInt16*, ec : Win32cr::Globalization::UErrorCode*) : Float64
+    {% if !flag?(:docs) %}
     C.ucurr_getRoundingIncrement(currency, ec)
+    {% end %}
   end
 
   def ucurrGetRoundingIncrementForUsage(currency : UInt16*, usage : Win32cr::Globalization::UCurrencyUsage, ec : Win32cr::Globalization::UErrorCode*) : Float64
+    {% if !flag?(:docs) %}
     C.ucurr_getRoundingIncrementForUsage(currency, usage, ec)
+    {% end %}
   end
 
   def ucurrOpenISOCurrencies(currType : UInt32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.ucurr_openISOCurrencies(currType, pErrorCode)
+    {% end %}
   end
 
   def ucurrIsAvailable(isoCode : UInt16*, from : Float64, to : Float64, errorCode : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.ucurr_isAvailable(isoCode, from, to, errorCode)
+    {% end %}
   end
 
   def ucurrCountCurrencies(locale : Win32cr::Foundation::PSTR, date : Float64, ec : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucurr_countCurrencies(locale, date, ec)
+    {% end %}
   end
 
   def ucurrForLocaleAndDate(locale : Win32cr::Foundation::PSTR, date : Float64, index : Int32, buff : UInt16*, buffCapacity : Int32, ec : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucurr_forLocaleAndDate(locale, date, index, buff, buffCapacity, ec)
+    {% end %}
   end
 
   def ucurrGetKeywordValuesForLocale(key : Win32cr::Foundation::PSTR, locale : Win32cr::Foundation::PSTR, commonlyUsed : Int8, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.ucurr_getKeywordValuesForLocale(key, locale, commonlyUsed, status)
+    {% end %}
   end
 
   def ucurrGetNumericCode(currency : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.ucurr_getNumericCode(currency)
+    {% end %}
   end
 
   def ucpmapGet(map : Win32cr::Globalization::UCPMap*, c : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.ucpmap_get(map, c)
+    {% end %}
   end
 
   def ucpmapGetRange(map : Win32cr::Globalization::UCPMap*, start : Int32, option : Win32cr::Globalization::UCPMapRangeOption, surrogateValue : UInt32, filter : Win32cr::Globalization::UCPMapValueFilter*, context : Void*, pValue : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.ucpmap_getRange(map, start, option, surrogateValue, filter, context, pValue)
+    {% end %}
   end
 
   def ucptrieOpenFromBinary(type__ : Win32cr::Globalization::UCPTrieType, valueWidth : Win32cr::Globalization::UCPTrieValueWidth, data : Void*, length : Int32, pActualLength : Int32*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UCPTrie*
+    {% if !flag?(:docs) %}
     C.ucptrie_openFromBinary(type__, valueWidth, data, length, pActualLength, pErrorCode)
+    {% end %}
   end
 
   def ucptrieClose(trie : Win32cr::Globalization::UCPTrie*) : Void
+    {% if !flag?(:docs) %}
     C.ucptrie_close(trie)
+    {% end %}
   end
 
   def ucptrieGetType(trie : Win32cr::Globalization::UCPTrie*) : Win32cr::Globalization::UCPTrieType
+    {% if !flag?(:docs) %}
     C.ucptrie_getType(trie)
+    {% end %}
   end
 
   def ucptrieGetValueWidth(trie : Win32cr::Globalization::UCPTrie*) : Win32cr::Globalization::UCPTrieValueWidth
+    {% if !flag?(:docs) %}
     C.ucptrie_getValueWidth(trie)
+    {% end %}
   end
 
   def ucptrieGet(trie : Win32cr::Globalization::UCPTrie*, c : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.ucptrie_get(trie, c)
+    {% end %}
   end
 
   def ucptrieGetRange(trie : Win32cr::Globalization::UCPTrie*, start : Int32, option : Win32cr::Globalization::UCPMapRangeOption, surrogateValue : UInt32, filter : Win32cr::Globalization::UCPMapValueFilter*, context : Void*, pValue : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.ucptrie_getRange(trie, start, option, surrogateValue, filter, context, pValue)
+    {% end %}
   end
 
   def ucptrieToBinary(trie : Win32cr::Globalization::UCPTrie*, data : Void*, capacity : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucptrie_toBinary(trie, data, capacity, pErrorCode)
+    {% end %}
   end
 
   def ucptrieInternalSmallIndex(trie : Win32cr::Globalization::UCPTrie*, c : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.ucptrie_internalSmallIndex(trie, c)
+    {% end %}
   end
 
   def ucptrieInternalSmallU8Index(trie : Win32cr::Globalization::UCPTrie*, lt1 : Int32, t2 : UInt8, t3 : UInt8) : Int32
+    {% if !flag?(:docs) %}
     C.ucptrie_internalSmallU8Index(trie, lt1, t2, t3)
+    {% end %}
   end
 
   def ucptrieInternalU8PrevIndex(trie : Win32cr::Globalization::UCPTrie*, c : Int32, start : UInt8*, src : UInt8*) : Int32
+    {% if !flag?(:docs) %}
     C.ucptrie_internalU8PrevIndex(trie, c, start, src)
+    {% end %}
   end
 
   def umutablecptrieOpen(initialValue : UInt32, errorValue : UInt32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UMutableCPTrie*
+    {% if !flag?(:docs) %}
     C.umutablecptrie_open(initialValue, errorValue, pErrorCode)
+    {% end %}
   end
 
   def umutablecptrieClone(other : Win32cr::Globalization::UMutableCPTrie*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UMutableCPTrie*
+    {% if !flag?(:docs) %}
     C.umutablecptrie_clone(other, pErrorCode)
+    {% end %}
   end
 
   def umutablecptrieClose(trie : Win32cr::Globalization::UMutableCPTrie*) : Void
+    {% if !flag?(:docs) %}
     C.umutablecptrie_close(trie)
+    {% end %}
   end
 
   def umutablecptrieFromUCPMap(map : Win32cr::Globalization::UCPMap*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UMutableCPTrie*
+    {% if !flag?(:docs) %}
     C.umutablecptrie_fromUCPMap(map, pErrorCode)
+    {% end %}
   end
 
   def umutablecptrieFromUCPTrie(trie : Win32cr::Globalization::UCPTrie*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UMutableCPTrie*
+    {% if !flag?(:docs) %}
     C.umutablecptrie_fromUCPTrie(trie, pErrorCode)
+    {% end %}
   end
 
   def umutablecptrieGet(trie : Win32cr::Globalization::UMutableCPTrie*, c : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.umutablecptrie_get(trie, c)
+    {% end %}
   end
 
   def umutablecptrieGetRange(trie : Win32cr::Globalization::UMutableCPTrie*, start : Int32, option : Win32cr::Globalization::UCPMapRangeOption, surrogateValue : UInt32, filter : Win32cr::Globalization::UCPMapValueFilter*, context : Void*, pValue : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.umutablecptrie_getRange(trie, start, option, surrogateValue, filter, context, pValue)
+    {% end %}
   end
 
   def umutablecptrieSet(trie : Win32cr::Globalization::UMutableCPTrie*, c : Int32, value : UInt32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.umutablecptrie_set(trie, c, value, pErrorCode)
+    {% end %}
   end
 
   def umutablecptrieSetRange(trie : Win32cr::Globalization::UMutableCPTrie*, start : Int32, end__ : Int32, value : UInt32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.umutablecptrie_setRange(trie, start, end__, value, pErrorCode)
+    {% end %}
   end
 
   def umutablecptrieBuildImmutable(trie : Win32cr::Globalization::UMutableCPTrie*, type__ : Win32cr::Globalization::UCPTrieType, valueWidth : Win32cr::Globalization::UCPTrieValueWidth, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UCPTrie*
+    {% if !flag?(:docs) %}
     C.umutablecptrie_buildImmutable(trie, type__, valueWidth, pErrorCode)
+    {% end %}
   end
 
   def uCNVFROMUCALLBACKSTOP(context : Void*, fromUArgs : Win32cr::Globalization::UConverterFromUnicodeArgs*, codeUnits : UInt16*, length : Int32, codePoint : Int32, reason : Win32cr::Globalization::UConverterCallbackReason, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.UCNV_FROM_U_CALLBACK_STOP(context, fromUArgs, codeUnits, length, codePoint, reason, err)
+    {% end %}
   end
 
   def uCNVTOUCALLBACKSTOP(context : Void*, toUArgs : Win32cr::Globalization::UConverterToUnicodeArgs*, codeUnits : Win32cr::Foundation::PSTR, length : Int32, reason : Win32cr::Globalization::UConverterCallbackReason, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.UCNV_TO_U_CALLBACK_STOP(context, toUArgs, codeUnits, length, reason, err)
+    {% end %}
   end
 
   def uCNVFROMUCALLBACKSKIP(context : Void*, fromUArgs : Win32cr::Globalization::UConverterFromUnicodeArgs*, codeUnits : UInt16*, length : Int32, codePoint : Int32, reason : Win32cr::Globalization::UConverterCallbackReason, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.UCNV_FROM_U_CALLBACK_SKIP(context, fromUArgs, codeUnits, length, codePoint, reason, err)
+    {% end %}
   end
 
   def uCNVFROMUCALLBACKSUBSTITUTE(context : Void*, fromUArgs : Win32cr::Globalization::UConverterFromUnicodeArgs*, codeUnits : UInt16*, length : Int32, codePoint : Int32, reason : Win32cr::Globalization::UConverterCallbackReason, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.UCNV_FROM_U_CALLBACK_SUBSTITUTE(context, fromUArgs, codeUnits, length, codePoint, reason, err)
+    {% end %}
   end
 
   def uCNVFROMUCALLBACKESCAPE(context : Void*, fromUArgs : Win32cr::Globalization::UConverterFromUnicodeArgs*, codeUnits : UInt16*, length : Int32, codePoint : Int32, reason : Win32cr::Globalization::UConverterCallbackReason, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.UCNV_FROM_U_CALLBACK_ESCAPE(context, fromUArgs, codeUnits, length, codePoint, reason, err)
+    {% end %}
   end
 
   def uCNVTOUCALLBACKSKIP(context : Void*, toUArgs : Win32cr::Globalization::UConverterToUnicodeArgs*, codeUnits : Win32cr::Foundation::PSTR, length : Int32, reason : Win32cr::Globalization::UConverterCallbackReason, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.UCNV_TO_U_CALLBACK_SKIP(context, toUArgs, codeUnits, length, reason, err)
+    {% end %}
   end
 
   def uCNVTOUCALLBACKSUBSTITUTE(context : Void*, toUArgs : Win32cr::Globalization::UConverterToUnicodeArgs*, codeUnits : Win32cr::Foundation::PSTR, length : Int32, reason : Win32cr::Globalization::UConverterCallbackReason, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.UCNV_TO_U_CALLBACK_SUBSTITUTE(context, toUArgs, codeUnits, length, reason, err)
+    {% end %}
   end
 
   def uCNVTOUCALLBACKESCAPE(context : Void*, toUArgs : Win32cr::Globalization::UConverterToUnicodeArgs*, codeUnits : Win32cr::Foundation::PSTR, length : Int32, reason : Win32cr::Globalization::UConverterCallbackReason, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.UCNV_TO_U_CALLBACK_ESCAPE(context, toUArgs, codeUnits, length, reason, err)
+    {% end %}
   end
 
   def ucnvCompareNames(name1 : Win32cr::Foundation::PSTR, name2 : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.ucnv_compareNames(name1, name2)
+    {% end %}
   end
 
   def ucnvOpen(converterName : Win32cr::Foundation::PSTR, err : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UConverter*
+    {% if !flag?(:docs) %}
     C.ucnv_open(converterName, err)
+    {% end %}
   end
 
   def ucnvOpenU(name : UInt16*, err : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UConverter*
+    {% if !flag?(:docs) %}
     C.ucnv_openU(name, err)
+    {% end %}
   end
 
   def ucnvOpenCCSID(codepage : Int32, platform : Win32cr::Globalization::UConverterPlatform, err : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UConverter*
+    {% if !flag?(:docs) %}
     C.ucnv_openCCSID(codepage, platform, err)
+    {% end %}
   end
 
   def ucnvOpenPackage(packageName : Win32cr::Foundation::PSTR, converterName : Win32cr::Foundation::PSTR, err : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UConverter*
+    {% if !flag?(:docs) %}
     C.ucnv_openPackage(packageName, converterName, err)
+    {% end %}
   end
 
   def ucnvSafeClone(cnv : Win32cr::Globalization::UConverter*, stackBuffer : Void*, pBufferSize : Int32*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UConverter*
+    {% if !flag?(:docs) %}
     C.ucnv_safeClone(cnv, stackBuffer, pBufferSize, status)
+    {% end %}
   end
 
   def ucnvClose(converter : Win32cr::Globalization::UConverter*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_close(converter)
+    {% end %}
   end
 
   def ucnvGetSubstChars(converter : Win32cr::Globalization::UConverter*, subChars : Win32cr::Foundation::PSTR, len : Int8*, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_getSubstChars(converter, subChars, len, err)
+    {% end %}
   end
 
   def ucnvSetSubstChars(converter : Win32cr::Globalization::UConverter*, subChars : Win32cr::Foundation::PSTR, len : Int8, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_setSubstChars(converter, subChars, len, err)
+    {% end %}
   end
 
   def ucnvSetSubstString(cnv : Win32cr::Globalization::UConverter*, s : UInt16*, length : Int32, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_setSubstString(cnv, s, length, err)
+    {% end %}
   end
 
   def ucnvGetInvalidChars(converter : Win32cr::Globalization::UConverter*, errBytes : Win32cr::Foundation::PSTR, len : Int8*, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_getInvalidChars(converter, errBytes, len, err)
+    {% end %}
   end
 
   def ucnvGetInvalidUChars(converter : Win32cr::Globalization::UConverter*, errUChars : UInt16*, len : Int8*, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_getInvalidUChars(converter, errUChars, len, err)
+    {% end %}
   end
 
   def ucnvReset(converter : Win32cr::Globalization::UConverter*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_reset(converter)
+    {% end %}
   end
 
   def ucnvResetToUnicode(converter : Win32cr::Globalization::UConverter*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_resetToUnicode(converter)
+    {% end %}
   end
 
   def ucnvResetFromUnicode(converter : Win32cr::Globalization::UConverter*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_resetFromUnicode(converter)
+    {% end %}
   end
 
   def ucnvGetMaxCharSize(converter : Win32cr::Globalization::UConverter*) : Int8
+    {% if !flag?(:docs) %}
     C.ucnv_getMaxCharSize(converter)
+    {% end %}
   end
 
   def ucnvGetMinCharSize(converter : Win32cr::Globalization::UConverter*) : Int8
+    {% if !flag?(:docs) %}
     C.ucnv_getMinCharSize(converter)
+    {% end %}
   end
 
   def ucnvGetDisplayName(converter : Win32cr::Globalization::UConverter*, displayLocale : Win32cr::Foundation::PSTR, displayName : UInt16*, displayNameCapacity : Int32, err : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucnv_getDisplayName(converter, displayLocale, displayName, displayNameCapacity, err)
+    {% end %}
   end
 
   def ucnvGetName(converter : Win32cr::Globalization::UConverter*, err : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ucnv_getName(converter, err)
+    {% end %}
   end
 
   def ucnvGetCCSID(converter : Win32cr::Globalization::UConverter*, err : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucnv_getCCSID(converter, err)
+    {% end %}
   end
 
   def ucnvGetPlatform(converter : Win32cr::Globalization::UConverter*, err : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UConverterPlatform
+    {% if !flag?(:docs) %}
     C.ucnv_getPlatform(converter, err)
+    {% end %}
   end
 
   def ucnvGetType(converter : Win32cr::Globalization::UConverter*) : Win32cr::Globalization::UConverterType
+    {% if !flag?(:docs) %}
     C.ucnv_getType(converter)
+    {% end %}
   end
 
   def ucnvGetStarters(converter : Win32cr::Globalization::UConverter*, starters : Int8*, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_getStarters(converter, starters, err)
+    {% end %}
   end
 
   def ucnvGetUnicodeSet(cnv : Win32cr::Globalization::UConverter*, setFillIn : Win32cr::Globalization::USet*, whichSet : Win32cr::Globalization::UConverterUnicodeSet, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_getUnicodeSet(cnv, setFillIn, whichSet, pErrorCode)
+    {% end %}
   end
 
   def ucnvGetToUCallBack(converter : Win32cr::Globalization::UConverter*, action : Win32cr::Globalization::UConverterToUCallback*, context : Void**) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_getToUCallBack(converter, action, context)
+    {% end %}
   end
 
   def ucnvGetFromUCallBack(converter : Win32cr::Globalization::UConverter*, action : Win32cr::Globalization::UConverterFromUCallback*, context : Void**) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_getFromUCallBack(converter, action, context)
+    {% end %}
   end
 
   def ucnvSetToUCallBack(converter : Win32cr::Globalization::UConverter*, newAction : Win32cr::Globalization::UConverterToUCallback, newContext : Void*, oldAction : Win32cr::Globalization::UConverterToUCallback*, oldContext : Void**, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_setToUCallBack(converter, newAction, newContext, oldAction, oldContext, err)
+    {% end %}
   end
 
   def ucnvSetFromUCallBack(converter : Win32cr::Globalization::UConverter*, newAction : Win32cr::Globalization::UConverterFromUCallback, newContext : Void*, oldAction : Win32cr::Globalization::UConverterFromUCallback*, oldContext : Void**, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_setFromUCallBack(converter, newAction, newContext, oldAction, oldContext, err)
+    {% end %}
   end
 
   def ucnvFromUnicode(converter : Win32cr::Globalization::UConverter*, target : Int8**, targetLimit : Win32cr::Foundation::PSTR, source : UInt16**, sourceLimit : UInt16*, offsets : Int32*, flush : Int8, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_fromUnicode(converter, target, targetLimit, source, sourceLimit, offsets, flush, err)
+    {% end %}
   end
 
   def ucnvToUnicode(converter : Win32cr::Globalization::UConverter*, target : UInt16**, targetLimit : UInt16*, source : Int8**, sourceLimit : Win32cr::Foundation::PSTR, offsets : Int32*, flush : Int8, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_toUnicode(converter, target, targetLimit, source, sourceLimit, offsets, flush, err)
+    {% end %}
   end
 
   def ucnvFromUChars(cnv : Win32cr::Globalization::UConverter*, dest : Win32cr::Foundation::PSTR, destCapacity : Int32, src : UInt16*, srcLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucnv_fromUChars(cnv, dest, destCapacity, src, srcLength, pErrorCode)
+    {% end %}
   end
 
   def ucnvToUChars(cnv : Win32cr::Globalization::UConverter*, dest : UInt16*, destCapacity : Int32, src : Win32cr::Foundation::PSTR, srcLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucnv_toUChars(cnv, dest, destCapacity, src, srcLength, pErrorCode)
+    {% end %}
   end
 
   def ucnvGetNextUChar(converter : Win32cr::Globalization::UConverter*, source : Int8**, sourceLimit : Win32cr::Foundation::PSTR, err : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucnv_getNextUChar(converter, source, sourceLimit, err)
+    {% end %}
   end
 
   def ucnvConvertEx(targetCnv : Win32cr::Globalization::UConverter*, sourceCnv : Win32cr::Globalization::UConverter*, target : Int8**, targetLimit : Win32cr::Foundation::PSTR, source : Int8**, sourceLimit : Win32cr::Foundation::PSTR, pivotStart : UInt16*, pivotSource : UInt16**, pivotTarget : UInt16**, pivotLimit : UInt16*, reset : Int8, flush : Int8, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_convertEx(targetCnv, sourceCnv, target, targetLimit, source, sourceLimit, pivotStart, pivotSource, pivotTarget, pivotLimit, reset, flush, pErrorCode)
+    {% end %}
   end
 
   def ucnvConvert(toConverterName : Win32cr::Foundation::PSTR, fromConverterName : Win32cr::Foundation::PSTR, target : Win32cr::Foundation::PSTR, targetCapacity : Int32, source : Win32cr::Foundation::PSTR, sourceLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucnv_convert(toConverterName, fromConverterName, target, targetCapacity, source, sourceLength, pErrorCode)
+    {% end %}
   end
 
   def ucnvToAlgorithmic(algorithmicType : Win32cr::Globalization::UConverterType, cnv : Win32cr::Globalization::UConverter*, target : Win32cr::Foundation::PSTR, targetCapacity : Int32, source : Win32cr::Foundation::PSTR, sourceLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucnv_toAlgorithmic(algorithmicType, cnv, target, targetCapacity, source, sourceLength, pErrorCode)
+    {% end %}
   end
 
   def ucnvFromAlgorithmic(cnv : Win32cr::Globalization::UConverter*, algorithmicType : Win32cr::Globalization::UConverterType, target : Win32cr::Foundation::PSTR, targetCapacity : Int32, source : Win32cr::Foundation::PSTR, sourceLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucnv_fromAlgorithmic(cnv, algorithmicType, target, targetCapacity, source, sourceLength, pErrorCode)
+    {% end %}
   end
 
   def ucnvFlushCache : Int32
+    {% if !flag?(:docs) %}
     C.ucnv_flushCache
+    {% end %}
   end
 
   def ucnvCountAvailable : Int32
+    {% if !flag?(:docs) %}
     C.ucnv_countAvailable
+    {% end %}
   end
 
   def ucnvGetAvailableName(n : Int32) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ucnv_getAvailableName(n)
+    {% end %}
   end
 
   def ucnvOpenAllNames(pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.ucnv_openAllNames(pErrorCode)
+    {% end %}
   end
 
   def ucnvCountAliases(alias__ : Win32cr::Foundation::PSTR, pErrorCode : Win32cr::Globalization::UErrorCode*) : UInt16
+    {% if !flag?(:docs) %}
     C.ucnv_countAliases(alias__, pErrorCode)
+    {% end %}
   end
 
   def ucnvGetAlias(alias__ : Win32cr::Foundation::PSTR, n : UInt16, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ucnv_getAlias(alias__, n, pErrorCode)
+    {% end %}
   end
 
   def ucnvGetAliases(alias__ : Win32cr::Foundation::PSTR, aliases : Int8**, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_getAliases(alias__, aliases, pErrorCode)
+    {% end %}
   end
 
   def ucnvOpenStandardNames(convName : Win32cr::Foundation::PSTR, standard : Win32cr::Foundation::PSTR, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.ucnv_openStandardNames(convName, standard, pErrorCode)
+    {% end %}
   end
 
   def ucnvCountStandards : UInt16
+    {% if !flag?(:docs) %}
     C.ucnv_countStandards
+    {% end %}
   end
 
   def ucnvGetStandard(n : UInt16, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ucnv_getStandard(n, pErrorCode)
+    {% end %}
   end
 
   def ucnvGetStandardName(name : Win32cr::Foundation::PSTR, standard : Win32cr::Foundation::PSTR, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ucnv_getStandardName(name, standard, pErrorCode)
+    {% end %}
   end
 
   def ucnvGetCanonicalName(alias__ : Win32cr::Foundation::PSTR, standard : Win32cr::Foundation::PSTR, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ucnv_getCanonicalName(alias__, standard, pErrorCode)
+    {% end %}
   end
 
   def ucnvGetDefaultName : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ucnv_getDefaultName
+    {% end %}
   end
 
   def ucnvSetDefaultName(name : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_setDefaultName(name)
+    {% end %}
   end
 
   def ucnvFixFileSeparator(cnv : Win32cr::Globalization::UConverter*, source : UInt16*, sourceLen : Int32) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_fixFileSeparator(cnv, source, sourceLen)
+    {% end %}
   end
 
   def ucnvIsAmbiguous(cnv : Win32cr::Globalization::UConverter*) : Int8
+    {% if !flag?(:docs) %}
     C.ucnv_isAmbiguous(cnv)
+    {% end %}
   end
 
   def ucnvSetFallback(cnv : Win32cr::Globalization::UConverter*, usesFallback : Int8) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_setFallback(cnv, usesFallback)
+    {% end %}
   end
 
   def ucnvUsesFallback(cnv : Win32cr::Globalization::UConverter*) : Int8
+    {% if !flag?(:docs) %}
     C.ucnv_usesFallback(cnv)
+    {% end %}
   end
 
   def ucnvDetectUnicodeSignature(source : Win32cr::Foundation::PSTR, sourceLength : Int32, signatureLength : Int32*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ucnv_detectUnicodeSignature(source, sourceLength, signatureLength, pErrorCode)
+    {% end %}
   end
 
   def ucnvFromUCountPending(cnv : Win32cr::Globalization::UConverter*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucnv_fromUCountPending(cnv, status)
+    {% end %}
   end
 
   def ucnvToUCountPending(cnv : Win32cr::Globalization::UConverter*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucnv_toUCountPending(cnv, status)
+    {% end %}
   end
 
   def ucnvIsFixedWidth(cnv : Win32cr::Globalization::UConverter*, status : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.ucnv_isFixedWidth(cnv, status)
+    {% end %}
   end
 
   def ucnvCbFromUWriteBytes(args : Win32cr::Globalization::UConverterFromUnicodeArgs*, source : Win32cr::Foundation::PSTR, length : Int32, offsetIndex : Int32, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_cbFromUWriteBytes(args, source, length, offsetIndex, err)
+    {% end %}
   end
 
   def ucnvCbFromUWriteSub(args : Win32cr::Globalization::UConverterFromUnicodeArgs*, offsetIndex : Int32, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_cbFromUWriteSub(args, offsetIndex, err)
+    {% end %}
   end
 
   def ucnvCbFromUWriteUChars(args : Win32cr::Globalization::UConverterFromUnicodeArgs*, source : UInt16**, sourceLimit : UInt16*, offsetIndex : Int32, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_cbFromUWriteUChars(args, source, sourceLimit, offsetIndex, err)
+    {% end %}
   end
 
   def ucnvCbToUWriteUChars(args : Win32cr::Globalization::UConverterToUnicodeArgs*, source : UInt16*, length : Int32, offsetIndex : Int32, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_cbToUWriteUChars(args, source, length, offsetIndex, err)
+    {% end %}
   end
 
   def ucnvCbToUWriteSub(args : Win32cr::Globalization::UConverterToUnicodeArgs*, offsetIndex : Int32, err : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucnv_cbToUWriteSub(args, offsetIndex, err)
+    {% end %}
   end
 
   def uInit(status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.u_init(status)
+    {% end %}
   end
 
   def uCleanup : Void
+    {% if !flag?(:docs) %}
     C.u_cleanup
+    {% end %}
   end
 
   def uSetMemoryFunctions(context : Void*, a : Win32cr::Globalization::UMemAllocFn*, r : Win32cr::Globalization::UMemReallocFn*, f : Win32cr::Globalization::UMemFreeFn*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.u_setMemoryFunctions(context, a, r, f, status)
+    {% end %}
   end
 
   def uCatopen(name : Win32cr::Foundation::PSTR, locale : Win32cr::Foundation::PSTR, ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UResourceBundle*
+    {% if !flag?(:docs) %}
     C.u_catopen(name, locale, ec)
+    {% end %}
   end
 
   def uCatclose(catd : Win32cr::Globalization::UResourceBundle*) : Void
+    {% if !flag?(:docs) %}
     C.u_catclose(catd)
+    {% end %}
   end
 
   def uCatgets(catd : Win32cr::Globalization::UResourceBundle*, set_num : Int32, msg_num : Int32, s : UInt16*, len : Int32*, ec : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_catgets(catd, set_num, msg_num, s, len, ec)
+    {% end %}
   end
 
   def uHasBinaryProperty(c : Int32, which : Win32cr::Globalization::UProperty) : Int8
+    {% if !flag?(:docs) %}
     C.u_hasBinaryProperty(c, which)
+    {% end %}
   end
 
   def uGetBinaryPropertySet(property : Win32cr::Globalization::UProperty, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::USet*
+    {% if !flag?(:docs) %}
     C.u_getBinaryPropertySet(property, pErrorCode)
+    {% end %}
   end
 
   def uIsUAlphabetic(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isUAlphabetic(c)
+    {% end %}
   end
 
   def uIsULowercase(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isULowercase(c)
+    {% end %}
   end
 
   def uIsUUppercase(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isUUppercase(c)
+    {% end %}
   end
 
   def uIsUWhiteSpace(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isUWhiteSpace(c)
+    {% end %}
   end
 
   def uGetIntPropertyValue(c : Int32, which : Win32cr::Globalization::UProperty) : Int32
+    {% if !flag?(:docs) %}
     C.u_getIntPropertyValue(c, which)
+    {% end %}
   end
 
   def uGetIntPropertyMinValue(which : Win32cr::Globalization::UProperty) : Int32
+    {% if !flag?(:docs) %}
     C.u_getIntPropertyMinValue(which)
+    {% end %}
   end
 
   def uGetIntPropertyMaxValue(which : Win32cr::Globalization::UProperty) : Int32
+    {% if !flag?(:docs) %}
     C.u_getIntPropertyMaxValue(which)
+    {% end %}
   end
 
   def uGetIntPropertyMap(property : Win32cr::Globalization::UProperty, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UCPMap*
+    {% if !flag?(:docs) %}
     C.u_getIntPropertyMap(property, pErrorCode)
+    {% end %}
   end
 
   def uGetNumericValue(c : Int32) : Float64
+    {% if !flag?(:docs) %}
     C.u_getNumericValue(c)
+    {% end %}
   end
 
   def uIslower(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_islower(c)
+    {% end %}
   end
 
   def uIsupper(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isupper(c)
+    {% end %}
   end
 
   def uIstitle(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_istitle(c)
+    {% end %}
   end
 
   def uIsdigit(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isdigit(c)
+    {% end %}
   end
 
   def uIsalpha(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isalpha(c)
+    {% end %}
   end
 
   def uIsalnum(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isalnum(c)
+    {% end %}
   end
 
   def uIsxdigit(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isxdigit(c)
+    {% end %}
   end
 
   def uIspunct(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_ispunct(c)
+    {% end %}
   end
 
   def uIsgraph(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isgraph(c)
+    {% end %}
   end
 
   def uIsblank(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isblank(c)
+    {% end %}
   end
 
   def uIsdefined(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isdefined(c)
+    {% end %}
   end
 
   def uIsspace(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isspace(c)
+    {% end %}
   end
 
   def uIsJavaSpaceChar(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isJavaSpaceChar(c)
+    {% end %}
   end
 
   def uIsWhitespace(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isWhitespace(c)
+    {% end %}
   end
 
   def uIscntrl(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_iscntrl(c)
+    {% end %}
   end
 
   def uIsISOControl(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isISOControl(c)
+    {% end %}
   end
 
   def uIsprint(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isprint(c)
+    {% end %}
   end
 
   def uIsbase(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isbase(c)
+    {% end %}
   end
 
   def uCharDirection(c : Int32) : Win32cr::Globalization::UCharDirection
+    {% if !flag?(:docs) %}
     C.u_charDirection(c)
+    {% end %}
   end
 
   def uIsMirrored(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isMirrored(c)
+    {% end %}
   end
 
   def uCharMirror(c : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.u_charMirror(c)
+    {% end %}
   end
 
   def uGetBidiPairedBracket(c : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.u_getBidiPairedBracket(c)
+    {% end %}
   end
 
   def uCharType(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_charType(c)
+    {% end %}
   end
 
   def uEnumCharTypes(enumRange : Win32cr::Globalization::UCharEnumTypeRange*, context : Void*) : Void
+    {% if !flag?(:docs) %}
     C.u_enumCharTypes(enumRange, context)
+    {% end %}
   end
 
   def uGetCombiningClass(c : Int32) : UInt8
+    {% if !flag?(:docs) %}
     C.u_getCombiningClass(c)
+    {% end %}
   end
 
   def uCharDigitValue(c : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.u_charDigitValue(c)
+    {% end %}
   end
 
   def ublockGetCode(c : Int32) : Win32cr::Globalization::UBlockCode
+    {% if !flag?(:docs) %}
     C.ublock_getCode(c)
+    {% end %}
   end
 
   def uCharName(code : Int32, nameChoice : Win32cr::Globalization::UCharNameChoice, buffer : Win32cr::Foundation::PSTR, bufferLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.u_charName(code, nameChoice, buffer, bufferLength, pErrorCode)
+    {% end %}
   end
 
   def uCharFromName(nameChoice : Win32cr::Globalization::UCharNameChoice, name : Win32cr::Foundation::PSTR, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.u_charFromName(nameChoice, name, pErrorCode)
+    {% end %}
   end
 
   def uEnumCharNames(start : Int32, limit : Int32, fn : Win32cr::Globalization::UEnumCharNamesFn*, context : Void*, nameChoice : Win32cr::Globalization::UCharNameChoice, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.u_enumCharNames(start, limit, fn, context, nameChoice, pErrorCode)
+    {% end %}
   end
 
   def uGetPropertyName(property : Win32cr::Globalization::UProperty, nameChoice : Win32cr::Globalization::UPropertyNameChoice) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.u_getPropertyName(property, nameChoice)
+    {% end %}
   end
 
   def uGetPropertyEnum(alias__ : Win32cr::Foundation::PSTR) : Win32cr::Globalization::UProperty
+    {% if !flag?(:docs) %}
     C.u_getPropertyEnum(alias__)
+    {% end %}
   end
 
   def uGetPropertyValueName(property : Win32cr::Globalization::UProperty, value : Int32, nameChoice : Win32cr::Globalization::UPropertyNameChoice) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.u_getPropertyValueName(property, value, nameChoice)
+    {% end %}
   end
 
   def uGetPropertyValueEnum(property : Win32cr::Globalization::UProperty, alias__ : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.u_getPropertyValueEnum(property, alias__)
+    {% end %}
   end
 
   def uIsIDStart(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isIDStart(c)
+    {% end %}
   end
 
   def uIsIDPart(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isIDPart(c)
+    {% end %}
   end
 
   def uIsIDIgnorable(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isIDIgnorable(c)
+    {% end %}
   end
 
   def uIsJavaIDStart(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isJavaIDStart(c)
+    {% end %}
   end
 
   def uIsJavaIDPart(c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_isJavaIDPart(c)
+    {% end %}
   end
 
   def uTolower(c : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.u_tolower(c)
+    {% end %}
   end
 
   def uToupper(c : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.u_toupper(c)
+    {% end %}
   end
 
   def uTotitle(c : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.u_totitle(c)
+    {% end %}
   end
 
   def uFoldCase(c : Int32, options : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.u_foldCase(c, options)
+    {% end %}
   end
 
   def uDigit(ch : Int32, radix : Int8) : Int32
+    {% if !flag?(:docs) %}
     C.u_digit(ch, radix)
+    {% end %}
   end
 
   def uForDigit(digit : Int32, radix : Int8) : Int32
+    {% if !flag?(:docs) %}
     C.u_forDigit(digit, radix)
+    {% end %}
   end
 
   def uCharAge(c : Int32, versionArray : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.u_charAge(c, versionArray)
+    {% end %}
   end
 
   def uGetUnicodeVersion(versionArray : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.u_getUnicodeVersion(versionArray)
+    {% end %}
   end
 
   def uGetFCNFKCClosure(c : Int32, dest : UInt16*, destCapacity : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.u_getFC_NFKC_Closure(c, dest, destCapacity, pErrorCode)
+    {% end %}
   end
 
   def ubidiOpen : Win32cr::Globalization::UBiDi*
+    {% if !flag?(:docs) %}
     C.ubidi_open
+    {% end %}
   end
 
   def ubidiOpenSized(maxLength : Int32, maxRunCount : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UBiDi*
+    {% if !flag?(:docs) %}
     C.ubidi_openSized(maxLength, maxRunCount, pErrorCode)
+    {% end %}
   end
 
   def ubidiClose(pBiDi : Win32cr::Globalization::UBiDi*) : Void
+    {% if !flag?(:docs) %}
     C.ubidi_close(pBiDi)
+    {% end %}
   end
 
   def ubidiSetInverse(pBiDi : Win32cr::Globalization::UBiDi*, isInverse : Int8) : Void
+    {% if !flag?(:docs) %}
     C.ubidi_setInverse(pBiDi, isInverse)
+    {% end %}
   end
 
   def ubidiIsInverse(pBiDi : Win32cr::Globalization::UBiDi*) : Int8
+    {% if !flag?(:docs) %}
     C.ubidi_isInverse(pBiDi)
+    {% end %}
   end
 
   def ubidiOrderParagraphsLTR(pBiDi : Win32cr::Globalization::UBiDi*, orderParagraphsLTR : Int8) : Void
+    {% if !flag?(:docs) %}
     C.ubidi_orderParagraphsLTR(pBiDi, orderParagraphsLTR)
+    {% end %}
   end
 
   def ubidiIsOrderParagraphsLTR(pBiDi : Win32cr::Globalization::UBiDi*) : Int8
+    {% if !flag?(:docs) %}
     C.ubidi_isOrderParagraphsLTR(pBiDi)
+    {% end %}
   end
 
   def ubidiSetReorderingMode(pBiDi : Win32cr::Globalization::UBiDi*, reorderingMode : Win32cr::Globalization::UBiDiReorderingMode) : Void
+    {% if !flag?(:docs) %}
     C.ubidi_setReorderingMode(pBiDi, reorderingMode)
+    {% end %}
   end
 
   def ubidiGetReorderingMode(pBiDi : Win32cr::Globalization::UBiDi*) : Win32cr::Globalization::UBiDiReorderingMode
+    {% if !flag?(:docs) %}
     C.ubidi_getReorderingMode(pBiDi)
+    {% end %}
   end
 
   def ubidiSetReorderingOptions(pBiDi : Win32cr::Globalization::UBiDi*, reorderingOptions : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.ubidi_setReorderingOptions(pBiDi, reorderingOptions)
+    {% end %}
   end
 
   def ubidiGetReorderingOptions(pBiDi : Win32cr::Globalization::UBiDi*) : UInt32
+    {% if !flag?(:docs) %}
     C.ubidi_getReorderingOptions(pBiDi)
+    {% end %}
   end
 
   def ubidiSetContext(pBiDi : Win32cr::Globalization::UBiDi*, prologue : UInt16*, proLength : Int32, epilogue : UInt16*, epiLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ubidi_setContext(pBiDi, prologue, proLength, epilogue, epiLength, pErrorCode)
+    {% end %}
   end
 
   def ubidiSetPara(pBiDi : Win32cr::Globalization::UBiDi*, text : UInt16*, length : Int32, paraLevel : UInt8, embeddingLevels : UInt8*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ubidi_setPara(pBiDi, text, length, paraLevel, embeddingLevels, pErrorCode)
+    {% end %}
   end
 
   def ubidiSetLine(pParaBiDi : Win32cr::Globalization::UBiDi*, start : Int32, limit : Int32, pLineBiDi : Win32cr::Globalization::UBiDi*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ubidi_setLine(pParaBiDi, start, limit, pLineBiDi, pErrorCode)
+    {% end %}
   end
 
   def ubidiGetDirection(pBiDi : Win32cr::Globalization::UBiDi*) : Win32cr::Globalization::UBiDiDirection
+    {% if !flag?(:docs) %}
     C.ubidi_getDirection(pBiDi)
+    {% end %}
   end
 
   def ubidiGetBaseDirection(text : UInt16*, length : Int32) : Win32cr::Globalization::UBiDiDirection
+    {% if !flag?(:docs) %}
     C.ubidi_getBaseDirection(text, length)
+    {% end %}
   end
 
   def ubidiGetText(pBiDi : Win32cr::Globalization::UBiDi*) : UInt16*
+    {% if !flag?(:docs) %}
     C.ubidi_getText(pBiDi)
+    {% end %}
   end
 
   def ubidiGetLength(pBiDi : Win32cr::Globalization::UBiDi*) : Int32
+    {% if !flag?(:docs) %}
     C.ubidi_getLength(pBiDi)
+    {% end %}
   end
 
   def ubidiGetParaLevel(pBiDi : Win32cr::Globalization::UBiDi*) : UInt8
+    {% if !flag?(:docs) %}
     C.ubidi_getParaLevel(pBiDi)
+    {% end %}
   end
 
   def ubidiCountParagraphs(pBiDi : Win32cr::Globalization::UBiDi*) : Int32
+    {% if !flag?(:docs) %}
     C.ubidi_countParagraphs(pBiDi)
+    {% end %}
   end
 
   def ubidiGetParagraph(pBiDi : Win32cr::Globalization::UBiDi*, charIndex : Int32, pParaStart : Int32*, pParaLimit : Int32*, pParaLevel : UInt8*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ubidi_getParagraph(pBiDi, charIndex, pParaStart, pParaLimit, pParaLevel, pErrorCode)
+    {% end %}
   end
 
   def ubidiGetParagraphByIndex(pBiDi : Win32cr::Globalization::UBiDi*, paraIndex : Int32, pParaStart : Int32*, pParaLimit : Int32*, pParaLevel : UInt8*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ubidi_getParagraphByIndex(pBiDi, paraIndex, pParaStart, pParaLimit, pParaLevel, pErrorCode)
+    {% end %}
   end
 
   def ubidiGetLevelAt(pBiDi : Win32cr::Globalization::UBiDi*, charIndex : Int32) : UInt8
+    {% if !flag?(:docs) %}
     C.ubidi_getLevelAt(pBiDi, charIndex)
+    {% end %}
   end
 
   def ubidiGetLevels(pBiDi : Win32cr::Globalization::UBiDi*, pErrorCode : Win32cr::Globalization::UErrorCode*) : UInt8*
+    {% if !flag?(:docs) %}
     C.ubidi_getLevels(pBiDi, pErrorCode)
+    {% end %}
   end
 
   def ubidiGetLogicalRun(pBiDi : Win32cr::Globalization::UBiDi*, logicalPosition : Int32, pLogicalLimit : Int32*, pLevel : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.ubidi_getLogicalRun(pBiDi, logicalPosition, pLogicalLimit, pLevel)
+    {% end %}
   end
 
   def ubidiCountRuns(pBiDi : Win32cr::Globalization::UBiDi*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ubidi_countRuns(pBiDi, pErrorCode)
+    {% end %}
   end
 
   def ubidiGetVisualRun(pBiDi : Win32cr::Globalization::UBiDi*, runIndex : Int32, pLogicalStart : Int32*, pLength : Int32*) : Win32cr::Globalization::UBiDiDirection
+    {% if !flag?(:docs) %}
     C.ubidi_getVisualRun(pBiDi, runIndex, pLogicalStart, pLength)
+    {% end %}
   end
 
   def ubidiGetVisualIndex(pBiDi : Win32cr::Globalization::UBiDi*, logicalIndex : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ubidi_getVisualIndex(pBiDi, logicalIndex, pErrorCode)
+    {% end %}
   end
 
   def ubidiGetLogicalIndex(pBiDi : Win32cr::Globalization::UBiDi*, visualIndex : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ubidi_getLogicalIndex(pBiDi, visualIndex, pErrorCode)
+    {% end %}
   end
 
   def ubidiGetLogicalMap(pBiDi : Win32cr::Globalization::UBiDi*, indexMap : Int32*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ubidi_getLogicalMap(pBiDi, indexMap, pErrorCode)
+    {% end %}
   end
 
   def ubidiGetVisualMap(pBiDi : Win32cr::Globalization::UBiDi*, indexMap : Int32*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ubidi_getVisualMap(pBiDi, indexMap, pErrorCode)
+    {% end %}
   end
 
   def ubidiReorderLogical(levels : UInt8*, length : Int32, indexMap : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.ubidi_reorderLogical(levels, length, indexMap)
+    {% end %}
   end
 
   def ubidiReorderVisual(levels : UInt8*, length : Int32, indexMap : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.ubidi_reorderVisual(levels, length, indexMap)
+    {% end %}
   end
 
   def ubidiInvertMap(srcMap : Int32*, destMap : Int32*, length : Int32) : Void
+    {% if !flag?(:docs) %}
     C.ubidi_invertMap(srcMap, destMap, length)
+    {% end %}
   end
 
   def ubidiGetProcessedLength(pBiDi : Win32cr::Globalization::UBiDi*) : Int32
+    {% if !flag?(:docs) %}
     C.ubidi_getProcessedLength(pBiDi)
+    {% end %}
   end
 
   def ubidiGetResultLength(pBiDi : Win32cr::Globalization::UBiDi*) : Int32
+    {% if !flag?(:docs) %}
     C.ubidi_getResultLength(pBiDi)
+    {% end %}
   end
 
   def ubidiGetCustomizedClass(pBiDi : Win32cr::Globalization::UBiDi*, c : Int32) : Win32cr::Globalization::UCharDirection
+    {% if !flag?(:docs) %}
     C.ubidi_getCustomizedClass(pBiDi, c)
+    {% end %}
   end
 
   def ubidiSetClassCallback(pBiDi : Win32cr::Globalization::UBiDi*, newFn : Win32cr::Globalization::UBiDiClassCallback, newContext : Void*, oldFn : Win32cr::Globalization::UBiDiClassCallback*, oldContext : Void**, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ubidi_setClassCallback(pBiDi, newFn, newContext, oldFn, oldContext, pErrorCode)
+    {% end %}
   end
 
   def ubidiGetClassCallback(pBiDi : Win32cr::Globalization::UBiDi*, fn : Win32cr::Globalization::UBiDiClassCallback*, context : Void**) : Void
+    {% if !flag?(:docs) %}
     C.ubidi_getClassCallback(pBiDi, fn, context)
+    {% end %}
   end
 
   def ubidiWriteReordered(pBiDi : Win32cr::Globalization::UBiDi*, dest : UInt16*, destSize : Int32, options : UInt16, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ubidi_writeReordered(pBiDi, dest, destSize, options, pErrorCode)
+    {% end %}
   end
 
   def ubidiWriteReverse(src : UInt16*, srcLength : Int32, dest : UInt16*, destSize : Int32, options : UInt16, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ubidi_writeReverse(src, srcLength, dest, destSize, options, pErrorCode)
+    {% end %}
   end
 
   def ubiditransformTransform(pBiDiTransform : Win32cr::Globalization::UBiDiTransform*, src : UInt16*, srcLength : Int32, dest : UInt16*, destSize : Int32, inParaLevel : UInt8, inOrder : Win32cr::Globalization::UBiDiOrder, outParaLevel : UInt8, outOrder : Win32cr::Globalization::UBiDiOrder, doMirroring : Win32cr::Globalization::UBiDiMirroring, shapingOptions : UInt32, pErrorCode : Win32cr::Globalization::UErrorCode*) : UInt32
+    {% if !flag?(:docs) %}
     C.ubiditransform_transform(pBiDiTransform, src, srcLength, dest, destSize, inParaLevel, inOrder, outParaLevel, outOrder, doMirroring, shapingOptions, pErrorCode)
+    {% end %}
   end
 
   def ubiditransformOpen(pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UBiDiTransform*
+    {% if !flag?(:docs) %}
     C.ubiditransform_open(pErrorCode)
+    {% end %}
   end
 
   def ubiditransformClose(pBidiTransform : Win32cr::Globalization::UBiDiTransform*) : Void
+    {% if !flag?(:docs) %}
     C.ubiditransform_close(pBidiTransform)
+    {% end %}
   end
 
   def utextClose(ut : Win32cr::Globalization::UText*) : Win32cr::Globalization::UText*
+    {% if !flag?(:docs) %}
     C.utext_close(ut)
+    {% end %}
   end
 
   def utextOpenUTF8(ut : Win32cr::Globalization::UText*, s : Win32cr::Foundation::PSTR, length : Int64, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UText*
+    {% if !flag?(:docs) %}
     C.utext_openUTF8(ut, s, length, status)
+    {% end %}
   end
 
   def utextOpenUChars(ut : Win32cr::Globalization::UText*, s : UInt16*, length : Int64, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UText*
+    {% if !flag?(:docs) %}
     C.utext_openUChars(ut, s, length, status)
+    {% end %}
   end
 
   def utextClone(dest : Win32cr::Globalization::UText*, src : Win32cr::Globalization::UText*, deep : Int8, readOnly : Int8, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UText*
+    {% if !flag?(:docs) %}
     C.utext_clone(dest, src, deep, readOnly, status)
+    {% end %}
   end
 
   def utextEquals(a : Win32cr::Globalization::UText*, b : Win32cr::Globalization::UText*) : Int8
+    {% if !flag?(:docs) %}
     C.utext_equals(a, b)
+    {% end %}
   end
 
   def utextNativeLength(ut : Win32cr::Globalization::UText*) : Int64
+    {% if !flag?(:docs) %}
     C.utext_nativeLength(ut)
+    {% end %}
   end
 
   def utextIsLengthExpensive(ut : Win32cr::Globalization::UText*) : Int8
+    {% if !flag?(:docs) %}
     C.utext_isLengthExpensive(ut)
+    {% end %}
   end
 
   def utextChar32At(ut : Win32cr::Globalization::UText*, nativeIndex : Int64) : Int32
+    {% if !flag?(:docs) %}
     C.utext_char32At(ut, nativeIndex)
+    {% end %}
   end
 
   def utextCurrent32(ut : Win32cr::Globalization::UText*) : Int32
+    {% if !flag?(:docs) %}
     C.utext_current32(ut)
+    {% end %}
   end
 
   def utextNext32(ut : Win32cr::Globalization::UText*) : Int32
+    {% if !flag?(:docs) %}
     C.utext_next32(ut)
+    {% end %}
   end
 
   def utextPrevious32(ut : Win32cr::Globalization::UText*) : Int32
+    {% if !flag?(:docs) %}
     C.utext_previous32(ut)
+    {% end %}
   end
 
   def utextNext32From(ut : Win32cr::Globalization::UText*, nativeIndex : Int64) : Int32
+    {% if !flag?(:docs) %}
     C.utext_next32From(ut, nativeIndex)
+    {% end %}
   end
 
   def utextPrevious32From(ut : Win32cr::Globalization::UText*, nativeIndex : Int64) : Int32
+    {% if !flag?(:docs) %}
     C.utext_previous32From(ut, nativeIndex)
+    {% end %}
   end
 
   def utextGetNativeIndex(ut : Win32cr::Globalization::UText*) : Int64
+    {% if !flag?(:docs) %}
     C.utext_getNativeIndex(ut)
+    {% end %}
   end
 
   def utextSetNativeIndex(ut : Win32cr::Globalization::UText*, nativeIndex : Int64) : Void
+    {% if !flag?(:docs) %}
     C.utext_setNativeIndex(ut, nativeIndex)
+    {% end %}
   end
 
   def utextMoveIndex32(ut : Win32cr::Globalization::UText*, delta : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.utext_moveIndex32(ut, delta)
+    {% end %}
   end
 
   def utextGetPreviousNativeIndex(ut : Win32cr::Globalization::UText*) : Int64
+    {% if !flag?(:docs) %}
     C.utext_getPreviousNativeIndex(ut)
+    {% end %}
   end
 
   def utextExtract(ut : Win32cr::Globalization::UText*, nativeStart : Int64, nativeLimit : Int64, dest : UInt16*, destCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.utext_extract(ut, nativeStart, nativeLimit, dest, destCapacity, status)
+    {% end %}
   end
 
   def utextIsWritable(ut : Win32cr::Globalization::UText*) : Int8
+    {% if !flag?(:docs) %}
     C.utext_isWritable(ut)
+    {% end %}
   end
 
   def utextHasMetaData(ut : Win32cr::Globalization::UText*) : Int8
+    {% if !flag?(:docs) %}
     C.utext_hasMetaData(ut)
+    {% end %}
   end
 
   def utextReplace(ut : Win32cr::Globalization::UText*, nativeStart : Int64, nativeLimit : Int64, replacementText : UInt16*, replacementLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.utext_replace(ut, nativeStart, nativeLimit, replacementText, replacementLength, status)
+    {% end %}
   end
 
   def utextCopy(ut : Win32cr::Globalization::UText*, nativeStart : Int64, nativeLimit : Int64, destIndex : Int64, move : Int8, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.utext_copy(ut, nativeStart, nativeLimit, destIndex, move, status)
+    {% end %}
   end
 
   def utextFreeze(ut : Win32cr::Globalization::UText*) : Void
+    {% if !flag?(:docs) %}
     C.utext_freeze(ut)
+    {% end %}
   end
 
   def utextSetup(ut : Win32cr::Globalization::UText*, extraSpace : Int32, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UText*
+    {% if !flag?(:docs) %}
     C.utext_setup(ut, extraSpace, status)
+    {% end %}
   end
 
   def usetOpenEmpty : Win32cr::Globalization::USet*
+    {% if !flag?(:docs) %}
     C.uset_openEmpty
+    {% end %}
   end
 
   def usetOpen(start : Int32, end__ : Int32) : Win32cr::Globalization::USet*
+    {% if !flag?(:docs) %}
     C.uset_open(start, end__)
+    {% end %}
   end
 
   def usetOpenPattern(pattern : UInt16*, patternLength : Int32, ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::USet*
+    {% if !flag?(:docs) %}
     C.uset_openPattern(pattern, patternLength, ec)
+    {% end %}
   end
 
   def usetOpenPatternOptions(pattern : UInt16*, patternLength : Int32, options : UInt32, ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::USet*
+    {% if !flag?(:docs) %}
     C.uset_openPatternOptions(pattern, patternLength, options, ec)
+    {% end %}
   end
 
   def usetClose(set : Win32cr::Globalization::USet*) : Void
+    {% if !flag?(:docs) %}
     C.uset_close(set)
+    {% end %}
   end
 
   def usetClone(set : Win32cr::Globalization::USet*) : Win32cr::Globalization::USet*
+    {% if !flag?(:docs) %}
     C.uset_clone(set)
+    {% end %}
   end
 
   def usetIsFrozen(set : Win32cr::Globalization::USet*) : Int8
+    {% if !flag?(:docs) %}
     C.uset_isFrozen(set)
+    {% end %}
   end
 
   def usetFreeze(set : Win32cr::Globalization::USet*) : Void
+    {% if !flag?(:docs) %}
     C.uset_freeze(set)
+    {% end %}
   end
 
   def usetCloneAsThawed(set : Win32cr::Globalization::USet*) : Win32cr::Globalization::USet*
+    {% if !flag?(:docs) %}
     C.uset_cloneAsThawed(set)
+    {% end %}
   end
 
   def usetSet(set : Win32cr::Globalization::USet*, start : Int32, end__ : Int32) : Void
+    {% if !flag?(:docs) %}
     C.uset_set(set, start, end__)
+    {% end %}
   end
 
   def usetApplyPattern(set : Win32cr::Globalization::USet*, pattern : UInt16*, patternLength : Int32, options : UInt32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uset_applyPattern(set, pattern, patternLength, options, status)
+    {% end %}
   end
 
   def usetApplyIntPropertyValue(set : Win32cr::Globalization::USet*, prop : Win32cr::Globalization::UProperty, value : Int32, ec : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uset_applyIntPropertyValue(set, prop, value, ec)
+    {% end %}
   end
 
   def usetApplyPropertyAlias(set : Win32cr::Globalization::USet*, prop : UInt16*, propLength : Int32, value : UInt16*, valueLength : Int32, ec : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uset_applyPropertyAlias(set, prop, propLength, value, valueLength, ec)
+    {% end %}
   end
 
   def usetResemblesPattern(pattern : UInt16*, patternLength : Int32, pos : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.uset_resemblesPattern(pattern, patternLength, pos)
+    {% end %}
   end
 
   def usetToPattern(set : Win32cr::Globalization::USet*, result : UInt16*, resultCapacity : Int32, escapeUnprintable : Int8, ec : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uset_toPattern(set, result, resultCapacity, escapeUnprintable, ec)
+    {% end %}
   end
 
   def usetAdd(set : Win32cr::Globalization::USet*, c : Int32) : Void
+    {% if !flag?(:docs) %}
     C.uset_add(set, c)
+    {% end %}
   end
 
   def usetAddAll(set : Win32cr::Globalization::USet*, additionalSet : Win32cr::Globalization::USet*) : Void
+    {% if !flag?(:docs) %}
     C.uset_addAll(set, additionalSet)
+    {% end %}
   end
 
   def usetAddRange(set : Win32cr::Globalization::USet*, start : Int32, end__ : Int32) : Void
+    {% if !flag?(:docs) %}
     C.uset_addRange(set, start, end__)
+    {% end %}
   end
 
   def usetAddString(set : Win32cr::Globalization::USet*, str : UInt16*, strLen : Int32) : Void
+    {% if !flag?(:docs) %}
     C.uset_addString(set, str, strLen)
+    {% end %}
   end
 
   def usetAddAllCodePoints(set : Win32cr::Globalization::USet*, str : UInt16*, strLen : Int32) : Void
+    {% if !flag?(:docs) %}
     C.uset_addAllCodePoints(set, str, strLen)
+    {% end %}
   end
 
   def usetRemove(set : Win32cr::Globalization::USet*, c : Int32) : Void
+    {% if !flag?(:docs) %}
     C.uset_remove(set, c)
+    {% end %}
   end
 
   def usetRemoveRange(set : Win32cr::Globalization::USet*, start : Int32, end__ : Int32) : Void
+    {% if !flag?(:docs) %}
     C.uset_removeRange(set, start, end__)
+    {% end %}
   end
 
   def usetRemoveString(set : Win32cr::Globalization::USet*, str : UInt16*, strLen : Int32) : Void
+    {% if !flag?(:docs) %}
     C.uset_removeString(set, str, strLen)
+    {% end %}
   end
 
   def usetRemoveAll(set : Win32cr::Globalization::USet*, removeSet : Win32cr::Globalization::USet*) : Void
+    {% if !flag?(:docs) %}
     C.uset_removeAll(set, removeSet)
+    {% end %}
   end
 
   def usetRetain(set : Win32cr::Globalization::USet*, start : Int32, end__ : Int32) : Void
+    {% if !flag?(:docs) %}
     C.uset_retain(set, start, end__)
+    {% end %}
   end
 
   def usetRetainAll(set : Win32cr::Globalization::USet*, retain : Win32cr::Globalization::USet*) : Void
+    {% if !flag?(:docs) %}
     C.uset_retainAll(set, retain)
+    {% end %}
   end
 
   def usetCompact(set : Win32cr::Globalization::USet*) : Void
+    {% if !flag?(:docs) %}
     C.uset_compact(set)
+    {% end %}
   end
 
   def usetComplement(set : Win32cr::Globalization::USet*) : Void
+    {% if !flag?(:docs) %}
     C.uset_complement(set)
+    {% end %}
   end
 
   def usetComplementAll(set : Win32cr::Globalization::USet*, complement : Win32cr::Globalization::USet*) : Void
+    {% if !flag?(:docs) %}
     C.uset_complementAll(set, complement)
+    {% end %}
   end
 
   def usetClear(set : Win32cr::Globalization::USet*) : Void
+    {% if !flag?(:docs) %}
     C.uset_clear(set)
+    {% end %}
   end
 
   def usetCloseOver(set : Win32cr::Globalization::USet*, attributes : Int32) : Void
+    {% if !flag?(:docs) %}
     C.uset_closeOver(set, attributes)
+    {% end %}
   end
 
   def usetRemoveAllStrings(set : Win32cr::Globalization::USet*) : Void
+    {% if !flag?(:docs) %}
     C.uset_removeAllStrings(set)
+    {% end %}
   end
 
   def usetIsEmpty(set : Win32cr::Globalization::USet*) : Int8
+    {% if !flag?(:docs) %}
     C.uset_isEmpty(set)
+    {% end %}
   end
 
   def usetContains(set : Win32cr::Globalization::USet*, c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.uset_contains(set, c)
+    {% end %}
   end
 
   def usetContainsRange(set : Win32cr::Globalization::USet*, start : Int32, end__ : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.uset_containsRange(set, start, end__)
+    {% end %}
   end
 
   def usetContainsString(set : Win32cr::Globalization::USet*, str : UInt16*, strLen : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.uset_containsString(set, str, strLen)
+    {% end %}
   end
 
   def usetIndexOf(set : Win32cr::Globalization::USet*, c : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.uset_indexOf(set, c)
+    {% end %}
   end
 
   def usetCharAt(set : Win32cr::Globalization::USet*, charIndex : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.uset_charAt(set, charIndex)
+    {% end %}
   end
 
   def usetSize(set : Win32cr::Globalization::USet*) : Int32
+    {% if !flag?(:docs) %}
     C.uset_size(set)
+    {% end %}
   end
 
   def usetGetItemCount(set : Win32cr::Globalization::USet*) : Int32
+    {% if !flag?(:docs) %}
     C.uset_getItemCount(set)
+    {% end %}
   end
 
   def usetGetItem(set : Win32cr::Globalization::USet*, itemIndex : Int32, start : Int32*, end__ : Int32*, str : UInt16*, strCapacity : Int32, ec : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uset_getItem(set, itemIndex, start, end__, str, strCapacity, ec)
+    {% end %}
   end
 
   def usetContainsAll(set1 : Win32cr::Globalization::USet*, set2 : Win32cr::Globalization::USet*) : Int8
+    {% if !flag?(:docs) %}
     C.uset_containsAll(set1, set2)
+    {% end %}
   end
 
   def usetContainsAllCodePoints(set : Win32cr::Globalization::USet*, str : UInt16*, strLen : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.uset_containsAllCodePoints(set, str, strLen)
+    {% end %}
   end
 
   def usetContainsNone(set1 : Win32cr::Globalization::USet*, set2 : Win32cr::Globalization::USet*) : Int8
+    {% if !flag?(:docs) %}
     C.uset_containsNone(set1, set2)
+    {% end %}
   end
 
   def usetContainsSome(set1 : Win32cr::Globalization::USet*, set2 : Win32cr::Globalization::USet*) : Int8
+    {% if !flag?(:docs) %}
     C.uset_containsSome(set1, set2)
+    {% end %}
   end
 
   def usetSpan(set : Win32cr::Globalization::USet*, s : UInt16*, length : Int32, spanCondition : Win32cr::Globalization::USetSpanCondition) : Int32
+    {% if !flag?(:docs) %}
     C.uset_span(set, s, length, spanCondition)
+    {% end %}
   end
 
   def usetSpanBack(set : Win32cr::Globalization::USet*, s : UInt16*, length : Int32, spanCondition : Win32cr::Globalization::USetSpanCondition) : Int32
+    {% if !flag?(:docs) %}
     C.uset_spanBack(set, s, length, spanCondition)
+    {% end %}
   end
 
   def usetSpanUTF8(set : Win32cr::Globalization::USet*, s : Win32cr::Foundation::PSTR, length : Int32, spanCondition : Win32cr::Globalization::USetSpanCondition) : Int32
+    {% if !flag?(:docs) %}
     C.uset_spanUTF8(set, s, length, spanCondition)
+    {% end %}
   end
 
   def usetSpanBackUTF8(set : Win32cr::Globalization::USet*, s : Win32cr::Foundation::PSTR, length : Int32, spanCondition : Win32cr::Globalization::USetSpanCondition) : Int32
+    {% if !flag?(:docs) %}
     C.uset_spanBackUTF8(set, s, length, spanCondition)
+    {% end %}
   end
 
   def usetEquals(set1 : Win32cr::Globalization::USet*, set2 : Win32cr::Globalization::USet*) : Int8
+    {% if !flag?(:docs) %}
     C.uset_equals(set1, set2)
+    {% end %}
   end
 
   def usetSerialize(set : Win32cr::Globalization::USet*, dest : UInt16*, destCapacity : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uset_serialize(set, dest, destCapacity, pErrorCode)
+    {% end %}
   end
 
   def usetGetSerializedSet(fillSet : Win32cr::Globalization::USerializedSet*, src : UInt16*, srcLength : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.uset_getSerializedSet(fillSet, src, srcLength)
+    {% end %}
   end
 
   def usetSetSerializedToOne(fillSet : Win32cr::Globalization::USerializedSet*, c : Int32) : Void
+    {% if !flag?(:docs) %}
     C.uset_setSerializedToOne(fillSet, c)
+    {% end %}
   end
 
   def usetSerializedContains(set : Win32cr::Globalization::USerializedSet*, c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.uset_serializedContains(set, c)
+    {% end %}
   end
 
   def usetGetSerializedRangeCount(set : Win32cr::Globalization::USerializedSet*) : Int32
+    {% if !flag?(:docs) %}
     C.uset_getSerializedRangeCount(set)
+    {% end %}
   end
 
   def usetGetSerializedRange(set : Win32cr::Globalization::USerializedSet*, rangeIndex : Int32, pStart : Int32*, pEnd : Int32*) : Int8
+    {% if !flag?(:docs) %}
     C.uset_getSerializedRange(set, rangeIndex, pStart, pEnd)
+    {% end %}
   end
 
   def unorm2GetNFCInstance(pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UNormalizer2*
+    {% if !flag?(:docs) %}
     C.unorm2_getNFCInstance(pErrorCode)
+    {% end %}
   end
 
   def unorm2GetNFDInstance(pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UNormalizer2*
+    {% if !flag?(:docs) %}
     C.unorm2_getNFDInstance(pErrorCode)
+    {% end %}
   end
 
   def unorm2GetNFKCInstance(pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UNormalizer2*
+    {% if !flag?(:docs) %}
     C.unorm2_getNFKCInstance(pErrorCode)
+    {% end %}
   end
 
   def unorm2GetNFKDInstance(pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UNormalizer2*
+    {% if !flag?(:docs) %}
     C.unorm2_getNFKDInstance(pErrorCode)
+    {% end %}
   end
 
   def unorm2GetNFKCCasefoldInstance(pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UNormalizer2*
+    {% if !flag?(:docs) %}
     C.unorm2_getNFKCCasefoldInstance(pErrorCode)
+    {% end %}
   end
 
   def unorm2GetInstance(packageName : Win32cr::Foundation::PSTR, name : Win32cr::Foundation::PSTR, mode : Win32cr::Globalization::UNormalization2Mode, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UNormalizer2*
+    {% if !flag?(:docs) %}
     C.unorm2_getInstance(packageName, name, mode, pErrorCode)
+    {% end %}
   end
 
   def unorm2OpenFiltered(norm2 : Win32cr::Globalization::UNormalizer2*, filterSet : Win32cr::Globalization::USet*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UNormalizer2*
+    {% if !flag?(:docs) %}
     C.unorm2_openFiltered(norm2, filterSet, pErrorCode)
+    {% end %}
   end
 
   def unorm2Close(norm2 : Win32cr::Globalization::UNormalizer2*) : Void
+    {% if !flag?(:docs) %}
     C.unorm2_close(norm2)
+    {% end %}
   end
 
   def unorm2Normalize(norm2 : Win32cr::Globalization::UNormalizer2*, src : UInt16*, length : Int32, dest : UInt16*, capacity : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unorm2_normalize(norm2, src, length, dest, capacity, pErrorCode)
+    {% end %}
   end
 
   def unorm2NormalizeSecondAndAppend(norm2 : Win32cr::Globalization::UNormalizer2*, first : UInt16*, firstLength : Int32, firstCapacity : Int32, second : UInt16*, secondLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unorm2_normalizeSecondAndAppend(norm2, first, firstLength, firstCapacity, second, secondLength, pErrorCode)
+    {% end %}
   end
 
   def unorm2Append(norm2 : Win32cr::Globalization::UNormalizer2*, first : UInt16*, firstLength : Int32, firstCapacity : Int32, second : UInt16*, secondLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unorm2_append(norm2, first, firstLength, firstCapacity, second, secondLength, pErrorCode)
+    {% end %}
   end
 
   def unorm2GetDecomposition(norm2 : Win32cr::Globalization::UNormalizer2*, c : Int32, decomposition : UInt16*, capacity : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unorm2_getDecomposition(norm2, c, decomposition, capacity, pErrorCode)
+    {% end %}
   end
 
   def unorm2GetRawDecomposition(norm2 : Win32cr::Globalization::UNormalizer2*, c : Int32, decomposition : UInt16*, capacity : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unorm2_getRawDecomposition(norm2, c, decomposition, capacity, pErrorCode)
+    {% end %}
   end
 
   def unorm2ComposePair(norm2 : Win32cr::Globalization::UNormalizer2*, a : Int32, b : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.unorm2_composePair(norm2, a, b)
+    {% end %}
   end
 
   def unorm2GetCombiningClass(norm2 : Win32cr::Globalization::UNormalizer2*, c : Int32) : UInt8
+    {% if !flag?(:docs) %}
     C.unorm2_getCombiningClass(norm2, c)
+    {% end %}
   end
 
   def unorm2IsNormalized(norm2 : Win32cr::Globalization::UNormalizer2*, s : UInt16*, length : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.unorm2_isNormalized(norm2, s, length, pErrorCode)
+    {% end %}
   end
 
   def unorm2QuickCheck(norm2 : Win32cr::Globalization::UNormalizer2*, s : UInt16*, length : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UNormalizationCheckResult
+    {% if !flag?(:docs) %}
     C.unorm2_quickCheck(norm2, s, length, pErrorCode)
+    {% end %}
   end
 
   def unorm2SpanQuickCheckYes(norm2 : Win32cr::Globalization::UNormalizer2*, s : UInt16*, length : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unorm2_spanQuickCheckYes(norm2, s, length, pErrorCode)
+    {% end %}
   end
 
   def unorm2HasBoundaryBefore(norm2 : Win32cr::Globalization::UNormalizer2*, c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.unorm2_hasBoundaryBefore(norm2, c)
+    {% end %}
   end
 
   def unorm2HasBoundaryAfter(norm2 : Win32cr::Globalization::UNormalizer2*, c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.unorm2_hasBoundaryAfter(norm2, c)
+    {% end %}
   end
 
   def unorm2IsInert(norm2 : Win32cr::Globalization::UNormalizer2*, c : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.unorm2_isInert(norm2, c)
+    {% end %}
   end
 
   def unormCompare(s1 : UInt16*, length1 : Int32, s2 : UInt16*, length2 : Int32, options : UInt32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unorm_compare(s1, length1, s2, length2, options, pErrorCode)
+    {% end %}
   end
 
   def ucnvselOpen(converterList : Int8**, converterListSize : Int32, excludedCodePoints : Win32cr::Globalization::USet*, whichSet : Win32cr::Globalization::UConverterUnicodeSet, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UConverterSelector*
+    {% if !flag?(:docs) %}
     C.ucnvsel_open(converterList, converterListSize, excludedCodePoints, whichSet, status)
+    {% end %}
   end
 
   def ucnvselClose(sel : Win32cr::Globalization::UConverterSelector*) : Void
+    {% if !flag?(:docs) %}
     C.ucnvsel_close(sel)
+    {% end %}
   end
 
   def ucnvselOpenFromSerialized(buffer : Void*, length : Int32, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UConverterSelector*
+    {% if !flag?(:docs) %}
     C.ucnvsel_openFromSerialized(buffer, length, status)
+    {% end %}
   end
 
   def ucnvselSerialize(sel : Win32cr::Globalization::UConverterSelector*, buffer : Void*, bufferCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucnvsel_serialize(sel, buffer, bufferCapacity, status)
+    {% end %}
   end
 
   def ucnvselSelectForString(sel : Win32cr::Globalization::UConverterSelector*, s : UInt16*, length : Int32, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.ucnvsel_selectForString(sel, s, length, status)
+    {% end %}
   end
 
   def ucnvselSelectForUTF8(sel : Win32cr::Globalization::UConverterSelector*, s : Win32cr::Foundation::PSTR, length : Int32, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.ucnvsel_selectForUTF8(sel, s, length, status)
+    {% end %}
   end
 
   def uCharsToUChars(cs : Win32cr::Foundation::PSTR, us : UInt16*, length : Int32) : Void
+    {% if !flag?(:docs) %}
     C.u_charsToUChars(cs, us, length)
+    {% end %}
   end
 
   def uUCharsToChars(us : UInt16*, cs : Win32cr::Foundation::PSTR, length : Int32) : Void
+    {% if !flag?(:docs) %}
     C.u_UCharsToChars(us, cs, length)
+    {% end %}
   end
 
   def uStrlen(s : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.u_strlen(s)
+    {% end %}
   end
 
   def uCountChar32(s : UInt16*, length : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.u_countChar32(s, length)
+    {% end %}
   end
 
   def uStrHasMoreChar32Than(s : UInt16*, length : Int32, number : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.u_strHasMoreChar32Than(s, length, number)
+    {% end %}
   end
 
   def uStrcat(dst : UInt16*, src : UInt16*) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strcat(dst, src)
+    {% end %}
   end
 
   def uStrncat(dst : UInt16*, src : UInt16*, n : Int32) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strncat(dst, src, n)
+    {% end %}
   end
 
   def uStrstr(s : UInt16*, substring : UInt16*) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strstr(s, substring)
+    {% end %}
   end
 
   def uStrFindFirst(s : UInt16*, length : Int32, substring : UInt16*, subLength : Int32) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strFindFirst(s, length, substring, subLength)
+    {% end %}
   end
 
   def uStrchr(s : UInt16*, c : UInt16) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strchr(s, c)
+    {% end %}
   end
 
   def uStrchr32(s : UInt16*, c : Int32) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strchr32(s, c)
+    {% end %}
   end
 
   def uStrrstr(s : UInt16*, substring : UInt16*) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strrstr(s, substring)
+    {% end %}
   end
 
   def uStrFindLast(s : UInt16*, length : Int32, substring : UInt16*, subLength : Int32) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strFindLast(s, length, substring, subLength)
+    {% end %}
   end
 
   def uStrrchr(s : UInt16*, c : UInt16) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strrchr(s, c)
+    {% end %}
   end
 
   def uStrrchr32(s : UInt16*, c : Int32) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strrchr32(s, c)
+    {% end %}
   end
 
   def uStrpbrk(string : UInt16*, matchSet : UInt16*) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strpbrk(string, matchSet)
+    {% end %}
   end
 
   def uStrcspn(string : UInt16*, matchSet : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.u_strcspn(string, matchSet)
+    {% end %}
   end
 
   def uStrspn(string : UInt16*, matchSet : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.u_strspn(string, matchSet)
+    {% end %}
   end
 
   def uStrtokR(src : UInt16*, delim : UInt16*, saveState : UInt16**) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strtok_r(src, delim, saveState)
+    {% end %}
   end
 
   def uStrcmp(s1 : UInt16*, s2 : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.u_strcmp(s1, s2)
+    {% end %}
   end
 
   def uStrcmpCodePointOrder(s1 : UInt16*, s2 : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.u_strcmpCodePointOrder(s1, s2)
+    {% end %}
   end
 
   def uStrCompare(s1 : UInt16*, length1 : Int32, s2 : UInt16*, length2 : Int32, codePointOrder : Int8) : Int32
+    {% if !flag?(:docs) %}
     C.u_strCompare(s1, length1, s2, length2, codePointOrder)
+    {% end %}
   end
 
   def uStrCompareIter(iter1 : Win32cr::Globalization::UCharIterator*, iter2 : Win32cr::Globalization::UCharIterator*, codePointOrder : Int8) : Int32
+    {% if !flag?(:docs) %}
     C.u_strCompareIter(iter1, iter2, codePointOrder)
+    {% end %}
   end
 
   def uStrCaseCompare(s1 : UInt16*, length1 : Int32, s2 : UInt16*, length2 : Int32, options : UInt32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.u_strCaseCompare(s1, length1, s2, length2, options, pErrorCode)
+    {% end %}
   end
 
   def uStrncmp(ucs1 : UInt16*, ucs2 : UInt16*, n : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.u_strncmp(ucs1, ucs2, n)
+    {% end %}
   end
 
   def uStrncmpCodePointOrder(s1 : UInt16*, s2 : UInt16*, n : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.u_strncmpCodePointOrder(s1, s2, n)
+    {% end %}
   end
 
   def uStrcasecmp(s1 : UInt16*, s2 : UInt16*, options : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.u_strcasecmp(s1, s2, options)
+    {% end %}
   end
 
   def uStrncasecmp(s1 : UInt16*, s2 : UInt16*, n : Int32, options : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.u_strncasecmp(s1, s2, n, options)
+    {% end %}
   end
 
   def uMemcasecmp(s1 : UInt16*, s2 : UInt16*, length : Int32, options : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.u_memcasecmp(s1, s2, length, options)
+    {% end %}
   end
 
   def uStrcpy(dst : UInt16*, src : UInt16*) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strcpy(dst, src)
+    {% end %}
   end
 
   def uStrncpy(dst : UInt16*, src : UInt16*, n : Int32) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strncpy(dst, src, n)
+    {% end %}
   end
 
   def uUastrcpy(dst : UInt16*, src : Win32cr::Foundation::PSTR) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_uastrcpy(dst, src)
+    {% end %}
   end
 
   def uUastrncpy(dst : UInt16*, src : Win32cr::Foundation::PSTR, n : Int32) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_uastrncpy(dst, src, n)
+    {% end %}
   end
 
   def uAustrcpy(dst : Win32cr::Foundation::PSTR, src : UInt16*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.u_austrcpy(dst, src)
+    {% end %}
   end
 
   def uAustrncpy(dst : Win32cr::Foundation::PSTR, src : UInt16*, n : Int32) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.u_austrncpy(dst, src, n)
+    {% end %}
   end
 
   def uMemcpy(dest : UInt16*, src : UInt16*, count : Int32) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_memcpy(dest, src, count)
+    {% end %}
   end
 
   def uMemmove(dest : UInt16*, src : UInt16*, count : Int32) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_memmove(dest, src, count)
+    {% end %}
   end
 
   def uMemset(dest : UInt16*, c : UInt16, count : Int32) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_memset(dest, c, count)
+    {% end %}
   end
 
   def uMemcmp(buf1 : UInt16*, buf2 : UInt16*, count : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.u_memcmp(buf1, buf2, count)
+    {% end %}
   end
 
   def uMemcmpCodePointOrder(s1 : UInt16*, s2 : UInt16*, count : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.u_memcmpCodePointOrder(s1, s2, count)
+    {% end %}
   end
 
   def uMemchr(s : UInt16*, c : UInt16, count : Int32) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_memchr(s, c, count)
+    {% end %}
   end
 
   def uMemchr32(s : UInt16*, c : Int32, count : Int32) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_memchr32(s, c, count)
+    {% end %}
   end
 
   def uMemrchr(s : UInt16*, c : UInt16, count : Int32) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_memrchr(s, c, count)
+    {% end %}
   end
 
   def uMemrchr32(s : UInt16*, c : Int32, count : Int32) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_memrchr32(s, c, count)
+    {% end %}
   end
 
   def uUnescape(src : Win32cr::Foundation::PSTR, dest : UInt16*, destCapacity : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.u_unescape(src, dest, destCapacity)
+    {% end %}
   end
 
   def uUnescapeAt(charAt : Win32cr::Globalization::UNESCAPE_CHAR_AT, offset : Int32*, length : Int32, context : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.u_unescapeAt(charAt, offset, length, context)
+    {% end %}
   end
 
   def uStrToUpper(dest : UInt16*, destCapacity : Int32, src : UInt16*, srcLength : Int32, locale : Win32cr::Foundation::PSTR, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.u_strToUpper(dest, destCapacity, src, srcLength, locale, pErrorCode)
+    {% end %}
   end
 
   def uStrToLower(dest : UInt16*, destCapacity : Int32, src : UInt16*, srcLength : Int32, locale : Win32cr::Foundation::PSTR, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.u_strToLower(dest, destCapacity, src, srcLength, locale, pErrorCode)
+    {% end %}
   end
 
   def uStrToTitle(dest : UInt16*, destCapacity : Int32, src : UInt16*, srcLength : Int32, titleIter : Win32cr::Globalization::UBreakIterator*, locale : Win32cr::Foundation::PSTR, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.u_strToTitle(dest, destCapacity, src, srcLength, titleIter, locale, pErrorCode)
+    {% end %}
   end
 
   def uStrFoldCase(dest : UInt16*, destCapacity : Int32, src : UInt16*, srcLength : Int32, options : UInt32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.u_strFoldCase(dest, destCapacity, src, srcLength, options, pErrorCode)
+    {% end %}
   end
 
   def uStrToWCS(dest : Win32cr::Foundation::PWSTR, destCapacity : Int32, pDestLength : Int32*, src : UInt16*, srcLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.u_strToWCS(dest, destCapacity, pDestLength, src, srcLength, pErrorCode)
+    {% end %}
   end
 
   def uStrFromWCS(dest : UInt16*, destCapacity : Int32, pDestLength : Int32*, src : Win32cr::Foundation::PWSTR, srcLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strFromWCS(dest, destCapacity, pDestLength, src, srcLength, pErrorCode)
+    {% end %}
   end
 
   def uStrToUTF8(dest : Win32cr::Foundation::PSTR, destCapacity : Int32, pDestLength : Int32*, src : UInt16*, srcLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.u_strToUTF8(dest, destCapacity, pDestLength, src, srcLength, pErrorCode)
+    {% end %}
   end
 
   def uStrFromUTF8(dest : UInt16*, destCapacity : Int32, pDestLength : Int32*, src : Win32cr::Foundation::PSTR, srcLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strFromUTF8(dest, destCapacity, pDestLength, src, srcLength, pErrorCode)
+    {% end %}
   end
 
   def uStrToUTF8WithSub(dest : Win32cr::Foundation::PSTR, destCapacity : Int32, pDestLength : Int32*, src : UInt16*, srcLength : Int32, subchar : Int32, pNumSubstitutions : Int32*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.u_strToUTF8WithSub(dest, destCapacity, pDestLength, src, srcLength, subchar, pNumSubstitutions, pErrorCode)
+    {% end %}
   end
 
   def uStrFromUTF8WithSub(dest : UInt16*, destCapacity : Int32, pDestLength : Int32*, src : Win32cr::Foundation::PSTR, srcLength : Int32, subchar : Int32, pNumSubstitutions : Int32*, pErrorCode : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strFromUTF8WithSub(dest, destCapacity, pDestLength, src, srcLength, subchar, pNumSubstitutions, pErrorCode)
+    {% end %}
   end
 
   def uStrFromUTF8Lenient(dest : UInt16*, destCapacity : Int32, pDestLength : Int32*, src : Win32cr::Foundation::PSTR, srcLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strFromUTF8Lenient(dest, destCapacity, pDestLength, src, srcLength, pErrorCode)
+    {% end %}
   end
 
   def uStrToUTF32(dest : Int32*, destCapacity : Int32, pDestLength : Int32*, src : UInt16*, srcLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32*
+    {% if !flag?(:docs) %}
     C.u_strToUTF32(dest, destCapacity, pDestLength, src, srcLength, pErrorCode)
+    {% end %}
   end
 
   def uStrFromUTF32(dest : UInt16*, destCapacity : Int32, pDestLength : Int32*, src : Int32*, srcLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strFromUTF32(dest, destCapacity, pDestLength, src, srcLength, pErrorCode)
+    {% end %}
   end
 
   def uStrToUTF32WithSub(dest : Int32*, destCapacity : Int32, pDestLength : Int32*, src : UInt16*, srcLength : Int32, subchar : Int32, pNumSubstitutions : Int32*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32*
+    {% if !flag?(:docs) %}
     C.u_strToUTF32WithSub(dest, destCapacity, pDestLength, src, srcLength, subchar, pNumSubstitutions, pErrorCode)
+    {% end %}
   end
 
   def uStrFromUTF32WithSub(dest : UInt16*, destCapacity : Int32, pDestLength : Int32*, src : Int32*, srcLength : Int32, subchar : Int32, pNumSubstitutions : Int32*, pErrorCode : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strFromUTF32WithSub(dest, destCapacity, pDestLength, src, srcLength, subchar, pNumSubstitutions, pErrorCode)
+    {% end %}
   end
 
   def uStrToJavaModifiedUTF8(dest : Win32cr::Foundation::PSTR, destCapacity : Int32, pDestLength : Int32*, src : UInt16*, srcLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.u_strToJavaModifiedUTF8(dest, destCapacity, pDestLength, src, srcLength, pErrorCode)
+    {% end %}
   end
 
   def uStrFromJavaModifiedUTF8WithSub(dest : UInt16*, destCapacity : Int32, pDestLength : Int32*, src : Win32cr::Foundation::PSTR, srcLength : Int32, subchar : Int32, pNumSubstitutions : Int32*, pErrorCode : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.u_strFromJavaModifiedUTF8WithSub(dest, destCapacity, pDestLength, src, srcLength, subchar, pNumSubstitutions, pErrorCode)
+    {% end %}
   end
 
   def ucasemapOpen(locale : Win32cr::Foundation::PSTR, options : UInt32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UCaseMap*
+    {% if !flag?(:docs) %}
     C.ucasemap_open(locale, options, pErrorCode)
+    {% end %}
   end
 
   def ucasemapClose(csm : Win32cr::Globalization::UCaseMap*) : Void
+    {% if !flag?(:docs) %}
     C.ucasemap_close(csm)
+    {% end %}
   end
 
   def ucasemapGetLocale(csm : Win32cr::Globalization::UCaseMap*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ucasemap_getLocale(csm)
+    {% end %}
   end
 
   def ucasemapGetOptions(csm : Win32cr::Globalization::UCaseMap*) : UInt32
+    {% if !flag?(:docs) %}
     C.ucasemap_getOptions(csm)
+    {% end %}
   end
 
   def ucasemapSetLocale(csm : Win32cr::Globalization::UCaseMap*, locale : Win32cr::Foundation::PSTR, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucasemap_setLocale(csm, locale, pErrorCode)
+    {% end %}
   end
 
   def ucasemapSetOptions(csm : Win32cr::Globalization::UCaseMap*, options : UInt32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucasemap_setOptions(csm, options, pErrorCode)
+    {% end %}
   end
 
   def ucasemapGetBreakIterator(csm : Win32cr::Globalization::UCaseMap*) : Win32cr::Globalization::UBreakIterator*
+    {% if !flag?(:docs) %}
     C.ucasemap_getBreakIterator(csm)
+    {% end %}
   end
 
   def ucasemapSetBreakIterator(csm : Win32cr::Globalization::UCaseMap*, iterToAdopt : Win32cr::Globalization::UBreakIterator*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucasemap_setBreakIterator(csm, iterToAdopt, pErrorCode)
+    {% end %}
   end
 
   def ucasemapToTitle(csm : Win32cr::Globalization::UCaseMap*, dest : UInt16*, destCapacity : Int32, src : UInt16*, srcLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucasemap_toTitle(csm, dest, destCapacity, src, srcLength, pErrorCode)
+    {% end %}
   end
 
   def ucasemapUtf8ToLower(csm : Win32cr::Globalization::UCaseMap*, dest : Win32cr::Foundation::PSTR, destCapacity : Int32, src : Win32cr::Foundation::PSTR, srcLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucasemap_utf8ToLower(csm, dest, destCapacity, src, srcLength, pErrorCode)
+    {% end %}
   end
 
   def ucasemapUtf8ToUpper(csm : Win32cr::Globalization::UCaseMap*, dest : Win32cr::Foundation::PSTR, destCapacity : Int32, src : Win32cr::Foundation::PSTR, srcLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucasemap_utf8ToUpper(csm, dest, destCapacity, src, srcLength, pErrorCode)
+    {% end %}
   end
 
   def ucasemapUtf8ToTitle(csm : Win32cr::Globalization::UCaseMap*, dest : Win32cr::Foundation::PSTR, destCapacity : Int32, src : Win32cr::Foundation::PSTR, srcLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucasemap_utf8ToTitle(csm, dest, destCapacity, src, srcLength, pErrorCode)
+    {% end %}
   end
 
   def ucasemapUtf8FoldCase(csm : Win32cr::Globalization::UCaseMap*, dest : Win32cr::Foundation::PSTR, destCapacity : Int32, src : Win32cr::Foundation::PSTR, srcLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucasemap_utf8FoldCase(csm, dest, destCapacity, src, srcLength, pErrorCode)
+    {% end %}
   end
 
   def usprepOpen(path : Win32cr::Foundation::PSTR, fileName : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UStringPrepProfile*
+    {% if !flag?(:docs) %}
     C.usprep_open(path, fileName, status)
+    {% end %}
   end
 
   def usprepOpenByType(type__ : Win32cr::Globalization::UStringPrepProfileType, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UStringPrepProfile*
+    {% if !flag?(:docs) %}
     C.usprep_openByType(type__, status)
+    {% end %}
   end
 
   def usprepClose(profile : Win32cr::Globalization::UStringPrepProfile*) : Void
+    {% if !flag?(:docs) %}
     C.usprep_close(profile)
+    {% end %}
   end
 
   def usprepPrepare(prep : Win32cr::Globalization::UStringPrepProfile*, src : UInt16*, srcLength : Int32, dest : UInt16*, destCapacity : Int32, options : Int32, parseError : Win32cr::Globalization::UParseError*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.usprep_prepare(prep, src, srcLength, dest, destCapacity, options, parseError, status)
+    {% end %}
   end
 
   def uidnaOpenUTS46(options : UInt32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UIDNA*
+    {% if !flag?(:docs) %}
     C.uidna_openUTS46(options, pErrorCode)
+    {% end %}
   end
 
   def uidnaClose(idna : Win32cr::Globalization::UIDNA*) : Void
+    {% if !flag?(:docs) %}
     C.uidna_close(idna)
+    {% end %}
   end
 
   def uidnaLabelToASCII(idna : Win32cr::Globalization::UIDNA*, label : UInt16*, length : Int32, dest : UInt16*, capacity : Int32, pInfo : Win32cr::Globalization::UIDNAInfo*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uidna_labelToASCII(idna, label, length, dest, capacity, pInfo, pErrorCode)
+    {% end %}
   end
 
   def uidnaLabelToUnicode(idna : Win32cr::Globalization::UIDNA*, label : UInt16*, length : Int32, dest : UInt16*, capacity : Int32, pInfo : Win32cr::Globalization::UIDNAInfo*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uidna_labelToUnicode(idna, label, length, dest, capacity, pInfo, pErrorCode)
+    {% end %}
   end
 
   def uidnaNameToASCII(idna : Win32cr::Globalization::UIDNA*, name : UInt16*, length : Int32, dest : UInt16*, capacity : Int32, pInfo : Win32cr::Globalization::UIDNAInfo*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uidna_nameToASCII(idna, name, length, dest, capacity, pInfo, pErrorCode)
+    {% end %}
   end
 
   def uidnaNameToUnicode(idna : Win32cr::Globalization::UIDNA*, name : UInt16*, length : Int32, dest : UInt16*, capacity : Int32, pInfo : Win32cr::Globalization::UIDNAInfo*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uidna_nameToUnicode(idna, name, length, dest, capacity, pInfo, pErrorCode)
+    {% end %}
   end
 
   def uidnaLabelToASCIIUTF8(idna : Win32cr::Globalization::UIDNA*, label : Win32cr::Foundation::PSTR, length : Int32, dest : Win32cr::Foundation::PSTR, capacity : Int32, pInfo : Win32cr::Globalization::UIDNAInfo*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uidna_labelToASCII_UTF8(idna, label, length, dest, capacity, pInfo, pErrorCode)
+    {% end %}
   end
 
   def uidnaLabelToUnicodeUTF8(idna : Win32cr::Globalization::UIDNA*, label : Win32cr::Foundation::PSTR, length : Int32, dest : Win32cr::Foundation::PSTR, capacity : Int32, pInfo : Win32cr::Globalization::UIDNAInfo*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uidna_labelToUnicodeUTF8(idna, label, length, dest, capacity, pInfo, pErrorCode)
+    {% end %}
   end
 
   def uidnaNameToASCIIUTF8(idna : Win32cr::Globalization::UIDNA*, name : Win32cr::Foundation::PSTR, length : Int32, dest : Win32cr::Foundation::PSTR, capacity : Int32, pInfo : Win32cr::Globalization::UIDNAInfo*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uidna_nameToASCII_UTF8(idna, name, length, dest, capacity, pInfo, pErrorCode)
+    {% end %}
   end
 
   def uidnaNameToUnicodeUTF8(idna : Win32cr::Globalization::UIDNA*, name : Win32cr::Foundation::PSTR, length : Int32, dest : Win32cr::Foundation::PSTR, capacity : Int32, pInfo : Win32cr::Globalization::UIDNAInfo*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uidna_nameToUnicodeUTF8(idna, name, length, dest, capacity, pInfo, pErrorCode)
+    {% end %}
   end
 
   def ubrkOpen(type__ : Win32cr::Globalization::UBreakIteratorType, locale : Win32cr::Foundation::PSTR, text : UInt16*, textLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UBreakIterator*
+    {% if !flag?(:docs) %}
     C.ubrk_open(type__, locale, text, textLength, status)
+    {% end %}
   end
 
   def ubrkOpenRules(rules : UInt16*, rulesLength : Int32, text : UInt16*, textLength : Int32, parseErr : Win32cr::Globalization::UParseError*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UBreakIterator*
+    {% if !flag?(:docs) %}
     C.ubrk_openRules(rules, rulesLength, text, textLength, parseErr, status)
+    {% end %}
   end
 
   def ubrkOpenBinaryRules(binaryRules : UInt8*, rulesLength : Int32, text : UInt16*, textLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UBreakIterator*
+    {% if !flag?(:docs) %}
     C.ubrk_openBinaryRules(binaryRules, rulesLength, text, textLength, status)
+    {% end %}
   end
 
   def ubrkSafeClone(bi : Win32cr::Globalization::UBreakIterator*, stackBuffer : Void*, pBufferSize : Int32*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UBreakIterator*
+    {% if !flag?(:docs) %}
     C.ubrk_safeClone(bi, stackBuffer, pBufferSize, status)
+    {% end %}
   end
 
   def ubrkClose(bi : Win32cr::Globalization::UBreakIterator*) : Void
+    {% if !flag?(:docs) %}
     C.ubrk_close(bi)
+    {% end %}
   end
 
   def ubrkSetText(bi : Win32cr::Globalization::UBreakIterator*, text : UInt16*, textLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ubrk_setText(bi, text, textLength, status)
+    {% end %}
   end
 
   def ubrkSetUText(bi : Win32cr::Globalization::UBreakIterator*, text : Win32cr::Globalization::UText*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ubrk_setUText(bi, text, status)
+    {% end %}
   end
 
   def ubrkCurrent(bi : Win32cr::Globalization::UBreakIterator*) : Int32
+    {% if !flag?(:docs) %}
     C.ubrk_current(bi)
+    {% end %}
   end
 
   def ubrkNext(bi : Win32cr::Globalization::UBreakIterator*) : Int32
+    {% if !flag?(:docs) %}
     C.ubrk_next(bi)
+    {% end %}
   end
 
   def ubrkPrevious(bi : Win32cr::Globalization::UBreakIterator*) : Int32
+    {% if !flag?(:docs) %}
     C.ubrk_previous(bi)
+    {% end %}
   end
 
   def ubrkFirst(bi : Win32cr::Globalization::UBreakIterator*) : Int32
+    {% if !flag?(:docs) %}
     C.ubrk_first(bi)
+    {% end %}
   end
 
   def ubrkLast(bi : Win32cr::Globalization::UBreakIterator*) : Int32
+    {% if !flag?(:docs) %}
     C.ubrk_last(bi)
+    {% end %}
   end
 
   def ubrkPreceding(bi : Win32cr::Globalization::UBreakIterator*, offset : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.ubrk_preceding(bi, offset)
+    {% end %}
   end
 
   def ubrkFollowing(bi : Win32cr::Globalization::UBreakIterator*, offset : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.ubrk_following(bi, offset)
+    {% end %}
   end
 
   def ubrkGetAvailable(index : Int32) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ubrk_getAvailable(index)
+    {% end %}
   end
 
   def ubrkCountAvailable : Int32
+    {% if !flag?(:docs) %}
     C.ubrk_countAvailable
+    {% end %}
   end
 
   def ubrkIsBoundary(bi : Win32cr::Globalization::UBreakIterator*, offset : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.ubrk_isBoundary(bi, offset)
+    {% end %}
   end
 
   def ubrkGetRuleStatus(bi : Win32cr::Globalization::UBreakIterator*) : Int32
+    {% if !flag?(:docs) %}
     C.ubrk_getRuleStatus(bi)
+    {% end %}
   end
 
   def ubrkGetRuleStatusVec(bi : Win32cr::Globalization::UBreakIterator*, fillInVec : Int32*, capacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ubrk_getRuleStatusVec(bi, fillInVec, capacity, status)
+    {% end %}
   end
 
   def ubrkGetLocaleByType(bi : Win32cr::Globalization::UBreakIterator*, type__ : Win32cr::Globalization::ULocDataLocaleType, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ubrk_getLocaleByType(bi, type__, status)
+    {% end %}
   end
 
   def ubrkRefreshUText(bi : Win32cr::Globalization::UBreakIterator*, text : Win32cr::Globalization::UText*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ubrk_refreshUText(bi, text, status)
+    {% end %}
   end
 
   def ubrkGetBinaryRules(bi : Win32cr::Globalization::UBreakIterator*, binaryRules : UInt8*, rulesCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ubrk_getBinaryRules(bi, binaryRules, rulesCapacity, status)
+    {% end %}
   end
 
   def uGetDataVersion(dataVersionFillin : UInt8*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.u_getDataVersion(dataVersionFillin, status)
+    {% end %}
   end
 
   def ucalOpenTimeZoneIDEnumeration(zoneType : Win32cr::Globalization::USystemTimeZoneType, region : Win32cr::Foundation::PSTR, rawOffset : Int32*, ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.ucal_openTimeZoneIDEnumeration(zoneType, region, rawOffset, ec)
+    {% end %}
   end
 
   def ucalOpenTimeZones(ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.ucal_openTimeZones(ec)
+    {% end %}
   end
 
   def ucalOpenCountryTimeZones(country : Win32cr::Foundation::PSTR, ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.ucal_openCountryTimeZones(country, ec)
+    {% end %}
   end
 
   def ucalGetDefaultTimeZone(result : UInt16*, resultCapacity : Int32, ec : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucal_getDefaultTimeZone(result, resultCapacity, ec)
+    {% end %}
   end
 
   def ucalSetDefaultTimeZone(zoneID : UInt16*, ec : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucal_setDefaultTimeZone(zoneID, ec)
+    {% end %}
   end
 
   def ucalGetHostTimeZone(result : UInt16*, resultCapacity : Int32, ec : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucal_getHostTimeZone(result, resultCapacity, ec)
+    {% end %}
   end
 
   def ucalGetDSTSavings(zoneID : UInt16*, ec : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucal_getDSTSavings(zoneID, ec)
+    {% end %}
   end
 
   def ucalGetNow : Float64
+    {% if !flag?(:docs) %}
     C.ucal_getNow
+    {% end %}
   end
 
   def ucalOpen(zoneID : UInt16*, len : Int32, locale : Win32cr::Foundation::PSTR, type__ : Win32cr::Globalization::UCalendarType, status : Win32cr::Globalization::UErrorCode*) : Void**
+    {% if !flag?(:docs) %}
     C.ucal_open(zoneID, len, locale, type__, status)
+    {% end %}
   end
 
   def ucalClose(cal : Void**) : Void
+    {% if !flag?(:docs) %}
     C.ucal_close(cal)
+    {% end %}
   end
 
   def ucalClone(cal : Void**, status : Win32cr::Globalization::UErrorCode*) : Void**
+    {% if !flag?(:docs) %}
     C.ucal_clone(cal, status)
+    {% end %}
   end
 
   def ucalSetTimeZone(cal : Void**, zoneID : UInt16*, len : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucal_setTimeZone(cal, zoneID, len, status)
+    {% end %}
   end
 
   def ucalGetTimeZoneID(cal : Void**, result : UInt16*, resultLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucal_getTimeZoneID(cal, result, resultLength, status)
+    {% end %}
   end
 
   def ucalGetTimeZoneDisplayName(cal : Void**, type__ : Win32cr::Globalization::UCalendarDisplayNameType, locale : Win32cr::Foundation::PSTR, result : UInt16*, resultLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucal_getTimeZoneDisplayName(cal, type__, locale, result, resultLength, status)
+    {% end %}
   end
 
   def ucalInDaylightTime(cal : Void**, status : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.ucal_inDaylightTime(cal, status)
+    {% end %}
   end
 
   def ucalSetGregorianChange(cal : Void**, date : Float64, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucal_setGregorianChange(cal, date, pErrorCode)
+    {% end %}
   end
 
   def ucalGetGregorianChange(cal : Void**, pErrorCode : Win32cr::Globalization::UErrorCode*) : Float64
+    {% if !flag?(:docs) %}
     C.ucal_getGregorianChange(cal, pErrorCode)
+    {% end %}
   end
 
   def ucalGetAttribute(cal : Void**, attr : Win32cr::Globalization::UCalendarAttribute) : Int32
+    {% if !flag?(:docs) %}
     C.ucal_getAttribute(cal, attr)
+    {% end %}
   end
 
   def ucalSetAttribute(cal : Void**, attr : Win32cr::Globalization::UCalendarAttribute, newValue : Int32) : Void
+    {% if !flag?(:docs) %}
     C.ucal_setAttribute(cal, attr, newValue)
+    {% end %}
   end
 
   def ucalGetAvailable(localeIndex : Int32) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ucal_getAvailable(localeIndex)
+    {% end %}
   end
 
   def ucalCountAvailable : Int32
+    {% if !flag?(:docs) %}
     C.ucal_countAvailable
+    {% end %}
   end
 
   def ucalGetMillis(cal : Void**, status : Win32cr::Globalization::UErrorCode*) : Float64
+    {% if !flag?(:docs) %}
     C.ucal_getMillis(cal, status)
+    {% end %}
   end
 
   def ucalSetMillis(cal : Void**, dateTime : Float64, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucal_setMillis(cal, dateTime, status)
+    {% end %}
   end
 
   def ucalSetDate(cal : Void**, year : Int32, month : Int32, date : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucal_setDate(cal, year, month, date, status)
+    {% end %}
   end
 
   def ucalSetDateTime(cal : Void**, year : Int32, month : Int32, date : Int32, hour : Int32, minute : Int32, second : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucal_setDateTime(cal, year, month, date, hour, minute, second, status)
+    {% end %}
   end
 
   def ucalEquivalentTo(cal1 : Void**, cal2 : Void**) : Int8
+    {% if !flag?(:docs) %}
     C.ucal_equivalentTo(cal1, cal2)
+    {% end %}
   end
 
   def ucalAdd(cal : Void**, field : Win32cr::Globalization::UCalendarDateFields, amount : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucal_add(cal, field, amount, status)
+    {% end %}
   end
 
   def ucalRoll(cal : Void**, field : Win32cr::Globalization::UCalendarDateFields, amount : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucal_roll(cal, field, amount, status)
+    {% end %}
   end
 
   def ucalGet(cal : Void**, field : Win32cr::Globalization::UCalendarDateFields, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucal_get(cal, field, status)
+    {% end %}
   end
 
   def ucalSet(cal : Void**, field : Win32cr::Globalization::UCalendarDateFields, value : Int32) : Void
+    {% if !flag?(:docs) %}
     C.ucal_set(cal, field, value)
+    {% end %}
   end
 
   def ucalIsSet(cal : Void**, field : Win32cr::Globalization::UCalendarDateFields) : Int8
+    {% if !flag?(:docs) %}
     C.ucal_isSet(cal, field)
+    {% end %}
   end
 
   def ucalClearField(cal : Void**, field : Win32cr::Globalization::UCalendarDateFields) : Void
+    {% if !flag?(:docs) %}
     C.ucal_clearField(cal, field)
+    {% end %}
   end
 
   def ucalClear(calendar : Void**) : Void
+    {% if !flag?(:docs) %}
     C.ucal_clear(calendar)
+    {% end %}
   end
 
   def ucalGetLimit(cal : Void**, field : Win32cr::Globalization::UCalendarDateFields, type__ : Win32cr::Globalization::UCalendarLimitType, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucal_getLimit(cal, field, type__, status)
+    {% end %}
   end
 
   def ucalGetLocaleByType(cal : Void**, type__ : Win32cr::Globalization::ULocDataLocaleType, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ucal_getLocaleByType(cal, type__, status)
+    {% end %}
   end
 
   def ucalGetTZDataVersion(status : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ucal_getTZDataVersion(status)
+    {% end %}
   end
 
   def ucalGetCanonicalTimeZoneID(id : UInt16*, len : Int32, result : UInt16*, resultCapacity : Int32, isSystemID : Int8*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucal_getCanonicalTimeZoneID(id, len, result, resultCapacity, isSystemID, status)
+    {% end %}
   end
 
   def ucalGetType(cal : Void**, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ucal_getType(cal, status)
+    {% end %}
   end
 
   def ucalGetKeywordValuesForLocale(key : Win32cr::Foundation::PSTR, locale : Win32cr::Foundation::PSTR, commonlyUsed : Int8, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.ucal_getKeywordValuesForLocale(key, locale, commonlyUsed, status)
+    {% end %}
   end
 
   def ucalGetDayOfWeekType(cal : Void**, dayOfWeek : Win32cr::Globalization::UCalendarDaysOfWeek, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UCalendarWeekdayType
+    {% if !flag?(:docs) %}
     C.ucal_getDayOfWeekType(cal, dayOfWeek, status)
+    {% end %}
   end
 
   def ucalGetWeekendTransition(cal : Void**, dayOfWeek : Win32cr::Globalization::UCalendarDaysOfWeek, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucal_getWeekendTransition(cal, dayOfWeek, status)
+    {% end %}
   end
 
   def ucalIsWeekend(cal : Void**, date : Float64, status : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.ucal_isWeekend(cal, date, status)
+    {% end %}
   end
 
   def ucalGetFieldDifference(cal : Void**, target : Float64, field : Win32cr::Globalization::UCalendarDateFields, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucal_getFieldDifference(cal, target, field, status)
+    {% end %}
   end
 
   def ucalGetTimeZoneTransitionDate(cal : Void**, type__ : Win32cr::Globalization::UTimeZoneTransitionType, transition : Float64*, status : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.ucal_getTimeZoneTransitionDate(cal, type__, transition, status)
+    {% end %}
   end
 
   def ucalGetWindowsTimeZoneID(id : UInt16*, len : Int32, winid : UInt16*, winidCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucal_getWindowsTimeZoneID(id, len, winid, winidCapacity, status)
+    {% end %}
   end
 
   def ucalGetTimeZoneIDForWindowsID(winid : UInt16*, len : Int32, region : Win32cr::Foundation::PSTR, id : UInt16*, idCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucal_getTimeZoneIDForWindowsID(winid, len, region, id, idCapacity, status)
+    {% end %}
   end
 
   def ucolOpen(loc : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UCollator*
+    {% if !flag?(:docs) %}
     C.ucol_open(loc, status)
+    {% end %}
   end
 
   def ucolOpenRules(rules : UInt16*, rulesLength : Int32, normalizationMode : Win32cr::Globalization::UColAttributeValue, strength : Win32cr::Globalization::UColAttributeValue, parseError : Win32cr::Globalization::UParseError*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UCollator*
+    {% if !flag?(:docs) %}
     C.ucol_openRules(rules, rulesLength, normalizationMode, strength, parseError, status)
+    {% end %}
   end
 
   def ucolGetContractionsAndExpansions(coll : Win32cr::Globalization::UCollator*, contractions : Win32cr::Globalization::USet*, expansions : Win32cr::Globalization::USet*, addPrefixes : Int8, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucol_getContractionsAndExpansions(coll, contractions, expansions, addPrefixes, status)
+    {% end %}
   end
 
   def ucolClose(coll : Win32cr::Globalization::UCollator*) : Void
+    {% if !flag?(:docs) %}
     C.ucol_close(coll)
+    {% end %}
   end
 
   def ucolStrcoll(coll : Win32cr::Globalization::UCollator*, source : UInt16*, sourceLength : Int32, target : UInt16*, targetLength : Int32) : Win32cr::Globalization::UCollationResult
+    {% if !flag?(:docs) %}
     C.ucol_strcoll(coll, source, sourceLength, target, targetLength)
+    {% end %}
   end
 
   def ucolStrcollUTF8(coll : Win32cr::Globalization::UCollator*, source : Win32cr::Foundation::PSTR, sourceLength : Int32, target : Win32cr::Foundation::PSTR, targetLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UCollationResult
+    {% if !flag?(:docs) %}
     C.ucol_strcollUTF8(coll, source, sourceLength, target, targetLength, status)
+    {% end %}
   end
 
   def ucolGreater(coll : Win32cr::Globalization::UCollator*, source : UInt16*, sourceLength : Int32, target : UInt16*, targetLength : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.ucol_greater(coll, source, sourceLength, target, targetLength)
+    {% end %}
   end
 
   def ucolGreaterOrEqual(coll : Win32cr::Globalization::UCollator*, source : UInt16*, sourceLength : Int32, target : UInt16*, targetLength : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.ucol_greaterOrEqual(coll, source, sourceLength, target, targetLength)
+    {% end %}
   end
 
   def ucolEqual(coll : Win32cr::Globalization::UCollator*, source : UInt16*, sourceLength : Int32, target : UInt16*, targetLength : Int32) : Int8
+    {% if !flag?(:docs) %}
     C.ucol_equal(coll, source, sourceLength, target, targetLength)
+    {% end %}
   end
 
   def ucolStrcollIter(coll : Win32cr::Globalization::UCollator*, sIter : Win32cr::Globalization::UCharIterator*, tIter : Win32cr::Globalization::UCharIterator*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UCollationResult
+    {% if !flag?(:docs) %}
     C.ucol_strcollIter(coll, sIter, tIter, status)
+    {% end %}
   end
 
   def ucolGetStrength(coll : Win32cr::Globalization::UCollator*) : Win32cr::Globalization::UColAttributeValue
+    {% if !flag?(:docs) %}
     C.ucol_getStrength(coll)
+    {% end %}
   end
 
   def ucolSetStrength(coll : Win32cr::Globalization::UCollator*, strength : Win32cr::Globalization::UColAttributeValue) : Void
+    {% if !flag?(:docs) %}
     C.ucol_setStrength(coll, strength)
+    {% end %}
   end
 
   def ucolGetReorderCodes(coll : Win32cr::Globalization::UCollator*, dest : Int32*, destCapacity : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucol_getReorderCodes(coll, dest, destCapacity, pErrorCode)
+    {% end %}
   end
 
   def ucolSetReorderCodes(coll : Win32cr::Globalization::UCollator*, reorderCodes : Int32*, reorderCodesLength : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucol_setReorderCodes(coll, reorderCodes, reorderCodesLength, pErrorCode)
+    {% end %}
   end
 
   def ucolGetEquivalentReorderCodes(reorderCode : Int32, dest : Int32*, destCapacity : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucol_getEquivalentReorderCodes(reorderCode, dest, destCapacity, pErrorCode)
+    {% end %}
   end
 
   def ucolGetDisplayName(objLoc : Win32cr::Foundation::PSTR, dispLoc : Win32cr::Foundation::PSTR, result : UInt16*, resultLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucol_getDisplayName(objLoc, dispLoc, result, resultLength, status)
+    {% end %}
   end
 
   def ucolGetAvailable(localeIndex : Int32) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ucol_getAvailable(localeIndex)
+    {% end %}
   end
 
   def ucolCountAvailable : Int32
+    {% if !flag?(:docs) %}
     C.ucol_countAvailable
+    {% end %}
   end
 
   def ucolOpenAvailableLocales(status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.ucol_openAvailableLocales(status)
+    {% end %}
   end
 
   def ucolGetKeywords(status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.ucol_getKeywords(status)
+    {% end %}
   end
 
   def ucolGetKeywordValues(keyword : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.ucol_getKeywordValues(keyword, status)
+    {% end %}
   end
 
   def ucolGetKeywordValuesForLocale(key : Win32cr::Foundation::PSTR, locale : Win32cr::Foundation::PSTR, commonlyUsed : Int8, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.ucol_getKeywordValuesForLocale(key, locale, commonlyUsed, status)
+    {% end %}
   end
 
   def ucolGetFunctionalEquivalent(result : Win32cr::Foundation::PSTR, resultCapacity : Int32, keyword : Win32cr::Foundation::PSTR, locale : Win32cr::Foundation::PSTR, isAvailable : Int8*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucol_getFunctionalEquivalent(result, resultCapacity, keyword, locale, isAvailable, status)
+    {% end %}
   end
 
   def ucolGetRules(coll : Win32cr::Globalization::UCollator*, length : Int32*) : UInt16*
+    {% if !flag?(:docs) %}
     C.ucol_getRules(coll, length)
+    {% end %}
   end
 
   def ucolGetSortKey(coll : Win32cr::Globalization::UCollator*, source : UInt16*, sourceLength : Int32, result : UInt8*, resultLength : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.ucol_getSortKey(coll, source, sourceLength, result, resultLength)
+    {% end %}
   end
 
   def ucolNextSortKeyPart(coll : Win32cr::Globalization::UCollator*, iter : Win32cr::Globalization::UCharIterator*, state : UInt32*, dest : UInt8*, count : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucol_nextSortKeyPart(coll, iter, state, dest, count, status)
+    {% end %}
   end
 
   def ucolGetBound(source : UInt8*, sourceLength : Int32, boundType : Win32cr::Globalization::UColBoundMode, noOfLevels : UInt32, result : UInt8*, resultLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucol_getBound(source, sourceLength, boundType, noOfLevels, result, resultLength, status)
+    {% end %}
   end
 
   def ucolGetVersion(coll : Win32cr::Globalization::UCollator*, info : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.ucol_getVersion(coll, info)
+    {% end %}
   end
 
   def ucolGetUCAVersion(coll : Win32cr::Globalization::UCollator*, info : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.ucol_getUCAVersion(coll, info)
+    {% end %}
   end
 
   def ucolMergeSortkeys(src1 : UInt8*, src1Length : Int32, src2 : UInt8*, src2Length : Int32, dest : UInt8*, destCapacity : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.ucol_mergeSortkeys(src1, src1Length, src2, src2Length, dest, destCapacity)
+    {% end %}
   end
 
   def ucolSetAttribute(coll : Win32cr::Globalization::UCollator*, attr : Win32cr::Globalization::UColAttribute, value : Win32cr::Globalization::UColAttributeValue, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucol_setAttribute(coll, attr, value, status)
+    {% end %}
   end
 
   def ucolGetAttribute(coll : Win32cr::Globalization::UCollator*, attr : Win32cr::Globalization::UColAttribute, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UColAttributeValue
+    {% if !flag?(:docs) %}
     C.ucol_getAttribute(coll, attr, status)
+    {% end %}
   end
 
   def ucolSetMaxVariable(coll : Win32cr::Globalization::UCollator*, group : Win32cr::Globalization::UColReorderCode, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucol_setMaxVariable(coll, group, pErrorCode)
+    {% end %}
   end
 
   def ucolGetMaxVariable(coll : Win32cr::Globalization::UCollator*) : Win32cr::Globalization::UColReorderCode
+    {% if !flag?(:docs) %}
     C.ucol_getMaxVariable(coll)
+    {% end %}
   end
 
   def ucolGetVariableTop(coll : Win32cr::Globalization::UCollator*, status : Win32cr::Globalization::UErrorCode*) : UInt32
+    {% if !flag?(:docs) %}
     C.ucol_getVariableTop(coll, status)
+    {% end %}
   end
 
   def ucolSafeClone(coll : Win32cr::Globalization::UCollator*, stackBuffer : Void*, pBufferSize : Int32*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UCollator*
+    {% if !flag?(:docs) %}
     C.ucol_safeClone(coll, stackBuffer, pBufferSize, status)
+    {% end %}
   end
 
   def ucolGetRulesEx(coll : Win32cr::Globalization::UCollator*, delta : Win32cr::Globalization::UColRuleOption, buffer : UInt16*, bufferLen : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.ucol_getRulesEx(coll, delta, buffer, bufferLen)
+    {% end %}
   end
 
   def ucolGetLocaleByType(coll : Win32cr::Globalization::UCollator*, type__ : Win32cr::Globalization::ULocDataLocaleType, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ucol_getLocaleByType(coll, type__, status)
+    {% end %}
   end
 
   def ucolGetTailoredSet(coll : Win32cr::Globalization::UCollator*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::USet*
+    {% if !flag?(:docs) %}
     C.ucol_getTailoredSet(coll, status)
+    {% end %}
   end
 
   def ucolCloneBinary(coll : Win32cr::Globalization::UCollator*, buffer : UInt8*, capacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucol_cloneBinary(coll, buffer, capacity, status)
+    {% end %}
   end
 
   def ucolOpenBinary(bin : UInt8*, length : Int32, base : Win32cr::Globalization::UCollator*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UCollator*
+    {% if !flag?(:docs) %}
     C.ucol_openBinary(bin, length, base, status)
+    {% end %}
   end
 
   def ucolOpenElements(coll : Win32cr::Globalization::UCollator*, text : UInt16*, textLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UCollationElements*
+    {% if !flag?(:docs) %}
     C.ucol_openElements(coll, text, textLength, status)
+    {% end %}
   end
 
   def ucolKeyHashCode(key : UInt8*, length : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.ucol_keyHashCode(key, length)
+    {% end %}
   end
 
   def ucolCloseElements(elems : Win32cr::Globalization::UCollationElements*) : Void
+    {% if !flag?(:docs) %}
     C.ucol_closeElements(elems)
+    {% end %}
   end
 
   def ucolReset(elems : Win32cr::Globalization::UCollationElements*) : Void
+    {% if !flag?(:docs) %}
     C.ucol_reset(elems)
+    {% end %}
   end
 
   def ucolNext(elems : Win32cr::Globalization::UCollationElements*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucol_next(elems, status)
+    {% end %}
   end
 
   def ucolPrevious(elems : Win32cr::Globalization::UCollationElements*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucol_previous(elems, status)
+    {% end %}
   end
 
   def ucolGetMaxExpansion(elems : Win32cr::Globalization::UCollationElements*, order : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.ucol_getMaxExpansion(elems, order)
+    {% end %}
   end
 
   def ucolSetText(elems : Win32cr::Globalization::UCollationElements*, text : UInt16*, textLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucol_setText(elems, text, textLength, status)
+    {% end %}
   end
 
   def ucolGetOffset(elems : Win32cr::Globalization::UCollationElements*) : Int32
+    {% if !flag?(:docs) %}
     C.ucol_getOffset(elems)
+    {% end %}
   end
 
   def ucolSetOffset(elems : Win32cr::Globalization::UCollationElements*, offset : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucol_setOffset(elems, offset, status)
+    {% end %}
   end
 
   def ucolPrimaryOrder(order : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.ucol_primaryOrder(order)
+    {% end %}
   end
 
   def ucolSecondaryOrder(order : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.ucol_secondaryOrder(order)
+    {% end %}
   end
 
   def ucolTertiaryOrder(order : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.ucol_tertiaryOrder(order)
+    {% end %}
   end
 
   def ucsdetOpen(status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UCharsetDetector*
+    {% if !flag?(:docs) %}
     C.ucsdet_open(status)
+    {% end %}
   end
 
   def ucsdetClose(ucsd : Win32cr::Globalization::UCharsetDetector*) : Void
+    {% if !flag?(:docs) %}
     C.ucsdet_close(ucsd)
+    {% end %}
   end
 
   def ucsdetSetText(ucsd : Win32cr::Globalization::UCharsetDetector*, textIn : Win32cr::Foundation::PSTR, len : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucsdet_setText(ucsd, textIn, len, status)
+    {% end %}
   end
 
   def ucsdetSetDeclaredEncoding(ucsd : Win32cr::Globalization::UCharsetDetector*, encoding : Win32cr::Foundation::PSTR, length : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucsdet_setDeclaredEncoding(ucsd, encoding, length, status)
+    {% end %}
   end
 
   def ucsdetDetect(ucsd : Win32cr::Globalization::UCharsetDetector*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UCharsetMatch*
+    {% if !flag?(:docs) %}
     C.ucsdet_detect(ucsd, status)
+    {% end %}
   end
 
   def ucsdetDetectAll(ucsd : Win32cr::Globalization::UCharsetDetector*, matchesFound : Int32*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UCharsetMatch**
+    {% if !flag?(:docs) %}
     C.ucsdet_detectAll(ucsd, matchesFound, status)
+    {% end %}
   end
 
   def ucsdetGetName(ucsm : Win32cr::Globalization::UCharsetMatch*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ucsdet_getName(ucsm, status)
+    {% end %}
   end
 
   def ucsdetGetConfidence(ucsm : Win32cr::Globalization::UCharsetMatch*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucsdet_getConfidence(ucsm, status)
+    {% end %}
   end
 
   def ucsdetGetLanguage(ucsm : Win32cr::Globalization::UCharsetMatch*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ucsdet_getLanguage(ucsm, status)
+    {% end %}
   end
 
   def ucsdetGetUChars(ucsm : Win32cr::Globalization::UCharsetMatch*, buf : UInt16*, cap : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucsdet_getUChars(ucsm, buf, cap, status)
+    {% end %}
   end
 
   def ucsdetGetAllDetectableCharsets(ucsd : Win32cr::Globalization::UCharsetDetector*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.ucsdet_getAllDetectableCharsets(ucsd, status)
+    {% end %}
   end
 
   def ucsdetIsInputFilterEnabled(ucsd : Win32cr::Globalization::UCharsetDetector*) : Int8
+    {% if !flag?(:docs) %}
     C.ucsdet_isInputFilterEnabled(ucsd)
+    {% end %}
   end
 
   def ucsdetEnableInputFilter(ucsd : Win32cr::Globalization::UCharsetDetector*, filter : Int8) : Int8
+    {% if !flag?(:docs) %}
     C.ucsdet_enableInputFilter(ucsd, filter)
+    {% end %}
   end
 
   def ufieldpositerOpen(status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UFieldPositionIterator*
+    {% if !flag?(:docs) %}
     C.ufieldpositer_open(status)
+    {% end %}
   end
 
   def ufieldpositerClose(fpositer : Win32cr::Globalization::UFieldPositionIterator*) : Void
+    {% if !flag?(:docs) %}
     C.ufieldpositer_close(fpositer)
+    {% end %}
   end
 
   def ufieldpositerNext(fpositer : Win32cr::Globalization::UFieldPositionIterator*, beginIndex : Int32*, endIndex : Int32*) : Int32
+    {% if !flag?(:docs) %}
     C.ufieldpositer_next(fpositer, beginIndex, endIndex)
+    {% end %}
   end
 
   def ufmtOpen(status : Win32cr::Globalization::UErrorCode*) : Void**
+    {% if !flag?(:docs) %}
     C.ufmt_open(status)
+    {% end %}
   end
 
   def ufmtClose(fmt : Void**) : Void
+    {% if !flag?(:docs) %}
     C.ufmt_close(fmt)
+    {% end %}
   end
 
   def ufmtGetType(fmt : Void**, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UFormattableType
+    {% if !flag?(:docs) %}
     C.ufmt_getType(fmt, status)
+    {% end %}
   end
 
   def ufmtIsNumeric(fmt : Void**) : Int8
+    {% if !flag?(:docs) %}
     C.ufmt_isNumeric(fmt)
+    {% end %}
   end
 
   def ufmtGetDate(fmt : Void**, status : Win32cr::Globalization::UErrorCode*) : Float64
+    {% if !flag?(:docs) %}
     C.ufmt_getDate(fmt, status)
+    {% end %}
   end
 
   def ufmtGetDouble(fmt : Void**, status : Win32cr::Globalization::UErrorCode*) : Float64
+    {% if !flag?(:docs) %}
     C.ufmt_getDouble(fmt, status)
+    {% end %}
   end
 
   def ufmtGetLong(fmt : Void**, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ufmt_getLong(fmt, status)
+    {% end %}
   end
 
   def ufmtGetInt64(fmt : Void**, status : Win32cr::Globalization::UErrorCode*) : Int64
+    {% if !flag?(:docs) %}
     C.ufmt_getInt64(fmt, status)
+    {% end %}
   end
 
   def ufmtGetObject(fmt : Void**, status : Win32cr::Globalization::UErrorCode*) : Void*
+    {% if !flag?(:docs) %}
     C.ufmt_getObject(fmt, status)
+    {% end %}
   end
 
   def ufmtGetUChars(fmt : Void**, len : Int32*, status : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.ufmt_getUChars(fmt, len, status)
+    {% end %}
   end
 
   def ufmtGetArrayLength(fmt : Void**, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ufmt_getArrayLength(fmt, status)
+    {% end %}
   end
 
   def ufmtGetArrayItemByIndex(fmt : Void**, n : Int32, status : Win32cr::Globalization::UErrorCode*) : Void**
+    {% if !flag?(:docs) %}
     C.ufmt_getArrayItemByIndex(fmt, n, status)
+    {% end %}
   end
 
   def ufmtGetDecNumChars(fmt : Void**, len : Int32*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.ufmt_getDecNumChars(fmt, len, status)
+    {% end %}
   end
 
   def ucfposOpen(ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UConstrainedFieldPosition*
+    {% if !flag?(:docs) %}
     C.ucfpos_open(ec)
+    {% end %}
   end
 
   def ucfposReset(ucfpos : Win32cr::Globalization::UConstrainedFieldPosition*, ec : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucfpos_reset(ucfpos, ec)
+    {% end %}
   end
 
   def ucfposClose(ucfpos : Win32cr::Globalization::UConstrainedFieldPosition*) : Void
+    {% if !flag?(:docs) %}
     C.ucfpos_close(ucfpos)
+    {% end %}
   end
 
   def ucfposConstrainCategory(ucfpos : Win32cr::Globalization::UConstrainedFieldPosition*, category : Int32, ec : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucfpos_constrainCategory(ucfpos, category, ec)
+    {% end %}
   end
 
   def ucfposConstrainField(ucfpos : Win32cr::Globalization::UConstrainedFieldPosition*, category : Int32, field : Int32, ec : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucfpos_constrainField(ucfpos, category, field, ec)
+    {% end %}
   end
 
   def ucfposGetCategory(ucfpos : Win32cr::Globalization::UConstrainedFieldPosition*, ec : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucfpos_getCategory(ucfpos, ec)
+    {% end %}
   end
 
   def ucfposGetField(ucfpos : Win32cr::Globalization::UConstrainedFieldPosition*, ec : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ucfpos_getField(ucfpos, ec)
+    {% end %}
   end
 
   def ucfposGetIndexes(ucfpos : Win32cr::Globalization::UConstrainedFieldPosition*, pStart : Int32*, pLimit : Int32*, ec : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucfpos_getIndexes(ucfpos, pStart, pLimit, ec)
+    {% end %}
   end
 
   def ucfposGetInt64IterationContext(ucfpos : Win32cr::Globalization::UConstrainedFieldPosition*, ec : Win32cr::Globalization::UErrorCode*) : Int64
+    {% if !flag?(:docs) %}
     C.ucfpos_getInt64IterationContext(ucfpos, ec)
+    {% end %}
   end
 
   def ucfposSetInt64IterationContext(ucfpos : Win32cr::Globalization::UConstrainedFieldPosition*, context : Int64, ec : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucfpos_setInt64IterationContext(ucfpos, context, ec)
+    {% end %}
   end
 
   def ucfposMatchesField(ucfpos : Win32cr::Globalization::UConstrainedFieldPosition*, category : Int32, field : Int32, ec : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.ucfpos_matchesField(ucfpos, category, field, ec)
+    {% end %}
   end
 
   def ucfposSetState(ucfpos : Win32cr::Globalization::UConstrainedFieldPosition*, category : Int32, field : Int32, start : Int32, limit : Int32, ec : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ucfpos_setState(ucfpos, category, field, start, limit, ec)
+    {% end %}
   end
 
   def ufmtvalGetString(ufmtval : Win32cr::Globalization::UFormattedValue*, pLength : Int32*, ec : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.ufmtval_getString(ufmtval, pLength, ec)
+    {% end %}
   end
 
   def ufmtvalNextPosition(ufmtval : Win32cr::Globalization::UFormattedValue*, ucfpos : Win32cr::Globalization::UConstrainedFieldPosition*, ec : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.ufmtval_nextPosition(ufmtval, ucfpos, ec)
+    {% end %}
   end
 
   def udtitvfmtOpen(locale : Win32cr::Foundation::PSTR, skeleton : UInt16*, skeletonLength : Int32, tzID : UInt16*, tzIDLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UDateIntervalFormat*
+    {% if !flag?(:docs) %}
     C.udtitvfmt_open(locale, skeleton, skeletonLength, tzID, tzIDLength, status)
+    {% end %}
   end
 
   def udtitvfmtClose(formatter : Win32cr::Globalization::UDateIntervalFormat*) : Void
+    {% if !flag?(:docs) %}
     C.udtitvfmt_close(formatter)
+    {% end %}
   end
 
   def udtitvfmtOpenResult(ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UFormattedDateInterval*
+    {% if !flag?(:docs) %}
     C.udtitvfmt_openResult(ec)
+    {% end %}
   end
 
   def udtitvfmtResultAsValue(uresult : Win32cr::Globalization::UFormattedDateInterval*, ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UFormattedValue*
+    {% if !flag?(:docs) %}
     C.udtitvfmt_resultAsValue(uresult, ec)
+    {% end %}
   end
 
   def udtitvfmtCloseResult(uresult : Win32cr::Globalization::UFormattedDateInterval*) : Void
+    {% if !flag?(:docs) %}
     C.udtitvfmt_closeResult(uresult)
+    {% end %}
   end
 
   def udtitvfmtFormat(formatter : Win32cr::Globalization::UDateIntervalFormat*, fromDate : Float64, toDate : Float64, result : UInt16*, resultCapacity : Int32, position : Win32cr::Globalization::UFieldPosition*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.udtitvfmt_format(formatter, fromDate, toDate, result, resultCapacity, position, status)
+    {% end %}
   end
 
   def ugenderGetInstance(locale : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UGenderInfo*
+    {% if !flag?(:docs) %}
     C.ugender_getInstance(locale, status)
+    {% end %}
   end
 
   def ugenderGetListGender(genderInfo : Win32cr::Globalization::UGenderInfo*, genders : Win32cr::Globalization::UGender*, size : Int32, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UGender
+    {% if !flag?(:docs) %}
     C.ugender_getListGender(genderInfo, genders, size, status)
+    {% end %}
   end
 
   def ulistfmtOpen(locale : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UListFormatter*
+    {% if !flag?(:docs) %}
     C.ulistfmt_open(locale, status)
+    {% end %}
   end
 
   def ulistfmtOpenForType(locale : Win32cr::Foundation::PSTR, type__ : Win32cr::Globalization::UListFormatterType, width : Win32cr::Globalization::UListFormatterWidth, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UListFormatter*
+    {% if !flag?(:docs) %}
     C.ulistfmt_openForType(locale, type__, width, status)
+    {% end %}
   end
 
   def ulistfmtClose(listfmt : Win32cr::Globalization::UListFormatter*) : Void
+    {% if !flag?(:docs) %}
     C.ulistfmt_close(listfmt)
+    {% end %}
   end
 
   def ulistfmtOpenResult(ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UFormattedList*
+    {% if !flag?(:docs) %}
     C.ulistfmt_openResult(ec)
+    {% end %}
   end
 
   def ulistfmtResultAsValue(uresult : Win32cr::Globalization::UFormattedList*, ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UFormattedValue*
+    {% if !flag?(:docs) %}
     C.ulistfmt_resultAsValue(uresult, ec)
+    {% end %}
   end
 
   def ulistfmtCloseResult(uresult : Win32cr::Globalization::UFormattedList*) : Void
+    {% if !flag?(:docs) %}
     C.ulistfmt_closeResult(uresult)
+    {% end %}
   end
 
   def ulistfmtFormat(listfmt : Win32cr::Globalization::UListFormatter*, strings : UInt16**, stringLengths : Int32*, stringCount : Int32, result : UInt16*, resultCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ulistfmt_format(listfmt, strings, stringLengths, stringCount, result, resultCapacity, status)
+    {% end %}
   end
 
   def ulistfmtFormatStringsToResult(listfmt : Win32cr::Globalization::UListFormatter*, strings : UInt16**, stringLengths : Int32*, stringCount : Int32, uresult : Win32cr::Globalization::UFormattedList*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ulistfmt_formatStringsToResult(listfmt, strings, stringLengths, stringCount, uresult, status)
+    {% end %}
   end
 
   def ulocdataOpen(localeID : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::ULocaleData*
+    {% if !flag?(:docs) %}
     C.ulocdata_open(localeID, status)
+    {% end %}
   end
 
   def ulocdataClose(uld : Win32cr::Globalization::ULocaleData*) : Void
+    {% if !flag?(:docs) %}
     C.ulocdata_close(uld)
+    {% end %}
   end
 
   def ulocdataSetNoSubstitute(uld : Win32cr::Globalization::ULocaleData*, setting : Int8) : Void
+    {% if !flag?(:docs) %}
     C.ulocdata_setNoSubstitute(uld, setting)
+    {% end %}
   end
 
   def ulocdataGetNoSubstitute(uld : Win32cr::Globalization::ULocaleData*) : Int8
+    {% if !flag?(:docs) %}
     C.ulocdata_getNoSubstitute(uld)
+    {% end %}
   end
 
   def ulocdataGetExemplarSet(uld : Win32cr::Globalization::ULocaleData*, fillIn : Win32cr::Globalization::USet*, options : UInt32, extype : Win32cr::Globalization::ULocaleDataExemplarSetType, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::USet*
+    {% if !flag?(:docs) %}
     C.ulocdata_getExemplarSet(uld, fillIn, options, extype, status)
+    {% end %}
   end
 
   def ulocdataGetDelimiter(uld : Win32cr::Globalization::ULocaleData*, type__ : Win32cr::Globalization::ULocaleDataDelimiterType, result : UInt16*, resultLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ulocdata_getDelimiter(uld, type__, result, resultLength, status)
+    {% end %}
   end
 
   def ulocdataGetMeasurementSystem(localeID : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UMeasurementSystem
+    {% if !flag?(:docs) %}
     C.ulocdata_getMeasurementSystem(localeID, status)
+    {% end %}
   end
 
   def ulocdataGetPaperSize(localeID : Win32cr::Foundation::PSTR, height : Int32*, width : Int32*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ulocdata_getPaperSize(localeID, height, width, status)
+    {% end %}
   end
 
   def ulocdataGetCLDRVersion(versionArray : UInt8*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ulocdata_getCLDRVersion(versionArray, status)
+    {% end %}
   end
 
   def ulocdataGetLocaleDisplayPattern(uld : Win32cr::Globalization::ULocaleData*, pattern : UInt16*, patternCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ulocdata_getLocaleDisplayPattern(uld, pattern, patternCapacity, status)
+    {% end %}
   end
 
   def ulocdataGetLocaleSeparator(uld : Win32cr::Globalization::ULocaleData*, separator : UInt16*, separatorCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ulocdata_getLocaleSeparator(uld, separator, separatorCapacity, status)
+    {% end %}
   end
 
   def uFormatMessage(locale : Win32cr::Foundation::PSTR, pattern : UInt16*, patternLength : Int32, result : UInt16*, resultLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.u_formatMessage(locale, pattern, patternLength, result, resultLength, status)
+    {% end %}
   end
 
   def uVformatMessage(locale : Win32cr::Foundation::PSTR, pattern : UInt16*, patternLength : Int32, result : UInt16*, resultLength : Int32, ap : Int8*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.u_vformatMessage(locale, pattern, patternLength, result, resultLength, ap, status)
+    {% end %}
   end
 
   def uParseMessage(locale : Win32cr::Foundation::PSTR, pattern : UInt16*, patternLength : Int32, source : UInt16*, sourceLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.u_parseMessage(locale, pattern, patternLength, source, sourceLength, status)
+    {% end %}
   end
 
   def uVparseMessage(locale : Win32cr::Foundation::PSTR, pattern : UInt16*, patternLength : Int32, source : UInt16*, sourceLength : Int32, ap : Int8*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.u_vparseMessage(locale, pattern, patternLength, source, sourceLength, ap, status)
+    {% end %}
   end
 
   def uFormatMessageWithError(locale : Win32cr::Foundation::PSTR, pattern : UInt16*, patternLength : Int32, result : UInt16*, resultLength : Int32, parseError : Win32cr::Globalization::UParseError*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.u_formatMessageWithError(locale, pattern, patternLength, result, resultLength, parseError, status)
+    {% end %}
   end
 
   def uVformatMessageWithError(locale : Win32cr::Foundation::PSTR, pattern : UInt16*, patternLength : Int32, result : UInt16*, resultLength : Int32, parseError : Win32cr::Globalization::UParseError*, ap : Int8*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.u_vformatMessageWithError(locale, pattern, patternLength, result, resultLength, parseError, ap, status)
+    {% end %}
   end
 
   def uParseMessageWithError(locale : Win32cr::Foundation::PSTR, pattern : UInt16*, patternLength : Int32, source : UInt16*, sourceLength : Int32, parseError : Win32cr::Globalization::UParseError*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.u_parseMessageWithError(locale, pattern, patternLength, source, sourceLength, parseError, status)
+    {% end %}
   end
 
   def uVparseMessageWithError(locale : Win32cr::Foundation::PSTR, pattern : UInt16*, patternLength : Int32, source : UInt16*, sourceLength : Int32, ap : Int8*, parseError : Win32cr::Globalization::UParseError*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.u_vparseMessageWithError(locale, pattern, patternLength, source, sourceLength, ap, parseError, status)
+    {% end %}
   end
 
   def umsgOpen(pattern : UInt16*, patternLength : Int32, locale : Win32cr::Foundation::PSTR, parseError : Win32cr::Globalization::UParseError*, status : Win32cr::Globalization::UErrorCode*) : Void**
+    {% if !flag?(:docs) %}
     C.umsg_open(pattern, patternLength, locale, parseError, status)
+    {% end %}
   end
 
   def umsgClose(format : Void**) : Void
+    {% if !flag?(:docs) %}
     C.umsg_close(format)
+    {% end %}
   end
 
   def umsgClone(fmt : Void**, status : Win32cr::Globalization::UErrorCode*) : Void*
+    {% if !flag?(:docs) %}
     C.umsg_clone(fmt, status)
+    {% end %}
   end
 
   def umsgSetLocale(fmt : Void**, locale : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.umsg_setLocale(fmt, locale)
+    {% end %}
   end
 
   def umsgGetLocale(fmt : Void**) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.umsg_getLocale(fmt)
+    {% end %}
   end
 
   def umsgApplyPattern(fmt : Void**, pattern : UInt16*, patternLength : Int32, parseError : Win32cr::Globalization::UParseError*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.umsg_applyPattern(fmt, pattern, patternLength, parseError, status)
+    {% end %}
   end
 
   def umsgToPattern(fmt : Void**, result : UInt16*, resultLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.umsg_toPattern(fmt, result, resultLength, status)
+    {% end %}
   end
 
   def umsgFormat(fmt : Void**, result : UInt16*, resultLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.umsg_format(fmt, result, resultLength, status)
+    {% end %}
   end
 
   def umsgVformat(fmt : Void**, result : UInt16*, resultLength : Int32, ap : Int8*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.umsg_vformat(fmt, result, resultLength, ap, status)
+    {% end %}
   end
 
   def umsgParse(fmt : Void**, source : UInt16*, sourceLength : Int32, count : Int32*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.umsg_parse(fmt, source, sourceLength, count, status)
+    {% end %}
   end
 
   def umsgVparse(fmt : Void**, source : UInt16*, sourceLength : Int32, count : Int32*, ap : Int8*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.umsg_vparse(fmt, source, sourceLength, count, ap, status)
+    {% end %}
   end
 
   def umsgAutoQuoteApostrophe(pattern : UInt16*, patternLength : Int32, dest : UInt16*, destCapacity : Int32, ec : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.umsg_autoQuoteApostrophe(pattern, patternLength, dest, destCapacity, ec)
+    {% end %}
   end
 
   def unumOpen(style : Win32cr::Globalization::UNumberFormatStyle, pattern : UInt16*, patternLength : Int32, locale : Win32cr::Foundation::PSTR, parseErr : Win32cr::Globalization::UParseError*, status : Win32cr::Globalization::UErrorCode*) : Void**
+    {% if !flag?(:docs) %}
     C.unum_open(style, pattern, patternLength, locale, parseErr, status)
+    {% end %}
   end
 
   def unumClose(fmt : Void**) : Void
+    {% if !flag?(:docs) %}
     C.unum_close(fmt)
+    {% end %}
   end
 
   def unumClone(fmt : Void**, status : Win32cr::Globalization::UErrorCode*) : Void**
+    {% if !flag?(:docs) %}
     C.unum_clone(fmt, status)
+    {% end %}
   end
 
   def unumFormat(fmt : Void**, number : Int32, result : UInt16*, resultLength : Int32, pos : Win32cr::Globalization::UFieldPosition*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unum_format(fmt, number, result, resultLength, pos, status)
+    {% end %}
   end
 
   def unumFormatInt64(fmt : Void**, number : Int64, result : UInt16*, resultLength : Int32, pos : Win32cr::Globalization::UFieldPosition*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unum_formatInt64(fmt, number, result, resultLength, pos, status)
+    {% end %}
   end
 
   def unumFormatDouble(fmt : Void**, number : Float64, result : UInt16*, resultLength : Int32, pos : Win32cr::Globalization::UFieldPosition*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unum_formatDouble(fmt, number, result, resultLength, pos, status)
+    {% end %}
   end
 
   def unumFormatDoubleForFields(format : Void**, number : Float64, result : UInt16*, resultLength : Int32, fpositer : Win32cr::Globalization::UFieldPositionIterator*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unum_formatDoubleForFields(format, number, result, resultLength, fpositer, status)
+    {% end %}
   end
 
   def unumFormatDecimal(fmt : Void**, number : Win32cr::Foundation::PSTR, length : Int32, result : UInt16*, resultLength : Int32, pos : Win32cr::Globalization::UFieldPosition*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unum_formatDecimal(fmt, number, length, result, resultLength, pos, status)
+    {% end %}
   end
 
   def unumFormatDoubleCurrency(fmt : Void**, number : Float64, currency : UInt16*, result : UInt16*, resultLength : Int32, pos : Win32cr::Globalization::UFieldPosition*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unum_formatDoubleCurrency(fmt, number, currency, result, resultLength, pos, status)
+    {% end %}
   end
 
   def unumFormatUFormattable(fmt : Void**, number : Void**, result : UInt16*, resultLength : Int32, pos : Win32cr::Globalization::UFieldPosition*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unum_formatUFormattable(fmt, number, result, resultLength, pos, status)
+    {% end %}
   end
 
   def unumParse(fmt : Void**, text : UInt16*, textLength : Int32, parsePos : Int32*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unum_parse(fmt, text, textLength, parsePos, status)
+    {% end %}
   end
 
   def unumParseInt64(fmt : Void**, text : UInt16*, textLength : Int32, parsePos : Int32*, status : Win32cr::Globalization::UErrorCode*) : Int64
+    {% if !flag?(:docs) %}
     C.unum_parseInt64(fmt, text, textLength, parsePos, status)
+    {% end %}
   end
 
   def unumParseDouble(fmt : Void**, text : UInt16*, textLength : Int32, parsePos : Int32*, status : Win32cr::Globalization::UErrorCode*) : Float64
+    {% if !flag?(:docs) %}
     C.unum_parseDouble(fmt, text, textLength, parsePos, status)
+    {% end %}
   end
 
   def unumParseDecimal(fmt : Void**, text : UInt16*, textLength : Int32, parsePos : Int32*, outBuf : Win32cr::Foundation::PSTR, outBufLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unum_parseDecimal(fmt, text, textLength, parsePos, outBuf, outBufLength, status)
+    {% end %}
   end
 
   def unumParseDoubleCurrency(fmt : Void**, text : UInt16*, textLength : Int32, parsePos : Int32*, currency : UInt16*, status : Win32cr::Globalization::UErrorCode*) : Float64
+    {% if !flag?(:docs) %}
     C.unum_parseDoubleCurrency(fmt, text, textLength, parsePos, currency, status)
+    {% end %}
   end
 
   def unumParseToUFormattable(fmt : Void**, result : Void**, text : UInt16*, textLength : Int32, parsePos : Int32*, status : Win32cr::Globalization::UErrorCode*) : Void**
+    {% if !flag?(:docs) %}
     C.unum_parseToUFormattable(fmt, result, text, textLength, parsePos, status)
+    {% end %}
   end
 
   def unumApplyPattern(format : Void**, localized : Int8, pattern : UInt16*, patternLength : Int32, parseError : Win32cr::Globalization::UParseError*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.unum_applyPattern(format, localized, pattern, patternLength, parseError, status)
+    {% end %}
   end
 
   def unumGetAvailable(localeIndex : Int32) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.unum_getAvailable(localeIndex)
+    {% end %}
   end
 
   def unumCountAvailable : Int32
+    {% if !flag?(:docs) %}
     C.unum_countAvailable
+    {% end %}
   end
 
   def unumGetAttribute(fmt : Void**, attr : Win32cr::Globalization::UNumberFormatAttribute) : Int32
+    {% if !flag?(:docs) %}
     C.unum_getAttribute(fmt, attr)
+    {% end %}
   end
 
   def unumSetAttribute(fmt : Void**, attr : Win32cr::Globalization::UNumberFormatAttribute, newValue : Int32) : Void
+    {% if !flag?(:docs) %}
     C.unum_setAttribute(fmt, attr, newValue)
+    {% end %}
   end
 
   def unumGetDoubleAttribute(fmt : Void**, attr : Win32cr::Globalization::UNumberFormatAttribute) : Float64
+    {% if !flag?(:docs) %}
     C.unum_getDoubleAttribute(fmt, attr)
+    {% end %}
   end
 
   def unumSetDoubleAttribute(fmt : Void**, attr : Win32cr::Globalization::UNumberFormatAttribute, newValue : Float64) : Void
+    {% if !flag?(:docs) %}
     C.unum_setDoubleAttribute(fmt, attr, newValue)
+    {% end %}
   end
 
   def unumGetTextAttribute(fmt : Void**, tag : Win32cr::Globalization::UNumberFormatTextAttribute, result : UInt16*, resultLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unum_getTextAttribute(fmt, tag, result, resultLength, status)
+    {% end %}
   end
 
   def unumSetTextAttribute(fmt : Void**, tag : Win32cr::Globalization::UNumberFormatTextAttribute, newValue : UInt16*, newValueLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.unum_setTextAttribute(fmt, tag, newValue, newValueLength, status)
+    {% end %}
   end
 
   def unumToPattern(fmt : Void**, isPatternLocalized : Int8, result : UInt16*, resultLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unum_toPattern(fmt, isPatternLocalized, result, resultLength, status)
+    {% end %}
   end
 
   def unumGetSymbol(fmt : Void**, symbol : Win32cr::Globalization::UNumberFormatSymbol, buffer : UInt16*, size : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unum_getSymbol(fmt, symbol, buffer, size, status)
+    {% end %}
   end
 
   def unumSetSymbol(fmt : Void**, symbol : Win32cr::Globalization::UNumberFormatSymbol, value : UInt16*, length : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.unum_setSymbol(fmt, symbol, value, length, status)
+    {% end %}
   end
 
   def unumGetLocaleByType(fmt : Void**, type__ : Win32cr::Globalization::ULocDataLocaleType, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.unum_getLocaleByType(fmt, type__, status)
+    {% end %}
   end
 
   def unumSetContext(fmt : Void**, value : Win32cr::Globalization::UDisplayContext, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.unum_setContext(fmt, value, status)
+    {% end %}
   end
 
   def unumGetContext(fmt : Void**, type__ : Win32cr::Globalization::UDisplayContextType, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UDisplayContext
+    {% if !flag?(:docs) %}
     C.unum_getContext(fmt, type__, status)
+    {% end %}
   end
 
   def udatToCalendarDateField(field : Win32cr::Globalization::UDateFormatField) : Win32cr::Globalization::UCalendarDateFields
+    {% if !flag?(:docs) %}
     C.udat_toCalendarDateField(field)
+    {% end %}
   end
 
   def udatOpen(timeStyle : Win32cr::Globalization::UDateFormatStyle, dateStyle : Win32cr::Globalization::UDateFormatStyle, locale : Win32cr::Foundation::PSTR, tzID : UInt16*, tzIDLength : Int32, pattern : UInt16*, patternLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Void**
+    {% if !flag?(:docs) %}
     C.udat_open(timeStyle, dateStyle, locale, tzID, tzIDLength, pattern, patternLength, status)
+    {% end %}
   end
 
   def udatClose(format : Void**) : Void
+    {% if !flag?(:docs) %}
     C.udat_close(format)
+    {% end %}
   end
 
   def udatGetBooleanAttribute(fmt : Void**, attr : Win32cr::Globalization::UDateFormatBooleanAttribute, status : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.udat_getBooleanAttribute(fmt, attr, status)
+    {% end %}
   end
 
   def udatSetBooleanAttribute(fmt : Void**, attr : Win32cr::Globalization::UDateFormatBooleanAttribute, newValue : Int8, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.udat_setBooleanAttribute(fmt, attr, newValue, status)
+    {% end %}
   end
 
   def udatClone(fmt : Void**, status : Win32cr::Globalization::UErrorCode*) : Void**
+    {% if !flag?(:docs) %}
     C.udat_clone(fmt, status)
+    {% end %}
   end
 
   def udatFormat(format : Void**, dateToFormat : Float64, result : UInt16*, resultLength : Int32, position : Win32cr::Globalization::UFieldPosition*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.udat_format(format, dateToFormat, result, resultLength, position, status)
+    {% end %}
   end
 
   def udatFormatCalendar(format : Void**, calendar : Void**, result : UInt16*, capacity : Int32, position : Win32cr::Globalization::UFieldPosition*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.udat_formatCalendar(format, calendar, result, capacity, position, status)
+    {% end %}
   end
 
   def udatFormatForFields(format : Void**, dateToFormat : Float64, result : UInt16*, resultLength : Int32, fpositer : Win32cr::Globalization::UFieldPositionIterator*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.udat_formatForFields(format, dateToFormat, result, resultLength, fpositer, status)
+    {% end %}
   end
 
   def udatFormatCalendarForFields(format : Void**, calendar : Void**, result : UInt16*, capacity : Int32, fpositer : Win32cr::Globalization::UFieldPositionIterator*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.udat_formatCalendarForFields(format, calendar, result, capacity, fpositer, status)
+    {% end %}
   end
 
   def udatParse(format : Void**, text : UInt16*, textLength : Int32, parsePos : Int32*, status : Win32cr::Globalization::UErrorCode*) : Float64
+    {% if !flag?(:docs) %}
     C.udat_parse(format, text, textLength, parsePos, status)
+    {% end %}
   end
 
   def udatParseCalendar(format : Void**, calendar : Void**, text : UInt16*, textLength : Int32, parsePos : Int32*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.udat_parseCalendar(format, calendar, text, textLength, parsePos, status)
+    {% end %}
   end
 
   def udatIsLenient(fmt : Void**) : Int8
+    {% if !flag?(:docs) %}
     C.udat_isLenient(fmt)
+    {% end %}
   end
 
   def udatSetLenient(fmt : Void**, isLenient : Int8) : Void
+    {% if !flag?(:docs) %}
     C.udat_setLenient(fmt, isLenient)
+    {% end %}
   end
 
   def udatGetCalendar(fmt : Void**) : Void**
+    {% if !flag?(:docs) %}
     C.udat_getCalendar(fmt)
+    {% end %}
   end
 
   def udatSetCalendar(fmt : Void**, calendarToSet : Void**) : Void
+    {% if !flag?(:docs) %}
     C.udat_setCalendar(fmt, calendarToSet)
+    {% end %}
   end
 
   def udatGetNumberFormat(fmt : Void**) : Void**
+    {% if !flag?(:docs) %}
     C.udat_getNumberFormat(fmt)
+    {% end %}
   end
 
   def udatGetNumberFormatForField(fmt : Void**, field : UInt16) : Void**
+    {% if !flag?(:docs) %}
     C.udat_getNumberFormatForField(fmt, field)
+    {% end %}
   end
 
   def udatAdoptNumberFormatForFields(fmt : Void**, fields : UInt16*, numberFormatToSet : Void**, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.udat_adoptNumberFormatForFields(fmt, fields, numberFormatToSet, status)
+    {% end %}
   end
 
   def udatSetNumberFormat(fmt : Void**, numberFormatToSet : Void**) : Void
+    {% if !flag?(:docs) %}
     C.udat_setNumberFormat(fmt, numberFormatToSet)
+    {% end %}
   end
 
   def udatAdoptNumberFormat(fmt : Void**, numberFormatToAdopt : Void**) : Void
+    {% if !flag?(:docs) %}
     C.udat_adoptNumberFormat(fmt, numberFormatToAdopt)
+    {% end %}
   end
 
   def udatGetAvailable(localeIndex : Int32) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.udat_getAvailable(localeIndex)
+    {% end %}
   end
 
   def udatCountAvailable : Int32
+    {% if !flag?(:docs) %}
     C.udat_countAvailable
+    {% end %}
   end
 
   def udatGet2DigitYearStart(fmt : Void**, status : Win32cr::Globalization::UErrorCode*) : Float64
+    {% if !flag?(:docs) %}
     C.udat_get2DigitYearStart(fmt, status)
+    {% end %}
   end
 
   def udatSet2DigitYearStart(fmt : Void**, d : Float64, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.udat_set2DigitYearStart(fmt, d, status)
+    {% end %}
   end
 
   def udatToPattern(fmt : Void**, localized : Int8, result : UInt16*, resultLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.udat_toPattern(fmt, localized, result, resultLength, status)
+    {% end %}
   end
 
   def udatApplyPattern(format : Void**, localized : Int8, pattern : UInt16*, patternLength : Int32) : Void
+    {% if !flag?(:docs) %}
     C.udat_applyPattern(format, localized, pattern, patternLength)
+    {% end %}
   end
 
   def udatGetSymbols(fmt : Void**, type__ : Win32cr::Globalization::UDateFormatSymbolType, symbolIndex : Int32, result : UInt16*, resultLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.udat_getSymbols(fmt, type__, symbolIndex, result, resultLength, status)
+    {% end %}
   end
 
   def udatCountSymbols(fmt : Void**, type__ : Win32cr::Globalization::UDateFormatSymbolType) : Int32
+    {% if !flag?(:docs) %}
     C.udat_countSymbols(fmt, type__)
+    {% end %}
   end
 
   def udatSetSymbols(format : Void**, type__ : Win32cr::Globalization::UDateFormatSymbolType, symbolIndex : Int32, value : UInt16*, valueLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.udat_setSymbols(format, type__, symbolIndex, value, valueLength, status)
+    {% end %}
   end
 
   def udatGetLocaleByType(fmt : Void**, type__ : Win32cr::Globalization::ULocDataLocaleType, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.udat_getLocaleByType(fmt, type__, status)
+    {% end %}
   end
 
   def udatSetContext(fmt : Void**, value : Win32cr::Globalization::UDisplayContext, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.udat_setContext(fmt, value, status)
+    {% end %}
   end
 
   def udatGetContext(fmt : Void**, type__ : Win32cr::Globalization::UDisplayContextType, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UDisplayContext
+    {% if !flag?(:docs) %}
     C.udat_getContext(fmt, type__, status)
+    {% end %}
   end
 
   def udatpgOpen(locale : Win32cr::Foundation::PSTR, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void**
+    {% if !flag?(:docs) %}
     C.udatpg_open(locale, pErrorCode)
+    {% end %}
   end
 
   def udatpgOpenEmpty(pErrorCode : Win32cr::Globalization::UErrorCode*) : Void**
+    {% if !flag?(:docs) %}
     C.udatpg_openEmpty(pErrorCode)
+    {% end %}
   end
 
   def udatpgClose(dtpg : Void**) : Void
+    {% if !flag?(:docs) %}
     C.udatpg_close(dtpg)
+    {% end %}
   end
 
   def udatpgClone(dtpg : Void**, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void**
+    {% if !flag?(:docs) %}
     C.udatpg_clone(dtpg, pErrorCode)
+    {% end %}
   end
 
   def udatpgGetBestPattern(dtpg : Void**, skeleton : UInt16*, length : Int32, bestPattern : UInt16*, capacity : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.udatpg_getBestPattern(dtpg, skeleton, length, bestPattern, capacity, pErrorCode)
+    {% end %}
   end
 
   def udatpgGetBestPatternWithOptions(dtpg : Void**, skeleton : UInt16*, length : Int32, options : Win32cr::Globalization::UDateTimePatternMatchOptions, bestPattern : UInt16*, capacity : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.udatpg_getBestPatternWithOptions(dtpg, skeleton, length, options, bestPattern, capacity, pErrorCode)
+    {% end %}
   end
 
   def udatpgGetSkeleton(unusedDtpg : Void**, pattern : UInt16*, length : Int32, skeleton : UInt16*, capacity : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.udatpg_getSkeleton(unusedDtpg, pattern, length, skeleton, capacity, pErrorCode)
+    {% end %}
   end
 
   def udatpgGetBaseSkeleton(unusedDtpg : Void**, pattern : UInt16*, length : Int32, baseSkeleton : UInt16*, capacity : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.udatpg_getBaseSkeleton(unusedDtpg, pattern, length, baseSkeleton, capacity, pErrorCode)
+    {% end %}
   end
 
   def udatpgAddPattern(dtpg : Void**, pattern : UInt16*, patternLength : Int32, override : Int8, conflictingPattern : UInt16*, capacity : Int32, pLength : Int32*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UDateTimePatternConflict
+    {% if !flag?(:docs) %}
     C.udatpg_addPattern(dtpg, pattern, patternLength, override, conflictingPattern, capacity, pLength, pErrorCode)
+    {% end %}
   end
 
   def udatpgSetAppendItemFormat(dtpg : Void**, field : Win32cr::Globalization::UDateTimePatternField, value : UInt16*, length : Int32) : Void
+    {% if !flag?(:docs) %}
     C.udatpg_setAppendItemFormat(dtpg, field, value, length)
+    {% end %}
   end
 
   def udatpgGetAppendItemFormat(dtpg : Void**, field : Win32cr::Globalization::UDateTimePatternField, pLength : Int32*) : UInt16*
+    {% if !flag?(:docs) %}
     C.udatpg_getAppendItemFormat(dtpg, field, pLength)
+    {% end %}
   end
 
   def udatpgSetAppendItemName(dtpg : Void**, field : Win32cr::Globalization::UDateTimePatternField, value : UInt16*, length : Int32) : Void
+    {% if !flag?(:docs) %}
     C.udatpg_setAppendItemName(dtpg, field, value, length)
+    {% end %}
   end
 
   def udatpgGetAppendItemName(dtpg : Void**, field : Win32cr::Globalization::UDateTimePatternField, pLength : Int32*) : UInt16*
+    {% if !flag?(:docs) %}
     C.udatpg_getAppendItemName(dtpg, field, pLength)
+    {% end %}
   end
 
   def udatpgGetFieldDisplayName(dtpg : Void**, field : Win32cr::Globalization::UDateTimePatternField, width : Win32cr::Globalization::UDateTimePGDisplayWidth, fieldName : UInt16*, capacity : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.udatpg_getFieldDisplayName(dtpg, field, width, fieldName, capacity, pErrorCode)
+    {% end %}
   end
 
   def udatpgSetDateTimeFormat(dtpg : Void**, dtFormat : UInt16*, length : Int32) : Void
+    {% if !flag?(:docs) %}
     C.udatpg_setDateTimeFormat(dtpg, dtFormat, length)
+    {% end %}
   end
 
   def udatpgGetDateTimeFormat(dtpg : Void**, pLength : Int32*) : UInt16*
+    {% if !flag?(:docs) %}
     C.udatpg_getDateTimeFormat(dtpg, pLength)
+    {% end %}
   end
 
   def udatpgSetDecimal(dtpg : Void**, decimal : UInt16*, length : Int32) : Void
+    {% if !flag?(:docs) %}
     C.udatpg_setDecimal(dtpg, decimal, length)
+    {% end %}
   end
 
   def udatpgGetDecimal(dtpg : Void**, pLength : Int32*) : UInt16*
+    {% if !flag?(:docs) %}
     C.udatpg_getDecimal(dtpg, pLength)
+    {% end %}
   end
 
   def udatpgReplaceFieldTypes(dtpg : Void**, pattern : UInt16*, patternLength : Int32, skeleton : UInt16*, skeletonLength : Int32, dest : UInt16*, destCapacity : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.udatpg_replaceFieldTypes(dtpg, pattern, patternLength, skeleton, skeletonLength, dest, destCapacity, pErrorCode)
+    {% end %}
   end
 
   def udatpgReplaceFieldTypesWithOptions(dtpg : Void**, pattern : UInt16*, patternLength : Int32, skeleton : UInt16*, skeletonLength : Int32, options : Win32cr::Globalization::UDateTimePatternMatchOptions, dest : UInt16*, destCapacity : Int32, pErrorCode : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.udatpg_replaceFieldTypesWithOptions(dtpg, pattern, patternLength, skeleton, skeletonLength, options, dest, destCapacity, pErrorCode)
+    {% end %}
   end
 
   def udatpgOpenSkeletons(dtpg : Void**, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.udatpg_openSkeletons(dtpg, pErrorCode)
+    {% end %}
   end
 
   def udatpgOpenBaseSkeletons(dtpg : Void**, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.udatpg_openBaseSkeletons(dtpg, pErrorCode)
+    {% end %}
   end
 
   def udatpgGetPatternForSkeleton(dtpg : Void**, skeleton : UInt16*, skeletonLength : Int32, pLength : Int32*) : UInt16*
+    {% if !flag?(:docs) %}
     C.udatpg_getPatternForSkeleton(dtpg, skeleton, skeletonLength, pLength)
+    {% end %}
   end
 
   def unumfOpenForSkeletonAndLocale(skeleton : UInt16*, skeletonLen : Int32, locale : Win32cr::Foundation::PSTR, ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UNumberFormatter*
+    {% if !flag?(:docs) %}
     C.unumf_openForSkeletonAndLocale(skeleton, skeletonLen, locale, ec)
+    {% end %}
   end
 
   def unumfOpenForSkeletonAndLocaleWithError(skeleton : UInt16*, skeletonLen : Int32, locale : Win32cr::Foundation::PSTR, perror : Win32cr::Globalization::UParseError*, ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UNumberFormatter*
+    {% if !flag?(:docs) %}
     C.unumf_openForSkeletonAndLocaleWithError(skeleton, skeletonLen, locale, perror, ec)
+    {% end %}
   end
 
   def unumfOpenResult(ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UFormattedNumber*
+    {% if !flag?(:docs) %}
     C.unumf_openResult(ec)
+    {% end %}
   end
 
   def unumfFormatInt(uformatter : Win32cr::Globalization::UNumberFormatter*, value : Int64, uresult : Win32cr::Globalization::UFormattedNumber*, ec : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.unumf_formatInt(uformatter, value, uresult, ec)
+    {% end %}
   end
 
   def unumfFormatDouble(uformatter : Win32cr::Globalization::UNumberFormatter*, value : Float64, uresult : Win32cr::Globalization::UFormattedNumber*, ec : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.unumf_formatDouble(uformatter, value, uresult, ec)
+    {% end %}
   end
 
   def unumfFormatDecimal(uformatter : Win32cr::Globalization::UNumberFormatter*, value : Win32cr::Foundation::PSTR, valueLen : Int32, uresult : Win32cr::Globalization::UFormattedNumber*, ec : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.unumf_formatDecimal(uformatter, value, valueLen, uresult, ec)
+    {% end %}
   end
 
   def unumfResultAsValue(uresult : Win32cr::Globalization::UFormattedNumber*, ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UFormattedValue*
+    {% if !flag?(:docs) %}
     C.unumf_resultAsValue(uresult, ec)
+    {% end %}
   end
 
   def unumfResultToString(uresult : Win32cr::Globalization::UFormattedNumber*, buffer : UInt16*, bufferCapacity : Int32, ec : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unumf_resultToString(uresult, buffer, bufferCapacity, ec)
+    {% end %}
   end
 
   def unumfResultNextFieldPosition(uresult : Win32cr::Globalization::UFormattedNumber*, ufpos : Win32cr::Globalization::UFieldPosition*, ec : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.unumf_resultNextFieldPosition(uresult, ufpos, ec)
+    {% end %}
   end
 
   def unumfResultGetAllFieldPositions(uresult : Win32cr::Globalization::UFormattedNumber*, ufpositer : Win32cr::Globalization::UFieldPositionIterator*, ec : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.unumf_resultGetAllFieldPositions(uresult, ufpositer, ec)
+    {% end %}
   end
 
   def unumfClose(uformatter : Win32cr::Globalization::UNumberFormatter*) : Void
+    {% if !flag?(:docs) %}
     C.unumf_close(uformatter)
+    {% end %}
   end
 
   def unumfCloseResult(uresult : Win32cr::Globalization::UFormattedNumber*) : Void
+    {% if !flag?(:docs) %}
     C.unumf_closeResult(uresult)
+    {% end %}
   end
 
   def unumsysOpen(locale : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UNumberingSystem*
+    {% if !flag?(:docs) %}
     C.unumsys_open(locale, status)
+    {% end %}
   end
 
   def unumsysOpenByName(name : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UNumberingSystem*
+    {% if !flag?(:docs) %}
     C.unumsys_openByName(name, status)
+    {% end %}
   end
 
   def unumsysClose(unumsys : Win32cr::Globalization::UNumberingSystem*) : Void
+    {% if !flag?(:docs) %}
     C.unumsys_close(unumsys)
+    {% end %}
   end
 
   def unumsysOpenAvailableNames(status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.unumsys_openAvailableNames(status)
+    {% end %}
   end
 
   def unumsysGetName(unumsys : Win32cr::Globalization::UNumberingSystem*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.unumsys_getName(unumsys)
+    {% end %}
   end
 
   def unumsysIsAlgorithmic(unumsys : Win32cr::Globalization::UNumberingSystem*) : Int8
+    {% if !flag?(:docs) %}
     C.unumsys_isAlgorithmic(unumsys)
+    {% end %}
   end
 
   def unumsysGetRadix(unumsys : Win32cr::Globalization::UNumberingSystem*) : Int32
+    {% if !flag?(:docs) %}
     C.unumsys_getRadix(unumsys)
+    {% end %}
   end
 
   def unumsysGetDescription(unumsys : Win32cr::Globalization::UNumberingSystem*, result : UInt16*, resultLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.unumsys_getDescription(unumsys, result, resultLength, status)
+    {% end %}
   end
 
   def uplrulesOpen(locale : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UPluralRules*
+    {% if !flag?(:docs) %}
     C.uplrules_open(locale, status)
+    {% end %}
   end
 
   def uplrulesOpenForType(locale : Win32cr::Foundation::PSTR, type__ : Win32cr::Globalization::UPluralType, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UPluralRules*
+    {% if !flag?(:docs) %}
     C.uplrules_openForType(locale, type__, status)
+    {% end %}
   end
 
   def uplrulesClose(uplrules : Win32cr::Globalization::UPluralRules*) : Void
+    {% if !flag?(:docs) %}
     C.uplrules_close(uplrules)
+    {% end %}
   end
 
   def uplrulesSelect(uplrules : Win32cr::Globalization::UPluralRules*, number : Float64, keyword : UInt16*, capacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uplrules_select(uplrules, number, keyword, capacity, status)
+    {% end %}
   end
 
   def uplrulesSelectFormatted(uplrules : Win32cr::Globalization::UPluralRules*, number : Win32cr::Globalization::UFormattedNumber*, keyword : UInt16*, capacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uplrules_selectFormatted(uplrules, number, keyword, capacity, status)
+    {% end %}
   end
 
   def uplrulesGetKeywords(uplrules : Win32cr::Globalization::UPluralRules*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.uplrules_getKeywords(uplrules, status)
+    {% end %}
   end
 
   def uregexOpen(pattern : UInt16*, patternLength : Int32, flags : UInt32, pe : Win32cr::Globalization::UParseError*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::URegularExpression*
+    {% if !flag?(:docs) %}
     C.uregex_open(pattern, patternLength, flags, pe, status)
+    {% end %}
   end
 
   def uregexOpenUText(pattern : Win32cr::Globalization::UText*, flags : UInt32, pe : Win32cr::Globalization::UParseError*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::URegularExpression*
+    {% if !flag?(:docs) %}
     C.uregex_openUText(pattern, flags, pe, status)
+    {% end %}
   end
 
   def uregexOpenC(pattern : Win32cr::Foundation::PSTR, flags : UInt32, pe : Win32cr::Globalization::UParseError*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::URegularExpression*
+    {% if !flag?(:docs) %}
     C.uregex_openC(pattern, flags, pe, status)
+    {% end %}
   end
 
   def uregexClose(regexp : Win32cr::Globalization::URegularExpression*) : Void
+    {% if !flag?(:docs) %}
     C.uregex_close(regexp)
+    {% end %}
   end
 
   def uregexClone(regexp : Win32cr::Globalization::URegularExpression*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::URegularExpression*
+    {% if !flag?(:docs) %}
     C.uregex_clone(regexp, status)
+    {% end %}
   end
 
   def uregexPattern(regexp : Win32cr::Globalization::URegularExpression*, patLength : Int32*, status : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.uregex_pattern(regexp, patLength, status)
+    {% end %}
   end
 
   def uregexPatternUText(regexp : Win32cr::Globalization::URegularExpression*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UText*
+    {% if !flag?(:docs) %}
     C.uregex_patternUText(regexp, status)
+    {% end %}
   end
 
   def uregexFlags(regexp : Win32cr::Globalization::URegularExpression*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uregex_flags(regexp, status)
+    {% end %}
   end
 
   def uregexSetText(regexp : Win32cr::Globalization::URegularExpression*, text : UInt16*, textLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uregex_setText(regexp, text, textLength, status)
+    {% end %}
   end
 
   def uregexSetUText(regexp : Win32cr::Globalization::URegularExpression*, text : Win32cr::Globalization::UText*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uregex_setUText(regexp, text, status)
+    {% end %}
   end
 
   def uregexGetText(regexp : Win32cr::Globalization::URegularExpression*, textLength : Int32*, status : Win32cr::Globalization::UErrorCode*) : UInt16*
+    {% if !flag?(:docs) %}
     C.uregex_getText(regexp, textLength, status)
+    {% end %}
   end
 
   def uregexGetUText(regexp : Win32cr::Globalization::URegularExpression*, dest : Win32cr::Globalization::UText*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UText*
+    {% if !flag?(:docs) %}
     C.uregex_getUText(regexp, dest, status)
+    {% end %}
   end
 
   def uregexRefreshUText(regexp : Win32cr::Globalization::URegularExpression*, text : Win32cr::Globalization::UText*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uregex_refreshUText(regexp, text, status)
+    {% end %}
   end
 
   def uregexMatches(regexp : Win32cr::Globalization::URegularExpression*, startIndex : Int32, status : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.uregex_matches(regexp, startIndex, status)
+    {% end %}
   end
 
   def uregexMatches64(regexp : Win32cr::Globalization::URegularExpression*, startIndex : Int64, status : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.uregex_matches64(regexp, startIndex, status)
+    {% end %}
   end
 
   def uregexLookingAt(regexp : Win32cr::Globalization::URegularExpression*, startIndex : Int32, status : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.uregex_lookingAt(regexp, startIndex, status)
+    {% end %}
   end
 
   def uregexLookingAt64(regexp : Win32cr::Globalization::URegularExpression*, startIndex : Int64, status : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.uregex_lookingAt64(regexp, startIndex, status)
+    {% end %}
   end
 
   def uregexFind(regexp : Win32cr::Globalization::URegularExpression*, startIndex : Int32, status : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.uregex_find(regexp, startIndex, status)
+    {% end %}
   end
 
   def uregexFind64(regexp : Win32cr::Globalization::URegularExpression*, startIndex : Int64, status : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.uregex_find64(regexp, startIndex, status)
+    {% end %}
   end
 
   def uregexFindNext(regexp : Win32cr::Globalization::URegularExpression*, status : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.uregex_findNext(regexp, status)
+    {% end %}
   end
 
   def uregexGroupCount(regexp : Win32cr::Globalization::URegularExpression*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uregex_groupCount(regexp, status)
+    {% end %}
   end
 
   def uregexGroupNumberFromName(regexp : Win32cr::Globalization::URegularExpression*, groupName : UInt16*, nameLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uregex_groupNumberFromName(regexp, groupName, nameLength, status)
+    {% end %}
   end
 
   def uregexGroupNumberFromCName(regexp : Win32cr::Globalization::URegularExpression*, groupName : Win32cr::Foundation::PSTR, nameLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uregex_groupNumberFromCName(regexp, groupName, nameLength, status)
+    {% end %}
   end
 
   def uregexGroup(regexp : Win32cr::Globalization::URegularExpression*, groupNum : Int32, dest : UInt16*, destCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uregex_group(regexp, groupNum, dest, destCapacity, status)
+    {% end %}
   end
 
   def uregexGroupUText(regexp : Win32cr::Globalization::URegularExpression*, groupNum : Int32, dest : Win32cr::Globalization::UText*, groupLength : Int64*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UText*
+    {% if !flag?(:docs) %}
     C.uregex_groupUText(regexp, groupNum, dest, groupLength, status)
+    {% end %}
   end
 
   def uregexStart(regexp : Win32cr::Globalization::URegularExpression*, groupNum : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uregex_start(regexp, groupNum, status)
+    {% end %}
   end
 
   def uregexStart64(regexp : Win32cr::Globalization::URegularExpression*, groupNum : Int32, status : Win32cr::Globalization::UErrorCode*) : Int64
+    {% if !flag?(:docs) %}
     C.uregex_start64(regexp, groupNum, status)
+    {% end %}
   end
 
   def uregexEnd(regexp : Win32cr::Globalization::URegularExpression*, groupNum : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uregex_end(regexp, groupNum, status)
+    {% end %}
   end
 
   def uregexEnd64(regexp : Win32cr::Globalization::URegularExpression*, groupNum : Int32, status : Win32cr::Globalization::UErrorCode*) : Int64
+    {% if !flag?(:docs) %}
     C.uregex_end64(regexp, groupNum, status)
+    {% end %}
   end
 
   def uregexReset(regexp : Win32cr::Globalization::URegularExpression*, index : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uregex_reset(regexp, index, status)
+    {% end %}
   end
 
   def uregexReset64(regexp : Win32cr::Globalization::URegularExpression*, index : Int64, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uregex_reset64(regexp, index, status)
+    {% end %}
   end
 
   def uregexSetRegion(regexp : Win32cr::Globalization::URegularExpression*, regionStart : Int32, regionLimit : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uregex_setRegion(regexp, regionStart, regionLimit, status)
+    {% end %}
   end
 
   def uregexSetRegion64(regexp : Win32cr::Globalization::URegularExpression*, regionStart : Int64, regionLimit : Int64, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uregex_setRegion64(regexp, regionStart, regionLimit, status)
+    {% end %}
   end
 
   def uregexSetRegionAndStart(regexp : Win32cr::Globalization::URegularExpression*, regionStart : Int64, regionLimit : Int64, startIndex : Int64, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uregex_setRegionAndStart(regexp, regionStart, regionLimit, startIndex, status)
+    {% end %}
   end
 
   def uregexRegionStart(regexp : Win32cr::Globalization::URegularExpression*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uregex_regionStart(regexp, status)
+    {% end %}
   end
 
   def uregexRegionStart64(regexp : Win32cr::Globalization::URegularExpression*, status : Win32cr::Globalization::UErrorCode*) : Int64
+    {% if !flag?(:docs) %}
     C.uregex_regionStart64(regexp, status)
+    {% end %}
   end
 
   def uregexRegionEnd(regexp : Win32cr::Globalization::URegularExpression*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uregex_regionEnd(regexp, status)
+    {% end %}
   end
 
   def uregexRegionEnd64(regexp : Win32cr::Globalization::URegularExpression*, status : Win32cr::Globalization::UErrorCode*) : Int64
+    {% if !flag?(:docs) %}
     C.uregex_regionEnd64(regexp, status)
+    {% end %}
   end
 
   def uregexHasTransparentBounds(regexp : Win32cr::Globalization::URegularExpression*, status : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.uregex_hasTransparentBounds(regexp, status)
+    {% end %}
   end
 
   def uregexUseTransparentBounds(regexp : Win32cr::Globalization::URegularExpression*, b : Int8, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uregex_useTransparentBounds(regexp, b, status)
+    {% end %}
   end
 
   def uregexHasAnchoringBounds(regexp : Win32cr::Globalization::URegularExpression*, status : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.uregex_hasAnchoringBounds(regexp, status)
+    {% end %}
   end
 
   def uregexUseAnchoringBounds(regexp : Win32cr::Globalization::URegularExpression*, b : Int8, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uregex_useAnchoringBounds(regexp, b, status)
+    {% end %}
   end
 
   def uregexHitEnd(regexp : Win32cr::Globalization::URegularExpression*, status : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.uregex_hitEnd(regexp, status)
+    {% end %}
   end
 
   def uregexRequireEnd(regexp : Win32cr::Globalization::URegularExpression*, status : Win32cr::Globalization::UErrorCode*) : Int8
+    {% if !flag?(:docs) %}
     C.uregex_requireEnd(regexp, status)
+    {% end %}
   end
 
   def uregexReplaceAll(regexp : Win32cr::Globalization::URegularExpression*, replacementText : UInt16*, replacementLength : Int32, destBuf : UInt16*, destCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uregex_replaceAll(regexp, replacementText, replacementLength, destBuf, destCapacity, status)
+    {% end %}
   end
 
   def uregexReplaceAllUText(regexp : Win32cr::Globalization::URegularExpression*, replacement : Win32cr::Globalization::UText*, dest : Win32cr::Globalization::UText*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UText*
+    {% if !flag?(:docs) %}
     C.uregex_replaceAllUText(regexp, replacement, dest, status)
+    {% end %}
   end
 
   def uregexReplaceFirst(regexp : Win32cr::Globalization::URegularExpression*, replacementText : UInt16*, replacementLength : Int32, destBuf : UInt16*, destCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uregex_replaceFirst(regexp, replacementText, replacementLength, destBuf, destCapacity, status)
+    {% end %}
   end
 
   def uregexReplaceFirstUText(regexp : Win32cr::Globalization::URegularExpression*, replacement : Win32cr::Globalization::UText*, dest : Win32cr::Globalization::UText*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UText*
+    {% if !flag?(:docs) %}
     C.uregex_replaceFirstUText(regexp, replacement, dest, status)
+    {% end %}
   end
 
   def uregexAppendReplacement(regexp : Win32cr::Globalization::URegularExpression*, replacementText : UInt16*, replacementLength : Int32, destBuf : UInt16**, destCapacity : Int32*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uregex_appendReplacement(regexp, replacementText, replacementLength, destBuf, destCapacity, status)
+    {% end %}
   end
 
   def uregexAppendReplacementUText(regexp : Win32cr::Globalization::URegularExpression*, replacementText : Win32cr::Globalization::UText*, dest : Win32cr::Globalization::UText*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uregex_appendReplacementUText(regexp, replacementText, dest, status)
+    {% end %}
   end
 
   def uregexAppendTail(regexp : Win32cr::Globalization::URegularExpression*, destBuf : UInt16**, destCapacity : Int32*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uregex_appendTail(regexp, destBuf, destCapacity, status)
+    {% end %}
   end
 
   def uregexAppendTailUText(regexp : Win32cr::Globalization::URegularExpression*, dest : Win32cr::Globalization::UText*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UText*
+    {% if !flag?(:docs) %}
     C.uregex_appendTailUText(regexp, dest, status)
+    {% end %}
   end
 
   def uregexSplit(regexp : Win32cr::Globalization::URegularExpression*, destBuf : UInt16*, destCapacity : Int32, requiredCapacity : Int32*, destFields : UInt16**, destFieldsCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uregex_split(regexp, destBuf, destCapacity, requiredCapacity, destFields, destFieldsCapacity, status)
+    {% end %}
   end
 
   def uregexSplitUText(regexp : Win32cr::Globalization::URegularExpression*, destFields : Win32cr::Globalization::UText**, destFieldsCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uregex_splitUText(regexp, destFields, destFieldsCapacity, status)
+    {% end %}
   end
 
   def uregexSetTimeLimit(regexp : Win32cr::Globalization::URegularExpression*, limit : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uregex_setTimeLimit(regexp, limit, status)
+    {% end %}
   end
 
   def uregexGetTimeLimit(regexp : Win32cr::Globalization::URegularExpression*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uregex_getTimeLimit(regexp, status)
+    {% end %}
   end
 
   def uregexSetStackLimit(regexp : Win32cr::Globalization::URegularExpression*, limit : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uregex_setStackLimit(regexp, limit, status)
+    {% end %}
   end
 
   def uregexGetStackLimit(regexp : Win32cr::Globalization::URegularExpression*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uregex_getStackLimit(regexp, status)
+    {% end %}
   end
 
   def uregexSetMatchCallback(regexp : Win32cr::Globalization::URegularExpression*, callback : Win32cr::Globalization::URegexMatchCallback, context : Void*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uregex_setMatchCallback(regexp, callback, context, status)
+    {% end %}
   end
 
   def uregexGetMatchCallback(regexp : Win32cr::Globalization::URegularExpression*, callback : Win32cr::Globalization::URegexMatchCallback*, context : Void**, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uregex_getMatchCallback(regexp, callback, context, status)
+    {% end %}
   end
 
   def uregexSetFindProgressCallback(regexp : Win32cr::Globalization::URegularExpression*, callback : Win32cr::Globalization::URegexFindProgressCallback, context : Void*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uregex_setFindProgressCallback(regexp, callback, context, status)
+    {% end %}
   end
 
   def uregexGetFindProgressCallback(regexp : Win32cr::Globalization::URegularExpression*, callback : Win32cr::Globalization::URegexFindProgressCallback*, context : Void**, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uregex_getFindProgressCallback(regexp, callback, context, status)
+    {% end %}
   end
 
   def uregionGetRegionFromCode(regionCode : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::URegion*
+    {% if !flag?(:docs) %}
     C.uregion_getRegionFromCode(regionCode, status)
+    {% end %}
   end
 
   def uregionGetRegionFromNumericCode(code : Int32, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::URegion*
+    {% if !flag?(:docs) %}
     C.uregion_getRegionFromNumericCode(code, status)
+    {% end %}
   end
 
   def uregionGetAvailable(type__ : Win32cr::Globalization::URegionType, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.uregion_getAvailable(type__, status)
+    {% end %}
   end
 
   def uregionAreEqual(uregion : Win32cr::Globalization::URegion*, otherRegion : Win32cr::Globalization::URegion*) : Int8
+    {% if !flag?(:docs) %}
     C.uregion_areEqual(uregion, otherRegion)
+    {% end %}
   end
 
   def uregionGetContainingRegion(uregion : Win32cr::Globalization::URegion*) : Win32cr::Globalization::URegion*
+    {% if !flag?(:docs) %}
     C.uregion_getContainingRegion(uregion)
+    {% end %}
   end
 
   def uregionGetContainingRegionOfType(uregion : Win32cr::Globalization::URegion*, type__ : Win32cr::Globalization::URegionType) : Win32cr::Globalization::URegion*
+    {% if !flag?(:docs) %}
     C.uregion_getContainingRegionOfType(uregion, type__)
+    {% end %}
   end
 
   def uregionGetContainedRegions(uregion : Win32cr::Globalization::URegion*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.uregion_getContainedRegions(uregion, status)
+    {% end %}
   end
 
   def uregionGetContainedRegionsOfType(uregion : Win32cr::Globalization::URegion*, type__ : Win32cr::Globalization::URegionType, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.uregion_getContainedRegionsOfType(uregion, type__, status)
+    {% end %}
   end
 
   def uregionContains(uregion : Win32cr::Globalization::URegion*, otherRegion : Win32cr::Globalization::URegion*) : Int8
+    {% if !flag?(:docs) %}
     C.uregion_contains(uregion, otherRegion)
+    {% end %}
   end
 
   def uregionGetPreferredValues(uregion : Win32cr::Globalization::URegion*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.uregion_getPreferredValues(uregion, status)
+    {% end %}
   end
 
   def uregionGetRegionCode(uregion : Win32cr::Globalization::URegion*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.uregion_getRegionCode(uregion)
+    {% end %}
   end
 
   def uregionGetNumericCode(uregion : Win32cr::Globalization::URegion*) : Int32
+    {% if !flag?(:docs) %}
     C.uregion_getNumericCode(uregion)
+    {% end %}
   end
 
   def uregionGetType(uregion : Win32cr::Globalization::URegion*) : Win32cr::Globalization::URegionType
+    {% if !flag?(:docs) %}
     C.uregion_getType(uregion)
+    {% end %}
   end
 
   def ureldatefmtOpen(locale : Win32cr::Foundation::PSTR, nfToAdopt : Void**, width : Win32cr::Globalization::UDateRelativeDateTimeFormatterStyle, capitalizationContext : Win32cr::Globalization::UDisplayContext, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::URelativeDateTimeFormatter*
+    {% if !flag?(:docs) %}
     C.ureldatefmt_open(locale, nfToAdopt, width, capitalizationContext, status)
+    {% end %}
   end
 
   def ureldatefmtClose(reldatefmt : Win32cr::Globalization::URelativeDateTimeFormatter*) : Void
+    {% if !flag?(:docs) %}
     C.ureldatefmt_close(reldatefmt)
+    {% end %}
   end
 
   def ureldatefmtOpenResult(ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UFormattedRelativeDateTime*
+    {% if !flag?(:docs) %}
     C.ureldatefmt_openResult(ec)
+    {% end %}
   end
 
   def ureldatefmtResultAsValue(ufrdt : Win32cr::Globalization::UFormattedRelativeDateTime*, ec : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UFormattedValue*
+    {% if !flag?(:docs) %}
     C.ureldatefmt_resultAsValue(ufrdt, ec)
+    {% end %}
   end
 
   def ureldatefmtCloseResult(ufrdt : Win32cr::Globalization::UFormattedRelativeDateTime*) : Void
+    {% if !flag?(:docs) %}
     C.ureldatefmt_closeResult(ufrdt)
+    {% end %}
   end
 
   def ureldatefmtFormatNumeric(reldatefmt : Win32cr::Globalization::URelativeDateTimeFormatter*, offset : Float64, unit : Win32cr::Globalization::URelativeDateTimeUnit, result : UInt16*, resultCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ureldatefmt_formatNumeric(reldatefmt, offset, unit, result, resultCapacity, status)
+    {% end %}
   end
 
   def ureldatefmtFormatNumericToResult(reldatefmt : Win32cr::Globalization::URelativeDateTimeFormatter*, offset : Float64, unit : Win32cr::Globalization::URelativeDateTimeUnit, result : Win32cr::Globalization::UFormattedRelativeDateTime*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ureldatefmt_formatNumericToResult(reldatefmt, offset, unit, result, status)
+    {% end %}
   end
 
   def ureldatefmtFormat(reldatefmt : Win32cr::Globalization::URelativeDateTimeFormatter*, offset : Float64, unit : Win32cr::Globalization::URelativeDateTimeUnit, result : UInt16*, resultCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ureldatefmt_format(reldatefmt, offset, unit, result, resultCapacity, status)
+    {% end %}
   end
 
   def ureldatefmtFormatToResult(reldatefmt : Win32cr::Globalization::URelativeDateTimeFormatter*, offset : Float64, unit : Win32cr::Globalization::URelativeDateTimeUnit, result : Win32cr::Globalization::UFormattedRelativeDateTime*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.ureldatefmt_formatToResult(reldatefmt, offset, unit, result, status)
+    {% end %}
   end
 
   def ureldatefmtCombineDateAndTime(reldatefmt : Win32cr::Globalization::URelativeDateTimeFormatter*, relativeDateString : UInt16*, relativeDateStringLen : Int32, timeString : UInt16*, timeStringLen : Int32, result : UInt16*, resultCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.ureldatefmt_combineDateAndTime(reldatefmt, relativeDateString, relativeDateStringLen, timeString, timeStringLen, result, resultCapacity, status)
+    {% end %}
   end
 
   def usearchOpen(pattern : UInt16*, patternlength : Int32, text : UInt16*, textlength : Int32, locale : Win32cr::Foundation::PSTR, breakiter : Win32cr::Globalization::UBreakIterator*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UStringSearch*
+    {% if !flag?(:docs) %}
     C.usearch_open(pattern, patternlength, text, textlength, locale, breakiter, status)
+    {% end %}
   end
 
   def usearchOpenFromCollator(pattern : UInt16*, patternlength : Int32, text : UInt16*, textlength : Int32, collator : Win32cr::Globalization::UCollator*, breakiter : Win32cr::Globalization::UBreakIterator*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UStringSearch*
+    {% if !flag?(:docs) %}
     C.usearch_openFromCollator(pattern, patternlength, text, textlength, collator, breakiter, status)
+    {% end %}
   end
 
   def usearchClose(searchiter : Win32cr::Globalization::UStringSearch*) : Void
+    {% if !flag?(:docs) %}
     C.usearch_close(searchiter)
+    {% end %}
   end
 
   def usearchSetOffset(strsrch : Win32cr::Globalization::UStringSearch*, position : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.usearch_setOffset(strsrch, position, status)
+    {% end %}
   end
 
   def usearchGetOffset(strsrch : Win32cr::Globalization::UStringSearch*) : Int32
+    {% if !flag?(:docs) %}
     C.usearch_getOffset(strsrch)
+    {% end %}
   end
 
   def usearchSetAttribute(strsrch : Win32cr::Globalization::UStringSearch*, attribute : Win32cr::Globalization::USearchAttribute, value : Win32cr::Globalization::USearchAttributeValue, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.usearch_setAttribute(strsrch, attribute, value, status)
+    {% end %}
   end
 
   def usearchGetAttribute(strsrch : Win32cr::Globalization::UStringSearch*, attribute : Win32cr::Globalization::USearchAttribute) : Win32cr::Globalization::USearchAttributeValue
+    {% if !flag?(:docs) %}
     C.usearch_getAttribute(strsrch, attribute)
+    {% end %}
   end
 
   def usearchGetMatchedStart(strsrch : Win32cr::Globalization::UStringSearch*) : Int32
+    {% if !flag?(:docs) %}
     C.usearch_getMatchedStart(strsrch)
+    {% end %}
   end
 
   def usearchGetMatchedLength(strsrch : Win32cr::Globalization::UStringSearch*) : Int32
+    {% if !flag?(:docs) %}
     C.usearch_getMatchedLength(strsrch)
+    {% end %}
   end
 
   def usearchGetMatchedText(strsrch : Win32cr::Globalization::UStringSearch*, result : UInt16*, resultCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.usearch_getMatchedText(strsrch, result, resultCapacity, status)
+    {% end %}
   end
 
   def usearchSetBreakIterator(strsrch : Win32cr::Globalization::UStringSearch*, breakiter : Win32cr::Globalization::UBreakIterator*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.usearch_setBreakIterator(strsrch, breakiter, status)
+    {% end %}
   end
 
   def usearchGetBreakIterator(strsrch : Win32cr::Globalization::UStringSearch*) : Win32cr::Globalization::UBreakIterator*
+    {% if !flag?(:docs) %}
     C.usearch_getBreakIterator(strsrch)
+    {% end %}
   end
 
   def usearchSetText(strsrch : Win32cr::Globalization::UStringSearch*, text : UInt16*, textlength : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.usearch_setText(strsrch, text, textlength, status)
+    {% end %}
   end
 
   def usearchGetText(strsrch : Win32cr::Globalization::UStringSearch*, length : Int32*) : UInt16*
+    {% if !flag?(:docs) %}
     C.usearch_getText(strsrch, length)
+    {% end %}
   end
 
   def usearchGetCollator(strsrch : Win32cr::Globalization::UStringSearch*) : Win32cr::Globalization::UCollator*
+    {% if !flag?(:docs) %}
     C.usearch_getCollator(strsrch)
+    {% end %}
   end
 
   def usearchSetCollator(strsrch : Win32cr::Globalization::UStringSearch*, collator : Win32cr::Globalization::UCollator*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.usearch_setCollator(strsrch, collator, status)
+    {% end %}
   end
 
   def usearchSetPattern(strsrch : Win32cr::Globalization::UStringSearch*, pattern : UInt16*, patternlength : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.usearch_setPattern(strsrch, pattern, patternlength, status)
+    {% end %}
   end
 
   def usearchGetPattern(strsrch : Win32cr::Globalization::UStringSearch*, length : Int32*) : UInt16*
+    {% if !flag?(:docs) %}
     C.usearch_getPattern(strsrch, length)
+    {% end %}
   end
 
   def usearchFirst(strsrch : Win32cr::Globalization::UStringSearch*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.usearch_first(strsrch, status)
+    {% end %}
   end
 
   def usearchFollowing(strsrch : Win32cr::Globalization::UStringSearch*, position : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.usearch_following(strsrch, position, status)
+    {% end %}
   end
 
   def usearchLast(strsrch : Win32cr::Globalization::UStringSearch*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.usearch_last(strsrch, status)
+    {% end %}
   end
 
   def usearchPreceding(strsrch : Win32cr::Globalization::UStringSearch*, position : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.usearch_preceding(strsrch, position, status)
+    {% end %}
   end
 
   def usearchNext(strsrch : Win32cr::Globalization::UStringSearch*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.usearch_next(strsrch, status)
+    {% end %}
   end
 
   def usearchPrevious(strsrch : Win32cr::Globalization::UStringSearch*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.usearch_previous(strsrch, status)
+    {% end %}
   end
 
   def usearchReset(strsrch : Win32cr::Globalization::UStringSearch*) : Void
+    {% if !flag?(:docs) %}
     C.usearch_reset(strsrch)
+    {% end %}
   end
 
   def uspoofOpen(status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::USpoofChecker*
+    {% if !flag?(:docs) %}
     C.uspoof_open(status)
+    {% end %}
   end
 
   def uspoofOpenFromSerialized(data : Void*, length : Int32, pActualLength : Int32*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::USpoofChecker*
+    {% if !flag?(:docs) %}
     C.uspoof_openFromSerialized(data, length, pActualLength, pErrorCode)
+    {% end %}
   end
 
   def uspoofOpenFromSource(confusables : Win32cr::Foundation::PSTR, confusablesLen : Int32, confusablesWholeScript : Win32cr::Foundation::PSTR, confusablesWholeScriptLen : Int32, errType : Int32*, pe : Win32cr::Globalization::UParseError*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::USpoofChecker*
+    {% if !flag?(:docs) %}
     C.uspoof_openFromSource(confusables, confusablesLen, confusablesWholeScript, confusablesWholeScriptLen, errType, pe, status)
+    {% end %}
   end
 
   def uspoofClose(sc : Win32cr::Globalization::USpoofChecker*) : Void
+    {% if !flag?(:docs) %}
     C.uspoof_close(sc)
+    {% end %}
   end
 
   def uspoofClone(sc : Win32cr::Globalization::USpoofChecker*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::USpoofChecker*
+    {% if !flag?(:docs) %}
     C.uspoof_clone(sc, status)
+    {% end %}
   end
 
   def uspoofSetChecks(sc : Win32cr::Globalization::USpoofChecker*, checks : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uspoof_setChecks(sc, checks, status)
+    {% end %}
   end
 
   def uspoofGetChecks(sc : Win32cr::Globalization::USpoofChecker*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uspoof_getChecks(sc, status)
+    {% end %}
   end
 
   def uspoofSetRestrictionLevel(sc : Win32cr::Globalization::USpoofChecker*, restrictionLevel : Win32cr::Globalization::URestrictionLevel) : Void
+    {% if !flag?(:docs) %}
     C.uspoof_setRestrictionLevel(sc, restrictionLevel)
+    {% end %}
   end
 
   def uspoofGetRestrictionLevel(sc : Win32cr::Globalization::USpoofChecker*) : Win32cr::Globalization::URestrictionLevel
+    {% if !flag?(:docs) %}
     C.uspoof_getRestrictionLevel(sc)
+    {% end %}
   end
 
   def uspoofSetAllowedLocales(sc : Win32cr::Globalization::USpoofChecker*, localesList : Win32cr::Foundation::PSTR, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uspoof_setAllowedLocales(sc, localesList, status)
+    {% end %}
   end
 
   def uspoofGetAllowedLocales(sc : Win32cr::Globalization::USpoofChecker*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.uspoof_getAllowedLocales(sc, status)
+    {% end %}
   end
 
   def uspoofSetAllowedChars(sc : Win32cr::Globalization::USpoofChecker*, chars : Win32cr::Globalization::USet*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.uspoof_setAllowedChars(sc, chars, status)
+    {% end %}
   end
 
   def uspoofGetAllowedChars(sc : Win32cr::Globalization::USpoofChecker*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::USet*
+    {% if !flag?(:docs) %}
     C.uspoof_getAllowedChars(sc, status)
+    {% end %}
   end
 
   def uspoofCheck(sc : Win32cr::Globalization::USpoofChecker*, id : UInt16*, length : Int32, position : Int32*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uspoof_check(sc, id, length, position, status)
+    {% end %}
   end
 
   def uspoofCheckUTF8(sc : Win32cr::Globalization::USpoofChecker*, id : Win32cr::Foundation::PSTR, length : Int32, position : Int32*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uspoof_checkUTF8(sc, id, length, position, status)
+    {% end %}
   end
 
   def uspoofCheck2(sc : Win32cr::Globalization::USpoofChecker*, id : UInt16*, length : Int32, checkResult : Win32cr::Globalization::USpoofCheckResult*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uspoof_check2(sc, id, length, checkResult, status)
+    {% end %}
   end
 
   def uspoofCheck2UTF8(sc : Win32cr::Globalization::USpoofChecker*, id : Win32cr::Foundation::PSTR, length : Int32, checkResult : Win32cr::Globalization::USpoofCheckResult*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uspoof_check2UTF8(sc, id, length, checkResult, status)
+    {% end %}
   end
 
   def uspoofOpenCheckResult(status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::USpoofCheckResult*
+    {% if !flag?(:docs) %}
     C.uspoof_openCheckResult(status)
+    {% end %}
   end
 
   def uspoofCloseCheckResult(checkResult : Win32cr::Globalization::USpoofCheckResult*) : Void
+    {% if !flag?(:docs) %}
     C.uspoof_closeCheckResult(checkResult)
+    {% end %}
   end
 
   def uspoofGetCheckResultChecks(checkResult : Win32cr::Globalization::USpoofCheckResult*, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uspoof_getCheckResultChecks(checkResult, status)
+    {% end %}
   end
 
   def uspoofGetCheckResultRestrictionLevel(checkResult : Win32cr::Globalization::USpoofCheckResult*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::URestrictionLevel
+    {% if !flag?(:docs) %}
     C.uspoof_getCheckResultRestrictionLevel(checkResult, status)
+    {% end %}
   end
 
   def uspoofGetCheckResultNumerics(checkResult : Win32cr::Globalization::USpoofCheckResult*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::USet*
+    {% if !flag?(:docs) %}
     C.uspoof_getCheckResultNumerics(checkResult, status)
+    {% end %}
   end
 
   def uspoofAreConfusable(sc : Win32cr::Globalization::USpoofChecker*, id1 : UInt16*, length1 : Int32, id2 : UInt16*, length2 : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uspoof_areConfusable(sc, id1, length1, id2, length2, status)
+    {% end %}
   end
 
   def uspoofAreConfusableUTF8(sc : Win32cr::Globalization::USpoofChecker*, id1 : Win32cr::Foundation::PSTR, length1 : Int32, id2 : Win32cr::Foundation::PSTR, length2 : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uspoof_areConfusableUTF8(sc, id1, length1, id2, length2, status)
+    {% end %}
   end
 
   def uspoofGetSkeleton(sc : Win32cr::Globalization::USpoofChecker*, type__ : UInt32, id : UInt16*, length : Int32, dest : UInt16*, destCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uspoof_getSkeleton(sc, type__, id, length, dest, destCapacity, status)
+    {% end %}
   end
 
   def uspoofGetSkeletonUTF8(sc : Win32cr::Globalization::USpoofChecker*, type__ : UInt32, id : Win32cr::Foundation::PSTR, length : Int32, dest : Win32cr::Foundation::PSTR, destCapacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uspoof_getSkeletonUTF8(sc, type__, id, length, dest, destCapacity, status)
+    {% end %}
   end
 
   def uspoofGetInclusionSet(status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::USet*
+    {% if !flag?(:docs) %}
     C.uspoof_getInclusionSet(status)
+    {% end %}
   end
 
   def uspoofGetRecommendedSet(status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::USet*
+    {% if !flag?(:docs) %}
     C.uspoof_getRecommendedSet(status)
+    {% end %}
   end
 
   def uspoofSerialize(sc : Win32cr::Globalization::USpoofChecker*, data : Void*, capacity : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.uspoof_serialize(sc, data, capacity, status)
+    {% end %}
   end
 
   def utmscaleGetTimeScaleValue(timeScale : Win32cr::Globalization::UDateTimeScale, value : Win32cr::Globalization::UTimeScaleValue, status : Win32cr::Globalization::UErrorCode*) : Int64
+    {% if !flag?(:docs) %}
     C.utmscale_getTimeScaleValue(timeScale, value, status)
+    {% end %}
   end
 
   def utmscaleFromInt64(otherTime : Int64, timeScale : Win32cr::Globalization::UDateTimeScale, status : Win32cr::Globalization::UErrorCode*) : Int64
+    {% if !flag?(:docs) %}
     C.utmscale_fromInt64(otherTime, timeScale, status)
+    {% end %}
   end
 
   def utmscaleToInt64(universalTime : Int64, timeScale : Win32cr::Globalization::UDateTimeScale, status : Win32cr::Globalization::UErrorCode*) : Int64
+    {% if !flag?(:docs) %}
     C.utmscale_toInt64(universalTime, timeScale, status)
+    {% end %}
   end
 
   def utransOpenU(id : UInt16*, idLength : Int32, dir : Win32cr::Globalization::UTransDirection, rules : UInt16*, rulesLength : Int32, parseError : Win32cr::Globalization::UParseError*, pErrorCode : Win32cr::Globalization::UErrorCode*) : Void**
+    {% if !flag?(:docs) %}
     C.utrans_openU(id, idLength, dir, rules, rulesLength, parseError, pErrorCode)
+    {% end %}
   end
 
   def utransOpenInverse(trans : Void**, status : Win32cr::Globalization::UErrorCode*) : Void**
+    {% if !flag?(:docs) %}
     C.utrans_openInverse(trans, status)
+    {% end %}
   end
 
   def utransClone(trans : Void**, status : Win32cr::Globalization::UErrorCode*) : Void**
+    {% if !flag?(:docs) %}
     C.utrans_clone(trans, status)
+    {% end %}
   end
 
   def utransClose(trans : Void**) : Void
+    {% if !flag?(:docs) %}
     C.utrans_close(trans)
+    {% end %}
   end
 
   def utransGetUnicodeID(trans : Void**, resultLength : Int32*) : UInt16*
+    {% if !flag?(:docs) %}
     C.utrans_getUnicodeID(trans, resultLength)
+    {% end %}
   end
 
   def utransRegister(adoptedTrans : Void**, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.utrans_register(adoptedTrans, status)
+    {% end %}
   end
 
   def utransUnregisterID(id : UInt16*, idLength : Int32) : Void
+    {% if !flag?(:docs) %}
     C.utrans_unregisterID(id, idLength)
+    {% end %}
   end
 
   def utransSetFilter(trans : Void**, filterPattern : UInt16*, filterPatternLen : Int32, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.utrans_setFilter(trans, filterPattern, filterPatternLen, status)
+    {% end %}
   end
 
   def utransCountAvailableIDs : Int32
+    {% if !flag?(:docs) %}
     C.utrans_countAvailableIDs
+    {% end %}
   end
 
   def utransOpenIDs(pErrorCode : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::UEnumeration*
+    {% if !flag?(:docs) %}
     C.utrans_openIDs(pErrorCode)
+    {% end %}
   end
 
   def utransTrans(trans : Void**, rep : Void**, repFunc : Win32cr::Globalization::UReplaceableCallbacks*, start : Int32, limit : Int32*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.utrans_trans(trans, rep, repFunc, start, limit, status)
+    {% end %}
   end
 
   def utransTransIncremental(trans : Void**, rep : Void**, repFunc : Win32cr::Globalization::UReplaceableCallbacks*, pos : Win32cr::Globalization::UTransPosition*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.utrans_transIncremental(trans, rep, repFunc, pos, status)
+    {% end %}
   end
 
   def utransTransUChars(trans : Void**, text : UInt16*, textLength : Int32*, textCapacity : Int32, start : Int32, limit : Int32*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.utrans_transUChars(trans, text, textLength, textCapacity, start, limit, status)
+    {% end %}
   end
 
   def utransTransIncrementalUChars(trans : Void**, text : UInt16*, textLength : Int32*, textCapacity : Int32, pos : Win32cr::Globalization::UTransPosition*, status : Win32cr::Globalization::UErrorCode*) : Void
+    {% if !flag?(:docs) %}
     C.utrans_transIncrementalUChars(trans, text, textLength, textCapacity, pos, status)
+    {% end %}
   end
 
   def utransToRules(trans : Void**, escapeUnprintable : Int8, result : UInt16*, resultLength : Int32, status : Win32cr::Globalization::UErrorCode*) : Int32
+    {% if !flag?(:docs) %}
     C.utrans_toRules(trans, escapeUnprintable, result, resultLength, status)
+    {% end %}
   end
 
   def utransGetSourceSet(trans : Void**, ignoreFilter : Int8, fillIn : Win32cr::Globalization::USet*, status : Win32cr::Globalization::UErrorCode*) : Win32cr::Globalization::USet*
+    {% if !flag?(:docs) %}
     C.utrans_getSourceSet(trans, ignoreFilter, fillIn, status)
+    {% end %}
   end
 
   def getDistanceOfClosestLanguageInList(pszLanguage : Win32cr::Foundation::PWSTR, pszLanguagesList : Win32cr::Foundation::PWSTR, wchListDelimiter : UInt16, pClosestDistance : Float64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetDistanceOfClosestLanguageInList(pszLanguage, pszLanguagesList, wchListDelimiter, pClosestDistance)
+    {% end %}
   end
 
   def isWellFormedTag(pszTag : Win32cr::Foundation::PWSTR) : UInt8
+    {% if !flag?(:docs) %}
     C.IsWellFormedTag(pszTag)
+    {% end %}
   end
 
   def findStringOrdinal(dwFindStringOrdinalFlags : UInt32, lpStringSource : UInt16*, cchSource : Int32, lpStringValue : UInt16*, cchValue : Int32, bIgnoreCase : Win32cr::Foundation::BOOL) : Int32
+    {% if !flag?(:docs) %}
     C.FindStringOrdinal(dwFindStringOrdinalFlags, lpStringSource, cchSource, lpStringValue, cchValue, bIgnoreCase)
+    {% end %}
   end
 
   def lstrcmpA(lpString1 : Win32cr::Foundation::PSTR, lpString2 : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lstrcmpA(lpString1, lpString2)
+    {% end %}
   end
 
   def lstrcmpW(lpString1 : Win32cr::Foundation::PWSTR, lpString2 : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lstrcmpW(lpString1, lpString2)
+    {% end %}
   end
 
   def lstrcmpiA(lpString1 : Win32cr::Foundation::PSTR, lpString2 : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lstrcmpiA(lpString1, lpString2)
+    {% end %}
   end
 
   def lstrcmpiW(lpString1 : Win32cr::Foundation::PWSTR, lpString2 : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lstrcmpiW(lpString1, lpString2)
+    {% end %}
   end
 
   def lstrcpynA(lpString1 : UInt8*, lpString2 : Win32cr::Foundation::PSTR, iMaxLength : Int32) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.lstrcpynA(lpString1, lpString2, iMaxLength)
+    {% end %}
   end
 
   def lstrcpynW(lpString1 : UInt16*, lpString2 : Win32cr::Foundation::PWSTR, iMaxLength : Int32) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.lstrcpynW(lpString1, lpString2, iMaxLength)
+    {% end %}
   end
 
   def lstrcpyA(lpString1 : Win32cr::Foundation::PSTR, lpString2 : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.lstrcpyA(lpString1, lpString2)
+    {% end %}
   end
 
   def lstrcpyW(lpString1 : Win32cr::Foundation::PWSTR, lpString2 : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.lstrcpyW(lpString1, lpString2)
+    {% end %}
   end
 
   def lstrcatA(lpString1 : Win32cr::Foundation::PSTR, lpString2 : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.lstrcatA(lpString1, lpString2)
+    {% end %}
   end
 
   def lstrcatW(lpString1 : Win32cr::Foundation::PWSTR, lpString2 : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.lstrcatW(lpString1, lpString2)
+    {% end %}
   end
 
   def lstrlenA(lpString : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lstrlenA(lpString)
+    {% end %}
   end
 
   def lstrlenW(lpString : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.lstrlenW(lpString)
+    {% end %}
   end
 
   def isTextUnicode(lpv : Void*, iSize : Int32, lpiResult : Win32cr::Globalization::IS_TEXT_UNICODE_RESULT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsTextUnicode(lpv, iSize, lpiResult)
+    {% end %}
   end
 
   @[Link("gdi32")]
@@ -10747,6 +12995,7 @@ module Win32cr::Globalization
   @[Link("icu")]
   @[Link("bcp47mrm")]
   @[Link("advapi32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun GetTextCharset(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
@@ -14391,4 +16640,5 @@ module Win32cr::Globalization
     fun IsTextUnicode(lpv : Void*, iSize : Int32, lpiResult : Win32cr::Globalization::IS_TEXT_UNICODE_RESULT*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

@@ -103,7 +103,7 @@ module Win32cr::UI::Input::Touch
   end
 
   @[Extern]
-  record IManipulationEvents_Vtbl,
+  record IManipulationEvents_Vtable,
     query_interface : Proc(IManipulationEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IManipulationEvents_*, UInt32),
     release : Proc(IManipulationEvents_*, UInt32),
@@ -113,7 +113,7 @@ module Win32cr::UI::Input::Touch
 
 
   @[Extern]
-  record IManipulationEvents_, lpVtbl : IManipulationEvents_Vtbl* do
+  record IManipulationEvents_, lpVtbl : IManipulationEvents_Vtable* do
     GUID = LibC::GUID.new(0x4f62c8da_u32, 0x9c53_u16, 0x4b22_u16, StaticArray[0x93_u8, 0xdf_u8, 0x92_u8, 0x7a_u8, 0x86_u8, 0x2b_u8, 0xbb_u8, 0x3_u8])
     def query_interface(this : IManipulationEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -137,7 +137,7 @@ module Win32cr::UI::Input::Touch
   end
 
   @[Extern]
-  record IInertiaProcessorVtbl,
+  record IInertiaProcessorVtable,
     query_interface : Proc(IInertiaProcessor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInertiaProcessor*, UInt32),
     release : Proc(IInertiaProcessor*, UInt32),
@@ -193,7 +193,7 @@ module Win32cr::UI::Input::Touch
 
 
   @[Extern]
-  record IInertiaProcessor, lpVtbl : IInertiaProcessorVtbl* do
+  record IInertiaProcessor, lpVtbl : IInertiaProcessorVtable* do
     GUID = LibC::GUID.new(0x18b00c6d_u32, 0xc5ee_u16, 0x41b1_u16, StaticArray[0x90_u8, 0xa9_u8, 0x9d_u8, 0x4a_u8, 0x92_u8, 0x90_u8, 0x95_u8, 0xad_u8])
     def query_interface(this : IInertiaProcessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -355,7 +355,7 @@ module Win32cr::UI::Input::Touch
   end
 
   @[Extern]
-  record IManipulationProcessorVtbl,
+  record IManipulationProcessorVtable,
     query_interface : Proc(IManipulationProcessor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IManipulationProcessor*, UInt32),
     release : Proc(IManipulationProcessor*, UInt32),
@@ -383,7 +383,7 @@ module Win32cr::UI::Input::Touch
 
 
   @[Extern]
-  record IManipulationProcessor, lpVtbl : IManipulationProcessorVtbl* do
+  record IManipulationProcessor, lpVtbl : IManipulationProcessorVtable* do
     GUID = LibC::GUID.new(0xa22ac519_u32, 0x8300_u16, 0x48a0_u16, StaticArray[0xbe_u8, 0xf4_u8, 0xf1_u8, 0xbe_u8, 0x87_u8, 0x37_u8, 0xdb_u8, 0xa4_u8])
     def query_interface(this : IManipulationProcessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -461,46 +461,67 @@ module Win32cr::UI::Input::Touch
   end
 
   def getTouchInputInfo(hTouchInput : Win32cr::UI::Input::Touch::HTOUCHINPUT, cInputs : UInt32, pInputs : Win32cr::UI::Input::Touch::TOUCHINPUT*, cbSize : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetTouchInputInfo(hTouchInput, cInputs, pInputs, cbSize)
+    {% end %}
   end
 
   def closeTouchInputHandle(hTouchInput : Win32cr::UI::Input::Touch::HTOUCHINPUT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CloseTouchInputHandle(hTouchInput)
+    {% end %}
   end
 
   def registerTouchWindow(hwnd : Win32cr::Foundation::HWND, ulFlags : Win32cr::UI::Input::Touch::REGISTER_TOUCH_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RegisterTouchWindow(hwnd, ulFlags)
+    {% end %}
   end
 
   def unregisterTouchWindow(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnregisterTouchWindow(hwnd)
+    {% end %}
   end
 
   def isTouchWindow(hwnd : Win32cr::Foundation::HWND, pulFlags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsTouchWindow(hwnd, pulFlags)
+    {% end %}
   end
 
   def getGestureInfo(hGestureInfo : Win32cr::UI::Input::Touch::HGESTUREINFO, pGestureInfo : Win32cr::UI::Input::Touch::GESTUREINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetGestureInfo(hGestureInfo, pGestureInfo)
+    {% end %}
   end
 
   def getGestureExtraArgs(hGestureInfo : Win32cr::UI::Input::Touch::HGESTUREINFO, cbExtraArgs : UInt32, pExtraArgs : UInt8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetGestureExtraArgs(hGestureInfo, cbExtraArgs, pExtraArgs)
+    {% end %}
   end
 
   def closeGestureInfoHandle(hGestureInfo : Win32cr::UI::Input::Touch::HGESTUREINFO) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CloseGestureInfoHandle(hGestureInfo)
+    {% end %}
   end
 
   def setGestureConfig(hwnd : Win32cr::Foundation::HWND, dwReserved : UInt32, cIDs : UInt32, pGestureConfig : Win32cr::UI::Input::Touch::GESTURECONFIG*, cbSize : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetGestureConfig(hwnd, dwReserved, cIDs, pGestureConfig, cbSize)
+    {% end %}
   end
 
   def getGestureConfig(hwnd : Win32cr::Foundation::HWND, dwReserved : UInt32, dwFlags : UInt32, pcIDs : UInt32*, pGestureConfig : Win32cr::UI::Input::Touch::GESTURECONFIG*, cbSize : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetGestureConfig(hwnd, dwReserved, dwFlags, pcIDs, pGestureConfig, cbSize)
+    {% end %}
   end
 
   @[Link("user32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun GetTouchInputInfo(hTouchInput : Win32cr::UI::Input::Touch::HTOUCHINPUT, cInputs : UInt32, pInputs : Win32cr::UI::Input::Touch::TOUCHINPUT*, cbSize : Int32) : Win32cr::Foundation::BOOL
@@ -533,4 +554,5 @@ module Win32cr::UI::Input::Touch
     fun GetGestureConfig(hwnd : Win32cr::Foundation::HWND, dwReserved : UInt32, dwFlags : UInt32, pcIDs : UInt32*, pGestureConfig : Win32cr::UI::Input::Touch::GESTURECONFIG*, cbSize : UInt32) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

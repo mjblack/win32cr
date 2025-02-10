@@ -69,34 +69,49 @@ module Win32cr::NetworkManagement::Multicast
   end
 
   def mcastApiStartup(version : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.McastApiStartup(version)
+    {% end %}
   end
 
   def mcastApiCleanup : Void
+    {% if !flag?(:docs) %}
     C.McastApiCleanup
+    {% end %}
   end
 
   def mcastGenUID(pRequestID : Win32cr::NetworkManagement::Multicast::MCAST_CLIENT_UID*) : UInt32
+    {% if !flag?(:docs) %}
     C.McastGenUID(pRequestID)
+    {% end %}
   end
 
   def mcastEnumerateScopes(addr_family : UInt16, re_query : Win32cr::Foundation::BOOL, pScopeList : Win32cr::NetworkManagement::Multicast::MCAST_SCOPE_ENTRY*, pScopeLen : UInt32*, pScopeCount : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.McastEnumerateScopes(addr_family, re_query, pScopeList, pScopeLen, pScopeCount)
+    {% end %}
   end
 
   def mcastRequestAddress(addr_family : UInt16, pRequestID : Win32cr::NetworkManagement::Multicast::MCAST_CLIENT_UID*, pScopeCtx : Win32cr::NetworkManagement::Multicast::MCAST_SCOPE_CTX*, pAddrRequest : Win32cr::NetworkManagement::Multicast::MCAST_LEASE_REQUEST*, pAddrResponse : Win32cr::NetworkManagement::Multicast::MCAST_LEASE_RESPONSE*) : UInt32
+    {% if !flag?(:docs) %}
     C.McastRequestAddress(addr_family, pRequestID, pScopeCtx, pAddrRequest, pAddrResponse)
+    {% end %}
   end
 
   def mcastRenewAddress(addr_family : UInt16, pRequestID : Win32cr::NetworkManagement::Multicast::MCAST_CLIENT_UID*, pRenewRequest : Win32cr::NetworkManagement::Multicast::MCAST_LEASE_REQUEST*, pRenewResponse : Win32cr::NetworkManagement::Multicast::MCAST_LEASE_RESPONSE*) : UInt32
+    {% if !flag?(:docs) %}
     C.McastRenewAddress(addr_family, pRequestID, pRenewRequest, pRenewResponse)
+    {% end %}
   end
 
   def mcastReleaseAddress(addr_family : UInt16, pRequestID : Win32cr::NetworkManagement::Multicast::MCAST_CLIENT_UID*, pReleaseRequest : Win32cr::NetworkManagement::Multicast::MCAST_LEASE_REQUEST*) : UInt32
+    {% if !flag?(:docs) %}
     C.McastReleaseAddress(addr_family, pRequestID, pReleaseRequest)
+    {% end %}
   end
 
   @[Link("dhcpcsvc")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun McastApiStartup(version : UInt32*) : UInt32
@@ -120,4 +135,5 @@ module Win32cr::NetworkManagement::Multicast
     fun McastReleaseAddress(addr_family : UInt16, pRequestID : Win32cr::NetworkManagement::Multicast::MCAST_CLIENT_UID*, pReleaseRequest : Win32cr::NetworkManagement::Multicast::MCAST_LEASE_REQUEST*) : UInt32
 
   end
+  {% end %}
 end

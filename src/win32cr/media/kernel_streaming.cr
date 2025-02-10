@@ -2853,23 +2853,11 @@ module Win32cr::Media::KernelStreaming
     KS_MemoryTypeAnyHost = 6_i32
   end
 
-  @[Extern]
-  struct IKsPin
-    def initialize()
-    end
-  end
+  alias IKsPin = Void
 
-  @[Extern]
-  struct IKsAllocator
-    def initialize()
-    end
-  end
+  alias IKsAllocator = Void
 
-  @[Extern]
-  struct IKsAllocatorEx
-    def initialize()
-    end
-  end
+  alias IKsAllocatorEx = Void
 
   @[Extern]
   struct KSPRIORITY
@@ -6830,7 +6818,7 @@ module Win32cr::Media::KernelStreaming
   {% end %}
 
   @[Extern]
-  record IKsControlVtbl,
+  record IKsControlVtable,
     query_interface : Proc(IKsControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsControl*, UInt32),
     release : Proc(IKsControl*, UInt32),
@@ -6840,7 +6828,7 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  record IKsControl, lpVtbl : IKsControlVtbl* do
+  record IKsControl, lpVtbl : IKsControlVtable* do
     GUID = LibC::GUID.new(0x28f54685_u32, 0x6fd_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0x7a_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0x31_u8, 0x96_u8])
     def query_interface(this : IKsControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6864,7 +6852,7 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  record IKsFormatSupportVtbl,
+  record IKsFormatSupportVtable,
     query_interface : Proc(IKsFormatSupport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsFormatSupport*, UInt32),
     release : Proc(IKsFormatSupport*, UInt32),
@@ -6873,7 +6861,7 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  record IKsFormatSupport, lpVtbl : IKsFormatSupportVtbl* do
+  record IKsFormatSupport, lpVtbl : IKsFormatSupportVtable* do
     GUID = LibC::GUID.new(0x3cb4a69d_u32, 0xbb6f_u16, 0x4d2b_u16, StaticArray[0x95_u8, 0xb7_u8, 0x45_u8, 0x2d_u8, 0x2c_u8, 0x15_u8, 0x5d_u8, 0xb5_u8])
     def query_interface(this : IKsFormatSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6894,7 +6882,7 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  record IKsJackDescriptionVtbl,
+  record IKsJackDescriptionVtable,
     query_interface : Proc(IKsJackDescription*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsJackDescription*, UInt32),
     release : Proc(IKsJackDescription*, UInt32),
@@ -6903,7 +6891,7 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  record IKsJackDescription, lpVtbl : IKsJackDescriptionVtbl* do
+  record IKsJackDescription, lpVtbl : IKsJackDescriptionVtable* do
     GUID = LibC::GUID.new(0x4509f757_u32, 0x2d46_u16, 0x4637_u16, StaticArray[0x8e_u8, 0x62_u8, 0xce_u8, 0x7d_u8, 0xb9_u8, 0x44_u8, 0xf5_u8, 0x7b_u8])
     def query_interface(this : IKsJackDescription*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6924,7 +6912,7 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  record IKsJackDescription2Vtbl,
+  record IKsJackDescription2Vtable,
     query_interface : Proc(IKsJackDescription2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsJackDescription2*, UInt32),
     release : Proc(IKsJackDescription2*, UInt32),
@@ -6933,7 +6921,7 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  record IKsJackDescription2, lpVtbl : IKsJackDescription2Vtbl* do
+  record IKsJackDescription2, lpVtbl : IKsJackDescription2Vtable* do
     GUID = LibC::GUID.new(0x478f3a9b_u32, 0xe0c9_u16, 0x4827_u16, StaticArray[0x92_u8, 0x28_u8, 0x6f_u8, 0x55_u8, 0x5_u8, 0xff_u8, 0xe7_u8, 0x6a_u8])
     def query_interface(this : IKsJackDescription2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6954,7 +6942,7 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  record IKsJackSinkInformationVtbl,
+  record IKsJackSinkInformationVtable,
     query_interface : Proc(IKsJackSinkInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsJackSinkInformation*, UInt32),
     release : Proc(IKsJackSinkInformation*, UInt32),
@@ -6962,7 +6950,7 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  record IKsJackSinkInformation, lpVtbl : IKsJackSinkInformationVtbl* do
+  record IKsJackSinkInformation, lpVtbl : IKsJackSinkInformationVtable* do
     GUID = LibC::GUID.new(0xd9bd72ed_u32, 0x290f_u16, 0x4581_u16, StaticArray[0x9f_u8, 0xf3_u8, 0x61_u8, 0x2_u8, 0x7a_u8, 0x8f_u8, 0xe5_u8, 0x32_u8])
     def query_interface(this : IKsJackSinkInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6980,7 +6968,7 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  record IKsJackContainerIdVtbl,
+  record IKsJackContainerIdVtable,
     query_interface : Proc(IKsJackContainerId*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsJackContainerId*, UInt32),
     release : Proc(IKsJackContainerId*, UInt32),
@@ -6988,7 +6976,7 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  record IKsJackContainerId, lpVtbl : IKsJackContainerIdVtbl* do
+  record IKsJackContainerId, lpVtbl : IKsJackContainerIdVtable* do
     GUID = LibC::GUID.new(0xc99af463_u32, 0xd629_u16, 0x4ec4_u16, StaticArray[0x8c_u8, 0x0_u8, 0xe5_u8, 0x4d_u8, 0x68_u8, 0x15_u8, 0x42_u8, 0x48_u8])
     def query_interface(this : IKsJackContainerId*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7006,7 +6994,7 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  record IKsPropertySetVtbl,
+  record IKsPropertySetVtable,
     query_interface : Proc(IKsPropertySet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsPropertySet*, UInt32),
     release : Proc(IKsPropertySet*, UInt32),
@@ -7016,7 +7004,7 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  record IKsPropertySet, lpVtbl : IKsPropertySetVtbl* do
+  record IKsPropertySet, lpVtbl : IKsPropertySetVtable* do
     GUID = LibC::GUID.new(0x31efac30_u32, 0x515c_u16, 0x11d0_u16, StaticArray[0xa9_u8, 0xaa_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x61_u8, 0xbe_u8, 0x93_u8])
     def query_interface(this : IKsPropertySet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7040,7 +7028,7 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  record IKsAggregateControlVtbl,
+  record IKsAggregateControlVtable,
     query_interface : Proc(IKsAggregateControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsAggregateControl*, UInt32),
     release : Proc(IKsAggregateControl*, UInt32),
@@ -7049,7 +7037,7 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  record IKsAggregateControl, lpVtbl : IKsAggregateControlVtbl* do
+  record IKsAggregateControl, lpVtbl : IKsAggregateControlVtable* do
     GUID = LibC::GUID.new(0x7f40eac0_u32, 0x3947_u16, 0x11d2_u16, StaticArray[0x87_u8, 0x4e_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0x31_u8, 0x96_u8])
     def query_interface(this : IKsAggregateControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7070,7 +7058,7 @@ module Win32cr::Media::KernelStreaming
   end
 
   @[Extern]
-  record IKsTopologyVtbl,
+  record IKsTopologyVtable,
     query_interface : Proc(IKsTopology*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKsTopology*, UInt32),
     release : Proc(IKsTopology*, UInt32),
@@ -7078,7 +7066,7 @@ module Win32cr::Media::KernelStreaming
 
 
   @[Extern]
-  record IKsTopology, lpVtbl : IKsTopologyVtbl* do
+  record IKsTopology, lpVtbl : IKsTopologyVtable* do
     GUID = LibC::GUID.new(0x28f54683_u32, 0x6fd_u16, 0x11d2_u16, StaticArray[0xb2_u8, 0x7a_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x22_u8, 0x31_u8, 0x96_u8])
     def query_interface(this : IKsTopology*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7096,38 +7084,55 @@ module Win32cr::Media::KernelStreaming
   end
 
   def ksCreateAllocator(connection_handle : Win32cr::Foundation::HANDLE, allocator_framing : Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING*, allocator_handle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.KsCreateAllocator(connection_handle, allocator_framing, allocator_handle)
+    {% end %}
   end
 
   def ksCreateClock(connection_handle : Win32cr::Foundation::HANDLE, clock_create : Win32cr::Media::KernelStreaming::KSCLOCK_CREATE*, clock_handle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.KsCreateClock(connection_handle, clock_create, clock_handle)
+    {% end %}
   end
 
   def ksCreatePin(filter_handle : Win32cr::Foundation::HANDLE, connect : Win32cr::Media::KernelStreaming::KSPIN_CONNECT*, desired_access : UInt32, connection_handle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.KsCreatePin(filter_handle, connect, desired_access, connection_handle)
+    {% end %}
   end
 
   def ksCreateTopologyNode(parent_handle : Win32cr::Foundation::HANDLE, node_create : Win32cr::Media::KernelStreaming::KSNODE_CREATE*, desired_access : UInt32, node_handle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.KsCreateTopologyNode(parent_handle, node_create, desired_access, node_handle)
+    {% end %}
   end
 
   def ksCreateAllocator2(connection_handle : Win32cr::Foundation::HANDLE, allocator_framing : Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING*, allocator_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.KsCreateAllocator2(connection_handle, allocator_framing, allocator_handle)
+    {% end %}
   end
 
   def ksCreateClock2(connection_handle : Win32cr::Foundation::HANDLE, clock_create : Win32cr::Media::KernelStreaming::KSCLOCK_CREATE*, clock_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.KsCreateClock2(connection_handle, clock_create, clock_handle)
+    {% end %}
   end
 
   def ksCreatePin2(filter_handle : Win32cr::Foundation::HANDLE, connect : Win32cr::Media::KernelStreaming::KSPIN_CONNECT*, desired_access : UInt32, connection_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.KsCreatePin2(filter_handle, connect, desired_access, connection_handle)
+    {% end %}
   end
 
   def ksCreateTopologyNode2(parent_handle : Win32cr::Foundation::HANDLE, node_create : Win32cr::Media::KernelStreaming::KSNODE_CREATE*, desired_access : UInt32, node_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.KsCreateTopologyNode2(parent_handle, node_create, desired_access, node_handle)
+    {% end %}
   end
 
   @[Link("ksuser")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun KsCreateAllocator(connection_handle : Win32cr::Foundation::HANDLE, allocator_framing : Win32cr::Media::KernelStreaming::KSALLOCATOR_FRAMING*, allocator_handle : Win32cr::Foundation::HANDLE*) : UInt32
@@ -7154,4 +7159,5 @@ module Win32cr::Media::KernelStreaming
     fun KsCreateTopologyNode2(parent_handle : Win32cr::Foundation::HANDLE, node_create : Win32cr::Media::KernelStreaming::KSNODE_CREATE*, desired_access : UInt32, node_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

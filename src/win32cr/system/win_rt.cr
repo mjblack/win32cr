@@ -115,14 +115,10 @@ module Win32cr::System::WinRT
     end
   end
 
-  @[Extern]
-  struct RO_REGISTRATION_COOKIE_
-    def initialize()
-    end
-  end
+  alias RO_REGISTRATION_COOKIE_ = Void
 
   @[Extern]
-  record IAgileReferenceVtbl,
+  record IAgileReferenceVtable,
     query_interface : Proc(IAgileReference*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAgileReference*, UInt32),
     release : Proc(IAgileReference*, UInt32),
@@ -130,7 +126,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IAgileReference, lpVtbl : IAgileReferenceVtbl* do
+  record IAgileReference, lpVtbl : IAgileReferenceVtable* do
     GUID = LibC::GUID.new(0xc03f6a43_u32, 0x65a4_u16, 0x9818_u16, StaticArray[0x98_u8, 0x7e_u8, 0xe0_u8, 0xb8_u8, 0x10_u8, 0xd2_u8, 0xa6_u8, 0xf2_u8])
     def query_interface(this : IAgileReference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -148,7 +144,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IApartmentShutdownVtbl,
+  record IApartmentShutdownVtable,
     query_interface : Proc(IApartmentShutdown*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IApartmentShutdown*, UInt32),
     release : Proc(IApartmentShutdown*, UInt32),
@@ -156,7 +152,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IApartmentShutdown, lpVtbl : IApartmentShutdownVtbl* do
+  record IApartmentShutdown, lpVtbl : IApartmentShutdownVtable* do
     GUID = LibC::GUID.new(0xa2f05a09_u32, 0x27a2_u16, 0x42b5_u16, StaticArray[0xbc_u8, 0xe_u8, 0xac_u8, 0x16_u8, 0x3e_u8, 0xf4_u8, 0x9d_u8, 0x9b_u8])
     def query_interface(this : IApartmentShutdown*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -174,7 +170,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record ISpatialInteractionManagerInteropVtbl,
+  record ISpatialInteractionManagerInteropVtable,
     query_interface : Proc(ISpatialInteractionManagerInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISpatialInteractionManagerInterop*, UInt32),
     release : Proc(ISpatialInteractionManagerInterop*, UInt32),
@@ -185,7 +181,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record ISpatialInteractionManagerInterop, lpVtbl : ISpatialInteractionManagerInteropVtbl* do
+  record ISpatialInteractionManagerInterop, lpVtbl : ISpatialInteractionManagerInteropVtable* do
     GUID = LibC::GUID.new(0x5c4ee536_u32, 0x6a98_u16, 0x4b86_u16, StaticArray[0xa1_u8, 0x70_u8, 0x58_u8, 0x70_u8, 0x13_u8, 0xd6_u8, 0xfd_u8, 0x4b_u8])
     def query_interface(this : ISpatialInteractionManagerInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -212,7 +208,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IHolographicSpaceInteropVtbl,
+  record IHolographicSpaceInteropVtable,
     query_interface : Proc(IHolographicSpaceInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHolographicSpaceInterop*, UInt32),
     release : Proc(IHolographicSpaceInterop*, UInt32),
@@ -223,7 +219,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IHolographicSpaceInterop, lpVtbl : IHolographicSpaceInteropVtbl* do
+  record IHolographicSpaceInterop, lpVtbl : IHolographicSpaceInteropVtable* do
     GUID = LibC::GUID.new(0x5c4ee536_u32, 0x6a98_u16, 0x4b86_u16, StaticArray[0xa1_u8, 0x70_u8, 0x58_u8, 0x70_u8, 0x13_u8, 0xd6_u8, 0xfd_u8, 0x4b_u8])
     def query_interface(this : IHolographicSpaceInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -250,7 +246,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IInspectableVtbl,
+  record IInspectableVtable,
     query_interface : Proc(IInspectable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInspectable*, UInt32),
     release : Proc(IInspectable*, UInt32),
@@ -260,7 +256,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IInspectable, lpVtbl : IInspectableVtbl* do
+  record IInspectable, lpVtbl : IInspectableVtable* do
     GUID = LibC::GUID.new(0xaf86e2e0_u32, 0xb12d_u16, 0x4c6a_u16, StaticArray[0x9c_u8, 0x5a_u8, 0xd7_u8, 0xaa_u8, 0x65_u8, 0x10_u8, 0x1e_u8, 0x90_u8])
     def query_interface(this : IInspectable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -284,7 +280,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IAccountsSettingsPaneInteropVtbl,
+  record IAccountsSettingsPaneInteropVtable,
     query_interface : Proc(IAccountsSettingsPaneInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAccountsSettingsPaneInterop*, UInt32),
     release : Proc(IAccountsSettingsPaneInterop*, UInt32),
@@ -297,7 +293,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IAccountsSettingsPaneInterop, lpVtbl : IAccountsSettingsPaneInteropVtbl* do
+  record IAccountsSettingsPaneInterop, lpVtbl : IAccountsSettingsPaneInteropVtable* do
     GUID = LibC::GUID.new(0xd3ee12ad_u32, 0x3865_u16, 0x4362_u16, StaticArray[0x97_u8, 0x46_u8, 0xb7_u8, 0x5a_u8, 0x68_u8, 0x2d_u8, 0xf0_u8, 0xe6_u8])
     def query_interface(this : IAccountsSettingsPaneInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -330,7 +326,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IAppServiceConnectionExtendedExecutionVtbl,
+  record IAppServiceConnectionExtendedExecutionVtable,
     query_interface : Proc(IAppServiceConnectionExtendedExecution*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAppServiceConnectionExtendedExecution*, UInt32),
     release : Proc(IAppServiceConnectionExtendedExecution*, UInt32),
@@ -338,7 +334,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IAppServiceConnectionExtendedExecution, lpVtbl : IAppServiceConnectionExtendedExecutionVtbl* do
+  record IAppServiceConnectionExtendedExecution, lpVtbl : IAppServiceConnectionExtendedExecutionVtable* do
     GUID = LibC::GUID.new(0x65219584_u32, 0xf9cb_u16, 0x4ae3_u16, StaticArray[0x81_u8, 0xf9_u8, 0xa2_u8, 0x8a_u8, 0x6c_u8, 0xa4_u8, 0x50_u8, 0xd9_u8])
     def query_interface(this : IAppServiceConnectionExtendedExecution*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -356,7 +352,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record ICorrelationVectorSourceVtbl,
+  record ICorrelationVectorSourceVtable,
     query_interface : Proc(ICorrelationVectorSource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICorrelationVectorSource*, UInt32),
     release : Proc(ICorrelationVectorSource*, UInt32),
@@ -364,7 +360,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record ICorrelationVectorSource, lpVtbl : ICorrelationVectorSourceVtbl* do
+  record ICorrelationVectorSource, lpVtbl : ICorrelationVectorSourceVtable* do
     GUID = LibC::GUID.new(0x152b8a3b_u32, 0xb9b9_u16, 0x4685_u16, StaticArray[0xb5_u8, 0x6e_u8, 0x97_u8, 0x48_u8, 0x47_u8, 0xbc_u8, 0x75_u8, 0x45_u8])
     def query_interface(this : ICorrelationVectorSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -382,7 +378,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record ICastingEventHandlerVtbl,
+  record ICastingEventHandlerVtable,
     query_interface : Proc(ICastingEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICastingEventHandler*, UInt32),
     release : Proc(ICastingEventHandler*, UInt32),
@@ -391,7 +387,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record ICastingEventHandler, lpVtbl : ICastingEventHandlerVtbl* do
+  record ICastingEventHandler, lpVtbl : ICastingEventHandlerVtable* do
     GUID = LibC::GUID.new(0xc79a6cb7_u32, 0xbebd_u16, 0x47a6_u16, StaticArray[0xa2_u8, 0xad_u8, 0x4d_u8, 0x45_u8, 0xad_u8, 0x79_u8, 0xc7_u8, 0xbc_u8])
     def query_interface(this : ICastingEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -412,7 +408,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record ICastingControllerVtbl,
+  record ICastingControllerVtable,
     query_interface : Proc(ICastingController*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICastingController*, UInt32),
     release : Proc(ICastingController*, UInt32),
@@ -424,7 +420,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record ICastingController, lpVtbl : ICastingControllerVtbl* do
+  record ICastingController, lpVtbl : ICastingControllerVtable* do
     GUID = LibC::GUID.new(0xf0a56423_u32, 0xa664_u16, 0x4fbd_u16, StaticArray[0x8b_u8, 0x43_u8, 0x40_u8, 0x9a_u8, 0x45_u8, 0xe8_u8, 0xd9_u8, 0xa1_u8])
     def query_interface(this : ICastingController*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -454,7 +450,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record ICastingSourceInfoVtbl,
+  record ICastingSourceInfoVtable,
     query_interface : Proc(ICastingSourceInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICastingSourceInfo*, UInt32),
     release : Proc(ICastingSourceInfo*, UInt32),
@@ -463,7 +459,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record ICastingSourceInfo, lpVtbl : ICastingSourceInfoVtbl* do
+  record ICastingSourceInfo, lpVtbl : ICastingSourceInfoVtable* do
     GUID = LibC::GUID.new(0x45101ab7_u32, 0x7c3a_u16, 0x4bce_u16, StaticArray[0x95_u8, 0x0_u8, 0x12_u8, 0xc0_u8, 0x90_u8, 0x24_u8, 0xb2_u8, 0x98_u8])
     def query_interface(this : ICastingSourceInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -484,7 +480,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IDragDropManagerInteropVtbl,
+  record IDragDropManagerInteropVtable,
     query_interface : Proc(IDragDropManagerInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDragDropManagerInterop*, UInt32),
     release : Proc(IDragDropManagerInterop*, UInt32),
@@ -495,7 +491,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IDragDropManagerInterop, lpVtbl : IDragDropManagerInteropVtbl* do
+  record IDragDropManagerInterop, lpVtbl : IDragDropManagerInteropVtable* do
     GUID = LibC::GUID.new(0x5ad8cba7_u32, 0x4c01_u16, 0x4dac_u16, StaticArray[0x90_u8, 0x74_u8, 0x82_u8, 0x78_u8, 0x94_u8, 0x29_u8, 0x2d_u8, 0x63_u8])
     def query_interface(this : IDragDropManagerInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -522,7 +518,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IInputPaneInteropVtbl,
+  record IInputPaneInteropVtable,
     query_interface : Proc(IInputPaneInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInputPaneInterop*, UInt32),
     release : Proc(IInputPaneInterop*, UInt32),
@@ -533,7 +529,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IInputPaneInterop, lpVtbl : IInputPaneInteropVtbl* do
+  record IInputPaneInterop, lpVtbl : IInputPaneInteropVtable* do
     GUID = LibC::GUID.new(0x75cf2c57_u32, 0x9195_u16, 0x4931_u16, StaticArray[0x83_u8, 0x32_u8, 0xf0_u8, 0xb4_u8, 0x9_u8, 0xe9_u8, 0x16_u8, 0xaf_u8])
     def query_interface(this : IInputPaneInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -560,7 +556,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IPlayToManagerInteropVtbl,
+  record IPlayToManagerInteropVtable,
     query_interface : Proc(IPlayToManagerInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPlayToManagerInterop*, UInt32),
     release : Proc(IPlayToManagerInterop*, UInt32),
@@ -572,7 +568,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IPlayToManagerInterop, lpVtbl : IPlayToManagerInteropVtbl* do
+  record IPlayToManagerInterop, lpVtbl : IPlayToManagerInteropVtable* do
     GUID = LibC::GUID.new(0x24394699_u32, 0x1f2c_u16, 0x4eb3_u16, StaticArray[0x8c_u8, 0xd7_u8, 0xe_u8, 0xc1_u8, 0xda_u8, 0x42_u8, 0xa5_u8, 0x40_u8])
     def query_interface(this : IPlayToManagerInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -602,7 +598,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record ICorrelationVectorInformationVtbl,
+  record ICorrelationVectorInformationVtable,
     query_interface : Proc(ICorrelationVectorInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICorrelationVectorInformation*, UInt32),
     release : Proc(ICorrelationVectorInformation*, UInt32),
@@ -615,7 +611,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record ICorrelationVectorInformation, lpVtbl : ICorrelationVectorInformationVtbl* do
+  record ICorrelationVectorInformation, lpVtbl : ICorrelationVectorInformationVtable* do
     GUID = LibC::GUID.new(0x83c78b3c_u32, 0xd88b_u16, 0x4950_u16, StaticArray[0xaa_u8, 0x6e_u8, 0x22_u8, 0xb8_u8, 0xd2_u8, 0x2a_u8, 0xab_u8, 0xd3_u8])
     def query_interface(this : ICorrelationVectorInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -648,7 +644,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IUIViewSettingsInteropVtbl,
+  record IUIViewSettingsInteropVtable,
     query_interface : Proc(IUIViewSettingsInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIViewSettingsInterop*, UInt32),
     release : Proc(IUIViewSettingsInterop*, UInt32),
@@ -659,7 +655,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IUIViewSettingsInterop, lpVtbl : IUIViewSettingsInteropVtbl* do
+  record IUIViewSettingsInterop, lpVtbl : IUIViewSettingsInteropVtable* do
     GUID = LibC::GUID.new(0x3694dbf9_u32, 0x8f68_u16, 0x44be_u16, StaticArray[0x8f_u8, 0xf5_u8, 0x19_u8, 0x5c_u8, 0x98_u8, 0xed_u8, 0xe8_u8, 0xa6_u8])
     def query_interface(this : IUIViewSettingsInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -686,7 +682,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IUserActivityInteropVtbl,
+  record IUserActivityInteropVtable,
     query_interface : Proc(IUserActivityInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUserActivityInterop*, UInt32),
     release : Proc(IUserActivityInterop*, UInt32),
@@ -697,7 +693,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IUserActivityInterop, lpVtbl : IUserActivityInteropVtbl* do
+  record IUserActivityInterop, lpVtbl : IUserActivityInteropVtable* do
     GUID = LibC::GUID.new(0x1ade314d_u32, 0xe0a_u16, 0x40d9_u16, StaticArray[0x82_u8, 0x4c_u8, 0x9a_u8, 0x8_u8, 0x8a_u8, 0x50_u8, 0x5_u8, 0x9f_u8])
     def query_interface(this : IUserActivityInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -724,7 +720,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IUserActivitySourceHostInteropVtbl,
+  record IUserActivitySourceHostInteropVtable,
     query_interface : Proc(IUserActivitySourceHostInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUserActivitySourceHostInterop*, UInt32),
     release : Proc(IUserActivitySourceHostInterop*, UInt32),
@@ -735,7 +731,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IUserActivitySourceHostInterop, lpVtbl : IUserActivitySourceHostInteropVtbl* do
+  record IUserActivitySourceHostInterop, lpVtbl : IUserActivitySourceHostInteropVtable* do
     GUID = LibC::GUID.new(0xc15df8bc_u32, 0x8844_u16, 0x487a_u16, StaticArray[0xb8_u8, 0x5b_u8, 0x75_u8, 0x78_u8, 0xe0_u8, 0xf6_u8, 0x14_u8, 0x19_u8])
     def query_interface(this : IUserActivitySourceHostInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -762,7 +758,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IUserActivityRequestManagerInteropVtbl,
+  record IUserActivityRequestManagerInteropVtable,
     query_interface : Proc(IUserActivityRequestManagerInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUserActivityRequestManagerInterop*, UInt32),
     release : Proc(IUserActivityRequestManagerInterop*, UInt32),
@@ -773,7 +769,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IUserActivityRequestManagerInterop, lpVtbl : IUserActivityRequestManagerInteropVtbl* do
+  record IUserActivityRequestManagerInterop, lpVtbl : IUserActivityRequestManagerInteropVtable* do
     GUID = LibC::GUID.new(0xdd69f876_u32, 0x9699_u16, 0x4715_u16, StaticArray[0x90_u8, 0x95_u8, 0xe3_u8, 0x7e_u8, 0xa3_u8, 0xd_u8, 0xfa_u8, 0x1b_u8])
     def query_interface(this : IUserActivityRequestManagerInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -800,7 +796,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IUserConsentVerifierInteropVtbl,
+  record IUserConsentVerifierInteropVtable,
     query_interface : Proc(IUserConsentVerifierInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUserConsentVerifierInterop*, UInt32),
     release : Proc(IUserConsentVerifierInterop*, UInt32),
@@ -811,7 +807,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IUserConsentVerifierInterop, lpVtbl : IUserConsentVerifierInteropVtbl* do
+  record IUserConsentVerifierInterop, lpVtbl : IUserConsentVerifierInteropVtable* do
     GUID = LibC::GUID.new(0x39e050c3_u32, 0x4e74_u16, 0x441a_u16, StaticArray[0x8d_u8, 0xc0_u8, 0xb8_u8, 0x11_u8, 0x4_u8, 0xdf_u8, 0x94_u8, 0x9c_u8])
     def query_interface(this : IUserConsentVerifierInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -838,7 +834,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IWebAuthenticationCoreManagerInteropVtbl,
+  record IWebAuthenticationCoreManagerInteropVtable,
     query_interface : Proc(IWebAuthenticationCoreManagerInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebAuthenticationCoreManagerInterop*, UInt32),
     release : Proc(IWebAuthenticationCoreManagerInterop*, UInt32),
@@ -850,7 +846,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IWebAuthenticationCoreManagerInterop, lpVtbl : IWebAuthenticationCoreManagerInteropVtbl* do
+  record IWebAuthenticationCoreManagerInterop, lpVtbl : IWebAuthenticationCoreManagerInteropVtable* do
     GUID = LibC::GUID.new(0xf4b8e804_u32, 0x811e_u16, 0x4436_u16, StaticArray[0xb6_u8, 0x9c_u8, 0x44_u8, 0xcb_u8, 0x67_u8, 0xb7_u8, 0x20_u8, 0x84_u8])
     def query_interface(this : IWebAuthenticationCoreManagerInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -880,7 +876,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IRestrictedErrorInfoVtbl,
+  record IRestrictedErrorInfoVtable,
     query_interface : Proc(IRestrictedErrorInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRestrictedErrorInfo*, UInt32),
     release : Proc(IRestrictedErrorInfo*, UInt32),
@@ -889,7 +885,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IRestrictedErrorInfo, lpVtbl : IRestrictedErrorInfoVtbl* do
+  record IRestrictedErrorInfo, lpVtbl : IRestrictedErrorInfoVtable* do
     GUID = LibC::GUID.new(0x82ba7092_u32, 0x4c88_u16, 0x427d_u16, StaticArray[0xa7_u8, 0xbc_u8, 0x16_u8, 0xdd_u8, 0x93_u8, 0xfe_u8, 0xb6_u8, 0x7e_u8])
     def query_interface(this : IRestrictedErrorInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -910,7 +906,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record ILanguageExceptionErrorInfoVtbl,
+  record ILanguageExceptionErrorInfoVtable,
     query_interface : Proc(ILanguageExceptionErrorInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILanguageExceptionErrorInfo*, UInt32),
     release : Proc(ILanguageExceptionErrorInfo*, UInt32),
@@ -918,7 +914,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record ILanguageExceptionErrorInfo, lpVtbl : ILanguageExceptionErrorInfoVtbl* do
+  record ILanguageExceptionErrorInfo, lpVtbl : ILanguageExceptionErrorInfoVtable* do
     GUID = LibC::GUID.new(0x4a2dbf3_u32, 0xdf83_u16, 0x116c_u16, StaticArray[0x9_u8, 0x46_u8, 0x8_u8, 0x12_u8, 0xab_u8, 0xf6_u8, 0xe0_u8, 0x7d_u8])
     def query_interface(this : ILanguageExceptionErrorInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -936,7 +932,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record ILanguageExceptionTransformVtbl,
+  record ILanguageExceptionTransformVtable,
     query_interface : Proc(ILanguageExceptionTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILanguageExceptionTransform*, UInt32),
     release : Proc(ILanguageExceptionTransform*, UInt32),
@@ -944,7 +940,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record ILanguageExceptionTransform, lpVtbl : ILanguageExceptionTransformVtbl* do
+  record ILanguageExceptionTransform, lpVtbl : ILanguageExceptionTransformVtable* do
     GUID = LibC::GUID.new(0xfeb5a271_u32, 0xa6cd_u16, 0x45ce_u16, StaticArray[0x88_u8, 0xa_u8, 0x69_u8, 0x67_u8, 0x6_u8, 0xba_u8, 0xdc_u8, 0x65_u8])
     def query_interface(this : ILanguageExceptionTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -962,7 +958,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record ILanguageExceptionStackBackTraceVtbl,
+  record ILanguageExceptionStackBackTraceVtable,
     query_interface : Proc(ILanguageExceptionStackBackTrace*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILanguageExceptionStackBackTrace*, UInt32),
     release : Proc(ILanguageExceptionStackBackTrace*, UInt32),
@@ -970,7 +966,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record ILanguageExceptionStackBackTrace, lpVtbl : ILanguageExceptionStackBackTraceVtbl* do
+  record ILanguageExceptionStackBackTrace, lpVtbl : ILanguageExceptionStackBackTraceVtable* do
     GUID = LibC::GUID.new(0xcbe53fb5_u32, 0xf967_u16, 0x4258_u16, StaticArray[0x8d_u8, 0x34_u8, 0x42_u8, 0xf5_u8, 0xe2_u8, 0x58_u8, 0x33_u8, 0xde_u8])
     def query_interface(this : ILanguageExceptionStackBackTrace*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -988,7 +984,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record ILanguageExceptionErrorInfo2Vtbl,
+  record ILanguageExceptionErrorInfo2Vtable,
     query_interface : Proc(ILanguageExceptionErrorInfo2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILanguageExceptionErrorInfo2*, UInt32),
     release : Proc(ILanguageExceptionErrorInfo2*, UInt32),
@@ -999,7 +995,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record ILanguageExceptionErrorInfo2, lpVtbl : ILanguageExceptionErrorInfo2Vtbl* do
+  record ILanguageExceptionErrorInfo2, lpVtbl : ILanguageExceptionErrorInfo2Vtable* do
     GUID = LibC::GUID.new(0x5746e5c4_u32, 0x5b97_u16, 0x424c_u16, StaticArray[0xb6_u8, 0x20_u8, 0x28_u8, 0x22_u8, 0x91_u8, 0x57_u8, 0x34_u8, 0xdd_u8])
     def query_interface(this : ILanguageExceptionErrorInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1026,7 +1022,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IActivationFactoryVtbl,
+  record IActivationFactoryVtable,
     query_interface : Proc(IActivationFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActivationFactory*, UInt32),
     release : Proc(IActivationFactory*, UInt32),
@@ -1037,7 +1033,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IActivationFactory, lpVtbl : IActivationFactoryVtbl* do
+  record IActivationFactory, lpVtbl : IActivationFactoryVtable* do
     GUID = LibC::GUID.new(0x35_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IActivationFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1064,7 +1060,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IBufferByteAccessVtbl,
+  record IBufferByteAccessVtable,
     query_interface : Proc(IBufferByteAccess*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBufferByteAccess*, UInt32),
     release : Proc(IBufferByteAccess*, UInt32),
@@ -1072,7 +1068,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IBufferByteAccess, lpVtbl : IBufferByteAccessVtbl* do
+  record IBufferByteAccess, lpVtbl : IBufferByteAccessVtable* do
     GUID = LibC::GUID.new(0x905a0fef_u32, 0xbc53_u16, 0x11df_u16, StaticArray[0x8c_u8, 0x49_u8, 0x0_u8, 0x1e_u8, 0x4f_u8, 0xc6_u8, 0x86_u8, 0xda_u8])
     def query_interface(this : IBufferByteAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1090,7 +1086,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IRoSimpleMetaDataBuilderVtbl,
+  record IRoSimpleMetaDataBuilderVtable,
     set_win_rt_interface : Proc(IRoSimpleMetaDataBuilder*, LibC::GUID, Win32cr::Foundation::HRESULT),
     set_delegate : Proc(IRoSimpleMetaDataBuilder*, LibC::GUID, Win32cr::Foundation::HRESULT),
     set_interface_group_simple_default : Proc(IRoSimpleMetaDataBuilder*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, LibC::GUID*, Win32cr::Foundation::HRESULT),
@@ -1104,7 +1100,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IRoSimpleMetaDataBuilder, lpVtbl : IRoSimpleMetaDataBuilderVtbl* do
+  record IRoSimpleMetaDataBuilder, lpVtbl : IRoSimpleMetaDataBuilderVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def set_win_rt_interface(this : IRoSimpleMetaDataBuilder*, iid : LibC::GUID) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.set_win_rt_interface.call(this, iid)
@@ -1140,12 +1136,12 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IRoMetaDataLocatorVtbl,
+  record IRoMetaDataLocatorVtable,
     locate : Proc(IRoMetaDataLocator*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IRoMetaDataLocator, lpVtbl : IRoMetaDataLocatorVtbl* do
+  record IRoMetaDataLocator, lpVtbl : IRoMetaDataLocatorVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def locate(this : IRoMetaDataLocator*, nameElement : Win32cr::Foundation::PWSTR, metaDataDestination : Void*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.locate.call(this, nameElement, metaDataDestination)
@@ -1154,7 +1150,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IMemoryBufferByteAccessVtbl,
+  record IMemoryBufferByteAccessVtable,
     query_interface : Proc(IMemoryBufferByteAccess*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMemoryBufferByteAccess*, UInt32),
     release : Proc(IMemoryBufferByteAccess*, UInt32),
@@ -1162,7 +1158,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IMemoryBufferByteAccess, lpVtbl : IMemoryBufferByteAccessVtbl* do
+  record IMemoryBufferByteAccess, lpVtbl : IMemoryBufferByteAccessVtable* do
     GUID = LibC::GUID.new(0x5b0d3235_u32, 0x4dba_u16, 0x4d44_u16, StaticArray[0x86_u8, 0x5e_u8, 0x8f_u8, 0x1d_u8, 0xe_u8, 0x4f_u8, 0xd0_u8, 0x4d_u8])
     def query_interface(this : IMemoryBufferByteAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1180,7 +1176,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IWeakReferenceVtbl,
+  record IWeakReferenceVtable,
     query_interface : Proc(IWeakReference*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWeakReference*, UInt32),
     release : Proc(IWeakReference*, UInt32),
@@ -1188,7 +1184,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IWeakReference, lpVtbl : IWeakReferenceVtbl* do
+  record IWeakReference, lpVtbl : IWeakReferenceVtable* do
     GUID = LibC::GUID.new(0x37_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IWeakReference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1206,7 +1202,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IWeakReferenceSourceVtbl,
+  record IWeakReferenceSourceVtable,
     query_interface : Proc(IWeakReferenceSource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWeakReferenceSource*, UInt32),
     release : Proc(IWeakReferenceSource*, UInt32),
@@ -1214,7 +1210,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IWeakReferenceSource, lpVtbl : IWeakReferenceSourceVtbl* do
+  record IWeakReferenceSource, lpVtbl : IWeakReferenceSourceVtable* do
     GUID = LibC::GUID.new(0x38_u32, 0x0_u16, 0x0_u16, StaticArray[0xc0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x46_u8])
     def query_interface(this : IWeakReferenceSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1232,7 +1228,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record ISystemMediaTransportControlsInteropVtbl,
+  record ISystemMediaTransportControlsInteropVtable,
     query_interface : Proc(ISystemMediaTransportControlsInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISystemMediaTransportControlsInterop*, UInt32),
     release : Proc(ISystemMediaTransportControlsInterop*, UInt32),
@@ -1243,7 +1239,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record ISystemMediaTransportControlsInterop, lpVtbl : ISystemMediaTransportControlsInteropVtbl* do
+  record ISystemMediaTransportControlsInterop, lpVtbl : ISystemMediaTransportControlsInteropVtable* do
     GUID = LibC::GUID.new(0xddb0472d_u32, 0xc911_u16, 0x4a1f_u16, StaticArray[0x86_u8, 0xd9_u8, 0xdc_u8, 0x3d_u8, 0x71_u8, 0xa9_u8, 0x5f_u8, 0x5a_u8])
     def query_interface(this : ISystemMediaTransportControlsInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1270,7 +1266,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IShareWindowCommandEventArgsInteropVtbl,
+  record IShareWindowCommandEventArgsInteropVtable,
     query_interface : Proc(IShareWindowCommandEventArgsInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IShareWindowCommandEventArgsInterop*, UInt32),
     release : Proc(IShareWindowCommandEventArgsInterop*, UInt32),
@@ -1278,7 +1274,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IShareWindowCommandEventArgsInterop, lpVtbl : IShareWindowCommandEventArgsInteropVtbl* do
+  record IShareWindowCommandEventArgsInterop, lpVtbl : IShareWindowCommandEventArgsInteropVtable* do
     GUID = LibC::GUID.new(0x6571a721_u32, 0x643d_u16, 0x43d4_u16, StaticArray[0xac_u8, 0xa4_u8, 0x6b_u8, 0x6f_u8, 0x5f_u8, 0x30_u8, 0xf1_u8, 0xad_u8])
     def query_interface(this : IShareWindowCommandEventArgsInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1296,7 +1292,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IShareWindowCommandSourceInteropVtbl,
+  record IShareWindowCommandSourceInteropVtable,
     query_interface : Proc(IShareWindowCommandSourceInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IShareWindowCommandSourceInterop*, UInt32),
     release : Proc(IShareWindowCommandSourceInterop*, UInt32),
@@ -1304,7 +1300,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IShareWindowCommandSourceInterop, lpVtbl : IShareWindowCommandSourceInteropVtbl* do
+  record IShareWindowCommandSourceInterop, lpVtbl : IShareWindowCommandSourceInteropVtable* do
     GUID = LibC::GUID.new(0x461a191f_u32, 0x8424_u16, 0x43a6_u16, StaticArray[0xa0_u8, 0xfa_u8, 0x34_u8, 0x51_u8, 0xa2_u8, 0x2f_u8, 0x56_u8, 0xab_u8])
     def query_interface(this : IShareWindowCommandSourceInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1322,7 +1318,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record IMessageDispatcherVtbl,
+  record IMessageDispatcherVtable,
     query_interface : Proc(IMessageDispatcher*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMessageDispatcher*, UInt32),
     release : Proc(IMessageDispatcher*, UInt32),
@@ -1333,7 +1329,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record IMessageDispatcher, lpVtbl : IMessageDispatcherVtbl* do
+  record IMessageDispatcher, lpVtbl : IMessageDispatcherVtable* do
     GUID = LibC::GUID.new(0xf5f84c8f_u32, 0xcfd0_u16, 0x4cd6_u16, StaticArray[0xb6_u8, 0x6b_u8, 0xc5_u8, 0xd2_u8, 0x6f_u8, 0xf1_u8, 0x68_u8, 0x9d_u8])
     def query_interface(this : IMessageDispatcher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1360,7 +1356,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record ICoreWindowInteropVtbl,
+  record ICoreWindowInteropVtable,
     query_interface : Proc(ICoreWindowInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICoreWindowInterop*, UInt32),
     release : Proc(ICoreWindowInterop*, UInt32),
@@ -1369,7 +1365,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record ICoreWindowInterop, lpVtbl : ICoreWindowInteropVtbl* do
+  record ICoreWindowInterop, lpVtbl : ICoreWindowInteropVtable* do
     GUID = LibC::GUID.new(0x45d64a29_u32, 0xa63e_u16, 0x4cb6_u16, StaticArray[0xb4_u8, 0x98_u8, 0x57_u8, 0x81_u8, 0xd2_u8, 0x98_u8, 0xcb_u8, 0x4f_u8])
     def query_interface(this : ICoreWindowInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1390,7 +1386,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record ICoreInputInteropVtbl,
+  record ICoreInputInteropVtable,
     query_interface : Proc(ICoreInputInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICoreInputInterop*, UInt32),
     release : Proc(ICoreInputInterop*, UInt32),
@@ -1399,7 +1395,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record ICoreInputInterop, lpVtbl : ICoreInputInteropVtbl* do
+  record ICoreInputInterop, lpVtbl : ICoreInputInteropVtable* do
     GUID = LibC::GUID.new(0x40bfe3e3_u32, 0xb75a_u16, 0x4479_u16, StaticArray[0xac_u8, 0x96_u8, 0x47_u8, 0x53_u8, 0x65_u8, 0x74_u8, 0x9b_u8, 0xb8_u8])
     def query_interface(this : ICoreInputInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1420,7 +1416,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record ICoreWindowComponentInteropVtbl,
+  record ICoreWindowComponentInteropVtable,
     query_interface : Proc(ICoreWindowComponentInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICoreWindowComponentInterop*, UInt32),
     release : Proc(ICoreWindowComponentInterop*, UInt32),
@@ -1429,7 +1425,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record ICoreWindowComponentInterop, lpVtbl : ICoreWindowComponentInteropVtbl* do
+  record ICoreWindowComponentInterop, lpVtbl : ICoreWindowComponentInteropVtable* do
     GUID = LibC::GUID.new(0x576ab31_u32, 0xa310_u16, 0x4c40_u16, StaticArray[0xba_u8, 0x31_u8, 0xfd_u8, 0x37_u8, 0xe0_u8, 0x29_u8, 0x8d_u8, 0xfa_u8])
     def query_interface(this : ICoreWindowComponentInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1450,7 +1446,7 @@ module Win32cr::System::WinRT
   end
 
   @[Extern]
-  record ICoreWindowAdapterInteropVtbl,
+  record ICoreWindowAdapterInteropVtable,
     query_interface : Proc(ICoreWindowAdapterInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICoreWindowAdapterInterop*, UInt32),
     release : Proc(ICoreWindowAdapterInterop*, UInt32),
@@ -1468,7 +1464,7 @@ module Win32cr::System::WinRT
 
 
   @[Extern]
-  record ICoreWindowAdapterInterop, lpVtbl : ICoreWindowAdapterInteropVtbl* do
+  record ICoreWindowAdapterInterop, lpVtbl : ICoreWindowAdapterInteropVtable* do
     GUID = LibC::GUID.new(0x7a5b6fd1_u32, 0xcd73_u16, 0x4b6c_u16, StaticArray[0x9c_u8, 0xf4_u8, 0x2e_u8, 0x86_u8, 0x9e_u8, 0xaf_u8, 0x47_u8, 0xa_u8])
     def query_interface(this : ICoreWindowAdapterInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1516,289 +1512,430 @@ module Win32cr::System::WinRT
   end
 
   def coDecodeProxy(dwClientPid : UInt32, ui64ProxyAddress : UInt64, pServerInformation : Win32cr::System::WinRT::ServerInformation*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CoDecodeProxy(dwClientPid, ui64ProxyAddress, pServerInformation)
+    {% end %}
   end
 
   def roGetAgileReference(options : Win32cr::System::WinRT::AgileReferenceOptions, riid : LibC::GUID*, pUnk : Void*, ppAgileReference : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoGetAgileReference(options, riid, pUnk, ppAgileReference)
+    {% end %}
   end
 
   def hSTRINGUserSize(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::System::WinRT::HSTRING*) : UInt32
+    {% if !flag?(:docs) %}
     C.HSTRING_UserSize(param0, param1, param2)
+    {% end %}
   end
 
   def hSTRINGUserMarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::WinRT::HSTRING*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HSTRING_UserMarshal(param0, param1, param2)
+    {% end %}
   end
 
   def hSTRINGUserUnmarshal(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::WinRT::HSTRING*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HSTRING_UserUnmarshal(param0, param1, param2)
+    {% end %}
   end
 
   def hSTRINGUserFree(param0 : UInt32*, param1 : Win32cr::System::WinRT::HSTRING*) : Void
+    {% if !flag?(:docs) %}
     C.HSTRING_UserFree(param0, param1)
+    {% end %}
   end
 
   def hSTRINGUserSize64(param0 : UInt32*, param1 : UInt32, param2 : Win32cr::System::WinRT::HSTRING*) : UInt32
+    {% if !flag?(:docs) %}
     C.HSTRING_UserSize64(param0, param1, param2)
+    {% end %}
   end
 
   def hSTRINGUserMarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::WinRT::HSTRING*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HSTRING_UserMarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def hSTRINGUserUnmarshal64(param0 : UInt32*, param1 : UInt8*, param2 : Win32cr::System::WinRT::HSTRING*) : UInt8*
+    {% if !flag?(:docs) %}
     C.HSTRING_UserUnmarshal64(param0, param1, param2)
+    {% end %}
   end
 
   def hSTRINGUserFree64(param0 : UInt32*, param1 : Win32cr::System::WinRT::HSTRING*) : Void
+    {% if !flag?(:docs) %}
     C.HSTRING_UserFree64(param0, param1)
+    {% end %}
   end
 
   def windowsCreateString(sourceString : UInt16*, length : UInt32, string : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowsCreateString(sourceString, length, string)
+    {% end %}
   end
 
   def windowsCreateStringReference(sourceString : Win32cr::Foundation::PWSTR, length : UInt32, hstringHeader : Win32cr::System::WinRT::HSTRING_HEADER*, string : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowsCreateStringReference(sourceString, length, hstringHeader, string)
+    {% end %}
   end
 
   def windowsDeleteString(string : Win32cr::System::WinRT::HSTRING) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowsDeleteString(string)
+    {% end %}
   end
 
   def windowsDuplicateString(string : Win32cr::System::WinRT::HSTRING, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowsDuplicateString(string, newString)
+    {% end %}
   end
 
   def windowsGetStringLen(string : Win32cr::System::WinRT::HSTRING) : UInt32
+    {% if !flag?(:docs) %}
     C.WindowsGetStringLen(string)
+    {% end %}
   end
 
   def windowsGetStringRawBuffer(string : Win32cr::System::WinRT::HSTRING, length : UInt32*) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.WindowsGetStringRawBuffer(string, length)
+    {% end %}
   end
 
   def windowsIsStringEmpty(string : Win32cr::System::WinRT::HSTRING) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WindowsIsStringEmpty(string)
+    {% end %}
   end
 
   def windowsStringHasEmbeddedNull(string : Win32cr::System::WinRT::HSTRING, hasEmbedNull : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowsStringHasEmbeddedNull(string, hasEmbedNull)
+    {% end %}
   end
 
   def windowsCompareStringOrdinal(string1 : Win32cr::System::WinRT::HSTRING, string2 : Win32cr::System::WinRT::HSTRING, result : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowsCompareStringOrdinal(string1, string2, result)
+    {% end %}
   end
 
   def windowsSubstring(string : Win32cr::System::WinRT::HSTRING, startIndex : UInt32, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowsSubstring(string, startIndex, newString)
+    {% end %}
   end
 
   def windowsSubstringWithSpecifiedLength(string : Win32cr::System::WinRT::HSTRING, startIndex : UInt32, length : UInt32, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowsSubstringWithSpecifiedLength(string, startIndex, length, newString)
+    {% end %}
   end
 
   def windowsConcatString(string1 : Win32cr::System::WinRT::HSTRING, string2 : Win32cr::System::WinRT::HSTRING, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowsConcatString(string1, string2, newString)
+    {% end %}
   end
 
   def windowsReplaceString(string : Win32cr::System::WinRT::HSTRING, stringReplaced : Win32cr::System::WinRT::HSTRING, stringReplaceWith : Win32cr::System::WinRT::HSTRING, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowsReplaceString(string, stringReplaced, stringReplaceWith, newString)
+    {% end %}
   end
 
   def windowsTrimStringStart(string : Win32cr::System::WinRT::HSTRING, trimString : Win32cr::System::WinRT::HSTRING, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowsTrimStringStart(string, trimString, newString)
+    {% end %}
   end
 
   def windowsTrimStringEnd(string : Win32cr::System::WinRT::HSTRING, trimString : Win32cr::System::WinRT::HSTRING, newString : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowsTrimStringEnd(string, trimString, newString)
+    {% end %}
   end
 
   def windowsPreallocateStringBuffer(length : UInt32, charBuffer : UInt16**, bufferHandle : Win32cr::System::WinRT::HSTRING_BUFFER*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowsPreallocateStringBuffer(length, charBuffer, bufferHandle)
+    {% end %}
   end
 
   def windowsPromoteStringBuffer(bufferHandle : Win32cr::System::WinRT::HSTRING_BUFFER, string : Win32cr::System::WinRT::HSTRING*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowsPromoteStringBuffer(bufferHandle, string)
+    {% end %}
   end
 
   def windowsDeleteStringBuffer(bufferHandle : Win32cr::System::WinRT::HSTRING_BUFFER) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowsDeleteStringBuffer(bufferHandle)
+    {% end %}
   end
 
   def windowsInspectString(targetHString : LibC::UIntPtrT, machine : UInt16, callback : Win32cr::System::WinRT::PINSPECT_HSTRING_CALLBACK, context : Void*, length : UInt32*, targetStringAddress : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowsInspectString(targetHString, machine, callback, context, length, targetStringAddress)
+    {% end %}
   end
 
   def windowsInspectString2(targetHString : UInt64, machine : UInt16, callback : Win32cr::System::WinRT::PINSPECT_HSTRING_CALLBACK2, context : Void*, length : UInt32*, targetStringAddress : UInt64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowsInspectString2(targetHString, machine, callback, context, length, targetStringAddress)
+    {% end %}
   end
 
   def createDispatcherQueueController(options : Win32cr::System::WinRT::DispatcherQueueOptions, dispatcherQueueController : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateDispatcherQueueController(options, dispatcherQueueController)
+    {% end %}
   end
 
   def roInitialize(initType : Win32cr::System::WinRT::RO_INIT_TYPE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoInitialize(initType)
+    {% end %}
   end
 
   def roUninitialize : Void
+    {% if !flag?(:docs) %}
     C.RoUninitialize
+    {% end %}
   end
 
   def roActivateInstance(activatableClassId : Win32cr::System::WinRT::HSTRING, instance : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoActivateInstance(activatableClassId, instance)
+    {% end %}
   end
 
   def roRegisterActivationFactories(activatableClassIds : Win32cr::System::WinRT::HSTRING*, activationFactoryCallbacks : LibC::IntPtrT*, count : UInt32, cookie : LibC::IntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoRegisterActivationFactories(activatableClassIds, activationFactoryCallbacks, count, cookie)
+    {% end %}
   end
 
   def roRevokeActivationFactories(cookie : LibC::IntPtrT) : Void
+    {% if !flag?(:docs) %}
     C.RoRevokeActivationFactories(cookie)
+    {% end %}
   end
 
   def roGetActivationFactory(activatableClassId : Win32cr::System::WinRT::HSTRING, iid : LibC::GUID*, factory : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoGetActivationFactory(activatableClassId, iid, factory)
+    {% end %}
   end
 
   def roRegisterForApartmentShutdown(callbackObject : Void*, apartmentIdentifier : UInt64*, regCookie : Win32cr::System::WinRT::APARTMENT_SHUTDOWN_REGISTRATION_COOKIE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoRegisterForApartmentShutdown(callbackObject, apartmentIdentifier, regCookie)
+    {% end %}
   end
 
   def roUnregisterForApartmentShutdown(regCookie : Win32cr::System::WinRT::APARTMENT_SHUTDOWN_REGISTRATION_COOKIE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoUnregisterForApartmentShutdown(regCookie)
+    {% end %}
   end
 
   def roGetApartmentIdentifier(apartmentIdentifier : UInt64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoGetApartmentIdentifier(apartmentIdentifier)
+    {% end %}
   end
 
   def roGetBufferMarshaler(bufferMarshaler : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoGetBufferMarshaler(bufferMarshaler)
+    {% end %}
   end
 
   def roGetErrorReportingFlags(pflags : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoGetErrorReportingFlags(pflags)
+    {% end %}
   end
 
   def roSetErrorReportingFlags(flags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoSetErrorReportingFlags(flags)
+    {% end %}
   end
 
   def roResolveRestrictedErrorInfoReference(reference : Win32cr::Foundation::PWSTR, ppRestrictedErrorInfo : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoResolveRestrictedErrorInfoReference(reference, ppRestrictedErrorInfo)
+    {% end %}
   end
 
   def setRestrictedErrorInfo(pRestrictedErrorInfo : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetRestrictedErrorInfo(pRestrictedErrorInfo)
+    {% end %}
   end
 
   def getRestrictedErrorInfo(ppRestrictedErrorInfo : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetRestrictedErrorInfo(ppRestrictedErrorInfo)
+    {% end %}
   end
 
   def roOriginateErrorW(error : Win32cr::Foundation::HRESULT, cchMax : UInt32, message : UInt16*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RoOriginateErrorW(error, cchMax, message)
+    {% end %}
   end
 
   def roOriginateError(error : Win32cr::Foundation::HRESULT, message : Win32cr::System::WinRT::HSTRING) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RoOriginateError(error, message)
+    {% end %}
   end
 
   def roTransformErrorW(oldError : Win32cr::Foundation::HRESULT, newError : Win32cr::Foundation::HRESULT, cchMax : UInt32, message : UInt16*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RoTransformErrorW(oldError, newError, cchMax, message)
+    {% end %}
   end
 
   def roTransformError(oldError : Win32cr::Foundation::HRESULT, newError : Win32cr::Foundation::HRESULT, message : Win32cr::System::WinRT::HSTRING) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RoTransformError(oldError, newError, message)
+    {% end %}
   end
 
   def roCaptureErrorContext(hr : Win32cr::Foundation::HRESULT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoCaptureErrorContext(hr)
+    {% end %}
   end
 
   def roFailFastWithErrorContext(hrError : Win32cr::Foundation::HRESULT) : Void
+    {% if !flag?(:docs) %}
     C.RoFailFastWithErrorContext(hrError)
+    {% end %}
   end
 
   def roOriginateLanguageException(error : Win32cr::Foundation::HRESULT, message : Win32cr::System::WinRT::HSTRING, languageException : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RoOriginateLanguageException(error, message, languageException)
+    {% end %}
   end
 
   def roClearError : Void
+    {% if !flag?(:docs) %}
     C.RoClearError
+    {% end %}
   end
 
   def roReportUnhandledError(pRestrictedErrorInfo : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoReportUnhandledError(pRestrictedErrorInfo)
+    {% end %}
   end
 
   def roInspectThreadErrorInfo(targetTebAddress : LibC::UIntPtrT, machine : UInt16, readMemoryCallback : Win32cr::System::WinRT::PINSPECT_MEMORY_CALLBACK, context : Void*, targetErrorInfoAddress : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoInspectThreadErrorInfo(targetTebAddress, machine, readMemoryCallback, context, targetErrorInfoAddress)
+    {% end %}
   end
 
   def roInspectCapturedStackBackTrace(targetErrorInfoAddress : LibC::UIntPtrT, machine : UInt16, readMemoryCallback : Win32cr::System::WinRT::PINSPECT_MEMORY_CALLBACK, context : Void*, frameCount : UInt32*, targetBackTraceAddress : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoInspectCapturedStackBackTrace(targetErrorInfoAddress, machine, readMemoryCallback, context, frameCount, targetBackTraceAddress)
+    {% end %}
   end
 
   def roGetMatchingRestrictedErrorInfo(hrIn : Win32cr::Foundation::HRESULT, ppRestrictedErrorInfo : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoGetMatchingRestrictedErrorInfo(hrIn, ppRestrictedErrorInfo)
+    {% end %}
   end
 
   def roReportFailedDelegate(punkDelegate : Void*, pRestrictedErrorInfo : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoReportFailedDelegate(punkDelegate, pRestrictedErrorInfo)
+    {% end %}
   end
 
   def isErrorPropagationEnabled : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsErrorPropagationEnabled
+    {% end %}
   end
 
   def metaDataGetDispenser(rclsid : LibC::GUID*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MetaDataGetDispenser(rclsid, riid, ppv)
+    {% end %}
   end
 
   def roGetParameterizedTypeInstanceIID(nameElementCount : UInt32, nameElements : Win32cr::Foundation::PWSTR*, metaDataLocator : Void*, iid : LibC::GUID*, pExtra : Win32cr::System::WinRT::ROPARAMIIDHANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoGetParameterizedTypeInstanceIID(nameElementCount, nameElements, metaDataLocator, iid, pExtra)
+    {% end %}
   end
 
   def roFreeParameterizedTypeExtra(extra : Win32cr::System::WinRT::ROPARAMIIDHANDLE) : Void
+    {% if !flag?(:docs) %}
     C.RoFreeParameterizedTypeExtra(extra)
+    {% end %}
   end
 
   def roParameterizedTypeExtraGetTypeSignature(extra : Win32cr::System::WinRT::ROPARAMIIDHANDLE) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.RoParameterizedTypeExtraGetTypeSignature(extra)
+    {% end %}
   end
 
   def roGetServerActivatableClasses(serverName : Win32cr::System::WinRT::HSTRING, activatableClassIds : Win32cr::System::WinRT::HSTRING**, count : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RoGetServerActivatableClasses(serverName, activatableClassIds, count)
+    {% end %}
   end
 
   def createRandomAccessStreamOnFile(filePath : Win32cr::Foundation::PWSTR, accessMode : UInt32, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateRandomAccessStreamOnFile(filePath, accessMode, riid, ppv)
+    {% end %}
   end
 
   def createRandomAccessStreamOverStream(stream : Void*, options : Win32cr::System::WinRT::BSOS_OPTIONS, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateRandomAccessStreamOverStream(stream, options, riid, ppv)
+    {% end %}
   end
 
   def createStreamOverRandomAccessStream(randomAccessStream : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateStreamOverRandomAccessStream(randomAccessStream, riid, ppv)
+    {% end %}
   end
 
   def createControlInput(riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateControlInput(riid, ppv)
+    {% end %}
   end
 
   def createControlInputEx(pCoreWindow : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateControlInputEx(pCoreWindow, riid, ppv)
+    {% end %}
   end
 
   @[Link("ole32")]
   @[Link("coremessaging")]
   @[Link("rometadata")]
   @[Link("windows.ui")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CoDecodeProxy(dwClientPid : UInt32, ui64ProxyAddress : UInt64, pServerInformation : Win32cr::System::WinRT::ServerInformation*) : Win32cr::Foundation::HRESULT
@@ -2011,4 +2148,5 @@ module Win32cr::System::WinRT
     fun CreateControlInputEx(pCoreWindow : Void*, riid : LibC::GUID*, ppv : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

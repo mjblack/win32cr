@@ -1011,11 +1011,7 @@ module Win32cr::System::AddressBook
     end
   end
 
-  @[Extern]
-  struct WABACTIONITEM_
-    def initialize()
-    end
-  end
+  alias WABACTIONITEM_ = Void
 
   @[Extern]
   struct WAB_PARAM
@@ -1063,7 +1059,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IMAPIAdviseSinkVtbl,
+  record IMAPIAdviseSinkVtable,
     query_interface : Proc(IMAPIAdviseSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMAPIAdviseSink*, UInt32),
     release : Proc(IMAPIAdviseSink*, UInt32),
@@ -1071,7 +1067,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IMAPIAdviseSink, lpVtbl : IMAPIAdviseSinkVtbl* do
+  record IMAPIAdviseSink, lpVtbl : IMAPIAdviseSinkVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IMAPIAdviseSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1089,7 +1085,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IMAPIProgressVtbl,
+  record IMAPIProgressVtable,
     query_interface : Proc(IMAPIProgress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMAPIProgress*, UInt32),
     release : Proc(IMAPIProgress*, UInt32),
@@ -1101,7 +1097,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IMAPIProgress, lpVtbl : IMAPIProgressVtbl* do
+  record IMAPIProgress, lpVtbl : IMAPIProgressVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IMAPIProgress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1131,7 +1127,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IMAPIPropVtbl,
+  record IMAPIPropVtable,
     query_interface : Proc(IMAPIProp*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMAPIProp*, UInt32),
     release : Proc(IMAPIProp*, UInt32),
@@ -1149,7 +1145,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IMAPIProp, lpVtbl : IMAPIPropVtbl* do
+  record IMAPIProp, lpVtbl : IMAPIPropVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IMAPIProp*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1197,7 +1193,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IMAPITableVtbl,
+  record IMAPITableVtable,
     query_interface : Proc(IMAPITable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMAPITable*, UInt32),
     release : Proc(IMAPITable*, UInt32),
@@ -1227,7 +1223,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IMAPITable, lpVtbl : IMAPITableVtbl* do
+  record IMAPITable, lpVtbl : IMAPITableVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IMAPITable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1311,7 +1307,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IProfSectVtbl,
+  record IProfSectVtable,
     query_interface : Proc(IProfSect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProfSect*, UInt32),
     release : Proc(IProfSect*, UInt32),
@@ -1329,7 +1325,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IProfSect, lpVtbl : IProfSectVtbl* do
+  record IProfSect, lpVtbl : IProfSectVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IProfSect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1377,7 +1373,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IMAPIStatusVtbl,
+  record IMAPIStatusVtable,
     query_interface : Proc(IMAPIStatus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMAPIStatus*, UInt32),
     release : Proc(IMAPIStatus*, UInt32),
@@ -1399,7 +1395,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IMAPIStatus, lpVtbl : IMAPIStatusVtbl* do
+  record IMAPIStatus, lpVtbl : IMAPIStatusVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IMAPIStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1459,7 +1455,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IMAPIContainerVtbl,
+  record IMAPIContainerVtable,
     query_interface : Proc(IMAPIContainer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMAPIContainer*, UInt32),
     release : Proc(IMAPIContainer*, UInt32),
@@ -1482,7 +1478,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IMAPIContainer, lpVtbl : IMAPIContainerVtbl* do
+  record IMAPIContainer, lpVtbl : IMAPIContainerVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IMAPIContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1545,7 +1541,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IABContainerVtbl,
+  record IABContainerVtable,
     query_interface : Proc(IABContainer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IABContainer*, UInt32),
     release : Proc(IABContainer*, UInt32),
@@ -1572,7 +1568,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IABContainer, lpVtbl : IABContainerVtbl* do
+  record IABContainer, lpVtbl : IABContainerVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IABContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1647,7 +1643,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IMailUserVtbl,
+  record IMailUserVtable,
     query_interface : Proc(IMailUser*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMailUser*, UInt32),
     release : Proc(IMailUser*, UInt32),
@@ -1665,7 +1661,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IMailUser, lpVtbl : IMailUserVtbl* do
+  record IMailUser, lpVtbl : IMailUserVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IMailUser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1713,7 +1709,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IDistListVtbl,
+  record IDistListVtable,
     query_interface : Proc(IDistList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDistList*, UInt32),
     release : Proc(IDistList*, UInt32),
@@ -1740,7 +1736,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IDistList, lpVtbl : IDistListVtbl* do
+  record IDistList, lpVtbl : IDistListVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDistList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1815,7 +1811,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IMAPIFolderVtbl,
+  record IMAPIFolderVtable,
     query_interface : Proc(IMAPIFolder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMAPIFolder*, UInt32),
     release : Proc(IMAPIFolder*, UInt32),
@@ -1849,7 +1845,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IMAPIFolder, lpVtbl : IMAPIFolderVtbl* do
+  record IMAPIFolder, lpVtbl : IMAPIFolderVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IMAPIFolder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1945,7 +1941,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IMsgStoreVtbl,
+  record IMsgStoreVtable,
     query_interface : Proc(IMsgStore*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMsgStore*, UInt32),
     release : Proc(IMsgStore*, UInt32),
@@ -1976,7 +1972,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IMsgStore, lpVtbl : IMsgStoreVtbl* do
+  record IMsgStore, lpVtbl : IMsgStoreVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IMsgStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2063,7 +2059,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IMessageVtbl,
+  record IMessageVtable,
     query_interface : Proc(IMessage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMessage*, UInt32),
     release : Proc(IMessage*, UInt32),
@@ -2089,7 +2085,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IMessage, lpVtbl : IMessageVtbl* do
+  record IMessage, lpVtbl : IMessageVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IMessage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2161,7 +2157,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IAttachVtbl,
+  record IAttachVtable,
     query_interface : Proc(IAttach*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAttach*, UInt32),
     release : Proc(IAttach*, UInt32),
@@ -2179,7 +2175,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IAttach, lpVtbl : IAttachVtbl* do
+  record IAttach, lpVtbl : IAttachVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IAttach*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2227,7 +2223,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IMAPIControlVtbl,
+  record IMAPIControlVtable,
     query_interface : Proc(IMAPIControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMAPIControl*, UInt32),
     release : Proc(IMAPIControl*, UInt32),
@@ -2237,7 +2233,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IMAPIControl, lpVtbl : IMAPIControlVtbl* do
+  record IMAPIControl, lpVtbl : IMAPIControlVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IMAPIControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2261,7 +2257,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IProviderAdminVtbl,
+  record IProviderAdminVtable,
     query_interface : Proc(IProviderAdmin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProviderAdmin*, UInt32),
     release : Proc(IProviderAdmin*, UInt32),
@@ -2273,7 +2269,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IProviderAdmin, lpVtbl : IProviderAdminVtbl* do
+  record IProviderAdmin, lpVtbl : IProviderAdminVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IProviderAdmin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2303,7 +2299,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record ITableDataVtbl,
+  record ITableDataVtable,
     query_interface : Proc(ITableData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITableData*, UInt32),
     release : Proc(ITableData*, UInt32),
@@ -2319,7 +2315,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record ITableData, lpVtbl : ITableDataVtbl* do
+  record ITableData, lpVtbl : ITableDataVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : ITableData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2361,7 +2357,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IPropDataVtbl,
+  record IPropDataVtable,
     query_interface : Proc(IPropData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPropData*, UInt32),
     release : Proc(IPropData*, UInt32),
@@ -2383,7 +2379,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IPropData, lpVtbl : IPropDataVtbl* do
+  record IPropData, lpVtbl : IPropDataVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IPropData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2443,7 +2439,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IAddrBookVtbl,
+  record IAddrBookVtable,
     query_interface : Proc(IAddrBook*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAddrBook*, UInt32),
     release : Proc(IAddrBook*, UInt32),
@@ -2479,7 +2475,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IAddrBook, lpVtbl : IAddrBookVtbl* do
+  record IAddrBook, lpVtbl : IAddrBookVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IAddrBook*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2581,7 +2577,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IWABObjectVtbl,
+  record IWABObjectVtable,
     query_interface : Proc(IWABObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWABObject*, UInt32),
     release : Proc(IWABObject*, UInt32),
@@ -2601,7 +2597,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IWABObject, lpVtbl : IWABObjectVtbl* do
+  record IWABObject, lpVtbl : IWABObjectVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IWABObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2655,7 +2651,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IWABOBJECT_Vtbl,
+  record IWABOBJECT_Vtable,
     query_interface : Proc(IWABOBJECT_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWABOBJECT_*, UInt32),
     release : Proc(IWABOBJECT_*, UInt32),
@@ -2675,7 +2671,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IWABOBJECT_, lpVtbl : IWABOBJECT_Vtbl* do
+  record IWABOBJECT_, lpVtbl : IWABOBJECT_Vtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IWABOBJECT_*, riid : LibC::GUID*, ppvObj : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObj)
@@ -2729,7 +2725,7 @@ module Win32cr::System::AddressBook
   end
 
   @[Extern]
-  record IWABExtInitVtbl,
+  record IWABExtInitVtable,
     query_interface : Proc(IWABExtInit*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWABExtInit*, UInt32),
     release : Proc(IWABExtInit*, UInt32),
@@ -2737,7 +2733,7 @@ module Win32cr::System::AddressBook
 
 
   @[Extern]
-  record IWABExtInit, lpVtbl : IWABExtInitVtbl* do
+  record IWABExtInit, lpVtbl : IWABExtInitVtable* do
     GUID = LibC::GUID.new(0xea22ebf0_u32, 0x87a4_u16, 0x11d1_u16, StaticArray[0x9a_u8, 0xcf_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x1f_u8, 0x9c_u8, 0x8b_u8])
     def query_interface(this : IWABExtInit*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2755,235 +2751,350 @@ module Win32cr::System::AddressBook
   end
 
   def createTable(lpInterface : LibC::GUID*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpAllocateMore : Win32cr::System::AddressBook::LPALLOCATEMORE, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, lpvReserved : Void*, ulTableType : UInt32, ulPropTagIndexColumn : UInt32, lpSPropTagArrayColumns : Win32cr::System::AddressBook::SPropTagArray*, lppTableData : Void**) : Int32
+    {% if !flag?(:docs) %}
     C.CreateTable(lpInterface, lpAllocateBuffer, lpAllocateMore, lpFreeBuffer, lpvReserved, ulTableType, ulPropTagIndexColumn, lpSPropTagArrayColumns, lppTableData)
+    {% end %}
   end
 
   def createIProp(lpInterface : LibC::GUID*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpAllocateMore : Win32cr::System::AddressBook::LPALLOCATEMORE, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, lpvReserved : Void*, lppPropData : Void**) : Int32
+    {% if !flag?(:docs) %}
     C.CreateIProp(lpInterface, lpAllocateBuffer, lpAllocateMore, lpFreeBuffer, lpvReserved, lppPropData)
+    {% end %}
   end
 
   def mAPIInitIdle(lpvReserved : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.MAPIInitIdle(lpvReserved)
+    {% end %}
   end
 
   def mAPIDeinitIdle : Void
+    {% if !flag?(:docs) %}
     C.MAPIDeinitIdle
+    {% end %}
   end
 
   def ftgRegisterIdleRoutine(lpfnIdle : Win32cr::System::AddressBook::PFNIDLE, lpvIdleParam : Void*, priIdle : Int16, csecIdle : UInt32, iroIdle : UInt16) : Void*
+    {% if !flag?(:docs) %}
     C.FtgRegisterIdleRoutine(lpfnIdle, lpvIdleParam, priIdle, csecIdle, iroIdle)
+    {% end %}
   end
 
   def deregisterIdleRoutine(ftg : Void*) : Void
+    {% if !flag?(:docs) %}
     C.DeregisterIdleRoutine(ftg)
+    {% end %}
   end
 
   def enableIdleRoutine(ftg : Void*, fEnable : Win32cr::Foundation::BOOL) : Void
+    {% if !flag?(:docs) %}
     C.EnableIdleRoutine(ftg, fEnable)
+    {% end %}
   end
 
   def changeIdleRoutine(ftg : Void*, lpfnIdle : Win32cr::System::AddressBook::PFNIDLE, lpvIdleParam : Void*, priIdle : Int16, csecIdle : UInt32, iroIdle : UInt16, ircIdle : UInt16) : Void
+    {% if !flag?(:docs) %}
     C.ChangeIdleRoutine(ftg, lpfnIdle, lpvIdleParam, priIdle, csecIdle, iroIdle, ircIdle)
+    {% end %}
   end
 
   def mAPIGetDefaultMalloc : Void*
+    {% if !flag?(:docs) %}
     C.MAPIGetDefaultMalloc
+    {% end %}
   end
 
   def openStreamOnFile(lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, ulFlags : UInt32, lpszFileName : Int8*, lpszPrefix : Int8*, lppStream : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.OpenStreamOnFile(lpAllocateBuffer, lpFreeBuffer, ulFlags, lpszFileName, lpszPrefix, lppStream)
+    {% end %}
   end
 
   def propCopyMore(lpSPropValueDest : Win32cr::System::AddressBook::SPropValue*, lpSPropValueSrc : Win32cr::System::AddressBook::SPropValue*, lpfAllocMore : Win32cr::System::AddressBook::LPALLOCATEMORE, lpvObject : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.PropCopyMore(lpSPropValueDest, lpSPropValueSrc, lpfAllocMore, lpvObject)
+    {% end %}
   end
 
   def ulPropSize(lpSPropValue : Win32cr::System::AddressBook::SPropValue*) : UInt32
+    {% if !flag?(:docs) %}
     C.UlPropSize(lpSPropValue)
+    {% end %}
   end
 
   def fEqualNames(lpName1 : Win32cr::System::AddressBook::MAPINAMEID*, lpName2 : Win32cr::System::AddressBook::MAPINAMEID*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FEqualNames(lpName1, lpName2)
+    {% end %}
   end
 
   def fPropContainsProp(lpSPropValueDst : Win32cr::System::AddressBook::SPropValue*, lpSPropValueSrc : Win32cr::System::AddressBook::SPropValue*, ulFuzzyLevel : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FPropContainsProp(lpSPropValueDst, lpSPropValueSrc, ulFuzzyLevel)
+    {% end %}
   end
 
   def fPropCompareProp(lpSPropValue1 : Win32cr::System::AddressBook::SPropValue*, ulRelOp : UInt32, lpSPropValue2 : Win32cr::System::AddressBook::SPropValue*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FPropCompareProp(lpSPropValue1, ulRelOp, lpSPropValue2)
+    {% end %}
   end
 
   def lPropCompareProp(lpSPropValueA : Win32cr::System::AddressBook::SPropValue*, lpSPropValueB : Win32cr::System::AddressBook::SPropValue*) : Int32
+    {% if !flag?(:docs) %}
     C.LPropCompareProp(lpSPropValueA, lpSPropValueB)
+    {% end %}
   end
 
   def hrAddColumns(lptbl : Void*, lpproptagColumnsNew : Win32cr::System::AddressBook::SPropTagArray*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HrAddColumns(lptbl, lpproptagColumnsNew, lpAllocateBuffer, lpFreeBuffer)
+    {% end %}
   end
 
   def hrAddColumnsEx(lptbl : Void*, lpproptagColumnsNew : Win32cr::System::AddressBook::SPropTagArray*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, lpfnFilterColumns : LibC::IntPtrT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HrAddColumnsEx(lptbl, lpproptagColumnsNew, lpAllocateBuffer, lpFreeBuffer, lpfnFilterColumns)
+    {% end %}
   end
 
   def hrAllocAdviseSink(lpfnCallback : Win32cr::System::AddressBook::LPNOTIFCALLBACK, lpvContext : Void*, lppAdviseSink : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HrAllocAdviseSink(lpfnCallback, lpvContext, lppAdviseSink)
+    {% end %}
   end
 
   def hrThisThreadAdviseSink(lpAdviseSink : Void*, lppAdviseSink : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HrThisThreadAdviseSink(lpAdviseSink, lppAdviseSink)
+    {% end %}
   end
 
   def hrDispatchNotifications(ulFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HrDispatchNotifications(ulFlags)
+    {% end %}
   end
 
   def buildDisplayTable(lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpAllocateMore : Win32cr::System::AddressBook::LPALLOCATEMORE, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, lpMalloc : Void*, hInstance : Win32cr::Foundation::HINSTANCE, cPages : UInt32, lpPage : Win32cr::System::AddressBook::DTPAGE*, ulFlags : UInt32, lppTable : Void**, lppTblData : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BuildDisplayTable(lpAllocateBuffer, lpAllocateMore, lpFreeBuffer, lpMalloc, hInstance, cPages, lpPage, ulFlags, lppTable, lppTblData)
+    {% end %}
   end
 
   def scCountNotifications(cNotifications : Int32, lpNotifications : Win32cr::System::AddressBook::NOTIFICATION*, lpcb : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.ScCountNotifications(cNotifications, lpNotifications, lpcb)
+    {% end %}
   end
 
   def scCopyNotifications(cNotification : Int32, lpNotifications : Win32cr::System::AddressBook::NOTIFICATION*, lpvDst : Void*, lpcb : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.ScCopyNotifications(cNotification, lpNotifications, lpvDst, lpcb)
+    {% end %}
   end
 
   def scRelocNotifications(cNotification : Int32, lpNotifications : Win32cr::System::AddressBook::NOTIFICATION*, lpvBaseOld : Void*, lpvBaseNew : Void*, lpcb : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.ScRelocNotifications(cNotification, lpNotifications, lpvBaseOld, lpvBaseNew, lpcb)
+    {% end %}
   end
 
   def scCountProps(cValues : Int32, lpPropArray : Win32cr::System::AddressBook::SPropValue*, lpcb : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.ScCountProps(cValues, lpPropArray, lpcb)
+    {% end %}
   end
 
   def lpValFindProp(ulPropTag : UInt32, cValues : UInt32, lpPropArray : Win32cr::System::AddressBook::SPropValue*) : Win32cr::System::AddressBook::SPropValue*
+    {% if !flag?(:docs) %}
     C.LpValFindProp(ulPropTag, cValues, lpPropArray)
+    {% end %}
   end
 
   def scCopyProps(cValues : Int32, lpPropArray : Win32cr::System::AddressBook::SPropValue*, lpvDst : Void*, lpcb : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.ScCopyProps(cValues, lpPropArray, lpvDst, lpcb)
+    {% end %}
   end
 
   def scRelocProps(cValues : Int32, lpPropArray : Win32cr::System::AddressBook::SPropValue*, lpvBaseOld : Void*, lpvBaseNew : Void*, lpcb : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.ScRelocProps(cValues, lpPropArray, lpvBaseOld, lpvBaseNew, lpcb)
+    {% end %}
   end
 
   def scDupPropset(cValues : Int32, lpPropArray : Win32cr::System::AddressBook::SPropValue*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lppPropArray : Win32cr::System::AddressBook::SPropValue**) : Int32
+    {% if !flag?(:docs) %}
     C.ScDupPropset(cValues, lpPropArray, lpAllocateBuffer, lppPropArray)
+    {% end %}
   end
 
   def ulAddRef(lpunk : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.UlAddRef(lpunk)
+    {% end %}
   end
 
   def ulRelease(lpunk : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.UlRelease(lpunk)
+    {% end %}
   end
 
   def hrGetOneProp(lpMapiProp : Void*, ulPropTag : UInt32, lppProp : Win32cr::System::AddressBook::SPropValue**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HrGetOneProp(lpMapiProp, ulPropTag, lppProp)
+    {% end %}
   end
 
   def hrSetOneProp(lpMapiProp : Void*, lpProp : Win32cr::System::AddressBook::SPropValue*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HrSetOneProp(lpMapiProp, lpProp)
+    {% end %}
   end
 
   def fPropExists(lpMapiProp : Void*, ulPropTag : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FPropExists(lpMapiProp, ulPropTag)
+    {% end %}
   end
 
   def ppropFindProp(lpPropArray : Win32cr::System::AddressBook::SPropValue*, cValues : UInt32, ulPropTag : UInt32) : Win32cr::System::AddressBook::SPropValue*
+    {% if !flag?(:docs) %}
     C.PpropFindProp(lpPropArray, cValues, ulPropTag)
+    {% end %}
   end
 
   def freePadrlist(lpAdrlist : Win32cr::System::AddressBook::ADRLIST*) : Void
+    {% if !flag?(:docs) %}
     C.FreePadrlist(lpAdrlist)
+    {% end %}
   end
 
   def freeProws(lpRows : Win32cr::System::AddressBook::SRowSet*) : Void
+    {% if !flag?(:docs) %}
     C.FreeProws(lpRows)
+    {% end %}
   end
 
   def hrQueryAllRows(lpTable : Void*, lpPropTags : Win32cr::System::AddressBook::SPropTagArray*, lpRestriction : Win32cr::System::AddressBook::SRestriction*, lpSortOrderSet : Win32cr::System::AddressBook::SSortOrderSet*, crowsMax : Int32, lppRows : Win32cr::System::AddressBook::SRowSet**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HrQueryAllRows(lpTable, lpPropTags, lpRestriction, lpSortOrderSet, crowsMax, lppRows)
+    {% end %}
   end
 
   def szFindCh(lpsz : Int8*, ch : UInt16) : Int8*
+    {% if !flag?(:docs) %}
     C.SzFindCh(lpsz, ch)
+    {% end %}
   end
 
   def szFindLastCh(lpsz : Int8*, ch : UInt16) : Int8*
+    {% if !flag?(:docs) %}
     C.SzFindLastCh(lpsz, ch)
+    {% end %}
   end
 
   def szFindSz(lpsz : Int8*, lpszKey : Int8*) : Int8*
+    {% if !flag?(:docs) %}
     C.SzFindSz(lpsz, lpszKey)
+    {% end %}
   end
 
   def uFromSz(lpsz : Int8*) : UInt32
+    {% if !flag?(:docs) %}
     C.UFromSz(lpsz)
+    {% end %}
   end
 
   def scUNCFromLocalPath(lpszLocal : Win32cr::Foundation::PSTR, lpszUNC : UInt8*, cchUNC : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.ScUNCFromLocalPath(lpszLocal, lpszUNC, cchUNC)
+    {% end %}
   end
 
   def scLocalPathFromUNC(lpszUNC : Win32cr::Foundation::PSTR, lpszLocal : UInt8*, cchLocal : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.ScLocalPathFromUNC(lpszUNC, lpszLocal, cchLocal)
+    {% end %}
   end
 
   def ftAddFt(ftAddend1 : Win32cr::Foundation::FILETIME, ftAddend2 : Win32cr::Foundation::FILETIME) : Win32cr::Foundation::FILETIME
+    {% if !flag?(:docs) %}
     C.FtAddFt(ftAddend1, ftAddend2)
+    {% end %}
   end
 
   def ftMulDwDw(ftMultiplicand : UInt32, ftMultiplier : UInt32) : Win32cr::Foundation::FILETIME
+    {% if !flag?(:docs) %}
     C.FtMulDwDw(ftMultiplicand, ftMultiplier)
+    {% end %}
   end
 
   def ftMulDw(ftMultiplier : UInt32, ftMultiplicand : Win32cr::Foundation::FILETIME) : Win32cr::Foundation::FILETIME
+    {% if !flag?(:docs) %}
     C.FtMulDw(ftMultiplier, ftMultiplicand)
+    {% end %}
   end
 
   def ftSubFt(ftMinuend : Win32cr::Foundation::FILETIME, ftSubtrahend : Win32cr::Foundation::FILETIME) : Win32cr::Foundation::FILETIME
+    {% if !flag?(:docs) %}
     C.FtSubFt(ftMinuend, ftSubtrahend)
+    {% end %}
   end
 
   def ftNegFt(ft : Win32cr::Foundation::FILETIME) : Win32cr::Foundation::FILETIME
+    {% if !flag?(:docs) %}
     C.FtNegFt(ft)
+    {% end %}
   end
 
   def scCreateConversationIndex(cbParent : UInt32, lpbParent : UInt8*, lpcbConvIndex : UInt32*, lppbConvIndex : UInt8**) : Int32
+    {% if !flag?(:docs) %}
     C.ScCreateConversationIndex(cbParent, lpbParent, lpcbConvIndex, lppbConvIndex)
+    {% end %}
   end
 
   def wrapStoreEntryID(ulFlags : UInt32, lpszDLLName : Int8*, cbOrigEntry : UInt32, lpOrigEntry : Win32cr::System::AddressBook::ENTRYID*, lpcbWrappedEntry : UInt32*, lppWrappedEntry : Win32cr::System::AddressBook::ENTRYID**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WrapStoreEntryID(ulFlags, lpszDLLName, cbOrigEntry, lpOrigEntry, lpcbWrappedEntry, lppWrappedEntry)
+    {% end %}
   end
 
   def rTFSync(lpMessage : Void*, ulFlags : UInt32, lpfMessageUpdated : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RTFSync(lpMessage, ulFlags, lpfMessageUpdated)
+    {% end %}
   end
 
   def wrapCompressedRTFStream(lpCompressedRTFStream : Void*, ulFlags : UInt32, lpUncompressedRTFStream : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WrapCompressedRTFStream(lpCompressedRTFStream, ulFlags, lpUncompressedRTFStream)
+    {% end %}
   end
 
   def hrIStorageFromStream(lpUnkIn : Void*, lpInterface : LibC::GUID*, ulFlags : UInt32, lppStorageOut : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HrIStorageFromStream(lpUnkIn, lpInterface, ulFlags, lppStorageOut)
+    {% end %}
   end
 
   def scInitMapiUtil(ulFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.ScInitMapiUtil(ulFlags)
+    {% end %}
   end
 
   def deinitMapiUtil : Void
+    {% if !flag?(:docs) %}
     C.DeinitMapiUtil
+    {% end %}
   end
 
   @[Link("rtm")]
   @[Link("mapi32")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CreateTable(lpInterface : LibC::GUID*, lpAllocateBuffer : Win32cr::System::AddressBook::LPALLOCATEBUFFER, lpAllocateMore : Win32cr::System::AddressBook::LPALLOCATEMORE, lpFreeBuffer : Win32cr::System::AddressBook::LPFREEBUFFER, lpvReserved : Void*, ulTableType : UInt32, ulPropTagIndexColumn : UInt32, lpSPropTagArrayColumns : Win32cr::System::AddressBook::SPropTagArray*, lppTableData : Void**) : Int32
@@ -3157,4 +3268,5 @@ module Win32cr::System::AddressBook
     fun DeinitMapiUtil : Void
 
   end
+  {% end %}
 end

@@ -770,511 +770,765 @@ module Win32cr::Security::Credentials
   end
 
   def keyCredentialManagerGetOperationErrorStates(keyCredentialManagerOperationType : Win32cr::Security::Credentials::KeyCredentialManagerOperationType, isReady : Win32cr::Foundation::BOOL*, keyCredentialManagerOperationErrorStates : Win32cr::Security::Credentials::KeyCredentialManagerOperationErrorStates*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.KeyCredentialManagerGetOperationErrorStates(keyCredentialManagerOperationType, isReady, keyCredentialManagerOperationErrorStates)
+    {% end %}
   end
 
   def keyCredentialManagerShowUIOperation(hWndOwner : Win32cr::Foundation::HWND, keyCredentialManagerOperationType : Win32cr::Security::Credentials::KeyCredentialManagerOperationType) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.KeyCredentialManagerShowUIOperation(hWndOwner, keyCredentialManagerOperationType)
+    {% end %}
   end
 
   def keyCredentialManagerGetInformation(keyCredentialManagerInfo : Win32cr::Security::Credentials::KeyCredentialManagerInfo**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.KeyCredentialManagerGetInformation(keyCredentialManagerInfo)
+    {% end %}
   end
 
   def keyCredentialManagerFreeInformation(keyCredentialManagerInfo : Win32cr::Security::Credentials::KeyCredentialManagerInfo*) : Void
+    {% if !flag?(:docs) %}
     C.KeyCredentialManagerFreeInformation(keyCredentialManagerInfo)
+    {% end %}
   end
 
   def credWriteW(credential : Win32cr::Security::Credentials::CREDENTIALW*, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredWriteW(credential, flags)
+    {% end %}
   end
 
   def credWriteA(credential : Win32cr::Security::Credentials::CREDENTIALA*, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredWriteA(credential, flags)
+    {% end %}
   end
 
   def credReadW(target_name : Win32cr::Foundation::PWSTR, type__ : UInt32, flags : UInt32, credential : Win32cr::Security::Credentials::CREDENTIALW**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredReadW(target_name, type__, flags, credential)
+    {% end %}
   end
 
   def credReadA(target_name : Win32cr::Foundation::PSTR, type__ : UInt32, flags : UInt32, credential : Win32cr::Security::Credentials::CREDENTIALA**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredReadA(target_name, type__, flags, credential)
+    {% end %}
   end
 
   def credEnumerateW(filter : Win32cr::Foundation::PWSTR, flags : Win32cr::Security::Credentials::CRED_ENUMERATE_FLAGS, count : UInt32*, credential : Win32cr::Security::Credentials::CREDENTIALW***) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredEnumerateW(filter, flags, count, credential)
+    {% end %}
   end
 
   def credEnumerateA(filter : Win32cr::Foundation::PSTR, flags : Win32cr::Security::Credentials::CRED_ENUMERATE_FLAGS, count : UInt32*, credential : Win32cr::Security::Credentials::CREDENTIALA***) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredEnumerateA(filter, flags, count, credential)
+    {% end %}
   end
 
   def credWriteDomainCredentialsW(target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONW*, credential : Win32cr::Security::Credentials::CREDENTIALW*, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredWriteDomainCredentialsW(target_info, credential, flags)
+    {% end %}
   end
 
   def credWriteDomainCredentialsA(target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONA*, credential : Win32cr::Security::Credentials::CREDENTIALA*, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredWriteDomainCredentialsA(target_info, credential, flags)
+    {% end %}
   end
 
   def credReadDomainCredentialsW(target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONW*, flags : UInt32, count : UInt32*, credential : Win32cr::Security::Credentials::CREDENTIALW***) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredReadDomainCredentialsW(target_info, flags, count, credential)
+    {% end %}
   end
 
   def credReadDomainCredentialsA(target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONA*, flags : UInt32, count : UInt32*, credential : Win32cr::Security::Credentials::CREDENTIALA***) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredReadDomainCredentialsA(target_info, flags, count, credential)
+    {% end %}
   end
 
   def credDeleteW(target_name : Win32cr::Foundation::PWSTR, type__ : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredDeleteW(target_name, type__, flags)
+    {% end %}
   end
 
   def credDeleteA(target_name : Win32cr::Foundation::PSTR, type__ : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredDeleteA(target_name, type__, flags)
+    {% end %}
   end
 
   def credRenameW(old_target_name : Win32cr::Foundation::PWSTR, new_target_name : Win32cr::Foundation::PWSTR, type__ : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredRenameW(old_target_name, new_target_name, type__, flags)
+    {% end %}
   end
 
   def credRenameA(old_target_name : Win32cr::Foundation::PSTR, new_target_name : Win32cr::Foundation::PSTR, type__ : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredRenameA(old_target_name, new_target_name, type__, flags)
+    {% end %}
   end
 
   def credGetTargetInfoW(target_name : Win32cr::Foundation::PWSTR, flags : UInt32, target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONW**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredGetTargetInfoW(target_name, flags, target_info)
+    {% end %}
   end
 
   def credGetTargetInfoA(target_name : Win32cr::Foundation::PSTR, flags : UInt32, target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONA**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredGetTargetInfoA(target_name, flags, target_info)
+    {% end %}
   end
 
   def credMarshalCredentialW(cred_type : Win32cr::Security::Credentials::CRED_MARSHAL_TYPE, credential : Void*, marshaled_credential : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredMarshalCredentialW(cred_type, credential, marshaled_credential)
+    {% end %}
   end
 
   def credMarshalCredentialA(cred_type : Win32cr::Security::Credentials::CRED_MARSHAL_TYPE, credential : Void*, marshaled_credential : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredMarshalCredentialA(cred_type, credential, marshaled_credential)
+    {% end %}
   end
 
   def credUnmarshalCredentialW(marshaled_credential : Win32cr::Foundation::PWSTR, cred_type : Win32cr::Security::Credentials::CRED_MARSHAL_TYPE*, credential : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredUnmarshalCredentialW(marshaled_credential, cred_type, credential)
+    {% end %}
   end
 
   def credUnmarshalCredentialA(marshaled_credential : Win32cr::Foundation::PSTR, cred_type : Win32cr::Security::Credentials::CRED_MARSHAL_TYPE*, credential : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredUnmarshalCredentialA(marshaled_credential, cred_type, credential)
+    {% end %}
   end
 
   def credIsMarshaledCredentialW(marshaled_credential : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredIsMarshaledCredentialW(marshaled_credential)
+    {% end %}
   end
 
   def credIsMarshaledCredentialA(marshaled_credential : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredIsMarshaledCredentialA(marshaled_credential)
+    {% end %}
   end
 
   def credUnPackAuthenticationBufferW(dwFlags : Win32cr::Security::Credentials::CRED_PACK_FLAGS, pAuthBuffer : Void*, cbAuthBuffer : UInt32, pszUserName : UInt16*, pcchMaxUserName : UInt32*, pszDomainName : UInt16*, pcchMaxDomainName : UInt32*, pszPassword : UInt16*, pcchMaxPassword : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredUnPackAuthenticationBufferW(dwFlags, pAuthBuffer, cbAuthBuffer, pszUserName, pcchMaxUserName, pszDomainName, pcchMaxDomainName, pszPassword, pcchMaxPassword)
+    {% end %}
   end
 
   def credUnPackAuthenticationBufferA(dwFlags : Win32cr::Security::Credentials::CRED_PACK_FLAGS, pAuthBuffer : Void*, cbAuthBuffer : UInt32, pszUserName : UInt8*, pcchlMaxUserName : UInt32*, pszDomainName : UInt8*, pcchMaxDomainName : UInt32*, pszPassword : UInt8*, pcchMaxPassword : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredUnPackAuthenticationBufferA(dwFlags, pAuthBuffer, cbAuthBuffer, pszUserName, pcchlMaxUserName, pszDomainName, pcchMaxDomainName, pszPassword, pcchMaxPassword)
+    {% end %}
   end
 
   def credPackAuthenticationBufferW(dwFlags : Win32cr::Security::Credentials::CRED_PACK_FLAGS, pszUserName : Win32cr::Foundation::PWSTR, pszPassword : Win32cr::Foundation::PWSTR, pPackedCredentials : UInt8*, pcbPackedCredentials : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredPackAuthenticationBufferW(dwFlags, pszUserName, pszPassword, pPackedCredentials, pcbPackedCredentials)
+    {% end %}
   end
 
   def credPackAuthenticationBufferA(dwFlags : Win32cr::Security::Credentials::CRED_PACK_FLAGS, pszUserName : Win32cr::Foundation::PSTR, pszPassword : Win32cr::Foundation::PSTR, pPackedCredentials : UInt8*, pcbPackedCredentials : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredPackAuthenticationBufferA(dwFlags, pszUserName, pszPassword, pPackedCredentials, pcbPackedCredentials)
+    {% end %}
   end
 
   def credProtectW(fAsSelf : Win32cr::Foundation::BOOL, pszCredentials : UInt16*, cchCredentials : UInt32, pszProtectedCredentials : UInt16*, pcchMaxChars : UInt32*, protection_type : Win32cr::Security::Credentials::CRED_PROTECTION_TYPE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredProtectW(fAsSelf, pszCredentials, cchCredentials, pszProtectedCredentials, pcchMaxChars, protection_type)
+    {% end %}
   end
 
   def credProtectA(fAsSelf : Win32cr::Foundation::BOOL, pszCredentials : UInt8*, cchCredentials : UInt32, pszProtectedCredentials : UInt8*, pcchMaxChars : UInt32*, protection_type : Win32cr::Security::Credentials::CRED_PROTECTION_TYPE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredProtectA(fAsSelf, pszCredentials, cchCredentials, pszProtectedCredentials, pcchMaxChars, protection_type)
+    {% end %}
   end
 
   def credUnprotectW(fAsSelf : Win32cr::Foundation::BOOL, pszProtectedCredentials : UInt16*, cchProtectedCredentials : UInt32, pszCredentials : UInt16*, pcchMaxChars : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredUnprotectW(fAsSelf, pszProtectedCredentials, cchProtectedCredentials, pszCredentials, pcchMaxChars)
+    {% end %}
   end
 
   def credUnprotectA(fAsSelf : Win32cr::Foundation::BOOL, pszProtectedCredentials : UInt8*, cchProtectedCredentials : UInt32, pszCredentials : UInt8*, pcchMaxChars : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredUnprotectA(fAsSelf, pszProtectedCredentials, cchProtectedCredentials, pszCredentials, pcchMaxChars)
+    {% end %}
   end
 
   def credIsProtectedW(pszProtectedCredentials : Win32cr::Foundation::PWSTR, pProtectionType : Win32cr::Security::Credentials::CRED_PROTECTION_TYPE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredIsProtectedW(pszProtectedCredentials, pProtectionType)
+    {% end %}
   end
 
   def credIsProtectedA(pszProtectedCredentials : Win32cr::Foundation::PSTR, pProtectionType : Win32cr::Security::Credentials::CRED_PROTECTION_TYPE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredIsProtectedA(pszProtectedCredentials, pProtectionType)
+    {% end %}
   end
 
   def credFindBestCredentialW(target_name : Win32cr::Foundation::PWSTR, type__ : UInt32, flags : UInt32, credential : Win32cr::Security::Credentials::CREDENTIALW**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredFindBestCredentialW(target_name, type__, flags, credential)
+    {% end %}
   end
 
   def credFindBestCredentialA(target_name : Win32cr::Foundation::PSTR, type__ : UInt32, flags : UInt32, credential : Win32cr::Security::Credentials::CREDENTIALA**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredFindBestCredentialA(target_name, type__, flags, credential)
+    {% end %}
   end
 
   def credGetSessionTypes(maximum_persist_count : UInt32, maximum_persist : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CredGetSessionTypes(maximum_persist_count, maximum_persist)
+    {% end %}
   end
 
   def credFree(buffer : Void*) : Void
+    {% if !flag?(:docs) %}
     C.CredFree(buffer)
+    {% end %}
   end
 
   def credUIPromptForCredentialsW(pUiInfo : Win32cr::Security::Credentials::CREDUI_INFOW*, pszTargetName : Win32cr::Foundation::PWSTR, pContext : Win32cr::Security::Credentials::SecHandle*, dwAuthError : UInt32, pszUserName : UInt16*, ulUserNameBufferSize : UInt32, pszPassword : UInt16*, ulPasswordBufferSize : UInt32, save : Win32cr::Foundation::BOOL*, dwFlags : Win32cr::Security::Credentials::CREDUI_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.CredUIPromptForCredentialsW(pUiInfo, pszTargetName, pContext, dwAuthError, pszUserName, ulUserNameBufferSize, pszPassword, ulPasswordBufferSize, save, dwFlags)
+    {% end %}
   end
 
   def credUIPromptForCredentialsA(pUiInfo : Win32cr::Security::Credentials::CREDUI_INFOA*, pszTargetName : Win32cr::Foundation::PSTR, pContext : Win32cr::Security::Credentials::SecHandle*, dwAuthError : UInt32, pszUserName : UInt8*, ulUserNameBufferSize : UInt32, pszPassword : UInt8*, ulPasswordBufferSize : UInt32, save : Win32cr::Foundation::BOOL*, dwFlags : Win32cr::Security::Credentials::CREDUI_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.CredUIPromptForCredentialsA(pUiInfo, pszTargetName, pContext, dwAuthError, pszUserName, ulUserNameBufferSize, pszPassword, ulPasswordBufferSize, save, dwFlags)
+    {% end %}
   end
 
   def credUIPromptForWindowsCredentialsW(pUiInfo : Win32cr::Security::Credentials::CREDUI_INFOW*, dwAuthError : UInt32, pulAuthPackage : UInt32*, pvInAuthBuffer : Void*, ulInAuthBufferSize : UInt32, ppvOutAuthBuffer : Void**, pulOutAuthBufferSize : UInt32*, pfSave : Win32cr::Foundation::BOOL*, dwFlags : Win32cr::Security::Credentials::CREDUIWIN_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.CredUIPromptForWindowsCredentialsW(pUiInfo, dwAuthError, pulAuthPackage, pvInAuthBuffer, ulInAuthBufferSize, ppvOutAuthBuffer, pulOutAuthBufferSize, pfSave, dwFlags)
+    {% end %}
   end
 
   def credUIPromptForWindowsCredentialsA(pUiInfo : Win32cr::Security::Credentials::CREDUI_INFOA*, dwAuthError : UInt32, pulAuthPackage : UInt32*, pvInAuthBuffer : Void*, ulInAuthBufferSize : UInt32, ppvOutAuthBuffer : Void**, pulOutAuthBufferSize : UInt32*, pfSave : Win32cr::Foundation::BOOL*, dwFlags : Win32cr::Security::Credentials::CREDUIWIN_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.CredUIPromptForWindowsCredentialsA(pUiInfo, dwAuthError, pulAuthPackage, pvInAuthBuffer, ulInAuthBufferSize, ppvOutAuthBuffer, pulOutAuthBufferSize, pfSave, dwFlags)
+    {% end %}
   end
 
   def credUIParseUserNameW(user_name : Win32cr::Foundation::PWSTR, user : UInt16*, userBufferSize : UInt32, domain : UInt16*, domainBufferSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CredUIParseUserNameW(user_name, user, userBufferSize, domain, domainBufferSize)
+    {% end %}
   end
 
   def credUIParseUserNameA(userName : Win32cr::Foundation::PSTR, user : UInt8*, userBufferSize : UInt32, domain : UInt8*, domainBufferSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CredUIParseUserNameA(userName, user, userBufferSize, domain, domainBufferSize)
+    {% end %}
   end
 
   def credUICmdLinePromptForCredentialsW(pszTargetName : Win32cr::Foundation::PWSTR, pContext : Win32cr::Security::Credentials::SecHandle*, dwAuthError : UInt32, user_name : UInt16*, ulUserBufferSize : UInt32, pszPassword : UInt16*, ulPasswordBufferSize : UInt32, pfSave : Win32cr::Foundation::BOOL*, dwFlags : Win32cr::Security::Credentials::CREDUI_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.CredUICmdLinePromptForCredentialsW(pszTargetName, pContext, dwAuthError, user_name, ulUserBufferSize, pszPassword, ulPasswordBufferSize, pfSave, dwFlags)
+    {% end %}
   end
 
   def credUICmdLinePromptForCredentialsA(pszTargetName : Win32cr::Foundation::PSTR, pContext : Win32cr::Security::Credentials::SecHandle*, dwAuthError : UInt32, user_name : UInt8*, ulUserBufferSize : UInt32, pszPassword : UInt8*, ulPasswordBufferSize : UInt32, pfSave : Win32cr::Foundation::BOOL*, dwFlags : Win32cr::Security::Credentials::CREDUI_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.CredUICmdLinePromptForCredentialsA(pszTargetName, pContext, dwAuthError, user_name, ulUserBufferSize, pszPassword, ulPasswordBufferSize, pfSave, dwFlags)
+    {% end %}
   end
 
   def credUIConfirmCredentialsW(pszTargetName : Win32cr::Foundation::PWSTR, bConfirm : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.CredUIConfirmCredentialsW(pszTargetName, bConfirm)
+    {% end %}
   end
 
   def credUIConfirmCredentialsA(pszTargetName : Win32cr::Foundation::PSTR, bConfirm : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.CredUIConfirmCredentialsA(pszTargetName, bConfirm)
+    {% end %}
   end
 
   def credUIStoreSSOCredW(pszRealm : Win32cr::Foundation::PWSTR, pszUsername : Win32cr::Foundation::PWSTR, pszPassword : Win32cr::Foundation::PWSTR, bPersist : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.CredUIStoreSSOCredW(pszRealm, pszUsername, pszPassword, bPersist)
+    {% end %}
   end
 
   def credUIReadSSOCredW(pszRealm : Win32cr::Foundation::PWSTR, ppszUsername : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.CredUIReadSSOCredW(pszRealm, ppszUsername)
+    {% end %}
   end
 
   def sCardEstablishContext(dwScope : Win32cr::Security::Credentials::SCARD_SCOPE, pvReserved1 : Void*, pvReserved2 : Void*, phContext : LibC::UIntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardEstablishContext(dwScope, pvReserved1, pvReserved2, phContext)
+    {% end %}
   end
 
   def sCardReleaseContext(hContext : LibC::UIntPtrT) : Int32
+    {% if !flag?(:docs) %}
     C.SCardReleaseContext(hContext)
+    {% end %}
   end
 
   def sCardIsValidContext(hContext : LibC::UIntPtrT) : Int32
+    {% if !flag?(:docs) %}
     C.SCardIsValidContext(hContext)
+    {% end %}
   end
 
   def sCardListReaderGroupsA(hContext : LibC::UIntPtrT, mszGroups : UInt8*, pcchGroups : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardListReaderGroupsA(hContext, mszGroups, pcchGroups)
+    {% end %}
   end
 
   def sCardListReaderGroupsW(hContext : LibC::UIntPtrT, mszGroups : UInt16*, pcchGroups : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardListReaderGroupsW(hContext, mszGroups, pcchGroups)
+    {% end %}
   end
 
   def sCardListReadersA(hContext : LibC::UIntPtrT, mszGroups : Win32cr::Foundation::PSTR, mszReaders : Win32cr::Foundation::PSTR, pcchReaders : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardListReadersA(hContext, mszGroups, mszReaders, pcchReaders)
+    {% end %}
   end
 
   def sCardListReadersW(hContext : LibC::UIntPtrT, mszGroups : Win32cr::Foundation::PWSTR, mszReaders : Win32cr::Foundation::PWSTR, pcchReaders : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardListReadersW(hContext, mszGroups, mszReaders, pcchReaders)
+    {% end %}
   end
 
   def sCardListCardsA(hContext : LibC::UIntPtrT, pbAtr : UInt8*, rgquidInterfaces : LibC::GUID*, cguidInterfaceCount : UInt32, mszCards : Win32cr::Foundation::PSTR, pcchCards : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardListCardsA(hContext, pbAtr, rgquidInterfaces, cguidInterfaceCount, mszCards, pcchCards)
+    {% end %}
   end
 
   def sCardListCardsW(hContext : LibC::UIntPtrT, pbAtr : UInt8*, rgquidInterfaces : LibC::GUID*, cguidInterfaceCount : UInt32, mszCards : Win32cr::Foundation::PWSTR, pcchCards : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardListCardsW(hContext, pbAtr, rgquidInterfaces, cguidInterfaceCount, mszCards, pcchCards)
+    {% end %}
   end
 
   def sCardListInterfacesA(hContext : LibC::UIntPtrT, szCard : Win32cr::Foundation::PSTR, pguidInterfaces : LibC::GUID*, pcguidInterfaces : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardListInterfacesA(hContext, szCard, pguidInterfaces, pcguidInterfaces)
+    {% end %}
   end
 
   def sCardListInterfacesW(hContext : LibC::UIntPtrT, szCard : Win32cr::Foundation::PWSTR, pguidInterfaces : LibC::GUID*, pcguidInterfaces : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardListInterfacesW(hContext, szCard, pguidInterfaces, pcguidInterfaces)
+    {% end %}
   end
 
   def sCardGetProviderIdA(hContext : LibC::UIntPtrT, szCard : Win32cr::Foundation::PSTR, pguidProviderId : LibC::GUID*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardGetProviderIdA(hContext, szCard, pguidProviderId)
+    {% end %}
   end
 
   def sCardGetProviderIdW(hContext : LibC::UIntPtrT, szCard : Win32cr::Foundation::PWSTR, pguidProviderId : LibC::GUID*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardGetProviderIdW(hContext, szCard, pguidProviderId)
+    {% end %}
   end
 
   def sCardGetCardTypeProviderNameA(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PSTR, dwProviderId : UInt32, szProvider : UInt8*, pcchProvider : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardGetCardTypeProviderNameA(hContext, szCardName, dwProviderId, szProvider, pcchProvider)
+    {% end %}
   end
 
   def sCardGetCardTypeProviderNameW(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PWSTR, dwProviderId : UInt32, szProvider : UInt16*, pcchProvider : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardGetCardTypeProviderNameW(hContext, szCardName, dwProviderId, szProvider, pcchProvider)
+    {% end %}
   end
 
   def sCardIntroduceReaderGroupA(hContext : LibC::UIntPtrT, szGroupName : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.SCardIntroduceReaderGroupA(hContext, szGroupName)
+    {% end %}
   end
 
   def sCardIntroduceReaderGroupW(hContext : LibC::UIntPtrT, szGroupName : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.SCardIntroduceReaderGroupW(hContext, szGroupName)
+    {% end %}
   end
 
   def sCardForgetReaderGroupA(hContext : LibC::UIntPtrT, szGroupName : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.SCardForgetReaderGroupA(hContext, szGroupName)
+    {% end %}
   end
 
   def sCardForgetReaderGroupW(hContext : LibC::UIntPtrT, szGroupName : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.SCardForgetReaderGroupW(hContext, szGroupName)
+    {% end %}
   end
 
   def sCardIntroduceReaderA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR, szDeviceName : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.SCardIntroduceReaderA(hContext, szReaderName, szDeviceName)
+    {% end %}
   end
 
   def sCardIntroduceReaderW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR, szDeviceName : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.SCardIntroduceReaderW(hContext, szReaderName, szDeviceName)
+    {% end %}
   end
 
   def sCardForgetReaderA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.SCardForgetReaderA(hContext, szReaderName)
+    {% end %}
   end
 
   def sCardForgetReaderW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.SCardForgetReaderW(hContext, szReaderName)
+    {% end %}
   end
 
   def sCardAddReaderToGroupA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR, szGroupName : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.SCardAddReaderToGroupA(hContext, szReaderName, szGroupName)
+    {% end %}
   end
 
   def sCardAddReaderToGroupW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR, szGroupName : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.SCardAddReaderToGroupW(hContext, szReaderName, szGroupName)
+    {% end %}
   end
 
   def sCardRemoveReaderFromGroupA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR, szGroupName : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.SCardRemoveReaderFromGroupA(hContext, szReaderName, szGroupName)
+    {% end %}
   end
 
   def sCardRemoveReaderFromGroupW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR, szGroupName : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.SCardRemoveReaderFromGroupW(hContext, szReaderName, szGroupName)
+    {% end %}
   end
 
   def sCardIntroduceCardTypeA(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PSTR, pguidPrimaryProvider : LibC::GUID*, rgguidInterfaces : LibC::GUID*, dwInterfaceCount : UInt32, pbAtr : UInt8*, pbAtrMask : UInt8*, cbAtrLen : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SCardIntroduceCardTypeA(hContext, szCardName, pguidPrimaryProvider, rgguidInterfaces, dwInterfaceCount, pbAtr, pbAtrMask, cbAtrLen)
+    {% end %}
   end
 
   def sCardIntroduceCardTypeW(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PWSTR, pguidPrimaryProvider : LibC::GUID*, rgguidInterfaces : LibC::GUID*, dwInterfaceCount : UInt32, pbAtr : UInt8*, pbAtrMask : UInt8*, cbAtrLen : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SCardIntroduceCardTypeW(hContext, szCardName, pguidPrimaryProvider, rgguidInterfaces, dwInterfaceCount, pbAtr, pbAtrMask, cbAtrLen)
+    {% end %}
   end
 
   def sCardSetCardTypeProviderNameA(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PSTR, dwProviderId : UInt32, szProvider : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.SCardSetCardTypeProviderNameA(hContext, szCardName, dwProviderId, szProvider)
+    {% end %}
   end
 
   def sCardSetCardTypeProviderNameW(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PWSTR, dwProviderId : UInt32, szProvider : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.SCardSetCardTypeProviderNameW(hContext, szCardName, dwProviderId, szProvider)
+    {% end %}
   end
 
   def sCardForgetCardTypeA(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.SCardForgetCardTypeA(hContext, szCardName)
+    {% end %}
   end
 
   def sCardForgetCardTypeW(hContext : LibC::UIntPtrT, szCardName : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.SCardForgetCardTypeW(hContext, szCardName)
+    {% end %}
   end
 
   def sCardFreeMemory(hContext : LibC::UIntPtrT, pvMem : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardFreeMemory(hContext, pvMem)
+    {% end %}
   end
 
   def sCardAccessStartedEvent : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.SCardAccessStartedEvent
+    {% end %}
   end
 
   def sCardReleaseStartedEvent : Void
+    {% if !flag?(:docs) %}
     C.SCardReleaseStartedEvent
+    {% end %}
   end
 
   def sCardLocateCardsA(hContext : LibC::UIntPtrT, mszCards : Win32cr::Foundation::PSTR, rgReaderStates : Win32cr::Security::Credentials::SCARD_READERSTATEA*, cReaders : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SCardLocateCardsA(hContext, mszCards, rgReaderStates, cReaders)
+    {% end %}
   end
 
   def sCardLocateCardsW(hContext : LibC::UIntPtrT, mszCards : Win32cr::Foundation::PWSTR, rgReaderStates : Win32cr::Security::Credentials::SCARD_READERSTATEW*, cReaders : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SCardLocateCardsW(hContext, mszCards, rgReaderStates, cReaders)
+    {% end %}
   end
 
   def sCardLocateCardsByATRA(hContext : LibC::UIntPtrT, rgAtrMasks : Win32cr::Security::Credentials::SCARD_ATRMASK*, cAtrs : UInt32, rgReaderStates : Win32cr::Security::Credentials::SCARD_READERSTATEA*, cReaders : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SCardLocateCardsByATRA(hContext, rgAtrMasks, cAtrs, rgReaderStates, cReaders)
+    {% end %}
   end
 
   def sCardLocateCardsByATRW(hContext : LibC::UIntPtrT, rgAtrMasks : Win32cr::Security::Credentials::SCARD_ATRMASK*, cAtrs : UInt32, rgReaderStates : Win32cr::Security::Credentials::SCARD_READERSTATEW*, cReaders : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SCardLocateCardsByATRW(hContext, rgAtrMasks, cAtrs, rgReaderStates, cReaders)
+    {% end %}
   end
 
   def sCardGetStatusChangeA(hContext : LibC::UIntPtrT, dwTimeout : UInt32, rgReaderStates : Win32cr::Security::Credentials::SCARD_READERSTATEA*, cReaders : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SCardGetStatusChangeA(hContext, dwTimeout, rgReaderStates, cReaders)
+    {% end %}
   end
 
   def sCardGetStatusChangeW(hContext : LibC::UIntPtrT, dwTimeout : UInt32, rgReaderStates : Win32cr::Security::Credentials::SCARD_READERSTATEW*, cReaders : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SCardGetStatusChangeW(hContext, dwTimeout, rgReaderStates, cReaders)
+    {% end %}
   end
 
   def sCardCancel(hContext : LibC::UIntPtrT) : Int32
+    {% if !flag?(:docs) %}
     C.SCardCancel(hContext)
+    {% end %}
   end
 
   def sCardConnectA(hContext : LibC::UIntPtrT, szReader : Win32cr::Foundation::PSTR, dwShareMode : UInt32, dwPreferredProtocols : UInt32, phCard : LibC::UIntPtrT*, pdwActiveProtocol : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardConnectA(hContext, szReader, dwShareMode, dwPreferredProtocols, phCard, pdwActiveProtocol)
+    {% end %}
   end
 
   def sCardConnectW(hContext : LibC::UIntPtrT, szReader : Win32cr::Foundation::PWSTR, dwShareMode : UInt32, dwPreferredProtocols : UInt32, phCard : LibC::UIntPtrT*, pdwActiveProtocol : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardConnectW(hContext, szReader, dwShareMode, dwPreferredProtocols, phCard, pdwActiveProtocol)
+    {% end %}
   end
 
   def sCardReconnect(hCard : LibC::UIntPtrT, dwShareMode : UInt32, dwPreferredProtocols : UInt32, dwInitialization : UInt32, pdwActiveProtocol : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardReconnect(hCard, dwShareMode, dwPreferredProtocols, dwInitialization, pdwActiveProtocol)
+    {% end %}
   end
 
   def sCardDisconnect(hCard : LibC::UIntPtrT, dwDisposition : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SCardDisconnect(hCard, dwDisposition)
+    {% end %}
   end
 
   def sCardBeginTransaction(hCard : LibC::UIntPtrT) : Int32
+    {% if !flag?(:docs) %}
     C.SCardBeginTransaction(hCard)
+    {% end %}
   end
 
   def sCardEndTransaction(hCard : LibC::UIntPtrT, dwDisposition : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SCardEndTransaction(hCard, dwDisposition)
+    {% end %}
   end
 
   def sCardState(hCard : LibC::UIntPtrT, pdwState : UInt32*, pdwProtocol : UInt32*, pbAtr : UInt8*, pcbAtrLen : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardState(hCard, pdwState, pdwProtocol, pbAtr, pcbAtrLen)
+    {% end %}
   end
 
   def sCardStatusA(hCard : LibC::UIntPtrT, mszReaderNames : Win32cr::Foundation::PSTR, pcchReaderLen : UInt32*, pdwState : UInt32*, pdwProtocol : UInt32*, pbAtr : UInt8*, pcbAtrLen : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardStatusA(hCard, mszReaderNames, pcchReaderLen, pdwState, pdwProtocol, pbAtr, pcbAtrLen)
+    {% end %}
   end
 
   def sCardStatusW(hCard : LibC::UIntPtrT, mszReaderNames : Win32cr::Foundation::PWSTR, pcchReaderLen : UInt32*, pdwState : UInt32*, pdwProtocol : UInt32*, pbAtr : UInt8*, pcbAtrLen : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardStatusW(hCard, mszReaderNames, pcchReaderLen, pdwState, pdwProtocol, pbAtr, pcbAtrLen)
+    {% end %}
   end
 
   def sCardTransmit(hCard : LibC::UIntPtrT, pioSendPci : Win32cr::Security::Credentials::SCARD_IO_REQUEST*, pbSendBuffer : UInt8*, cbSendLength : UInt32, pioRecvPci : Win32cr::Security::Credentials::SCARD_IO_REQUEST*, pbRecvBuffer : UInt8*, pcbRecvLength : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardTransmit(hCard, pioSendPci, pbSendBuffer, cbSendLength, pioRecvPci, pbRecvBuffer, pcbRecvLength)
+    {% end %}
   end
 
   def sCardGetTransmitCount(hCard : LibC::UIntPtrT, pcTransmitCount : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardGetTransmitCount(hCard, pcTransmitCount)
+    {% end %}
   end
 
   def sCardControl(hCard : LibC::UIntPtrT, dwControlCode : UInt32, lpInBuffer : Void*, cbInBufferSize : UInt32, lpOutBuffer : Void*, cbOutBufferSize : UInt32, lpBytesReturned : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardControl(hCard, dwControlCode, lpInBuffer, cbInBufferSize, lpOutBuffer, cbOutBufferSize, lpBytesReturned)
+    {% end %}
   end
 
   def sCardGetAttrib(hCard : LibC::UIntPtrT, dwAttrId : UInt32, pbAttr : UInt8*, pcbAttrLen : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardGetAttrib(hCard, dwAttrId, pbAttr, pcbAttrLen)
+    {% end %}
   end
 
   def sCardSetAttrib(hCard : LibC::UIntPtrT, dwAttrId : UInt32, pbAttr : UInt8*, cbAttrLen : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SCardSetAttrib(hCard, dwAttrId, pbAttr, cbAttrLen)
+    {% end %}
   end
 
   def sCardUIDlgSelectCardA(param0 : Win32cr::Security::Credentials::OPENCARDNAME_EXA*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardUIDlgSelectCardA(param0)
+    {% end %}
   end
 
   def sCardUIDlgSelectCardW(param0 : Win32cr::Security::Credentials::OPENCARDNAME_EXW*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardUIDlgSelectCardW(param0)
+    {% end %}
   end
 
   def getOpenCardNameA(param0 : Win32cr::Security::Credentials::OPENCARDNAMEA*) : Int32
+    {% if !flag?(:docs) %}
     C.GetOpenCardNameA(param0)
+    {% end %}
   end
 
   def getOpenCardNameW(param0 : Win32cr::Security::Credentials::OPENCARDNAMEW*) : Int32
+    {% if !flag?(:docs) %}
     C.GetOpenCardNameW(param0)
+    {% end %}
   end
 
   def sCardDlgExtendedError : Int32
+    {% if !flag?(:docs) %}
     C.SCardDlgExtendedError
+    {% end %}
   end
 
   def sCardReadCacheA(hContext : LibC::UIntPtrT, card_identifier : LibC::GUID*, freshness_counter : UInt32, lookup_name : Win32cr::Foundation::PSTR, data : UInt8*, data_len : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardReadCacheA(hContext, card_identifier, freshness_counter, lookup_name, data, data_len)
+    {% end %}
   end
 
   def sCardReadCacheW(hContext : LibC::UIntPtrT, card_identifier : LibC::GUID*, freshness_counter : UInt32, lookup_name : Win32cr::Foundation::PWSTR, data : UInt8*, data_len : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardReadCacheW(hContext, card_identifier, freshness_counter, lookup_name, data, data_len)
+    {% end %}
   end
 
   def sCardWriteCacheA(hContext : LibC::UIntPtrT, card_identifier : LibC::GUID*, freshness_counter : UInt32, lookup_name : Win32cr::Foundation::PSTR, data : UInt8*, data_len : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SCardWriteCacheA(hContext, card_identifier, freshness_counter, lookup_name, data, data_len)
+    {% end %}
   end
 
   def sCardWriteCacheW(hContext : LibC::UIntPtrT, card_identifier : LibC::GUID*, freshness_counter : UInt32, lookup_name : Win32cr::Foundation::PWSTR, data : UInt8*, data_len : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SCardWriteCacheW(hContext, card_identifier, freshness_counter, lookup_name, data, data_len)
+    {% end %}
   end
 
   def sCardGetReaderIconA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR, pbIcon : UInt8*, pcbIcon : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardGetReaderIconA(hContext, szReaderName, pbIcon, pcbIcon)
+    {% end %}
   end
 
   def sCardGetReaderIconW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR, pbIcon : UInt8*, pcbIcon : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardGetReaderIconW(hContext, szReaderName, pbIcon, pcbIcon)
+    {% end %}
   end
 
   def sCardGetDeviceTypeIdA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR, pdwDeviceTypeId : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardGetDeviceTypeIdA(hContext, szReaderName, pdwDeviceTypeId)
+    {% end %}
   end
 
   def sCardGetDeviceTypeIdW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR, pdwDeviceTypeId : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardGetDeviceTypeIdW(hContext, szReaderName, pdwDeviceTypeId)
+    {% end %}
   end
 
   def sCardGetReaderDeviceInstanceIdA(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PSTR, szDeviceInstanceId : Win32cr::Foundation::PSTR, pcchDeviceInstanceId : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardGetReaderDeviceInstanceIdA(hContext, szReaderName, szDeviceInstanceId, pcchDeviceInstanceId)
+    {% end %}
   end
 
   def sCardGetReaderDeviceInstanceIdW(hContext : LibC::UIntPtrT, szReaderName : Win32cr::Foundation::PWSTR, szDeviceInstanceId : Win32cr::Foundation::PWSTR, pcchDeviceInstanceId : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardGetReaderDeviceInstanceIdW(hContext, szReaderName, szDeviceInstanceId, pcchDeviceInstanceId)
+    {% end %}
   end
 
   def sCardListReadersWithDeviceInstanceIdA(hContext : LibC::UIntPtrT, szDeviceInstanceId : Win32cr::Foundation::PSTR, mszReaders : Win32cr::Foundation::PSTR, pcchReaders : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardListReadersWithDeviceInstanceIdA(hContext, szDeviceInstanceId, mszReaders, pcchReaders)
+    {% end %}
   end
 
   def sCardListReadersWithDeviceInstanceIdW(hContext : LibC::UIntPtrT, szDeviceInstanceId : Win32cr::Foundation::PWSTR, mszReaders : Win32cr::Foundation::PWSTR, pcchReaders : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.SCardListReadersWithDeviceInstanceIdW(hContext, szDeviceInstanceId, mszReaders, pcchReaders)
+    {% end %}
   end
 
   def sCardAudit(hContext : LibC::UIntPtrT, dwEvent : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SCardAudit(hContext, dwEvent)
+    {% end %}
   end
 
   @[Link("keycredmgr")]
@@ -1282,6 +1536,7 @@ module Win32cr::Security::Credentials
   @[Link("credui")]
   @[Link("winscard")]
   @[Link("scarddlg")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun KeyCredentialManagerGetOperationErrorStates(keyCredentialManagerOperationType : Win32cr::Security::Credentials::KeyCredentialManagerOperationType, isReady : Win32cr::Foundation::BOOL*, keyCredentialManagerOperationErrorStates : Win32cr::Security::Credentials::KeyCredentialManagerOperationErrorStates*) : Win32cr::Foundation::HRESULT
@@ -1665,4 +1920,5 @@ module Win32cr::Security::Credentials
     fun SCardAudit(hContext : LibC::UIntPtrT, dwEvent : UInt32) : Int32
 
   end
+  {% end %}
 end
