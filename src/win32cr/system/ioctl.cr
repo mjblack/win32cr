@@ -1976,9 +1976,9 @@ module Win32cr::System::Ioctl
       end
 
 
-      # Nested Type DiskInfo_e__Struct_
+      # Nested Type RemovableDiskInfo_e__Struct_
       @[Extern]
-      struct DiskInfo_e__Struct_
+      struct RemovableDiskInfo_e__Struct_
     property cylinders : Win32cr::Foundation::LARGE_INTEGER
     property media_type : Win32cr::System::Ioctl::STORAGE_MEDIA_TYPE
     property tracks_per_cylinder : UInt32
@@ -1991,9 +1991,9 @@ module Win32cr::System::Ioctl
       end
 
 
-      # Nested Type RemovableDiskInfo_e__Struct_
+      # Nested Type DiskInfo_e__Struct_
       @[Extern]
-      struct RemovableDiskInfo_e__Struct_
+      struct DiskInfo_e__Struct_
     property cylinders : Win32cr::Foundation::LARGE_INTEGER
     property media_type : Win32cr::System::Ioctl::STORAGE_MEDIA_TYPE
     property tracks_per_cylinder : UInt32
@@ -2598,6 +2598,17 @@ module Win32cr::System::Ioctl
     property nvdimm_n : NVDIMM_N_e__Struct_
     property as_ulong : UInt32
 
+      # Nested Type NVDIMM_N_e__Struct_
+      @[Extern]
+      struct NVDIMM_N_e__Struct_
+    property critical_health : UInt8
+    property module_health : UInt8[2]
+    property error_threshold_status : UInt8
+    def initialize(@critical_health : UInt8, @module_health : UInt8[2], @error_threshold_status : UInt8)
+    end
+      end
+
+
       # Nested Type ScsiSenseKey_e__Struct_
       @[Extern]
       struct ScsiSenseKey_e__Struct_
@@ -2606,17 +2617,6 @@ module Win32cr::System::Ioctl
     property ascq : UInt8
     property reserved : UInt8
     def initialize(@sense_key : UInt8, @asc : UInt8, @ascq : UInt8, @reserved : UInt8)
-    end
-      end
-
-
-      # Nested Type NVDIMM_N_e__Struct_
-      @[Extern]
-      struct NVDIMM_N_e__Struct_
-    property critical_health : UInt8
-    property module_health : UInt8[2]
-    property error_threshold_status : UInt8
-    def initialize(@critical_health : UInt8, @module_health : UInt8[2], @error_threshold_status : UInt8)
     end
       end
 
@@ -2675,6 +2675,16 @@ module Win32cr::System::Ioctl
     property sequential_required_zone : SequentialRequiredZone_e__Struct_
     property sequential_preferred_zone : SequentialPreferredZone_e__Struct_
 
+      # Nested Type SequentialPreferredZone_e__Struct_
+      @[Extern]
+      struct SequentialPreferredZone_e__Struct_
+    property optimal_open_zone_count : UInt32
+    property reserved : UInt32
+    def initialize(@optimal_open_zone_count : UInt32, @reserved : UInt32)
+    end
+      end
+
+
       # Nested Type SequentialRequiredZone_e__Struct_
       @[Extern]
       struct SequentialRequiredZone_e__Struct_
@@ -2682,16 +2692,6 @@ module Win32cr::System::Ioctl
     property unrestricted_read : Win32cr::Foundation::BOOLEAN
     property reserved : UInt8[3]
     def initialize(@max_open_zone_count : UInt32, @unrestricted_read : Win32cr::Foundation::BOOLEAN, @reserved : UInt8[3])
-    end
-      end
-
-
-      # Nested Type SequentialPreferredZone_e__Struct_
-      @[Extern]
-      struct SequentialPreferredZone_e__Struct_
-    property optimal_open_zone_count : UInt32
-    property reserved : UInt32
-    def initialize(@optimal_open_zone_count : UInt32, @reserved : UInt32)
     end
       end
 
@@ -2717,22 +2717,22 @@ module Win32cr::System::Ioctl
     property anonymous1 : Anonymous1_e__Struct_
     property anonymous2 : Anonymous2_e__Struct_
 
-      # Nested Type Anonymous1_e__Struct_
-      @[Extern]
-      struct Anonymous1_e__Struct_
-    property channel : UInt32
-    property device : UInt32
-    def initialize(@channel : UInt32, @device : UInt32)
-    end
-      end
-
-
       # Nested Type Anonymous2_e__Struct_
       @[Extern]
       struct Anonymous2_e__Struct_
     property target : UInt32
     property lun : UInt32
     def initialize(@target : UInt32, @lun : UInt32)
+    end
+      end
+
+
+      # Nested Type Anonymous1_e__Struct_
+      @[Extern]
+      struct Anonymous1_e__Struct_
+    property channel : UInt32
+    property device : UInt32
+    def initialize(@channel : UInt32, @device : UInt32)
     end
       end
 
@@ -3415,16 +3415,6 @@ module Win32cr::System::Ioctl
     property pr_in : PR_IN_e__Struct_
     property pr_out : PR_OUT_e__Struct_
 
-      # Nested Type PR_IN_e__Struct_
-      @[Extern]
-      struct PR_IN_e__Struct_
-    property _bitfield : UInt8
-    property allocation_length : UInt16
-    def initialize(@_bitfield : UInt8, @allocation_length : UInt16)
-    end
-      end
-
-
       # Nested Type PR_OUT_e__Struct_
       @[Extern]
       struct PR_OUT_e__Struct_
@@ -3432,6 +3422,16 @@ module Win32cr::System::Ioctl
     property _bitfield2 : UInt8
     property parameter_list : UInt8*
     def initialize(@_bitfield1 : UInt8, @_bitfield2 : UInt8, @parameter_list : UInt8*)
+    end
+      end
+
+
+      # Nested Type PR_IN_e__Struct_
+      @[Extern]
+      struct PR_IN_e__Struct_
+    property _bitfield : UInt8
+    property allocation_length : UInt16
+    def initialize(@_bitfield : UInt8, @allocation_length : UInt16)
     end
       end
 
@@ -3549,20 +3549,20 @@ module Win32cr::System::Ioctl
       end
 
 
-      # Nested Type ExternalStack_e__Struct_
-      @[Extern]
-      struct ExternalStack_e__Struct_
-    property dwReserved : UInt32
-    def initialize(@dwReserved : UInt32)
-    end
-      end
-
-
       # Nested Type AtaPort_e__Struct_
       @[Extern]
       struct AtaPort_e__Struct_
     property dwAtaPortSpecific : UInt32
     def initialize(@dwAtaPortSpecific : UInt32)
+    end
+      end
+
+
+      # Nested Type ExternalStack_e__Struct_
+      @[Extern]
+      struct ExternalStack_e__Struct_
+    property dwReserved : UInt32
+    def initialize(@dwReserved : UInt32)
     end
       end
 
@@ -5568,29 +5568,6 @@ module Win32cr::System::Ioctl
     end
 
 
-    # Nested Type BitmapWritesUserLevel_e__Struct_
-    @[Extern]
-    struct BitmapWritesUserLevel_e__Struct_
-    property write : UInt16
-    property create : UInt16
-    property set_info : UInt16
-    def initialize(@write : UInt16, @create : UInt16, @set_info : UInt16)
-    end
-    end
-
-
-    # Nested Type MftWritesUserLevel_e__Struct_
-    @[Extern]
-    struct MftWritesUserLevel_e__Struct_
-    property write : UInt16
-    property create : UInt16
-    property set_info : UInt16
-    property flush : UInt16
-    def initialize(@write : UInt16, @create : UInt16, @set_info : UInt16, @flush : UInt16)
-    end
-    end
-
-
     # Nested Type MftBitmapWritesUserLevel_e__Struct_
     @[Extern]
     struct MftBitmapWritesUserLevel_e__Struct_
@@ -5603,9 +5580,32 @@ module Win32cr::System::Ioctl
     end
 
 
+    # Nested Type BitmapWritesUserLevel_e__Struct_
+    @[Extern]
+    struct BitmapWritesUserLevel_e__Struct_
+    property write : UInt16
+    property create : UInt16
+    property set_info : UInt16
+    def initialize(@write : UInt16, @create : UInt16, @set_info : UInt16)
+    end
+    end
+
+
     # Nested Type Mft2WritesUserLevel_e__Struct_
     @[Extern]
     struct Mft2WritesUserLevel_e__Struct_
+    property write : UInt16
+    property create : UInt16
+    property set_info : UInt16
+    property flush : UInt16
+    def initialize(@write : UInt16, @create : UInt16, @set_info : UInt16, @flush : UInt16)
+    end
+    end
+
+
+    # Nested Type MftWritesUserLevel_e__Struct_
+    @[Extern]
+    struct MftWritesUserLevel_e__Struct_
     property write : UInt16
     property create : UInt16
     property set_info : UInt16
@@ -5699,21 +5699,27 @@ module Win32cr::System::Ioctl
     property ntfs_fill_stat_info_from_mft_record_bailed_because_of_attribute_list_count : UInt64
     property ntfs_fill_stat_info_from_mft_record_bailed_because_of_non_res_reparse_point_count : UInt64
 
+    # Nested Type Allocate_e__Struct_
+    @[Extern]
+    struct Allocate_e__Struct_
+    property calls : UInt32
+    property runs_returned : UInt32
+    property hints : UInt32
+    property hints_honored : UInt32
+    property cache : UInt32
+    property cache_miss : UInt32
+    property clusters : UInt64
+    property hints_clusters : UInt64
+    property cache_clusters : UInt64
+    property cache_miss_clusters : UInt64
+    def initialize(@calls : UInt32, @runs_returned : UInt32, @hints : UInt32, @hints_honored : UInt32, @cache : UInt32, @cache_miss : UInt32, @clusters : UInt64, @hints_clusters : UInt64, @cache_clusters : UInt64, @cache_miss_clusters : UInt64)
+    end
+    end
+
+
     # Nested Type MftBitmapWritesUserLevel_e__Struct_
     @[Extern]
     struct MftBitmapWritesUserLevel_e__Struct_
-    property write : UInt32
-    property create : UInt32
-    property set_info : UInt32
-    property flush : UInt32
-    def initialize(@write : UInt32, @create : UInt32, @set_info : UInt32, @flush : UInt32)
-    end
-    end
-
-
-    # Nested Type Mft2WritesUserLevel_e__Struct_
-    @[Extern]
-    struct Mft2WritesUserLevel_e__Struct_
     property write : UInt32
     property create : UInt32
     property set_info : UInt32
@@ -5735,9 +5741,9 @@ module Win32cr::System::Ioctl
     end
 
 
-    # Nested Type MftWritesUserLevel_e__Struct_
+    # Nested Type Mft2WritesUserLevel_e__Struct_
     @[Extern]
-    struct MftWritesUserLevel_e__Struct_
+    struct Mft2WritesUserLevel_e__Struct_
     property write : UInt32
     property create : UInt32
     property set_info : UInt32
@@ -5747,20 +5753,14 @@ module Win32cr::System::Ioctl
     end
 
 
-    # Nested Type Allocate_e__Struct_
+    # Nested Type MftWritesUserLevel_e__Struct_
     @[Extern]
-    struct Allocate_e__Struct_
-    property calls : UInt32
-    property runs_returned : UInt32
-    property hints : UInt32
-    property hints_honored : UInt32
-    property cache : UInt32
-    property cache_miss : UInt32
-    property clusters : UInt64
-    property hints_clusters : UInt64
-    property cache_clusters : UInt64
-    property cache_miss_clusters : UInt64
-    def initialize(@calls : UInt32, @runs_returned : UInt32, @hints : UInt32, @hints_honored : UInt32, @cache : UInt32, @cache_miss : UInt32, @clusters : UInt64, @hints_clusters : UInt64, @cache_clusters : UInt64, @cache_miss_clusters : UInt64)
+    struct MftWritesUserLevel_e__Struct_
+    property write : UInt32
+    property create : UInt32
+    property set_info : UInt32
+    property flush : UInt32
+    def initialize(@write : UInt32, @create : UInt32, @set_info : UInt32, @flush : UInt32)
     end
     end
 
@@ -6592,16 +6592,6 @@ module Win32cr::System::Ioctl
     property reserved : UInt32
     property filter : Filter_e__Union_
 
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous_e__Union_
-    property filter_entry_count : UInt32
-    property number_of_pairs : UInt32
-    def initialize(@filter_entry_count : UInt32, @number_of_pairs : UInt32)
-    end
-    end
-
-
     # Nested Type Filter_e__Union_
     @[Extern(union: true)]
     struct Filter_e__Union_
@@ -6609,6 +6599,16 @@ module Win32cr::System::Ioctl
     property file_reference_ranges : Win32cr::System::Ioctl::FILE_REFERENCE_RANGE*
     property storage_reserve_ids : Win32cr::System::Ioctl::STORAGE_RESERVE_ID*
     def initialize(@cluster_ranges : Win32cr::System::Ioctl::CLUSTER_RANGE*, @file_reference_ranges : Win32cr::System::Ioctl::FILE_REFERENCE_RANGE*, @storage_reserve_ids : Win32cr::System::Ioctl::STORAGE_RESERVE_ID*)
+    end
+    end
+
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property filter_entry_count : UInt32
+    property number_of_pairs : UInt32
+    def initialize(@filter_entry_count : UInt32, @number_of_pairs : UInt32)
     end
     end
 
@@ -6892,28 +6892,6 @@ module Win32cr::System::Ioctl
     property reparse : Reparse_
     property ea : Ea_
 
-      # Nested Type Reparse_
-      @[Extern]
-      struct Reparse_
-    property length : UInt16
-    property flags : UInt16
-    property reparse_data_size : UInt32
-    property reparse_data_offset : UInt32
-    def initialize(@length : UInt16, @flags : UInt16, @reparse_data_size : UInt32, @reparse_data_offset : UInt32)
-    end
-      end
-
-
-      # Nested Type DesiredStorageClass_
-      @[Extern]
-      struct DesiredStorageClass_
-    property class__ : Win32cr::System::Ioctl::FILE_STORAGE_TIER_CLASS
-    property flags : UInt32
-    def initialize(@class__ : Win32cr::System::Ioctl::FILE_STORAGE_TIER_CLASS, @flags : UInt32)
-    end
-      end
-
-
       # Nested Type Ea_
       @[Extern]
       struct Ea_
@@ -6926,6 +6904,18 @@ module Win32cr::System::Ioctl
       end
 
 
+      # Nested Type Reparse_
+      @[Extern]
+      struct Reparse_
+    property length : UInt16
+    property flags : UInt16
+    property reparse_data_size : UInt32
+    property reparse_data_offset : UInt32
+    def initialize(@length : UInt16, @flags : UInt16, @reparse_data_size : UInt32, @reparse_data_offset : UInt32)
+    end
+      end
+
+
       # Nested Type DataStream_
       @[Extern]
       struct DataStream_
@@ -6934,6 +6924,16 @@ module Win32cr::System::Ioctl
     property reserved : UInt32
     property vdl : UInt64
     def initialize(@length : UInt16, @flags : UInt16, @reserved : UInt32, @vdl : UInt64)
+    end
+      end
+
+
+      # Nested Type DesiredStorageClass_
+      @[Extern]
+      struct DesiredStorageClass_
+    property class__ : Win32cr::System::Ioctl::FILE_STORAGE_TIER_CLASS
+    property flags : UInt32
+    def initialize(@class__ : Win32cr::System::Ioctl::FILE_STORAGE_TIER_CLASS, @flags : UInt32)
     end
       end
 

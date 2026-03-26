@@ -95,106 +95,157 @@ module Win32cr::Graphics::Direct3D::Fxc
   end
 
   def d3DReadFileToBlob(pFileName : Win32cr::Foundation::PWSTR, ppContents : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DReadFileToBlob(pFileName, ppContents)
+    {% end %}
   end
 
   def d3DWriteBlobToFile(pBlob : Void*, pFileName : Win32cr::Foundation::PWSTR, bOverwrite : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DWriteBlobToFile(pBlob, pFileName, bOverwrite)
+    {% end %}
   end
 
   def d3DCompile(pSrcData : Void*, src_data_size : LibC::UIntPtrT, pSourceName : Win32cr::Foundation::PSTR, pDefines : Win32cr::Graphics::Direct3D::D3D_SHADER_MACRO*, pInclude : Void*, pEntrypoint : Win32cr::Foundation::PSTR, pTarget : Win32cr::Foundation::PSTR, flags1 : UInt32, flags2 : UInt32, ppCode : Void**, ppErrorMsgs : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DCompile(pSrcData, src_data_size, pSourceName, pDefines, pInclude, pEntrypoint, pTarget, flags1, flags2, ppCode, ppErrorMsgs)
+    {% end %}
   end
 
   def d3DCompile2(pSrcData : Void*, src_data_size : LibC::UIntPtrT, pSourceName : Win32cr::Foundation::PSTR, pDefines : Win32cr::Graphics::Direct3D::D3D_SHADER_MACRO*, pInclude : Void*, pEntrypoint : Win32cr::Foundation::PSTR, pTarget : Win32cr::Foundation::PSTR, flags1 : UInt32, flags2 : UInt32, secondary_data_flags : UInt32, pSecondaryData : Void*, secondary_data_size : LibC::UIntPtrT, ppCode : Void**, ppErrorMsgs : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DCompile2(pSrcData, src_data_size, pSourceName, pDefines, pInclude, pEntrypoint, pTarget, flags1, flags2, secondary_data_flags, pSecondaryData, secondary_data_size, ppCode, ppErrorMsgs)
+    {% end %}
   end
 
   def d3DCompileFromFile(pFileName : Win32cr::Foundation::PWSTR, pDefines : Win32cr::Graphics::Direct3D::D3D_SHADER_MACRO*, pInclude : Void*, pEntrypoint : Win32cr::Foundation::PSTR, pTarget : Win32cr::Foundation::PSTR, flags1 : UInt32, flags2 : UInt32, ppCode : Void**, ppErrorMsgs : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DCompileFromFile(pFileName, pDefines, pInclude, pEntrypoint, pTarget, flags1, flags2, ppCode, ppErrorMsgs)
+    {% end %}
   end
 
   def d3DPreprocess(pSrcData : Void*, src_data_size : LibC::UIntPtrT, pSourceName : Win32cr::Foundation::PSTR, pDefines : Win32cr::Graphics::Direct3D::D3D_SHADER_MACRO*, pInclude : Void*, ppCodeText : Void**, ppErrorMsgs : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DPreprocess(pSrcData, src_data_size, pSourceName, pDefines, pInclude, ppCodeText, ppErrorMsgs)
+    {% end %}
   end
 
   def d3DGetDebugInfo(pSrcData : Void*, src_data_size : LibC::UIntPtrT, ppDebugInfo : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DGetDebugInfo(pSrcData, src_data_size, ppDebugInfo)
+    {% end %}
   end
 
   def d3DReflect(pSrcData : Void*, src_data_size : LibC::UIntPtrT, pInterface : LibC::GUID*, ppReflector : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DReflect(pSrcData, src_data_size, pInterface, ppReflector)
+    {% end %}
   end
 
   def d3DReflectLibrary(pSrcData : Void*, src_data_size : LibC::UIntPtrT, riid : LibC::GUID*, ppReflector : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DReflectLibrary(pSrcData, src_data_size, riid, ppReflector)
+    {% end %}
   end
 
   def d3DDisassemble(pSrcData : Void*, src_data_size : LibC::UIntPtrT, flags : UInt32, szComments : Win32cr::Foundation::PSTR, ppDisassembly : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DDisassemble(pSrcData, src_data_size, flags, szComments, ppDisassembly)
+    {% end %}
   end
 
   def d3DDisassembleRegion(pSrcData : Void*, src_data_size : LibC::UIntPtrT, flags : UInt32, szComments : Win32cr::Foundation::PSTR, start_byte_offset : LibC::UIntPtrT, num_insts : LibC::UIntPtrT, pFinishByteOffset : LibC::UIntPtrT*, ppDisassembly : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DDisassembleRegion(pSrcData, src_data_size, flags, szComments, start_byte_offset, num_insts, pFinishByteOffset, ppDisassembly)
+    {% end %}
   end
 
   def d3DCreateLinker(ppLinker : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DCreateLinker(ppLinker)
+    {% end %}
   end
 
   def d3DLoadModule(pSrcData : Void*, cbSrcDataSize : LibC::UIntPtrT, ppModule : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DLoadModule(pSrcData, cbSrcDataSize, ppModule)
+    {% end %}
   end
 
   def d3DCreateFunctionLinkingGraph(uFlags : UInt32, ppFunctionLinkingGraph : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DCreateFunctionLinkingGraph(uFlags, ppFunctionLinkingGraph)
+    {% end %}
   end
 
   def d3DGetTraceInstructionOffsets(pSrcData : Void*, src_data_size : LibC::UIntPtrT, flags : UInt32, start_inst_index : LibC::UIntPtrT, num_insts : LibC::UIntPtrT, pOffsets : LibC::UIntPtrT*, pTotalInsts : LibC::UIntPtrT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DGetTraceInstructionOffsets(pSrcData, src_data_size, flags, start_inst_index, num_insts, pOffsets, pTotalInsts)
+    {% end %}
   end
 
   def d3DGetInputSignatureBlob(pSrcData : Void*, src_data_size : LibC::UIntPtrT, ppSignatureBlob : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DGetInputSignatureBlob(pSrcData, src_data_size, ppSignatureBlob)
+    {% end %}
   end
 
   def d3DGetOutputSignatureBlob(pSrcData : Void*, src_data_size : LibC::UIntPtrT, ppSignatureBlob : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DGetOutputSignatureBlob(pSrcData, src_data_size, ppSignatureBlob)
+    {% end %}
   end
 
   def d3DGetInputAndOutputSignatureBlob(pSrcData : Void*, src_data_size : LibC::UIntPtrT, ppSignatureBlob : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DGetInputAndOutputSignatureBlob(pSrcData, src_data_size, ppSignatureBlob)
+    {% end %}
   end
 
   def d3DStripShader(pShaderBytecode : Void*, bytecode_length : LibC::UIntPtrT, uStripFlags : UInt32, ppStrippedBlob : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DStripShader(pShaderBytecode, bytecode_length, uStripFlags, ppStrippedBlob)
+    {% end %}
   end
 
   def d3DGetBlobPart(pSrcData : Void*, src_data_size : LibC::UIntPtrT, part : Win32cr::Graphics::Direct3D::Fxc::D3D_BLOB_PART, flags : UInt32, ppPart : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DGetBlobPart(pSrcData, src_data_size, part, flags, ppPart)
+    {% end %}
   end
 
   def d3DSetBlobPart(pSrcData : Void*, src_data_size : LibC::UIntPtrT, part : Win32cr::Graphics::Direct3D::Fxc::D3D_BLOB_PART, flags : UInt32, pPart : Void*, part_size : LibC::UIntPtrT, ppNewShader : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DSetBlobPart(pSrcData, src_data_size, part, flags, pPart, part_size, ppNewShader)
+    {% end %}
   end
 
   def d3DCreateBlob(size : LibC::UIntPtrT, ppBlob : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DCreateBlob(size, ppBlob)
+    {% end %}
   end
 
   def d3DCompressShaders(uNumShaders : UInt32, pShaderData : Win32cr::Graphics::Direct3D::Fxc::D3D_SHADER_DATA*, uFlags : UInt32, ppCompressedData : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DCompressShaders(uNumShaders, pShaderData, uFlags, ppCompressedData)
+    {% end %}
   end
 
   def d3DDecompressShaders(pSrcData : Void*, src_data_size : LibC::UIntPtrT, uNumShaders : UInt32, uStartIndex : UInt32, pIndices : UInt32*, uFlags : UInt32, ppShaders : Void**, pTotalShaders : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DDecompressShaders(pSrcData, src_data_size, uNumShaders, uStartIndex, pIndices, uFlags, ppShaders, pTotalShaders)
+    {% end %}
   end
 
   def d3DDisassemble10Effect(pEffect : Void*, flags : UInt32, ppDisassembly : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3DDisassemble10Effect(pEffect, flags, ppDisassembly)
+    {% end %}
   end
 
-  @[Link("d3dcompiler_47")]
+  @[Link("d3dcompiler_47.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun D3DReadFileToBlob(pFileName : Win32cr::Foundation::PWSTR, ppContents : Void**) : Win32cr::Foundation::HRESULT
@@ -272,4 +323,5 @@ module Win32cr::Graphics::Direct3D::Fxc
     fun D3DDisassemble10Effect(pEffect : Void*, flags : UInt32, ppDisassembly : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

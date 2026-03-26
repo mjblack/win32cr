@@ -55,7 +55,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectConnectorInfoVtbl,
+  record IMILBitmapEffectConnectorInfoVtable,
     query_interface : Proc(IMILBitmapEffectConnectorInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectConnectorInfo*, UInt32),
     release : Proc(IMILBitmapEffectConnectorInfo*, UInt32),
@@ -66,7 +66,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectConnectorInfo, lpVtbl : IMILBitmapEffectConnectorInfoVtbl* do
+  record IMILBitmapEffectConnectorInfo, lpVtbl : IMILBitmapEffectConnectorInfoVtable* do
     GUID = LibC::GUID.new(0xf66d2e4b_u32, 0xb46b_u16, 0x42fc_u16, StaticArray[0x85_u8, 0x9e_u8, 0x3d_u8, 0xa0_u8, 0xec_u8, 0xdb_u8, 0x3c_u8, 0x43_u8])
     def query_interface(this : IMILBitmapEffectConnectorInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -93,7 +93,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectConnectionsInfoVtbl,
+  record IMILBitmapEffectConnectionsInfoVtable,
     query_interface : Proc(IMILBitmapEffectConnectionsInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectConnectionsInfo*, UInt32),
     release : Proc(IMILBitmapEffectConnectionsInfo*, UInt32),
@@ -104,7 +104,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectConnectionsInfo, lpVtbl : IMILBitmapEffectConnectionsInfoVtbl* do
+  record IMILBitmapEffectConnectionsInfo, lpVtbl : IMILBitmapEffectConnectionsInfoVtable* do
     GUID = LibC::GUID.new(0x476b538a_u32, 0xc765_u16, 0x4237_u16, StaticArray[0xba_u8, 0x4a_u8, 0xd6_u8, 0xa8_u8, 0x80_u8, 0xff_u8, 0xc_u8, 0xfc_u8])
     def query_interface(this : IMILBitmapEffectConnectionsInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -131,7 +131,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectConnectionsVtbl,
+  record IMILBitmapEffectConnectionsVtable,
     query_interface : Proc(IMILBitmapEffectConnections*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectConnections*, UInt32),
     release : Proc(IMILBitmapEffectConnections*, UInt32),
@@ -140,7 +140,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectConnections, lpVtbl : IMILBitmapEffectConnectionsVtbl* do
+  record IMILBitmapEffectConnections, lpVtbl : IMILBitmapEffectConnectionsVtable* do
     GUID = LibC::GUID.new(0xc2b5d861_u32, 0x9b1a_u16, 0x4374_u16, StaticArray[0x89_u8, 0xb0_u8, 0xde_u8, 0xc4_u8, 0x87_u8, 0x4d_u8, 0x6a_u8, 0x81_u8])
     def query_interface(this : IMILBitmapEffectConnections*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -161,7 +161,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectVtbl,
+  record IMILBitmapEffectVtable,
     query_interface : Proc(IMILBitmapEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffect*, UInt32),
     release : Proc(IMILBitmapEffect*, UInt32),
@@ -171,7 +171,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffect, lpVtbl : IMILBitmapEffectVtbl* do
+  record IMILBitmapEffect, lpVtbl : IMILBitmapEffectVtable* do
     GUID = LibC::GUID.new(0x8a6ff321_u32, 0xc944_u16, 0x4a1b_u16, StaticArray[0x99_u8, 0x44_u8, 0x99_u8, 0x54_u8, 0xaf_u8, 0x30_u8, 0x12_u8, 0x58_u8])
     def query_interface(this : IMILBitmapEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -195,7 +195,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectImplVtbl,
+  record IMILBitmapEffectImplVtable,
     query_interface : Proc(IMILBitmapEffectImpl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectImpl*, UInt32),
     release : Proc(IMILBitmapEffectImpl*, UInt32),
@@ -209,7 +209,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectImpl, lpVtbl : IMILBitmapEffectImplVtbl* do
+  record IMILBitmapEffectImpl, lpVtbl : IMILBitmapEffectImplVtable* do
     GUID = LibC::GUID.new(0xcc2468f2_u32, 0x9936_u16, 0x47be_u16, StaticArray[0xb4_u8, 0xaf_u8, 0x6_u8, 0xb5_u8, 0xdf_u8, 0x5d_u8, 0xbc_u8, 0xbb_u8])
     def query_interface(this : IMILBitmapEffectImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -245,7 +245,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectGroupVtbl,
+  record IMILBitmapEffectGroupVtable,
     query_interface : Proc(IMILBitmapEffectGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectGroup*, UInt32),
     release : Proc(IMILBitmapEffectGroup*, UInt32),
@@ -255,7 +255,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectGroup, lpVtbl : IMILBitmapEffectGroupVtbl* do
+  record IMILBitmapEffectGroup, lpVtbl : IMILBitmapEffectGroupVtable* do
     GUID = LibC::GUID.new(0x2f952360_u32, 0x698a_u16, 0x4ac6_u16, StaticArray[0x81_u8, 0xa1_u8, 0xbc_u8, 0xfd_u8, 0xf0_u8, 0x8e_u8, 0xb8_u8, 0xe8_u8])
     def query_interface(this : IMILBitmapEffectGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -279,7 +279,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectGroupImplVtbl,
+  record IMILBitmapEffectGroupImplVtable,
     query_interface : Proc(IMILBitmapEffectGroupImpl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectGroupImpl*, UInt32),
     release : Proc(IMILBitmapEffectGroupImpl*, UInt32),
@@ -289,7 +289,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectGroupImpl, lpVtbl : IMILBitmapEffectGroupImplVtbl* do
+  record IMILBitmapEffectGroupImpl, lpVtbl : IMILBitmapEffectGroupImplVtable* do
     GUID = LibC::GUID.new(0x78fed518_u32, 0x1cfc_u16, 0x4807_u16, StaticArray[0x8b_u8, 0x85_u8, 0x6b_u8, 0x6e_u8, 0x51_u8, 0x39_u8, 0x8f_u8, 0x62_u8])
     def query_interface(this : IMILBitmapEffectGroupImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -313,7 +313,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectRenderContextVtbl,
+  record IMILBitmapEffectRenderContextVtable,
     query_interface : Proc(IMILBitmapEffectRenderContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectRenderContext*, UInt32),
     release : Proc(IMILBitmapEffectRenderContext*, UInt32),
@@ -328,7 +328,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectRenderContext, lpVtbl : IMILBitmapEffectRenderContextVtbl* do
+  record IMILBitmapEffectRenderContext, lpVtbl : IMILBitmapEffectRenderContextVtable* do
     GUID = LibC::GUID.new(0x12a2ec7e_u32, 0x2d33_u16, 0x44b2_u16, StaticArray[0xb3_u8, 0x34_u8, 0x1a_u8, 0xbb_u8, 0x78_u8, 0x46_u8, 0xe3_u8, 0x90_u8])
     def query_interface(this : IMILBitmapEffectRenderContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -367,7 +367,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectRenderContextImplVtbl,
+  record IMILBitmapEffectRenderContextImplVtable,
     query_interface : Proc(IMILBitmapEffectRenderContextImpl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectRenderContextImpl*, UInt32),
     release : Proc(IMILBitmapEffectRenderContextImpl*, UInt32),
@@ -379,7 +379,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectRenderContextImpl, lpVtbl : IMILBitmapEffectRenderContextImplVtbl* do
+  record IMILBitmapEffectRenderContextImpl, lpVtbl : IMILBitmapEffectRenderContextImplVtable* do
     GUID = LibC::GUID.new(0x4d25accb_u32, 0x797d_u16, 0x4fd2_u16, StaticArray[0xb1_u8, 0x28_u8, 0xdf_u8, 0xfe_u8, 0xff_u8, 0x84_u8, 0xfc_u8, 0xc3_u8])
     def query_interface(this : IMILBitmapEffectRenderContextImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -409,7 +409,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectFactoryVtbl,
+  record IMILBitmapEffectFactoryVtable,
     query_interface : Proc(IMILBitmapEffectFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectFactory*, UInt32),
     release : Proc(IMILBitmapEffectFactory*, UInt32),
@@ -419,7 +419,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectFactory, lpVtbl : IMILBitmapEffectFactoryVtbl* do
+  record IMILBitmapEffectFactory, lpVtbl : IMILBitmapEffectFactoryVtable* do
     GUID = LibC::GUID.new(0x33a9df34_u32, 0xa403_u16, 0x4ec7_u16, StaticArray[0xb0_u8, 0x7e_u8, 0xbc_u8, 0x6_u8, 0x82_u8, 0x37_u8, 0x8_u8, 0x45_u8])
     def query_interface(this : IMILBitmapEffectFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -443,7 +443,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectPrimitiveVtbl,
+  record IMILBitmapEffectPrimitiveVtable,
     query_interface : Proc(IMILBitmapEffectPrimitive*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectPrimitive*, UInt32),
     release : Proc(IMILBitmapEffectPrimitive*, UInt32),
@@ -456,7 +456,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectPrimitive, lpVtbl : IMILBitmapEffectPrimitiveVtbl* do
+  record IMILBitmapEffectPrimitive, lpVtbl : IMILBitmapEffectPrimitiveVtable* do
     GUID = LibC::GUID.new(0x67e31025_u32, 0x3091_u16, 0x4dfc_u16, StaticArray[0x98_u8, 0xd6_u8, 0xdd_u8, 0x49_u8, 0x45_u8, 0x51_u8, 0x46_u8, 0x1d_u8])
     def query_interface(this : IMILBitmapEffectPrimitive*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -489,7 +489,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectPrimitiveImplVtbl,
+  record IMILBitmapEffectPrimitiveImplVtable,
     query_interface : Proc(IMILBitmapEffectPrimitiveImpl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectPrimitiveImpl*, UInt32),
     release : Proc(IMILBitmapEffectPrimitiveImpl*, UInt32),
@@ -498,7 +498,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectPrimitiveImpl, lpVtbl : IMILBitmapEffectPrimitiveImplVtbl* do
+  record IMILBitmapEffectPrimitiveImpl, lpVtbl : IMILBitmapEffectPrimitiveImplVtable* do
     GUID = LibC::GUID.new(0xce41e00b_u32, 0xefa6_u16, 0x44e7_u16, StaticArray[0xb0_u8, 0x7_u8, 0xdd_u8, 0x4_u8, 0x2e_u8, 0x3a_u8, 0xe1_u8, 0x26_u8])
     def query_interface(this : IMILBitmapEffectPrimitiveImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -519,7 +519,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectsVtbl,
+  record IMILBitmapEffectsVtable,
     query_interface : Proc(IMILBitmapEffects*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffects*, UInt32),
     release : Proc(IMILBitmapEffects*, UInt32),
@@ -530,7 +530,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffects, lpVtbl : IMILBitmapEffectsVtbl* do
+  record IMILBitmapEffects, lpVtbl : IMILBitmapEffectsVtable* do
     GUID = LibC::GUID.new(0x51ac3dce_u32, 0x67c5_u16, 0x448b_u16, StaticArray[0x91_u8, 0x80_u8, 0xad_u8, 0x3e_u8, 0xab_u8, 0xdd_u8, 0xd5_u8, 0xdd_u8])
     def query_interface(this : IMILBitmapEffects*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -557,7 +557,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectConnectorVtbl,
+  record IMILBitmapEffectConnectorVtable,
     query_interface : Proc(IMILBitmapEffectConnector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectConnector*, UInt32),
     release : Proc(IMILBitmapEffectConnector*, UInt32),
@@ -570,7 +570,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectConnector, lpVtbl : IMILBitmapEffectConnectorVtbl* do
+  record IMILBitmapEffectConnector, lpVtbl : IMILBitmapEffectConnectorVtable* do
     GUID = LibC::GUID.new(0xf59567b3_u32, 0x76c1_u16, 0x4d47_u16, StaticArray[0xba_u8, 0x1e_u8, 0x79_u8, 0xf9_u8, 0x55_u8, 0xe3_u8, 0x50_u8, 0xef_u8])
     def query_interface(this : IMILBitmapEffectConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -603,7 +603,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectInputConnectorVtbl,
+  record IMILBitmapEffectInputConnectorVtable,
     query_interface : Proc(IMILBitmapEffectInputConnector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectInputConnector*, UInt32),
     release : Proc(IMILBitmapEffectInputConnector*, UInt32),
@@ -618,7 +618,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectInputConnector, lpVtbl : IMILBitmapEffectInputConnectorVtbl* do
+  record IMILBitmapEffectInputConnector, lpVtbl : IMILBitmapEffectInputConnectorVtable* do
     GUID = LibC::GUID.new(0xa9b4ecaa_u32, 0x7a3c_u16, 0x45e7_u16, StaticArray[0x85_u8, 0x73_u8, 0xf4_u8, 0xb8_u8, 0x1b_u8, 0x60_u8, 0xdd_u8, 0x6c_u8])
     def query_interface(this : IMILBitmapEffectInputConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -657,7 +657,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectOutputConnectorVtbl,
+  record IMILBitmapEffectOutputConnectorVtable,
     query_interface : Proc(IMILBitmapEffectOutputConnector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectOutputConnector*, UInt32),
     release : Proc(IMILBitmapEffectOutputConnector*, UInt32),
@@ -672,7 +672,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectOutputConnector, lpVtbl : IMILBitmapEffectOutputConnectorVtbl* do
+  record IMILBitmapEffectOutputConnector, lpVtbl : IMILBitmapEffectOutputConnectorVtable* do
     GUID = LibC::GUID.new(0x92957aad_u32, 0x841b_u16, 0x4866_u16, StaticArray[0x82_u8, 0xec_u8, 0x87_u8, 0x52_u8, 0x46_u8, 0x8b_u8, 0x7_u8, 0xfd_u8])
     def query_interface(this : IMILBitmapEffectOutputConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -711,7 +711,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectOutputConnectorImplVtbl,
+  record IMILBitmapEffectOutputConnectorImplVtable,
     query_interface : Proc(IMILBitmapEffectOutputConnectorImpl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectOutputConnectorImpl*, UInt32),
     release : Proc(IMILBitmapEffectOutputConnectorImpl*, UInt32),
@@ -720,7 +720,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectOutputConnectorImpl, lpVtbl : IMILBitmapEffectOutputConnectorImplVtbl* do
+  record IMILBitmapEffectOutputConnectorImpl, lpVtbl : IMILBitmapEffectOutputConnectorImplVtable* do
     GUID = LibC::GUID.new(0x21fae777_u32, 0x8b39_u16, 0x4bfa_u16, StaticArray[0x9f_u8, 0x2d_u8, 0xf3_u8, 0x94_u8, 0x1e_u8, 0xd3_u8, 0x69_u8, 0x13_u8])
     def query_interface(this : IMILBitmapEffectOutputConnectorImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -741,7 +741,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectInteriorInputConnectorVtbl,
+  record IMILBitmapEffectInteriorInputConnectorVtable,
     query_interface : Proc(IMILBitmapEffectInteriorInputConnector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectInteriorInputConnector*, UInt32),
     release : Proc(IMILBitmapEffectInteriorInputConnector*, UInt32),
@@ -749,7 +749,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectInteriorInputConnector, lpVtbl : IMILBitmapEffectInteriorInputConnectorVtbl* do
+  record IMILBitmapEffectInteriorInputConnector, lpVtbl : IMILBitmapEffectInteriorInputConnectorVtable* do
     GUID = LibC::GUID.new(0x20287e9e_u32, 0x86a2_u16, 0x4e15_u16, StaticArray[0x95_u8, 0x3d_u8, 0xeb_u8, 0x14_u8, 0x38_u8, 0xa5_u8, 0xb8_u8, 0x42_u8])
     def query_interface(this : IMILBitmapEffectInteriorInputConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -767,7 +767,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectInteriorOutputConnectorVtbl,
+  record IMILBitmapEffectInteriorOutputConnectorVtable,
     query_interface : Proc(IMILBitmapEffectInteriorOutputConnector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectInteriorOutputConnector*, UInt32),
     release : Proc(IMILBitmapEffectInteriorOutputConnector*, UInt32),
@@ -775,7 +775,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectInteriorOutputConnector, lpVtbl : IMILBitmapEffectInteriorOutputConnectorVtbl* do
+  record IMILBitmapEffectInteriorOutputConnector, lpVtbl : IMILBitmapEffectInteriorOutputConnectorVtable* do
     GUID = LibC::GUID.new(0xbbb6dc_u32, 0xacc9_u16, 0x4bfc_u16, StaticArray[0xb3_u8, 0x44_u8, 0x8b_u8, 0xee_u8, 0x38_u8, 0x3d_u8, 0xfe_u8, 0xfa_u8])
     def query_interface(this : IMILBitmapEffectInteriorOutputConnector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -793,7 +793,7 @@ module Win32cr::UI::Wpf
   end
 
   @[Extern]
-  record IMILBitmapEffectEventsVtbl,
+  record IMILBitmapEffectEventsVtable,
     query_interface : Proc(IMILBitmapEffectEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMILBitmapEffectEvents*, UInt32),
     release : Proc(IMILBitmapEffectEvents*, UInt32),
@@ -802,7 +802,7 @@ module Win32cr::UI::Wpf
 
 
   @[Extern]
-  record IMILBitmapEffectEvents, lpVtbl : IMILBitmapEffectEventsVtbl* do
+  record IMILBitmapEffectEvents, lpVtbl : IMILBitmapEffectEventsVtable* do
     GUID = LibC::GUID.new(0x2e880dd8_u32, 0xf8ce_u16, 0x457b_u16, StaticArray[0x81_u8, 0x99_u8, 0xd6_u8, 0xb_u8, 0xb3_u8, 0xd7_u8, 0xef_u8, 0x98_u8])
     def query_interface(this : IMILBitmapEffectEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

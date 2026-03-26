@@ -305,22 +305,22 @@ module Win32cr::System::JobObjects
     end
 
 
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property job_high_memory_limit : UInt64
-    property job_memory_limit : UInt64
-    def initialize(@job_high_memory_limit : UInt64, @job_memory_limit : UInt64)
-    end
-    end
-
-
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
     struct Anonymous2_e__Union_
     property rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE
     property cpu_rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE
     def initialize(@rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE, @cpu_rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE)
+    end
+    end
+
+
+    # Nested Type Anonymous1_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous1_e__Union_
+    property job_high_memory_limit : UInt64
+    property job_memory_limit : UInt64
+    def initialize(@job_high_memory_limit : UInt64, @job_memory_limit : UInt64)
     end
     end
 
@@ -366,22 +366,22 @@ module Win32cr::System::JobObjects
     property net_rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE
     property net_rate_control_tolerance_limit : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE
 
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE
-    property cpu_rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE
-    def initialize(@rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE, @cpu_rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE)
-    end
-    end
-
-
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
     struct Anonymous3_e__Union_
     property rate_control_tolerance_limit : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE
     property cpu_rate_control_tolerance_limit : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE
     def initialize(@rate_control_tolerance_limit : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE, @cpu_rate_control_tolerance_limit : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE)
+    end
+    end
+
+
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE
+    property cpu_rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE
+    def initialize(@rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE, @cpu_rate_control_tolerance : Win32cr::System::JobObjects::JOBOBJECT_RATE_CONTROL_TOLERANCE)
     end
     end
 
@@ -514,7 +514,9 @@ module Win32cr::System::JobObjects
   end
 
   def isProcessInJob(process_handle : Win32cr::Foundation::HANDLE, job_handle : Win32cr::Foundation::HANDLE, result : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsProcessInJob(process_handle, job_handle, result)
+    {% end %}
   end
 
   #def createJobObjectW(lpJobAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
@@ -522,11 +524,15 @@ module Win32cr::System::JobObjects
   #end
 
   def freeMemoryJobObject(buffer : Void*) : Void
+    {% if !flag?(:docs) %}
     C.FreeMemoryJobObject(buffer)
+    {% end %}
   end
 
   def openJobObjectW(dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenJobObjectW(dwDesiredAccess, bInheritHandle, lpName)
+    {% end %}
   end
 
   #def assignProcessToJobObject(hJob : Win32cr::Foundation::HANDLE, hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
@@ -534,7 +540,9 @@ module Win32cr::System::JobObjects
   #end
 
   def terminateJobObject(hJob : Win32cr::Foundation::HANDLE, uExitCode : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TerminateJobObject(hJob, uExitCode)
+    {% end %}
   end
 
   #def setInformationJobObject(hJob : Win32cr::Foundation::HANDLE, job_object_information_class : Win32cr::System::JobObjects::JOBOBJECTINFOCLASS, lpJobObjectInformation : Void*, cbJobObjectInformationLength : UInt32) : Win32cr::Foundation::BOOL
@@ -542,35 +550,50 @@ module Win32cr::System::JobObjects
   #end
 
   def setIoRateControlInformationJobObject(hJob : Win32cr::Foundation::HANDLE, io_rate_control_info : Win32cr::System::JobObjects::JOBOBJECT_IO_RATE_CONTROL_INFORMATION*) : UInt32
+    {% if !flag?(:docs) %}
     C.SetIoRateControlInformationJobObject(hJob, io_rate_control_info)
+    {% end %}
   end
 
   def queryInformationJobObject(hJob : Win32cr::Foundation::HANDLE, job_object_information_class : Win32cr::System::JobObjects::JOBOBJECTINFOCLASS, lpJobObjectInformation : Void*, cbJobObjectInformationLength : UInt32, lpReturnLength : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryInformationJobObject(hJob, job_object_information_class, lpJobObjectInformation, cbJobObjectInformationLength, lpReturnLength)
+    {% end %}
   end
 
   def queryIoRateControlInformationJobObject(hJob : Win32cr::Foundation::HANDLE, volume_name : Win32cr::Foundation::PWSTR, info_blocks : Win32cr::System::JobObjects::JOBOBJECT_IO_RATE_CONTROL_INFORMATION**, info_block_count : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.QueryIoRateControlInformationJobObject(hJob, volume_name, info_blocks, info_block_count)
+    {% end %}
   end
 
   def userHandleGrantAccess(hUserHandle : Win32cr::Foundation::HANDLE, hJob : Win32cr::Foundation::HANDLE, bGrant : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UserHandleGrantAccess(hUserHandle, hJob, bGrant)
+    {% end %}
   end
 
   def createJobObjectA(lpJobAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateJobObjectA(lpJobAttributes, lpName)
+    {% end %}
   end
 
   def openJobObjectA(dwDesiredAccess : UInt32, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenJobObjectA(dwDesiredAccess, bInheritHandle, lpName)
+    {% end %}
   end
 
   def createJobSet(num_job : UInt32, user_job_set : Win32cr::System::JobObjects::JOB_SET_ARRAY*, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateJobSet(num_job, user_job_set, flags)
+    {% end %}
   end
 
-  @[Link("kernel32")]
-  @[Link("user32")]
+  @[Link("kernel32.dll")]
+  @[Link("user32.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun IsProcessInJob(process_handle : Win32cr::Foundation::HANDLE, job_handle : Win32cr::Foundation::HANDLE, result : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
@@ -618,4 +641,5 @@ module Win32cr::System::JobObjects
     fun CreateJobSet(num_job : UInt32, user_job_set : Win32cr::System::JobObjects::JOB_SET_ARRAY*, flags : UInt32) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

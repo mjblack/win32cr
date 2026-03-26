@@ -420,35 +420,15 @@ module Win32cr::System::Threading
     ThreadNameInformation = 38_i32
   end
 
-  @[Extern]
-  struct TP_CALLBACK_INSTANCE
-    def initialize()
-    end
-  end
+  alias TP_CALLBACK_INSTANCE = Void
 
-  @[Extern]
-  struct TP_WORK
-    def initialize()
-    end
-  end
+  alias TP_WORK = Void
 
-  @[Extern]
-  struct TP_TIMER
-    def initialize()
-    end
-  end
+  alias TP_TIMER = Void
 
-  @[Extern]
-  struct TP_WAIT
-    def initialize()
-    end
-  end
+  alias TP_WAIT = Void
 
-  @[Extern]
-  struct TP_IO
-    def initialize()
-    end
-  end
+  alias TP_IO = Void
 
   @[Extern]
   struct REASON_CONTEXT
@@ -757,11 +737,7 @@ module Win32cr::System::Threading
 
 
     # Nested Type ACTIVATION_CONTEXT_
-    @[Extern]
-    struct ACTIVATION_CONTEXT_
-    def initialize()
-    end
-    end
+    alias ACTIVATION_CONTEXT_ = Void
 
     def initialize(@version : UInt32, @pool : Win32cr::System::Threading::PTP_POOL, @cleanup_group : LibC::IntPtrT, @cleanup_group_cancel_callback : Win32cr::System::Threading::PTP_CLEANUP_GROUP_CANCEL_CALLBACK, @race_dll : Void*, @activation_context : LibC::IntPtrT, @finalization_callback : Win32cr::System::Threading::PTP_SIMPLE_CALLBACK, @u : U_e__union_, @callback_priority : Win32cr::System::Threading::TP_CALLBACK_PRIORITY, @size : UInt32)
     end
@@ -876,63 +852,93 @@ module Win32cr::System::Threading
   end
 
   def getProcessWorkingSetSize(hProcess : Win32cr::Foundation::HANDLE, lpMinimumWorkingSetSize : LibC::UIntPtrT*, lpMaximumWorkingSetSize : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetProcessWorkingSetSize(hProcess, lpMinimumWorkingSetSize, lpMaximumWorkingSetSize)
+    {% end %}
   end
 
   def setProcessWorkingSetSize(hProcess : Win32cr::Foundation::HANDLE, dwMinimumWorkingSetSize : LibC::UIntPtrT, dwMaximumWorkingSetSize : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessWorkingSetSize(hProcess, dwMinimumWorkingSetSize, dwMaximumWorkingSetSize)
+    {% end %}
   end
 
   def flsAlloc(lpCallback : Win32cr::System::Threading::PFLS_CALLBACK_FUNCTION) : UInt32
+    {% if !flag?(:docs) %}
     C.FlsAlloc(lpCallback)
+    {% end %}
   end
 
   def flsGetValue(dwFlsIndex : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.FlsGetValue(dwFlsIndex)
+    {% end %}
   end
 
   def flsSetValue(dwFlsIndex : UInt32, lpFlsData : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FlsSetValue(dwFlsIndex, lpFlsData)
+    {% end %}
   end
 
   def flsFree(dwFlsIndex : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FlsFree(dwFlsIndex)
+    {% end %}
   end
 
   def isThreadAFiber : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsThreadAFiber
+    {% end %}
   end
 
   def initializeSRWLock(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Void
+    {% if !flag?(:docs) %}
     C.InitializeSRWLock(srw_lock)
+    {% end %}
   end
 
   def releaseSRWLockExclusive(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Void
+    {% if !flag?(:docs) %}
     C.ReleaseSRWLockExclusive(srw_lock)
+    {% end %}
   end
 
   def releaseSRWLockShared(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Void
+    {% if !flag?(:docs) %}
     C.ReleaseSRWLockShared(srw_lock)
+    {% end %}
   end
 
   def acquireSRWLockExclusive(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Void
+    {% if !flag?(:docs) %}
     C.AcquireSRWLockExclusive(srw_lock)
+    {% end %}
   end
 
   def acquireSRWLockShared(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Void
+    {% if !flag?(:docs) %}
     C.AcquireSRWLockShared(srw_lock)
+    {% end %}
   end
 
   def tryAcquireSRWLockExclusive(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.TryAcquireSRWLockExclusive(srw_lock)
+    {% end %}
   end
 
   def tryAcquireSRWLockShared(srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.TryAcquireSRWLockShared(srw_lock)
+    {% end %}
   end
 
   def initializeCriticalSection(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*) : Void
+    {% if !flag?(:docs) %}
     C.InitializeCriticalSection(lpCriticalSection)
+    {% end %}
   end
 
   #def enterCriticalSection(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*) : Void
@@ -948,11 +954,15 @@ module Win32cr::System::Threading
   #end
 
   def initializeCriticalSectionEx(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*, dwSpinCount : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitializeCriticalSectionEx(lpCriticalSection, dwSpinCount, flags)
+    {% end %}
   end
 
   def setCriticalSectionSpinCount(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*, dwSpinCount : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SetCriticalSectionSpinCount(lpCriticalSection, dwSpinCount)
+    {% end %}
   end
 
   #def tryEnterCriticalSection(lpCriticalSection : Win32cr::System::Threading::RTL_CRITICAL_SECTION*) : Win32cr::Foundation::BOOL
@@ -964,19 +974,27 @@ module Win32cr::System::Threading
   #end
 
   def initOnceInitialize(init_once : Win32cr::System::Threading::RTL_RUN_ONCE*) : Void
+    {% if !flag?(:docs) %}
     C.InitOnceInitialize(init_once)
+    {% end %}
   end
 
   def initOnceExecuteOnce(init_once : Win32cr::System::Threading::RTL_RUN_ONCE*, init_fn : Win32cr::System::Threading::PINIT_ONCE_FN, parameter : Void*, context : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitOnceExecuteOnce(init_once, init_fn, parameter, context)
+    {% end %}
   end
 
   def initOnceBeginInitialize(lpInitOnce : Win32cr::System::Threading::RTL_RUN_ONCE*, dwFlags : UInt32, fPending : Win32cr::Foundation::BOOL*, lpContext : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitOnceBeginInitialize(lpInitOnce, dwFlags, fPending, lpContext)
+    {% end %}
   end
 
   def initOnceComplete(lpInitOnce : Win32cr::System::Threading::RTL_RUN_ONCE*, dwFlags : UInt32, lpContext : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitOnceComplete(lpInitOnce, dwFlags, lpContext)
+    {% end %}
   end
 
   #def initializeConditionVariable(condition_variable : Win32cr::System::Threading::RTL_CONDITION_VARIABLE*) : Void
@@ -996,79 +1014,115 @@ module Win32cr::System::Threading
   #end
 
   def sleepConditionVariableSRW(condition_variable : Win32cr::System::Threading::RTL_CONDITION_VARIABLE*, srw_lock : Win32cr::System::Threading::RTL_SRWLOCK*, dwMilliseconds : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SleepConditionVariableSRW(condition_variable, srw_lock, dwMilliseconds, flags)
+    {% end %}
   end
 
   def setEvent(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetEvent(hEvent)
+    {% end %}
   end
 
   def resetEvent(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ResetEvent(hEvent)
+    {% end %}
   end
 
   def releaseSemaphore(hSemaphore : Win32cr::Foundation::HANDLE, lReleaseCount : Int32, lpPreviousCount : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReleaseSemaphore(hSemaphore, lReleaseCount, lpPreviousCount)
+    {% end %}
   end
 
   def releaseMutex(hMutex : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReleaseMutex(hMutex)
+    {% end %}
   end
 
-  #def waitForSingleObject(hHandle : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32) : UInt32
+  #def waitForSingleObject(hHandle : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32) : Win32cr::Foundation::WIN32_ERROR
     #C.WaitForSingleObject(hHandle, dwMilliseconds)
   #end
 
   def sleepEx(dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.SleepEx(dwMilliseconds, bAlertable)
+    {% end %}
   end
 
-  def waitForSingleObjectEx(hHandle : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : UInt32
+  def waitForSingleObjectEx(hHandle : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.WaitForSingleObjectEx(hHandle, dwMilliseconds, bAlertable)
+    {% end %}
   end
 
-  def waitForMultipleObjectsEx(nCount : UInt32, lpHandles : Win32cr::Foundation::HANDLE*, bWaitAll : Win32cr::Foundation::BOOL, dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : UInt32
+  def waitForMultipleObjectsEx(nCount : UInt32, lpHandles : Win32cr::Foundation::HANDLE*, bWaitAll : Win32cr::Foundation::BOOL, dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.WaitForMultipleObjectsEx(nCount, lpHandles, bWaitAll, dwMilliseconds, bAlertable)
+    {% end %}
   end
 
   def createMutexA(lpMutexAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInitialOwner : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateMutexA(lpMutexAttributes, bInitialOwner, lpName)
+    {% end %}
   end
 
   def createMutexW(lpMutexAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInitialOwner : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateMutexW(lpMutexAttributes, bInitialOwner, lpName)
+    {% end %}
   end
 
   def openMutexW(dwDesiredAccess : Win32cr::System::Threading::SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenMutexW(dwDesiredAccess, bInheritHandle, lpName)
+    {% end %}
   end
 
   def createEventA(lpEventAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bManualReset : Win32cr::Foundation::BOOL, bInitialState : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateEventA(lpEventAttributes, bManualReset, bInitialState, lpName)
+    {% end %}
   end
 
   def createEventW(lpEventAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bManualReset : Win32cr::Foundation::BOOL, bInitialState : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateEventW(lpEventAttributes, bManualReset, bInitialState, lpName)
+    {% end %}
   end
 
   def openEventA(dwDesiredAccess : Win32cr::System::Threading::SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenEventA(dwDesiredAccess, bInheritHandle, lpName)
+    {% end %}
   end
 
   def openEventW(dwDesiredAccess : Win32cr::System::Threading::SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenEventW(dwDesiredAccess, bInheritHandle, lpName)
+    {% end %}
   end
 
   def openSemaphoreW(dwDesiredAccess : Win32cr::System::Threading::SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenSemaphoreW(dwDesiredAccess, bInheritHandle, lpName)
+    {% end %}
   end
 
   def openWaitableTimerW(dwDesiredAccess : Win32cr::System::Threading::SYNCHRONIZATION_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, lpTimerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenWaitableTimerW(dwDesiredAccess, bInheritHandle, lpTimerName)
+    {% end %}
   end
 
   def setWaitableTimerEx(hTimer : Win32cr::Foundation::HANDLE, lpDueTime : Win32cr::Foundation::LARGE_INTEGER*, lPeriod : Int32, pfnCompletionRoutine : Win32cr::System::Threading::PTIMERAPCROUTINE, lpArgToCompletionRoutine : Void*, wake_context : Win32cr::System::Threading::REASON_CONTEXT*, tolerable_delay : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetWaitableTimerEx(hTimer, lpDueTime, lPeriod, pfnCompletionRoutine, lpArgToCompletionRoutine, wake_context, tolerable_delay)
+    {% end %}
   end
 
   #def setWaitableTimer(hTimer : Win32cr::Foundation::HANDLE, lpDueTime : Win32cr::Foundation::LARGE_INTEGER*, lPeriod : Int32, pfnCompletionRoutine : Win32cr::System::Threading::PTIMERAPCROUTINE, lpArgToCompletionRoutine : Void*, fResume : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
@@ -1080,23 +1134,33 @@ module Win32cr::System::Threading
   #end
 
   def createMutexExA(lpMutexAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateMutexExA(lpMutexAttributes, lpName, dwFlags, dwDesiredAccess)
+    {% end %}
   end
 
   def createMutexExW(lpMutexAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateMutexExW(lpMutexAttributes, lpName, dwFlags, dwDesiredAccess)
+    {% end %}
   end
 
   def createEventExA(lpEventAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PSTR, dwFlags : Win32cr::System::Threading::CREATE_EVENT, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateEventExA(lpEventAttributes, lpName, dwFlags, dwDesiredAccess)
+    {% end %}
   end
 
   def createEventExW(lpEventAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpName : Win32cr::Foundation::PWSTR, dwFlags : Win32cr::System::Threading::CREATE_EVENT, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateEventExW(lpEventAttributes, lpName, dwFlags, dwDesiredAccess)
+    {% end %}
   end
 
   def createSemaphoreExW(lpSemaphoreAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lInitialCount : Int32, lMaximumCount : Int32, lpName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateSemaphoreExW(lpSemaphoreAttributes, lInitialCount, lMaximumCount, lpName, dwFlags, dwDesiredAccess)
+    {% end %}
   end
 
   #def createWaitableTimerExW(lpTimerAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpTimerName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
@@ -1104,15 +1168,21 @@ module Win32cr::System::Threading
   #end
 
   def enterSynchronizationBarrier(lpBarrier : Win32cr::System::Threading::RTL_BARRIER*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnterSynchronizationBarrier(lpBarrier, dwFlags)
+    {% end %}
   end
 
   def initializeSynchronizationBarrier(lpBarrier : Win32cr::System::Threading::RTL_BARRIER*, lTotalThreads : Int32, lSpinCount : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitializeSynchronizationBarrier(lpBarrier, lTotalThreads, lSpinCount)
+    {% end %}
   end
 
   def deleteSynchronizationBarrier(lpBarrier : Win32cr::System::Threading::RTL_BARRIER*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteSynchronizationBarrier(lpBarrier)
+    {% end %}
   end
 
   #def sleep(dwMilliseconds : UInt32) : Void
@@ -1120,51 +1190,75 @@ module Win32cr::System::Threading
   #end
 
   def waitOnAddress(address : Void*, compare_address : Void*, address_size : LibC::UIntPtrT, dwMilliseconds : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WaitOnAddress(address, compare_address, address_size, dwMilliseconds)
+    {% end %}
   end
 
   def wakeByAddressSingle(address : Void*) : Void
+    {% if !flag?(:docs) %}
     C.WakeByAddressSingle(address)
+    {% end %}
   end
 
   def wakeByAddressAll(address : Void*) : Void
+    {% if !flag?(:docs) %}
     C.WakeByAddressAll(address)
+    {% end %}
   end
 
-  def waitForMultipleObjects(nCount : UInt32, lpHandles : Win32cr::Foundation::HANDLE*, bWaitAll : Win32cr::Foundation::BOOL, dwMilliseconds : UInt32) : UInt32
+  def waitForMultipleObjects(nCount : UInt32, lpHandles : Win32cr::Foundation::HANDLE*, bWaitAll : Win32cr::Foundation::BOOL, dwMilliseconds : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.WaitForMultipleObjects(nCount, lpHandles, bWaitAll, dwMilliseconds)
+    {% end %}
   end
 
   def createSemaphoreW(lpSemaphoreAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lInitialCount : Int32, lMaximumCount : Int32, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateSemaphoreW(lpSemaphoreAttributes, lInitialCount, lMaximumCount, lpName)
+    {% end %}
   end
 
   def createWaitableTimerW(lpTimerAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bManualReset : Win32cr::Foundation::BOOL, lpTimerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateWaitableTimerW(lpTimerAttributes, bManualReset, lpTimerName)
+    {% end %}
   end
 
   def initializeSListHead(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Void
+    {% if !flag?(:docs) %}
     C.InitializeSListHead(list_head)
+    {% end %}
   end
 
   def interlockedPopEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.InterlockedPopEntrySList(list_head)
+    {% end %}
   end
 
   def interlockedPushEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*, list_entry : Win32cr::System::Kernel::SLIST_ENTRY*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.InterlockedPushEntrySList(list_head, list_entry)
+    {% end %}
   end
 
   def interlockedPushListSListEx(list_head : Win32cr::System::Kernel::SLIST_HEADER*, list : Win32cr::System::Kernel::SLIST_ENTRY*, list_end : Win32cr::System::Kernel::SLIST_ENTRY*, count : UInt32) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.InterlockedPushListSListEx(list_head, list, list_end, count)
+    {% end %}
   end
 
   def interlockedFlushSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.InterlockedFlushSList(list_head)
+    {% end %}
   end
 
   def queryDepthSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : UInt16
+    {% if !flag?(:docs) %}
     C.QueryDepthSList(list_head)
+    {% end %}
   end
 
   #def queueUserAPC(pfnAPC : Win32cr::Foundation::PAPCFUNC, hThread : Win32cr::Foundation::HANDLE, dwData : LibC::UIntPtrT) : UInt32
@@ -1172,7 +1266,9 @@ module Win32cr::System::Threading
   #end
 
   def queueUserAPC2(apc_routine : Win32cr::Foundation::PAPCFUNC, thread : Win32cr::Foundation::HANDLE, data : LibC::UIntPtrT, flags : Win32cr::System::Threading::QUEUE_USER_APC_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueueUserAPC2(apc_routine, thread, data, flags)
+    {% end %}
   end
 
   #def getProcessTimes(hProcess : Win32cr::Foundation::HANDLE, lpCreationTime : Win32cr::Foundation::FILETIME*, lpExitTime : Win32cr::Foundation::FILETIME*, lpKernelTime : Win32cr::Foundation::FILETIME*, lpUserTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
@@ -1204,11 +1300,15 @@ module Win32cr::System::Threading
   #end
 
   def createThread(lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwStackSize : LibC::UIntPtrT, lpStartAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, lpParameter : Void*, dwCreationFlags : Win32cr::System::Threading::THREAD_CREATION_FLAGS, lpThreadId : UInt32*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateThread(lpThreadAttributes, dwStackSize, lpStartAddress, lpParameter, dwCreationFlags, lpThreadId)
+    {% end %}
   end
 
   def createRemoteThread(hProcess : Win32cr::Foundation::HANDLE, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwStackSize : LibC::UIntPtrT, lpStartAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, lpParameter : Void*, dwCreationFlags : UInt32, lpThreadId : UInt32*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateRemoteThread(hProcess, lpThreadAttributes, dwStackSize, lpStartAddress, lpParameter, dwCreationFlags, lpThreadId)
+    {% end %}
   end
 
   #def getCurrentThread : Win32cr::Foundation::HANDLE
@@ -1220,35 +1320,51 @@ module Win32cr::System::Threading
   #end
 
   def openThread(dwDesiredAccess : Win32cr::System::Threading::THREAD_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, dwThreadId : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.OpenThread(dwDesiredAccess, bInheritHandle, dwThreadId)
+    {% end %}
   end
 
   def setThreadPriority(hThread : Win32cr::Foundation::HANDLE, nPriority : Win32cr::System::Threading::THREAD_PRIORITY) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetThreadPriority(hThread, nPriority)
+    {% end %}
   end
 
   def setThreadPriorityBoost(hThread : Win32cr::Foundation::HANDLE, bDisablePriorityBoost : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetThreadPriorityBoost(hThread, bDisablePriorityBoost)
+    {% end %}
   end
 
   def getThreadPriorityBoost(hThread : Win32cr::Foundation::HANDLE, pDisablePriorityBoost : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetThreadPriorityBoost(hThread, pDisablePriorityBoost)
+    {% end %}
   end
 
   def getThreadPriority(hThread : Win32cr::Foundation::HANDLE) : Int32
+    {% if !flag?(:docs) %}
     C.GetThreadPriority(hThread)
+    {% end %}
   end
 
   def exitThread(dwExitCode : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.ExitThread(dwExitCode)
+    {% end %}
   end
 
   def terminateThread(hThread : Win32cr::Foundation::HANDLE, dwExitCode : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TerminateThread(hThread, dwExitCode)
+    {% end %}
   end
 
   def getExitCodeThread(hThread : Win32cr::Foundation::HANDLE, lpExitCode : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetExitCodeThread(hThread, lpExitCode)
+    {% end %}
   end
 
   #def suspendThread(hThread : Win32cr::Foundation::HANDLE) : UInt32
@@ -1272,11 +1388,15 @@ module Win32cr::System::Threading
   #end
 
   def tlsFree(dwTlsIndex : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TlsFree(dwTlsIndex)
+    {% end %}
   end
 
   def createProcessA(lpApplicationName : Win32cr::Foundation::PSTR, lpCommandLine : Win32cr::Foundation::PSTR, lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInheritHandles : Win32cr::Foundation::BOOL, dwCreationFlags : Win32cr::System::Threading::PROCESS_CREATION_FLAGS, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOA*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateProcessA(lpApplicationName, lpCommandLine, lpProcessAttributes, lpThreadAttributes, bInheritHandles, dwCreationFlags, lpEnvironment, lpCurrentDirectory, lpStartupInfo, lpProcessInformation)
+    {% end %}
   end
 
   #def createProcessW(lpApplicationName : Win32cr::Foundation::PWSTR, lpCommandLine : Win32cr::Foundation::PWSTR, lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInheritHandles : Win32cr::Foundation::BOOL, dwCreationFlags : Win32cr::System::Threading::PROCESS_CREATION_FLAGS, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PWSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
@@ -1284,39 +1404,57 @@ module Win32cr::System::Threading
   #end
 
   def setProcessShutdownParameters(dwLevel : UInt32, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessShutdownParameters(dwLevel, dwFlags)
+    {% end %}
   end
 
   def getProcessVersion(process_id : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetProcessVersion(process_id)
+    {% end %}
   end
 
   def getStartupInfoW(lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*) : Void
+    {% if !flag?(:docs) %}
     C.GetStartupInfoW(lpStartupInfo)
+    {% end %}
   end
 
   def createProcessAsUserW(hToken : Win32cr::Foundation::HANDLE, lpApplicationName : Win32cr::Foundation::PWSTR, lpCommandLine : Win32cr::Foundation::PWSTR, lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInheritHandles : Win32cr::Foundation::BOOL, dwCreationFlags : UInt32, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PWSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateProcessAsUserW(hToken, lpApplicationName, lpCommandLine, lpProcessAttributes, lpThreadAttributes, bInheritHandles, dwCreationFlags, lpEnvironment, lpCurrentDirectory, lpStartupInfo, lpProcessInformation)
+    {% end %}
   end
 
   def setThreadToken(thread : Win32cr::Foundation::HANDLE*, token : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetThreadToken(thread, token)
+    {% end %}
   end
 
   def openProcessToken(process_handle : Win32cr::Foundation::HANDLE, desired_access : Win32cr::Security::TOKEN_ACCESS_MASK, token_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.OpenProcessToken(process_handle, desired_access, token_handle)
+    {% end %}
   end
 
   def openThreadToken(thread_handle : Win32cr::Foundation::HANDLE, desired_access : Win32cr::Security::TOKEN_ACCESS_MASK, open_as_self : Win32cr::Foundation::BOOL, token_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.OpenThreadToken(thread_handle, desired_access, open_as_self, token_handle)
+    {% end %}
   end
 
   def setPriorityClass(hProcess : Win32cr::Foundation::HANDLE, dwPriorityClass : Win32cr::System::Threading::PROCESS_CREATION_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetPriorityClass(hProcess, dwPriorityClass)
+    {% end %}
   end
 
   def getPriorityClass(hProcess : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.GetPriorityClass(hProcess)
+    {% end %}
   end
 
   #def setThreadStackGuarantee(stack_size_in_bytes : UInt32*) : Win32cr::Foundation::BOOL
@@ -1324,51 +1462,75 @@ module Win32cr::System::Threading
   #end
 
   def getProcessId(process : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.GetProcessId(process)
+    {% end %}
   end
 
   def getThreadId(thread : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.GetThreadId(thread)
+    {% end %}
   end
 
   def flushProcessWriteBuffers : Void
+    {% if !flag?(:docs) %}
     C.FlushProcessWriteBuffers
+    {% end %}
   end
 
   def getProcessIdOfThread(thread : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.GetProcessIdOfThread(thread)
+    {% end %}
   end
 
   def initializeProcThreadAttributeList(lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST, dwAttributeCount : UInt32, dwFlags : UInt32, lpSize : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitializeProcThreadAttributeList(lpAttributeList, dwAttributeCount, dwFlags, lpSize)
+    {% end %}
   end
 
   def deleteProcThreadAttributeList(lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST) : Void
+    {% if !flag?(:docs) %}
     C.DeleteProcThreadAttributeList(lpAttributeList)
+    {% end %}
   end
 
   def updateProcThreadAttribute(lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST, dwFlags : UInt32, attribute : LibC::UIntPtrT, lpValue : Void*, cbSize : LibC::UIntPtrT, lpPreviousValue : Void*, lpReturnSize : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UpdateProcThreadAttribute(lpAttributeList, dwFlags, attribute, lpValue, cbSize, lpPreviousValue, lpReturnSize)
+    {% end %}
   end
 
   def setProcessDynamicEHContinuationTargets(process : Win32cr::Foundation::HANDLE, number_of_targets : UInt16, targets : Win32cr::System::Threading::PROCESS_DYNAMIC_EH_CONTINUATION_TARGET*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessDynamicEHContinuationTargets(process, number_of_targets, targets)
+    {% end %}
   end
 
   def setProcessDynamicEnforcedCetCompatibleRanges(process : Win32cr::Foundation::HANDLE, number_of_ranges : UInt16, ranges : Win32cr::System::Threading::PROCESS_DYNAMIC_ENFORCED_ADDRESS_RANGE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessDynamicEnforcedCetCompatibleRanges(process, number_of_ranges, ranges)
+    {% end %}
   end
 
   def setProcessAffinityUpdateMode(hProcess : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Threading::PROCESS_AFFINITY_AUTO_UPDATE_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessAffinityUpdateMode(hProcess, dwFlags)
+    {% end %}
   end
 
   def queryProcessAffinityUpdateMode(hProcess : Win32cr::Foundation::HANDLE, lpdwFlags : Win32cr::System::Threading::PROCESS_AFFINITY_AUTO_UPDATE_FLAGS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryProcessAffinityUpdateMode(hProcess, lpdwFlags)
+    {% end %}
   end
 
   def createRemoteThreadEx(hProcess : Win32cr::Foundation::HANDLE, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, dwStackSize : LibC::UIntPtrT, lpStartAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, lpParameter : Void*, dwCreationFlags : UInt32, lpAttributeList : Win32cr::System::Threading::LPPROC_THREAD_ATTRIBUTE_LIST, lpThreadId : UInt32*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateRemoteThreadEx(hProcess, lpThreadAttributes, dwStackSize, lpStartAddress, lpParameter, dwCreationFlags, lpAttributeList, lpThreadId)
+    {% end %}
   end
 
   #def getCurrentThreadStackLimits(low_limit : LibC::UIntPtrT*, high_limit : LibC::UIntPtrT*) : Void
@@ -1376,15 +1538,21 @@ module Win32cr::System::Threading
   #end
 
   def getProcessMitigationPolicy(hProcess : Win32cr::Foundation::HANDLE, mitigation_policy : Win32cr::System::Threading::PROCESS_MITIGATION_POLICY, lpBuffer : Void*, dwLength : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetProcessMitigationPolicy(hProcess, mitigation_policy, lpBuffer, dwLength)
+    {% end %}
   end
 
   def setProcessMitigationPolicy(mitigation_policy : Win32cr::System::Threading::PROCESS_MITIGATION_POLICY, lpBuffer : Void*, dwLength : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessMitigationPolicy(mitigation_policy, lpBuffer, dwLength)
+    {% end %}
   end
 
   def getThreadTimes(hThread : Win32cr::Foundation::HANDLE, lpCreationTime : Win32cr::Foundation::FILETIME*, lpExitTime : Win32cr::Foundation::FILETIME*, lpKernelTime : Win32cr::Foundation::FILETIME*, lpUserTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetThreadTimes(hThread, lpCreationTime, lpExitTime, lpKernelTime, lpUserTime)
+    {% end %}
   end
 
   #def openProcess(dwDesiredAccess : Win32cr::System::Threading::PROCESS_ACCESS_RIGHTS, bInheritHandle : Win32cr::Foundation::BOOL, dwProcessId : UInt32) : Win32cr::Foundation::HANDLE
@@ -1392,119 +1560,177 @@ module Win32cr::System::Threading
   #end
 
   def isProcessorFeaturePresent(processor_feature : Win32cr::System::Threading::PROCESSOR_FEATURE_ID) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsProcessorFeaturePresent(processor_feature)
+    {% end %}
   end
 
   def getProcessHandleCount(hProcess : Win32cr::Foundation::HANDLE, pdwHandleCount : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetProcessHandleCount(hProcess, pdwHandleCount)
+    {% end %}
   end
 
   def getCurrentProcessorNumber : UInt32
+    {% if !flag?(:docs) %}
     C.GetCurrentProcessorNumber
+    {% end %}
   end
 
   def setThreadIdealProcessorEx(hThread : Win32cr::Foundation::HANDLE, lpIdealProcessor : Win32cr::System::Kernel::PROCESSOR_NUMBER*, lpPreviousIdealProcessor : Win32cr::System::Kernel::PROCESSOR_NUMBER*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetThreadIdealProcessorEx(hThread, lpIdealProcessor, lpPreviousIdealProcessor)
+    {% end %}
   end
 
   def getThreadIdealProcessorEx(hThread : Win32cr::Foundation::HANDLE, lpIdealProcessor : Win32cr::System::Kernel::PROCESSOR_NUMBER*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetThreadIdealProcessorEx(hThread, lpIdealProcessor)
+    {% end %}
   end
 
   def getCurrentProcessorNumberEx(proc_number : Win32cr::System::Kernel::PROCESSOR_NUMBER*) : Void
+    {% if !flag?(:docs) %}
     C.GetCurrentProcessorNumberEx(proc_number)
+    {% end %}
   end
 
   def getProcessPriorityBoost(hProcess : Win32cr::Foundation::HANDLE, pDisablePriorityBoost : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetProcessPriorityBoost(hProcess, pDisablePriorityBoost)
+    {% end %}
   end
 
   def setProcessPriorityBoost(hProcess : Win32cr::Foundation::HANDLE, bDisablePriorityBoost : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessPriorityBoost(hProcess, bDisablePriorityBoost)
+    {% end %}
   end
 
   def getThreadIOPendingFlag(hThread : Win32cr::Foundation::HANDLE, lpIOIsPending : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetThreadIOPendingFlag(hThread, lpIOIsPending)
+    {% end %}
   end
 
   def getSystemTimes(lpIdleTime : Win32cr::Foundation::FILETIME*, lpKernelTime : Win32cr::Foundation::FILETIME*, lpUserTime : Win32cr::Foundation::FILETIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetSystemTimes(lpIdleTime, lpKernelTime, lpUserTime)
+    {% end %}
   end
 
   def getThreadInformation(hThread : Win32cr::Foundation::HANDLE, thread_information_class : Win32cr::System::Threading::THREAD_INFORMATION_CLASS, thread_information : Void*, thread_information_size : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetThreadInformation(hThread, thread_information_class, thread_information, thread_information_size)
+    {% end %}
   end
 
   def setThreadInformation(hThread : Win32cr::Foundation::HANDLE, thread_information_class : Win32cr::System::Threading::THREAD_INFORMATION_CLASS, thread_information : Void*, thread_information_size : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetThreadInformation(hThread, thread_information_class, thread_information, thread_information_size)
+    {% end %}
   end
 
   def isProcessCritical(hProcess : Win32cr::Foundation::HANDLE, critical : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsProcessCritical(hProcess, critical)
+    {% end %}
   end
 
   def setProtectedPolicy(policy_guid : LibC::GUID*, policy_value : LibC::UIntPtrT, old_policy_value : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProtectedPolicy(policy_guid, policy_value, old_policy_value)
+    {% end %}
   end
 
   def queryProtectedPolicy(policy_guid : LibC::GUID*, policy_value : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryProtectedPolicy(policy_guid, policy_value)
+    {% end %}
   end
 
   def setThreadIdealProcessor(hThread : Win32cr::Foundation::HANDLE, dwIdealProcessor : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SetThreadIdealProcessor(hThread, dwIdealProcessor)
+    {% end %}
   end
 
   def setProcessInformation(hProcess : Win32cr::Foundation::HANDLE, process_information_class : Win32cr::System::Threading::PROCESS_INFORMATION_CLASS, process_information : Void*, process_information_size : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessInformation(hProcess, process_information_class, process_information, process_information_size)
+    {% end %}
   end
 
   def getProcessInformation(hProcess : Win32cr::Foundation::HANDLE, process_information_class : Win32cr::System::Threading::PROCESS_INFORMATION_CLASS, process_information : Void*, process_information_size : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetProcessInformation(hProcess, process_information_class, process_information, process_information_size)
+    {% end %}
   end
 
   def getProcessDefaultCpuSets(process : Win32cr::Foundation::HANDLE, cpu_set_ids : UInt32*, cpu_set_id_count : UInt32, required_id_count : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetProcessDefaultCpuSets(process, cpu_set_ids, cpu_set_id_count, required_id_count)
+    {% end %}
   end
 
   def setProcessDefaultCpuSets(process : Win32cr::Foundation::HANDLE, cpu_set_ids : UInt32*, cpu_set_id_count : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessDefaultCpuSets(process, cpu_set_ids, cpu_set_id_count)
+    {% end %}
   end
 
   def getThreadSelectedCpuSets(thread : Win32cr::Foundation::HANDLE, cpu_set_ids : UInt32*, cpu_set_id_count : UInt32, required_id_count : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetThreadSelectedCpuSets(thread, cpu_set_ids, cpu_set_id_count, required_id_count)
+    {% end %}
   end
 
   def setThreadSelectedCpuSets(thread : Win32cr::Foundation::HANDLE, cpu_set_ids : UInt32*, cpu_set_id_count : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetThreadSelectedCpuSets(thread, cpu_set_ids, cpu_set_id_count)
+    {% end %}
   end
 
   def createProcessAsUserA(hToken : Win32cr::Foundation::HANDLE, lpApplicationName : Win32cr::Foundation::PSTR, lpCommandLine : Win32cr::Foundation::PSTR, lpProcessAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpThreadAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInheritHandles : Win32cr::Foundation::BOOL, dwCreationFlags : UInt32, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOA*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateProcessAsUserA(hToken, lpApplicationName, lpCommandLine, lpProcessAttributes, lpThreadAttributes, bInheritHandles, dwCreationFlags, lpEnvironment, lpCurrentDirectory, lpStartupInfo, lpProcessInformation)
+    {% end %}
   end
 
   def getProcessShutdownParameters(lpdwLevel : UInt32*, lpdwFlags : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetProcessShutdownParameters(lpdwLevel, lpdwFlags)
+    {% end %}
   end
 
   def getProcessDefaultCpuSetMasks(process : Win32cr::Foundation::HANDLE, cpu_set_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*, cpu_set_mask_count : UInt16, required_mask_count : UInt16*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetProcessDefaultCpuSetMasks(process, cpu_set_masks, cpu_set_mask_count, required_mask_count)
+    {% end %}
   end
 
   def setProcessDefaultCpuSetMasks(process : Win32cr::Foundation::HANDLE, cpu_set_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*, cpu_set_mask_count : UInt16) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessDefaultCpuSetMasks(process, cpu_set_masks, cpu_set_mask_count)
+    {% end %}
   end
 
   def getThreadSelectedCpuSetMasks(thread : Win32cr::Foundation::HANDLE, cpu_set_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*, cpu_set_mask_count : UInt16, required_mask_count : UInt16*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetThreadSelectedCpuSetMasks(thread, cpu_set_masks, cpu_set_mask_count, required_mask_count)
+    {% end %}
   end
 
   def setThreadSelectedCpuSetMasks(thread : Win32cr::Foundation::HANDLE, cpu_set_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*, cpu_set_mask_count : UInt16) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetThreadSelectedCpuSetMasks(thread, cpu_set_masks, cpu_set_mask_count)
+    {% end %}
   end
 
   def getMachineTypeAttributes(machine : UInt16, machine_type_attributes : Win32cr::System::Threading::MACHINE_ATTRIBUTES*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetMachineTypeAttributes(machine, machine_type_attributes)
+    {% end %}
   end
 
   #def setThreadDescription(hThread : Win32cr::Foundation::HANDLE, lpThreadDescription : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
@@ -1512,567 +1738,845 @@ module Win32cr::System::Threading
   #end
 
   def getThreadDescription(hThread : Win32cr::Foundation::HANDLE, ppszThreadDescription : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetThreadDescription(hThread, ppszThreadDescription)
+    {% end %}
   end
 
   def queueUserWorkItem(function : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, context : Void*, flags : Win32cr::System::Threading::WORKER_THREAD_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueueUserWorkItem(function, context, flags)
+    {% end %}
   end
 
   def unregisterWaitEx(wait_handle : Win32cr::Foundation::HANDLE, completion_event : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnregisterWaitEx(wait_handle, completion_event)
+    {% end %}
   end
 
   def createTimerQueue : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateTimerQueue
+    {% end %}
   end
 
   def createTimerQueueTimer(phNewTimer : Win32cr::Foundation::HANDLE*, timer_queue : Win32cr::Foundation::HANDLE, callback : Win32cr::System::Threading::WAITORTIMERCALLBACK, parameter : Void*, due_time : UInt32, period : UInt32, flags : Win32cr::System::Threading::WORKER_THREAD_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateTimerQueueTimer(phNewTimer, timer_queue, callback, parameter, due_time, period, flags)
+    {% end %}
   end
 
   def changeTimerQueueTimer(timer_queue : Win32cr::Foundation::HANDLE, timer : Win32cr::Foundation::HANDLE, due_time : UInt32, period : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ChangeTimerQueueTimer(timer_queue, timer, due_time, period)
+    {% end %}
   end
 
   def deleteTimerQueueTimer(timer_queue : Win32cr::Foundation::HANDLE, timer : Win32cr::Foundation::HANDLE, completion_event : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteTimerQueueTimer(timer_queue, timer, completion_event)
+    {% end %}
   end
 
   def deleteTimerQueue(timer_queue : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteTimerQueue(timer_queue)
+    {% end %}
   end
 
   def deleteTimerQueueEx(timer_queue : Win32cr::Foundation::HANDLE, completion_event : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteTimerQueueEx(timer_queue, completion_event)
+    {% end %}
   end
 
   def createThreadpool(reserved : Void*) : Win32cr::System::Threading::PTP_POOL
+    {% if !flag?(:docs) %}
     C.CreateThreadpool(reserved)
+    {% end %}
   end
 
   def setThreadpoolThreadMaximum(ptpp : Win32cr::System::Threading::PTP_POOL, cthrdMost : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.SetThreadpoolThreadMaximum(ptpp, cthrdMost)
+    {% end %}
   end
 
   def setThreadpoolThreadMinimum(ptpp : Win32cr::System::Threading::PTP_POOL, cthrdMic : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetThreadpoolThreadMinimum(ptpp, cthrdMic)
+    {% end %}
   end
 
   def setThreadpoolStackInformation(ptpp : Win32cr::System::Threading::PTP_POOL, ptpsi : Win32cr::System::Threading::TP_POOL_STACK_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetThreadpoolStackInformation(ptpp, ptpsi)
+    {% end %}
   end
 
   def queryThreadpoolStackInformation(ptpp : Win32cr::System::Threading::PTP_POOL, ptpsi : Win32cr::System::Threading::TP_POOL_STACK_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryThreadpoolStackInformation(ptpp, ptpsi)
+    {% end %}
   end
 
   def closeThreadpool(ptpp : Win32cr::System::Threading::PTP_POOL) : Void
+    {% if !flag?(:docs) %}
     C.CloseThreadpool(ptpp)
+    {% end %}
   end
 
   def createThreadpoolCleanupGroup : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.CreateThreadpoolCleanupGroup
+    {% end %}
   end
 
   def closeThreadpoolCleanupGroupMembers(ptpcg : LibC::IntPtrT, fCancelPendingCallbacks : Win32cr::Foundation::BOOL, pvCleanupContext : Void*) : Void
+    {% if !flag?(:docs) %}
     C.CloseThreadpoolCleanupGroupMembers(ptpcg, fCancelPendingCallbacks, pvCleanupContext)
+    {% end %}
   end
 
   def closeThreadpoolCleanupGroup(ptpcg : LibC::IntPtrT) : Void
+    {% if !flag?(:docs) %}
     C.CloseThreadpoolCleanupGroup(ptpcg)
+    {% end %}
   end
 
   def setEventWhenCallbackReturns(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, evt : Win32cr::Foundation::HANDLE) : Void
+    {% if !flag?(:docs) %}
     C.SetEventWhenCallbackReturns(pci, evt)
+    {% end %}
   end
 
   def releaseSemaphoreWhenCallbackReturns(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, sem : Win32cr::Foundation::HANDLE, crel : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.ReleaseSemaphoreWhenCallbackReturns(pci, sem, crel)
+    {% end %}
   end
 
   def releaseMutexWhenCallbackReturns(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, mut : Win32cr::Foundation::HANDLE) : Void
+    {% if !flag?(:docs) %}
     C.ReleaseMutexWhenCallbackReturns(pci, mut)
+    {% end %}
   end
 
   def leaveCriticalSectionWhenCallbackReturns(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, pcs : Win32cr::System::Threading::RTL_CRITICAL_SECTION*) : Void
+    {% if !flag?(:docs) %}
     C.LeaveCriticalSectionWhenCallbackReturns(pci, pcs)
+    {% end %}
   end
 
   def freeLibraryWhenCallbackReturns(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*, mod : Win32cr::Foundation::HINSTANCE) : Void
+    {% if !flag?(:docs) %}
     C.FreeLibraryWhenCallbackReturns(pci, mod)
+    {% end %}
   end
 
   def callbackMayRunLong(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CallbackMayRunLong(pci)
+    {% end %}
   end
 
   def disassociateCurrentThreadFromCallback(pci : Win32cr::System::Threading::TP_CALLBACK_INSTANCE*) : Void
+    {% if !flag?(:docs) %}
     C.DisassociateCurrentThreadFromCallback(pci)
+    {% end %}
   end
 
   def trySubmitThreadpoolCallback(pfns : Win32cr::System::Threading::PTP_SIMPLE_CALLBACK, pv : Void*, pcbe : Win32cr::System::Threading::TP_CALLBACK_ENVIRON_V3*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TrySubmitThreadpoolCallback(pfns, pv, pcbe)
+    {% end %}
   end
 
   def createThreadpoolWork(pfnwk : Win32cr::System::Threading::PTP_WORK_CALLBACK, pv : Void*, pcbe : Win32cr::System::Threading::TP_CALLBACK_ENVIRON_V3*) : Win32cr::System::Threading::TP_WORK*
+    {% if !flag?(:docs) %}
     C.CreateThreadpoolWork(pfnwk, pv, pcbe)
+    {% end %}
   end
 
   def submitThreadpoolWork(pwk : Win32cr::System::Threading::TP_WORK*) : Void
+    {% if !flag?(:docs) %}
     C.SubmitThreadpoolWork(pwk)
+    {% end %}
   end
 
   def waitForThreadpoolWorkCallbacks(pwk : Win32cr::System::Threading::TP_WORK*, fCancelPendingCallbacks : Win32cr::Foundation::BOOL) : Void
+    {% if !flag?(:docs) %}
     C.WaitForThreadpoolWorkCallbacks(pwk, fCancelPendingCallbacks)
+    {% end %}
   end
 
   def closeThreadpoolWork(pwk : Win32cr::System::Threading::TP_WORK*) : Void
+    {% if !flag?(:docs) %}
     C.CloseThreadpoolWork(pwk)
+    {% end %}
   end
 
   def createThreadpoolTimer(pfnti : Win32cr::System::Threading::PTP_TIMER_CALLBACK, pv : Void*, pcbe : Win32cr::System::Threading::TP_CALLBACK_ENVIRON_V3*) : Win32cr::System::Threading::TP_TIMER*
+    {% if !flag?(:docs) %}
     C.CreateThreadpoolTimer(pfnti, pv, pcbe)
+    {% end %}
   end
 
   def setThreadpoolTimer(pti : Win32cr::System::Threading::TP_TIMER*, pftDueTime : Win32cr::Foundation::FILETIME*, msPeriod : UInt32, msWindowLength : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.SetThreadpoolTimer(pti, pftDueTime, msPeriod, msWindowLength)
+    {% end %}
   end
 
   def isThreadpoolTimerSet(pti : Win32cr::System::Threading::TP_TIMER*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsThreadpoolTimerSet(pti)
+    {% end %}
   end
 
   def waitForThreadpoolTimerCallbacks(pti : Win32cr::System::Threading::TP_TIMER*, fCancelPendingCallbacks : Win32cr::Foundation::BOOL) : Void
+    {% if !flag?(:docs) %}
     C.WaitForThreadpoolTimerCallbacks(pti, fCancelPendingCallbacks)
+    {% end %}
   end
 
   def closeThreadpoolTimer(pti : Win32cr::System::Threading::TP_TIMER*) : Void
+    {% if !flag?(:docs) %}
     C.CloseThreadpoolTimer(pti)
+    {% end %}
   end
 
   def createThreadpoolWait(pfnwa : Win32cr::System::Threading::PTP_WAIT_CALLBACK, pv : Void*, pcbe : Win32cr::System::Threading::TP_CALLBACK_ENVIRON_V3*) : Win32cr::System::Threading::TP_WAIT*
+    {% if !flag?(:docs) %}
     C.CreateThreadpoolWait(pfnwa, pv, pcbe)
+    {% end %}
   end
 
   def setThreadpoolWait(pwa : Win32cr::System::Threading::TP_WAIT*, h : Win32cr::Foundation::HANDLE, pftTimeout : Win32cr::Foundation::FILETIME*) : Void
+    {% if !flag?(:docs) %}
     C.SetThreadpoolWait(pwa, h, pftTimeout)
+    {% end %}
   end
 
   def waitForThreadpoolWaitCallbacks(pwa : Win32cr::System::Threading::TP_WAIT*, fCancelPendingCallbacks : Win32cr::Foundation::BOOL) : Void
+    {% if !flag?(:docs) %}
     C.WaitForThreadpoolWaitCallbacks(pwa, fCancelPendingCallbacks)
+    {% end %}
   end
 
   def closeThreadpoolWait(pwa : Win32cr::System::Threading::TP_WAIT*) : Void
+    {% if !flag?(:docs) %}
     C.CloseThreadpoolWait(pwa)
+    {% end %}
   end
 
   def createThreadpoolIo(fl : Win32cr::Foundation::HANDLE, pfnio : Win32cr::System::Threading::PTP_WIN32_IO_CALLBACK, pv : Void*, pcbe : Win32cr::System::Threading::TP_CALLBACK_ENVIRON_V3*) : Win32cr::System::Threading::TP_IO*
+    {% if !flag?(:docs) %}
     C.CreateThreadpoolIo(fl, pfnio, pv, pcbe)
+    {% end %}
   end
 
   def startThreadpoolIo(pio : Win32cr::System::Threading::TP_IO*) : Void
+    {% if !flag?(:docs) %}
     C.StartThreadpoolIo(pio)
+    {% end %}
   end
 
   def cancelThreadpoolIo(pio : Win32cr::System::Threading::TP_IO*) : Void
+    {% if !flag?(:docs) %}
     C.CancelThreadpoolIo(pio)
+    {% end %}
   end
 
   def waitForThreadpoolIoCallbacks(pio : Win32cr::System::Threading::TP_IO*, fCancelPendingCallbacks : Win32cr::Foundation::BOOL) : Void
+    {% if !flag?(:docs) %}
     C.WaitForThreadpoolIoCallbacks(pio, fCancelPendingCallbacks)
+    {% end %}
   end
 
   def closeThreadpoolIo(pio : Win32cr::System::Threading::TP_IO*) : Void
+    {% if !flag?(:docs) %}
     C.CloseThreadpoolIo(pio)
+    {% end %}
   end
 
   def setThreadpoolTimerEx(pti : Win32cr::System::Threading::TP_TIMER*, pftDueTime : Win32cr::Foundation::FILETIME*, msPeriod : UInt32, msWindowLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetThreadpoolTimerEx(pti, pftDueTime, msPeriod, msWindowLength)
+    {% end %}
   end
 
   def setThreadpoolWaitEx(pwa : Win32cr::System::Threading::TP_WAIT*, h : Win32cr::Foundation::HANDLE, pftTimeout : Win32cr::Foundation::FILETIME*, reserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetThreadpoolWaitEx(pwa, h, pftTimeout, reserved)
+    {% end %}
   end
 
   def isWow64Process(hProcess : Win32cr::Foundation::HANDLE, wow64_process : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsWow64Process(hProcess, wow64_process)
+    {% end %}
   end
 
   def wow64SetThreadDefaultGuestMachine(machine : UInt16) : UInt16
+    {% if !flag?(:docs) %}
     C.Wow64SetThreadDefaultGuestMachine(machine)
+    {% end %}
   end
 
   def isWow64Process2(hProcess : Win32cr::Foundation::HANDLE, pProcessMachine : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE*, pNativeMachine : Win32cr::System::SystemInformation::IMAGE_FILE_MACHINE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsWow64Process2(hProcess, pProcessMachine, pNativeMachine)
+    {% end %}
   end
 
   def wow64SuspendThread(hThread : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.Wow64SuspendThread(hThread)
+    {% end %}
   end
 
   def createPrivateNamespaceW(lpPrivateNamespaceAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpBoundaryDescriptor : Void*, lpAliasPrefix : Win32cr::Foundation::PWSTR) : Win32cr::System::Threading::NamespaceHandle
+    {% if !flag?(:docs) %}
     C.CreatePrivateNamespaceW(lpPrivateNamespaceAttributes, lpBoundaryDescriptor, lpAliasPrefix)
+    {% end %}
   end
 
   def openPrivateNamespaceW(lpBoundaryDescriptor : Void*, lpAliasPrefix : Win32cr::Foundation::PWSTR) : Win32cr::System::Threading::NamespaceHandle
+    {% if !flag?(:docs) %}
     C.OpenPrivateNamespaceW(lpBoundaryDescriptor, lpAliasPrefix)
+    {% end %}
   end
 
   def closePrivateNamespace(handle : Win32cr::System::Threading::NamespaceHandle, flags : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.ClosePrivateNamespace(handle, flags)
+    {% end %}
   end
 
   def createBoundaryDescriptorW(name : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::System::Threading::BoundaryDescriptorHandle
+    {% if !flag?(:docs) %}
     C.CreateBoundaryDescriptorW(name, flags)
+    {% end %}
   end
 
   def addSIDToBoundaryDescriptor(boundary_descriptor : Win32cr::Foundation::HANDLE*, required_sid : Win32cr::Foundation::PSID) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddSIDToBoundaryDescriptor(boundary_descriptor, required_sid)
+    {% end %}
   end
 
   def deleteBoundaryDescriptor(boundary_descriptor : Win32cr::System::Threading::BoundaryDescriptorHandle) : Void
+    {% if !flag?(:docs) %}
     C.DeleteBoundaryDescriptor(boundary_descriptor)
+    {% end %}
   end
 
   def getNumaHighestNodeNumber(highest_node_number : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetNumaHighestNodeNumber(highest_node_number)
+    {% end %}
   end
 
   def getNumaNodeProcessorMaskEx(node : UInt16, processor_mask : Win32cr::System::SystemInformation::GROUP_AFFINITY*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetNumaNodeProcessorMaskEx(node, processor_mask)
+    {% end %}
   end
 
   def getNumaNodeProcessorMask2(node_number : UInt16, processor_masks : Win32cr::System::SystemInformation::GROUP_AFFINITY*, processor_mask_count : UInt16, required_mask_count : UInt16*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetNumaNodeProcessorMask2(node_number, processor_masks, processor_mask_count, required_mask_count)
+    {% end %}
   end
 
   def getNumaProximityNodeEx(proximity_id : UInt32, node_number : UInt16*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetNumaProximityNodeEx(proximity_id, node_number)
+    {% end %}
   end
 
   def getProcessGroupAffinity(hProcess : Win32cr::Foundation::HANDLE, group_count : UInt16*, group_array : UInt16*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetProcessGroupAffinity(hProcess, group_count, group_array)
+    {% end %}
   end
 
   def getThreadGroupAffinity(hThread : Win32cr::Foundation::HANDLE, group_affinity : Win32cr::System::SystemInformation::GROUP_AFFINITY*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetThreadGroupAffinity(hThread, group_affinity)
+    {% end %}
   end
 
   def setThreadGroupAffinity(hThread : Win32cr::Foundation::HANDLE, group_affinity : Win32cr::System::SystemInformation::GROUP_AFFINITY*, previous_group_affinity : Win32cr::System::SystemInformation::GROUP_AFFINITY*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetThreadGroupAffinity(hThread, group_affinity, previous_group_affinity)
+    {% end %}
   end
 
   def avSetMmThreadCharacteristicsA(task_name : Win32cr::Foundation::PSTR, task_index : UInt32*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.AvSetMmThreadCharacteristicsA(task_name, task_index)
+    {% end %}
   end
 
   def avSetMmThreadCharacteristicsW(task_name : Win32cr::Foundation::PWSTR, task_index : UInt32*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.AvSetMmThreadCharacteristicsW(task_name, task_index)
+    {% end %}
   end
 
   def avSetMmMaxThreadCharacteristicsA(first_task : Win32cr::Foundation::PSTR, second_task : Win32cr::Foundation::PSTR, task_index : UInt32*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.AvSetMmMaxThreadCharacteristicsA(first_task, second_task, task_index)
+    {% end %}
   end
 
   def avSetMmMaxThreadCharacteristicsW(first_task : Win32cr::Foundation::PWSTR, second_task : Win32cr::Foundation::PWSTR, task_index : UInt32*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.AvSetMmMaxThreadCharacteristicsW(first_task, second_task, task_index)
+    {% end %}
   end
 
   def avRevertMmThreadCharacteristics(avrt_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AvRevertMmThreadCharacteristics(avrt_handle)
+    {% end %}
   end
 
   def avSetMmThreadPriority(avrt_handle : Win32cr::Foundation::HANDLE, priority : Win32cr::System::Threading::AVRT_PRIORITY) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AvSetMmThreadPriority(avrt_handle, priority)
+    {% end %}
   end
 
   def avRtCreateThreadOrderingGroup(context : Win32cr::Foundation::HANDLE*, period : Win32cr::Foundation::LARGE_INTEGER*, thread_ordering_guid : LibC::GUID*, timeout : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AvRtCreateThreadOrderingGroup(context, period, thread_ordering_guid, timeout)
+    {% end %}
   end
 
   def avRtCreateThreadOrderingGroupExA(context : Win32cr::Foundation::HANDLE*, period : Win32cr::Foundation::LARGE_INTEGER*, thread_ordering_guid : LibC::GUID*, timeout : Win32cr::Foundation::LARGE_INTEGER*, task_name : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AvRtCreateThreadOrderingGroupExA(context, period, thread_ordering_guid, timeout, task_name)
+    {% end %}
   end
 
   def avRtCreateThreadOrderingGroupExW(context : Win32cr::Foundation::HANDLE*, period : Win32cr::Foundation::LARGE_INTEGER*, thread_ordering_guid : LibC::GUID*, timeout : Win32cr::Foundation::LARGE_INTEGER*, task_name : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AvRtCreateThreadOrderingGroupExW(context, period, thread_ordering_guid, timeout, task_name)
+    {% end %}
   end
 
   def avRtJoinThreadOrderingGroup(context : Win32cr::Foundation::HANDLE*, thread_ordering_guid : LibC::GUID*, before : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AvRtJoinThreadOrderingGroup(context, thread_ordering_guid, before)
+    {% end %}
   end
 
   def avRtWaitOnThreadOrderingGroup(context : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AvRtWaitOnThreadOrderingGroup(context)
+    {% end %}
   end
 
   def avRtLeaveThreadOrderingGroup(context : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AvRtLeaveThreadOrderingGroup(context)
+    {% end %}
   end
 
   def avRtDeleteThreadOrderingGroup(context : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AvRtDeleteThreadOrderingGroup(context)
+    {% end %}
   end
 
   def avQuerySystemResponsiveness(avrt_handle : Win32cr::Foundation::HANDLE, system_responsiveness_value : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AvQuerySystemResponsiveness(avrt_handle, system_responsiveness_value)
+    {% end %}
   end
 
   def attachThreadInput(idAttach : UInt32, idAttachTo : UInt32, fAttach : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AttachThreadInput(idAttach, idAttachTo, fAttach)
+    {% end %}
   end
 
   def waitForInputIdle(hProcess : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WaitForInputIdle(hProcess, dwMilliseconds)
+    {% end %}
   end
 
   def getGuiResources(hProcess : Win32cr::Foundation::HANDLE, uiFlags : Win32cr::System::Threading::GET_GUI_RESOURCES_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.GetGuiResources(hProcess, uiFlags)
+    {% end %}
   end
 
   def isImmersiveProcess(hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsImmersiveProcess(hProcess)
+    {% end %}
   end
 
   def setProcessRestrictionExemption(fEnableExemption : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessRestrictionExemption(fEnableExemption)
+    {% end %}
   end
 
-  def getProcessAffinityMask(hProcess : Win32cr::Foundation::HANDLE, lpProcessAffinityMask : LibC::UIntPtrT*, lpSystemAffinityMask : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
-    C.GetProcessAffinityMask(hProcess, lpProcessAffinityMask, lpSystemAffinityMask)
-  end
+  #def getProcessAffinityMask(hProcess : Win32cr::Foundation::HANDLE, lpProcessAffinityMask : LibC::UIntPtrT*, lpSystemAffinityMask : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    #C.GetProcessAffinityMask(hProcess, lpProcessAffinityMask, lpSystemAffinityMask)
+  #end
 
   def setProcessAffinityMask(hProcess : Win32cr::Foundation::HANDLE, dwProcessAffinityMask : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessAffinityMask(hProcess, dwProcessAffinityMask)
+    {% end %}
   end
 
   def getProcessIoCounters(hProcess : Win32cr::Foundation::HANDLE, lpIoCounters : Win32cr::System::Threading::IO_COUNTERS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetProcessIoCounters(hProcess, lpIoCounters)
+    {% end %}
   end
 
   def switchToFiber(lpFiber : Void*) : Void
+    {% if !flag?(:docs) %}
     C.SwitchToFiber(lpFiber)
+    {% end %}
   end
 
   def deleteFiber(lpFiber : Void*) : Void
+    {% if !flag?(:docs) %}
     C.DeleteFiber(lpFiber)
+    {% end %}
   end
 
   def convertFiberToThread : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ConvertFiberToThread
+    {% end %}
   end
 
   def createFiberEx(dwStackCommitSize : LibC::UIntPtrT, dwStackReserveSize : LibC::UIntPtrT, dwFlags : UInt32, lpStartAddress : Win32cr::System::Threading::LPFIBER_START_ROUTINE, lpParameter : Void*) : Void*
+    {% if !flag?(:docs) %}
     C.CreateFiberEx(dwStackCommitSize, dwStackReserveSize, dwFlags, lpStartAddress, lpParameter)
+    {% end %}
   end
 
   def convertThreadToFiberEx(lpParameter : Void*, dwFlags : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.ConvertThreadToFiberEx(lpParameter, dwFlags)
+    {% end %}
   end
 
   def createFiber(dwStackSize : LibC::UIntPtrT, lpStartAddress : Win32cr::System::Threading::LPFIBER_START_ROUTINE, lpParameter : Void*) : Void*
+    {% if !flag?(:docs) %}
     C.CreateFiber(dwStackSize, lpStartAddress, lpParameter)
+    {% end %}
   end
 
   def convertThreadToFiber(lpParameter : Void*) : Void*
+    {% if !flag?(:docs) %}
     C.ConvertThreadToFiber(lpParameter)
+    {% end %}
   end
 
   def createUmsCompletionList(ums_completion_list : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateUmsCompletionList(ums_completion_list)
+    {% end %}
   end
 
   def dequeueUmsCompletionListItems(ums_completion_list : Void*, wait_time_out : UInt32, ums_thread_list : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DequeueUmsCompletionListItems(ums_completion_list, wait_time_out, ums_thread_list)
+    {% end %}
   end
 
   def getUmsCompletionListEvent(ums_completion_list : Void*, ums_completion_event : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUmsCompletionListEvent(ums_completion_list, ums_completion_event)
+    {% end %}
   end
 
   def executeUmsThread(ums_thread : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ExecuteUmsThread(ums_thread)
+    {% end %}
   end
 
   def umsThreadYield(scheduler_param : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UmsThreadYield(scheduler_param)
+    {% end %}
   end
 
   def deleteUmsCompletionList(ums_completion_list : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteUmsCompletionList(ums_completion_list)
+    {% end %}
   end
 
   def getCurrentUmsThread : Void*
+    {% if !flag?(:docs) %}
     C.GetCurrentUmsThread
+    {% end %}
   end
 
   def getNextUmsListItem(ums_context : Void*) : Void*
+    {% if !flag?(:docs) %}
     C.GetNextUmsListItem(ums_context)
+    {% end %}
   end
 
   def queryUmsThreadInformation(ums_thread : Void*, ums_thread_info_class : Win32cr::System::Threading::RTL_UMS_THREAD_INFO_CLASS, ums_thread_information : Void*, ums_thread_information_length : UInt32, return_length : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryUmsThreadInformation(ums_thread, ums_thread_info_class, ums_thread_information, ums_thread_information_length, return_length)
+    {% end %}
   end
 
   def setUmsThreadInformation(ums_thread : Void*, ums_thread_info_class : Win32cr::System::Threading::RTL_UMS_THREAD_INFO_CLASS, ums_thread_information : Void*, ums_thread_information_length : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetUmsThreadInformation(ums_thread, ums_thread_info_class, ums_thread_information, ums_thread_information_length)
+    {% end %}
   end
 
   def deleteUmsThreadContext(ums_thread : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteUmsThreadContext(ums_thread)
+    {% end %}
   end
 
   def createUmsThreadContext(lpUmsThread : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateUmsThreadContext(lpUmsThread)
+    {% end %}
   end
 
   def enterUmsSchedulingMode(scheduler_startup_info : Win32cr::System::Threading::UMS_SCHEDULER_STARTUP_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnterUmsSchedulingMode(scheduler_startup_info)
+    {% end %}
   end
 
   def getUmsSystemThreadInformation(thread_handle : Win32cr::Foundation::HANDLE, system_thread_info : Win32cr::System::Threading::UMS_SYSTEM_THREAD_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUmsSystemThreadInformation(thread_handle, system_thread_info)
+    {% end %}
   end
 
   def setThreadAffinityMask(hThread : Win32cr::Foundation::HANDLE, dwThreadAffinityMask : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.SetThreadAffinityMask(hThread, dwThreadAffinityMask)
+    {% end %}
   end
 
   def setProcessDEPPolicy(dwFlags : Win32cr::System::Threading::PROCESS_DEP_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessDEPPolicy(dwFlags)
+    {% end %}
   end
 
   def getProcessDEPPolicy(hProcess : Win32cr::Foundation::HANDLE, lpFlags : UInt32*, lpPermanent : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetProcessDEPPolicy(hProcess, lpFlags, lpPermanent)
+    {% end %}
   end
 
   def pulseEvent(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PulseEvent(hEvent)
+    {% end %}
   end
 
   def winExec(lpCmdLine : Win32cr::Foundation::PSTR, uCmdShow : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.WinExec(lpCmdLine, uCmdShow)
+    {% end %}
   end
 
   def createSemaphoreA(lpSemaphoreAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lInitialCount : Int32, lMaximumCount : Int32, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateSemaphoreA(lpSemaphoreAttributes, lInitialCount, lMaximumCount, lpName)
+    {% end %}
   end
 
   def createSemaphoreExA(lpSemaphoreAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lInitialCount : Int32, lMaximumCount : Int32, lpName : Win32cr::Foundation::PSTR, dwFlags : UInt32, dwDesiredAccess : UInt32) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CreateSemaphoreExA(lpSemaphoreAttributes, lInitialCount, lMaximumCount, lpName, dwFlags, dwDesiredAccess)
+    {% end %}
   end
 
   def queryFullProcessImageNameA(hProcess : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Threading::PROCESS_NAME_FORMAT, lpExeName : UInt8*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryFullProcessImageNameA(hProcess, dwFlags, lpExeName, lpdwSize)
+    {% end %}
   end
 
   def queryFullProcessImageNameW(hProcess : Win32cr::Foundation::HANDLE, dwFlags : Win32cr::System::Threading::PROCESS_NAME_FORMAT, lpExeName : UInt16*, lpdwSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryFullProcessImageNameW(hProcess, dwFlags, lpExeName, lpdwSize)
+    {% end %}
   end
 
   def getStartupInfoA(lpStartupInfo : Win32cr::System::Threading::STARTUPINFOA*) : Void
+    {% if !flag?(:docs) %}
     C.GetStartupInfoA(lpStartupInfo)
+    {% end %}
   end
 
   def createProcessWithLogonW(lpUsername : Win32cr::Foundation::PWSTR, lpDomain : Win32cr::Foundation::PWSTR, lpPassword : Win32cr::Foundation::PWSTR, dwLogonFlags : Win32cr::System::Threading::CREATE_PROCESS_LOGON_FLAGS, lpApplicationName : Win32cr::Foundation::PWSTR, lpCommandLine : Win32cr::Foundation::PWSTR, dwCreationFlags : UInt32, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PWSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateProcessWithLogonW(lpUsername, lpDomain, lpPassword, dwLogonFlags, lpApplicationName, lpCommandLine, dwCreationFlags, lpEnvironment, lpCurrentDirectory, lpStartupInfo, lpProcessInformation)
+    {% end %}
   end
 
   def createProcessWithTokenW(hToken : Win32cr::Foundation::HANDLE, dwLogonFlags : Win32cr::System::Threading::CREATE_PROCESS_LOGON_FLAGS, lpApplicationName : Win32cr::Foundation::PWSTR, lpCommandLine : Win32cr::Foundation::PWSTR, dwCreationFlags : UInt32, lpEnvironment : Void*, lpCurrentDirectory : Win32cr::Foundation::PWSTR, lpStartupInfo : Win32cr::System::Threading::STARTUPINFOW*, lpProcessInformation : Win32cr::System::Threading::PROCESS_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateProcessWithTokenW(hToken, dwLogonFlags, lpApplicationName, lpCommandLine, dwCreationFlags, lpEnvironment, lpCurrentDirectory, lpStartupInfo, lpProcessInformation)
+    {% end %}
   end
 
   def registerWaitForSingleObject(phNewWaitObject : Win32cr::Foundation::HANDLE*, hObject : Win32cr::Foundation::HANDLE, callback : Win32cr::System::Threading::WAITORTIMERCALLBACK, context : Void*, dwMilliseconds : UInt32, dwFlags : Win32cr::System::Threading::WORKER_THREAD_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RegisterWaitForSingleObject(phNewWaitObject, hObject, callback, context, dwMilliseconds, dwFlags)
+    {% end %}
   end
 
   def unregisterWait(wait_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnregisterWait(wait_handle)
+    {% end %}
   end
 
   def setTimerQueueTimer(timer_queue : Win32cr::Foundation::HANDLE, callback : Win32cr::System::Threading::WAITORTIMERCALLBACK, parameter : Void*, due_time : UInt32, period : UInt32, prefer_io : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.SetTimerQueueTimer(timer_queue, callback, parameter, due_time, period, prefer_io)
+    {% end %}
   end
 
   def createPrivateNamespaceA(lpPrivateNamespaceAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lpBoundaryDescriptor : Void*, lpAliasPrefix : Win32cr::Foundation::PSTR) : Win32cr::System::Threading::NamespaceHandle
+    {% if !flag?(:docs) %}
     C.CreatePrivateNamespaceA(lpPrivateNamespaceAttributes, lpBoundaryDescriptor, lpAliasPrefix)
+    {% end %}
   end
 
   def openPrivateNamespaceA(lpBoundaryDescriptor : Void*, lpAliasPrefix : Win32cr::Foundation::PSTR) : Win32cr::System::Threading::NamespaceHandle
+    {% if !flag?(:docs) %}
     C.OpenPrivateNamespaceA(lpBoundaryDescriptor, lpAliasPrefix)
+    {% end %}
   end
 
   def createBoundaryDescriptorA(name : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::System::Threading::BoundaryDescriptorHandle
+    {% if !flag?(:docs) %}
     C.CreateBoundaryDescriptorA(name, flags)
+    {% end %}
   end
 
   def addIntegrityLabelToBoundaryDescriptor(boundary_descriptor : Win32cr::Foundation::HANDLE*, integrity_label : Win32cr::Foundation::PSID) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AddIntegrityLabelToBoundaryDescriptor(boundary_descriptor, integrity_label)
+    {% end %}
   end
 
   def getActiveProcessorGroupCount : UInt16
+    {% if !flag?(:docs) %}
     C.GetActiveProcessorGroupCount
+    {% end %}
   end
 
   def getMaximumProcessorGroupCount : UInt16
+    {% if !flag?(:docs) %}
     C.GetMaximumProcessorGroupCount
+    {% end %}
   end
 
   def getActiveProcessorCount(group_number : UInt16) : UInt32
+    {% if !flag?(:docs) %}
     C.GetActiveProcessorCount(group_number)
+    {% end %}
   end
 
   def getMaximumProcessorCount(group_number : UInt16) : UInt32
+    {% if !flag?(:docs) %}
     C.GetMaximumProcessorCount(group_number)
+    {% end %}
   end
 
   def getNumaProcessorNode(processor : UInt8, node_number : UInt8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetNumaProcessorNode(processor, node_number)
+    {% end %}
   end
 
   def getNumaNodeNumberFromHandle(hFile : Win32cr::Foundation::HANDLE, node_number : UInt16*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetNumaNodeNumberFromHandle(hFile, node_number)
+    {% end %}
   end
 
   def getNumaProcessorNodeEx(processor : Win32cr::System::Kernel::PROCESSOR_NUMBER*, node_number : UInt16*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetNumaProcessorNodeEx(processor, node_number)
+    {% end %}
   end
 
   def getNumaNodeProcessorMask(node : UInt8, processor_mask : UInt64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetNumaNodeProcessorMask(node, processor_mask)
+    {% end %}
   end
 
   def getNumaAvailableMemoryNode(node : UInt8, available_bytes : UInt64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetNumaAvailableMemoryNode(node, available_bytes)
+    {% end %}
   end
 
   def getNumaAvailableMemoryNodeEx(node : UInt16, available_bytes : UInt64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetNumaAvailableMemoryNodeEx(node, available_bytes)
+    {% end %}
   end
 
   def getNumaProximityNode(proximity_id : UInt32, node_number : UInt8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetNumaProximityNode(proximity_id, node_number)
+    {% end %}
   end
 
   def ntQueryInformationProcess(process_handle : Win32cr::Foundation::HANDLE, process_information_class : Win32cr::System::Threading::PROCESSINFOCLASS, process_information : Void*, process_information_length : UInt32, return_length : UInt32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NtQueryInformationProcess(process_handle, process_information_class, process_information, process_information_length, return_length)
+    {% end %}
   end
 
   def ntQueryInformationThread(thread_handle : Win32cr::Foundation::HANDLE, thread_information_class : Win32cr::System::Threading::THREADINFOCLASS, thread_information : Void*, thread_information_length : UInt32, return_length : UInt32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NtQueryInformationThread(thread_handle, thread_information_class, thread_information, thread_information_length, return_length)
+    {% end %}
   end
 
   def ntSetInformationThread(thread_handle : Win32cr::Foundation::HANDLE, thread_information_class : Win32cr::System::Threading::THREADINFOCLASS, thread_information : Void*, thread_information_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NtSetInformationThread(thread_handle, thread_information_class, thread_information, thread_information_length)
+    {% end %}
   end
 
-  @[Link("kernel32")]
-  @[Link("vertdll")]
-  @[Link("advapi32")]
-  @[Link("avrt")]
-  @[Link("user32")]
-  @[Link("ntdll")]
+  @[Link("kernel32.dll")]
+  @[Link("vertdll.dll")]
+  @[Link("advapi32.dll")]
+  @[Link("api-ms-win-core-wow64-l1-1-1.dll")]
+  @[Link("avrt.dll")]
+  @[Link("user32.dll")]
+  @[Link("ntdll.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun GetProcessWorkingSetSize(hProcess : Win32cr::Foundation::HANDLE, lpMinimumWorkingSetSize : LibC::UIntPtrT*, lpMaximumWorkingSetSize : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
@@ -2190,16 +2694,16 @@ module Win32cr::System::Threading
 
     # Commented out due to being part of LibC
     # :nodoc:
-    #fun WaitForSingleObject(hHandle : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32) : UInt32
+    #fun WaitForSingleObject(hHandle : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
     fun SleepEx(dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : UInt32
 
     # :nodoc:
-    fun WaitForSingleObjectEx(hHandle : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : UInt32
+    fun WaitForSingleObjectEx(hHandle : Win32cr::Foundation::HANDLE, dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
-    fun WaitForMultipleObjectsEx(nCount : UInt32, lpHandles : Win32cr::Foundation::HANDLE*, bWaitAll : Win32cr::Foundation::BOOL, dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : UInt32
+    fun WaitForMultipleObjectsEx(nCount : UInt32, lpHandles : Win32cr::Foundation::HANDLE*, bWaitAll : Win32cr::Foundation::BOOL, dwMilliseconds : UInt32, bAlertable : Win32cr::Foundation::BOOL) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
     fun CreateMutexA(lpMutexAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, bInitialOwner : Win32cr::Foundation::BOOL, lpName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
@@ -2281,7 +2785,7 @@ module Win32cr::System::Threading
     fun WakeByAddressAll(address : Void*) : Void
 
     # :nodoc:
-    fun WaitForMultipleObjects(nCount : UInt32, lpHandles : Win32cr::Foundation::HANDLE*, bWaitAll : Win32cr::Foundation::BOOL, dwMilliseconds : UInt32) : UInt32
+    fun WaitForMultipleObjects(nCount : UInt32, lpHandles : Win32cr::Foundation::HANDLE*, bWaitAll : Win32cr::Foundation::BOOL, dwMilliseconds : UInt32) : Win32cr::Foundation::WIN32_ERROR
 
     # :nodoc:
     fun CreateSemaphoreW(lpSemaphoreAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, lInitialCount : Int32, lMaximumCount : Int32, lpName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
@@ -2831,8 +3335,9 @@ module Win32cr::System::Threading
     # :nodoc:
     fun SetProcessRestrictionExemption(fEnableExemption : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
+    # Commented out due to being part of LibC
     # :nodoc:
-    fun GetProcessAffinityMask(hProcess : Win32cr::Foundation::HANDLE, lpProcessAffinityMask : LibC::UIntPtrT*, lpSystemAffinityMask : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    #fun GetProcessAffinityMask(hProcess : Win32cr::Foundation::HANDLE, lpProcessAffinityMask : LibC::UIntPtrT*, lpSystemAffinityMask : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun SetProcessAffinityMask(hProcess : Win32cr::Foundation::HANDLE, dwProcessAffinityMask : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
@@ -3003,4 +3508,5 @@ module Win32cr::System::Threading
     fun NtSetInformationThread(thread_handle : Win32cr::Foundation::HANDLE, thread_information_class : Win32cr::System::Threading::THREADINFOCLASS, thread_information : Void*, thread_information_length : UInt32) : Win32cr::Foundation::NTSTATUS
 
   end
+  {% end %}
 end

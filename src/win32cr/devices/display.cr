@@ -3654,7 +3654,7 @@ module Win32cr::Devices::Display
   {% end %}
 
   @[Extern]
-  record ICloneViewHelperVtbl,
+  record ICloneViewHelperVtable,
     query_interface : Proc(ICloneViewHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICloneViewHelper*, UInt32),
     release : Proc(ICloneViewHelper*, UInt32),
@@ -3665,7 +3665,7 @@ module Win32cr::Devices::Display
 
 
   @[Extern]
-  record ICloneViewHelper, lpVtbl : ICloneViewHelperVtbl* do
+  record ICloneViewHelper, lpVtbl : ICloneViewHelperVtable* do
     GUID = LibC::GUID.new(0xf6a3d4c4_u32, 0x5632_u16, 0x4d83_u16, StaticArray[0xb0_u8, 0xa1_u8, 0xfb_u8, 0x88_u8, 0x71_u8, 0x2b_u8, 0x1e_u8, 0xb7_u8])
     def query_interface(this : ICloneViewHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3692,7 +3692,7 @@ module Win32cr::Devices::Display
   end
 
   @[Extern]
-  record IViewHelperVtbl,
+  record IViewHelperVtable,
     query_interface : Proc(IViewHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IViewHelper*, UInt32),
     release : Proc(IViewHelper*, UInt32),
@@ -3705,7 +3705,7 @@ module Win32cr::Devices::Display
 
 
   @[Extern]
-  record IViewHelper, lpVtbl : IViewHelperVtbl* do
+  record IViewHelper, lpVtbl : IViewHelperVtable* do
     GUID = LibC::GUID.new(0xe85ccef5_u32, 0xaaaa_u16, 0x47f0_u16, StaticArray[0xb5_u8, 0xe3_u8, 0x61_u8, 0xf7_u8, 0xae_u8, 0xcd_u8, 0xc4_u8, 0xc1_u8])
     def query_interface(this : IViewHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3738,484 +3738,723 @@ module Win32cr::Devices::Display
   end
 
   def getNumberOfPhysicalMonitorsFromHMONITOR(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, pdwNumberOfPhysicalMonitors : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetNumberOfPhysicalMonitorsFromHMONITOR(hMonitor, pdwNumberOfPhysicalMonitors)
+    {% end %}
   end
 
   def getNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 : Void*, pdwNumberOfPhysicalMonitors : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetNumberOfPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9, pdwNumberOfPhysicalMonitors)
+    {% end %}
   end
 
   def getPhysicalMonitorsFromHMONITOR(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, dwPhysicalMonitorArraySize : UInt32, pPhysicalMonitorArray : Win32cr::Devices::Display::PHYSICAL_MONITOR*) : Int32
+    {% if !flag?(:docs) %}
     C.GetPhysicalMonitorsFromHMONITOR(hMonitor, dwPhysicalMonitorArraySize, pPhysicalMonitorArray)
+    {% end %}
   end
 
   def getPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9 : Void*, dwPhysicalMonitorArraySize : UInt32, pPhysicalMonitorArray : Win32cr::Devices::Display::PHYSICAL_MONITOR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetPhysicalMonitorsFromIDirect3DDevice9(pDirect3DDevice9, dwPhysicalMonitorArraySize, pPhysicalMonitorArray)
+    {% end %}
   end
 
   def destroyPhysicalMonitor(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+    {% if !flag?(:docs) %}
     C.DestroyPhysicalMonitor(hMonitor)
+    {% end %}
   end
 
   def destroyPhysicalMonitors(dwPhysicalMonitorArraySize : UInt32, pPhysicalMonitorArray : Win32cr::Devices::Display::PHYSICAL_MONITOR*) : Int32
+    {% if !flag?(:docs) %}
     C.DestroyPhysicalMonitors(dwPhysicalMonitorArraySize, pPhysicalMonitorArray)
+    {% end %}
   end
 
   def getVCPFeatureAndVCPFeatureReply(hMonitor : Win32cr::Foundation::HANDLE, bVCPCode : UInt8, pvct : Win32cr::Devices::Display::MC_VCP_CODE_TYPE*, pdwCurrentValue : UInt32*, pdwMaximumValue : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetVCPFeatureAndVCPFeatureReply(hMonitor, bVCPCode, pvct, pdwCurrentValue, pdwMaximumValue)
+    {% end %}
   end
 
   def setVCPFeature(hMonitor : Win32cr::Foundation::HANDLE, bVCPCode : UInt8, dwNewValue : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SetVCPFeature(hMonitor, bVCPCode, dwNewValue)
+    {% end %}
   end
 
   def saveCurrentSettings(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+    {% if !flag?(:docs) %}
     C.SaveCurrentSettings(hMonitor)
+    {% end %}
   end
 
   def getCapabilitiesStringLength(hMonitor : Win32cr::Foundation::HANDLE, pdwCapabilitiesStringLengthInCharacters : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetCapabilitiesStringLength(hMonitor, pdwCapabilitiesStringLengthInCharacters)
+    {% end %}
   end
 
   def capabilitiesRequestAndCapabilitiesReply(hMonitor : Win32cr::Foundation::HANDLE, pszASCIICapabilitiesString : UInt8*, dwCapabilitiesStringLengthInCharacters : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.CapabilitiesRequestAndCapabilitiesReply(hMonitor, pszASCIICapabilitiesString, dwCapabilitiesStringLengthInCharacters)
+    {% end %}
   end
 
   def getTimingReport(hMonitor : Win32cr::Foundation::HANDLE, pmtrMonitorTimingReport : Win32cr::Devices::Display::MC_TIMING_REPORT*) : Int32
+    {% if !flag?(:docs) %}
     C.GetTimingReport(hMonitor, pmtrMonitorTimingReport)
+    {% end %}
   end
 
   def getMonitorCapabilities(hMonitor : Win32cr::Foundation::HANDLE, pdwMonitorCapabilities : UInt32*, pdwSupportedColorTemperatures : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetMonitorCapabilities(hMonitor, pdwMonitorCapabilities, pdwSupportedColorTemperatures)
+    {% end %}
   end
 
   def saveCurrentMonitorSettings(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+    {% if !flag?(:docs) %}
     C.SaveCurrentMonitorSettings(hMonitor)
+    {% end %}
   end
 
   def getMonitorTechnologyType(hMonitor : Win32cr::Foundation::HANDLE, pdtyDisplayTechnologyType : Win32cr::Devices::Display::MC_DISPLAY_TECHNOLOGY_TYPE*) : Int32
+    {% if !flag?(:docs) %}
     C.GetMonitorTechnologyType(hMonitor, pdtyDisplayTechnologyType)
+    {% end %}
   end
 
   def getMonitorBrightness(hMonitor : Win32cr::Foundation::HANDLE, pdwMinimumBrightness : UInt32*, pdwCurrentBrightness : UInt32*, pdwMaximumBrightness : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetMonitorBrightness(hMonitor, pdwMinimumBrightness, pdwCurrentBrightness, pdwMaximumBrightness)
+    {% end %}
   end
 
   def getMonitorContrast(hMonitor : Win32cr::Foundation::HANDLE, pdwMinimumContrast : UInt32*, pdwCurrentContrast : UInt32*, pdwMaximumContrast : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetMonitorContrast(hMonitor, pdwMinimumContrast, pdwCurrentContrast, pdwMaximumContrast)
+    {% end %}
   end
 
   def getMonitorColorTemperature(hMonitor : Win32cr::Foundation::HANDLE, pctCurrentColorTemperature : Win32cr::Devices::Display::MC_COLOR_TEMPERATURE*) : Int32
+    {% if !flag?(:docs) %}
     C.GetMonitorColorTemperature(hMonitor, pctCurrentColorTemperature)
+    {% end %}
   end
 
   def getMonitorRedGreenOrBlueDrive(hMonitor : Win32cr::Foundation::HANDLE, dtDriveType : Win32cr::Devices::Display::MC_DRIVE_TYPE, pdwMinimumDrive : UInt32*, pdwCurrentDrive : UInt32*, pdwMaximumDrive : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetMonitorRedGreenOrBlueDrive(hMonitor, dtDriveType, pdwMinimumDrive, pdwCurrentDrive, pdwMaximumDrive)
+    {% end %}
   end
 
   def getMonitorRedGreenOrBlueGain(hMonitor : Win32cr::Foundation::HANDLE, gtGainType : Win32cr::Devices::Display::MC_GAIN_TYPE, pdwMinimumGain : UInt32*, pdwCurrentGain : UInt32*, pdwMaximumGain : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetMonitorRedGreenOrBlueGain(hMonitor, gtGainType, pdwMinimumGain, pdwCurrentGain, pdwMaximumGain)
+    {% end %}
   end
 
   def setMonitorBrightness(hMonitor : Win32cr::Foundation::HANDLE, dwNewBrightness : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SetMonitorBrightness(hMonitor, dwNewBrightness)
+    {% end %}
   end
 
   def setMonitorContrast(hMonitor : Win32cr::Foundation::HANDLE, dwNewContrast : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SetMonitorContrast(hMonitor, dwNewContrast)
+    {% end %}
   end
 
   def setMonitorColorTemperature(hMonitor : Win32cr::Foundation::HANDLE, ctCurrentColorTemperature : Win32cr::Devices::Display::MC_COLOR_TEMPERATURE) : Int32
+    {% if !flag?(:docs) %}
     C.SetMonitorColorTemperature(hMonitor, ctCurrentColorTemperature)
+    {% end %}
   end
 
   def setMonitorRedGreenOrBlueDrive(hMonitor : Win32cr::Foundation::HANDLE, dtDriveType : Win32cr::Devices::Display::MC_DRIVE_TYPE, dwNewDrive : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SetMonitorRedGreenOrBlueDrive(hMonitor, dtDriveType, dwNewDrive)
+    {% end %}
   end
 
   def setMonitorRedGreenOrBlueGain(hMonitor : Win32cr::Foundation::HANDLE, gtGainType : Win32cr::Devices::Display::MC_GAIN_TYPE, dwNewGain : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SetMonitorRedGreenOrBlueGain(hMonitor, gtGainType, dwNewGain)
+    {% end %}
   end
 
   def degaussMonitor(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+    {% if !flag?(:docs) %}
     C.DegaussMonitor(hMonitor)
+    {% end %}
   end
 
   def getMonitorDisplayAreaSize(hMonitor : Win32cr::Foundation::HANDLE, stSizeType : Win32cr::Devices::Display::MC_SIZE_TYPE, pdwMinimumWidthOrHeight : UInt32*, pdwCurrentWidthOrHeight : UInt32*, pdwMaximumWidthOrHeight : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetMonitorDisplayAreaSize(hMonitor, stSizeType, pdwMinimumWidthOrHeight, pdwCurrentWidthOrHeight, pdwMaximumWidthOrHeight)
+    {% end %}
   end
 
   def getMonitorDisplayAreaPosition(hMonitor : Win32cr::Foundation::HANDLE, ptPositionType : Win32cr::Devices::Display::MC_POSITION_TYPE, pdwMinimumPosition : UInt32*, pdwCurrentPosition : UInt32*, pdwMaximumPosition : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetMonitorDisplayAreaPosition(hMonitor, ptPositionType, pdwMinimumPosition, pdwCurrentPosition, pdwMaximumPosition)
+    {% end %}
   end
 
   def setMonitorDisplayAreaSize(hMonitor : Win32cr::Foundation::HANDLE, stSizeType : Win32cr::Devices::Display::MC_SIZE_TYPE, dwNewDisplayAreaWidthOrHeight : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SetMonitorDisplayAreaSize(hMonitor, stSizeType, dwNewDisplayAreaWidthOrHeight)
+    {% end %}
   end
 
   def setMonitorDisplayAreaPosition(hMonitor : Win32cr::Foundation::HANDLE, ptPositionType : Win32cr::Devices::Display::MC_POSITION_TYPE, dwNewPosition : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SetMonitorDisplayAreaPosition(hMonitor, ptPositionType, dwNewPosition)
+    {% end %}
   end
 
   def restoreMonitorFactoryColorDefaults(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+    {% if !flag?(:docs) %}
     C.RestoreMonitorFactoryColorDefaults(hMonitor)
+    {% end %}
   end
 
   def restoreMonitorFactoryDefaults(hMonitor : Win32cr::Foundation::HANDLE) : Int32
+    {% if !flag?(:docs) %}
     C.RestoreMonitorFactoryDefaults(hMonitor)
+    {% end %}
   end
 
   def bRUSHOBJPvAllocRbrush(pbo : Win32cr::Devices::Display::BRUSHOBJ*, cj : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.BRUSHOBJ_pvAllocRbrush(pbo, cj)
+    {% end %}
   end
 
   def bRUSHOBJPvGetRbrush(pbo : Win32cr::Devices::Display::BRUSHOBJ*) : Void*
+    {% if !flag?(:docs) %}
     C.BRUSHOBJ_pvGetRbrush(pbo)
+    {% end %}
   end
 
   def bRUSHOBJUlGetBrushColor(pbo : Win32cr::Devices::Display::BRUSHOBJ*) : UInt32
+    {% if !flag?(:docs) %}
     C.BRUSHOBJ_ulGetBrushColor(pbo)
+    {% end %}
   end
 
   def bRUSHOBJHGetColorTransform(pbo : Win32cr::Devices::Display::BRUSHOBJ*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.BRUSHOBJ_hGetColorTransform(pbo)
+    {% end %}
   end
 
   def cLIPOBJCEnumStart(pco : Win32cr::Devices::Display::CLIPOBJ*, bAll : Win32cr::Foundation::BOOL, iType : UInt32, iDirection : UInt32, cLimit : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CLIPOBJ_cEnumStart(pco, bAll, iType, iDirection, cLimit)
+    {% end %}
   end
 
   def cLIPOBJBEnum(pco : Win32cr::Devices::Display::CLIPOBJ*, cj : UInt32, pul : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CLIPOBJ_bEnum(pco, cj, pul)
+    {% end %}
   end
 
   def cLIPOBJPpoGetPath(pco : Win32cr::Devices::Display::CLIPOBJ*) : Win32cr::Devices::Display::PATHOBJ*
+    {% if !flag?(:docs) %}
     C.CLIPOBJ_ppoGetPath(pco)
+    {% end %}
   end
 
   def fONTOBJCGetAllGlyphHandles(pfo : Win32cr::Devices::Display::FONTOBJ*, phg : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.FONTOBJ_cGetAllGlyphHandles(pfo, phg)
+    {% end %}
   end
 
   def fONTOBJVGetInfo(pfo : Win32cr::Devices::Display::FONTOBJ*, cjSize : UInt32, pfi : Win32cr::Devices::Display::FONTINFO*) : Void
+    {% if !flag?(:docs) %}
     C.FONTOBJ_vGetInfo(pfo, cjSize, pfi)
+    {% end %}
   end
 
   def fONTOBJCGetGlyphs(pfo : Win32cr::Devices::Display::FONTOBJ*, iMode : UInt32, cGlyph : UInt32, phg : UInt32*, ppvGlyph : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.FONTOBJ_cGetGlyphs(pfo, iMode, cGlyph, phg, ppvGlyph)
+    {% end %}
   end
 
   def fONTOBJPxoGetXform(pfo : Win32cr::Devices::Display::FONTOBJ*) : Win32cr::Devices::Display::XFORMOBJ*
+    {% if !flag?(:docs) %}
     C.FONTOBJ_pxoGetXform(pfo)
+    {% end %}
   end
 
   def fONTOBJPifi(pfo : Win32cr::Devices::Display::FONTOBJ*) : Win32cr::Devices::Display::IFIMETRICS*
+    {% if !flag?(:docs) %}
     C.FONTOBJ_pifi(pfo)
+    {% end %}
   end
 
   def fONTOBJPfdg(pfo : Win32cr::Devices::Display::FONTOBJ*) : Win32cr::Devices::Display::FD_GLYPHSET*
+    {% if !flag?(:docs) %}
     C.FONTOBJ_pfdg(pfo)
+    {% end %}
   end
 
   def fONTOBJPvTrueTypeFontFile(pfo : Win32cr::Devices::Display::FONTOBJ*, pcjFile : UInt32*) : Void*
+    {% if !flag?(:docs) %}
     C.FONTOBJ_pvTrueTypeFontFile(pfo, pcjFile)
+    {% end %}
   end
 
   def fONTOBJPQueryGlyphAttrs(pfo : Win32cr::Devices::Display::FONTOBJ*, iMode : UInt32) : Win32cr::Devices::Display::FD_GLYPHATTR*
+    {% if !flag?(:docs) %}
     C.FONTOBJ_pQueryGlyphAttrs(pfo, iMode)
+    {% end %}
   end
 
   def pATHOBJVEnumStart(ppo : Win32cr::Devices::Display::PATHOBJ*) : Void
+    {% if !flag?(:docs) %}
     C.PATHOBJ_vEnumStart(ppo)
+    {% end %}
   end
 
   def pATHOBJBEnum(ppo : Win32cr::Devices::Display::PATHOBJ*, ppd : Win32cr::Devices::Display::PATHDATA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PATHOBJ_bEnum(ppo, ppd)
+    {% end %}
   end
 
   def pATHOBJVEnumStartClipLines(ppo : Win32cr::Devices::Display::PATHOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pso : Win32cr::Devices::Display::SURFOBJ*, pla : Win32cr::Devices::Display::LINEATTRS*) : Void
+    {% if !flag?(:docs) %}
     C.PATHOBJ_vEnumStartClipLines(ppo, pco, pso, pla)
+    {% end %}
   end
 
   def pATHOBJBEnumClipLines(ppo : Win32cr::Devices::Display::PATHOBJ*, cb : UInt32, pcl : Win32cr::Devices::Display::CLIPLINE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PATHOBJ_bEnumClipLines(ppo, cb, pcl)
+    {% end %}
   end
 
   def pATHOBJVGetBounds(ppo : Win32cr::Devices::Display::PATHOBJ*, prectfx : Win32cr::Devices::Display::RECTFX*) : Void
+    {% if !flag?(:docs) %}
     C.PATHOBJ_vGetBounds(ppo, prectfx)
+    {% end %}
   end
 
   def sTROBJVEnumStart(pstro : Win32cr::Devices::Display::STROBJ*) : Void
+    {% if !flag?(:docs) %}
     C.STROBJ_vEnumStart(pstro)
+    {% end %}
   end
 
   def sTROBJBEnum(pstro : Win32cr::Devices::Display::STROBJ*, pc : UInt32*, ppgpos : Win32cr::Devices::Display::GLYPHPOS**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.STROBJ_bEnum(pstro, pc, ppgpos)
+    {% end %}
   end
 
   def sTROBJBEnumPositionsOnly(pstro : Win32cr::Devices::Display::STROBJ*, pc : UInt32*, ppgpos : Win32cr::Devices::Display::GLYPHPOS**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.STROBJ_bEnumPositionsOnly(pstro, pc, ppgpos)
+    {% end %}
   end
 
   def sTROBJDwGetCodePage(pstro : Win32cr::Devices::Display::STROBJ*) : UInt32
+    {% if !flag?(:docs) %}
     C.STROBJ_dwGetCodePage(pstro)
+    {% end %}
   end
 
   def sTROBJBGetAdvanceWidths(pso : Win32cr::Devices::Display::STROBJ*, iFirst : UInt32, c : UInt32, pptqD : Win32cr::Devices::Display::POINTQF*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.STROBJ_bGetAdvanceWidths(pso, iFirst, c, pptqD)
+    {% end %}
   end
 
   def xFORMOBJIGetXform(pxo : Win32cr::Devices::Display::XFORMOBJ*, pxform : Win32cr::Devices::Display::XFORML*) : UInt32
+    {% if !flag?(:docs) %}
     C.XFORMOBJ_iGetXform(pxo, pxform)
+    {% end %}
   end
 
   def xFORMOBJBApplyXform(pxo : Win32cr::Devices::Display::XFORMOBJ*, iMode : UInt32, cPoints : UInt32, pvIn : Void*, pvOut : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.XFORMOBJ_bApplyXform(pxo, iMode, cPoints, pvIn, pvOut)
+    {% end %}
   end
 
   def xLATEOBJIXlate(pxlo : Win32cr::Devices::Display::XLATEOBJ*, iColor : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.XLATEOBJ_iXlate(pxlo, iColor)
+    {% end %}
   end
 
   def xLATEOBJPiVector(pxlo : Win32cr::Devices::Display::XLATEOBJ*) : UInt32*
+    {% if !flag?(:docs) %}
     C.XLATEOBJ_piVector(pxlo)
+    {% end %}
   end
 
   def xLATEOBJCGetPalette(pxlo : Win32cr::Devices::Display::XLATEOBJ*, iPal : UInt32, cPal : UInt32, pPal : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.XLATEOBJ_cGetPalette(pxlo, iPal, cPal, pPal)
+    {% end %}
   end
 
   def xLATEOBJHGetColorTransform(pxlo : Win32cr::Devices::Display::XLATEOBJ*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.XLATEOBJ_hGetColorTransform(pxlo)
+    {% end %}
   end
 
   def engCreateBitmap(sizl : Win32cr::Foundation::SIZE, lWidth : Int32, iFormat : UInt32, fl : UInt32, pvBits : Void*) : Win32cr::Graphics::Gdi::HBITMAP
+    {% if !flag?(:docs) %}
     C.EngCreateBitmap(sizl, lWidth, iFormat, fl, pvBits)
+    {% end %}
   end
 
   def engCreateDeviceSurface(dhsurf : Win32cr::Devices::Display::DHSURF, sizl : Win32cr::Foundation::SIZE, iFormatCompat : UInt32) : Win32cr::Devices::Display::HSURF
+    {% if !flag?(:docs) %}
     C.EngCreateDeviceSurface(dhsurf, sizl, iFormatCompat)
+    {% end %}
   end
 
   def engCreateDeviceBitmap(dhsurf : Win32cr::Devices::Display::DHSURF, sizl : Win32cr::Foundation::SIZE, iFormatCompat : UInt32) : Win32cr::Graphics::Gdi::HBITMAP
+    {% if !flag?(:docs) %}
     C.EngCreateDeviceBitmap(dhsurf, sizl, iFormatCompat)
+    {% end %}
   end
 
   def engDeleteSurface(hsurf : Win32cr::Devices::Display::HSURF) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngDeleteSurface(hsurf)
+    {% end %}
   end
 
   def engLockSurface(hsurf : Win32cr::Devices::Display::HSURF) : Win32cr::Devices::Display::SURFOBJ*
+    {% if !flag?(:docs) %}
     C.EngLockSurface(hsurf)
+    {% end %}
   end
 
   def engUnlockSurface(pso : Win32cr::Devices::Display::SURFOBJ*) : Void
+    {% if !flag?(:docs) %}
     C.EngUnlockSurface(pso)
+    {% end %}
   end
 
   def engEraseSurface(pso : Win32cr::Devices::Display::SURFOBJ*, prcl : Win32cr::Foundation::RECTL*, iColor : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngEraseSurface(pso, prcl, iColor)
+    {% end %}
   end
 
   def engAssociateSurface(hsurf : Win32cr::Devices::Display::HSURF, hdev : Win32cr::Devices::Display::HDEV, flHooks : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngAssociateSurface(hsurf, hdev, flHooks)
+    {% end %}
   end
 
   def engMarkBandingSurface(hsurf : Win32cr::Devices::Display::HSURF) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngMarkBandingSurface(hsurf)
+    {% end %}
   end
 
   def engCheckAbort(pso : Win32cr::Devices::Display::SURFOBJ*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngCheckAbort(pso)
+    {% end %}
   end
 
   def engDeletePath(ppo : Win32cr::Devices::Display::PATHOBJ*) : Void
+    {% if !flag?(:docs) %}
     C.EngDeletePath(ppo)
+    {% end %}
   end
 
   def engCreatePalette(iMode : UInt32, cColors : UInt32, pulColors : UInt32*, flRed : UInt32, flGreen : UInt32, flBlue : UInt32) : Win32cr::Graphics::Gdi::HPALETTE
+    {% if !flag?(:docs) %}
     C.EngCreatePalette(iMode, cColors, pulColors, flRed, flGreen, flBlue)
+    {% end %}
   end
 
   def engDeletePalette(hpal : Win32cr::Graphics::Gdi::HPALETTE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngDeletePalette(hpal)
+    {% end %}
   end
 
   def engCreateClip : Win32cr::Devices::Display::CLIPOBJ*
+    {% if !flag?(:docs) %}
     C.EngCreateClip
+    {% end %}
   end
 
   def engDeleteClip(pco : Win32cr::Devices::Display::CLIPOBJ*) : Void
+    {% if !flag?(:docs) %}
     C.EngDeleteClip(pco)
+    {% end %}
   end
 
   def engBitBlt(psoTrg : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, psoMask : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, prclTrg : Win32cr::Foundation::RECTL*, pptlSrc : Win32cr::Foundation::POINTL*, pptlMask : Win32cr::Foundation::POINTL*, pbo : Win32cr::Devices::Display::BRUSHOBJ*, pptlBrush : Win32cr::Foundation::POINTL*, rop4 : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngBitBlt(psoTrg, psoSrc, psoMask, pco, pxlo, prclTrg, pptlSrc, pptlMask, pbo, pptlBrush, rop4)
+    {% end %}
   end
 
   def engLineTo(pso : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pbo : Win32cr::Devices::Display::BRUSHOBJ*, x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, prclBounds : Win32cr::Foundation::RECTL*, mix : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngLineTo(pso, pco, pbo, x1, y1, x2, y2, prclBounds, mix)
+    {% end %}
   end
 
   def engStretchBlt(psoDest : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, psoMask : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, pca : Win32cr::Graphics::Gdi::COLORADJUSTMENT*, pptlHTOrg : Win32cr::Foundation::POINTL*, prclDest : Win32cr::Foundation::RECTL*, prclSrc : Win32cr::Foundation::RECTL*, pptlMask : Win32cr::Foundation::POINTL*, iMode : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngStretchBlt(psoDest, psoSrc, psoMask, pco, pxlo, pca, pptlHTOrg, prclDest, prclSrc, pptlMask, iMode)
+    {% end %}
   end
 
   def engStretchBltROP(psoDest : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, psoMask : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, pca : Win32cr::Graphics::Gdi::COLORADJUSTMENT*, pptlHTOrg : Win32cr::Foundation::POINTL*, prclDest : Win32cr::Foundation::RECTL*, prclSrc : Win32cr::Foundation::RECTL*, pptlMask : Win32cr::Foundation::POINTL*, iMode : UInt32, pbo : Win32cr::Devices::Display::BRUSHOBJ*, rop4 : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngStretchBltROP(psoDest, psoSrc, psoMask, pco, pxlo, pca, pptlHTOrg, prclDest, prclSrc, pptlMask, iMode, pbo, rop4)
+    {% end %}
   end
 
   def engAlphaBlend(psoDest : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, prclDest : Win32cr::Foundation::RECTL*, prclSrc : Win32cr::Foundation::RECTL*, pBlendObj : Win32cr::Devices::Display::BLENDOBJ*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngAlphaBlend(psoDest, psoSrc, pco, pxlo, prclDest, prclSrc, pBlendObj)
+    {% end %}
   end
 
   def engGradientFill(psoDest : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, pVertex : Win32cr::Graphics::Gdi::TRIVERTEX*, nVertex : UInt32, pMesh : Void*, nMesh : UInt32, prclExtents : Win32cr::Foundation::RECTL*, pptlDitherOrg : Win32cr::Foundation::POINTL*, ulMode : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngGradientFill(psoDest, pco, pxlo, pVertex, nVertex, pMesh, nMesh, prclExtents, pptlDitherOrg, ulMode)
+    {% end %}
   end
 
   def engTransparentBlt(psoDst : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, prclDst : Win32cr::Foundation::RECTL*, prclSrc : Win32cr::Foundation::RECTL*, trans_color : UInt32, bCalledFromBitBlt : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngTransparentBlt(psoDst, psoSrc, pco, pxlo, prclDst, prclSrc, trans_color, bCalledFromBitBlt)
+    {% end %}
   end
 
   def engTextOut(pso : Win32cr::Devices::Display::SURFOBJ*, pstro : Win32cr::Devices::Display::STROBJ*, pfo : Win32cr::Devices::Display::FONTOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, prclExtra : Win32cr::Foundation::RECTL*, prclOpaque : Win32cr::Foundation::RECTL*, pboFore : Win32cr::Devices::Display::BRUSHOBJ*, pboOpaque : Win32cr::Devices::Display::BRUSHOBJ*, pptlOrg : Win32cr::Foundation::POINTL*, mix : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngTextOut(pso, pstro, pfo, pco, prclExtra, prclOpaque, pboFore, pboOpaque, pptlOrg, mix)
+    {% end %}
   end
 
   def engStrokePath(pso : Win32cr::Devices::Display::SURFOBJ*, ppo : Win32cr::Devices::Display::PATHOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxo : Win32cr::Devices::Display::XFORMOBJ*, pbo : Win32cr::Devices::Display::BRUSHOBJ*, pptlBrushOrg : Win32cr::Foundation::POINTL*, plineattrs : Win32cr::Devices::Display::LINEATTRS*, mix : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngStrokePath(pso, ppo, pco, pxo, pbo, pptlBrushOrg, plineattrs, mix)
+    {% end %}
   end
 
   def engFillPath(pso : Win32cr::Devices::Display::SURFOBJ*, ppo : Win32cr::Devices::Display::PATHOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pbo : Win32cr::Devices::Display::BRUSHOBJ*, pptlBrushOrg : Win32cr::Foundation::POINTL*, mix : UInt32, flOptions : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngFillPath(pso, ppo, pco, pbo, pptlBrushOrg, mix, flOptions)
+    {% end %}
   end
 
   def engStrokeAndFillPath(pso : Win32cr::Devices::Display::SURFOBJ*, ppo : Win32cr::Devices::Display::PATHOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxo : Win32cr::Devices::Display::XFORMOBJ*, pboStroke : Win32cr::Devices::Display::BRUSHOBJ*, plineattrs : Win32cr::Devices::Display::LINEATTRS*, pboFill : Win32cr::Devices::Display::BRUSHOBJ*, pptlBrushOrg : Win32cr::Foundation::POINTL*, mixFill : UInt32, flOptions : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngStrokeAndFillPath(pso, ppo, pco, pxo, pboStroke, plineattrs, pboFill, pptlBrushOrg, mixFill, flOptions)
+    {% end %}
   end
 
   def engPaint(pso : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pbo : Win32cr::Devices::Display::BRUSHOBJ*, pptlBrushOrg : Win32cr::Foundation::POINTL*, mix : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngPaint(pso, pco, pbo, pptlBrushOrg, mix)
+    {% end %}
   end
 
   def engCopyBits(psoDest : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, prclDest : Win32cr::Foundation::RECTL*, pptlSrc : Win32cr::Foundation::POINTL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngCopyBits(psoDest, psoSrc, pco, pxlo, prclDest, pptlSrc)
+    {% end %}
   end
 
   def engPlgBlt(psoTrg : Win32cr::Devices::Display::SURFOBJ*, psoSrc : Win32cr::Devices::Display::SURFOBJ*, psoMsk : Win32cr::Devices::Display::SURFOBJ*, pco : Win32cr::Devices::Display::CLIPOBJ*, pxlo : Win32cr::Devices::Display::XLATEOBJ*, pca : Win32cr::Graphics::Gdi::COLORADJUSTMENT*, pptlBrushOrg : Win32cr::Foundation::POINTL*, pptfx : Win32cr::Devices::Display::POINTFIX*, prcl : Win32cr::Foundation::RECTL*, pptl : Win32cr::Foundation::POINTL*, iMode : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngPlgBlt(psoTrg, psoSrc, psoMsk, pco, pxlo, pca, pptlBrushOrg, pptfx, prcl, pptl, iMode)
+    {% end %}
   end
 
   def hTGet8BPPFormatPalette(pPaletteEntry : Win32cr::Graphics::Gdi::PALETTEENTRY*, red_gamma : UInt16, green_gamma : UInt16, blue_gamma : UInt16) : Int32
+    {% if !flag?(:docs) %}
     C.HT_Get8BPPFormatPalette(pPaletteEntry, red_gamma, green_gamma, blue_gamma)
+    {% end %}
   end
 
   def hTGet8BPPMaskPalette(pPaletteEntry : Win32cr::Graphics::Gdi::PALETTEENTRY*, use8_bpp_mask_pal : Win32cr::Foundation::BOOL, cmy_mask : UInt8, red_gamma : UInt16, green_gamma : UInt16, blue_gamma : UInt16) : Int32
+    {% if !flag?(:docs) %}
     C.HT_Get8BPPMaskPalette(pPaletteEntry, use8_bpp_mask_pal, cmy_mask, red_gamma, green_gamma, blue_gamma)
+    {% end %}
   end
 
   def engGetPrinterDataFileName(hdev : Win32cr::Devices::Display::HDEV) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.EngGetPrinterDataFileName(hdev)
+    {% end %}
   end
 
   def engGetDriverName(hdev : Win32cr::Devices::Display::HDEV) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.EngGetDriverName(hdev)
+    {% end %}
   end
 
   def engLoadModule(pwsz : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.EngLoadModule(pwsz)
+    {% end %}
   end
 
   def engFindResource(h : Win32cr::Foundation::HANDLE, iName : Int32, iType : Int32, pulSize : UInt32*) : Void*
+    {% if !flag?(:docs) %}
     C.EngFindResource(h, iName, iType, pulSize)
+    {% end %}
   end
 
   def engFreeModule(h : Win32cr::Foundation::HANDLE) : Void
+    {% if !flag?(:docs) %}
     C.EngFreeModule(h)
+    {% end %}
   end
 
   def engCreateSemaphore : Win32cr::Devices::Display::HSEMAPHORE
+    {% if !flag?(:docs) %}
     C.EngCreateSemaphore
+    {% end %}
   end
 
   def engAcquireSemaphore(hsem : Win32cr::Devices::Display::HSEMAPHORE) : Void
+    {% if !flag?(:docs) %}
     C.EngAcquireSemaphore(hsem)
+    {% end %}
   end
 
   def engReleaseSemaphore(hsem : Win32cr::Devices::Display::HSEMAPHORE) : Void
+    {% if !flag?(:docs) %}
     C.EngReleaseSemaphore(hsem)
+    {% end %}
   end
 
   def engDeleteSemaphore(hsem : Win32cr::Devices::Display::HSEMAPHORE) : Void
+    {% if !flag?(:docs) %}
     C.EngDeleteSemaphore(hsem)
+    {% end %}
   end
 
   def engMultiByteToUnicodeN(unicode_string : Win32cr::Foundation::PWSTR, max_bytes_in_unicode_string : UInt32, bytes_in_unicode_string : UInt32*, multi_byte_string : Win32cr::Foundation::PSTR, bytes_in_multi_byte_string : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.EngMultiByteToUnicodeN(unicode_string, max_bytes_in_unicode_string, bytes_in_unicode_string, multi_byte_string, bytes_in_multi_byte_string)
+    {% end %}
   end
 
   def engUnicodeToMultiByteN(multi_byte_string : Win32cr::Foundation::PSTR, max_bytes_in_multi_byte_string : UInt32, bytes_in_multi_byte_string : UInt32*, unicode_string : Win32cr::Foundation::PWSTR, bytes_in_unicode_string : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.EngUnicodeToMultiByteN(multi_byte_string, max_bytes_in_multi_byte_string, bytes_in_multi_byte_string, unicode_string, bytes_in_unicode_string)
+    {% end %}
   end
 
   def engQueryLocalTime(param0 : Win32cr::Devices::Display::ENG_TIME_FIELDS*) : Void
+    {% if !flag?(:docs) %}
     C.EngQueryLocalTime(param0)
+    {% end %}
   end
 
   def engComputeGlyphSet(nCodePage : Int32, nFirstChar : Int32, cChars : Int32) : Win32cr::Devices::Display::FD_GLYPHSET*
+    {% if !flag?(:docs) %}
     C.EngComputeGlyphSet(nCodePage, nFirstChar, cChars)
+    {% end %}
   end
 
   def engMultiByteToWideChar(code_page : UInt32, wide_char_string : Win32cr::Foundation::PWSTR, bytes_in_wide_char_string : Int32, multi_byte_string : Win32cr::Foundation::PSTR, bytes_in_multi_byte_string : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.EngMultiByteToWideChar(code_page, wide_char_string, bytes_in_wide_char_string, multi_byte_string, bytes_in_multi_byte_string)
+    {% end %}
   end
 
   def engWideCharToMultiByte(code_page : UInt32, wide_char_string : Win32cr::Foundation::PWSTR, bytes_in_wide_char_string : Int32, multi_byte_string : Win32cr::Foundation::PSTR, bytes_in_multi_byte_string : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.EngWideCharToMultiByte(code_page, wide_char_string, bytes_in_wide_char_string, multi_byte_string, bytes_in_multi_byte_string)
+    {% end %}
   end
 
   def engGetCurrentCodePage(oem_code_page : UInt16*, ansi_code_page : UInt16*) : Void
+    {% if !flag?(:docs) %}
     C.EngGetCurrentCodePage(oem_code_page, ansi_code_page)
+    {% end %}
   end
 
   def engQueryEMFInfo(hdev : Win32cr::Devices::Display::HDEV, pEMFInfo : Win32cr::Devices::Display::EMFINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EngQueryEMFInfo(hdev, pEMFInfo)
+    {% end %}
   end
 
   def getDisplayConfigBufferSizes(flags : UInt32, numPathArrayElements : UInt32*, numModeInfoArrayElements : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.GetDisplayConfigBufferSizes(flags, numPathArrayElements, numModeInfoArrayElements)
+    {% end %}
   end
 
   def setDisplayConfig(numPathArrayElements : UInt32, pathArray : Win32cr::Devices::Display::DISPLAYCONFIG_PATH_INFO*, numModeInfoArrayElements : UInt32, modeInfoArray : Win32cr::Devices::Display::DISPLAYCONFIG_MODE_INFO*, flags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.SetDisplayConfig(numPathArrayElements, pathArray, numModeInfoArrayElements, modeInfoArray, flags)
+    {% end %}
   end
 
   def queryDisplayConfig(flags : UInt32, numPathArrayElements : UInt32*, pathArray : Win32cr::Devices::Display::DISPLAYCONFIG_PATH_INFO*, numModeInfoArrayElements : UInt32*, modeInfoArray : Win32cr::Devices::Display::DISPLAYCONFIG_MODE_INFO*, currentTopologyId : Win32cr::Devices::Display::DISPLAYCONFIG_TOPOLOGY_ID*) : Int32
+    {% if !flag?(:docs) %}
     C.QueryDisplayConfig(flags, numPathArrayElements, pathArray, numModeInfoArrayElements, modeInfoArray, currentTopologyId)
+    {% end %}
   end
 
   def displayConfigGetDeviceInfo(requestPacket : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER*) : Int32
+    {% if !flag?(:docs) %}
     C.DisplayConfigGetDeviceInfo(requestPacket)
+    {% end %}
   end
 
   def displayConfigSetDeviceInfo(setPacket : Win32cr::Devices::Display::DISPLAYCONFIG_DEVICE_INFO_HEADER*) : Int32
+    {% if !flag?(:docs) %}
     C.DisplayConfigSetDeviceInfo(setPacket)
+    {% end %}
   end
 
   def getAutoRotationState(pState : Win32cr::Devices::Display::AR_STATE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetAutoRotationState(pState)
+    {% end %}
   end
 
   def getDisplayAutoRotationPreferences(pOrientation : Win32cr::Devices::Display::ORIENTATION_PREFERENCE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetDisplayAutoRotationPreferences(pOrientation)
+    {% end %}
   end
 
   def setDisplayAutoRotationPreferences(orientation : Win32cr::Devices::Display::ORIENTATION_PREFERENCE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetDisplayAutoRotationPreferences(orientation)
+    {% end %}
   end
 
-  @[Link("dxva2")]
-  @[Link("gdi32")]
-  @[Link("user32")]
+  @[Link("dxva2.dll")]
+  @[Link("gdi32.dll")]
+  @[Link("user32.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun GetNumberOfPhysicalMonitorsFromHMONITOR(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, pdwNumberOfPhysicalMonitors : UInt32*) : Int32
@@ -4575,4 +4814,5 @@ module Win32cr::Devices::Display
     fun SetDisplayAutoRotationPreferences(orientation : Win32cr::Devices::Display::ORIENTATION_PREFERENCE) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

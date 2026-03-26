@@ -352,7 +352,7 @@ module Win32cr::NetworkManagement::WindowsConnectNow
   end
 
   @[Extern]
-  record IWCNDeviceVtbl,
+  record IWCNDeviceVtable,
     query_interface : Proc(IWCNDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWCNDevice*, UInt32),
     release : Proc(IWCNDevice*, UInt32),
@@ -370,7 +370,7 @@ module Win32cr::NetworkManagement::WindowsConnectNow
 
 
   @[Extern]
-  record IWCNDevice, lpVtbl : IWCNDeviceVtbl* do
+  record IWCNDevice, lpVtbl : IWCNDeviceVtable* do
     GUID = LibC::GUID.new(0xc100be9c_u32, 0xd33a_u16, 0x4a4b_u16, StaticArray[0xbf_u8, 0x23_u8, 0xbb_u8, 0xef_u8, 0x46_u8, 0x63_u8, 0xd0_u8, 0x17_u8])
     def query_interface(this : IWCNDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -418,7 +418,7 @@ module Win32cr::NetworkManagement::WindowsConnectNow
   end
 
   @[Extern]
-  record IWCNConnectNotifyVtbl,
+  record IWCNConnectNotifyVtable,
     query_interface : Proc(IWCNConnectNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWCNConnectNotify*, UInt32),
     release : Proc(IWCNConnectNotify*, UInt32),
@@ -427,7 +427,7 @@ module Win32cr::NetworkManagement::WindowsConnectNow
 
 
   @[Extern]
-  record IWCNConnectNotify, lpVtbl : IWCNConnectNotifyVtbl* do
+  record IWCNConnectNotify, lpVtbl : IWCNConnectNotifyVtable* do
     GUID = LibC::GUID.new(0xc100be9f_u32, 0xd33a_u16, 0x4a4b_u16, StaticArray[0xbf_u8, 0x23_u8, 0xbb_u8, 0xef_u8, 0x46_u8, 0x63_u8, 0xd0_u8, 0x17_u8])
     def query_interface(this : IWCNConnectNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

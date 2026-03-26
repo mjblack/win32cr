@@ -3121,9 +3121,9 @@ module Win32cr::NetworkManagement::Ndis
     end
 
 
-    # Nested Type IPv4Receive_e__Struct_
+    # Nested Type IPv6Transmit_e__Struct_
     @[Extern]
-    struct IPv4Receive_e__Struct_
+    struct IPv6Transmit_e__Struct_
     property encapsulation : UInt32
     property _bitfield : UInt32
     def initialize(@encapsulation : UInt32, @_bitfield : UInt32)
@@ -3131,9 +3131,9 @@ module Win32cr::NetworkManagement::Ndis
     end
 
 
-    # Nested Type IPv6Transmit_e__Struct_
+    # Nested Type IPv4Receive_e__Struct_
     @[Extern]
-    struct IPv6Transmit_e__Struct_
+    struct IPv4Receive_e__Struct_
     property encapsulation : UInt32
     property _bitfield : UInt32
     def initialize(@encapsulation : UInt32, @_bitfield : UInt32)
@@ -3160,18 +3160,18 @@ module Win32cr::NetworkManagement::Ndis
     property i_pv4_ah : IPv4AH_e__Struct_
     property i_pv4_esp : IPv4ESP_e__Struct_
 
-    # Nested Type IPv4AH_e__Struct_
+    # Nested Type IPv4ESP_e__Struct_
     @[Extern]
-    struct IPv4AH_e__Struct_
+    struct IPv4ESP_e__Struct_
     property _bitfield : UInt32
     def initialize(@_bitfield : UInt32)
     end
     end
 
 
-    # Nested Type IPv4ESP_e__Struct_
+    # Nested Type IPv4AH_e__Struct_
     @[Extern]
-    struct IPv4ESP_e__Struct_
+    struct IPv4AH_e__Struct_
     property _bitfield : UInt32
     def initialize(@_bitfield : UInt32)
     end
@@ -3199,17 +3199,6 @@ module Win32cr::NetworkManagement::Ndis
     property i_pv4 : IPv4_e__Struct_
     property i_pv6 : IPv6_e__Struct_
 
-    # Nested Type IPv4_e__Struct_
-    @[Extern]
-    struct IPv4_e__Struct_
-    property encapsulation : UInt32
-    property max_off_load_size : UInt32
-    property min_segment_count : UInt32
-    def initialize(@encapsulation : UInt32, @max_off_load_size : UInt32, @min_segment_count : UInt32)
-    end
-    end
-
-
     # Nested Type IPv6_e__Struct_
     @[Extern]
     struct IPv6_e__Struct_
@@ -3218,6 +3207,17 @@ module Win32cr::NetworkManagement::Ndis
     property min_segment_count : UInt32
     property _bitfield : UInt32
     def initialize(@encapsulation : UInt32, @max_off_load_size : UInt32, @min_segment_count : UInt32, @_bitfield : UInt32)
+    end
+    end
+
+
+    # Nested Type IPv4_e__Struct_
+    @[Extern]
+    struct IPv4_e__Struct_
+    property encapsulation : UInt32
+    property max_off_load_size : UInt32
+    property min_segment_count : UInt32
+    def initialize(@encapsulation : UInt32, @max_off_load_size : UInt32, @min_segment_count : UInt32)
     end
     end
 
@@ -3277,6 +3277,19 @@ module Win32cr::NetworkManagement::Ndis
     end
 
 
+    # Nested Type IPv6Transmit_e__Struct_
+    @[Extern]
+    struct IPv6Transmit_e__Struct_
+    property encapsulation : UInt32
+    property ip_extension_headers_supported : UInt32
+    property tcp_options_supported : UInt32
+    property tcp_checksum : UInt32
+    property udp_checksum : UInt32
+    def initialize(@encapsulation : UInt32, @ip_extension_headers_supported : UInt32, @tcp_options_supported : UInt32, @tcp_checksum : UInt32, @udp_checksum : UInt32)
+    end
+    end
+
+
     # Nested Type IPv4Receive_e__Struct_
     @[Extern]
     struct IPv4Receive_e__Struct_
@@ -3304,19 +3317,6 @@ module Win32cr::NetworkManagement::Ndis
     end
     end
 
-
-    # Nested Type IPv6Transmit_e__Struct_
-    @[Extern]
-    struct IPv6Transmit_e__Struct_
-    property encapsulation : UInt32
-    property ip_extension_headers_supported : UInt32
-    property tcp_options_supported : UInt32
-    property tcp_checksum : UInt32
-    property udp_checksum : UInt32
-    def initialize(@encapsulation : UInt32, @ip_extension_headers_supported : UInt32, @tcp_options_supported : UInt32, @tcp_checksum : UInt32, @udp_checksum : UInt32)
-    end
-    end
-
     def initialize(@i_pv4_transmit : IPv4Transmit_e__Struct_, @i_pv4_receive : IPv4Receive_e__Struct_, @i_pv6_transmit : IPv6Transmit_e__Struct_, @i_pv6_receive : IPv6Receive_e__Struct_)
     end
   end
@@ -3326,6 +3326,22 @@ module Win32cr::NetworkManagement::Ndis
     property supported : Supported_e__Struct_
     property i_pv4_ah : IPv4AH_e__Struct_
     property i_pv4_esp : IPv4ESP_e__Struct_
+
+    # Nested Type IPv4ESP_e__Struct_
+    @[Extern]
+    struct IPv4ESP_e__Struct_
+    property des : UInt32
+    property reserved : UInt32
+    property triple_des : UInt32
+    property null_esp : UInt32
+    property transport : UInt32
+    property tunnel : UInt32
+    property send : UInt32
+    property receive : UInt32
+    def initialize(@des : UInt32, @reserved : UInt32, @triple_des : UInt32, @null_esp : UInt32, @transport : UInt32, @tunnel : UInt32, @send : UInt32, @receive : UInt32)
+    end
+    end
+
 
     # Nested Type IPv4AH_e__Struct_
     @[Extern]
@@ -3353,22 +3369,6 @@ module Win32cr::NetworkManagement::Ndis
     end
     end
 
-
-    # Nested Type IPv4ESP_e__Struct_
-    @[Extern]
-    struct IPv4ESP_e__Struct_
-    property des : UInt32
-    property reserved : UInt32
-    property triple_des : UInt32
-    property null_esp : UInt32
-    property transport : UInt32
-    property tunnel : UInt32
-    property send : UInt32
-    property receive : UInt32
-    def initialize(@des : UInt32, @reserved : UInt32, @triple_des : UInt32, @null_esp : UInt32, @transport : UInt32, @tunnel : UInt32, @send : UInt32, @receive : UInt32)
-    end
-    end
-
     def initialize(@supported : Supported_e__Struct_, @i_pv4_ah : IPv4AH_e__Struct_, @i_pv4_esp : IPv4ESP_e__Struct_)
     end
   end
@@ -3377,17 +3377,6 @@ module Win32cr::NetworkManagement::Ndis
   struct NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2
     property i_pv4 : IPv4_e__Struct_
     property i_pv6 : IPv6_e__Struct_
-
-    # Nested Type IPv4_e__Struct_
-    @[Extern]
-    struct IPv4_e__Struct_
-    property encapsulation : UInt32
-    property max_off_load_size : UInt32
-    property min_segment_count : UInt32
-    def initialize(@encapsulation : UInt32, @max_off_load_size : UInt32, @min_segment_count : UInt32)
-    end
-    end
-
 
     # Nested Type IPv6_e__Struct_
     @[Extern]
@@ -3398,6 +3387,17 @@ module Win32cr::NetworkManagement::Ndis
     property ip_extension_headers_supported : UInt32
     property tcp_options_supported : UInt32
     def initialize(@encapsulation : UInt32, @max_off_load_size : UInt32, @min_segment_count : UInt32, @ip_extension_headers_supported : UInt32, @tcp_options_supported : UInt32)
+    end
+    end
+
+
+    # Nested Type IPv4_e__Struct_
+    @[Extern]
+    struct IPv4_e__Struct_
+    property encapsulation : UInt32
+    property max_off_load_size : UInt32
+    property min_segment_count : UInt32
+    def initialize(@encapsulation : UInt32, @max_off_load_size : UInt32, @min_segment_count : UInt32)
     end
     end
 

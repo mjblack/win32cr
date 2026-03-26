@@ -33,22 +33,31 @@ module Win32cr::System::Performance::HardwareCounterProfiling
   end
 
   def enableThreadProfiling(thread_handle : Win32cr::Foundation::HANDLE, flags : UInt32, hardware_counters : UInt64, performance_data_handle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.EnableThreadProfiling(thread_handle, flags, hardware_counters, performance_data_handle)
+    {% end %}
   end
 
   def disableThreadProfiling(performance_data_handle : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.DisableThreadProfiling(performance_data_handle)
+    {% end %}
   end
 
   def queryThreadProfiling(thread_handle : Win32cr::Foundation::HANDLE, enabled : Win32cr::Foundation::BOOLEAN*) : UInt32
+    {% if !flag?(:docs) %}
     C.QueryThreadProfiling(thread_handle, enabled)
+    {% end %}
   end
 
   def readThreadProfilingData(performance_data_handle : Win32cr::Foundation::HANDLE, flags : UInt32, performance_data : Win32cr::System::Performance::HardwareCounterProfiling::PERFORMANCE_DATA*) : UInt32
+    {% if !flag?(:docs) %}
     C.ReadThreadProfilingData(performance_data_handle, flags, performance_data)
+    {% end %}
   end
 
-  @[Link("kernel32")]
+  @[Link("kernel32.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun EnableThreadProfiling(thread_handle : Win32cr::Foundation::HANDLE, flags : UInt32, hardware_counters : UInt64, performance_data_handle : Win32cr::Foundation::HANDLE*) : UInt32
@@ -63,4 +72,5 @@ module Win32cr::System::Performance::HardwareCounterProfiling
     fun ReadThreadProfilingData(performance_data_handle : Win32cr::Foundation::HANDLE, flags : UInt32, performance_data : Win32cr::System::Performance::HardwareCounterProfiling::PERFORMANCE_DATA*) : UInt32
 
   end
+  {% end %}
 end

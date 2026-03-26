@@ -1369,22 +1369,22 @@ module Win32cr::Graphics::Direct3D10
     property anonymous1 : Anonymous1_e__Union_
     property anonymous2 : Anonymous2_e__Union_
 
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property first_element : UInt32
-    property element_offset : UInt32
-    def initialize(@first_element : UInt32, @element_offset : UInt32)
-    end
-    end
-
-
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
     struct Anonymous2_e__Union_
     property num_elements : UInt32
     property element_width : UInt32
     def initialize(@num_elements : UInt32, @element_width : UInt32)
+    end
+    end
+
+
+    # Nested Type Anonymous1_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous1_e__Union_
+    property first_element : UInt32
+    property element_offset : UInt32
+    def initialize(@first_element : UInt32, @element_offset : UInt32)
     end
     end
 
@@ -2180,7 +2180,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10DeviceChildVtbl,
+  record ID3D10DeviceChildVtable,
     query_interface : Proc(ID3D10DeviceChild*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10DeviceChild*, UInt32),
     release : Proc(ID3D10DeviceChild*, UInt32),
@@ -2191,7 +2191,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10DeviceChild, lpVtbl : ID3D10DeviceChildVtbl* do
+  record ID3D10DeviceChild, lpVtbl : ID3D10DeviceChildVtable* do
     GUID = LibC::GUID.new(0x9b7e4c00_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10DeviceChild*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2218,7 +2218,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10DepthStencilStateVtbl,
+  record ID3D10DepthStencilStateVtable,
     query_interface : Proc(ID3D10DepthStencilState*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10DepthStencilState*, UInt32),
     release : Proc(ID3D10DepthStencilState*, UInt32),
@@ -2230,7 +2230,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10DepthStencilState, lpVtbl : ID3D10DepthStencilStateVtbl* do
+  record ID3D10DepthStencilState, lpVtbl : ID3D10DepthStencilStateVtable* do
     GUID = LibC::GUID.new(0x2b4b1cc8_u32, 0xa4ad_u16, 0x41f8_u16, StaticArray[0x83_u8, 0x22_u8, 0xca_u8, 0x86_u8, 0xfc_u8, 0x3e_u8, 0xc6_u8, 0x75_u8])
     def query_interface(this : ID3D10DepthStencilState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2260,7 +2260,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10BlendStateVtbl,
+  record ID3D10BlendStateVtable,
     query_interface : Proc(ID3D10BlendState*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10BlendState*, UInt32),
     release : Proc(ID3D10BlendState*, UInt32),
@@ -2272,7 +2272,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10BlendState, lpVtbl : ID3D10BlendStateVtbl* do
+  record ID3D10BlendState, lpVtbl : ID3D10BlendStateVtable* do
     GUID = LibC::GUID.new(0xedad8d19_u32, 0x8a35_u16, 0x4d6d_u16, StaticArray[0x85_u8, 0x66_u8, 0x2e_u8, 0xa2_u8, 0x76_u8, 0xcd_u8, 0xe1_u8, 0x61_u8])
     def query_interface(this : ID3D10BlendState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2302,7 +2302,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10RasterizerStateVtbl,
+  record ID3D10RasterizerStateVtable,
     query_interface : Proc(ID3D10RasterizerState*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10RasterizerState*, UInt32),
     release : Proc(ID3D10RasterizerState*, UInt32),
@@ -2314,7 +2314,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10RasterizerState, lpVtbl : ID3D10RasterizerStateVtbl* do
+  record ID3D10RasterizerState, lpVtbl : ID3D10RasterizerStateVtable* do
     GUID = LibC::GUID.new(0xa2a07292_u32, 0x89af_u16, 0x4345_u16, StaticArray[0xbe_u8, 0x2e_u8, 0xc5_u8, 0x3d_u8, 0x9f_u8, 0xbb_u8, 0x6e_u8, 0x9f_u8])
     def query_interface(this : ID3D10RasterizerState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2344,7 +2344,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10ResourceVtbl,
+  record ID3D10ResourceVtable,
     query_interface : Proc(ID3D10Resource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10Resource*, UInt32),
     release : Proc(ID3D10Resource*, UInt32),
@@ -2358,7 +2358,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10Resource, lpVtbl : ID3D10ResourceVtbl* do
+  record ID3D10Resource, lpVtbl : ID3D10ResourceVtable* do
     GUID = LibC::GUID.new(0x9b7e4c01_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Resource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2394,7 +2394,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10BufferVtbl,
+  record ID3D10BufferVtable,
     query_interface : Proc(ID3D10Buffer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10Buffer*, UInt32),
     release : Proc(ID3D10Buffer*, UInt32),
@@ -2411,7 +2411,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10Buffer, lpVtbl : ID3D10BufferVtbl* do
+  record ID3D10Buffer, lpVtbl : ID3D10BufferVtable* do
     GUID = LibC::GUID.new(0x9b7e4c02_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Buffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2456,7 +2456,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10Texture1DVtbl,
+  record ID3D10Texture1DVtable,
     query_interface : Proc(ID3D10Texture1D*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10Texture1D*, UInt32),
     release : Proc(ID3D10Texture1D*, UInt32),
@@ -2473,7 +2473,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10Texture1D, lpVtbl : ID3D10Texture1DVtbl* do
+  record ID3D10Texture1D, lpVtbl : ID3D10Texture1DVtable* do
     GUID = LibC::GUID.new(0x9b7e4c03_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Texture1D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2518,7 +2518,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10Texture2DVtbl,
+  record ID3D10Texture2DVtable,
     query_interface : Proc(ID3D10Texture2D*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10Texture2D*, UInt32),
     release : Proc(ID3D10Texture2D*, UInt32),
@@ -2535,7 +2535,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10Texture2D, lpVtbl : ID3D10Texture2DVtbl* do
+  record ID3D10Texture2D, lpVtbl : ID3D10Texture2DVtable* do
     GUID = LibC::GUID.new(0x9b7e4c04_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Texture2D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2580,7 +2580,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10Texture3DVtbl,
+  record ID3D10Texture3DVtable,
     query_interface : Proc(ID3D10Texture3D*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10Texture3D*, UInt32),
     release : Proc(ID3D10Texture3D*, UInt32),
@@ -2597,7 +2597,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10Texture3D, lpVtbl : ID3D10Texture3DVtbl* do
+  record ID3D10Texture3D, lpVtbl : ID3D10Texture3DVtable* do
     GUID = LibC::GUID.new(0x9b7e4c05_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Texture3D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2642,7 +2642,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10ViewVtbl,
+  record ID3D10ViewVtable,
     query_interface : Proc(ID3D10View*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10View*, UInt32),
     release : Proc(ID3D10View*, UInt32),
@@ -2654,7 +2654,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10View, lpVtbl : ID3D10ViewVtbl* do
+  record ID3D10View, lpVtbl : ID3D10ViewVtable* do
     GUID = LibC::GUID.new(0xc902b03f_u32, 0x60a7_u16, 0x49ba_u16, StaticArray[0x99_u8, 0x36_u8, 0x2a_u8, 0x3a_u8, 0xb3_u8, 0x7a_u8, 0x7e_u8, 0x33_u8])
     def query_interface(this : ID3D10View*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2684,7 +2684,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10ShaderResourceViewVtbl,
+  record ID3D10ShaderResourceViewVtable,
     query_interface : Proc(ID3D10ShaderResourceView*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10ShaderResourceView*, UInt32),
     release : Proc(ID3D10ShaderResourceView*, UInt32),
@@ -2697,7 +2697,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10ShaderResourceView, lpVtbl : ID3D10ShaderResourceViewVtbl* do
+  record ID3D10ShaderResourceView, lpVtbl : ID3D10ShaderResourceViewVtable* do
     GUID = LibC::GUID.new(0x9b7e4c07_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10ShaderResourceView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2730,7 +2730,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10RenderTargetViewVtbl,
+  record ID3D10RenderTargetViewVtable,
     query_interface : Proc(ID3D10RenderTargetView*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10RenderTargetView*, UInt32),
     release : Proc(ID3D10RenderTargetView*, UInt32),
@@ -2743,7 +2743,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10RenderTargetView, lpVtbl : ID3D10RenderTargetViewVtbl* do
+  record ID3D10RenderTargetView, lpVtbl : ID3D10RenderTargetViewVtable* do
     GUID = LibC::GUID.new(0x9b7e4c08_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10RenderTargetView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2776,7 +2776,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10DepthStencilViewVtbl,
+  record ID3D10DepthStencilViewVtable,
     query_interface : Proc(ID3D10DepthStencilView*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10DepthStencilView*, UInt32),
     release : Proc(ID3D10DepthStencilView*, UInt32),
@@ -2789,7 +2789,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10DepthStencilView, lpVtbl : ID3D10DepthStencilViewVtbl* do
+  record ID3D10DepthStencilView, lpVtbl : ID3D10DepthStencilViewVtable* do
     GUID = LibC::GUID.new(0x9b7e4c09_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10DepthStencilView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2822,7 +2822,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10VertexShaderVtbl,
+  record ID3D10VertexShaderVtable,
     query_interface : Proc(ID3D10VertexShader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10VertexShader*, UInt32),
     release : Proc(ID3D10VertexShader*, UInt32),
@@ -2833,7 +2833,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10VertexShader, lpVtbl : ID3D10VertexShaderVtbl* do
+  record ID3D10VertexShader, lpVtbl : ID3D10VertexShaderVtable* do
     GUID = LibC::GUID.new(0x9b7e4c0a_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10VertexShader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2860,7 +2860,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10GeometryShaderVtbl,
+  record ID3D10GeometryShaderVtable,
     query_interface : Proc(ID3D10GeometryShader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10GeometryShader*, UInt32),
     release : Proc(ID3D10GeometryShader*, UInt32),
@@ -2871,7 +2871,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10GeometryShader, lpVtbl : ID3D10GeometryShaderVtbl* do
+  record ID3D10GeometryShader, lpVtbl : ID3D10GeometryShaderVtable* do
     GUID = LibC::GUID.new(0x6316be88_u32, 0x54cd_u16, 0x4040_u16, StaticArray[0xab_u8, 0x44_u8, 0x20_u8, 0x46_u8, 0x1b_u8, 0xc8_u8, 0x1f_u8, 0x68_u8])
     def query_interface(this : ID3D10GeometryShader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2898,7 +2898,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10PixelShaderVtbl,
+  record ID3D10PixelShaderVtable,
     query_interface : Proc(ID3D10PixelShader*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10PixelShader*, UInt32),
     release : Proc(ID3D10PixelShader*, UInt32),
@@ -2909,7 +2909,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10PixelShader, lpVtbl : ID3D10PixelShaderVtbl* do
+  record ID3D10PixelShader, lpVtbl : ID3D10PixelShaderVtable* do
     GUID = LibC::GUID.new(0x4968b601_u32, 0x9d00_u16, 0x4cde_u16, StaticArray[0x83_u8, 0x46_u8, 0x8e_u8, 0x7f_u8, 0x67_u8, 0x58_u8, 0x19_u8, 0xb6_u8])
     def query_interface(this : ID3D10PixelShader*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2936,7 +2936,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10InputLayoutVtbl,
+  record ID3D10InputLayoutVtable,
     query_interface : Proc(ID3D10InputLayout*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10InputLayout*, UInt32),
     release : Proc(ID3D10InputLayout*, UInt32),
@@ -2947,7 +2947,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10InputLayout, lpVtbl : ID3D10InputLayoutVtbl* do
+  record ID3D10InputLayout, lpVtbl : ID3D10InputLayoutVtable* do
     GUID = LibC::GUID.new(0x9b7e4c0b_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10InputLayout*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2974,7 +2974,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10SamplerStateVtbl,
+  record ID3D10SamplerStateVtable,
     query_interface : Proc(ID3D10SamplerState*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10SamplerState*, UInt32),
     release : Proc(ID3D10SamplerState*, UInt32),
@@ -2986,7 +2986,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10SamplerState, lpVtbl : ID3D10SamplerStateVtbl* do
+  record ID3D10SamplerState, lpVtbl : ID3D10SamplerStateVtable* do
     GUID = LibC::GUID.new(0x9b7e4c0c_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10SamplerState*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3016,7 +3016,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10AsynchronousVtbl,
+  record ID3D10AsynchronousVtable,
     query_interface : Proc(ID3D10Asynchronous*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10Asynchronous*, UInt32),
     release : Proc(ID3D10Asynchronous*, UInt32),
@@ -3031,7 +3031,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10Asynchronous, lpVtbl : ID3D10AsynchronousVtbl* do
+  record ID3D10Asynchronous, lpVtbl : ID3D10AsynchronousVtable* do
     GUID = LibC::GUID.new(0x9b7e4c0d_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Asynchronous*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3070,7 +3070,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10QueryVtbl,
+  record ID3D10QueryVtable,
     query_interface : Proc(ID3D10Query*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10Query*, UInt32),
     release : Proc(ID3D10Query*, UInt32),
@@ -3086,7 +3086,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10Query, lpVtbl : ID3D10QueryVtbl* do
+  record ID3D10Query, lpVtbl : ID3D10QueryVtable* do
     GUID = LibC::GUID.new(0x9b7e4c0e_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Query*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3128,7 +3128,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10PredicateVtbl,
+  record ID3D10PredicateVtable,
     query_interface : Proc(ID3D10Predicate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10Predicate*, UInt32),
     release : Proc(ID3D10Predicate*, UInt32),
@@ -3144,7 +3144,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10Predicate, lpVtbl : ID3D10PredicateVtbl* do
+  record ID3D10Predicate, lpVtbl : ID3D10PredicateVtable* do
     GUID = LibC::GUID.new(0x9b7e4c10_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Predicate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3186,7 +3186,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10CounterVtbl,
+  record ID3D10CounterVtable,
     query_interface : Proc(ID3D10Counter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10Counter*, UInt32),
     release : Proc(ID3D10Counter*, UInt32),
@@ -3202,7 +3202,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10Counter, lpVtbl : ID3D10CounterVtbl* do
+  record ID3D10Counter, lpVtbl : ID3D10CounterVtable* do
     GUID = LibC::GUID.new(0x9b7e4c11_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Counter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3244,7 +3244,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10DeviceVtbl,
+  record ID3D10DeviceVtable,
     query_interface : Proc(ID3D10Device*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10Device*, UInt32),
     release : Proc(ID3D10Device*, UInt32),
@@ -3346,7 +3346,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10Device, lpVtbl : ID3D10DeviceVtbl* do
+  record ID3D10Device, lpVtbl : ID3D10DeviceVtable* do
     GUID = LibC::GUID.new(0x9b7e4c0f_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Device*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3646,7 +3646,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10MultithreadVtbl,
+  record ID3D10MultithreadVtable,
     query_interface : Proc(ID3D10Multithread*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10Multithread*, UInt32),
     release : Proc(ID3D10Multithread*, UInt32),
@@ -3657,7 +3657,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10Multithread, lpVtbl : ID3D10MultithreadVtbl* do
+  record ID3D10Multithread, lpVtbl : ID3D10MultithreadVtable* do
     GUID = LibC::GUID.new(0x9b7e4e00_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Multithread*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3684,7 +3684,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10DebugVtbl,
+  record ID3D10DebugVtable,
     query_interface : Proc(ID3D10Debug*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10Debug*, UInt32),
     release : Proc(ID3D10Debug*, UInt32),
@@ -3698,7 +3698,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10Debug, lpVtbl : ID3D10DebugVtbl* do
+  record ID3D10Debug, lpVtbl : ID3D10DebugVtable* do
     GUID = LibC::GUID.new(0x9b7e4e01_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Debug*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3734,7 +3734,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10SwitchToRefVtbl,
+  record ID3D10SwitchToRefVtable,
     query_interface : Proc(ID3D10SwitchToRef*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10SwitchToRef*, UInt32),
     release : Proc(ID3D10SwitchToRef*, UInt32),
@@ -3743,7 +3743,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10SwitchToRef, lpVtbl : ID3D10SwitchToRefVtbl* do
+  record ID3D10SwitchToRef, lpVtbl : ID3D10SwitchToRefVtable* do
     GUID = LibC::GUID.new(0x9b7e4e02_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10SwitchToRef*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3764,7 +3764,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10InfoQueueVtbl,
+  record ID3D10InfoQueueVtable,
     query_interface : Proc(ID3D10InfoQueue*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10InfoQueue*, UInt32),
     release : Proc(ID3D10InfoQueue*, UInt32),
@@ -3806,7 +3806,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10InfoQueue, lpVtbl : ID3D10InfoQueueVtbl* do
+  record ID3D10InfoQueue, lpVtbl : ID3D10InfoQueueVtable* do
     GUID = LibC::GUID.new(0x1b940b17_u32, 0x2642_u16, 0x4d1f_u16, StaticArray[0xab_u8, 0x1f_u8, 0xb9_u8, 0x9b_u8, 0xad_u8, 0xc_u8, 0x39_u8, 0x5f_u8])
     def query_interface(this : ID3D10InfoQueue*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3926,7 +3926,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10ShaderReflectionTypeVtbl,
+  record ID3D10ShaderReflectionTypeVtable,
     get_desc : Proc(ID3D10ShaderReflectionType*, Win32cr::Graphics::Direct3D10::D3D10_SHADER_TYPE_DESC*, Win32cr::Foundation::HRESULT),
     get_member_type_by_index : Proc(ID3D10ShaderReflectionType*, UInt32, Void*),
     get_member_type_by_name : Proc(ID3D10ShaderReflectionType*, Win32cr::Foundation::PSTR, Void*),
@@ -3934,7 +3934,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10ShaderReflectionType, lpVtbl : ID3D10ShaderReflectionTypeVtbl* do
+  record ID3D10ShaderReflectionType, lpVtbl : ID3D10ShaderReflectionTypeVtable* do
     GUID = LibC::GUID.new(0xc530ad7d_u32, 0x9b16_u16, 0x4395_u16, StaticArray[0xa9_u8, 0x79_u8, 0xba_u8, 0x2e_u8, 0xcf_u8, 0xf8_u8, 0x3a_u8, 0xdd_u8])
     def get_desc(this : ID3D10ShaderReflectionType*, pDesc : Win32cr::Graphics::Direct3D10::D3D10_SHADER_TYPE_DESC*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_desc.call(this, pDesc)
@@ -3952,13 +3952,13 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10ShaderReflectionVariableVtbl,
+  record ID3D10ShaderReflectionVariableVtable,
     get_desc : Proc(ID3D10ShaderReflectionVariable*, Win32cr::Graphics::Direct3D10::D3D10_SHADER_VARIABLE_DESC*, Win32cr::Foundation::HRESULT),
     get_type : Proc(ID3D10ShaderReflectionVariable*, Void*)
 
 
   @[Extern]
-  record ID3D10ShaderReflectionVariable, lpVtbl : ID3D10ShaderReflectionVariableVtbl* do
+  record ID3D10ShaderReflectionVariable, lpVtbl : ID3D10ShaderReflectionVariableVtable* do
     GUID = LibC::GUID.new(0x1bf63c95_u32, 0x2650_u16, 0x405d_u16, StaticArray[0x99_u8, 0xc1_u8, 0x36_u8, 0x36_u8, 0xbd_u8, 0x1d_u8, 0xa0_u8, 0xa1_u8])
     def get_desc(this : ID3D10ShaderReflectionVariable*, pDesc : Win32cr::Graphics::Direct3D10::D3D10_SHADER_VARIABLE_DESC*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_desc.call(this, pDesc)
@@ -3970,14 +3970,14 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10ShaderReflectionConstantBufferVtbl,
+  record ID3D10ShaderReflectionConstantBufferVtable,
     get_desc : Proc(ID3D10ShaderReflectionConstantBuffer*, Win32cr::Graphics::Direct3D10::D3D10_SHADER_BUFFER_DESC*, Win32cr::Foundation::HRESULT),
     get_variable_by_index : Proc(ID3D10ShaderReflectionConstantBuffer*, UInt32, Void*),
     get_variable_by_name : Proc(ID3D10ShaderReflectionConstantBuffer*, Win32cr::Foundation::PSTR, Void*)
 
 
   @[Extern]
-  record ID3D10ShaderReflectionConstantBuffer, lpVtbl : ID3D10ShaderReflectionConstantBufferVtbl* do
+  record ID3D10ShaderReflectionConstantBuffer, lpVtbl : ID3D10ShaderReflectionConstantBufferVtable* do
     GUID = LibC::GUID.new(0x66c66a94_u32, 0xdddd_u16, 0x4b62_u16, StaticArray[0xa6_u8, 0x6a_u8, 0xf0_u8, 0xda_u8, 0x33_u8, 0xc2_u8, 0xb4_u8, 0xd0_u8])
     def get_desc(this : ID3D10ShaderReflectionConstantBuffer*, pDesc : Win32cr::Graphics::Direct3D10::D3D10_SHADER_BUFFER_DESC*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_desc.call(this, pDesc)
@@ -3992,7 +3992,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10ShaderReflectionVtbl,
+  record ID3D10ShaderReflectionVtable,
     query_interface : Proc(ID3D10ShaderReflection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10ShaderReflection*, UInt32),
     release : Proc(ID3D10ShaderReflection*, UInt32),
@@ -4005,7 +4005,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10ShaderReflection, lpVtbl : ID3D10ShaderReflectionVtbl* do
+  record ID3D10ShaderReflection, lpVtbl : ID3D10ShaderReflectionVtable* do
     GUID = LibC::GUID.new(0xd40e20b6_u32, 0xf8f7_u16, 0x42ad_u16, StaticArray[0xab_u8, 0x20_u8, 0x4b_u8, 0xaf_u8, 0x8f_u8, 0x15_u8, 0xdf_u8, 0xaa_u8])
     def query_interface(this : ID3D10ShaderReflection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4038,7 +4038,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10StateBlockVtbl,
+  record ID3D10StateBlockVtable,
     query_interface : Proc(ID3D10StateBlock*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10StateBlock*, UInt32),
     release : Proc(ID3D10StateBlock*, UInt32),
@@ -4049,7 +4049,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10StateBlock, lpVtbl : ID3D10StateBlockVtbl* do
+  record ID3D10StateBlock, lpVtbl : ID3D10StateBlockVtable* do
     GUID = LibC::GUID.new(0x803425a_u32, 0x57f5_u16, 0x4dd6_u16, StaticArray[0x94_u8, 0x65_u8, 0xa8_u8, 0x75_u8, 0x70_u8, 0x83_u8, 0x4a_u8, 0x8_u8])
     def query_interface(this : ID3D10StateBlock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4076,7 +4076,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectTypeVtbl,
+  record ID3D10EffectTypeVtable,
     is_valid : Proc(ID3D10EffectType*, Win32cr::Foundation::BOOL),
     get_desc : Proc(ID3D10EffectType*, Win32cr::Graphics::Direct3D10::D3D10_EFFECT_TYPE_DESC*, Win32cr::Foundation::HRESULT),
     get_member_type_by_index : Proc(ID3D10EffectType*, UInt32, Void*),
@@ -4087,7 +4087,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10EffectType, lpVtbl : ID3D10EffectTypeVtbl* do
+  record ID3D10EffectType, lpVtbl : ID3D10EffectTypeVtable* do
     GUID = LibC::GUID.new(0x4e9e1ddc_u32, 0xcd9d_u16, 0x4772_u16, StaticArray[0xa8_u8, 0x37_u8, 0x0_u8, 0x18_u8, 0xb_u8, 0x9b_u8, 0x88_u8, 0xfd_u8])
     def is_valid(this : ID3D10EffectType*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_valid.call(this)
@@ -4114,7 +4114,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectVariableVtbl,
+  record ID3D10EffectVariableVtable,
     is_valid : Proc(ID3D10EffectVariable*, Win32cr::Foundation::BOOL),
     get_type : Proc(ID3D10EffectVariable*, Void*),
     get_desc : Proc(ID3D10EffectVariable*, Win32cr::Graphics::Direct3D10::D3D10_EFFECT_VARIABLE_DESC*, Win32cr::Foundation::HRESULT),
@@ -4143,7 +4143,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10EffectVariable, lpVtbl : ID3D10EffectVariableVtbl* do
+  record ID3D10EffectVariable, lpVtbl : ID3D10EffectVariableVtable* do
     GUID = LibC::GUID.new(0xae897105_u32, 0xe6_u16, 0x45bf_u16, StaticArray[0xbb_u8, 0x8e_u8, 0x28_u8, 0x1d_u8, 0xd6_u8, 0xdb_u8, 0x8e_u8, 0x1b_u8])
     def is_valid(this : ID3D10EffectVariable*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_valid.call(this)
@@ -4224,7 +4224,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectScalarVariableVtbl,
+  record ID3D10EffectScalarVariableVtable,
     is_valid : Proc(ID3D10EffectScalarVariable*, Win32cr::Foundation::BOOL),
     get_type : Proc(ID3D10EffectScalarVariable*, Void*),
     get_desc : Proc(ID3D10EffectScalarVariable*, Win32cr::Graphics::Direct3D10::D3D10_EFFECT_VARIABLE_DESC*, Win32cr::Foundation::HRESULT),
@@ -4265,7 +4265,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10EffectScalarVariable, lpVtbl : ID3D10EffectScalarVariableVtbl* do
+  record ID3D10EffectScalarVariable, lpVtbl : ID3D10EffectScalarVariableVtable* do
     GUID = LibC::GUID.new(0xe48f7b_u32, 0xd2c8_u16, 0x49e8_u16, StaticArray[0xa8_u8, 0x6c_u8, 0x2_u8, 0x2d_u8, 0xee_u8, 0x53_u8, 0x43_u8, 0x1f_u8])
     def is_valid(this : ID3D10EffectScalarVariable*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_valid.call(this)
@@ -4382,7 +4382,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectVectorVariableVtbl,
+  record ID3D10EffectVectorVariableVtable,
     is_valid : Proc(ID3D10EffectVectorVariable*, Win32cr::Foundation::BOOL),
     get_type : Proc(ID3D10EffectVectorVariable*, Void*),
     get_desc : Proc(ID3D10EffectVectorVariable*, Win32cr::Graphics::Direct3D10::D3D10_EFFECT_VARIABLE_DESC*, Win32cr::Foundation::HRESULT),
@@ -4423,7 +4423,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10EffectVectorVariable, lpVtbl : ID3D10EffectVectorVariableVtbl* do
+  record ID3D10EffectVectorVariable, lpVtbl : ID3D10EffectVectorVariableVtable* do
     GUID = LibC::GUID.new(0x62b98c44_u32, 0x1f82_u16, 0x4c67_u16, StaticArray[0xbc_u8, 0xd0_u8, 0x72_u8, 0xcf_u8, 0x8f_u8, 0x21_u8, 0x7e_u8, 0x81_u8])
     def is_valid(this : ID3D10EffectVectorVariable*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_valid.call(this)
@@ -4540,7 +4540,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectMatrixVariableVtbl,
+  record ID3D10EffectMatrixVariableVtable,
     is_valid : Proc(ID3D10EffectMatrixVariable*, Win32cr::Foundation::BOOL),
     get_type : Proc(ID3D10EffectMatrixVariable*, Void*),
     get_desc : Proc(ID3D10EffectMatrixVariable*, Win32cr::Graphics::Direct3D10::D3D10_EFFECT_VARIABLE_DESC*, Win32cr::Foundation::HRESULT),
@@ -4577,7 +4577,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10EffectMatrixVariable, lpVtbl : ID3D10EffectMatrixVariableVtbl* do
+  record ID3D10EffectMatrixVariable, lpVtbl : ID3D10EffectMatrixVariableVtable* do
     GUID = LibC::GUID.new(0x50666c24_u32, 0xb82f_u16, 0x4eed_u16, StaticArray[0xa1_u8, 0x72_u8, 0x5b_u8, 0x6e_u8, 0x7e_u8, 0x85_u8, 0x22_u8, 0xe0_u8])
     def is_valid(this : ID3D10EffectMatrixVariable*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_valid.call(this)
@@ -4682,7 +4682,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectStringVariableVtbl,
+  record ID3D10EffectStringVariableVtable,
     is_valid : Proc(ID3D10EffectStringVariable*, Win32cr::Foundation::BOOL),
     get_type : Proc(ID3D10EffectStringVariable*, Void*),
     get_desc : Proc(ID3D10EffectStringVariable*, Win32cr::Graphics::Direct3D10::D3D10_EFFECT_VARIABLE_DESC*, Win32cr::Foundation::HRESULT),
@@ -4713,7 +4713,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10EffectStringVariable, lpVtbl : ID3D10EffectStringVariableVtbl* do
+  record ID3D10EffectStringVariable, lpVtbl : ID3D10EffectStringVariableVtable* do
     GUID = LibC::GUID.new(0x71417501_u32, 0x8df9_u16, 0x4e0a_u16, StaticArray[0xa7_u8, 0x8a_u8, 0x25_u8, 0x5f_u8, 0x97_u8, 0x56_u8, 0xba_u8, 0xff_u8])
     def is_valid(this : ID3D10EffectStringVariable*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_valid.call(this)
@@ -4800,7 +4800,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectShaderResourceVariableVtbl,
+  record ID3D10EffectShaderResourceVariableVtable,
     is_valid : Proc(ID3D10EffectShaderResourceVariable*, Win32cr::Foundation::BOOL),
     get_type : Proc(ID3D10EffectShaderResourceVariable*, Void*),
     get_desc : Proc(ID3D10EffectShaderResourceVariable*, Win32cr::Graphics::Direct3D10::D3D10_EFFECT_VARIABLE_DESC*, Win32cr::Foundation::HRESULT),
@@ -4833,7 +4833,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10EffectShaderResourceVariable, lpVtbl : ID3D10EffectShaderResourceVariableVtbl* do
+  record ID3D10EffectShaderResourceVariable, lpVtbl : ID3D10EffectShaderResourceVariableVtable* do
     GUID = LibC::GUID.new(0xc0a7157b_u32, 0xd872_u16, 0x4b1d_u16, StaticArray[0x80_u8, 0x73_u8, 0xef_u8, 0xc2_u8, 0xac_u8, 0xd4_u8, 0xb1_u8, 0xfc_u8])
     def is_valid(this : ID3D10EffectShaderResourceVariable*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_valid.call(this)
@@ -4926,7 +4926,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectRenderTargetViewVariableVtbl,
+  record ID3D10EffectRenderTargetViewVariableVtable,
     is_valid : Proc(ID3D10EffectRenderTargetViewVariable*, Win32cr::Foundation::BOOL),
     get_type : Proc(ID3D10EffectRenderTargetViewVariable*, Void*),
     get_desc : Proc(ID3D10EffectRenderTargetViewVariable*, Win32cr::Graphics::Direct3D10::D3D10_EFFECT_VARIABLE_DESC*, Win32cr::Foundation::HRESULT),
@@ -4959,7 +4959,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10EffectRenderTargetViewVariable, lpVtbl : ID3D10EffectRenderTargetViewVariableVtbl* do
+  record ID3D10EffectRenderTargetViewVariable, lpVtbl : ID3D10EffectRenderTargetViewVariableVtable* do
     GUID = LibC::GUID.new(0x28ca0cc3_u32, 0xc2c9_u16, 0x40bb_u16, StaticArray[0xb5_u8, 0x7f_u8, 0x67_u8, 0xb7_u8, 0x37_u8, 0x12_u8, 0x2b_u8, 0x17_u8])
     def is_valid(this : ID3D10EffectRenderTargetViewVariable*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_valid.call(this)
@@ -5052,7 +5052,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectDepthStencilViewVariableVtbl,
+  record ID3D10EffectDepthStencilViewVariableVtable,
     is_valid : Proc(ID3D10EffectDepthStencilViewVariable*, Win32cr::Foundation::BOOL),
     get_type : Proc(ID3D10EffectDepthStencilViewVariable*, Void*),
     get_desc : Proc(ID3D10EffectDepthStencilViewVariable*, Win32cr::Graphics::Direct3D10::D3D10_EFFECT_VARIABLE_DESC*, Win32cr::Foundation::HRESULT),
@@ -5085,7 +5085,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10EffectDepthStencilViewVariable, lpVtbl : ID3D10EffectDepthStencilViewVariableVtbl* do
+  record ID3D10EffectDepthStencilViewVariable, lpVtbl : ID3D10EffectDepthStencilViewVariableVtable* do
     GUID = LibC::GUID.new(0x3e02c918_u32, 0xcc79_u16, 0x4985_u16, StaticArray[0xb6_u8, 0x22_u8, 0x2d_u8, 0x92_u8, 0xad_u8, 0x70_u8, 0x16_u8, 0x23_u8])
     def is_valid(this : ID3D10EffectDepthStencilViewVariable*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_valid.call(this)
@@ -5178,7 +5178,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectConstantBufferVtbl,
+  record ID3D10EffectConstantBufferVtable,
     is_valid : Proc(ID3D10EffectConstantBuffer*, Win32cr::Foundation::BOOL),
     get_type : Proc(ID3D10EffectConstantBuffer*, Void*),
     get_desc : Proc(ID3D10EffectConstantBuffer*, Win32cr::Graphics::Direct3D10::D3D10_EFFECT_VARIABLE_DESC*, Win32cr::Foundation::HRESULT),
@@ -5211,7 +5211,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10EffectConstantBuffer, lpVtbl : ID3D10EffectConstantBufferVtbl* do
+  record ID3D10EffectConstantBuffer, lpVtbl : ID3D10EffectConstantBufferVtable* do
     GUID = LibC::GUID.new(0x56648f4d_u32, 0xcc8b_u16, 0x4444_u16, StaticArray[0xa5_u8, 0xad_u8, 0xb5_u8, 0xa3_u8, 0xd7_u8, 0x6e_u8, 0x91_u8, 0xb3_u8])
     def is_valid(this : ID3D10EffectConstantBuffer*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_valid.call(this)
@@ -5304,7 +5304,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectShaderVariableVtbl,
+  record ID3D10EffectShaderVariableVtable,
     is_valid : Proc(ID3D10EffectShaderVariable*, Win32cr::Foundation::BOOL),
     get_type : Proc(ID3D10EffectShaderVariable*, Void*),
     get_desc : Proc(ID3D10EffectShaderVariable*, Win32cr::Graphics::Direct3D10::D3D10_EFFECT_VARIABLE_DESC*, Win32cr::Foundation::HRESULT),
@@ -5339,7 +5339,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10EffectShaderVariable, lpVtbl : ID3D10EffectShaderVariableVtbl* do
+  record ID3D10EffectShaderVariable, lpVtbl : ID3D10EffectShaderVariableVtable* do
     GUID = LibC::GUID.new(0x80849279_u32, 0xc799_u16, 0x4797_u16, StaticArray[0x8c_u8, 0x33_u8, 0x4_u8, 0x7_u8, 0xa0_u8, 0x7d_u8, 0x9e_u8, 0x6_u8])
     def is_valid(this : ID3D10EffectShaderVariable*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_valid.call(this)
@@ -5438,7 +5438,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectBlendVariableVtbl,
+  record ID3D10EffectBlendVariableVtable,
     is_valid : Proc(ID3D10EffectBlendVariable*, Win32cr::Foundation::BOOL),
     get_type : Proc(ID3D10EffectBlendVariable*, Void*),
     get_desc : Proc(ID3D10EffectBlendVariable*, Win32cr::Graphics::Direct3D10::D3D10_EFFECT_VARIABLE_DESC*, Win32cr::Foundation::HRESULT),
@@ -5469,7 +5469,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10EffectBlendVariable, lpVtbl : ID3D10EffectBlendVariableVtbl* do
+  record ID3D10EffectBlendVariable, lpVtbl : ID3D10EffectBlendVariableVtable* do
     GUID = LibC::GUID.new(0x1fcd2294_u32, 0xdf6d_u16, 0x4eae_u16, StaticArray[0x86_u8, 0xb3_u8, 0xe_u8, 0x91_u8, 0x60_u8, 0xcf_u8, 0xb0_u8, 0x7b_u8])
     def is_valid(this : ID3D10EffectBlendVariable*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_valid.call(this)
@@ -5556,7 +5556,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectDepthStencilVariableVtbl,
+  record ID3D10EffectDepthStencilVariableVtable,
     is_valid : Proc(ID3D10EffectDepthStencilVariable*, Win32cr::Foundation::BOOL),
     get_type : Proc(ID3D10EffectDepthStencilVariable*, Void*),
     get_desc : Proc(ID3D10EffectDepthStencilVariable*, Win32cr::Graphics::Direct3D10::D3D10_EFFECT_VARIABLE_DESC*, Win32cr::Foundation::HRESULT),
@@ -5587,7 +5587,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10EffectDepthStencilVariable, lpVtbl : ID3D10EffectDepthStencilVariableVtbl* do
+  record ID3D10EffectDepthStencilVariable, lpVtbl : ID3D10EffectDepthStencilVariableVtable* do
     GUID = LibC::GUID.new(0xaf482368_u32, 0x330a_u16, 0x46a5_u16, StaticArray[0x9a_u8, 0x5c_u8, 0x1_u8, 0xc7_u8, 0x1a_u8, 0xf2_u8, 0x4c_u8, 0x8d_u8])
     def is_valid(this : ID3D10EffectDepthStencilVariable*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_valid.call(this)
@@ -5674,7 +5674,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectRasterizerVariableVtbl,
+  record ID3D10EffectRasterizerVariableVtable,
     is_valid : Proc(ID3D10EffectRasterizerVariable*, Win32cr::Foundation::BOOL),
     get_type : Proc(ID3D10EffectRasterizerVariable*, Void*),
     get_desc : Proc(ID3D10EffectRasterizerVariable*, Win32cr::Graphics::Direct3D10::D3D10_EFFECT_VARIABLE_DESC*, Win32cr::Foundation::HRESULT),
@@ -5705,7 +5705,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10EffectRasterizerVariable, lpVtbl : ID3D10EffectRasterizerVariableVtbl* do
+  record ID3D10EffectRasterizerVariable, lpVtbl : ID3D10EffectRasterizerVariableVtable* do
     GUID = LibC::GUID.new(0x21af9f0e_u32, 0x4d94_u16, 0x4ea9_u16, StaticArray[0x97_u8, 0x85_u8, 0x2c_u8, 0xb7_u8, 0x6b_u8, 0x8c_u8, 0xb_u8, 0x34_u8])
     def is_valid(this : ID3D10EffectRasterizerVariable*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_valid.call(this)
@@ -5792,7 +5792,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectSamplerVariableVtbl,
+  record ID3D10EffectSamplerVariableVtable,
     is_valid : Proc(ID3D10EffectSamplerVariable*, Win32cr::Foundation::BOOL),
     get_type : Proc(ID3D10EffectSamplerVariable*, Void*),
     get_desc : Proc(ID3D10EffectSamplerVariable*, Win32cr::Graphics::Direct3D10::D3D10_EFFECT_VARIABLE_DESC*, Win32cr::Foundation::HRESULT),
@@ -5823,7 +5823,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10EffectSamplerVariable, lpVtbl : ID3D10EffectSamplerVariableVtbl* do
+  record ID3D10EffectSamplerVariable, lpVtbl : ID3D10EffectSamplerVariableVtable* do
     GUID = LibC::GUID.new(0x6530d5c7_u32, 0x7e9_u16, 0x4271_u16, StaticArray[0xa4_u8, 0x18_u8, 0xe7_u8, 0xce_u8, 0x4b_u8, 0xd1_u8, 0xe4_u8, 0x80_u8])
     def is_valid(this : ID3D10EffectSamplerVariable*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_valid.call(this)
@@ -5910,7 +5910,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectPassVtbl,
+  record ID3D10EffectPassVtable,
     is_valid : Proc(ID3D10EffectPass*, Win32cr::Foundation::BOOL),
     get_desc : Proc(ID3D10EffectPass*, Win32cr::Graphics::Direct3D10::D3D10_PASS_DESC*, Win32cr::Foundation::HRESULT),
     get_vertex_shader_desc : Proc(ID3D10EffectPass*, Win32cr::Graphics::Direct3D10::D3D10_PASS_SHADER_DESC*, Win32cr::Foundation::HRESULT),
@@ -5923,7 +5923,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10EffectPass, lpVtbl : ID3D10EffectPassVtbl* do
+  record ID3D10EffectPass, lpVtbl : ID3D10EffectPassVtable* do
     GUID = LibC::GUID.new(0x5cfbeb89_u32, 0x1a06_u16, 0x46e0_u16, StaticArray[0xb2_u8, 0x82_u8, 0xe3_u8, 0xf9_u8, 0xbf_u8, 0xa3_u8, 0x6a_u8, 0x54_u8])
     def is_valid(this : ID3D10EffectPass*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_valid.call(this)
@@ -5956,7 +5956,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectTechniqueVtbl,
+  record ID3D10EffectTechniqueVtable,
     is_valid : Proc(ID3D10EffectTechnique*, Win32cr::Foundation::BOOL),
     get_desc : Proc(ID3D10EffectTechnique*, Win32cr::Graphics::Direct3D10::D3D10_TECHNIQUE_DESC*, Win32cr::Foundation::HRESULT),
     get_annotation_by_index : Proc(ID3D10EffectTechnique*, UInt32, Void*),
@@ -5967,7 +5967,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10EffectTechnique, lpVtbl : ID3D10EffectTechniqueVtbl* do
+  record ID3D10EffectTechnique, lpVtbl : ID3D10EffectTechniqueVtable* do
     GUID = LibC::GUID.new(0xdb122ce8_u32, 0xd1c9_u16, 0x4292_u16, StaticArray[0xb2_u8, 0x37_u8, 0x24_u8, 0xed_u8, 0x3d_u8, 0xe8_u8, 0xb1_u8, 0x75_u8])
     def is_valid(this : ID3D10EffectTechnique*) : Win32cr::Foundation::BOOL
       @lpVtbl.try &.value.is_valid.call(this)
@@ -5994,7 +5994,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectVtbl,
+  record ID3D10EffectVtable,
     query_interface : Proc(ID3D10Effect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10Effect*, UInt32),
     release : Proc(ID3D10Effect*, UInt32),
@@ -6014,7 +6014,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10Effect, lpVtbl : ID3D10EffectVtbl* do
+  record ID3D10Effect, lpVtbl : ID3D10EffectVtable* do
     GUID = LibC::GUID.new(0x51b0ca8b_u32, 0xec0b_u16, 0x4519_u16, StaticArray[0x87_u8, 0xd_u8, 0x8e_u8, 0xe1_u8, 0xcb_u8, 0x50_u8, 0x17_u8, 0xc7_u8])
     def query_interface(this : ID3D10Effect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6068,7 +6068,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10EffectPoolVtbl,
+  record ID3D10EffectPoolVtable,
     query_interface : Proc(ID3D10EffectPool*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10EffectPool*, UInt32),
     release : Proc(ID3D10EffectPool*, UInt32),
@@ -6076,7 +6076,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10EffectPool, lpVtbl : ID3D10EffectPoolVtbl* do
+  record ID3D10EffectPool, lpVtbl : ID3D10EffectPoolVtable* do
     GUID = LibC::GUID.new(0x9537ab04_u32, 0x3250_u16, 0x412e_u16, StaticArray[0x82_u8, 0x13_u8, 0xfc_u8, 0xd2_u8, 0xf8_u8, 0x67_u8, 0x79_u8, 0x33_u8])
     def query_interface(this : ID3D10EffectPool*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6094,7 +6094,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10BlendState1Vtbl,
+  record ID3D10BlendState1Vtable,
     query_interface : Proc(ID3D10BlendState1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10BlendState1*, UInt32),
     release : Proc(ID3D10BlendState1*, UInt32),
@@ -6107,7 +6107,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10BlendState1, lpVtbl : ID3D10BlendState1Vtbl* do
+  record ID3D10BlendState1, lpVtbl : ID3D10BlendState1Vtable* do
     GUID = LibC::GUID.new(0xedad8d99_u32, 0x8a35_u16, 0x4d6d_u16, StaticArray[0x85_u8, 0x66_u8, 0x2e_u8, 0xa2_u8, 0x76_u8, 0xcd_u8, 0xe1_u8, 0x61_u8])
     def query_interface(this : ID3D10BlendState1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6140,7 +6140,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10ShaderResourceView1Vtbl,
+  record ID3D10ShaderResourceView1Vtable,
     query_interface : Proc(ID3D10ShaderResourceView1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10ShaderResourceView1*, UInt32),
     release : Proc(ID3D10ShaderResourceView1*, UInt32),
@@ -6154,7 +6154,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10ShaderResourceView1, lpVtbl : ID3D10ShaderResourceView1Vtbl* do
+  record ID3D10ShaderResourceView1, lpVtbl : ID3D10ShaderResourceView1Vtable* do
     GUID = LibC::GUID.new(0x9b7e4c87_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10ShaderResourceView1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6190,7 +6190,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10Device1Vtbl,
+  record ID3D10Device1Vtable,
     query_interface : Proc(ID3D10Device1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10Device1*, UInt32),
     release : Proc(ID3D10Device1*, UInt32),
@@ -6295,7 +6295,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10Device1, lpVtbl : ID3D10Device1Vtbl* do
+  record ID3D10Device1, lpVtbl : ID3D10Device1Vtable* do
     GUID = LibC::GUID.new(0x9b7e4c8f_u32, 0x342c_u16, 0x4106_u16, StaticArray[0xa1_u8, 0x9f_u8, 0x4f_u8, 0x27_u8, 0x4_u8, 0xf6_u8, 0x89_u8, 0xf0_u8])
     def query_interface(this : ID3D10Device1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6604,7 +6604,7 @@ module Win32cr::Graphics::Direct3D10
   end
 
   @[Extern]
-  record ID3D10ShaderReflection1Vtbl,
+  record ID3D10ShaderReflection1Vtable,
     query_interface : Proc(ID3D10ShaderReflection1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ID3D10ShaderReflection1*, UInt32),
     release : Proc(ID3D10ShaderReflection1*, UInt32),
@@ -6626,7 +6626,7 @@ module Win32cr::Graphics::Direct3D10
 
 
   @[Extern]
-  record ID3D10ShaderReflection1, lpVtbl : ID3D10ShaderReflection1Vtbl* do
+  record ID3D10ShaderReflection1, lpVtbl : ID3D10ShaderReflection1Vtable* do
     GUID = LibC::GUID.new(0xc3457783_u32, 0xa846_u16, 0x47ce_u16, StaticArray[0x95_u8, 0x20_u8, 0xce_u8, 0xa6_u8, 0xf6_u8, 0x6e_u8, 0x74_u8, 0x47_u8])
     def query_interface(this : ID3D10ShaderReflection1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6686,123 +6686,182 @@ module Win32cr::Graphics::Direct3D10
   end
 
   def d3D10CreateDevice(pAdapter : Void*, driver_type : Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, software : Win32cr::Foundation::HINSTANCE, flags : UInt32, sdk_version : UInt32, ppDevice : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10CreateDevice(pAdapter, driver_type, software, flags, sdk_version, ppDevice)
+    {% end %}
   end
 
   def d3D10CreateDeviceAndSwapChain(pAdapter : Void*, driver_type : Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, software : Win32cr::Foundation::HINSTANCE, flags : UInt32, sdk_version : UInt32, pSwapChainDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*, ppSwapChain : Void**, ppDevice : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10CreateDeviceAndSwapChain(pAdapter, driver_type, software, flags, sdk_version, pSwapChainDesc, ppSwapChain, ppDevice)
+    {% end %}
   end
 
   def d3D10CreateBlob(num_bytes : LibC::UIntPtrT, ppBuffer : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10CreateBlob(num_bytes, ppBuffer)
+    {% end %}
   end
 
   def d3D10CompileShader(pSrcData : Win32cr::Foundation::PSTR, src_data_size : LibC::UIntPtrT, pFileName : Win32cr::Foundation::PSTR, pDefines : Win32cr::Graphics::Direct3D::D3D_SHADER_MACRO*, pInclude : Void*, pFunctionName : Win32cr::Foundation::PSTR, pProfile : Win32cr::Foundation::PSTR, flags : UInt32, ppShader : Void**, ppErrorMsgs : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10CompileShader(pSrcData, src_data_size, pFileName, pDefines, pInclude, pFunctionName, pProfile, flags, ppShader, ppErrorMsgs)
+    {% end %}
   end
 
   def d3D10DisassembleShader(pShader : Void*, bytecode_length : LibC::UIntPtrT, enable_color_code : Win32cr::Foundation::BOOL, pComments : Win32cr::Foundation::PSTR, ppDisassembly : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10DisassembleShader(pShader, bytecode_length, enable_color_code, pComments, ppDisassembly)
+    {% end %}
   end
 
   def d3D10GetPixelShaderProfile(pDevice : Void*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.D3D10GetPixelShaderProfile(pDevice)
+    {% end %}
   end
 
   def d3D10GetVertexShaderProfile(pDevice : Void*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.D3D10GetVertexShaderProfile(pDevice)
+    {% end %}
   end
 
   def d3D10GetGeometryShaderProfile(pDevice : Void*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.D3D10GetGeometryShaderProfile(pDevice)
+    {% end %}
   end
 
   def d3D10ReflectShader(pShaderBytecode : Void*, bytecode_length : LibC::UIntPtrT, ppReflector : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10ReflectShader(pShaderBytecode, bytecode_length, ppReflector)
+    {% end %}
   end
 
   def d3D10PreprocessShader(pSrcData : Win32cr::Foundation::PSTR, src_data_size : LibC::UIntPtrT, pFileName : Win32cr::Foundation::PSTR, pDefines : Win32cr::Graphics::Direct3D::D3D_SHADER_MACRO*, pInclude : Void*, ppShaderText : Void**, ppErrorMsgs : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10PreprocessShader(pSrcData, src_data_size, pFileName, pDefines, pInclude, ppShaderText, ppErrorMsgs)
+    {% end %}
   end
 
   def d3D10GetInputSignatureBlob(pShaderBytecode : Void*, bytecode_length : LibC::UIntPtrT, ppSignatureBlob : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10GetInputSignatureBlob(pShaderBytecode, bytecode_length, ppSignatureBlob)
+    {% end %}
   end
 
   def d3D10GetOutputSignatureBlob(pShaderBytecode : Void*, bytecode_length : LibC::UIntPtrT, ppSignatureBlob : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10GetOutputSignatureBlob(pShaderBytecode, bytecode_length, ppSignatureBlob)
+    {% end %}
   end
 
   def d3D10GetInputAndOutputSignatureBlob(pShaderBytecode : Void*, bytecode_length : LibC::UIntPtrT, ppSignatureBlob : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10GetInputAndOutputSignatureBlob(pShaderBytecode, bytecode_length, ppSignatureBlob)
+    {% end %}
   end
 
   def d3D10GetShaderDebugInfo(pShaderBytecode : Void*, bytecode_length : LibC::UIntPtrT, ppDebugInfo : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10GetShaderDebugInfo(pShaderBytecode, bytecode_length, ppDebugInfo)
+    {% end %}
   end
 
   def d3D10StateBlockMaskUnion(pA : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, pB : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, pResult : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10StateBlockMaskUnion(pA, pB, pResult)
+    {% end %}
   end
 
   def d3D10StateBlockMaskIntersect(pA : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, pB : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, pResult : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10StateBlockMaskIntersect(pA, pB, pResult)
+    {% end %}
   end
 
   def d3D10StateBlockMaskDifference(pA : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, pB : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, pResult : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10StateBlockMaskDifference(pA, pB, pResult)
+    {% end %}
   end
 
   def d3D10StateBlockMaskEnableCapture(pMask : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, state_type : Win32cr::Graphics::Direct3D10::D3D10_DEVICE_STATE_TYPES, range_start : UInt32, range_length : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10StateBlockMaskEnableCapture(pMask, state_type, range_start, range_length)
+    {% end %}
   end
 
   def d3D10StateBlockMaskDisableCapture(pMask : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, state_type : Win32cr::Graphics::Direct3D10::D3D10_DEVICE_STATE_TYPES, range_start : UInt32, range_length : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10StateBlockMaskDisableCapture(pMask, state_type, range_start, range_length)
+    {% end %}
   end
 
   def d3D10StateBlockMaskEnableAll(pMask : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10StateBlockMaskEnableAll(pMask)
+    {% end %}
   end
 
   def d3D10StateBlockMaskDisableAll(pMask : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10StateBlockMaskDisableAll(pMask)
+    {% end %}
   end
 
   def d3D10StateBlockMaskGetSetting(pMask : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, state_type : Win32cr::Graphics::Direct3D10::D3D10_DEVICE_STATE_TYPES, entry : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.D3D10StateBlockMaskGetSetting(pMask, state_type, entry)
+    {% end %}
   end
 
   def d3D10CreateStateBlock(pDevice : Void*, pStateBlockMask : Win32cr::Graphics::Direct3D10::D3D10_STATE_BLOCK_MASK*, ppStateBlock : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10CreateStateBlock(pDevice, pStateBlockMask, ppStateBlock)
+    {% end %}
   end
 
   def d3D10CompileEffectFromMemory(pData : Void*, data_length : LibC::UIntPtrT, pSrcFileName : Win32cr::Foundation::PSTR, pDefines : Win32cr::Graphics::Direct3D::D3D_SHADER_MACRO*, pInclude : Void*, hlsl_flags : UInt32, fx_flags : UInt32, ppCompiledEffect : Void**, ppErrors : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10CompileEffectFromMemory(pData, data_length, pSrcFileName, pDefines, pInclude, hlsl_flags, fx_flags, ppCompiledEffect, ppErrors)
+    {% end %}
   end
 
   def d3D10CreateEffectFromMemory(pData : Void*, data_length : LibC::UIntPtrT, fx_flags : UInt32, pDevice : Void*, pEffectPool : Void*, ppEffect : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10CreateEffectFromMemory(pData, data_length, fx_flags, pDevice, pEffectPool, ppEffect)
+    {% end %}
   end
 
   def d3D10CreateEffectPoolFromMemory(pData : Void*, data_length : LibC::UIntPtrT, fx_flags : UInt32, pDevice : Void*, ppEffectPool : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10CreateEffectPoolFromMemory(pData, data_length, fx_flags, pDevice, ppEffectPool)
+    {% end %}
   end
 
   def d3D10DisassembleEffect(pEffect : Void*, enable_color_code : Win32cr::Foundation::BOOL, ppDisassembly : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10DisassembleEffect(pEffect, enable_color_code, ppDisassembly)
+    {% end %}
   end
 
   def d3D10CreateDevice1(pAdapter : Void*, driver_type : Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, software : Win32cr::Foundation::HINSTANCE, flags : UInt32, hardware_level : Win32cr::Graphics::Direct3D10::D3D10_FEATURE_LEVEL1, sdk_version : UInt32, ppDevice : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10CreateDevice1(pAdapter, driver_type, software, flags, hardware_level, sdk_version, ppDevice)
+    {% end %}
   end
 
   def d3D10CreateDeviceAndSwapChain1(pAdapter : Void*, driver_type : Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, software : Win32cr::Foundation::HINSTANCE, flags : UInt32, hardware_level : Win32cr::Graphics::Direct3D10::D3D10_FEATURE_LEVEL1, sdk_version : UInt32, pSwapChainDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*, ppSwapChain : Void**, ppDevice : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.D3D10CreateDeviceAndSwapChain1(pAdapter, driver_type, software, flags, hardware_level, sdk_version, pSwapChainDesc, ppSwapChain, ppDevice)
+    {% end %}
   end
 
-  @[Link("d3d10")]
-  @[Link("d3d10_1")]
+  @[Link("d3d10.dll")]
+  @[Link("d3d10_1.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun D3D10CreateDevice(pAdapter : Void*, driver_type : Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, software : Win32cr::Foundation::HINSTANCE, flags : UInt32, sdk_version : UInt32, ppDevice : Void**) : Win32cr::Foundation::HRESULT
@@ -6892,4 +6951,5 @@ module Win32cr::Graphics::Direct3D10
     fun D3D10CreateDeviceAndSwapChain1(pAdapter : Void*, driver_type : Win32cr::Graphics::Direct3D10::D3D10_DRIVER_TYPE, software : Win32cr::Foundation::HINSTANCE, flags : UInt32, hardware_level : Win32cr::Graphics::Direct3D10::D3D10_FEATURE_LEVEL1, sdk_version : UInt32, pSwapChainDesc : Win32cr::Graphics::Dxgi::DXGI_SWAP_CHAIN_DESC*, ppSwapChain : Void**, ppDevice : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

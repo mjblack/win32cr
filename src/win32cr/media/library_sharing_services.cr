@@ -13,7 +13,7 @@ module Win32cr::Media::LibrarySharingServices
   end
 
   @[Extern]
-  record IWindowsMediaLibrarySharingDevicePropertyVtbl,
+  record IWindowsMediaLibrarySharingDevicePropertyVtable,
     query_interface : Proc(IWindowsMediaLibrarySharingDeviceProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsMediaLibrarySharingDeviceProperty*, UInt32),
     release : Proc(IWindowsMediaLibrarySharingDeviceProperty*, UInt32),
@@ -26,7 +26,7 @@ module Win32cr::Media::LibrarySharingServices
 
 
   @[Extern]
-  record IWindowsMediaLibrarySharingDeviceProperty, lpVtbl : IWindowsMediaLibrarySharingDevicePropertyVtbl* do
+  record IWindowsMediaLibrarySharingDeviceProperty, lpVtbl : IWindowsMediaLibrarySharingDevicePropertyVtable* do
     GUID = LibC::GUID.new(0x81e26927_u32, 0x7a7d_u16, 0x40a7_u16, StaticArray[0x81_u8, 0xd4_u8, 0xbd_u8, 0xdc_u8, 0x2_u8, 0x96_u8, 0xe_u8, 0x3e_u8])
     def query_interface(this : IWindowsMediaLibrarySharingDeviceProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -59,7 +59,7 @@ module Win32cr::Media::LibrarySharingServices
   end
 
   @[Extern]
-  record IWindowsMediaLibrarySharingDevicePropertiesVtbl,
+  record IWindowsMediaLibrarySharingDevicePropertiesVtable,
     query_interface : Proc(IWindowsMediaLibrarySharingDeviceProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsMediaLibrarySharingDeviceProperties*, UInt32),
     release : Proc(IWindowsMediaLibrarySharingDeviceProperties*, UInt32),
@@ -73,7 +73,7 @@ module Win32cr::Media::LibrarySharingServices
 
 
   @[Extern]
-  record IWindowsMediaLibrarySharingDeviceProperties, lpVtbl : IWindowsMediaLibrarySharingDevicePropertiesVtbl* do
+  record IWindowsMediaLibrarySharingDeviceProperties, lpVtbl : IWindowsMediaLibrarySharingDevicePropertiesVtable* do
     GUID = LibC::GUID.new(0xc4623214_u32, 0x6b06_u16, 0x40c5_u16, StaticArray[0xa6_u8, 0x23_u8, 0xb2_u8, 0xff_u8, 0x4c_u8, 0x7_u8, 0x6b_u8, 0xfd_u8])
     def query_interface(this : IWindowsMediaLibrarySharingDeviceProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -109,7 +109,7 @@ module Win32cr::Media::LibrarySharingServices
   end
 
   @[Extern]
-  record IWindowsMediaLibrarySharingDeviceVtbl,
+  record IWindowsMediaLibrarySharingDeviceVtable,
     query_interface : Proc(IWindowsMediaLibrarySharingDevice*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsMediaLibrarySharingDevice*, UInt32),
     release : Proc(IWindowsMediaLibrarySharingDevice*, UInt32),
@@ -124,7 +124,7 @@ module Win32cr::Media::LibrarySharingServices
 
 
   @[Extern]
-  record IWindowsMediaLibrarySharingDevice, lpVtbl : IWindowsMediaLibrarySharingDeviceVtbl* do
+  record IWindowsMediaLibrarySharingDevice, lpVtbl : IWindowsMediaLibrarySharingDeviceVtable* do
     GUID = LibC::GUID.new(0x3dccc293_u32, 0x4fd9_u16, 0x4191_u16, StaticArray[0xa2_u8, 0x5b_u8, 0x8e_u8, 0x57_u8, 0xc5_u8, 0xd2_u8, 0x7b_u8, 0xd4_u8])
     def query_interface(this : IWindowsMediaLibrarySharingDevice*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -163,7 +163,7 @@ module Win32cr::Media::LibrarySharingServices
   end
 
   @[Extern]
-  record IWindowsMediaLibrarySharingDevicesVtbl,
+  record IWindowsMediaLibrarySharingDevicesVtable,
     query_interface : Proc(IWindowsMediaLibrarySharingDevices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsMediaLibrarySharingDevices*, UInt32),
     release : Proc(IWindowsMediaLibrarySharingDevices*, UInt32),
@@ -177,7 +177,7 @@ module Win32cr::Media::LibrarySharingServices
 
 
   @[Extern]
-  record IWindowsMediaLibrarySharingDevices, lpVtbl : IWindowsMediaLibrarySharingDevicesVtbl* do
+  record IWindowsMediaLibrarySharingDevices, lpVtbl : IWindowsMediaLibrarySharingDevicesVtable* do
     GUID = LibC::GUID.new(0x1803f9d6_u32, 0xfe6d_u16, 0x4546_u16, StaticArray[0xbf_u8, 0x5b_u8, 0x99_u8, 0x2f_u8, 0xe8_u8, 0xec_u8, 0x12_u8, 0xd1_u8])
     def query_interface(this : IWindowsMediaLibrarySharingDevices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -213,7 +213,7 @@ module Win32cr::Media::LibrarySharingServices
   end
 
   @[Extern]
-  record IWindowsMediaLibrarySharingServicesVtbl,
+  record IWindowsMediaLibrarySharingServicesVtable,
     query_interface : Proc(IWindowsMediaLibrarySharingServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowsMediaLibrarySharingServices*, UInt32),
     release : Proc(IWindowsMediaLibrarySharingServices*, UInt32),
@@ -243,7 +243,7 @@ module Win32cr::Media::LibrarySharingServices
 
 
   @[Extern]
-  record IWindowsMediaLibrarySharingServices, lpVtbl : IWindowsMediaLibrarySharingServicesVtbl* do
+  record IWindowsMediaLibrarySharingServices, lpVtbl : IWindowsMediaLibrarySharingServicesVtable* do
     GUID = LibC::GUID.new(0x1f5f85e_u32, 0xa81_u16, 0x40da_u16, StaticArray[0xa7_u8, 0xc8_u8, 0x21_u8, 0xef_u8, 0x3a_u8, 0xf8_u8, 0x44_u8, 0xc_u8])
     def query_interface(this : IWindowsMediaLibrarySharingServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

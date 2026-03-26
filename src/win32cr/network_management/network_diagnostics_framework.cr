@@ -253,7 +253,7 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
   end
 
   @[Extern]
-  record INetDiagHelperVtbl,
+  record INetDiagHelperVtable,
     query_interface : Proc(INetDiagHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetDiagHelper*, UInt32),
     release : Proc(INetDiagHelper*, UInt32),
@@ -278,7 +278,7 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
 
 
   @[Extern]
-  record INetDiagHelper, lpVtbl : INetDiagHelperVtbl* do
+  record INetDiagHelper, lpVtbl : INetDiagHelperVtable* do
     GUID = LibC::GUID.new(0xc0b35746_u32, 0xebf5_u16, 0x11d8_u16, StaticArray[0xbb_u8, 0xe9_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : INetDiagHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -347,7 +347,7 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
   end
 
   @[Extern]
-  record INetDiagHelperUtilFactoryVtbl,
+  record INetDiagHelperUtilFactoryVtable,
     query_interface : Proc(INetDiagHelperUtilFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetDiagHelperUtilFactory*, UInt32),
     release : Proc(INetDiagHelperUtilFactory*, UInt32),
@@ -355,7 +355,7 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
 
 
   @[Extern]
-  record INetDiagHelperUtilFactory, lpVtbl : INetDiagHelperUtilFactoryVtbl* do
+  record INetDiagHelperUtilFactory, lpVtbl : INetDiagHelperUtilFactoryVtable* do
     GUID = LibC::GUID.new(0x104613fb_u32, 0xbc57_u16, 0x4178_u16, StaticArray[0x95_u8, 0xba_u8, 0x88_u8, 0x80_u8, 0x96_u8, 0x98_u8, 0x35_u8, 0x4a_u8])
     def query_interface(this : INetDiagHelperUtilFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -373,7 +373,7 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
   end
 
   @[Extern]
-  record INetDiagHelperExVtbl,
+  record INetDiagHelperExVtable,
     query_interface : Proc(INetDiagHelperEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetDiagHelperEx*, UInt32),
     release : Proc(INetDiagHelperEx*, UInt32),
@@ -383,7 +383,7 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
 
 
   @[Extern]
-  record INetDiagHelperEx, lpVtbl : INetDiagHelperExVtbl* do
+  record INetDiagHelperEx, lpVtbl : INetDiagHelperExVtable* do
     GUID = LibC::GUID.new(0x972dab4d_u32, 0xe4e3_u16, 0x4fc6_u16, StaticArray[0xae_u8, 0x54_u8, 0x5f_u8, 0x65_u8, 0xcc_u8, 0xde_u8, 0x4a_u8, 0x15_u8])
     def query_interface(this : INetDiagHelperEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -407,7 +407,7 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
   end
 
   @[Extern]
-  record INetDiagHelperInfoVtbl,
+  record INetDiagHelperInfoVtable,
     query_interface : Proc(INetDiagHelperInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetDiagHelperInfo*, UInt32),
     release : Proc(INetDiagHelperInfo*, UInt32),
@@ -415,7 +415,7 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
 
 
   @[Extern]
-  record INetDiagHelperInfo, lpVtbl : INetDiagHelperInfoVtbl* do
+  record INetDiagHelperInfo, lpVtbl : INetDiagHelperInfoVtable* do
     GUID = LibC::GUID.new(0xc0b35747_u32, 0xebf5_u16, 0x11d8_u16, StaticArray[0xbb_u8, 0xe9_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : INetDiagHelperInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -433,7 +433,7 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
   end
 
   @[Extern]
-  record INetDiagExtensibleHelperVtbl,
+  record INetDiagExtensibleHelperVtable,
     query_interface : Proc(INetDiagExtensibleHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetDiagExtensibleHelper*, UInt32),
     release : Proc(INetDiagExtensibleHelper*, UInt32),
@@ -441,7 +441,7 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
 
 
   @[Extern]
-  record INetDiagExtensibleHelper, lpVtbl : INetDiagExtensibleHelperVtbl* do
+  record INetDiagExtensibleHelper, lpVtbl : INetDiagExtensibleHelperVtable* do
     GUID = LibC::GUID.new(0xc0b35748_u32, 0xebf5_u16, 0x11d8_u16, StaticArray[0xbb_u8, 0xe9_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : INetDiagExtensibleHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -459,70 +459,103 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
   end
 
   def ndfCreateIncident(helperClassName : Win32cr::Foundation::PWSTR, celt : UInt32, attributes : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::HELPER_ATTRIBUTE*, handle : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NdfCreateIncident(helperClassName, celt, attributes, handle)
+    {% end %}
   end
 
   def ndfCreateWinSockIncident(sock : Win32cr::Networking::WinSock::SOCKET, host : Win32cr::Foundation::PWSTR, port : UInt16, appId : Win32cr::Foundation::PWSTR, userId : Win32cr::Security::SID*, handle : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NdfCreateWinSockIncident(sock, host, port, appId, userId, handle)
+    {% end %}
   end
 
   def ndfCreateWebIncident(url : Win32cr::Foundation::PWSTR, handle : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NdfCreateWebIncident(url, handle)
+    {% end %}
   end
 
   def ndfCreateWebIncidentEx(url : Win32cr::Foundation::PWSTR, useWinHTTP : Win32cr::Foundation::BOOL, moduleName : Win32cr::Foundation::PWSTR, handle : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NdfCreateWebIncidentEx(url, useWinHTTP, moduleName, handle)
+    {% end %}
   end
 
   def ndfCreateSharingIncident(unc_path : Win32cr::Foundation::PWSTR, handle : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NdfCreateSharingIncident(unc_path, handle)
+    {% end %}
   end
 
   def ndfCreateDNSIncident(hostname : Win32cr::Foundation::PWSTR, queryType : UInt16, handle : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NdfCreateDNSIncident(hostname, queryType, handle)
+    {% end %}
   end
 
   def ndfCreateConnectivityIncident(handle : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NdfCreateConnectivityIncident(handle)
+    {% end %}
   end
 
   def ndfCreateNetConnectionIncident(handle : Void**, id : LibC::GUID) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NdfCreateNetConnectionIncident(handle, id)
+    {% end %}
   end
 
   def ndfCreatePnrpIncident(cloudname : Win32cr::Foundation::PWSTR, peername : Win32cr::Foundation::PWSTR, diagnosePublish : Win32cr::Foundation::BOOL, appId : Win32cr::Foundation::PWSTR, handle : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NdfCreatePnrpIncident(cloudname, peername, diagnosePublish, appId, handle)
+    {% end %}
   end
 
   def ndfCreateGroupingIncident(cloud_name : Win32cr::Foundation::PWSTR, group_name : Win32cr::Foundation::PWSTR, identity : Win32cr::Foundation::PWSTR, invitation : Win32cr::Foundation::PWSTR, addresses : Win32cr::Networking::WinSock::SOCKET_ADDRESS_LIST*, appId : Win32cr::Foundation::PWSTR, handle : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NdfCreateGroupingIncident(cloud_name, group_name, identity, invitation, addresses, appId, handle)
+    {% end %}
   end
 
   def ndfExecuteDiagnosis(handle : Void*, hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NdfExecuteDiagnosis(handle, hwnd)
+    {% end %}
   end
 
   def ndfCloseIncident(handle : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NdfCloseIncident(handle)
+    {% end %}
   end
 
   def ndfDiagnoseIncident(handle : Void*, root_cause_count : UInt32*, root_causes : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::RootCauseInfo**, dwWait : UInt32, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NdfDiagnoseIncident(handle, root_cause_count, root_causes, dwWait, dwFlags)
+    {% end %}
   end
 
   def ndfRepairIncident(handle : Void*, repair_ex : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::RepairInfoEx*, dwWait : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NdfRepairIncident(handle, repair_ex, dwWait)
+    {% end %}
   end
 
   def ndfCancelIncident(handle : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NdfCancelIncident(handle)
+    {% end %}
   end
 
   def ndfGetTraceFile(handle : Void*, trace_file_location : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NdfGetTraceFile(handle, trace_file_location)
+    {% end %}
   end
 
-  @[Link("ndfapi")]
+  @[Link("ndfapi.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun NdfCreateIncident(helperClassName : Win32cr::Foundation::PWSTR, celt : UInt32, attributes : Win32cr::NetworkManagement::NetworkDiagnosticsFramework::HELPER_ATTRIBUTE*, handle : Void**) : Win32cr::Foundation::HRESULT
@@ -573,4 +606,5 @@ module Win32cr::NetworkManagement::NetworkDiagnosticsFramework
     fun NdfGetTraceFile(handle : Void*, trace_file_location : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

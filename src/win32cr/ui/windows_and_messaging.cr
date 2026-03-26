@@ -534,13 +534,6 @@ module Win32cr::UI::WindowsAndMessaging
   WVR_HREDRAW = 256_u32
   WVR_VREDRAW = 512_u32
   WVR_VALIDRECTS = 1024_u32
-  MK_LBUTTON = 1_u32
-  MK_RBUTTON = 2_u32
-  MK_SHIFT = 4_u32
-  MK_CONTROL = 8_u32
-  MK_MBUTTON = 16_u32
-  MK_XBUTTON1 = 32_u32
-  MK_XBUTTON2 = 64_u32
   PRF_CHECKVISIBLE = 1_i32
   PRF_NONCLIENT = 2_i32
   PRF_CLIENT = 4_i32
@@ -867,38 +860,6 @@ module Win32cr::UI::WindowsAndMessaging
   BM_SETDONTCLICK = 248_u32
   BST_PUSHED = 4_u32
   BST_FOCUS = 8_u32
-  SS_LEFT = 0_i32
-  SS_CENTER = 1_i32
-  SS_RIGHT = 2_i32
-  SS_ICON = 3_i32
-  SS_BLACKRECT = 4_i32
-  SS_GRAYRECT = 5_i32
-  SS_WHITERECT = 6_i32
-  SS_BLACKFRAME = 7_i32
-  SS_GRAYFRAME = 8_i32
-  SS_WHITEFRAME = 9_i32
-  SS_USERITEM = 10_i32
-  SS_SIMPLE = 11_i32
-  SS_LEFTNOWORDWRAP = 12_i32
-  SS_OWNERDRAW = 13_i32
-  SS_BITMAP = 14_i32
-  SS_ENHMETAFILE = 15_i32
-  SS_ETCHEDHORZ = 16_i32
-  SS_ETCHEDVERT = 17_i32
-  SS_ETCHEDFRAME = 18_i32
-  SS_TYPEMASK = 31_i32
-  SS_REALSIZECONTROL = 64_i32
-  SS_NOPREFIX = 128_i32
-  SS_NOTIFY = 256_i32
-  SS_CENTERIMAGE = 512_i32
-  SS_RIGHTJUST = 1024_i32
-  SS_REALSIZEIMAGE = 2048_i32
-  SS_SUNKEN = 4096_i32
-  SS_EDITCONTROL = 8192_i32
-  SS_ENDELLIPSIS = 16384_i32
-  SS_PATHELLIPSIS = 32768_i32
-  SS_WORDELLIPSIS = 49152_i32
-  SS_ELLIPSISMASK = 49152_i32
   STM_SETICON = 368_u32
   STM_GETICON = 369_u32
   STM_SETIMAGE = 370_u32
@@ -2594,9 +2555,9 @@ module Win32cr::UI::WindowsAndMessaging
 
   @[Extern]
   struct MOUSEHOOKSTRUCTEX
-    property __anonymous_base_winuser_l1166_c46 : Win32cr::UI::WindowsAndMessaging::MOUSEHOOKSTRUCT
+    property base : Win32cr::UI::WindowsAndMessaging::MOUSEHOOKSTRUCT
     property mouseData : Win32cr::UI::WindowsAndMessaging::MOUSEHOOKSTRUCTEX_MOUSE_DATA
-    def initialize(@__anonymous_base_winuser_l1166_c46 : Win32cr::UI::WindowsAndMessaging::MOUSEHOOKSTRUCT, @mouseData : Win32cr::UI::WindowsAndMessaging::MOUSEHOOKSTRUCTEX_MOUSE_DATA)
+    def initialize(@base : Win32cr::UI::WindowsAndMessaging::MOUSEHOOKSTRUCT, @mouseData : Win32cr::UI::WindowsAndMessaging::MOUSEHOOKSTRUCTEX_MOUSE_DATA)
     end
   end
 
@@ -2804,11 +2765,11 @@ module Win32cr::UI::WindowsAndMessaging
     property psize : Win32cr::Foundation::SIZE*
     property hdcSrc : Win32cr::Graphics::Gdi::HDC
     property pptSrc : Win32cr::Foundation::POINT*
-    property crKey : UInt32
+    property crKey : Win32cr::Foundation::COLORREF
     property pblend : Win32cr::Graphics::Gdi::BLENDFUNCTION*
     property dwFlags : Win32cr::UI::WindowsAndMessaging::UPDATE_LAYERED_WINDOW_FLAGS
     property prcDirty : Win32cr::Foundation::RECT*
-    def initialize(@cbSize : UInt32, @hdcDst : Win32cr::Graphics::Gdi::HDC, @pptDst : Win32cr::Foundation::POINT*, @psize : Win32cr::Foundation::SIZE*, @hdcSrc : Win32cr::Graphics::Gdi::HDC, @pptSrc : Win32cr::Foundation::POINT*, @crKey : UInt32, @pblend : Win32cr::Graphics::Gdi::BLENDFUNCTION*, @dwFlags : Win32cr::UI::WindowsAndMessaging::UPDATE_LAYERED_WINDOW_FLAGS, @prcDirty : Win32cr::Foundation::RECT*)
+    def initialize(@cbSize : UInt32, @hdcDst : Win32cr::Graphics::Gdi::HDC, @pptDst : Win32cr::Foundation::POINT*, @psize : Win32cr::Foundation::SIZE*, @hdcSrc : Win32cr::Graphics::Gdi::HDC, @pptSrc : Win32cr::Foundation::POINT*, @crKey : Win32cr::Foundation::COLORREF, @pblend : Win32cr::Graphics::Gdi::BLENDFUNCTION*, @dwFlags : Win32cr::UI::WindowsAndMessaging::UPDATE_LAYERED_WINDOW_FLAGS, @prcDirty : Win32cr::Foundation::RECT*)
     end
   end
 
@@ -3319,1679 +3280,2508 @@ module Win32cr::UI::WindowsAndMessaging
   end
 
   def loadStringA(hInstance : Win32cr::Foundation::HINSTANCE, uID : UInt32, lpBuffer : Win32cr::Foundation::PSTR, cchBufferMax : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.LoadStringA(hInstance, uID, lpBuffer, cchBufferMax)
+    {% end %}
   end
 
   def loadStringW(hInstance : Win32cr::Foundation::HINSTANCE, uID : UInt32, lpBuffer : Win32cr::Foundation::PWSTR, cchBufferMax : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.LoadStringW(hInstance, uID, lpBuffer, cchBufferMax)
+    {% end %}
   end
 
   def wvsprintfA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, arglist : Int8*) : Int32
+    {% if !flag?(:docs) %}
     C.wvsprintfA(param0, param1, arglist)
+    {% end %}
   end
 
   def wvsprintfW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, arglist : Int8*) : Int32
+    {% if !flag?(:docs) %}
     C.wvsprintfW(param0, param1, arglist)
+    {% end %}
   end
 
   def wsprintfA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.wsprintfA(param0, param1)
+    {% end %}
   end
 
   def wsprintfW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.wsprintfW(param0, param1)
+    {% end %}
   end
 
   def isHungAppWindow(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsHungAppWindow(hwnd)
+    {% end %}
   end
 
   def disableProcessWindowsGhosting : Void
+    {% if !flag?(:docs) %}
     C.DisableProcessWindowsGhosting
+    {% end %}
   end
 
   def registerWindowMessageA(lpString : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RegisterWindowMessageA(lpString)
+    {% end %}
   end
 
   def registerWindowMessageW(lpString : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RegisterWindowMessageW(lpString)
+    {% end %}
   end
 
   def getMessageA(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*, hWnd : Win32cr::Foundation::HWND, wMsgFilterMin : UInt32, wMsgFilterMax : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetMessageA(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax)
+    {% end %}
   end
 
   def getMessageW(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*, hWnd : Win32cr::Foundation::HWND, wMsgFilterMin : UInt32, wMsgFilterMax : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetMessageW(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax)
+    {% end %}
   end
 
   def translateMessage(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TranslateMessage(lpMsg)
+    {% end %}
   end
 
   def dispatchMessageA(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.DispatchMessageA(lpMsg)
+    {% end %}
   end
 
   def dispatchMessageW(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.DispatchMessageW(lpMsg)
+    {% end %}
   end
 
   def setMessageQueue(cMessagesMax : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetMessageQueue(cMessagesMax)
+    {% end %}
   end
 
   def peekMessageA(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*, hWnd : Win32cr::Foundation::HWND, wMsgFilterMin : UInt32, wMsgFilterMax : UInt32, wRemoveMsg : Win32cr::UI::WindowsAndMessaging::PEEK_MESSAGE_REMOVE_TYPE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PeekMessageA(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax, wRemoveMsg)
+    {% end %}
   end
 
   def peekMessageW(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*, hWnd : Win32cr::Foundation::HWND, wMsgFilterMin : UInt32, wMsgFilterMax : UInt32, wRemoveMsg : Win32cr::UI::WindowsAndMessaging::PEEK_MESSAGE_REMOVE_TYPE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PeekMessageW(lpMsg, hWnd, wMsgFilterMin, wMsgFilterMax, wRemoveMsg)
+    {% end %}
   end
 
   def getMessagePos : UInt32
+    {% if !flag?(:docs) %}
     C.GetMessagePos
+    {% end %}
   end
 
   def getMessageTime : Int32
+    {% if !flag?(:docs) %}
     C.GetMessageTime
+    {% end %}
   end
 
   def getMessageExtraInfo : Win32cr::Foundation::LPARAM
+    {% if !flag?(:docs) %}
     C.GetMessageExtraInfo
+    {% end %}
   end
 
   def isWow64Message : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsWow64Message
+    {% end %}
   end
 
   def setMessageExtraInfo(lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LPARAM
+    {% if !flag?(:docs) %}
     C.SetMessageExtraInfo(lParam)
+    {% end %}
   end
 
   def sendMessageA(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.SendMessageA(hWnd, msg, wParam, lParam)
+    {% end %}
   end
 
   def sendMessageW(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.SendMessageW(hWnd, msg, wParam, lParam)
+    {% end %}
   end
 
   def sendMessageTimeoutA(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, fuFlags : Win32cr::UI::WindowsAndMessaging::SEND_MESSAGE_TIMEOUT_FLAGS, uTimeout : UInt32, lpdwResult : LibC::UIntPtrT*) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.SendMessageTimeoutA(hWnd, msg, wParam, lParam, fuFlags, uTimeout, lpdwResult)
+    {% end %}
   end
 
   def sendMessageTimeoutW(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, fuFlags : Win32cr::UI::WindowsAndMessaging::SEND_MESSAGE_TIMEOUT_FLAGS, uTimeout : UInt32, lpdwResult : LibC::UIntPtrT*) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.SendMessageTimeoutW(hWnd, msg, wParam, lParam, fuFlags, uTimeout, lpdwResult)
+    {% end %}
   end
 
   def sendNotifyMessageA(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SendNotifyMessageA(hWnd, msg, wParam, lParam)
+    {% end %}
   end
 
   def sendNotifyMessageW(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SendNotifyMessageW(hWnd, msg, wParam, lParam)
+    {% end %}
   end
 
   def sendMessageCallbackA(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, lpResultCallBack : Win32cr::UI::WindowsAndMessaging::SENDASYNCPROC, dwData : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SendMessageCallbackA(hWnd, msg, wParam, lParam, lpResultCallBack, dwData)
+    {% end %}
   end
 
   def sendMessageCallbackW(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, lpResultCallBack : Win32cr::UI::WindowsAndMessaging::SENDASYNCPROC, dwData : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SendMessageCallbackW(hWnd, msg, wParam, lParam, lpResultCallBack, dwData)
+    {% end %}
   end
 
   def registerDeviceNotificationA(hRecipient : Win32cr::Foundation::HANDLE, notification_filter : Void*, flags : Win32cr::System::Power::POWER_SETTING_REGISTER_NOTIFICATION_FLAGS) : Void*
+    {% if !flag?(:docs) %}
     C.RegisterDeviceNotificationA(hRecipient, notification_filter, flags)
+    {% end %}
   end
 
   def registerDeviceNotificationW(hRecipient : Win32cr::Foundation::HANDLE, notification_filter : Void*, flags : Win32cr::System::Power::POWER_SETTING_REGISTER_NOTIFICATION_FLAGS) : Void*
+    {% if !flag?(:docs) %}
     C.RegisterDeviceNotificationW(hRecipient, notification_filter, flags)
+    {% end %}
   end
 
   def postMessageA(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PostMessageA(hWnd, msg, wParam, lParam)
+    {% end %}
   end
 
   def postMessageW(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PostMessageW(hWnd, msg, wParam, lParam)
+    {% end %}
   end
 
   def postThreadMessageA(idThread : UInt32, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PostThreadMessageA(idThread, msg, wParam, lParam)
+    {% end %}
   end
 
   def postThreadMessageW(idThread : UInt32, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PostThreadMessageW(idThread, msg, wParam, lParam)
+    {% end %}
   end
 
   def replyMessage(lResult : Win32cr::Foundation::LRESULT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReplyMessage(lResult)
+    {% end %}
   end
 
   def waitMessage : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WaitMessage
+    {% end %}
   end
 
   def defWindowProcA(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.DefWindowProcA(hWnd, msg, wParam, lParam)
+    {% end %}
   end
 
   def defWindowProcW(hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.DefWindowProcW(hWnd, msg, wParam, lParam)
+    {% end %}
   end
 
   def postQuitMessage(nExitCode : Int32) : Void
+    {% if !flag?(:docs) %}
     C.PostQuitMessage(nExitCode)
+    {% end %}
   end
 
   def callWindowProcA(lpPrevWndFunc : Win32cr::UI::WindowsAndMessaging::WNDPROC, hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.CallWindowProcA(lpPrevWndFunc, hWnd, msg, wParam, lParam)
+    {% end %}
   end
 
   def callWindowProcW(lpPrevWndFunc : Win32cr::UI::WindowsAndMessaging::WNDPROC, hWnd : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.CallWindowProcW(lpPrevWndFunc, hWnd, msg, wParam, lParam)
+    {% end %}
   end
 
   def inSendMessage : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InSendMessage
+    {% end %}
   end
 
   def inSendMessageEx(lpReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.InSendMessageEx(lpReserved)
+    {% end %}
   end
 
   def registerClassA(lpWndClass : Win32cr::UI::WindowsAndMessaging::WNDCLASSA*) : UInt16
+    {% if !flag?(:docs) %}
     C.RegisterClassA(lpWndClass)
+    {% end %}
   end
 
   def registerClassW(lpWndClass : Win32cr::UI::WindowsAndMessaging::WNDCLASSW*) : UInt16
+    {% if !flag?(:docs) %}
     C.RegisterClassW(lpWndClass)
+    {% end %}
   end
 
   def unregisterClassA(lpClassName : Win32cr::Foundation::PSTR, hInstance : Win32cr::Foundation::HINSTANCE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnregisterClassA(lpClassName, hInstance)
+    {% end %}
   end
 
   def unregisterClassW(lpClassName : Win32cr::Foundation::PWSTR, hInstance : Win32cr::Foundation::HINSTANCE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnregisterClassW(lpClassName, hInstance)
+    {% end %}
   end
 
   def getClassInfoA(hInstance : Win32cr::Foundation::HINSTANCE, lpClassName : Win32cr::Foundation::PSTR, lpWndClass : Win32cr::UI::WindowsAndMessaging::WNDCLASSA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetClassInfoA(hInstance, lpClassName, lpWndClass)
+    {% end %}
   end
 
   def getClassInfoW(hInstance : Win32cr::Foundation::HINSTANCE, lpClassName : Win32cr::Foundation::PWSTR, lpWndClass : Win32cr::UI::WindowsAndMessaging::WNDCLASSW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetClassInfoW(hInstance, lpClassName, lpWndClass)
+    {% end %}
   end
 
   def registerClassExA(param0 : Win32cr::UI::WindowsAndMessaging::WNDCLASSEXA*) : UInt16
+    {% if !flag?(:docs) %}
     C.RegisterClassExA(param0)
+    {% end %}
   end
 
   def registerClassExW(param0 : Win32cr::UI::WindowsAndMessaging::WNDCLASSEXW*) : UInt16
+    {% if !flag?(:docs) %}
     C.RegisterClassExW(param0)
+    {% end %}
   end
 
   def getClassInfoExA(hInstance : Win32cr::Foundation::HINSTANCE, lpszClass : Win32cr::Foundation::PSTR, lpwcx : Win32cr::UI::WindowsAndMessaging::WNDCLASSEXA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetClassInfoExA(hInstance, lpszClass, lpwcx)
+    {% end %}
   end
 
   def getClassInfoExW(hInstance : Win32cr::Foundation::HINSTANCE, lpszClass : Win32cr::Foundation::PWSTR, lpwcx : Win32cr::UI::WindowsAndMessaging::WNDCLASSEXW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetClassInfoExW(hInstance, lpszClass, lpwcx)
+    {% end %}
   end
 
   def createWindowExA(dwExStyle : UInt32, lpClassName : Win32cr::Foundation::PSTR, lpWindowName : Win32cr::Foundation::PSTR, dwStyle : UInt32, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, hWndParent : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, hInstance : Win32cr::Foundation::HINSTANCE, lpParam : Void*) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.CreateWindowExA(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam)
+    {% end %}
   end
 
   def createWindowExW(dwExStyle : UInt32, lpClassName : Win32cr::Foundation::PWSTR, lpWindowName : Win32cr::Foundation::PWSTR, dwStyle : UInt32, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, hWndParent : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, hInstance : Win32cr::Foundation::HINSTANCE, lpParam : Void*) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.CreateWindowExW(dwExStyle, lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam)
+    {% end %}
   end
 
   def isWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsWindow(hWnd)
+    {% end %}
   end
 
   def isMenu(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsMenu(hMenu)
+    {% end %}
   end
 
   def isChild(hWndParent : Win32cr::Foundation::HWND, hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsChild(hWndParent, hWnd)
+    {% end %}
   end
 
   def destroyWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DestroyWindow(hWnd)
+    {% end %}
   end
 
   def showWindow(hWnd : Win32cr::Foundation::HWND, nCmdShow : Win32cr::UI::WindowsAndMessaging::SHOW_WINDOW_CMD) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ShowWindow(hWnd, nCmdShow)
+    {% end %}
   end
 
   def animateWindow(hWnd : Win32cr::Foundation::HWND, dwTime : UInt32, dwFlags : Win32cr::UI::WindowsAndMessaging::ANIMATE_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AnimateWindow(hWnd, dwTime, dwFlags)
+    {% end %}
   end
 
-  def updateLayeredWindow(hWnd : Win32cr::Foundation::HWND, hdcDst : Win32cr::Graphics::Gdi::HDC, pptDst : Win32cr::Foundation::POINT*, psize : Win32cr::Foundation::SIZE*, hdcSrc : Win32cr::Graphics::Gdi::HDC, pptSrc : Win32cr::Foundation::POINT*, crKey : UInt32, pblend : Win32cr::Graphics::Gdi::BLENDFUNCTION*, dwFlags : Win32cr::UI::WindowsAndMessaging::UPDATE_LAYERED_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
+  def updateLayeredWindow(hWnd : Win32cr::Foundation::HWND, hdcDst : Win32cr::Graphics::Gdi::HDC, pptDst : Win32cr::Foundation::POINT*, psize : Win32cr::Foundation::SIZE*, hdcSrc : Win32cr::Graphics::Gdi::HDC, pptSrc : Win32cr::Foundation::POINT*, crKey : Win32cr::Foundation::COLORREF, pblend : Win32cr::Graphics::Gdi::BLENDFUNCTION*, dwFlags : Win32cr::UI::WindowsAndMessaging::UPDATE_LAYERED_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UpdateLayeredWindow(hWnd, hdcDst, pptDst, psize, hdcSrc, pptSrc, crKey, pblend, dwFlags)
+    {% end %}
   end
 
   def updateLayeredWindowIndirect(hWnd : Win32cr::Foundation::HWND, pULWInfo : Win32cr::UI::WindowsAndMessaging::UPDATELAYEREDWINDOWINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UpdateLayeredWindowIndirect(hWnd, pULWInfo)
+    {% end %}
   end
 
-  def getLayeredWindowAttributes(hwnd : Win32cr::Foundation::HWND, pcrKey : UInt32*, pbAlpha : UInt8*, pdwFlags : Win32cr::UI::WindowsAndMessaging::LAYERED_WINDOW_ATTRIBUTES_FLAGS*) : Win32cr::Foundation::BOOL
+  def getLayeredWindowAttributes(hwnd : Win32cr::Foundation::HWND, pcrKey : Win32cr::Foundation::COLORREF*, pbAlpha : UInt8*, pdwFlags : Win32cr::UI::WindowsAndMessaging::LAYERED_WINDOW_ATTRIBUTES_FLAGS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetLayeredWindowAttributes(hwnd, pcrKey, pbAlpha, pdwFlags)
+    {% end %}
   end
 
-  def setLayeredWindowAttributes(hwnd : Win32cr::Foundation::HWND, crKey : UInt32, bAlpha : UInt8, dwFlags : Win32cr::UI::WindowsAndMessaging::LAYERED_WINDOW_ATTRIBUTES_FLAGS) : Win32cr::Foundation::BOOL
+  def setLayeredWindowAttributes(hwnd : Win32cr::Foundation::HWND, crKey : Win32cr::Foundation::COLORREF, bAlpha : UInt8, dwFlags : Win32cr::UI::WindowsAndMessaging::LAYERED_WINDOW_ATTRIBUTES_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetLayeredWindowAttributes(hwnd, crKey, bAlpha, dwFlags)
+    {% end %}
   end
 
   def showWindowAsync(hWnd : Win32cr::Foundation::HWND, nCmdShow : Win32cr::UI::WindowsAndMessaging::SHOW_WINDOW_CMD) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ShowWindowAsync(hWnd, nCmdShow)
+    {% end %}
   end
 
   def flashWindow(hWnd : Win32cr::Foundation::HWND, bInvert : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FlashWindow(hWnd, bInvert)
+    {% end %}
   end
 
   def flashWindowEx(pfwi : Win32cr::UI::WindowsAndMessaging::FLASHWINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FlashWindowEx(pfwi)
+    {% end %}
   end
 
   def showOwnedPopups(hWnd : Win32cr::Foundation::HWND, fShow : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ShowOwnedPopups(hWnd, fShow)
+    {% end %}
   end
 
   def openIcon(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.OpenIcon(hWnd)
+    {% end %}
   end
 
   def closeWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CloseWindow(hWnd)
+    {% end %}
   end
 
   def moveWindow(hWnd : Win32cr::Foundation::HWND, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, bRepaint : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MoveWindow(hWnd, x, y, nWidth, nHeight, bRepaint)
+    {% end %}
   end
 
   def setWindowPos(hWnd : Win32cr::Foundation::HWND, hWndInsertAfter : Win32cr::Foundation::HWND, x : Int32, y : Int32, cx : Int32, cy : Int32, uFlags : Win32cr::UI::WindowsAndMessaging::SET_WINDOW_POS_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetWindowPos(hWnd, hWndInsertAfter, x, y, cx, cy, uFlags)
+    {% end %}
   end
 
   def getWindowPlacement(hWnd : Win32cr::Foundation::HWND, lpwndpl : Win32cr::UI::WindowsAndMessaging::WINDOWPLACEMENT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetWindowPlacement(hWnd, lpwndpl)
+    {% end %}
   end
 
   def setWindowPlacement(hWnd : Win32cr::Foundation::HWND, lpwndpl : Win32cr::UI::WindowsAndMessaging::WINDOWPLACEMENT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetWindowPlacement(hWnd, lpwndpl)
+    {% end %}
   end
 
   def getWindowDisplayAffinity(hWnd : Win32cr::Foundation::HWND, pdwAffinity : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetWindowDisplayAffinity(hWnd, pdwAffinity)
+    {% end %}
   end
 
   def setWindowDisplayAffinity(hWnd : Win32cr::Foundation::HWND, dwAffinity : Win32cr::UI::WindowsAndMessaging::WINDOW_DISPLAY_AFFINITY) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetWindowDisplayAffinity(hWnd, dwAffinity)
+    {% end %}
   end
 
   def beginDeferWindowPos(nNumWindows : Int32) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.BeginDeferWindowPos(nNumWindows)
+    {% end %}
   end
 
   def deferWindowPos(hWinPosInfo : LibC::IntPtrT, hWnd : Win32cr::Foundation::HWND, hWndInsertAfter : Win32cr::Foundation::HWND, x : Int32, y : Int32, cx : Int32, cy : Int32, uFlags : Win32cr::UI::WindowsAndMessaging::SET_WINDOW_POS_FLAGS) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.DeferWindowPos(hWinPosInfo, hWnd, hWndInsertAfter, x, y, cx, cy, uFlags)
+    {% end %}
   end
 
   def endDeferWindowPos(hWinPosInfo : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EndDeferWindowPos(hWinPosInfo)
+    {% end %}
   end
 
   def isWindowVisible(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsWindowVisible(hWnd)
+    {% end %}
   end
 
   def isIconic(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsIconic(hWnd)
+    {% end %}
   end
 
   def anyPopup : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AnyPopup
+    {% end %}
   end
 
   def bringWindowToTop(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BringWindowToTop(hWnd)
+    {% end %}
   end
 
   def isZoomed(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsZoomed(hWnd)
+    {% end %}
   end
 
   def createDialogParamA(hInstance : Win32cr::Foundation::HINSTANCE, lpTemplateName : Win32cr::Foundation::PSTR, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.CreateDialogParamA(hInstance, lpTemplateName, hWndParent, lpDialogFunc, dwInitParam)
+    {% end %}
   end
 
   def createDialogParamW(hInstance : Win32cr::Foundation::HINSTANCE, lpTemplateName : Win32cr::Foundation::PWSTR, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.CreateDialogParamW(hInstance, lpTemplateName, hWndParent, lpDialogFunc, dwInitParam)
+    {% end %}
   end
 
   def createDialogIndirectParamA(hInstance : Win32cr::Foundation::HINSTANCE, lpTemplate : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.CreateDialogIndirectParamA(hInstance, lpTemplate, hWndParent, lpDialogFunc, dwInitParam)
+    {% end %}
   end
 
   def createDialogIndirectParamW(hInstance : Win32cr::Foundation::HINSTANCE, lpTemplate : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.CreateDialogIndirectParamW(hInstance, lpTemplate, hWndParent, lpDialogFunc, dwInitParam)
+    {% end %}
   end
 
   def dialogBoxParamA(hInstance : Win32cr::Foundation::HINSTANCE, lpTemplateName : Win32cr::Foundation::PSTR, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.DialogBoxParamA(hInstance, lpTemplateName, hWndParent, lpDialogFunc, dwInitParam)
+    {% end %}
   end
 
   def dialogBoxParamW(hInstance : Win32cr::Foundation::HINSTANCE, lpTemplateName : Win32cr::Foundation::PWSTR, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.DialogBoxParamW(hInstance, lpTemplateName, hWndParent, lpDialogFunc, dwInitParam)
+    {% end %}
   end
 
   def dialogBoxIndirectParamA(hInstance : Win32cr::Foundation::HINSTANCE, hDialogTemplate : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.DialogBoxIndirectParamA(hInstance, hDialogTemplate, hWndParent, lpDialogFunc, dwInitParam)
+    {% end %}
   end
 
   def dialogBoxIndirectParamW(hInstance : Win32cr::Foundation::HINSTANCE, hDialogTemplate : Win32cr::UI::WindowsAndMessaging::DLGTEMPLATE*, hWndParent : Win32cr::Foundation::HWND, lpDialogFunc : Win32cr::UI::WindowsAndMessaging::DLGPROC, dwInitParam : Win32cr::Foundation::LPARAM) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.DialogBoxIndirectParamW(hInstance, hDialogTemplate, hWndParent, lpDialogFunc, dwInitParam)
+    {% end %}
   end
 
   def endDialog(hDlg : Win32cr::Foundation::HWND, nResult : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EndDialog(hDlg, nResult)
+    {% end %}
   end
 
   def getDlgItem(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.GetDlgItem(hDlg, nIDDlgItem)
+    {% end %}
   end
 
   def setDlgItemInt(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, uValue : UInt32, bSigned : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetDlgItemInt(hDlg, nIDDlgItem, uValue, bSigned)
+    {% end %}
   end
 
   def getDlgItemInt(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, lpTranslated : Win32cr::Foundation::BOOL*, bSigned : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.GetDlgItemInt(hDlg, nIDDlgItem, lpTranslated, bSigned)
+    {% end %}
   end
 
   def setDlgItemTextA(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, lpString : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetDlgItemTextA(hDlg, nIDDlgItem, lpString)
+    {% end %}
   end
 
   def setDlgItemTextW(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, lpString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetDlgItemTextW(hDlg, nIDDlgItem, lpString)
+    {% end %}
   end
 
   def getDlgItemTextA(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, lpString : UInt8*, cchMax : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetDlgItemTextA(hDlg, nIDDlgItem, lpString, cchMax)
+    {% end %}
   end
 
   def getDlgItemTextW(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, lpString : UInt16*, cchMax : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetDlgItemTextW(hDlg, nIDDlgItem, lpString, cchMax)
+    {% end %}
   end
 
   def sendDlgItemMessageA(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.SendDlgItemMessageA(hDlg, nIDDlgItem, msg, wParam, lParam)
+    {% end %}
   end
 
   def sendDlgItemMessageW(hDlg : Win32cr::Foundation::HWND, nIDDlgItem : Int32, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.SendDlgItemMessageW(hDlg, nIDDlgItem, msg, wParam, lParam)
+    {% end %}
   end
 
   def getNextDlgGroupItem(hDlg : Win32cr::Foundation::HWND, hCtl : Win32cr::Foundation::HWND, bPrevious : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.GetNextDlgGroupItem(hDlg, hCtl, bPrevious)
+    {% end %}
   end
 
   def getNextDlgTabItem(hDlg : Win32cr::Foundation::HWND, hCtl : Win32cr::Foundation::HWND, bPrevious : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.GetNextDlgTabItem(hDlg, hCtl, bPrevious)
+    {% end %}
   end
 
   def getDlgCtrlID(hWnd : Win32cr::Foundation::HWND) : Int32
+    {% if !flag?(:docs) %}
     C.GetDlgCtrlID(hWnd)
+    {% end %}
   end
 
   def getDialogBaseUnits : Int32
+    {% if !flag?(:docs) %}
     C.GetDialogBaseUnits
+    {% end %}
   end
 
   def defDlgProcA(hDlg : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.DefDlgProcA(hDlg, msg, wParam, lParam)
+    {% end %}
   end
 
   def defDlgProcW(hDlg : Win32cr::Foundation::HWND, msg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.DefDlgProcW(hDlg, msg, wParam, lParam)
+    {% end %}
   end
 
   def callMsgFilterA(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*, nCode : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CallMsgFilterA(lpMsg, nCode)
+    {% end %}
   end
 
   def callMsgFilterW(lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*, nCode : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CallMsgFilterW(lpMsg, nCode)
+    {% end %}
   end
 
   def charToOemA(pSrc : Win32cr::Foundation::PSTR, pDst : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CharToOemA(pSrc, pDst)
+    {% end %}
   end
 
   def charToOemW(pSrc : Win32cr::Foundation::PWSTR, pDst : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CharToOemW(pSrc, pDst)
+    {% end %}
   end
 
   def oemToCharA(pSrc : Win32cr::Foundation::PSTR, pDst : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.OemToCharA(pSrc, pDst)
+    {% end %}
   end
 
   def oemToCharW(pSrc : Win32cr::Foundation::PSTR, pDst : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.OemToCharW(pSrc, pDst)
+    {% end %}
   end
 
   def charToOemBuffA(lpszSrc : Win32cr::Foundation::PSTR, lpszDst : UInt8*, cchDstLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CharToOemBuffA(lpszSrc, lpszDst, cchDstLength)
+    {% end %}
   end
 
   def charToOemBuffW(lpszSrc : Win32cr::Foundation::PWSTR, lpszDst : UInt8*, cchDstLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CharToOemBuffW(lpszSrc, lpszDst, cchDstLength)
+    {% end %}
   end
 
   def oemToCharBuffA(lpszSrc : Win32cr::Foundation::PSTR, lpszDst : UInt8*, cchDstLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.OemToCharBuffA(lpszSrc, lpszDst, cchDstLength)
+    {% end %}
   end
 
   def oemToCharBuffW(lpszSrc : Win32cr::Foundation::PSTR, lpszDst : UInt16*, cchDstLength : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.OemToCharBuffW(lpszSrc, lpszDst, cchDstLength)
+    {% end %}
   end
 
   def charUpperA(lpsz : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.CharUpperA(lpsz)
+    {% end %}
   end
 
   def charUpperW(lpsz : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.CharUpperW(lpsz)
+    {% end %}
   end
 
   def charUpperBuffA(lpsz : UInt8*, cchLength : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CharUpperBuffA(lpsz, cchLength)
+    {% end %}
   end
 
   def charUpperBuffW(lpsz : UInt16*, cchLength : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CharUpperBuffW(lpsz, cchLength)
+    {% end %}
   end
 
   def charLowerA(lpsz : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.CharLowerA(lpsz)
+    {% end %}
   end
 
   def charLowerW(lpsz : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.CharLowerW(lpsz)
+    {% end %}
   end
 
   def charLowerBuffA(lpsz : UInt8*, cchLength : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CharLowerBuffA(lpsz, cchLength)
+    {% end %}
   end
 
   def charLowerBuffW(lpsz : UInt16*, cchLength : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CharLowerBuffW(lpsz, cchLength)
+    {% end %}
   end
 
   def charNextA(lpsz : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.CharNextA(lpsz)
+    {% end %}
   end
 
   def charNextW(lpsz : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.CharNextW(lpsz)
+    {% end %}
   end
 
   def charPrevA(lpszStart : Win32cr::Foundation::PSTR, lpszCurrent : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.CharPrevA(lpszStart, lpszCurrent)
+    {% end %}
   end
 
   def charPrevW(lpszStart : Win32cr::Foundation::PWSTR, lpszCurrent : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.CharPrevW(lpszStart, lpszCurrent)
+    {% end %}
   end
 
   def charNextExA(code_page : UInt16, lpCurrentChar : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.CharNextExA(code_page, lpCurrentChar, dwFlags)
+    {% end %}
   end
 
   def charPrevExA(code_page : UInt16, lpStart : Win32cr::Foundation::PSTR, lpCurrentChar : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.CharPrevExA(code_page, lpStart, lpCurrentChar, dwFlags)
+    {% end %}
   end
 
   def isCharAlphaA(ch : Win32cr::Foundation::CHAR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsCharAlphaA(ch)
+    {% end %}
   end
 
   def isCharAlphaW(ch : UInt16) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsCharAlphaW(ch)
+    {% end %}
   end
 
   def isCharAlphaNumericA(ch : Win32cr::Foundation::CHAR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsCharAlphaNumericA(ch)
+    {% end %}
   end
 
   def isCharAlphaNumericW(ch : UInt16) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsCharAlphaNumericW(ch)
+    {% end %}
   end
 
   def isCharUpperA(ch : Win32cr::Foundation::CHAR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsCharUpperA(ch)
+    {% end %}
   end
 
   def isCharUpperW(ch : UInt16) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsCharUpperW(ch)
+    {% end %}
   end
 
   def isCharLowerA(ch : Win32cr::Foundation::CHAR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsCharLowerA(ch)
+    {% end %}
   end
 
   def getInputState : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetInputState
+    {% end %}
   end
 
   def getQueueStatus(flags : Win32cr::UI::WindowsAndMessaging::QUEUE_STATUS_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.GetQueueStatus(flags)
+    {% end %}
   end
 
   def msgWaitForMultipleObjects(nCount : UInt32, pHandles : Win32cr::Foundation::HANDLE*, fWaitAll : Win32cr::Foundation::BOOL, dwMilliseconds : UInt32, dwWakeMask : Win32cr::UI::WindowsAndMessaging::QUEUE_STATUS_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.MsgWaitForMultipleObjects(nCount, pHandles, fWaitAll, dwMilliseconds, dwWakeMask)
+    {% end %}
   end
 
   def msgWaitForMultipleObjectsEx(nCount : UInt32, pHandles : Win32cr::Foundation::HANDLE*, dwMilliseconds : UInt32, dwWakeMask : Win32cr::UI::WindowsAndMessaging::QUEUE_STATUS_FLAGS, dwFlags : Win32cr::UI::WindowsAndMessaging::MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.MsgWaitForMultipleObjectsEx(nCount, pHandles, dwMilliseconds, dwWakeMask, dwFlags)
+    {% end %}
   end
 
   def setTimer(hWnd : Win32cr::Foundation::HWND, nIDEvent : LibC::UIntPtrT, uElapse : UInt32, lpTimerFunc : Win32cr::UI::WindowsAndMessaging::TIMERPROC) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.SetTimer(hWnd, nIDEvent, uElapse, lpTimerFunc)
+    {% end %}
   end
 
   def setCoalescableTimer(hWnd : Win32cr::Foundation::HWND, nIDEvent : LibC::UIntPtrT, uElapse : UInt32, lpTimerFunc : Win32cr::UI::WindowsAndMessaging::TIMERPROC, uToleranceDelay : UInt32) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.SetCoalescableTimer(hWnd, nIDEvent, uElapse, lpTimerFunc, uToleranceDelay)
+    {% end %}
   end
 
   def killTimer(hWnd : Win32cr::Foundation::HWND, uIDEvent : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.KillTimer(hWnd, uIDEvent)
+    {% end %}
   end
 
   def isWindowUnicode(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsWindowUnicode(hWnd)
+    {% end %}
   end
 
   def loadAcceleratorsA(hInstance : Win32cr::Foundation::HINSTANCE, lpTableName : Win32cr::Foundation::PSTR) : Win32cr::UI::WindowsAndMessaging::HACCEL
+    {% if !flag?(:docs) %}
     C.LoadAcceleratorsA(hInstance, lpTableName)
+    {% end %}
   end
 
   def loadAcceleratorsW(hInstance : Win32cr::Foundation::HINSTANCE, lpTableName : Win32cr::Foundation::PWSTR) : Win32cr::UI::WindowsAndMessaging::HACCEL
+    {% if !flag?(:docs) %}
     C.LoadAcceleratorsW(hInstance, lpTableName)
+    {% end %}
   end
 
   def createAcceleratorTableA(paccel : Win32cr::UI::WindowsAndMessaging::ACCEL*, cAccel : Int32) : Win32cr::UI::WindowsAndMessaging::HACCEL
+    {% if !flag?(:docs) %}
     C.CreateAcceleratorTableA(paccel, cAccel)
+    {% end %}
   end
 
   def createAcceleratorTableW(paccel : Win32cr::UI::WindowsAndMessaging::ACCEL*, cAccel : Int32) : Win32cr::UI::WindowsAndMessaging::HACCEL
+    {% if !flag?(:docs) %}
     C.CreateAcceleratorTableW(paccel, cAccel)
+    {% end %}
   end
 
   def destroyAcceleratorTable(hAccel : Win32cr::UI::WindowsAndMessaging::HACCEL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DestroyAcceleratorTable(hAccel)
+    {% end %}
   end
 
   def copyAcceleratorTableA(hAccelSrc : Win32cr::UI::WindowsAndMessaging::HACCEL, lpAccelDst : Win32cr::UI::WindowsAndMessaging::ACCEL*, cAccelEntries : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.CopyAcceleratorTableA(hAccelSrc, lpAccelDst, cAccelEntries)
+    {% end %}
   end
 
   def copyAcceleratorTableW(hAccelSrc : Win32cr::UI::WindowsAndMessaging::HACCEL, lpAccelDst : Win32cr::UI::WindowsAndMessaging::ACCEL*, cAccelEntries : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.CopyAcceleratorTableW(hAccelSrc, lpAccelDst, cAccelEntries)
+    {% end %}
   end
 
   def translateAcceleratorA(hWnd : Win32cr::Foundation::HWND, hAccTable : Win32cr::UI::WindowsAndMessaging::HACCEL, lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Int32
+    {% if !flag?(:docs) %}
     C.TranslateAcceleratorA(hWnd, hAccTable, lpMsg)
+    {% end %}
   end
 
   def translateAcceleratorW(hWnd : Win32cr::Foundation::HWND, hAccTable : Win32cr::UI::WindowsAndMessaging::HACCEL, lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Int32
+    {% if !flag?(:docs) %}
     C.TranslateAcceleratorW(hWnd, hAccTable, lpMsg)
+    {% end %}
   end
 
   def getSystemMetrics(nIndex : Win32cr::UI::WindowsAndMessaging::SYSTEM_METRICS_INDEX) : Int32
+    {% if !flag?(:docs) %}
     C.GetSystemMetrics(nIndex)
+    {% end %}
   end
 
   def loadMenuA(hInstance : Win32cr::Foundation::HINSTANCE, lpMenuName : Win32cr::Foundation::PSTR) : Win32cr::UI::WindowsAndMessaging::HMENU
+    {% if !flag?(:docs) %}
     C.LoadMenuA(hInstance, lpMenuName)
+    {% end %}
   end
 
   def loadMenuW(hInstance : Win32cr::Foundation::HINSTANCE, lpMenuName : Win32cr::Foundation::PWSTR) : Win32cr::UI::WindowsAndMessaging::HMENU
+    {% if !flag?(:docs) %}
     C.LoadMenuW(hInstance, lpMenuName)
+    {% end %}
   end
 
   def loadMenuIndirectA(lpMenuTemplate : Void*) : Win32cr::UI::WindowsAndMessaging::HMENU
+    {% if !flag?(:docs) %}
     C.LoadMenuIndirectA(lpMenuTemplate)
+    {% end %}
   end
 
   def loadMenuIndirectW(lpMenuTemplate : Void*) : Win32cr::UI::WindowsAndMessaging::HMENU
+    {% if !flag?(:docs) %}
     C.LoadMenuIndirectW(lpMenuTemplate)
+    {% end %}
   end
 
   def getMenu(hWnd : Win32cr::Foundation::HWND) : Win32cr::UI::WindowsAndMessaging::HMENU
+    {% if !flag?(:docs) %}
     C.GetMenu(hWnd)
+    {% end %}
   end
 
   def setMenu(hWnd : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetMenu(hWnd, hMenu)
+    {% end %}
   end
 
   def changeMenuA(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, cmd : UInt32, lpszNewItem : Win32cr::Foundation::PSTR, cmdInsert : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ChangeMenuA(hMenu, cmd, lpszNewItem, cmdInsert, flags)
+    {% end %}
   end
 
   def changeMenuW(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, cmd : UInt32, lpszNewItem : Win32cr::Foundation::PWSTR, cmdInsert : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ChangeMenuW(hMenu, cmd, lpszNewItem, cmdInsert, flags)
+    {% end %}
   end
 
   def hiliteMenuItem(hWnd : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uIDHiliteItem : UInt32, uHilite : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HiliteMenuItem(hWnd, hMenu, uIDHiliteItem, uHilite)
+    {% end %}
   end
 
   def getMenuStringA(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uIDItem : UInt32, lpString : UInt8*, cchMax : Int32, flags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS) : Int32
+    {% if !flag?(:docs) %}
     C.GetMenuStringA(hMenu, uIDItem, lpString, cchMax, flags)
+    {% end %}
   end
 
   def getMenuStringW(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uIDItem : UInt32, lpString : UInt16*, cchMax : Int32, flags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS) : Int32
+    {% if !flag?(:docs) %}
     C.GetMenuStringW(hMenu, uIDItem, lpString, cchMax, flags)
+    {% end %}
   end
 
   def getMenuState(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uId : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.GetMenuState(hMenu, uId, uFlags)
+    {% end %}
   end
 
   def drawMenuBar(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawMenuBar(hWnd)
+    {% end %}
   end
 
   def getSystemMenu(hWnd : Win32cr::Foundation::HWND, bRevert : Win32cr::Foundation::BOOL) : Win32cr::UI::WindowsAndMessaging::HMENU
+    {% if !flag?(:docs) %}
     C.GetSystemMenu(hWnd, bRevert)
+    {% end %}
   end
 
   def createMenu : Win32cr::UI::WindowsAndMessaging::HMENU
+    {% if !flag?(:docs) %}
     C.CreateMenu
+    {% end %}
   end
 
   def createPopupMenu : Win32cr::UI::WindowsAndMessaging::HMENU
+    {% if !flag?(:docs) %}
     C.CreatePopupMenu
+    {% end %}
   end
 
   def destroyMenu(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DestroyMenu(hMenu)
+    {% end %}
   end
 
   def checkMenuItem(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uIDCheckItem : UInt32, uCheck : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CheckMenuItem(hMenu, uIDCheckItem, uCheck)
+    {% end %}
   end
 
   def enableMenuItem(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uIDEnableItem : UInt32, uEnable : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnableMenuItem(hMenu, uIDEnableItem, uEnable)
+    {% end %}
   end
 
   def getSubMenu(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, nPos : Int32) : Win32cr::UI::WindowsAndMessaging::HMENU
+    {% if !flag?(:docs) %}
     C.GetSubMenu(hMenu, nPos)
+    {% end %}
   end
 
   def getMenuItemID(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, nPos : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetMenuItemID(hMenu, nPos)
+    {% end %}
   end
 
   def getMenuItemCount(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU) : Int32
+    {% if !flag?(:docs) %}
     C.GetMenuItemCount(hMenu)
+    {% end %}
   end
 
   def insertMenuA(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, uIDNewItem : LibC::UIntPtrT, lpNewItem : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InsertMenuA(hMenu, uPosition, uFlags, uIDNewItem, lpNewItem)
+    {% end %}
   end
 
   def insertMenuW(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, uIDNewItem : LibC::UIntPtrT, lpNewItem : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InsertMenuW(hMenu, uPosition, uFlags, uIDNewItem, lpNewItem)
+    {% end %}
   end
 
   def appendMenuA(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, uIDNewItem : LibC::UIntPtrT, lpNewItem : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AppendMenuA(hMenu, uFlags, uIDNewItem, lpNewItem)
+    {% end %}
   end
 
   def appendMenuW(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, uIDNewItem : LibC::UIntPtrT, lpNewItem : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AppendMenuW(hMenu, uFlags, uIDNewItem, lpNewItem)
+    {% end %}
   end
 
   def modifyMenuA(hMnu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, uIDNewItem : LibC::UIntPtrT, lpNewItem : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ModifyMenuA(hMnu, uPosition, uFlags, uIDNewItem, lpNewItem)
+    {% end %}
   end
 
   def modifyMenuW(hMnu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, uIDNewItem : LibC::UIntPtrT, lpNewItem : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ModifyMenuW(hMnu, uPosition, uFlags, uIDNewItem, lpNewItem)
+    {% end %}
   end
 
   def removeMenu(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RemoveMenu(hMenu, uPosition, uFlags)
+    {% end %}
   end
 
   def deleteMenu(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteMenu(hMenu, uPosition, uFlags)
+    {% end %}
   end
 
   def setMenuItemBitmaps(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uPosition : UInt32, uFlags : Win32cr::UI::WindowsAndMessaging::MENU_ITEM_FLAGS, hBitmapUnchecked : Win32cr::Graphics::Gdi::HBITMAP, hBitmapChecked : Win32cr::Graphics::Gdi::HBITMAP) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetMenuItemBitmaps(hMenu, uPosition, uFlags, hBitmapUnchecked, hBitmapChecked)
+    {% end %}
   end
 
   def getMenuCheckMarkDimensions : Int32
+    {% if !flag?(:docs) %}
     C.GetMenuCheckMarkDimensions
+    {% end %}
   end
 
   def trackPopupMenu(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uFlags : Win32cr::UI::WindowsAndMessaging::TRACK_POPUP_MENU_FLAGS, x : Int32, y : Int32, nReserved : Int32, hWnd : Win32cr::Foundation::HWND, prcRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TrackPopupMenu(hMenu, uFlags, x, y, nReserved, hWnd, prcRect)
+    {% end %}
   end
 
   def trackPopupMenuEx(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uFlags : UInt32, x : Int32, y : Int32, hwnd : Win32cr::Foundation::HWND, lptpm : Win32cr::UI::WindowsAndMessaging::TPMPARAMS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TrackPopupMenuEx(hMenu, uFlags, x, y, hwnd, lptpm)
+    {% end %}
   end
 
   def calculatePopupWindowPosition(anchorPoint : Win32cr::Foundation::POINT*, windowSize : Win32cr::Foundation::SIZE*, flags : UInt32, excludeRect : Win32cr::Foundation::RECT*, popupWindowPosition : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CalculatePopupWindowPosition(anchorPoint, windowSize, flags, excludeRect, popupWindowPosition)
+    {% end %}
   end
 
   def getMenuInfo(param0 : Win32cr::UI::WindowsAndMessaging::HMENU, param1 : Win32cr::UI::WindowsAndMessaging::MENUINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetMenuInfo(param0, param1)
+    {% end %}
   end
 
   def setMenuInfo(param0 : Win32cr::UI::WindowsAndMessaging::HMENU, param1 : Win32cr::UI::WindowsAndMessaging::MENUINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetMenuInfo(param0, param1)
+    {% end %}
   end
 
   def endMenu : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EndMenu
+    {% end %}
   end
 
   def insertMenuItemA(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, item : UInt32, fByPosition : Win32cr::Foundation::BOOL, lpmi : Win32cr::UI::WindowsAndMessaging::MENUITEMINFOA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InsertMenuItemA(hmenu, item, fByPosition, lpmi)
+    {% end %}
   end
 
   def insertMenuItemW(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, item : UInt32, fByPosition : Win32cr::Foundation::BOOL, lpmi : Win32cr::UI::WindowsAndMessaging::MENUITEMINFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InsertMenuItemW(hmenu, item, fByPosition, lpmi)
+    {% end %}
   end
 
   def getMenuItemInfoA(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, item : UInt32, fByPosition : Win32cr::Foundation::BOOL, lpmii : Win32cr::UI::WindowsAndMessaging::MENUITEMINFOA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetMenuItemInfoA(hmenu, item, fByPosition, lpmii)
+    {% end %}
   end
 
   def getMenuItemInfoW(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, item : UInt32, fByPosition : Win32cr::Foundation::BOOL, lpmii : Win32cr::UI::WindowsAndMessaging::MENUITEMINFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetMenuItemInfoW(hmenu, item, fByPosition, lpmii)
+    {% end %}
   end
 
   def setMenuItemInfoA(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, item : UInt32, fByPositon : Win32cr::Foundation::BOOL, lpmii : Win32cr::UI::WindowsAndMessaging::MENUITEMINFOA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetMenuItemInfoA(hmenu, item, fByPositon, lpmii)
+    {% end %}
   end
 
   def setMenuItemInfoW(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, item : UInt32, fByPositon : Win32cr::Foundation::BOOL, lpmii : Win32cr::UI::WindowsAndMessaging::MENUITEMINFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetMenuItemInfoW(hmenu, item, fByPositon, lpmii)
+    {% end %}
   end
 
   def getMenuDefaultItem(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, fByPos : UInt32, gmdiFlags : Win32cr::UI::WindowsAndMessaging::GET_MENU_DEFAULT_ITEM_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.GetMenuDefaultItem(hMenu, fByPos, gmdiFlags)
+    {% end %}
   end
 
   def setMenuDefaultItem(hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uItem : UInt32, fByPos : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetMenuDefaultItem(hMenu, uItem, fByPos)
+    {% end %}
   end
 
   def getMenuItemRect(hWnd : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, uItem : UInt32, lprcItem : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetMenuItemRect(hWnd, hMenu, uItem, lprcItem)
+    {% end %}
   end
 
   def menuItemFromPoint(hWnd : Win32cr::Foundation::HWND, hMenu : Win32cr::UI::WindowsAndMessaging::HMENU, ptScreen : Win32cr::Foundation::POINT) : Int32
+    {% if !flag?(:docs) %}
     C.MenuItemFromPoint(hWnd, hMenu, ptScreen)
+    {% end %}
   end
 
   def dragObject(hwndParent : Win32cr::Foundation::HWND, hwndFrom : Win32cr::Foundation::HWND, fmt : UInt32, data : LibC::UIntPtrT, hcur : Win32cr::UI::WindowsAndMessaging::HCURSOR) : UInt32
+    {% if !flag?(:docs) %}
     C.DragObject(hwndParent, hwndFrom, fmt, data, hcur)
+    {% end %}
   end
 
   def drawIcon(hDC : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, hIcon : Win32cr::UI::WindowsAndMessaging::HICON) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawIcon(hDC, x, y, hIcon)
+    {% end %}
   end
 
   def getForegroundWindow : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.GetForegroundWindow
+    {% end %}
   end
 
   def switchToThisWindow(hwnd : Win32cr::Foundation::HWND, fUnknown : Win32cr::Foundation::BOOL) : Void
+    {% if !flag?(:docs) %}
     C.SwitchToThisWindow(hwnd, fUnknown)
+    {% end %}
   end
 
   def setForegroundWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetForegroundWindow(hWnd)
+    {% end %}
   end
 
   def allowSetForegroundWindow(dwProcessId : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AllowSetForegroundWindow(dwProcessId)
+    {% end %}
   end
 
   def lockSetForegroundWindow(uLockCode : Win32cr::UI::WindowsAndMessaging::FOREGROUND_WINDOW_LOCK_CODE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LockSetForegroundWindow(uLockCode)
+    {% end %}
   end
 
   def scrollWindow(hWnd : Win32cr::Foundation::HWND, x_amount : Int32, y_amount : Int32, lpRect : Win32cr::Foundation::RECT*, lpClipRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ScrollWindow(hWnd, x_amount, y_amount, lpRect, lpClipRect)
+    {% end %}
   end
 
   def scrollDC(hDC : Win32cr::Graphics::Gdi::HDC, dx : Int32, dy : Int32, lprcScroll : Win32cr::Foundation::RECT*, lprcClip : Win32cr::Foundation::RECT*, hrgnUpdate : Win32cr::Graphics::Gdi::HRGN, lprcUpdate : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ScrollDC(hDC, dx, dy, lprcScroll, lprcClip, hrgnUpdate, lprcUpdate)
+    {% end %}
   end
 
   def scrollWindowEx(hWnd : Win32cr::Foundation::HWND, dx : Int32, dy : Int32, prcScroll : Win32cr::Foundation::RECT*, prcClip : Win32cr::Foundation::RECT*, hrgnUpdate : Win32cr::Graphics::Gdi::HRGN, prcUpdate : Win32cr::Foundation::RECT*, flags : Win32cr::UI::WindowsAndMessaging::SHOW_WINDOW_CMD) : Int32
+    {% if !flag?(:docs) %}
     C.ScrollWindowEx(hWnd, dx, dy, prcScroll, prcClip, hrgnUpdate, prcUpdate, flags)
+    {% end %}
   end
 
   def getScrollPos(hWnd : Win32cr::Foundation::HWND, nBar : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS) : Int32
+    {% if !flag?(:docs) %}
     C.GetScrollPos(hWnd, nBar)
+    {% end %}
   end
 
   def getScrollRange(hWnd : Win32cr::Foundation::HWND, nBar : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, lpMinPos : Int32*, lpMaxPos : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetScrollRange(hWnd, nBar, lpMinPos, lpMaxPos)
+    {% end %}
   end
 
   def setPropA(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PSTR, hData : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetPropA(hWnd, lpString, hData)
+    {% end %}
   end
 
   def setPropW(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PWSTR, hData : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetPropW(hWnd, lpString, hData)
+    {% end %}
   end
 
   def getPropA(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.GetPropA(hWnd, lpString)
+    {% end %}
   end
 
   def getPropW(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.GetPropW(hWnd, lpString)
+    {% end %}
   end
 
   def removePropA(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.RemovePropA(hWnd, lpString)
+    {% end %}
   end
 
   def removePropW(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.RemovePropW(hWnd, lpString)
+    {% end %}
   end
 
   def enumPropsExA(hWnd : Win32cr::Foundation::HWND, lpEnumFunc : Win32cr::UI::WindowsAndMessaging::PROPENUMPROCEXA, lParam : Win32cr::Foundation::LPARAM) : Int32
+    {% if !flag?(:docs) %}
     C.EnumPropsExA(hWnd, lpEnumFunc, lParam)
+    {% end %}
   end
 
   def enumPropsExW(hWnd : Win32cr::Foundation::HWND, lpEnumFunc : Win32cr::UI::WindowsAndMessaging::PROPENUMPROCEXW, lParam : Win32cr::Foundation::LPARAM) : Int32
+    {% if !flag?(:docs) %}
     C.EnumPropsExW(hWnd, lpEnumFunc, lParam)
+    {% end %}
   end
 
   def enumPropsA(hWnd : Win32cr::Foundation::HWND, lpEnumFunc : Win32cr::UI::WindowsAndMessaging::PROPENUMPROCA) : Int32
+    {% if !flag?(:docs) %}
     C.EnumPropsA(hWnd, lpEnumFunc)
+    {% end %}
   end
 
   def enumPropsW(hWnd : Win32cr::Foundation::HWND, lpEnumFunc : Win32cr::UI::WindowsAndMessaging::PROPENUMPROCW) : Int32
+    {% if !flag?(:docs) %}
     C.EnumPropsW(hWnd, lpEnumFunc)
+    {% end %}
   end
 
   def setWindowTextA(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetWindowTextA(hWnd, lpString)
+    {% end %}
   end
 
   def setWindowTextW(hWnd : Win32cr::Foundation::HWND, lpString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetWindowTextW(hWnd, lpString)
+    {% end %}
   end
 
   def getWindowTextA(hWnd : Win32cr::Foundation::HWND, lpString : UInt8*, nMaxCount : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetWindowTextA(hWnd, lpString, nMaxCount)
+    {% end %}
   end
 
   def getWindowTextW(hWnd : Win32cr::Foundation::HWND, lpString : UInt16*, nMaxCount : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetWindowTextW(hWnd, lpString, nMaxCount)
+    {% end %}
   end
 
   def getWindowTextLengthA(hWnd : Win32cr::Foundation::HWND) : Int32
+    {% if !flag?(:docs) %}
     C.GetWindowTextLengthA(hWnd)
+    {% end %}
   end
 
   def getWindowTextLengthW(hWnd : Win32cr::Foundation::HWND) : Int32
+    {% if !flag?(:docs) %}
     C.GetWindowTextLengthW(hWnd)
+    {% end %}
   end
 
   def getClientRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetClientRect(hWnd, lpRect)
+    {% end %}
   end
 
   def getWindowRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetWindowRect(hWnd, lpRect)
+    {% end %}
   end
 
   def adjustWindowRect(lpRect : Win32cr::Foundation::RECT*, dwStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE, bMenu : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AdjustWindowRect(lpRect, dwStyle, bMenu)
+    {% end %}
   end
 
   def adjustWindowRectEx(lpRect : Win32cr::Foundation::RECT*, dwStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE, bMenu : Win32cr::Foundation::BOOL, dwExStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_EX_STYLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AdjustWindowRectEx(lpRect, dwStyle, bMenu, dwExStyle)
+    {% end %}
   end
 
   def messageBoxA(hWnd : Win32cr::Foundation::HWND, lpText : Win32cr::Foundation::PSTR, lpCaption : Win32cr::Foundation::PSTR, uType : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE) : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT
+    {% if !flag?(:docs) %}
     C.MessageBoxA(hWnd, lpText, lpCaption, uType)
+    {% end %}
   end
 
   def messageBoxW(hWnd : Win32cr::Foundation::HWND, lpText : Win32cr::Foundation::PWSTR, lpCaption : Win32cr::Foundation::PWSTR, uType : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE) : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT
+    {% if !flag?(:docs) %}
     C.MessageBoxW(hWnd, lpText, lpCaption, uType)
+    {% end %}
   end
 
   def messageBoxExA(hWnd : Win32cr::Foundation::HWND, lpText : Win32cr::Foundation::PSTR, lpCaption : Win32cr::Foundation::PSTR, uType : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE, wLanguageId : UInt16) : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT
+    {% if !flag?(:docs) %}
     C.MessageBoxExA(hWnd, lpText, lpCaption, uType, wLanguageId)
+    {% end %}
   end
 
   def messageBoxExW(hWnd : Win32cr::Foundation::HWND, lpText : Win32cr::Foundation::PWSTR, lpCaption : Win32cr::Foundation::PWSTR, uType : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_STYLE, wLanguageId : UInt16) : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT
+    {% if !flag?(:docs) %}
     C.MessageBoxExW(hWnd, lpText, lpCaption, uType, wLanguageId)
+    {% end %}
   end
 
   def messageBoxIndirectA(lpmbp : Win32cr::UI::WindowsAndMessaging::MSGBOXPARAMSA*) : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT
+    {% if !flag?(:docs) %}
     C.MessageBoxIndirectA(lpmbp)
+    {% end %}
   end
 
   def messageBoxIndirectW(lpmbp : Win32cr::UI::WindowsAndMessaging::MSGBOXPARAMSW*) : Win32cr::UI::WindowsAndMessaging::MESSAGEBOX_RESULT
+    {% if !flag?(:docs) %}
     C.MessageBoxIndirectW(lpmbp)
+    {% end %}
   end
 
   def showCursor(bShow : Win32cr::Foundation::BOOL) : Int32
+    {% if !flag?(:docs) %}
     C.ShowCursor(bShow)
+    {% end %}
   end
 
   def setCursorPos(x : Int32, y : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetCursorPos(x, y)
+    {% end %}
   end
 
   def setPhysicalCursorPos(x : Int32, y : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetPhysicalCursorPos(x, y)
+    {% end %}
   end
 
   def setCursor(hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR) : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    {% if !flag?(:docs) %}
     C.SetCursor(hCursor)
+    {% end %}
   end
 
   def getCursorPos(lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCursorPos(lpPoint)
+    {% end %}
   end
 
   def getPhysicalCursorPos(lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPhysicalCursorPos(lpPoint)
+    {% end %}
   end
 
   def getClipCursor(lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetClipCursor(lpRect)
+    {% end %}
   end
 
   def getCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    {% if !flag?(:docs) %}
     C.GetCursor
+    {% end %}
   end
 
   def createCaret(hWnd : Win32cr::Foundation::HWND, hBitmap : Win32cr::Graphics::Gdi::HBITMAP, nWidth : Int32, nHeight : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateCaret(hWnd, hBitmap, nWidth, nHeight)
+    {% end %}
   end
 
   def getCaretBlinkTime : UInt32
+    {% if !flag?(:docs) %}
     C.GetCaretBlinkTime
+    {% end %}
   end
 
   def setCaretBlinkTime(uMSeconds : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetCaretBlinkTime(uMSeconds)
+    {% end %}
   end
 
   def destroyCaret : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DestroyCaret
+    {% end %}
   end
 
   def hideCaret(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.HideCaret(hWnd)
+    {% end %}
   end
 
   def showCaret(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ShowCaret(hWnd)
+    {% end %}
   end
 
   def setCaretPos(x : Int32, y : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetCaretPos(x, y)
+    {% end %}
   end
 
   def getCaretPos(lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCaretPos(lpPoint)
+    {% end %}
   end
 
   def logicalToPhysicalPoint(hWnd : Win32cr::Foundation::HWND, lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LogicalToPhysicalPoint(hWnd, lpPoint)
+    {% end %}
   end
 
   def physicalToLogicalPoint(hWnd : Win32cr::Foundation::HWND, lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PhysicalToLogicalPoint(hWnd, lpPoint)
+    {% end %}
   end
 
   def windowFromPoint(point : Win32cr::Foundation::POINT) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.WindowFromPoint(point)
+    {% end %}
   end
 
   def windowFromPhysicalPoint(point : Win32cr::Foundation::POINT) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.WindowFromPhysicalPoint(point)
+    {% end %}
   end
 
   def childWindowFromPoint(hWndParent : Win32cr::Foundation::HWND, point : Win32cr::Foundation::POINT) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.ChildWindowFromPoint(hWndParent, point)
+    {% end %}
   end
 
   def clipCursor(lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ClipCursor(lpRect)
+    {% end %}
   end
 
   def childWindowFromPointEx(hwnd : Win32cr::Foundation::HWND, pt : Win32cr::Foundation::POINT, flags : Win32cr::UI::WindowsAndMessaging::CWP_FLAGS) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.ChildWindowFromPointEx(hwnd, pt, flags)
+    {% end %}
   end
 
   def getSysColor(nIndex : Win32cr::UI::WindowsAndMessaging::SYS_COLOR_INDEX) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSysColor(nIndex)
+    {% end %}
   end
 
-  def setSysColors(cElements : Int32, lpaElements : Int32*, lpaRgbValues : UInt32*) : Win32cr::Foundation::BOOL
+  def setSysColors(cElements : Int32, lpaElements : Int32*, lpaRgbValues : Win32cr::Foundation::COLORREF*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetSysColors(cElements, lpaElements, lpaRgbValues)
+    {% end %}
   end
 
   def getWindowWord(hWnd : Win32cr::Foundation::HWND, nIndex : Int32) : UInt16
+    {% if !flag?(:docs) %}
     C.GetWindowWord(hWnd, nIndex)
+    {% end %}
   end
 
   def setWindowWord(hWnd : Win32cr::Foundation::HWND, nIndex : Int32, wNewWord : UInt16) : UInt16
+    {% if !flag?(:docs) %}
     C.SetWindowWord(hWnd, nIndex, wNewWord)
+    {% end %}
   end
 
   def getWindowLongA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX) : Int32
+    {% if !flag?(:docs) %}
     C.GetWindowLongA(hWnd, nIndex)
+    {% end %}
   end
 
   def getWindowLongW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX) : Int32
+    {% if !flag?(:docs) %}
     C.GetWindowLongW(hWnd, nIndex)
+    {% end %}
   end
 
   def setWindowLongA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX, dwNewLong : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.SetWindowLongA(hWnd, nIndex, dwNewLong)
+    {% end %}
   end
 
   def setWindowLongW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX, dwNewLong : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.SetWindowLongW(hWnd, nIndex, dwNewLong)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def getWindowLongPtrA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.GetWindowLongPtrA(hWnd, nIndex)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def getWindowLongPtrW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.GetWindowLongPtrW(hWnd, nIndex)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def setWindowLongPtrA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX, dwNewLong : LibC::IntPtrT) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.SetWindowLongPtrA(hWnd, nIndex, dwNewLong)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def setWindowLongPtrW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::WINDOW_LONG_PTR_INDEX, dwNewLong : LibC::IntPtrT) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.SetWindowLongPtrW(hWnd, nIndex, dwNewLong)
+    {% end %}
   end
 {% end %}
 
   def getClassWord(hWnd : Win32cr::Foundation::HWND, nIndex : Int32) : UInt16
+    {% if !flag?(:docs) %}
     C.GetClassWord(hWnd, nIndex)
+    {% end %}
   end
 
   def setClassWord(hWnd : Win32cr::Foundation::HWND, nIndex : Int32, wNewWord : UInt16) : UInt16
+    {% if !flag?(:docs) %}
     C.SetClassWord(hWnd, nIndex, wNewWord)
+    {% end %}
   end
 
   def getClassLongA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX) : UInt32
+    {% if !flag?(:docs) %}
     C.GetClassLongA(hWnd, nIndex)
+    {% end %}
   end
 
   def getClassLongW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX) : UInt32
+    {% if !flag?(:docs) %}
     C.GetClassLongW(hWnd, nIndex)
+    {% end %}
   end
 
   def setClassLongA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX, dwNewLong : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.SetClassLongA(hWnd, nIndex, dwNewLong)
+    {% end %}
   end
 
   def setClassLongW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX, dwNewLong : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.SetClassLongW(hWnd, nIndex, dwNewLong)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def getClassLongPtrA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.GetClassLongPtrA(hWnd, nIndex)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def getClassLongPtrW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.GetClassLongPtrW(hWnd, nIndex)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def setClassLongPtrA(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX, dwNewLong : LibC::IntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.SetClassLongPtrA(hWnd, nIndex, dwNewLong)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def setClassLongPtrW(hWnd : Win32cr::Foundation::HWND, nIndex : Win32cr::UI::WindowsAndMessaging::GET_CLASS_LONG_INDEX, dwNewLong : LibC::IntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.SetClassLongPtrW(hWnd, nIndex, dwNewLong)
+    {% end %}
   end
 {% end %}
 
   def getProcessDefaultLayout(pdwDefaultLayout : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetProcessDefaultLayout(pdwDefaultLayout)
+    {% end %}
   end
 
   def setProcessDefaultLayout(dwDefaultLayout : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessDefaultLayout(dwDefaultLayout)
+    {% end %}
   end
 
   def getDesktopWindow : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.GetDesktopWindow
+    {% end %}
   end
 
   def getParent(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.GetParent(hWnd)
+    {% end %}
   end
 
   def setParent(hWndChild : Win32cr::Foundation::HWND, hWndNewParent : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.SetParent(hWndChild, hWndNewParent)
+    {% end %}
   end
 
   def enumChildWindows(hWndParent : Win32cr::Foundation::HWND, lpEnumFunc : Win32cr::UI::WindowsAndMessaging::WNDENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumChildWindows(hWndParent, lpEnumFunc, lParam)
+    {% end %}
   end
 
   def findWindowA(lpClassName : Win32cr::Foundation::PSTR, lpWindowName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.FindWindowA(lpClassName, lpWindowName)
+    {% end %}
   end
 
   def findWindowW(lpClassName : Win32cr::Foundation::PWSTR, lpWindowName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.FindWindowW(lpClassName, lpWindowName)
+    {% end %}
   end
 
   def findWindowExA(hWndParent : Win32cr::Foundation::HWND, hWndChildAfter : Win32cr::Foundation::HWND, lpszClass : Win32cr::Foundation::PSTR, lpszWindow : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.FindWindowExA(hWndParent, hWndChildAfter, lpszClass, lpszWindow)
+    {% end %}
   end
 
   def findWindowExW(hWndParent : Win32cr::Foundation::HWND, hWndChildAfter : Win32cr::Foundation::HWND, lpszClass : Win32cr::Foundation::PWSTR, lpszWindow : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.FindWindowExW(hWndParent, hWndChildAfter, lpszClass, lpszWindow)
+    {% end %}
   end
 
   def getShellWindow : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.GetShellWindow
+    {% end %}
   end
 
   def registerShellHookWindow(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RegisterShellHookWindow(hwnd)
+    {% end %}
   end
 
   def deregisterShellHookWindow(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeregisterShellHookWindow(hwnd)
+    {% end %}
   end
 
   def enumWindows(lpEnumFunc : Win32cr::UI::WindowsAndMessaging::WNDENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumWindows(lpEnumFunc, lParam)
+    {% end %}
   end
 
   def enumThreadWindows(dwThreadId : UInt32, lpfn : Win32cr::UI::WindowsAndMessaging::WNDENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumThreadWindows(dwThreadId, lpfn, lParam)
+    {% end %}
   end
 
   def getClassNameA(hWnd : Win32cr::Foundation::HWND, lpClassName : UInt8*, nMaxCount : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetClassNameA(hWnd, lpClassName, nMaxCount)
+    {% end %}
   end
 
   def getClassNameW(hWnd : Win32cr::Foundation::HWND, lpClassName : UInt16*, nMaxCount : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetClassNameW(hWnd, lpClassName, nMaxCount)
+    {% end %}
   end
 
   def getTopWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.GetTopWindow(hWnd)
+    {% end %}
   end
 
   def getWindowThreadProcessId(hWnd : Win32cr::Foundation::HWND, lpdwProcessId : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetWindowThreadProcessId(hWnd, lpdwProcessId)
+    {% end %}
   end
 
   def isGUIThread(bConvert : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsGUIThread(bConvert)
+    {% end %}
   end
 
   def getLastActivePopup(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.GetLastActivePopup(hWnd)
+    {% end %}
   end
 
   def getWindow(hWnd : Win32cr::Foundation::HWND, uCmd : Win32cr::UI::WindowsAndMessaging::GET_WINDOW_CMD) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.GetWindow(hWnd, uCmd)
+    {% end %}
   end
 
   def setWindowsHookA(nFilterType : Int32, pfnFilterProc : Win32cr::UI::WindowsAndMessaging::HOOKPROC) : Win32cr::UI::WindowsAndMessaging::HHOOK
+    {% if !flag?(:docs) %}
     C.SetWindowsHookA(nFilterType, pfnFilterProc)
+    {% end %}
   end
 
   def setWindowsHookW(nFilterType : Int32, pfnFilterProc : Win32cr::UI::WindowsAndMessaging::HOOKPROC) : Win32cr::UI::WindowsAndMessaging::HHOOK
+    {% if !flag?(:docs) %}
     C.SetWindowsHookW(nFilterType, pfnFilterProc)
+    {% end %}
   end
 
   def unhookWindowsHook(nCode : Int32, pfnFilterProc : Win32cr::UI::WindowsAndMessaging::HOOKPROC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnhookWindowsHook(nCode, pfnFilterProc)
+    {% end %}
   end
 
   def setWindowsHookExA(idHook : Win32cr::UI::WindowsAndMessaging::WINDOWS_HOOK_ID, lpfn : Win32cr::UI::WindowsAndMessaging::HOOKPROC, hmod : Win32cr::Foundation::HINSTANCE, dwThreadId : UInt32) : Win32cr::UI::WindowsAndMessaging::HHOOK
+    {% if !flag?(:docs) %}
     C.SetWindowsHookExA(idHook, lpfn, hmod, dwThreadId)
+    {% end %}
   end
 
   def setWindowsHookExW(idHook : Win32cr::UI::WindowsAndMessaging::WINDOWS_HOOK_ID, lpfn : Win32cr::UI::WindowsAndMessaging::HOOKPROC, hmod : Win32cr::Foundation::HINSTANCE, dwThreadId : UInt32) : Win32cr::UI::WindowsAndMessaging::HHOOK
+    {% if !flag?(:docs) %}
     C.SetWindowsHookExW(idHook, lpfn, hmod, dwThreadId)
+    {% end %}
   end
 
   def unhookWindowsHookEx(hhk : Win32cr::UI::WindowsAndMessaging::HHOOK) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnhookWindowsHookEx(hhk)
+    {% end %}
   end
 
   def callNextHookEx(hhk : Win32cr::UI::WindowsAndMessaging::HHOOK, nCode : Int32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.CallNextHookEx(hhk, nCode, wParam, lParam)
+    {% end %}
   end
 
   def checkMenuRadioItem(hmenu : Win32cr::UI::WindowsAndMessaging::HMENU, first : UInt32, last : UInt32, check : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CheckMenuRadioItem(hmenu, first, last, check, flags)
+    {% end %}
   end
 
   def loadCursorA(hInstance : Win32cr::Foundation::HINSTANCE, lpCursorName : Win32cr::Foundation::PSTR) : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    {% if !flag?(:docs) %}
     C.LoadCursorA(hInstance, lpCursorName)
+    {% end %}
   end
 
   def loadCursorW(hInstance : Win32cr::Foundation::HINSTANCE, lpCursorName : Win32cr::Foundation::PWSTR) : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    {% if !flag?(:docs) %}
     C.LoadCursorW(hInstance, lpCursorName)
+    {% end %}
   end
 
   def loadCursorFromFileA(lpFileName : Win32cr::Foundation::PSTR) : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    {% if !flag?(:docs) %}
     C.LoadCursorFromFileA(lpFileName)
+    {% end %}
   end
 
   def loadCursorFromFileW(lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    {% if !flag?(:docs) %}
     C.LoadCursorFromFileW(lpFileName)
+    {% end %}
   end
 
   def createCursor(hInst : Win32cr::Foundation::HINSTANCE, xHotSpot : Int32, yHotSpot : Int32, nWidth : Int32, nHeight : Int32, pvANDPlane : Void*, pvXORPlane : Void*) : Win32cr::UI::WindowsAndMessaging::HCURSOR
+    {% if !flag?(:docs) %}
     C.CreateCursor(hInst, xHotSpot, yHotSpot, nWidth, nHeight, pvANDPlane, pvXORPlane)
+    {% end %}
   end
 
   def destroyCursor(hCursor : Win32cr::UI::WindowsAndMessaging::HCURSOR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DestroyCursor(hCursor)
+    {% end %}
   end
 
   def setSystemCursor(hcur : Win32cr::UI::WindowsAndMessaging::HCURSOR, id : Win32cr::UI::WindowsAndMessaging::SYSTEM_CURSOR_ID) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetSystemCursor(hcur, id)
+    {% end %}
   end
 
   def loadIconA(hInstance : Win32cr::Foundation::HINSTANCE, lpIconName : Win32cr::Foundation::PSTR) : Win32cr::UI::WindowsAndMessaging::HICON
+    {% if !flag?(:docs) %}
     C.LoadIconA(hInstance, lpIconName)
+    {% end %}
   end
 
   def loadIconW(hInstance : Win32cr::Foundation::HINSTANCE, lpIconName : Win32cr::Foundation::PWSTR) : Win32cr::UI::WindowsAndMessaging::HICON
+    {% if !flag?(:docs) %}
     C.LoadIconW(hInstance, lpIconName)
+    {% end %}
   end
 
   def privateExtractIconsA(szFileName : UInt8*, nIconIndex : Int32, cxIcon : Int32, cyIcon : Int32, phicon : Win32cr::UI::WindowsAndMessaging::HICON*, piconid : UInt32*, nIcons : UInt32, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.PrivateExtractIconsA(szFileName, nIconIndex, cxIcon, cyIcon, phicon, piconid, nIcons, flags)
+    {% end %}
   end
 
   def privateExtractIconsW(szFileName : UInt16*, nIconIndex : Int32, cxIcon : Int32, cyIcon : Int32, phicon : Win32cr::UI::WindowsAndMessaging::HICON*, piconid : UInt32*, nIcons : UInt32, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.PrivateExtractIconsW(szFileName, nIconIndex, cxIcon, cyIcon, phicon, piconid, nIcons, flags)
+    {% end %}
   end
 
   def createIcon(hInstance : Win32cr::Foundation::HINSTANCE, nWidth : Int32, nHeight : Int32, cPlanes : UInt8, cBitsPixel : UInt8, lpbANDbits : UInt8*, lpbXORbits : UInt8*) : Win32cr::UI::WindowsAndMessaging::HICON
+    {% if !flag?(:docs) %}
     C.CreateIcon(hInstance, nWidth, nHeight, cPlanes, cBitsPixel, lpbANDbits, lpbXORbits)
+    {% end %}
   end
 
   def destroyIcon(hIcon : Win32cr::UI::WindowsAndMessaging::HICON) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DestroyIcon(hIcon)
+    {% end %}
   end
 
   def lookupIconIdFromDirectory(presbits : UInt8*, fIcon : Win32cr::Foundation::BOOL) : Int32
+    {% if !flag?(:docs) %}
     C.LookupIconIdFromDirectory(presbits, fIcon)
+    {% end %}
   end
 
   def lookupIconIdFromDirectoryEx(presbits : UInt8*, fIcon : Win32cr::Foundation::BOOL, cxDesired : Int32, cyDesired : Int32, flags : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Int32
+    {% if !flag?(:docs) %}
     C.LookupIconIdFromDirectoryEx(presbits, fIcon, cxDesired, cyDesired, flags)
+    {% end %}
   end
 
   def createIconFromResource(presbits : UInt8*, dwResSize : UInt32, fIcon : Win32cr::Foundation::BOOL, dwVer : UInt32) : Win32cr::UI::WindowsAndMessaging::HICON
+    {% if !flag?(:docs) %}
     C.CreateIconFromResource(presbits, dwResSize, fIcon, dwVer)
+    {% end %}
   end
 
   def createIconFromResourceEx(presbits : UInt8*, dwResSize : UInt32, fIcon : Win32cr::Foundation::BOOL, dwVer : UInt32, cxDesired : Int32, cyDesired : Int32, flags : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Win32cr::UI::WindowsAndMessaging::HICON
+    {% if !flag?(:docs) %}
     C.CreateIconFromResourceEx(presbits, dwResSize, fIcon, dwVer, cxDesired, cyDesired, flags)
+    {% end %}
   end
 
   def loadImageA(hInst : Win32cr::Foundation::HINSTANCE, name : Win32cr::Foundation::PSTR, type__ : Win32cr::UI::WindowsAndMessaging::GDI_IMAGE_TYPE, cx : Int32, cy : Int32, fuLoad : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.LoadImageA(hInst, name, type__, cx, cy, fuLoad)
+    {% end %}
   end
 
   def loadImageW(hInst : Win32cr::Foundation::HINSTANCE, name : Win32cr::Foundation::PWSTR, type__ : Win32cr::UI::WindowsAndMessaging::GDI_IMAGE_TYPE, cx : Int32, cy : Int32, fuLoad : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.LoadImageW(hInst, name, type__, cx, cy, fuLoad)
+    {% end %}
   end
 
   def copyImage(h : Win32cr::Foundation::HANDLE, type__ : Win32cr::UI::WindowsAndMessaging::GDI_IMAGE_TYPE, cx : Int32, cy : Int32, flags : Win32cr::UI::WindowsAndMessaging::IMAGE_FLAGS) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.CopyImage(h, type__, cx, cy, flags)
+    {% end %}
   end
 
   def drawIconEx(hdc : Win32cr::Graphics::Gdi::HDC, xLeft : Int32, yTop : Int32, hIcon : Win32cr::UI::WindowsAndMessaging::HICON, cxWidth : Int32, cyWidth : Int32, istepIfAniCur : UInt32, hbrFlickerFreeDraw : Win32cr::Graphics::Gdi::HBRUSH, diFlags : Win32cr::UI::WindowsAndMessaging::DI_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawIconEx(hdc, xLeft, yTop, hIcon, cxWidth, cyWidth, istepIfAniCur, hbrFlickerFreeDraw, diFlags)
+    {% end %}
   end
 
   def createIconIndirect(piconinfo : Win32cr::UI::WindowsAndMessaging::ICONINFO*) : Win32cr::UI::WindowsAndMessaging::HICON
+    {% if !flag?(:docs) %}
     C.CreateIconIndirect(piconinfo)
+    {% end %}
   end
 
   def copyIcon(hIcon : Win32cr::UI::WindowsAndMessaging::HICON) : Win32cr::UI::WindowsAndMessaging::HICON
+    {% if !flag?(:docs) %}
     C.CopyIcon(hIcon)
+    {% end %}
   end
 
   def getIconInfo(hIcon : Win32cr::UI::WindowsAndMessaging::HICON, piconinfo : Win32cr::UI::WindowsAndMessaging::ICONINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetIconInfo(hIcon, piconinfo)
+    {% end %}
   end
 
   def getIconInfoExA(hicon : Win32cr::UI::WindowsAndMessaging::HICON, piconinfo : Win32cr::UI::WindowsAndMessaging::ICONINFOEXA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetIconInfoExA(hicon, piconinfo)
+    {% end %}
   end
 
   def getIconInfoExW(hicon : Win32cr::UI::WindowsAndMessaging::HICON, piconinfo : Win32cr::UI::WindowsAndMessaging::ICONINFOEXW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetIconInfoExW(hicon, piconinfo)
+    {% end %}
   end
 
   def isDialogMessageA(hDlg : Win32cr::Foundation::HWND, lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsDialogMessageA(hDlg, lpMsg)
+    {% end %}
   end
 
   def isDialogMessageW(hDlg : Win32cr::Foundation::HWND, lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsDialogMessageW(hDlg, lpMsg)
+    {% end %}
   end
 
   def mapDialogRect(hDlg : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MapDialogRect(hDlg, lpRect)
+    {% end %}
   end
 
   def getScrollInfo(hwnd : Win32cr::Foundation::HWND, nBar : Win32cr::UI::WindowsAndMessaging::SCROLLBAR_CONSTANTS, lpsi : Win32cr::UI::WindowsAndMessaging::SCROLLINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetScrollInfo(hwnd, nBar, lpsi)
+    {% end %}
   end
 
   def defFrameProcA(hWnd : Win32cr::Foundation::HWND, hWndMDIClient : Win32cr::Foundation::HWND, uMsg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.DefFrameProcA(hWnd, hWndMDIClient, uMsg, wParam, lParam)
+    {% end %}
   end
 
   def defFrameProcW(hWnd : Win32cr::Foundation::HWND, hWndMDIClient : Win32cr::Foundation::HWND, uMsg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.DefFrameProcW(hWnd, hWndMDIClient, uMsg, wParam, lParam)
+    {% end %}
   end
 
   def defMDIChildProcA(hWnd : Win32cr::Foundation::HWND, uMsg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.DefMDIChildProcA(hWnd, uMsg, wParam, lParam)
+    {% end %}
   end
 
   def defMDIChildProcW(hWnd : Win32cr::Foundation::HWND, uMsg : UInt32, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.DefMDIChildProcW(hWnd, uMsg, wParam, lParam)
+    {% end %}
   end
 
   def translateMDISysAccel(hWndClient : Win32cr::Foundation::HWND, lpMsg : Win32cr::UI::WindowsAndMessaging::MSG*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TranslateMDISysAccel(hWndClient, lpMsg)
+    {% end %}
   end
 
   def arrangeIconicWindows(hWnd : Win32cr::Foundation::HWND) : UInt32
+    {% if !flag?(:docs) %}
     C.ArrangeIconicWindows(hWnd)
+    {% end %}
   end
 
   def createMDIWindowA(lpClassName : Win32cr::Foundation::PSTR, lpWindowName : Win32cr::Foundation::PSTR, dwStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, hWndParent : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.CreateMDIWindowA(lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hInstance, lParam)
+    {% end %}
   end
 
   def createMDIWindowW(lpClassName : Win32cr::Foundation::PWSTR, lpWindowName : Win32cr::Foundation::PWSTR, dwStyle : Win32cr::UI::WindowsAndMessaging::WINDOW_STYLE, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32, hWndParent : Win32cr::Foundation::HWND, hInstance : Win32cr::Foundation::HINSTANCE, lParam : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.CreateMDIWindowW(lpClassName, lpWindowName, dwStyle, x, y, nWidth, nHeight, hWndParent, hInstance, lParam)
+    {% end %}
   end
 
   def tileWindows(hwndParent : Win32cr::Foundation::HWND, wHow : Win32cr::UI::WindowsAndMessaging::TILE_WINDOWS_HOW, lpRect : Win32cr::Foundation::RECT*, cKids : UInt32, lpKids : Win32cr::Foundation::HWND*) : UInt16
+    {% if !flag?(:docs) %}
     C.TileWindows(hwndParent, wHow, lpRect, cKids, lpKids)
+    {% end %}
   end
 
   def cascadeWindows(hwndParent : Win32cr::Foundation::HWND, wHow : Win32cr::UI::WindowsAndMessaging::CASCADE_WINDOWS_HOW, lpRect : Win32cr::Foundation::RECT*, cKids : UInt32, lpKids : Win32cr::Foundation::HWND*) : UInt16
+    {% if !flag?(:docs) %}
     C.CascadeWindows(hwndParent, wHow, lpRect, cKids, lpKids)
+    {% end %}
   end
 
   def systemParametersInfoA(uiAction : Win32cr::UI::WindowsAndMessaging::SYSTEM_PARAMETERS_INFO_ACTION, uiParam : UInt32, pvParam : Void*, fWinIni : Win32cr::UI::WindowsAndMessaging::SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SystemParametersInfoA(uiAction, uiParam, pvParam, fWinIni)
+    {% end %}
   end
 
   def systemParametersInfoW(uiAction : Win32cr::UI::WindowsAndMessaging::SYSTEM_PARAMETERS_INFO_ACTION, uiParam : UInt32, pvParam : Void*, fWinIni : Win32cr::UI::WindowsAndMessaging::SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SystemParametersInfoW(uiAction, uiParam, pvParam, fWinIni)
+    {% end %}
   end
 
   def soundSentry : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SoundSentry
+    {% end %}
   end
 
   def setDebugErrorLevel(dwLevel : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.SetDebugErrorLevel(dwLevel)
+    {% end %}
   end
 
   def internalGetWindowText(hWnd : Win32cr::Foundation::HWND, pString : UInt16*, cchMaxCount : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.InternalGetWindowText(hWnd, pString, cchMaxCount)
+    {% end %}
   end
 
   def cancelShutdown : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CancelShutdown
+    {% end %}
   end
 
   def getGUIThreadInfo(idThread : UInt32, pgui : Win32cr::UI::WindowsAndMessaging::GUITHREADINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetGUIThreadInfo(idThread, pgui)
+    {% end %}
   end
 
   def setProcessDPIAware : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetProcessDPIAware
+    {% end %}
   end
 
   def isProcessDPIAware : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsProcessDPIAware
+    {% end %}
   end
 
   def inheritWindowMonitor(hwnd : Win32cr::Foundation::HWND, hwndInherit : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InheritWindowMonitor(hwnd, hwndInherit)
+    {% end %}
   end
 
   def getWindowModuleFileNameA(hwnd : Win32cr::Foundation::HWND, pszFileName : UInt8*, cchFileNameMax : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetWindowModuleFileNameA(hwnd, pszFileName, cchFileNameMax)
+    {% end %}
   end
 
   def getWindowModuleFileNameW(hwnd : Win32cr::Foundation::HWND, pszFileName : UInt16*, cchFileNameMax : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetWindowModuleFileNameW(hwnd, pszFileName, cchFileNameMax)
+    {% end %}
   end
 
   def getCursorInfo(pci : Win32cr::UI::WindowsAndMessaging::CURSORINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCursorInfo(pci)
+    {% end %}
   end
 
   def getWindowInfo(hwnd : Win32cr::Foundation::HWND, pwi : Win32cr::UI::WindowsAndMessaging::WINDOWINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetWindowInfo(hwnd, pwi)
+    {% end %}
   end
 
   def getTitleBarInfo(hwnd : Win32cr::Foundation::HWND, pti : Win32cr::UI::WindowsAndMessaging::TITLEBARINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetTitleBarInfo(hwnd, pti)
+    {% end %}
   end
 
   def getMenuBarInfo(hwnd : Win32cr::Foundation::HWND, idObject : Win32cr::UI::WindowsAndMessaging::OBJECT_IDENTIFIER, idItem : Int32, pmbi : Win32cr::UI::WindowsAndMessaging::MENUBARINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetMenuBarInfo(hwnd, idObject, idItem, pmbi)
+    {% end %}
   end
 
   def getScrollBarInfo(hwnd : Win32cr::Foundation::HWND, idObject : Win32cr::UI::WindowsAndMessaging::OBJECT_IDENTIFIER, psbi : Win32cr::UI::WindowsAndMessaging::SCROLLBARINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetScrollBarInfo(hwnd, idObject, psbi)
+    {% end %}
   end
 
   def getAncestor(hwnd : Win32cr::Foundation::HWND, gaFlags : Win32cr::UI::WindowsAndMessaging::GET_ANCESTOR_FLAGS) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.GetAncestor(hwnd, gaFlags)
+    {% end %}
   end
 
   def realChildWindowFromPoint(hwndParent : Win32cr::Foundation::HWND, ptParentClientCoords : Win32cr::Foundation::POINT) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.RealChildWindowFromPoint(hwndParent, ptParentClientCoords)
+    {% end %}
   end
 
   def realGetWindowClassA(hwnd : Win32cr::Foundation::HWND, ptszClassName : UInt8*, cchClassNameMax : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RealGetWindowClassA(hwnd, ptszClassName, cchClassNameMax)
+    {% end %}
   end
 
   def realGetWindowClassW(hwnd : Win32cr::Foundation::HWND, ptszClassName : UInt16*, cchClassNameMax : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RealGetWindowClassW(hwnd, ptszClassName, cchClassNameMax)
+    {% end %}
   end
 
   def getAltTabInfoA(hwnd : Win32cr::Foundation::HWND, iItem : Int32, pati : Win32cr::UI::WindowsAndMessaging::ALTTABINFO*, pszItemText : UInt8*, cchItemText : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetAltTabInfoA(hwnd, iItem, pati, pszItemText, cchItemText)
+    {% end %}
   end
 
   def getAltTabInfoW(hwnd : Win32cr::Foundation::HWND, iItem : Int32, pati : Win32cr::UI::WindowsAndMessaging::ALTTABINFO*, pszItemText : UInt16*, cchItemText : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetAltTabInfoW(hwnd, iItem, pati, pszItemText, cchItemText)
+    {% end %}
   end
 
   def changeWindowMessageFilter(message : UInt32, dwFlag : Win32cr::UI::WindowsAndMessaging::CHANGE_WINDOW_MESSAGE_FILTER_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ChangeWindowMessageFilter(message, dwFlag)
+    {% end %}
   end
 
   def changeWindowMessageFilterEx(hwnd : Win32cr::Foundation::HWND, message : UInt32, action : Win32cr::UI::WindowsAndMessaging::WINDOW_MESSAGE_FILTER_ACTION, pChangeFilterStruct : Win32cr::UI::WindowsAndMessaging::CHANGEFILTERSTRUCT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ChangeWindowMessageFilterEx(hwnd, message, action, pChangeFilterStruct)
+    {% end %}
   end
 
   def createResourceIndexer(projectRoot : Win32cr::Foundation::PWSTR, extensionDllPath : Win32cr::Foundation::PWSTR, ppResourceIndexer : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateResourceIndexer(projectRoot, extensionDllPath, ppResourceIndexer)
+    {% end %}
   end
 
   def destroyResourceIndexer(resourceIndexer : Void*) : Void
+    {% if !flag?(:docs) %}
     C.DestroyResourceIndexer(resourceIndexer)
+    {% end %}
   end
 
   def indexFilePath(resourceIndexer : Void*, filePath : Win32cr::Foundation::PWSTR, ppResourceUri : Win32cr::Foundation::PWSTR*, pQualifierCount : UInt32*, ppQualifiers : Win32cr::UI::WindowsAndMessaging::IndexedResourceQualifier**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.IndexFilePath(resourceIndexer, filePath, ppResourceUri, pQualifierCount, ppQualifiers)
+    {% end %}
   end
 
   def destroyIndexedResults(resourceUri : Win32cr::Foundation::PWSTR, qualifierCount : UInt32, qualifiers : Win32cr::UI::WindowsAndMessaging::IndexedResourceQualifier*) : Void
+    {% if !flag?(:docs) %}
     C.DestroyIndexedResults(resourceUri, qualifierCount, qualifiers)
+    {% end %}
   end
 
   def mrmCreateResourceIndexer(packageFamilyName : Win32cr::Foundation::PWSTR, projectRoot : Win32cr::Foundation::PWSTR, platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmCreateResourceIndexer(packageFamilyName, projectRoot, platformVersion, defaultQualifiers, indexer)
+    {% end %}
   end
 
   def mrmCreateResourceIndexerFromPreviousSchemaFile(projectRoot : Win32cr::Foundation::PWSTR, platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, schemaFile : Win32cr::Foundation::PWSTR, indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmCreateResourceIndexerFromPreviousSchemaFile(projectRoot, platformVersion, defaultQualifiers, schemaFile, indexer)
+    {% end %}
   end
 
   def mrmCreateResourceIndexerFromPreviousPriFile(projectRoot : Win32cr::Foundation::PWSTR, platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, priFile : Win32cr::Foundation::PWSTR, indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmCreateResourceIndexerFromPreviousPriFile(projectRoot, platformVersion, defaultQualifiers, priFile, indexer)
+    {% end %}
   end
 
   def mrmCreateResourceIndexerFromPreviousSchemaData(projectRoot : Win32cr::Foundation::PWSTR, platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, schemaXmlData : UInt8*, schemaXmlSize : UInt32, indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmCreateResourceIndexerFromPreviousSchemaData(projectRoot, platformVersion, defaultQualifiers, schemaXmlData, schemaXmlSize, indexer)
+    {% end %}
   end
 
   def mrmCreateResourceIndexerFromPreviousPriData(projectRoot : Win32cr::Foundation::PWSTR, platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, priData : UInt8*, priSize : UInt32, indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmCreateResourceIndexerFromPreviousPriData(projectRoot, platformVersion, defaultQualifiers, priData, priSize, indexer)
+    {% end %}
   end
 
   def mrmCreateResourceIndexerWithFlags(packageFamilyName : Win32cr::Foundation::PWSTR, projectRoot : Win32cr::Foundation::PWSTR, platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, flags : Win32cr::UI::WindowsAndMessaging::MrmIndexerFlags, indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmCreateResourceIndexerWithFlags(packageFamilyName, projectRoot, platformVersion, defaultQualifiers, flags, indexer)
+    {% end %}
   end
 
   def mrmIndexString(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, resourceUri : Win32cr::Foundation::PWSTR, resourceString : Win32cr::Foundation::PWSTR, qualifiers : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmIndexString(indexer, resourceUri, resourceString, qualifiers)
+    {% end %}
   end
 
   def mrmIndexEmbeddedData(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, resourceUri : Win32cr::Foundation::PWSTR, embeddedData : UInt8*, embeddedDataSize : UInt32, qualifiers : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmIndexEmbeddedData(indexer, resourceUri, embeddedData, embeddedDataSize, qualifiers)
+    {% end %}
   end
 
   def mrmIndexFile(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, resourceUri : Win32cr::Foundation::PWSTR, filePath : Win32cr::Foundation::PWSTR, qualifiers : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmIndexFile(indexer, resourceUri, filePath, qualifiers)
+    {% end %}
   end
 
   def mrmIndexFileAutoQualifiers(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, filePath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmIndexFileAutoQualifiers(indexer, filePath)
+    {% end %}
   end
 
   def mrmIndexResourceContainerAutoQualifiers(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, containerPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmIndexResourceContainerAutoQualifiers(indexer, containerPath)
+    {% end %}
   end
 
   def mrmCreateResourceFile(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, packagingMode : Win32cr::UI::WindowsAndMessaging::MrmPackagingMode, packagingOptions : Win32cr::UI::WindowsAndMessaging::MrmPackagingOptions, outputDirectory : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmCreateResourceFile(indexer, packagingMode, packagingOptions, outputDirectory)
+    {% end %}
   end
 
   def mrmCreateResourceFileWithChecksum(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, packagingMode : Win32cr::UI::WindowsAndMessaging::MrmPackagingMode, packagingOptions : Win32cr::UI::WindowsAndMessaging::MrmPackagingOptions, checksum : UInt32, outputDirectory : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmCreateResourceFileWithChecksum(indexer, packagingMode, packagingOptions, checksum, outputDirectory)
+    {% end %}
   end
 
   def mrmCreateResourceFileInMemory(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, packagingMode : Win32cr::UI::WindowsAndMessaging::MrmPackagingMode, packagingOptions : Win32cr::UI::WindowsAndMessaging::MrmPackagingOptions, outputPriData : UInt8**, outputPriSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmCreateResourceFileInMemory(indexer, packagingMode, packagingOptions, outputPriData, outputPriSize)
+    {% end %}
   end
 
   def mrmPeekResourceIndexerMessages(handle : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle, messages : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerMessage**, numMsgs : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmPeekResourceIndexerMessages(handle, messages, numMsgs)
+    {% end %}
   end
 
   def mrmDestroyIndexerAndMessages(indexer : Win32cr::UI::WindowsAndMessaging::MrmResourceIndexerHandle) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmDestroyIndexerAndMessages(indexer)
+    {% end %}
   end
 
   def mrmFreeMemory(data : UInt8*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmFreeMemory(data)
+    {% end %}
   end
 
   def mrmDumpPriFile(indexFileName : Win32cr::Foundation::PWSTR, schemaPriFile : Win32cr::Foundation::PWSTR, dumpType : Win32cr::UI::WindowsAndMessaging::MrmDumpType, outputXmlFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmDumpPriFile(indexFileName, schemaPriFile, dumpType, outputXmlFile)
+    {% end %}
   end
 
   def mrmDumpPriFileInMemory(indexFileName : Win32cr::Foundation::PWSTR, schemaPriFile : Win32cr::Foundation::PWSTR, dumpType : Win32cr::UI::WindowsAndMessaging::MrmDumpType, outputXmlData : UInt8**, outputXmlSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmDumpPriFileInMemory(indexFileName, schemaPriFile, dumpType, outputXmlData, outputXmlSize)
+    {% end %}
   end
 
   def mrmDumpPriDataInMemory(inputPriData : UInt8*, inputPriSize : UInt32, schemaPriData : UInt8*, schemaPriSize : UInt32, dumpType : Win32cr::UI::WindowsAndMessaging::MrmDumpType, outputXmlData : UInt8**, outputXmlSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmDumpPriDataInMemory(inputPriData, inputPriSize, schemaPriData, schemaPriSize, dumpType, outputXmlData, outputXmlSize)
+    {% end %}
   end
 
   def mrmCreateConfig(platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, outputXmlFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmCreateConfig(platformVersion, defaultQualifiers, outputXmlFile)
+    {% end %}
   end
 
   def mrmCreateConfigInMemory(platformVersion : Win32cr::UI::WindowsAndMessaging::MrmPlatformVersion, defaultQualifiers : Win32cr::Foundation::PWSTR, outputXmlData : UInt8**, outputXmlSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmCreateConfigInMemory(platformVersion, defaultQualifiers, outputXmlData, outputXmlSize)
+    {% end %}
   end
 
   def mrmGetPriFileContentChecksum(priFile : Win32cr::Foundation::PWSTR, checksum : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MrmGetPriFileContentChecksum(priFile, checksum)
+    {% end %}
   end
 
-  @[Link("user32")]
-  @[Link("mrmsupport")]
+  @[Link("user32.dll")]
+  @[Link("mrmsupport.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun LoadStringA(hInstance : Win32cr::Foundation::HINSTANCE, uID : UInt32, lpBuffer : Win32cr::Foundation::PSTR, cchBufferMax : Int32) : Int32
@@ -5186,16 +5976,16 @@ module Win32cr::UI::WindowsAndMessaging
     fun AnimateWindow(hWnd : Win32cr::Foundation::HWND, dwTime : UInt32, dwFlags : Win32cr::UI::WindowsAndMessaging::ANIMATE_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun UpdateLayeredWindow(hWnd : Win32cr::Foundation::HWND, hdcDst : Win32cr::Graphics::Gdi::HDC, pptDst : Win32cr::Foundation::POINT*, psize : Win32cr::Foundation::SIZE*, hdcSrc : Win32cr::Graphics::Gdi::HDC, pptSrc : Win32cr::Foundation::POINT*, crKey : UInt32, pblend : Win32cr::Graphics::Gdi::BLENDFUNCTION*, dwFlags : Win32cr::UI::WindowsAndMessaging::UPDATE_LAYERED_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
+    fun UpdateLayeredWindow(hWnd : Win32cr::Foundation::HWND, hdcDst : Win32cr::Graphics::Gdi::HDC, pptDst : Win32cr::Foundation::POINT*, psize : Win32cr::Foundation::SIZE*, hdcSrc : Win32cr::Graphics::Gdi::HDC, pptSrc : Win32cr::Foundation::POINT*, crKey : Win32cr::Foundation::COLORREF, pblend : Win32cr::Graphics::Gdi::BLENDFUNCTION*, dwFlags : Win32cr::UI::WindowsAndMessaging::UPDATE_LAYERED_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun UpdateLayeredWindowIndirect(hWnd : Win32cr::Foundation::HWND, pULWInfo : Win32cr::UI::WindowsAndMessaging::UPDATELAYEREDWINDOWINFO*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetLayeredWindowAttributes(hwnd : Win32cr::Foundation::HWND, pcrKey : UInt32*, pbAlpha : UInt8*, pdwFlags : Win32cr::UI::WindowsAndMessaging::LAYERED_WINDOW_ATTRIBUTES_FLAGS*) : Win32cr::Foundation::BOOL
+    fun GetLayeredWindowAttributes(hwnd : Win32cr::Foundation::HWND, pcrKey : Win32cr::Foundation::COLORREF*, pbAlpha : UInt8*, pdwFlags : Win32cr::UI::WindowsAndMessaging::LAYERED_WINDOW_ATTRIBUTES_FLAGS*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun SetLayeredWindowAttributes(hwnd : Win32cr::Foundation::HWND, crKey : UInt32, bAlpha : UInt8, dwFlags : Win32cr::UI::WindowsAndMessaging::LAYERED_WINDOW_ATTRIBUTES_FLAGS) : Win32cr::Foundation::BOOL
+    fun SetLayeredWindowAttributes(hwnd : Win32cr::Foundation::HWND, crKey : Win32cr::Foundation::COLORREF, bAlpha : UInt8, dwFlags : Win32cr::UI::WindowsAndMessaging::LAYERED_WINDOW_ATTRIBUTES_FLAGS) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun ShowWindowAsync(hWnd : Win32cr::Foundation::HWND, nCmdShow : Win32cr::UI::WindowsAndMessaging::SHOW_WINDOW_CMD) : Win32cr::Foundation::BOOL
@@ -5807,7 +6597,7 @@ module Win32cr::UI::WindowsAndMessaging
     fun GetSysColor(nIndex : Win32cr::UI::WindowsAndMessaging::SYS_COLOR_INDEX) : UInt32
 
     # :nodoc:
-    fun SetSysColors(cElements : Int32, lpaElements : Int32*, lpaRgbValues : UInt32*) : Win32cr::Foundation::BOOL
+    fun SetSysColors(cElements : Int32, lpaElements : Int32*, lpaRgbValues : Win32cr::Foundation::COLORREF*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun GetWindowWord(hWnd : Win32cr::Foundation::HWND, nIndex : Int32) : UInt16
@@ -6252,4 +7042,5 @@ module Win32cr::UI::WindowsAndMessaging
     fun MrmGetPriFileContentChecksum(priFile : Win32cr::Foundation::PWSTR, checksum : UInt32*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

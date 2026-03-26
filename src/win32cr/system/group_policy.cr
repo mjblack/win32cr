@@ -389,22 +389,22 @@ module Win32cr::System::GroupPolicy
     property prog_id : Win32cr::Foundation::PWSTR
     property com_class : COMClass_e__Struct_
 
-    # Nested Type AppName_e__Struct_
-    @[Extern]
-    struct AppName_e__Struct_
-    property name : Win32cr::Foundation::PWSTR
-    property gpo_id : LibC::GUID
-    def initialize(@name : Win32cr::Foundation::PWSTR, @gpo_id : LibC::GUID)
-    end
-    end
-
-
     # Nested Type COMClass_e__Struct_
     @[Extern]
     struct COMClass_e__Struct_
     property clsid : LibC::GUID
     property cls_ctx : UInt32
     def initialize(@clsid : LibC::GUID, @cls_ctx : UInt32)
+    end
+    end
+
+
+    # Nested Type AppName_e__Struct_
+    @[Extern]
+    struct AppName_e__Struct_
+    property name : Win32cr::Foundation::PWSTR
+    property gpo_id : LibC::GUID
+    def initialize(@name : Win32cr::Foundation::PWSTR, @gpo_id : LibC::GUID)
     end
     end
 
@@ -470,7 +470,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMVtbl,
+  record IGPMVtable,
     query_interface : Proc(IGPM*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPM*, UInt32),
     release : Proc(IGPM*, UInt32),
@@ -493,7 +493,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPM, lpVtbl : IGPMVtbl* do
+  record IGPM, lpVtbl : IGPMVtable* do
     GUID = LibC::GUID.new(0xf5fae809_u32, 0x3bd6_u16, 0x4da9_u16, StaticArray[0xa6_u8, 0x5e_u8, 0x17_u8, 0x66_u8, 0x5b_u8, 0x41_u8, 0xd7_u8, 0x63_u8])
     def query_interface(this : IGPM*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -556,7 +556,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMDomainVtbl,
+  record IGPMDomainVtable,
     query_interface : Proc(IGPMDomain*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMDomain*, UInt32),
     release : Proc(IGPMDomain*, UInt32),
@@ -577,7 +577,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMDomain, lpVtbl : IGPMDomainVtbl* do
+  record IGPMDomain, lpVtbl : IGPMDomainVtable* do
     GUID = LibC::GUID.new(0x6b21cc14_u32, 0x5a00_u16, 0x4f44_u16, StaticArray[0xa7_u8, 0x38_u8, 0xfe_u8, 0xec_u8, 0x8a_u8, 0x94_u8, 0xc7_u8, 0xe3_u8])
     def query_interface(this : IGPMDomain*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -634,7 +634,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMBackupDirVtbl,
+  record IGPMBackupDirVtable,
     query_interface : Proc(IGPMBackupDir*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMBackupDir*, UInt32),
     release : Proc(IGPMBackupDir*, UInt32),
@@ -648,7 +648,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMBackupDir, lpVtbl : IGPMBackupDirVtbl* do
+  record IGPMBackupDir, lpVtbl : IGPMBackupDirVtable* do
     GUID = LibC::GUID.new(0xb1568bed_u32, 0xa93_u16, 0x4acc_u16, StaticArray[0x81_u8, 0xf_u8, 0xaf_u8, 0xe7_u8, 0x8_u8, 0x10_u8, 0x19_u8, 0xb9_u8])
     def query_interface(this : IGPMBackupDir*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -684,7 +684,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMSitesContainerVtbl,
+  record IGPMSitesContainerVtable,
     query_interface : Proc(IGPMSitesContainer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMSitesContainer*, UInt32),
     release : Proc(IGPMSitesContainer*, UInt32),
@@ -700,7 +700,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMSitesContainer, lpVtbl : IGPMSitesContainerVtbl* do
+  record IGPMSitesContainer, lpVtbl : IGPMSitesContainerVtable* do
     GUID = LibC::GUID.new(0x4725a899_u32, 0x2782_u16, 0x4d27_u16, StaticArray[0xa6_u8, 0xbb_u8, 0xd4_u8, 0x99_u8, 0x24_u8, 0x6f_u8, 0xfd_u8, 0x72_u8])
     def query_interface(this : IGPMSitesContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -742,7 +742,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMSearchCriteriaVtbl,
+  record IGPMSearchCriteriaVtable,
     query_interface : Proc(IGPMSearchCriteria*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMSearchCriteria*, UInt32),
     release : Proc(IGPMSearchCriteria*, UInt32),
@@ -754,7 +754,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMSearchCriteria, lpVtbl : IGPMSearchCriteriaVtbl* do
+  record IGPMSearchCriteria, lpVtbl : IGPMSearchCriteriaVtable* do
     GUID = LibC::GUID.new(0xd6f11c42_u32, 0x829b_u16, 0x48d4_u16, StaticArray[0x83_u8, 0xf5_u8, 0x36_u8, 0x15_u8, 0xb6_u8, 0x7d_u8, 0xfc_u8, 0x22_u8])
     def query_interface(this : IGPMSearchCriteria*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -784,7 +784,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMTrusteeVtbl,
+  record IGPMTrusteeVtable,
     query_interface : Proc(IGPMTrustee*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMTrustee*, UInt32),
     release : Proc(IGPMTrustee*, UInt32),
@@ -800,7 +800,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMTrustee, lpVtbl : IGPMTrusteeVtbl* do
+  record IGPMTrustee, lpVtbl : IGPMTrusteeVtable* do
     GUID = LibC::GUID.new(0x3b466da8_u32, 0xc1a4_u16, 0x4b2a_u16, StaticArray[0x99_u8, 0x9a_u8, 0xbe_u8, 0xfc_u8, 0xdd_u8, 0x56_u8, 0xce_u8, 0xfb_u8])
     def query_interface(this : IGPMTrustee*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -842,7 +842,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMPermissionVtbl,
+  record IGPMPermissionVtable,
     query_interface : Proc(IGPMPermission*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMPermission*, UInt32),
     release : Proc(IGPMPermission*, UInt32),
@@ -858,7 +858,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMPermission, lpVtbl : IGPMPermissionVtbl* do
+  record IGPMPermission, lpVtbl : IGPMPermissionVtable* do
     GUID = LibC::GUID.new(0x35ebca40_u32, 0xe1a1_u16, 0x4a02_u16, StaticArray[0x89_u8, 0x5_u8, 0xd7_u8, 0x94_u8, 0x16_u8, 0xfb_u8, 0x46_u8, 0x4a_u8])
     def query_interface(this : IGPMPermission*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -900,7 +900,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMSecurityInfoVtbl,
+  record IGPMSecurityInfoVtable,
     query_interface : Proc(IGPMSecurityInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMSecurityInfo*, UInt32),
     release : Proc(IGPMSecurityInfo*, UInt32),
@@ -917,7 +917,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMSecurityInfo, lpVtbl : IGPMSecurityInfoVtbl* do
+  record IGPMSecurityInfo, lpVtbl : IGPMSecurityInfoVtable* do
     GUID = LibC::GUID.new(0xb6c31ed4_u32, 0x1c93_u16, 0x4d3e_u16, StaticArray[0xae_u8, 0x84_u8, 0xeb_u8, 0x6d_u8, 0x61_u8, 0x16_u8, 0x1b_u8, 0x60_u8])
     def query_interface(this : IGPMSecurityInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -962,7 +962,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMBackupVtbl,
+  record IGPMBackupVtable,
     query_interface : Proc(IGPMBackup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMBackup*, UInt32),
     release : Proc(IGPMBackup*, UInt32),
@@ -983,7 +983,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMBackup, lpVtbl : IGPMBackupVtbl* do
+  record IGPMBackup, lpVtbl : IGPMBackupVtable* do
     GUID = LibC::GUID.new(0xd8a16a35_u32, 0x3b0d_u16, 0x416b_u16, StaticArray[0x8d_u8, 0x2_u8, 0x4d_u8, 0xf6_u8, 0xf9_u8, 0x5a_u8, 0x71_u8, 0x19_u8])
     def query_interface(this : IGPMBackup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1040,7 +1040,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMBackupCollectionVtbl,
+  record IGPMBackupCollectionVtable,
     query_interface : Proc(IGPMBackupCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMBackupCollection*, UInt32),
     release : Proc(IGPMBackupCollection*, UInt32),
@@ -1054,7 +1054,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMBackupCollection, lpVtbl : IGPMBackupCollectionVtbl* do
+  record IGPMBackupCollection, lpVtbl : IGPMBackupCollectionVtable* do
     GUID = LibC::GUID.new(0xc786fc0f_u32, 0x26d8_u16, 0x4bab_u16, StaticArray[0xa7_u8, 0x45_u8, 0x39_u8, 0xca_u8, 0x7e_u8, 0x80_u8, 0xc_u8, 0xac_u8])
     def query_interface(this : IGPMBackupCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1090,7 +1090,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMSOMVtbl,
+  record IGPMSOMVtable,
     query_interface : Proc(IGPMSOM*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMSOM*, UInt32),
     release : Proc(IGPMSOM*, UInt32),
@@ -1111,7 +1111,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMSOM, lpVtbl : IGPMSOMVtbl* do
+  record IGPMSOM, lpVtbl : IGPMSOMVtable* do
     GUID = LibC::GUID.new(0xc0a7f09e_u32, 0x5a1_u16, 0x4f0c_u16, StaticArray[0x81_u8, 0x58_u8, 0x9e_u8, 0x5c_u8, 0x33_u8, 0x68_u8, 0x4f_u8, 0x6b_u8])
     def query_interface(this : IGPMSOM*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1168,7 +1168,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMSOMCollectionVtbl,
+  record IGPMSOMCollectionVtable,
     query_interface : Proc(IGPMSOMCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMSOMCollection*, UInt32),
     release : Proc(IGPMSOMCollection*, UInt32),
@@ -1182,7 +1182,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMSOMCollection, lpVtbl : IGPMSOMCollectionVtbl* do
+  record IGPMSOMCollection, lpVtbl : IGPMSOMCollectionVtable* do
     GUID = LibC::GUID.new(0xadc1688e_u32, 0xe4_u16, 0x4495_u16, StaticArray[0xab_u8, 0xba_u8, 0xbe_u8, 0xd2_u8, 0x0_u8, 0xdf_u8, 0xc_u8, 0xab_u8])
     def query_interface(this : IGPMSOMCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1218,7 +1218,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMWMIFilterVtbl,
+  record IGPMWMIFilterVtable,
     query_interface : Proc(IGPMWMIFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMWMIFilter*, UInt32),
     release : Proc(IGPMWMIFilter*, UInt32),
@@ -1237,7 +1237,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMWMIFilter, lpVtbl : IGPMWMIFilterVtbl* do
+  record IGPMWMIFilter, lpVtbl : IGPMWMIFilterVtable* do
     GUID = LibC::GUID.new(0xef2ff9b4_u32, 0x3c27_u16, 0x459a_u16, StaticArray[0xb9_u8, 0x79_u8, 0x3_u8, 0x83_u8, 0x5_u8, 0xce_u8, 0xc7_u8, 0x5d_u8])
     def query_interface(this : IGPMWMIFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1288,7 +1288,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMWMIFilterCollectionVtbl,
+  record IGPMWMIFilterCollectionVtable,
     query_interface : Proc(IGPMWMIFilterCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMWMIFilterCollection*, UInt32),
     release : Proc(IGPMWMIFilterCollection*, UInt32),
@@ -1302,7 +1302,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMWMIFilterCollection, lpVtbl : IGPMWMIFilterCollectionVtbl* do
+  record IGPMWMIFilterCollection, lpVtbl : IGPMWMIFilterCollectionVtable* do
     GUID = LibC::GUID.new(0x5782d582_u32, 0x1a36_u16, 0x4661_u16, StaticArray[0x8a_u8, 0x94_u8, 0xc3_u8, 0xc3_u8, 0x25_u8, 0x51_u8, 0x94_u8, 0x5b_u8])
     def query_interface(this : IGPMWMIFilterCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1338,7 +1338,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMRSOPVtbl,
+  record IGPMRSOPVtable,
     query_interface : Proc(IGPMRSOP*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMRSOP*, UInt32),
     release : Proc(IGPMRSOP*, UInt32),
@@ -1384,7 +1384,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMRSOP, lpVtbl : IGPMRSOPVtbl* do
+  record IGPMRSOP, lpVtbl : IGPMRSOPVtable* do
     GUID = LibC::GUID.new(0x49ed785a_u32, 0x3237_u16, 0x4ff2_u16, StaticArray[0xb1_u8, 0xf0_u8, 0xfd_u8, 0xf5_u8, 0xa8_u8, 0xd5_u8, 0xa1_u8, 0xee_u8])
     def query_interface(this : IGPMRSOP*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1516,7 +1516,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMGPOVtbl,
+  record IGPMGPOVtable,
     query_interface : Proc(IGPMGPO*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMGPO*, UInt32),
     release : Proc(IGPMGPO*, UInt32),
@@ -1556,7 +1556,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMGPO, lpVtbl : IGPMGPOVtbl* do
+  record IGPMGPO, lpVtbl : IGPMGPOVtable* do
     GUID = LibC::GUID.new(0x58cc4352_u32, 0x1ca3_u16, 0x48e5_u16, StaticArray[0x98_u8, 0x64_u8, 0x1d_u8, 0xa4_u8, 0xd6_u8, 0xe0_u8, 0xd6_u8, 0xf_u8])
     def query_interface(this : IGPMGPO*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1670,7 +1670,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMGPOCollectionVtbl,
+  record IGPMGPOCollectionVtable,
     query_interface : Proc(IGPMGPOCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMGPOCollection*, UInt32),
     release : Proc(IGPMGPOCollection*, UInt32),
@@ -1684,7 +1684,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMGPOCollection, lpVtbl : IGPMGPOCollectionVtbl* do
+  record IGPMGPOCollection, lpVtbl : IGPMGPOCollectionVtable* do
     GUID = LibC::GUID.new(0xf0f0d5cf_u32, 0x70ca_u16, 0x4c39_u16, StaticArray[0x9e_u8, 0x29_u8, 0xb6_u8, 0x42_u8, 0xf8_u8, 0x72_u8, 0x6c_u8, 0x1_u8])
     def query_interface(this : IGPMGPOCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1720,7 +1720,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMGPOLinkVtbl,
+  record IGPMGPOLinkVtable,
     query_interface : Proc(IGPMGPOLink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMGPOLink*, UInt32),
     release : Proc(IGPMGPOLink*, UInt32),
@@ -1740,7 +1740,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMGPOLink, lpVtbl : IGPMGPOLinkVtbl* do
+  record IGPMGPOLink, lpVtbl : IGPMGPOLinkVtable* do
     GUID = LibC::GUID.new(0x434b99bd_u32, 0x5de7_u16, 0x478a_u16, StaticArray[0x80_u8, 0x9c_u8, 0xc2_u8, 0x51_u8, 0x72_u8, 0x1d_u8, 0xf7_u8, 0xc_u8])
     def query_interface(this : IGPMGPOLink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1794,7 +1794,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMGPOLinksCollectionVtbl,
+  record IGPMGPOLinksCollectionVtable,
     query_interface : Proc(IGPMGPOLinksCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMGPOLinksCollection*, UInt32),
     release : Proc(IGPMGPOLinksCollection*, UInt32),
@@ -1808,7 +1808,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMGPOLinksCollection, lpVtbl : IGPMGPOLinksCollectionVtbl* do
+  record IGPMGPOLinksCollection, lpVtbl : IGPMGPOLinksCollectionVtable* do
     GUID = LibC::GUID.new(0x189d7b68_u32, 0x16bd_u16, 0x4d0d_u16, StaticArray[0xa2_u8, 0xec_u8, 0x2e_u8, 0x6a_u8, 0xa2_u8, 0x28_u8, 0x8c_u8, 0x7f_u8])
     def query_interface(this : IGPMGPOLinksCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1844,7 +1844,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMCSECollectionVtbl,
+  record IGPMCSECollectionVtable,
     query_interface : Proc(IGPMCSECollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMCSECollection*, UInt32),
     release : Proc(IGPMCSECollection*, UInt32),
@@ -1858,7 +1858,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMCSECollection, lpVtbl : IGPMCSECollectionVtbl* do
+  record IGPMCSECollection, lpVtbl : IGPMCSECollectionVtable* do
     GUID = LibC::GUID.new(0x2e52a97d_u32, 0xa4a_u16, 0x4a6f_u16, StaticArray[0x85_u8, 0xdb_u8, 0x20_u8, 0x16_u8, 0x22_u8, 0x45_u8, 0x5d_u8, 0xa0_u8])
     def query_interface(this : IGPMCSECollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1894,7 +1894,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMClientSideExtensionVtbl,
+  record IGPMClientSideExtensionVtable,
     query_interface : Proc(IGPMClientSideExtension*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMClientSideExtension*, UInt32),
     release : Proc(IGPMClientSideExtension*, UInt32),
@@ -1909,7 +1909,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMClientSideExtension, lpVtbl : IGPMClientSideExtensionVtbl* do
+  record IGPMClientSideExtension, lpVtbl : IGPMClientSideExtensionVtable* do
     GUID = LibC::GUID.new(0x69da7488_u32, 0xb8db_u16, 0x415e_u16, StaticArray[0x92_u8, 0x66_u8, 0x90_u8, 0x1b_u8, 0xe4_u8, 0xd4_u8, 0x99_u8, 0x28_u8])
     def query_interface(this : IGPMClientSideExtension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1948,7 +1948,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMAsyncCancelVtbl,
+  record IGPMAsyncCancelVtable,
     query_interface : Proc(IGPMAsyncCancel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMAsyncCancel*, UInt32),
     release : Proc(IGPMAsyncCancel*, UInt32),
@@ -1960,7 +1960,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMAsyncCancel, lpVtbl : IGPMAsyncCancelVtbl* do
+  record IGPMAsyncCancel, lpVtbl : IGPMAsyncCancelVtable* do
     GUID = LibC::GUID.new(0xddc67754_u32, 0xbe67_u16, 0x4541_u16, StaticArray[0x81_u8, 0x66_u8, 0xf4_u8, 0x81_u8, 0x66_u8, 0x86_u8, 0x8c_u8, 0x9c_u8])
     def query_interface(this : IGPMAsyncCancel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1990,7 +1990,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMAsyncProgressVtbl,
+  record IGPMAsyncProgressVtable,
     query_interface : Proc(IGPMAsyncProgress*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMAsyncProgress*, UInt32),
     release : Proc(IGPMAsyncProgress*, UInt32),
@@ -2002,7 +2002,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMAsyncProgress, lpVtbl : IGPMAsyncProgressVtbl* do
+  record IGPMAsyncProgress, lpVtbl : IGPMAsyncProgressVtable* do
     GUID = LibC::GUID.new(0x6aac29f8_u32, 0x5948_u16, 0x4324_u16, StaticArray[0xbf_u8, 0x70_u8, 0x42_u8, 0x38_u8, 0x18_u8, 0x94_u8, 0x2d_u8, 0xbc_u8])
     def query_interface(this : IGPMAsyncProgress*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2032,7 +2032,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMStatusMsgCollectionVtbl,
+  record IGPMStatusMsgCollectionVtable,
     query_interface : Proc(IGPMStatusMsgCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMStatusMsgCollection*, UInt32),
     release : Proc(IGPMStatusMsgCollection*, UInt32),
@@ -2046,7 +2046,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMStatusMsgCollection, lpVtbl : IGPMStatusMsgCollectionVtbl* do
+  record IGPMStatusMsgCollection, lpVtbl : IGPMStatusMsgCollectionVtable* do
     GUID = LibC::GUID.new(0x9b6e1af0_u32, 0x1a92_u16, 0x40f3_u16, StaticArray[0xa5_u8, 0x9d_u8, 0xf3_u8, 0x6a_u8, 0xc1_u8, 0xf7_u8, 0x28_u8, 0xb7_u8])
     def query_interface(this : IGPMStatusMsgCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2082,7 +2082,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMStatusMessageVtbl,
+  record IGPMStatusMessageVtable,
     query_interface : Proc(IGPMStatusMessage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMStatusMessage*, UInt32),
     release : Proc(IGPMStatusMessage*, UInt32),
@@ -2099,7 +2099,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMStatusMessage, lpVtbl : IGPMStatusMessageVtbl* do
+  record IGPMStatusMessage, lpVtbl : IGPMStatusMessageVtable* do
     GUID = LibC::GUID.new(0x8496c22f_u32, 0xf3de_u16, 0x4a1f_u16, StaticArray[0x8f_u8, 0x58_u8, 0x60_u8, 0x3c_u8, 0xaa_u8, 0xa9_u8, 0x3d_u8, 0x7b_u8])
     def query_interface(this : IGPMStatusMessage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2144,7 +2144,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMConstantsVtbl,
+  record IGPMConstantsVtable,
     query_interface : Proc(IGPMConstants*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMConstants*, UInt32),
     release : Proc(IGPMConstants*, UInt32),
@@ -2215,7 +2215,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMConstants, lpVtbl : IGPMConstantsVtbl* do
+  record IGPMConstants, lpVtbl : IGPMConstantsVtable* do
     GUID = LibC::GUID.new(0x50ef73e6_u32, 0xd35c_u16, 0x4c8d_u16, StaticArray[0xbe_u8, 0x63_u8, 0x7e_u8, 0xa5_u8, 0xd2_u8, 0xaa_u8, 0xc5_u8, 0xc4_u8])
     def query_interface(this : IGPMConstants*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2422,7 +2422,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMResultVtbl,
+  record IGPMResultVtable,
     query_interface : Proc(IGPMResult*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMResult*, UInt32),
     release : Proc(IGPMResult*, UInt32),
@@ -2436,7 +2436,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMResult, lpVtbl : IGPMResultVtbl* do
+  record IGPMResult, lpVtbl : IGPMResultVtable* do
     GUID = LibC::GUID.new(0x86dff7e9_u32, 0xf76f_u16, 0x42ab_u16, StaticArray[0x95_u8, 0x70_u8, 0xce_u8, 0xbc_u8, 0x6b_u8, 0xe8_u8, 0xa5_u8, 0x2d_u8])
     def query_interface(this : IGPMResult*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2472,7 +2472,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMMapEntryCollectionVtbl,
+  record IGPMMapEntryCollectionVtable,
     query_interface : Proc(IGPMMapEntryCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMMapEntryCollection*, UInt32),
     release : Proc(IGPMMapEntryCollection*, UInt32),
@@ -2486,7 +2486,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMMapEntryCollection, lpVtbl : IGPMMapEntryCollectionVtbl* do
+  record IGPMMapEntryCollection, lpVtbl : IGPMMapEntryCollectionVtable* do
     GUID = LibC::GUID.new(0xbb0bf49b_u32, 0xe53f_u16, 0x443f_u16, StaticArray[0xb8_u8, 0x7_u8, 0x8b_u8, 0xe2_u8, 0x2b_u8, 0xfb_u8, 0x6d_u8, 0x42_u8])
     def query_interface(this : IGPMMapEntryCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2522,7 +2522,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMMapEntryVtbl,
+  record IGPMMapEntryVtable,
     query_interface : Proc(IGPMMapEntry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMMapEntry*, UInt32),
     release : Proc(IGPMMapEntry*, UInt32),
@@ -2537,7 +2537,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMMapEntry, lpVtbl : IGPMMapEntryVtbl* do
+  record IGPMMapEntry, lpVtbl : IGPMMapEntryVtable* do
     GUID = LibC::GUID.new(0x8e79ad06_u32, 0x2381_u16, 0x4444_u16, StaticArray[0xbe_u8, 0x4c_u8, 0xff_u8, 0x69_u8, 0x3e_u8, 0x6e_u8, 0x6f_u8, 0x2b_u8])
     def query_interface(this : IGPMMapEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2576,7 +2576,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMMigrationTableVtbl,
+  record IGPMMigrationTableVtable,
     query_interface : Proc(IGPMMigrationTable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMMigrationTable*, UInt32),
     release : Proc(IGPMMigrationTable*, UInt32),
@@ -2595,7 +2595,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMMigrationTable, lpVtbl : IGPMMigrationTableVtbl* do
+  record IGPMMigrationTable, lpVtbl : IGPMMigrationTableVtable* do
     GUID = LibC::GUID.new(0x48f823b1_u32, 0xefaf_u16, 0x470b_u16, StaticArray[0xb6_u8, 0xed_u8, 0x40_u8, 0xd1_u8, 0x4e_u8, 0xe1_u8, 0xa4_u8, 0xec_u8])
     def query_interface(this : IGPMMigrationTable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2646,7 +2646,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMBackupDirExVtbl,
+  record IGPMBackupDirExVtable,
     query_interface : Proc(IGPMBackupDirEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMBackupDirEx*, UInt32),
     release : Proc(IGPMBackupDirEx*, UInt32),
@@ -2661,7 +2661,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMBackupDirEx, lpVtbl : IGPMBackupDirExVtbl* do
+  record IGPMBackupDirEx, lpVtbl : IGPMBackupDirExVtable* do
     GUID = LibC::GUID.new(0xf8dc55ed_u32, 0x3ba0_u16, 0x4864_u16, StaticArray[0xaa_u8, 0xd4_u8, 0xd3_u8, 0x65_u8, 0x18_u8, 0x9e_u8, 0xe1_u8, 0xd5_u8])
     def query_interface(this : IGPMBackupDirEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2700,7 +2700,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMStarterGPOBackupCollectionVtbl,
+  record IGPMStarterGPOBackupCollectionVtable,
     query_interface : Proc(IGPMStarterGPOBackupCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMStarterGPOBackupCollection*, UInt32),
     release : Proc(IGPMStarterGPOBackupCollection*, UInt32),
@@ -2714,7 +2714,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMStarterGPOBackupCollection, lpVtbl : IGPMStarterGPOBackupCollectionVtbl* do
+  record IGPMStarterGPOBackupCollection, lpVtbl : IGPMStarterGPOBackupCollectionVtable* do
     GUID = LibC::GUID.new(0xc998031d_u32, 0xadd0_u16, 0x4bb5_u16, StaticArray[0x8d_u8, 0xea_u8, 0x29_u8, 0x85_u8, 0x5_u8, 0xd8_u8, 0x42_u8, 0x3b_u8])
     def query_interface(this : IGPMStarterGPOBackupCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2750,7 +2750,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMStarterGPOBackupVtbl,
+  record IGPMStarterGPOBackupVtable,
     query_interface : Proc(IGPMStarterGPOBackup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMStarterGPOBackup*, UInt32),
     release : Proc(IGPMStarterGPOBackup*, UInt32),
@@ -2772,7 +2772,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMStarterGPOBackup, lpVtbl : IGPMStarterGPOBackupVtbl* do
+  record IGPMStarterGPOBackup, lpVtbl : IGPMStarterGPOBackupVtable* do
     GUID = LibC::GUID.new(0x51d98eda_u32, 0xa87e_u16, 0x43dd_u16, StaticArray[0xb8_u8, 0xa_u8, 0xb_u8, 0x66_u8, 0xef_u8, 0x19_u8, 0x38_u8, 0xd6_u8])
     def query_interface(this : IGPMStarterGPOBackup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2832,7 +2832,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPM2Vtbl,
+  record IGPM2Vtable,
     query_interface : Proc(IGPM2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPM2*, UInt32),
     release : Proc(IGPM2*, UInt32),
@@ -2857,7 +2857,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPM2, lpVtbl : IGPM2Vtbl* do
+  record IGPM2, lpVtbl : IGPM2Vtable* do
     GUID = LibC::GUID.new(0x238f8a_u32, 0x3d86_u16, 0x41ac_u16, StaticArray[0x8f_u8, 0x5e_u8, 0x6_u8, 0xa6_u8, 0x63_u8, 0x8a_u8, 0x63_u8, 0x4a_u8])
     def query_interface(this : IGPM2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2926,7 +2926,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMStarterGPOVtbl,
+  record IGPMStarterGPOVtable,
     query_interface : Proc(IGPMStarterGPO*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMStarterGPO*, UInt32),
     release : Proc(IGPMStarterGPO*, UInt32),
@@ -2958,7 +2958,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMStarterGPO, lpVtbl : IGPMStarterGPOVtbl* do
+  record IGPMStarterGPO, lpVtbl : IGPMStarterGPOVtable* do
     GUID = LibC::GUID.new(0xdfc3f61b_u32, 0x8880_u16, 0x4490_u16, StaticArray[0x93_u8, 0x37_u8, 0xd2_u8, 0x9c_u8, 0x7b_u8, 0xa8_u8, 0xc2_u8, 0xf0_u8])
     def query_interface(this : IGPMStarterGPO*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3048,7 +3048,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMStarterGPOCollectionVtbl,
+  record IGPMStarterGPOCollectionVtable,
     query_interface : Proc(IGPMStarterGPOCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMStarterGPOCollection*, UInt32),
     release : Proc(IGPMStarterGPOCollection*, UInt32),
@@ -3062,7 +3062,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMStarterGPOCollection, lpVtbl : IGPMStarterGPOCollectionVtbl* do
+  record IGPMStarterGPOCollection, lpVtbl : IGPMStarterGPOCollectionVtable* do
     GUID = LibC::GUID.new(0x2e522729_u32, 0x2219_u16, 0x44ad_u16, StaticArray[0x93_u8, 0x3a_u8, 0x64_u8, 0xdf_u8, 0xd6_u8, 0x50_u8, 0xc4_u8, 0x23_u8])
     def query_interface(this : IGPMStarterGPOCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3098,7 +3098,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMDomain2Vtbl,
+  record IGPMDomain2Vtable,
     query_interface : Proc(IGPMDomain2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMDomain2*, UInt32),
     release : Proc(IGPMDomain2*, UInt32),
@@ -3125,7 +3125,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMDomain2, lpVtbl : IGPMDomain2Vtbl* do
+  record IGPMDomain2, lpVtbl : IGPMDomain2Vtable* do
     GUID = LibC::GUID.new(0x7ca6bb8b_u32, 0xf1eb_u16, 0x490a_u16, StaticArray[0x93_u8, 0x8d_u8, 0x3c_u8, 0x4e_u8, 0x51_u8, 0xc7_u8, 0x68_u8, 0xe6_u8])
     def query_interface(this : IGPMDomain2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3200,7 +3200,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMConstants2Vtbl,
+  record IGPMConstants2Vtable,
     query_interface : Proc(IGPMConstants2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMConstants2*, UInt32),
     release : Proc(IGPMConstants2*, UInt32),
@@ -3286,7 +3286,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMConstants2, lpVtbl : IGPMConstants2Vtbl* do
+  record IGPMConstants2, lpVtbl : IGPMConstants2Vtable* do
     GUID = LibC::GUID.new(0x5ae21b0_u32, 0xac09_u16, 0x4032_u16, StaticArray[0xa2_u8, 0x6f_u8, 0x9e_u8, 0x7d_u8, 0xa7_u8, 0x86_u8, 0xdc_u8, 0x19_u8])
     def query_interface(this : IGPMConstants2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3538,7 +3538,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMGPO2Vtbl,
+  record IGPMGPO2Vtable,
     query_interface : Proc(IGPMGPO2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMGPO2*, UInt32),
     release : Proc(IGPMGPO2*, UInt32),
@@ -3580,7 +3580,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMGPO2, lpVtbl : IGPMGPO2Vtbl* do
+  record IGPMGPO2, lpVtbl : IGPMGPO2Vtable* do
     GUID = LibC::GUID.new(0x8a66a210_u32, 0xb78b_u16, 0x4d99_u16, StaticArray[0x88_u8, 0xe2_u8, 0xc3_u8, 0x6_u8, 0xa8_u8, 0x17_u8, 0xc9_u8, 0x25_u8])
     def query_interface(this : IGPMGPO2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3700,7 +3700,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMDomain3Vtbl,
+  record IGPMDomain3Vtable,
     query_interface : Proc(IGPMDomain3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMDomain3*, UInt32),
     release : Proc(IGPMDomain3*, UInt32),
@@ -3731,7 +3731,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMDomain3, lpVtbl : IGPMDomain3Vtbl* do
+  record IGPMDomain3, lpVtbl : IGPMDomain3Vtable* do
     GUID = LibC::GUID.new(0x77fdfe_u32, 0x88c7_u16, 0x4acf_u16, StaticArray[0xa1_u8, 0x1d_u8, 0xd1_u8, 0xa_u8, 0x7c_u8, 0x31_u8, 0xa_u8, 0x3_u8])
     def query_interface(this : IGPMDomain3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3818,7 +3818,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPMGPO3Vtbl,
+  record IGPMGPO3Vtable,
     query_interface : Proc(IGPMGPO3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPMGPO3*, UInt32),
     release : Proc(IGPMGPO3*, UInt32),
@@ -3863,7 +3863,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPMGPO3, lpVtbl : IGPMGPO3Vtbl* do
+  record IGPMGPO3, lpVtbl : IGPMGPO3Vtable* do
     GUID = LibC::GUID.new(0x7cf123a1_u32, 0xf94a_u16, 0x4112_u16, StaticArray[0xbf_u8, 0xae_u8, 0x6a_u8, 0xa1_u8, 0xdb_u8, 0x9c_u8, 0xb2_u8, 0x48_u8])
     def query_interface(this : IGPMGPO3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3992,7 +3992,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGPEInformationVtbl,
+  record IGPEInformationVtable,
     query_interface : Proc(IGPEInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGPEInformation*, UInt32),
     release : Proc(IGPEInformation*, UInt32),
@@ -4008,7 +4008,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGPEInformation, lpVtbl : IGPEInformationVtbl* do
+  record IGPEInformation, lpVtbl : IGPEInformationVtable* do
     GUID = LibC::GUID.new(0x8fc0b735_u32, 0xa0e1_u16, 0x11d1_u16, StaticArray[0xa7_u8, 0xd3_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x71_u8, 0xe3_u8])
     def query_interface(this : IGPEInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4050,7 +4050,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IGroupPolicyObjectVtbl,
+  record IGroupPolicyObjectVtable,
     query_interface : Proc(IGroupPolicyObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGroupPolicyObject*, UInt32),
     release : Proc(IGroupPolicyObject*, UInt32),
@@ -4075,7 +4075,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IGroupPolicyObject, lpVtbl : IGroupPolicyObjectVtbl* do
+  record IGroupPolicyObject, lpVtbl : IGroupPolicyObjectVtable* do
     GUID = LibC::GUID.new(0xea502723_u32, 0xa23d_u16, 0x11d1_u16, StaticArray[0xa7_u8, 0xd3_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x75_u8, 0x71_u8, 0xe3_u8])
     def query_interface(this : IGroupPolicyObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4144,7 +4144,7 @@ module Win32cr::System::GroupPolicy
   end
 
   @[Extern]
-  record IRSOPInformationVtbl,
+  record IRSOPInformationVtable,
     query_interface : Proc(IRSOPInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRSOPInformation*, UInt32),
     release : Proc(IRSOPInformation*, UInt32),
@@ -4154,7 +4154,7 @@ module Win32cr::System::GroupPolicy
 
 
   @[Extern]
-  record IRSOPInformation, lpVtbl : IRSOPInformationVtbl* do
+  record IRSOPInformation, lpVtbl : IRSOPInformationVtable* do
     GUID = LibC::GUID.new(0x9a5a81b5_u32, 0xd9c7_u16, 0x49ef_u16, StaticArray[0x9d_u8, 0x11_u8, 0xdd_u8, 0xf5_u8, 0x9_u8, 0x68_u8, 0xc4_u8, 0x8d_u8])
     def query_interface(this : IRSOPInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4178,136 +4178,201 @@ module Win32cr::System::GroupPolicy
   end
 
   def refreshPolicy(bMachine : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RefreshPolicy(bMachine)
+    {% end %}
   end
 
   def refreshPolicyEx(bMachine : Win32cr::Foundation::BOOL, dwOptions : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RefreshPolicyEx(bMachine, dwOptions)
+    {% end %}
   end
 
   def enterCriticalPolicySection(bMachine : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.EnterCriticalPolicySection(bMachine)
+    {% end %}
   end
 
   def leaveCriticalPolicySection(hSection : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LeaveCriticalPolicySection(hSection)
+    {% end %}
   end
 
   def registerGPNotification(hEvent : Win32cr::Foundation::HANDLE, bMachine : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RegisterGPNotification(hEvent, bMachine)
+    {% end %}
   end
 
   def unregisterGPNotification(hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnregisterGPNotification(hEvent)
+    {% end %}
   end
 
   def getGPOListA(hToken : Win32cr::Foundation::HANDLE, lpName : Win32cr::Foundation::PSTR, lpHostName : Win32cr::Foundation::PSTR, lpComputerName : Win32cr::Foundation::PSTR, dwFlags : UInt32, pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetGPOListA(hToken, lpName, lpHostName, lpComputerName, dwFlags, pGPOList)
+    {% end %}
   end
 
   def getGPOListW(hToken : Win32cr::Foundation::HANDLE, lpName : Win32cr::Foundation::PWSTR, lpHostName : Win32cr::Foundation::PWSTR, lpComputerName : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetGPOListW(hToken, lpName, lpHostName, lpComputerName, dwFlags, pGPOList)
+    {% end %}
   end
 
   def freeGPOListA(pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FreeGPOListA(pGPOList)
+    {% end %}
   end
 
   def freeGPOListW(pGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FreeGPOListW(pGPOList)
+    {% end %}
   end
 
   def getAppliedGPOListA(dwFlags : UInt32, pMachineName : Win32cr::Foundation::PSTR, pSidUser : Win32cr::Foundation::PSID, pGuidExtension : LibC::GUID*, ppGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTA**) : UInt32
+    {% if !flag?(:docs) %}
     C.GetAppliedGPOListA(dwFlags, pMachineName, pSidUser, pGuidExtension, ppGPOList)
+    {% end %}
   end
 
   def getAppliedGPOListW(dwFlags : UInt32, pMachineName : Win32cr::Foundation::PWSTR, pSidUser : Win32cr::Foundation::PSID, pGuidExtension : LibC::GUID*, ppGPOList : Win32cr::System::GroupPolicy::GROUP_POLICY_OBJECTW**) : UInt32
+    {% if !flag?(:docs) %}
     C.GetAppliedGPOListW(dwFlags, pMachineName, pSidUser, pGuidExtension, ppGPOList)
+    {% end %}
   end
 
   def processGroupPolicyCompleted(extensionId : LibC::GUID*, pAsyncHandle : LibC::UIntPtrT, dwStatus : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.ProcessGroupPolicyCompleted(extensionId, pAsyncHandle, dwStatus)
+    {% end %}
   end
 
   def processGroupPolicyCompletedEx(extensionId : LibC::GUID*, pAsyncHandle : LibC::UIntPtrT, dwStatus : UInt32, rsop_status : Win32cr::Foundation::HRESULT) : UInt32
+    {% if !flag?(:docs) %}
     C.ProcessGroupPolicyCompletedEx(extensionId, pAsyncHandle, dwStatus, rsop_status)
+    {% end %}
   end
 
   def rsopAccessCheckByType(pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, pPrincipalSelfSid : Win32cr::Foundation::PSID, pRsopToken : Void*, dwDesiredAccessMask : UInt32, pObjectTypeList : Win32cr::Security::OBJECT_TYPE_LIST*, object_type_list_length : UInt32, pGenericMapping : Win32cr::Security::GENERIC_MAPPING*, pPrivilegeSet : Win32cr::Security::PRIVILEGE_SET*, pdwPrivilegeSetLength : UInt32*, pdwGrantedAccessMask : UInt32*, pbAccessStatus : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RsopAccessCheckByType(pSecurityDescriptor, pPrincipalSelfSid, pRsopToken, dwDesiredAccessMask, pObjectTypeList, object_type_list_length, pGenericMapping, pPrivilegeSet, pdwPrivilegeSetLength, pdwGrantedAccessMask, pbAccessStatus)
+    {% end %}
   end
 
   def rsopFileAccessCheck(pszFileName : Win32cr::Foundation::PWSTR, pRsopToken : Void*, dwDesiredAccessMask : UInt32, pdwGrantedAccessMask : UInt32*, pbAccessStatus : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RsopFileAccessCheck(pszFileName, pRsopToken, dwDesiredAccessMask, pdwGrantedAccessMask, pbAccessStatus)
+    {% end %}
   end
 
   def rsopSetPolicySettingStatus(dwFlags : UInt32, pServices : Void*, pSettingInstance : Void*, nInfo : UInt32, pStatus : Win32cr::System::GroupPolicy::POLICYSETTINGSTATUSINFO*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RsopSetPolicySettingStatus(dwFlags, pServices, pSettingInstance, nInfo, pStatus)
+    {% end %}
   end
 
   def rsopResetPolicySettingStatus(dwFlags : UInt32, pServices : Void*, pSettingInstance : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RsopResetPolicySettingStatus(dwFlags, pServices, pSettingInstance)
+    {% end %}
   end
 
   def generateGPNotification(bMachine : Win32cr::Foundation::BOOL, lpwszMgmtProduct : Win32cr::Foundation::PWSTR, dwMgmtProductOptions : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GenerateGPNotification(bMachine, lpwszMgmtProduct, dwMgmtProductOptions)
+    {% end %}
   end
 
   def installApplication(pInstallInfo : Win32cr::System::GroupPolicy::INSTALLDATA*) : UInt32
+    {% if !flag?(:docs) %}
     C.InstallApplication(pInstallInfo)
+    {% end %}
   end
 
   def uninstallApplication(product_code : Win32cr::Foundation::PWSTR, dwStatus : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.UninstallApplication(product_code, dwStatus)
+    {% end %}
   end
 
   def commandLineFromMsiDescriptor(descriptor : Win32cr::Foundation::PWSTR, command_line : UInt16*, command_line_length : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.CommandLineFromMsiDescriptor(descriptor, command_line, command_line_length)
+    {% end %}
   end
 
   def getManagedApplications(pCategory : LibC::GUID*, dwQueryFlags : UInt32, dwInfoLevel : UInt32, pdwApps : UInt32*, prgManagedApps : Win32cr::System::GroupPolicy::MANAGEDAPPLICATION**) : UInt32
+    {% if !flag?(:docs) %}
     C.GetManagedApplications(pCategory, dwQueryFlags, dwInfoLevel, pdwApps, prgManagedApps)
+    {% end %}
   end
 
   def getLocalManagedApplications(bUserApps : Win32cr::Foundation::BOOL, pdwApps : UInt32*, prgLocalApps : Win32cr::System::GroupPolicy::LOCALMANAGEDAPPLICATION**) : UInt32
+    {% if !flag?(:docs) %}
     C.GetLocalManagedApplications(bUserApps, pdwApps, prgLocalApps)
+    {% end %}
   end
 
   def getLocalManagedApplicationData(product_code : Win32cr::Foundation::PWSTR, display_name : Win32cr::Foundation::PWSTR*, support_url : Win32cr::Foundation::PWSTR*) : Void
+    {% if !flag?(:docs) %}
     C.GetLocalManagedApplicationData(product_code, display_name, support_url)
+    {% end %}
   end
 
   def getManagedApplicationCategories(dwReserved : UInt32, pAppCategory : Win32cr::UI::Shell::APPCATEGORYINFOLIST*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetManagedApplicationCategories(dwReserved, pAppCategory)
+    {% end %}
   end
 
   def createGPOLink(lpGPO : Win32cr::Foundation::PWSTR, lpContainer : Win32cr::Foundation::PWSTR, fHighPriority : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateGPOLink(lpGPO, lpContainer, fHighPriority)
+    {% end %}
   end
 
   def deleteGPOLink(lpGPO : Win32cr::Foundation::PWSTR, lpContainer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DeleteGPOLink(lpGPO, lpContainer)
+    {% end %}
   end
 
   def deleteAllGPOLinks(lpContainer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DeleteAllGPOLinks(lpContainer)
+    {% end %}
   end
 
   def browseForGPO(lpBrowseInfo : Win32cr::System::GroupPolicy::GPOBROWSEINFO*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BrowseForGPO(lpBrowseInfo)
+    {% end %}
   end
 
   def importRSoPData(lpNameSpace : Win32cr::Foundation::PWSTR, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ImportRSoPData(lpNameSpace, lpFileName)
+    {% end %}
   end
 
   def exportRSoPData(lpNameSpace : Win32cr::Foundation::PWSTR, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ExportRSoPData(lpNameSpace, lpFileName)
+    {% end %}
   end
 
-  @[Link("userenv")]
-  @[Link("advapi32")]
-  @[Link("gpedit")]
+  @[Link("userenv.dll")]
+  @[Link("advapi32.dll")]
+  @[Link("gpedit.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun RefreshPolicy(bMachine : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
@@ -4406,4 +4471,5 @@ module Win32cr::System::GroupPolicy
     fun ExportRSoPData(lpNameSpace : Win32cr::Foundation::PWSTR, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

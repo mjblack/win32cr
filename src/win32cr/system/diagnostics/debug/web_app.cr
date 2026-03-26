@@ -12,7 +12,7 @@ module Win32cr::System::Diagnostics::Debug::WebApp
 
 
   @[Extern]
-  record IWebApplicationScriptEventsVtbl,
+  record IWebApplicationScriptEventsVtable,
     query_interface : Proc(IWebApplicationScriptEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebApplicationScriptEvents*, UInt32),
     release : Proc(IWebApplicationScriptEvents*, UInt32),
@@ -21,7 +21,7 @@ module Win32cr::System::Diagnostics::Debug::WebApp
 
 
   @[Extern]
-  record IWebApplicationScriptEvents, lpVtbl : IWebApplicationScriptEventsVtbl* do
+  record IWebApplicationScriptEvents, lpVtbl : IWebApplicationScriptEventsVtable* do
     GUID = LibC::GUID.new(0x7c3f6998_u32, 0x1567_u16, 0x4bba_u16, StaticArray[0xb5_u8, 0x2b_u8, 0x48_u8, 0xd3_u8, 0x21_u8, 0x41_u8, 0xd6_u8, 0x13_u8])
     def query_interface(this : IWebApplicationScriptEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42,7 +42,7 @@ module Win32cr::System::Diagnostics::Debug::WebApp
   end
 
   @[Extern]
-  record IWebApplicationNavigationEventsVtbl,
+  record IWebApplicationNavigationEventsVtable,
     query_interface : Proc(IWebApplicationNavigationEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebApplicationNavigationEvents*, UInt32),
     release : Proc(IWebApplicationNavigationEvents*, UInt32),
@@ -55,7 +55,7 @@ module Win32cr::System::Diagnostics::Debug::WebApp
 
 
   @[Extern]
-  record IWebApplicationNavigationEvents, lpVtbl : IWebApplicationNavigationEventsVtbl* do
+  record IWebApplicationNavigationEvents, lpVtbl : IWebApplicationNavigationEventsVtable* do
     GUID = LibC::GUID.new(0xc22615d2_u32, 0xd318_u16, 0x4da2_u16, StaticArray[0x84_u8, 0x22_u8, 0x1f_u8, 0xca_u8, 0xf7_u8, 0x7b_u8, 0x10_u8, 0xe4_u8])
     def query_interface(this : IWebApplicationNavigationEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -88,7 +88,7 @@ module Win32cr::System::Diagnostics::Debug::WebApp
   end
 
   @[Extern]
-  record IWebApplicationUIEventsVtbl,
+  record IWebApplicationUIEventsVtable,
     query_interface : Proc(IWebApplicationUIEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebApplicationUIEvents*, UInt32),
     release : Proc(IWebApplicationUIEvents*, UInt32),
@@ -96,7 +96,7 @@ module Win32cr::System::Diagnostics::Debug::WebApp
 
 
   @[Extern]
-  record IWebApplicationUIEvents, lpVtbl : IWebApplicationUIEventsVtbl* do
+  record IWebApplicationUIEvents, lpVtbl : IWebApplicationUIEventsVtable* do
     GUID = LibC::GUID.new(0x5b2b3f99_u32, 0x328c_u16, 0x41d5_u16, StaticArray[0xa6_u8, 0xf7_u8, 0x74_u8, 0x83_u8, 0xed_u8, 0x8e_u8, 0x71_u8, 0xdd_u8])
     def query_interface(this : IWebApplicationUIEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -114,7 +114,7 @@ module Win32cr::System::Diagnostics::Debug::WebApp
   end
 
   @[Extern]
-  record IWebApplicationUpdateEventsVtbl,
+  record IWebApplicationUpdateEventsVtable,
     query_interface : Proc(IWebApplicationUpdateEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebApplicationUpdateEvents*, UInt32),
     release : Proc(IWebApplicationUpdateEvents*, UInt32),
@@ -123,7 +123,7 @@ module Win32cr::System::Diagnostics::Debug::WebApp
 
 
   @[Extern]
-  record IWebApplicationUpdateEvents, lpVtbl : IWebApplicationUpdateEventsVtbl* do
+  record IWebApplicationUpdateEvents, lpVtbl : IWebApplicationUpdateEventsVtable* do
     GUID = LibC::GUID.new(0x3e59e6b7_u32, 0xc652_u16, 0x4daf_u16, StaticArray[0xad_u8, 0x5e_u8, 0x16_u8, 0xfe_u8, 0xb3_u8, 0x50_u8, 0xcd_u8, 0xe3_u8])
     def query_interface(this : IWebApplicationUpdateEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -144,7 +144,7 @@ module Win32cr::System::Diagnostics::Debug::WebApp
   end
 
   @[Extern]
-  record IWebApplicationHostVtbl,
+  record IWebApplicationHostVtable,
     query_interface : Proc(IWebApplicationHost*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebApplicationHost*, UInt32),
     release : Proc(IWebApplicationHost*, UInt32),
@@ -156,7 +156,7 @@ module Win32cr::System::Diagnostics::Debug::WebApp
 
 
   @[Extern]
-  record IWebApplicationHost, lpVtbl : IWebApplicationHostVtbl* do
+  record IWebApplicationHost, lpVtbl : IWebApplicationHostVtable* do
     GUID = LibC::GUID.new(0xcecbd2c3_u32, 0xa3a5_u16, 0x4749_u16, StaticArray[0x96_u8, 0x81_u8, 0x20_u8, 0xe9_u8, 0x16_u8, 0x1c_u8, 0x67_u8, 0x94_u8])
     def query_interface(this : IWebApplicationHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -186,7 +186,7 @@ module Win32cr::System::Diagnostics::Debug::WebApp
   end
 
   @[Extern]
-  record IWebApplicationActivationVtbl,
+  record IWebApplicationActivationVtable,
     query_interface : Proc(IWebApplicationActivation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebApplicationActivation*, UInt32),
     release : Proc(IWebApplicationActivation*, UInt32),
@@ -194,7 +194,7 @@ module Win32cr::System::Diagnostics::Debug::WebApp
 
 
   @[Extern]
-  record IWebApplicationActivation, lpVtbl : IWebApplicationActivationVtbl* do
+  record IWebApplicationActivation, lpVtbl : IWebApplicationActivationVtable* do
     GUID = LibC::GUID.new(0xbcdcd0de_u32, 0x330e_u16, 0x481b_u16, StaticArray[0xb8_u8, 0x43_u8, 0x48_u8, 0x98_u8, 0xa6_u8, 0xa8_u8, 0xeb_u8, 0xac_u8])
     def query_interface(this : IWebApplicationActivation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -212,7 +212,7 @@ module Win32cr::System::Diagnostics::Debug::WebApp
   end
 
   @[Extern]
-  record IWebApplicationAuthoringModeVtbl,
+  record IWebApplicationAuthoringModeVtable,
     query_interface : Proc(IWebApplicationAuthoringMode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebApplicationAuthoringMode*, UInt32),
     release : Proc(IWebApplicationAuthoringMode*, UInt32),
@@ -221,7 +221,7 @@ module Win32cr::System::Diagnostics::Debug::WebApp
 
 
   @[Extern]
-  record IWebApplicationAuthoringMode, lpVtbl : IWebApplicationAuthoringModeVtbl* do
+  record IWebApplicationAuthoringMode, lpVtbl : IWebApplicationAuthoringModeVtable* do
     GUID = LibC::GUID.new(0x720aea93_u32, 0x1964_u16, 0x4db0_u16, StaticArray[0xb0_u8, 0x5_u8, 0x29_u8, 0xeb_u8, 0x9e_u8, 0x2b_u8, 0x18_u8, 0xa9_u8])
     def query_interface(this : IWebApplicationAuthoringMode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

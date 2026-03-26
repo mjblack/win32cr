@@ -439,6 +439,10 @@ module Win32cr::Graphics::Direct3D9
     D3DTS_TEXTURE6 = 22_i32
     D3DTS_TEXTURE7 = 23_i32
     D3DTS_FORCE_DWORD = 2147483647_i32
+    D3DTS_WORLD = 256_i32
+    D3DTS_WORLD1 = 257_i32
+    D3DTS_WORLD2 = 258_i32
+    D3DTS_WORLD3 = 259_i32
   end
   enum D3DRENDERSTATETYPE
     D3DRS_ZENABLE = 7_i32
@@ -1969,7 +1973,7 @@ module Win32cr::Graphics::Direct3D9
   {% end %}
 
   @[Extern]
-  record IDirect3D9Vtbl,
+  record IDirect3D9Vtable,
     query_interface : Proc(IDirect3D9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3D9*, UInt32),
     release : Proc(IDirect3D9*, UInt32),
@@ -1990,7 +1994,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3D9, lpVtbl : IDirect3D9Vtbl* do
+  record IDirect3D9, lpVtbl : IDirect3D9Vtable* do
     GUID = LibC::GUID.new(0x81bdcbca_u32, 0x64d4_u16, 0x426d_u16, StaticArray[0xae_u8, 0x8d_u8, 0xad_u8, 0x1_u8, 0x47_u8, 0xf4_u8, 0x27_u8, 0x5c_u8])
     def query_interface(this : IDirect3D9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2047,7 +2051,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3DDevice9Vtbl,
+  record IDirect3DDevice9Vtable,
     query_interface : Proc(IDirect3DDevice9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DDevice9*, UInt32),
     release : Proc(IDirect3DDevice9*, UInt32),
@@ -2170,7 +2174,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3DDevice9, lpVtbl : IDirect3DDevice9Vtbl* do
+  record IDirect3DDevice9, lpVtbl : IDirect3DDevice9Vtable* do
     GUID = LibC::GUID.new(0xd0223b96_u32, 0xbf7a_u16, 0x43fd_u16, StaticArray[0x92_u8, 0xbd_u8, 0xa4_u8, 0x3b_u8, 0xd_u8, 0x82_u8, 0xb9_u8, 0xeb_u8])
     def query_interface(this : IDirect3DDevice9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2533,7 +2537,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3DStateBlock9Vtbl,
+  record IDirect3DStateBlock9Vtable,
     query_interface : Proc(IDirect3DStateBlock9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DStateBlock9*, UInt32),
     release : Proc(IDirect3DStateBlock9*, UInt32),
@@ -2543,7 +2547,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3DStateBlock9, lpVtbl : IDirect3DStateBlock9Vtbl* do
+  record IDirect3DStateBlock9, lpVtbl : IDirect3DStateBlock9Vtable* do
     GUID = LibC::GUID.new(0xb07c4fe5_u32, 0x310d_u16, 0x4ba8_u16, StaticArray[0xa2_u8, 0x3c_u8, 0x4f_u8, 0xf_u8, 0x20_u8, 0x6f_u8, 0x21_u8, 0x8b_u8])
     def query_interface(this : IDirect3DStateBlock9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2567,7 +2571,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3DSwapChain9Vtbl,
+  record IDirect3DSwapChain9Vtable,
     query_interface : Proc(IDirect3DSwapChain9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DSwapChain9*, UInt32),
     release : Proc(IDirect3DSwapChain9*, UInt32),
@@ -2581,7 +2585,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3DSwapChain9, lpVtbl : IDirect3DSwapChain9Vtbl* do
+  record IDirect3DSwapChain9, lpVtbl : IDirect3DSwapChain9Vtable* do
     GUID = LibC::GUID.new(0x794950f2_u32, 0xadfc_u16, 0x458a_u16, StaticArray[0x90_u8, 0x5e_u8, 0x10_u8, 0xa1_u8, 0xb_u8, 0xb_u8, 0x50_u8, 0x3b_u8])
     def query_interface(this : IDirect3DSwapChain9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2617,7 +2621,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3DResource9Vtbl,
+  record IDirect3DResource9Vtable,
     query_interface : Proc(IDirect3DResource9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DResource9*, UInt32),
     release : Proc(IDirect3DResource9*, UInt32),
@@ -2632,7 +2636,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3DResource9, lpVtbl : IDirect3DResource9Vtbl* do
+  record IDirect3DResource9, lpVtbl : IDirect3DResource9Vtable* do
     GUID = LibC::GUID.new(0x5eec05d_u32, 0x8f7d_u16, 0x4362_u16, StaticArray[0xb9_u8, 0x99_u8, 0xd1_u8, 0xba_u8, 0xf3_u8, 0x57_u8, 0xc7_u8, 0x4_u8])
     def query_interface(this : IDirect3DResource9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2671,7 +2675,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3DVertexDeclaration9Vtbl,
+  record IDirect3DVertexDeclaration9Vtable,
     query_interface : Proc(IDirect3DVertexDeclaration9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DVertexDeclaration9*, UInt32),
     release : Proc(IDirect3DVertexDeclaration9*, UInt32),
@@ -2680,7 +2684,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3DVertexDeclaration9, lpVtbl : IDirect3DVertexDeclaration9Vtbl* do
+  record IDirect3DVertexDeclaration9, lpVtbl : IDirect3DVertexDeclaration9Vtable* do
     GUID = LibC::GUID.new(0xdd13c59c_u32, 0x36fa_u16, 0x4098_u16, StaticArray[0xa8_u8, 0xfb_u8, 0xc7_u8, 0xed_u8, 0x39_u8, 0xdc_u8, 0x85_u8, 0x46_u8])
     def query_interface(this : IDirect3DVertexDeclaration9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2701,7 +2705,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3DVertexShader9Vtbl,
+  record IDirect3DVertexShader9Vtable,
     query_interface : Proc(IDirect3DVertexShader9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DVertexShader9*, UInt32),
     release : Proc(IDirect3DVertexShader9*, UInt32),
@@ -2710,7 +2714,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3DVertexShader9, lpVtbl : IDirect3DVertexShader9Vtbl* do
+  record IDirect3DVertexShader9, lpVtbl : IDirect3DVertexShader9Vtable* do
     GUID = LibC::GUID.new(0xefc5557e_u32, 0x6265_u16, 0x4613_u16, StaticArray[0x8a_u8, 0x94_u8, 0x43_u8, 0x85_u8, 0x78_u8, 0x89_u8, 0xeb_u8, 0x36_u8])
     def query_interface(this : IDirect3DVertexShader9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2731,7 +2735,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3DPixelShader9Vtbl,
+  record IDirect3DPixelShader9Vtable,
     query_interface : Proc(IDirect3DPixelShader9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DPixelShader9*, UInt32),
     release : Proc(IDirect3DPixelShader9*, UInt32),
@@ -2740,7 +2744,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3DPixelShader9, lpVtbl : IDirect3DPixelShader9Vtbl* do
+  record IDirect3DPixelShader9, lpVtbl : IDirect3DPixelShader9Vtable* do
     GUID = LibC::GUID.new(0x6d3bdbdc_u32, 0x5b02_u16, 0x4415_u16, StaticArray[0xb8_u8, 0x52_u8, 0xce_u8, 0x5e_u8, 0x8b_u8, 0xcc_u8, 0xb2_u8, 0x89_u8])
     def query_interface(this : IDirect3DPixelShader9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2761,7 +2765,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3DBaseTexture9Vtbl,
+  record IDirect3DBaseTexture9Vtable,
     query_interface : Proc(IDirect3DBaseTexture9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DBaseTexture9*, UInt32),
     release : Proc(IDirect3DBaseTexture9*, UInt32),
@@ -2782,7 +2786,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3DBaseTexture9, lpVtbl : IDirect3DBaseTexture9Vtbl* do
+  record IDirect3DBaseTexture9, lpVtbl : IDirect3DBaseTexture9Vtable* do
     GUID = LibC::GUID.new(0x580ca87e_u32, 0x1d3c_u16, 0x4d54_u16, StaticArray[0x99_u8, 0x1d_u8, 0xb7_u8, 0xd3_u8, 0xe3_u8, 0xc2_u8, 0x98_u8, 0xce_u8])
     def query_interface(this : IDirect3DBaseTexture9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2839,7 +2843,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3DTexture9Vtbl,
+  record IDirect3DTexture9Vtable,
     query_interface : Proc(IDirect3DTexture9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DTexture9*, UInt32),
     release : Proc(IDirect3DTexture9*, UInt32),
@@ -2865,7 +2869,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3DTexture9, lpVtbl : IDirect3DTexture9Vtbl* do
+  record IDirect3DTexture9, lpVtbl : IDirect3DTexture9Vtable* do
     GUID = LibC::GUID.new(0x85c31227_u32, 0x3de5_u16, 0x4f00_u16, StaticArray[0x9b_u8, 0x3a_u8, 0xf1_u8, 0x1a_u8, 0xc3_u8, 0x8c_u8, 0x18_u8, 0xb5_u8])
     def query_interface(this : IDirect3DTexture9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2937,7 +2941,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3DVolumeTexture9Vtbl,
+  record IDirect3DVolumeTexture9Vtable,
     query_interface : Proc(IDirect3DVolumeTexture9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DVolumeTexture9*, UInt32),
     release : Proc(IDirect3DVolumeTexture9*, UInt32),
@@ -2963,7 +2967,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3DVolumeTexture9, lpVtbl : IDirect3DVolumeTexture9Vtbl* do
+  record IDirect3DVolumeTexture9, lpVtbl : IDirect3DVolumeTexture9Vtable* do
     GUID = LibC::GUID.new(0x2518526c_u32, 0xe789_u16, 0x4111_u16, StaticArray[0xa7_u8, 0xb9_u8, 0x47_u8, 0xef_u8, 0x32_u8, 0x8d_u8, 0x13_u8, 0xe6_u8])
     def query_interface(this : IDirect3DVolumeTexture9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3035,7 +3039,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3DCubeTexture9Vtbl,
+  record IDirect3DCubeTexture9Vtable,
     query_interface : Proc(IDirect3DCubeTexture9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DCubeTexture9*, UInt32),
     release : Proc(IDirect3DCubeTexture9*, UInt32),
@@ -3061,7 +3065,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3DCubeTexture9, lpVtbl : IDirect3DCubeTexture9Vtbl* do
+  record IDirect3DCubeTexture9, lpVtbl : IDirect3DCubeTexture9Vtable* do
     GUID = LibC::GUID.new(0xfff32f81_u32, 0xd953_u16, 0x473a_u16, StaticArray[0x92_u8, 0x23_u8, 0x93_u8, 0xd6_u8, 0x52_u8, 0xab_u8, 0xa9_u8, 0x3f_u8])
     def query_interface(this : IDirect3DCubeTexture9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3133,7 +3137,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3DVertexBuffer9Vtbl,
+  record IDirect3DVertexBuffer9Vtable,
     query_interface : Proc(IDirect3DVertexBuffer9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DVertexBuffer9*, UInt32),
     release : Proc(IDirect3DVertexBuffer9*, UInt32),
@@ -3151,7 +3155,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3DVertexBuffer9, lpVtbl : IDirect3DVertexBuffer9Vtbl* do
+  record IDirect3DVertexBuffer9, lpVtbl : IDirect3DVertexBuffer9Vtable* do
     GUID = LibC::GUID.new(0xb64bb1b5_u32, 0xfd70_u16, 0x4df6_u16, StaticArray[0xbf_u8, 0x91_u8, 0x19_u8, 0xd0_u8, 0xa1_u8, 0x24_u8, 0x55_u8, 0xe3_u8])
     def query_interface(this : IDirect3DVertexBuffer9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3199,7 +3203,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3DIndexBuffer9Vtbl,
+  record IDirect3DIndexBuffer9Vtable,
     query_interface : Proc(IDirect3DIndexBuffer9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DIndexBuffer9*, UInt32),
     release : Proc(IDirect3DIndexBuffer9*, UInt32),
@@ -3217,7 +3221,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3DIndexBuffer9, lpVtbl : IDirect3DIndexBuffer9Vtbl* do
+  record IDirect3DIndexBuffer9, lpVtbl : IDirect3DIndexBuffer9Vtable* do
     GUID = LibC::GUID.new(0x7c9dd65e_u32, 0xd3f7_u16, 0x4529_u16, StaticArray[0xac_u8, 0xee_u8, 0x78_u8, 0x58_u8, 0x30_u8, 0xac_u8, 0xde_u8, 0x35_u8])
     def query_interface(this : IDirect3DIndexBuffer9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3265,7 +3269,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3DSurface9Vtbl,
+  record IDirect3DSurface9Vtable,
     query_interface : Proc(IDirect3DSurface9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DSurface9*, UInt32),
     release : Proc(IDirect3DSurface9*, UInt32),
@@ -3286,7 +3290,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3DSurface9, lpVtbl : IDirect3DSurface9Vtbl* do
+  record IDirect3DSurface9, lpVtbl : IDirect3DSurface9Vtable* do
     GUID = LibC::GUID.new(0xcfbaf3a_u32, 0x9ff6_u16, 0x429a_u16, StaticArray[0x99_u8, 0xb3_u8, 0xa2_u8, 0x79_u8, 0x6a_u8, 0xf8_u8, 0xb8_u8, 0x9b_u8])
     def query_interface(this : IDirect3DSurface9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3343,7 +3347,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3DVolume9Vtbl,
+  record IDirect3DVolume9Vtable,
     query_interface : Proc(IDirect3DVolume9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DVolume9*, UInt32),
     release : Proc(IDirect3DVolume9*, UInt32),
@@ -3358,7 +3362,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3DVolume9, lpVtbl : IDirect3DVolume9Vtbl* do
+  record IDirect3DVolume9, lpVtbl : IDirect3DVolume9Vtable* do
     GUID = LibC::GUID.new(0x24f416e6_u32, 0x1f67_u16, 0x4aa7_u16, StaticArray[0xb8_u8, 0x8e_u8, 0xd3_u8, 0x3f_u8, 0x6f_u8, 0x31_u8, 0x28_u8, 0xa1_u8])
     def query_interface(this : IDirect3DVolume9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3397,7 +3401,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3DQuery9Vtbl,
+  record IDirect3DQuery9Vtable,
     query_interface : Proc(IDirect3DQuery9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DQuery9*, UInt32),
     release : Proc(IDirect3DQuery9*, UInt32),
@@ -3409,7 +3413,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3DQuery9, lpVtbl : IDirect3DQuery9Vtbl* do
+  record IDirect3DQuery9, lpVtbl : IDirect3DQuery9Vtable* do
     GUID = LibC::GUID.new(0xd9771460_u32, 0xa695_u16, 0x4f26_u16, StaticArray[0xbb_u8, 0xd3_u8, 0x27_u8, 0xb8_u8, 0x40_u8, 0xb5_u8, 0x41_u8, 0xcc_u8])
     def query_interface(this : IDirect3DQuery9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3439,7 +3443,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3D9ExVtbl,
+  record IDirect3D9ExVtable,
     query_interface : Proc(IDirect3D9Ex*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3D9Ex*, UInt32),
     release : Proc(IDirect3D9Ex*, UInt32),
@@ -3465,7 +3469,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3D9Ex, lpVtbl : IDirect3D9ExVtbl* do
+  record IDirect3D9Ex, lpVtbl : IDirect3D9ExVtable* do
     GUID = LibC::GUID.new(0x2177241_u32, 0x69fc_u16, 0x400c_u16, StaticArray[0x8f_u8, 0xf1_u8, 0x93_u8, 0xa4_u8, 0x4d_u8, 0xf6_u8, 0x86_u8, 0x1d_u8])
     def query_interface(this : IDirect3D9Ex*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3537,7 +3541,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3DDevice9ExVtbl,
+  record IDirect3DDevice9ExVtable,
     query_interface : Proc(IDirect3DDevice9Ex*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DDevice9Ex*, UInt32),
     release : Proc(IDirect3DDevice9Ex*, UInt32),
@@ -3675,7 +3679,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3DDevice9Ex, lpVtbl : IDirect3DDevice9ExVtbl* do
+  record IDirect3DDevice9Ex, lpVtbl : IDirect3DDevice9ExVtable* do
     GUID = LibC::GUID.new(0xb18b10ce_u32, 0x2649_u16, 0x405a_u16, StaticArray[0x87_u8, 0xf_u8, 0x95_u8, 0xf7_u8, 0x77_u8, 0xd4_u8, 0x31_u8, 0x3a_u8])
     def query_interface(this : IDirect3DDevice9Ex*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4083,7 +4087,7 @@ module Win32cr::Graphics::Direct3D9
   end
 
   @[Extern]
-  record IDirect3DSwapChain9ExVtbl,
+  record IDirect3DSwapChain9ExVtable,
     query_interface : Proc(IDirect3DSwapChain9Ex*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DSwapChain9Ex*, UInt32),
     release : Proc(IDirect3DSwapChain9Ex*, UInt32),
@@ -4100,7 +4104,7 @@ module Win32cr::Graphics::Direct3D9
 
 
   @[Extern]
-  record IDirect3DSwapChain9Ex, lpVtbl : IDirect3DSwapChain9ExVtbl* do
+  record IDirect3DSwapChain9Ex, lpVtbl : IDirect3DSwapChain9ExVtable* do
     GUID = LibC::GUID.new(0x91886caf_u32, 0x1c3d_u16, 0x4d2e_u16, StaticArray[0xa0_u8, 0xab_u8, 0x3e_u8, 0x4c_u8, 0x7d_u8, 0x8d_u8, 0x33_u8, 0x3_u8])
     def query_interface(this : IDirect3DSwapChain9Ex*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4145,42 +4149,61 @@ module Win32cr::Graphics::Direct3D9
   end
 
   def direct3DCreate9(sdk_version : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.Direct3DCreate9(sdk_version)
+    {% end %}
   end
 
   def d3DPERFBeginEvent(col : UInt32, wszName : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.D3DPERF_BeginEvent(col, wszName)
+    {% end %}
   end
 
   def d3DPERFEndEvent : Int32
+    {% if !flag?(:docs) %}
     C.D3DPERF_EndEvent
+    {% end %}
   end
 
   def d3DPERFSetMarker(col : UInt32, wszName : Win32cr::Foundation::PWSTR) : Void
+    {% if !flag?(:docs) %}
     C.D3DPERF_SetMarker(col, wszName)
+    {% end %}
   end
 
   def d3DPERFSetRegion(col : UInt32, wszName : Win32cr::Foundation::PWSTR) : Void
+    {% if !flag?(:docs) %}
     C.D3DPERF_SetRegion(col, wszName)
+    {% end %}
   end
 
   def d3DPERFQueryRepeatFrame : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.D3DPERF_QueryRepeatFrame
+    {% end %}
   end
 
   def d3DPERFSetOptions(dwOptions : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.D3DPERF_SetOptions(dwOptions)
+    {% end %}
   end
 
   def d3DPERFGetStatus : UInt32
+    {% if !flag?(:docs) %}
     C.D3DPERF_GetStatus
+    {% end %}
   end
 
   def direct3DCreate9Ex(sdk_version : UInt32, param1 : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.Direct3DCreate9Ex(sdk_version, param1)
+    {% end %}
   end
 
-  @[Link("d3d9")]
+  @[Link("d3d9.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun Direct3DCreate9(sdk_version : UInt32) : Void*
@@ -4210,4 +4233,5 @@ module Win32cr::Graphics::Direct3D9
     fun Direct3DCreate9Ex(sdk_version : UInt32, param1 : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

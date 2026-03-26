@@ -27,22 +27,31 @@ module Win32cr::Security::DirectoryServices
 
 
   def dSCreateISecurityInfoObject(pwszObjectPath : Win32cr::Foundation::PWSTR, pwszObjectClass : Win32cr::Foundation::PWSTR, dwFlags : UInt32, ppSI : Void**, pfnReadSD : Win32cr::Security::DirectoryServices::PFNREADOBJECTSECURITY, pfnWriteSD : Win32cr::Security::DirectoryServices::PFNWRITEOBJECTSECURITY, lpContext : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DSCreateISecurityInfoObject(pwszObjectPath, pwszObjectClass, dwFlags, ppSI, pfnReadSD, pfnWriteSD, lpContext)
+    {% end %}
   end
 
   def dSCreateISecurityInfoObjectEx(pwszObjectPath : Win32cr::Foundation::PWSTR, pwszObjectClass : Win32cr::Foundation::PWSTR, pwszServer : Win32cr::Foundation::PWSTR, pwszUserName : Win32cr::Foundation::PWSTR, pwszPassword : Win32cr::Foundation::PWSTR, dwFlags : UInt32, ppSI : Void**, pfnReadSD : Win32cr::Security::DirectoryServices::PFNREADOBJECTSECURITY, pfnWriteSD : Win32cr::Security::DirectoryServices::PFNWRITEOBJECTSECURITY, lpContext : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DSCreateISecurityInfoObjectEx(pwszObjectPath, pwszObjectClass, pwszServer, pwszUserName, pwszPassword, dwFlags, ppSI, pfnReadSD, pfnWriteSD, lpContext)
+    {% end %}
   end
 
   def dSCreateSecurityPage(pwszObjectPath : Win32cr::Foundation::PWSTR, pwszObjectClass : Win32cr::Foundation::PWSTR, dwFlags : UInt32, phPage : Win32cr::UI::Controls::HPROPSHEETPAGE*, pfnReadSD : Win32cr::Security::DirectoryServices::PFNREADOBJECTSECURITY, pfnWriteSD : Win32cr::Security::DirectoryServices::PFNWRITEOBJECTSECURITY, lpContext : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DSCreateSecurityPage(pwszObjectPath, pwszObjectClass, dwFlags, phPage, pfnReadSD, pfnWriteSD, lpContext)
+    {% end %}
   end
 
   def dSEditSecurity(hwndOwner : Win32cr::Foundation::HWND, pwszObjectPath : Win32cr::Foundation::PWSTR, pwszObjectClass : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pwszCaption : Win32cr::Foundation::PWSTR, pfnReadSD : Win32cr::Security::DirectoryServices::PFNREADOBJECTSECURITY, pfnWriteSD : Win32cr::Security::DirectoryServices::PFNWRITEOBJECTSECURITY, lpContext : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DSEditSecurity(hwndOwner, pwszObjectPath, pwszObjectClass, dwFlags, pwszCaption, pfnReadSD, pfnWriteSD, lpContext)
+    {% end %}
   end
 
-  @[Link("dssec")]
+  @[Link("dssec.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun DSCreateISecurityInfoObject(pwszObjectPath : Win32cr::Foundation::PWSTR, pwszObjectClass : Win32cr::Foundation::PWSTR, dwFlags : UInt32, ppSI : Void**, pfnReadSD : Win32cr::Security::DirectoryServices::PFNREADOBJECTSECURITY, pfnWriteSD : Win32cr::Security::DirectoryServices::PFNWRITEOBJECTSECURITY, lpContext : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
@@ -57,4 +66,5 @@ module Win32cr::Security::DirectoryServices
     fun DSEditSecurity(hwndOwner : Win32cr::Foundation::HWND, pwszObjectPath : Win32cr::Foundation::PWSTR, pwszObjectClass : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pwszCaption : Win32cr::Foundation::PWSTR, pfnReadSD : Win32cr::Security::DirectoryServices::PFNREADOBJECTSECURITY, pfnWriteSD : Win32cr::Security::DirectoryServices::PFNWRITEOBJECTSECURITY, lpContext : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

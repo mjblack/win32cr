@@ -88,22 +88,22 @@ module Win32cr::System::Kernel
     property anonymous : Anonymous_e__Struct_
     property header_arm64 : HeaderArm64_e__Struct_
 
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    struct Anonymous_e__Struct_
-    property alignment : UInt64
-    property region : UInt64
-    def initialize(@alignment : UInt64, @region : UInt64)
-    end
-    end
-
-
     # Nested Type HeaderArm64_e__Struct_
     @[Extern]
     struct HeaderArm64_e__Struct_
     property _bitfield1 : UInt64
     property _bitfield2 : UInt64
     def initialize(@_bitfield1 : UInt64, @_bitfield2 : UInt64)
+    end
+    end
+
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property alignment : UInt64
+    property region : UInt64
+    def initialize(@alignment : UInt64, @region : UInt64)
     end
     end
 
@@ -326,22 +326,22 @@ module Win32cr::System::Kernel
     property anonymous : Anonymous_e__Struct_
     property header_x64 : HeaderX64_e__Struct_
 
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    struct Anonymous_e__Struct_
-    property alignment : UInt64
-    property region : UInt64
-    def initialize(@alignment : UInt64, @region : UInt64)
-    end
-    end
-
-
     # Nested Type HeaderX64_e__Struct_
     @[Extern]
     struct HeaderX64_e__Struct_
     property _bitfield1 : UInt64
     property _bitfield2 : UInt64
     def initialize(@_bitfield1 : UInt64, @_bitfield2 : UInt64)
+    end
+    end
+
+
+    # Nested Type Anonymous_e__Struct_
+    @[Extern]
+    struct Anonymous_e__Struct_
+    property alignment : UInt64
+    property region : UInt64
+    def initialize(@alignment : UInt64, @region : UInt64)
     end
     end
 
@@ -406,34 +406,49 @@ module Win32cr::System::Kernel
   {% end %}
 
   def rtlInitializeSListHead(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Void
+    {% if !flag?(:docs) %}
     C.RtlInitializeSListHead(list_head)
+    {% end %}
   end
 
   def rtlFirstEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.RtlFirstEntrySList(list_head)
+    {% end %}
   end
 
   def rtlInterlockedPopEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.RtlInterlockedPopEntrySList(list_head)
+    {% end %}
   end
 
   def rtlInterlockedPushEntrySList(list_head : Win32cr::System::Kernel::SLIST_HEADER*, list_entry : Win32cr::System::Kernel::SLIST_ENTRY*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.RtlInterlockedPushEntrySList(list_head, list_entry)
+    {% end %}
   end
 
   def rtlInterlockedPushListSListEx(list_head : Win32cr::System::Kernel::SLIST_HEADER*, list : Win32cr::System::Kernel::SLIST_ENTRY*, list_end : Win32cr::System::Kernel::SLIST_ENTRY*, count : UInt32) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.RtlInterlockedPushListSListEx(list_head, list, list_end, count)
+    {% end %}
   end
 
   def rtlInterlockedFlushSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Win32cr::System::Kernel::SLIST_ENTRY*
+    {% if !flag?(:docs) %}
     C.RtlInterlockedFlushSList(list_head)
+    {% end %}
   end
 
   def rtlQueryDepthSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : UInt16
+    {% if !flag?(:docs) %}
     C.RtlQueryDepthSList(list_head)
+    {% end %}
   end
 
-  @[Link("ntdll")]
+  @[Link("ntdll.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun RtlInitializeSListHead(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : Void
@@ -457,4 +472,5 @@ module Win32cr::System::Kernel
     fun RtlQueryDepthSList(list_head : Win32cr::System::Kernel::SLIST_HEADER*) : UInt16
 
   end
+  {% end %}
 end

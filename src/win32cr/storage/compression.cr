@@ -34,54 +34,79 @@ module Win32cr::Storage::Compression
   end
 
   def createCompressor(algorithm : Win32cr::Storage::Compression::COMPRESS_ALGORITHM, allocation_routines : Win32cr::Storage::Compression::COMPRESS_ALLOCATION_ROUTINES*, compressor_handle : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateCompressor(algorithm, allocation_routines, compressor_handle)
+    {% end %}
   end
 
   def setCompressorInformation(compressor_handle : Win32cr::Storage::Compression::COMPRESSOR_HANDLE, compress_information_class : Win32cr::Storage::Compression::COMPRESS_INFORMATION_CLASS, compress_information : Void*, compress_information_size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetCompressorInformation(compressor_handle, compress_information_class, compress_information, compress_information_size)
+    {% end %}
   end
 
   def queryCompressorInformation(compressor_handle : Win32cr::Storage::Compression::COMPRESSOR_HANDLE, compress_information_class : Win32cr::Storage::Compression::COMPRESS_INFORMATION_CLASS, compress_information : Void*, compress_information_size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryCompressorInformation(compressor_handle, compress_information_class, compress_information, compress_information_size)
+    {% end %}
   end
 
   def compress(compressor_handle : Win32cr::Storage::Compression::COMPRESSOR_HANDLE, uncompressed_data : Void*, uncompressed_data_size : LibC::UIntPtrT, compressed_buffer : Void*, compressed_buffer_size : LibC::UIntPtrT, compressed_data_size : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Compress(compressor_handle, uncompressed_data, uncompressed_data_size, compressed_buffer, compressed_buffer_size, compressed_data_size)
+    {% end %}
   end
 
   def resetCompressor(compressor_handle : Win32cr::Storage::Compression::COMPRESSOR_HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ResetCompressor(compressor_handle)
+    {% end %}
   end
 
   def closeCompressor(compressor_handle : Win32cr::Storage::Compression::COMPRESSOR_HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CloseCompressor(compressor_handle)
+    {% end %}
   end
 
   def createDecompressor(algorithm : Win32cr::Storage::Compression::COMPRESS_ALGORITHM, allocation_routines : Win32cr::Storage::Compression::COMPRESS_ALLOCATION_ROUTINES*, decompressor_handle : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateDecompressor(algorithm, allocation_routines, decompressor_handle)
+    {% end %}
   end
 
   def setDecompressorInformation(decompressor_handle : LibC::IntPtrT, compress_information_class : Win32cr::Storage::Compression::COMPRESS_INFORMATION_CLASS, compress_information : Void*, compress_information_size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetDecompressorInformation(decompressor_handle, compress_information_class, compress_information, compress_information_size)
+    {% end %}
   end
 
   def queryDecompressorInformation(decompressor_handle : LibC::IntPtrT, compress_information_class : Win32cr::Storage::Compression::COMPRESS_INFORMATION_CLASS, compress_information : Void*, compress_information_size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QueryDecompressorInformation(decompressor_handle, compress_information_class, compress_information, compress_information_size)
+    {% end %}
   end
 
   def decompress(decompressor_handle : LibC::IntPtrT, compressed_data : Void*, compressed_data_size : LibC::UIntPtrT, uncompressed_buffer : Void*, uncompressed_buffer_size : LibC::UIntPtrT, uncompressed_data_size : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Decompress(decompressor_handle, compressed_data, compressed_data_size, uncompressed_buffer, uncompressed_buffer_size, uncompressed_data_size)
+    {% end %}
   end
 
   def resetDecompressor(decompressor_handle : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ResetDecompressor(decompressor_handle)
+    {% end %}
   end
 
   def closeDecompressor(decompressor_handle : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CloseDecompressor(decompressor_handle)
+    {% end %}
   end
 
-  @[Link("cabinet")]
+  @[Link("cabinet.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CreateCompressor(algorithm : Win32cr::Storage::Compression::COMPRESS_ALGORITHM, allocation_routines : Win32cr::Storage::Compression::COMPRESS_ALLOCATION_ROUTINES*, compressor_handle : LibC::IntPtrT*) : Win32cr::Foundation::BOOL
@@ -120,4 +145,5 @@ module Win32cr::Storage::Compression
     fun CloseDecompressor(decompressor_handle : LibC::IntPtrT) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

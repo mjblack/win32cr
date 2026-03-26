@@ -3256,18 +3256,6 @@ module Win32cr::System::SystemServices
     ATF_TIMEOUTON = 1_u32
     ATF_ONOFFFEEDBACK = 2_u32
   end
-  @[Flags]
-  enum CHOOSECOLOR_FLAGS : UInt32
-    CC_RGBINIT = 1_u32
-    CC_FULLOPEN = 2_u32
-    CC_PREVENTFULLOPEN = 4_u32
-    CC_SHOWHELP = 8_u32
-    CC_ENABLEHOOK = 16_u32
-    CC_ENABLETEMPLATE = 32_u32
-    CC_ENABLETEMPLATEHANDLE = 64_u32
-    CC_SOLIDCOLOR = 128_u32
-    CC_ANYCOLOR = 256_u32
-  end
   enum CLIPBOARD_FORMATS : UInt32
     CF_TEXT = 1_u32
     CF_BITMAP = 2_u32
@@ -3396,6 +3384,50 @@ module Win32cr::System::SystemServices
   enum DEV_BROADCAST_VOLUME_FLAGS : UInt16
     DBTF_MEDIA = 1_u16
     DBTF_NET = 2_u16
+  end
+  @[Flags]
+  enum MODIFIERKEYS_FLAGS : UInt32
+    MK_LBUTTON = 1_u32
+    MK_RBUTTON = 2_u32
+    MK_SHIFT = 4_u32
+    MK_CONTROL = 8_u32
+    MK_MBUTTON = 16_u32
+    MK_XBUTTON1 = 32_u32
+    MK_XBUTTON2 = 64_u32
+  end
+  enum STATIC_STYLES : UInt32
+    SS_LEFT = 0_u32
+    SS_CENTER = 1_u32
+    SS_RIGHT = 2_u32
+    SS_ICON = 3_u32
+    SS_BLACKRECT = 4_u32
+    SS_GRAYRECT = 5_u32
+    SS_WHITERECT = 6_u32
+    SS_BLACKFRAME = 7_u32
+    SS_GRAYFRAME = 8_u32
+    SS_WHITEFRAME = 9_u32
+    SS_USERITEM = 10_u32
+    SS_SIMPLE = 11_u32
+    SS_LEFTNOWORDWRAP = 12_u32
+    SS_OWNERDRAW = 13_u32
+    SS_BITMAP = 14_u32
+    SS_ENHMETAFILE = 15_u32
+    SS_ETCHEDHORZ = 16_u32
+    SS_ETCHEDVERT = 17_u32
+    SS_ETCHEDFRAME = 18_u32
+    SS_TYPEMASK = 31_u32
+    SS_REALSIZECONTROL = 64_u32
+    SS_NOPREFIX = 128_u32
+    SS_NOTIFY = 256_u32
+    SS_CENTERIMAGE = 512_u32
+    SS_RIGHTJUST = 1024_u32
+    SS_REALSIZEIMAGE = 2048_u32
+    SS_SUNKEN = 4096_u32
+    SS_EDITCONTROL = 8192_u32
+    SS_ENDELLIPSIS = 16384_u32
+    SS_PATHELLIPSIS = 32768_u32
+    SS_WORDELLIPSIS = 49152_u32
+    SS_ELLIPSISMASK = 49152_u32
   end
   enum ACCESS_REASON_TYPE
     AccessReasonNone = 0_i32
@@ -3739,23 +3771,11 @@ module Win32cr::System::SystemServices
     KTMOBJECT_INVALID = 4_i32
   end
 
-  @[Extern]
-  struct TP_POOL
-    def initialize()
-    end
-  end
+  alias TP_POOL = Void
 
-  @[Extern]
-  struct TP_CLEANUP_GROUP
-    def initialize()
-    end
-  end
+  alias TP_CLEANUP_GROUP = Void
 
-  @[Extern]
-  struct TEB
-    def initialize()
-    end
-  end
+  alias TEB = Void
 
   @[Extern]
   struct RemHGLOBAL
@@ -4239,11 +4259,7 @@ module Win32cr::System::SystemServices
     end
   end
 
-  @[Extern]
-  struct AtlThunkData_t
-    def initialize()
-    end
-  end
+  alias AtlThunkData_t = Void
 
   @[Extern]
   struct XSAVE_CET_U_FORMAT
@@ -5769,6 +5785,22 @@ module Win32cr::System::SystemServices
     end
 
 
+    # Nested Type Section_e__Struct_
+    @[Extern]
+    struct Section_e__Struct_
+    property length : UInt32
+    property number_of_relocations : UInt16
+    property number_of_linenumbers : UInt16
+    property check_sum : UInt32
+    property number : Int16
+    property selection : UInt8
+    property bReserved : UInt8
+    property high_number : Int16
+    def initialize(@length : UInt32, @number_of_relocations : UInt16, @number_of_linenumbers : UInt16, @check_sum : UInt32, @number : Int16, @selection : UInt8, @bReserved : UInt8, @high_number : Int16)
+    end
+    end
+
+
     # Nested Type File_e__Struct_
     @[Extern]
     struct File_e__Struct_
@@ -5838,22 +5870,6 @@ module Win32cr::System::SystemServices
     end
     end
 
-
-    # Nested Type Section_e__Struct_
-    @[Extern]
-    struct Section_e__Struct_
-    property length : UInt32
-    property number_of_relocations : UInt16
-    property number_of_linenumbers : UInt16
-    property check_sum : UInt32
-    property number : Int16
-    property selection : UInt8
-    property bReserved : UInt8
-    property high_number : Int16
-    def initialize(@length : UInt32, @number_of_relocations : UInt16, @number_of_linenumbers : UInt16, @check_sum : UInt32, @number : Int16, @selection : UInt8, @bReserved : UInt8, @high_number : Int16)
-    end
-    end
-
     def initialize(@sym : Sym_e__Struct_, @file : File_e__Struct_, @section : Section_e__Struct_, @token_def : Win32cr::System::SystemServices::IMAGE_AUX_SYMBOL_TOKEN_DEF, @crc : CRC_e__Struct_)
     end
   end
@@ -5866,25 +5882,6 @@ module Win32cr::System::SystemServices
     property anonymous : Anonymous_e__Struct_
     property crc : CRC_e__Struct_
 
-    # Nested Type Anonymous_e__Struct_
-    @[Extern]
-    struct Anonymous_e__Struct_
-    property token_def : Win32cr::System::SystemServices::IMAGE_AUX_SYMBOL_TOKEN_DEF
-    property rgbReserved : UInt8[2]
-    def initialize(@token_def : Win32cr::System::SystemServices::IMAGE_AUX_SYMBOL_TOKEN_DEF, @rgbReserved : UInt8[2])
-    end
-    end
-
-
-    # Nested Type File_e__Struct_
-    @[Extern]
-    struct File_e__Struct_
-    property name : UInt8[20]
-    def initialize(@name : UInt8[20])
-    end
-    end
-
-
     # Nested Type CRC_e__Struct_
     @[Extern]
     struct CRC_e__Struct_
@@ -5895,13 +5892,12 @@ module Win32cr::System::SystemServices
     end
 
 
-    # Nested Type Sym_e__Struct_
+    # Nested Type Anonymous_e__Struct_
     @[Extern]
-    struct Sym_e__Struct_
-    property weak_default_sym_index : UInt32
-    property weak_search_type : UInt32
-    property rgbReserved : UInt8[12]
-    def initialize(@weak_default_sym_index : UInt32, @weak_search_type : UInt32, @rgbReserved : UInt8[12])
+    struct Anonymous_e__Struct_
+    property token_def : Win32cr::System::SystemServices::IMAGE_AUX_SYMBOL_TOKEN_DEF
+    property rgbReserved : UInt8[2]
+    def initialize(@token_def : Win32cr::System::SystemServices::IMAGE_AUX_SYMBOL_TOKEN_DEF, @rgbReserved : UInt8[2])
     end
     end
 
@@ -5919,6 +5915,26 @@ module Win32cr::System::SystemServices
     property high_number : Int16
     property rgbReserved : UInt8[2]
     def initialize(@length : UInt32, @number_of_relocations : UInt16, @number_of_linenumbers : UInt16, @check_sum : UInt32, @number : Int16, @selection : UInt8, @bReserved : UInt8, @high_number : Int16, @rgbReserved : UInt8[2])
+    end
+    end
+
+
+    # Nested Type File_e__Struct_
+    @[Extern]
+    struct File_e__Struct_
+    property name : UInt8[20]
+    def initialize(@name : UInt8[20])
+    end
+    end
+
+
+    # Nested Type Sym_e__Struct_
+    @[Extern]
+    struct Sym_e__Struct_
+    property weak_default_sym_index : UInt32
+    property weak_search_type : UInt32
+    property rgbReserved : UInt8[12]
+    def initialize(@weak_default_sym_index : UInt32, @weak_search_type : UInt32, @rgbReserved : UInt8[12])
     end
     end
 
@@ -6756,13 +6772,17 @@ module Win32cr::System::SystemServices
   end
 
   def unregisterDeviceNotification(handle : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnregisterDeviceNotification(handle)
+    {% end %}
   end
 
-  @[Link("user32")]
+  @[Link("user32.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun UnregisterDeviceNotification(handle : Void*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

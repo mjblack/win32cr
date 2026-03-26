@@ -106,7 +106,7 @@ module Win32cr::Storage::FileHistory
   end
 
   @[Extern]
-  record IFhTargetVtbl,
+  record IFhTargetVtable,
     query_interface : Proc(IFhTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFhTarget*, UInt32),
     release : Proc(IFhTarget*, UInt32),
@@ -115,7 +115,7 @@ module Win32cr::Storage::FileHistory
 
 
   @[Extern]
-  record IFhTarget, lpVtbl : IFhTargetVtbl* do
+  record IFhTarget, lpVtbl : IFhTargetVtable* do
     GUID = LibC::GUID.new(0xd87965fd_u32, 0x2bad_u16, 0x4657_u16, StaticArray[0xbd_u8, 0x3b_u8, 0x95_u8, 0x67_u8, 0xeb_u8, 0x30_u8, 0xc_u8, 0xed_u8])
     def query_interface(this : IFhTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -136,7 +136,7 @@ module Win32cr::Storage::FileHistory
   end
 
   @[Extern]
-  record IFhScopeIteratorVtbl,
+  record IFhScopeIteratorVtable,
     query_interface : Proc(IFhScopeIterator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFhScopeIterator*, UInt32),
     release : Proc(IFhScopeIterator*, UInt32),
@@ -145,7 +145,7 @@ module Win32cr::Storage::FileHistory
 
 
   @[Extern]
-  record IFhScopeIterator, lpVtbl : IFhScopeIteratorVtbl* do
+  record IFhScopeIterator, lpVtbl : IFhScopeIteratorVtable* do
     GUID = LibC::GUID.new(0x3197abce_u32, 0x532a_u16, 0x44c6_u16, StaticArray[0x86_u8, 0x15_u8, 0xf3_u8, 0x66_u8, 0x65_u8, 0x66_u8, 0xa7_u8, 0x20_u8])
     def query_interface(this : IFhScopeIterator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -166,7 +166,7 @@ module Win32cr::Storage::FileHistory
   end
 
   @[Extern]
-  record IFhConfigMgrVtbl,
+  record IFhConfigMgrVtable,
     query_interface : Proc(IFhConfigMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFhConfigMgr*, UInt32),
     release : Proc(IFhConfigMgr*, UInt32),
@@ -187,7 +187,7 @@ module Win32cr::Storage::FileHistory
 
 
   @[Extern]
-  record IFhConfigMgr, lpVtbl : IFhConfigMgrVtbl* do
+  record IFhConfigMgr, lpVtbl : IFhConfigMgrVtable* do
     GUID = LibC::GUID.new(0x6a5fea5b_u32, 0xbf8f_u16, 0x4ee5_u16, StaticArray[0xb8_u8, 0xc3_u8, 0x44_u8, 0xd8_u8, 0xa0_u8, 0xd7_u8, 0x33_u8, 0x1c_u8])
     def query_interface(this : IFhConfigMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -244,7 +244,7 @@ module Win32cr::Storage::FileHistory
   end
 
   @[Extern]
-  record IFhReassociationVtbl,
+  record IFhReassociationVtable,
     query_interface : Proc(IFhReassociation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFhReassociation*, UInt32),
     release : Proc(IFhReassociation*, UInt32),
@@ -256,7 +256,7 @@ module Win32cr::Storage::FileHistory
 
 
   @[Extern]
-  record IFhReassociation, lpVtbl : IFhReassociationVtbl* do
+  record IFhReassociation, lpVtbl : IFhReassociationVtable* do
     GUID = LibC::GUID.new(0x6544a28a_u32, 0xf68d_u16, 0x47ac_u16, StaticArray[0x91_u8, 0xef_u8, 0x16_u8, 0xb2_u8, 0xb3_u8, 0x6a_u8, 0xa3_u8, 0xee_u8])
     def query_interface(this : IFhReassociation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -286,34 +286,49 @@ module Win32cr::Storage::FileHistory
   end
 
   def fhServiceOpenPipe(start_service_if_stopped : Win32cr::Foundation::BOOL, pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FhServiceOpenPipe(start_service_if_stopped, pipe)
+    {% end %}
   end
 
   def fhServiceClosePipe(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FhServiceClosePipe(pipe)
+    {% end %}
   end
 
   def fhServiceStartBackup(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE, low_priority_io : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FhServiceStartBackup(pipe, low_priority_io)
+    {% end %}
   end
 
   def fhServiceStopBackup(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE, stop_tracking : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FhServiceStopBackup(pipe, stop_tracking)
+    {% end %}
   end
 
   def fhServiceReloadConfiguration(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FhServiceReloadConfiguration(pipe)
+    {% end %}
   end
 
   def fhServiceBlockBackup(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FhServiceBlockBackup(pipe)
+    {% end %}
   end
 
   def fhServiceUnblockBackup(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FhServiceUnblockBackup(pipe)
+    {% end %}
   end
 
-  @[Link("fhsvcctl")]
+  @[Link("fhsvcctl.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun FhServiceOpenPipe(start_service_if_stopped : Win32cr::Foundation::BOOL, pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE*) : Win32cr::Foundation::HRESULT
@@ -337,4 +352,5 @@ module Win32cr::Storage::FileHistory
     fun FhServiceUnblockBackup(pipe : Win32cr::System::WindowsProgramming::FH_SERVICE_PIPE_HANDLE) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

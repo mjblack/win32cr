@@ -74,16 +74,6 @@ module Win32cr::Networking::WebSocket
     property data : Data_e__Struct_
     property close_status : CloseStatus_e__Struct_
 
-    # Nested Type Data_e__Struct_
-    @[Extern]
-    struct Data_e__Struct_
-    property pbBuffer : UInt8*
-    property ulBufferLength : UInt32
-    def initialize(@pbBuffer : UInt8*, @ulBufferLength : UInt32)
-    end
-    end
-
-
     # Nested Type CloseStatus_e__Struct_
     @[Extern]
     struct CloseStatus_e__Struct_
@@ -94,63 +84,100 @@ module Win32cr::Networking::WebSocket
     end
     end
 
+
+    # Nested Type Data_e__Struct_
+    @[Extern]
+    struct Data_e__Struct_
+    property pbBuffer : UInt8*
+    property ulBufferLength : UInt32
+    def initialize(@pbBuffer : UInt8*, @ulBufferLength : UInt32)
+    end
+    end
+
     def initialize(@data : Data_e__Struct_, @close_status : CloseStatus_e__Struct_)
     end
   end
 
   def webSocketCreateClientHandle(pProperties : Win32cr::Networking::WebSocket::WEB_SOCKET_PROPERTY*, ulPropertyCount : UInt32, phWebSocket : Win32cr::Networking::WebSocket::WEB_SOCKET_HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WebSocketCreateClientHandle(pProperties, ulPropertyCount, phWebSocket)
+    {% end %}
   end
 
   def webSocketBeginClientHandshake(hWebSocket : Win32cr::Networking::WebSocket::WEB_SOCKET_HANDLE, pszSubprotocols : Win32cr::Foundation::PSTR*, ulSubprotocolCount : UInt32, pszExtensions : Win32cr::Foundation::PSTR*, ulExtensionCount : UInt32, pInitialHeaders : Win32cr::Networking::WebSocket::WEB_SOCKET_HTTP_HEADER*, ulInitialHeaderCount : UInt32, pAdditionalHeaders : Win32cr::Networking::WebSocket::WEB_SOCKET_HTTP_HEADER**, pulAdditionalHeaderCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WebSocketBeginClientHandshake(hWebSocket, pszSubprotocols, ulSubprotocolCount, pszExtensions, ulExtensionCount, pInitialHeaders, ulInitialHeaderCount, pAdditionalHeaders, pulAdditionalHeaderCount)
+    {% end %}
   end
 
   def webSocketEndClientHandshake(hWebSocket : Win32cr::Networking::WebSocket::WEB_SOCKET_HANDLE, pResponseHeaders : Win32cr::Networking::WebSocket::WEB_SOCKET_HTTP_HEADER*, ulReponseHeaderCount : UInt32, pulSelectedExtensions : UInt32*, pulSelectedExtensionCount : UInt32*, pulSelectedSubprotocol : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WebSocketEndClientHandshake(hWebSocket, pResponseHeaders, ulReponseHeaderCount, pulSelectedExtensions, pulSelectedExtensionCount, pulSelectedSubprotocol)
+    {% end %}
   end
 
   def webSocketCreateServerHandle(pProperties : Win32cr::Networking::WebSocket::WEB_SOCKET_PROPERTY*, ulPropertyCount : UInt32, phWebSocket : Win32cr::Networking::WebSocket::WEB_SOCKET_HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WebSocketCreateServerHandle(pProperties, ulPropertyCount, phWebSocket)
+    {% end %}
   end
 
   def webSocketBeginServerHandshake(hWebSocket : Win32cr::Networking::WebSocket::WEB_SOCKET_HANDLE, pszSubprotocolSelected : Win32cr::Foundation::PSTR, pszExtensionSelected : Win32cr::Foundation::PSTR*, ulExtensionSelectedCount : UInt32, pRequestHeaders : Win32cr::Networking::WebSocket::WEB_SOCKET_HTTP_HEADER*, ulRequestHeaderCount : UInt32, pResponseHeaders : Win32cr::Networking::WebSocket::WEB_SOCKET_HTTP_HEADER**, pulResponseHeaderCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WebSocketBeginServerHandshake(hWebSocket, pszSubprotocolSelected, pszExtensionSelected, ulExtensionSelectedCount, pRequestHeaders, ulRequestHeaderCount, pResponseHeaders, pulResponseHeaderCount)
+    {% end %}
   end
 
   def webSocketEndServerHandshake(hWebSocket : Win32cr::Networking::WebSocket::WEB_SOCKET_HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WebSocketEndServerHandshake(hWebSocket)
+    {% end %}
   end
 
   def webSocketSend(hWebSocket : Win32cr::Networking::WebSocket::WEB_SOCKET_HANDLE, buffer_type : Win32cr::Networking::WebSocket::WEB_SOCKET_BUFFER_TYPE, pBuffer : Win32cr::Networking::WebSocket::WEB_SOCKET_BUFFER*, context : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WebSocketSend(hWebSocket, buffer_type, pBuffer, context)
+    {% end %}
   end
 
   def webSocketReceive(hWebSocket : Win32cr::Networking::WebSocket::WEB_SOCKET_HANDLE, pBuffer : Win32cr::Networking::WebSocket::WEB_SOCKET_BUFFER*, pvContext : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WebSocketReceive(hWebSocket, pBuffer, pvContext)
+    {% end %}
   end
 
   def webSocketGetAction(hWebSocket : Win32cr::Networking::WebSocket::WEB_SOCKET_HANDLE, eActionQueue : Win32cr::Networking::WebSocket::WEB_SOCKET_ACTION_QUEUE, pDataBuffers : Win32cr::Networking::WebSocket::WEB_SOCKET_BUFFER*, pulDataBufferCount : UInt32*, pAction : Win32cr::Networking::WebSocket::WEB_SOCKET_ACTION*, pBufferType : Win32cr::Networking::WebSocket::WEB_SOCKET_BUFFER_TYPE*, pvApplicationContext : Void**, pvActionContext : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WebSocketGetAction(hWebSocket, eActionQueue, pDataBuffers, pulDataBufferCount, pAction, pBufferType, pvApplicationContext, pvActionContext)
+    {% end %}
   end
 
   def webSocketCompleteAction(hWebSocket : Win32cr::Networking::WebSocket::WEB_SOCKET_HANDLE, pvActionContext : Void*, ulBytesTransferred : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.WebSocketCompleteAction(hWebSocket, pvActionContext, ulBytesTransferred)
+    {% end %}
   end
 
   def webSocketAbortHandle(hWebSocket : Win32cr::Networking::WebSocket::WEB_SOCKET_HANDLE) : Void
+    {% if !flag?(:docs) %}
     C.WebSocketAbortHandle(hWebSocket)
+    {% end %}
   end
 
   def webSocketDeleteHandle(hWebSocket : Win32cr::Networking::WebSocket::WEB_SOCKET_HANDLE) : Void
+    {% if !flag?(:docs) %}
     C.WebSocketDeleteHandle(hWebSocket)
+    {% end %}
   end
 
   def webSocketGetGlobalProperty(eType : Win32cr::Networking::WebSocket::WEB_SOCKET_PROPERTY_TYPE, pvValue : Void*, ulSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WebSocketGetGlobalProperty(eType, pvValue, ulSize)
+    {% end %}
   end
 
-  @[Link("websocket")]
+  @[Link("websocket.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WebSocketCreateClientHandle(pProperties : Win32cr::Networking::WebSocket::WEB_SOCKET_PROPERTY*, ulPropertyCount : UInt32, phWebSocket : Win32cr::Networking::WebSocket::WEB_SOCKET_HANDLE*) : Win32cr::Foundation::HRESULT
@@ -192,4 +219,5 @@ module Win32cr::Networking::WebSocket
     fun WebSocketGetGlobalProperty(eType : Win32cr::Networking::WebSocket::WEB_SOCKET_PROPERTY_TYPE, pvValue : Void*, ulSize : UInt32*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

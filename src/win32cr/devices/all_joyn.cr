@@ -640,11 +640,7 @@ module Win32cr::Devices::AllJoyn
     ALLJOYN_SESSIONLOST_REASON_OTHER = 5_i32
   end
 
-  @[Extern]
-  struct Alljoyn_abouticon_handle_
-    def initialize()
-    end
-  end
+  alias Alljoyn_abouticon_handle_ = Void
 
   @[Extern]
   struct Alljoyn_certificateid
@@ -807,17 +803,9 @@ module Win32cr::Devices::AllJoyn
     end
   end
 
-  @[Extern]
-  struct Alljoyn_abouticonobj_handle_
-    def initialize()
-    end
-  end
+  alias Alljoyn_abouticonobj_handle_ = Void
 
-  @[Extern]
-  struct Alljoyn_abouticonproxy_handle_
-    def initialize()
-    end
-  end
+  alias Alljoyn_abouticonproxy_handle_ = Void
 
   @[Extern]
   struct Alljoyn_aboutdatalistener_callbacks
@@ -844,2194 +832,3289 @@ module Win32cr::Devices::AllJoyn
   end
 
   def allJoynConnectToBus(connectionSpec : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.AllJoynConnectToBus(connectionSpec)
+    {% end %}
   end
 
   def allJoynCloseBusHandle(busHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AllJoynCloseBusHandle(busHandle)
+    {% end %}
   end
 
   def allJoynSendToBus(connectedBusHandle : Win32cr::Foundation::HANDLE, buffer : Void*, bytesToWrite : UInt32, bytesTransferred : UInt32*, reserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AllJoynSendToBus(connectedBusHandle, buffer, bytesToWrite, bytesTransferred, reserved)
+    {% end %}
   end
 
   def allJoynReceiveFromBus(connectedBusHandle : Win32cr::Foundation::HANDLE, buffer : Void*, bytesToRead : UInt32, bytesTransferred : UInt32*, reserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AllJoynReceiveFromBus(connectedBusHandle, buffer, bytesToRead, bytesTransferred, reserved)
+    {% end %}
   end
 
   def allJoynEventSelect(connectedBusHandle : Win32cr::Foundation::HANDLE, eventHandle : Win32cr::Foundation::HANDLE, eventTypes : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AllJoynEventSelect(connectedBusHandle, eventHandle, eventTypes)
+    {% end %}
   end
 
   def allJoynEnumEvents(connectedBusHandle : Win32cr::Foundation::HANDLE, eventToReset : Win32cr::Foundation::HANDLE, eventTypes : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AllJoynEnumEvents(connectedBusHandle, eventToReset, eventTypes)
+    {% end %}
   end
 
   def allJoynCreateBus(outBufferSize : UInt32, inBufferSize : UInt32, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.AllJoynCreateBus(outBufferSize, inBufferSize, lpSecurityAttributes)
+    {% end %}
   end
 
   def allJoynAcceptBusConnection(serverBusHandle : Win32cr::Foundation::HANDLE, abortEvent : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.AllJoynAcceptBusConnection(serverBusHandle, abortEvent)
+    {% end %}
   end
 
   def alljoynUnityDeferredCallbacksProcess : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_unity_deferred_callbacks_process
+    {% end %}
   end
 
   def alljoynUnitySetDeferredCallbackMainthreadOnly(mainthread_only : Int32) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_unity_set_deferred_callback_mainthread_only(mainthread_only)
+    {% end %}
   end
 
   def qCCStatusText(status : Win32cr::Devices::AllJoyn::QStatus) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.QCC_StatusText(status)
+    {% end %}
   end
 
   def alljoynMsgargCreate : Win32cr::Devices::AllJoyn::Alljoyn_msgarg
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_create
+    {% end %}
   end
 
   def alljoynMsgargCreateAndSet(signature : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::Alljoyn_msgarg
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_create_and_set(signature)
+    {% end %}
   end
 
   def alljoynMsgargDestroy(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_destroy(arg)
+    {% end %}
   end
 
   def alljoynMsgargArrayCreate(size : LibC::UIntPtrT) : Win32cr::Devices::AllJoyn::Alljoyn_msgarg
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_array_create(size)
+    {% end %}
   end
 
   def alljoynMsgargArrayElement(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, index : LibC::UIntPtrT) : Win32cr::Devices::AllJoyn::Alljoyn_msgarg
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_array_element(arg, index)
+    {% end %}
   end
 
   def alljoynMsgargSet(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, signature : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set(arg, signature)
+    {% end %}
   end
 
   def alljoynMsgargGet(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, signature : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get(arg, signature)
+    {% end %}
   end
 
   def alljoynMsgargCopy(source : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Win32cr::Devices::AllJoyn::Alljoyn_msgarg
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_copy(source)
+    {% end %}
   end
 
   def alljoynMsgargClone(destination : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, source : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_clone(destination, source)
+    {% end %}
   end
 
   def alljoynMsgargEqual(lhv : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, rhv : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_equal(lhv, rhv)
+    {% end %}
   end
 
   def alljoynMsgargArraySet(args : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, numArgs : LibC::UIntPtrT*, signature : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_array_set(args, numArgs, signature)
+    {% end %}
   end
 
   def alljoynMsgargArrayGet(args : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, numArgs : LibC::UIntPtrT, signature : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_array_get(args, numArgs, signature)
+    {% end %}
   end
 
   def alljoynMsgargTostring(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, str : Win32cr::Foundation::PSTR, buf : LibC::UIntPtrT, indent : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_tostring(arg, str, buf, indent)
+    {% end %}
   end
 
   def alljoynMsgargArrayTostring(args : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, numArgs : LibC::UIntPtrT, str : Win32cr::Foundation::PSTR, buf : LibC::UIntPtrT, indent : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_array_tostring(args, numArgs, str, buf, indent)
+    {% end %}
   end
 
   def alljoynMsgargSignature(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, str : Win32cr::Foundation::PSTR, buf : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_signature(arg, str, buf)
+    {% end %}
   end
 
   def alljoynMsgargArraySignature(values : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, numValues : LibC::UIntPtrT, str : Win32cr::Foundation::PSTR, buf : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_array_signature(values, numValues, str, buf)
+    {% end %}
   end
 
   def alljoynMsgargHassignature(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, signature : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_hassignature(arg, signature)
+    {% end %}
   end
 
   def alljoynMsgargGetdictelement(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, elemSig : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_getdictelement(arg, elemSig)
+    {% end %}
   end
 
   def alljoynMsgargGettype(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Win32cr::Devices::AllJoyn::Alljoyn_typeid
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_gettype(arg)
+    {% end %}
   end
 
   def alljoynMsgargClear(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_clear(arg)
+    {% end %}
   end
 
   def alljoynMsgargStabilize(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_stabilize(arg)
+    {% end %}
   end
 
   def alljoynMsgargArraySetOffset(args : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, argOffset : LibC::UIntPtrT, numArgs : LibC::UIntPtrT*, signature : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_array_set_offset(args, argOffset, numArgs, signature)
+    {% end %}
   end
 
   def alljoynMsgargSetAndStabilize(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, signature : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_and_stabilize(arg, signature)
+    {% end %}
   end
 
   def alljoynMsgargSetUint8(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, y : UInt8) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_uint8(arg, y)
+    {% end %}
   end
 
   def alljoynMsgargSetBool(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, b : Int32) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_bool(arg, b)
+    {% end %}
   end
 
   def alljoynMsgargSetInt16(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, n : Int16) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_int16(arg, n)
+    {% end %}
   end
 
   def alljoynMsgargSetUint16(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, q : UInt16) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_uint16(arg, q)
+    {% end %}
   end
 
   def alljoynMsgargSetInt32(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, i : Int32) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_int32(arg, i)
+    {% end %}
   end
 
   def alljoynMsgargSetUint32(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, u : UInt32) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_uint32(arg, u)
+    {% end %}
   end
 
   def alljoynMsgargSetInt64(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, x : Int64) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_int64(arg, x)
+    {% end %}
   end
 
   def alljoynMsgargSetUint64(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, t : UInt64) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_uint64(arg, t)
+    {% end %}
   end
 
   def alljoynMsgargSetDouble(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, d : Float64) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_double(arg, d)
+    {% end %}
   end
 
   def alljoynMsgargSetString(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, s : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_string(arg, s)
+    {% end %}
   end
 
   def alljoynMsgargSetObjectpath(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, o : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_objectpath(arg, o)
+    {% end %}
   end
 
   def alljoynMsgargSetSignature(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, g : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_signature(arg, g)
+    {% end %}
   end
 
   def alljoynMsgargGetUint8(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, y : UInt8*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_uint8(arg, y)
+    {% end %}
   end
 
   def alljoynMsgargGetBool(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, b : Int32*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_bool(arg, b)
+    {% end %}
   end
 
   def alljoynMsgargGetInt16(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, n : Int16*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_int16(arg, n)
+    {% end %}
   end
 
   def alljoynMsgargGetUint16(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, q : UInt16*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_uint16(arg, q)
+    {% end %}
   end
 
   def alljoynMsgargGetInt32(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, i : Int32*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_int32(arg, i)
+    {% end %}
   end
 
   def alljoynMsgargGetUint32(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, u : UInt32*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_uint32(arg, u)
+    {% end %}
   end
 
   def alljoynMsgargGetInt64(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, x : Int64*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_int64(arg, x)
+    {% end %}
   end
 
   def alljoynMsgargGetUint64(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, t : UInt64*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_uint64(arg, t)
+    {% end %}
   end
 
   def alljoynMsgargGetDouble(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, d : Float64*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_double(arg, d)
+    {% end %}
   end
 
   def alljoynMsgargGetString(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, s : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_string(arg, s)
+    {% end %}
   end
 
   def alljoynMsgargGetObjectpath(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, o : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_objectpath(arg, o)
+    {% end %}
   end
 
   def alljoynMsgargGetSignature(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, g : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_signature(arg, g)
+    {% end %}
   end
 
   def alljoynMsgargGetVariant(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, v : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_variant(arg, v)
+    {% end %}
   end
 
   def alljoynMsgargSetUint8Array(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT, ay : UInt8*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_uint8_array(arg, length, ay)
+    {% end %}
   end
 
   def alljoynMsgargSetBoolArray(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT, ab : Int32*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_bool_array(arg, length, ab)
+    {% end %}
   end
 
   def alljoynMsgargSetInt16Array(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT, an : Int16*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_int16_array(arg, length, an)
+    {% end %}
   end
 
   def alljoynMsgargSetUint16Array(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT, aq : UInt16*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_uint16_array(arg, length, aq)
+    {% end %}
   end
 
   def alljoynMsgargSetInt32Array(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT, ai : Int32*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_int32_array(arg, length, ai)
+    {% end %}
   end
 
   def alljoynMsgargSetUint32Array(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT, au : UInt32*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_uint32_array(arg, length, au)
+    {% end %}
   end
 
   def alljoynMsgargSetInt64Array(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT, ax : Int64*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_int64_array(arg, length, ax)
+    {% end %}
   end
 
   def alljoynMsgargSetUint64Array(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT, at : UInt64*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_uint64_array(arg, length, at)
+    {% end %}
   end
 
   def alljoynMsgargSetDoubleArray(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT, ad : Float64*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_double_array(arg, length, ad)
+    {% end %}
   end
 
   def alljoynMsgargSetStringArray(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT, as__ : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_string_array(arg, length, as__)
+    {% end %}
   end
 
   def alljoynMsgargSetObjectpathArray(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT, ao : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_objectpath_array(arg, length, ao)
+    {% end %}
   end
 
   def alljoynMsgargSetSignatureArray(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT, ag : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_set_signature_array(arg, length, ag)
+    {% end %}
   end
 
   def alljoynMsgargGetUint8Array(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT*, ay : UInt8*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_uint8_array(arg, length, ay)
+    {% end %}
   end
 
   def alljoynMsgargGetBoolArray(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT*, ab : Int32*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_bool_array(arg, length, ab)
+    {% end %}
   end
 
   def alljoynMsgargGetInt16Array(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT*, an : Int16*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_int16_array(arg, length, an)
+    {% end %}
   end
 
   def alljoynMsgargGetUint16Array(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT*, aq : UInt16*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_uint16_array(arg, length, aq)
+    {% end %}
   end
 
   def alljoynMsgargGetInt32Array(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT*, ai : Int32*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_int32_array(arg, length, ai)
+    {% end %}
   end
 
   def alljoynMsgargGetUint32Array(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT*, au : UInt32*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_uint32_array(arg, length, au)
+    {% end %}
   end
 
   def alljoynMsgargGetInt64Array(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT*, ax : Int64*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_int64_array(arg, length, ax)
+    {% end %}
   end
 
   def alljoynMsgargGetUint64Array(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT*, at : UInt64*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_uint64_array(arg, length, at)
+    {% end %}
   end
 
   def alljoynMsgargGetDoubleArray(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, length : LibC::UIntPtrT*, ad : Float64*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_double_array(arg, length, ad)
+    {% end %}
   end
 
   def alljoynMsgargGetVariantArray(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, signature : Win32cr::Foundation::PSTR, length : LibC::UIntPtrT*, av : Win32cr::Devices::AllJoyn::Alljoyn_msgarg*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_variant_array(arg, signature, length, av)
+    {% end %}
   end
 
   def alljoynMsgargGetArrayNumberofelements(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_array_numberofelements(arg)
+    {% end %}
   end
 
   def alljoynMsgargGetArrayElement(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, index : LibC::UIntPtrT, element : Win32cr::Devices::AllJoyn::Alljoyn_msgarg*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_array_element(arg, index, element)
+    {% end %}
   end
 
   def alljoynMsgargGetArrayElementsignature(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, index : LibC::UIntPtrT) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_get_array_elementsignature(arg, index)
+    {% end %}
   end
 
   def alljoynMsgargGetkey(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Win32cr::Devices::AllJoyn::Alljoyn_msgarg
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_getkey(arg)
+    {% end %}
   end
 
   def alljoynMsgargGetvalue(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Win32cr::Devices::AllJoyn::Alljoyn_msgarg
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_getvalue(arg)
+    {% end %}
   end
 
   def alljoynMsgargSetdictentry(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, key : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, value : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_setdictentry(arg, key, value)
+    {% end %}
   end
 
   def alljoynMsgargSetstruct(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, struct_members : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, num_members : LibC::UIntPtrT) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_setstruct(arg, struct_members, num_members)
+    {% end %}
   end
 
   def alljoynMsgargGetnummembers(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_getnummembers(arg)
+    {% end %}
   end
 
   def alljoynMsgargGetmember(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, index : LibC::UIntPtrT) : Win32cr::Devices::AllJoyn::Alljoyn_msgarg
+    {% if !flag?(:docs) %}
     C.alljoyn_msgarg_getmember(arg, index)
+    {% end %}
   end
 
   def alljoynAboutdataCreateEmpty : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_create_empty
+    {% end %}
   end
 
   def alljoynAboutdataCreate(defaultLanguage : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_create(defaultLanguage)
+    {% end %}
   end
 
   def alljoynAboutdataCreateFull(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, language : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_create_full(arg, language)
+    {% end %}
   end
 
   def alljoynAboutdataDestroy(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_destroy(data)
+    {% end %}
   end
 
   def alljoynAboutdataCreatefromxml(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, aboutDataXml : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_createfromxml(data, aboutDataXml)
+    {% end %}
   end
 
   def alljoynAboutdataIsvalid(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, language : Win32cr::Foundation::PSTR) : UInt8
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_isvalid(data, language)
+    {% end %}
   end
 
   def alljoynAboutdataCreatefrommsgarg(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, language : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_createfrommsgarg(data, arg, language)
+    {% end %}
   end
 
   def alljoynAboutdataSetappid(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, appId : UInt8*, num : LibC::UIntPtrT) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_setappid(data, appId, num)
+    {% end %}
   end
 
   def alljoynAboutdataSetappidFromstring(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, appId : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_setappid_fromstring(data, appId)
+    {% end %}
   end
 
   def alljoynAboutdataGetappid(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, appId : UInt8**, num : LibC::UIntPtrT*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_getappid(data, appId, num)
+    {% end %}
   end
 
   def alljoynAboutdataSetdefaultlanguage(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, defaultLanguage : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_setdefaultlanguage(data, defaultLanguage)
+    {% end %}
   end
 
   def alljoynAboutdataGetdefaultlanguage(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, defaultLanguage : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_getdefaultlanguage(data, defaultLanguage)
+    {% end %}
   end
 
   def alljoynAboutdataSetdevicename(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, deviceName : Win32cr::Foundation::PSTR, language : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_setdevicename(data, deviceName, language)
+    {% end %}
   end
 
   def alljoynAboutdataGetdevicename(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, deviceName : Int8**, language : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_getdevicename(data, deviceName, language)
+    {% end %}
   end
 
   def alljoynAboutdataSetdeviceid(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, deviceId : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_setdeviceid(data, deviceId)
+    {% end %}
   end
 
   def alljoynAboutdataGetdeviceid(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, deviceId : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_getdeviceid(data, deviceId)
+    {% end %}
   end
 
   def alljoynAboutdataSetappname(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, appName : Win32cr::Foundation::PSTR, language : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_setappname(data, appName, language)
+    {% end %}
   end
 
   def alljoynAboutdataGetappname(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, appName : Int8**, language : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_getappname(data, appName, language)
+    {% end %}
   end
 
   def alljoynAboutdataSetmanufacturer(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, manufacturer : Win32cr::Foundation::PSTR, language : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_setmanufacturer(data, manufacturer, language)
+    {% end %}
   end
 
   def alljoynAboutdataGetmanufacturer(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, manufacturer : Int8**, language : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_getmanufacturer(data, manufacturer, language)
+    {% end %}
   end
 
   def alljoynAboutdataSetmodelnumber(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, modelNumber : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_setmodelnumber(data, modelNumber)
+    {% end %}
   end
 
   def alljoynAboutdataGetmodelnumber(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, modelNumber : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_getmodelnumber(data, modelNumber)
+    {% end %}
   end
 
   def alljoynAboutdataSetsupportedlanguage(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, language : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_setsupportedlanguage(data, language)
+    {% end %}
   end
 
   def alljoynAboutdataGetsupportedlanguages(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, languageTags : Int8**, num : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_getsupportedlanguages(data, languageTags, num)
+    {% end %}
   end
 
   def alljoynAboutdataSetdescription(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, description : Win32cr::Foundation::PSTR, language : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_setdescription(data, description, language)
+    {% end %}
   end
 
   def alljoynAboutdataGetdescription(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, description : Int8**, language : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_getdescription(data, description, language)
+    {% end %}
   end
 
   def alljoynAboutdataSetdateofmanufacture(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, dateOfManufacture : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_setdateofmanufacture(data, dateOfManufacture)
+    {% end %}
   end
 
   def alljoynAboutdataGetdateofmanufacture(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, dateOfManufacture : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_getdateofmanufacture(data, dateOfManufacture)
+    {% end %}
   end
 
   def alljoynAboutdataSetsoftwareversion(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, softwareVersion : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_setsoftwareversion(data, softwareVersion)
+    {% end %}
   end
 
   def alljoynAboutdataGetsoftwareversion(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, softwareVersion : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_getsoftwareversion(data, softwareVersion)
+    {% end %}
   end
 
   def alljoynAboutdataGetajsoftwareversion(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, ajSoftwareVersion : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_getajsoftwareversion(data, ajSoftwareVersion)
+    {% end %}
   end
 
   def alljoynAboutdataSethardwareversion(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, hardwareVersion : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_sethardwareversion(data, hardwareVersion)
+    {% end %}
   end
 
   def alljoynAboutdataGethardwareversion(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, hardwareVersion : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_gethardwareversion(data, hardwareVersion)
+    {% end %}
   end
 
   def alljoynAboutdataSetsupporturl(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, supportUrl : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_setsupporturl(data, supportUrl)
+    {% end %}
   end
 
   def alljoynAboutdataGetsupporturl(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, supportUrl : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_getsupporturl(data, supportUrl)
+    {% end %}
   end
 
   def alljoynAboutdataSetfield(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, name : Win32cr::Foundation::PSTR, value : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, language : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_setfield(data, name, value, language)
+    {% end %}
   end
 
   def alljoynAboutdataGetfield(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, name : Win32cr::Foundation::PSTR, value : Win32cr::Devices::AllJoyn::Alljoyn_msgarg*, language : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_getfield(data, name, value, language)
+    {% end %}
   end
 
   def alljoynAboutdataGetfields(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, fields : Int8**, num_fields : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_getfields(data, fields, num_fields)
+    {% end %}
   end
 
   def alljoynAboutdataGetaboutdata(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, msgArg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, language : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_getaboutdata(data, msgArg, language)
+    {% end %}
   end
 
   def alljoynAboutdataGetannouncedaboutdata(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, msgArg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_getannouncedaboutdata(data, msgArg)
+    {% end %}
   end
 
   def alljoynAboutdataIsfieldrequired(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, fieldName : Win32cr::Foundation::PSTR) : UInt8
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_isfieldrequired(data, fieldName)
+    {% end %}
   end
 
   def alljoynAboutdataIsfieldannounced(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, fieldName : Win32cr::Foundation::PSTR) : UInt8
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_isfieldannounced(data, fieldName)
+    {% end %}
   end
 
   def alljoynAboutdataIsfieldlocalized(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, fieldName : Win32cr::Foundation::PSTR) : UInt8
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_isfieldlocalized(data, fieldName)
+    {% end %}
   end
 
   def alljoynAboutdataGetfieldsignature(data : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata, fieldName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdata_getfieldsignature(data, fieldName)
+    {% end %}
   end
 
   def alljoynAbouticonCreate : Win32cr::Devices::AllJoyn::Alljoyn_abouticon_handle_*
+    {% if !flag?(:docs) %}
     C.alljoyn_abouticon_create
+    {% end %}
   end
 
   def alljoynAbouticonDestroy(icon : Win32cr::Devices::AllJoyn::Alljoyn_abouticon_handle_*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_abouticon_destroy(icon)
+    {% end %}
   end
 
   def alljoynAbouticonGetcontent(icon : Win32cr::Devices::AllJoyn::Alljoyn_abouticon_handle_*, data : UInt8**, size : LibC::UIntPtrT*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_abouticon_getcontent(icon, data, size)
+    {% end %}
   end
 
   def alljoynAbouticonSetcontent(icon : Win32cr::Devices::AllJoyn::Alljoyn_abouticon_handle_*, type__ : Win32cr::Foundation::PSTR, data : UInt8*, csize : LibC::UIntPtrT, ownsData : UInt8) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_abouticon_setcontent(icon, type__, data, csize, ownsData)
+    {% end %}
   end
 
   def alljoynAbouticonGeturl(icon : Win32cr::Devices::AllJoyn::Alljoyn_abouticon_handle_*, type__ : Int8**, url : Int8**) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_abouticon_geturl(icon, type__, url)
+    {% end %}
   end
 
   def alljoynAbouticonSeturl(icon : Win32cr::Devices::AllJoyn::Alljoyn_abouticon_handle_*, type__ : Win32cr::Foundation::PSTR, url : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_abouticon_seturl(icon, type__, url)
+    {% end %}
   end
 
   def alljoynAbouticonClear(icon : Win32cr::Devices::AllJoyn::Alljoyn_abouticon_handle_*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_abouticon_clear(icon)
+    {% end %}
   end
 
   def alljoynAbouticonSetcontentFrommsgarg(icon : Win32cr::Devices::AllJoyn::Alljoyn_abouticon_handle_*, arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_abouticon_setcontent_frommsgarg(icon, arg)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorGetdefaultclaimcapabilities : UInt16
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_getdefaultclaimcapabilities
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorGetapplicationstate(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, state : Win32cr::Devices::AllJoyn::Alljoyn_applicationstate*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_getapplicationstate(configurator, state)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorSetapplicationstate(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, state : Win32cr::Devices::AllJoyn::Alljoyn_applicationstate) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_setapplicationstate(configurator, state)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorGetpublickey(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, publicKey : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_getpublickey(configurator, publicKey)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorPublickeyDestroy(publicKey : Int8*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_publickey_destroy(publicKey)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorGetmanifesttemplate(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, manifestTemplateXml : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_getmanifesttemplate(configurator, manifestTemplateXml)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorManifesttemplateDestroy(manifestTemplateXml : Int8*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_manifesttemplate_destroy(manifestTemplateXml)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorSetmanifesttemplatefromxml(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, manifestTemplateXml : Int8*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_setmanifesttemplatefromxml(configurator, manifestTemplateXml)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorGetclaimcapabilities(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, claimCapabilities : UInt16*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_getclaimcapabilities(configurator, claimCapabilities)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorSetclaimcapabilities(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, claimCapabilities : UInt16) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_setclaimcapabilities(configurator, claimCapabilities)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorGetclaimcapabilitiesadditionalinfo(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, additionalInfo : UInt16*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_getclaimcapabilitiesadditionalinfo(configurator, additionalInfo)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorSetclaimcapabilitiesadditionalinfo(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, additionalInfo : UInt16) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_setclaimcapabilitiesadditionalinfo(configurator, additionalInfo)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorReset(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_reset(configurator)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorClaim(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, caKey : Int8*, identityCertificateChain : Int8*, groupId : UInt8*, groupSize : LibC::UIntPtrT, groupAuthority : Int8*, manifestsXmls : Int8**, manifestsCount : LibC::UIntPtrT) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_claim(configurator, caKey, identityCertificateChain, groupId, groupSize, groupAuthority, manifestsXmls, manifestsCount)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorUpdateidentity(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, identityCertificateChain : Int8*, manifestsXmls : Int8**, manifestsCount : LibC::UIntPtrT) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_updateidentity(configurator, identityCertificateChain, manifestsXmls, manifestsCount)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorGetidentity(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, identityCertificateChain : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_getidentity(configurator, identityCertificateChain)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorCertificatechainDestroy(certificateChain : Int8*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_certificatechain_destroy(certificateChain)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorGetmanifests(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, manifestArray : Win32cr::Devices::AllJoyn::Alljoyn_manifestarray*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_getmanifests(configurator, manifestArray)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorManifestarrayCleanup(manifestArray : Win32cr::Devices::AllJoyn::Alljoyn_manifestarray*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_manifestarray_cleanup(manifestArray)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorInstallmanifests(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, manifestsXmls : Int8**, manifestsCount : LibC::UIntPtrT, append : Int32) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_installmanifests(configurator, manifestsXmls, manifestsCount, append)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorGetidentitycertificateid(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, certificateId : Win32cr::Devices::AllJoyn::Alljoyn_certificateid*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_getidentitycertificateid(configurator, certificateId)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorCertificateidCleanup(certificateId : Win32cr::Devices::AllJoyn::Alljoyn_certificateid*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_certificateid_cleanup(certificateId)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorUpdatepolicy(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, policyXml : Int8*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_updatepolicy(configurator, policyXml)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorGetpolicy(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, policyXml : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_getpolicy(configurator, policyXml)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorGetdefaultpolicy(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, policyXml : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_getdefaultpolicy(configurator, policyXml)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorPolicyDestroy(policyXml : Int8*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_policy_destroy(policyXml)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorResetpolicy(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_resetpolicy(configurator)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorGetmembershipsummaries(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, certificateIds : Win32cr::Devices::AllJoyn::Alljoyn_certificateidarray*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_getmembershipsummaries(configurator, certificateIds)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorCertificateidarrayCleanup(certificateIdArray : Win32cr::Devices::AllJoyn::Alljoyn_certificateidarray*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_certificateidarray_cleanup(certificateIdArray)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorInstallmembership(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, membershipCertificateChain : Int8*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_installmembership(configurator, membershipCertificateChain)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorRemovemembership(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator, serial : UInt8*, serialLen : LibC::UIntPtrT, issuerPublicKey : Int8*, issuerAki : UInt8*, issuerAkiLen : LibC::UIntPtrT) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_removemembership(configurator, serial, serialLen, issuerPublicKey, issuerAki, issuerAkiLen)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorStartmanagement(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_startmanagement(configurator)
+    {% end %}
   end
 
   def alljoynPermissionconfiguratorEndmanagement(configurator : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurator_endmanagement(configurator)
+    {% end %}
   end
 
   def alljoynApplicationstatelistenerCreate(callbacks : Win32cr::Devices::AllJoyn::Alljoyn_applicationstatelistener_callbacks*, context : Void*) : Win32cr::Devices::AllJoyn::Alljoyn_applicationstatelistener
+    {% if !flag?(:docs) %}
     C.alljoyn_applicationstatelistener_create(callbacks, context)
+    {% end %}
   end
 
   def alljoynApplicationstatelistenerDestroy(listener : Win32cr::Devices::AllJoyn::Alljoyn_applicationstatelistener) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_applicationstatelistener_destroy(listener)
+    {% end %}
   end
 
   def alljoynKeystorelistenerCreate(callbacks : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_callbacks*, context : Void*) : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener
+    {% if !flag?(:docs) %}
     C.alljoyn_keystorelistener_create(callbacks, context)
+    {% end %}
   end
 
   def alljoynKeystorelistenerWithSynchronizationCreate(callbacks : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener_with_synchronization_callbacks*, context : Void*) : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener
+    {% if !flag?(:docs) %}
     C.alljoyn_keystorelistener_with_synchronization_create(callbacks, context)
+    {% end %}
   end
 
   def alljoynKeystorelistenerDestroy(listener : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_keystorelistener_destroy(listener)
+    {% end %}
   end
 
   def alljoynKeystorelistenerPutkeys(listener : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener, keyStore : Win32cr::Devices::AllJoyn::Alljoyn_keystore, source : Win32cr::Foundation::PSTR, password : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_keystorelistener_putkeys(listener, keyStore, source, password)
+    {% end %}
   end
 
   def alljoynKeystorelistenerGetkeys(listener : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener, keyStore : Win32cr::Devices::AllJoyn::Alljoyn_keystore, sink : Win32cr::Foundation::PSTR, sink_sz : LibC::UIntPtrT*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_keystorelistener_getkeys(listener, keyStore, sink, sink_sz)
+    {% end %}
   end
 
   def alljoynSessionoptsCreate(traffic : UInt8, isMultipoint : Int32, proximity : UInt8, transports : UInt16) : Win32cr::Devices::AllJoyn::Alljoyn_sessionopts
+    {% if !flag?(:docs) %}
     C.alljoyn_sessionopts_create(traffic, isMultipoint, proximity, transports)
+    {% end %}
   end
 
   def alljoynSessionoptsDestroy(opts : Win32cr::Devices::AllJoyn::Alljoyn_sessionopts) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_sessionopts_destroy(opts)
+    {% end %}
   end
 
   def alljoynSessionoptsGetTraffic(opts : Win32cr::Devices::AllJoyn::Alljoyn_sessionopts) : UInt8
+    {% if !flag?(:docs) %}
     C.alljoyn_sessionopts_get_traffic(opts)
+    {% end %}
   end
 
   def alljoynSessionoptsSetTraffic(opts : Win32cr::Devices::AllJoyn::Alljoyn_sessionopts, traffic : UInt8) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_sessionopts_set_traffic(opts, traffic)
+    {% end %}
   end
 
   def alljoynSessionoptsGetMultipoint(opts : Win32cr::Devices::AllJoyn::Alljoyn_sessionopts) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_sessionopts_get_multipoint(opts)
+    {% end %}
   end
 
   def alljoynSessionoptsSetMultipoint(opts : Win32cr::Devices::AllJoyn::Alljoyn_sessionopts, isMultipoint : Int32) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_sessionopts_set_multipoint(opts, isMultipoint)
+    {% end %}
   end
 
   def alljoynSessionoptsGetProximity(opts : Win32cr::Devices::AllJoyn::Alljoyn_sessionopts) : UInt8
+    {% if !flag?(:docs) %}
     C.alljoyn_sessionopts_get_proximity(opts)
+    {% end %}
   end
 
   def alljoynSessionoptsSetProximity(opts : Win32cr::Devices::AllJoyn::Alljoyn_sessionopts, proximity : UInt8) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_sessionopts_set_proximity(opts, proximity)
+    {% end %}
   end
 
   def alljoynSessionoptsGetTransports(opts : Win32cr::Devices::AllJoyn::Alljoyn_sessionopts) : UInt16
+    {% if !flag?(:docs) %}
     C.alljoyn_sessionopts_get_transports(opts)
+    {% end %}
   end
 
   def alljoynSessionoptsSetTransports(opts : Win32cr::Devices::AllJoyn::Alljoyn_sessionopts, transports : UInt16) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_sessionopts_set_transports(opts, transports)
+    {% end %}
   end
 
   def alljoynSessionoptsIscompatible(one : Win32cr::Devices::AllJoyn::Alljoyn_sessionopts, other : Win32cr::Devices::AllJoyn::Alljoyn_sessionopts) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_sessionopts_iscompatible(one, other)
+    {% end %}
   end
 
   def alljoynSessionoptsCmp(one : Win32cr::Devices::AllJoyn::Alljoyn_sessionopts, other : Win32cr::Devices::AllJoyn::Alljoyn_sessionopts) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_sessionopts_cmp(one, other)
+    {% end %}
   end
 
   def alljoynMessageCreate(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Win32cr::Devices::AllJoyn::Alljoyn_message
+    {% if !flag?(:docs) %}
     C.alljoyn_message_create(bus)
+    {% end %}
   end
 
   def alljoynMessageDestroy(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_message_destroy(msg)
+    {% end %}
   end
 
   def alljoynMessageIsbroadcastsignal(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_message_isbroadcastsignal(msg)
+    {% end %}
   end
 
   def alljoynMessageIsglobalbroadcast(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_message_isglobalbroadcast(msg)
+    {% end %}
   end
 
   def alljoynMessageIssessionless(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_message_issessionless(msg)
+    {% end %}
   end
 
   def alljoynMessageGetflags(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : UInt8
+    {% if !flag?(:docs) %}
     C.alljoyn_message_getflags(msg)
+    {% end %}
   end
 
   def alljoynMessageIsexpired(msg : Win32cr::Devices::AllJoyn::Alljoyn_message, tillExpireMS : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_message_isexpired(msg, tillExpireMS)
+    {% end %}
   end
 
   def alljoynMessageIsunreliable(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_message_isunreliable(msg)
+    {% end %}
   end
 
   def alljoynMessageIsencrypted(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_message_isencrypted(msg)
+    {% end %}
   end
 
   def alljoynMessageGetauthmechanism(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_message_getauthmechanism(msg)
+    {% end %}
   end
 
   def alljoynMessageGettype(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : Win32cr::Devices::AllJoyn::Alljoyn_messagetype
+    {% if !flag?(:docs) %}
     C.alljoyn_message_gettype(msg)
+    {% end %}
   end
 
   def alljoynMessageGetargs(msg : Win32cr::Devices::AllJoyn::Alljoyn_message, numArgs : LibC::UIntPtrT*, args : Win32cr::Devices::AllJoyn::Alljoyn_msgarg*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_message_getargs(msg, numArgs, args)
+    {% end %}
   end
 
   def alljoynMessageGetarg(msg : Win32cr::Devices::AllJoyn::Alljoyn_message, argN : LibC::UIntPtrT) : Win32cr::Devices::AllJoyn::Alljoyn_msgarg
+    {% if !flag?(:docs) %}
     C.alljoyn_message_getarg(msg, argN)
+    {% end %}
   end
 
   def alljoynMessageParseargs(msg : Win32cr::Devices::AllJoyn::Alljoyn_message, signature : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_message_parseargs(msg, signature)
+    {% end %}
   end
 
   def alljoynMessageGetcallserial(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : UInt32
+    {% if !flag?(:docs) %}
     C.alljoyn_message_getcallserial(msg)
+    {% end %}
   end
 
   def alljoynMessageGetsignature(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_message_getsignature(msg)
+    {% end %}
   end
 
   def alljoynMessageGetobjectpath(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_message_getobjectpath(msg)
+    {% end %}
   end
 
   def alljoynMessageGetinterface(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_message_getinterface(msg)
+    {% end %}
   end
 
   def alljoynMessageGetmembername(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_message_getmembername(msg)
+    {% end %}
   end
 
   def alljoynMessageGetreplyserial(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : UInt32
+    {% if !flag?(:docs) %}
     C.alljoyn_message_getreplyserial(msg)
+    {% end %}
   end
 
   def alljoynMessageGetsender(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_message_getsender(msg)
+    {% end %}
   end
 
   def alljoynMessageGetreceiveendpointname(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_message_getreceiveendpointname(msg)
+    {% end %}
   end
 
   def alljoynMessageGetdestination(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_message_getdestination(msg)
+    {% end %}
   end
 
   def alljoynMessageGetcompressiontoken(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : UInt32
+    {% if !flag?(:docs) %}
     C.alljoyn_message_getcompressiontoken(msg)
+    {% end %}
   end
 
   def alljoynMessageGetsessionid(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : UInt32
+    {% if !flag?(:docs) %}
     C.alljoyn_message_getsessionid(msg)
+    {% end %}
   end
 
   def alljoynMessageGeterrorname(msg : Win32cr::Devices::AllJoyn::Alljoyn_message, errorMessage : Win32cr::Foundation::PSTR, errorMessage_size : LibC::UIntPtrT*) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_message_geterrorname(msg, errorMessage, errorMessage_size)
+    {% end %}
   end
 
   def alljoynMessageTostring(msg : Win32cr::Devices::AllJoyn::Alljoyn_message, str : Win32cr::Foundation::PSTR, buf : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_message_tostring(msg, str, buf)
+    {% end %}
   end
 
   def alljoynMessageDescription(msg : Win32cr::Devices::AllJoyn::Alljoyn_message, str : Win32cr::Foundation::PSTR, buf : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_message_description(msg, str, buf)
+    {% end %}
   end
 
   def alljoynMessageGettimestamp(msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : UInt32
+    {% if !flag?(:docs) %}
     C.alljoyn_message_gettimestamp(msg)
+    {% end %}
   end
 
   def alljoynMessageEql(one : Win32cr::Devices::AllJoyn::Alljoyn_message, other : Win32cr::Devices::AllJoyn::Alljoyn_message) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_message_eql(one, other)
+    {% end %}
   end
 
   def alljoynMessageSetendianess(endian : Int8) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_message_setendianess(endian)
+    {% end %}
   end
 
   def alljoynAuthlistenerRequestcredentialsresponse(listener : Win32cr::Devices::AllJoyn::Alljoyn_authlistener, authContext : Void*, accept : Int32, credentials : Win32cr::Devices::AllJoyn::Alljoyn_credentials) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_authlistener_requestcredentialsresponse(listener, authContext, accept, credentials)
+    {% end %}
   end
 
   def alljoynAuthlistenerVerifycredentialsresponse(listener : Win32cr::Devices::AllJoyn::Alljoyn_authlistener, authContext : Void*, accept : Int32) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_authlistener_verifycredentialsresponse(listener, authContext, accept)
+    {% end %}
   end
 
   def alljoynAuthlistenerCreate(callbacks : Win32cr::Devices::AllJoyn::Alljoyn_authlistener_callbacks*, context : Void*) : Win32cr::Devices::AllJoyn::Alljoyn_authlistener
+    {% if !flag?(:docs) %}
     C.alljoyn_authlistener_create(callbacks, context)
+    {% end %}
   end
 
   def alljoynAuthlistenerasyncCreate(callbacks : Win32cr::Devices::AllJoyn::Alljoyn_authlistenerasync_callbacks*, context : Void*) : Win32cr::Devices::AllJoyn::Alljoyn_authlistener
+    {% if !flag?(:docs) %}
     C.alljoyn_authlistenerasync_create(callbacks, context)
+    {% end %}
   end
 
   def alljoynAuthlistenerDestroy(listener : Win32cr::Devices::AllJoyn::Alljoyn_authlistener) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_authlistener_destroy(listener)
+    {% end %}
   end
 
   def alljoynAuthlistenerasyncDestroy(listener : Win32cr::Devices::AllJoyn::Alljoyn_authlistener) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_authlistenerasync_destroy(listener)
+    {% end %}
   end
 
   def alljoynAuthlistenerSetsharedsecret(listener : Win32cr::Devices::AllJoyn::Alljoyn_authlistener, sharedSecret : UInt8*, sharedSecretSize : LibC::UIntPtrT) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_authlistener_setsharedsecret(listener, sharedSecret, sharedSecretSize)
+    {% end %}
   end
 
   def alljoynCredentialsCreate : Win32cr::Devices::AllJoyn::Alljoyn_credentials
+    {% if !flag?(:docs) %}
     C.alljoyn_credentials_create
+    {% end %}
   end
 
   def alljoynCredentialsDestroy(cred : Win32cr::Devices::AllJoyn::Alljoyn_credentials) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_credentials_destroy(cred)
+    {% end %}
   end
 
   def alljoynCredentialsIsset(cred : Win32cr::Devices::AllJoyn::Alljoyn_credentials, creds : UInt16) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_credentials_isset(cred, creds)
+    {% end %}
   end
 
   def alljoynCredentialsSetpassword(cred : Win32cr::Devices::AllJoyn::Alljoyn_credentials, pwd : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_credentials_setpassword(cred, pwd)
+    {% end %}
   end
 
   def alljoynCredentialsSetusername(cred : Win32cr::Devices::AllJoyn::Alljoyn_credentials, userName : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_credentials_setusername(cred, userName)
+    {% end %}
   end
 
   def alljoynCredentialsSetcertchain(cred : Win32cr::Devices::AllJoyn::Alljoyn_credentials, certChain : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_credentials_setcertchain(cred, certChain)
+    {% end %}
   end
 
   def alljoynCredentialsSetprivatekey(cred : Win32cr::Devices::AllJoyn::Alljoyn_credentials, pk : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_credentials_setprivatekey(cred, pk)
+    {% end %}
   end
 
   def alljoynCredentialsSetlogonentry(cred : Win32cr::Devices::AllJoyn::Alljoyn_credentials, logonEntry : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_credentials_setlogonentry(cred, logonEntry)
+    {% end %}
   end
 
   def alljoynCredentialsSetexpiration(cred : Win32cr::Devices::AllJoyn::Alljoyn_credentials, expiration : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_credentials_setexpiration(cred, expiration)
+    {% end %}
   end
 
   def alljoynCredentialsGetpassword(cred : Win32cr::Devices::AllJoyn::Alljoyn_credentials) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_credentials_getpassword(cred)
+    {% end %}
   end
 
   def alljoynCredentialsGetusername(cred : Win32cr::Devices::AllJoyn::Alljoyn_credentials) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_credentials_getusername(cred)
+    {% end %}
   end
 
   def alljoynCredentialsGetcertchain(cred : Win32cr::Devices::AllJoyn::Alljoyn_credentials) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_credentials_getcertchain(cred)
+    {% end %}
   end
 
   def alljoynCredentialsGetprivateKey(cred : Win32cr::Devices::AllJoyn::Alljoyn_credentials) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_credentials_getprivateKey(cred)
+    {% end %}
   end
 
   def alljoynCredentialsGetlogonentry(cred : Win32cr::Devices::AllJoyn::Alljoyn_credentials) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_credentials_getlogonentry(cred)
+    {% end %}
   end
 
   def alljoynCredentialsGetexpiration(cred : Win32cr::Devices::AllJoyn::Alljoyn_credentials) : UInt32
+    {% if !flag?(:docs) %}
     C.alljoyn_credentials_getexpiration(cred)
+    {% end %}
   end
 
   def alljoynCredentialsClear(cred : Win32cr::Devices::AllJoyn::Alljoyn_credentials) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_credentials_clear(cred)
+    {% end %}
   end
 
   def alljoynBuslistenerCreate(callbacks : Win32cr::Devices::AllJoyn::Alljoyn_buslistener_callbacks*, context : Void*) : Win32cr::Devices::AllJoyn::Alljoyn_buslistener
+    {% if !flag?(:docs) %}
     C.alljoyn_buslistener_create(callbacks, context)
+    {% end %}
   end
 
   def alljoynBuslistenerDestroy(listener : Win32cr::Devices::AllJoyn::Alljoyn_buslistener) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_buslistener_destroy(listener)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionMemberGetannotationscount(member : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_member_getannotationscount(member)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionMemberGetannotationatindex(member : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member, index : LibC::UIntPtrT, name : Win32cr::Foundation::PSTR, name_size : LibC::UIntPtrT*, value : Win32cr::Foundation::PSTR, value_size : LibC::UIntPtrT*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_member_getannotationatindex(member, index, name, name_size, value, value_size)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionMemberGetannotation(member : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member, name : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR, value_size : LibC::UIntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_member_getannotation(member, name, value, value_size)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionMemberGetargannotationscount(member : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member, argName : Win32cr::Foundation::PSTR) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_member_getargannotationscount(member, argName)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionMemberGetargannotationatindex(member : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member, argName : Win32cr::Foundation::PSTR, index : LibC::UIntPtrT, name : Win32cr::Foundation::PSTR, name_size : LibC::UIntPtrT*, value : Win32cr::Foundation::PSTR, value_size : LibC::UIntPtrT*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_member_getargannotationatindex(member, argName, index, name, name_size, value, value_size)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionMemberGetargannotation(member : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member, argName : Win32cr::Foundation::PSTR, name : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR, value_size : LibC::UIntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_member_getargannotation(member, argName, name, value, value_size)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionPropertyGetannotationscount(property : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_property) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_property_getannotationscount(property)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionPropertyGetannotationatindex(property : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_property, index : LibC::UIntPtrT, name : Win32cr::Foundation::PSTR, name_size : LibC::UIntPtrT*, value : Win32cr::Foundation::PSTR, value_size : LibC::UIntPtrT*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_property_getannotationatindex(property, index, name, name_size, value, value_size)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionPropertyGetannotation(property : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_property, name : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR, value_size : LibC::UIntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_property_getannotation(property, name, value, value_size)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionActivate(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_activate(iface)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionAddannotation(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, name : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_addannotation(iface, name, value)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetannotation(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, name : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR, value_size : LibC::UIntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getannotation(iface, name, value, value_size)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetannotationscount(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getannotationscount(iface)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetannotationatindex(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, index : LibC::UIntPtrT, name : Win32cr::Foundation::PSTR, name_size : LibC::UIntPtrT*, value : Win32cr::Foundation::PSTR, value_size : LibC::UIntPtrT*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getannotationatindex(iface, index, name, name_size, value, value_size)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetmember(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, name : Win32cr::Foundation::PSTR, member : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member*) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getmember(iface, name, member)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionAddmember(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, type__ : Win32cr::Devices::AllJoyn::Alljoyn_messagetype, name : Win32cr::Foundation::PSTR, inputSig : Win32cr::Foundation::PSTR, outSig : Win32cr::Foundation::PSTR, argNames : Win32cr::Foundation::PSTR, annotation__ : UInt8) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_addmember(iface, type__, name, inputSig, outSig, argNames, annotation__)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionAddmemberannotation(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, member : Win32cr::Foundation::PSTR, name : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_addmemberannotation(iface, member, name, value)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetmemberannotation(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, member : Win32cr::Foundation::PSTR, name : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR, value_size : LibC::UIntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getmemberannotation(iface, member, name, value, value_size)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetmembers(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, members : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member*, numMembers : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getmembers(iface, members, numMembers)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionHasmember(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, name : Win32cr::Foundation::PSTR, inSig : Win32cr::Foundation::PSTR, outSig : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_hasmember(iface, name, inSig, outSig)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionAddmethod(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, name : Win32cr::Foundation::PSTR, inputSig : Win32cr::Foundation::PSTR, outSig : Win32cr::Foundation::PSTR, argNames : Win32cr::Foundation::PSTR, annotation__ : UInt8, accessPerms : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_addmethod(iface, name, inputSig, outSig, argNames, annotation__, accessPerms)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetmethod(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, name : Win32cr::Foundation::PSTR, member : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member*) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getmethod(iface, name, member)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionAddsignal(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, name : Win32cr::Foundation::PSTR, sig : Win32cr::Foundation::PSTR, argNames : Win32cr::Foundation::PSTR, annotation__ : UInt8, accessPerms : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_addsignal(iface, name, sig, argNames, annotation__, accessPerms)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetsignal(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, name : Win32cr::Foundation::PSTR, member : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member*) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getsignal(iface, name, member)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetproperty(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, name : Win32cr::Foundation::PSTR, property : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_property*) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getproperty(iface, name, property)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetproperties(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, props : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_property*, numProps : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getproperties(iface, props, numProps)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionAddproperty(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, name : Win32cr::Foundation::PSTR, signature : Win32cr::Foundation::PSTR, access : UInt8) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_addproperty(iface, name, signature, access)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionAddpropertyannotation(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, property : Win32cr::Foundation::PSTR, name : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_addpropertyannotation(iface, property, name, value)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetpropertyannotation(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, property : Win32cr::Foundation::PSTR, name : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR, str_size : LibC::UIntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getpropertyannotation(iface, property, name, value, str_size)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionHasproperty(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, name : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_hasproperty(iface, name)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionHasproperties(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_hasproperties(iface)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetname(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getname(iface)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionIntrospect(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, str : Win32cr::Foundation::PSTR, buf : LibC::UIntPtrT, indent : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_introspect(iface, str, buf, indent)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionIssecure(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_issecure(iface)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetsecuritypolicy(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription) : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_securitypolicy
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getsecuritypolicy(iface)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionSetdescriptionlanguage(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, language : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_setdescriptionlanguage(iface, language)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetdescriptionlanguages(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, languages : Int8**, size : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getdescriptionlanguages(iface, languages, size)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetdescriptionlanguages2(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, languages : Win32cr::Foundation::PSTR, languagesSize : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getdescriptionlanguages2(iface, languages, languagesSize)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionSetdescription(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, description : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_setdescription(iface, description)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionSetdescriptionforlanguage(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, description : Win32cr::Foundation::PSTR, languageTag : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_setdescriptionforlanguage(iface, description, languageTag)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetdescriptionforlanguage(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, description : Win32cr::Foundation::PSTR, maxLanguageLength : LibC::UIntPtrT, languageTag : Win32cr::Foundation::PSTR) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getdescriptionforlanguage(iface, description, maxLanguageLength, languageTag)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionSetmemberdescription(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, member : Win32cr::Foundation::PSTR, description : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_setmemberdescription(iface, member, description)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionSetmemberdescriptionforlanguage(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, member : Win32cr::Foundation::PSTR, description : Win32cr::Foundation::PSTR, languageTag : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_setmemberdescriptionforlanguage(iface, member, description, languageTag)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetmemberdescriptionforlanguage(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, member : Win32cr::Foundation::PSTR, description : Win32cr::Foundation::PSTR, maxLanguageLength : LibC::UIntPtrT, languageTag : Win32cr::Foundation::PSTR) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getmemberdescriptionforlanguage(iface, member, description, maxLanguageLength, languageTag)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionSetargdescription(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, member : Win32cr::Foundation::PSTR, argName : Win32cr::Foundation::PSTR, description : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_setargdescription(iface, member, argName, description)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionSetargdescriptionforlanguage(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, member : Win32cr::Foundation::PSTR, arg : Win32cr::Foundation::PSTR, description : Win32cr::Foundation::PSTR, languageTag : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_setargdescriptionforlanguage(iface, member, arg, description, languageTag)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetargdescriptionforlanguage(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, member : Win32cr::Foundation::PSTR, arg : Win32cr::Foundation::PSTR, description : Win32cr::Foundation::PSTR, maxLanguageLength : LibC::UIntPtrT, languageTag : Win32cr::Foundation::PSTR) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getargdescriptionforlanguage(iface, member, arg, description, maxLanguageLength, languageTag)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionSetpropertydescription(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, name : Win32cr::Foundation::PSTR, description : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_setpropertydescription(iface, name, description)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionSetpropertydescriptionforlanguage(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, name : Win32cr::Foundation::PSTR, description : Win32cr::Foundation::PSTR, languageTag : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_setpropertydescriptionforlanguage(iface, name, description, languageTag)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetpropertydescriptionforlanguage(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, property : Win32cr::Foundation::PSTR, description : Win32cr::Foundation::PSTR, maxLanguageLength : LibC::UIntPtrT, languageTag : Win32cr::Foundation::PSTR) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getpropertydescriptionforlanguage(iface, property, description, maxLanguageLength, languageTag)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionSetdescriptiontranslationcallback(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, translationCallback : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_translation_callback_ptr) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_setdescriptiontranslationcallback(iface, translationCallback)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetdescriptiontranslationcallback(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription) : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_translation_callback_ptr
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getdescriptiontranslationcallback(iface)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionHasdescription(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_hasdescription(iface)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionAddargannotation(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, member : Win32cr::Foundation::PSTR, argName : Win32cr::Foundation::PSTR, name : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_addargannotation(iface, member, argName, name, value)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionGetmemberargannotation(iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, member : Win32cr::Foundation::PSTR, argName : Win32cr::Foundation::PSTR, name : Win32cr::Foundation::PSTR, value : Win32cr::Foundation::PSTR, value_size : LibC::UIntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_getmemberargannotation(iface, member, argName, name, value, value_size)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionEql(one : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, other : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_eql(one, other)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionMemberEql(one : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member, other : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_member_eql(one, other)
+    {% end %}
   end
 
   def alljoynInterfacedescriptionPropertyEql(one : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_property, other : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_property) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_interfacedescription_property_eql(one, other)
+    {% end %}
   end
 
   def alljoynBusobjectCreate(path : Win32cr::Foundation::PSTR, isPlaceholder : Int32, callbacks_in : Win32cr::Devices::AllJoyn::Alljoyn_busobject_callbacks*, context_in : Void*) : Win32cr::Devices::AllJoyn::Alljoyn_busobject
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_create(path, isPlaceholder, callbacks_in, context_in)
+    {% end %}
   end
 
   def alljoynBusobjectDestroy(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_destroy(bus)
+    {% end %}
   end
 
   def alljoynBusobjectGetpath(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_getpath(bus)
+    {% end %}
   end
 
   def alljoynBusobjectEmitpropertychanged(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject, ifcName : Win32cr::Foundation::PSTR, propName : Win32cr::Foundation::PSTR, val : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, id : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_emitpropertychanged(bus, ifcName, propName, val, id)
+    {% end %}
   end
 
   def alljoynBusobjectEmitpropertieschanged(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject, ifcName : Win32cr::Foundation::PSTR, propNames : Int8**, numProps : LibC::UIntPtrT, id : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_emitpropertieschanged(bus, ifcName, propNames, numProps, id)
+    {% end %}
   end
 
   def alljoynBusobjectGetname(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject, buffer : Win32cr::Foundation::PSTR, bufferSz : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_getname(bus, buffer, bufferSz)
+    {% end %}
   end
 
   def alljoynBusobjectAddinterface(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject, iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_addinterface(bus, iface)
+    {% end %}
   end
 
   def alljoynBusobjectAddmethodhandler(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject, member : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member, handler : Win32cr::Devices::AllJoyn::Alljoyn_messagereceiver_methodhandler_ptr, context : Void*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_addmethodhandler(bus, member, handler, context)
+    {% end %}
   end
 
   def alljoynBusobjectAddmethodhandlers(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject, entries : Win32cr::Devices::AllJoyn::Alljoyn_busobject_methodentry*, numEntries : LibC::UIntPtrT) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_addmethodhandlers(bus, entries, numEntries)
+    {% end %}
   end
 
   def alljoynBusobjectMethodreplyArgs(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject, msg : Win32cr::Devices::AllJoyn::Alljoyn_message, args : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, numArgs : LibC::UIntPtrT) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_methodreply_args(bus, msg, args, numArgs)
+    {% end %}
   end
 
   def alljoynBusobjectMethodreplyErr(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject, msg : Win32cr::Devices::AllJoyn::Alljoyn_message, error : Win32cr::Foundation::PSTR, errorMessage : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_methodreply_err(bus, msg, error, errorMessage)
+    {% end %}
   end
 
   def alljoynBusobjectMethodreplyStatus(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject, msg : Win32cr::Devices::AllJoyn::Alljoyn_message, status : Win32cr::Devices::AllJoyn::QStatus) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_methodreply_status(bus, msg, status)
+    {% end %}
   end
 
   def alljoynBusobjectGetbusattachment(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject) : Win32cr::Devices::AllJoyn::Alljoyn_busattachment
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_getbusattachment(bus)
+    {% end %}
   end
 
   def alljoynBusobjectSignal(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject, destination : Win32cr::Foundation::PSTR, sessionId : UInt32, signal : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member, args : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, numArgs : LibC::UIntPtrT, timeToLive : UInt16, flags : UInt8, msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_signal(bus, destination, sessionId, signal, args, numArgs, timeToLive, flags, msg)
+    {% end %}
   end
 
   def alljoynBusobjectCancelsessionlessmessageSerial(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject, serialNumber : UInt32) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_cancelsessionlessmessage_serial(bus, serialNumber)
+    {% end %}
   end
 
   def alljoynBusobjectCancelsessionlessmessage(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject, msg : Win32cr::Devices::AllJoyn::Alljoyn_message) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_cancelsessionlessmessage(bus, msg)
+    {% end %}
   end
 
   def alljoynBusobjectIssecure(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_issecure(bus)
+    {% end %}
   end
 
   def alljoynBusobjectGetannouncedinterfacenames(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject, interfaces : Int8**, numInterfaces : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_getannouncedinterfacenames(bus, interfaces, numInterfaces)
+    {% end %}
   end
 
   def alljoynBusobjectSetannounceflag(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject, iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription, isAnnounced : Win32cr::Devices::AllJoyn::Alljoyn_about_announceflag) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_setannounceflag(bus, iface, isAnnounced)
+    {% end %}
   end
 
   def alljoynBusobjectAddinterfaceAnnounced(bus : Win32cr::Devices::AllJoyn::Alljoyn_busobject, iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busobject_addinterface_announced(bus, iface)
+    {% end %}
   end
 
   def alljoynProxybusobjectCreate(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, service : Win32cr::Foundation::PSTR, path : Win32cr::Foundation::PSTR, sessionId : UInt32) : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_create(bus, service, path, sessionId)
+    {% end %}
   end
 
   def alljoynProxybusobjectCreateSecure(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, service : Win32cr::Foundation::PSTR, path : Win32cr::Foundation::PSTR, sessionId : UInt32) : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_create_secure(bus, service, path, sessionId)
+    {% end %}
   end
 
   def alljoynProxybusobjectDestroy(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_destroy(proxyObj)
+    {% end %}
   end
 
   def alljoynProxybusobjectAddinterface(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_addinterface(proxyObj, iface)
+    {% end %}
   end
 
   def alljoynProxybusobjectAddinterfaceByName(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, name : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_addinterface_by_name(proxyObj, name)
+    {% end %}
   end
 
   def alljoynProxybusobjectGetchildren(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, children : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject*, numChildren : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_getchildren(proxyObj, children, numChildren)
+    {% end %}
   end
 
   def alljoynProxybusobjectGetchild(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, path : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_getchild(proxyObj, path)
+    {% end %}
   end
 
   def alljoynProxybusobjectAddchild(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, child : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_addchild(proxyObj, child)
+    {% end %}
   end
 
   def alljoynProxybusobjectRemovechild(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, path : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_removechild(proxyObj, path)
+    {% end %}
   end
 
   def alljoynProxybusobjectIntrospectremoteobject(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_introspectremoteobject(proxyObj)
+    {% end %}
   end
 
   def alljoynProxybusobjectIntrospectremoteobjectasync(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, callback : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject_listener_introspectcb_ptr, context : Void*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_introspectremoteobjectasync(proxyObj, callback, context)
+    {% end %}
   end
 
   def alljoynProxybusobjectGetproperty(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, iface : Win32cr::Foundation::PSTR, property : Win32cr::Foundation::PSTR, value : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_getproperty(proxyObj, iface, property, value)
+    {% end %}
   end
 
   def alljoynProxybusobjectGetpropertyasync(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, iface : Win32cr::Foundation::PSTR, property : Win32cr::Foundation::PSTR, callback : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject_listener_getpropertycb_ptr, timeout : UInt32, context : Void*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_getpropertyasync(proxyObj, iface, property, callback, timeout, context)
+    {% end %}
   end
 
   def alljoynProxybusobjectGetallproperties(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, iface : Win32cr::Foundation::PSTR, values : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_getallproperties(proxyObj, iface, values)
+    {% end %}
   end
 
   def alljoynProxybusobjectGetallpropertiesasync(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, iface : Win32cr::Foundation::PSTR, callback : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject_listener_getallpropertiescb_ptr, timeout : UInt32, context : Void*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_getallpropertiesasync(proxyObj, iface, callback, timeout, context)
+    {% end %}
   end
 
   def alljoynProxybusobjectSetproperty(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, iface : Win32cr::Foundation::PSTR, property : Win32cr::Foundation::PSTR, value : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_setproperty(proxyObj, iface, property, value)
+    {% end %}
   end
 
   def alljoynProxybusobjectRegisterpropertieschangedlistener(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, iface : Win32cr::Foundation::PSTR, properties : Int8**, numProperties : LibC::UIntPtrT, callback : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject_listener_propertieschanged_ptr, context : Void*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_registerpropertieschangedlistener(proxyObj, iface, properties, numProperties, callback, context)
+    {% end %}
   end
 
   def alljoynProxybusobjectUnregisterpropertieschangedlistener(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, iface : Win32cr::Foundation::PSTR, callback : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject_listener_propertieschanged_ptr) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_unregisterpropertieschangedlistener(proxyObj, iface, callback)
+    {% end %}
   end
 
   def alljoynProxybusobjectSetpropertyasync(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, iface : Win32cr::Foundation::PSTR, property : Win32cr::Foundation::PSTR, value : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, callback : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject_listener_setpropertycb_ptr, timeout : UInt32, context : Void*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_setpropertyasync(proxyObj, iface, property, value, callback, timeout, context)
+    {% end %}
   end
 
   def alljoynProxybusobjectMethodcall(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, ifaceName : Win32cr::Foundation::PSTR, methodName : Win32cr::Foundation::PSTR, args : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, numArgs : LibC::UIntPtrT, replyMsg : Win32cr::Devices::AllJoyn::Alljoyn_message, timeout : UInt32, flags : UInt8) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_methodcall(proxyObj, ifaceName, methodName, args, numArgs, replyMsg, timeout, flags)
+    {% end %}
   end
 
   def alljoynProxybusobjectMethodcallMember(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, method : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member, args : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, numArgs : LibC::UIntPtrT, replyMsg : Win32cr::Devices::AllJoyn::Alljoyn_message, timeout : UInt32, flags : UInt8) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_methodcall_member(proxyObj, method, args, numArgs, replyMsg, timeout, flags)
+    {% end %}
   end
 
   def alljoynProxybusobjectMethodcallNoreply(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, ifaceName : Win32cr::Foundation::PSTR, methodName : Win32cr::Foundation::PSTR, args : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, numArgs : LibC::UIntPtrT, flags : UInt8) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_methodcall_noreply(proxyObj, ifaceName, methodName, args, numArgs, flags)
+    {% end %}
   end
 
   def alljoynProxybusobjectMethodcallMemberNoreply(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, method : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member, args : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, numArgs : LibC::UIntPtrT, flags : UInt8) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_methodcall_member_noreply(proxyObj, method, args, numArgs, flags)
+    {% end %}
   end
 
   def alljoynProxybusobjectMethodcallasync(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, ifaceName : Win32cr::Foundation::PSTR, methodName : Win32cr::Foundation::PSTR, replyFunc : Win32cr::Devices::AllJoyn::Alljoyn_messagereceiver_replyhandler_ptr, args : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, numArgs : LibC::UIntPtrT, context : Void*, timeout : UInt32, flags : UInt8) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_methodcallasync(proxyObj, ifaceName, methodName, replyFunc, args, numArgs, context, timeout, flags)
+    {% end %}
   end
 
   def alljoynProxybusobjectMethodcallasyncMember(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, method : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member, replyFunc : Win32cr::Devices::AllJoyn::Alljoyn_messagereceiver_replyhandler_ptr, args : Win32cr::Devices::AllJoyn::Alljoyn_msgarg, numArgs : LibC::UIntPtrT, context : Void*, timeout : UInt32, flags : UInt8) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_methodcallasync_member(proxyObj, method, replyFunc, args, numArgs, context, timeout, flags)
+    {% end %}
   end
 
   def alljoynProxybusobjectParsexml(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, xml : Win32cr::Foundation::PSTR, identifier : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_parsexml(proxyObj, xml, identifier)
+    {% end %}
   end
 
   def alljoynProxybusobjectSecureconnection(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, forceAuth : Int32) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_secureconnection(proxyObj, forceAuth)
+    {% end %}
   end
 
   def alljoynProxybusobjectSecureconnectionasync(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, forceAuth : Int32) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_secureconnectionasync(proxyObj, forceAuth)
+    {% end %}
   end
 
   def alljoynProxybusobjectGetinterface(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, iface : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_getinterface(proxyObj, iface)
+    {% end %}
   end
 
   def alljoynProxybusobjectGetinterfaces(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, ifaces : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription*, numIfaces : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_getinterfaces(proxyObj, ifaces, numIfaces)
+    {% end %}
   end
 
   def alljoynProxybusobjectGetpath(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_getpath(proxyObj)
+    {% end %}
   end
 
   def alljoynProxybusobjectGetservicename(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_getservicename(proxyObj)
+    {% end %}
   end
 
   def alljoynProxybusobjectGetuniquename(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_getuniquename(proxyObj)
+    {% end %}
   end
 
   def alljoynProxybusobjectGetsessionid(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject) : UInt32
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_getsessionid(proxyObj)
+    {% end %}
   end
 
   def alljoynProxybusobjectImplementsinterface(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject, iface : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_implementsinterface(proxyObj, iface)
+    {% end %}
   end
 
   def alljoynProxybusobjectCopy(source : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject) : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_copy(source)
+    {% end %}
   end
 
   def alljoynProxybusobjectIsvalid(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_isvalid(proxyObj)
+    {% end %}
   end
 
   def alljoynProxybusobjectIssecure(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_issecure(proxyObj)
+    {% end %}
   end
 
   def alljoynProxybusobjectEnablepropertycaching(proxyObj : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_enablepropertycaching(proxyObj)
+    {% end %}
   end
 
   def alljoynPermissionconfigurationlistenerCreate(callbacks : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurationlistener_callbacks*, context : Void*) : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurationlistener
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurationlistener_create(callbacks, context)
+    {% end %}
   end
 
   def alljoynPermissionconfigurationlistenerDestroy(listener : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurationlistener) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_permissionconfigurationlistener_destroy(listener)
+    {% end %}
   end
 
   def alljoynSessionlistenerCreate(callbacks : Win32cr::Devices::AllJoyn::Alljoyn_sessionlistener_callbacks*, context : Void*) : Win32cr::Devices::AllJoyn::Alljoyn_sessionlistener
+    {% if !flag?(:docs) %}
     C.alljoyn_sessionlistener_create(callbacks, context)
+    {% end %}
   end
 
   def alljoynSessionlistenerDestroy(listener : Win32cr::Devices::AllJoyn::Alljoyn_sessionlistener) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_sessionlistener_destroy(listener)
+    {% end %}
   end
 
   def alljoynSessionportlistenerCreate(callbacks : Win32cr::Devices::AllJoyn::Alljoyn_sessionportlistener_callbacks*, context : Void*) : Win32cr::Devices::AllJoyn::Alljoyn_sessionportlistener
+    {% if !flag?(:docs) %}
     C.alljoyn_sessionportlistener_create(callbacks, context)
+    {% end %}
   end
 
   def alljoynSessionportlistenerDestroy(listener : Win32cr::Devices::AllJoyn::Alljoyn_sessionportlistener) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_sessionportlistener_destroy(listener)
+    {% end %}
   end
 
   def alljoynAboutlistenerCreate(callback : Win32cr::Devices::AllJoyn::Alljoyn_aboutlistener_callback*, context : Void*) : Win32cr::Devices::AllJoyn::Alljoyn_aboutlistener
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutlistener_create(callback, context)
+    {% end %}
   end
 
   def alljoynAboutlistenerDestroy(listener : Win32cr::Devices::AllJoyn::Alljoyn_aboutlistener) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutlistener_destroy(listener)
+    {% end %}
   end
 
   def alljoynBusattachmentCreate(applicationName : Win32cr::Foundation::PSTR, allowRemoteMessages : Int32) : Win32cr::Devices::AllJoyn::Alljoyn_busattachment
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_create(applicationName, allowRemoteMessages)
+    {% end %}
   end
 
   def alljoynBusattachmentCreateConcurrency(applicationName : Win32cr::Foundation::PSTR, allowRemoteMessages : Int32, concurrency : UInt32) : Win32cr::Devices::AllJoyn::Alljoyn_busattachment
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_create_concurrency(applicationName, allowRemoteMessages, concurrency)
+    {% end %}
   end
 
   def alljoynBusattachmentDestroy(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_destroy(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentStart(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_start(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentStop(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_stop(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentJoin(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_join(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentGetconcurrency(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : UInt32
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_getconcurrency(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentGetconnectspec(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_getconnectspec(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentEnableconcurrentcallbacks(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_enableconcurrentcallbacks(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentCreateinterface(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, name : Win32cr::Foundation::PSTR, iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_createinterface(bus, name, iface)
+    {% end %}
   end
 
   def alljoynBusattachmentCreateinterfaceSecure(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, name : Win32cr::Foundation::PSTR, iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription*, secPolicy : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_securitypolicy) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_createinterface_secure(bus, name, iface, secPolicy)
+    {% end %}
   end
 
   def alljoynBusattachmentConnect(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, connectSpec : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_connect(bus, connectSpec)
+    {% end %}
   end
 
   def alljoynBusattachmentRegisterbuslistener(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, listener : Win32cr::Devices::AllJoyn::Alljoyn_buslistener) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_registerbuslistener(bus, listener)
+    {% end %}
   end
 
   def alljoynBusattachmentUnregisterbuslistener(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, listener : Win32cr::Devices::AllJoyn::Alljoyn_buslistener) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_unregisterbuslistener(bus, listener)
+    {% end %}
   end
 
   def alljoynBusattachmentFindadvertisedname(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, namePrefix : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_findadvertisedname(bus, namePrefix)
+    {% end %}
   end
 
   def alljoynBusattachmentFindadvertisednamebytransport(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, namePrefix : Win32cr::Foundation::PSTR, transports : UInt16) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_findadvertisednamebytransport(bus, namePrefix, transports)
+    {% end %}
   end
 
   def alljoynBusattachmentCancelfindadvertisedname(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, namePrefix : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_cancelfindadvertisedname(bus, namePrefix)
+    {% end %}
   end
 
   def alljoynBusattachmentCancelfindadvertisednamebytransport(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, namePrefix : Win32cr::Foundation::PSTR, transports : UInt16) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_cancelfindadvertisednamebytransport(bus, namePrefix, transports)
+    {% end %}
   end
 
   def alljoynBusattachmentAdvertisename(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, name : Win32cr::Foundation::PSTR, transports : UInt16) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_advertisename(bus, name, transports)
+    {% end %}
   end
 
   def alljoynBusattachmentCanceladvertisename(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, name : Win32cr::Foundation::PSTR, transports : UInt16) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_canceladvertisename(bus, name, transports)
+    {% end %}
   end
 
   def alljoynBusattachmentGetinterface(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, name : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_getinterface(bus, name)
+    {% end %}
   end
 
   def alljoynBusattachmentJoinsession(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, sessionHost : Win32cr::Foundation::PSTR, sessionPort : UInt16, listener : Win32cr::Devices::AllJoyn::Alljoyn_sessionlistener, sessionId : UInt32*, opts : Win32cr::Devices::AllJoyn::Alljoyn_sessionopts) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_joinsession(bus, sessionHost, sessionPort, listener, sessionId, opts)
+    {% end %}
   end
 
   def alljoynBusattachmentJoinsessionasync(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, sessionHost : Win32cr::Foundation::PSTR, sessionPort : UInt16, listener : Win32cr::Devices::AllJoyn::Alljoyn_sessionlistener, opts : Win32cr::Devices::AllJoyn::Alljoyn_sessionopts, callback : Win32cr::Devices::AllJoyn::Alljoyn_busattachment_joinsessioncb_ptr, context : Void*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_joinsessionasync(bus, sessionHost, sessionPort, listener, opts, callback, context)
+    {% end %}
   end
 
   def alljoynBusattachmentRegisterbusobject(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, obj : Win32cr::Devices::AllJoyn::Alljoyn_busobject) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_registerbusobject(bus, obj)
+    {% end %}
   end
 
   def alljoynBusattachmentRegisterbusobjectSecure(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, obj : Win32cr::Devices::AllJoyn::Alljoyn_busobject) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_registerbusobject_secure(bus, obj)
+    {% end %}
   end
 
   def alljoynBusattachmentUnregisterbusobject(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, object : Win32cr::Devices::AllJoyn::Alljoyn_busobject) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_unregisterbusobject(bus, object)
+    {% end %}
   end
 
   def alljoynBusattachmentRequestname(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, requestedName : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_requestname(bus, requestedName, flags)
+    {% end %}
   end
 
   def alljoynBusattachmentReleasename(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, name : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_releasename(bus, name)
+    {% end %}
   end
 
   def alljoynBusattachmentBindsessionport(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, sessionPort : UInt16*, opts : Win32cr::Devices::AllJoyn::Alljoyn_sessionopts, listener : Win32cr::Devices::AllJoyn::Alljoyn_sessionportlistener) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_bindsessionport(bus, sessionPort, opts, listener)
+    {% end %}
   end
 
   def alljoynBusattachmentUnbindsessionport(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, sessionPort : UInt16) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_unbindsessionport(bus, sessionPort)
+    {% end %}
   end
 
   def alljoynBusattachmentEnablepeersecurity(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, authMechanisms : Win32cr::Foundation::PSTR, listener : Win32cr::Devices::AllJoyn::Alljoyn_authlistener, keyStoreFileName : Win32cr::Foundation::PSTR, isShared : Int32) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_enablepeersecurity(bus, authMechanisms, listener, keyStoreFileName, isShared)
+    {% end %}
   end
 
   def alljoynBusattachmentEnablepeersecuritywithpermissionconfigurationlistener(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, authMechanisms : Win32cr::Foundation::PSTR, authListener : Win32cr::Devices::AllJoyn::Alljoyn_authlistener, keyStoreFileName : Win32cr::Foundation::PSTR, isShared : Int32, permissionConfigurationListener : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurationlistener) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_enablepeersecuritywithpermissionconfigurationlistener(bus, authMechanisms, authListener, keyStoreFileName, isShared, permissionConfigurationListener)
+    {% end %}
   end
 
   def alljoynBusattachmentIspeersecurityenabled(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_ispeersecurityenabled(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentCreateinterfacesfromxml(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, xml : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_createinterfacesfromxml(bus, xml)
+    {% end %}
   end
 
   def alljoynBusattachmentGetinterfaces(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, ifaces : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription*, numIfaces : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_getinterfaces(bus, ifaces, numIfaces)
+    {% end %}
   end
 
   def alljoynBusattachmentDeleteinterface(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, iface : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_deleteinterface(bus, iface)
+    {% end %}
   end
 
   def alljoynBusattachmentIsstarted(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_isstarted(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentIsstopping(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_isstopping(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentIsconnected(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Int32
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_isconnected(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentDisconnect(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, unused : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_disconnect(bus, unused)
+    {% end %}
   end
 
   def alljoynBusattachmentGetdbusproxyobj(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_getdbusproxyobj(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentGetalljoynproxyobj(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_getalljoynproxyobj(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentGetalljoyndebugobj(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_getalljoyndebugobj(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentGetuniquename(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_getuniquename(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentGetglobalguidstring(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_getglobalguidstring(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentRegistersignalhandler(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, signal_handler : Win32cr::Devices::AllJoyn::Alljoyn_messagereceiver_signalhandler_ptr, member : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member, srcPath : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_registersignalhandler(bus, signal_handler, member, srcPath)
+    {% end %}
   end
 
   def alljoynBusattachmentRegistersignalhandlerwithrule(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, signal_handler : Win32cr::Devices::AllJoyn::Alljoyn_messagereceiver_signalhandler_ptr, member : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member, matchRule : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_registersignalhandlerwithrule(bus, signal_handler, member, matchRule)
+    {% end %}
   end
 
   def alljoynBusattachmentUnregistersignalhandler(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, signal_handler : Win32cr::Devices::AllJoyn::Alljoyn_messagereceiver_signalhandler_ptr, member : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member, srcPath : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_unregistersignalhandler(bus, signal_handler, member, srcPath)
+    {% end %}
   end
 
   def alljoynBusattachmentUnregistersignalhandlerwithrule(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, signal_handler : Win32cr::Devices::AllJoyn::Alljoyn_messagereceiver_signalhandler_ptr, member : Win32cr::Devices::AllJoyn::Alljoyn_interfacedescription_member, matchRule : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_unregistersignalhandlerwithrule(bus, signal_handler, member, matchRule)
+    {% end %}
   end
 
   def alljoynBusattachmentUnregisterallhandlers(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_unregisterallhandlers(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentRegisterkeystorelistener(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, listener : Win32cr::Devices::AllJoyn::Alljoyn_keystorelistener) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_registerkeystorelistener(bus, listener)
+    {% end %}
   end
 
   def alljoynBusattachmentReloadkeystore(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_reloadkeystore(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentClearkeystore(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_clearkeystore(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentClearkeys(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, guid : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_clearkeys(bus, guid)
+    {% end %}
   end
 
   def alljoynBusattachmentSetkeyexpiration(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, guid : Win32cr::Foundation::PSTR, timeout : UInt32) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_setkeyexpiration(bus, guid, timeout)
+    {% end %}
   end
 
   def alljoynBusattachmentGetkeyexpiration(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, guid : Win32cr::Foundation::PSTR, timeout : UInt32*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_getkeyexpiration(bus, guid, timeout)
+    {% end %}
   end
 
   def alljoynBusattachmentAddlogonentry(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, authMechanism : Win32cr::Foundation::PSTR, userName : Win32cr::Foundation::PSTR, password : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_addlogonentry(bus, authMechanism, userName, password)
+    {% end %}
   end
 
   def alljoynBusattachmentAddmatch(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, rule : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_addmatch(bus, rule)
+    {% end %}
   end
 
   def alljoynBusattachmentRemovematch(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, rule : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_removematch(bus, rule)
+    {% end %}
   end
 
   def alljoynBusattachmentSetsessionlistener(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, sessionId : UInt32, listener : Win32cr::Devices::AllJoyn::Alljoyn_sessionlistener) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_setsessionlistener(bus, sessionId, listener)
+    {% end %}
   end
 
   def alljoynBusattachmentLeavesession(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, sessionId : UInt32) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_leavesession(bus, sessionId)
+    {% end %}
   end
 
   def alljoynBusattachmentSecureconnection(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, name : Win32cr::Foundation::PSTR, forceAuth : Int32) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_secureconnection(bus, name, forceAuth)
+    {% end %}
   end
 
   def alljoynBusattachmentSecureconnectionasync(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, name : Win32cr::Foundation::PSTR, forceAuth : Int32) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_secureconnectionasync(bus, name, forceAuth)
+    {% end %}
   end
 
   def alljoynBusattachmentRemovesessionmember(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, sessionId : UInt32, memberName : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_removesessionmember(bus, sessionId, memberName)
+    {% end %}
   end
 
   def alljoynBusattachmentSetlinktimeout(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, sessionid : UInt32, linkTimeout : UInt32*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_setlinktimeout(bus, sessionid, linkTimeout)
+    {% end %}
   end
 
   def alljoynBusattachmentSetlinktimeoutasync(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, sessionid : UInt32, linkTimeout : UInt32, callback : Win32cr::Devices::AllJoyn::Alljoyn_busattachment_setlinktimeoutcb_ptr, context : Void*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_setlinktimeoutasync(bus, sessionid, linkTimeout, callback, context)
+    {% end %}
   end
 
   def alljoynBusattachmentNamehasowner(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, name : Win32cr::Foundation::PSTR, hasOwner : Int32*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_namehasowner(bus, name, hasOwner)
+    {% end %}
   end
 
   def alljoynBusattachmentGetpeerguid(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, name : Win32cr::Foundation::PSTR, guid : Win32cr::Foundation::PSTR, guidSz : LibC::UIntPtrT*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_getpeerguid(bus, name, guid, guidSz)
+    {% end %}
   end
 
   def alljoynBusattachmentSetdaemondebug(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, module__ : Win32cr::Foundation::PSTR, level : UInt32) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_setdaemondebug(bus, module__, level)
+    {% end %}
   end
 
   def alljoynBusattachmentGettimestamp : UInt32
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_gettimestamp
+    {% end %}
   end
 
   def alljoynBusattachmentPing(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, name : Win32cr::Foundation::PSTR, timeout : UInt32) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_ping(bus, name, timeout)
+    {% end %}
   end
 
   def alljoynBusattachmentRegisteraboutlistener(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, aboutListener : Win32cr::Devices::AllJoyn::Alljoyn_aboutlistener) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_registeraboutlistener(bus, aboutListener)
+    {% end %}
   end
 
   def alljoynBusattachmentUnregisteraboutlistener(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, aboutListener : Win32cr::Devices::AllJoyn::Alljoyn_aboutlistener) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_unregisteraboutlistener(bus, aboutListener)
+    {% end %}
   end
 
   def alljoynBusattachmentUnregisterallaboutlisteners(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_unregisterallaboutlisteners(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentWhoimplementsInterfaces(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, implementsInterfaces : Int8**, numberInterfaces : LibC::UIntPtrT) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_whoimplements_interfaces(bus, implementsInterfaces, numberInterfaces)
+    {% end %}
   end
 
   def alljoynBusattachmentWhoimplementsInterface(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, implementsInterface : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_whoimplements_interface(bus, implementsInterface)
+    {% end %}
   end
 
   def alljoynBusattachmentCancelwhoimplementsInterfaces(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, implementsInterfaces : Int8**, numberInterfaces : LibC::UIntPtrT) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_cancelwhoimplements_interfaces(bus, implementsInterfaces, numberInterfaces)
+    {% end %}
   end
 
   def alljoynBusattachmentCancelwhoimplementsInterface(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, implementsInterface : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_cancelwhoimplements_interface(bus, implementsInterface)
+    {% end %}
   end
 
   def alljoynBusattachmentGetpermissionconfigurator(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Win32cr::Devices::AllJoyn::Alljoyn_permissionconfigurator
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_getpermissionconfigurator(bus)
+    {% end %}
   end
 
   def alljoynBusattachmentRegisterapplicationstatelistener(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, listener : Win32cr::Devices::AllJoyn::Alljoyn_applicationstatelistener) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_registerapplicationstatelistener(bus, listener)
+    {% end %}
   end
 
   def alljoynBusattachmentUnregisterapplicationstatelistener(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, listener : Win32cr::Devices::AllJoyn::Alljoyn_applicationstatelistener) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_unregisterapplicationstatelistener(bus, listener)
+    {% end %}
   end
 
   def alljoynBusattachmentDeletedefaultkeystore(applicationName : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_busattachment_deletedefaultkeystore(applicationName)
+    {% end %}
   end
 
   def alljoynAbouticonobjCreate(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, icon : Win32cr::Devices::AllJoyn::Alljoyn_abouticon_handle_*) : Win32cr::Devices::AllJoyn::Alljoyn_abouticonobj_handle_*
+    {% if !flag?(:docs) %}
     C.alljoyn_abouticonobj_create(bus, icon)
+    {% end %}
   end
 
   def alljoynAbouticonobjDestroy(icon : Win32cr::Devices::AllJoyn::Alljoyn_abouticonobj_handle_*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_abouticonobj_destroy(icon)
+    {% end %}
   end
 
   def alljoynAbouticonproxyCreate(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, busName : Win32cr::Foundation::PSTR, sessionId : UInt32) : Win32cr::Devices::AllJoyn::Alljoyn_abouticonproxy_handle_*
+    {% if !flag?(:docs) %}
     C.alljoyn_abouticonproxy_create(bus, busName, sessionId)
+    {% end %}
   end
 
   def alljoynAbouticonproxyDestroy(proxy : Win32cr::Devices::AllJoyn::Alljoyn_abouticonproxy_handle_*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_abouticonproxy_destroy(proxy)
+    {% end %}
   end
 
   def alljoynAbouticonproxyGeticon(proxy : Win32cr::Devices::AllJoyn::Alljoyn_abouticonproxy_handle_*, icon : Win32cr::Devices::AllJoyn::Alljoyn_abouticon_handle_*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_abouticonproxy_geticon(proxy, icon)
+    {% end %}
   end
 
   def alljoynAbouticonproxyGetversion(proxy : Win32cr::Devices::AllJoyn::Alljoyn_abouticonproxy_handle_*, version : UInt16*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_abouticonproxy_getversion(proxy, version)
+    {% end %}
   end
 
   def alljoynAboutdatalistenerCreate(callbacks : Win32cr::Devices::AllJoyn::Alljoyn_aboutdatalistener_callbacks*, context : Void*) : Win32cr::Devices::AllJoyn::Alljoyn_aboutdatalistener
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdatalistener_create(callbacks, context)
+    {% end %}
   end
 
   def alljoynAboutdatalistenerDestroy(listener : Win32cr::Devices::AllJoyn::Alljoyn_aboutdatalistener) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutdatalistener_destroy(listener)
+    {% end %}
   end
 
   def alljoynAboutobjCreate(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, isAnnounced : Win32cr::Devices::AllJoyn::Alljoyn_about_announceflag) : Win32cr::Devices::AllJoyn::Alljoyn_aboutobj
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutobj_create(bus, isAnnounced)
+    {% end %}
   end
 
   def alljoynAboutobjDestroy(obj : Win32cr::Devices::AllJoyn::Alljoyn_aboutobj) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutobj_destroy(obj)
+    {% end %}
   end
 
   def alljoynAboutobjAnnounce(obj : Win32cr::Devices::AllJoyn::Alljoyn_aboutobj, sessionPort : UInt16, aboutData : Win32cr::Devices::AllJoyn::Alljoyn_aboutdata) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutobj_announce(obj, sessionPort, aboutData)
+    {% end %}
   end
 
   def alljoynAboutobjAnnounceUsingDatalistener(obj : Win32cr::Devices::AllJoyn::Alljoyn_aboutobj, sessionPort : UInt16, aboutListener : Win32cr::Devices::AllJoyn::Alljoyn_aboutdatalistener) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutobj_announce_using_datalistener(obj, sessionPort, aboutListener)
+    {% end %}
   end
 
   def alljoynAboutobjUnannounce(obj : Win32cr::Devices::AllJoyn::Alljoyn_aboutobj) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutobj_unannounce(obj)
+    {% end %}
   end
 
   def alljoynAboutobjectdescriptionCreate : Win32cr::Devices::AllJoyn::Alljoyn_aboutobjectdescription
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutobjectdescription_create
+    {% end %}
   end
 
   def alljoynAboutobjectdescriptionCreateFull(arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Win32cr::Devices::AllJoyn::Alljoyn_aboutobjectdescription
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutobjectdescription_create_full(arg)
+    {% end %}
   end
 
   def alljoynAboutobjectdescriptionCreatefrommsgarg(description : Win32cr::Devices::AllJoyn::Alljoyn_aboutobjectdescription, arg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutobjectdescription_createfrommsgarg(description, arg)
+    {% end %}
   end
 
   def alljoynAboutobjectdescriptionDestroy(description : Win32cr::Devices::AllJoyn::Alljoyn_aboutobjectdescription) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutobjectdescription_destroy(description)
+    {% end %}
   end
 
   def alljoynAboutobjectdescriptionGetpaths(description : Win32cr::Devices::AllJoyn::Alljoyn_aboutobjectdescription, paths : Int8**, numPaths : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutobjectdescription_getpaths(description, paths, numPaths)
+    {% end %}
   end
 
   def alljoynAboutobjectdescriptionGetinterfaces(description : Win32cr::Devices::AllJoyn::Alljoyn_aboutobjectdescription, path : Win32cr::Foundation::PSTR, interfaces : Int8**, numInterfaces : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutobjectdescription_getinterfaces(description, path, interfaces, numInterfaces)
+    {% end %}
   end
 
   def alljoynAboutobjectdescriptionGetinterfacepaths(description : Win32cr::Devices::AllJoyn::Alljoyn_aboutobjectdescription, interfaceName : Win32cr::Foundation::PSTR, paths : Int8**, numPaths : LibC::UIntPtrT) : LibC::UIntPtrT
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutobjectdescription_getinterfacepaths(description, interfaceName, paths, numPaths)
+    {% end %}
   end
 
   def alljoynAboutobjectdescriptionClear(description : Win32cr::Devices::AllJoyn::Alljoyn_aboutobjectdescription) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutobjectdescription_clear(description)
+    {% end %}
   end
 
   def alljoynAboutobjectdescriptionHaspath(description : Win32cr::Devices::AllJoyn::Alljoyn_aboutobjectdescription, path : Win32cr::Foundation::PSTR) : UInt8
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutobjectdescription_haspath(description, path)
+    {% end %}
   end
 
   def alljoynAboutobjectdescriptionHasinterface(description : Win32cr::Devices::AllJoyn::Alljoyn_aboutobjectdescription, interfaceName : Win32cr::Foundation::PSTR) : UInt8
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutobjectdescription_hasinterface(description, interfaceName)
+    {% end %}
   end
 
   def alljoynAboutobjectdescriptionHasinterfaceatpath(description : Win32cr::Devices::AllJoyn::Alljoyn_aboutobjectdescription, path : Win32cr::Foundation::PSTR, interfaceName : Win32cr::Foundation::PSTR) : UInt8
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutobjectdescription_hasinterfaceatpath(description, path, interfaceName)
+    {% end %}
   end
 
   def alljoynAboutobjectdescriptionGetmsgarg(description : Win32cr::Devices::AllJoyn::Alljoyn_aboutobjectdescription, msgArg : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutobjectdescription_getmsgarg(description, msgArg)
+    {% end %}
   end
 
   def alljoynAboutproxyCreate(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, busName : Win32cr::Foundation::PSTR, sessionId : UInt32) : Win32cr::Devices::AllJoyn::Alljoyn_aboutproxy
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutproxy_create(bus, busName, sessionId)
+    {% end %}
   end
 
   def alljoynAboutproxyDestroy(proxy : Win32cr::Devices::AllJoyn::Alljoyn_aboutproxy) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutproxy_destroy(proxy)
+    {% end %}
   end
 
   def alljoynAboutproxyGetobjectdescription(proxy : Win32cr::Devices::AllJoyn::Alljoyn_aboutproxy, objectDesc : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutproxy_getobjectdescription(proxy, objectDesc)
+    {% end %}
   end
 
   def alljoynAboutproxyGetaboutdata(proxy : Win32cr::Devices::AllJoyn::Alljoyn_aboutproxy, language : Win32cr::Foundation::PSTR, data : Win32cr::Devices::AllJoyn::Alljoyn_msgarg) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutproxy_getaboutdata(proxy, language, data)
+    {% end %}
   end
 
   def alljoynAboutproxyGetversion(proxy : Win32cr::Devices::AllJoyn::Alljoyn_aboutproxy, version : UInt16*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_aboutproxy_getversion(proxy, version)
+    {% end %}
   end
 
   def alljoynPinglistenerCreate(callback : Win32cr::Devices::AllJoyn::Alljoyn_pinglistener_callback*, context : Void*) : Win32cr::Devices::AllJoyn::Alljoyn_pinglistener
+    {% if !flag?(:docs) %}
     C.alljoyn_pinglistener_create(callback, context)
+    {% end %}
   end
 
   def alljoynPinglistenerDestroy(listener : Win32cr::Devices::AllJoyn::Alljoyn_pinglistener) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_pinglistener_destroy(listener)
+    {% end %}
   end
 
   def alljoynAutopingerCreate(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment) : Win32cr::Devices::AllJoyn::Alljoyn_autopinger
+    {% if !flag?(:docs) %}
     C.alljoyn_autopinger_create(bus)
+    {% end %}
   end
 
   def alljoynAutopingerDestroy(autopinger : Win32cr::Devices::AllJoyn::Alljoyn_autopinger) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_autopinger_destroy(autopinger)
+    {% end %}
   end
 
   def alljoynAutopingerPause(autopinger : Win32cr::Devices::AllJoyn::Alljoyn_autopinger) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_autopinger_pause(autopinger)
+    {% end %}
   end
 
   def alljoynAutopingerResume(autopinger : Win32cr::Devices::AllJoyn::Alljoyn_autopinger) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_autopinger_resume(autopinger)
+    {% end %}
   end
 
   def alljoynAutopingerAddpinggroup(autopinger : Win32cr::Devices::AllJoyn::Alljoyn_autopinger, group : Win32cr::Foundation::PSTR, listener : Win32cr::Devices::AllJoyn::Alljoyn_pinglistener, pinginterval : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_autopinger_addpinggroup(autopinger, group, listener, pinginterval)
+    {% end %}
   end
 
   def alljoynAutopingerRemovepinggroup(autopinger : Win32cr::Devices::AllJoyn::Alljoyn_autopinger, group : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_autopinger_removepinggroup(autopinger, group)
+    {% end %}
   end
 
   def alljoynAutopingerSetpinginterval(autopinger : Win32cr::Devices::AllJoyn::Alljoyn_autopinger, group : Win32cr::Foundation::PSTR, pinginterval : UInt32) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_autopinger_setpinginterval(autopinger, group, pinginterval)
+    {% end %}
   end
 
   def alljoynAutopingerAdddestination(autopinger : Win32cr::Devices::AllJoyn::Alljoyn_autopinger, group : Win32cr::Foundation::PSTR, destination : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_autopinger_adddestination(autopinger, group, destination)
+    {% end %}
   end
 
   def alljoynAutopingerRemovedestination(autopinger : Win32cr::Devices::AllJoyn::Alljoyn_autopinger, group : Win32cr::Foundation::PSTR, destination : Win32cr::Foundation::PSTR, removeall : Int32) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_autopinger_removedestination(autopinger, group, destination, removeall)
+    {% end %}
   end
 
   def alljoynGetversion : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_getversion
+    {% end %}
   end
 
   def alljoynGetbuildinfo : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.alljoyn_getbuildinfo
+    {% end %}
   end
 
   def alljoynGetnumericversion : UInt32
+    {% if !flag?(:docs) %}
     C.alljoyn_getnumericversion
+    {% end %}
   end
 
   def alljoynInit : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_init
+    {% end %}
   end
 
   def alljoynShutdown : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_shutdown
+    {% end %}
   end
 
   def alljoynRouterinit : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_routerinit
+    {% end %}
   end
 
   def alljoynRouterinitwithconfig(configXml : Int8*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_routerinitwithconfig(configXml)
+    {% end %}
   end
 
   def alljoynRoutershutdown : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_routershutdown
+    {% end %}
   end
 
   def alljoynProxybusobjectRefCreate(proxy : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject) : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject_ref
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_ref_create(proxy)
+    {% end %}
   end
 
   def alljoynProxybusobjectRefGet(ref : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject_ref) : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_ref_get(ref)
+    {% end %}
   end
 
   def alljoynProxybusobjectRefIncref(ref : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject_ref) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_ref_incref(ref)
+    {% end %}
   end
 
   def alljoynProxybusobjectRefDecref(ref : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject_ref) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_proxybusobject_ref_decref(ref)
+    {% end %}
   end
 
   def alljoynObserverlistenerCreate(callback : Win32cr::Devices::AllJoyn::Alljoyn_observerlistener_callback*, context : Void*) : Win32cr::Devices::AllJoyn::Alljoyn_observerlistener
+    {% if !flag?(:docs) %}
     C.alljoyn_observerlistener_create(callback, context)
+    {% end %}
   end
 
   def alljoynObserverlistenerDestroy(listener : Win32cr::Devices::AllJoyn::Alljoyn_observerlistener) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_observerlistener_destroy(listener)
+    {% end %}
   end
 
   def alljoynObserverCreate(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, mandatoryInterfaces : Int8**, numMandatoryInterfaces : LibC::UIntPtrT) : Win32cr::Devices::AllJoyn::Alljoyn_observer
+    {% if !flag?(:docs) %}
     C.alljoyn_observer_create(bus, mandatoryInterfaces, numMandatoryInterfaces)
+    {% end %}
   end
 
   def alljoynObserverDestroy(observer : Win32cr::Devices::AllJoyn::Alljoyn_observer) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_observer_destroy(observer)
+    {% end %}
   end
 
   def alljoynObserverRegisterlistener(observer : Win32cr::Devices::AllJoyn::Alljoyn_observer, listener : Win32cr::Devices::AllJoyn::Alljoyn_observerlistener, triggerOnExisting : Int32) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_observer_registerlistener(observer, listener, triggerOnExisting)
+    {% end %}
   end
 
   def alljoynObserverUnregisterlistener(observer : Win32cr::Devices::AllJoyn::Alljoyn_observer, listener : Win32cr::Devices::AllJoyn::Alljoyn_observerlistener) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_observer_unregisterlistener(observer, listener)
+    {% end %}
   end
 
   def alljoynObserverUnregisteralllisteners(observer : Win32cr::Devices::AllJoyn::Alljoyn_observer) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_observer_unregisteralllisteners(observer)
+    {% end %}
   end
 
   def alljoynObserverGet(observer : Win32cr::Devices::AllJoyn::Alljoyn_observer, uniqueBusName : Win32cr::Foundation::PSTR, objectPath : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject_ref
+    {% if !flag?(:docs) %}
     C.alljoyn_observer_get(observer, uniqueBusName, objectPath)
+    {% end %}
   end
 
   def alljoynObserverGetfirst(observer : Win32cr::Devices::AllJoyn::Alljoyn_observer) : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject_ref
+    {% if !flag?(:docs) %}
     C.alljoyn_observer_getfirst(observer)
+    {% end %}
   end
 
   def alljoynObserverGetnext(observer : Win32cr::Devices::AllJoyn::Alljoyn_observer, proxyref : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject_ref) : Win32cr::Devices::AllJoyn::Alljoyn_proxybusobject_ref
+    {% if !flag?(:docs) %}
     C.alljoyn_observer_getnext(observer, proxyref)
+    {% end %}
   end
 
   def alljoynPasswordmanagerSetcredentials(authMechanism : Win32cr::Foundation::PSTR, password : Win32cr::Foundation::PSTR) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_passwordmanager_setcredentials(authMechanism, password)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyGetpermissionmanagementsessionport : UInt16
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_getpermissionmanagementsessionport
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyCreate(bus : Win32cr::Devices::AllJoyn::Alljoyn_busattachment, appBusName : Int8*, sessionId : UInt32) : Win32cr::Devices::AllJoyn::Alljoyn_securityapplicationproxy
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_create(bus, appBusName, sessionId)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyDestroy(proxy : Win32cr::Devices::AllJoyn::Alljoyn_securityapplicationproxy) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_destroy(proxy)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyClaim(proxy : Win32cr::Devices::AllJoyn::Alljoyn_securityapplicationproxy, caKey : Int8*, identityCertificateChain : Int8*, groupId : UInt8*, groupSize : LibC::UIntPtrT, groupAuthority : Int8*, manifestsXmls : Int8**, manifestsCount : LibC::UIntPtrT) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_claim(proxy, caKey, identityCertificateChain, groupId, groupSize, groupAuthority, manifestsXmls, manifestsCount)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyGetmanifesttemplate(proxy : Win32cr::Devices::AllJoyn::Alljoyn_securityapplicationproxy, manifestTemplateXml : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_getmanifesttemplate(proxy, manifestTemplateXml)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyManifesttemplateDestroy(manifestTemplateXml : Int8*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_manifesttemplate_destroy(manifestTemplateXml)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyGetapplicationstate(proxy : Win32cr::Devices::AllJoyn::Alljoyn_securityapplicationproxy, applicationState : Win32cr::Devices::AllJoyn::Alljoyn_applicationstate*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_getapplicationstate(proxy, applicationState)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyGetclaimcapabilities(proxy : Win32cr::Devices::AllJoyn::Alljoyn_securityapplicationproxy, capabilities : UInt16*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_getclaimcapabilities(proxy, capabilities)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyGetclaimcapabilitiesadditionalinfo(proxy : Win32cr::Devices::AllJoyn::Alljoyn_securityapplicationproxy, additionalInfo : UInt16*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_getclaimcapabilitiesadditionalinfo(proxy, additionalInfo)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyGetpolicy(proxy : Win32cr::Devices::AllJoyn::Alljoyn_securityapplicationproxy, policyXml : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_getpolicy(proxy, policyXml)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyGetdefaultpolicy(proxy : Win32cr::Devices::AllJoyn::Alljoyn_securityapplicationproxy, policyXml : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_getdefaultpolicy(proxy, policyXml)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyPolicyDestroy(policyXml : Int8*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_policy_destroy(policyXml)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyUpdatepolicy(proxy : Win32cr::Devices::AllJoyn::Alljoyn_securityapplicationproxy, policyXml : Int8*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_updatepolicy(proxy, policyXml)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyUpdateidentity(proxy : Win32cr::Devices::AllJoyn::Alljoyn_securityapplicationproxy, identityCertificateChain : Int8*, manifestsXmls : Int8**, manifestsCount : LibC::UIntPtrT) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_updateidentity(proxy, identityCertificateChain, manifestsXmls, manifestsCount)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyInstallmembership(proxy : Win32cr::Devices::AllJoyn::Alljoyn_securityapplicationproxy, membershipCertificateChain : Int8*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_installmembership(proxy, membershipCertificateChain)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyReset(proxy : Win32cr::Devices::AllJoyn::Alljoyn_securityapplicationproxy) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_reset(proxy)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyResetpolicy(proxy : Win32cr::Devices::AllJoyn::Alljoyn_securityapplicationproxy) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_resetpolicy(proxy)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyStartmanagement(proxy : Win32cr::Devices::AllJoyn::Alljoyn_securityapplicationproxy) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_startmanagement(proxy)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyEndmanagement(proxy : Win32cr::Devices::AllJoyn::Alljoyn_securityapplicationproxy) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_endmanagement(proxy)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyGeteccpublickey(proxy : Win32cr::Devices::AllJoyn::Alljoyn_securityapplicationproxy, eccPublicKey : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_geteccpublickey(proxy, eccPublicKey)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyEccpublickeyDestroy(eccPublicKey : Int8*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_eccpublickey_destroy(eccPublicKey)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxySignmanifest(unsignedManifestXml : Int8*, identityCertificatePem : Int8*, signingPrivateKeyPem : Int8*, signedManifestXml : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_signmanifest(unsignedManifestXml, identityCertificatePem, signingPrivateKeyPem, signedManifestXml)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyManifestDestroy(signedManifestXml : Int8*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_manifest_destroy(signedManifestXml)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyComputemanifestdigest(unsignedManifestXml : Int8*, identityCertificatePem : Int8*, digest : UInt8**, digestSize : LibC::UIntPtrT*) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_computemanifestdigest(unsignedManifestXml, identityCertificatePem, digest, digestSize)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxyDigestDestroy(digest : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_digest_destroy(digest)
+    {% end %}
   end
 
   def alljoynSecurityapplicationproxySetmanifestsignature(unsignedManifestXml : Int8*, identityCertificatePem : Int8*, signature : UInt8*, signatureSize : LibC::UIntPtrT, signedManifestXml : Int8**) : Win32cr::Devices::AllJoyn::QStatus
+    {% if !flag?(:docs) %}
     C.alljoyn_securityapplicationproxy_setmanifestsignature(unsignedManifestXml, identityCertificatePem, signature, signatureSize, signedManifestXml)
+    {% end %}
   end
 
-  @[Link("msajapi")]
+  @[Link("msajapi.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun AllJoynConnectToBus(connectionSpec : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
@@ -4675,4 +5758,5 @@ module Win32cr::Devices::AllJoyn
     fun alljoyn_securityapplicationproxy_setmanifestsignature(unsignedManifestXml : Int8*, identityCertificatePem : Int8*, signature : UInt8*, signatureSize : LibC::UIntPtrT, signedManifestXml : Int8**) : Win32cr::Devices::AllJoyn::QStatus
 
   end
+  {% end %}
 end

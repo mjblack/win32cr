@@ -6,7 +6,7 @@ module Win32cr::System::Com::ChannelCredentials
 
 
   @[Extern]
-  record IChannelCredentialsVtbl,
+  record IChannelCredentialsVtable,
     query_interface : Proc(IChannelCredentials*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IChannelCredentials*, UInt32),
     release : Proc(IChannelCredentials*, UInt32),
@@ -27,7 +27,7 @@ module Win32cr::System::Com::ChannelCredentials
 
 
   @[Extern]
-  record IChannelCredentials, lpVtbl : IChannelCredentialsVtbl* do
+  record IChannelCredentials, lpVtbl : IChannelCredentialsVtable* do
     GUID = LibC::GUID.new(0x181b448c_u32, 0xc17c_u16, 0x4b17_u16, StaticArray[0xac_u8, 0x6d_u8, 0x6_u8, 0x69_u8, 0x9b_u8, 0x93_u8, 0x19_u8, 0x8f_u8])
     def query_interface(this : IChannelCredentials*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

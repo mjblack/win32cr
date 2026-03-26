@@ -50,7 +50,7 @@ module Win32cr::Storage::Xps::Printing
   end
 
   @[Extern]
-  record IXpsPrintJobStreamVtbl,
+  record IXpsPrintJobStreamVtable,
     query_interface : Proc(IXpsPrintJobStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsPrintJobStream*, UInt32),
     release : Proc(IXpsPrintJobStream*, UInt32),
@@ -60,7 +60,7 @@ module Win32cr::Storage::Xps::Printing
 
 
   @[Extern]
-  record IXpsPrintJobStream, lpVtbl : IXpsPrintJobStreamVtbl* do
+  record IXpsPrintJobStream, lpVtbl : IXpsPrintJobStreamVtable* do
     GUID = LibC::GUID.new(0x7a77dc5f_u32, 0x45d6_u16, 0x4dff_u16, StaticArray[0x93_u8, 0x7_u8, 0xd8_u8, 0xcb_u8, 0x84_u8, 0x63_u8, 0x47_u8, 0xca_u8])
     def query_interface(this : IXpsPrintJobStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -84,7 +84,7 @@ module Win32cr::Storage::Xps::Printing
   end
 
   @[Extern]
-  record IXpsPrintJobVtbl,
+  record IXpsPrintJobVtable,
     query_interface : Proc(IXpsPrintJob*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsPrintJob*, UInt32),
     release : Proc(IXpsPrintJob*, UInt32),
@@ -93,7 +93,7 @@ module Win32cr::Storage::Xps::Printing
 
 
   @[Extern]
-  record IXpsPrintJob, lpVtbl : IXpsPrintJobVtbl* do
+  record IXpsPrintJob, lpVtbl : IXpsPrintJobVtable* do
     GUID = LibC::GUID.new(0x5ab89b06_u32, 0x8194_u16, 0x425f_u16, StaticArray[0xab_u8, 0x3b_u8, 0xd7_u8, 0xa9_u8, 0x6e_u8, 0x35_u8, 0x1_u8, 0x61_u8])
     def query_interface(this : IXpsPrintJob*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -114,7 +114,7 @@ module Win32cr::Storage::Xps::Printing
   end
 
   @[Extern]
-  record IPrintDocumentPackageTargetVtbl,
+  record IPrintDocumentPackageTargetVtable,
     query_interface : Proc(IPrintDocumentPackageTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrintDocumentPackageTarget*, UInt32),
     release : Proc(IPrintDocumentPackageTarget*, UInt32),
@@ -124,7 +124,7 @@ module Win32cr::Storage::Xps::Printing
 
 
   @[Extern]
-  record IPrintDocumentPackageTarget, lpVtbl : IPrintDocumentPackageTargetVtbl* do
+  record IPrintDocumentPackageTarget, lpVtbl : IPrintDocumentPackageTargetVtable* do
     GUID = LibC::GUID.new(0x1b8efec4_u32, 0x3019_u16, 0x4c27_u16, StaticArray[0x96_u8, 0x4e_u8, 0x36_u8, 0x72_u8, 0x2_u8, 0x15_u8, 0x69_u8, 0x6_u8])
     def query_interface(this : IPrintDocumentPackageTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -148,7 +148,7 @@ module Win32cr::Storage::Xps::Printing
   end
 
   @[Extern]
-  record IPrintDocumentPackageStatusEventVtbl,
+  record IPrintDocumentPackageStatusEventVtable,
     query_interface : Proc(IPrintDocumentPackageStatusEvent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrintDocumentPackageStatusEvent*, UInt32),
     release : Proc(IPrintDocumentPackageStatusEvent*, UInt32),
@@ -160,7 +160,7 @@ module Win32cr::Storage::Xps::Printing
 
 
   @[Extern]
-  record IPrintDocumentPackageStatusEvent, lpVtbl : IPrintDocumentPackageStatusEventVtbl* do
+  record IPrintDocumentPackageStatusEvent, lpVtbl : IPrintDocumentPackageStatusEventVtable* do
     GUID = LibC::GUID.new(0xed90c8ad_u32, 0x5c34_u16, 0x4d05_u16, StaticArray[0xa1_u8, 0xec_u8, 0xe_u8, 0x8a_u8, 0x9b_u8, 0x3a_u8, 0xd7_u8, 0xaf_u8])
     def query_interface(this : IPrintDocumentPackageStatusEvent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -190,7 +190,7 @@ module Win32cr::Storage::Xps::Printing
   end
 
   @[Extern]
-  record IPrintDocumentPackageTargetFactoryVtbl,
+  record IPrintDocumentPackageTargetFactoryVtable,
     query_interface : Proc(IPrintDocumentPackageTargetFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrintDocumentPackageTargetFactory*, UInt32),
     release : Proc(IPrintDocumentPackageTargetFactory*, UInt32),
@@ -198,7 +198,7 @@ module Win32cr::Storage::Xps::Printing
 
 
   @[Extern]
-  record IPrintDocumentPackageTargetFactory, lpVtbl : IPrintDocumentPackageTargetFactoryVtbl* do
+  record IPrintDocumentPackageTargetFactory, lpVtbl : IPrintDocumentPackageTargetFactoryVtable* do
     GUID = LibC::GUID.new(0xd2959bf7_u32, 0xb31b_u16, 0x4a3d_u16, StaticArray[0x96_u8, 0x0_u8, 0x71_u8, 0x2e_u8, 0xb1_u8, 0x33_u8, 0x5b_u8, 0xa4_u8])
     def query_interface(this : IPrintDocumentPackageTargetFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -216,14 +216,19 @@ module Win32cr::Storage::Xps::Printing
   end
 
   def startXpsPrintJob(printerName : Win32cr::Foundation::PWSTR, jobName : Win32cr::Foundation::PWSTR, outputFileName : Win32cr::Foundation::PWSTR, progressEvent : Win32cr::Foundation::HANDLE, completionEvent : Win32cr::Foundation::HANDLE, printablePagesOn : UInt8*, printablePagesOnCount : UInt32, xpsPrintJob : Void**, documentStream : Void**, printTicketStream : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StartXpsPrintJob(printerName, jobName, outputFileName, progressEvent, completionEvent, printablePagesOn, printablePagesOnCount, xpsPrintJob, documentStream, printTicketStream)
+    {% end %}
   end
 
   def startXpsPrintJob1(printerName : Win32cr::Foundation::PWSTR, jobName : Win32cr::Foundation::PWSTR, outputFileName : Win32cr::Foundation::PWSTR, progressEvent : Win32cr::Foundation::HANDLE, completionEvent : Win32cr::Foundation::HANDLE, xpsPrintJob : Void**, printContentReceiver : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StartXpsPrintJob1(printerName, jobName, outputFileName, progressEvent, completionEvent, xpsPrintJob, printContentReceiver)
+    {% end %}
   end
 
-  @[Link("xpsprint")]
+  @[Link("xpsprint.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun StartXpsPrintJob(printerName : Win32cr::Foundation::PWSTR, jobName : Win32cr::Foundation::PWSTR, outputFileName : Win32cr::Foundation::PWSTR, progressEvent : Win32cr::Foundation::HANDLE, completionEvent : Win32cr::Foundation::HANDLE, printablePagesOn : UInt8*, printablePagesOnCount : UInt32, xpsPrintJob : Void**, documentStream : Void**, printTicketStream : Void**) : Win32cr::Foundation::HRESULT
@@ -232,4 +237,5 @@ module Win32cr::Storage::Xps::Printing
     fun StartXpsPrintJob1(printerName : Win32cr::Foundation::PWSTR, jobName : Win32cr::Foundation::PWSTR, outputFileName : Win32cr::Foundation::PWSTR, progressEvent : Win32cr::Foundation::HANDLE, completionEvent : Win32cr::Foundation::HANDLE, xpsPrintJob : Void**, printContentReceiver : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

@@ -425,11 +425,7 @@ module Win32cr::Storage::Vss
     end
   end
 
-  @[Extern]
-  struct IVssExamineWriterMetadata
-    def initialize()
-    end
-  end
+  alias IVssExamineWriterMetadata = Void
 
   @[Extern]
   struct VSS_VOLUME_PROP
@@ -490,7 +486,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssEnumObjectVtbl,
+  record IVssEnumObjectVtable,
     query_interface : Proc(IVssEnumObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssEnumObject*, UInt32),
     release : Proc(IVssEnumObject*, UInt32),
@@ -501,7 +497,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssEnumObject, lpVtbl : IVssEnumObjectVtbl* do
+  record IVssEnumObject, lpVtbl : IVssEnumObjectVtable* do
     GUID = LibC::GUID.new(0xae1c7110_u32, 0x2f60_u16, 0x11d3_u16, StaticArray[0x8a_u8, 0x39_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd8_u8, 0xe3_u8])
     def query_interface(this : IVssEnumObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -528,7 +524,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssAsyncVtbl,
+  record IVssAsyncVtable,
     query_interface : Proc(IVssAsync*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssAsync*, UInt32),
     release : Proc(IVssAsync*, UInt32),
@@ -538,7 +534,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssAsync, lpVtbl : IVssAsyncVtbl* do
+  record IVssAsync, lpVtbl : IVssAsyncVtable* do
     GUID = LibC::GUID.new(0x507c37b4_u32, 0xcf5b_u16, 0x4e95_u16, StaticArray[0xb0_u8, 0xaf_u8, 0x14_u8, 0xeb_u8, 0x97_u8, 0x67_u8, 0x46_u8, 0x7e_u8])
     def query_interface(this : IVssAsync*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -562,7 +558,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssWMFiledescVtbl,
+  record IVssWMFiledescVtable,
     query_interface : Proc(IVssWMFiledesc*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssWMFiledesc*, UInt32),
     release : Proc(IVssWMFiledesc*, UInt32),
@@ -574,7 +570,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssWMFiledesc, lpVtbl : IVssWMFiledescVtbl* do
+  record IVssWMFiledesc, lpVtbl : IVssWMFiledescVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IVssWMFiledesc*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -604,7 +600,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssWMDependencyVtbl,
+  record IVssWMDependencyVtable,
     query_interface : Proc(IVssWMDependency*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssWMDependency*, UInt32),
     release : Proc(IVssWMDependency*, UInt32),
@@ -614,7 +610,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssWMDependency, lpVtbl : IVssWMDependencyVtbl* do
+  record IVssWMDependency, lpVtbl : IVssWMDependencyVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IVssWMDependency*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -638,7 +634,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssComponentVtbl,
+  record IVssComponentVtable,
     query_interface : Proc(IVssComponent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssComponent*, UInt32),
     release : Proc(IVssComponent*, UInt32),
@@ -683,7 +679,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssComponent, lpVtbl : IVssComponentVtbl* do
+  record IVssComponent, lpVtbl : IVssComponentVtable* do
     GUID = LibC::GUID.new(0xd2c72c96_u32, 0xc121_u16, 0x4518_u16, StaticArray[0xb6_u8, 0x27_u8, 0xe5_u8, 0xa9_u8, 0x3d_u8, 0x1_u8, 0xe_u8, 0xad_u8])
     def query_interface(this : IVssComponent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -812,14 +808,14 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssWriterComponentsVtbl,
+  record IVssWriterComponentsVtable,
     get_component_count : Proc(IVssWriterComponents*, UInt32*, Win32cr::Foundation::HRESULT),
     get_writer_info : Proc(IVssWriterComponents*, LibC::GUID*, LibC::GUID*, Win32cr::Foundation::HRESULT),
     get_component : Proc(IVssWriterComponents*, UInt32, Void**, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IVssWriterComponents, lpVtbl : IVssWriterComponentsVtbl* do
+  record IVssWriterComponents, lpVtbl : IVssWriterComponentsVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def get_component_count(this : IVssWriterComponents*, pcComponents : UInt32*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_component_count.call(this, pcComponents)
@@ -834,7 +830,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssComponentExVtbl,
+  record IVssComponentExVtable,
     query_interface : Proc(IVssComponentEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssComponentEx*, UInt32),
     release : Proc(IVssComponentEx*, UInt32),
@@ -886,7 +882,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssComponentEx, lpVtbl : IVssComponentExVtbl* do
+  record IVssComponentEx, lpVtbl : IVssComponentExVtable* do
     GUID = LibC::GUID.new(0x156c8b5e_u32, 0xf131_u16, 0x4bd7_u16, StaticArray[0x9c_u8, 0x97_u8, 0xd1_u8, 0x92_u8, 0x3b_u8, 0xe7_u8, 0xe1_u8, 0xfa_u8])
     def query_interface(this : IVssComponentEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1036,7 +1032,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssComponentEx2Vtbl,
+  record IVssComponentEx2Vtable,
     query_interface : Proc(IVssComponentEx2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssComponentEx2*, UInt32),
     release : Proc(IVssComponentEx2*, UInt32),
@@ -1090,7 +1086,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssComponentEx2, lpVtbl : IVssComponentEx2Vtbl* do
+  record IVssComponentEx2, lpVtbl : IVssComponentEx2Vtable* do
     GUID = LibC::GUID.new(0x3b5be0f2_u32, 0x7a9_u16, 0x4e4b_u16, StaticArray[0xbd_u8, 0xd3_u8, 0xcf_u8, 0xdc_u8, 0x8e_u8, 0x2c_u8, 0xd_u8, 0x2d_u8])
     def query_interface(this : IVssComponentEx2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1246,7 +1242,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssCreateWriterMetadataVtbl,
+  record IVssCreateWriterMetadataVtable,
     add_include_files : Proc(IVssCreateWriterMetadata*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::PWSTR, Win32cr::Foundation::HRESULT),
     add_exclude_files : Proc(IVssCreateWriterMetadata*, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8, Win32cr::Foundation::HRESULT),
     add_component : Proc(IVssCreateWriterMetadata*, Win32cr::Storage::Vss::VSS_COMPONENT_TYPE, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, Win32cr::Foundation::PWSTR, UInt8*, UInt32, UInt8, UInt8, UInt8, UInt8, UInt32, Win32cr::Foundation::HRESULT),
@@ -1262,7 +1258,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssCreateWriterMetadata, lpVtbl : IVssCreateWriterMetadataVtbl* do
+  record IVssCreateWriterMetadata, lpVtbl : IVssCreateWriterMetadataVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def add_include_files(this : IVssCreateWriterMetadata*, wszPath : Win32cr::Foundation::PWSTR, wszFilespec : Win32cr::Foundation::PWSTR, bRecursive : UInt8, wszAlternateLocation : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.add_include_files.call(this, wszPath, wszFilespec, bRecursive, wszAlternateLocation)
@@ -1304,7 +1300,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssWriterImplVtbl,
+  record IVssWriterImplVtable,
     query_interface : Proc(IVssWriterImpl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssWriterImpl*, UInt32),
     release : Proc(IVssWriterImpl*, UInt32),
@@ -1333,7 +1329,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssWriterImpl, lpVtbl : IVssWriterImplVtbl* do
+  record IVssWriterImpl, lpVtbl : IVssWriterImplVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IVssWriterImpl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1414,7 +1410,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssCreateExpressWriterMetadataVtbl,
+  record IVssCreateExpressWriterMetadataVtable,
     query_interface : Proc(IVssCreateExpressWriterMetadata*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssCreateExpressWriterMetadata*, UInt32),
     release : Proc(IVssCreateExpressWriterMetadata*, UInt32),
@@ -1428,7 +1424,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssCreateExpressWriterMetadata, lpVtbl : IVssCreateExpressWriterMetadataVtbl* do
+  record IVssCreateExpressWriterMetadata, lpVtbl : IVssCreateExpressWriterMetadataVtable* do
     GUID = LibC::GUID.new(0x9c772e77_u32, 0xb26e_u16, 0x427f_u16, StaticArray[0x92_u8, 0xdd_u8, 0xc9_u8, 0x96_u8, 0xf4_u8, 0x1e_u8, 0xa5_u8, 0xe3_u8])
     def query_interface(this : IVssCreateExpressWriterMetadata*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1464,7 +1460,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssExpressWriterVtbl,
+  record IVssExpressWriterVtable,
     query_interface : Proc(IVssExpressWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssExpressWriter*, UInt32),
     release : Proc(IVssExpressWriter*, UInt32),
@@ -1475,7 +1471,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssExpressWriter, lpVtbl : IVssExpressWriterVtbl* do
+  record IVssExpressWriter, lpVtbl : IVssExpressWriterVtable* do
     GUID = LibC::GUID.new(0xe33affdc_u32, 0x59c7_u16, 0x47b1_u16, StaticArray[0x97_u8, 0xd5_u8, 0x42_u8, 0x66_u8, 0x59_u8, 0x8f_u8, 0x62_u8, 0x35_u8])
     def query_interface(this : IVssExpressWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1502,7 +1498,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssSnapshotMgmtVtbl,
+  record IVssSnapshotMgmtVtable,
     query_interface : Proc(IVssSnapshotMgmt*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssSnapshotMgmt*, UInt32),
     release : Proc(IVssSnapshotMgmt*, UInt32),
@@ -1512,7 +1508,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssSnapshotMgmt, lpVtbl : IVssSnapshotMgmtVtbl* do
+  record IVssSnapshotMgmt, lpVtbl : IVssSnapshotMgmtVtable* do
     GUID = LibC::GUID.new(0xfa7df749_u32, 0x66e7_u16, 0x4986_u16, StaticArray[0xa2_u8, 0x7f_u8, 0xe2_u8, 0xf0_u8, 0x4a_u8, 0xe5_u8, 0x37_u8, 0x72_u8])
     def query_interface(this : IVssSnapshotMgmt*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1536,7 +1532,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssSnapshotMgmt2Vtbl,
+  record IVssSnapshotMgmt2Vtable,
     query_interface : Proc(IVssSnapshotMgmt2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssSnapshotMgmt2*, UInt32),
     release : Proc(IVssSnapshotMgmt2*, UInt32),
@@ -1544,7 +1540,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssSnapshotMgmt2, lpVtbl : IVssSnapshotMgmt2Vtbl* do
+  record IVssSnapshotMgmt2, lpVtbl : IVssSnapshotMgmt2Vtable* do
     GUID = LibC::GUID.new(0xf61ec39_u32, 0xfe82_u16, 0x45f2_u16, StaticArray[0xa3_u8, 0xf0_u8, 0x76_u8, 0x8b_u8, 0x5d_u8, 0x42_u8, 0x71_u8, 0x2_u8])
     def query_interface(this : IVssSnapshotMgmt2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1562,7 +1558,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssDifferentialSoftwareSnapshotMgmtVtbl,
+  record IVssDifferentialSoftwareSnapshotMgmtVtable,
     query_interface : Proc(IVssDifferentialSoftwareSnapshotMgmt*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssDifferentialSoftwareSnapshotMgmt*, UInt32),
     release : Proc(IVssDifferentialSoftwareSnapshotMgmt*, UInt32),
@@ -1575,7 +1571,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssDifferentialSoftwareSnapshotMgmt, lpVtbl : IVssDifferentialSoftwareSnapshotMgmtVtbl* do
+  record IVssDifferentialSoftwareSnapshotMgmt, lpVtbl : IVssDifferentialSoftwareSnapshotMgmtVtable* do
     GUID = LibC::GUID.new(0x214a0f28_u32, 0xb737_u16, 0x4026_u16, StaticArray[0xb8_u8, 0x47_u8, 0x4f_u8, 0x9e_u8, 0x37_u8, 0xd7_u8, 0x95_u8, 0x29_u8])
     def query_interface(this : IVssDifferentialSoftwareSnapshotMgmt*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1608,7 +1604,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssDifferentialSoftwareSnapshotMgmt2Vtbl,
+  record IVssDifferentialSoftwareSnapshotMgmt2Vtable,
     query_interface : Proc(IVssDifferentialSoftwareSnapshotMgmt2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssDifferentialSoftwareSnapshotMgmt2*, UInt32),
     release : Proc(IVssDifferentialSoftwareSnapshotMgmt2*, UInt32),
@@ -1625,7 +1621,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssDifferentialSoftwareSnapshotMgmt2, lpVtbl : IVssDifferentialSoftwareSnapshotMgmt2Vtbl* do
+  record IVssDifferentialSoftwareSnapshotMgmt2, lpVtbl : IVssDifferentialSoftwareSnapshotMgmt2Vtable* do
     GUID = LibC::GUID.new(0x949d7353_u32, 0x675f_u16, 0x4275_u16, StaticArray[0x89_u8, 0x69_u8, 0xf0_u8, 0x44_u8, 0xc6_u8, 0x27_u8, 0x78_u8, 0x15_u8])
     def query_interface(this : IVssDifferentialSoftwareSnapshotMgmt2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1670,7 +1666,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssDifferentialSoftwareSnapshotMgmt3Vtbl,
+  record IVssDifferentialSoftwareSnapshotMgmt3Vtable,
     query_interface : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, UInt32),
     release : Proc(IVssDifferentialSoftwareSnapshotMgmt3*, UInt32),
@@ -1692,7 +1688,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssDifferentialSoftwareSnapshotMgmt3, lpVtbl : IVssDifferentialSoftwareSnapshotMgmt3Vtbl* do
+  record IVssDifferentialSoftwareSnapshotMgmt3, lpVtbl : IVssDifferentialSoftwareSnapshotMgmt3Vtable* do
     GUID = LibC::GUID.new(0x383f7e71_u32, 0xa4c5_u16, 0x401f_u16, StaticArray[0xb2_u8, 0x7f_u8, 0xf8_u8, 0x26_u8, 0x28_u8, 0x9f_u8, 0x84_u8, 0x58_u8])
     def query_interface(this : IVssDifferentialSoftwareSnapshotMgmt3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1752,7 +1748,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssEnumMgmtObjectVtbl,
+  record IVssEnumMgmtObjectVtable,
     query_interface : Proc(IVssEnumMgmtObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssEnumMgmtObject*, UInt32),
     release : Proc(IVssEnumMgmtObject*, UInt32),
@@ -1763,7 +1759,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssEnumMgmtObject, lpVtbl : IVssEnumMgmtObjectVtbl* do
+  record IVssEnumMgmtObject, lpVtbl : IVssEnumMgmtObjectVtable* do
     GUID = LibC::GUID.new(0x1954e6b_u32, 0x9254_u16, 0x4e6e_u16, StaticArray[0x80_u8, 0x8c_u8, 0xc9_u8, 0xe0_u8, 0x5d_u8, 0x0_u8, 0x76_u8, 0x96_u8])
     def query_interface(this : IVssEnumMgmtObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1790,7 +1786,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssAdminVtbl,
+  record IVssAdminVtable,
     query_interface : Proc(IVssAdmin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssAdmin*, UInt32),
     release : Proc(IVssAdmin*, UInt32),
@@ -1801,7 +1797,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssAdmin, lpVtbl : IVssAdminVtbl* do
+  record IVssAdmin, lpVtbl : IVssAdminVtable* do
     GUID = LibC::GUID.new(0x77ed5996_u32, 0x2f63_u16, 0x11d3_u16, StaticArray[0x8a_u8, 0x39_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xd8_u8, 0xe3_u8])
     def query_interface(this : IVssAdmin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1828,7 +1824,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssAdminExVtbl,
+  record IVssAdminExVtable,
     query_interface : Proc(IVssAdminEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssAdminEx*, UInt32),
     release : Proc(IVssAdminEx*, UInt32),
@@ -1842,7 +1838,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssAdminEx, lpVtbl : IVssAdminExVtbl* do
+  record IVssAdminEx, lpVtbl : IVssAdminExVtable* do
     GUID = LibC::GUID.new(0x7858a9f8_u32, 0xb1fa_u16, 0x41a6_u16, StaticArray[0x96_u8, 0x4f_u8, 0xb9_u8, 0xb3_u8, 0x6b_u8, 0x8c_u8, 0xd8_u8, 0xd8_u8])
     def query_interface(this : IVssAdminEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1878,7 +1874,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssSoftwareSnapshotProviderVtbl,
+  record IVssSoftwareSnapshotProviderVtable,
     query_interface : Proc(IVssSoftwareSnapshotProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssSoftwareSnapshotProvider*, UInt32),
     release : Proc(IVssSoftwareSnapshotProvider*, UInt32),
@@ -1895,7 +1891,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssSoftwareSnapshotProvider, lpVtbl : IVssSoftwareSnapshotProviderVtbl* do
+  record IVssSoftwareSnapshotProvider, lpVtbl : IVssSoftwareSnapshotProviderVtable* do
     GUID = LibC::GUID.new(0x609e123e_u32, 0x2c5a_u16, 0x44d3_u16, StaticArray[0x8f_u8, 0x1_u8, 0xb_u8, 0x1d_u8, 0x9a_u8, 0x47_u8, 0xd1_u8, 0xff_u8])
     def query_interface(this : IVssSoftwareSnapshotProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1940,7 +1936,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssProviderCreateSnapshotSetVtbl,
+  record IVssProviderCreateSnapshotSetVtable,
     query_interface : Proc(IVssProviderCreateSnapshotSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssProviderCreateSnapshotSet*, UInt32),
     release : Proc(IVssProviderCreateSnapshotSet*, UInt32),
@@ -1954,7 +1950,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssProviderCreateSnapshotSet, lpVtbl : IVssProviderCreateSnapshotSetVtbl* do
+  record IVssProviderCreateSnapshotSet, lpVtbl : IVssProviderCreateSnapshotSetVtable* do
     GUID = LibC::GUID.new(0x5f894e5b_u32, 0x1e39_u16, 0x4778_u16, StaticArray[0x8e_u8, 0x23_u8, 0x9a_u8, 0xba_u8, 0xd9_u8, 0xf0_u8, 0xe0_u8, 0x8c_u8])
     def query_interface(this : IVssProviderCreateSnapshotSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1990,7 +1986,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssProviderNotificationsVtbl,
+  record IVssProviderNotificationsVtable,
     query_interface : Proc(IVssProviderNotifications*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssProviderNotifications*, UInt32),
     release : Proc(IVssProviderNotifications*, UInt32),
@@ -1999,7 +1995,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssProviderNotifications, lpVtbl : IVssProviderNotificationsVtbl* do
+  record IVssProviderNotifications, lpVtbl : IVssProviderNotificationsVtable* do
     GUID = LibC::GUID.new(0xe561901f_u32, 0x3a5_u16, 0x4afe_u16, StaticArray[0x86_u8, 0xd0_u8, 0x72_u8, 0xba_u8, 0xee_u8, 0xce_u8, 0x70_u8, 0x4_u8])
     def query_interface(this : IVssProviderNotifications*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2020,7 +2016,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssHardwareSnapshotProviderVtbl,
+  record IVssHardwareSnapshotProviderVtable,
     query_interface : Proc(IVssHardwareSnapshotProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssHardwareSnapshotProvider*, UInt32),
     release : Proc(IVssHardwareSnapshotProvider*, UInt32),
@@ -2033,7 +2029,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssHardwareSnapshotProvider, lpVtbl : IVssHardwareSnapshotProviderVtbl* do
+  record IVssHardwareSnapshotProvider, lpVtbl : IVssHardwareSnapshotProviderVtable* do
     GUID = LibC::GUID.new(0x9593a157_u32, 0x44e9_u16, 0x4344_u16, StaticArray[0xbb_u8, 0xeb_u8, 0x44_u8, 0xfb_u8, 0xf9_u8, 0xb0_u8, 0x6b_u8, 0x10_u8])
     def query_interface(this : IVssHardwareSnapshotProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2066,7 +2062,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssHardwareSnapshotProviderExVtbl,
+  record IVssHardwareSnapshotProviderExVtable,
     query_interface : Proc(IVssHardwareSnapshotProviderEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssHardwareSnapshotProviderEx*, UInt32),
     release : Proc(IVssHardwareSnapshotProviderEx*, UInt32),
@@ -2083,7 +2079,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssHardwareSnapshotProviderEx, lpVtbl : IVssHardwareSnapshotProviderExVtbl* do
+  record IVssHardwareSnapshotProviderEx, lpVtbl : IVssHardwareSnapshotProviderExVtable* do
     GUID = LibC::GUID.new(0x7f5ba925_u32, 0xcdb1_u16, 0x4d11_u16, StaticArray[0xa7_u8, 0x1f_u8, 0x33_u8, 0x9e_u8, 0xb7_u8, 0xe7_u8, 0x9_u8, 0xfd_u8])
     def query_interface(this : IVssHardwareSnapshotProviderEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2128,7 +2124,7 @@ module Win32cr::Storage::Vss
   end
 
   @[Extern]
-  record IVssFileShareSnapshotProviderVtbl,
+  record IVssFileShareSnapshotProviderVtable,
     query_interface : Proc(IVssFileShareSnapshotProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVssFileShareSnapshotProvider*, UInt32),
     release : Proc(IVssFileShareSnapshotProvider*, UInt32),
@@ -2143,7 +2139,7 @@ module Win32cr::Storage::Vss
 
 
   @[Extern]
-  record IVssFileShareSnapshotProvider, lpVtbl : IVssFileShareSnapshotProviderVtbl* do
+  record IVssFileShareSnapshotProvider, lpVtbl : IVssFileShareSnapshotProviderVtable* do
     GUID = LibC::GUID.new(0xc8636060_u32, 0x7c2e_u16, 0x11df_u16, StaticArray[0x8c_u8, 0x4a_u8, 0x8_u8, 0x0_u8, 0x20_u8, 0xc_u8, 0x9a_u8, 0x66_u8])
     def query_interface(this : IVssFileShareSnapshotProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2182,13 +2178,17 @@ module Win32cr::Storage::Vss
   end
 
   def createVssExpressWriterInternal(ppWriter : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateVssExpressWriterInternal(ppWriter)
+    {% end %}
   end
 
-  @[Link("vssapi")]
+  @[Link("vssapi.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CreateVssExpressWriterInternal(ppWriter : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

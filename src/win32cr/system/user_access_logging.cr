@@ -17,22 +17,31 @@ module Win32cr::System::UserAccessLogging
   end
 
   def ualStart(data : Win32cr::System::UserAccessLogging::UAL_DATA_BLOB*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UalStart(data)
+    {% end %}
   end
 
   def ualStop(data : Win32cr::System::UserAccessLogging::UAL_DATA_BLOB*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UalStop(data)
+    {% end %}
   end
 
   def ualInstrument(data : Win32cr::System::UserAccessLogging::UAL_DATA_BLOB*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UalInstrument(data)
+    {% end %}
   end
 
   def ualRegisterProduct(wszProductName : Win32cr::Foundation::PWSTR, wszRoleName : Win32cr::Foundation::PWSTR, wszGuid : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UalRegisterProduct(wszProductName, wszRoleName, wszGuid)
+    {% end %}
   end
 
-  @[Link("ualapi")]
+  @[Link("ualapi.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun UalStart(data : Win32cr::System::UserAccessLogging::UAL_DATA_BLOB*) : Win32cr::Foundation::HRESULT
@@ -47,4 +56,5 @@ module Win32cr::System::UserAccessLogging
     fun UalRegisterProduct(wszProductName : Win32cr::Foundation::PWSTR, wszRoleName : Win32cr::Foundation::PWSTR, wszGuid : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

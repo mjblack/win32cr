@@ -127,14 +127,19 @@ module Win32cr::NetworkManagement::WindowsNetworkVirtualization
   end
 
   def wnvOpen : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.WnvOpen
+    {% end %}
   end
 
   def wnvRequestNotification(wnv_handle : Win32cr::Foundation::HANDLE, notification_param : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_NOTIFICATION_PARAM*, overlapped : Win32cr::System::IO::OVERLAPPED*, bytes_transferred : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.WnvRequestNotification(wnv_handle, notification_param, overlapped, bytes_transferred)
+    {% end %}
   end
 
-  @[Link("wnvapi")]
+  @[Link("wnvapi.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WnvOpen : Win32cr::Foundation::HANDLE
@@ -143,4 +148,5 @@ module Win32cr::NetworkManagement::WindowsNetworkVirtualization
     fun WnvRequestNotification(wnv_handle : Win32cr::Foundation::HANDLE, notification_param : Win32cr::NetworkManagement::WindowsNetworkVirtualization::WNV_NOTIFICATION_PARAM*, overlapped : Win32cr::System::IO::OVERLAPPED*, bytes_transferred : UInt32*) : UInt32
 
   end
+  {% end %}
 end

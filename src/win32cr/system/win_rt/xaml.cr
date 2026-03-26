@@ -20,7 +20,7 @@ module Win32cr::System::WinRT::Xaml
   end
 
   @[Extern]
-  record ISurfaceImageSourceNativeVtbl,
+  record ISurfaceImageSourceNativeVtable,
     query_interface : Proc(ISurfaceImageSourceNative*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISurfaceImageSourceNative*, UInt32),
     release : Proc(ISurfaceImageSourceNative*, UInt32),
@@ -30,7 +30,7 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  record ISurfaceImageSourceNative, lpVtbl : ISurfaceImageSourceNativeVtbl* do
+  record ISurfaceImageSourceNative, lpVtbl : ISurfaceImageSourceNativeVtable* do
     GUID = LibC::GUID.new(0xf2e9edc1_u32, 0xd307_u16, 0x4525_u16, StaticArray[0x98_u8, 0x86_u8, 0xf_u8, 0xaf_u8, 0xaa_u8, 0x44_u8, 0x16_u8, 0x3c_u8])
     def query_interface(this : ISurfaceImageSourceNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54,7 +54,7 @@ module Win32cr::System::WinRT::Xaml
   end
 
   @[Extern]
-  record IVirtualSurfaceUpdatesCallbackNativeVtbl,
+  record IVirtualSurfaceUpdatesCallbackNativeVtable,
     query_interface : Proc(IVirtualSurfaceUpdatesCallbackNative*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVirtualSurfaceUpdatesCallbackNative*, UInt32),
     release : Proc(IVirtualSurfaceUpdatesCallbackNative*, UInt32),
@@ -62,7 +62,7 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  record IVirtualSurfaceUpdatesCallbackNative, lpVtbl : IVirtualSurfaceUpdatesCallbackNativeVtbl* do
+  record IVirtualSurfaceUpdatesCallbackNative, lpVtbl : IVirtualSurfaceUpdatesCallbackNativeVtable* do
     GUID = LibC::GUID.new(0xdbf2e947_u32, 0x8e6c_u16, 0x4254_u16, StaticArray[0x9e_u8, 0xee_u8, 0x77_u8, 0x38_u8, 0xf7_u8, 0x13_u8, 0x86_u8, 0xc9_u8])
     def query_interface(this : IVirtualSurfaceUpdatesCallbackNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -80,7 +80,7 @@ module Win32cr::System::WinRT::Xaml
   end
 
   @[Extern]
-  record IVirtualSurfaceImageSourceNativeVtbl,
+  record IVirtualSurfaceImageSourceNativeVtable,
     query_interface : Proc(IVirtualSurfaceImageSourceNative*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVirtualSurfaceImageSourceNative*, UInt32),
     release : Proc(IVirtualSurfaceImageSourceNative*, UInt32),
@@ -96,7 +96,7 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  record IVirtualSurfaceImageSourceNative, lpVtbl : IVirtualSurfaceImageSourceNativeVtbl* do
+  record IVirtualSurfaceImageSourceNative, lpVtbl : IVirtualSurfaceImageSourceNativeVtable* do
     GUID = LibC::GUID.new(0xe9550983_u32, 0x360b_u16, 0x4f53_u16, StaticArray[0xb3_u8, 0x91_u8, 0xaf_u8, 0xd6_u8, 0x95_u8, 0x7_u8, 0x86_u8, 0x91_u8])
     def query_interface(this : IVirtualSurfaceImageSourceNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -138,7 +138,7 @@ module Win32cr::System::WinRT::Xaml
   end
 
   @[Extern]
-  record ISwapChainBackgroundPanelNativeVtbl,
+  record ISwapChainBackgroundPanelNativeVtable,
     query_interface : Proc(ISwapChainBackgroundPanelNative*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISwapChainBackgroundPanelNative*, UInt32),
     release : Proc(ISwapChainBackgroundPanelNative*, UInt32),
@@ -146,7 +146,7 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  record ISwapChainBackgroundPanelNative, lpVtbl : ISwapChainBackgroundPanelNativeVtbl* do
+  record ISwapChainBackgroundPanelNative, lpVtbl : ISwapChainBackgroundPanelNativeVtable* do
     GUID = LibC::GUID.new(0x43bebd4e_u32, 0xadd5_u16, 0x4035_u16, StaticArray[0x8f_u8, 0x85_u8, 0x56_u8, 0x8_u8, 0xd0_u8, 0x8e_u8, 0x9d_u8, 0xc9_u8])
     def query_interface(this : ISwapChainBackgroundPanelNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -164,7 +164,7 @@ module Win32cr::System::WinRT::Xaml
   end
 
   @[Extern]
-  record ISurfaceImageSourceManagerNativeVtbl,
+  record ISurfaceImageSourceManagerNativeVtable,
     query_interface : Proc(ISurfaceImageSourceManagerNative*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISurfaceImageSourceManagerNative*, UInt32),
     release : Proc(ISurfaceImageSourceManagerNative*, UInt32),
@@ -172,7 +172,7 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  record ISurfaceImageSourceManagerNative, lpVtbl : ISurfaceImageSourceManagerNativeVtbl* do
+  record ISurfaceImageSourceManagerNative, lpVtbl : ISurfaceImageSourceManagerNativeVtable* do
     GUID = LibC::GUID.new(0x4c8798b7_u32, 0x1d88_u16, 0x4a0f_u16, StaticArray[0xb5_u8, 0x9b_u8, 0xb9_u8, 0x3f_u8, 0x60_u8, 0xd_u8, 0xe8_u8, 0xc8_u8])
     def query_interface(this : ISurfaceImageSourceManagerNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -190,7 +190,7 @@ module Win32cr::System::WinRT::Xaml
   end
 
   @[Extern]
-  record ISurfaceImageSourceNativeWithD2DVtbl,
+  record ISurfaceImageSourceNativeWithD2DVtable,
     query_interface : Proc(ISurfaceImageSourceNativeWithD2D*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISurfaceImageSourceNativeWithD2D*, UInt32),
     release : Proc(ISurfaceImageSourceNativeWithD2D*, UInt32),
@@ -202,7 +202,7 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  record ISurfaceImageSourceNativeWithD2D, lpVtbl : ISurfaceImageSourceNativeWithD2DVtbl* do
+  record ISurfaceImageSourceNativeWithD2D, lpVtbl : ISurfaceImageSourceNativeWithD2DVtable* do
     GUID = LibC::GUID.new(0x54298223_u32, 0x41e1_u16, 0x4a41_u16, StaticArray[0x9c_u8, 0x8_u8, 0x2_u8, 0xe8_u8, 0x25_u8, 0x68_u8, 0x64_u8, 0xa1_u8])
     def query_interface(this : ISurfaceImageSourceNativeWithD2D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -232,7 +232,7 @@ module Win32cr::System::WinRT::Xaml
   end
 
   @[Extern]
-  record ISwapChainPanelNativeVtbl,
+  record ISwapChainPanelNativeVtable,
     query_interface : Proc(ISwapChainPanelNative*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISwapChainPanelNative*, UInt32),
     release : Proc(ISwapChainPanelNative*, UInt32),
@@ -240,7 +240,7 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  record ISwapChainPanelNative, lpVtbl : ISwapChainPanelNativeVtbl* do
+  record ISwapChainPanelNative, lpVtbl : ISwapChainPanelNativeVtable* do
     GUID = LibC::GUID.new(0xf92f19d2_u32, 0x3ade_u16, 0x45a6_u16, StaticArray[0xa2_u8, 0xc_u8, 0xf6_u8, 0xf1_u8, 0xea_u8, 0x90_u8, 0x55_u8, 0x4b_u8])
     def query_interface(this : ISwapChainPanelNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -258,7 +258,7 @@ module Win32cr::System::WinRT::Xaml
   end
 
   @[Extern]
-  record ISwapChainPanelNative2Vtbl,
+  record ISwapChainPanelNative2Vtable,
     query_interface : Proc(ISwapChainPanelNative2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISwapChainPanelNative2*, UInt32),
     release : Proc(ISwapChainPanelNative2*, UInt32),
@@ -267,7 +267,7 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  record ISwapChainPanelNative2, lpVtbl : ISwapChainPanelNative2Vtbl* do
+  record ISwapChainPanelNative2, lpVtbl : ISwapChainPanelNative2Vtable* do
     GUID = LibC::GUID.new(0xd5a2f60c_u32, 0x37b2_u16, 0x44a2_u16, StaticArray[0x93_u8, 0x7b_u8, 0x8d_u8, 0x8e_u8, 0xb9_u8, 0x72_u8, 0x68_u8, 0x21_u8])
     def query_interface(this : ISwapChainPanelNative2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -288,7 +288,7 @@ module Win32cr::System::WinRT::Xaml
   end
 
   @[Extern]
-  record IDesktopWindowXamlSourceNativeVtbl,
+  record IDesktopWindowXamlSourceNativeVtable,
     query_interface : Proc(IDesktopWindowXamlSourceNative*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDesktopWindowXamlSourceNative*, UInt32),
     release : Proc(IDesktopWindowXamlSourceNative*, UInt32),
@@ -297,7 +297,7 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  record IDesktopWindowXamlSourceNative, lpVtbl : IDesktopWindowXamlSourceNativeVtbl* do
+  record IDesktopWindowXamlSourceNative, lpVtbl : IDesktopWindowXamlSourceNativeVtable* do
     GUID = LibC::GUID.new(0x3cbcf1bf_u32, 0x2f76_u16, 0x4e9c_u16, StaticArray[0x96_u8, 0xab_u8, 0xe8_u8, 0x4b_u8, 0x37_u8, 0x97_u8, 0x25_u8, 0x54_u8])
     def query_interface(this : IDesktopWindowXamlSourceNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -318,7 +318,7 @@ module Win32cr::System::WinRT::Xaml
   end
 
   @[Extern]
-  record IDesktopWindowXamlSourceNative2Vtbl,
+  record IDesktopWindowXamlSourceNative2Vtable,
     query_interface : Proc(IDesktopWindowXamlSourceNative2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDesktopWindowXamlSourceNative2*, UInt32),
     release : Proc(IDesktopWindowXamlSourceNative2*, UInt32),
@@ -328,7 +328,7 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  record IDesktopWindowXamlSourceNative2, lpVtbl : IDesktopWindowXamlSourceNative2Vtbl* do
+  record IDesktopWindowXamlSourceNative2, lpVtbl : IDesktopWindowXamlSourceNative2Vtable* do
     GUID = LibC::GUID.new(0xe3dcd8c7_u32, 0x3057_u16, 0x4692_u16, StaticArray[0x99_u8, 0xc3_u8, 0x7b_u8, 0x77_u8, 0x20_u8, 0xaf_u8, 0xda_u8, 0x31_u8])
     def query_interface(this : IDesktopWindowXamlSourceNative2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -352,7 +352,7 @@ module Win32cr::System::WinRT::Xaml
   end
 
   @[Extern]
-  record IReferenceTrackerTargetVtbl,
+  record IReferenceTrackerTargetVtable,
     query_interface : Proc(IReferenceTrackerTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IReferenceTrackerTarget*, UInt32),
     release : Proc(IReferenceTrackerTarget*, UInt32),
@@ -363,7 +363,7 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  record IReferenceTrackerTarget, lpVtbl : IReferenceTrackerTargetVtbl* do
+  record IReferenceTrackerTarget, lpVtbl : IReferenceTrackerTargetVtable* do
     GUID = LibC::GUID.new(0x64bd43f8_u32, 0xbfee_u16, 0x4ec4_u16, StaticArray[0xb7_u8, 0xeb_u8, 0x29_u8, 0x35_u8, 0x15_u8, 0x8d_u8, 0xae_u8, 0x21_u8])
     def query_interface(this : IReferenceTrackerTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -390,7 +390,7 @@ module Win32cr::System::WinRT::Xaml
   end
 
   @[Extern]
-  record IReferenceTrackerVtbl,
+  record IReferenceTrackerVtable,
     query_interface : Proc(IReferenceTracker*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IReferenceTracker*, UInt32),
     release : Proc(IReferenceTracker*, UInt32),
@@ -404,7 +404,7 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  record IReferenceTracker, lpVtbl : IReferenceTrackerVtbl* do
+  record IReferenceTracker, lpVtbl : IReferenceTrackerVtable* do
     GUID = LibC::GUID.new(0x11d3b13a_u32, 0x180e_u16, 0x4789_u16, StaticArray[0xa8_u8, 0xbe_u8, 0x77_u8, 0x12_u8, 0x88_u8, 0x28_u8, 0x93_u8, 0xe6_u8])
     def query_interface(this : IReferenceTracker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -440,7 +440,7 @@ module Win32cr::System::WinRT::Xaml
   end
 
   @[Extern]
-  record IReferenceTrackerManagerVtbl,
+  record IReferenceTrackerManagerVtable,
     query_interface : Proc(IReferenceTrackerManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IReferenceTrackerManager*, UInt32),
     release : Proc(IReferenceTrackerManager*, UInt32),
@@ -451,7 +451,7 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  record IReferenceTrackerManager, lpVtbl : IReferenceTrackerManagerVtbl* do
+  record IReferenceTrackerManager, lpVtbl : IReferenceTrackerManagerVtable* do
     GUID = LibC::GUID.new(0x3cf184b4_u32, 0x7ccb_u16, 0x4dda_u16, StaticArray[0x84_u8, 0x55_u8, 0x7e_u8, 0x6c_u8, 0xe9_u8, 0x9a_u8, 0x32_u8, 0x98_u8])
     def query_interface(this : IReferenceTrackerManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -478,7 +478,7 @@ module Win32cr::System::WinRT::Xaml
   end
 
   @[Extern]
-  record IFindReferenceTargetsCallbackVtbl,
+  record IFindReferenceTargetsCallbackVtable,
     query_interface : Proc(IFindReferenceTargetsCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFindReferenceTargetsCallback*, UInt32),
     release : Proc(IFindReferenceTargetsCallback*, UInt32),
@@ -486,7 +486,7 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  record IFindReferenceTargetsCallback, lpVtbl : IFindReferenceTargetsCallbackVtbl* do
+  record IFindReferenceTargetsCallback, lpVtbl : IFindReferenceTargetsCallbackVtable* do
     GUID = LibC::GUID.new(0x4b3486c_u32, 0x4687_u16, 0x4229_u16, StaticArray[0x8d_u8, 0x14_u8, 0x50_u8, 0x5a_u8, 0xb5_u8, 0x84_u8, 0xdd_u8, 0x88_u8])
     def query_interface(this : IFindReferenceTargetsCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -504,7 +504,7 @@ module Win32cr::System::WinRT::Xaml
   end
 
   @[Extern]
-  record IReferenceTrackerHostVtbl,
+  record IReferenceTrackerHostVtable,
     query_interface : Proc(IReferenceTrackerHost*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IReferenceTrackerHost*, UInt32),
     release : Proc(IReferenceTrackerHost*, UInt32),
@@ -517,7 +517,7 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  record IReferenceTrackerHost, lpVtbl : IReferenceTrackerHostVtbl* do
+  record IReferenceTrackerHost, lpVtbl : IReferenceTrackerHostVtable* do
     GUID = LibC::GUID.new(0x29a71c6a_u32, 0x3c42_u16, 0x4416_u16, StaticArray[0xa3_u8, 0x9d_u8, 0xe2_u8, 0x82_u8, 0x5a_u8, 0x7_u8, 0xa7_u8, 0x73_u8])
     def query_interface(this : IReferenceTrackerHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -550,14 +550,14 @@ module Win32cr::System::WinRT::Xaml
   end
 
   @[Extern]
-  record IReferenceTrackerExtensionVtbl,
+  record IReferenceTrackerExtensionVtable,
     query_interface : Proc(IReferenceTrackerExtension*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IReferenceTrackerExtension*, UInt32),
     release : Proc(IReferenceTrackerExtension*, UInt32)
 
 
   @[Extern]
-  record IReferenceTrackerExtension, lpVtbl : IReferenceTrackerExtensionVtbl* do
+  record IReferenceTrackerExtension, lpVtbl : IReferenceTrackerExtensionVtable* do
     GUID = LibC::GUID.new(0x4e897caa_u32, 0x59d5_u16, 0x4613_u16, StaticArray[0x8f_u8, 0x8c_u8, 0xf7_u8, 0xeb_u8, 0xd1_u8, 0xf3_u8, 0x99_u8, 0xb0_u8])
     def query_interface(this : IReferenceTrackerExtension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -572,7 +572,7 @@ module Win32cr::System::WinRT::Xaml
   end
 
   @[Extern]
-  record ITrackerOwnerVtbl,
+  record ITrackerOwnerVtable,
     query_interface : Proc(ITrackerOwner*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITrackerOwner*, UInt32),
     release : Proc(ITrackerOwner*, UInt32),
@@ -583,7 +583,7 @@ module Win32cr::System::WinRT::Xaml
 
 
   @[Extern]
-  record ITrackerOwner, lpVtbl : ITrackerOwnerVtbl* do
+  record ITrackerOwner, lpVtbl : ITrackerOwnerVtable* do
     GUID = LibC::GUID.new(0xeb24c20b_u32, 0x9816_u16, 0x4ac7_u16, StaticArray[0x8c_u8, 0xff_u8, 0x36_u8, 0xf6_u8, 0x7a_u8, 0x11_u8, 0x8f_u8, 0x4e_u8])
     def query_interface(this : ITrackerOwner*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

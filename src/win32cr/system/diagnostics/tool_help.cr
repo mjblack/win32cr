@@ -129,23 +129,33 @@ module Win32cr::System::Diagnostics::ToolHelp
   #end
 
   def heap32ListFirst(hSnapshot : Win32cr::Foundation::HANDLE, lphl : Win32cr::System::Diagnostics::ToolHelp::HEAPLIST32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Heap32ListFirst(hSnapshot, lphl)
+    {% end %}
   end
 
   def heap32ListNext(hSnapshot : Win32cr::Foundation::HANDLE, lphl : Win32cr::System::Diagnostics::ToolHelp::HEAPLIST32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Heap32ListNext(hSnapshot, lphl)
+    {% end %}
   end
 
   def heap32First(lphe : Win32cr::System::Diagnostics::ToolHelp::HEAPENTRY32*, th32ProcessID : UInt32, th32HeapID : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Heap32First(lphe, th32ProcessID, th32HeapID)
+    {% end %}
   end
 
   def heap32Next(lphe : Win32cr::System::Diagnostics::ToolHelp::HEAPENTRY32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Heap32Next(lphe)
+    {% end %}
   end
 
   def toolhelp32ReadProcessMemory(th32ProcessID : UInt32, lpBaseAddress : Void*, lpBuffer : Void*, cbRead : LibC::UIntPtrT, lpNumberOfBytesRead : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Toolhelp32ReadProcessMemory(th32ProcessID, lpBaseAddress, lpBuffer, cbRead, lpNumberOfBytesRead)
+    {% end %}
   end
 
   #def process32FirstW(hSnapshot : Win32cr::Foundation::HANDLE, lppe : Win32cr::System::Diagnostics::ToolHelp::PROCESSENTRY32W*) : Win32cr::Foundation::BOOL
@@ -157,38 +167,55 @@ module Win32cr::System::Diagnostics::ToolHelp
   #end
 
   def process32First(hSnapshot : Win32cr::Foundation::HANDLE, lppe : Win32cr::System::Diagnostics::ToolHelp::PROCESSENTRY32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Process32First(hSnapshot, lppe)
+    {% end %}
   end
 
   def process32Next(hSnapshot : Win32cr::Foundation::HANDLE, lppe : Win32cr::System::Diagnostics::ToolHelp::PROCESSENTRY32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Process32Next(hSnapshot, lppe)
+    {% end %}
   end
 
   def thread32First(hSnapshot : Win32cr::Foundation::HANDLE, lpte : Win32cr::System::Diagnostics::ToolHelp::THREADENTRY32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Thread32First(hSnapshot, lpte)
+    {% end %}
   end
 
   def thread32Next(hSnapshot : Win32cr::Foundation::HANDLE, lpte : Win32cr::System::Diagnostics::ToolHelp::THREADENTRY32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Thread32Next(hSnapshot, lpte)
+    {% end %}
   end
 
   def module32FirstW(hSnapshot : Win32cr::Foundation::HANDLE, lpme : Win32cr::System::Diagnostics::ToolHelp::MODULEENTRY32W*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Module32FirstW(hSnapshot, lpme)
+    {% end %}
   end
 
   def module32NextW(hSnapshot : Win32cr::Foundation::HANDLE, lpme : Win32cr::System::Diagnostics::ToolHelp::MODULEENTRY32W*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Module32NextW(hSnapshot, lpme)
+    {% end %}
   end
 
   def module32First(hSnapshot : Win32cr::Foundation::HANDLE, lpme : Win32cr::System::Diagnostics::ToolHelp::MODULEENTRY32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Module32First(hSnapshot, lpme)
+    {% end %}
   end
 
   def module32Next(hSnapshot : Win32cr::Foundation::HANDLE, lpme : Win32cr::System::Diagnostics::ToolHelp::MODULEENTRY32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Module32Next(hSnapshot, lpme)
+    {% end %}
   end
 
-  @[Link("kernel32")]
+  @[Link("kernel32.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # Commented out due to being part of LibC
     # :nodoc:
@@ -242,4 +269,5 @@ module Win32cr::System::Diagnostics::ToolHelp
     fun Module32Next(hSnapshot : Win32cr::Foundation::HANDLE, lpme : Win32cr::System::Diagnostics::ToolHelp::MODULEENTRY32*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

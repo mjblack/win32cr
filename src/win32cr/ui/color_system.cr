@@ -626,7 +626,7 @@ module Win32cr::UI::ColorSystem
   end
 
   @[Extern]
-  record IDeviceModelPlugInVtbl,
+  record IDeviceModelPlugInVtable,
     query_interface : Proc(IDeviceModelPlugIn*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDeviceModelPlugIn*, UInt32),
     release : Proc(IDeviceModelPlugIn*, UInt32),
@@ -644,7 +644,7 @@ module Win32cr::UI::ColorSystem
 
 
   @[Extern]
-  record IDeviceModelPlugIn, lpVtbl : IDeviceModelPlugInVtbl* do
+  record IDeviceModelPlugIn, lpVtbl : IDeviceModelPlugInVtable* do
     GUID = LibC::GUID.new(0x1cd63475_u32, 0x7c4_u16, 0x46fe_u16, StaticArray[0xa9_u8, 0x3_u8, 0xd6_u8, 0x55_u8, 0x31_u8, 0x6d_u8, 0x11_u8, 0xfd_u8])
     def query_interface(this : IDeviceModelPlugIn*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -692,7 +692,7 @@ module Win32cr::UI::ColorSystem
   end
 
   @[Extern]
-  record IGamutMapModelPlugInVtbl,
+  record IGamutMapModelPlugInVtable,
     query_interface : Proc(IGamutMapModelPlugIn*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGamutMapModelPlugIn*, UInt32),
     release : Proc(IGamutMapModelPlugIn*, UInt32),
@@ -701,7 +701,7 @@ module Win32cr::UI::ColorSystem
 
 
   @[Extern]
-  record IGamutMapModelPlugIn, lpVtbl : IGamutMapModelPlugInVtbl* do
+  record IGamutMapModelPlugIn, lpVtbl : IGamutMapModelPlugInVtable* do
     GUID = LibC::GUID.new(0x2dd80115_u32, 0xad1e_u16, 0x41f6_u16, StaticArray[0xa2_u8, 0x19_u8, 0xa4_u8, 0xf4_u8, 0xb5_u8, 0x83_u8, 0xd1_u8, 0xf9_u8])
     def query_interface(this : IGamutMapModelPlugIn*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -722,493 +722,736 @@ module Win32cr::UI::ColorSystem
   end
 
   def setICMMode(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::UI::ColorSystem::ICM_MODE) : Int32
+    {% if !flag?(:docs) %}
     C.SetICMMode(hdc, mode)
+    {% end %}
   end
 
   def checkColorsInGamut(hdc : Win32cr::Graphics::Gdi::HDC, lpRGBTriple : Win32cr::Graphics::Gdi::RGBTRIPLE*, dlpBuffer : Void*, nCount : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CheckColorsInGamut(hdc, lpRGBTriple, dlpBuffer, nCount)
+    {% end %}
   end
 
   def getColorSpace(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::UI::ColorSystem::HCOLORSPACE
+    {% if !flag?(:docs) %}
     C.GetColorSpace(hdc)
+    {% end %}
   end
 
   def getLogColorSpaceA(hColorSpace : Win32cr::UI::ColorSystem::HCOLORSPACE, lpBuffer : Win32cr::UI::ColorSystem::LOGCOLORSPACEA*, nSize : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetLogColorSpaceA(hColorSpace, lpBuffer, nSize)
+    {% end %}
   end
 
   def getLogColorSpaceW(hColorSpace : Win32cr::UI::ColorSystem::HCOLORSPACE, lpBuffer : Win32cr::UI::ColorSystem::LOGCOLORSPACEW*, nSize : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetLogColorSpaceW(hColorSpace, lpBuffer, nSize)
+    {% end %}
   end
 
   def createColorSpaceA(lplcs : Win32cr::UI::ColorSystem::LOGCOLORSPACEA*) : Win32cr::UI::ColorSystem::HCOLORSPACE
+    {% if !flag?(:docs) %}
     C.CreateColorSpaceA(lplcs)
+    {% end %}
   end
 
   def createColorSpaceW(lplcs : Win32cr::UI::ColorSystem::LOGCOLORSPACEW*) : Win32cr::UI::ColorSystem::HCOLORSPACE
+    {% if !flag?(:docs) %}
     C.CreateColorSpaceW(lplcs)
+    {% end %}
   end
 
   def setColorSpace(hdc : Win32cr::Graphics::Gdi::HDC, hcs : Win32cr::UI::ColorSystem::HCOLORSPACE) : Win32cr::UI::ColorSystem::HCOLORSPACE
+    {% if !flag?(:docs) %}
     C.SetColorSpace(hdc, hcs)
+    {% end %}
   end
 
   def deleteColorSpace(hcs : Win32cr::UI::ColorSystem::HCOLORSPACE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteColorSpace(hcs)
+    {% end %}
   end
 
   def getICMProfileA(hdc : Win32cr::Graphics::Gdi::HDC, pBufSize : UInt32*, pszFilename : UInt8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetICMProfileA(hdc, pBufSize, pszFilename)
+    {% end %}
   end
 
   def getICMProfileW(hdc : Win32cr::Graphics::Gdi::HDC, pBufSize : UInt32*, pszFilename : UInt16*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetICMProfileW(hdc, pBufSize, pszFilename)
+    {% end %}
   end
 
   def setICMProfileA(hdc : Win32cr::Graphics::Gdi::HDC, lpFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetICMProfileA(hdc, lpFileName)
+    {% end %}
   end
 
   def setICMProfileW(hdc : Win32cr::Graphics::Gdi::HDC, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetICMProfileW(hdc, lpFileName)
+    {% end %}
   end
 
   def getDeviceGammaRamp(hdc : Win32cr::Graphics::Gdi::HDC, lpRamp : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetDeviceGammaRamp(hdc, lpRamp)
+    {% end %}
   end
 
   def setDeviceGammaRamp(hdc : Win32cr::Graphics::Gdi::HDC, lpRamp : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetDeviceGammaRamp(hdc, lpRamp)
+    {% end %}
   end
 
   def colorMatchToTarget(hdc : Win32cr::Graphics::Gdi::HDC, hdcTarget : Win32cr::Graphics::Gdi::HDC, action : Win32cr::UI::ColorSystem::COLOR_MATCH_TO_TARGET_ACTION) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ColorMatchToTarget(hdc, hdcTarget, action)
+    {% end %}
   end
 
   def enumICMProfilesA(hdc : Win32cr::Graphics::Gdi::HDC, proc : Win32cr::UI::ColorSystem::ICMENUMPROCA, param2 : Win32cr::Foundation::LPARAM) : Int32
+    {% if !flag?(:docs) %}
     C.EnumICMProfilesA(hdc, proc, param2)
+    {% end %}
   end
 
   def enumICMProfilesW(hdc : Win32cr::Graphics::Gdi::HDC, proc : Win32cr::UI::ColorSystem::ICMENUMPROCW, param2 : Win32cr::Foundation::LPARAM) : Int32
+    {% if !flag?(:docs) %}
     C.EnumICMProfilesW(hdc, proc, param2)
+    {% end %}
   end
 
   def updateICMRegKeyA(reserved : UInt32, lpszCMID : Win32cr::Foundation::PSTR, lpszFileName : Win32cr::Foundation::PSTR, command : Win32cr::UI::ColorSystem::ICM_COMMAND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UpdateICMRegKeyA(reserved, lpszCMID, lpszFileName, command)
+    {% end %}
   end
 
   def updateICMRegKeyW(reserved : UInt32, lpszCMID : Win32cr::Foundation::PWSTR, lpszFileName : Win32cr::Foundation::PWSTR, command : Win32cr::UI::ColorSystem::ICM_COMMAND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UpdateICMRegKeyW(reserved, lpszCMID, lpszFileName, command)
+    {% end %}
   end
 
   def colorCorrectPalette(hdc : Win32cr::Graphics::Gdi::HDC, hPal : Win32cr::Graphics::Gdi::HPALETTE, deFirst : UInt32, num : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ColorCorrectPalette(hdc, hPal, deFirst, num)
+    {% end %}
   end
 
   def openColorProfileA(pProfile : Win32cr::UI::ColorSystem::PROFILE*, dwDesiredAccess : UInt32, dwShareMode : UInt32, dwCreationMode : UInt32) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.OpenColorProfileA(pProfile, dwDesiredAccess, dwShareMode, dwCreationMode)
+    {% end %}
   end
 
   def openColorProfileW(pProfile : Win32cr::UI::ColorSystem::PROFILE*, dwDesiredAccess : UInt32, dwShareMode : UInt32, dwCreationMode : UInt32) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.OpenColorProfileW(pProfile, dwDesiredAccess, dwShareMode, dwCreationMode)
+    {% end %}
   end
 
   def closeColorProfile(hProfile : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CloseColorProfile(hProfile)
+    {% end %}
   end
 
   def getColorProfileFromHandle(hProfile : LibC::IntPtrT, pProfile : UInt8*, pcbProfile : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetColorProfileFromHandle(hProfile, pProfile, pcbProfile)
+    {% end %}
   end
 
   def isColorProfileValid(hProfile : LibC::IntPtrT, pbValid : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsColorProfileValid(hProfile, pbValid)
+    {% end %}
   end
 
   def createProfileFromLogColorSpaceA(pLogColorSpace : Win32cr::UI::ColorSystem::LOGCOLORSPACEA*, pProfile : UInt8**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateProfileFromLogColorSpaceA(pLogColorSpace, pProfile)
+    {% end %}
   end
 
   def createProfileFromLogColorSpaceW(pLogColorSpace : Win32cr::UI::ColorSystem::LOGCOLORSPACEW*, pProfile : UInt8**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateProfileFromLogColorSpaceW(pLogColorSpace, pProfile)
+    {% end %}
   end
 
   def getCountColorProfileElements(hProfile : LibC::IntPtrT, pnElementCount : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCountColorProfileElements(hProfile, pnElementCount)
+    {% end %}
   end
 
   def getColorProfileHeader(hProfile : LibC::IntPtrT, pHeader : Win32cr::UI::ColorSystem::PROFILEHEADER*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetColorProfileHeader(hProfile, pHeader)
+    {% end %}
   end
 
   def getColorProfileElementTag(hProfile : LibC::IntPtrT, dwIndex : UInt32, pTag : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetColorProfileElementTag(hProfile, dwIndex, pTag)
+    {% end %}
   end
 
   def isColorProfileTagPresent(hProfile : LibC::IntPtrT, tag : UInt32, pbPresent : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsColorProfileTagPresent(hProfile, tag, pbPresent)
+    {% end %}
   end
 
   def getColorProfileElement(hProfile : LibC::IntPtrT, tag : UInt32, dwOffset : UInt32, pcbElement : UInt32*, pElement : Void*, pbReference : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetColorProfileElement(hProfile, tag, dwOffset, pcbElement, pElement, pbReference)
+    {% end %}
   end
 
   def setColorProfileHeader(hProfile : LibC::IntPtrT, pHeader : Win32cr::UI::ColorSystem::PROFILEHEADER*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetColorProfileHeader(hProfile, pHeader)
+    {% end %}
   end
 
   def setColorProfileElementSize(hProfile : LibC::IntPtrT, tagType : UInt32, pcbElement : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetColorProfileElementSize(hProfile, tagType, pcbElement)
+    {% end %}
   end
 
   def setColorProfileElement(hProfile : LibC::IntPtrT, tag : UInt32, dwOffset : UInt32, pcbElement : UInt32*, pElement : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetColorProfileElement(hProfile, tag, dwOffset, pcbElement, pElement)
+    {% end %}
   end
 
   def setColorProfileElementReference(hProfile : LibC::IntPtrT, newTag : UInt32, refTag : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetColorProfileElementReference(hProfile, newTag, refTag)
+    {% end %}
   end
 
   def getPS2ColorSpaceArray(hProfile : LibC::IntPtrT, dwIntent : UInt32, dwCSAType : UInt32, pPS2ColorSpaceArray : UInt8*, pcbPS2ColorSpaceArray : UInt32*, pbBinary : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPS2ColorSpaceArray(hProfile, dwIntent, dwCSAType, pPS2ColorSpaceArray, pcbPS2ColorSpaceArray, pbBinary)
+    {% end %}
   end
 
   def getPS2ColorRenderingIntent(hProfile : LibC::IntPtrT, dwIntent : UInt32, pBuffer : UInt8*, pcbPS2ColorRenderingIntent : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPS2ColorRenderingIntent(hProfile, dwIntent, pBuffer, pcbPS2ColorRenderingIntent)
+    {% end %}
   end
 
   def getPS2ColorRenderingDictionary(hProfile : LibC::IntPtrT, dwIntent : UInt32, pPS2ColorRenderingDictionary : UInt8*, pcbPS2ColorRenderingDictionary : UInt32*, pbBinary : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetPS2ColorRenderingDictionary(hProfile, dwIntent, pPS2ColorRenderingDictionary, pcbPS2ColorRenderingDictionary, pbBinary)
+    {% end %}
   end
 
   def getNamedProfileInfo(hProfile : LibC::IntPtrT, pNamedProfileInfo : Win32cr::UI::ColorSystem::NAMED_PROFILE_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetNamedProfileInfo(hProfile, pNamedProfileInfo)
+    {% end %}
   end
 
   def convertColorNameToIndex(hProfile : LibC::IntPtrT, paColorName : Int8**, paIndex : UInt32*, dwCount : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ConvertColorNameToIndex(hProfile, paColorName, paIndex, dwCount)
+    {% end %}
   end
 
   def convertIndexToColorName(hProfile : LibC::IntPtrT, paIndex : UInt32*, paColorName : Int8**, dwCount : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ConvertIndexToColorName(hProfile, paIndex, paColorName, dwCount)
+    {% end %}
   end
 
   def createDeviceLinkProfile(hProfile : LibC::IntPtrT*, nProfiles : UInt32, padwIntent : UInt32*, nIntents : UInt32, dwFlags : UInt32, pProfileData : UInt8**, indexPreferredCMM : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateDeviceLinkProfile(hProfile, nProfiles, padwIntent, nIntents, dwFlags, pProfileData, indexPreferredCMM)
+    {% end %}
   end
 
   def createColorTransformA(pLogColorSpace : Win32cr::UI::ColorSystem::LOGCOLORSPACEA*, hDestProfile : LibC::IntPtrT, hTargetProfile : LibC::IntPtrT, dwFlags : UInt32) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.CreateColorTransformA(pLogColorSpace, hDestProfile, hTargetProfile, dwFlags)
+    {% end %}
   end
 
   def createColorTransformW(pLogColorSpace : Win32cr::UI::ColorSystem::LOGCOLORSPACEW*, hDestProfile : LibC::IntPtrT, hTargetProfile : LibC::IntPtrT, dwFlags : UInt32) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.CreateColorTransformW(pLogColorSpace, hDestProfile, hTargetProfile, dwFlags)
+    {% end %}
   end
 
   def createMultiProfileTransform(pahProfiles : LibC::IntPtrT*, nProfiles : UInt32, padwIntent : UInt32*, nIntents : UInt32, dwFlags : UInt32, indexPreferredCMM : UInt32) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.CreateMultiProfileTransform(pahProfiles, nProfiles, padwIntent, nIntents, dwFlags, indexPreferredCMM)
+    {% end %}
   end
 
   def deleteColorTransform(hxform : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteColorTransform(hxform)
+    {% end %}
   end
 
   def translateBitmapBits(hColorTransform : LibC::IntPtrT, pSrcBits : Void*, bmInput : Win32cr::UI::ColorSystem::BMFORMAT, dwWidth : UInt32, dwHeight : UInt32, dwInputStride : UInt32, pDestBits : Void*, bmOutput : Win32cr::UI::ColorSystem::BMFORMAT, dwOutputStride : UInt32, pfnCallBack : Win32cr::UI::ColorSystem::LPBMCALLBACKFN, ulCallbackData : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TranslateBitmapBits(hColorTransform, pSrcBits, bmInput, dwWidth, dwHeight, dwInputStride, pDestBits, bmOutput, dwOutputStride, pfnCallBack, ulCallbackData)
+    {% end %}
   end
 
   def checkBitmapBits(hColorTransform : LibC::IntPtrT, pSrcBits : Void*, bmInput : Win32cr::UI::ColorSystem::BMFORMAT, dwWidth : UInt32, dwHeight : UInt32, dwStride : UInt32, paResult : UInt8*, pfnCallback : Win32cr::UI::ColorSystem::LPBMCALLBACKFN, lpCallbackData : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CheckBitmapBits(hColorTransform, pSrcBits, bmInput, dwWidth, dwHeight, dwStride, paResult, pfnCallback, lpCallbackData)
+    {% end %}
   end
 
   def translateColors(hColorTransform : LibC::IntPtrT, paInputColors : Win32cr::UI::ColorSystem::COLOR*, nColors : UInt32, ctInput : Win32cr::UI::ColorSystem::COLORTYPE, paOutputColors : Win32cr::UI::ColorSystem::COLOR*, ctOutput : Win32cr::UI::ColorSystem::COLORTYPE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TranslateColors(hColorTransform, paInputColors, nColors, ctInput, paOutputColors, ctOutput)
+    {% end %}
   end
 
   def checkColors(hColorTransform : LibC::IntPtrT, paInputColors : Win32cr::UI::ColorSystem::COLOR*, nColors : UInt32, ctInput : Win32cr::UI::ColorSystem::COLORTYPE, paResult : UInt8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CheckColors(hColorTransform, paInputColors, nColors, ctInput, paResult)
+    {% end %}
   end
 
   def getCMMInfo(hColorTransform : LibC::IntPtrT, param1 : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetCMMInfo(hColorTransform, param1)
+    {% end %}
   end
 
   def registerCMMA(pMachineName : Win32cr::Foundation::PSTR, cmmID : UInt32, pCMMdll : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RegisterCMMA(pMachineName, cmmID, pCMMdll)
+    {% end %}
   end
 
   def registerCMMW(pMachineName : Win32cr::Foundation::PWSTR, cmmID : UInt32, pCMMdll : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RegisterCMMW(pMachineName, cmmID, pCMMdll)
+    {% end %}
   end
 
   def unregisterCMMA(pMachineName : Win32cr::Foundation::PSTR, cmmID : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnregisterCMMA(pMachineName, cmmID)
+    {% end %}
   end
 
   def unregisterCMMW(pMachineName : Win32cr::Foundation::PWSTR, cmmID : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnregisterCMMW(pMachineName, cmmID)
+    {% end %}
   end
 
   def selectCMM(dwCMMType : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SelectCMM(dwCMMType)
+    {% end %}
   end
 
   def getColorDirectoryA(pMachineName : Win32cr::Foundation::PSTR, pBuffer : Win32cr::Foundation::PSTR, pdwSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetColorDirectoryA(pMachineName, pBuffer, pdwSize)
+    {% end %}
   end
 
   def getColorDirectoryW(pMachineName : Win32cr::Foundation::PWSTR, pBuffer : Win32cr::Foundation::PWSTR, pdwSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetColorDirectoryW(pMachineName, pBuffer, pdwSize)
+    {% end %}
   end
 
   def installColorProfileA(pMachineName : Win32cr::Foundation::PSTR, pProfileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InstallColorProfileA(pMachineName, pProfileName)
+    {% end %}
   end
 
   def installColorProfileW(pMachineName : Win32cr::Foundation::PWSTR, pProfileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InstallColorProfileW(pMachineName, pProfileName)
+    {% end %}
   end
 
   def uninstallColorProfileA(pMachineName : Win32cr::Foundation::PSTR, pProfileName : Win32cr::Foundation::PSTR, bDelete : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UninstallColorProfileA(pMachineName, pProfileName, bDelete)
+    {% end %}
   end
 
   def uninstallColorProfileW(pMachineName : Win32cr::Foundation::PWSTR, pProfileName : Win32cr::Foundation::PWSTR, bDelete : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UninstallColorProfileW(pMachineName, pProfileName, bDelete)
+    {% end %}
   end
 
   def enumColorProfilesA(pMachineName : Win32cr::Foundation::PSTR, pEnumRecord : Win32cr::UI::ColorSystem::ENUMTYPEA*, pEnumerationBuffer : UInt8*, pdwSizeOfEnumerationBuffer : UInt32*, pnProfiles : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumColorProfilesA(pMachineName, pEnumRecord, pEnumerationBuffer, pdwSizeOfEnumerationBuffer, pnProfiles)
+    {% end %}
   end
 
   def enumColorProfilesW(pMachineName : Win32cr::Foundation::PWSTR, pEnumRecord : Win32cr::UI::ColorSystem::ENUMTYPEW*, pEnumerationBuffer : UInt8*, pdwSizeOfEnumerationBuffer : UInt32*, pnProfiles : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumColorProfilesW(pMachineName, pEnumRecord, pEnumerationBuffer, pdwSizeOfEnumerationBuffer, pnProfiles)
+    {% end %}
   end
 
   def setStandardColorSpaceProfileA(pMachineName : Win32cr::Foundation::PSTR, dwProfileID : UInt32, pProfilename : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetStandardColorSpaceProfileA(pMachineName, dwProfileID, pProfilename)
+    {% end %}
   end
 
   def setStandardColorSpaceProfileW(pMachineName : Win32cr::Foundation::PWSTR, dwProfileID : UInt32, pProfileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetStandardColorSpaceProfileW(pMachineName, dwProfileID, pProfileName)
+    {% end %}
   end
 
   def getStandardColorSpaceProfileA(pMachineName : Win32cr::Foundation::PSTR, dwSCS : UInt32, pBuffer : Win32cr::Foundation::PSTR, pcbSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetStandardColorSpaceProfileA(pMachineName, dwSCS, pBuffer, pcbSize)
+    {% end %}
   end
 
   def getStandardColorSpaceProfileW(pMachineName : Win32cr::Foundation::PWSTR, dwSCS : UInt32, pBuffer : Win32cr::Foundation::PWSTR, pcbSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetStandardColorSpaceProfileW(pMachineName, dwSCS, pBuffer, pcbSize)
+    {% end %}
   end
 
   def associateColorProfileWithDeviceA(pMachineName : Win32cr::Foundation::PSTR, pProfileName : Win32cr::Foundation::PSTR, pDeviceName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AssociateColorProfileWithDeviceA(pMachineName, pProfileName, pDeviceName)
+    {% end %}
   end
 
   def associateColorProfileWithDeviceW(pMachineName : Win32cr::Foundation::PWSTR, pProfileName : Win32cr::Foundation::PWSTR, pDeviceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AssociateColorProfileWithDeviceW(pMachineName, pProfileName, pDeviceName)
+    {% end %}
   end
 
   def disassociateColorProfileFromDeviceA(pMachineName : Win32cr::Foundation::PSTR, pProfileName : Win32cr::Foundation::PSTR, pDeviceName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DisassociateColorProfileFromDeviceA(pMachineName, pProfileName, pDeviceName)
+    {% end %}
   end
 
   def disassociateColorProfileFromDeviceW(pMachineName : Win32cr::Foundation::PWSTR, pProfileName : Win32cr::Foundation::PWSTR, pDeviceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DisassociateColorProfileFromDeviceW(pMachineName, pProfileName, pDeviceName)
+    {% end %}
   end
 
   def setupColorMatchingW(pcms : Win32cr::UI::ColorSystem::COLORMATCHSETUPW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetupColorMatchingW(pcms)
+    {% end %}
   end
 
   def setupColorMatchingA(pcms : Win32cr::UI::ColorSystem::COLORMATCHSETUPA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetupColorMatchingA(pcms)
+    {% end %}
   end
 
   def wcsAssociateColorProfileWithDevice(scope : Win32cr::UI::ColorSystem::WCS_PROFILE_MANAGEMENT_SCOPE, pProfileName : Win32cr::Foundation::PWSTR, pDeviceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WcsAssociateColorProfileWithDevice(scope, pProfileName, pDeviceName)
+    {% end %}
   end
 
   def wcsDisassociateColorProfileFromDevice(scope : Win32cr::UI::ColorSystem::WCS_PROFILE_MANAGEMENT_SCOPE, pProfileName : Win32cr::Foundation::PWSTR, pDeviceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WcsDisassociateColorProfileFromDevice(scope, pProfileName, pDeviceName)
+    {% end %}
   end
 
   def wcsEnumColorProfilesSize(scope : Win32cr::UI::ColorSystem::WCS_PROFILE_MANAGEMENT_SCOPE, pEnumRecord : Win32cr::UI::ColorSystem::ENUMTYPEW*, pdwSize : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WcsEnumColorProfilesSize(scope, pEnumRecord, pdwSize)
+    {% end %}
   end
 
   def wcsEnumColorProfiles(scope : Win32cr::UI::ColorSystem::WCS_PROFILE_MANAGEMENT_SCOPE, pEnumRecord : Win32cr::UI::ColorSystem::ENUMTYPEW*, pBuffer : UInt8*, dwSize : UInt32, pnProfiles : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WcsEnumColorProfiles(scope, pEnumRecord, pBuffer, dwSize, pnProfiles)
+    {% end %}
   end
 
   def wcsGetDefaultColorProfileSize(scope : Win32cr::UI::ColorSystem::WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName : Win32cr::Foundation::PWSTR, cptColorProfileType : Win32cr::UI::ColorSystem::COLORPROFILETYPE, cpstColorProfileSubType : Win32cr::UI::ColorSystem::COLORPROFILESUBTYPE, dwProfileID : UInt32, pcbProfileName : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WcsGetDefaultColorProfileSize(scope, pDeviceName, cptColorProfileType, cpstColorProfileSubType, dwProfileID, pcbProfileName)
+    {% end %}
   end
 
   def wcsGetDefaultColorProfile(scope : Win32cr::UI::ColorSystem::WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName : Win32cr::Foundation::PWSTR, cptColorProfileType : Win32cr::UI::ColorSystem::COLORPROFILETYPE, cpstColorProfileSubType : Win32cr::UI::ColorSystem::COLORPROFILESUBTYPE, dwProfileID : UInt32, cbProfileName : UInt32, pProfileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WcsGetDefaultColorProfile(scope, pDeviceName, cptColorProfileType, cpstColorProfileSubType, dwProfileID, cbProfileName, pProfileName)
+    {% end %}
   end
 
   def wcsSetDefaultColorProfile(scope : Win32cr::UI::ColorSystem::WCS_PROFILE_MANAGEMENT_SCOPE, pDeviceName : Win32cr::Foundation::PWSTR, cptColorProfileType : Win32cr::UI::ColorSystem::COLORPROFILETYPE, cpstColorProfileSubType : Win32cr::UI::ColorSystem::COLORPROFILESUBTYPE, dwProfileID : UInt32, pProfileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WcsSetDefaultColorProfile(scope, pDeviceName, cptColorProfileType, cpstColorProfileSubType, dwProfileID, pProfileName)
+    {% end %}
   end
 
   def wcsSetDefaultRenderingIntent(scope : Win32cr::UI::ColorSystem::WCS_PROFILE_MANAGEMENT_SCOPE, dwRenderingIntent : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WcsSetDefaultRenderingIntent(scope, dwRenderingIntent)
+    {% end %}
   end
 
   def wcsGetDefaultRenderingIntent(scope : Win32cr::UI::ColorSystem::WCS_PROFILE_MANAGEMENT_SCOPE, pdwRenderingIntent : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WcsGetDefaultRenderingIntent(scope, pdwRenderingIntent)
+    {% end %}
   end
 
   def wcsGetUsePerUserProfiles(pDeviceName : Win32cr::Foundation::PWSTR, dwDeviceClass : UInt32, pUsePerUserProfiles : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WcsGetUsePerUserProfiles(pDeviceName, dwDeviceClass, pUsePerUserProfiles)
+    {% end %}
   end
 
   def wcsSetUsePerUserProfiles(pDeviceName : Win32cr::Foundation::PWSTR, dwDeviceClass : UInt32, usePerUserProfiles : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WcsSetUsePerUserProfiles(pDeviceName, dwDeviceClass, usePerUserProfiles)
+    {% end %}
   end
 
   def wcsTranslateColors(hColorTransform : LibC::IntPtrT, nColors : UInt32, nInputChannels : UInt32, cdtInput : Win32cr::UI::ColorSystem::COLORDATATYPE, cbInput : UInt32, pInputData : Void*, nOutputChannels : UInt32, cdtOutput : Win32cr::UI::ColorSystem::COLORDATATYPE, cbOutput : UInt32, pOutputData : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WcsTranslateColors(hColorTransform, nColors, nInputChannels, cdtInput, cbInput, pInputData, nOutputChannels, cdtOutput, cbOutput, pOutputData)
+    {% end %}
   end
 
   def wcsCheckColors(hColorTransform : LibC::IntPtrT, nColors : UInt32, nInputChannels : UInt32, cdtInput : Win32cr::UI::ColorSystem::COLORDATATYPE, cbInput : UInt32, pInputData : Void*, paResult : UInt8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WcsCheckColors(hColorTransform, nColors, nInputChannels, cdtInput, cbInput, pInputData, paResult)
+    {% end %}
   end
 
   def cMCheckColors(hcmTransform : LibC::IntPtrT, lpaInputColors : Win32cr::UI::ColorSystem::COLOR*, nColors : UInt32, ctInput : Win32cr::UI::ColorSystem::COLORTYPE, lpaResult : UInt8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CMCheckColors(hcmTransform, lpaInputColors, nColors, ctInput, lpaResult)
+    {% end %}
   end
 
   def cMCheckRGBs(hcmTransform : LibC::IntPtrT, lpSrcBits : Void*, bmInput : Win32cr::UI::ColorSystem::BMFORMAT, dwWidth : UInt32, dwHeight : UInt32, dwStride : UInt32, lpaResult : UInt8*, pfnCallback : Win32cr::UI::ColorSystem::LPBMCALLBACKFN, ulCallbackData : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CMCheckRGBs(hcmTransform, lpSrcBits, bmInput, dwWidth, dwHeight, dwStride, lpaResult, pfnCallback, ulCallbackData)
+    {% end %}
   end
 
   def cMConvertColorNameToIndex(hProfile : LibC::IntPtrT, paColorName : Int8**, paIndex : UInt32*, dwCount : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CMConvertColorNameToIndex(hProfile, paColorName, paIndex, dwCount)
+    {% end %}
   end
 
   def cMConvertIndexToColorName(hProfile : LibC::IntPtrT, paIndex : UInt32*, paColorName : Int8**, dwCount : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CMConvertIndexToColorName(hProfile, paIndex, paColorName, dwCount)
+    {% end %}
   end
 
   def cMCreateDeviceLinkProfile(pahProfiles : LibC::IntPtrT*, nProfiles : UInt32, padwIntents : UInt32*, nIntents : UInt32, dwFlags : UInt32, lpProfileData : UInt8**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CMCreateDeviceLinkProfile(pahProfiles, nProfiles, padwIntents, nIntents, dwFlags, lpProfileData)
+    {% end %}
   end
 
   def cMCreateMultiProfileTransform(pahProfiles : LibC::IntPtrT*, nProfiles : UInt32, padwIntents : UInt32*, nIntents : UInt32, dwFlags : UInt32) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.CMCreateMultiProfileTransform(pahProfiles, nProfiles, padwIntents, nIntents, dwFlags)
+    {% end %}
   end
 
   def cMCreateProfileW(lpColorSpace : Win32cr::UI::ColorSystem::LOGCOLORSPACEW*, lpProfileData : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CMCreateProfileW(lpColorSpace, lpProfileData)
+    {% end %}
   end
 
   def cMCreateTransform(lpColorSpace : Win32cr::UI::ColorSystem::LOGCOLORSPACEA*, lpDevCharacter : Void*, lpTargetDevCharacter : Void*) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.CMCreateTransform(lpColorSpace, lpDevCharacter, lpTargetDevCharacter)
+    {% end %}
   end
 
   def cMCreateTransformW(lpColorSpace : Win32cr::UI::ColorSystem::LOGCOLORSPACEW*, lpDevCharacter : Void*, lpTargetDevCharacter : Void*) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.CMCreateTransformW(lpColorSpace, lpDevCharacter, lpTargetDevCharacter)
+    {% end %}
   end
 
   def cMCreateTransformExt(lpColorSpace : Win32cr::UI::ColorSystem::LOGCOLORSPACEA*, lpDevCharacter : Void*, lpTargetDevCharacter : Void*, dwFlags : UInt32) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.CMCreateTransformExt(lpColorSpace, lpDevCharacter, lpTargetDevCharacter, dwFlags)
+    {% end %}
   end
 
   def cMCheckColorsInGamut(hcmTransform : LibC::IntPtrT, lpaRGBTriple : Win32cr::Graphics::Gdi::RGBTRIPLE*, lpaResult : UInt8*, nCount : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CMCheckColorsInGamut(hcmTransform, lpaRGBTriple, lpaResult, nCount)
+    {% end %}
   end
 
   def cMCreateProfile(lpColorSpace : Win32cr::UI::ColorSystem::LOGCOLORSPACEA*, lpProfileData : Void**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CMCreateProfile(lpColorSpace, lpProfileData)
+    {% end %}
   end
 
-  def cMTranslateRGB(hcmTransform : LibC::IntPtrT, color_ref : UInt32, lpColorRef : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+  def cMTranslateRGB(hcmTransform : LibC::IntPtrT, color_ref : Win32cr::Foundation::COLORREF, lpColorRef : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CMTranslateRGB(hcmTransform, color_ref, lpColorRef, dwFlags)
+    {% end %}
   end
 
   def cMTranslateRGBs(hcmTransform : LibC::IntPtrT, lpSrcBits : Void*, bmInput : Win32cr::UI::ColorSystem::BMFORMAT, dwWidth : UInt32, dwHeight : UInt32, dwStride : UInt32, lpDestBits : Void*, bmOutput : Win32cr::UI::ColorSystem::BMFORMAT, dwTranslateDirection : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CMTranslateRGBs(hcmTransform, lpSrcBits, bmInput, dwWidth, dwHeight, dwStride, lpDestBits, bmOutput, dwTranslateDirection)
+    {% end %}
   end
 
   def cMCreateTransformExtW(lpColorSpace : Win32cr::UI::ColorSystem::LOGCOLORSPACEW*, lpDevCharacter : Void*, lpTargetDevCharacter : Void*, dwFlags : UInt32) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.CMCreateTransformExtW(lpColorSpace, lpDevCharacter, lpTargetDevCharacter, dwFlags)
+    {% end %}
   end
 
   def cMDeleteTransform(hcmTransform : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CMDeleteTransform(hcmTransform)
+    {% end %}
   end
 
   def cMGetInfo(dwInfo : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.CMGetInfo(dwInfo)
+    {% end %}
   end
 
   def cMGetNamedProfileInfo(hProfile : LibC::IntPtrT, pNamedProfileInfo : Win32cr::UI::ColorSystem::NAMED_PROFILE_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CMGetNamedProfileInfo(hProfile, pNamedProfileInfo)
+    {% end %}
   end
 
   def cMIsProfileValid(hProfile : LibC::IntPtrT, lpbValid : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CMIsProfileValid(hProfile, lpbValid)
+    {% end %}
   end
 
   def cMTranslateColors(hcmTransform : LibC::IntPtrT, lpaInputColors : Win32cr::UI::ColorSystem::COLOR*, nColors : UInt32, ctInput : Win32cr::UI::ColorSystem::COLORTYPE, lpaOutputColors : Win32cr::UI::ColorSystem::COLOR*, ctOutput : Win32cr::UI::ColorSystem::COLORTYPE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CMTranslateColors(hcmTransform, lpaInputColors, nColors, ctInput, lpaOutputColors, ctOutput)
+    {% end %}
   end
 
   def cMTranslateRGBsExt(hcmTransform : LibC::IntPtrT, lpSrcBits : Void*, bmInput : Win32cr::UI::ColorSystem::BMFORMAT, dwWidth : UInt32, dwHeight : UInt32, dwInputStride : UInt32, lpDestBits : Void*, bmOutput : Win32cr::UI::ColorSystem::BMFORMAT, dwOutputStride : UInt32, lpfnCallback : Win32cr::UI::ColorSystem::LPBMCALLBACKFN, ulCallbackData : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CMTranslateRGBsExt(hcmTransform, lpSrcBits, bmInput, dwWidth, dwHeight, dwInputStride, lpDestBits, bmOutput, dwOutputStride, lpfnCallback, ulCallbackData)
+    {% end %}
   end
 
   def wcsOpenColorProfileA(pCDMPProfile : Win32cr::UI::ColorSystem::PROFILE*, pCAMPProfile : Win32cr::UI::ColorSystem::PROFILE*, pGMMPProfile : Win32cr::UI::ColorSystem::PROFILE*, dwDesireAccess : UInt32, dwShareMode : UInt32, dwCreationMode : UInt32, dwFlags : UInt32) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.WcsOpenColorProfileA(pCDMPProfile, pCAMPProfile, pGMMPProfile, dwDesireAccess, dwShareMode, dwCreationMode, dwFlags)
+    {% end %}
   end
 
   def wcsOpenColorProfileW(pCDMPProfile : Win32cr::UI::ColorSystem::PROFILE*, pCAMPProfile : Win32cr::UI::ColorSystem::PROFILE*, pGMMPProfile : Win32cr::UI::ColorSystem::PROFILE*, dwDesireAccess : UInt32, dwShareMode : UInt32, dwCreationMode : UInt32, dwFlags : UInt32) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.WcsOpenColorProfileW(pCDMPProfile, pCAMPProfile, pGMMPProfile, dwDesireAccess, dwShareMode, dwCreationMode, dwFlags)
+    {% end %}
   end
 
   def wcsCreateIccProfile(hWcsProfile : LibC::IntPtrT, dwOptions : UInt32) : LibC::IntPtrT
+    {% if !flag?(:docs) %}
     C.WcsCreateIccProfile(hWcsProfile, dwOptions)
+    {% end %}
   end
 
   def wcsGetCalibrationManagementState(pbIsEnabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WcsGetCalibrationManagementState(pbIsEnabled)
+    {% end %}
   end
 
   def wcsSetCalibrationManagementState(bIsEnabled : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WcsSetCalibrationManagementState(bIsEnabled)
+    {% end %}
   end
 
   def colorProfileAddDisplayAssociation(scope : Win32cr::UI::ColorSystem::WCS_PROFILE_MANAGEMENT_SCOPE, profileName : Win32cr::Foundation::PWSTR, targetAdapterID : Win32cr::Foundation::LUID, sourceID : UInt32, setAsDefault : Win32cr::Foundation::BOOL, associateAsAdvancedColor : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ColorProfileAddDisplayAssociation(scope, profileName, targetAdapterID, sourceID, setAsDefault, associateAsAdvancedColor)
+    {% end %}
   end
 
   def colorProfileRemoveDisplayAssociation(scope : Win32cr::UI::ColorSystem::WCS_PROFILE_MANAGEMENT_SCOPE, profileName : Win32cr::Foundation::PWSTR, targetAdapterID : Win32cr::Foundation::LUID, sourceID : UInt32, dissociateAdvancedColor : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ColorProfileRemoveDisplayAssociation(scope, profileName, targetAdapterID, sourceID, dissociateAdvancedColor)
+    {% end %}
   end
 
   def colorProfileSetDisplayDefaultAssociation(scope : Win32cr::UI::ColorSystem::WCS_PROFILE_MANAGEMENT_SCOPE, profileName : Win32cr::Foundation::PWSTR, profileType : Win32cr::UI::ColorSystem::COLORPROFILETYPE, profileSubType : Win32cr::UI::ColorSystem::COLORPROFILESUBTYPE, targetAdapterID : Win32cr::Foundation::LUID, sourceID : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ColorProfileSetDisplayDefaultAssociation(scope, profileName, profileType, profileSubType, targetAdapterID, sourceID)
+    {% end %}
   end
 
   def colorProfileGetDisplayList(scope : Win32cr::UI::ColorSystem::WCS_PROFILE_MANAGEMENT_SCOPE, targetAdapterID : Win32cr::Foundation::LUID, sourceID : UInt32, profileList : Win32cr::Foundation::PWSTR**, profileCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ColorProfileGetDisplayList(scope, targetAdapterID, sourceID, profileList, profileCount)
+    {% end %}
   end
 
   def colorProfileGetDisplayDefault(scope : Win32cr::UI::ColorSystem::WCS_PROFILE_MANAGEMENT_SCOPE, targetAdapterID : Win32cr::Foundation::LUID, sourceID : UInt32, profileType : Win32cr::UI::ColorSystem::COLORPROFILETYPE, profileSubType : Win32cr::UI::ColorSystem::COLORPROFILESUBTYPE, profileName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ColorProfileGetDisplayDefault(scope, targetAdapterID, sourceID, profileType, profileSubType, profileName)
+    {% end %}
   end
 
   def colorProfileGetDisplayUserScope(targetAdapterID : Win32cr::Foundation::LUID, sourceID : UInt32, scope : Win32cr::UI::ColorSystem::WCS_PROFILE_MANAGEMENT_SCOPE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ColorProfileGetDisplayUserScope(targetAdapterID, sourceID, scope)
+    {% end %}
   end
 
-  @[Link("gdi32")]
-  @[Link("mscms")]
-  @[Link("icmui")]
-  @[Link("icm32")]
+  @[Link("gdi32.dll")]
+  @[Link("mscms.dll")]
+  @[Link("icmui.dll")]
+  @[Link("icm32.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun SetICMMode(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::UI::ColorSystem::ICM_MODE) : Int32
@@ -1514,7 +1757,7 @@ module Win32cr::UI::ColorSystem
     fun CMCreateProfile(lpColorSpace : Win32cr::UI::ColorSystem::LOGCOLORSPACEA*, lpProfileData : Void**) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CMTranslateRGB(hcmTransform : LibC::IntPtrT, color_ref : UInt32, lpColorRef : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    fun CMTranslateRGB(hcmTransform : LibC::IntPtrT, color_ref : Win32cr::Foundation::COLORREF, lpColorRef : UInt32*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun CMTranslateRGBs(hcmTransform : LibC::IntPtrT, lpSrcBits : Void*, bmInput : Win32cr::UI::ColorSystem::BMFORMAT, dwWidth : UInt32, dwHeight : UInt32, dwStride : UInt32, lpDestBits : Void*, bmOutput : Win32cr::UI::ColorSystem::BMFORMAT, dwTranslateDirection : UInt32) : Win32cr::Foundation::BOOL
@@ -1574,4 +1817,5 @@ module Win32cr::UI::ColorSystem
     fun ColorProfileGetDisplayUserScope(targetAdapterID : Win32cr::Foundation::LUID, sourceID : UInt32, scope : Win32cr::UI::ColorSystem::WCS_PROFILE_MANAGEMENT_SCOPE*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

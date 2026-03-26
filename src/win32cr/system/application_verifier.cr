@@ -78,13 +78,17 @@ module Win32cr::System::ApplicationVerifier
   end
 
   def verifierEnumerateResource(process : Win32cr::Foundation::HANDLE, flags : Win32cr::System::ApplicationVerifier::VERIFIER_ENUM_RESOURCE_FLAGS, resource_type : Win32cr::System::ApplicationVerifier::Eavrfresourcetypes, resource_callback : Win32cr::System::ApplicationVerifier::AVRF_RESOURCE_ENUMERATE_CALLBACK, enumeration_context : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.VerifierEnumerateResource(process, flags, resource_type, resource_callback, enumeration_context)
+    {% end %}
   end
 
-  @[Link("verifier")]
+  @[Link("verifier.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun VerifierEnumerateResource(process : Win32cr::Foundation::HANDLE, flags : Win32cr::System::ApplicationVerifier::VERIFIER_ENUM_RESOURCE_FLAGS, resource_type : Win32cr::System::ApplicationVerifier::Eavrfresourcetypes, resource_callback : Win32cr::System::ApplicationVerifier::AVRF_RESOURCE_ENUMERATE_CALLBACK, enumeration_context : Void*) : UInt32
 
   end
+  {% end %}
 end

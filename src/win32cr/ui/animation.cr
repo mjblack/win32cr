@@ -90,7 +90,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationManagerVtbl,
+  record IUIAnimationManagerVtable,
     query_interface : Proc(IUIAnimationManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationManager*, UInt32),
     release : Proc(IUIAnimationManager*, UInt32),
@@ -116,7 +116,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationManager, lpVtbl : IUIAnimationManagerVtbl* do
+  record IUIAnimationManager, lpVtbl : IUIAnimationManagerVtable* do
     GUID = LibC::GUID.new(0x9169896c_u32, 0xac8d_u16, 0x4e7d_u16, StaticArray[0x94_u8, 0xe5_u8, 0x67_u8, 0xfa_u8, 0x4d_u8, 0xc2_u8, 0xf2_u8, 0xe8_u8])
     def query_interface(this : IUIAnimationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -188,7 +188,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationVariableVtbl,
+  record IUIAnimationVariableVtable,
     query_interface : Proc(IUIAnimationVariable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationVariable*, UInt32),
     release : Proc(IUIAnimationVariable*, UInt32),
@@ -209,7 +209,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationVariable, lpVtbl : IUIAnimationVariableVtbl* do
+  record IUIAnimationVariable, lpVtbl : IUIAnimationVariableVtable* do
     GUID = LibC::GUID.new(0x8ceeb155_u32, 0x2849_u16, 0x4ce5_u16, StaticArray[0x94_u8, 0x48_u8, 0x91_u8, 0xff_u8, 0x70_u8, 0xe1_u8, 0xe4_u8, 0xd9_u8])
     def query_interface(this : IUIAnimationVariable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -266,7 +266,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationStoryboardVtbl,
+  record IUIAnimationStoryboardVtable,
     query_interface : Proc(IUIAnimationStoryboard*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationStoryboard*, UInt32),
     release : Proc(IUIAnimationStoryboard*, UInt32),
@@ -290,7 +290,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationStoryboard, lpVtbl : IUIAnimationStoryboardVtbl* do
+  record IUIAnimationStoryboard, lpVtbl : IUIAnimationStoryboardVtable* do
     GUID = LibC::GUID.new(0xa8ff128f_u32, 0x9bf9_u16, 0x4af1_u16, StaticArray[0x9e_u8, 0x67_u8, 0xe5_u8, 0xe4_u8, 0x10_u8, 0xde_u8, 0xfb_u8, 0x84_u8])
     def query_interface(this : IUIAnimationStoryboard*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -356,7 +356,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationTransitionVtbl,
+  record IUIAnimationTransitionVtable,
     query_interface : Proc(IUIAnimationTransition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationTransition*, UInt32),
     release : Proc(IUIAnimationTransition*, UInt32),
@@ -367,7 +367,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationTransition, lpVtbl : IUIAnimationTransitionVtbl* do
+  record IUIAnimationTransition, lpVtbl : IUIAnimationTransitionVtable* do
     GUID = LibC::GUID.new(0xdc6ce252_u32, 0xf731_u16, 0x41cf_u16, StaticArray[0xb6_u8, 0x10_u8, 0x61_u8, 0x4b_u8, 0x6c_u8, 0xa0_u8, 0x49_u8, 0xad_u8])
     def query_interface(this : IUIAnimationTransition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -394,7 +394,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationManagerEventHandlerVtbl,
+  record IUIAnimationManagerEventHandlerVtable,
     query_interface : Proc(IUIAnimationManagerEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationManagerEventHandler*, UInt32),
     release : Proc(IUIAnimationManagerEventHandler*, UInt32),
@@ -402,7 +402,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationManagerEventHandler, lpVtbl : IUIAnimationManagerEventHandlerVtbl* do
+  record IUIAnimationManagerEventHandler, lpVtbl : IUIAnimationManagerEventHandlerVtable* do
     GUID = LibC::GUID.new(0x783321ed_u32, 0x78a3_u16, 0x4366_u16, StaticArray[0xb5_u8, 0x74_u8, 0x6a_u8, 0xf6_u8, 0x7_u8, 0xa6_u8, 0x47_u8, 0x88_u8])
     def query_interface(this : IUIAnimationManagerEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -420,7 +420,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationVariableChangeHandlerVtbl,
+  record IUIAnimationVariableChangeHandlerVtable,
     query_interface : Proc(IUIAnimationVariableChangeHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationVariableChangeHandler*, UInt32),
     release : Proc(IUIAnimationVariableChangeHandler*, UInt32),
@@ -428,7 +428,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationVariableChangeHandler, lpVtbl : IUIAnimationVariableChangeHandlerVtbl* do
+  record IUIAnimationVariableChangeHandler, lpVtbl : IUIAnimationVariableChangeHandlerVtable* do
     GUID = LibC::GUID.new(0x6358b7ba_u32, 0x87d2_u16, 0x42d5_u16, StaticArray[0xbf_u8, 0x71_u8, 0x82_u8, 0xe9_u8, 0x19_u8, 0xdd_u8, 0x58_u8, 0x62_u8])
     def query_interface(this : IUIAnimationVariableChangeHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -446,7 +446,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationVariableIntegerChangeHandlerVtbl,
+  record IUIAnimationVariableIntegerChangeHandlerVtable,
     query_interface : Proc(IUIAnimationVariableIntegerChangeHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationVariableIntegerChangeHandler*, UInt32),
     release : Proc(IUIAnimationVariableIntegerChangeHandler*, UInt32),
@@ -454,7 +454,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationVariableIntegerChangeHandler, lpVtbl : IUIAnimationVariableIntegerChangeHandlerVtbl* do
+  record IUIAnimationVariableIntegerChangeHandler, lpVtbl : IUIAnimationVariableIntegerChangeHandlerVtable* do
     GUID = LibC::GUID.new(0xbb3e1550_u32, 0x356e_u16, 0x44b0_u16, StaticArray[0x99_u8, 0xda_u8, 0x85_u8, 0xac_u8, 0x60_u8, 0x17_u8, 0x86_u8, 0x5e_u8])
     def query_interface(this : IUIAnimationVariableIntegerChangeHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -472,7 +472,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationStoryboardEventHandlerVtbl,
+  record IUIAnimationStoryboardEventHandlerVtable,
     query_interface : Proc(IUIAnimationStoryboardEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationStoryboardEventHandler*, UInt32),
     release : Proc(IUIAnimationStoryboardEventHandler*, UInt32),
@@ -481,7 +481,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationStoryboardEventHandler, lpVtbl : IUIAnimationStoryboardEventHandlerVtbl* do
+  record IUIAnimationStoryboardEventHandler, lpVtbl : IUIAnimationStoryboardEventHandlerVtable* do
     GUID = LibC::GUID.new(0x3d5c9008_u32, 0xec7c_u16, 0x4364_u16, StaticArray[0x9f_u8, 0x8a_u8, 0x9a_u8, 0xf3_u8, 0xc5_u8, 0x8c_u8, 0xba_u8, 0xe6_u8])
     def query_interface(this : IUIAnimationStoryboardEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -502,7 +502,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationPriorityComparisonVtbl,
+  record IUIAnimationPriorityComparisonVtable,
     query_interface : Proc(IUIAnimationPriorityComparison*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationPriorityComparison*, UInt32),
     release : Proc(IUIAnimationPriorityComparison*, UInt32),
@@ -510,7 +510,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationPriorityComparison, lpVtbl : IUIAnimationPriorityComparisonVtbl* do
+  record IUIAnimationPriorityComparison, lpVtbl : IUIAnimationPriorityComparisonVtable* do
     GUID = LibC::GUID.new(0x83fa9b74_u32, 0x5f86_u16, 0x4618_u16, StaticArray[0xbc_u8, 0x6a_u8, 0xa2_u8, 0xfa_u8, 0xc1_u8, 0x9b_u8, 0x3f_u8, 0x44_u8])
     def query_interface(this : IUIAnimationPriorityComparison*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -528,7 +528,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationTransitionLibraryVtbl,
+  record IUIAnimationTransitionLibraryVtable,
     query_interface : Proc(IUIAnimationTransitionLibrary*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationTransitionLibrary*, UInt32),
     release : Proc(IUIAnimationTransitionLibrary*, UInt32),
@@ -547,7 +547,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationTransitionLibrary, lpVtbl : IUIAnimationTransitionLibraryVtbl* do
+  record IUIAnimationTransitionLibrary, lpVtbl : IUIAnimationTransitionLibraryVtable* do
     GUID = LibC::GUID.new(0xca5a14b1_u32, 0xd24f_u16, 0x48b8_u16, StaticArray[0x8f_u8, 0xe4_u8, 0xc7_u8, 0x81_u8, 0x69_u8, 0xba_u8, 0x95_u8, 0x4e_u8])
     def query_interface(this : IUIAnimationTransitionLibrary*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -598,7 +598,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationInterpolatorVtbl,
+  record IUIAnimationInterpolatorVtable,
     query_interface : Proc(IUIAnimationInterpolator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationInterpolator*, UInt32),
     release : Proc(IUIAnimationInterpolator*, UInt32),
@@ -612,7 +612,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationInterpolator, lpVtbl : IUIAnimationInterpolatorVtbl* do
+  record IUIAnimationInterpolator, lpVtbl : IUIAnimationInterpolatorVtable* do
     GUID = LibC::GUID.new(0x7815cbba_u32, 0xddf7_u16, 0x478c_u16, StaticArray[0xa4_u8, 0x6c_u8, 0x7b_u8, 0x6c_u8, 0x73_u8, 0x8b_u8, 0x79_u8, 0x78_u8])
     def query_interface(this : IUIAnimationInterpolator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -648,7 +648,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationTransitionFactoryVtbl,
+  record IUIAnimationTransitionFactoryVtable,
     query_interface : Proc(IUIAnimationTransitionFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationTransitionFactory*, UInt32),
     release : Proc(IUIAnimationTransitionFactory*, UInt32),
@@ -656,7 +656,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationTransitionFactory, lpVtbl : IUIAnimationTransitionFactoryVtbl* do
+  record IUIAnimationTransitionFactory, lpVtbl : IUIAnimationTransitionFactoryVtable* do
     GUID = LibC::GUID.new(0xfcd91e03_u32, 0x3e3b_u16, 0x45ad_u16, StaticArray[0xbb_u8, 0xb1_u8, 0x6d_u8, 0xfc_u8, 0x81_u8, 0x53_u8, 0x74_u8, 0x3d_u8])
     def query_interface(this : IUIAnimationTransitionFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -674,7 +674,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationTimerVtbl,
+  record IUIAnimationTimerVtable,
     query_interface : Proc(IUIAnimationTimer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationTimer*, UInt32),
     release : Proc(IUIAnimationTimer*, UInt32),
@@ -688,7 +688,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationTimer, lpVtbl : IUIAnimationTimerVtbl* do
+  record IUIAnimationTimer, lpVtbl : IUIAnimationTimerVtable* do
     GUID = LibC::GUID.new(0x6b0efad1_u32, 0xa053_u16, 0x41d6_u16, StaticArray[0x90_u8, 0x85_u8, 0x33_u8, 0xa6_u8, 0x89_u8, 0x14_u8, 0x46_u8, 0x65_u8])
     def query_interface(this : IUIAnimationTimer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -724,7 +724,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationTimerUpdateHandlerVtbl,
+  record IUIAnimationTimerUpdateHandlerVtable,
     query_interface : Proc(IUIAnimationTimerUpdateHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationTimerUpdateHandler*, UInt32),
     release : Proc(IUIAnimationTimerUpdateHandler*, UInt32),
@@ -734,7 +734,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationTimerUpdateHandler, lpVtbl : IUIAnimationTimerUpdateHandlerVtbl* do
+  record IUIAnimationTimerUpdateHandler, lpVtbl : IUIAnimationTimerUpdateHandlerVtable* do
     GUID = LibC::GUID.new(0x195509b7_u32, 0x5d5e_u16, 0x4e3e_u16, StaticArray[0xb2_u8, 0x78_u8, 0xee_u8, 0x37_u8, 0x59_u8, 0xb3_u8, 0x67_u8, 0xad_u8])
     def query_interface(this : IUIAnimationTimerUpdateHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -758,7 +758,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationTimerClientEventHandlerVtbl,
+  record IUIAnimationTimerClientEventHandlerVtable,
     query_interface : Proc(IUIAnimationTimerClientEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationTimerClientEventHandler*, UInt32),
     release : Proc(IUIAnimationTimerClientEventHandler*, UInt32),
@@ -766,7 +766,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationTimerClientEventHandler, lpVtbl : IUIAnimationTimerClientEventHandlerVtbl* do
+  record IUIAnimationTimerClientEventHandler, lpVtbl : IUIAnimationTimerClientEventHandlerVtable* do
     GUID = LibC::GUID.new(0xbedb4db6_u32, 0x94fa_u16, 0x4bfb_u16, StaticArray[0xa4_u8, 0x7f_u8, 0xef_u8, 0x2d_u8, 0x9e_u8, 0x40_u8, 0x8c_u8, 0x25_u8])
     def query_interface(this : IUIAnimationTimerClientEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -784,7 +784,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationTimerEventHandlerVtbl,
+  record IUIAnimationTimerEventHandlerVtable,
     query_interface : Proc(IUIAnimationTimerEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationTimerEventHandler*, UInt32),
     release : Proc(IUIAnimationTimerEventHandler*, UInt32),
@@ -794,7 +794,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationTimerEventHandler, lpVtbl : IUIAnimationTimerEventHandlerVtbl* do
+  record IUIAnimationTimerEventHandler, lpVtbl : IUIAnimationTimerEventHandlerVtable* do
     GUID = LibC::GUID.new(0x274a7dea_u32, 0xd771_u16, 0x4095_u16, StaticArray[0xab_u8, 0xbd_u8, 0x8d_u8, 0xf7_u8, 0xab_u8, 0xd2_u8, 0x3c_u8, 0xe3_u8])
     def query_interface(this : IUIAnimationTimerEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -818,7 +818,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationManager2Vtbl,
+  record IUIAnimationManager2Vtable,
     query_interface : Proc(IUIAnimationManager2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationManager2*, UInt32),
     release : Proc(IUIAnimationManager2*, UInt32),
@@ -846,7 +846,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationManager2, lpVtbl : IUIAnimationManager2Vtbl* do
+  record IUIAnimationManager2, lpVtbl : IUIAnimationManager2Vtable* do
     GUID = LibC::GUID.new(0xd8b6f7d4_u32, 0x4109_u16, 0x4d3f_u16, StaticArray[0xac_u8, 0xee_u8, 0x87_u8, 0x99_u8, 0x26_u8, 0x96_u8, 0x8c_u8, 0xb1_u8])
     def query_interface(this : IUIAnimationManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -924,7 +924,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationVariable2Vtbl,
+  record IUIAnimationVariable2Vtable,
     query_interface : Proc(IUIAnimationVariable2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationVariable2*, UInt32),
     release : Proc(IUIAnimationVariable2*, UInt32),
@@ -957,7 +957,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationVariable2, lpVtbl : IUIAnimationVariable2Vtbl* do
+  record IUIAnimationVariable2, lpVtbl : IUIAnimationVariable2Vtable* do
     GUID = LibC::GUID.new(0x4914b304_u32, 0x96ab_u16, 0x44d9_u16, StaticArray[0x9e_u8, 0x77_u8, 0xd5_u8, 0x10_u8, 0x9b_u8, 0x7e_u8, 0x74_u8, 0x66_u8])
     def query_interface(this : IUIAnimationVariable2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1050,7 +1050,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationTransition2Vtbl,
+  record IUIAnimationTransition2Vtable,
     query_interface : Proc(IUIAnimationTransition2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationTransition2*, UInt32),
     release : Proc(IUIAnimationTransition2*, UInt32),
@@ -1064,7 +1064,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationTransition2, lpVtbl : IUIAnimationTransition2Vtbl* do
+  record IUIAnimationTransition2, lpVtbl : IUIAnimationTransition2Vtable* do
     GUID = LibC::GUID.new(0x62ff9123_u32, 0xa85a_u16, 0x4e9b_u16, StaticArray[0xa2_u8, 0x18_u8, 0x43_u8, 0x5a_u8, 0x93_u8, 0xe2_u8, 0x68_u8, 0xfd_u8])
     def query_interface(this : IUIAnimationTransition2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1100,7 +1100,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationManagerEventHandler2Vtbl,
+  record IUIAnimationManagerEventHandler2Vtable,
     query_interface : Proc(IUIAnimationManagerEventHandler2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationManagerEventHandler2*, UInt32),
     release : Proc(IUIAnimationManagerEventHandler2*, UInt32),
@@ -1108,7 +1108,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationManagerEventHandler2, lpVtbl : IUIAnimationManagerEventHandler2Vtbl* do
+  record IUIAnimationManagerEventHandler2, lpVtbl : IUIAnimationManagerEventHandler2Vtable* do
     GUID = LibC::GUID.new(0xf6e022ba_u32, 0xbff3_u16, 0x42ec_u16, StaticArray[0x90_u8, 0x33_u8, 0xe0_u8, 0x73_u8, 0xf3_u8, 0x3e_u8, 0x83_u8, 0xc3_u8])
     def query_interface(this : IUIAnimationManagerEventHandler2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1126,7 +1126,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationVariableChangeHandler2Vtbl,
+  record IUIAnimationVariableChangeHandler2Vtable,
     query_interface : Proc(IUIAnimationVariableChangeHandler2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationVariableChangeHandler2*, UInt32),
     release : Proc(IUIAnimationVariableChangeHandler2*, UInt32),
@@ -1134,7 +1134,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationVariableChangeHandler2, lpVtbl : IUIAnimationVariableChangeHandler2Vtbl* do
+  record IUIAnimationVariableChangeHandler2, lpVtbl : IUIAnimationVariableChangeHandler2Vtable* do
     GUID = LibC::GUID.new(0x63acc8d2_u32, 0x6eae_u16, 0x4bb0_u16, StaticArray[0xb8_u8, 0x79_u8, 0x58_u8, 0x6d_u8, 0xd8_u8, 0xcf_u8, 0xbe_u8, 0x42_u8])
     def query_interface(this : IUIAnimationVariableChangeHandler2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1152,7 +1152,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationVariableIntegerChangeHandler2Vtbl,
+  record IUIAnimationVariableIntegerChangeHandler2Vtable,
     query_interface : Proc(IUIAnimationVariableIntegerChangeHandler2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationVariableIntegerChangeHandler2*, UInt32),
     release : Proc(IUIAnimationVariableIntegerChangeHandler2*, UInt32),
@@ -1160,7 +1160,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationVariableIntegerChangeHandler2, lpVtbl : IUIAnimationVariableIntegerChangeHandler2Vtbl* do
+  record IUIAnimationVariableIntegerChangeHandler2, lpVtbl : IUIAnimationVariableIntegerChangeHandler2Vtable* do
     GUID = LibC::GUID.new(0x829b6cf1_u32, 0x4f3a_u16, 0x4412_u16, StaticArray[0xae_u8, 0x9_u8, 0xb2_u8, 0x43_u8, 0xeb_u8, 0x4c_u8, 0x6b_u8, 0x58_u8])
     def query_interface(this : IUIAnimationVariableIntegerChangeHandler2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1178,7 +1178,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationVariableCurveChangeHandler2Vtbl,
+  record IUIAnimationVariableCurveChangeHandler2Vtable,
     query_interface : Proc(IUIAnimationVariableCurveChangeHandler2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationVariableCurveChangeHandler2*, UInt32),
     release : Proc(IUIAnimationVariableCurveChangeHandler2*, UInt32),
@@ -1186,7 +1186,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationVariableCurveChangeHandler2, lpVtbl : IUIAnimationVariableCurveChangeHandler2Vtbl* do
+  record IUIAnimationVariableCurveChangeHandler2, lpVtbl : IUIAnimationVariableCurveChangeHandler2Vtable* do
     GUID = LibC::GUID.new(0x72895e91_u32, 0x145_u16, 0x4c21_u16, StaticArray[0x91_u8, 0x92_u8, 0x5a_u8, 0xab_u8, 0x40_u8, 0xed_u8, 0xdf_u8, 0x80_u8])
     def query_interface(this : IUIAnimationVariableCurveChangeHandler2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1204,7 +1204,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationStoryboardEventHandler2Vtbl,
+  record IUIAnimationStoryboardEventHandler2Vtable,
     query_interface : Proc(IUIAnimationStoryboardEventHandler2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationStoryboardEventHandler2*, UInt32),
     release : Proc(IUIAnimationStoryboardEventHandler2*, UInt32),
@@ -1213,7 +1213,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationStoryboardEventHandler2, lpVtbl : IUIAnimationStoryboardEventHandler2Vtbl* do
+  record IUIAnimationStoryboardEventHandler2, lpVtbl : IUIAnimationStoryboardEventHandler2Vtable* do
     GUID = LibC::GUID.new(0xbac5f55a_u32, 0xba7c_u16, 0x414c_u16, StaticArray[0xb5_u8, 0x99_u8, 0xfb_u8, 0xf8_u8, 0x50_u8, 0xf5_u8, 0x53_u8, 0xc6_u8])
     def query_interface(this : IUIAnimationStoryboardEventHandler2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1234,7 +1234,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationLoopIterationChangeHandler2Vtbl,
+  record IUIAnimationLoopIterationChangeHandler2Vtable,
     query_interface : Proc(IUIAnimationLoopIterationChangeHandler2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationLoopIterationChangeHandler2*, UInt32),
     release : Proc(IUIAnimationLoopIterationChangeHandler2*, UInt32),
@@ -1242,7 +1242,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationLoopIterationChangeHandler2, lpVtbl : IUIAnimationLoopIterationChangeHandler2Vtbl* do
+  record IUIAnimationLoopIterationChangeHandler2, lpVtbl : IUIAnimationLoopIterationChangeHandler2Vtable* do
     GUID = LibC::GUID.new(0x2d3b15a4_u32, 0x4762_u16, 0x47ab_u16, StaticArray[0xa0_u8, 0x30_u8, 0xb2_u8, 0x32_u8, 0x21_u8, 0xdf_u8, 0x3a_u8, 0xe0_u8])
     def query_interface(this : IUIAnimationLoopIterationChangeHandler2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1260,7 +1260,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationPriorityComparison2Vtbl,
+  record IUIAnimationPriorityComparison2Vtable,
     query_interface : Proc(IUIAnimationPriorityComparison2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationPriorityComparison2*, UInt32),
     release : Proc(IUIAnimationPriorityComparison2*, UInt32),
@@ -1268,7 +1268,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationPriorityComparison2, lpVtbl : IUIAnimationPriorityComparison2Vtbl* do
+  record IUIAnimationPriorityComparison2, lpVtbl : IUIAnimationPriorityComparison2Vtable* do
     GUID = LibC::GUID.new(0x5b6d7a37_u32, 0x4621_u16, 0x467c_u16, StaticArray[0x8b_u8, 0x5_u8, 0x70_u8, 0x13_u8, 0x1d_u8, 0xe6_u8, 0x2d_u8, 0xdb_u8])
     def query_interface(this : IUIAnimationPriorityComparison2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1286,7 +1286,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationTransitionLibrary2Vtbl,
+  record IUIAnimationTransitionLibrary2Vtable,
     query_interface : Proc(IUIAnimationTransitionLibrary2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationTransitionLibrary2*, UInt32),
     release : Proc(IUIAnimationTransitionLibrary2*, UInt32),
@@ -1312,7 +1312,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationTransitionLibrary2, lpVtbl : IUIAnimationTransitionLibrary2Vtbl* do
+  record IUIAnimationTransitionLibrary2, lpVtbl : IUIAnimationTransitionLibrary2Vtable* do
     GUID = LibC::GUID.new(0x3cfae53_u32, 0x9580_u16, 0x4ee3_u16, StaticArray[0xb3_u8, 0x63_u8, 0x2e_u8, 0xce_u8, 0x51_u8, 0xb4_u8, 0xaf_u8, 0x6a_u8])
     def query_interface(this : IUIAnimationTransitionLibrary2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1384,7 +1384,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationPrimitiveInterpolationVtbl,
+  record IUIAnimationPrimitiveInterpolationVtable,
     query_interface : Proc(IUIAnimationPrimitiveInterpolation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationPrimitiveInterpolation*, UInt32),
     release : Proc(IUIAnimationPrimitiveInterpolation*, UInt32),
@@ -1393,7 +1393,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationPrimitiveInterpolation, lpVtbl : IUIAnimationPrimitiveInterpolationVtbl* do
+  record IUIAnimationPrimitiveInterpolation, lpVtbl : IUIAnimationPrimitiveInterpolationVtable* do
     GUID = LibC::GUID.new(0xbab20d63_u32, 0x4361_u16, 0x45da_u16, StaticArray[0xa2_u8, 0x4f_u8, 0xab_u8, 0x85_u8, 0x8_u8, 0x84_u8, 0x6b_u8, 0x5b_u8])
     def query_interface(this : IUIAnimationPrimitiveInterpolation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1414,7 +1414,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationInterpolator2Vtbl,
+  record IUIAnimationInterpolator2Vtable,
     query_interface : Proc(IUIAnimationInterpolator2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationInterpolator2*, UInt32),
     release : Proc(IUIAnimationInterpolator2*, UInt32),
@@ -1430,7 +1430,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationInterpolator2, lpVtbl : IUIAnimationInterpolator2Vtbl* do
+  record IUIAnimationInterpolator2, lpVtbl : IUIAnimationInterpolator2Vtable* do
     GUID = LibC::GUID.new(0xea76aff8_u32, 0xea22_u16, 0x4a23_u16, StaticArray[0xa0_u8, 0xef_u8, 0xa6_u8, 0xa9_u8, 0x66_u8, 0x70_u8, 0x35_u8, 0x18_u8])
     def query_interface(this : IUIAnimationInterpolator2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1472,7 +1472,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationTransitionFactory2Vtbl,
+  record IUIAnimationTransitionFactory2Vtable,
     query_interface : Proc(IUIAnimationTransitionFactory2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationTransitionFactory2*, UInt32),
     release : Proc(IUIAnimationTransitionFactory2*, UInt32),
@@ -1480,7 +1480,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationTransitionFactory2, lpVtbl : IUIAnimationTransitionFactory2Vtbl* do
+  record IUIAnimationTransitionFactory2, lpVtbl : IUIAnimationTransitionFactory2Vtable* do
     GUID = LibC::GUID.new(0x937d4916_u32, 0xc1a6_u16, 0x42d5_u16, StaticArray[0x88_u8, 0xd8_u8, 0x30_u8, 0x34_u8, 0x4d_u8, 0x6e_u8, 0xfe_u8, 0x31_u8])
     def query_interface(this : IUIAnimationTransitionFactory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1498,7 +1498,7 @@ module Win32cr::UI::Animation
   end
 
   @[Extern]
-  record IUIAnimationStoryboard2Vtbl,
+  record IUIAnimationStoryboard2Vtable,
     query_interface : Proc(IUIAnimationStoryboard2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAnimationStoryboard2*, UInt32),
     release : Proc(IUIAnimationStoryboard2*, UInt32),
@@ -1523,7 +1523,7 @@ module Win32cr::UI::Animation
 
 
   @[Extern]
-  record IUIAnimationStoryboard2, lpVtbl : IUIAnimationStoryboard2Vtbl* do
+  record IUIAnimationStoryboard2, lpVtbl : IUIAnimationStoryboard2Vtable* do
     GUID = LibC::GUID.new(0xae289cd2_u32, 0x12d4_u16, 0x4945_u16, StaticArray[0x94_u8, 0x19_u8, 0x9e_u8, 0x41_u8, 0xbe_u8, 0x3_u8, 0x4d_u8, 0xf2_u8])
     def query_interface(this : IUIAnimationStoryboard2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

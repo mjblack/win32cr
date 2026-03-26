@@ -12,33 +12,49 @@ module Win32cr::System::SubsystemForLinux
   end
 
   def wslIsDistributionRegistered(distributionName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WslIsDistributionRegistered(distributionName)
+    {% end %}
   end
 
   def wslRegisterDistribution(distributionName : Win32cr::Foundation::PWSTR, tarGzFilename : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WslRegisterDistribution(distributionName, tarGzFilename)
+    {% end %}
   end
 
   def wslUnregisterDistribution(distributionName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WslUnregisterDistribution(distributionName)
+    {% end %}
   end
 
   def wslConfigureDistribution(distributionName : Win32cr::Foundation::PWSTR, defaultUID : UInt32, wslDistributionFlags : Win32cr::System::SubsystemForLinux::WSL_DISTRIBUTION_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WslConfigureDistribution(distributionName, defaultUID, wslDistributionFlags)
+    {% end %}
   end
 
   def wslGetDistributionConfiguration(distributionName : Win32cr::Foundation::PWSTR, distributionVersion : UInt32*, defaultUID : UInt32*, wslDistributionFlags : Win32cr::System::SubsystemForLinux::WSL_DISTRIBUTION_FLAGS*, defaultEnvironmentVariables : Win32cr::Foundation::PSTR**, defaultEnvironmentVariableCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WslGetDistributionConfiguration(distributionName, distributionVersion, defaultUID, wslDistributionFlags, defaultEnvironmentVariables, defaultEnvironmentVariableCount)
+    {% end %}
   end
 
   def wslLaunchInteractive(distributionName : Win32cr::Foundation::PWSTR, command : Win32cr::Foundation::PWSTR, useCurrentWorkingDirectory : Win32cr::Foundation::BOOL, exitCode : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WslLaunchInteractive(distributionName, command, useCurrentWorkingDirectory, exitCode)
+    {% end %}
   end
 
   def wslLaunch(distributionName : Win32cr::Foundation::PWSTR, command : Win32cr::Foundation::PWSTR, useCurrentWorkingDirectory : Win32cr::Foundation::BOOL, stdIn : Win32cr::Foundation::HANDLE, stdOut : Win32cr::Foundation::HANDLE, stdErr : Win32cr::Foundation::HANDLE, process : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WslLaunch(distributionName, command, useCurrentWorkingDirectory, stdIn, stdOut, stdErr, process)
+    {% end %}
   end
 
+  @[Link("api-ms-win-wsl-api-l1-1-0.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WslIsDistributionRegistered(distributionName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
@@ -62,4 +78,5 @@ module Win32cr::System::SubsystemForLinux
     fun WslLaunch(distributionName : Win32cr::Foundation::PWSTR, command : Win32cr::Foundation::PWSTR, useCurrentWorkingDirectory : Win32cr::Foundation::BOOL, stdIn : Win32cr::Foundation::HANDLE, stdOut : Win32cr::Foundation::HANDLE, stdErr : Win32cr::Foundation::HANDLE, process : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end
