@@ -305,7 +305,7 @@ module Win32cr::Storage::IndexServer
   {% end %}
 
   @[Extern]
-  record IFilterVtbl,
+  record IFilterVtable,
     query_interface : Proc(IFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFilter*, UInt32),
     release : Proc(IFilter*, UInt32),
@@ -317,7 +317,7 @@ module Win32cr::Storage::IndexServer
 
 
   @[Extern]
-  record IFilter, lpVtbl : IFilterVtbl* do
+  record IFilter, lpVtbl : IFilterVtable* do
     GUID = LibC::GUID.new(0x89bcb740_u32, 0x6119_u16, 0x101a_u16, StaticArray[0xbc_u8, 0xb7_u8, 0x0_u8, 0xdd_u8, 0x1_u8, 0x6_u8, 0x55_u8, 0xaf_u8])
     def query_interface(this : IFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -347,7 +347,7 @@ module Win32cr::Storage::IndexServer
   end
 
   @[Extern]
-  record IPhraseSinkVtbl,
+  record IPhraseSinkVtable,
     query_interface : Proc(IPhraseSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPhraseSink*, UInt32),
     release : Proc(IPhraseSink*, UInt32),
@@ -356,7 +356,7 @@ module Win32cr::Storage::IndexServer
 
 
   @[Extern]
-  record IPhraseSink, lpVtbl : IPhraseSinkVtbl* do
+  record IPhraseSink, lpVtbl : IPhraseSinkVtable* do
     GUID = LibC::GUID.new(0xcc906ff0_u32, 0xc058_u16, 0x101a_u16, StaticArray[0xb5_u8, 0x54_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x33_u8, 0xb0_u8, 0xe6_u8])
     def query_interface(this : IPhraseSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -377,22 +377,31 @@ module Win32cr::Storage::IndexServer
   end
 
   def loadIFilter(pwcsPath : Win32cr::Foundation::PWSTR, pUnkOuter : Void*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.LoadIFilter(pwcsPath, pUnkOuter, ppIUnk)
+    {% end %}
   end
 
   def loadIFilterEx(pwcsPath : Win32cr::Foundation::PWSTR, dwFlags : UInt32, riid : LibC::GUID*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.LoadIFilterEx(pwcsPath, dwFlags, riid, ppIUnk)
+    {% end %}
   end
 
   def bindIFilterFromStorage(pStg : Void*, pUnkOuter : Void*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BindIFilterFromStorage(pStg, pUnkOuter, ppIUnk)
+    {% end %}
   end
 
   def bindIFilterFromStream(pStm : Void*, pUnkOuter : Void*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BindIFilterFromStream(pStm, pUnkOuter, ppIUnk)
+    {% end %}
   end
 
-  @[Link("query")]
+  @[Link("query.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun LoadIFilter(pwcsPath : Win32cr::Foundation::PWSTR, pUnkOuter : Void*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
@@ -407,4 +416,5 @@ module Win32cr::Storage::IndexServer
     fun BindIFilterFromStream(pStm : Void*, pUnkOuter : Void*, ppIUnk : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

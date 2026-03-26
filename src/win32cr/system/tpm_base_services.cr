@@ -98,58 +98,85 @@ module Win32cr::System::TpmBaseServices
   end
 
   def tbsiContextCreate(pContextParams : Win32cr::System::TpmBaseServices::TBS_CONTEXT_PARAMS*, phContext : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.Tbsi_Context_Create(pContextParams, phContext)
+    {% end %}
   end
 
   def tbsipContextClose(hContext : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.Tbsip_Context_Close(hContext)
+    {% end %}
   end
 
   def tbsipSubmitCommand(hContext : Void*, locality : Win32cr::System::TpmBaseServices::TBS_COMMAND_LOCALITY, priority : Win32cr::System::TpmBaseServices::TBS_COMMAND_PRIORITY, pabCommand : UInt8*, cbCommand : UInt32, pabResult : UInt8*, pcbResult : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.Tbsip_Submit_Command(hContext, locality, priority, pabCommand, cbCommand, pabResult, pcbResult)
+    {% end %}
   end
 
   def tbsipCancelCommands(hContext : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.Tbsip_Cancel_Commands(hContext)
+    {% end %}
   end
 
   def tbsiPhysicalPresenceCommand(hContext : Void*, pabInput : UInt8*, cbInput : UInt32, pabOutput : UInt8*, pcbOutput : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.Tbsi_Physical_Presence_Command(hContext, pabInput, cbInput, pabOutput, pcbOutput)
+    {% end %}
   end
 
   def tbsiGetTCGLog(hContext : Void*, pOutputBuf : UInt8*, pOutputBufLen : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.Tbsi_Get_TCG_Log(hContext, pOutputBuf, pOutputBufLen)
+    {% end %}
   end
 
   def tbsiGetDeviceInfo(size : UInt32, info : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.Tbsi_GetDeviceInfo(size, info)
+    {% end %}
   end
 
   def tbsiGetOwnerAuth(hContext : Void*, ownerauthType : UInt32, pOutputBuf : UInt8*, pOutputBufLen : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.Tbsi_Get_OwnerAuth(hContext, ownerauthType, pOutputBuf, pOutputBufLen)
+    {% end %}
   end
 
   def tbsiRevokeAttestation : UInt32
+    {% if !flag?(:docs) %}
     C.Tbsi_Revoke_Attestation
+    {% end %}
   end
 
   def getDeviceID(pbWindowsAIK : UInt8*, cbWindowsAIK : UInt32, pcbResult : UInt32*, pfProtectedByTPM : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetDeviceID(pbWindowsAIK, cbWindowsAIK, pcbResult, pfProtectedByTPM)
+    {% end %}
   end
 
   def getDeviceIDString(pszWindowsAIK : UInt16*, cchWindowsAIK : UInt32, pcchResult : UInt32*, pfProtectedByTPM : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetDeviceIDString(pszWindowsAIK, cchWindowsAIK, pcchResult, pfProtectedByTPM)
+    {% end %}
   end
 
   def tbsiCreateWindowsKey(keyHandle : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.Tbsi_Create_Windows_Key(keyHandle)
+    {% end %}
   end
 
   def tbsiGetTCGLogEx(logType : UInt32, pbOutput : UInt8*, pcbOutput : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.Tbsi_Get_TCG_Log_Ex(logType, pbOutput, pcbOutput)
+    {% end %}
   end
 
-  @[Link("tbs")]
+  @[Link("tbs.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun Tbsi_Context_Create(pContextParams : Win32cr::System::TpmBaseServices::TBS_CONTEXT_PARAMS*, phContext : Void**) : UInt32
@@ -191,4 +218,5 @@ module Win32cr::System::TpmBaseServices
     fun Tbsi_Get_TCG_Log_Ex(logType : UInt32, pbOutput : UInt8*, pcbOutput : UInt32*) : UInt32
 
   end
+  {% end %}
 end

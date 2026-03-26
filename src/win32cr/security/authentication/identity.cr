@@ -5683,11 +5683,7 @@ module Win32cr::Security::Authentication::Identity
     end
   end
 
-  @[Extern]
-  struct HMAPPER_
-    def initialize()
-    end
-  end
+  alias HMAPPER_ = Void
 
   @[Extern]
   struct SCHANNEL_CRED
@@ -6083,7 +6079,7 @@ module Win32cr::Security::Authentication::Identity
   end
 
   @[Extern]
-  record ICcgDomainAuthCredentialsVtbl,
+  record ICcgDomainAuthCredentialsVtable,
     query_interface : Proc(ICcgDomainAuthCredentials*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICcgDomainAuthCredentials*, UInt32),
     release : Proc(ICcgDomainAuthCredentials*, UInt32),
@@ -6091,7 +6087,7 @@ module Win32cr::Security::Authentication::Identity
 
 
   @[Extern]
-  record ICcgDomainAuthCredentials, lpVtbl : ICcgDomainAuthCredentialsVtbl* do
+  record ICcgDomainAuthCredentials, lpVtbl : ICcgDomainAuthCredentialsVtable* do
     GUID = LibC::GUID.new(0x6ecda518_u32, 0x2010_u16, 0x4437_u16, StaticArray[0x8b_u8, 0xc3_u8, 0x46_u8, 0xe7_u8, 0x52_u8, 0xb7_u8, 0xb1_u8, 0x72_u8])
     def query_interface(this : ICcgDomainAuthCredentials*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6109,858 +6105,1282 @@ module Win32cr::Security::Authentication::Identity
   end
 
   def lsaRegisterLogonProcess(logon_process_name : Win32cr::System::Kernel::STRING*, lsa_handle : Win32cr::Security::Authentication::Identity::LsaHandle*, security_mode : UInt32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaRegisterLogonProcess(logon_process_name, lsa_handle, security_mode)
+    {% end %}
   end
 
   def lsaLogonUser(lsa_handle : Win32cr::Foundation::HANDLE, origin_name : Win32cr::System::Kernel::STRING*, logon_type : Win32cr::Security::Authentication::Identity::SECURITY_LOGON_TYPE, authentication_package : UInt32, authentication_information : Void*, authentication_information_length : UInt32, local_groups : Win32cr::Security::TOKEN_GROUPS*, source_context : Win32cr::Security::TOKEN_SOURCE*, profile_buffer : Void**, profile_buffer_length : UInt32*, logon_id : Win32cr::Foundation::LUID*, token : Win32cr::Foundation::HANDLE*, quotas : Win32cr::Security::QUOTA_LIMITS*, sub_status : Int32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaLogonUser(lsa_handle, origin_name, logon_type, authentication_package, authentication_information, authentication_information_length, local_groups, source_context, profile_buffer, profile_buffer_length, logon_id, token, quotas, sub_status)
+    {% end %}
   end
 
   def lsaLookupAuthenticationPackage(lsa_handle : Win32cr::Foundation::HANDLE, package_name : Win32cr::System::Kernel::STRING*, authentication_package : UInt32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaLookupAuthenticationPackage(lsa_handle, package_name, authentication_package)
+    {% end %}
   end
 
   def lsaFreeReturnBuffer(buffer : Void*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaFreeReturnBuffer(buffer)
+    {% end %}
   end
 
   def lsaCallAuthenticationPackage(lsa_handle : Win32cr::Foundation::HANDLE, authentication_package : UInt32, protocol_submit_buffer : Void*, submit_buffer_length : UInt32, protocol_return_buffer : Void**, return_buffer_length : UInt32*, protocol_status : Int32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaCallAuthenticationPackage(lsa_handle, authentication_package, protocol_submit_buffer, submit_buffer_length, protocol_return_buffer, return_buffer_length, protocol_status)
+    {% end %}
   end
 
   def lsaDeregisterLogonProcess(lsa_handle : Win32cr::Security::Authentication::Identity::LsaHandle) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaDeregisterLogonProcess(lsa_handle)
+    {% end %}
   end
 
   def lsaConnectUntrusted(lsa_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaConnectUntrusted(lsa_handle)
+    {% end %}
   end
 
   def lsaFreeMemory(buffer : Void*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaFreeMemory(buffer)
+    {% end %}
   end
 
   def lsaClose(object_handle : Void*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaClose(object_handle)
+    {% end %}
   end
 
   def lsaEnumerateLogonSessions(logon_session_count : UInt32*, logon_session_list : Win32cr::Foundation::LUID**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaEnumerateLogonSessions(logon_session_count, logon_session_list)
+    {% end %}
   end
 
   def lsaGetLogonSessionData(logon_id : Win32cr::Foundation::LUID*, ppLogonSessionData : Win32cr::Security::Authentication::Identity::SECURITY_LOGON_SESSION_DATA**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaGetLogonSessionData(logon_id, ppLogonSessionData)
+    {% end %}
   end
 
   def lsaOpenPolicy(system_name : Win32cr::Foundation::UNICODE_STRING*, object_attributes : Win32cr::System::WindowsProgramming::OBJECT_ATTRIBUTES*, desired_access : UInt32, policy_handle : Void**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaOpenPolicy(system_name, object_attributes, desired_access, policy_handle)
+    {% end %}
   end
 
   def lsaSetCAPs(capd_ns : Win32cr::Foundation::UNICODE_STRING*, capdn_count : UInt32, flags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaSetCAPs(capd_ns, capdn_count, flags)
+    {% end %}
   end
 
   def lsaGetAppliedCAPIDs(system_name : Win32cr::Foundation::UNICODE_STRING*, capi_ds : Win32cr::Foundation::PSID**, capid_count : UInt32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaGetAppliedCAPIDs(system_name, capi_ds, capid_count)
+    {% end %}
   end
 
   def lsaQueryCAPs(capi_ds : Win32cr::Foundation::PSID*, capid_count : UInt32, ca_ps : Win32cr::Security::Authentication::Identity::CENTRAL_ACCESS_POLICY**, cap_count : UInt32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaQueryCAPs(capi_ds, capid_count, ca_ps, cap_count)
+    {% end %}
   end
 
   def lsaQueryInformationPolicy(policy_handle : Void*, information_class : Win32cr::Security::Authentication::Identity::POLICY_INFORMATION_CLASS, buffer : Void**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaQueryInformationPolicy(policy_handle, information_class, buffer)
+    {% end %}
   end
 
   def lsaSetInformationPolicy(policy_handle : Void*, information_class : Win32cr::Security::Authentication::Identity::POLICY_INFORMATION_CLASS, buffer : Void*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaSetInformationPolicy(policy_handle, information_class, buffer)
+    {% end %}
   end
 
   def lsaQueryDomainInformationPolicy(policy_handle : Void*, information_class : Win32cr::Security::Authentication::Identity::POLICY_DOMAIN_INFORMATION_CLASS, buffer : Void**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaQueryDomainInformationPolicy(policy_handle, information_class, buffer)
+    {% end %}
   end
 
   def lsaSetDomainInformationPolicy(policy_handle : Void*, information_class : Win32cr::Security::Authentication::Identity::POLICY_DOMAIN_INFORMATION_CLASS, buffer : Void*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaSetDomainInformationPolicy(policy_handle, information_class, buffer)
+    {% end %}
   end
 
   def lsaRegisterPolicyChangeNotification(information_class : Win32cr::Security::Authentication::Identity::POLICY_NOTIFICATION_INFORMATION_CLASS, notification_event_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaRegisterPolicyChangeNotification(information_class, notification_event_handle)
+    {% end %}
   end
 
   def lsaUnregisterPolicyChangeNotification(information_class : Win32cr::Security::Authentication::Identity::POLICY_NOTIFICATION_INFORMATION_CLASS, notification_event_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaUnregisterPolicyChangeNotification(information_class, notification_event_handle)
+    {% end %}
   end
 
   def lsaEnumerateTrustedDomains(policy_handle : Void*, enumeration_context : UInt32*, buffer : Void**, prefered_maximum_length : UInt32, count_returned : UInt32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaEnumerateTrustedDomains(policy_handle, enumeration_context, buffer, prefered_maximum_length, count_returned)
+    {% end %}
   end
 
   def lsaLookupNames(policy_handle : Void*, count : UInt32, names : Win32cr::Foundation::UNICODE_STRING*, referenced_domains : Win32cr::Security::Authentication::Identity::LSA_REFERENCED_DOMAIN_LIST**, sids : Win32cr::Security::Authentication::Identity::LSA_TRANSLATED_SID**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaLookupNames(policy_handle, count, names, referenced_domains, sids)
+    {% end %}
   end
 
   def lsaLookupNames2(policy_handle : Void*, flags : UInt32, count : UInt32, names : Win32cr::Foundation::UNICODE_STRING*, referenced_domains : Win32cr::Security::Authentication::Identity::LSA_REFERENCED_DOMAIN_LIST**, sids : Win32cr::Security::Authentication::Identity::LSA_TRANSLATED_SID2**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaLookupNames2(policy_handle, flags, count, names, referenced_domains, sids)
+    {% end %}
   end
 
   def lsaLookupSids(policy_handle : Void*, count : UInt32, sids : Win32cr::Foundation::PSID*, referenced_domains : Win32cr::Security::Authentication::Identity::LSA_REFERENCED_DOMAIN_LIST**, names : Win32cr::Security::Authentication::Identity::LSA_TRANSLATED_NAME**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaLookupSids(policy_handle, count, sids, referenced_domains, names)
+    {% end %}
   end
 
   def lsaLookupSids2(policy_handle : Void*, lookup_options : UInt32, count : UInt32, sids : Win32cr::Foundation::PSID*, referenced_domains : Win32cr::Security::Authentication::Identity::LSA_REFERENCED_DOMAIN_LIST**, names : Win32cr::Security::Authentication::Identity::LSA_TRANSLATED_NAME**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaLookupSids2(policy_handle, lookup_options, count, sids, referenced_domains, names)
+    {% end %}
   end
 
   def lsaEnumerateAccountsWithUserRight(policy_handle : Void*, user_right : Win32cr::Foundation::UNICODE_STRING*, buffer : Void**, count_returned : UInt32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaEnumerateAccountsWithUserRight(policy_handle, user_right, buffer, count_returned)
+    {% end %}
   end
 
   def lsaEnumerateAccountRights(policy_handle : Void*, account_sid : Win32cr::Foundation::PSID, user_rights : Win32cr::Foundation::UNICODE_STRING**, count_of_rights : UInt32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaEnumerateAccountRights(policy_handle, account_sid, user_rights, count_of_rights)
+    {% end %}
   end
 
   def lsaAddAccountRights(policy_handle : Void*, account_sid : Win32cr::Foundation::PSID, user_rights : Win32cr::Foundation::UNICODE_STRING*, count_of_rights : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaAddAccountRights(policy_handle, account_sid, user_rights, count_of_rights)
+    {% end %}
   end
 
   def lsaRemoveAccountRights(policy_handle : Void*, account_sid : Win32cr::Foundation::PSID, all_rights : Win32cr::Foundation::BOOLEAN, user_rights : Win32cr::Foundation::UNICODE_STRING*, count_of_rights : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaRemoveAccountRights(policy_handle, account_sid, all_rights, user_rights, count_of_rights)
+    {% end %}
   end
 
   def lsaOpenTrustedDomainByName(policy_handle : Void*, trusted_domain_name : Win32cr::Foundation::UNICODE_STRING*, desired_access : UInt32, trusted_domain_handle : Void**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaOpenTrustedDomainByName(policy_handle, trusted_domain_name, desired_access, trusted_domain_handle)
+    {% end %}
   end
 
   def lsaQueryTrustedDomainInfo(policy_handle : Void*, trusted_domain_sid : Win32cr::Foundation::PSID, information_class : Win32cr::Security::Authentication::Identity::TRUSTED_INFORMATION_CLASS, buffer : Void**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaQueryTrustedDomainInfo(policy_handle, trusted_domain_sid, information_class, buffer)
+    {% end %}
   end
 
   def lsaSetTrustedDomainInformation(policy_handle : Void*, trusted_domain_sid : Win32cr::Foundation::PSID, information_class : Win32cr::Security::Authentication::Identity::TRUSTED_INFORMATION_CLASS, buffer : Void*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaSetTrustedDomainInformation(policy_handle, trusted_domain_sid, information_class, buffer)
+    {% end %}
   end
 
   def lsaDeleteTrustedDomain(policy_handle : Void*, trusted_domain_sid : Win32cr::Foundation::PSID) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaDeleteTrustedDomain(policy_handle, trusted_domain_sid)
+    {% end %}
   end
 
   def lsaQueryTrustedDomainInfoByName(policy_handle : Void*, trusted_domain_name : Win32cr::Foundation::UNICODE_STRING*, information_class : Win32cr::Security::Authentication::Identity::TRUSTED_INFORMATION_CLASS, buffer : Void**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaQueryTrustedDomainInfoByName(policy_handle, trusted_domain_name, information_class, buffer)
+    {% end %}
   end
 
   def lsaSetTrustedDomainInfoByName(policy_handle : Void*, trusted_domain_name : Win32cr::Foundation::UNICODE_STRING*, information_class : Win32cr::Security::Authentication::Identity::TRUSTED_INFORMATION_CLASS, buffer : Void*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaSetTrustedDomainInfoByName(policy_handle, trusted_domain_name, information_class, buffer)
+    {% end %}
   end
 
   def lsaEnumerateTrustedDomainsEx(policy_handle : Void*, enumeration_context : UInt32*, buffer : Void**, prefered_maximum_length : UInt32, count_returned : UInt32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaEnumerateTrustedDomainsEx(policy_handle, enumeration_context, buffer, prefered_maximum_length, count_returned)
+    {% end %}
   end
 
   def lsaCreateTrustedDomainEx(policy_handle : Void*, trusted_domain_information : Win32cr::Security::Authentication::Identity::TRUSTED_DOMAIN_INFORMATION_EX*, authentication_information : Win32cr::Security::Authentication::Identity::TRUSTED_DOMAIN_AUTH_INFORMATION*, desired_access : UInt32, trusted_domain_handle : Void**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaCreateTrustedDomainEx(policy_handle, trusted_domain_information, authentication_information, desired_access, trusted_domain_handle)
+    {% end %}
   end
 
   def lsaQueryForestTrustInformation(policy_handle : Void*, trusted_domain_name : Win32cr::Foundation::UNICODE_STRING*, forest_trust_info : Win32cr::Security::Authentication::Identity::LSA_FOREST_TRUST_INFORMATION**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaQueryForestTrustInformation(policy_handle, trusted_domain_name, forest_trust_info)
+    {% end %}
   end
 
   def lsaSetForestTrustInformation(policy_handle : Void*, trusted_domain_name : Win32cr::Foundation::UNICODE_STRING*, forest_trust_info : Win32cr::Security::Authentication::Identity::LSA_FOREST_TRUST_INFORMATION*, check_only : Win32cr::Foundation::BOOLEAN, collision_info : Win32cr::Security::Authentication::Identity::LSA_FOREST_TRUST_COLLISION_INFORMATION**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaSetForestTrustInformation(policy_handle, trusted_domain_name, forest_trust_info, check_only, collision_info)
+    {% end %}
   end
 
   def lsaStorePrivateData(policy_handle : Void*, key_name : Win32cr::Foundation::UNICODE_STRING*, private_data : Win32cr::Foundation::UNICODE_STRING*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaStorePrivateData(policy_handle, key_name, private_data)
+    {% end %}
   end
 
   def lsaRetrievePrivateData(policy_handle : Void*, key_name : Win32cr::Foundation::UNICODE_STRING*, private_data : Win32cr::Foundation::UNICODE_STRING**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.LsaRetrievePrivateData(policy_handle, key_name, private_data)
+    {% end %}
   end
 
   def lsaNtStatusToWinError(status : Win32cr::Foundation::NTSTATUS) : UInt32
+    {% if !flag?(:docs) %}
     C.LsaNtStatusToWinError(status)
+    {% end %}
   end
 
   def systemFunction036(random_buffer : Void*, random_buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.SystemFunction036(random_buffer, random_buffer_length)
+    {% end %}
   end
 
   def systemFunction040(memory : Void*, memory_size : UInt32, option_flags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.SystemFunction040(memory, memory_size, option_flags)
+    {% end %}
   end
 
   def systemFunction041(memory : Void*, memory_size : UInt32, option_flags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.SystemFunction041(memory, memory_size, option_flags)
+    {% end %}
   end
 
   def auditSetSystemPolicy(pAuditPolicy : Win32cr::Security::Authentication::Identity::AUDIT_POLICY_INFORMATION*, dwPolicyCount : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditSetSystemPolicy(pAuditPolicy, dwPolicyCount)
+    {% end %}
   end
 
   def auditSetPerUserPolicy(pSid : Win32cr::Foundation::PSID, pAuditPolicy : Win32cr::Security::Authentication::Identity::AUDIT_POLICY_INFORMATION*, dwPolicyCount : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditSetPerUserPolicy(pSid, pAuditPolicy, dwPolicyCount)
+    {% end %}
   end
 
   def auditQuerySystemPolicy(pSubCategoryGuids : LibC::GUID*, dwPolicyCount : UInt32, ppAuditPolicy : Win32cr::Security::Authentication::Identity::AUDIT_POLICY_INFORMATION**) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditQuerySystemPolicy(pSubCategoryGuids, dwPolicyCount, ppAuditPolicy)
+    {% end %}
   end
 
   def auditQueryPerUserPolicy(pSid : Win32cr::Foundation::PSID, pSubCategoryGuids : LibC::GUID*, dwPolicyCount : UInt32, ppAuditPolicy : Win32cr::Security::Authentication::Identity::AUDIT_POLICY_INFORMATION**) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditQueryPerUserPolicy(pSid, pSubCategoryGuids, dwPolicyCount, ppAuditPolicy)
+    {% end %}
   end
 
   def auditEnumeratePerUserPolicy(ppAuditSidArray : Win32cr::Security::Authentication::Identity::POLICY_AUDIT_SID_ARRAY**) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditEnumeratePerUserPolicy(ppAuditSidArray)
+    {% end %}
   end
 
   def auditComputeEffectivePolicyBySid(pSid : Win32cr::Foundation::PSID, pSubCategoryGuids : LibC::GUID*, dwPolicyCount : UInt32, ppAuditPolicy : Win32cr::Security::Authentication::Identity::AUDIT_POLICY_INFORMATION**) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditComputeEffectivePolicyBySid(pSid, pSubCategoryGuids, dwPolicyCount, ppAuditPolicy)
+    {% end %}
   end
 
   def auditComputeEffectivePolicyByToken(hTokenHandle : Win32cr::Foundation::HANDLE, pSubCategoryGuids : LibC::GUID*, dwPolicyCount : UInt32, ppAuditPolicy : Win32cr::Security::Authentication::Identity::AUDIT_POLICY_INFORMATION**) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditComputeEffectivePolicyByToken(hTokenHandle, pSubCategoryGuids, dwPolicyCount, ppAuditPolicy)
+    {% end %}
   end
 
   def auditEnumerateCategories(ppAuditCategoriesArray : LibC::GUID**, pdwCountReturned : UInt32*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditEnumerateCategories(ppAuditCategoriesArray, pdwCountReturned)
+    {% end %}
   end
 
   def auditEnumerateSubCategories(pAuditCategoryGuid : LibC::GUID*, bRetrieveAllSubCategories : Win32cr::Foundation::BOOLEAN, ppAuditSubCategoriesArray : LibC::GUID**, pdwCountReturned : UInt32*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditEnumerateSubCategories(pAuditCategoryGuid, bRetrieveAllSubCategories, ppAuditSubCategoriesArray, pdwCountReturned)
+    {% end %}
   end
 
   def auditLookupCategoryNameW(pAuditCategoryGuid : LibC::GUID*, ppszCategoryName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditLookupCategoryNameW(pAuditCategoryGuid, ppszCategoryName)
+    {% end %}
   end
 
   def auditLookupCategoryNameA(pAuditCategoryGuid : LibC::GUID*, ppszCategoryName : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditLookupCategoryNameA(pAuditCategoryGuid, ppszCategoryName)
+    {% end %}
   end
 
   def auditLookupSubCategoryNameW(pAuditSubCategoryGuid : LibC::GUID*, ppszSubCategoryName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditLookupSubCategoryNameW(pAuditSubCategoryGuid, ppszSubCategoryName)
+    {% end %}
   end
 
   def auditLookupSubCategoryNameA(pAuditSubCategoryGuid : LibC::GUID*, ppszSubCategoryName : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditLookupSubCategoryNameA(pAuditSubCategoryGuid, ppszSubCategoryName)
+    {% end %}
   end
 
   def auditLookupCategoryIdFromCategoryGuid(pAuditCategoryGuid : LibC::GUID*, pAuditCategoryId : Win32cr::Security::Authentication::Identity::POLICY_AUDIT_EVENT_TYPE*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditLookupCategoryIdFromCategoryGuid(pAuditCategoryGuid, pAuditCategoryId)
+    {% end %}
   end
 
   def auditLookupCategoryGuidFromCategoryId(audit_category_id : Win32cr::Security::Authentication::Identity::POLICY_AUDIT_EVENT_TYPE, pAuditCategoryGuid : LibC::GUID*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditLookupCategoryGuidFromCategoryId(audit_category_id, pAuditCategoryGuid)
+    {% end %}
   end
 
   def auditSetSecurity(security_information : UInt32, pSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditSetSecurity(security_information, pSecurityDescriptor)
+    {% end %}
   end
 
   def auditQuerySecurity(security_information : UInt32, ppSecurityDescriptor : Win32cr::Security::PSECURITY_DESCRIPTOR*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditQuerySecurity(security_information, ppSecurityDescriptor)
+    {% end %}
   end
 
   def auditSetGlobalSaclW(object_type_name : Win32cr::Foundation::PWSTR, acl : Win32cr::Security::ACL*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditSetGlobalSaclW(object_type_name, acl)
+    {% end %}
   end
 
   def auditSetGlobalSaclA(object_type_name : Win32cr::Foundation::PSTR, acl : Win32cr::Security::ACL*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditSetGlobalSaclA(object_type_name, acl)
+    {% end %}
   end
 
   def auditQueryGlobalSaclW(object_type_name : Win32cr::Foundation::PWSTR, acl : Win32cr::Security::ACL**) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditQueryGlobalSaclW(object_type_name, acl)
+    {% end %}
   end
 
   def auditQueryGlobalSaclA(object_type_name : Win32cr::Foundation::PSTR, acl : Win32cr::Security::ACL**) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.AuditQueryGlobalSaclA(object_type_name, acl)
+    {% end %}
   end
 
   def auditFree(buffer : Void*) : Void
+    {% if !flag?(:docs) %}
     C.AuditFree(buffer)
+    {% end %}
   end
 
   def acquireCredentialsHandleW(pszPrincipal : Win32cr::Foundation::PWSTR, pszPackage : Win32cr::Foundation::PWSTR, fCredentialUse : Win32cr::Security::Authentication::Identity::SECPKG_CRED, pvLogonId : Void*, pAuthData : Void*, pGetKeyFn : Win32cr::Security::Authentication::Identity::SEC_GET_KEY_FN, pvGetKeyArgument : Void*, phCredential : Win32cr::Security::Credentials::SecHandle*, ptsExpiry : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AcquireCredentialsHandleW(pszPrincipal, pszPackage, fCredentialUse, pvLogonId, pAuthData, pGetKeyFn, pvGetKeyArgument, phCredential, ptsExpiry)
+    {% end %}
   end
 
   def acquireCredentialsHandleA(pszPrincipal : Win32cr::Foundation::PSTR, pszPackage : Win32cr::Foundation::PSTR, fCredentialUse : Win32cr::Security::Authentication::Identity::SECPKG_CRED, pvLogonId : Void*, pAuthData : Void*, pGetKeyFn : Win32cr::Security::Authentication::Identity::SEC_GET_KEY_FN, pvGetKeyArgument : Void*, phCredential : Win32cr::Security::Credentials::SecHandle*, ptsExpiry : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AcquireCredentialsHandleA(pszPrincipal, pszPackage, fCredentialUse, pvLogonId, pAuthData, pGetKeyFn, pvGetKeyArgument, phCredential, ptsExpiry)
+    {% end %}
   end
 
   def freeCredentialsHandle(phCredential : Win32cr::Security::Credentials::SecHandle*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FreeCredentialsHandle(phCredential)
+    {% end %}
   end
 
   def addCredentialsW(hCredentials : Win32cr::Security::Credentials::SecHandle*, pszPrincipal : Win32cr::Foundation::PWSTR, pszPackage : Win32cr::Foundation::PWSTR, fCredentialUse : UInt32, pAuthData : Void*, pGetKeyFn : Win32cr::Security::Authentication::Identity::SEC_GET_KEY_FN, pvGetKeyArgument : Void*, ptsExpiry : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AddCredentialsW(hCredentials, pszPrincipal, pszPackage, fCredentialUse, pAuthData, pGetKeyFn, pvGetKeyArgument, ptsExpiry)
+    {% end %}
   end
 
   def addCredentialsA(hCredentials : Win32cr::Security::Credentials::SecHandle*, pszPrincipal : Win32cr::Foundation::PSTR, pszPackage : Win32cr::Foundation::PSTR, fCredentialUse : UInt32, pAuthData : Void*, pGetKeyFn : Win32cr::Security::Authentication::Identity::SEC_GET_KEY_FN, pvGetKeyArgument : Void*, ptsExpiry : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AddCredentialsA(hCredentials, pszPrincipal, pszPackage, fCredentialUse, pAuthData, pGetKeyFn, pvGetKeyArgument, ptsExpiry)
+    {% end %}
   end
 
   def changeAccountPasswordW(pszPackageName : UInt16*, pszDomainName : UInt16*, pszAccountName : UInt16*, pszOldPassword : UInt16*, pszNewPassword : UInt16*, bImpersonating : Win32cr::Foundation::BOOLEAN, dwReserved : UInt32, pOutput : Win32cr::Security::Authentication::Identity::SecBufferDesc*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ChangeAccountPasswordW(pszPackageName, pszDomainName, pszAccountName, pszOldPassword, pszNewPassword, bImpersonating, dwReserved, pOutput)
+    {% end %}
   end
 
   def changeAccountPasswordA(pszPackageName : Int8*, pszDomainName : Int8*, pszAccountName : Int8*, pszOldPassword : Int8*, pszNewPassword : Int8*, bImpersonating : Win32cr::Foundation::BOOLEAN, dwReserved : UInt32, pOutput : Win32cr::Security::Authentication::Identity::SecBufferDesc*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ChangeAccountPasswordA(pszPackageName, pszDomainName, pszAccountName, pszOldPassword, pszNewPassword, bImpersonating, dwReserved, pOutput)
+    {% end %}
   end
 
   def initializeSecurityContextW(phCredential : Win32cr::Security::Credentials::SecHandle*, phContext : Win32cr::Security::Credentials::SecHandle*, pszTargetName : UInt16*, fContextReq : Win32cr::Security::Authentication::Identity::ISC_REQ_FLAGS, reserved1 : UInt32, target_data_rep : UInt32, pInput : Win32cr::Security::Authentication::Identity::SecBufferDesc*, reserved2 : UInt32, phNewContext : Win32cr::Security::Credentials::SecHandle*, pOutput : Win32cr::Security::Authentication::Identity::SecBufferDesc*, pfContextAttr : UInt32*, ptsExpiry : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.InitializeSecurityContextW(phCredential, phContext, pszTargetName, fContextReq, reserved1, target_data_rep, pInput, reserved2, phNewContext, pOutput, pfContextAttr, ptsExpiry)
+    {% end %}
   end
 
   def initializeSecurityContextA(phCredential : Win32cr::Security::Credentials::SecHandle*, phContext : Win32cr::Security::Credentials::SecHandle*, pszTargetName : Int8*, fContextReq : Win32cr::Security::Authentication::Identity::ISC_REQ_FLAGS, reserved1 : UInt32, target_data_rep : UInt32, pInput : Win32cr::Security::Authentication::Identity::SecBufferDesc*, reserved2 : UInt32, phNewContext : Win32cr::Security::Credentials::SecHandle*, pOutput : Win32cr::Security::Authentication::Identity::SecBufferDesc*, pfContextAttr : UInt32*, ptsExpiry : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.InitializeSecurityContextA(phCredential, phContext, pszTargetName, fContextReq, reserved1, target_data_rep, pInput, reserved2, phNewContext, pOutput, pfContextAttr, ptsExpiry)
+    {% end %}
   end
 
   def acceptSecurityContext(phCredential : Win32cr::Security::Credentials::SecHandle*, phContext : Win32cr::Security::Credentials::SecHandle*, pInput : Win32cr::Security::Authentication::Identity::SecBufferDesc*, fContextReq : Win32cr::Security::Authentication::Identity::ASC_REQ_FLAGS, target_data_rep : UInt32, phNewContext : Win32cr::Security::Credentials::SecHandle*, pOutput : Win32cr::Security::Authentication::Identity::SecBufferDesc*, pfContextAttr : UInt32*, ptsExpiry : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AcceptSecurityContext(phCredential, phContext, pInput, fContextReq, target_data_rep, phNewContext, pOutput, pfContextAttr, ptsExpiry)
+    {% end %}
   end
 
   def completeAuthToken(phContext : Win32cr::Security::Credentials::SecHandle*, pToken : Win32cr::Security::Authentication::Identity::SecBufferDesc*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CompleteAuthToken(phContext, pToken)
+    {% end %}
   end
 
   def impersonateSecurityContext(phContext : Win32cr::Security::Credentials::SecHandle*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ImpersonateSecurityContext(phContext)
+    {% end %}
   end
 
   def revertSecurityContext(phContext : Win32cr::Security::Credentials::SecHandle*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RevertSecurityContext(phContext)
+    {% end %}
   end
 
   def querySecurityContextToken(phContext : Win32cr::Security::Credentials::SecHandle*, token : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.QuerySecurityContextToken(phContext, token)
+    {% end %}
   end
 
   def deleteSecurityContext(phContext : Win32cr::Security::Credentials::SecHandle*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DeleteSecurityContext(phContext)
+    {% end %}
   end
 
   def applyControlToken(phContext : Win32cr::Security::Credentials::SecHandle*, pInput : Win32cr::Security::Authentication::Identity::SecBufferDesc*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ApplyControlToken(phContext, pInput)
+    {% end %}
   end
 
   def queryContextAttributesW(phContext : Win32cr::Security::Credentials::SecHandle*, ulAttribute : Win32cr::Security::Authentication::Identity::SECPKG_ATTR, pBuffer : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.QueryContextAttributesW(phContext, ulAttribute, pBuffer)
+    {% end %}
   end
 
   def queryContextAttributesExW(phContext : Win32cr::Security::Credentials::SecHandle*, ulAttribute : Win32cr::Security::Authentication::Identity::SECPKG_ATTR, pBuffer : Void*, cbBuffer : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.QueryContextAttributesExW(phContext, ulAttribute, pBuffer, cbBuffer)
+    {% end %}
   end
 
   def queryContextAttributesA(phContext : Win32cr::Security::Credentials::SecHandle*, ulAttribute : Win32cr::Security::Authentication::Identity::SECPKG_ATTR, pBuffer : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.QueryContextAttributesA(phContext, ulAttribute, pBuffer)
+    {% end %}
   end
 
   def queryContextAttributesExA(phContext : Win32cr::Security::Credentials::SecHandle*, ulAttribute : Win32cr::Security::Authentication::Identity::SECPKG_ATTR, pBuffer : Void*, cbBuffer : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.QueryContextAttributesExA(phContext, ulAttribute, pBuffer, cbBuffer)
+    {% end %}
   end
 
   def setContextAttributesW(phContext : Win32cr::Security::Credentials::SecHandle*, ulAttribute : Win32cr::Security::Authentication::Identity::SECPKG_ATTR, pBuffer : Void*, cbBuffer : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetContextAttributesW(phContext, ulAttribute, pBuffer, cbBuffer)
+    {% end %}
   end
 
   def setContextAttributesA(phContext : Win32cr::Security::Credentials::SecHandle*, ulAttribute : Win32cr::Security::Authentication::Identity::SECPKG_ATTR, pBuffer : Void*, cbBuffer : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetContextAttributesA(phContext, ulAttribute, pBuffer, cbBuffer)
+    {% end %}
   end
 
   def queryCredentialsAttributesW(phCredential : Win32cr::Security::Credentials::SecHandle*, ulAttribute : UInt32, pBuffer : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.QueryCredentialsAttributesW(phCredential, ulAttribute, pBuffer)
+    {% end %}
   end
 
   def queryCredentialsAttributesExW(phCredential : Win32cr::Security::Credentials::SecHandle*, ulAttribute : UInt32, pBuffer : Void*, cbBuffer : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.QueryCredentialsAttributesExW(phCredential, ulAttribute, pBuffer, cbBuffer)
+    {% end %}
   end
 
   def queryCredentialsAttributesA(phCredential : Win32cr::Security::Credentials::SecHandle*, ulAttribute : UInt32, pBuffer : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.QueryCredentialsAttributesA(phCredential, ulAttribute, pBuffer)
+    {% end %}
   end
 
   def queryCredentialsAttributesExA(phCredential : Win32cr::Security::Credentials::SecHandle*, ulAttribute : UInt32, pBuffer : Void*, cbBuffer : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.QueryCredentialsAttributesExA(phCredential, ulAttribute, pBuffer, cbBuffer)
+    {% end %}
   end
 
   def setCredentialsAttributesW(phCredential : Win32cr::Security::Credentials::SecHandle*, ulAttribute : UInt32, pBuffer : Void*, cbBuffer : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetCredentialsAttributesW(phCredential, ulAttribute, pBuffer, cbBuffer)
+    {% end %}
   end
 
   def setCredentialsAttributesA(phCredential : Win32cr::Security::Credentials::SecHandle*, ulAttribute : UInt32, pBuffer : Void*, cbBuffer : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetCredentialsAttributesA(phCredential, ulAttribute, pBuffer, cbBuffer)
+    {% end %}
   end
 
   def freeContextBuffer(pvContextBuffer : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FreeContextBuffer(pvContextBuffer)
+    {% end %}
   end
 
   def makeSignature(phContext : Win32cr::Security::Credentials::SecHandle*, fQOP : UInt32, pMessage : Win32cr::Security::Authentication::Identity::SecBufferDesc*, message_seq_no : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MakeSignature(phContext, fQOP, pMessage, message_seq_no)
+    {% end %}
   end
 
   def verifySignature(phContext : Win32cr::Security::Credentials::SecHandle*, pMessage : Win32cr::Security::Authentication::Identity::SecBufferDesc*, message_seq_no : UInt32, pfQOP : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.VerifySignature(phContext, pMessage, message_seq_no, pfQOP)
+    {% end %}
   end
 
   def encryptMessage(phContext : Win32cr::Security::Credentials::SecHandle*, fQOP : UInt32, pMessage : Win32cr::Security::Authentication::Identity::SecBufferDesc*, message_seq_no : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EncryptMessage(phContext, fQOP, pMessage, message_seq_no)
+    {% end %}
   end
 
   def decryptMessage(phContext : Win32cr::Security::Credentials::SecHandle*, pMessage : Win32cr::Security::Authentication::Identity::SecBufferDesc*, message_seq_no : UInt32, pfQOP : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DecryptMessage(phContext, pMessage, message_seq_no, pfQOP)
+    {% end %}
   end
 
   def enumerateSecurityPackagesW(pcPackages : UInt32*, ppPackageInfo : Win32cr::Security::Authentication::Identity::SecPkgInfoW**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EnumerateSecurityPackagesW(pcPackages, ppPackageInfo)
+    {% end %}
   end
 
   def enumerateSecurityPackagesA(pcPackages : UInt32*, ppPackageInfo : Win32cr::Security::Authentication::Identity::SecPkgInfoA**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EnumerateSecurityPackagesA(pcPackages, ppPackageInfo)
+    {% end %}
   end
 
   def querySecurityPackageInfoW(pszPackageName : Win32cr::Foundation::PWSTR, ppPackageInfo : Win32cr::Security::Authentication::Identity::SecPkgInfoW**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.QuerySecurityPackageInfoW(pszPackageName, ppPackageInfo)
+    {% end %}
   end
 
   def querySecurityPackageInfoA(pszPackageName : Win32cr::Foundation::PSTR, ppPackageInfo : Win32cr::Security::Authentication::Identity::SecPkgInfoA**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.QuerySecurityPackageInfoA(pszPackageName, ppPackageInfo)
+    {% end %}
   end
 
   def exportSecurityContext(phContext : Win32cr::Security::Credentials::SecHandle*, fFlags : Win32cr::Security::Authentication::Identity::EXPORT_SECURITY_CONTEXT_FLAGS, pPackedContext : Win32cr::Security::Authentication::Identity::SecBuffer*, pToken : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ExportSecurityContext(phContext, fFlags, pPackedContext, pToken)
+    {% end %}
   end
 
   def importSecurityContextW(pszPackage : Win32cr::Foundation::PWSTR, pPackedContext : Win32cr::Security::Authentication::Identity::SecBuffer*, token : Void*, phContext : Win32cr::Security::Credentials::SecHandle*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ImportSecurityContextW(pszPackage, pPackedContext, token, phContext)
+    {% end %}
   end
 
   def importSecurityContextA(pszPackage : Win32cr::Foundation::PSTR, pPackedContext : Win32cr::Security::Authentication::Identity::SecBuffer*, token : Void*, phContext : Win32cr::Security::Credentials::SecHandle*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ImportSecurityContextA(pszPackage, pPackedContext, token, phContext)
+    {% end %}
   end
 
   def initSecurityInterfaceA : Win32cr::Security::Authentication::Identity::SecurityFunctionTableA*
+    {% if !flag?(:docs) %}
     C.InitSecurityInterfaceA
+    {% end %}
   end
 
   def initSecurityInterfaceW : Win32cr::Security::Authentication::Identity::SecurityFunctionTableW*
+    {% if !flag?(:docs) %}
     C.InitSecurityInterfaceW
+    {% end %}
   end
 
   def saslEnumerateProfilesA(profile_list : Win32cr::Foundation::PSTR*, profile_count : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SaslEnumerateProfilesA(profile_list, profile_count)
+    {% end %}
   end
 
   def saslEnumerateProfilesW(profile_list : Win32cr::Foundation::PWSTR*, profile_count : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SaslEnumerateProfilesW(profile_list, profile_count)
+    {% end %}
   end
 
   def saslGetProfilePackageA(profile_name : Win32cr::Foundation::PSTR, package_info : Win32cr::Security::Authentication::Identity::SecPkgInfoA**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SaslGetProfilePackageA(profile_name, package_info)
+    {% end %}
   end
 
   def saslGetProfilePackageW(profile_name : Win32cr::Foundation::PWSTR, package_info : Win32cr::Security::Authentication::Identity::SecPkgInfoW**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SaslGetProfilePackageW(profile_name, package_info)
+    {% end %}
   end
 
   def saslIdentifyPackageA(pInput : Win32cr::Security::Authentication::Identity::SecBufferDesc*, package_info : Win32cr::Security::Authentication::Identity::SecPkgInfoA**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SaslIdentifyPackageA(pInput, package_info)
+    {% end %}
   end
 
   def saslIdentifyPackageW(pInput : Win32cr::Security::Authentication::Identity::SecBufferDesc*, package_info : Win32cr::Security::Authentication::Identity::SecPkgInfoW**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SaslIdentifyPackageW(pInput, package_info)
+    {% end %}
   end
 
   def saslInitializeSecurityContextW(phCredential : Win32cr::Security::Credentials::SecHandle*, phContext : Win32cr::Security::Credentials::SecHandle*, pszTargetName : Win32cr::Foundation::PWSTR, fContextReq : Win32cr::Security::Authentication::Identity::ISC_REQ_FLAGS, reserved1 : UInt32, target_data_rep : UInt32, pInput : Win32cr::Security::Authentication::Identity::SecBufferDesc*, reserved2 : UInt32, phNewContext : Win32cr::Security::Credentials::SecHandle*, pOutput : Win32cr::Security::Authentication::Identity::SecBufferDesc*, pfContextAttr : UInt32*, ptsExpiry : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SaslInitializeSecurityContextW(phCredential, phContext, pszTargetName, fContextReq, reserved1, target_data_rep, pInput, reserved2, phNewContext, pOutput, pfContextAttr, ptsExpiry)
+    {% end %}
   end
 
   def saslInitializeSecurityContextA(phCredential : Win32cr::Security::Credentials::SecHandle*, phContext : Win32cr::Security::Credentials::SecHandle*, pszTargetName : Win32cr::Foundation::PSTR, fContextReq : Win32cr::Security::Authentication::Identity::ISC_REQ_FLAGS, reserved1 : UInt32, target_data_rep : UInt32, pInput : Win32cr::Security::Authentication::Identity::SecBufferDesc*, reserved2 : UInt32, phNewContext : Win32cr::Security::Credentials::SecHandle*, pOutput : Win32cr::Security::Authentication::Identity::SecBufferDesc*, pfContextAttr : UInt32*, ptsExpiry : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SaslInitializeSecurityContextA(phCredential, phContext, pszTargetName, fContextReq, reserved1, target_data_rep, pInput, reserved2, phNewContext, pOutput, pfContextAttr, ptsExpiry)
+    {% end %}
   end
 
   def saslAcceptSecurityContext(phCredential : Win32cr::Security::Credentials::SecHandle*, phContext : Win32cr::Security::Credentials::SecHandle*, pInput : Win32cr::Security::Authentication::Identity::SecBufferDesc*, fContextReq : Win32cr::Security::Authentication::Identity::ASC_REQ_FLAGS, target_data_rep : UInt32, phNewContext : Win32cr::Security::Credentials::SecHandle*, pOutput : Win32cr::Security::Authentication::Identity::SecBufferDesc*, pfContextAttr : UInt32*, ptsExpiry : Win32cr::Foundation::LARGE_INTEGER*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SaslAcceptSecurityContext(phCredential, phContext, pInput, fContextReq, target_data_rep, phNewContext, pOutput, pfContextAttr, ptsExpiry)
+    {% end %}
   end
 
   def saslSetContextOption(context_handle : Win32cr::Security::Credentials::SecHandle*, option : UInt32, value : Void*, size : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SaslSetContextOption(context_handle, option, value, size)
+    {% end %}
   end
 
   def saslGetContextOption(context_handle : Win32cr::Security::Credentials::SecHandle*, option : UInt32, value : Void*, size : UInt32, needed : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SaslGetContextOption(context_handle, option, value, size, needed)
+    {% end %}
   end
 
   def sspiPromptForCredentialsW(pszTargetName : Win32cr::Foundation::PWSTR, pUiInfo : Void*, dwAuthError : UInt32, pszPackage : Win32cr::Foundation::PWSTR, pInputAuthIdentity : Void*, ppAuthIdentity : Void**, pfSave : Int32*, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SspiPromptForCredentialsW(pszTargetName, pUiInfo, dwAuthError, pszPackage, pInputAuthIdentity, ppAuthIdentity, pfSave, dwFlags)
+    {% end %}
   end
 
   def sspiPromptForCredentialsA(pszTargetName : Win32cr::Foundation::PSTR, pUiInfo : Void*, dwAuthError : UInt32, pszPackage : Win32cr::Foundation::PSTR, pInputAuthIdentity : Void*, ppAuthIdentity : Void**, pfSave : Int32*, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SspiPromptForCredentialsA(pszTargetName, pUiInfo, dwAuthError, pszPackage, pInputAuthIdentity, ppAuthIdentity, pfSave, dwFlags)
+    {% end %}
   end
 
   def sspiPrepareForCredRead(auth_identity : Void*, pszTargetName : Win32cr::Foundation::PWSTR, pCredmanCredentialType : UInt32*, ppszCredmanTargetName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SspiPrepareForCredRead(auth_identity, pszTargetName, pCredmanCredentialType, ppszCredmanTargetName)
+    {% end %}
   end
 
   def sspiPrepareForCredWrite(auth_identity : Void*, pszTargetName : Win32cr::Foundation::PWSTR, pCredmanCredentialType : UInt32*, ppszCredmanTargetName : Win32cr::Foundation::PWSTR*, ppszCredmanUserName : Win32cr::Foundation::PWSTR*, ppCredentialBlob : UInt8**, pCredentialBlobSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SspiPrepareForCredWrite(auth_identity, pszTargetName, pCredmanCredentialType, ppszCredmanTargetName, ppszCredmanUserName, ppCredentialBlob, pCredentialBlobSize)
+    {% end %}
   end
 
   def sspiEncryptAuthIdentity(auth_data : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SspiEncryptAuthIdentity(auth_data)
+    {% end %}
   end
 
   def sspiEncryptAuthIdentityEx(options : UInt32, auth_data : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SspiEncryptAuthIdentityEx(options, auth_data)
+    {% end %}
   end
 
   def sspiDecryptAuthIdentity(encrypted_auth_data : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SspiDecryptAuthIdentity(encrypted_auth_data)
+    {% end %}
   end
 
   def sspiDecryptAuthIdentityEx(options : UInt32, encrypted_auth_data : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SspiDecryptAuthIdentityEx(options, encrypted_auth_data)
+    {% end %}
   end
 
   def sspiIsAuthIdentityEncrypted(encrypted_auth_data : Void*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.SspiIsAuthIdentityEncrypted(encrypted_auth_data)
+    {% end %}
   end
 
   def sspiEncodeAuthIdentityAsStrings(pAuthIdentity : Void*, ppszUserName : Win32cr::Foundation::PWSTR*, ppszDomainName : Win32cr::Foundation::PWSTR*, ppszPackedCredentialsString : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SspiEncodeAuthIdentityAsStrings(pAuthIdentity, ppszUserName, ppszDomainName, ppszPackedCredentialsString)
+    {% end %}
   end
 
   def sspiValidateAuthIdentity(auth_data : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SspiValidateAuthIdentity(auth_data)
+    {% end %}
   end
 
   def sspiCopyAuthIdentity(auth_data : Void*, auth_data_copy : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SspiCopyAuthIdentity(auth_data, auth_data_copy)
+    {% end %}
   end
 
   def sspiFreeAuthIdentity(auth_data : Void*) : Void
+    {% if !flag?(:docs) %}
     C.SspiFreeAuthIdentity(auth_data)
+    {% end %}
   end
 
   def sspiZeroAuthIdentity(auth_data : Void*) : Void
+    {% if !flag?(:docs) %}
     C.SspiZeroAuthIdentity(auth_data)
+    {% end %}
   end
 
   def sspiLocalFree(data_buffer : Void*) : Void
+    {% if !flag?(:docs) %}
     C.SspiLocalFree(data_buffer)
+    {% end %}
   end
 
   def sspiEncodeStringsAsAuthIdentity(pszUserName : Win32cr::Foundation::PWSTR, pszDomainName : Win32cr::Foundation::PWSTR, pszPackedCredentialsString : Win32cr::Foundation::PWSTR, ppAuthIdentity : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SspiEncodeStringsAsAuthIdentity(pszUserName, pszDomainName, pszPackedCredentialsString, ppAuthIdentity)
+    {% end %}
   end
 
   def sspiCompareAuthIdentities(auth_identity1 : Void*, auth_identity2 : Void*, same_supplied_user : Win32cr::Foundation::BOOLEAN*, same_supplied_identity : Win32cr::Foundation::BOOLEAN*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SspiCompareAuthIdentities(auth_identity1, auth_identity2, same_supplied_user, same_supplied_identity)
+    {% end %}
   end
 
   def sspiMarshalAuthIdentity(auth_identity : Void*, auth_identity_length : UInt32*, auth_identity_byte_array : Int8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SspiMarshalAuthIdentity(auth_identity, auth_identity_length, auth_identity_byte_array)
+    {% end %}
   end
 
   def sspiUnmarshalAuthIdentity(auth_identity_length : UInt32, auth_identity_byte_array : Win32cr::Foundation::PSTR, ppAuthIdentity : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SspiUnmarshalAuthIdentity(auth_identity_length, auth_identity_byte_array, ppAuthIdentity)
+    {% end %}
   end
 
   def sspiIsPromptingNeeded(error_or_nt_status : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.SspiIsPromptingNeeded(error_or_nt_status)
+    {% end %}
   end
 
   def sspiGetTargetHostName(pszTargetName : Win32cr::Foundation::PWSTR, pszHostName : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SspiGetTargetHostName(pszTargetName, pszHostName)
+    {% end %}
   end
 
   def sspiExcludePackage(auth_identity : Void*, pszPackageName : Win32cr::Foundation::PWSTR, ppNewAuthIdentity : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SspiExcludePackage(auth_identity, pszPackageName, ppNewAuthIdentity)
+    {% end %}
   end
 
   def addSecurityPackageA(pszPackageName : Win32cr::Foundation::PSTR, pOptions : Win32cr::Security::Authentication::Identity::SECURITY_PACKAGE_OPTIONS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AddSecurityPackageA(pszPackageName, pOptions)
+    {% end %}
   end
 
   def addSecurityPackageW(pszPackageName : Win32cr::Foundation::PWSTR, pOptions : Win32cr::Security::Authentication::Identity::SECURITY_PACKAGE_OPTIONS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AddSecurityPackageW(pszPackageName, pOptions)
+    {% end %}
   end
 
   def deleteSecurityPackageA(pszPackageName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DeleteSecurityPackageA(pszPackageName)
+    {% end %}
   end
 
   def deleteSecurityPackageW(pszPackageName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DeleteSecurityPackageW(pszPackageName)
+    {% end %}
   end
 
   def credMarshalTargetInfo(in_target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONW*, buffer : UInt16**, buffer_size : UInt32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.CredMarshalTargetInfo(in_target_info, buffer, buffer_size)
+    {% end %}
   end
 
   def credUnmarshalTargetInfo(buffer : UInt16*, buffer_size : UInt32, ret_target_info : Win32cr::Security::Credentials::CREDENTIAL_TARGET_INFORMATIONW**, ret_actual_size : UInt32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.CredUnmarshalTargetInfo(buffer, buffer_size, ret_target_info, ret_actual_size)
+    {% end %}
   end
 
   def sslEmptyCacheA(pszTargetName : Win32cr::Foundation::PSTR, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SslEmptyCacheA(pszTargetName, dwFlags)
+    {% end %}
   end
 
   def sslEmptyCacheW(pszTargetName : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SslEmptyCacheW(pszTargetName, dwFlags)
+    {% end %}
   end
 
   def sslGenerateRandomBits(pRandomData : UInt8*, cRandomData : Int32) : Void
+    {% if !flag?(:docs) %}
     C.SslGenerateRandomBits(pRandomData, cRandomData)
+    {% end %}
   end
 
   def sslCrackCertificate(pbCertificate : UInt8*, cbCertificate : UInt32, dwFlags : UInt32, ppCertificate : Win32cr::Security::Authentication::Identity::X509Certificate**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SslCrackCertificate(pbCertificate, cbCertificate, dwFlags, ppCertificate)
+    {% end %}
   end
 
   def sslFreeCertificate(pCertificate : Win32cr::Security::Authentication::Identity::X509Certificate*) : Void
+    {% if !flag?(:docs) %}
     C.SslFreeCertificate(pCertificate)
+    {% end %}
   end
 
   def sslGetMaximumKeySize(reserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SslGetMaximumKeySize(reserved)
+    {% end %}
   end
 
   def sslGetServerIdentity(client_hello : UInt8*, client_hello_size : UInt32, server_identity : UInt8**, server_identity_size : UInt32*, flags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SslGetServerIdentity(client_hello, client_hello_size, server_identity, server_identity_size, flags)
+    {% end %}
   end
 
   def sslGetExtensions(clientHello : UInt8*, clientHelloByteSize : UInt32, genericExtensions : Win32cr::Security::Authentication::Identity::SCH_EXTENSION_DATA*, genericExtensionsCount : UInt8, bytesToRead : UInt32*, flags : Win32cr::Security::Authentication::Identity::SchGetExtensionsOptions) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SslGetExtensions(clientHello, clientHelloByteSize, genericExtensions, genericExtensionsCount, bytesToRead, flags)
+    {% end %}
   end
 
   def tokenBindingGenerateBinding(keyType : Win32cr::Security::Authentication::Identity::TOKENBINDING_KEY_PARAMETERS_TYPE, targetURL : Win32cr::Foundation::PWSTR, bindingType : Win32cr::Security::Authentication::Identity::TOKENBINDING_TYPE, tlsEKM : Void*, tlsEKMSize : UInt32, extensionFormat : Win32cr::Security::Authentication::Identity::TOKENBINDING_EXTENSION_FORMAT, extensionData : Void*, tokenBinding : Void**, tokenBindingSize : UInt32*, resultData : Win32cr::Security::Authentication::Identity::TOKENBINDING_RESULT_DATA**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TokenBindingGenerateBinding(keyType, targetURL, bindingType, tlsEKM, tlsEKMSize, extensionFormat, extensionData, tokenBinding, tokenBindingSize, resultData)
+    {% end %}
   end
 
   def tokenBindingGenerateMessage(tokenBindings : Void**, tokenBindingsSize : UInt32*, tokenBindingsCount : UInt32, tokenBindingMessage : Void**, tokenBindingMessageSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TokenBindingGenerateMessage(tokenBindings, tokenBindingsSize, tokenBindingsCount, tokenBindingMessage, tokenBindingMessageSize)
+    {% end %}
   end
 
   def tokenBindingVerifyMessage(tokenBindingMessage : Void*, tokenBindingMessageSize : UInt32, keyType : Win32cr::Security::Authentication::Identity::TOKENBINDING_KEY_PARAMETERS_TYPE, tlsEKM : Void*, tlsEKMSize : UInt32, resultList : Win32cr::Security::Authentication::Identity::TOKENBINDING_RESULT_LIST**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TokenBindingVerifyMessage(tokenBindingMessage, tokenBindingMessageSize, keyType, tlsEKM, tlsEKMSize, resultList)
+    {% end %}
   end
 
   def tokenBindingGetKeyTypesClient(keyTypes : Win32cr::Security::Authentication::Identity::TOKENBINDING_KEY_TYPES**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TokenBindingGetKeyTypesClient(keyTypes)
+    {% end %}
   end
 
   def tokenBindingGetKeyTypesServer(keyTypes : Win32cr::Security::Authentication::Identity::TOKENBINDING_KEY_TYPES**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TokenBindingGetKeyTypesServer(keyTypes)
+    {% end %}
   end
 
   def tokenBindingDeleteBinding(targetURL : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TokenBindingDeleteBinding(targetURL)
+    {% end %}
   end
 
   def tokenBindingDeleteAllBindings : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TokenBindingDeleteAllBindings
+    {% end %}
   end
 
   def tokenBindingGenerateID(keyType : Win32cr::Security::Authentication::Identity::TOKENBINDING_KEY_PARAMETERS_TYPE, publicKey : Void*, publicKeySize : UInt32, resultData : Win32cr::Security::Authentication::Identity::TOKENBINDING_RESULT_DATA**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TokenBindingGenerateID(keyType, publicKey, publicKeySize, resultData)
+    {% end %}
   end
 
   def tokenBindingGenerateIDForUri(keyType : Win32cr::Security::Authentication::Identity::TOKENBINDING_KEY_PARAMETERS_TYPE, targetUri : Win32cr::Foundation::PWSTR, resultData : Win32cr::Security::Authentication::Identity::TOKENBINDING_RESULT_DATA**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TokenBindingGenerateIDForUri(keyType, targetUri, resultData)
+    {% end %}
   end
 
   def tokenBindingGetHighestSupportedVersion(majorVersion : UInt8*, minorVersion : UInt8*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TokenBindingGetHighestSupportedVersion(majorVersion, minorVersion)
+    {% end %}
   end
 
   def getUserNameExA(name_format : Win32cr::Security::Authentication::Identity::EXTENDED_NAME_FORMAT, lpNameBuffer : UInt8*, nSize : UInt32*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.GetUserNameExA(name_format, lpNameBuffer, nSize)
+    {% end %}
   end
 
   def getUserNameExW(name_format : Win32cr::Security::Authentication::Identity::EXTENDED_NAME_FORMAT, lpNameBuffer : UInt16*, nSize : UInt32*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.GetUserNameExW(name_format, lpNameBuffer, nSize)
+    {% end %}
   end
 
   def getComputerObjectNameA(name_format : Win32cr::Security::Authentication::Identity::EXTENDED_NAME_FORMAT, lpNameBuffer : UInt8*, nSize : UInt32*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.GetComputerObjectNameA(name_format, lpNameBuffer, nSize)
+    {% end %}
   end
 
   def getComputerObjectNameW(name_format : Win32cr::Security::Authentication::Identity::EXTENDED_NAME_FORMAT, lpNameBuffer : UInt16*, nSize : UInt32*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.GetComputerObjectNameW(name_format, lpNameBuffer, nSize)
+    {% end %}
   end
 
   def translateNameA(lpAccountName : Win32cr::Foundation::PSTR, account_name_format : Win32cr::Security::Authentication::Identity::EXTENDED_NAME_FORMAT, desired_name_format : Win32cr::Security::Authentication::Identity::EXTENDED_NAME_FORMAT, lpTranslatedName : UInt8*, nSize : UInt32*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.TranslateNameA(lpAccountName, account_name_format, desired_name_format, lpTranslatedName, nSize)
+    {% end %}
   end
 
   def translateNameW(lpAccountName : Win32cr::Foundation::PWSTR, account_name_format : Win32cr::Security::Authentication::Identity::EXTENDED_NAME_FORMAT, desired_name_format : Win32cr::Security::Authentication::Identity::EXTENDED_NAME_FORMAT, lpTranslatedName : UInt16*, nSize : UInt32*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.TranslateNameW(lpAccountName, account_name_format, desired_name_format, lpTranslatedName, nSize)
+    {% end %}
   end
 
   def sLOpen(phSLC : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLOpen(phSLC)
+    {% end %}
   end
 
   def sLClose(hSLC : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLClose(hSLC)
+    {% end %}
   end
 
   def sLInstallProofOfPurchase(hSLC : Void*, pwszPKeyAlgorithm : Win32cr::Foundation::PWSTR, pwszPKeyString : Win32cr::Foundation::PWSTR, cbPKeySpecificData : UInt32, pbPKeySpecificData : UInt8*, pPkeyId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLInstallProofOfPurchase(hSLC, pwszPKeyAlgorithm, pwszPKeyString, cbPKeySpecificData, pbPKeySpecificData, pPkeyId)
+    {% end %}
   end
 
   def sLUninstallProofOfPurchase(hSLC : Void*, pPKeyId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLUninstallProofOfPurchase(hSLC, pPKeyId)
+    {% end %}
   end
 
   def sLInstallLicense(hSLC : Void*, cbLicenseBlob : UInt32, pbLicenseBlob : UInt8*, pLicenseFileId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLInstallLicense(hSLC, cbLicenseBlob, pbLicenseBlob, pLicenseFileId)
+    {% end %}
   end
 
   def sLUninstallLicense(hSLC : Void*, pLicenseFileId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLUninstallLicense(hSLC, pLicenseFileId)
+    {% end %}
   end
 
   def sLConsumeRight(hSLC : Void*, pAppId : LibC::GUID*, pProductSkuId : LibC::GUID*, pwszRightName : Win32cr::Foundation::PWSTR, pvReserved : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLConsumeRight(hSLC, pAppId, pProductSkuId, pwszRightName, pvReserved)
+    {% end %}
   end
 
   def sLGetProductSkuInformation(hSLC : Void*, pProductSkuId : LibC::GUID*, pwszValueName : Win32cr::Foundation::PWSTR, peDataType : Win32cr::Security::Authentication::Identity::SLDATATYPE*, pcbValue : UInt32*, ppbValue : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGetProductSkuInformation(hSLC, pProductSkuId, pwszValueName, peDataType, pcbValue, ppbValue)
+    {% end %}
   end
 
   def sLGetPKeyInformation(hSLC : Void*, pPKeyId : LibC::GUID*, pwszValueName : Win32cr::Foundation::PWSTR, peDataType : Win32cr::Security::Authentication::Identity::SLDATATYPE*, pcbValue : UInt32*, ppbValue : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGetPKeyInformation(hSLC, pPKeyId, pwszValueName, peDataType, pcbValue, ppbValue)
+    {% end %}
   end
 
   def sLGetLicenseInformation(hSLC : Void*, pSLLicenseId : LibC::GUID*, pwszValueName : Win32cr::Foundation::PWSTR, peDataType : Win32cr::Security::Authentication::Identity::SLDATATYPE*, pcbValue : UInt32*, ppbValue : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGetLicenseInformation(hSLC, pSLLicenseId, pwszValueName, peDataType, pcbValue, ppbValue)
+    {% end %}
   end
 
   def sLGetLicensingStatusInformation(hSLC : Void*, pAppID : LibC::GUID*, pProductSkuId : LibC::GUID*, pwszRightName : Win32cr::Foundation::PWSTR, pnStatusCount : UInt32*, ppLicensingStatus : Win32cr::Security::Authentication::Identity::SL_LICENSING_STATUS**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGetLicensingStatusInformation(hSLC, pAppID, pProductSkuId, pwszRightName, pnStatusCount, ppLicensingStatus)
+    {% end %}
   end
 
   def sLGetPolicyInformation(hSLC : Void*, pwszValueName : Win32cr::Foundation::PWSTR, peDataType : Win32cr::Security::Authentication::Identity::SLDATATYPE*, pcbValue : UInt32*, ppbValue : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGetPolicyInformation(hSLC, pwszValueName, peDataType, pcbValue, ppbValue)
+    {% end %}
   end
 
   def sLGetPolicyInformationDWORD(hSLC : Void*, pwszValueName : Win32cr::Foundation::PWSTR, pdwValue : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGetPolicyInformationDWORD(hSLC, pwszValueName, pdwValue)
+    {% end %}
   end
 
   def sLGetServiceInformation(hSLC : Void*, pwszValueName : Win32cr::Foundation::PWSTR, peDataType : Win32cr::Security::Authentication::Identity::SLDATATYPE*, pcbValue : UInt32*, ppbValue : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGetServiceInformation(hSLC, pwszValueName, peDataType, pcbValue, ppbValue)
+    {% end %}
   end
 
   def sLGetApplicationInformation(hSLC : Void*, pApplicationId : LibC::GUID*, pwszValueName : Win32cr::Foundation::PWSTR, peDataType : Win32cr::Security::Authentication::Identity::SLDATATYPE*, pcbValue : UInt32*, ppbValue : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGetApplicationInformation(hSLC, pApplicationId, pwszValueName, peDataType, pcbValue, ppbValue)
+    {% end %}
   end
 
   def sLActivateProduct(hSLC : Void*, pProductSkuId : LibC::GUID*, cbAppSpecificData : UInt32, pvAppSpecificData : Void*, pActivationInfo : Win32cr::Security::Authentication::Identity::SL_ACTIVATION_INFO_HEADER*, pwszProxyServer : Win32cr::Foundation::PWSTR, wProxyPort : UInt16) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLActivateProduct(hSLC, pProductSkuId, cbAppSpecificData, pvAppSpecificData, pActivationInfo, pwszProxyServer, wProxyPort)
+    {% end %}
   end
 
   def sLGetServerStatus(pwszServerURL : Win32cr::Foundation::PWSTR, pwszAcquisitionType : Win32cr::Foundation::PWSTR, pwszProxyServer : Win32cr::Foundation::PWSTR, wProxyPort : UInt16, phrStatus : Win32cr::Foundation::HRESULT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGetServerStatus(pwszServerURL, pwszAcquisitionType, pwszProxyServer, wProxyPort, phrStatus)
+    {% end %}
   end
 
   def sLGenerateOfflineInstallationId(hSLC : Void*, pProductSkuId : LibC::GUID*, ppwszInstallationId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGenerateOfflineInstallationId(hSLC, pProductSkuId, ppwszInstallationId)
+    {% end %}
   end
 
   def sLGenerateOfflineInstallationIdEx(hSLC : Void*, pProductSkuId : LibC::GUID*, pActivationInfo : Win32cr::Security::Authentication::Identity::SL_ACTIVATION_INFO_HEADER*, ppwszInstallationId : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGenerateOfflineInstallationIdEx(hSLC, pProductSkuId, pActivationInfo, ppwszInstallationId)
+    {% end %}
   end
 
   def sLDepositOfflineConfirmationId(hSLC : Void*, pProductSkuId : LibC::GUID*, pwszInstallationId : Win32cr::Foundation::PWSTR, pwszConfirmationId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLDepositOfflineConfirmationId(hSLC, pProductSkuId, pwszInstallationId, pwszConfirmationId)
+    {% end %}
   end
 
   def sLDepositOfflineConfirmationIdEx(hSLC : Void*, pProductSkuId : LibC::GUID*, pActivationInfo : Win32cr::Security::Authentication::Identity::SL_ACTIVATION_INFO_HEADER*, pwszInstallationId : Win32cr::Foundation::PWSTR, pwszConfirmationId : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLDepositOfflineConfirmationIdEx(hSLC, pProductSkuId, pActivationInfo, pwszInstallationId, pwszConfirmationId)
+    {% end %}
   end
 
   def sLGetPKeyId(hSLC : Void*, pwszPKeyAlgorithm : Win32cr::Foundation::PWSTR, pwszPKeyString : Win32cr::Foundation::PWSTR, cbPKeySpecificData : UInt32, pbPKeySpecificData : UInt8*, pPKeyId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGetPKeyId(hSLC, pwszPKeyAlgorithm, pwszPKeyString, cbPKeySpecificData, pbPKeySpecificData, pPKeyId)
+    {% end %}
   end
 
   def sLGetInstalledProductKeyIds(hSLC : Void*, pProductSkuId : LibC::GUID*, pnProductKeyIds : UInt32*, ppProductKeyIds : LibC::GUID**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGetInstalledProductKeyIds(hSLC, pProductSkuId, pnProductKeyIds, ppProductKeyIds)
+    {% end %}
   end
 
   def sLSetCurrentProductKey(hSLC : Void*, pProductSkuId : LibC::GUID*, pProductKeyId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLSetCurrentProductKey(hSLC, pProductSkuId, pProductKeyId)
+    {% end %}
   end
 
   def sLGetSLIDList(hSLC : Void*, eQueryIdType : Win32cr::Security::Authentication::Identity::SLIDTYPE, pQueryId : LibC::GUID*, eReturnIdType : Win32cr::Security::Authentication::Identity::SLIDTYPE, pnReturnIds : UInt32*, ppReturnIds : LibC::GUID**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGetSLIDList(hSLC, eQueryIdType, pQueryId, eReturnIdType, pnReturnIds, ppReturnIds)
+    {% end %}
   end
 
   def sLGetLicenseFileId(hSLC : Void*, cbLicenseBlob : UInt32, pbLicenseBlob : UInt8*, pLicenseFileId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGetLicenseFileId(hSLC, cbLicenseBlob, pbLicenseBlob, pLicenseFileId)
+    {% end %}
   end
 
   def sLGetLicense(hSLC : Void*, pLicenseFileId : LibC::GUID*, pcbLicenseFile : UInt32*, ppbLicenseFile : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGetLicense(hSLC, pLicenseFileId, pcbLicenseFile, ppbLicenseFile)
+    {% end %}
   end
 
   def sLFireEvent(hSLC : Void*, pwszEventId : Win32cr::Foundation::PWSTR, pApplicationId : LibC::GUID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLFireEvent(hSLC, pwszEventId, pApplicationId)
+    {% end %}
   end
 
   def sLRegisterEvent(hSLC : Void*, pwszEventId : Win32cr::Foundation::PWSTR, pApplicationId : LibC::GUID*, hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLRegisterEvent(hSLC, pwszEventId, pApplicationId, hEvent)
+    {% end %}
   end
 
   def sLUnregisterEvent(hSLC : Void*, pwszEventId : Win32cr::Foundation::PWSTR, pApplicationId : LibC::GUID*, hEvent : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLUnregisterEvent(hSLC, pwszEventId, pApplicationId, hEvent)
+    {% end %}
   end
 
   def sLGetWindowsInformation(pwszValueName : Win32cr::Foundation::PWSTR, peDataType : Win32cr::Security::Authentication::Identity::SLDATATYPE*, pcbValue : UInt32*, ppbValue : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGetWindowsInformation(pwszValueName, peDataType, pcbValue, ppbValue)
+    {% end %}
   end
 
   def sLGetWindowsInformationDWORD(pwszValueName : Win32cr::Foundation::PWSTR, pdwValue : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGetWindowsInformationDWORD(pwszValueName, pdwValue)
+    {% end %}
   end
 
   def sLIsGenuineLocal(pAppId : LibC::GUID*, pGenuineState : Win32cr::Security::Authentication::Identity::SL_GENUINE_STATE*, pUIOptions : Win32cr::Security::Authentication::Identity::SL_NONGENUINE_UI_OPTIONS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLIsGenuineLocal(pAppId, pGenuineState, pUIOptions)
+    {% end %}
   end
 
   def sLAcquireGenuineTicket(ppTicketBlob : Void**, pcbTicketBlob : UInt32*, pwszTemplateId : Win32cr::Foundation::PWSTR, pwszServerUrl : Win32cr::Foundation::PWSTR, pwszClientToken : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLAcquireGenuineTicket(ppTicketBlob, pcbTicketBlob, pwszTemplateId, pwszServerUrl, pwszClientToken)
+    {% end %}
   end
 
   def sLSetGenuineInformation(pQueryId : LibC::GUID*, pwszValueName : Win32cr::Foundation::PWSTR, eDataType : Win32cr::Security::Authentication::Identity::SLDATATYPE, cbValue : UInt32, pbValue : UInt8*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLSetGenuineInformation(pQueryId, pwszValueName, eDataType, cbValue, pbValue)
+    {% end %}
   end
 
   def sLGetReferralInformation(hSLC : Void*, eReferralType : Win32cr::Security::Authentication::Identity::SLREFERRALTYPE, pSkuOrAppId : LibC::GUID*, pwszValueName : Win32cr::Foundation::PWSTR, ppwszValue : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGetReferralInformation(hSLC, eReferralType, pSkuOrAppId, pwszValueName, ppwszValue)
+    {% end %}
   end
 
   def sLGetGenuineInformation(pQueryId : LibC::GUID*, pwszValueName : Win32cr::Foundation::PWSTR, peDataType : Win32cr::Security::Authentication::Identity::SLDATATYPE*, pcbValue : UInt32*, ppbValue : UInt8**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLGetGenuineInformation(pQueryId, pwszValueName, peDataType, pcbValue, ppbValue)
+    {% end %}
   end
 
   def sLQueryLicenseValueFromApp(valueName : Win32cr::Foundation::PWSTR, valueType : UInt32*, dataBuffer : Void*, dataSize : UInt32, resultDataSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SLQueryLicenseValueFromApp(valueName, valueType, dataBuffer, dataSize, resultDataSize)
+    {% end %}
   end
 
-  @[Link("secur32")]
-  @[Link("advapi32")]
-  @[Link("sspicli")]
-  @[Link("credui")]
-  @[Link("schannel")]
-  @[Link("tokenbinding")]
-  @[Link("slc")]
-  @[Link("slcext")]
-  @[Link("slwga")]
+  @[Link("secur32.dll")]
+  @[Link("advapi32.dll")]
+  @[Link("sspicli.dll")]
+  @[Link("credui.dll")]
+  @[Link("schannel.dll")]
+  @[Link("tokenbinding.dll")]
+  @[Link("slc.dll")]
+  @[Link("slcext.dll")]
+  @[Link("slwga.dll")]
+  @[Link("api-ms-win-core-slapi-l1-1-0.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun LsaRegisterLogonProcess(logon_process_name : Win32cr::System::Kernel::STRING*, lsa_handle : Win32cr::Security::Authentication::Identity::LsaHandle*, security_mode : UInt32*) : Win32cr::Foundation::NTSTATUS
@@ -7596,4 +8016,5 @@ module Win32cr::Security::Authentication::Identity
     fun SLQueryLicenseValueFromApp(valueName : Win32cr::Foundation::PWSTR, valueType : UInt32*, dataBuffer : Void*, dataSize : UInt32, resultDataSize : UInt32*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

@@ -954,22 +954,22 @@ module Win32cr::NetworkManagement::QoS
     property u1 : U1_e__union_
     property u2 : U2_e__union_
 
-    # Nested Type U1_e__union_
-    @[Extern(union: true)]
-    struct U1_e__union_
-    property stspec : Win32cr::NetworkManagement::QoS::SENDER_TSPEC*
-    property isflow : Win32cr::NetworkManagement::QoS::IS_FLOWSPEC*
-    def initialize(@stspec : Win32cr::NetworkManagement::QoS::SENDER_TSPEC*, @isflow : Win32cr::NetworkManagement::QoS::IS_FLOWSPEC*)
-    end
-    end
-
-
     # Nested Type U2_e__union_
     @[Extern(union: true)]
     struct U2_e__union_
     property stemp : Win32cr::NetworkManagement::QoS::FILTER_SPEC*
     property fspec : Win32cr::NetworkManagement::QoS::FILTER_SPEC*
     def initialize(@stemp : Win32cr::NetworkManagement::QoS::FILTER_SPEC*, @fspec : Win32cr::NetworkManagement::QoS::FILTER_SPEC*)
+    end
+    end
+
+
+    # Nested Type U1_e__union_
+    @[Extern(union: true)]
+    struct U1_e__union_
+    property stspec : Win32cr::NetworkManagement::QoS::SENDER_TSPEC*
+    property isflow : Win32cr::NetworkManagement::QoS::IS_FLOWSPEC*
+    def initialize(@stspec : Win32cr::NetworkManagement::QoS::SENDER_TSPEC*, @isflow : Win32cr::NetworkManagement::QoS::IS_FLOWSPEC*)
     end
     end
 
@@ -1634,131 +1634,194 @@ module Win32cr::NetworkManagement::QoS
   end
 
   def qOSCreateHandle(version : Win32cr::NetworkManagement::QoS::QOS_VERSION*, qos_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSCreateHandle(version, qos_handle)
+    {% end %}
   end
 
   def qOSCloseHandle(qos_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSCloseHandle(qos_handle)
+    {% end %}
   end
 
   def qOSStartTrackingClient(qos_handle : Win32cr::Foundation::HANDLE, dest_addr : Win32cr::Networking::WinSock::SOCKADDR*, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSStartTrackingClient(qos_handle, dest_addr, flags)
+    {% end %}
   end
 
   def qOSStopTrackingClient(qos_handle : Win32cr::Foundation::HANDLE, dest_addr : Win32cr::Networking::WinSock::SOCKADDR*, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSStopTrackingClient(qos_handle, dest_addr, flags)
+    {% end %}
   end
 
   def qOSEnumerateFlows(qos_handle : Win32cr::Foundation::HANDLE, size : UInt32*, buffer : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSEnumerateFlows(qos_handle, size, buffer)
+    {% end %}
   end
 
   def qOSAddSocketToFlow(qos_handle : Win32cr::Foundation::HANDLE, socket : Win32cr::Networking::WinSock::SOCKET, dest_addr : Win32cr::Networking::WinSock::SOCKADDR*, traffic_type : Win32cr::NetworkManagement::QoS::QOS_TRAFFIC_TYPE, flags : UInt32, flow_id : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSAddSocketToFlow(qos_handle, socket, dest_addr, traffic_type, flags, flow_id)
+    {% end %}
   end
 
   def qOSRemoveSocketFromFlow(qos_handle : Win32cr::Foundation::HANDLE, socket : Win32cr::Networking::WinSock::SOCKET, flow_id : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSRemoveSocketFromFlow(qos_handle, socket, flow_id, flags)
+    {% end %}
   end
 
   def qOSSetFlow(qos_handle : Win32cr::Foundation::HANDLE, flow_id : UInt32, operation : Win32cr::NetworkManagement::QoS::QOS_SET_FLOW, size : UInt32, buffer : Void*, flags : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSSetFlow(qos_handle, flow_id, operation, size, buffer, flags, overlapped)
+    {% end %}
   end
 
   def qOSQueryFlow(qos_handle : Win32cr::Foundation::HANDLE, flow_id : UInt32, operation : Win32cr::NetworkManagement::QoS::QOS_QUERY_FLOW, size : UInt32*, buffer : Void*, flags : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSQueryFlow(qos_handle, flow_id, operation, size, buffer, flags, overlapped)
+    {% end %}
   end
 
   def qOSNotifyFlow(qos_handle : Win32cr::Foundation::HANDLE, flow_id : UInt32, operation : Win32cr::NetworkManagement::QoS::QOS_NOTIFY_FLOW, size : UInt32*, buffer : Void*, flags : UInt32, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSNotifyFlow(qos_handle, flow_id, operation, size, buffer, flags, overlapped)
+    {% end %}
   end
 
   def qOSCancel(qos_handle : Win32cr::Foundation::HANDLE, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.QOSCancel(qos_handle, overlapped)
+    {% end %}
   end
 
   def tcRegisterClient(tci_version : UInt32, cl_reg_ctx : Win32cr::Foundation::HANDLE, client_handler_list : Win32cr::NetworkManagement::QoS::TCI_CLIENT_FUNC_LIST*, pClientHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcRegisterClient(tci_version, cl_reg_ctx, client_handler_list, pClientHandle)
+    {% end %}
   end
 
   def tcEnumerateInterfaces(client_handle : Win32cr::Foundation::HANDLE, pBufferSize : UInt32*, interface_buffer : Win32cr::NetworkManagement::QoS::TC_IFC_DESCRIPTOR*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcEnumerateInterfaces(client_handle, pBufferSize, interface_buffer)
+    {% end %}
   end
 
   def tcOpenInterfaceA(pInterfaceName : Win32cr::Foundation::PSTR, client_handle : Win32cr::Foundation::HANDLE, cl_ifc_ctx : Win32cr::Foundation::HANDLE, pIfcHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcOpenInterfaceA(pInterfaceName, client_handle, cl_ifc_ctx, pIfcHandle)
+    {% end %}
   end
 
   def tcOpenInterfaceW(pInterfaceName : Win32cr::Foundation::PWSTR, client_handle : Win32cr::Foundation::HANDLE, cl_ifc_ctx : Win32cr::Foundation::HANDLE, pIfcHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcOpenInterfaceW(pInterfaceName, client_handle, cl_ifc_ctx, pIfcHandle)
+    {% end %}
   end
 
   def tcCloseInterface(ifc_handle : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.TcCloseInterface(ifc_handle)
+    {% end %}
   end
 
   def tcQueryInterface(ifc_handle : Win32cr::Foundation::HANDLE, pGuidParam : LibC::GUID*, notify_change : Win32cr::Foundation::BOOLEAN, pBufferSize : UInt32*, buffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcQueryInterface(ifc_handle, pGuidParam, notify_change, pBufferSize, buffer)
+    {% end %}
   end
 
   def tcSetInterface(ifc_handle : Win32cr::Foundation::HANDLE, pGuidParam : LibC::GUID*, buffer_size : UInt32, buffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcSetInterface(ifc_handle, pGuidParam, buffer_size, buffer)
+    {% end %}
   end
 
   def tcQueryFlowA(pFlowName : Win32cr::Foundation::PSTR, pGuidParam : LibC::GUID*, pBufferSize : UInt32*, buffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcQueryFlowA(pFlowName, pGuidParam, pBufferSize, buffer)
+    {% end %}
   end
 
   def tcQueryFlowW(pFlowName : Win32cr::Foundation::PWSTR, pGuidParam : LibC::GUID*, pBufferSize : UInt32*, buffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcQueryFlowW(pFlowName, pGuidParam, pBufferSize, buffer)
+    {% end %}
   end
 
   def tcSetFlowA(pFlowName : Win32cr::Foundation::PSTR, pGuidParam : LibC::GUID*, buffer_size : UInt32, buffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcSetFlowA(pFlowName, pGuidParam, buffer_size, buffer)
+    {% end %}
   end
 
   def tcSetFlowW(pFlowName : Win32cr::Foundation::PWSTR, pGuidParam : LibC::GUID*, buffer_size : UInt32, buffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcSetFlowW(pFlowName, pGuidParam, buffer_size, buffer)
+    {% end %}
   end
 
   def tcAddFlow(ifc_handle : Win32cr::Foundation::HANDLE, cl_flow_ctx : Win32cr::Foundation::HANDLE, flags : UInt32, pGenericFlow : Win32cr::NetworkManagement::QoS::TC_GEN_FLOW*, pFlowHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcAddFlow(ifc_handle, cl_flow_ctx, flags, pGenericFlow, pFlowHandle)
+    {% end %}
   end
 
   def tcGetFlowNameA(flow_handle : Win32cr::Foundation::HANDLE, str_size : UInt32, pFlowName : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcGetFlowNameA(flow_handle, str_size, pFlowName)
+    {% end %}
   end
 
   def tcGetFlowNameW(flow_handle : Win32cr::Foundation::HANDLE, str_size : UInt32, pFlowName : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcGetFlowNameW(flow_handle, str_size, pFlowName)
+    {% end %}
   end
 
   def tcModifyFlow(flow_handle : Win32cr::Foundation::HANDLE, pGenericFlow : Win32cr::NetworkManagement::QoS::TC_GEN_FLOW*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcModifyFlow(flow_handle, pGenericFlow)
+    {% end %}
   end
 
   def tcAddFilter(flow_handle : Win32cr::Foundation::HANDLE, pGenericFilter : Win32cr::NetworkManagement::QoS::TC_GEN_FILTER*, pFilterHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcAddFilter(flow_handle, pGenericFilter, pFilterHandle)
+    {% end %}
   end
 
   def tcDeregisterClient(client_handle : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.TcDeregisterClient(client_handle)
+    {% end %}
   end
 
   def tcDeleteFlow(flow_handle : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.TcDeleteFlow(flow_handle)
+    {% end %}
   end
 
   def tcDeleteFilter(filter_handle : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.TcDeleteFilter(filter_handle)
+    {% end %}
   end
 
   def tcEnumerateFlows(ifc_handle : Win32cr::Foundation::HANDLE, pEnumHandle : Win32cr::Foundation::HANDLE*, pFlowCount : UInt32*, pBufSize : UInt32*, buffer : Win32cr::NetworkManagement::QoS::ENUMERATION_BUFFER*) : UInt32
+    {% if !flag?(:docs) %}
     C.TcEnumerateFlows(ifc_handle, pEnumHandle, pFlowCount, pBufSize, buffer)
+    {% end %}
   end
 
-  @[Link("qwave")]
-  @[Link("traffic")]
+  @[Link("qwave.dll")]
+  @[Link("traffic.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun QOSCreateHandle(version : Win32cr::NetworkManagement::QoS::QOS_VERSION*, qos_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::BOOL
@@ -1854,4 +1917,5 @@ module Win32cr::NetworkManagement::QoS
     fun TcEnumerateFlows(ifc_handle : Win32cr::Foundation::HANDLE, pEnumHandle : Win32cr::Foundation::HANDLE*, pFlowCount : UInt32*, pBufSize : UInt32*, buffer : Win32cr::NetworkManagement::QoS::ENUMERATION_BUFFER*) : UInt32
 
   end
+  {% end %}
 end

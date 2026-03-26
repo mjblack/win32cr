@@ -5260,7 +5260,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record IEnumNetCfgBindingInterfaceVtbl,
+  record IEnumNetCfgBindingInterfaceVtable,
     query_interface : Proc(IEnumNetCfgBindingInterface*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumNetCfgBindingInterface*, UInt32),
     release : Proc(IEnumNetCfgBindingInterface*, UInt32),
@@ -5271,7 +5271,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record IEnumNetCfgBindingInterface, lpVtbl : IEnumNetCfgBindingInterfaceVtbl* do
+  record IEnumNetCfgBindingInterface, lpVtbl : IEnumNetCfgBindingInterfaceVtable* do
     GUID = LibC::GUID.new(0xc0e8ae90_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : IEnumNetCfgBindingInterface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5298,7 +5298,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record IEnumNetCfgBindingPathVtbl,
+  record IEnumNetCfgBindingPathVtable,
     query_interface : Proc(IEnumNetCfgBindingPath*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumNetCfgBindingPath*, UInt32),
     release : Proc(IEnumNetCfgBindingPath*, UInt32),
@@ -5309,7 +5309,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record IEnumNetCfgBindingPath, lpVtbl : IEnumNetCfgBindingPathVtbl* do
+  record IEnumNetCfgBindingPath, lpVtbl : IEnumNetCfgBindingPathVtable* do
     GUID = LibC::GUID.new(0xc0e8ae91_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : IEnumNetCfgBindingPath*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5336,7 +5336,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record IEnumNetCfgComponentVtbl,
+  record IEnumNetCfgComponentVtable,
     query_interface : Proc(IEnumNetCfgComponent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumNetCfgComponent*, UInt32),
     release : Proc(IEnumNetCfgComponent*, UInt32),
@@ -5347,7 +5347,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record IEnumNetCfgComponent, lpVtbl : IEnumNetCfgComponentVtbl* do
+  record IEnumNetCfgComponent, lpVtbl : IEnumNetCfgComponentVtable* do
     GUID = LibC::GUID.new(0xc0e8ae92_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : IEnumNetCfgComponent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5374,7 +5374,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetCfgVtbl,
+  record INetCfgVtable,
     query_interface : Proc(INetCfg*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetCfg*, UInt32),
     release : Proc(INetCfg*, UInt32),
@@ -5388,7 +5388,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetCfg, lpVtbl : INetCfgVtbl* do
+  record INetCfg, lpVtbl : INetCfgVtable* do
     GUID = LibC::GUID.new(0xc0e8ae93_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfg*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5424,7 +5424,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetCfgLockVtbl,
+  record INetCfgLockVtable,
     query_interface : Proc(INetCfgLock*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetCfgLock*, UInt32),
     release : Proc(INetCfgLock*, UInt32),
@@ -5434,7 +5434,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetCfgLock, lpVtbl : INetCfgLockVtbl* do
+  record INetCfgLock, lpVtbl : INetCfgLockVtable* do
     GUID = LibC::GUID.new(0xc0e8ae9f_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgLock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5458,7 +5458,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetCfgBindingInterfaceVtbl,
+  record INetCfgBindingInterfaceVtable,
     query_interface : Proc(INetCfgBindingInterface*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetCfgBindingInterface*, UInt32),
     release : Proc(INetCfgBindingInterface*, UInt32),
@@ -5468,7 +5468,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetCfgBindingInterface, lpVtbl : INetCfgBindingInterfaceVtbl* do
+  record INetCfgBindingInterface, lpVtbl : INetCfgBindingInterfaceVtable* do
     GUID = LibC::GUID.new(0xc0e8ae94_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgBindingInterface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5492,7 +5492,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetCfgBindingPathVtbl,
+  record INetCfgBindingPathVtable,
     query_interface : Proc(INetCfgBindingPath*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetCfgBindingPath*, UInt32),
     release : Proc(INetCfgBindingPath*, UInt32),
@@ -5507,7 +5507,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetCfgBindingPath, lpVtbl : INetCfgBindingPathVtbl* do
+  record INetCfgBindingPath, lpVtbl : INetCfgBindingPathVtable* do
     GUID = LibC::GUID.new(0xc0e8ae96_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgBindingPath*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5546,7 +5546,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetCfgClassVtbl,
+  record INetCfgClassVtable,
     query_interface : Proc(INetCfgClass*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetCfgClass*, UInt32),
     release : Proc(INetCfgClass*, UInt32),
@@ -5555,7 +5555,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetCfgClass, lpVtbl : INetCfgClassVtbl* do
+  record INetCfgClass, lpVtbl : INetCfgClassVtable* do
     GUID = LibC::GUID.new(0xc0e8ae97_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgClass*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5576,7 +5576,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetCfgClassSetupVtbl,
+  record INetCfgClassSetupVtable,
     query_interface : Proc(INetCfgClassSetup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetCfgClassSetup*, UInt32),
     release : Proc(INetCfgClassSetup*, UInt32),
@@ -5586,7 +5586,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetCfgClassSetup, lpVtbl : INetCfgClassSetupVtbl* do
+  record INetCfgClassSetup, lpVtbl : INetCfgClassSetupVtable* do
     GUID = LibC::GUID.new(0xc0e8ae9d_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgClassSetup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5610,7 +5610,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetCfgClassSetup2Vtbl,
+  record INetCfgClassSetup2Vtable,
     query_interface : Proc(INetCfgClassSetup2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetCfgClassSetup2*, UInt32),
     release : Proc(INetCfgClassSetup2*, UInt32),
@@ -5621,7 +5621,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetCfgClassSetup2, lpVtbl : INetCfgClassSetup2Vtbl* do
+  record INetCfgClassSetup2, lpVtbl : INetCfgClassSetup2Vtable* do
     GUID = LibC::GUID.new(0xc0e8aea0_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgClassSetup2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5648,7 +5648,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetCfgComponentVtbl,
+  record INetCfgComponentVtable,
     query_interface : Proc(INetCfgComponent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetCfgComponent*, UInt32),
     release : Proc(INetCfgComponent*, UInt32),
@@ -5667,7 +5667,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetCfgComponent, lpVtbl : INetCfgComponentVtbl* do
+  record INetCfgComponent, lpVtbl : INetCfgComponentVtable* do
     GUID = LibC::GUID.new(0xc0e8ae99_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgComponent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5718,7 +5718,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetCfgComponentBindingsVtbl,
+  record INetCfgComponentBindingsVtable,
     query_interface : Proc(INetCfgComponentBindings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetCfgComponentBindings*, UInt32),
     release : Proc(INetCfgComponentBindings*, UInt32),
@@ -5733,7 +5733,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetCfgComponentBindings, lpVtbl : INetCfgComponentBindingsVtbl* do
+  record INetCfgComponentBindings, lpVtbl : INetCfgComponentBindingsVtable* do
     GUID = LibC::GUID.new(0xc0e8ae9e_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgComponentBindings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5772,7 +5772,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetCfgSysPrepVtbl,
+  record INetCfgSysPrepVtable,
     query_interface : Proc(INetCfgSysPrep*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetCfgSysPrep*, UInt32),
     release : Proc(INetCfgSysPrep*, UInt32),
@@ -5783,7 +5783,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetCfgSysPrep, lpVtbl : INetCfgSysPrepVtbl* do
+  record INetCfgSysPrep, lpVtbl : INetCfgSysPrepVtable* do
     GUID = LibC::GUID.new(0xc0e8ae98_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgSysPrep*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5810,7 +5810,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetCfgPnpReconfigCallbackVtbl,
+  record INetCfgPnpReconfigCallbackVtable,
     query_interface : Proc(INetCfgPnpReconfigCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetCfgPnpReconfigCallback*, UInt32),
     release : Proc(INetCfgPnpReconfigCallback*, UInt32),
@@ -5818,7 +5818,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetCfgPnpReconfigCallback, lpVtbl : INetCfgPnpReconfigCallbackVtbl* do
+  record INetCfgPnpReconfigCallback, lpVtbl : INetCfgPnpReconfigCallbackVtable* do
     GUID = LibC::GUID.new(0x8d84bd35_u32, 0xe227_u16, 0x11d2_u16, StaticArray[0xb7_u8, 0x0_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x8a_u8, 0x6a_u8, 0x85_u8])
     def query_interface(this : INetCfgPnpReconfigCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5836,7 +5836,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetCfgComponentControlVtbl,
+  record INetCfgComponentControlVtable,
     query_interface : Proc(INetCfgComponentControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetCfgComponentControl*, UInt32),
     release : Proc(INetCfgComponentControl*, UInt32),
@@ -5847,7 +5847,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetCfgComponentControl, lpVtbl : INetCfgComponentControlVtbl* do
+  record INetCfgComponentControl, lpVtbl : INetCfgComponentControlVtable* do
     GUID = LibC::GUID.new(0x932238df_u32, 0xbea1_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x98_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9d_u8, 0xcf_u8])
     def query_interface(this : INetCfgComponentControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5874,7 +5874,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetCfgComponentSetupVtbl,
+  record INetCfgComponentSetupVtable,
     query_interface : Proc(INetCfgComponentSetup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetCfgComponentSetup*, UInt32),
     release : Proc(INetCfgComponentSetup*, UInt32),
@@ -5885,7 +5885,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetCfgComponentSetup, lpVtbl : INetCfgComponentSetupVtbl* do
+  record INetCfgComponentSetup, lpVtbl : INetCfgComponentSetupVtable* do
     GUID = LibC::GUID.new(0x932238e3_u32, 0xbea1_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x98_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9d_u8, 0xcf_u8])
     def query_interface(this : INetCfgComponentSetup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5912,7 +5912,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetCfgComponentPropertyUiVtbl,
+  record INetCfgComponentPropertyUiVtable,
     query_interface : Proc(INetCfgComponentPropertyUi*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetCfgComponentPropertyUi*, UInt32),
     release : Proc(INetCfgComponentPropertyUi*, UInt32),
@@ -5925,7 +5925,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetCfgComponentPropertyUi, lpVtbl : INetCfgComponentPropertyUiVtbl* do
+  record INetCfgComponentPropertyUi, lpVtbl : INetCfgComponentPropertyUiVtable* do
     GUID = LibC::GUID.new(0x932238e0_u32, 0xbea1_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x98_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9d_u8, 0xcf_u8])
     def query_interface(this : INetCfgComponentPropertyUi*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5958,7 +5958,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetCfgComponentNotifyBindingVtbl,
+  record INetCfgComponentNotifyBindingVtable,
     query_interface : Proc(INetCfgComponentNotifyBinding*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetCfgComponentNotifyBinding*, UInt32),
     release : Proc(INetCfgComponentNotifyBinding*, UInt32),
@@ -5967,7 +5967,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetCfgComponentNotifyBinding, lpVtbl : INetCfgComponentNotifyBindingVtbl* do
+  record INetCfgComponentNotifyBinding, lpVtbl : INetCfgComponentNotifyBindingVtable* do
     GUID = LibC::GUID.new(0x932238e1_u32, 0xbea1_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x98_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9d_u8, 0xcf_u8])
     def query_interface(this : INetCfgComponentNotifyBinding*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5988,7 +5988,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetCfgComponentNotifyGlobalVtbl,
+  record INetCfgComponentNotifyGlobalVtable,
     query_interface : Proc(INetCfgComponentNotifyGlobal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetCfgComponentNotifyGlobal*, UInt32),
     release : Proc(INetCfgComponentNotifyGlobal*, UInt32),
@@ -5999,7 +5999,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetCfgComponentNotifyGlobal, lpVtbl : INetCfgComponentNotifyGlobalVtbl* do
+  record INetCfgComponentNotifyGlobal, lpVtbl : INetCfgComponentNotifyGlobalVtable* do
     GUID = LibC::GUID.new(0x932238e2_u32, 0xbea1_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x98_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9d_u8, 0xcf_u8])
     def query_interface(this : INetCfgComponentNotifyGlobal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6026,7 +6026,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetCfgComponentUpperEdgeVtbl,
+  record INetCfgComponentUpperEdgeVtable,
     query_interface : Proc(INetCfgComponentUpperEdge*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetCfgComponentUpperEdge*, UInt32),
     release : Proc(INetCfgComponentUpperEdge*, UInt32),
@@ -6036,7 +6036,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetCfgComponentUpperEdge, lpVtbl : INetCfgComponentUpperEdgeVtbl* do
+  record INetCfgComponentUpperEdge, lpVtbl : INetCfgComponentUpperEdgeVtable* do
     GUID = LibC::GUID.new(0x932238e4_u32, 0xbea1_u16, 0x11d0_u16, StaticArray[0x92_u8, 0x98_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc9_u8, 0x9d_u8, 0xcf_u8])
     def query_interface(this : INetCfgComponentUpperEdge*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6060,7 +6060,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetLanConnectionUiInfoVtbl,
+  record INetLanConnectionUiInfoVtable,
     query_interface : Proc(INetLanConnectionUiInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetLanConnectionUiInfo*, UInt32),
     release : Proc(INetLanConnectionUiInfo*, UInt32),
@@ -6068,7 +6068,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetLanConnectionUiInfo, lpVtbl : INetLanConnectionUiInfoVtbl* do
+  record INetLanConnectionUiInfo, lpVtbl : INetLanConnectionUiInfoVtable* do
     GUID = LibC::GUID.new(0xc08956a6_u32, 0x1cd3_u16, 0x11d1_u16, StaticArray[0xb1_u8, 0xc5_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetLanConnectionUiInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6086,7 +6086,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetRasConnectionIpUiInfoVtbl,
+  record INetRasConnectionIpUiInfoVtable,
     query_interface : Proc(INetRasConnectionIpUiInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetRasConnectionIpUiInfo*, UInt32),
     release : Proc(INetRasConnectionIpUiInfo*, UInt32),
@@ -6094,7 +6094,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetRasConnectionIpUiInfo, lpVtbl : INetRasConnectionIpUiInfoVtbl* do
+  record INetRasConnectionIpUiInfo, lpVtbl : INetRasConnectionIpUiInfoVtable* do
     GUID = LibC::GUID.new(0xfaedcf58_u32, 0x31fe_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xd2_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetRasConnectionIpUiInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6112,7 +6112,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record INetCfgComponentSysPrepVtbl,
+  record INetCfgComponentSysPrepVtable,
     query_interface : Proc(INetCfgComponentSysPrep*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetCfgComponentSysPrep*, UInt32),
     release : Proc(INetCfgComponentSysPrep*, UInt32),
@@ -6121,7 +6121,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record INetCfgComponentSysPrep, lpVtbl : INetCfgComponentSysPrepVtbl* do
+  record INetCfgComponentSysPrep, lpVtbl : INetCfgComponentSysPrepVtable* do
     GUID = LibC::GUID.new(0xc0e8ae9a_u32, 0x306e_u16, 0x11d1_u16, StaticArray[0xaa_u8, 0xcf_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xc1_u8, 0x27_u8, 0xe_u8])
     def query_interface(this : INetCfgComponentSysPrep*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6142,7 +6142,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record IProvisioningDomainVtbl,
+  record IProvisioningDomainVtable,
     query_interface : Proc(IProvisioningDomain*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProvisioningDomain*, UInt32),
     release : Proc(IProvisioningDomain*, UInt32),
@@ -6151,7 +6151,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record IProvisioningDomain, lpVtbl : IProvisioningDomainVtbl* do
+  record IProvisioningDomain, lpVtbl : IProvisioningDomainVtable* do
     GUID = LibC::GUID.new(0xc96fbd50_u32, 0x24dd_u16, 0x11d8_u16, StaticArray[0x89_u8, 0xfb_u8, 0x0_u8, 0x90_u8, 0x4b_u8, 0x2e_u8, 0xa9_u8, 0xc6_u8])
     def query_interface(this : IProvisioningDomain*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6172,7 +6172,7 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   @[Extern]
-  record IProvisioningProfileWirelessVtbl,
+  record IProvisioningProfileWirelessVtable,
     query_interface : Proc(IProvisioningProfileWireless*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProvisioningProfileWireless*, UInt32),
     release : Proc(IProvisioningProfileWireless*, UInt32),
@@ -6180,7 +6180,7 @@ module Win32cr::NetworkManagement::NetManagement
 
 
   @[Extern]
-  record IProvisioningProfileWireless, lpVtbl : IProvisioningProfileWirelessVtbl* do
+  record IProvisioningProfileWireless, lpVtbl : IProvisioningProfileWirelessVtable* do
     GUID = LibC::GUID.new(0xc96fbd51_u32, 0x24dd_u16, 0x11d8_u16, StaticArray[0x89_u8, 0xfb_u8, 0x0_u8, 0x90_u8, 0x4b_u8, 0x2e_u8, 0xa9_u8, 0xc6_u8])
     def query_interface(this : IProvisioningProfileWireless*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6198,708 +6198,1059 @@ module Win32cr::NetworkManagement::NetManagement
   end
 
   def netUserAdd(servername : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetUserAdd(servername, level, buf, parm_err)
+    {% end %}
   end
 
   def netUserEnum(servername : Win32cr::Foundation::PWSTR, level : UInt32, filter : Win32cr::NetworkManagement::NetManagement::NET_USER_ENUM_FILTER_FLAGS, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetUserEnum(servername, level, filter, bufptr, prefmaxlen, entriesread, totalentries, resume_handle)
+    {% end %}
   end
 
   def netUserGetInfo(servername : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetUserGetInfo(servername, username, level, bufptr)
+    {% end %}
   end
 
   def netUserSetInfo(servername : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetUserSetInfo(servername, username, level, buf, parm_err)
+    {% end %}
   end
 
   def netUserDel(servername : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NetUserDel(servername, username)
+    {% end %}
   end
 
   def netUserGetGroups(servername : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetUserGetGroups(servername, username, level, bufptr, prefmaxlen, entriesread, totalentries)
+    {% end %}
   end
 
   def netUserSetGroups(servername : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, num_entries : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NetUserSetGroups(servername, username, level, buf, num_entries)
+    {% end %}
   end
 
   def netUserGetLocalGroups(servername : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR, level : UInt32, flags : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetUserGetLocalGroups(servername, username, level, flags, bufptr, prefmaxlen, entriesread, totalentries)
+    {% end %}
   end
 
   def netUserModalsGet(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetUserModalsGet(servername, level, bufptr)
+    {% end %}
   end
 
   def netUserModalsSet(servername : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetUserModalsSet(servername, level, buf, parm_err)
+    {% end %}
   end
 
   def netUserChangePassword(domainname : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR, oldpassword : Win32cr::Foundation::PWSTR, newpassword : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NetUserChangePassword(domainname, username, oldpassword, newpassword)
+    {% end %}
   end
 
   def netGroupAdd(servername : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetGroupAdd(servername, level, buf, parm_err)
+    {% end %}
   end
 
   def netGroupAddUser(servername : Win32cr::Foundation::PWSTR, group_name : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NetGroupAddUser(servername, group_name, username)
+    {% end %}
   end
 
   def netGroupEnum(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : LibC::UIntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetGroupEnum(servername, level, bufptr, prefmaxlen, entriesread, totalentries, resume_handle)
+    {% end %}
   end
 
   def netGroupGetInfo(servername : Win32cr::Foundation::PWSTR, groupname : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetGroupGetInfo(servername, groupname, level, bufptr)
+    {% end %}
   end
 
   def netGroupSetInfo(servername : Win32cr::Foundation::PWSTR, groupname : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetGroupSetInfo(servername, groupname, level, buf, parm_err)
+    {% end %}
   end
 
   def netGroupDel(servername : Win32cr::Foundation::PWSTR, groupname : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NetGroupDel(servername, groupname)
+    {% end %}
   end
 
   def netGroupDelUser(servername : Win32cr::Foundation::PWSTR, group_name : Win32cr::Foundation::PWSTR, username : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NetGroupDelUser(servername, group_name, username)
+    {% end %}
   end
 
   def netGroupGetUsers(servername : Win32cr::Foundation::PWSTR, groupname : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : LibC::UIntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetGroupGetUsers(servername, groupname, level, bufptr, prefmaxlen, entriesread, totalentries, resume_handle)
+    {% end %}
   end
 
   def netGroupSetUsers(servername : Win32cr::Foundation::PWSTR, groupname : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, totalentries : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NetGroupSetUsers(servername, groupname, level, buf, totalentries)
+    {% end %}
   end
 
   def netLocalGroupAdd(servername : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetLocalGroupAdd(servername, level, buf, parm_err)
+    {% end %}
   end
 
   def netLocalGroupAddMember(servername : Win32cr::Foundation::PWSTR, groupname : Win32cr::Foundation::PWSTR, membersid : Win32cr::Foundation::PSID) : UInt32
+    {% if !flag?(:docs) %}
     C.NetLocalGroupAddMember(servername, groupname, membersid)
+    {% end %}
   end
 
   def netLocalGroupEnum(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resumehandle : LibC::UIntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetLocalGroupEnum(servername, level, bufptr, prefmaxlen, entriesread, totalentries, resumehandle)
+    {% end %}
   end
 
   def netLocalGroupGetInfo(servername : Win32cr::Foundation::PWSTR, groupname : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetLocalGroupGetInfo(servername, groupname, level, bufptr)
+    {% end %}
   end
 
   def netLocalGroupSetInfo(servername : Win32cr::Foundation::PWSTR, groupname : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetLocalGroupSetInfo(servername, groupname, level, buf, parm_err)
+    {% end %}
   end
 
   def netLocalGroupDel(servername : Win32cr::Foundation::PWSTR, groupname : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NetLocalGroupDel(servername, groupname)
+    {% end %}
   end
 
   def netLocalGroupDelMember(servername : Win32cr::Foundation::PWSTR, groupname : Win32cr::Foundation::PWSTR, membersid : Win32cr::Foundation::PSID) : UInt32
+    {% if !flag?(:docs) %}
     C.NetLocalGroupDelMember(servername, groupname, membersid)
+    {% end %}
   end
 
   def netLocalGroupGetMembers(servername : Win32cr::Foundation::PWSTR, localgroupname : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resumehandle : LibC::UIntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetLocalGroupGetMembers(servername, localgroupname, level, bufptr, prefmaxlen, entriesread, totalentries, resumehandle)
+    {% end %}
   end
 
   def netLocalGroupSetMembers(servername : Win32cr::Foundation::PWSTR, groupname : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, totalentries : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NetLocalGroupSetMembers(servername, groupname, level, buf, totalentries)
+    {% end %}
   end
 
   def netLocalGroupAddMembers(servername : Win32cr::Foundation::PWSTR, groupname : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, totalentries : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NetLocalGroupAddMembers(servername, groupname, level, buf, totalentries)
+    {% end %}
   end
 
   def netLocalGroupDelMembers(servername : Win32cr::Foundation::PWSTR, groupname : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, totalentries : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NetLocalGroupDelMembers(servername, groupname, level, buf, totalentries)
+    {% end %}
   end
 
   def netQueryDisplayInformation(server_name : Win32cr::Foundation::PWSTR, level : UInt32, index : UInt32, entries_requested : UInt32, preferred_maximum_length : UInt32, returned_entry_count : UInt32*, sorted_buffer : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetQueryDisplayInformation(server_name, level, index, entries_requested, preferred_maximum_length, returned_entry_count, sorted_buffer)
+    {% end %}
   end
 
   def netGetDisplayInformationIndex(server_name : Win32cr::Foundation::PWSTR, level : UInt32, prefix : Win32cr::Foundation::PWSTR, index : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetGetDisplayInformationIndex(server_name, level, prefix, index)
+    {% end %}
   end
 
   def netAccessAdd(servername : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetAccessAdd(servername, level, buf, parm_err)
+    {% end %}
   end
 
   def netAccessEnum(servername : Win32cr::Foundation::PWSTR, base_path : Win32cr::Foundation::PWSTR, recursive : UInt32, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetAccessEnum(servername, base_path, recursive, level, bufptr, prefmaxlen, entriesread, totalentries, resume_handle)
+    {% end %}
   end
 
   def netAccessGetInfo(servername : Win32cr::Foundation::PWSTR, resource : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetAccessGetInfo(servername, resource, level, bufptr)
+    {% end %}
   end
 
   def netAccessSetInfo(servername : Win32cr::Foundation::PWSTR, resource : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetAccessSetInfo(servername, resource, level, buf, parm_err)
+    {% end %}
   end
 
   def netAccessDel(servername : Win32cr::Foundation::PWSTR, resource : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NetAccessDel(servername, resource)
+    {% end %}
   end
 
   def netAccessGetUserPerms(servername : Win32cr::Foundation::PWSTR, u_gname : Win32cr::Foundation::PWSTR, resource : Win32cr::Foundation::PWSTR, perms : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetAccessGetUserPerms(servername, u_gname, resource, perms)
+    {% end %}
   end
 
   def netValidatePasswordPolicy(server_name : Win32cr::Foundation::PWSTR, qualifier : Void*, validation_type : Win32cr::NetworkManagement::NetManagement::NET_VALIDATE_PASSWORD_TYPE, input_arg : Void*, output_arg : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetValidatePasswordPolicy(server_name, qualifier, validation_type, input_arg, output_arg)
+    {% end %}
   end
 
   def netValidatePasswordPolicyFree(output_arg : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetValidatePasswordPolicyFree(output_arg)
+    {% end %}
   end
 
   def netGetDCName(server_name : Win32cr::Foundation::PWSTR, domain_name : Win32cr::Foundation::PWSTR, buffer : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetGetDCName(server_name, domain_name, buffer)
+    {% end %}
   end
 
   def netGetAnyDCName(server_name : Win32cr::Foundation::PWSTR, domain_name : Win32cr::Foundation::PWSTR, buffer : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetGetAnyDCName(server_name, domain_name, buffer)
+    {% end %}
   end
 
   def iNetLogonControl2(server_name : Win32cr::Foundation::PWSTR, function_code : UInt32, query_level : UInt32, data : UInt8*, buffer : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.I_NetLogonControl2(server_name, function_code, query_level, data, buffer)
+    {% end %}
   end
 
   def netAddServiceAccount(server_name : Win32cr::Foundation::PWSTR, account_name : Win32cr::Foundation::PWSTR, password : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NetAddServiceAccount(server_name, account_name, password, flags)
+    {% end %}
   end
 
   def netRemoveServiceAccount(server_name : Win32cr::Foundation::PWSTR, account_name : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NetRemoveServiceAccount(server_name, account_name, flags)
+    {% end %}
   end
 
   def netEnumerateServiceAccounts(server_name : Win32cr::Foundation::PWSTR, flags : UInt32, accounts_count : UInt32*, accounts : UInt16***) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NetEnumerateServiceAccounts(server_name, flags, accounts_count, accounts)
+    {% end %}
   end
 
   def netIsServiceAccount(server_name : Win32cr::Foundation::PWSTR, account_name : Win32cr::Foundation::PWSTR, is_service : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NetIsServiceAccount(server_name, account_name, is_service)
+    {% end %}
   end
 
   def netQueryServiceAccount(server_name : Win32cr::Foundation::PWSTR, account_name : Win32cr::Foundation::PWSTR, info_level : UInt32, buffer : UInt8**) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.NetQueryServiceAccount(server_name, account_name, info_level, buffer)
+    {% end %}
   end
 
   def netAlertRaise(alert_type : Win32cr::Foundation::PWSTR, buffer : Void*, buffer_size : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NetAlertRaise(alert_type, buffer, buffer_size)
+    {% end %}
   end
 
   def netAlertRaiseEx(alert_type : Win32cr::Foundation::PWSTR, variable_info : Void*, variable_info_size : UInt32, service_name : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NetAlertRaiseEx(alert_type, variable_info, variable_info_size, service_name)
+    {% end %}
   end
 
   def netMessageNameAdd(servername : Win32cr::Foundation::PWSTR, msgname : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NetMessageNameAdd(servername, msgname)
+    {% end %}
   end
 
   def netMessageNameEnum(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetMessageNameEnum(servername, level, bufptr, prefmaxlen, entriesread, totalentries, resume_handle)
+    {% end %}
   end
 
   def netMessageNameGetInfo(servername : Win32cr::Foundation::PWSTR, msgname : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetMessageNameGetInfo(servername, msgname, level, bufptr)
+    {% end %}
   end
 
   def netMessageNameDel(servername : Win32cr::Foundation::PWSTR, msgname : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NetMessageNameDel(servername, msgname)
+    {% end %}
   end
 
   def netMessageBufferSend(servername : Win32cr::Foundation::PWSTR, msgname : Win32cr::Foundation::PWSTR, fromname : Win32cr::Foundation::PWSTR, buf : UInt8*, buflen : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NetMessageBufferSend(servername, msgname, fromname, buf, buflen)
+    {% end %}
   end
 
   def netRemoteTOD(unc_server_name : Win32cr::Foundation::PWSTR, buffer_ptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetRemoteTOD(unc_server_name, buffer_ptr)
+    {% end %}
   end
 
   def netRemoteComputerSupports(unc_server_name : Win32cr::Foundation::PWSTR, options_wanted : Win32cr::NetworkManagement::NetManagement::NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS, options_supported : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetRemoteComputerSupports(unc_server_name, options_wanted, options_supported)
+    {% end %}
   end
 
   def netReplGetInfo(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetReplGetInfo(servername, level, bufptr)
+    {% end %}
   end
 
   def netReplSetInfo(servername : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetReplSetInfo(servername, level, buf, parm_err)
+    {% end %}
   end
 
   def netReplExportDirAdd(servername : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetReplExportDirAdd(servername, level, buf, parm_err)
+    {% end %}
   end
 
   def netReplExportDirDel(servername : Win32cr::Foundation::PWSTR, dirname : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NetReplExportDirDel(servername, dirname)
+    {% end %}
   end
 
   def netReplExportDirEnum(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resumehandle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetReplExportDirEnum(servername, level, bufptr, prefmaxlen, entriesread, totalentries, resumehandle)
+    {% end %}
   end
 
   def netReplExportDirGetInfo(servername : Win32cr::Foundation::PWSTR, dirname : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetReplExportDirGetInfo(servername, dirname, level, bufptr)
+    {% end %}
   end
 
   def netReplExportDirSetInfo(servername : Win32cr::Foundation::PWSTR, dirname : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetReplExportDirSetInfo(servername, dirname, level, buf, parm_err)
+    {% end %}
   end
 
   def netReplExportDirLock(servername : Win32cr::Foundation::PWSTR, dirname : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NetReplExportDirLock(servername, dirname)
+    {% end %}
   end
 
   def netReplExportDirUnlock(servername : Win32cr::Foundation::PWSTR, dirname : Win32cr::Foundation::PWSTR, unlockforce : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NetReplExportDirUnlock(servername, dirname, unlockforce)
+    {% end %}
   end
 
   def netReplImportDirAdd(servername : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetReplImportDirAdd(servername, level, buf, parm_err)
+    {% end %}
   end
 
   def netReplImportDirDel(servername : Win32cr::Foundation::PWSTR, dirname : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NetReplImportDirDel(servername, dirname)
+    {% end %}
   end
 
   def netReplImportDirEnum(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resumehandle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetReplImportDirEnum(servername, level, bufptr, prefmaxlen, entriesread, totalentries, resumehandle)
+    {% end %}
   end
 
   def netReplImportDirGetInfo(servername : Win32cr::Foundation::PWSTR, dirname : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetReplImportDirGetInfo(servername, dirname, level, bufptr)
+    {% end %}
   end
 
   def netReplImportDirLock(servername : Win32cr::Foundation::PWSTR, dirname : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NetReplImportDirLock(servername, dirname)
+    {% end %}
   end
 
   def netReplImportDirUnlock(servername : Win32cr::Foundation::PWSTR, dirname : Win32cr::Foundation::PWSTR, unlockforce : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NetReplImportDirUnlock(servername, dirname, unlockforce)
+    {% end %}
   end
 
   def netServerEnum(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, servertype : Win32cr::NetworkManagement::NetManagement::NET_SERVER_TYPE, domain : Win32cr::Foundation::PWSTR, resume_handle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetServerEnum(servername, level, bufptr, prefmaxlen, entriesread, totalentries, servertype, domain, resume_handle)
+    {% end %}
   end
 
   def netServerGetInfo(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetServerGetInfo(servername, level, bufptr)
+    {% end %}
   end
 
   def netServerSetInfo(servername : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_error : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetServerSetInfo(servername, level, buf, parm_error)
+    {% end %}
   end
 
   def netServerDiskEnum(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetServerDiskEnum(servername, level, bufptr, prefmaxlen, entriesread, totalentries, resume_handle)
+    {% end %}
   end
 
   def netServerComputerNameAdd(server_name : Win32cr::Foundation::PWSTR, emulated_domain_name : Win32cr::Foundation::PWSTR, emulated_server_name : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NetServerComputerNameAdd(server_name, emulated_domain_name, emulated_server_name)
+    {% end %}
   end
 
   def netServerComputerNameDel(server_name : Win32cr::Foundation::PWSTR, emulated_server_name : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NetServerComputerNameDel(server_name, emulated_server_name)
+    {% end %}
   end
 
   def netServerTransportAdd(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetServerTransportAdd(servername, level, bufptr)
+    {% end %}
   end
 
   def netServerTransportAddEx(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetServerTransportAddEx(servername, level, bufptr)
+    {% end %}
   end
 
   def netServerTransportDel(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetServerTransportDel(servername, level, bufptr)
+    {% end %}
   end
 
   def netServerTransportEnum(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetServerTransportEnum(servername, level, bufptr, prefmaxlen, entriesread, totalentries, resume_handle)
+    {% end %}
   end
 
   def netServiceControl(servername : Win32cr::Foundation::PWSTR, service : Win32cr::Foundation::PWSTR, opcode : UInt32, arg : UInt32, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetServiceControl(servername, service, opcode, arg, bufptr)
+    {% end %}
   end
 
   def netServiceEnum(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetServiceEnum(servername, level, bufptr, prefmaxlen, entriesread, totalentries, resume_handle)
+    {% end %}
   end
 
   def netServiceGetInfo(servername : Win32cr::Foundation::PWSTR, service : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetServiceGetInfo(servername, service, level, bufptr)
+    {% end %}
   end
 
   def netServiceInstall(servername : Win32cr::Foundation::PWSTR, service : Win32cr::Foundation::PWSTR, argc : UInt32, argv : Win32cr::Foundation::PWSTR*, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetServiceInstall(servername, service, argc, argv, bufptr)
+    {% end %}
   end
 
   def netUseAdd(servername : Int8*, level_flags : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetUseAdd(servername, level_flags, buf, parm_err)
+    {% end %}
   end
 
   def netUseDel(unc_server_name : Win32cr::Foundation::PWSTR, use_name : Win32cr::Foundation::PWSTR, force_level_flags : Win32cr::NetworkManagement::NetManagement::FORCE_LEVEL_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.NetUseDel(unc_server_name, use_name, force_level_flags)
+    {% end %}
   end
 
   def netUseEnum(unc_server_name : Win32cr::Foundation::PWSTR, level_flags : UInt32, buf_ptr : UInt8**, prefered_maximum_size : UInt32, entries_read : UInt32*, total_entries : UInt32*, resume_handle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetUseEnum(unc_server_name, level_flags, buf_ptr, prefered_maximum_size, entries_read, total_entries, resume_handle)
+    {% end %}
   end
 
   def netUseGetInfo(unc_server_name : Win32cr::Foundation::PWSTR, use_name : Win32cr::Foundation::PWSTR, level_flags : UInt32, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetUseGetInfo(unc_server_name, use_name, level_flags, bufptr)
+    {% end %}
   end
 
   def netWkstaGetInfo(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetWkstaGetInfo(servername, level, bufptr)
+    {% end %}
   end
 
   def netWkstaSetInfo(servername : Win32cr::Foundation::PWSTR, level : UInt32, buffer : UInt8*, parm_err : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetWkstaSetInfo(servername, level, buffer, parm_err)
+    {% end %}
   end
 
   def netWkstaUserGetInfo(reserved : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetWkstaUserGetInfo(reserved, level, bufptr)
+    {% end %}
   end
 
   def netWkstaUserSetInfo(reserved : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetWkstaUserSetInfo(reserved, level, buf, parm_err)
+    {% end %}
   end
 
   def netWkstaUserEnum(servername : Win32cr::Foundation::PWSTR, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resumehandle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetWkstaUserEnum(servername, level, bufptr, prefmaxlen, entriesread, totalentries, resumehandle)
+    {% end %}
   end
 
   def netWkstaTransportAdd(servername : Int8*, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetWkstaTransportAdd(servername, level, buf, parm_err)
+    {% end %}
   end
 
   def netWkstaTransportDel(servername : Win32cr::Foundation::PWSTR, transportname : Win32cr::Foundation::PWSTR, ucond : Win32cr::NetworkManagement::NetManagement::FORCE_LEVEL_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.NetWkstaTransportDel(servername, transportname, ucond)
+    {% end %}
   end
 
   def netWkstaTransportEnum(servername : Int8*, level : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, entriesread : UInt32*, totalentries : UInt32*, resume_handle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetWkstaTransportEnum(servername, level, bufptr, prefmaxlen, entriesread, totalentries, resume_handle)
+    {% end %}
   end
 
   def netApiBufferAllocate(byte_count : UInt32, buffer : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetApiBufferAllocate(byte_count, buffer)
+    {% end %}
   end
 
   def netApiBufferFree(buffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetApiBufferFree(buffer)
+    {% end %}
   end
 
   def netApiBufferReallocate(old_buffer : Void*, new_byte_count : UInt32, new_buffer : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetApiBufferReallocate(old_buffer, new_byte_count, new_buffer)
+    {% end %}
   end
 
   def netApiBufferSize(buffer : Void*, byte_count : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetApiBufferSize(buffer, byte_count)
+    {% end %}
   end
 
   def netErrorLogClear(unc_server_name : Win32cr::Foundation::PWSTR, backup_file : Win32cr::Foundation::PWSTR, reserved : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetErrorLogClear(unc_server_name, backup_file, reserved)
+    {% end %}
   end
 
   def netErrorLogRead(unc_server_name : Win32cr::Foundation::PWSTR, reserved1 : Win32cr::Foundation::PWSTR, error_log_handle : Win32cr::NetworkManagement::NetManagement::HLOG*, offset : UInt32, reserved2 : UInt32*, reserved3 : UInt32, offset_flag : UInt32, buf_ptr : UInt8**, pref_max_size : UInt32, bytes_read : UInt32*, total_available : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetErrorLogRead(unc_server_name, reserved1, error_log_handle, offset, reserved2, reserved3, offset_flag, buf_ptr, pref_max_size, bytes_read, total_available)
+    {% end %}
   end
 
   def netErrorLogWrite(reserved1 : UInt8*, code : UInt32, component : Win32cr::Foundation::PWSTR, buffer : UInt8*, num_bytes : UInt32, msg_buf : UInt8*, str_count : UInt32, reserved2 : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetErrorLogWrite(reserved1, code, component, buffer, num_bytes, msg_buf, str_count, reserved2)
+    {% end %}
   end
 
   def netConfigGet(server : Win32cr::Foundation::PWSTR, component : Win32cr::Foundation::PWSTR, parameter : Win32cr::Foundation::PWSTR, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetConfigGet(server, component, parameter, bufptr)
+    {% end %}
   end
 
   def netConfigGetAll(server : Win32cr::Foundation::PWSTR, component : Win32cr::Foundation::PWSTR, bufptr : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetConfigGetAll(server, component, bufptr)
+    {% end %}
   end
 
   def netConfigSet(server : Win32cr::Foundation::PWSTR, reserved1 : Win32cr::Foundation::PWSTR, component : Win32cr::Foundation::PWSTR, level : UInt32, reserved2 : UInt32, buf : UInt8*, reserved3 : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NetConfigSet(server, reserved1, component, level, reserved2, buf, reserved3)
+    {% end %}
   end
 
   def netAuditClear(server : Win32cr::Foundation::PWSTR, backupfile : Win32cr::Foundation::PWSTR, service : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NetAuditClear(server, backupfile, service)
+    {% end %}
   end
 
   def netAuditRead(server : Win32cr::Foundation::PWSTR, service : Win32cr::Foundation::PWSTR, auditloghandle : Win32cr::NetworkManagement::NetManagement::HLOG*, offset : UInt32, reserved1 : UInt32*, reserved2 : UInt32, offsetflag : UInt32, bufptr : UInt8**, prefmaxlen : UInt32, bytesread : UInt32*, totalavailable : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetAuditRead(server, service, auditloghandle, offset, reserved1, reserved2, offsetflag, bufptr, prefmaxlen, bytesread, totalavailable)
+    {% end %}
   end
 
   def netAuditWrite(type__ : UInt32, buf : UInt8*, numbytes : UInt32, service : Win32cr::Foundation::PWSTR, reserved : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetAuditWrite(type__, buf, numbytes, service, reserved)
+    {% end %}
   end
 
   def netJoinDomain(lpServer : Win32cr::Foundation::PWSTR, lpDomain : Win32cr::Foundation::PWSTR, lpMachineAccountOU : Win32cr::Foundation::PWSTR, lpAccount : Win32cr::Foundation::PWSTR, lpPassword : Win32cr::Foundation::PWSTR, fJoinOptions : Win32cr::NetworkManagement::NetManagement::NET_JOIN_DOMAIN_JOIN_OPTIONS) : UInt32
+    {% if !flag?(:docs) %}
     C.NetJoinDomain(lpServer, lpDomain, lpMachineAccountOU, lpAccount, lpPassword, fJoinOptions)
+    {% end %}
   end
 
   def netUnjoinDomain(lpServer : Win32cr::Foundation::PWSTR, lpAccount : Win32cr::Foundation::PWSTR, lpPassword : Win32cr::Foundation::PWSTR, fUnjoinOptions : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NetUnjoinDomain(lpServer, lpAccount, lpPassword, fUnjoinOptions)
+    {% end %}
   end
 
   def netRenameMachineInDomain(lpServer : Win32cr::Foundation::PWSTR, lpNewMachineName : Win32cr::Foundation::PWSTR, lpAccount : Win32cr::Foundation::PWSTR, lpPassword : Win32cr::Foundation::PWSTR, fRenameOptions : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NetRenameMachineInDomain(lpServer, lpNewMachineName, lpAccount, lpPassword, fRenameOptions)
+    {% end %}
   end
 
   def netValidateName(lpServer : Win32cr::Foundation::PWSTR, lpName : Win32cr::Foundation::PWSTR, lpAccount : Win32cr::Foundation::PWSTR, lpPassword : Win32cr::Foundation::PWSTR, name_type : Win32cr::NetworkManagement::NetManagement::NETSETUP_NAME_TYPE) : UInt32
+    {% if !flag?(:docs) %}
     C.NetValidateName(lpServer, lpName, lpAccount, lpPassword, name_type)
+    {% end %}
   end
 
   def netGetJoinableOUs(lpServer : Win32cr::Foundation::PWSTR, lpDomain : Win32cr::Foundation::PWSTR, lpAccount : Win32cr::Foundation::PWSTR, lpPassword : Win32cr::Foundation::PWSTR, ou_count : UInt32*, o_us : Win32cr::Foundation::PWSTR**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetGetJoinableOUs(lpServer, lpDomain, lpAccount, lpPassword, ou_count, o_us)
+    {% end %}
   end
 
   def netAddAlternateComputerName(server : Win32cr::Foundation::PWSTR, alternate_name : Win32cr::Foundation::PWSTR, domain_account : Win32cr::Foundation::PWSTR, domain_account_password : Win32cr::Foundation::PWSTR, reserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NetAddAlternateComputerName(server, alternate_name, domain_account, domain_account_password, reserved)
+    {% end %}
   end
 
   def netRemoveAlternateComputerName(server : Win32cr::Foundation::PWSTR, alternate_name : Win32cr::Foundation::PWSTR, domain_account : Win32cr::Foundation::PWSTR, domain_account_password : Win32cr::Foundation::PWSTR, reserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NetRemoveAlternateComputerName(server, alternate_name, domain_account, domain_account_password, reserved)
+    {% end %}
   end
 
   def netSetPrimaryComputerName(server : Win32cr::Foundation::PWSTR, primary_name : Win32cr::Foundation::PWSTR, domain_account : Win32cr::Foundation::PWSTR, domain_account_password : Win32cr::Foundation::PWSTR, reserved : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NetSetPrimaryComputerName(server, primary_name, domain_account, domain_account_password, reserved)
+    {% end %}
   end
 
   def netEnumerateComputerNames(server : Win32cr::Foundation::PWSTR, name_type : Win32cr::NetworkManagement::NetManagement::NET_COMPUTER_NAME_TYPE, reserved : UInt32, entry_count : UInt32*, computer_names : Win32cr::Foundation::PWSTR**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetEnumerateComputerNames(server, name_type, reserved, entry_count, computer_names)
+    {% end %}
   end
 
   def netProvisionComputerAccount(lpDomain : Win32cr::Foundation::PWSTR, lpMachineName : Win32cr::Foundation::PWSTR, lpMachineAccountOU : Win32cr::Foundation::PWSTR, lpDcName : Win32cr::Foundation::PWSTR, dwOptions : Win32cr::NetworkManagement::NetManagement::NETSETUP_PROVISION, pProvisionBinData : UInt8**, pdwProvisionBinDataSize : UInt32*, pProvisionTextData : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetProvisionComputerAccount(lpDomain, lpMachineName, lpMachineAccountOU, lpDcName, dwOptions, pProvisionBinData, pdwProvisionBinDataSize, pProvisionTextData)
+    {% end %}
   end
 
   def netRequestOfflineDomainJoin(pProvisionBinData : UInt8*, cbProvisionBinDataSize : UInt32, dwOptions : Win32cr::NetworkManagement::NetManagement::NET_REQUEST_PROVISION_OPTIONS, lpWindowsPath : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.NetRequestOfflineDomainJoin(pProvisionBinData, cbProvisionBinDataSize, dwOptions, lpWindowsPath)
+    {% end %}
   end
 
   def netCreateProvisioningPackage(pProvisioningParams : Win32cr::NetworkManagement::NetManagement::NETSETUP_PROVISIONING_PARAMS*, ppPackageBinData : UInt8**, pdwPackageBinDataSize : UInt32*, ppPackageTextData : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetCreateProvisioningPackage(pProvisioningParams, ppPackageBinData, pdwPackageBinDataSize, ppPackageTextData)
+    {% end %}
   end
 
   def netRequestProvisioningPackageInstall(pPackageBinData : UInt8*, dwPackageBinDataSize : UInt32, dwProvisionOptions : Win32cr::NetworkManagement::NetManagement::NET_REQUEST_PROVISION_OPTIONS, lpWindowsPath : Win32cr::Foundation::PWSTR, pvReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetRequestProvisioningPackageInstall(pPackageBinData, dwPackageBinDataSize, dwProvisionOptions, lpWindowsPath, pvReserved)
+    {% end %}
   end
 
   def netGetAadJoinInformation(pcszTenantId : Win32cr::Foundation::PWSTR, ppJoinInfo : Win32cr::NetworkManagement::NetManagement::DSREG_JOIN_INFO**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.NetGetAadJoinInformation(pcszTenantId, ppJoinInfo)
+    {% end %}
   end
 
   def netFreeAadJoinInformation(pJoinInfo : Win32cr::NetworkManagement::NetManagement::DSREG_JOIN_INFO*) : Void
+    {% if !flag?(:docs) %}
     C.NetFreeAadJoinInformation(pJoinInfo)
+    {% end %}
   end
 
   def netGetJoinInformation(lpServer : Win32cr::Foundation::PWSTR, lpNameBuffer : Win32cr::Foundation::PWSTR*, buffer_type : Win32cr::NetworkManagement::NetManagement::NETSETUP_JOIN_STATUS*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetGetJoinInformation(lpServer, lpNameBuffer, buffer_type)
+    {% end %}
   end
 
   def getNetScheduleAccountInformation(pwszServerName : Win32cr::Foundation::PWSTR, ccAccount : UInt32, wszAccount : UInt16*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetNetScheduleAccountInformation(pwszServerName, ccAccount, wszAccount)
+    {% end %}
   end
 
   def setNetScheduleAccountInformation(pwszServerName : Win32cr::Foundation::PWSTR, pwszAccount : Win32cr::Foundation::PWSTR, pwszPassword : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetNetScheduleAccountInformation(pwszServerName, pwszAccount, pwszPassword)
+    {% end %}
   end
 
   def netScheduleJobAdd(servername : Win32cr::Foundation::PWSTR, buffer : UInt8*, job_id : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetScheduleJobAdd(servername, buffer, job_id)
+    {% end %}
   end
 
   def netScheduleJobDel(servername : Win32cr::Foundation::PWSTR, min_job_id : UInt32, max_job_id : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.NetScheduleJobDel(servername, min_job_id, max_job_id)
+    {% end %}
   end
 
   def netScheduleJobEnum(servername : Win32cr::Foundation::PWSTR, pointer_to_buffer : UInt8**, preffered_maximum_length : UInt32, entries_read : UInt32*, total_entries : UInt32*, resume_handle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.NetScheduleJobEnum(servername, pointer_to_buffer, preffered_maximum_length, entries_read, total_entries, resume_handle)
+    {% end %}
   end
 
   def netScheduleJobGetInfo(servername : Win32cr::Foundation::PWSTR, job_id : UInt32, pointer_to_buffer : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.NetScheduleJobGetInfo(servername, job_id, pointer_to_buffer)
+    {% end %}
   end
 
   def traceRegisterExA(lpszCallerName : Win32cr::Foundation::PSTR, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.TraceRegisterExA(lpszCallerName, dwFlags)
+    {% end %}
   end
 
   def traceDeregisterA(dwTraceID : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.TraceDeregisterA(dwTraceID)
+    {% end %}
   end
 
   def traceDeregisterExA(dwTraceID : UInt32, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.TraceDeregisterExA(dwTraceID, dwFlags)
+    {% end %}
   end
 
   def traceGetConsoleA(dwTraceID : UInt32, lphConsole : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.TraceGetConsoleA(dwTraceID, lphConsole)
+    {% end %}
   end
 
   def tracePrintfA(dwTraceID : UInt32, lpszFormat : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.TracePrintfA(dwTraceID, lpszFormat)
+    {% end %}
   end
 
   def tracePrintfExA(dwTraceID : UInt32, dwFlags : UInt32, lpszFormat : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.TracePrintfExA(dwTraceID, dwFlags, lpszFormat)
+    {% end %}
   end
 
   def traceVprintfExA(dwTraceID : UInt32, dwFlags : UInt32, lpszFormat : Win32cr::Foundation::PSTR, arglist : Int8*) : UInt32
+    {% if !flag?(:docs) %}
     C.TraceVprintfExA(dwTraceID, dwFlags, lpszFormat, arglist)
+    {% end %}
   end
 
   def tracePutsExA(dwTraceID : UInt32, dwFlags : UInt32, lpszString : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.TracePutsExA(dwTraceID, dwFlags, lpszString)
+    {% end %}
   end
 
   def traceDumpExA(dwTraceID : UInt32, dwFlags : UInt32, lpbBytes : UInt8*, dwByteCount : UInt32, dwGroupSize : UInt32, bAddressPrefix : Win32cr::Foundation::BOOL, lpszPrefix : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.TraceDumpExA(dwTraceID, dwFlags, lpbBytes, dwByteCount, dwGroupSize, bAddressPrefix, lpszPrefix)
+    {% end %}
   end
 
   def traceRegisterExW(lpszCallerName : Win32cr::Foundation::PWSTR, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.TraceRegisterExW(lpszCallerName, dwFlags)
+    {% end %}
   end
 
   def traceDeregisterW(dwTraceID : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.TraceDeregisterW(dwTraceID)
+    {% end %}
   end
 
   def traceDeregisterExW(dwTraceID : UInt32, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.TraceDeregisterExW(dwTraceID, dwFlags)
+    {% end %}
   end
 
   def traceGetConsoleW(dwTraceID : UInt32, lphConsole : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.TraceGetConsoleW(dwTraceID, lphConsole)
+    {% end %}
   end
 
   def tracePrintfW(dwTraceID : UInt32, lpszFormat : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.TracePrintfW(dwTraceID, lpszFormat)
+    {% end %}
   end
 
   def tracePrintfExW(dwTraceID : UInt32, dwFlags : UInt32, lpszFormat : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.TracePrintfExW(dwTraceID, dwFlags, lpszFormat)
+    {% end %}
   end
 
   def traceVprintfExW(dwTraceID : UInt32, dwFlags : UInt32, lpszFormat : Win32cr::Foundation::PWSTR, arglist : Int8*) : UInt32
+    {% if !flag?(:docs) %}
     C.TraceVprintfExW(dwTraceID, dwFlags, lpszFormat, arglist)
+    {% end %}
   end
 
   def tracePutsExW(dwTraceID : UInt32, dwFlags : UInt32, lpszString : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.TracePutsExW(dwTraceID, dwFlags, lpszString)
+    {% end %}
   end
 
   def traceDumpExW(dwTraceID : UInt32, dwFlags : UInt32, lpbBytes : UInt8*, dwByteCount : UInt32, dwGroupSize : UInt32, bAddressPrefix : Win32cr::Foundation::BOOL, lpszPrefix : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.TraceDumpExW(dwTraceID, dwFlags, lpbBytes, dwByteCount, dwGroupSize, bAddressPrefix, lpszPrefix)
+    {% end %}
   end
 
   def logErrorA(dwMessageId : UInt32, cNumberOfSubStrings : UInt32, plpwsSubStrings : Win32cr::Foundation::PSTR*, dwErrorCode : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.LogErrorA(dwMessageId, cNumberOfSubStrings, plpwsSubStrings, dwErrorCode)
+    {% end %}
   end
 
   def logEventA(wEventType : UInt32, dwMessageId : UInt32, cNumberOfSubStrings : UInt32, plpwsSubStrings : Win32cr::Foundation::PSTR*) : Void
+    {% if !flag?(:docs) %}
     C.LogEventA(wEventType, dwMessageId, cNumberOfSubStrings, plpwsSubStrings)
+    {% end %}
   end
 
   def logErrorW(dwMessageId : UInt32, cNumberOfSubStrings : UInt32, plpwsSubStrings : Win32cr::Foundation::PWSTR*, dwErrorCode : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.LogErrorW(dwMessageId, cNumberOfSubStrings, plpwsSubStrings, dwErrorCode)
+    {% end %}
   end
 
   def logEventW(wEventType : UInt32, dwMessageId : UInt32, cNumberOfSubStrings : UInt32, plpwsSubStrings : Win32cr::Foundation::PWSTR*) : Void
+    {% if !flag?(:docs) %}
     C.LogEventW(wEventType, dwMessageId, cNumberOfSubStrings, plpwsSubStrings)
+    {% end %}
   end
 
   def routerLogRegisterA(lpszSource : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.RouterLogRegisterA(lpszSource)
+    {% end %}
   end
 
   def routerLogDeregisterA(hLogHandle : Win32cr::Foundation::HANDLE) : Void
+    {% if !flag?(:docs) %}
     C.RouterLogDeregisterA(hLogHandle)
+    {% end %}
   end
 
   def routerLogEventA(hLogHandle : Win32cr::Foundation::HANDLE, dwEventType : UInt32, dwMessageId : UInt32, dwSubStringCount : UInt32, plpszSubStringArray : Win32cr::Foundation::PSTR*, dwErrorCode : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.RouterLogEventA(hLogHandle, dwEventType, dwMessageId, dwSubStringCount, plpszSubStringArray, dwErrorCode)
+    {% end %}
   end
 
   def routerLogEventDataA(hLogHandle : Win32cr::Foundation::HANDLE, dwEventType : UInt32, dwMessageId : UInt32, dwSubStringCount : UInt32, plpszSubStringArray : Win32cr::Foundation::PSTR*, dwDataBytes : UInt32, lpDataBytes : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.RouterLogEventDataA(hLogHandle, dwEventType, dwMessageId, dwSubStringCount, plpszSubStringArray, dwDataBytes, lpDataBytes)
+    {% end %}
   end
 
   def routerLogEventStringA(hLogHandle : Win32cr::Foundation::HANDLE, dwEventType : UInt32, dwMessageId : UInt32, dwSubStringCount : UInt32, plpszSubStringArray : Win32cr::Foundation::PSTR*, dwErrorCode : UInt32, dwErrorIndex : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.RouterLogEventStringA(hLogHandle, dwEventType, dwMessageId, dwSubStringCount, plpszSubStringArray, dwErrorCode, dwErrorIndex)
+    {% end %}
   end
 
   def routerLogEventExA(hLogHandle : Win32cr::Foundation::HANDLE, dwEventType : UInt32, dwErrorCode : UInt32, dwMessageId : UInt32, ptszFormat : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.RouterLogEventExA(hLogHandle, dwEventType, dwErrorCode, dwMessageId, ptszFormat)
+    {% end %}
   end
 
   def routerLogEventValistExA(hLogHandle : Win32cr::Foundation::HANDLE, dwEventType : UInt32, dwErrorCode : UInt32, dwMessageId : UInt32, ptszFormat : Win32cr::Foundation::PSTR, arglist : Int8*) : Void
+    {% if !flag?(:docs) %}
     C.RouterLogEventValistExA(hLogHandle, dwEventType, dwErrorCode, dwMessageId, ptszFormat, arglist)
+    {% end %}
   end
 
   def routerGetErrorStringA(dwErrorCode : UInt32, lplpszErrorString : Win32cr::Foundation::PSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.RouterGetErrorStringA(dwErrorCode, lplpszErrorString)
+    {% end %}
   end
 
   def routerLogRegisterW(lpszSource : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.RouterLogRegisterW(lpszSource)
+    {% end %}
   end
 
   def routerLogDeregisterW(hLogHandle : Win32cr::Foundation::HANDLE) : Void
+    {% if !flag?(:docs) %}
     C.RouterLogDeregisterW(hLogHandle)
+    {% end %}
   end
 
   def routerLogEventW(hLogHandle : Win32cr::Foundation::HANDLE, dwEventType : UInt32, dwMessageId : UInt32, dwSubStringCount : UInt32, plpszSubStringArray : Win32cr::Foundation::PWSTR*, dwErrorCode : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.RouterLogEventW(hLogHandle, dwEventType, dwMessageId, dwSubStringCount, plpszSubStringArray, dwErrorCode)
+    {% end %}
   end
 
   def routerLogEventDataW(hLogHandle : Win32cr::Foundation::HANDLE, dwEventType : UInt32, dwMessageId : UInt32, dwSubStringCount : UInt32, plpszSubStringArray : Win32cr::Foundation::PWSTR*, dwDataBytes : UInt32, lpDataBytes : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.RouterLogEventDataW(hLogHandle, dwEventType, dwMessageId, dwSubStringCount, plpszSubStringArray, dwDataBytes, lpDataBytes)
+    {% end %}
   end
 
   def routerLogEventStringW(hLogHandle : Win32cr::Foundation::HANDLE, dwEventType : UInt32, dwMessageId : UInt32, dwSubStringCount : UInt32, plpszSubStringArray : Win32cr::Foundation::PWSTR*, dwErrorCode : UInt32, dwErrorIndex : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.RouterLogEventStringW(hLogHandle, dwEventType, dwMessageId, dwSubStringCount, plpszSubStringArray, dwErrorCode, dwErrorIndex)
+    {% end %}
   end
 
   def routerLogEventExW(hLogHandle : Win32cr::Foundation::HANDLE, dwEventType : UInt32, dwErrorCode : UInt32, dwMessageId : UInt32, ptszFormat : Win32cr::Foundation::PWSTR) : Void
+    {% if !flag?(:docs) %}
     C.RouterLogEventExW(hLogHandle, dwEventType, dwErrorCode, dwMessageId, ptszFormat)
+    {% end %}
   end
 
   def routerLogEventValistExW(hLogHandle : Win32cr::Foundation::HANDLE, dwEventType : UInt32, dwErrorCode : UInt32, dwMessageId : UInt32, ptszFormat : Win32cr::Foundation::PWSTR, arglist : Int8*) : Void
+    {% if !flag?(:docs) %}
     C.RouterLogEventValistExW(hLogHandle, dwEventType, dwErrorCode, dwMessageId, ptszFormat, arglist)
+    {% end %}
   end
 
   def routerGetErrorStringW(dwErrorCode : UInt32, lplpwszErrorString : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.RouterGetErrorStringW(dwErrorCode, lplpwszErrorString)
+    {% end %}
   end
 
   def routerAssert(pszFailedAssertion : Win32cr::Foundation::PSTR, pszFileName : Win32cr::Foundation::PSTR, dwLineNumber : UInt32, pszMessage : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.RouterAssert(pszFailedAssertion, pszFileName, dwLineNumber, pszMessage)
+    {% end %}
   end
 
   def mprSetupProtocolEnum(dwTransportId : UInt32, lplpBuffer : UInt8**, lpdwEntriesRead : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprSetupProtocolEnum(dwTransportId, lplpBuffer, lpdwEntriesRead)
+    {% end %}
   end
 
   def mprSetupProtocolFree(lpBuffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprSetupProtocolFree(lpBuffer)
+    {% end %}
   end
 
-  @[Link("netapi32")]
-  @[Link("mstask")]
-  @[Link("rtutils")]
+  @[Link("netapi32.dll")]
+  @[Link("mstask.dll")]
+  @[Link("rtutils.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun NetUserAdd(servername : Win32cr::Foundation::PWSTR, level : UInt32, buf : UInt8*, parm_err : UInt32*) : UInt32
@@ -7427,4 +7778,5 @@ module Win32cr::NetworkManagement::NetManagement
     fun MprSetupProtocolFree(lpBuffer : Void*) : UInt32
 
   end
+  {% end %}
 end

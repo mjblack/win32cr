@@ -55,7 +55,7 @@ module Win32cr::Graphics::CompositionSwapchain
   end
 
   @[Extern]
-  record IPresentationBufferVtbl,
+  record IPresentationBufferVtable,
     query_interface : Proc(IPresentationBuffer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPresentationBuffer*, UInt32),
     release : Proc(IPresentationBuffer*, UInt32),
@@ -64,7 +64,7 @@ module Win32cr::Graphics::CompositionSwapchain
 
 
   @[Extern]
-  record IPresentationBuffer, lpVtbl : IPresentationBufferVtbl* do
+  record IPresentationBuffer, lpVtbl : IPresentationBufferVtable* do
     GUID = LibC::GUID.new(0x2e217d3a_u32, 0x5abb_u16, 0x4138_u16, StaticArray[0x9a_u8, 0x13_u8, 0xa7_u8, 0x75_u8, 0x59_u8, 0x3c_u8, 0x89_u8, 0xca_u8])
     def query_interface(this : IPresentationBuffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -85,7 +85,7 @@ module Win32cr::Graphics::CompositionSwapchain
   end
 
   @[Extern]
-  record IPresentationContentVtbl,
+  record IPresentationContentVtable,
     query_interface : Proc(IPresentationContent*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPresentationContent*, UInt32),
     release : Proc(IPresentationContent*, UInt32),
@@ -93,7 +93,7 @@ module Win32cr::Graphics::CompositionSwapchain
 
 
   @[Extern]
-  record IPresentationContent, lpVtbl : IPresentationContentVtbl* do
+  record IPresentationContent, lpVtbl : IPresentationContentVtable* do
     GUID = LibC::GUID.new(0x5668bb79_u32, 0x3d8e_u16, 0x415c_u16, StaticArray[0xb2_u8, 0x15_u8, 0xf3_u8, 0x80_u8, 0x20_u8, 0xf2_u8, 0xd2_u8, 0x52_u8])
     def query_interface(this : IPresentationContent*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -111,7 +111,7 @@ module Win32cr::Graphics::CompositionSwapchain
   end
 
   @[Extern]
-  record IPresentationSurfaceVtbl,
+  record IPresentationSurfaceVtable,
     query_interface : Proc(IPresentationSurface*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPresentationSurface*, UInt32),
     release : Proc(IPresentationSurface*, UInt32),
@@ -127,7 +127,7 @@ module Win32cr::Graphics::CompositionSwapchain
 
 
   @[Extern]
-  record IPresentationSurface, lpVtbl : IPresentationSurfaceVtbl* do
+  record IPresentationSurface, lpVtbl : IPresentationSurfaceVtable* do
     GUID = LibC::GUID.new(0x956710fb_u32, 0xea40_u16, 0x4eba_u16, StaticArray[0xa3_u8, 0xeb_u8, 0x43_u8, 0x75_u8, 0xa0_u8, 0xeb_u8, 0x4e_u8, 0xdc_u8])
     def query_interface(this : IPresentationSurface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -169,7 +169,7 @@ module Win32cr::Graphics::CompositionSwapchain
   end
 
   @[Extern]
-  record IPresentStatisticsVtbl,
+  record IPresentStatisticsVtable,
     query_interface : Proc(IPresentStatistics*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPresentStatistics*, UInt32),
     release : Proc(IPresentStatistics*, UInt32),
@@ -178,7 +178,7 @@ module Win32cr::Graphics::CompositionSwapchain
 
 
   @[Extern]
-  record IPresentStatistics, lpVtbl : IPresentStatisticsVtbl* do
+  record IPresentStatistics, lpVtbl : IPresentStatisticsVtable* do
     GUID = LibC::GUID.new(0xb44b8bda_u32, 0x7282_u16, 0x495d_u16, StaticArray[0x9d_u8, 0xd7_u8, 0xce_u8, 0xad_u8, 0xd8_u8, 0xb4_u8, 0xbb_u8, 0x86_u8])
     def query_interface(this : IPresentStatistics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -199,7 +199,7 @@ module Win32cr::Graphics::CompositionSwapchain
   end
 
   @[Extern]
-  record IPresentationManagerVtbl,
+  record IPresentationManagerVtable,
     query_interface : Proc(IPresentationManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPresentationManager*, UInt32),
     release : Proc(IPresentationManager*, UInt32),
@@ -219,7 +219,7 @@ module Win32cr::Graphics::CompositionSwapchain
 
 
   @[Extern]
-  record IPresentationManager, lpVtbl : IPresentationManagerVtbl* do
+  record IPresentationManager, lpVtbl : IPresentationManagerVtable* do
     GUID = LibC::GUID.new(0xfb562f82_u32, 0x6292_u16, 0x470a_u16, StaticArray[0x88_u8, 0xb1_u8, 0x84_u8, 0x36_u8, 0x61_u8, 0xe7_u8, 0xf2_u8, 0xc_u8])
     def query_interface(this : IPresentationManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -273,7 +273,7 @@ module Win32cr::Graphics::CompositionSwapchain
   end
 
   @[Extern]
-  record IPresentationFactoryVtbl,
+  record IPresentationFactoryVtable,
     query_interface : Proc(IPresentationFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPresentationFactory*, UInt32),
     release : Proc(IPresentationFactory*, UInt32),
@@ -283,7 +283,7 @@ module Win32cr::Graphics::CompositionSwapchain
 
 
   @[Extern]
-  record IPresentationFactory, lpVtbl : IPresentationFactoryVtbl* do
+  record IPresentationFactory, lpVtbl : IPresentationFactoryVtable* do
     GUID = LibC::GUID.new(0x8fb37b58_u32, 0x1d74_u16, 0x4f64_u16, StaticArray[0xa4_u8, 0x9c_u8, 0x1f_u8, 0x97_u8, 0xa8_u8, 0xa_u8, 0x2e_u8, 0xc0_u8])
     def query_interface(this : IPresentationFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -307,7 +307,7 @@ module Win32cr::Graphics::CompositionSwapchain
   end
 
   @[Extern]
-  record IPresentStatusPresentStatisticsVtbl,
+  record IPresentStatusPresentStatisticsVtable,
     query_interface : Proc(IPresentStatusPresentStatistics*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPresentStatusPresentStatistics*, UInt32),
     release : Proc(IPresentStatusPresentStatistics*, UInt32),
@@ -318,7 +318,7 @@ module Win32cr::Graphics::CompositionSwapchain
 
 
   @[Extern]
-  record IPresentStatusPresentStatistics, lpVtbl : IPresentStatusPresentStatisticsVtbl* do
+  record IPresentStatusPresentStatistics, lpVtbl : IPresentStatusPresentStatisticsVtable* do
     GUID = LibC::GUID.new(0xc9ed2a41_u32, 0x79cb_u16, 0x435e_u16, StaticArray[0x96_u8, 0x4e_u8, 0xc8_u8, 0x55_u8, 0x30_u8, 0x55_u8, 0x42_u8, 0xc_u8])
     def query_interface(this : IPresentStatusPresentStatistics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -345,7 +345,7 @@ module Win32cr::Graphics::CompositionSwapchain
   end
 
   @[Extern]
-  record ICompositionFramePresentStatisticsVtbl,
+  record ICompositionFramePresentStatisticsVtable,
     query_interface : Proc(ICompositionFramePresentStatistics*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICompositionFramePresentStatistics*, UInt32),
     release : Proc(ICompositionFramePresentStatistics*, UInt32),
@@ -357,7 +357,7 @@ module Win32cr::Graphics::CompositionSwapchain
 
 
   @[Extern]
-  record ICompositionFramePresentStatistics, lpVtbl : ICompositionFramePresentStatisticsVtbl* do
+  record ICompositionFramePresentStatistics, lpVtbl : ICompositionFramePresentStatisticsVtable* do
     GUID = LibC::GUID.new(0xab41d127_u32, 0xc101_u16, 0x4c0a_u16, StaticArray[0x91_u8, 0x1d_u8, 0xf9_u8, 0xf2_u8, 0xe9_u8, 0xd0_u8, 0x8e_u8, 0x64_u8])
     def query_interface(this : ICompositionFramePresentStatistics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -387,7 +387,7 @@ module Win32cr::Graphics::CompositionSwapchain
   end
 
   @[Extern]
-  record IIndependentFlipFramePresentStatisticsVtbl,
+  record IIndependentFlipFramePresentStatisticsVtable,
     query_interface : Proc(IIndependentFlipFramePresentStatistics*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIndependentFlipFramePresentStatistics*, UInt32),
     release : Proc(IIndependentFlipFramePresentStatistics*, UInt32),
@@ -401,7 +401,7 @@ module Win32cr::Graphics::CompositionSwapchain
 
 
   @[Extern]
-  record IIndependentFlipFramePresentStatistics, lpVtbl : IIndependentFlipFramePresentStatisticsVtbl* do
+  record IIndependentFlipFramePresentStatistics, lpVtbl : IIndependentFlipFramePresentStatisticsVtable* do
     GUID = LibC::GUID.new(0x8c93be27_u32, 0xad94_u16, 0x4da0_u16, StaticArray[0x8f_u8, 0xd4_u8, 0x24_u8, 0x13_u8, 0x13_u8, 0x2d_u8, 0x12_u8, 0x4e_u8])
     def query_interface(this : IIndependentFlipFramePresentStatistics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -437,13 +437,17 @@ module Win32cr::Graphics::CompositionSwapchain
   end
 
   def createPresentationFactory(d3dDevice : Void*, riid : LibC::GUID*, presentationFactory : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreatePresentationFactory(d3dDevice, riid, presentationFactory)
+    {% end %}
   end
 
-  @[Link("dcomp")]
+  @[Link("dcomp.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CreatePresentationFactory(d3dDevice : Void*, riid : LibC::GUID*, presentationFactory : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

@@ -223,7 +223,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskTriggerVtbl,
+  record ITaskTriggerVtable,
     query_interface : Proc(ITaskTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskTrigger*, UInt32),
     release : Proc(ITaskTrigger*, UInt32),
@@ -233,7 +233,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskTrigger, lpVtbl : ITaskTriggerVtbl* do
+  record ITaskTrigger, lpVtbl : ITaskTriggerVtable* do
     GUID = LibC::GUID.new(0x148bd52b_u32, 0xa2ab_u16, 0x11ce_u16, StaticArray[0xb1_u8, 0x1f_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x53_u8, 0x5_u8, 0x3_u8])
     def query_interface(this : ITaskTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -257,7 +257,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IScheduledWorkItemVtbl,
+  record IScheduledWorkItemVtable,
     query_interface : Proc(IScheduledWorkItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IScheduledWorkItem*, UInt32),
     release : Proc(IScheduledWorkItem*, UInt32),
@@ -293,7 +293,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IScheduledWorkItem, lpVtbl : IScheduledWorkItemVtbl* do
+  record IScheduledWorkItem, lpVtbl : IScheduledWorkItemVtable* do
     GUID = LibC::GUID.new(0xa6b952f0_u32, 0xa4b1_u16, 0x11d0_u16, StaticArray[0x99_u8, 0x7d_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x68_u8, 0x87_u8, 0xec_u8])
     def query_interface(this : IScheduledWorkItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -395,7 +395,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskVtbl,
+  record ITaskVtable,
     query_interface : Proc(ITask*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITask*, UInt32),
     release : Proc(ITask*, UInt32),
@@ -443,7 +443,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITask, lpVtbl : ITaskVtbl* do
+  record ITask, lpVtbl : ITaskVtable* do
     GUID = LibC::GUID.new(0x148bd524_u32, 0xa2ab_u16, 0x11ce_u16, StaticArray[0xb1_u8, 0x1f_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x53_u8, 0x5_u8, 0x3_u8])
     def query_interface(this : ITask*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -581,7 +581,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IEnumWorkItemsVtbl,
+  record IEnumWorkItemsVtable,
     query_interface : Proc(IEnumWorkItems*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumWorkItems*, UInt32),
     release : Proc(IEnumWorkItems*, UInt32),
@@ -592,7 +592,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IEnumWorkItems, lpVtbl : IEnumWorkItemsVtbl* do
+  record IEnumWorkItems, lpVtbl : IEnumWorkItemsVtable* do
     GUID = LibC::GUID.new(0x148bd528_u32, 0xa2ab_u16, 0x11ce_u16, StaticArray[0xb1_u8, 0x1f_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x53_u8, 0x5_u8, 0x3_u8])
     def query_interface(this : IEnumWorkItems*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -619,7 +619,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskSchedulerVtbl,
+  record ITaskSchedulerVtable,
     query_interface : Proc(ITaskScheduler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskScheduler*, UInt32),
     release : Proc(ITaskScheduler*, UInt32),
@@ -634,7 +634,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskScheduler, lpVtbl : ITaskSchedulerVtbl* do
+  record ITaskScheduler, lpVtbl : ITaskSchedulerVtable* do
     GUID = LibC::GUID.new(0x148bd527_u32, 0xa2ab_u16, 0x11ce_u16, StaticArray[0xb1_u8, 0x1f_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x53_u8, 0x5_u8, 0x3_u8])
     def query_interface(this : ITaskScheduler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -673,7 +673,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IProvideTaskPageVtbl,
+  record IProvideTaskPageVtable,
     query_interface : Proc(IProvideTaskPage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProvideTaskPage*, UInt32),
     release : Proc(IProvideTaskPage*, UInt32),
@@ -681,7 +681,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IProvideTaskPage, lpVtbl : IProvideTaskPageVtbl* do
+  record IProvideTaskPage, lpVtbl : IProvideTaskPageVtable* do
     GUID = LibC::GUID.new(0x4086658a_u32, 0xcbbb_u16, 0x11cf_u16, StaticArray[0xb6_u8, 0x4_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd8_u8, 0xd5_u8, 0x65_u8])
     def query_interface(this : IProvideTaskPage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -699,7 +699,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskFolderCollectionVtbl,
+  record ITaskFolderCollectionVtable,
     query_interface : Proc(ITaskFolderCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskFolderCollection*, UInt32),
     release : Proc(ITaskFolderCollection*, UInt32),
@@ -713,7 +713,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskFolderCollection, lpVtbl : ITaskFolderCollectionVtbl* do
+  record ITaskFolderCollection, lpVtbl : ITaskFolderCollectionVtable* do
     GUID = LibC::GUID.new(0x79184a66_u32, 0x8664_u16, 0x423f_u16, StaticArray[0x97_u8, 0xf1_u8, 0x63_u8, 0x73_u8, 0x56_u8, 0xa5_u8, 0xd8_u8, 0x12_u8])
     def query_interface(this : ITaskFolderCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -749,7 +749,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskServiceVtbl,
+  record ITaskServiceVtable,
     query_interface : Proc(ITaskService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskService*, UInt32),
     release : Proc(ITaskService*, UInt32),
@@ -769,7 +769,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskService, lpVtbl : ITaskServiceVtbl* do
+  record ITaskService, lpVtbl : ITaskServiceVtable* do
     GUID = LibC::GUID.new(0x2faba4c7_u32, 0x4da9_u16, 0x4013_u16, StaticArray[0x96_u8, 0x97_u8, 0x20_u8, 0xcc_u8, 0x3f_u8, 0xd4_u8, 0xf_u8, 0x85_u8])
     def query_interface(this : ITaskService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -823,7 +823,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskHandlerVtbl,
+  record ITaskHandlerVtable,
     query_interface : Proc(ITaskHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskHandler*, UInt32),
     release : Proc(ITaskHandler*, UInt32),
@@ -834,7 +834,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskHandler, lpVtbl : ITaskHandlerVtbl* do
+  record ITaskHandler, lpVtbl : ITaskHandlerVtable* do
     GUID = LibC::GUID.new(0x839d7762_u32, 0x5121_u16, 0x4009_u16, StaticArray[0x92_u8, 0x34_u8, 0x4f_u8, 0xd_u8, 0x19_u8, 0x39_u8, 0x4f_u8, 0x4_u8])
     def query_interface(this : ITaskHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -861,7 +861,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskHandlerStatusVtbl,
+  record ITaskHandlerStatusVtable,
     query_interface : Proc(ITaskHandlerStatus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskHandlerStatus*, UInt32),
     release : Proc(ITaskHandlerStatus*, UInt32),
@@ -870,7 +870,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskHandlerStatus, lpVtbl : ITaskHandlerStatusVtbl* do
+  record ITaskHandlerStatus, lpVtbl : ITaskHandlerStatusVtable* do
     GUID = LibC::GUID.new(0xeaec7a8f_u32, 0x27a0_u16, 0x4ddc_u16, StaticArray[0x86_u8, 0x75_u8, 0x14_u8, 0x72_u8, 0x6a_u8, 0x1_u8, 0xa3_u8, 0x8a_u8])
     def query_interface(this : ITaskHandlerStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -891,7 +891,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskVariablesVtbl,
+  record ITaskVariablesVtable,
     query_interface : Proc(ITaskVariables*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskVariables*, UInt32),
     release : Proc(ITaskVariables*, UInt32),
@@ -901,7 +901,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskVariables, lpVtbl : ITaskVariablesVtbl* do
+  record ITaskVariables, lpVtbl : ITaskVariablesVtable* do
     GUID = LibC::GUID.new(0x3e4c9351_u32, 0xd966_u16, 0x4b8b_u16, StaticArray[0xbb_u8, 0x87_u8, 0xce_u8, 0xba_u8, 0x68_u8, 0xbb_u8, 0x1_u8, 0x7_u8])
     def query_interface(this : ITaskVariables*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -925,7 +925,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskNamedValuePairVtbl,
+  record ITaskNamedValuePairVtable,
     query_interface : Proc(ITaskNamedValuePair*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskNamedValuePair*, UInt32),
     release : Proc(ITaskNamedValuePair*, UInt32),
@@ -940,7 +940,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskNamedValuePair, lpVtbl : ITaskNamedValuePairVtbl* do
+  record ITaskNamedValuePair, lpVtbl : ITaskNamedValuePairVtable* do
     GUID = LibC::GUID.new(0x39038068_u32, 0x2b46_u16, 0x4afd_u16, StaticArray[0x86_u8, 0x62_u8, 0x7b_u8, 0xb6_u8, 0xf8_u8, 0x68_u8, 0xd2_u8, 0x21_u8])
     def query_interface(this : ITaskNamedValuePair*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -979,7 +979,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskNamedValueCollectionVtbl,
+  record ITaskNamedValueCollectionVtable,
     query_interface : Proc(ITaskNamedValueCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskNamedValueCollection*, UInt32),
     release : Proc(ITaskNamedValueCollection*, UInt32),
@@ -996,7 +996,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskNamedValueCollection, lpVtbl : ITaskNamedValueCollectionVtbl* do
+  record ITaskNamedValueCollection, lpVtbl : ITaskNamedValueCollectionVtable* do
     GUID = LibC::GUID.new(0xb4ef826b_u32, 0x63c3_u16, 0x46e4_u16, StaticArray[0xa5_u8, 0x4_u8, 0xef_u8, 0x69_u8, 0xe4_u8, 0xf7_u8, 0xea_u8, 0x4d_u8])
     def query_interface(this : ITaskNamedValueCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1041,7 +1041,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IRunningTaskVtbl,
+  record IRunningTaskVtable,
     query_interface : Proc(IRunningTask*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRunningTask*, UInt32),
     release : Proc(IRunningTask*, UInt32),
@@ -1060,7 +1060,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IRunningTask, lpVtbl : IRunningTaskVtbl* do
+  record IRunningTask, lpVtbl : IRunningTaskVtable* do
     GUID = LibC::GUID.new(0x653758fb_u32, 0x7b9a_u16, 0x4f1e_u16, StaticArray[0xa4_u8, 0x71_u8, 0xbe_u8, 0xeb_u8, 0x8e_u8, 0x9b_u8, 0x83_u8, 0x4e_u8])
     def query_interface(this : IRunningTask*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1111,7 +1111,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IRunningTaskCollectionVtbl,
+  record IRunningTaskCollectionVtable,
     query_interface : Proc(IRunningTaskCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRunningTaskCollection*, UInt32),
     release : Proc(IRunningTaskCollection*, UInt32),
@@ -1125,7 +1125,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IRunningTaskCollection, lpVtbl : IRunningTaskCollectionVtbl* do
+  record IRunningTaskCollection, lpVtbl : IRunningTaskCollectionVtable* do
     GUID = LibC::GUID.new(0x6a67614b_u32, 0x6828_u16, 0x4fec_u16, StaticArray[0xaa_u8, 0x54_u8, 0x6d_u8, 0x52_u8, 0xe8_u8, 0xf1_u8, 0xf2_u8, 0xdb_u8])
     def query_interface(this : IRunningTaskCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1161,7 +1161,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IRegisteredTaskVtbl,
+  record IRegisteredTaskVtable,
     query_interface : Proc(IRegisteredTask*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRegisteredTask*, UInt32),
     release : Proc(IRegisteredTask*, UInt32),
@@ -1190,7 +1190,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IRegisteredTask, lpVtbl : IRegisteredTaskVtbl* do
+  record IRegisteredTask, lpVtbl : IRegisteredTaskVtable* do
     GUID = LibC::GUID.new(0x9c86f320_u32, 0xdee3_u16, 0x4dd1_u16, StaticArray[0xb9_u8, 0x72_u8, 0xa3_u8, 0x3_u8, 0xf2_u8, 0x6b_u8, 0x6_u8, 0x1e_u8])
     def query_interface(this : IRegisteredTask*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1271,7 +1271,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITriggerVtbl,
+  record ITriggerVtable,
     query_interface : Proc(ITrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITrigger*, UInt32),
     release : Proc(ITrigger*, UInt32),
@@ -1295,7 +1295,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITrigger, lpVtbl : ITriggerVtbl* do
+  record ITrigger, lpVtbl : ITriggerVtable* do
     GUID = LibC::GUID.new(0x9941815_u32, 0xea89_u16, 0x4b5b_u16, StaticArray[0x89_u8, 0xe0_u8, 0x2a_u8, 0x77_u8, 0x38_u8, 0x1_u8, 0xfa_u8, 0xc3_u8])
     def query_interface(this : ITrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1361,7 +1361,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IIdleTriggerVtbl,
+  record IIdleTriggerVtable,
     query_interface : Proc(IIdleTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIdleTrigger*, UInt32),
     release : Proc(IIdleTrigger*, UInt32),
@@ -1385,7 +1385,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IIdleTrigger, lpVtbl : IIdleTriggerVtbl* do
+  record IIdleTrigger, lpVtbl : IIdleTriggerVtable* do
     GUID = LibC::GUID.new(0xd537d2b0_u32, 0x9fb3_u16, 0x4d34_u16, StaticArray[0x97_u8, 0x39_u8, 0x1f_u8, 0xf5_u8, 0xce_u8, 0x7b_u8, 0x1e_u8, 0xf3_u8])
     def query_interface(this : IIdleTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1451,7 +1451,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ILogonTriggerVtbl,
+  record ILogonTriggerVtable,
     query_interface : Proc(ILogonTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILogonTrigger*, UInt32),
     release : Proc(ILogonTrigger*, UInt32),
@@ -1479,7 +1479,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ILogonTrigger, lpVtbl : ILogonTriggerVtbl* do
+  record ILogonTrigger, lpVtbl : ILogonTriggerVtable* do
     GUID = LibC::GUID.new(0x72dade38_u32, 0xfae4_u16, 0x4b3e_u16, StaticArray[0xba_u8, 0xf4_u8, 0x5d_u8, 0x0_u8, 0x9a_u8, 0xf0_u8, 0x2b_u8, 0x1c_u8])
     def query_interface(this : ILogonTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1557,7 +1557,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ISessionStateChangeTriggerVtbl,
+  record ISessionStateChangeTriggerVtable,
     query_interface : Proc(ISessionStateChangeTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISessionStateChangeTrigger*, UInt32),
     release : Proc(ISessionStateChangeTrigger*, UInt32),
@@ -1587,7 +1587,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ISessionStateChangeTrigger, lpVtbl : ISessionStateChangeTriggerVtbl* do
+  record ISessionStateChangeTrigger, lpVtbl : ISessionStateChangeTriggerVtable* do
     GUID = LibC::GUID.new(0x754da71b_u32, 0x4385_u16, 0x4475_u16, StaticArray[0x9d_u8, 0xd9_u8, 0x59_u8, 0x82_u8, 0x94_u8, 0xfa_u8, 0x36_u8, 0x41_u8])
     def query_interface(this : ISessionStateChangeTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1671,7 +1671,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IEventTriggerVtbl,
+  record IEventTriggerVtable,
     query_interface : Proc(IEventTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEventTrigger*, UInt32),
     release : Proc(IEventTrigger*, UInt32),
@@ -1701,7 +1701,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IEventTrigger, lpVtbl : IEventTriggerVtbl* do
+  record IEventTrigger, lpVtbl : IEventTriggerVtable* do
     GUID = LibC::GUID.new(0xd45b0167_u32, 0x9653_u16, 0x4eef_u16, StaticArray[0xb9_u8, 0x4f_u8, 0x7_u8, 0x32_u8, 0xca_u8, 0x7a_u8, 0xf2_u8, 0x51_u8])
     def query_interface(this : IEventTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1785,7 +1785,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITimeTriggerVtbl,
+  record ITimeTriggerVtable,
     query_interface : Proc(ITimeTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITimeTrigger*, UInt32),
     release : Proc(ITimeTrigger*, UInt32),
@@ -1811,7 +1811,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITimeTrigger, lpVtbl : ITimeTriggerVtbl* do
+  record ITimeTrigger, lpVtbl : ITimeTriggerVtable* do
     GUID = LibC::GUID.new(0xb45747e0_u32, 0xeba7_u16, 0x4276_u16, StaticArray[0x9f_u8, 0x29_u8, 0x85_u8, 0xc5_u8, 0xbb_u8, 0x30_u8, 0x0_u8, 0x6_u8])
     def query_interface(this : ITimeTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1883,7 +1883,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IDailyTriggerVtbl,
+  record IDailyTriggerVtable,
     query_interface : Proc(IDailyTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDailyTrigger*, UInt32),
     release : Proc(IDailyTrigger*, UInt32),
@@ -1911,7 +1911,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IDailyTrigger, lpVtbl : IDailyTriggerVtbl* do
+  record IDailyTrigger, lpVtbl : IDailyTriggerVtable* do
     GUID = LibC::GUID.new(0x126c5cd8_u32, 0xb288_u16, 0x41d5_u16, StaticArray[0x8d_u8, 0xbf_u8, 0xe4_u8, 0x91_u8, 0x44_u8, 0x6a_u8, 0xdc_u8, 0x5c_u8])
     def query_interface(this : IDailyTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1989,7 +1989,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IWeeklyTriggerVtbl,
+  record IWeeklyTriggerVtable,
     query_interface : Proc(IWeeklyTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWeeklyTrigger*, UInt32),
     release : Proc(IWeeklyTrigger*, UInt32),
@@ -2019,7 +2019,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IWeeklyTrigger, lpVtbl : IWeeklyTriggerVtbl* do
+  record IWeeklyTrigger, lpVtbl : IWeeklyTriggerVtable* do
     GUID = LibC::GUID.new(0x5038fc98_u32, 0x82ff_u16, 0x436d_u16, StaticArray[0x87_u8, 0x28_u8, 0xa5_u8, 0x12_u8, 0xa5_u8, 0x7c_u8, 0x9d_u8, 0xc1_u8])
     def query_interface(this : IWeeklyTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2103,7 +2103,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IMonthlyTriggerVtbl,
+  record IMonthlyTriggerVtable,
     query_interface : Proc(IMonthlyTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMonthlyTrigger*, UInt32),
     release : Proc(IMonthlyTrigger*, UInt32),
@@ -2135,7 +2135,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IMonthlyTrigger, lpVtbl : IMonthlyTriggerVtbl* do
+  record IMonthlyTrigger, lpVtbl : IMonthlyTriggerVtable* do
     GUID = LibC::GUID.new(0x97c45ef1_u32, 0x6b02_u16, 0x4a1a_u16, StaticArray[0x9c_u8, 0xe_u8, 0x1e_u8, 0xbf_u8, 0xba_u8, 0x15_u8, 0x0_u8, 0xac_u8])
     def query_interface(this : IMonthlyTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2225,7 +2225,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IMonthlyDOWTriggerVtbl,
+  record IMonthlyDOWTriggerVtable,
     query_interface : Proc(IMonthlyDOWTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMonthlyDOWTrigger*, UInt32),
     release : Proc(IMonthlyDOWTrigger*, UInt32),
@@ -2259,7 +2259,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IMonthlyDOWTrigger, lpVtbl : IMonthlyDOWTriggerVtbl* do
+  record IMonthlyDOWTrigger, lpVtbl : IMonthlyDOWTriggerVtable* do
     GUID = LibC::GUID.new(0x77d025a3_u32, 0x90fa_u16, 0x43aa_u16, StaticArray[0xb5_u8, 0x2e_u8, 0xcd_u8, 0xa5_u8, 0x49_u8, 0x9b_u8, 0x94_u8, 0x6a_u8])
     def query_interface(this : IMonthlyDOWTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2355,7 +2355,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IBootTriggerVtbl,
+  record IBootTriggerVtable,
     query_interface : Proc(IBootTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBootTrigger*, UInt32),
     release : Proc(IBootTrigger*, UInt32),
@@ -2381,7 +2381,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IBootTrigger, lpVtbl : IBootTriggerVtbl* do
+  record IBootTrigger, lpVtbl : IBootTriggerVtable* do
     GUID = LibC::GUID.new(0x2a9c35da_u32, 0xd357_u16, 0x41f4_u16, StaticArray[0xbb_u8, 0xc1_u8, 0x20_u8, 0x7a_u8, 0xc1_u8, 0xb1_u8, 0xf3_u8, 0xcb_u8])
     def query_interface(this : IBootTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2453,7 +2453,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IRegistrationTriggerVtbl,
+  record IRegistrationTriggerVtable,
     query_interface : Proc(IRegistrationTrigger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRegistrationTrigger*, UInt32),
     release : Proc(IRegistrationTrigger*, UInt32),
@@ -2479,7 +2479,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IRegistrationTrigger, lpVtbl : IRegistrationTriggerVtbl* do
+  record IRegistrationTrigger, lpVtbl : IRegistrationTriggerVtable* do
     GUID = LibC::GUID.new(0x4c8fec3a_u32, 0xc218_u16, 0x4e0c_u16, StaticArray[0xb2_u8, 0x3d_u8, 0x62_u8, 0x90_u8, 0x24_u8, 0xdb_u8, 0x91_u8, 0xa2_u8])
     def query_interface(this : IRegistrationTrigger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2551,7 +2551,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IActionVtbl,
+  record IActionVtable,
     query_interface : Proc(IAction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAction*, UInt32),
     release : Proc(IAction*, UInt32),
@@ -2565,7 +2565,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IAction, lpVtbl : IActionVtbl* do
+  record IAction, lpVtbl : IActionVtable* do
     GUID = LibC::GUID.new(0xbae54997_u32, 0x48b1_u16, 0x4cbe_u16, StaticArray[0x99_u8, 0x65_u8, 0xd6_u8, 0xbe_u8, 0x26_u8, 0x3e_u8, 0xbe_u8, 0xa4_u8])
     def query_interface(this : IAction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2601,7 +2601,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IExecActionVtbl,
+  record IExecActionVtable,
     query_interface : Proc(IExecAction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IExecAction*, UInt32),
     release : Proc(IExecAction*, UInt32),
@@ -2621,7 +2621,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IExecAction, lpVtbl : IExecActionVtbl* do
+  record IExecAction, lpVtbl : IExecActionVtable* do
     GUID = LibC::GUID.new(0x4c3d624d_u32, 0xfd6b_u16, 0x49a3_u16, StaticArray[0xb9_u8, 0xb7_u8, 0x9_u8, 0xcb_u8, 0x3c_u8, 0xd3_u8, 0xf0_u8, 0x47_u8])
     def query_interface(this : IExecAction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2675,7 +2675,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IExecAction2Vtbl,
+  record IExecAction2Vtable,
     query_interface : Proc(IExecAction2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IExecAction2*, UInt32),
     release : Proc(IExecAction2*, UInt32),
@@ -2697,7 +2697,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IExecAction2, lpVtbl : IExecAction2Vtbl* do
+  record IExecAction2, lpVtbl : IExecAction2Vtable* do
     GUID = LibC::GUID.new(0xf2a82542_u32, 0xbda5_u16, 0x4e6b_u16, StaticArray[0x91_u8, 0x43_u8, 0xe2_u8, 0xbf_u8, 0x4f_u8, 0x89_u8, 0x87_u8, 0xb6_u8])
     def query_interface(this : IExecAction2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2757,7 +2757,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IShowMessageActionVtbl,
+  record IShowMessageActionVtable,
     query_interface : Proc(IShowMessageAction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IShowMessageAction*, UInt32),
     release : Proc(IShowMessageAction*, UInt32),
@@ -2775,7 +2775,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IShowMessageAction, lpVtbl : IShowMessageActionVtbl* do
+  record IShowMessageAction, lpVtbl : IShowMessageActionVtable* do
     GUID = LibC::GUID.new(0x505e9e68_u32, 0xaf89_u16, 0x46b8_u16, StaticArray[0xa3_u8, 0xf_u8, 0x56_u8, 0x16_u8, 0x2a_u8, 0x83_u8, 0xd5_u8, 0x37_u8])
     def query_interface(this : IShowMessageAction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2823,7 +2823,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IComHandlerActionVtbl,
+  record IComHandlerActionVtable,
     query_interface : Proc(IComHandlerAction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IComHandlerAction*, UInt32),
     release : Proc(IComHandlerAction*, UInt32),
@@ -2841,7 +2841,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IComHandlerAction, lpVtbl : IComHandlerActionVtbl* do
+  record IComHandlerAction, lpVtbl : IComHandlerActionVtable* do
     GUID = LibC::GUID.new(0x6d2fd252_u32, 0x75c5_u16, 0x4f66_u16, StaticArray[0x90_u8, 0xba_u8, 0x2a_u8, 0x7d_u8, 0x8c_u8, 0xc3_u8, 0x3_u8, 0x9f_u8])
     def query_interface(this : IComHandlerAction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2889,7 +2889,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IEmailActionVtbl,
+  record IEmailActionVtable,
     query_interface : Proc(IEmailAction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEmailAction*, UInt32),
     release : Proc(IEmailAction*, UInt32),
@@ -2923,7 +2923,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IEmailAction, lpVtbl : IEmailActionVtbl* do
+  record IEmailAction, lpVtbl : IEmailActionVtable* do
     GUID = LibC::GUID.new(0x10f62c64_u32, 0x7e16_u16, 0x4314_u16, StaticArray[0xa0_u8, 0xc2_u8, 0xc_u8, 0x36_u8, 0x83_u8, 0xf9_u8, 0x9d_u8, 0x40_u8])
     def query_interface(this : IEmailAction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3019,7 +3019,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITriggerCollectionVtbl,
+  record ITriggerCollectionVtable,
     query_interface : Proc(ITriggerCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITriggerCollection*, UInt32),
     release : Proc(ITriggerCollection*, UInt32),
@@ -3036,7 +3036,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITriggerCollection, lpVtbl : ITriggerCollectionVtbl* do
+  record ITriggerCollection, lpVtbl : ITriggerCollectionVtable* do
     GUID = LibC::GUID.new(0x85df5081_u32, 0x1b24_u16, 0x4f32_u16, StaticArray[0x87_u8, 0x8a_u8, 0xd9_u8, 0xd1_u8, 0x4d_u8, 0xf4_u8, 0xcb_u8, 0x77_u8])
     def query_interface(this : ITriggerCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3081,7 +3081,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IActionCollectionVtbl,
+  record IActionCollectionVtable,
     query_interface : Proc(IActionCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActionCollection*, UInt32),
     release : Proc(IActionCollection*, UInt32),
@@ -3102,7 +3102,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IActionCollection, lpVtbl : IActionCollectionVtbl* do
+  record IActionCollection, lpVtbl : IActionCollectionVtable* do
     GUID = LibC::GUID.new(0x2820e19_u32, 0x7b98_u16, 0x4ed2_u16, StaticArray[0xb2_u8, 0xe8_u8, 0xfd_u8, 0xcc_u8, 0xce_u8, 0xff_u8, 0x61_u8, 0x9b_u8])
     def query_interface(this : IActionCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3159,7 +3159,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IPrincipalVtbl,
+  record IPrincipalVtable,
     query_interface : Proc(IPrincipal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrincipal*, UInt32),
     release : Proc(IPrincipal*, UInt32),
@@ -3182,7 +3182,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IPrincipal, lpVtbl : IPrincipalVtbl* do
+  record IPrincipal, lpVtbl : IPrincipalVtable* do
     GUID = LibC::GUID.new(0xd98d51e5_u32, 0xc9b4_u16, 0x496a_u16, StaticArray[0xa9_u8, 0xc1_u8, 0x18_u8, 0x98_u8, 0x2_u8, 0x61_u8, 0xcf_u8, 0xf_u8])
     def query_interface(this : IPrincipal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3245,7 +3245,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IPrincipal2Vtbl,
+  record IPrincipal2Vtable,
     query_interface : Proc(IPrincipal2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPrincipal2*, UInt32),
     release : Proc(IPrincipal2*, UInt32),
@@ -3261,7 +3261,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IPrincipal2, lpVtbl : IPrincipal2Vtbl* do
+  record IPrincipal2, lpVtbl : IPrincipal2Vtable* do
     GUID = LibC::GUID.new(0x248919ae_u32, 0xe345_u16, 0x4a6d_u16, StaticArray[0x8a_u8, 0xeb_u8, 0xe0_u8, 0xd3_u8, 0x16_u8, 0x5c_u8, 0x90_u8, 0x4e_u8])
     def query_interface(this : IPrincipal2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3303,7 +3303,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IRegistrationInfoVtbl,
+  record IRegistrationInfoVtable,
     query_interface : Proc(IRegistrationInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRegistrationInfo*, UInt32),
     release : Proc(IRegistrationInfo*, UInt32),
@@ -3332,7 +3332,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IRegistrationInfo, lpVtbl : IRegistrationInfoVtbl* do
+  record IRegistrationInfo, lpVtbl : IRegistrationInfoVtable* do
     GUID = LibC::GUID.new(0x416d8b73_u32, 0xcb41_u16, 0x4ea1_u16, StaticArray[0x80_u8, 0x5c_u8, 0x9b_u8, 0xe9_u8, 0xa5_u8, 0xac_u8, 0x4a_u8, 0x74_u8])
     def query_interface(this : IRegistrationInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3413,7 +3413,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskDefinitionVtbl,
+  record ITaskDefinitionVtable,
     query_interface : Proc(ITaskDefinition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskDefinition*, UInt32),
     release : Proc(ITaskDefinition*, UInt32),
@@ -3438,7 +3438,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskDefinition, lpVtbl : ITaskDefinitionVtbl* do
+  record ITaskDefinition, lpVtbl : ITaskDefinitionVtable* do
     GUID = LibC::GUID.new(0xf5bc8fc5_u32, 0x536d_u16, 0x4f77_u16, StaticArray[0xb8_u8, 0x52_u8, 0xfb_u8, 0xc1_u8, 0x35_u8, 0x6f_u8, 0xde_u8, 0xb6_u8])
     def query_interface(this : ITaskDefinition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3507,7 +3507,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskSettingsVtbl,
+  record ITaskSettingsVtable,
     query_interface : Proc(ITaskSettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskSettings*, UInt32),
     release : Proc(ITaskSettings*, UInt32),
@@ -3558,7 +3558,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskSettings, lpVtbl : ITaskSettingsVtbl* do
+  record ITaskSettings, lpVtbl : ITaskSettingsVtable* do
     GUID = LibC::GUID.new(0x8fd4711d_u32, 0x2d02_u16, 0x4c8c_u16, StaticArray[0x87_u8, 0xe3_u8, 0xef_u8, 0xf6_u8, 0x99_u8, 0xde_u8, 0x12_u8, 0x7e_u8])
     def query_interface(this : ITaskSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3705,7 +3705,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskSettings2Vtbl,
+  record ITaskSettings2Vtable,
     query_interface : Proc(ITaskSettings2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskSettings2*, UInt32),
     release : Proc(ITaskSettings2*, UInt32),
@@ -3720,7 +3720,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskSettings2, lpVtbl : ITaskSettings2Vtbl* do
+  record ITaskSettings2, lpVtbl : ITaskSettings2Vtable* do
     GUID = LibC::GUID.new(0x2c05c3f0_u32, 0x6eed_u16, 0x4c05_u16, StaticArray[0xa1_u8, 0x5f_u8, 0xed_u8, 0x7d_u8, 0x7a_u8, 0x98_u8, 0xa3_u8, 0x69_u8])
     def query_interface(this : ITaskSettings2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3759,7 +3759,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskSettings3Vtbl,
+  record ITaskSettings3Vtable,
     query_interface : Proc(ITaskSettings3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskSettings3*, UInt32),
     release : Proc(ITaskSettings3*, UInt32),
@@ -3819,7 +3819,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskSettings3, lpVtbl : ITaskSettings3Vtbl* do
+  record ITaskSettings3, lpVtbl : ITaskSettings3Vtable* do
     GUID = LibC::GUID.new(0xad9d0d7_u32, 0xc7f_u16, 0x4ebb_u16, StaticArray[0x9a_u8, 0x5f_u8, 0xd1_u8, 0xc6_u8, 0x48_u8, 0xdc_u8, 0xa5_u8, 0x28_u8])
     def query_interface(this : ITaskSettings3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3993,7 +3993,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IMaintenanceSettingsVtbl,
+  record IMaintenanceSettingsVtable,
     query_interface : Proc(IMaintenanceSettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMaintenanceSettings*, UInt32),
     release : Proc(IMaintenanceSettings*, UInt32),
@@ -4010,7 +4010,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IMaintenanceSettings, lpVtbl : IMaintenanceSettingsVtbl* do
+  record IMaintenanceSettings, lpVtbl : IMaintenanceSettingsVtable* do
     GUID = LibC::GUID.new(0xa6024fa8_u32, 0x9652_u16, 0x4adb_u16, StaticArray[0xa6_u8, 0xbf_u8, 0x5c_u8, 0xfc_u8, 0xd8_u8, 0x77_u8, 0xa7_u8, 0xba_u8])
     def query_interface(this : IMaintenanceSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4055,7 +4055,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IRegisteredTaskCollectionVtbl,
+  record IRegisteredTaskCollectionVtable,
     query_interface : Proc(IRegisteredTaskCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRegisteredTaskCollection*, UInt32),
     release : Proc(IRegisteredTaskCollection*, UInt32),
@@ -4069,7 +4069,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IRegisteredTaskCollection, lpVtbl : IRegisteredTaskCollectionVtbl* do
+  record IRegisteredTaskCollection, lpVtbl : IRegisteredTaskCollectionVtable* do
     GUID = LibC::GUID.new(0x86627eb4_u32, 0x42a7_u16, 0x41e4_u16, StaticArray[0xa4_u8, 0xd9_u8, 0xac_u8, 0x33_u8, 0xa7_u8, 0x2f_u8, 0x2d_u8, 0x52_u8])
     def query_interface(this : IRegisteredTaskCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4105,7 +4105,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record ITaskFolderVtbl,
+  record ITaskFolderVtable,
     query_interface : Proc(ITaskFolder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITaskFolder*, UInt32),
     release : Proc(ITaskFolder*, UInt32),
@@ -4129,7 +4129,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record ITaskFolder, lpVtbl : ITaskFolderVtbl* do
+  record ITaskFolder, lpVtbl : ITaskFolderVtable* do
     GUID = LibC::GUID.new(0x8cfac062_u32, 0xa080_u16, 0x4c15_u16, StaticArray[0x9a_u8, 0x88_u8, 0xaa_u8, 0x7c_u8, 0x2a_u8, 0xf8_u8, 0xd_u8, 0xfc_u8])
     def query_interface(this : ITaskFolder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4195,7 +4195,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IIdleSettingsVtbl,
+  record IIdleSettingsVtable,
     query_interface : Proc(IIdleSettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIdleSettings*, UInt32),
     release : Proc(IIdleSettings*, UInt32),
@@ -4214,7 +4214,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IIdleSettings, lpVtbl : IIdleSettingsVtbl* do
+  record IIdleSettings, lpVtbl : IIdleSettingsVtable* do
     GUID = LibC::GUID.new(0x84594461_u32, 0x53_u16, 0x4342_u16, StaticArray[0xa8_u8, 0xfd_u8, 0x8_u8, 0x8f_u8, 0xab_u8, 0xf1_u8, 0x1f_u8, 0x32_u8])
     def query_interface(this : IIdleSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4265,7 +4265,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record INetworkSettingsVtbl,
+  record INetworkSettingsVtable,
     query_interface : Proc(INetworkSettings*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INetworkSettings*, UInt32),
     release : Proc(INetworkSettings*, UInt32),
@@ -4280,7 +4280,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record INetworkSettings, lpVtbl : INetworkSettingsVtbl* do
+  record INetworkSettings, lpVtbl : INetworkSettingsVtable* do
     GUID = LibC::GUID.new(0x9f7dea84_u32, 0xc30b_u16, 0x4245_u16, StaticArray[0x80_u8, 0xb6_u8, 0x0_u8, 0xe9_u8, 0xf6_u8, 0x46_u8, 0xf1_u8, 0xb4_u8])
     def query_interface(this : INetworkSettings*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4319,7 +4319,7 @@ module Win32cr::System::TaskScheduler
   end
 
   @[Extern]
-  record IRepetitionPatternVtbl,
+  record IRepetitionPatternVtable,
     query_interface : Proc(IRepetitionPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRepetitionPattern*, UInt32),
     release : Proc(IRepetitionPattern*, UInt32),
@@ -4336,7 +4336,7 @@ module Win32cr::System::TaskScheduler
 
 
   @[Extern]
-  record IRepetitionPattern, lpVtbl : IRepetitionPatternVtbl* do
+  record IRepetitionPattern, lpVtbl : IRepetitionPatternVtable* do
     GUID = LibC::GUID.new(0x7fb9acf1_u32, 0x26be_u16, 0x400e_u16, StaticArray[0x85_u8, 0xb5_u8, 0x29_u8, 0x4b_u8, 0x9c_u8, 0x75_u8, 0xdf_u8, 0xd6_u8])
     def query_interface(this : IRepetitionPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

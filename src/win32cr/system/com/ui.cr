@@ -9,7 +9,7 @@ module Win32cr::System::Com::UI
 
 
   @[Extern]
-  record IThumbnailExtractorVtbl,
+  record IThumbnailExtractorVtable,
     query_interface : Proc(IThumbnailExtractor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IThumbnailExtractor*, UInt32),
     release : Proc(IThumbnailExtractor*, UInt32),
@@ -18,7 +18,7 @@ module Win32cr::System::Com::UI
 
 
   @[Extern]
-  record IThumbnailExtractor, lpVtbl : IThumbnailExtractorVtbl* do
+  record IThumbnailExtractor, lpVtbl : IThumbnailExtractorVtable* do
     GUID = LibC::GUID.new(0x969dc708_u32, 0x5c76_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0x86_u8, 0x0_u8, 0x0_u8, 0xf8_u8, 0x4_u8, 0xb0_u8, 0x57_u8])
     def query_interface(this : IThumbnailExtractor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -39,7 +39,7 @@ module Win32cr::System::Com::UI
   end
 
   @[Extern]
-  record IDummyHICONIncluderVtbl,
+  record IDummyHICONIncluderVtable,
     query_interface : Proc(IDummyHICONIncluder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDummyHICONIncluder*, UInt32),
     release : Proc(IDummyHICONIncluder*, UInt32),
@@ -47,7 +47,7 @@ module Win32cr::System::Com::UI
 
 
   @[Extern]
-  record IDummyHICONIncluder, lpVtbl : IDummyHICONIncluderVtbl* do
+  record IDummyHICONIncluder, lpVtbl : IDummyHICONIncluderVtable* do
     GUID = LibC::GUID.new(0x947990de_u32, 0xcc28_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0xf7_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x85_u8, 0x8f_u8, 0xb1_u8])
     def query_interface(this : IDummyHICONIncluder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

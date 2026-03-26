@@ -296,15 +296,6 @@ module Win32cr::Storage::Vhd
       end
 
 
-      # Nested Type Version1_e__Struct_
-      @[Extern]
-      struct Version1_e__Struct_
-    property rw_depth : UInt32
-    def initialize(@rw_depth : UInt32)
-    end
-      end
-
-
       # Nested Type Version2_e__Struct_
       @[Extern]
       struct Version2_e__Struct_
@@ -312,6 +303,15 @@ module Win32cr::Storage::Vhd
     property read_only : Win32cr::Foundation::BOOL
     property resiliency_guid : LibC::GUID
     def initialize(@get_info_only : Win32cr::Foundation::BOOL, @read_only : Win32cr::Foundation::BOOL, @resiliency_guid : LibC::GUID)
+    end
+      end
+
+
+      # Nested Type Version1_e__Struct_
+      @[Extern]
+      struct Version1_e__Struct_
+    property rw_depth : UInt32
+    def initialize(@rw_depth : UInt32)
     end
       end
 
@@ -359,25 +359,6 @@ module Win32cr::Storage::Vhd
       end
 
 
-      # Nested Type Version2_e__Struct_
-      @[Extern]
-      struct Version2_e__Struct_
-    property unique_id : LibC::GUID
-    property maximum_size : UInt64
-    property block_size_in_bytes : UInt32
-    property sector_size_in_bytes : UInt32
-    property physical_sector_size_in_bytes : UInt32
-    property parent_path : Win32cr::Foundation::PWSTR
-    property source_path : Win32cr::Foundation::PWSTR
-    property open_flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG
-    property parent_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
-    property source_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
-    property resiliency_guid : LibC::GUID
-    def initialize(@unique_id : LibC::GUID, @maximum_size : UInt64, @block_size_in_bytes : UInt32, @sector_size_in_bytes : UInt32, @physical_sector_size_in_bytes : UInt32, @parent_path : Win32cr::Foundation::PWSTR, @source_path : Win32cr::Foundation::PWSTR, @open_flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG, @parent_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @source_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @resiliency_guid : LibC::GUID)
-    end
-      end
-
-
       # Nested Type Version3_e__Struct_
       @[Extern]
       struct Version3_e__Struct_
@@ -395,6 +376,25 @@ module Win32cr::Storage::Vhd
     property source_limit_path : Win32cr::Foundation::PWSTR
     property backing_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
     def initialize(@unique_id : LibC::GUID, @maximum_size : UInt64, @block_size_in_bytes : UInt32, @sector_size_in_bytes : UInt32, @physical_sector_size_in_bytes : UInt32, @parent_path : Win32cr::Foundation::PWSTR, @source_path : Win32cr::Foundation::PWSTR, @open_flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG, @parent_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @source_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @resiliency_guid : LibC::GUID, @source_limit_path : Win32cr::Foundation::PWSTR, @backing_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE)
+    end
+      end
+
+
+      # Nested Type Version2_e__Struct_
+      @[Extern]
+      struct Version2_e__Struct_
+    property unique_id : LibC::GUID
+    property maximum_size : UInt64
+    property block_size_in_bytes : UInt32
+    property sector_size_in_bytes : UInt32
+    property physical_sector_size_in_bytes : UInt32
+    property parent_path : Win32cr::Foundation::PWSTR
+    property source_path : Win32cr::Foundation::PWSTR
+    property open_flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG
+    property parent_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    property source_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE
+    property resiliency_guid : LibC::GUID
+    def initialize(@unique_id : LibC::GUID, @maximum_size : UInt64, @block_size_in_bytes : UInt32, @sector_size_in_bytes : UInt32, @physical_sector_size_in_bytes : UInt32, @parent_path : Win32cr::Foundation::PWSTR, @source_path : Win32cr::Foundation::PWSTR, @open_flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG, @parent_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @source_virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE, @resiliency_guid : LibC::GUID)
     end
       end
 
@@ -523,6 +523,17 @@ module Win32cr::Storage::Vhd
     property virtual_disk_id : LibC::GUID
     property change_tracking_state : ChangeTrackingState_e__Struct_
 
+      # Nested Type ChangeTrackingState_e__Struct_
+      @[Extern]
+      struct ChangeTrackingState_e__Struct_
+    property enabled : Win32cr::Foundation::BOOL
+    property newer_changes : Win32cr::Foundation::BOOL
+    property most_recent_id : UInt16*
+    def initialize(@enabled : Win32cr::Foundation::BOOL, @newer_changes : Win32cr::Foundation::BOOL, @most_recent_id : UInt16*)
+    end
+      end
+
+
       # Nested Type PhysicalDisk_e__Struct_
       @[Extern]
       struct PhysicalDisk_e__Struct_
@@ -530,6 +541,16 @@ module Win32cr::Storage::Vhd
     property physical_sector_size : UInt32
     property is_remote : Win32cr::Foundation::BOOL
     def initialize(@logical_sector_size : UInt32, @physical_sector_size : UInt32, @is_remote : Win32cr::Foundation::BOOL)
+    end
+      end
+
+
+      # Nested Type ParentLocation_e__Struct_
+      @[Extern]
+      struct ParentLocation_e__Struct_
+    property parent_resolved : Win32cr::Foundation::BOOL
+    property parent_location_buffer : UInt16*
+    def initialize(@parent_resolved : Win32cr::Foundation::BOOL, @parent_location_buffer : UInt16*)
     end
       end
 
@@ -542,27 +563,6 @@ module Win32cr::Storage::Vhd
     property block_size : UInt32
     property sector_size : UInt32
     def initialize(@virtual_size : UInt64, @physical_size : UInt64, @block_size : UInt32, @sector_size : UInt32)
-    end
-      end
-
-
-      # Nested Type ChangeTrackingState_e__Struct_
-      @[Extern]
-      struct ChangeTrackingState_e__Struct_
-    property enabled : Win32cr::Foundation::BOOL
-    property newer_changes : Win32cr::Foundation::BOOL
-    property most_recent_id : UInt16*
-    def initialize(@enabled : Win32cr::Foundation::BOOL, @newer_changes : Win32cr::Foundation::BOOL, @most_recent_id : UInt16*)
-    end
-      end
-
-
-      # Nested Type ParentLocation_e__Struct_
-      @[Extern]
-      struct ParentLocation_e__Struct_
-    property parent_resolved : Win32cr::Foundation::BOOL
-    property parent_location_buffer : UInt16*
-    def initialize(@parent_resolved : Win32cr::Foundation::BOOL, @parent_location_buffer : UInt16*)
     end
       end
 
@@ -590,22 +590,22 @@ module Win32cr::Storage::Vhd
     property change_tracking_enabled : Win32cr::Foundation::BOOL
     property parent_locator : ParentLocator_e__Struct_
 
-      # Nested Type ParentPathWithDepthInfo_e__Struct_
-      @[Extern]
-      struct ParentPathWithDepthInfo_e__Struct_
-    property child_depth : UInt32
-    property parent_file_path : Win32cr::Foundation::PWSTR
-    def initialize(@child_depth : UInt32, @parent_file_path : Win32cr::Foundation::PWSTR)
-    end
-      end
-
-
       # Nested Type ParentLocator_e__Struct_
       @[Extern]
       struct ParentLocator_e__Struct_
     property linkage_id : LibC::GUID
     property parent_file_path : Win32cr::Foundation::PWSTR
     def initialize(@linkage_id : LibC::GUID, @parent_file_path : Win32cr::Foundation::PWSTR)
+    end
+      end
+
+
+      # Nested Type ParentPathWithDepthInfo_e__Struct_
+      @[Extern]
+      struct ParentPathWithDepthInfo_e__Struct_
+    property child_depth : UInt32
+    property parent_file_path : Win32cr::Foundation::PWSTR
+    def initialize(@child_depth : UInt32, @parent_file_path : Win32cr::Foundation::PWSTR)
     end
       end
 
@@ -973,122 +973,181 @@ module Win32cr::Storage::Vhd
   end
 
   def openVirtualDisk(virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE*, path : Win32cr::Foundation::PWSTR, virtual_disk_access_mask : Win32cr::Storage::Vhd::VIRTUAL_DISK_ACCESS_MASK, flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_PARAMETERS*, handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.OpenVirtualDisk(virtual_storage_type, path, virtual_disk_access_mask, flags, parameters, handle)
+    {% end %}
   end
 
   def createVirtualDisk(virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE*, path : Win32cr::Foundation::PWSTR, virtual_disk_access_mask : Win32cr::Storage::Vhd::VIRTUAL_DISK_ACCESS_MASK, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, flags : Win32cr::Storage::Vhd::CREATE_VIRTUAL_DISK_FLAG, provider_specific_flags : UInt32, parameters : Win32cr::Storage::Vhd::CREATE_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*, handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.CreateVirtualDisk(virtual_storage_type, path, virtual_disk_access_mask, security_descriptor, flags, provider_specific_flags, parameters, overlapped, handle)
+    {% end %}
   end
 
   def attachVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, security_descriptor : Win32cr::Security::PSECURITY_DESCRIPTOR, flags : Win32cr::Storage::Vhd::ATTACH_VIRTUAL_DISK_FLAG, provider_specific_flags : UInt32, parameters : Win32cr::Storage::Vhd::ATTACH_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.AttachVirtualDisk(virtual_disk_handle, security_descriptor, flags, provider_specific_flags, parameters, overlapped)
+    {% end %}
   end
 
   def detachVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::DETACH_VIRTUAL_DISK_FLAG, provider_specific_flags : UInt32) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.DetachVirtualDisk(virtual_disk_handle, flags, provider_specific_flags)
+    {% end %}
   end
 
   def getVirtualDiskPhysicalPath(virtual_disk_handle : Win32cr::Foundation::HANDLE, disk_path_size_in_bytes : UInt32*, disk_path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetVirtualDiskPhysicalPath(virtual_disk_handle, disk_path_size_in_bytes, disk_path)
+    {% end %}
   end
 
   def getAllAttachedVirtualDiskPhysicalPaths(paths_buffer_size_in_bytes : UInt32*, paths_buffer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetAllAttachedVirtualDiskPhysicalPaths(paths_buffer_size_in_bytes, paths_buffer)
+    {% end %}
   end
 
   def getStorageDependencyInformation(object_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::GET_STORAGE_DEPENDENCY_FLAG, storage_dependency_info_size : UInt32, storage_dependency_info : Win32cr::Storage::Vhd::STORAGE_DEPENDENCY_INFO*, size_used : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetStorageDependencyInformation(object_handle, flags, storage_dependency_info_size, storage_dependency_info, size_used)
+    {% end %}
   end
 
   def getVirtualDiskInformation(virtual_disk_handle : Win32cr::Foundation::HANDLE, virtual_disk_info_size : UInt32*, virtual_disk_info : Win32cr::Storage::Vhd::GET_VIRTUAL_DISK_INFO*, size_used : UInt32*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetVirtualDiskInformation(virtual_disk_handle, virtual_disk_info_size, virtual_disk_info, size_used)
+    {% end %}
   end
 
   def setVirtualDiskInformation(virtual_disk_handle : Win32cr::Foundation::HANDLE, virtual_disk_info : Win32cr::Storage::Vhd::SET_VIRTUAL_DISK_INFO*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.SetVirtualDiskInformation(virtual_disk_handle, virtual_disk_info)
+    {% end %}
   end
 
   def enumerateVirtualDiskMetadata(virtual_disk_handle : Win32cr::Foundation::HANDLE, number_of_items : UInt32*, items : LibC::GUID*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.EnumerateVirtualDiskMetadata(virtual_disk_handle, number_of_items, items)
+    {% end %}
   end
 
   def getVirtualDiskMetadata(virtual_disk_handle : Win32cr::Foundation::HANDLE, item : LibC::GUID*, meta_data_size : UInt32*, meta_data : Void*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetVirtualDiskMetadata(virtual_disk_handle, item, meta_data_size, meta_data)
+    {% end %}
   end
 
   def setVirtualDiskMetadata(virtual_disk_handle : Win32cr::Foundation::HANDLE, item : LibC::GUID*, meta_data_size : UInt32, meta_data : Void*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.SetVirtualDiskMetadata(virtual_disk_handle, item, meta_data_size, meta_data)
+    {% end %}
   end
 
   def deleteVirtualDiskMetadata(virtual_disk_handle : Win32cr::Foundation::HANDLE, item : LibC::GUID*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.DeleteVirtualDiskMetadata(virtual_disk_handle, item)
+    {% end %}
   end
 
   def getVirtualDiskOperationProgress(virtual_disk_handle : Win32cr::Foundation::HANDLE, overlapped : Win32cr::System::IO::OVERLAPPED*, progress : Win32cr::Storage::Vhd::VIRTUAL_DISK_PROGRESS*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.GetVirtualDiskOperationProgress(virtual_disk_handle, overlapped, progress)
+    {% end %}
   end
 
   def compactVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::COMPACT_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::COMPACT_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.CompactVirtualDisk(virtual_disk_handle, flags, parameters, overlapped)
+    {% end %}
   end
 
   def mergeVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::MERGE_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::MERGE_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.MergeVirtualDisk(virtual_disk_handle, flags, parameters, overlapped)
+    {% end %}
   end
 
   def expandVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::EXPAND_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::EXPAND_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.ExpandVirtualDisk(virtual_disk_handle, flags, parameters, overlapped)
+    {% end %}
   end
 
   def resizeVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::RESIZE_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::RESIZE_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.ResizeVirtualDisk(virtual_disk_handle, flags, parameters, overlapped)
+    {% end %}
   end
 
   def mirrorVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::MIRROR_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::MIRROR_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.MirrorVirtualDisk(virtual_disk_handle, flags, parameters, overlapped)
+    {% end %}
   end
 
   def breakMirrorVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.BreakMirrorVirtualDisk(virtual_disk_handle)
+    {% end %}
   end
 
   def addVirtualDiskParent(virtual_disk_handle : Win32cr::Foundation::HANDLE, parent_path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.AddVirtualDiskParent(virtual_disk_handle, parent_path)
+    {% end %}
   end
 
   def queryChangesVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, change_tracking_id : Win32cr::Foundation::PWSTR, byte_offset : UInt64, byte_length : UInt64, flags : Win32cr::Storage::Vhd::QUERY_CHANGES_VIRTUAL_DISK_FLAG, ranges : Win32cr::Storage::Vhd::QUERY_CHANGES_VIRTUAL_DISK_RANGE*, range_count : UInt32*, processed_length : UInt64*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.QueryChangesVirtualDisk(virtual_disk_handle, change_tracking_id, byte_offset, byte_length, flags, ranges, range_count, processed_length)
+    {% end %}
   end
 
   def takeSnapshotVhdSet(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::TAKE_SNAPSHOT_VHDSET_PARAMETERS*, flags : Win32cr::Storage::Vhd::TAKE_SNAPSHOT_VHDSET_FLAG) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.TakeSnapshotVhdSet(virtual_disk_handle, parameters, flags)
+    {% end %}
   end
 
   def deleteSnapshotVhdSet(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::DELETE_SNAPSHOT_VHDSET_PARAMETERS*, flags : Win32cr::Storage::Vhd::DELETE_SNAPSHOT_VHDSET_FLAG) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.DeleteSnapshotVhdSet(virtual_disk_handle, parameters, flags)
+    {% end %}
   end
 
   def modifyVhdSet(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::MODIFY_VHDSET_PARAMETERS*, flags : Win32cr::Storage::Vhd::MODIFY_VHDSET_FLAG) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.ModifyVhdSet(virtual_disk_handle, parameters, flags)
+    {% end %}
   end
 
   def applySnapshotVhdSet(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::APPLY_SNAPSHOT_VHDSET_PARAMETERS*, flags : Win32cr::Storage::Vhd::APPLY_SNAPSHOT_VHDSET_FLAG) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.ApplySnapshotVhdSet(virtual_disk_handle, parameters, flags)
+    {% end %}
   end
 
   def rawSCSIVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, parameters : Win32cr::Storage::Vhd::RAW_SCSI_VIRTUAL_DISK_PARAMETERS*, flags : Win32cr::Storage::Vhd::RAW_SCSI_VIRTUAL_DISK_FLAG, response : Win32cr::Storage::Vhd::RAW_SCSI_VIRTUAL_DISK_RESPONSE*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.RawSCSIVirtualDisk(virtual_disk_handle, parameters, flags, response)
+    {% end %}
   end
 
   def forkVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE, flags : Win32cr::Storage::Vhd::FORK_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::FORK_VIRTUAL_DISK_PARAMETERS*, overlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.ForkVirtualDisk(virtual_disk_handle, flags, parameters, overlapped)
+    {% end %}
   end
 
   def completeForkVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::WIN32_ERROR
+    {% if !flag?(:docs) %}
     C.CompleteForkVirtualDisk(virtual_disk_handle)
+    {% end %}
   end
 
-  @[Link("virtdisk")]
+  @[Link("virtdisk.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun OpenVirtualDisk(virtual_storage_type : Win32cr::Storage::Vhd::VIRTUAL_STORAGE_TYPE*, path : Win32cr::Foundation::PWSTR, virtual_disk_access_mask : Win32cr::Storage::Vhd::VIRTUAL_DISK_ACCESS_MASK, flags : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_FLAG, parameters : Win32cr::Storage::Vhd::OPEN_VIRTUAL_DISK_PARAMETERS*, handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::WIN32_ERROR
@@ -1178,4 +1237,5 @@ module Win32cr::Storage::Vhd
     fun CompleteForkVirtualDisk(virtual_disk_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::WIN32_ERROR
 
   end
+  {% end %}
 end

@@ -3590,22 +3590,6 @@ module Win32cr::Devices::HumanInterfaceDevice
     property range : Range_e__Struct_
     property not_range : NotRange_e__Struct_
 
-      # Nested Type Range_e__Struct_
-      @[Extern]
-      struct Range_e__Struct_
-    property usage_min : UInt16
-    property usage_max : UInt16
-    property string_min : UInt16
-    property string_max : UInt16
-    property designator_min : UInt16
-    property designator_max : UInt16
-    property data_index_min : UInt16
-    property data_index_max : UInt16
-    def initialize(@usage_min : UInt16, @usage_max : UInt16, @string_min : UInt16, @string_max : UInt16, @designator_min : UInt16, @designator_max : UInt16, @data_index_min : UInt16, @data_index_max : UInt16)
-    end
-      end
-
-
       # Nested Type NotRange_e__Struct_
       @[Extern]
       struct NotRange_e__Struct_
@@ -3618,6 +3602,22 @@ module Win32cr::Devices::HumanInterfaceDevice
     property data_index : UInt16
     property reserved4 : UInt16
     def initialize(@usage : UInt16, @reserved1 : UInt16, @string_index : UInt16, @reserved2 : UInt16, @designator_index : UInt16, @reserved3 : UInt16, @data_index : UInt16, @reserved4 : UInt16)
+    end
+      end
+
+
+      # Nested Type Range_e__Struct_
+      @[Extern]
+      struct Range_e__Struct_
+    property usage_min : UInt16
+    property usage_max : UInt16
+    property string_min : UInt16
+    property string_max : UInt16
+    property designator_min : UInt16
+    property designator_max : UInt16
+    property data_index_min : UInt16
+    property data_index_max : UInt16
+    def initialize(@usage_min : UInt16, @usage_max : UInt16, @string_min : UInt16, @string_max : UInt16, @designator_min : UInt16, @designator_max : UInt16, @data_index_min : UInt16, @data_index_max : UInt16)
     end
       end
 
@@ -3661,22 +3661,6 @@ module Win32cr::Devices::HumanInterfaceDevice
     property range : Range_e__Struct_
     property not_range : NotRange_e__Struct_
 
-      # Nested Type Range_e__Struct_
-      @[Extern]
-      struct Range_e__Struct_
-    property usage_min : UInt16
-    property usage_max : UInt16
-    property string_min : UInt16
-    property string_max : UInt16
-    property designator_min : UInt16
-    property designator_max : UInt16
-    property data_index_min : UInt16
-    property data_index_max : UInt16
-    def initialize(@usage_min : UInt16, @usage_max : UInt16, @string_min : UInt16, @string_max : UInt16, @designator_min : UInt16, @designator_max : UInt16, @data_index_min : UInt16, @data_index_max : UInt16)
-    end
-      end
-
-
       # Nested Type NotRange_e__Struct_
       @[Extern]
       struct NotRange_e__Struct_
@@ -3689,6 +3673,22 @@ module Win32cr::Devices::HumanInterfaceDevice
     property data_index : UInt16
     property reserved4 : UInt16
     def initialize(@usage : UInt16, @reserved1 : UInt16, @string_index : UInt16, @reserved2 : UInt16, @designator_index : UInt16, @reserved3 : UInt16, @data_index : UInt16, @reserved4 : UInt16)
+    end
+      end
+
+
+      # Nested Type Range_e__Struct_
+      @[Extern]
+      struct Range_e__Struct_
+    property usage_min : UInt16
+    property usage_max : UInt16
+    property string_min : UInt16
+    property string_max : UInt16
+    property designator_min : UInt16
+    property designator_max : UInt16
+    property data_index_min : UInt16
+    property data_index_max : UInt16
+    def initialize(@usage_min : UInt16, @usage_max : UInt16, @string_min : UInt16, @string_max : UInt16, @designator_min : UInt16, @designator_max : UInt16, @data_index_min : UInt16, @data_index_max : UInt16)
     end
       end
 
@@ -3714,11 +3714,7 @@ module Win32cr::Devices::HumanInterfaceDevice
     end
   end
 
-  @[Extern]
-  struct HIDP_PREPARSED_DATA_
-    def initialize()
-    end
-  end
+  alias HIDP_PREPARSED_DATA_ = Void
 
   @[Extern]
   struct HIDP_CAPS
@@ -3871,7 +3867,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInputEffectVtbl,
+  record IDirectInputEffectVtable,
     query_interface : Proc(IDirectInputEffect*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInputEffect*, UInt32),
     release : Proc(IDirectInputEffect*, UInt32),
@@ -3888,7 +3884,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInputEffect, lpVtbl : IDirectInputEffectVtbl* do
+  record IDirectInputEffect, lpVtbl : IDirectInputEffectVtable* do
     GUID = LibC::GUID.new(0xe7e1f7c0_u32, 0x88d2_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0xd0_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa0_u8, 0x6e_u8, 0x35_u8])
     def query_interface(this : IDirectInputEffect*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3933,7 +3929,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInputDeviceWVtbl,
+  record IDirectInputDeviceWVtable,
     query_interface : Proc(IDirectInputDeviceW*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInputDeviceW*, UInt32),
     release : Proc(IDirectInputDeviceW*, UInt32),
@@ -3955,7 +3951,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInputDeviceW, lpVtbl : IDirectInputDeviceWVtbl* do
+  record IDirectInputDeviceW, lpVtbl : IDirectInputDeviceWVtable* do
     GUID = LibC::GUID.new(0x5944e681_u32, 0xc92e_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0xc7_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDirectInputDeviceW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4015,7 +4011,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInputDeviceAVtbl,
+  record IDirectInputDeviceAVtable,
     query_interface : Proc(IDirectInputDeviceA*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInputDeviceA*, UInt32),
     release : Proc(IDirectInputDeviceA*, UInt32),
@@ -4037,7 +4033,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInputDeviceA, lpVtbl : IDirectInputDeviceAVtbl* do
+  record IDirectInputDeviceA, lpVtbl : IDirectInputDeviceAVtable* do
     GUID = LibC::GUID.new(0x5944e680_u32, 0xc92e_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0xc7_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDirectInputDeviceA*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4097,7 +4093,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInputDevice2WVtbl,
+  record IDirectInputDevice2WVtable,
     query_interface : Proc(IDirectInputDevice2W*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInputDevice2W*, UInt32),
     release : Proc(IDirectInputDevice2W*, UInt32),
@@ -4128,7 +4124,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInputDevice2W, lpVtbl : IDirectInputDevice2WVtbl* do
+  record IDirectInputDevice2W, lpVtbl : IDirectInputDevice2WVtable* do
     GUID = LibC::GUID.new(0x5944e683_u32, 0xc92e_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0xc7_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDirectInputDevice2W*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4215,7 +4211,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInputDevice2AVtbl,
+  record IDirectInputDevice2AVtable,
     query_interface : Proc(IDirectInputDevice2A*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInputDevice2A*, UInt32),
     release : Proc(IDirectInputDevice2A*, UInt32),
@@ -4246,7 +4242,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInputDevice2A, lpVtbl : IDirectInputDevice2AVtbl* do
+  record IDirectInputDevice2A, lpVtbl : IDirectInputDevice2AVtable* do
     GUID = LibC::GUID.new(0x5944e682_u32, 0xc92e_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0xc7_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDirectInputDevice2A*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4333,7 +4329,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInputDevice7WVtbl,
+  record IDirectInputDevice7WVtable,
     query_interface : Proc(IDirectInputDevice7W*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInputDevice7W*, UInt32),
     release : Proc(IDirectInputDevice7W*, UInt32),
@@ -4366,7 +4362,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInputDevice7W, lpVtbl : IDirectInputDevice7WVtbl* do
+  record IDirectInputDevice7W, lpVtbl : IDirectInputDevice7WVtable* do
     GUID = LibC::GUID.new(0x57d7c6bd_u32, 0x2356_u16, 0x11d3_u16, StaticArray[0x8e_u8, 0x9d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x44_u8, 0xae_u8])
     def query_interface(this : IDirectInputDevice7W*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4459,7 +4455,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInputDevice7AVtbl,
+  record IDirectInputDevice7AVtable,
     query_interface : Proc(IDirectInputDevice7A*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInputDevice7A*, UInt32),
     release : Proc(IDirectInputDevice7A*, UInt32),
@@ -4492,7 +4488,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInputDevice7A, lpVtbl : IDirectInputDevice7AVtbl* do
+  record IDirectInputDevice7A, lpVtbl : IDirectInputDevice7AVtable* do
     GUID = LibC::GUID.new(0x57d7c6bc_u32, 0x2356_u16, 0x11d3_u16, StaticArray[0x8e_u8, 0x9d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x44_u8, 0xae_u8])
     def query_interface(this : IDirectInputDevice7A*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4585,7 +4581,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInputDevice8WVtbl,
+  record IDirectInputDevice8WVtable,
     query_interface : Proc(IDirectInputDevice8W*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInputDevice8W*, UInt32),
     release : Proc(IDirectInputDevice8W*, UInt32),
@@ -4621,7 +4617,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInputDevice8W, lpVtbl : IDirectInputDevice8WVtbl* do
+  record IDirectInputDevice8W, lpVtbl : IDirectInputDevice8WVtable* do
     GUID = LibC::GUID.new(0x54d41081_u32, 0xdc15_u16, 0x4833_u16, StaticArray[0xa4_u8, 0x1b_u8, 0x74_u8, 0x8f_u8, 0x73_u8, 0xa3_u8, 0x81_u8, 0x79_u8])
     def query_interface(this : IDirectInputDevice8W*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4723,7 +4719,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInputDevice8AVtbl,
+  record IDirectInputDevice8AVtable,
     query_interface : Proc(IDirectInputDevice8A*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInputDevice8A*, UInt32),
     release : Proc(IDirectInputDevice8A*, UInt32),
@@ -4759,7 +4755,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInputDevice8A, lpVtbl : IDirectInputDevice8AVtbl* do
+  record IDirectInputDevice8A, lpVtbl : IDirectInputDevice8AVtable* do
     GUID = LibC::GUID.new(0x54d41080_u32, 0xdc15_u16, 0x4833_u16, StaticArray[0xa4_u8, 0x1b_u8, 0x74_u8, 0x8f_u8, 0x73_u8, 0xa3_u8, 0x81_u8, 0x79_u8])
     def query_interface(this : IDirectInputDevice8A*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4861,7 +4857,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInputWVtbl,
+  record IDirectInputWVtable,
     query_interface : Proc(IDirectInputW*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInputW*, UInt32),
     release : Proc(IDirectInputW*, UInt32),
@@ -4873,7 +4869,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInputW, lpVtbl : IDirectInputWVtbl* do
+  record IDirectInputW, lpVtbl : IDirectInputWVtable* do
     GUID = LibC::GUID.new(0x89521361_u32, 0xaa8a_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0xc7_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDirectInputW*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4903,7 +4899,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInputAVtbl,
+  record IDirectInputAVtable,
     query_interface : Proc(IDirectInputA*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInputA*, UInt32),
     release : Proc(IDirectInputA*, UInt32),
@@ -4915,7 +4911,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInputA, lpVtbl : IDirectInputAVtbl* do
+  record IDirectInputA, lpVtbl : IDirectInputAVtable* do
     GUID = LibC::GUID.new(0x89521360_u32, 0xaa8a_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0xc7_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDirectInputA*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4945,7 +4941,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInput2WVtbl,
+  record IDirectInput2WVtable,
     query_interface : Proc(IDirectInput2W*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInput2W*, UInt32),
     release : Proc(IDirectInput2W*, UInt32),
@@ -4958,7 +4954,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInput2W, lpVtbl : IDirectInput2WVtbl* do
+  record IDirectInput2W, lpVtbl : IDirectInput2WVtable* do
     GUID = LibC::GUID.new(0x5944e663_u32, 0xaa8a_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0xc7_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDirectInput2W*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4991,7 +4987,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInput2AVtbl,
+  record IDirectInput2AVtable,
     query_interface : Proc(IDirectInput2A*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInput2A*, UInt32),
     release : Proc(IDirectInput2A*, UInt32),
@@ -5004,7 +5000,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInput2A, lpVtbl : IDirectInput2AVtbl* do
+  record IDirectInput2A, lpVtbl : IDirectInput2AVtable* do
     GUID = LibC::GUID.new(0x5944e662_u32, 0xaa8a_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0xc7_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDirectInput2A*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5037,7 +5033,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInput7WVtbl,
+  record IDirectInput7WVtable,
     query_interface : Proc(IDirectInput7W*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInput7W*, UInt32),
     release : Proc(IDirectInput7W*, UInt32),
@@ -5051,7 +5047,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInput7W, lpVtbl : IDirectInput7WVtbl* do
+  record IDirectInput7W, lpVtbl : IDirectInput7WVtable* do
     GUID = LibC::GUID.new(0x9a4cb685_u32, 0x236d_u16, 0x11d3_u16, StaticArray[0x8e_u8, 0x9d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x44_u8, 0xae_u8])
     def query_interface(this : IDirectInput7W*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5087,7 +5083,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInput7AVtbl,
+  record IDirectInput7AVtable,
     query_interface : Proc(IDirectInput7A*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInput7A*, UInt32),
     release : Proc(IDirectInput7A*, UInt32),
@@ -5101,7 +5097,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInput7A, lpVtbl : IDirectInput7AVtbl* do
+  record IDirectInput7A, lpVtbl : IDirectInput7AVtable* do
     GUID = LibC::GUID.new(0x9a4cb684_u32, 0x236d_u16, 0x11d3_u16, StaticArray[0x8e_u8, 0x9d_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x68_u8, 0x44_u8, 0xae_u8])
     def query_interface(this : IDirectInput7A*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5137,7 +5133,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInput8WVtbl,
+  record IDirectInput8WVtable,
     query_interface : Proc(IDirectInput8W*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInput8W*, UInt32),
     release : Proc(IDirectInput8W*, UInt32),
@@ -5152,7 +5148,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInput8W, lpVtbl : IDirectInput8WVtbl* do
+  record IDirectInput8W, lpVtbl : IDirectInput8WVtable* do
     GUID = LibC::GUID.new(0xbf798031_u32, 0x483a_u16, 0x4da2_u16, StaticArray[0xaa_u8, 0x99_u8, 0x5d_u8, 0x64_u8, 0xed_u8, 0x36_u8, 0x97_u8, 0x0_u8])
     def query_interface(this : IDirectInput8W*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5191,7 +5187,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInput8AVtbl,
+  record IDirectInput8AVtable,
     query_interface : Proc(IDirectInput8A*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInput8A*, UInt32),
     release : Proc(IDirectInput8A*, UInt32),
@@ -5206,7 +5202,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInput8A, lpVtbl : IDirectInput8AVtbl* do
+  record IDirectInput8A, lpVtbl : IDirectInput8AVtable* do
     GUID = LibC::GUID.new(0xbf798030_u32, 0x483a_u16, 0x4da2_u16, StaticArray[0xaa_u8, 0x99_u8, 0x5d_u8, 0x64_u8, 0xed_u8, 0x36_u8, 0x97_u8, 0x0_u8])
     def query_interface(this : IDirectInput8A*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5245,7 +5241,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInputEffectDriverVtbl,
+  record IDirectInputEffectDriverVtable,
     query_interface : Proc(IDirectInputEffectDriver*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInputEffectDriver*, UInt32),
     release : Proc(IDirectInputEffectDriver*, UInt32),
@@ -5263,7 +5259,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInputEffectDriver, lpVtbl : IDirectInputEffectDriverVtbl* do
+  record IDirectInputEffectDriver, lpVtbl : IDirectInputEffectDriverVtable* do
     GUID = LibC::GUID.new(0x2538130_u32, 0x898f_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0xd0_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa0_u8, 0x6e_u8, 0x35_u8])
     def query_interface(this : IDirectInputEffectDriver*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5311,7 +5307,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInputJoyConfigVtbl,
+  record IDirectInputJoyConfigVtable,
     query_interface : Proc(IDirectInputJoyConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInputJoyConfig*, UInt32),
     release : Proc(IDirectInputJoyConfig*, UInt32),
@@ -5334,7 +5330,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInputJoyConfig, lpVtbl : IDirectInputJoyConfigVtbl* do
+  record IDirectInputJoyConfig, lpVtbl : IDirectInputJoyConfigVtable* do
     GUID = LibC::GUID.new(0x1de12ab1_u32, 0xc9f5_u16, 0x11cf_u16, StaticArray[0xbf_u8, 0xc7_u8, 0x44_u8, 0x45_u8, 0x53_u8, 0x54_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IDirectInputJoyConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5397,7 +5393,7 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   @[Extern]
-  record IDirectInputJoyConfig8Vtbl,
+  record IDirectInputJoyConfig8Vtable,
     query_interface : Proc(IDirectInputJoyConfig8*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectInputJoyConfig8*, UInt32),
     release : Proc(IDirectInputJoyConfig8*, UInt32),
@@ -5420,7 +5416,7 @@ module Win32cr::Devices::HumanInterfaceDevice
 
 
   @[Extern]
-  record IDirectInputJoyConfig8, lpVtbl : IDirectInputJoyConfig8Vtbl* do
+  record IDirectInputJoyConfig8, lpVtbl : IDirectInputJoyConfig8Vtable* do
     GUID = LibC::GUID.new(0xeb0d7dfa_u32, 0x1990_u16, 0x4f27_u16, StaticArray[0xb4_u8, 0xd6_u8, 0xed_u8, 0xf2_u8, 0xee_u8, 0xc4_u8, 0xa4_u8, 0x4c_u8])
     def query_interface(this : IDirectInputJoyConfig8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5483,196 +5479,291 @@ module Win32cr::Devices::HumanInterfaceDevice
   end
 
   def directInput8Create(hinst : Win32cr::Foundation::HINSTANCE, dwVersion : UInt32, riidltf : LibC::GUID*, ppvOut : Void**, punkOuter : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectInput8Create(hinst, dwVersion, riidltf, ppvOut, punkOuter)
+    {% end %}
   end
 
   def joyConfigChanged(dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.joyConfigChanged(dwFlags)
+    {% end %}
   end
 
   def hidPGetCaps(preparsed_data : LibC::IntPtrT, capabilities : Win32cr::Devices::HumanInterfaceDevice::HIDP_CAPS*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_GetCaps(preparsed_data, capabilities)
+    {% end %}
   end
 
   def hidPGetLinkCollectionNodes(link_collection_nodes : Win32cr::Devices::HumanInterfaceDevice::HIDP_LINK_COLLECTION_NODE*, link_collection_nodes_length : UInt32*, preparsed_data : LibC::IntPtrT) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_GetLinkCollectionNodes(link_collection_nodes, link_collection_nodes_length, preparsed_data)
+    {% end %}
   end
 
   def hidPGetSpecificButtonCaps(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, button_caps : Win32cr::Devices::HumanInterfaceDevice::HIDP_BUTTON_CAPS*, button_caps_length : UInt16*, preparsed_data : LibC::IntPtrT) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_GetSpecificButtonCaps(report_type, usage_page, link_collection, usage, button_caps, button_caps_length, preparsed_data)
+    {% end %}
   end
 
   def hidPGetButtonCaps(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, button_caps : Win32cr::Devices::HumanInterfaceDevice::HIDP_BUTTON_CAPS*, button_caps_length : UInt16*, preparsed_data : LibC::IntPtrT) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_GetButtonCaps(report_type, button_caps, button_caps_length, preparsed_data)
+    {% end %}
   end
 
   def hidPGetSpecificValueCaps(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, value_caps : Win32cr::Devices::HumanInterfaceDevice::HIDP_VALUE_CAPS*, value_caps_length : UInt16*, preparsed_data : LibC::IntPtrT) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_GetSpecificValueCaps(report_type, usage_page, link_collection, usage, value_caps, value_caps_length, preparsed_data)
+    {% end %}
   end
 
   def hidPGetValueCaps(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, value_caps : Win32cr::Devices::HumanInterfaceDevice::HIDP_VALUE_CAPS*, value_caps_length : UInt16*, preparsed_data : LibC::IntPtrT) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_GetValueCaps(report_type, value_caps, value_caps_length, preparsed_data)
+    {% end %}
   end
 
   def hidPGetExtendedAttributes(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, data_index : UInt16, preparsed_data : LibC::IntPtrT, attributes : Win32cr::Devices::HumanInterfaceDevice::HIDP_EXTENDED_ATTRIBUTES*, length_attributes : UInt32*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_GetExtendedAttributes(report_type, data_index, preparsed_data, attributes, length_attributes)
+    {% end %}
   end
 
   def hidPInitializeReportForID(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, report_id : UInt8, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_InitializeReportForID(report_type, report_id, preparsed_data, report, report_length)
+    {% end %}
   end
 
   def hidPSetData(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, data_list : Win32cr::Devices::HumanInterfaceDevice::HIDP_DATA*, data_length : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_SetData(report_type, data_list, data_length, preparsed_data, report, report_length)
+    {% end %}
   end
 
   def hidPGetData(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, data_list : Win32cr::Devices::HumanInterfaceDevice::HIDP_DATA*, data_length : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_GetData(report_type, data_list, data_length, preparsed_data, report, report_length)
+    {% end %}
   end
 
   def hidPMaxDataListLength(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, preparsed_data : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.HidP_MaxDataListLength(report_type, preparsed_data)
+    {% end %}
   end
 
   def hidPSetUsages(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage_list : UInt16*, usage_length : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_SetUsages(report_type, usage_page, link_collection, usage_list, usage_length, preparsed_data, report, report_length)
+    {% end %}
   end
 
   def hidPUnsetUsages(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage_list : UInt16*, usage_length : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_UnsetUsages(report_type, usage_page, link_collection, usage_list, usage_length, preparsed_data, report, report_length)
+    {% end %}
   end
 
   def hidPGetUsages(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage_list : UInt16*, usage_length : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_GetUsages(report_type, usage_page, link_collection, usage_list, usage_length, preparsed_data, report, report_length)
+    {% end %}
   end
 
   def hidPGetUsagesEx(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, link_collection : UInt16, button_list : Win32cr::Devices::HumanInterfaceDevice::USAGE_AND_PAGE*, usage_length : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_GetUsagesEx(report_type, link_collection, button_list, usage_length, preparsed_data, report, report_length)
+    {% end %}
   end
 
   def hidPMaxUsageListLength(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, preparsed_data : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.HidP_MaxUsageListLength(report_type, usage_page, preparsed_data)
+    {% end %}
   end
 
   def hidPSetUsageValue(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, usage_value : UInt32, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_SetUsageValue(report_type, usage_page, link_collection, usage, usage_value, preparsed_data, report, report_length)
+    {% end %}
   end
 
   def hidPSetScaledUsageValue(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, usage_value : Int32, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_SetScaledUsageValue(report_type, usage_page, link_collection, usage, usage_value, preparsed_data, report, report_length)
+    {% end %}
   end
 
   def hidPSetUsageValueArray(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, usage_value : Win32cr::Foundation::PSTR, usage_value_byte_length : UInt16, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_SetUsageValueArray(report_type, usage_page, link_collection, usage, usage_value, usage_value_byte_length, preparsed_data, report, report_length)
+    {% end %}
   end
 
   def hidPGetUsageValue(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, usage_value : UInt32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_GetUsageValue(report_type, usage_page, link_collection, usage, usage_value, preparsed_data, report, report_length)
+    {% end %}
   end
 
   def hidPGetScaledUsageValue(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, usage_value : Int32*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_GetScaledUsageValue(report_type, usage_page, link_collection, usage, usage_value, preparsed_data, report, report_length)
+    {% end %}
   end
 
   def hidPGetUsageValueArray(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, usage_value : Win32cr::Foundation::PSTR, usage_value_byte_length : UInt16, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_GetUsageValueArray(report_type, usage_page, link_collection, usage, usage_value, usage_value_byte_length, preparsed_data, report, report_length)
+    {% end %}
   end
 
   def hidPUsageListDifference(previous_usage_list : UInt16*, current_usage_list : UInt16*, break_usage_list : UInt16*, make_usage_list : UInt16*, usage_list_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_UsageListDifference(previous_usage_list, current_usage_list, break_usage_list, make_usage_list, usage_list_length)
+    {% end %}
   end
 
   def hidPGetButtonArray(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, button_data : Win32cr::Devices::HumanInterfaceDevice::HIDP_BUTTON_ARRAY_DATA*, button_data_length : UInt16*, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_GetButtonArray(report_type, usage_page, link_collection, usage, button_data, button_data_length, preparsed_data, report, report_length)
+    {% end %}
   end
 
   def hidPSetButtonArray(report_type : Win32cr::Devices::HumanInterfaceDevice::HIDP_REPORT_TYPE, usage_page : UInt16, link_collection : UInt16, usage : UInt16, button_data : Win32cr::Devices::HumanInterfaceDevice::HIDP_BUTTON_ARRAY_DATA*, button_data_length : UInt16, preparsed_data : LibC::IntPtrT, report : Win32cr::Foundation::PSTR, report_length : UInt32) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_SetButtonArray(report_type, usage_page, link_collection, usage, button_data, button_data_length, preparsed_data, report, report_length)
+    {% end %}
   end
 
   def hidPTranslateUsagesToI8042ScanCodes(changed_usage_list : UInt16*, usage_list_length : UInt32, key_action : Win32cr::Devices::HumanInterfaceDevice::HIDP_KEYBOARD_DIRECTION, modifier_state : Win32cr::Devices::HumanInterfaceDevice::HIDP_KEYBOARD_MODIFIER_STATE*, insert_codes_procedure : Win32cr::Devices::HumanInterfaceDevice::PHIDP_INSERT_SCANCODES, insert_codes_context : Void*) : Win32cr::Foundation::NTSTATUS
+    {% if !flag?(:docs) %}
     C.HidP_TranslateUsagesToI8042ScanCodes(changed_usage_list, usage_list_length, key_action, modifier_state, insert_codes_procedure, insert_codes_context)
+    {% end %}
   end
 
   def hidDGetAttributes(hid_device_object : Win32cr::Foundation::HANDLE, attributes : Win32cr::Devices::HumanInterfaceDevice::HIDD_ATTRIBUTES*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.HidD_GetAttributes(hid_device_object, attributes)
+    {% end %}
   end
 
   def hidDGetHidGuid(hid_guid : LibC::GUID*) : Void
+    {% if !flag?(:docs) %}
     C.HidD_GetHidGuid(hid_guid)
+    {% end %}
   end
 
   def hidDGetPreparsedData(hid_device_object : Win32cr::Foundation::HANDLE, preparsed_data : LibC::IntPtrT*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.HidD_GetPreparsedData(hid_device_object, preparsed_data)
+    {% end %}
   end
 
   def hidDFreePreparsedData(preparsed_data : LibC::IntPtrT) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.HidD_FreePreparsedData(preparsed_data)
+    {% end %}
   end
 
   def hidDFlushQueue(hid_device_object : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.HidD_FlushQueue(hid_device_object)
+    {% end %}
   end
 
   def hidDGetConfiguration(hid_device_object : Win32cr::Foundation::HANDLE, configuration : Win32cr::Devices::HumanInterfaceDevice::HIDD_CONFIGURATION*, configuration_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.HidD_GetConfiguration(hid_device_object, configuration, configuration_length)
+    {% end %}
   end
 
   def hidDSetConfiguration(hid_device_object : Win32cr::Foundation::HANDLE, configuration : Win32cr::Devices::HumanInterfaceDevice::HIDD_CONFIGURATION*, configuration_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.HidD_SetConfiguration(hid_device_object, configuration, configuration_length)
+    {% end %}
   end
 
   def hidDGetFeature(hid_device_object : Win32cr::Foundation::HANDLE, report_buffer : Void*, report_buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.HidD_GetFeature(hid_device_object, report_buffer, report_buffer_length)
+    {% end %}
   end
 
   def hidDSetFeature(hid_device_object : Win32cr::Foundation::HANDLE, report_buffer : Void*, report_buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.HidD_SetFeature(hid_device_object, report_buffer, report_buffer_length)
+    {% end %}
   end
 
   def hidDGetInputReport(hid_device_object : Win32cr::Foundation::HANDLE, report_buffer : Void*, report_buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.HidD_GetInputReport(hid_device_object, report_buffer, report_buffer_length)
+    {% end %}
   end
 
   def hidDSetOutputReport(hid_device_object : Win32cr::Foundation::HANDLE, report_buffer : Void*, report_buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.HidD_SetOutputReport(hid_device_object, report_buffer, report_buffer_length)
+    {% end %}
   end
 
   def hidDGetNumInputBuffers(hid_device_object : Win32cr::Foundation::HANDLE, number_buffers : UInt32*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.HidD_GetNumInputBuffers(hid_device_object, number_buffers)
+    {% end %}
   end
 
   def hidDSetNumInputBuffers(hid_device_object : Win32cr::Foundation::HANDLE, number_buffers : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.HidD_SetNumInputBuffers(hid_device_object, number_buffers)
+    {% end %}
   end
 
   def hidDGetPhysicalDescriptor(hid_device_object : Win32cr::Foundation::HANDLE, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.HidD_GetPhysicalDescriptor(hid_device_object, buffer, buffer_length)
+    {% end %}
   end
 
   def hidDGetManufacturerString(hid_device_object : Win32cr::Foundation::HANDLE, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.HidD_GetManufacturerString(hid_device_object, buffer, buffer_length)
+    {% end %}
   end
 
   def hidDGetProductString(hid_device_object : Win32cr::Foundation::HANDLE, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.HidD_GetProductString(hid_device_object, buffer, buffer_length)
+    {% end %}
   end
 
   def hidDGetIndexedString(hid_device_object : Win32cr::Foundation::HANDLE, string_index : UInt32, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.HidD_GetIndexedString(hid_device_object, string_index, buffer, buffer_length)
+    {% end %}
   end
 
   def hidDGetSerialNumberString(hid_device_object : Win32cr::Foundation::HANDLE, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.HidD_GetSerialNumberString(hid_device_object, buffer, buffer_length)
+    {% end %}
   end
 
   def hidDGetMsGenreDescriptor(hid_device_object : Win32cr::Foundation::HANDLE, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.HidD_GetMsGenreDescriptor(hid_device_object, buffer, buffer_length)
+    {% end %}
   end
 
-  @[Link("dinput8")]
-  @[Link("winmm")]
-  @[Link("hid")]
+  @[Link("dinput8.dll")]
+  @[Link("winmm.dll")]
+  @[Link("hid.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun DirectInput8Create(hinst : Win32cr::Foundation::HINSTANCE, dwVersion : UInt32, riidltf : LibC::GUID*, ppvOut : Void**, punkOuter : Void*) : Win32cr::Foundation::HRESULT
@@ -5816,4 +5907,5 @@ module Win32cr::Devices::HumanInterfaceDevice
     fun HidD_GetMsGenreDescriptor(hid_device_object : Win32cr::Foundation::HANDLE, buffer : Void*, buffer_length : UInt32) : Win32cr::Foundation::BOOLEAN
 
   end
+  {% end %}
 end

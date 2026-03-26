@@ -50,51 +50,74 @@ module Win32cr::NetworkManagement::WebDav
   end
 
   def davAddConnection(connection_handle : Win32cr::Foundation::HANDLE*, remote_name : Win32cr::Foundation::PWSTR, user_name : Win32cr::Foundation::PWSTR, password : Win32cr::Foundation::PWSTR, client_cert : UInt8*, cert_size : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DavAddConnection(connection_handle, remote_name, user_name, password, client_cert, cert_size)
+    {% end %}
   end
 
   def davDeleteConnection(connection_handle : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.DavDeleteConnection(connection_handle)
+    {% end %}
   end
 
   def davGetUNCFromHTTPPath(url : Win32cr::Foundation::PWSTR, unc_path : UInt16*, lpSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.DavGetUNCFromHTTPPath(url, unc_path, lpSize)
+    {% end %}
   end
 
   def davGetHTTPFromUNCPath(unc_path : Win32cr::Foundation::PWSTR, url : UInt16*, lpSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.DavGetHTTPFromUNCPath(unc_path, url, lpSize)
+    {% end %}
   end
 
   def davGetTheLockOwnerOfTheFile(file_name : Win32cr::Foundation::PWSTR, lock_owner_name : Win32cr::Foundation::PWSTR, lock_owner_name_length_in_bytes : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.DavGetTheLockOwnerOfTheFile(file_name, lock_owner_name, lock_owner_name_length_in_bytes)
+    {% end %}
   end
 
   def davGetExtendedError(hFile : Win32cr::Foundation::HANDLE, ext_error : UInt32*, ext_error_string : UInt16*, cChSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.DavGetExtendedError(hFile, ext_error, ext_error_string, cChSize)
+    {% end %}
   end
 
   def davFlushFile(hFile : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.DavFlushFile(hFile)
+    {% end %}
   end
 
   def davInvalidateCache(url_name : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.DavInvalidateCache(url_name)
+    {% end %}
   end
 
   def davCancelConnectionsToServer(lpName : Win32cr::Foundation::PWSTR, fForce : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.DavCancelConnectionsToServer(lpName, fForce)
+    {% end %}
   end
 
   def davRegisterAuthCallback(call_back : Win32cr::NetworkManagement::WebDav::PFNDAVAUTHCALLBACK, version : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.DavRegisterAuthCallback(call_back, version)
+    {% end %}
   end
 
   def davUnregisterAuthCallback(hCallback : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.DavUnregisterAuthCallback(hCallback)
+    {% end %}
   end
 
-  @[Link("netapi32")]
-  @[Link("davclnt")]
+  @[Link("netapi32.dll")]
+  @[Link("davclnt.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun DavAddConnection(connection_handle : Win32cr::Foundation::HANDLE*, remote_name : Win32cr::Foundation::PWSTR, user_name : Win32cr::Foundation::PWSTR, password : Win32cr::Foundation::PWSTR, client_cert : UInt8*, cert_size : UInt32) : UInt32
@@ -130,4 +153,5 @@ module Win32cr::NetworkManagement::WebDav
     fun DavUnregisterAuthCallback(hCallback : UInt32) : Void
 
   end
+  {% end %}
 end

@@ -181,13 +181,17 @@ module Win32cr::System::Mapi
   end
 
   def mAPIFreeBuffer(pv : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.MAPIFreeBuffer(pv)
+    {% end %}
   end
 
-  @[Link("mapi32")]
+  @[Link("mapi32.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun MAPIFreeBuffer(pv : Void*) : UInt32
 
   end
+  {% end %}
 end

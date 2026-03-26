@@ -249,12 +249,35 @@ module Win32cr::System::Diagnostics::ProcessSnapshotting
       end
 
 
+      # Nested Type Section_e__Struct_
+      @[Extern]
+      struct Section_e__Struct_
+    property base_address : Void*
+    property allocation_attributes : UInt32
+    property maximum_size : Win32cr::Foundation::LARGE_INTEGER
+    def initialize(@base_address : Void*, @allocation_attributes : UInt32, @maximum_size : Win32cr::Foundation::LARGE_INTEGER)
+    end
+      end
+
+
       # Nested Type Event_e__Struct_
       @[Extern]
       struct Event_e__Struct_
     property manual_reset : Win32cr::Foundation::BOOL
     property signaled : Win32cr::Foundation::BOOL
     def initialize(@manual_reset : Win32cr::Foundation::BOOL, @signaled : Win32cr::Foundation::BOOL)
+    end
+      end
+
+
+      # Nested Type Mutant_e__Struct_
+      @[Extern]
+      struct Mutant_e__Struct_
+    property current_count : Int32
+    property abandoned : Win32cr::Foundation::BOOL
+    property owner_process_id : UInt32
+    property owner_thread_id : UInt32
+    def initialize(@current_count : Int32, @abandoned : Win32cr::Foundation::BOOL, @owner_process_id : UInt32, @owner_thread_id : UInt32)
     end
       end
 
@@ -275,17 +298,6 @@ module Win32cr::System::Diagnostics::ProcessSnapshotting
       end
 
 
-      # Nested Type Section_e__Struct_
-      @[Extern]
-      struct Section_e__Struct_
-    property base_address : Void*
-    property allocation_attributes : UInt32
-    property maximum_size : Win32cr::Foundation::LARGE_INTEGER
-    def initialize(@base_address : Void*, @allocation_attributes : UInt32, @maximum_size : Win32cr::Foundation::LARGE_INTEGER)
-    end
-      end
-
-
       # Nested Type Process_e__Struct_
       @[Extern]
       struct Process_e__Struct_
@@ -297,18 +309,6 @@ module Win32cr::System::Diagnostics::ProcessSnapshotting
     property parent_process_id : UInt32
     property flags : UInt32
     def initialize(@exit_status : UInt32, @peb_base_address : Void*, @affinity_mask : LibC::UIntPtrT, @base_priority : Int32, @process_id : UInt32, @parent_process_id : UInt32, @flags : UInt32)
-    end
-      end
-
-
-      # Nested Type Mutant_e__Struct_
-      @[Extern]
-      struct Mutant_e__Struct_
-    property current_count : Int32
-    property abandoned : Win32cr::Foundation::BOOL
-    property owner_process_id : UInt32
-    property owner_thread_id : UInt32
-    def initialize(@current_count : Int32, @abandoned : Win32cr::Foundation::BOOL, @owner_process_id : UInt32, @owner_thread_id : UInt32)
     end
       end
 
@@ -355,46 +355,67 @@ module Win32cr::System::Diagnostics::ProcessSnapshotting
   end
 
   def pssCaptureSnapshot(process_handle : Win32cr::Foundation::HANDLE, capture_flags : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_CAPTURE_FLAGS, thread_context_flags : UInt32, snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS*) : UInt32
+    {% if !flag?(:docs) %}
     C.PssCaptureSnapshot(process_handle, capture_flags, thread_context_flags, snapshot_handle)
+    {% end %}
   end
 
   def pssFreeSnapshot(process_handle : Win32cr::Foundation::HANDLE, snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS) : UInt32
+    {% if !flag?(:docs) %}
     C.PssFreeSnapshot(process_handle, snapshot_handle)
+    {% end %}
   end
 
   def pssQuerySnapshot(snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS, information_class : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_QUERY_INFORMATION_CLASS, buffer : Void*, buffer_length : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.PssQuerySnapshot(snapshot_handle, information_class, buffer, buffer_length)
+    {% end %}
   end
 
   def pssWalkSnapshot(snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS, information_class : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_WALK_INFORMATION_CLASS, walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK, buffer : Void*, buffer_length : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.PssWalkSnapshot(snapshot_handle, information_class, walk_marker_handle, buffer, buffer_length)
+    {% end %}
   end
 
   def pssDuplicateSnapshot(source_process_handle : Win32cr::Foundation::HANDLE, snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS, target_process_handle : Win32cr::Foundation::HANDLE, target_snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS*, flags : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_DUPLICATE_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.PssDuplicateSnapshot(source_process_handle, snapshot_handle, target_process_handle, target_snapshot_handle, flags)
+    {% end %}
   end
 
   def pssWalkMarkerCreate(allocator : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_ALLOCATOR*, walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK*) : UInt32
+    {% if !flag?(:docs) %}
     C.PssWalkMarkerCreate(allocator, walk_marker_handle)
+    {% end %}
   end
 
   def pssWalkMarkerFree(walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK) : UInt32
+    {% if !flag?(:docs) %}
     C.PssWalkMarkerFree(walk_marker_handle)
+    {% end %}
   end
 
   def pssWalkMarkerGetPosition(walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK, position : LibC::UIntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.PssWalkMarkerGetPosition(walk_marker_handle, position)
+    {% end %}
   end
 
   def pssWalkMarkerSetPosition(walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK, position : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.PssWalkMarkerSetPosition(walk_marker_handle, position)
+    {% end %}
   end
 
   def pssWalkMarkerSeekToBeginning(walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK) : UInt32
+    {% if !flag?(:docs) %}
     C.PssWalkMarkerSeekToBeginning(walk_marker_handle)
+    {% end %}
   end
 
-  @[Link("kernel32")]
+  @[Link("kernel32.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun PssCaptureSnapshot(process_handle : Win32cr::Foundation::HANDLE, capture_flags : Win32cr::System::Diagnostics::ProcessSnapshotting::PSS_CAPTURE_FLAGS, thread_context_flags : UInt32, snapshot_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSS*) : UInt32
@@ -427,4 +448,5 @@ module Win32cr::System::Diagnostics::ProcessSnapshotting
     fun PssWalkMarkerSeekToBeginning(walk_marker_handle : Win32cr::System::Diagnostics::ProcessSnapshotting::HPSSWALK) : UInt32
 
   end
+  {% end %}
 end

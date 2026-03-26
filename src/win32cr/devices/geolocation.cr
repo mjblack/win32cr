@@ -906,7 +906,7 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ILocationReportVtbl,
+  record ILocationReportVtable,
     query_interface : Proc(ILocationReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILocationReport*, UInt32),
     release : Proc(ILocationReport*, UInt32),
@@ -916,7 +916,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ILocationReport, lpVtbl : ILocationReportVtbl* do
+  record ILocationReport, lpVtbl : ILocationReportVtable* do
     GUID = LibC::GUID.new(0xc8b7f7ee_u32, 0x75d0_u16, 0x4db9_u16, StaticArray[0xb6_u8, 0x2d_u8, 0x7a_u8, 0xf_u8, 0x36_u8, 0x9c_u8, 0xa4_u8, 0x56_u8])
     def query_interface(this : ILocationReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -940,7 +940,7 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ILatLongReportVtbl,
+  record ILatLongReportVtable,
     query_interface : Proc(ILatLongReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILatLongReport*, UInt32),
     release : Proc(ILatLongReport*, UInt32),
@@ -955,7 +955,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ILatLongReport, lpVtbl : ILatLongReportVtbl* do
+  record ILatLongReport, lpVtbl : ILatLongReportVtable* do
     GUID = LibC::GUID.new(0x7fed806d_u32, 0xef8_u16, 0x4f07_u16, StaticArray[0x80_u8, 0xac_u8, 0x36_u8, 0xa0_u8, 0xbe_u8, 0xae_u8, 0x31_u8, 0x34_u8])
     def query_interface(this : ILatLongReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -994,7 +994,7 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ICivicAddressReportVtbl,
+  record ICivicAddressReportVtable,
     query_interface : Proc(ICivicAddressReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICivicAddressReport*, UInt32),
     release : Proc(ICivicAddressReport*, UInt32),
@@ -1011,7 +1011,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ICivicAddressReport, lpVtbl : ICivicAddressReportVtbl* do
+  record ICivicAddressReport, lpVtbl : ICivicAddressReportVtable* do
     GUID = LibC::GUID.new(0xc0b19f70_u32, 0x4adf_u16, 0x445d_u16, StaticArray[0x87_u8, 0xf2_u8, 0xca_u8, 0xd8_u8, 0xfd_u8, 0x71_u8, 0x17_u8, 0x92_u8])
     def query_interface(this : ICivicAddressReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1056,7 +1056,7 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ILocationVtbl,
+  record ILocationVtable,
     query_interface : Proc(ILocation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILocation*, UInt32),
     release : Proc(ILocation*, UInt32),
@@ -1072,7 +1072,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ILocation, lpVtbl : ILocationVtbl* do
+  record ILocation, lpVtbl : ILocationVtable* do
     GUID = LibC::GUID.new(0xab2ece69_u32, 0x56d9_u16, 0x4f28_u16, StaticArray[0xb5_u8, 0x25_u8, 0xde_u8, 0x1b_u8, 0xe_u8, 0xe4_u8, 0x42_u8, 0x37_u8])
     def query_interface(this : ILocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1114,7 +1114,7 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ILocationPowerVtbl,
+  record ILocationPowerVtable,
     query_interface : Proc(ILocationPower*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILocationPower*, UInt32),
     release : Proc(ILocationPower*, UInt32),
@@ -1123,7 +1123,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ILocationPower, lpVtbl : ILocationPowerVtbl* do
+  record ILocationPower, lpVtbl : ILocationPowerVtable* do
     GUID = LibC::GUID.new(0x193e7729_u32, 0xab6b_u16, 0x4b12_u16, StaticArray[0x86_u8, 0x17_u8, 0x75_u8, 0x96_u8, 0xe1_u8, 0xbb_u8, 0x19_u8, 0x1c_u8])
     def query_interface(this : ILocationPower*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1144,7 +1144,7 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record IDefaultLocationVtbl,
+  record IDefaultLocationVtable,
     query_interface : Proc(IDefaultLocation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDefaultLocation*, UInt32),
     release : Proc(IDefaultLocation*, UInt32),
@@ -1153,7 +1153,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record IDefaultLocation, lpVtbl : IDefaultLocationVtbl* do
+  record IDefaultLocation, lpVtbl : IDefaultLocationVtable* do
     GUID = LibC::GUID.new(0xa65af77e_u32, 0x969a_u16, 0x4a2e_u16, StaticArray[0x8a_u8, 0xca_u8, 0x33_u8, 0xbb_u8, 0x7c_u8, 0xbb_u8, 0x12_u8, 0x35_u8])
     def query_interface(this : IDefaultLocation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1174,7 +1174,7 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ILocationEventsVtbl,
+  record ILocationEventsVtable,
     query_interface : Proc(ILocationEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILocationEvents*, UInt32),
     release : Proc(ILocationEvents*, UInt32),
@@ -1183,7 +1183,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ILocationEvents, lpVtbl : ILocationEventsVtbl* do
+  record ILocationEvents, lpVtbl : ILocationEventsVtable* do
     GUID = LibC::GUID.new(0xcae02bbf_u32, 0x798b_u16, 0x4508_u16, StaticArray[0xa2_u8, 0x7_u8, 0x35_u8, 0xa7_u8, 0x90_u8, 0x6d_u8, 0xc7_u8, 0x3d_u8])
     def query_interface(this : ILocationEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1204,7 +1204,7 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record IDispLatLongReportVtbl,
+  record IDispLatLongReportVtable,
     query_interface : Proc(IDispLatLongReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDispLatLongReport*, UInt32),
     release : Proc(IDispLatLongReport*, UInt32),
@@ -1221,7 +1221,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record IDispLatLongReport, lpVtbl : IDispLatLongReportVtbl* do
+  record IDispLatLongReport, lpVtbl : IDispLatLongReportVtable* do
     GUID = LibC::GUID.new(0x8ae32723_u32, 0x389b_u16, 0x4a11_u16, StaticArray[0x99_u8, 0x57_u8, 0x5b_u8, 0xdd_u8, 0x48_u8, 0xfc_u8, 0x96_u8, 0x17_u8])
     def query_interface(this : IDispLatLongReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1266,7 +1266,7 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record IDispCivicAddressReportVtbl,
+  record IDispCivicAddressReportVtable,
     query_interface : Proc(IDispCivicAddressReport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDispCivicAddressReport*, UInt32),
     release : Proc(IDispCivicAddressReport*, UInt32),
@@ -1285,7 +1285,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record IDispCivicAddressReport, lpVtbl : IDispCivicAddressReportVtbl* do
+  record IDispCivicAddressReport, lpVtbl : IDispCivicAddressReportVtable* do
     GUID = LibC::GUID.new(0x16ff1a34_u32, 0x9e30_u16, 0x42c3_u16, StaticArray[0xb4_u8, 0x4d_u8, 0xe2_u8, 0x25_u8, 0x13_u8, 0xb5_u8, 0x76_u8, 0x7a_u8])
     def query_interface(this : IDispCivicAddressReport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1336,7 +1336,7 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ILocationReportFactoryVtbl,
+  record ILocationReportFactoryVtable,
     query_interface : Proc(ILocationReportFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILocationReportFactory*, UInt32),
     release : Proc(ILocationReportFactory*, UInt32),
@@ -1355,7 +1355,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ILocationReportFactory, lpVtbl : ILocationReportFactoryVtbl* do
+  record ILocationReportFactory, lpVtbl : ILocationReportFactoryVtable* do
     GUID = LibC::GUID.new(0x2daec322_u32, 0x90b2_u16, 0x47e4_u16, StaticArray[0xbb_u8, 0x8_u8, 0xd_u8, 0xa8_u8, 0x41_u8, 0x93_u8, 0x5a_u8, 0x6b_u8])
     def query_interface(this : ILocationReportFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1406,7 +1406,7 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ILatLongReportFactoryVtbl,
+  record ILatLongReportFactoryVtable,
     query_interface : Proc(ILatLongReportFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILatLongReportFactory*, UInt32),
     release : Proc(ILatLongReportFactory*, UInt32),
@@ -1426,7 +1426,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ILatLongReportFactory, lpVtbl : ILatLongReportFactoryVtbl* do
+  record ILatLongReportFactory, lpVtbl : ILatLongReportFactoryVtable* do
     GUID = LibC::GUID.new(0x3f0804cb_u32, 0xb114_u16, 0x447d_u16, StaticArray[0x83_u8, 0xdd_u8, 0x39_u8, 0x1_u8, 0x74_u8, 0xeb_u8, 0xb0_u8, 0x82_u8])
     def query_interface(this : ILatLongReportFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1480,7 +1480,7 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ICivicAddressReportFactoryVtbl,
+  record ICivicAddressReportFactoryVtable,
     query_interface : Proc(ICivicAddressReportFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICivicAddressReportFactory*, UInt32),
     release : Proc(ICivicAddressReportFactory*, UInt32),
@@ -1500,7 +1500,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ICivicAddressReportFactory, lpVtbl : ICivicAddressReportFactoryVtbl* do
+  record ICivicAddressReportFactory, lpVtbl : ICivicAddressReportFactoryVtable* do
     GUID = LibC::GUID.new(0xbf773b93_u32, 0xc64f_u16, 0x4bee_u16, StaticArray[0xbe_u8, 0xb2_u8, 0x67_u8, 0xc0_u8, 0xb8_u8, 0xdf_u8, 0x66_u8, 0xe0_u8])
     def query_interface(this : ICivicAddressReportFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1554,7 +1554,7 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ILatLongReportFactoryEvents_Vtbl,
+  record ILatLongReportFactoryEvents_Vtable,
     query_interface : Proc(ILatLongReportFactoryEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILatLongReportFactoryEvents_*, UInt32),
     release : Proc(ILatLongReportFactoryEvents_*, UInt32),
@@ -1565,7 +1565,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ILatLongReportFactoryEvents_, lpVtbl : ILatLongReportFactoryEvents_Vtbl* do
+  record ILatLongReportFactoryEvents_, lpVtbl : ILatLongReportFactoryEvents_Vtable* do
     GUID = LibC::GUID.new(0x16ee6cb7_u32, 0xab3c_u16, 0x424b_u16, StaticArray[0x84_u8, 0x9f_u8, 0x26_u8, 0x9b_u8, 0xe5_u8, 0x51_u8, 0xfc_u8, 0xbc_u8])
     def query_interface(this : ILatLongReportFactoryEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1592,7 +1592,7 @@ module Win32cr::Devices::Geolocation
   end
 
   @[Extern]
-  record ICivicAddressReportFactoryEvents_Vtbl,
+  record ICivicAddressReportFactoryEvents_Vtable,
     query_interface : Proc(ICivicAddressReportFactoryEvents_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICivicAddressReportFactoryEvents_*, UInt32),
     release : Proc(ICivicAddressReportFactoryEvents_*, UInt32),
@@ -1603,7 +1603,7 @@ module Win32cr::Devices::Geolocation
 
 
   @[Extern]
-  record ICivicAddressReportFactoryEvents_, lpVtbl : ICivicAddressReportFactoryEvents_Vtbl* do
+  record ICivicAddressReportFactoryEvents_, lpVtbl : ICivicAddressReportFactoryEvents_Vtable* do
     GUID = LibC::GUID.new(0xc96039ff_u32, 0x72ec_u16, 0x4617_u16, StaticArray[0x89_u8, 0xbd_u8, 0x84_u8, 0xd8_u8, 0x8b_u8, 0xed_u8, 0xc7_u8, 0x22_u8])
     def query_interface(this : ICivicAddressReportFactoryEvents_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

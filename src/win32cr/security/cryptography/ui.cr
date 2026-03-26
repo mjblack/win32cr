@@ -629,46 +629,67 @@ module Win32cr::Security::Cryptography::UI
   end
 
   def cryptUIDlgViewContext(dwContextType : UInt32, pvContext : Void*, hwnd : Win32cr::Foundation::HWND, pwszTitle : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pvReserved : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUIDlgViewContext(dwContextType, pvContext, hwnd, pwszTitle, dwFlags, pvReserved)
+    {% end %}
   end
 
   def cryptUIDlgSelectCertificateFromStore(hCertStore : Win32cr::Security::Cryptography::HCERTSTORE, hwnd : Win32cr::Foundation::HWND, pwszTitle : Win32cr::Foundation::PWSTR, pwszDisplayString : Win32cr::Foundation::PWSTR, dwDontUseColumn : UInt32, dwFlags : UInt32, pvReserved : Void*) : Win32cr::Security::Cryptography::CERT_CONTEXT*
+    {% if !flag?(:docs) %}
     C.CryptUIDlgSelectCertificateFromStore(hCertStore, hwnd, pwszTitle, pwszDisplayString, dwDontUseColumn, dwFlags, pvReserved)
+    {% end %}
   end
 
   def certSelectionGetSerializedBlob(pcsi : Win32cr::Security::Cryptography::UI::CERT_SELECTUI_INPUT*, ppOutBuffer : Void**, pulOutBufferSize : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CertSelectionGetSerializedBlob(pcsi, ppOutBuffer, pulOutBufferSize)
+    {% end %}
   end
 
   def cryptUIDlgCertMgr(pCryptUICertMgr : Win32cr::Security::Cryptography::UI::CRYPTUI_CERT_MGR_STRUCT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUIDlgCertMgr(pCryptUICertMgr)
+    {% end %}
   end
 
   def cryptUIWizDigitalSign(dwFlags : UInt32, hwndParent : Win32cr::Foundation::HWND, pwszWizardTitle : Win32cr::Foundation::PWSTR, pDigitalSignInfo : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_DIGITAL_SIGN_INFO*, ppSignContext : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT**) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUIWizDigitalSign(dwFlags, hwndParent, pwszWizardTitle, pDigitalSignInfo, ppSignContext)
+    {% end %}
   end
 
   def cryptUIWizFreeDigitalSignContext(pSignContext : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUIWizFreeDigitalSignContext(pSignContext)
+    {% end %}
   end
 
   def cryptUIDlgViewCertificateW(pCertViewInfo : Win32cr::Security::Cryptography::UI::CRYPTUI_VIEWCERTIFICATE_STRUCTW*, pfPropertiesChanged : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUIDlgViewCertificateW(pCertViewInfo, pfPropertiesChanged)
+    {% end %}
   end
 
   def cryptUIDlgViewCertificateA(pCertViewInfo : Win32cr::Security::Cryptography::UI::CRYPTUI_VIEWCERTIFICATE_STRUCTA*, pfPropertiesChanged : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUIDlgViewCertificateA(pCertViewInfo, pfPropertiesChanged)
+    {% end %}
   end
 
   def cryptUIWizExport(dwFlags : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_FLAGS, hwndParent : Win32cr::Foundation::HWND, pwszWizardTitle : Win32cr::Foundation::PWSTR, pExportInfo : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_EXPORT_INFO*, pvoid : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUIWizExport(dwFlags, hwndParent, pwszWizardTitle, pExportInfo, pvoid)
+    {% end %}
   end
 
   def cryptUIWizImport(dwFlags : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_FLAGS, hwndParent : Win32cr::Foundation::HWND, pwszWizardTitle : Win32cr::Foundation::PWSTR, pImportSrc : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_IMPORT_SRC_INFO*, hDestCertStore : Win32cr::Security::Cryptography::HCERTSTORE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptUIWizImport(dwFlags, hwndParent, pwszWizardTitle, pImportSrc, hDestCertStore)
+    {% end %}
   end
 
-  @[Link("cryptui")]
+  @[Link("cryptui.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CryptUIDlgViewContext(dwContextType : UInt32, pvContext : Void*, hwnd : Win32cr::Foundation::HWND, pwszTitle : Win32cr::Foundation::PWSTR, dwFlags : UInt32, pvReserved : Void*) : Win32cr::Foundation::BOOL
@@ -701,4 +722,5 @@ module Win32cr::Security::Cryptography::UI
     fun CryptUIWizImport(dwFlags : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_FLAGS, hwndParent : Win32cr::Foundation::HWND, pwszWizardTitle : Win32cr::Foundation::PWSTR, pImportSrc : Win32cr::Security::Cryptography::UI::CRYPTUI_WIZ_IMPORT_SRC_INFO*, hDestCertStore : Win32cr::Security::Cryptography::HCERTSTORE) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

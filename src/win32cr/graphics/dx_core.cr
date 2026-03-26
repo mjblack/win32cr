@@ -87,7 +87,7 @@ module Win32cr::Graphics::DXCore
   end
 
   @[Extern]
-  record IDXCoreAdapterVtbl,
+  record IDXCoreAdapterVtable,
     query_interface : Proc(IDXCoreAdapter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXCoreAdapter*, UInt32),
     release : Proc(IDXCoreAdapter*, UInt32),
@@ -104,7 +104,7 @@ module Win32cr::Graphics::DXCore
 
 
   @[Extern]
-  record IDXCoreAdapter, lpVtbl : IDXCoreAdapterVtbl* do
+  record IDXCoreAdapter, lpVtbl : IDXCoreAdapterVtable* do
     GUID = LibC::GUID.new(0xf0db4c7f_u32, 0xfe5a_u16, 0x42a2_u16, StaticArray[0xbd_u8, 0x62_u8, 0xf2_u8, 0xa6_u8, 0xcf_u8, 0x6f_u8, 0xc8_u8, 0x3e_u8])
     def query_interface(this : IDXCoreAdapter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -149,7 +149,7 @@ module Win32cr::Graphics::DXCore
   end
 
   @[Extern]
-  record IDXCoreAdapterListVtbl,
+  record IDXCoreAdapterListVtable,
     query_interface : Proc(IDXCoreAdapterList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXCoreAdapterList*, UInt32),
     release : Proc(IDXCoreAdapterList*, UInt32),
@@ -162,7 +162,7 @@ module Win32cr::Graphics::DXCore
 
 
   @[Extern]
-  record IDXCoreAdapterList, lpVtbl : IDXCoreAdapterListVtbl* do
+  record IDXCoreAdapterList, lpVtbl : IDXCoreAdapterListVtable* do
     GUID = LibC::GUID.new(0x526c7776_u32, 0x40e9_u16, 0x459b_u16, StaticArray[0xb7_u8, 0x11_u8, 0xf3_u8, 0x2a_u8, 0xd7_u8, 0x6d_u8, 0xfc_u8, 0x28_u8])
     def query_interface(this : IDXCoreAdapterList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -195,7 +195,7 @@ module Win32cr::Graphics::DXCore
   end
 
   @[Extern]
-  record IDXCoreAdapterFactoryVtbl,
+  record IDXCoreAdapterFactoryVtable,
     query_interface : Proc(IDXCoreAdapterFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDXCoreAdapterFactory*, UInt32),
     release : Proc(IDXCoreAdapterFactory*, UInt32),
@@ -207,7 +207,7 @@ module Win32cr::Graphics::DXCore
 
 
   @[Extern]
-  record IDXCoreAdapterFactory, lpVtbl : IDXCoreAdapterFactoryVtbl* do
+  record IDXCoreAdapterFactory, lpVtbl : IDXCoreAdapterFactoryVtable* do
     GUID = LibC::GUID.new(0x78ee5945_u32, 0xc36e_u16, 0x4b13_u16, StaticArray[0xa6_u8, 0x69_u8, 0x0_u8, 0x5d_u8, 0xd1_u8, 0x1c_u8, 0xf_u8, 0x6_u8])
     def query_interface(this : IDXCoreAdapterFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -237,13 +237,17 @@ module Win32cr::Graphics::DXCore
   end
 
   def dXCoreCreateAdapterFactory(riid : LibC::GUID*, ppvFactory : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DXCoreCreateAdapterFactory(riid, ppvFactory)
+    {% end %}
   end
 
-  @[Link("dxcore")]
+  @[Link("dxcore.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun DXCoreCreateAdapterFactory(riid : LibC::GUID*, ppvFactory : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

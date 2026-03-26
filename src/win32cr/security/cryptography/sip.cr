@@ -173,55 +173,80 @@ module Win32cr::Security::Cryptography::Sip
   end
 
   def cryptSIPGetSignedDataMsg(pSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, pdwEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE*, dwIndex : UInt32, pcbSignedDataMsg : UInt32*, pbSignedDataMsg : UInt8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPGetSignedDataMsg(pSubjectInfo, pdwEncodingType, dwIndex, pcbSignedDataMsg, pbSignedDataMsg)
+    {% end %}
   end
 
   def cryptSIPPutSignedDataMsg(pSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, dwEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE, pdwIndex : UInt32*, cbSignedDataMsg : UInt32, pbSignedDataMsg : UInt8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPPutSignedDataMsg(pSubjectInfo, dwEncodingType, pdwIndex, cbSignedDataMsg, pbSignedDataMsg)
+    {% end %}
   end
 
   def cryptSIPCreateIndirectData(pSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, pcbIndirectData : UInt32*, pIndirectData : Win32cr::Security::Cryptography::Sip::SIP_INDIRECT_DATA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPCreateIndirectData(pSubjectInfo, pcbIndirectData, pIndirectData)
+    {% end %}
   end
 
   def cryptSIPVerifyIndirectData(pSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, pIndirectData : Win32cr::Security::Cryptography::Sip::SIP_INDIRECT_DATA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPVerifyIndirectData(pSubjectInfo, pIndirectData)
+    {% end %}
   end
 
   def cryptSIPRemoveSignedDataMsg(pSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, dwIndex : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPRemoveSignedDataMsg(pSubjectInfo, dwIndex)
+    {% end %}
   end
 
   def cryptSIPLoad(pgSubject : LibC::GUID*, dwFlags : UInt32, pSipDispatch : Win32cr::Security::Cryptography::Sip::SIP_DISPATCH_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPLoad(pgSubject, dwFlags, pSipDispatch)
+    {% end %}
   end
 
   def cryptSIPRetrieveSubjectGuid(file_name : Win32cr::Foundation::PWSTR, hFileIn : Win32cr::Foundation::HANDLE, pgSubject : LibC::GUID*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPRetrieveSubjectGuid(file_name, hFileIn, pgSubject)
+    {% end %}
   end
 
   def cryptSIPRetrieveSubjectGuidForCatalogFile(file_name : Win32cr::Foundation::PWSTR, hFileIn : Win32cr::Foundation::HANDLE, pgSubject : LibC::GUID*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPRetrieveSubjectGuidForCatalogFile(file_name, hFileIn, pgSubject)
+    {% end %}
   end
 
   def cryptSIPAddProvider(psNewProv : Win32cr::Security::Cryptography::Sip::SIP_ADD_NEWPROVIDER*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPAddProvider(psNewProv)
+    {% end %}
   end
 
   def cryptSIPRemoveProvider(pgProv : LibC::GUID*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPRemoveProvider(pgProv)
+    {% end %}
   end
 
   def cryptSIPGetCaps(pSubjInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, pCaps : Win32cr::Security::Cryptography::Sip::SIP_CAP_SET_V3*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPGetCaps(pSubjInfo, pCaps)
+    {% end %}
   end
 
   def cryptSIPGetSealedDigest(pSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, pSig : UInt8*, dwSig : UInt32, pbDigest : UInt8*, pcbDigest : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CryptSIPGetSealedDigest(pSubjectInfo, pSig, dwSig, pbDigest, pcbDigest)
+    {% end %}
   end
 
-  @[Link("wintrust")]
-  @[Link("crypt32")]
+  @[Link("wintrust.dll")]
+  @[Link("crypt32.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CryptSIPGetSignedDataMsg(pSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, pdwEncodingType : Win32cr::Security::Cryptography::CERT_QUERY_ENCODING_TYPE*, dwIndex : UInt32, pcbSignedDataMsg : UInt32*, pbSignedDataMsg : UInt8*) : Win32cr::Foundation::BOOL
@@ -260,4 +285,5 @@ module Win32cr::Security::Cryptography::Sip
     fun CryptSIPGetSealedDigest(pSubjectInfo : Win32cr::Security::Cryptography::Sip::SIP_SUBJECTINFO*, pSig : UInt8*, dwSig : UInt32, pbDigest : UInt8*, pcbDigest : UInt32*) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

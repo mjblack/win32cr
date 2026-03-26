@@ -3957,22 +3957,22 @@ module Win32cr::System::Diagnostics::Debug
     property f128_parts64 : F128Parts64_e__Struct_
     property raw_bytes : UInt8[24]
 
-      # Nested Type I64Parts32_e__Struct_
-      @[Extern]
-      struct I64Parts32_e__Struct_
-    property low_part : UInt32
-    property high_part : UInt32
-    def initialize(@low_part : UInt32, @high_part : UInt32)
-    end
-      end
-
-
       # Nested Type F128Parts64_e__Struct_
       @[Extern]
       struct F128Parts64_e__Struct_
     property low_part : UInt64
     property high_part : Int64
     def initialize(@low_part : UInt64, @high_part : Int64)
+    end
+      end
+
+
+      # Nested Type I64Parts32_e__Struct_
+      @[Extern]
+      struct I64Parts32_e__Struct_
+    property low_part : UInt32
+    property high_part : UInt32
+    def initialize(@low_part : UInt32, @high_part : UInt32)
     end
       end
 
@@ -4210,20 +4210,20 @@ module Win32cr::System::Diagnostics::Debug
     property exception_information : ExceptionInformation_e__Struct_
     property breakpoint_information : BreakpointInformation_e__Struct_
 
-      # Nested Type ExceptionInformation_e__Struct_
-      @[Extern]
-      struct ExceptionInformation_e__Struct_
-    property is_uncaught : Bool
-    def initialize(@is_uncaught : Bool)
-    end
-      end
-
-
       # Nested Type BreakpointInformation_e__Struct_
       @[Extern]
       struct BreakpointInformation_e__Struct_
     property breakpoint_id : UInt64
     def initialize(@breakpoint_id : UInt64)
+    end
+      end
+
+
+      # Nested Type ExceptionInformation_e__Struct_
+      @[Extern]
+      struct ExceptionInformation_e__Struct_
+    property is_uncaught : UInt8
+    def initialize(@is_uncaught : UInt8)
     end
       end
 
@@ -5051,22 +5051,22 @@ module Win32cr::System::Diagnostics::Debug
     property bit_field : BitField_
     property _bitfield : UInt32
 
-    # Nested Type Anonymous_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous_e__Union_
-    property fieldCallBack : Void*
-    property pBuffer : Void*
-    def initialize(@fieldCallBack : Void*, @pBuffer : Void*)
-    end
-    end
-
-
     # Nested Type BitField_
     @[Extern]
     struct BitField_
     property position : UInt16
     property size : UInt16
     def initialize(@position : UInt16, @size : UInt16)
+    end
+    end
+
+
+    # Nested Type Anonymous_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous_e__Union_
+    property fieldCallBack : Void*
+    property pBuffer : Void*
+    def initialize(@fieldCallBack : Void*, @pBuffer : Void*)
     end
     end
 
@@ -5455,6 +5455,15 @@ module Win32cr::System::Diagnostics::Debug
     property bytes : Bytes_e__Struct_
     property bits : Bits_e__Struct_
 
+      # Nested Type Bits_e__Struct_
+      @[Extern]
+      struct Bits_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+
       # Nested Type Bytes_e__Struct_
       @[Extern]
       struct Bytes_e__Struct_
@@ -5463,15 +5472,6 @@ module Win32cr::System::Diagnostics::Debug
     property flags2 : UInt8
     property base_hi : UInt8
     def initialize(@base_mid : UInt8, @flags1 : UInt8, @flags2 : UInt8, @base_hi : UInt8)
-    end
-      end
-
-
-      # Nested Type Bits_e__Struct_
-      @[Extern]
-      struct Bits_e__Struct_
-    property _bitfield : UInt32
-    def initialize(@_bitfield : UInt32)
     end
       end
 
@@ -5541,6 +5541,15 @@ module Win32cr::System::Diagnostics::Debug
     property bytes : Bytes_e__Struct_
     property bits : Bits_e__Struct_
 
+      # Nested Type Bits_e__Struct_
+      @[Extern]
+      struct Bits_e__Struct_
+    property _bitfield : UInt32
+    def initialize(@_bitfield : UInt32)
+    end
+      end
+
+
       # Nested Type Bytes_e__Struct_
       @[Extern]
       struct Bytes_e__Struct_
@@ -5549,15 +5558,6 @@ module Win32cr::System::Diagnostics::Debug
     property flags2 : UInt8
     property base_hi : UInt8
     def initialize(@base_mid : UInt8, @flags1 : UInt8, @flags2 : UInt8, @base_hi : UInt8)
-    end
-      end
-
-
-      # Nested Type Bits_e__Struct_
-      @[Extern]
-      struct Bits_e__Struct_
-    property _bitfield : UInt32
-    def initialize(@_bitfield : UInt32)
     end
       end
 
@@ -6130,17 +6130,6 @@ module Win32cr::System::Diagnostics::Debug
     property lock_object : LockObject_e__Struct_
     property thread_object : ThreadObject_e__Struct_
 
-      # Nested Type LockObject_e__Struct_
-      @[Extern]
-      struct LockObject_e__Struct_
-    property object_name : UInt16[128]
-    property timeout : Win32cr::Foundation::LARGE_INTEGER
-    property alertable : Win32cr::Foundation::BOOL
-    def initialize(@object_name : UInt16[128], @timeout : Win32cr::Foundation::LARGE_INTEGER, @alertable : Win32cr::Foundation::BOOL)
-    end
-      end
-
-
       # Nested Type ThreadObject_e__Struct_
       @[Extern]
       struct ThreadObject_e__Struct_
@@ -6149,6 +6138,17 @@ module Win32cr::System::Diagnostics::Debug
     property wait_time : UInt32
     property context_switches : UInt32
     def initialize(@process_id : UInt32, @thread_id : UInt32, @wait_time : UInt32, @context_switches : UInt32)
+    end
+      end
+
+
+      # Nested Type LockObject_e__Struct_
+      @[Extern]
+      struct LockObject_e__Struct_
+    property object_name : UInt16[128]
+    property timeout : Win32cr::Foundation::LARGE_INTEGER
+    property alertable : Win32cr::Foundation::BOOL
+    def initialize(@object_name : UInt16[128], @timeout : Win32cr::Foundation::LARGE_INTEGER, @alertable : Win32cr::Foundation::BOOL)
     end
       end
 
@@ -6236,6 +6236,15 @@ module Win32cr::System::Diagnostics::Debug
     property x86_cpu_info : X86CpuInfo_e__Struct_
     property other_cpu_info : OtherCpuInfo_e__Struct_
 
+    # Nested Type OtherCpuInfo_e__Struct_
+    @[Extern]
+    struct OtherCpuInfo_e__Struct_
+    property processor_features : UInt64[2]
+    def initialize(@processor_features : UInt64[2])
+    end
+    end
+
+
     # Nested Type X86CpuInfo_e__Struct_
     @[Extern]
     struct X86CpuInfo_e__Struct_
@@ -6244,15 +6253,6 @@ module Win32cr::System::Diagnostics::Debug
     property feature_information : UInt32
     property amd_extended_cpu_features : UInt32
     def initialize(@vendor_id : UInt32[3], @version_information : UInt32, @feature_information : UInt32, @amd_extended_cpu_features : UInt32)
-    end
-    end
-
-
-    # Nested Type OtherCpuInfo_e__Struct_
-    @[Extern]
-    struct OtherCpuInfo_e__Struct_
-    property processor_features : UInt64[2]
-    def initialize(@processor_features : UInt64[2])
     end
     end
 
@@ -7098,12 +7098,32 @@ module Win32cr::System::Diagnostics::Debug
     property anonymous5 : Anonymous5_e__Struct_
     property status : Win32cr::Foundation::HRESULT
 
+      # Nested Type Anonymous5_e__Struct_
+      @[Extern]
+      struct Anonymous5_e__Struct_
+    property vm_read_status : Win32cr::Foundation::HRESULT
+    property vm_read_bytes_completed : UInt32
+    def initialize(@vm_read_status : Win32cr::Foundation::HRESULT, @vm_read_bytes_completed : UInt32)
+    end
+      end
+
+
       # Nested Type Anonymous4_e__Struct_
       @[Extern]
       struct Anonymous4_e__Struct_
     property vm_query_status : Win32cr::Foundation::HRESULT
     property vm_query_result : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_INFO
     def initialize(@vm_query_status : Win32cr::Foundation::HRESULT, @vm_query_result : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_INFO)
+    end
+      end
+
+
+      # Nested Type Anonymous3_e__Struct_
+      @[Extern]
+      struct Anonymous3_e__Struct_
+    property vm_region : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_INFO
+    property continue : Win32cr::Foundation::BOOL
+    def initialize(@vm_region : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_INFO, @continue : Win32cr::Foundation::BOOL)
     end
       end
 
@@ -7118,32 +7138,12 @@ module Win32cr::System::Diagnostics::Debug
       end
 
 
-      # Nested Type Anonymous5_e__Struct_
-      @[Extern]
-      struct Anonymous5_e__Struct_
-    property vm_read_status : Win32cr::Foundation::HRESULT
-    property vm_read_bytes_completed : UInt32
-    def initialize(@vm_read_status : Win32cr::Foundation::HRESULT, @vm_read_bytes_completed : UInt32)
-    end
-      end
-
-
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
       struct Anonymous1_e__Struct_
     property memory_base : UInt64
     property memory_size : UInt32
     def initialize(@memory_base : UInt64, @memory_size : UInt32)
-    end
-      end
-
-
-      # Nested Type Anonymous3_e__Struct_
-      @[Extern]
-      struct Anonymous3_e__Struct_
-    property vm_region : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_INFO
-    property continue : Win32cr::Foundation::BOOL
-    def initialize(@vm_region : Win32cr::System::Diagnostics::Debug::MINIDUMP_MEMORY_INFO, @continue : Win32cr::Foundation::BOOL)
     end
       end
 
@@ -8250,9 +8250,37 @@ module Win32cr::System::Diagnostics::Debug
     property sei : Sei_e__Struct_
     property gsiv : Gsiv_e__Struct_
 
+      # Nested Type Gsiv_e__Struct_
+      @[Extern]
+      struct Gsiv_e__Struct_
+    property poll_interval : UInt32
+    property vector : UInt32
+    property switch_to_polling_threshold : UInt32
+    property switch_to_polling_window : UInt32
+    property error_threshold : UInt32
+    property error_threshold_window : UInt32
+    def initialize(@poll_interval : UInt32, @vector : UInt32, @switch_to_polling_threshold : UInt32, @switch_to_polling_window : UInt32, @error_threshold : UInt32, @error_threshold_window : UInt32)
+    end
+      end
+
+
       # Nested Type Sei_e__Struct_
       @[Extern]
       struct Sei_e__Struct_
+    property poll_interval : UInt32
+    property vector : UInt32
+    property switch_to_polling_threshold : UInt32
+    property switch_to_polling_window : UInt32
+    property error_threshold : UInt32
+    property error_threshold_window : UInt32
+    def initialize(@poll_interval : UInt32, @vector : UInt32, @switch_to_polling_threshold : UInt32, @switch_to_polling_window : UInt32, @error_threshold : UInt32, @error_threshold_window : UInt32)
+    end
+      end
+
+
+      # Nested Type Sea_e__Struct_
+      @[Extern]
+      struct Sea_e__Struct_
     property poll_interval : UInt32
     property vector : UInt32
     property switch_to_polling_threshold : UInt32
@@ -8278,9 +8306,9 @@ module Win32cr::System::Diagnostics::Debug
       end
 
 
-      # Nested Type LocalInterrupt_e__Struct_
+      # Nested Type Sci_e__Struct_
       @[Extern]
-      struct LocalInterrupt_e__Struct_
+      struct Sci_e__Struct_
     property poll_interval : UInt32
     property vector : UInt32
     property switch_to_polling_threshold : UInt32
@@ -8292,18 +8320,9 @@ module Win32cr::System::Diagnostics::Debug
       end
 
 
-      # Nested Type Polled_e__Struct_
+      # Nested Type LocalInterrupt_e__Struct_
       @[Extern]
-      struct Polled_e__Struct_
-    property poll_interval : UInt32
-    def initialize(@poll_interval : UInt32)
-    end
-      end
-
-
-      # Nested Type Sea_e__Struct_
-      @[Extern]
-      struct Sea_e__Struct_
+      struct LocalInterrupt_e__Struct_
     property poll_interval : UInt32
     property vector : UInt32
     property switch_to_polling_threshold : UInt32
@@ -8329,30 +8348,11 @@ module Win32cr::System::Diagnostics::Debug
       end
 
 
-      # Nested Type Sci_e__Struct_
+      # Nested Type Polled_e__Struct_
       @[Extern]
-      struct Sci_e__Struct_
+      struct Polled_e__Struct_
     property poll_interval : UInt32
-    property vector : UInt32
-    property switch_to_polling_threshold : UInt32
-    property switch_to_polling_window : UInt32
-    property error_threshold : UInt32
-    property error_threshold_window : UInt32
-    def initialize(@poll_interval : UInt32, @vector : UInt32, @switch_to_polling_threshold : UInt32, @switch_to_polling_window : UInt32, @error_threshold : UInt32, @error_threshold_window : UInt32)
-    end
-      end
-
-
-      # Nested Type Gsiv_e__Struct_
-      @[Extern]
-      struct Gsiv_e__Struct_
-    property poll_interval : UInt32
-    property vector : UInt32
-    property switch_to_polling_threshold : UInt32
-    property switch_to_polling_window : UInt32
-    property error_threshold : UInt32
-    property error_threshold_window : UInt32
-    def initialize(@poll_interval : UInt32, @vector : UInt32, @switch_to_polling_threshold : UInt32, @switch_to_polling_window : UInt32, @error_threshold : UInt32, @error_threshold_window : UInt32)
+    def initialize(@poll_interval : UInt32)
     end
       end
 
@@ -8992,7 +8992,7 @@ module Win32cr::System::Diagnostics::Debug
   {% end %}
 
   @[Extern]
-  record IDebugAdvancedVtbl,
+  record IDebugAdvancedVtable,
     query_interface : Proc(IDebugAdvanced*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugAdvanced*, UInt32),
     release : Proc(IDebugAdvanced*, UInt32),
@@ -9001,7 +9001,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugAdvanced, lpVtbl : IDebugAdvancedVtbl* do
+  record IDebugAdvanced, lpVtbl : IDebugAdvancedVtable* do
     GUID = LibC::GUID.new(0xf2df5f53_u32, 0x71f_u16, 0x47bd_u16, StaticArray[0x9d_u8, 0xe6_u8, 0x57_u8, 0x34_u8, 0xc3_u8, 0xfe_u8, 0xd6_u8, 0x89_u8])
     def query_interface(this : IDebugAdvanced*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9022,7 +9022,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugAdvanced2Vtbl,
+  record IDebugAdvanced2Vtable,
     query_interface : Proc(IDebugAdvanced2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugAdvanced2*, UInt32),
     release : Proc(IDebugAdvanced2*, UInt32),
@@ -9036,7 +9036,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugAdvanced2, lpVtbl : IDebugAdvanced2Vtbl* do
+  record IDebugAdvanced2, lpVtbl : IDebugAdvanced2Vtable* do
     GUID = LibC::GUID.new(0x716d14c9_u32, 0x119b_u16, 0x4ba5_u16, StaticArray[0xaf_u8, 0x1f_u8, 0x8_u8, 0x90_u8, 0xe6_u8, 0x72_u8, 0x41_u8, 0x6a_u8])
     def query_interface(this : IDebugAdvanced2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9072,7 +9072,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugAdvanced3Vtbl,
+  record IDebugAdvanced3Vtable,
     query_interface : Proc(IDebugAdvanced3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugAdvanced3*, UInt32),
     release : Proc(IDebugAdvanced3*, UInt32),
@@ -9089,7 +9089,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugAdvanced3, lpVtbl : IDebugAdvanced3Vtbl* do
+  record IDebugAdvanced3, lpVtbl : IDebugAdvanced3Vtable* do
     GUID = LibC::GUID.new(0xcba4abb4_u32, 0x84c4_u16, 0x444d_u16, StaticArray[0x87_u8, 0xca_u8, 0xa0_u8, 0x4e_u8, 0x13_u8, 0x28_u8, 0x67_u8, 0x39_u8])
     def query_interface(this : IDebugAdvanced3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9134,7 +9134,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugAdvanced4Vtbl,
+  record IDebugAdvanced4Vtable,
     query_interface : Proc(IDebugAdvanced4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugAdvanced4*, UInt32),
     release : Proc(IDebugAdvanced4*, UInt32),
@@ -9152,7 +9152,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugAdvanced4, lpVtbl : IDebugAdvanced4Vtbl* do
+  record IDebugAdvanced4, lpVtbl : IDebugAdvanced4Vtable* do
     GUID = LibC::GUID.new(0xd1069067_u32, 0x2a65_u16, 0x4bf0_u16, StaticArray[0xae_u8, 0x97_u8, 0x76_u8, 0x18_u8, 0x4b_u8, 0x67_u8, 0x85_u8, 0x6b_u8])
     def query_interface(this : IDebugAdvanced4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9200,7 +9200,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugBreakpointVtbl,
+  record IDebugBreakpointVtable,
     query_interface : Proc(IDebugBreakpoint*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugBreakpoint*, UInt32),
     release : Proc(IDebugBreakpoint*, UInt32),
@@ -9228,7 +9228,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugBreakpoint, lpVtbl : IDebugBreakpointVtbl* do
+  record IDebugBreakpoint, lpVtbl : IDebugBreakpointVtable* do
     GUID = LibC::GUID.new(0x5bd9d474_u32, 0x5975_u16, 0x423a_u16, StaticArray[0xb8_u8, 0x8b_u8, 0x65_u8, 0xa8_u8, 0xe7_u8, 0x11_u8, 0xe_u8, 0x65_u8])
     def query_interface(this : IDebugBreakpoint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9306,7 +9306,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugBreakpoint2Vtbl,
+  record IDebugBreakpoint2Vtable,
     query_interface : Proc(IDebugBreakpoint2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugBreakpoint2*, UInt32),
     release : Proc(IDebugBreakpoint2*, UInt32),
@@ -9338,7 +9338,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugBreakpoint2, lpVtbl : IDebugBreakpoint2Vtbl* do
+  record IDebugBreakpoint2, lpVtbl : IDebugBreakpoint2Vtable* do
     GUID = LibC::GUID.new(0x1b278d20_u32, 0x79f2_u16, 0x426e_u16, StaticArray[0xa3_u8, 0xf9_u8, 0xc1_u8, 0xdd_u8, 0xf3_u8, 0x75_u8, 0xd4_u8, 0x8e_u8])
     def query_interface(this : IDebugBreakpoint2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9428,7 +9428,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugBreakpoint3Vtbl,
+  record IDebugBreakpoint3Vtable,
     query_interface : Proc(IDebugBreakpoint3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugBreakpoint3*, UInt32),
     release : Proc(IDebugBreakpoint3*, UInt32),
@@ -9461,7 +9461,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugBreakpoint3, lpVtbl : IDebugBreakpoint3Vtbl* do
+  record IDebugBreakpoint3, lpVtbl : IDebugBreakpoint3Vtable* do
     GUID = LibC::GUID.new(0x38f5c249_u32, 0xb448_u16, 0x43bb_u16, StaticArray[0x98_u8, 0x35_u8, 0x57_u8, 0x9d_u8, 0x4e_u8, 0xc0_u8, 0x22_u8, 0x49_u8])
     def query_interface(this : IDebugBreakpoint3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9554,7 +9554,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugClientVtbl,
+  record IDebugClientVtable,
     query_interface : Proc(IDebugClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugClient*, UInt32),
     release : Proc(IDebugClient*, UInt32),
@@ -9606,7 +9606,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugClient, lpVtbl : IDebugClientVtbl* do
+  record IDebugClient, lpVtbl : IDebugClientVtable* do
     GUID = LibC::GUID.new(0x27fe5639_u32, 0x8407_u16, 0x4f47_u16, StaticArray[0x83_u8, 0x64_u8, 0xee_u8, 0x11_u8, 0x8f_u8, 0xb0_u8, 0x8a_u8, 0xc8_u8])
     def query_interface(this : IDebugClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9756,7 +9756,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugClient2Vtbl,
+  record IDebugClient2Vtable,
     query_interface : Proc(IDebugClient2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugClient2*, UInt32),
     release : Proc(IDebugClient2*, UInt32),
@@ -9816,7 +9816,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugClient2, lpVtbl : IDebugClient2Vtbl* do
+  record IDebugClient2, lpVtbl : IDebugClient2Vtable* do
     GUID = LibC::GUID.new(0xedbed635_u32, 0x372e_u16, 0x4dab_u16, StaticArray[0xbb_u8, 0xfe_u8, 0xed_u8, 0xd_u8, 0x2f_u8, 0x63_u8, 0xbe_u8, 0x81_u8])
     def query_interface(this : IDebugClient2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9990,7 +9990,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugClient3Vtbl,
+  record IDebugClient3Vtable,
     query_interface : Proc(IDebugClient3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugClient3*, UInt32),
     release : Proc(IDebugClient3*, UInt32),
@@ -10054,7 +10054,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugClient3, lpVtbl : IDebugClient3Vtbl* do
+  record IDebugClient3, lpVtbl : IDebugClient3Vtable* do
     GUID = LibC::GUID.new(0xdd492d7f_u32, 0x71b8_u16, 0x4ad6_u16, StaticArray[0xa8_u8, 0xdc_u8, 0x1c_u8, 0x88_u8, 0x74_u8, 0x79_u8, 0xff_u8, 0x91_u8])
     def query_interface(this : IDebugClient3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10240,7 +10240,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugClient4Vtbl,
+  record IDebugClient4Vtable,
     query_interface : Proc(IDebugClient4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugClient4*, UInt32),
     release : Proc(IDebugClient4*, UInt32),
@@ -10310,7 +10310,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugClient4, lpVtbl : IDebugClient4Vtbl* do
+  record IDebugClient4, lpVtbl : IDebugClient4Vtable* do
     GUID = LibC::GUID.new(0xca83c3de_u32, 0x5089_u16, 0x4cf8_u16, StaticArray[0x93_u8, 0xc8_u8, 0xd8_u8, 0x92_u8, 0x38_u8, 0x7f_u8, 0x2a_u8, 0x5e_u8])
     def query_interface(this : IDebugClient4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10514,7 +10514,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugClient5Vtbl,
+  record IDebugClient5Vtable,
     query_interface : Proc(IDebugClient5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugClient5*, UInt32),
     release : Proc(IDebugClient5*, UInt32),
@@ -10613,7 +10613,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugClient5, lpVtbl : IDebugClient5Vtbl* do
+  record IDebugClient5, lpVtbl : IDebugClient5Vtable* do
     GUID = LibC::GUID.new(0xe3acb9d7_u32, 0x7ec2_u16, 0x4f0c_u16, StaticArray[0xa0_u8, 0xda_u8, 0xe8_u8, 0x1e_u8, 0xc_u8, 0xbb_u8, 0xe6_u8, 0x28_u8])
     def query_interface(this : IDebugClient5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10904,7 +10904,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugClient6Vtbl,
+  record IDebugClient6Vtable,
     query_interface : Proc(IDebugClient6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugClient6*, UInt32),
     release : Proc(IDebugClient6*, UInt32),
@@ -11004,7 +11004,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugClient6, lpVtbl : IDebugClient6Vtbl* do
+  record IDebugClient6, lpVtbl : IDebugClient6Vtable* do
     GUID = LibC::GUID.new(0xfd28b4c5_u32, 0xc498_u16, 0x4686_u16, StaticArray[0xa2_u8, 0x8e_u8, 0x62_u8, 0xca_u8, 0xd2_u8, 0x15_u8, 0x4e_u8, 0xb3_u8])
     def query_interface(this : IDebugClient6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11298,7 +11298,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugClient7Vtbl,
+  record IDebugClient7Vtable,
     query_interface : Proc(IDebugClient7*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugClient7*, UInt32),
     release : Proc(IDebugClient7*, UInt32),
@@ -11399,7 +11399,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugClient7, lpVtbl : IDebugClient7Vtbl* do
+  record IDebugClient7, lpVtbl : IDebugClient7Vtable* do
     GUID = LibC::GUID.new(0x13586be3_u32, 0x542e_u16, 0x481e_u16, StaticArray[0xb1_u8, 0xf2_u8, 0x84_u8, 0x97_u8, 0xba_u8, 0x74_u8, 0xf9_u8, 0xa9_u8])
     def query_interface(this : IDebugClient7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11696,7 +11696,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugClient8Vtbl,
+  record IDebugClient8Vtable,
     query_interface : Proc(IDebugClient8*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugClient8*, UInt32),
     release : Proc(IDebugClient8*, UInt32),
@@ -11798,7 +11798,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugClient8, lpVtbl : IDebugClient8Vtbl* do
+  record IDebugClient8, lpVtbl : IDebugClient8Vtable* do
     GUID = LibC::GUID.new(0xcec43add_u32, 0x6375_u16, 0x469e_u16, StaticArray[0x83_u8, 0xd5_u8, 0x41_u8, 0x4e_u8, 0x40_u8, 0x33_u8, 0xc1_u8, 0x9a_u8])
     def query_interface(this : IDebugClient8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12098,7 +12098,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugPlmClientVtbl,
+  record IDebugPlmClientVtable,
     query_interface : Proc(IDebugPlmClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugPlmClient*, UInt32),
     release : Proc(IDebugPlmClient*, UInt32),
@@ -12106,7 +12106,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugPlmClient, lpVtbl : IDebugPlmClientVtbl* do
+  record IDebugPlmClient, lpVtbl : IDebugPlmClientVtable* do
     GUID = LibC::GUID.new(0xa02b66c4_u32, 0xaea3_u16, 0x4234_u16, StaticArray[0xa9_u8, 0xf7_u8, 0xfe_u8, 0x4c_u8, 0x38_u8, 0x3d_u8, 0x4e_u8, 0x29_u8])
     def query_interface(this : IDebugPlmClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12124,7 +12124,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugPlmClient2Vtbl,
+  record IDebugPlmClient2Vtable,
     query_interface : Proc(IDebugPlmClient2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugPlmClient2*, UInt32),
     release : Proc(IDebugPlmClient2*, UInt32),
@@ -12133,7 +12133,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugPlmClient2, lpVtbl : IDebugPlmClient2Vtbl* do
+  record IDebugPlmClient2, lpVtbl : IDebugPlmClient2Vtable* do
     GUID = LibC::GUID.new(0x597c980d_u32, 0xe7bd_u16, 0x4309_u16, StaticArray[0x96_u8, 0x2c_u8, 0x9d_u8, 0x9b_u8, 0x69_u8, 0xa7_u8, 0x37_u8, 0x2c_u8])
     def query_interface(this : IDebugPlmClient2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12154,7 +12154,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugPlmClient3Vtbl,
+  record IDebugPlmClient3Vtable,
     query_interface : Proc(IDebugPlmClient3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugPlmClient3*, UInt32),
     release : Proc(IDebugPlmClient3*, UInt32),
@@ -12172,7 +12172,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugPlmClient3, lpVtbl : IDebugPlmClient3Vtbl* do
+  record IDebugPlmClient3, lpVtbl : IDebugPlmClient3Vtable* do
     GUID = LibC::GUID.new(0xd4a5dbd1_u32, 0xca02_u16, 0x4d90_u16, StaticArray[0x85_u8, 0x6a_u8, 0x2a_u8, 0x92_u8, 0xbf_u8, 0xd0_u8, 0xf2_u8, 0xf_u8])
     def query_interface(this : IDebugPlmClient3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12220,7 +12220,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugOutputStreamVtbl,
+  record IDebugOutputStreamVtable,
     query_interface : Proc(IDebugOutputStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugOutputStream*, UInt32),
     release : Proc(IDebugOutputStream*, UInt32),
@@ -12228,7 +12228,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugOutputStream, lpVtbl : IDebugOutputStreamVtbl* do
+  record IDebugOutputStream, lpVtbl : IDebugOutputStreamVtable* do
     GUID = LibC::GUID.new(0x7782d8f2_u32, 0x2b85_u16, 0x4059_u16, StaticArray[0xab_u8, 0x88_u8, 0x28_u8, 0xce_u8, 0xdd_u8, 0xca_u8, 0x1c_u8, 0x80_u8])
     def query_interface(this : IDebugOutputStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12246,7 +12246,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugControlVtbl,
+  record IDebugControlVtable,
     query_interface : Proc(IDebugControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugControl*, UInt32),
     release : Proc(IDebugControl*, UInt32),
@@ -12345,7 +12345,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugControl, lpVtbl : IDebugControlVtbl* do
+  record IDebugControl, lpVtbl : IDebugControlVtable* do
     GUID = LibC::GUID.new(0x5182e668_u32, 0x105e_u16, 0x416e_u16, StaticArray[0xad_u8, 0x92_u8, 0x24_u8, 0xef_u8, 0x80_u8, 0x4_u8, 0x24_u8, 0xba_u8])
     def query_interface(this : IDebugControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12636,7 +12636,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugControl2Vtbl,
+  record IDebugControl2Vtable,
     query_interface : Proc(IDebugControl2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugControl2*, UInt32),
     release : Proc(IDebugControl2*, UInt32),
@@ -12743,7 +12743,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugControl2, lpVtbl : IDebugControl2Vtbl* do
+  record IDebugControl2, lpVtbl : IDebugControl2Vtable* do
     GUID = LibC::GUID.new(0xd4366723_u32, 0x44df_u16, 0x4bed_u16, StaticArray[0x8c_u8, 0x7e_u8, 0x4c_u8, 0x5_u8, 0x42_u8, 0x4f_u8, 0x45_u8, 0x88_u8])
     def query_interface(this : IDebugControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13058,7 +13058,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugControl3Vtbl,
+  record IDebugControl3Vtable,
     query_interface : Proc(IDebugControl3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugControl3*, UInt32),
     release : Proc(IDebugControl3*, UInt32),
@@ -13178,7 +13178,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugControl3, lpVtbl : IDebugControl3Vtbl* do
+  record IDebugControl3, lpVtbl : IDebugControl3Vtable* do
     GUID = LibC::GUID.new(0x7df74a86_u32, 0xb03f_u16, 0x407f_u16, StaticArray[0x90_u8, 0xab_u8, 0xa2_u8, 0xd_u8, 0xad_u8, 0xce_u8, 0xad_u8, 0x8_u8])
     def query_interface(this : IDebugControl3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13532,7 +13532,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugControl4Vtbl,
+  record IDebugControl4Vtable,
     query_interface : Proc(IDebugControl4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugControl4*, UInt32),
     release : Proc(IDebugControl4*, UInt32),
@@ -13705,7 +13705,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugControl4, lpVtbl : IDebugControl4Vtbl* do
+  record IDebugControl4, lpVtbl : IDebugControl4Vtable* do
     GUID = LibC::GUID.new(0x94e60ce9_u32, 0x9b41_u16, 0x4b19_u16, StaticArray[0x9f_u8, 0xc0_u8, 0x6d_u8, 0x9e_u8, 0xb3_u8, 0x52_u8, 0x72_u8, 0xb3_u8])
     def query_interface(this : IDebugControl4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14218,7 +14218,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugControl5Vtbl,
+  record IDebugControl5Vtable,
     query_interface : Proc(IDebugControl5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugControl5*, UInt32),
     release : Proc(IDebugControl5*, UInt32),
@@ -14396,7 +14396,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugControl5, lpVtbl : IDebugControl5Vtbl* do
+  record IDebugControl5, lpVtbl : IDebugControl5Vtable* do
     GUID = LibC::GUID.new(0xb2ffe162_u32, 0x2412_u16, 0x429f_u16, StaticArray[0x8d_u8, 0x1d_u8, 0x5b_u8, 0xf6_u8, 0xdd_u8, 0x82_u8, 0x46_u8, 0x96_u8])
     def query_interface(this : IDebugControl5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -14924,7 +14924,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugControl6Vtbl,
+  record IDebugControl6Vtable,
     query_interface : Proc(IDebugControl6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugControl6*, UInt32),
     release : Proc(IDebugControl6*, UInt32),
@@ -15104,7 +15104,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugControl6, lpVtbl : IDebugControl6Vtbl* do
+  record IDebugControl6, lpVtbl : IDebugControl6Vtable* do
     GUID = LibC::GUID.new(0xbc0d583f_u32, 0x126d_u16, 0x43a1_u16, StaticArray[0x9c_u8, 0xc4_u8, 0xa8_u8, 0x60_u8, 0xab_u8, 0x1d_u8, 0x53_u8, 0x7b_u8])
     def query_interface(this : IDebugControl6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -15638,7 +15638,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugControl7Vtbl,
+  record IDebugControl7Vtable,
     query_interface : Proc(IDebugControl7*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugControl7*, UInt32),
     release : Proc(IDebugControl7*, UInt32),
@@ -15819,7 +15819,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugControl7, lpVtbl : IDebugControl7Vtbl* do
+  record IDebugControl7, lpVtbl : IDebugControl7Vtable* do
     GUID = LibC::GUID.new(0xb86fb3b1_u32, 0x80d4_u16, 0x475b_u16, StaticArray[0xae_u8, 0xa3_u8, 0xcf_u8, 0x6_u8, 0x53_u8, 0x9c_u8, 0xf6_u8, 0x3a_u8])
     def query_interface(this : IDebugControl7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16356,7 +16356,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugDataSpacesVtbl,
+  record IDebugDataSpacesVtable,
     query_interface : Proc(IDebugDataSpaces*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugDataSpaces*, UInt32),
     release : Proc(IDebugDataSpaces*, UInt32),
@@ -16383,7 +16383,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugDataSpaces, lpVtbl : IDebugDataSpacesVtbl* do
+  record IDebugDataSpaces, lpVtbl : IDebugDataSpacesVtable* do
     GUID = LibC::GUID.new(0x88f7dfab_u32, 0x3ea7_u16, 0x4c3a_u16, StaticArray[0xae_u8, 0xfb_u8, 0xc4_u8, 0xe8_u8, 0x10_u8, 0x61_u8, 0x73_u8, 0xaa_u8])
     def query_interface(this : IDebugDataSpaces*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16458,7 +16458,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugDataSpaces2Vtbl,
+  record IDebugDataSpaces2Vtable,
     query_interface : Proc(IDebugDataSpaces2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugDataSpaces2*, UInt32),
     release : Proc(IDebugDataSpaces2*, UInt32),
@@ -16491,7 +16491,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugDataSpaces2, lpVtbl : IDebugDataSpaces2Vtbl* do
+  record IDebugDataSpaces2, lpVtbl : IDebugDataSpaces2Vtable* do
     GUID = LibC::GUID.new(0x7a5e852f_u32, 0x96e9_u16, 0x468f_u16, StaticArray[0xac_u8, 0x1b_u8, 0xb_u8, 0x3a_u8, 0xdd_u8, 0xc4_u8, 0xa0_u8, 0x49_u8])
     def query_interface(this : IDebugDataSpaces2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16584,7 +16584,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugDataSpaces3Vtbl,
+  record IDebugDataSpaces3Vtable,
     query_interface : Proc(IDebugDataSpaces3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugDataSpaces3*, UInt32),
     release : Proc(IDebugDataSpaces3*, UInt32),
@@ -16622,7 +16622,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugDataSpaces3, lpVtbl : IDebugDataSpaces3Vtbl* do
+  record IDebugDataSpaces3, lpVtbl : IDebugDataSpaces3Vtable* do
     GUID = LibC::GUID.new(0x23f79d6c_u32, 0x8aaf_u16, 0x4f7c_u16, StaticArray[0xa6_u8, 0x7_u8, 0x99_u8, 0x95_u8, 0xf5_u8, 0x40_u8, 0x7e_u8, 0x63_u8])
     def query_interface(this : IDebugDataSpaces3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16730,7 +16730,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugDataSpaces4Vtbl,
+  record IDebugDataSpaces4Vtable,
     query_interface : Proc(IDebugDataSpaces4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugDataSpaces4*, UInt32),
     release : Proc(IDebugDataSpaces4*, UInt32),
@@ -16778,7 +16778,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugDataSpaces4, lpVtbl : IDebugDataSpaces4Vtbl* do
+  record IDebugDataSpaces4, lpVtbl : IDebugDataSpaces4Vtable* do
     GUID = LibC::GUID.new(0xd98ada1f_u32, 0x29e9_u16, 0x4ef5_u16, StaticArray[0xa6_u8, 0xc0_u8, 0xe5_u8, 0x33_u8, 0x49_u8, 0x88_u8, 0x32_u8, 0x12_u8])
     def query_interface(this : IDebugDataSpaces4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16916,7 +16916,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugEventCallbacksVtbl,
+  record IDebugEventCallbacksVtable,
     query_interface : Proc(IDebugEventCallbacks*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugEventCallbacks*, UInt32),
     release : Proc(IDebugEventCallbacks*, UInt32),
@@ -16937,7 +16937,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugEventCallbacks, lpVtbl : IDebugEventCallbacksVtbl* do
+  record IDebugEventCallbacks, lpVtbl : IDebugEventCallbacksVtable* do
     GUID = LibC::GUID.new(0x337be28b_u32, 0x5036_u16, 0x4d72_u16, StaticArray[0xb6_u8, 0xbf_u8, 0xc4_u8, 0x5f_u8, 0xbb_u8, 0x9f_u8, 0x2e_u8, 0xaa_u8])
     def query_interface(this : IDebugEventCallbacks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -16994,7 +16994,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugEventCallbacksWideVtbl,
+  record IDebugEventCallbacksWideVtable,
     query_interface : Proc(IDebugEventCallbacksWide*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugEventCallbacksWide*, UInt32),
     release : Proc(IDebugEventCallbacksWide*, UInt32),
@@ -17015,7 +17015,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugEventCallbacksWide, lpVtbl : IDebugEventCallbacksWideVtbl* do
+  record IDebugEventCallbacksWide, lpVtbl : IDebugEventCallbacksWideVtable* do
     GUID = LibC::GUID.new(0x690e046_u32, 0x9c23_u16, 0x45ac_u16, StaticArray[0xa0_u8, 0x4f_u8, 0x98_u8, 0x7a_u8, 0xc2_u8, 0x9a_u8, 0xd0_u8, 0xd3_u8])
     def query_interface(this : IDebugEventCallbacksWide*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17072,7 +17072,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugEventContextCallbacksVtbl,
+  record IDebugEventContextCallbacksVtable,
     query_interface : Proc(IDebugEventContextCallbacks*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugEventContextCallbacks*, UInt32),
     release : Proc(IDebugEventContextCallbacks*, UInt32),
@@ -17093,7 +17093,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugEventContextCallbacks, lpVtbl : IDebugEventContextCallbacksVtbl* do
+  record IDebugEventContextCallbacks, lpVtbl : IDebugEventContextCallbacksVtable* do
     GUID = LibC::GUID.new(0x61a4905b_u32, 0x23f9_u16, 0x4247_u16, StaticArray[0xb3_u8, 0xc5_u8, 0x53_u8, 0xd0_u8, 0x87_u8, 0x52_u8, 0x9a_u8, 0xb7_u8])
     def query_interface(this : IDebugEventContextCallbacks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17150,7 +17150,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugInputCallbacksVtbl,
+  record IDebugInputCallbacksVtable,
     query_interface : Proc(IDebugInputCallbacks*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugInputCallbacks*, UInt32),
     release : Proc(IDebugInputCallbacks*, UInt32),
@@ -17159,7 +17159,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugInputCallbacks, lpVtbl : IDebugInputCallbacksVtbl* do
+  record IDebugInputCallbacks, lpVtbl : IDebugInputCallbacksVtable* do
     GUID = LibC::GUID.new(0x9f50e42c_u32, 0xf136_u16, 0x499e_u16, StaticArray[0x9a_u8, 0x97_u8, 0x73_u8, 0x3_u8, 0x6c_u8, 0x94_u8, 0xed_u8, 0x2d_u8])
     def query_interface(this : IDebugInputCallbacks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17180,7 +17180,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugOutputCallbacksVtbl,
+  record IDebugOutputCallbacksVtable,
     query_interface : Proc(IDebugOutputCallbacks*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugOutputCallbacks*, UInt32),
     release : Proc(IDebugOutputCallbacks*, UInt32),
@@ -17188,7 +17188,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugOutputCallbacks, lpVtbl : IDebugOutputCallbacksVtbl* do
+  record IDebugOutputCallbacks, lpVtbl : IDebugOutputCallbacksVtable* do
     GUID = LibC::GUID.new(0x4bf58045_u32, 0xd654_u16, 0x4c40_u16, StaticArray[0xb0_u8, 0xaf_u8, 0x68_u8, 0x30_u8, 0x90_u8, 0xf3_u8, 0x56_u8, 0xdc_u8])
     def query_interface(this : IDebugOutputCallbacks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17206,7 +17206,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugOutputCallbacksWideVtbl,
+  record IDebugOutputCallbacksWideVtable,
     query_interface : Proc(IDebugOutputCallbacksWide*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugOutputCallbacksWide*, UInt32),
     release : Proc(IDebugOutputCallbacksWide*, UInt32),
@@ -17214,7 +17214,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugOutputCallbacksWide, lpVtbl : IDebugOutputCallbacksWideVtbl* do
+  record IDebugOutputCallbacksWide, lpVtbl : IDebugOutputCallbacksWideVtable* do
     GUID = LibC::GUID.new(0x4c7fd663_u32, 0xc394_u16, 0x4e26_u16, StaticArray[0x8e_u8, 0xf1_u8, 0x34_u8, 0xad_u8, 0x5e_u8, 0xd3_u8, 0x76_u8, 0x4c_u8])
     def query_interface(this : IDebugOutputCallbacksWide*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17232,7 +17232,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugOutputCallbacks2Vtbl,
+  record IDebugOutputCallbacks2Vtable,
     query_interface : Proc(IDebugOutputCallbacks2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugOutputCallbacks2*, UInt32),
     release : Proc(IDebugOutputCallbacks2*, UInt32),
@@ -17242,7 +17242,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugOutputCallbacks2, lpVtbl : IDebugOutputCallbacks2Vtbl* do
+  record IDebugOutputCallbacks2, lpVtbl : IDebugOutputCallbacks2Vtable* do
     GUID = LibC::GUID.new(0x67721fe9_u32, 0x56d2_u16, 0x4a44_u16, StaticArray[0xa3_u8, 0x25_u8, 0x2b_u8, 0x65_u8, 0x51_u8, 0x3c_u8, 0xe6_u8, 0xeb_u8])
     def query_interface(this : IDebugOutputCallbacks2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17266,7 +17266,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugRegistersVtbl,
+  record IDebugRegistersVtable,
     query_interface : Proc(IDebugRegisters*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugRegisters*, UInt32),
     release : Proc(IDebugRegisters*, UInt32),
@@ -17284,7 +17284,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugRegisters, lpVtbl : IDebugRegistersVtbl* do
+  record IDebugRegisters, lpVtbl : IDebugRegistersVtable* do
     GUID = LibC::GUID.new(0xce289126_u32, 0x9e84_u16, 0x45a7_u16, StaticArray[0x93_u8, 0x7e_u8, 0x67_u8, 0xbb_u8, 0x18_u8, 0x69_u8, 0x14_u8, 0x93_u8])
     def query_interface(this : IDebugRegisters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17332,7 +17332,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugRegisters2Vtbl,
+  record IDebugRegisters2Vtable,
     query_interface : Proc(IDebugRegisters2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugRegisters2*, UInt32),
     release : Proc(IDebugRegisters2*, UInt32),
@@ -17365,7 +17365,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugRegisters2, lpVtbl : IDebugRegisters2Vtbl* do
+  record IDebugRegisters2, lpVtbl : IDebugRegisters2Vtable* do
     GUID = LibC::GUID.new(0x1656afa9_u32, 0x19c6_u16, 0x4e3a_u16, StaticArray[0x97_u8, 0xe7_u8, 0x5d_u8, 0xc9_u8, 0x16_u8, 0xc_u8, 0xf9_u8, 0xc4_u8])
     def query_interface(this : IDebugRegisters2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17458,7 +17458,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugSymbolGroupVtbl,
+  record IDebugSymbolGroupVtable,
     query_interface : Proc(IDebugSymbolGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugSymbolGroup*, UInt32),
     release : Proc(IDebugSymbolGroup*, UInt32),
@@ -17475,7 +17475,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugSymbolGroup, lpVtbl : IDebugSymbolGroupVtbl* do
+  record IDebugSymbolGroup, lpVtbl : IDebugSymbolGroupVtable* do
     GUID = LibC::GUID.new(0xf2528316_u32, 0xf1a_u16, 0x4431_u16, StaticArray[0xae_u8, 0xed_u8, 0x11_u8, 0xd0_u8, 0x96_u8, 0xe1_u8, 0xe2_u8, 0xab_u8])
     def query_interface(this : IDebugSymbolGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17520,7 +17520,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugSymbolGroup2Vtbl,
+  record IDebugSymbolGroup2Vtable,
     query_interface : Proc(IDebugSymbolGroup2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugSymbolGroup2*, UInt32),
     release : Proc(IDebugSymbolGroup2*, UInt32),
@@ -17550,7 +17550,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugSymbolGroup2, lpVtbl : IDebugSymbolGroup2Vtbl* do
+  record IDebugSymbolGroup2, lpVtbl : IDebugSymbolGroup2Vtable* do
     GUID = LibC::GUID.new(0x6a7ccc5f_u32, 0xfb5e_u16, 0x4dcc_u16, StaticArray[0xb4_u8, 0x1c_u8, 0x6c_u8, 0x20_u8, 0x30_u8, 0x7b_u8, 0xcc_u8, 0xc7_u8])
     def query_interface(this : IDebugSymbolGroup2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17634,7 +17634,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugSymbolsVtbl,
+  record IDebugSymbolsVtable,
     query_interface : Proc(IDebugSymbols*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugSymbols*, UInt32),
     release : Proc(IDebugSymbols*, UInt32),
@@ -17690,7 +17690,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugSymbols, lpVtbl : IDebugSymbolsVtbl* do
+  record IDebugSymbols, lpVtbl : IDebugSymbolsVtable* do
     GUID = LibC::GUID.new(0x8c31e98c_u32, 0x983a_u16, 0x48a5_u16, StaticArray[0x90_u8, 0x16_u8, 0x6f_u8, 0xe5_u8, 0xd6_u8, 0x67_u8, 0xa9_u8, 0x50_u8])
     def query_interface(this : IDebugSymbols*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -17852,7 +17852,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugSymbols2Vtbl,
+  record IDebugSymbols2Vtable,
     query_interface : Proc(IDebugSymbols2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugSymbols2*, UInt32),
     release : Proc(IDebugSymbols2*, UInt32),
@@ -17916,7 +17916,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugSymbols2, lpVtbl : IDebugSymbols2Vtbl* do
+  record IDebugSymbols2, lpVtbl : IDebugSymbols2Vtable* do
     GUID = LibC::GUID.new(0x3a707211_u32, 0xafdd_u16, 0x4495_u16, StaticArray[0xad_u8, 0x4f_u8, 0x56_u8, 0xfe_u8, 0xcd_u8, 0xf8_u8, 0x16_u8, 0x3f_u8])
     def query_interface(this : IDebugSymbols2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18102,7 +18102,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugSymbols3Vtbl,
+  record IDebugSymbols3Vtable,
     query_interface : Proc(IDebugSymbols3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugSymbols3*, UInt32),
     release : Proc(IDebugSymbols3*, UInt32),
@@ -18232,7 +18232,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugSymbols3, lpVtbl : IDebugSymbols3Vtbl* do
+  record IDebugSymbols3, lpVtbl : IDebugSymbols3Vtable* do
     GUID = LibC::GUID.new(0xf02fbecc_u32, 0x50ac_u16, 0x4f36_u16, StaticArray[0x9a_u8, 0xd9_u8, 0xc9_u8, 0x75_u8, 0xe8_u8, 0xf3_u8, 0x2f_u8, 0xf8_u8])
     def query_interface(this : IDebugSymbols3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -18616,7 +18616,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugSymbols4Vtbl,
+  record IDebugSymbols4Vtable,
     query_interface : Proc(IDebugSymbols4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugSymbols4*, UInt32),
     release : Proc(IDebugSymbols4*, UInt32),
@@ -18753,7 +18753,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugSymbols4, lpVtbl : IDebugSymbols4Vtbl* do
+  record IDebugSymbols4, lpVtbl : IDebugSymbols4Vtable* do
     GUID = LibC::GUID.new(0xe391bbd8_u32, 0x9d8c_u16, 0x4418_u16, StaticArray[0x84_u8, 0xb_u8, 0xc0_u8, 0x6_u8, 0x59_u8, 0x2a_u8, 0x17_u8, 0x52_u8])
     def query_interface(this : IDebugSymbols4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19158,7 +19158,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugSymbols5Vtbl,
+  record IDebugSymbols5Vtable,
     query_interface : Proc(IDebugSymbols5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugSymbols5*, UInt32),
     release : Proc(IDebugSymbols5*, UInt32),
@@ -19297,7 +19297,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugSymbols5, lpVtbl : IDebugSymbols5Vtbl* do
+  record IDebugSymbols5, lpVtbl : IDebugSymbols5Vtable* do
     GUID = LibC::GUID.new(0xc65fa83e_u32, 0x1e69_u16, 0x475e_u16, StaticArray[0x8e_u8, 0xe_u8, 0xb5_u8, 0xd7_u8, 0x9e_u8, 0x9c_u8, 0xc1_u8, 0x7e_u8])
     def query_interface(this : IDebugSymbols5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19708,7 +19708,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugSystemObjectsVtbl,
+  record IDebugSystemObjectsVtable,
     query_interface : Proc(IDebugSystemObjects*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugSystemObjects*, UInt32),
     release : Proc(IDebugSystemObjects*, UInt32),
@@ -19744,7 +19744,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugSystemObjects, lpVtbl : IDebugSystemObjectsVtbl* do
+  record IDebugSystemObjects, lpVtbl : IDebugSystemObjectsVtable* do
     GUID = LibC::GUID.new(0x6b86fe2c_u32, 0x2c4f_u16, 0x4f0c_u16, StaticArray[0x9d_u8, 0xa2_u8, 0x17_u8, 0x43_u8, 0x11_u8, 0xac_u8, 0xc3_u8, 0x27_u8])
     def query_interface(this : IDebugSystemObjects*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -19846,7 +19846,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugSystemObjects2Vtbl,
+  record IDebugSystemObjects2Vtable,
     query_interface : Proc(IDebugSystemObjects2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugSystemObjects2*, UInt32),
     release : Proc(IDebugSystemObjects2*, UInt32),
@@ -19887,7 +19887,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugSystemObjects2, lpVtbl : IDebugSystemObjects2Vtbl* do
+  record IDebugSystemObjects2, lpVtbl : IDebugSystemObjects2Vtable* do
     GUID = LibC::GUID.new(0xae9f5ff_u32, 0x1852_u16, 0x4679_u16, StaticArray[0xb0_u8, 0x55_u8, 0x49_u8, 0x4b_u8, 0xee_u8, 0x64_u8, 0x7_u8, 0xee_u8])
     def query_interface(this : IDebugSystemObjects2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20004,7 +20004,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugSystemObjects3Vtbl,
+  record IDebugSystemObjects3Vtable,
     query_interface : Proc(IDebugSystemObjects3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugSystemObjects3*, UInt32),
     release : Proc(IDebugSystemObjects3*, UInt32),
@@ -20054,7 +20054,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugSystemObjects3, lpVtbl : IDebugSystemObjects3Vtbl* do
+  record IDebugSystemObjects3, lpVtbl : IDebugSystemObjects3Vtable* do
     GUID = LibC::GUID.new(0xe9676e2f_u32, 0xe286_u16, 0x4ea3_u16, StaticArray[0xb0_u8, 0xf9_u8, 0xdf_u8, 0xe5_u8, 0xd9_u8, 0xfc_u8, 0x33_u8, 0xe_u8])
     def query_interface(this : IDebugSystemObjects3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20198,7 +20198,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugSystemObjects4Vtbl,
+  record IDebugSystemObjects4Vtable,
     query_interface : Proc(IDebugSystemObjects4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugSystemObjects4*, UInt32),
     release : Proc(IDebugSystemObjects4*, UInt32),
@@ -20250,7 +20250,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugSystemObjects4, lpVtbl : IDebugSystemObjects4Vtbl* do
+  record IDebugSystemObjects4, lpVtbl : IDebugSystemObjects4Vtable* do
     GUID = LibC::GUID.new(0x489468e6_u32, 0x7d0f_u16, 0x4af5_u16, StaticArray[0x87_u8, 0xab_u8, 0x25_u8, 0x20_u8, 0x74_u8, 0x54_u8, 0xd5_u8, 0x53_u8])
     def query_interface(this : IDebugSystemObjects4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20400,7 +20400,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record DebugBaseEventCallbacksVtbl,
+  record DebugBaseEventCallbacksVtable,
     query_interface : Proc(DebugBaseEventCallbacks*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DebugBaseEventCallbacks*, UInt32),
     release : Proc(DebugBaseEventCallbacks*, UInt32),
@@ -20421,7 +20421,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record DebugBaseEventCallbacks, lpVtbl : DebugBaseEventCallbacksVtbl* do
+  record DebugBaseEventCallbacks, lpVtbl : DebugBaseEventCallbacksVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : DebugBaseEventCallbacks*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20478,7 +20478,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record DebugBaseEventCallbacksWideVtbl,
+  record DebugBaseEventCallbacksWideVtable,
     query_interface : Proc(DebugBaseEventCallbacksWide*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DebugBaseEventCallbacksWide*, UInt32),
     release : Proc(DebugBaseEventCallbacksWide*, UInt32),
@@ -20499,7 +20499,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record DebugBaseEventCallbacksWide, lpVtbl : DebugBaseEventCallbacksWideVtbl* do
+  record DebugBaseEventCallbacksWide, lpVtbl : DebugBaseEventCallbacksWideVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : DebugBaseEventCallbacksWide*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20556,7 +20556,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IHostDataModelAccessVtbl,
+  record IHostDataModelAccessVtable,
     query_interface : Proc(IHostDataModelAccess*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IHostDataModelAccess*, UInt32),
     release : Proc(IHostDataModelAccess*, UInt32),
@@ -20564,7 +20564,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IHostDataModelAccess, lpVtbl : IHostDataModelAccessVtbl* do
+  record IHostDataModelAccess, lpVtbl : IHostDataModelAccessVtable* do
     GUID = LibC::GUID.new(0xf2bce54e_u32, 0x4835_u16, 0x4f8a_u16, StaticArray[0x83_u8, 0x6e_u8, 0x79_u8, 0x81_u8, 0xe2_u8, 0x99_u8, 0x4_u8, 0xd1_u8])
     def query_interface(this : IHostDataModelAccess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20582,7 +20582,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IKeyStoreVtbl,
+  record IKeyStoreVtable,
     query_interface : Proc(IKeyStore*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKeyStore*, UInt32),
     release : Proc(IKeyStore*, UInt32),
@@ -20594,7 +20594,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IKeyStore, lpVtbl : IKeyStoreVtbl* do
+  record IKeyStore, lpVtbl : IKeyStoreVtable* do
     GUID = LibC::GUID.new(0xfc7557d_u32, 0x401d_u16, 0x4fca_u16, StaticArray[0x93_u8, 0x65_u8, 0xda_u8, 0x1e_u8, 0x98_u8, 0x50_u8, 0x69_u8, 0x7c_u8])
     def query_interface(this : IKeyStore*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20624,14 +20624,14 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IModelObjectVtbl,
+  record IModelObjectVtable,
     query_interface : Proc(IModelObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IModelObject*, UInt32),
     release : Proc(IModelObject*, UInt32),
     get_context : Proc(IModelObject*, Void**, Win32cr::Foundation::HRESULT),
     get_kind : Proc(IModelObject*, Win32cr::System::Diagnostics::Debug::ModelObjectKind*, Win32cr::Foundation::HRESULT),
     get_intrinsic_value : Proc(IModelObject*, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_intrinsic_value_as : Proc(IModelObject*, UInt16, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
+    get_intrinsic_value_as : Proc(IModelObject*, Win32cr::System::Com::VARENUM, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
     get_key_value : Proc(IModelObject*, Win32cr::Foundation::PWSTR, Void**, Void**, Win32cr::Foundation::HRESULT),
     set_key_value : Proc(IModelObject*, Win32cr::Foundation::PWSTR, Void*, Win32cr::Foundation::HRESULT),
     enumerate_key_values : Proc(IModelObject*, Void**, Win32cr::Foundation::HRESULT),
@@ -20664,7 +20664,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IModelObject, lpVtbl : IModelObjectVtbl* do
+  record IModelObject, lpVtbl : IModelObjectVtable* do
     GUID = LibC::GUID.new(0xe28c7893_u32, 0x3f4b_u16, 0x4b96_u16, StaticArray[0xba_u8, 0xca_u8, 0x29_u8, 0x3c_u8, 0xdc_u8, 0x55_u8, 0xf4_u8, 0x5d_u8])
     def query_interface(this : IModelObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20684,7 +20684,7 @@ module Win32cr::System::Diagnostics::Debug
     def get_intrinsic_value(this : IModelObject*, intrinsicData : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_intrinsic_value.call(this, intrinsicData)
     end
-    def get_intrinsic_value_as(this : IModelObject*, vt : UInt16, intrinsicData : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    def get_intrinsic_value_as(this : IModelObject*, vt : Win32cr::System::Com::VARENUM, intrinsicData : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_intrinsic_value_as.call(this, vt, intrinsicData)
     end
     def get_key_value(this : IModelObject*, key : Win32cr::Foundation::PWSTR, object : Void**, metadata : Void**) : Win32cr::Foundation::HRESULT
@@ -20778,7 +20778,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelManagerVtbl,
+  record IDataModelManagerVtable,
     query_interface : Proc(IDataModelManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelManager*, UInt32),
     release : Proc(IDataModelManager*, UInt32),
@@ -20805,7 +20805,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelManager, lpVtbl : IDataModelManagerVtbl* do
+  record IDataModelManager, lpVtbl : IDataModelManagerVtable* do
     GUID = LibC::GUID.new(0x73fe19f4_u32, 0xa110_u16, 0x4500_u16, StaticArray[0x8e_u8, 0xd9_u8, 0x3c_u8, 0x28_u8, 0x89_u8, 0x6f_u8, 0x50_u8, 0x8c_u8])
     def query_interface(this : IDataModelManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20880,7 +20880,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IModelKeyReferenceVtbl,
+  record IModelKeyReferenceVtable,
     query_interface : Proc(IModelKeyReference*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IModelKeyReference*, UInt32),
     release : Proc(IModelKeyReference*, UInt32),
@@ -20894,7 +20894,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IModelKeyReference, lpVtbl : IModelKeyReferenceVtbl* do
+  record IModelKeyReference, lpVtbl : IModelKeyReferenceVtable* do
     GUID = LibC::GUID.new(0x5253dcf8_u32, 0x5aff_u16, 0x4c62_u16, StaticArray[0xb3_u8, 0x2_u8, 0x56_u8, 0xa2_u8, 0x89_u8, 0xe0_u8, 0x9_u8, 0x98_u8])
     def query_interface(this : IModelKeyReference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20930,7 +20930,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IModelPropertyAccessorVtbl,
+  record IModelPropertyAccessorVtable,
     query_interface : Proc(IModelPropertyAccessor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IModelPropertyAccessor*, UInt32),
     release : Proc(IModelPropertyAccessor*, UInt32),
@@ -20939,7 +20939,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IModelPropertyAccessor, lpVtbl : IModelPropertyAccessorVtbl* do
+  record IModelPropertyAccessor, lpVtbl : IModelPropertyAccessorVtable* do
     GUID = LibC::GUID.new(0x5a0c63d9_u32, 0x526_u16, 0x42b8_u16, StaticArray[0x96_u8, 0xc_u8, 0x95_u8, 0x16_u8, 0xa3_u8, 0x25_u8, 0x4c_u8, 0x85_u8])
     def query_interface(this : IModelPropertyAccessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20960,7 +20960,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IModelMethodVtbl,
+  record IModelMethodVtable,
     query_interface : Proc(IModelMethod*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IModelMethod*, UInt32),
     release : Proc(IModelMethod*, UInt32),
@@ -20968,7 +20968,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IModelMethod, lpVtbl : IModelMethodVtbl* do
+  record IModelMethod, lpVtbl : IModelMethodVtable* do
     GUID = LibC::GUID.new(0x80600c1f_u32, 0xb90b_u16, 0x4896_u16, StaticArray[0x82_u8, 0xad_u8, 0x1c_u8, 0x0_u8, 0x20_u8, 0x79_u8, 0x9_u8, 0xe8_u8])
     def query_interface(this : IModelMethod*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -20986,7 +20986,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IKeyEnumeratorVtbl,
+  record IKeyEnumeratorVtable,
     query_interface : Proc(IKeyEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IKeyEnumerator*, UInt32),
     release : Proc(IKeyEnumerator*, UInt32),
@@ -20995,7 +20995,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IKeyEnumerator, lpVtbl : IKeyEnumeratorVtbl* do
+  record IKeyEnumerator, lpVtbl : IKeyEnumeratorVtable* do
     GUID = LibC::GUID.new(0x345fa92e_u32, 0x5e00_u16, 0x4319_u16, StaticArray[0x9c_u8, 0xae_u8, 0x97_u8, 0x1f_u8, 0x76_u8, 0x1_u8, 0xcd_u8, 0xcf_u8])
     def query_interface(this : IKeyEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21016,7 +21016,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IRawEnumeratorVtbl,
+  record IRawEnumeratorVtable,
     query_interface : Proc(IRawEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRawEnumerator*, UInt32),
     release : Proc(IRawEnumerator*, UInt32),
@@ -21025,7 +21025,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IRawEnumerator, lpVtbl : IRawEnumeratorVtbl* do
+  record IRawEnumerator, lpVtbl : IRawEnumeratorVtable* do
     GUID = LibC::GUID.new(0xe13613f9_u32, 0x3a3c_u16, 0x40b5_u16, StaticArray[0x8f_u8, 0x48_u8, 0x1e_u8, 0x5e_u8, 0xbf_u8, 0xb9_u8, 0xb2_u8, 0x1b_u8])
     def query_interface(this : IRawEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21046,7 +21046,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelConceptVtbl,
+  record IDataModelConceptVtable,
     query_interface : Proc(IDataModelConcept*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelConcept*, UInt32),
     release : Proc(IDataModelConcept*, UInt32),
@@ -21055,7 +21055,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelConcept, lpVtbl : IDataModelConceptVtbl* do
+  record IDataModelConcept, lpVtbl : IDataModelConceptVtable* do
     GUID = LibC::GUID.new(0xfcb98d1d_u32, 0x1114_u16, 0x4fbf_u16, StaticArray[0xb2_u8, 0x4c_u8, 0xef_u8, 0xfc_u8, 0xb5_u8, 0xde_u8, 0xf0_u8, 0xd3_u8])
     def query_interface(this : IDataModelConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21076,7 +21076,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IStringDisplayableConceptVtbl,
+  record IStringDisplayableConceptVtable,
     query_interface : Proc(IStringDisplayableConcept*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStringDisplayableConcept*, UInt32),
     release : Proc(IStringDisplayableConcept*, UInt32),
@@ -21084,7 +21084,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IStringDisplayableConcept, lpVtbl : IStringDisplayableConceptVtbl* do
+  record IStringDisplayableConcept, lpVtbl : IStringDisplayableConceptVtable* do
     GUID = LibC::GUID.new(0xd28e8d70_u32, 0x6c00_u16, 0x4205_u16, StaticArray[0x94_u8, 0xd_u8, 0x50_u8, 0x10_u8, 0x16_u8, 0x60_u8, 0x1e_u8, 0xa3_u8])
     def query_interface(this : IStringDisplayableConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21102,7 +21102,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record ICodeAddressConceptVtbl,
+  record ICodeAddressConceptVtable,
     query_interface : Proc(ICodeAddressConcept*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICodeAddressConcept*, UInt32),
     release : Proc(ICodeAddressConcept*, UInt32),
@@ -21110,7 +21110,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record ICodeAddressConcept, lpVtbl : ICodeAddressConceptVtbl* do
+  record ICodeAddressConcept, lpVtbl : ICodeAddressConceptVtable* do
     GUID = LibC::GUID.new(0xc7371568_u32, 0x5c78_u16, 0x4a00_u16, StaticArray[0xa4_u8, 0xab_u8, 0x6e_u8, 0xf8_u8, 0x82_u8, 0x31_u8, 0x84_u8, 0xcb_u8])
     def query_interface(this : ICodeAddressConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21128,7 +21128,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IModelIteratorVtbl,
+  record IModelIteratorVtable,
     query_interface : Proc(IModelIterator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IModelIterator*, UInt32),
     release : Proc(IModelIterator*, UInt32),
@@ -21137,7 +21137,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IModelIterator, lpVtbl : IModelIteratorVtbl* do
+  record IModelIterator, lpVtbl : IModelIteratorVtable* do
     GUID = LibC::GUID.new(0xe4622136_u32, 0x927d_u16, 0x4490_u16, StaticArray[0x87_u8, 0x4f_u8, 0x58_u8, 0x1f_u8, 0x3e_u8, 0x4e_u8, 0x36_u8, 0x88_u8])
     def query_interface(this : IModelIterator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21158,7 +21158,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IIterableConceptVtbl,
+  record IIterableConceptVtable,
     query_interface : Proc(IIterableConcept*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIterableConcept*, UInt32),
     release : Proc(IIterableConcept*, UInt32),
@@ -21167,7 +21167,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IIterableConcept, lpVtbl : IIterableConceptVtbl* do
+  record IIterableConcept, lpVtbl : IIterableConceptVtable* do
     GUID = LibC::GUID.new(0xf5d49d0c_u32, 0xb02_u16, 0x4301_u16, StaticArray[0x9c_u8, 0x9b_u8, 0xb3_u8, 0xa6_u8, 0x3_u8, 0x76_u8, 0x28_u8, 0xf3_u8])
     def query_interface(this : IIterableConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21188,7 +21188,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IIndexableConceptVtbl,
+  record IIndexableConceptVtable,
     query_interface : Proc(IIndexableConcept*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIndexableConcept*, UInt32),
     release : Proc(IIndexableConcept*, UInt32),
@@ -21198,7 +21198,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IIndexableConcept, lpVtbl : IIndexableConceptVtbl* do
+  record IIndexableConcept, lpVtbl : IIndexableConceptVtable* do
     GUID = LibC::GUID.new(0xd1fad99f_u32, 0x3f53_u16, 0x4457_u16, StaticArray[0x85_u8, 0xc_u8, 0x80_u8, 0x51_u8, 0xdf_u8, 0x2d_u8, 0x3f_u8, 0xb5_u8])
     def query_interface(this : IIndexableConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21222,7 +21222,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IPreferredRuntimeTypeConceptVtbl,
+  record IPreferredRuntimeTypeConceptVtable,
     query_interface : Proc(IPreferredRuntimeTypeConcept*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPreferredRuntimeTypeConcept*, UInt32),
     release : Proc(IPreferredRuntimeTypeConcept*, UInt32),
@@ -21230,7 +21230,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IPreferredRuntimeTypeConcept, lpVtbl : IPreferredRuntimeTypeConceptVtbl* do
+  record IPreferredRuntimeTypeConcept, lpVtbl : IPreferredRuntimeTypeConceptVtable* do
     GUID = LibC::GUID.new(0x9d6c1d7b_u32, 0xa76f_u16, 0x4618_u16, StaticArray[0x80_u8, 0x68_u8, 0x5f_u8, 0x76_u8, 0xbd_u8, 0x9a_u8, 0x4e_u8, 0x8a_u8])
     def query_interface(this : IPreferredRuntimeTypeConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21248,7 +21248,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostVtbl,
+  record IDebugHostVtable,
     query_interface : Proc(IDebugHost*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHost*, UInt32),
     release : Proc(IDebugHost*, UInt32),
@@ -21258,7 +21258,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHost, lpVtbl : IDebugHostVtbl* do
+  record IDebugHost, lpVtbl : IDebugHostVtable* do
     GUID = LibC::GUID.new(0xb8c74943_u32, 0x6b2c_u16, 0x4eeb_u16, StaticArray[0xb5_u8, 0xc5_u8, 0x35_u8, 0xd3_u8, 0x78_u8, 0xa6_u8, 0xd9_u8, 0x9d_u8])
     def query_interface(this : IDebugHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21282,7 +21282,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostContextVtbl,
+  record IDebugHostContextVtable,
     query_interface : Proc(IDebugHostContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostContext*, UInt32),
     release : Proc(IDebugHostContext*, UInt32),
@@ -21290,7 +21290,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostContext, lpVtbl : IDebugHostContextVtbl* do
+  record IDebugHostContext, lpVtbl : IDebugHostContextVtable* do
     GUID = LibC::GUID.new(0xa68c70d8_u32, 0x5ec0_u16, 0x46e5_u16, StaticArray[0xb7_u8, 0x75_u8, 0x31_u8, 0x34_u8, 0xa4_u8, 0x8e_u8, 0xa2_u8, 0xe3_u8])
     def query_interface(this : IDebugHostContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21308,7 +21308,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostErrorSinkVtbl,
+  record IDebugHostErrorSinkVtable,
     query_interface : Proc(IDebugHostErrorSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostErrorSink*, UInt32),
     release : Proc(IDebugHostErrorSink*, UInt32),
@@ -21316,7 +21316,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostErrorSink, lpVtbl : IDebugHostErrorSinkVtbl* do
+  record IDebugHostErrorSink, lpVtbl : IDebugHostErrorSinkVtable* do
     GUID = LibC::GUID.new(0xc8ff0f0b_u32, 0xfce9_u16, 0x467e_u16, StaticArray[0x8b_u8, 0xb3_u8, 0x5d_u8, 0x69_u8, 0xef_u8, 0x10_u8, 0x9c_u8, 0x0_u8])
     def query_interface(this : IDebugHostErrorSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21334,7 +21334,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostSymbolVtbl,
+  record IDebugHostSymbolVtable,
     query_interface : Proc(IDebugHostSymbol*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostSymbol*, UInt32),
     release : Proc(IDebugHostSymbol*, UInt32),
@@ -21348,7 +21348,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostSymbol, lpVtbl : IDebugHostSymbolVtbl* do
+  record IDebugHostSymbol, lpVtbl : IDebugHostSymbolVtable* do
     GUID = LibC::GUID.new(0xf819103_u32, 0x87de_u16, 0x4e96_u16, StaticArray[0x82_u8, 0x77_u8, 0xe0_u8, 0x5c_u8, 0xd4_u8, 0x41_u8, 0xfb_u8, 0x22_u8])
     def query_interface(this : IDebugHostSymbol*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21384,7 +21384,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostSymbolEnumeratorVtbl,
+  record IDebugHostSymbolEnumeratorVtable,
     query_interface : Proc(IDebugHostSymbolEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostSymbolEnumerator*, UInt32),
     release : Proc(IDebugHostSymbolEnumerator*, UInt32),
@@ -21393,7 +21393,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostSymbolEnumerator, lpVtbl : IDebugHostSymbolEnumeratorVtbl* do
+  record IDebugHostSymbolEnumerator, lpVtbl : IDebugHostSymbolEnumeratorVtable* do
     GUID = LibC::GUID.new(0x28d96c86_u32, 0x10a3_u16, 0x4976_u16, StaticArray[0xb1_u8, 0x4e_u8, 0xea_u8, 0xef_u8, 0x47_u8, 0x90_u8, 0xaa_u8, 0x1f_u8])
     def query_interface(this : IDebugHostSymbolEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21414,7 +21414,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostModuleVtbl,
+  record IDebugHostModuleVtable,
     query_interface : Proc(IDebugHostModule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostModule*, UInt32),
     release : Proc(IDebugHostModule*, UInt32),
@@ -21434,7 +21434,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostModule, lpVtbl : IDebugHostModuleVtbl* do
+  record IDebugHostModule, lpVtbl : IDebugHostModuleVtable* do
     GUID = LibC::GUID.new(0xc9ba3e18_u32, 0xd070_u16, 0x4378_u16, StaticArray[0xbb_u8, 0xd0_u8, 0x34_u8, 0x61_u8, 0x3b_u8, 0x34_u8, 0x6e_u8, 0x1e_u8])
     def query_interface(this : IDebugHostModule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21488,7 +21488,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostTypeVtbl,
+  record IDebugHostTypeVtable,
     query_interface : Proc(IDebugHostType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostType*, UInt32),
     release : Proc(IDebugHostType*, UInt32),
@@ -21521,7 +21521,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostType, lpVtbl : IDebugHostTypeVtbl* do
+  record IDebugHostType, lpVtbl : IDebugHostTypeVtable* do
     GUID = LibC::GUID.new(0x3aadc353_u32, 0x2b14_u16, 0x4abb_u16, StaticArray[0x98_u8, 0x93_u8, 0x5e_u8, 0x3_u8, 0x45_u8, 0x8e_u8, 0x7_u8, 0xee_u8])
     def query_interface(this : IDebugHostType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21614,7 +21614,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostConstantVtbl,
+  record IDebugHostConstantVtable,
     query_interface : Proc(IDebugHostConstant*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostConstant*, UInt32),
     release : Proc(IDebugHostConstant*, UInt32),
@@ -21629,7 +21629,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostConstant, lpVtbl : IDebugHostConstantVtbl* do
+  record IDebugHostConstant, lpVtbl : IDebugHostConstantVtable* do
     GUID = LibC::GUID.new(0x62787edc_u32, 0xfa76_u16, 0x4690_u16, StaticArray[0xbd_u8, 0x71_u8, 0x5e_u8, 0x8c_u8, 0x3e_u8, 0x29_u8, 0x37_u8, 0xec_u8])
     def query_interface(this : IDebugHostConstant*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21668,7 +21668,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostFieldVtbl,
+  record IDebugHostFieldVtable,
     query_interface : Proc(IDebugHostField*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostField*, UInt32),
     release : Proc(IDebugHostField*, UInt32),
@@ -21686,7 +21686,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostField, lpVtbl : IDebugHostFieldVtbl* do
+  record IDebugHostField, lpVtbl : IDebugHostFieldVtable* do
     GUID = LibC::GUID.new(0xe06f6495_u32, 0x16bc_u16, 0x4cc9_u16, StaticArray[0xb1_u8, 0x1d_u8, 0x2a_u8, 0x6b_u8, 0x23_u8, 0xfa_u8, 0x72_u8, 0xf3_u8])
     def query_interface(this : IDebugHostField*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21734,7 +21734,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostDataVtbl,
+  record IDebugHostDataVtable,
     query_interface : Proc(IDebugHostData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostData*, UInt32),
     release : Proc(IDebugHostData*, UInt32),
@@ -21751,7 +21751,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostData, lpVtbl : IDebugHostDataVtbl* do
+  record IDebugHostData, lpVtbl : IDebugHostDataVtable* do
     GUID = LibC::GUID.new(0xa3d64993_u32, 0x826c_u16, 0x44fa_u16, StaticArray[0x89_u8, 0x7d_u8, 0x92_u8, 0x6f_u8, 0x2f_u8, 0xe7_u8, 0xad_u8, 0xb_u8])
     def query_interface(this : IDebugHostData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21796,7 +21796,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostPublicVtbl,
+  record IDebugHostPublicVtable,
     query_interface : Proc(IDebugHostPublic*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostPublic*, UInt32),
     release : Proc(IDebugHostPublic*, UInt32),
@@ -21812,7 +21812,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostPublic, lpVtbl : IDebugHostPublicVtbl* do
+  record IDebugHostPublic, lpVtbl : IDebugHostPublicVtable* do
     GUID = LibC::GUID.new(0x6c597ac9_u32, 0xfb4d_u16, 0x4f6d_u16, StaticArray[0x9f_u8, 0x39_u8, 0x22_u8, 0x48_u8, 0x85_u8, 0x39_u8, 0xf8_u8, 0xf4_u8])
     def query_interface(this : IDebugHostPublic*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21854,7 +21854,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostBaseClassVtbl,
+  record IDebugHostBaseClassVtable,
     query_interface : Proc(IDebugHostBaseClass*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostBaseClass*, UInt32),
     release : Proc(IDebugHostBaseClass*, UInt32),
@@ -21869,7 +21869,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostBaseClass, lpVtbl : IDebugHostBaseClassVtbl* do
+  record IDebugHostBaseClass, lpVtbl : IDebugHostBaseClassVtable* do
     GUID = LibC::GUID.new(0xb94d57d2_u32, 0x390b_u16, 0x40f7_u16, StaticArray[0xb5_u8, 0xb4_u8, 0xb6_u8, 0xdb_u8, 0x89_u8, 0x7d_u8, 0x97_u8, 0x4b_u8])
     def query_interface(this : IDebugHostBaseClass*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21908,7 +21908,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostSymbolsVtbl,
+  record IDebugHostSymbolsVtable,
     query_interface : Proc(IDebugHostSymbols*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostSymbols*, UInt32),
     release : Proc(IDebugHostSymbols*, UInt32),
@@ -21922,7 +21922,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostSymbols, lpVtbl : IDebugHostSymbolsVtbl* do
+  record IDebugHostSymbols, lpVtbl : IDebugHostSymbolsVtable* do
     GUID = LibC::GUID.new(0x854fd751_u32, 0xc2e1_u16, 0x4eb2_u16, StaticArray[0xb5_u8, 0x25_u8, 0x66_u8, 0x19_u8, 0xcb_u8, 0x97_u8, 0xa5_u8, 0x88_u8])
     def query_interface(this : IDebugHostSymbols*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -21958,7 +21958,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostMemoryVtbl,
+  record IDebugHostMemoryVtable,
     query_interface : Proc(IDebugHostMemory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostMemory*, UInt32),
     release : Proc(IDebugHostMemory*, UInt32),
@@ -21970,7 +21970,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostMemory, lpVtbl : IDebugHostMemoryVtbl* do
+  record IDebugHostMemory, lpVtbl : IDebugHostMemoryVtable* do
     GUID = LibC::GUID.new(0x212149c9_u32, 0x9183_u16, 0x4a3e_u16, StaticArray[0xb0_u8, 0xe_u8, 0x4f_u8, 0xd1_u8, 0xdc_u8, 0x95_u8, 0x33_u8, 0x9b_u8])
     def query_interface(this : IDebugHostMemory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22000,7 +22000,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostEvaluatorVtbl,
+  record IDebugHostEvaluatorVtable,
     query_interface : Proc(IDebugHostEvaluator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostEvaluator*, UInt32),
     release : Proc(IDebugHostEvaluator*, UInt32),
@@ -22009,7 +22009,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostEvaluator, lpVtbl : IDebugHostEvaluatorVtbl* do
+  record IDebugHostEvaluator, lpVtbl : IDebugHostEvaluatorVtable* do
     GUID = LibC::GUID.new(0xfef9a21_u32, 0x577e_u16, 0x4997_u16, StaticArray[0xac_u8, 0x7b_u8, 0x1c_u8, 0x48_u8, 0x83_u8, 0x24_u8, 0x1d_u8, 0x99_u8])
     def query_interface(this : IDebugHostEvaluator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22030,7 +22030,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostModuleSignatureVtbl,
+  record IDebugHostModuleSignatureVtable,
     query_interface : Proc(IDebugHostModuleSignature*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostModuleSignature*, UInt32),
     release : Proc(IDebugHostModuleSignature*, UInt32),
@@ -22038,7 +22038,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostModuleSignature, lpVtbl : IDebugHostModuleSignatureVtbl* do
+  record IDebugHostModuleSignature, lpVtbl : IDebugHostModuleSignatureVtable* do
     GUID = LibC::GUID.new(0x31e53a5a_u32, 0x1ee_u16, 0x4bbb_u16, StaticArray[0xb8_u8, 0x99_u8, 0x4b_u8, 0x46_u8, 0xae_u8, 0x7d_u8, 0x59_u8, 0x5c_u8])
     def query_interface(this : IDebugHostModuleSignature*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22056,7 +22056,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostTypeSignatureVtbl,
+  record IDebugHostTypeSignatureVtable,
     query_interface : Proc(IDebugHostTypeSignature*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostTypeSignature*, UInt32),
     release : Proc(IDebugHostTypeSignature*, UInt32),
@@ -22066,7 +22066,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostTypeSignature, lpVtbl : IDebugHostTypeSignatureVtbl* do
+  record IDebugHostTypeSignature, lpVtbl : IDebugHostTypeSignatureVtable* do
     GUID = LibC::GUID.new(0x3aadc353_u32, 0x2b14_u16, 0x4abb_u16, StaticArray[0x98_u8, 0x93_u8, 0x5e_u8, 0x3_u8, 0x45_u8, 0x8e_u8, 0x7_u8, 0xee_u8])
     def query_interface(this : IDebugHostTypeSignature*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22090,7 +22090,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostSymbol2Vtbl,
+  record IDebugHostSymbol2Vtable,
     query_interface : Proc(IDebugHostSymbol2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostSymbol2*, UInt32),
     release : Proc(IDebugHostSymbol2*, UInt32),
@@ -22105,7 +22105,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostSymbol2, lpVtbl : IDebugHostSymbol2Vtbl* do
+  record IDebugHostSymbol2, lpVtbl : IDebugHostSymbol2Vtable* do
     GUID = LibC::GUID.new(0x21515b67_u32, 0x6720_u16, 0x4257_u16, StaticArray[0x8a_u8, 0x68_u8, 0x7_u8, 0x7d_u8, 0xc9_u8, 0x44_u8, 0x47_u8, 0x1c_u8])
     def query_interface(this : IDebugHostSymbol2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22144,7 +22144,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostType2Vtbl,
+  record IDebugHostType2Vtable,
     query_interface : Proc(IDebugHostType2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostType2*, UInt32),
     release : Proc(IDebugHostType2*, UInt32),
@@ -22182,7 +22182,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostType2, lpVtbl : IDebugHostType2Vtbl* do
+  record IDebugHostType2, lpVtbl : IDebugHostType2Vtable* do
     GUID = LibC::GUID.new(0xb28632b9_u32, 0x8506_u16, 0x4676_u16, StaticArray[0x87_u8, 0xce_u8, 0x8f_u8, 0x7e_u8, 0x5_u8, 0xe5_u8, 0x98_u8, 0x76_u8])
     def query_interface(this : IDebugHostType2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22290,7 +22290,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostStatusVtbl,
+  record IDebugHostStatusVtable,
     query_interface : Proc(IDebugHostStatus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostStatus*, UInt32),
     release : Proc(IDebugHostStatus*, UInt32),
@@ -22298,7 +22298,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostStatus, lpVtbl : IDebugHostStatusVtbl* do
+  record IDebugHostStatus, lpVtbl : IDebugHostStatusVtable* do
     GUID = LibC::GUID.new(0x4f3e1ce2_u32, 0x86b2_u16, 0x4c7a_u16, StaticArray[0x9c_u8, 0x65_u8, 0xd0_u8, 0xa9_u8, 0xd0_u8, 0xee_u8, 0xcf_u8, 0x44_u8])
     def query_interface(this : IDebugHostStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22316,7 +22316,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelScriptClientVtbl,
+  record IDataModelScriptClientVtable,
     query_interface : Proc(IDataModelScriptClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelScriptClient*, UInt32),
     release : Proc(IDataModelScriptClient*, UInt32),
@@ -22324,7 +22324,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelScriptClient, lpVtbl : IDataModelScriptClientVtbl* do
+  record IDataModelScriptClient, lpVtbl : IDataModelScriptClientVtable* do
     GUID = LibC::GUID.new(0x3b362b0e_u32, 0x89f0_u16, 0x46c6_u16, StaticArray[0xa6_u8, 0x63_u8, 0xdf_u8, 0xdc_u8, 0x95_u8, 0x19_u8, 0x4a_u8, 0xef_u8])
     def query_interface(this : IDataModelScriptClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22342,7 +22342,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelScriptTemplateVtbl,
+  record IDataModelScriptTemplateVtable,
     query_interface : Proc(IDataModelScriptTemplate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelScriptTemplate*, UInt32),
     release : Proc(IDataModelScriptTemplate*, UInt32),
@@ -22352,7 +22352,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelScriptTemplate, lpVtbl : IDataModelScriptTemplateVtbl* do
+  record IDataModelScriptTemplate, lpVtbl : IDataModelScriptTemplateVtable* do
     GUID = LibC::GUID.new(0x1303dec4_u32, 0xfa3b_u16, 0x4f1b_u16, StaticArray[0x92_u8, 0x24_u8, 0xb9_u8, 0x53_u8, 0xd1_u8, 0x6b_u8, 0xab_u8, 0xb5_u8])
     def query_interface(this : IDataModelScriptTemplate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22376,7 +22376,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelScriptVtbl,
+  record IDataModelScriptVtable,
     query_interface : Proc(IDataModelScript*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelScript*, UInt32),
     release : Proc(IDataModelScript*, UInt32),
@@ -22390,7 +22390,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelScript, lpVtbl : IDataModelScriptVtbl* do
+  record IDataModelScript, lpVtbl : IDataModelScriptVtable* do
     GUID = LibC::GUID.new(0x7b4d30fc_u32, 0xb14a_u16, 0x49f8_u16, StaticArray[0x8d_u8, 0x87_u8, 0xd9_u8, 0xa1_u8, 0x48_u8, 0xc_u8, 0x97_u8, 0xf7_u8])
     def query_interface(this : IDataModelScript*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22426,7 +22426,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelScriptTemplateEnumeratorVtbl,
+  record IDataModelScriptTemplateEnumeratorVtable,
     query_interface : Proc(IDataModelScriptTemplateEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelScriptTemplateEnumerator*, UInt32),
     release : Proc(IDataModelScriptTemplateEnumerator*, UInt32),
@@ -22435,7 +22435,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelScriptTemplateEnumerator, lpVtbl : IDataModelScriptTemplateEnumeratorVtbl* do
+  record IDataModelScriptTemplateEnumerator, lpVtbl : IDataModelScriptTemplateEnumeratorVtable* do
     GUID = LibC::GUID.new(0x69ce6ae2_u32, 0x2268_u16, 0x4e6f_u16, StaticArray[0xb0_u8, 0x62_u8, 0x20_u8, 0xce_u8, 0x62_u8, 0xbf_u8, 0xe6_u8, 0x77_u8])
     def query_interface(this : IDataModelScriptTemplateEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22456,7 +22456,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelScriptProviderVtbl,
+  record IDataModelScriptProviderVtable,
     query_interface : Proc(IDataModelScriptProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelScriptProvider*, UInt32),
     release : Proc(IDataModelScriptProvider*, UInt32),
@@ -22468,7 +22468,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelScriptProvider, lpVtbl : IDataModelScriptProviderVtbl* do
+  record IDataModelScriptProvider, lpVtbl : IDataModelScriptProviderVtable* do
     GUID = LibC::GUID.new(0x513461e0_u32, 0x4fca_u16, 0x48ce_u16, StaticArray[0x86_u8, 0x58_u8, 0x32_u8, 0xf3_u8, 0xe2_u8, 0x5_u8, 0x6f_u8, 0x3b_u8])
     def query_interface(this : IDataModelScriptProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22498,7 +22498,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelScriptProviderEnumeratorVtbl,
+  record IDataModelScriptProviderEnumeratorVtable,
     query_interface : Proc(IDataModelScriptProviderEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelScriptProviderEnumerator*, UInt32),
     release : Proc(IDataModelScriptProviderEnumerator*, UInt32),
@@ -22507,7 +22507,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelScriptProviderEnumerator, lpVtbl : IDataModelScriptProviderEnumeratorVtbl* do
+  record IDataModelScriptProviderEnumerator, lpVtbl : IDataModelScriptProviderEnumeratorVtable* do
     GUID = LibC::GUID.new(0x95ba00e2_u32, 0x704a_u16, 0x4fe2_u16, StaticArray[0xa8_u8, 0xf1_u8, 0xa7_u8, 0xe7_u8, 0xd8_u8, 0xfb_u8, 0x9_u8, 0x41_u8])
     def query_interface(this : IDataModelScriptProviderEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22528,7 +22528,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelScriptManagerVtbl,
+  record IDataModelScriptManagerVtable,
     query_interface : Proc(IDataModelScriptManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelScriptManager*, UInt32),
     release : Proc(IDataModelScriptManager*, UInt32),
@@ -22541,7 +22541,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelScriptManager, lpVtbl : IDataModelScriptManagerVtbl* do
+  record IDataModelScriptManager, lpVtbl : IDataModelScriptManagerVtable* do
     GUID = LibC::GUID.new(0x6fd11e33_u32, 0xe5ad_u16, 0x410b_u16, StaticArray[0x80_u8, 0x11_u8, 0x68_u8, 0xc6_u8, 0xbc_u8, 0x4b_u8, 0xf8_u8, 0xd_u8])
     def query_interface(this : IDataModelScriptManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22574,7 +22574,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDynamicKeyProviderConceptVtbl,
+  record IDynamicKeyProviderConceptVtable,
     query_interface : Proc(IDynamicKeyProviderConcept*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDynamicKeyProviderConcept*, UInt32),
     release : Proc(IDynamicKeyProviderConcept*, UInt32),
@@ -22584,7 +22584,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDynamicKeyProviderConcept, lpVtbl : IDynamicKeyProviderConceptVtbl* do
+  record IDynamicKeyProviderConcept, lpVtbl : IDynamicKeyProviderConceptVtable* do
     GUID = LibC::GUID.new(0xe7983fa1_u32, 0x80a7_u16, 0x498c_u16, StaticArray[0x98_u8, 0x8f_u8, 0x51_u8, 0x8d_u8, 0xdc_u8, 0x5d_u8, 0x40_u8, 0x25_u8])
     def query_interface(this : IDynamicKeyProviderConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22608,7 +22608,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDynamicConceptProviderConceptVtbl,
+  record IDynamicConceptProviderConceptVtable,
     query_interface : Proc(IDynamicConceptProviderConcept*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDynamicConceptProviderConcept*, UInt32),
     release : Proc(IDynamicConceptProviderConcept*, UInt32),
@@ -22620,7 +22620,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDynamicConceptProviderConcept, lpVtbl : IDynamicConceptProviderConceptVtbl* do
+  record IDynamicConceptProviderConcept, lpVtbl : IDynamicConceptProviderConceptVtable* do
     GUID = LibC::GUID.new(0x95a7f7dd_u32, 0x602e_u16, 0x483f_u16, StaticArray[0x9d_u8, 0x6_u8, 0xa1_u8, 0x5c_u8, 0xe_u8, 0xe1_u8, 0x31_u8, 0x74_u8])
     def query_interface(this : IDynamicConceptProviderConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22650,7 +22650,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelScriptHostContextVtbl,
+  record IDataModelScriptHostContextVtable,
     query_interface : Proc(IDataModelScriptHostContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelScriptHostContext*, UInt32),
     release : Proc(IDataModelScriptHostContext*, UInt32),
@@ -22659,7 +22659,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelScriptHostContext, lpVtbl : IDataModelScriptHostContextVtbl* do
+  record IDataModelScriptHostContext, lpVtbl : IDataModelScriptHostContextVtable* do
     GUID = LibC::GUID.new(0x14d366a_u32, 0x1f23_u16, 0x4981_u16, StaticArray[0x92_u8, 0x19_u8, 0xb2_u8, 0xdb_u8, 0x8b_u8, 0x40_u8, 0x20_u8, 0x54_u8])
     def query_interface(this : IDataModelScriptHostContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22680,7 +22680,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostScriptHostVtbl,
+  record IDebugHostScriptHostVtable,
     query_interface : Proc(IDebugHostScriptHost*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostScriptHost*, UInt32),
     release : Proc(IDebugHostScriptHost*, UInt32),
@@ -22688,7 +22688,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostScriptHost, lpVtbl : IDebugHostScriptHostVtbl* do
+  record IDebugHostScriptHost, lpVtbl : IDebugHostScriptHostVtable* do
     GUID = LibC::GUID.new(0xb70334a4_u32, 0xb92c_u16, 0x4570_u16, StaticArray[0x93_u8, 0xa1_u8, 0xd3_u8, 0xeb_u8, 0x68_u8, 0x66_u8, 0x49_u8, 0xa0_u8])
     def query_interface(this : IDebugHostScriptHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22706,7 +22706,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelNameBinderVtbl,
+  record IDataModelNameBinderVtable,
     query_interface : Proc(IDataModelNameBinder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelNameBinder*, UInt32),
     release : Proc(IDataModelNameBinder*, UInt32),
@@ -22717,7 +22717,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelNameBinder, lpVtbl : IDataModelNameBinderVtbl* do
+  record IDataModelNameBinder, lpVtbl : IDataModelNameBinderVtable* do
     GUID = LibC::GUID.new(0xaf352b7b_u32, 0x8292_u16, 0x4c01_u16, StaticArray[0xb3_u8, 0x60_u8, 0x2d_u8, 0xc3_u8, 0x69_u8, 0x6c_u8, 0x65_u8, 0xe7_u8])
     def query_interface(this : IDataModelNameBinder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22744,7 +22744,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IModelKeyReference2Vtbl,
+  record IModelKeyReference2Vtable,
     query_interface : Proc(IModelKeyReference2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IModelKeyReference2*, UInt32),
     release : Proc(IModelKeyReference2*, UInt32),
@@ -22759,7 +22759,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IModelKeyReference2, lpVtbl : IModelKeyReference2Vtbl* do
+  record IModelKeyReference2, lpVtbl : IModelKeyReference2Vtable* do
     GUID = LibC::GUID.new(0x80e2f7c5_u32, 0x7159_u16, 0x4e92_u16, StaticArray[0x88_u8, 0x7e_u8, 0x7e_u8, 0x3_u8, 0x47_u8, 0xe8_u8, 0x84_u8, 0x6_u8])
     def query_interface(this : IModelKeyReference2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22798,7 +22798,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostEvaluator2Vtbl,
+  record IDebugHostEvaluator2Vtable,
     query_interface : Proc(IDebugHostEvaluator2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostEvaluator2*, UInt32),
     release : Proc(IDebugHostEvaluator2*, UInt32),
@@ -22808,7 +22808,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostEvaluator2, lpVtbl : IDebugHostEvaluator2Vtbl* do
+  record IDebugHostEvaluator2, lpVtbl : IDebugHostEvaluator2Vtable* do
     GUID = LibC::GUID.new(0xa117a435_u32, 0x1fb4_u16, 0x4092_u16, StaticArray[0xa2_u8, 0xab_u8, 0xa9_u8, 0x29_u8, 0x57_u8, 0x6c_u8, 0x1e_u8, 0x87_u8])
     def query_interface(this : IDebugHostEvaluator2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22832,7 +22832,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelManager2Vtbl,
+  record IDataModelManager2Vtable,
     query_interface : Proc(IDataModelManager2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelManager2*, UInt32),
     release : Proc(IDataModelManager2*, UInt32),
@@ -22861,7 +22861,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelManager2, lpVtbl : IDataModelManager2Vtbl* do
+  record IDataModelManager2, lpVtbl : IDataModelManager2Vtable* do
     GUID = LibC::GUID.new(0xf412c5ea_u32, 0x2284_u16, 0x4622_u16, StaticArray[0xa6_u8, 0x60_u8, 0xa6_u8, 0x97_u8, 0x16_u8, 0xd_u8, 0x33_u8, 0x12_u8])
     def query_interface(this : IDataModelManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22942,7 +22942,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostMemory2Vtbl,
+  record IDebugHostMemory2Vtable,
     query_interface : Proc(IDebugHostMemory2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostMemory2*, UInt32),
     release : Proc(IDebugHostMemory2*, UInt32),
@@ -22955,7 +22955,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostMemory2, lpVtbl : IDebugHostMemory2Vtbl* do
+  record IDebugHostMemory2, lpVtbl : IDebugHostMemory2Vtable* do
     GUID = LibC::GUID.new(0xeea033de_u32, 0x38f6_u16, 0x416b_u16, StaticArray[0xa2_u8, 0x51_u8, 0x1d_u8, 0x37_u8, 0x71_u8, 0x0_u8, 0x12_u8, 0x70_u8])
     def query_interface(this : IDebugHostMemory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -22988,7 +22988,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostExtensibilityVtbl,
+  record IDebugHostExtensibilityVtable,
     query_interface : Proc(IDebugHostExtensibility*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostExtensibility*, UInt32),
     release : Proc(IDebugHostExtensibility*, UInt32),
@@ -22997,7 +22997,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostExtensibility, lpVtbl : IDebugHostExtensibilityVtbl* do
+  record IDebugHostExtensibility, lpVtbl : IDebugHostExtensibilityVtable* do
     GUID = LibC::GUID.new(0x3c2b24e1_u32, 0x11d0_u16, 0x4f86_u16, StaticArray[0x8a_u8, 0xe5_u8, 0x4d_u8, 0xf1_u8, 0x66_u8, 0xf7_u8, 0x32_u8, 0x53_u8])
     def query_interface(this : IDebugHostExtensibility*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23018,7 +23018,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelScriptDebugClientVtbl,
+  record IDataModelScriptDebugClientVtable,
     query_interface : Proc(IDataModelScriptDebugClient*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelScriptDebugClient*, UInt32),
     release : Proc(IDataModelScriptDebugClient*, UInt32),
@@ -23026,7 +23026,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelScriptDebugClient, lpVtbl : IDataModelScriptDebugClientVtbl* do
+  record IDataModelScriptDebugClient, lpVtbl : IDataModelScriptDebugClientVtable* do
     GUID = LibC::GUID.new(0x53159b6d_u32, 0xd4c4_u16, 0x471b_u16, StaticArray[0xa8_u8, 0x63_u8, 0x5b_u8, 0x11_u8, 0xc_u8, 0xa8_u8, 0x0_u8, 0xca_u8])
     def query_interface(this : IDataModelScriptDebugClient*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23044,7 +23044,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelScriptDebugVariableSetEnumeratorVtbl,
+  record IDataModelScriptDebugVariableSetEnumeratorVtable,
     query_interface : Proc(IDataModelScriptDebugVariableSetEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelScriptDebugVariableSetEnumerator*, UInt32),
     release : Proc(IDataModelScriptDebugVariableSetEnumerator*, UInt32),
@@ -23053,7 +23053,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelScriptDebugVariableSetEnumerator, lpVtbl : IDataModelScriptDebugVariableSetEnumeratorVtbl* do
+  record IDataModelScriptDebugVariableSetEnumerator, lpVtbl : IDataModelScriptDebugVariableSetEnumeratorVtable* do
     GUID = LibC::GUID.new(0xf9feed7_u32, 0xd045_u16, 0x4ac3_u16, StaticArray[0x98_u8, 0xa8_u8, 0xa9_u8, 0x89_u8, 0x42_u8, 0xcf_u8, 0x6a_u8, 0x35_u8])
     def query_interface(this : IDataModelScriptDebugVariableSetEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23074,7 +23074,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelScriptDebugStackFrameVtbl,
+  record IDataModelScriptDebugStackFrameVtable,
     query_interface : Proc(IDataModelScriptDebugStackFrame*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelScriptDebugStackFrame*, UInt32),
     release : Proc(IDataModelScriptDebugStackFrame*, UInt32),
@@ -23088,7 +23088,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelScriptDebugStackFrame, lpVtbl : IDataModelScriptDebugStackFrameVtbl* do
+  record IDataModelScriptDebugStackFrame, lpVtbl : IDataModelScriptDebugStackFrameVtable* do
     GUID = LibC::GUID.new(0xdec6ed5e_u32, 0x6360_u16, 0x4941_u16, StaticArray[0xab_u8, 0x4c_u8, 0xa2_u8, 0x64_u8, 0x9_u8, 0xde_u8, 0x4f_u8, 0x82_u8])
     def query_interface(this : IDataModelScriptDebugStackFrame*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23124,7 +23124,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelScriptDebugStackVtbl,
+  record IDataModelScriptDebugStackVtable,
     query_interface : Proc(IDataModelScriptDebugStack*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelScriptDebugStack*, UInt32),
     release : Proc(IDataModelScriptDebugStack*, UInt32),
@@ -23133,7 +23133,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelScriptDebugStack, lpVtbl : IDataModelScriptDebugStackVtbl* do
+  record IDataModelScriptDebugStack, lpVtbl : IDataModelScriptDebugStackVtable* do
     GUID = LibC::GUID.new(0x51364dd_u32, 0xe449_u16, 0x443e_u16, StaticArray[0x97_u8, 0x62_u8, 0xfe_u8, 0x57_u8, 0x8f_u8, 0x4a_u8, 0x54_u8, 0x73_u8])
     def query_interface(this : IDataModelScriptDebugStack*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23154,7 +23154,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelScriptDebugBreakpointVtbl,
+  record IDataModelScriptDebugBreakpointVtable,
     query_interface : Proc(IDataModelScriptDebugBreakpoint*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelScriptDebugBreakpoint*, UInt32),
     release : Proc(IDataModelScriptDebugBreakpoint*, UInt32),
@@ -23167,7 +23167,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelScriptDebugBreakpoint, lpVtbl : IDataModelScriptDebugBreakpointVtbl* do
+  record IDataModelScriptDebugBreakpoint, lpVtbl : IDataModelScriptDebugBreakpointVtable* do
     GUID = LibC::GUID.new(0x6bb27b35_u32, 0x2e6_u16, 0x47cb_u16, StaticArray[0x90_u8, 0xa0_u8, 0x53_u8, 0x71_u8, 0x24_u8, 0x40_u8, 0x32_u8, 0xde_u8])
     def query_interface(this : IDataModelScriptDebugBreakpoint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23200,7 +23200,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelScriptDebugBreakpointEnumeratorVtbl,
+  record IDataModelScriptDebugBreakpointEnumeratorVtable,
     query_interface : Proc(IDataModelScriptDebugBreakpointEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelScriptDebugBreakpointEnumerator*, UInt32),
     release : Proc(IDataModelScriptDebugBreakpointEnumerator*, UInt32),
@@ -23209,7 +23209,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelScriptDebugBreakpointEnumerator, lpVtbl : IDataModelScriptDebugBreakpointEnumeratorVtbl* do
+  record IDataModelScriptDebugBreakpointEnumerator, lpVtbl : IDataModelScriptDebugBreakpointEnumeratorVtable* do
     GUID = LibC::GUID.new(0x39484a75_u32, 0xb4f3_u16, 0x4799_u16, StaticArray[0x86_u8, 0xda_u8, 0x69_u8, 0x1a_u8, 0xfa_u8, 0x57_u8, 0xb2_u8, 0x99_u8])
     def query_interface(this : IDataModelScriptDebugBreakpointEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23230,7 +23230,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelScriptDebugVtbl,
+  record IDataModelScriptDebugVtable,
     query_interface : Proc(IDataModelScriptDebug*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelScriptDebug*, UInt32),
     release : Proc(IDataModelScriptDebug*, UInt32),
@@ -23247,7 +23247,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelScriptDebug, lpVtbl : IDataModelScriptDebugVtbl* do
+  record IDataModelScriptDebug, lpVtbl : IDataModelScriptDebugVtable* do
     GUID = LibC::GUID.new(0xde8e0945_u32, 0x9750_u16, 0x4471_u16, StaticArray[0xab_u8, 0x76_u8, 0xa8_u8, 0xf7_u8, 0x9d_u8, 0x6e_u8, 0xc3_u8, 0x50_u8])
     def query_interface(this : IDataModelScriptDebug*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23292,7 +23292,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDataModelScriptDebug2Vtbl,
+  record IDataModelScriptDebug2Vtable,
     query_interface : Proc(IDataModelScriptDebug2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataModelScriptDebug2*, UInt32),
     release : Proc(IDataModelScriptDebug2*, UInt32),
@@ -23310,7 +23310,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDataModelScriptDebug2, lpVtbl : IDataModelScriptDebug2Vtbl* do
+  record IDataModelScriptDebug2, lpVtbl : IDataModelScriptDebug2Vtable* do
     GUID = LibC::GUID.new(0xcbb10ed3_u32, 0x839e_u16, 0x426c_u16, StaticArray[0x92_u8, 0x43_u8, 0xe2_u8, 0x35_u8, 0x35_u8, 0xc1_u8, 0xae_u8, 0x1a_u8])
     def query_interface(this : IDataModelScriptDebug2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23358,7 +23358,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHostModule2Vtbl,
+  record IDebugHostModule2Vtable,
     query_interface : Proc(IDebugHostModule2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHostModule2*, UInt32),
     release : Proc(IDebugHostModule2*, UInt32),
@@ -23379,7 +23379,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHostModule2, lpVtbl : IDebugHostModule2Vtbl* do
+  record IDebugHostModule2, lpVtbl : IDebugHostModule2Vtable* do
     GUID = LibC::GUID.new(0xb51887e8_u32, 0xbcd0_u16, 0x4e8f_u16, StaticArray[0xa8_u8, 0xc7_u8, 0x43_u8, 0x43_u8, 0x98_u8, 0xb7_u8, 0x8c_u8, 0x37_u8])
     def query_interface(this : IDebugHostModule2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23436,7 +23436,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IComparableConceptVtbl,
+  record IComparableConceptVtable,
     query_interface : Proc(IComparableConcept*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IComparableConcept*, UInt32),
     release : Proc(IComparableConcept*, UInt32),
@@ -23444,7 +23444,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IComparableConcept, lpVtbl : IComparableConceptVtbl* do
+  record IComparableConcept, lpVtbl : IComparableConceptVtable* do
     GUID = LibC::GUID.new(0xa7830646_u32, 0x9f0c_u16, 0x4a31_u16, StaticArray[0xba_u8, 0x19_u8, 0x50_u8, 0x3f_u8, 0x33_u8, 0xe6_u8, 0xc8_u8, 0xa3_u8])
     def query_interface(this : IComparableConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23462,7 +23462,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IEquatableConceptVtbl,
+  record IEquatableConceptVtable,
     query_interface : Proc(IEquatableConcept*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEquatableConcept*, UInt32),
     release : Proc(IEquatableConcept*, UInt32),
@@ -23470,7 +23470,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IEquatableConcept, lpVtbl : IEquatableConceptVtbl* do
+  record IEquatableConcept, lpVtbl : IEquatableConceptVtable* do
     GUID = LibC::GUID.new(0xc52d5d3d_u32, 0x609d_u16, 0x4d5d_u16, StaticArray[0x8a_u8, 0x82_u8, 0x46_u8, 0xb0_u8, 0xac_u8, 0xde_u8, 0xc4_u8, 0xf4_u8])
     def query_interface(this : IEquatableConcept*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23488,7 +23488,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptSiteVtbl,
+  record IActiveScriptSiteVtable,
     query_interface : Proc(IActiveScriptSite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptSite*, UInt32),
     release : Proc(IActiveScriptSite*, UInt32),
@@ -23503,7 +23503,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptSite, lpVtbl : IActiveScriptSiteVtbl* do
+  record IActiveScriptSite, lpVtbl : IActiveScriptSiteVtable* do
     GUID = LibC::GUID.new(0xdb01a1e3_u32, 0xa42b_u16, 0x11cf_u16, StaticArray[0x8f_u8, 0x20_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x2c_u8, 0xd0_u8, 0x64_u8])
     def query_interface(this : IActiveScriptSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23542,7 +23542,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptErrorVtbl,
+  record IActiveScriptErrorVtable,
     query_interface : Proc(IActiveScriptError*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptError*, UInt32),
     release : Proc(IActiveScriptError*, UInt32),
@@ -23552,7 +23552,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptError, lpVtbl : IActiveScriptErrorVtbl* do
+  record IActiveScriptError, lpVtbl : IActiveScriptErrorVtable* do
     GUID = LibC::GUID.new(0xeae1ba61_u32, 0xa4ed_u16, 0x11cf_u16, StaticArray[0x8f_u8, 0x20_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x2c_u8, 0xd0_u8, 0x64_u8])
     def query_interface(this : IActiveScriptError*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23576,7 +23576,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptError64Vtbl,
+  record IActiveScriptError64Vtable,
     query_interface : Proc(IActiveScriptError64*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptError64*, UInt32),
     release : Proc(IActiveScriptError64*, UInt32),
@@ -23587,7 +23587,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptError64, lpVtbl : IActiveScriptError64Vtbl* do
+  record IActiveScriptError64, lpVtbl : IActiveScriptError64Vtable* do
     GUID = LibC::GUID.new(0xb21fb2a1_u32, 0x5b8f_u16, 0x4963_u16, StaticArray[0x8c_u8, 0x21_u8, 0x21_u8, 0x45_u8, 0xf_u8, 0x84_u8, 0xed_u8, 0x7f_u8])
     def query_interface(this : IActiveScriptError64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23614,7 +23614,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptSiteWindowVtbl,
+  record IActiveScriptSiteWindowVtable,
     query_interface : Proc(IActiveScriptSiteWindow*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptSiteWindow*, UInt32),
     release : Proc(IActiveScriptSiteWindow*, UInt32),
@@ -23623,7 +23623,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptSiteWindow, lpVtbl : IActiveScriptSiteWindowVtbl* do
+  record IActiveScriptSiteWindow, lpVtbl : IActiveScriptSiteWindowVtable* do
     GUID = LibC::GUID.new(0xd10f6761_u32, 0x83e9_u16, 0x11cf_u16, StaticArray[0x8f_u8, 0x20_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x2c_u8, 0xd0_u8, 0x64_u8])
     def query_interface(this : IActiveScriptSiteWindow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23644,7 +23644,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptSiteUIControlVtbl,
+  record IActiveScriptSiteUIControlVtable,
     query_interface : Proc(IActiveScriptSiteUIControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptSiteUIControl*, UInt32),
     release : Proc(IActiveScriptSiteUIControl*, UInt32),
@@ -23652,7 +23652,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptSiteUIControl, lpVtbl : IActiveScriptSiteUIControlVtbl* do
+  record IActiveScriptSiteUIControl, lpVtbl : IActiveScriptSiteUIControlVtable* do
     GUID = LibC::GUID.new(0xaedae97e_u32, 0xd7ee_u16, 0x4796_u16, StaticArray[0xb9_u8, 0x60_u8, 0x7f_u8, 0x9_u8, 0x2a_u8, 0xe8_u8, 0x44_u8, 0xab_u8])
     def query_interface(this : IActiveScriptSiteUIControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23670,7 +23670,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptSiteInterruptPollVtbl,
+  record IActiveScriptSiteInterruptPollVtable,
     query_interface : Proc(IActiveScriptSiteInterruptPoll*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptSiteInterruptPoll*, UInt32),
     release : Proc(IActiveScriptSiteInterruptPoll*, UInt32),
@@ -23678,7 +23678,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptSiteInterruptPoll, lpVtbl : IActiveScriptSiteInterruptPollVtbl* do
+  record IActiveScriptSiteInterruptPoll, lpVtbl : IActiveScriptSiteInterruptPollVtable* do
     GUID = LibC::GUID.new(0x539698a0_u32, 0xcdca_u16, 0x11cf_u16, StaticArray[0xa5_u8, 0xeb_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x47_u8, 0xa0_u8, 0x63_u8])
     def query_interface(this : IActiveScriptSiteInterruptPoll*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23696,7 +23696,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptVtbl,
+  record IActiveScriptVtable,
     query_interface : Proc(IActiveScript*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScript*, UInt32),
     release : Proc(IActiveScript*, UInt32),
@@ -23716,7 +23716,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScript, lpVtbl : IActiveScriptVtbl* do
+  record IActiveScript, lpVtbl : IActiveScriptVtable* do
     GUID = LibC::GUID.new(0xbb1a2ae1_u32, 0xa4f9_u16, 0x11cf_u16, StaticArray[0x8f_u8, 0x20_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x2c_u8, 0xd0_u8, 0x64_u8])
     def query_interface(this : IActiveScript*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23770,7 +23770,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptParse32Vtbl,
+  record IActiveScriptParse32Vtable,
     query_interface : Proc(IActiveScriptParse32*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptParse32*, UInt32),
     release : Proc(IActiveScriptParse32*, UInt32),
@@ -23780,7 +23780,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptParse32, lpVtbl : IActiveScriptParse32Vtbl* do
+  record IActiveScriptParse32, lpVtbl : IActiveScriptParse32Vtable* do
     GUID = LibC::GUID.new(0xbb1a2ae2_u32, 0xa4f9_u16, 0x11cf_u16, StaticArray[0x8f_u8, 0x20_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x2c_u8, 0xd0_u8, 0x64_u8])
     def query_interface(this : IActiveScriptParse32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23804,7 +23804,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptParse64Vtbl,
+  record IActiveScriptParse64Vtable,
     query_interface : Proc(IActiveScriptParse64*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptParse64*, UInt32),
     release : Proc(IActiveScriptParse64*, UInt32),
@@ -23814,7 +23814,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptParse64, lpVtbl : IActiveScriptParse64Vtbl* do
+  record IActiveScriptParse64, lpVtbl : IActiveScriptParse64Vtable* do
     GUID = LibC::GUID.new(0xc7ef7658_u32, 0xe1ee_u16, 0x480e_u16, StaticArray[0x97_u8, 0xea_u8, 0xd5_u8, 0x2c_u8, 0xb4_u8, 0xd7_u8, 0x6d_u8, 0x17_u8])
     def query_interface(this : IActiveScriptParse64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23838,7 +23838,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptParseProcedureOld32Vtbl,
+  record IActiveScriptParseProcedureOld32Vtable,
     query_interface : Proc(IActiveScriptParseProcedureOld32*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptParseProcedureOld32*, UInt32),
     release : Proc(IActiveScriptParseProcedureOld32*, UInt32),
@@ -23846,7 +23846,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptParseProcedureOld32, lpVtbl : IActiveScriptParseProcedureOld32Vtbl* do
+  record IActiveScriptParseProcedureOld32, lpVtbl : IActiveScriptParseProcedureOld32Vtable* do
     GUID = LibC::GUID.new(0x1cff0050_u32, 0x6fdd_u16, 0x11d0_u16, StaticArray[0x93_u8, 0x28_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0xca_u8, 0xa9_u8])
     def query_interface(this : IActiveScriptParseProcedureOld32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23864,7 +23864,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptParseProcedureOld64Vtbl,
+  record IActiveScriptParseProcedureOld64Vtable,
     query_interface : Proc(IActiveScriptParseProcedureOld64*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptParseProcedureOld64*, UInt32),
     release : Proc(IActiveScriptParseProcedureOld64*, UInt32),
@@ -23872,7 +23872,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptParseProcedureOld64, lpVtbl : IActiveScriptParseProcedureOld64Vtbl* do
+  record IActiveScriptParseProcedureOld64, lpVtbl : IActiveScriptParseProcedureOld64Vtable* do
     GUID = LibC::GUID.new(0x21f57128_u32, 0x8c9_u16, 0x4638_u16, StaticArray[0xba_u8, 0x12_u8, 0x22_u8, 0xd1_u8, 0x5d_u8, 0x88_u8, 0xdc_u8, 0x5c_u8])
     def query_interface(this : IActiveScriptParseProcedureOld64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23890,7 +23890,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptParseProcedure32Vtbl,
+  record IActiveScriptParseProcedure32Vtable,
     query_interface : Proc(IActiveScriptParseProcedure32*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptParseProcedure32*, UInt32),
     release : Proc(IActiveScriptParseProcedure32*, UInt32),
@@ -23898,7 +23898,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptParseProcedure32, lpVtbl : IActiveScriptParseProcedure32Vtbl* do
+  record IActiveScriptParseProcedure32, lpVtbl : IActiveScriptParseProcedure32Vtable* do
     GUID = LibC::GUID.new(0xaa5b6a80_u32, 0xb834_u16, 0x11d0_u16, StaticArray[0x93_u8, 0x2f_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0xca_u8, 0xa9_u8])
     def query_interface(this : IActiveScriptParseProcedure32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23916,7 +23916,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptParseProcedure64Vtbl,
+  record IActiveScriptParseProcedure64Vtable,
     query_interface : Proc(IActiveScriptParseProcedure64*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptParseProcedure64*, UInt32),
     release : Proc(IActiveScriptParseProcedure64*, UInt32),
@@ -23924,7 +23924,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptParseProcedure64, lpVtbl : IActiveScriptParseProcedure64Vtbl* do
+  record IActiveScriptParseProcedure64, lpVtbl : IActiveScriptParseProcedure64Vtable* do
     GUID = LibC::GUID.new(0xc64713b6_u32, 0xe029_u16, 0x4cc5_u16, StaticArray[0x92_u8, 0x0_u8, 0x43_u8, 0x8b_u8, 0x72_u8, 0x89_u8, 0xb_u8, 0x6a_u8])
     def query_interface(this : IActiveScriptParseProcedure64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23942,7 +23942,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptParseProcedure2_32Vtbl,
+  record IActiveScriptParseProcedure2_32Vtable,
     query_interface : Proc(IActiveScriptParseProcedure2_32*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptParseProcedure2_32*, UInt32),
     release : Proc(IActiveScriptParseProcedure2_32*, UInt32),
@@ -23950,7 +23950,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptParseProcedure2_32, lpVtbl : IActiveScriptParseProcedure2_32Vtbl* do
+  record IActiveScriptParseProcedure2_32, lpVtbl : IActiveScriptParseProcedure2_32Vtable* do
     GUID = LibC::GUID.new(0x71ee5b20_u32, 0xfb04_u16, 0x11d1_u16, StaticArray[0xb3_u8, 0xa8_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xe8_u8, 0xb2_u8])
     def query_interface(this : IActiveScriptParseProcedure2_32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23968,7 +23968,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptParseProcedure2_64Vtbl,
+  record IActiveScriptParseProcedure2_64Vtable,
     query_interface : Proc(IActiveScriptParseProcedure2_64*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptParseProcedure2_64*, UInt32),
     release : Proc(IActiveScriptParseProcedure2_64*, UInt32),
@@ -23976,7 +23976,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptParseProcedure2_64, lpVtbl : IActiveScriptParseProcedure2_64Vtbl* do
+  record IActiveScriptParseProcedure2_64, lpVtbl : IActiveScriptParseProcedure2_64Vtable* do
     GUID = LibC::GUID.new(0xfe7c4271_u32, 0x210c_u16, 0x448d_u16, StaticArray[0x9f_u8, 0x54_u8, 0x76_u8, 0xda_u8, 0xb7_u8, 0x4_u8, 0x7b_u8, 0x28_u8])
     def query_interface(this : IActiveScriptParseProcedure2_64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -23994,7 +23994,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptEncodeVtbl,
+  record IActiveScriptEncodeVtable,
     query_interface : Proc(IActiveScriptEncode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptEncode*, UInt32),
     release : Proc(IActiveScriptEncode*, UInt32),
@@ -24004,7 +24004,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptEncode, lpVtbl : IActiveScriptEncodeVtbl* do
+  record IActiveScriptEncode, lpVtbl : IActiveScriptEncodeVtable* do
     GUID = LibC::GUID.new(0xbb1a2ae3_u32, 0xa4f9_u16, 0x11cf_u16, StaticArray[0x8f_u8, 0x20_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x2c_u8, 0xd0_u8, 0x64_u8])
     def query_interface(this : IActiveScriptEncode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24028,7 +24028,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptHostEncodeVtbl,
+  record IActiveScriptHostEncodeVtable,
     query_interface : Proc(IActiveScriptHostEncode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptHostEncode*, UInt32),
     release : Proc(IActiveScriptHostEncode*, UInt32),
@@ -24036,7 +24036,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptHostEncode, lpVtbl : IActiveScriptHostEncodeVtbl* do
+  record IActiveScriptHostEncode, lpVtbl : IActiveScriptHostEncodeVtable* do
     GUID = LibC::GUID.new(0xbee9b76e_u32, 0xcfe3_u16, 0x11d1_u16, StaticArray[0xb7_u8, 0x47_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xb0_u8, 0x85_u8])
     def query_interface(this : IActiveScriptHostEncode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24054,7 +24054,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IBindEventHandlerVtbl,
+  record IBindEventHandlerVtable,
     query_interface : Proc(IBindEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBindEventHandler*, UInt32),
     release : Proc(IBindEventHandler*, UInt32),
@@ -24062,7 +24062,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IBindEventHandler, lpVtbl : IBindEventHandlerVtbl* do
+  record IBindEventHandler, lpVtbl : IBindEventHandlerVtable* do
     GUID = LibC::GUID.new(0x63cdbcb0_u32, 0xc1b1_u16, 0x11d0_u16, StaticArray[0x93_u8, 0x36_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0xca_u8, 0xa9_u8])
     def query_interface(this : IBindEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24080,7 +24080,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptStatsVtbl,
+  record IActiveScriptStatsVtable,
     query_interface : Proc(IActiveScriptStats*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptStats*, UInt32),
     release : Proc(IActiveScriptStats*, UInt32),
@@ -24090,7 +24090,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptStats, lpVtbl : IActiveScriptStatsVtbl* do
+  record IActiveScriptStats, lpVtbl : IActiveScriptStatsVtable* do
     GUID = LibC::GUID.new(0xb8da6310_u32, 0xe19b_u16, 0x11d0_u16, StaticArray[0x93_u8, 0x3c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0xca_u8, 0xa9_u8])
     def query_interface(this : IActiveScriptStats*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24114,7 +24114,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptPropertyVtbl,
+  record IActiveScriptPropertyVtable,
     query_interface : Proc(IActiveScriptProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptProperty*, UInt32),
     release : Proc(IActiveScriptProperty*, UInt32),
@@ -24123,7 +24123,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptProperty, lpVtbl : IActiveScriptPropertyVtbl* do
+  record IActiveScriptProperty, lpVtbl : IActiveScriptPropertyVtable* do
     GUID = LibC::GUID.new(0x4954e0d0_u32, 0xfbc7_u16, 0x11d1_u16, StaticArray[0x84_u8, 0x10_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xc3_u8, 0xfb_u8, 0xfc_u8])
     def query_interface(this : IActiveScriptProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24144,7 +24144,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record ITridentEventSinkVtbl,
+  record ITridentEventSinkVtable,
     query_interface : Proc(ITridentEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITridentEventSink*, UInt32),
     release : Proc(ITridentEventSink*, UInt32),
@@ -24152,7 +24152,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record ITridentEventSink, lpVtbl : ITridentEventSinkVtbl* do
+  record ITridentEventSink, lpVtbl : ITridentEventSinkVtable* do
     GUID = LibC::GUID.new(0x1dc9ca50_u32, 0x6ef_u16, 0x11d2_u16, StaticArray[0x84_u8, 0x15_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0xc3_u8, 0xfb_u8, 0xfc_u8])
     def query_interface(this : ITridentEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24170,7 +24170,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptGarbageCollectorVtbl,
+  record IActiveScriptGarbageCollectorVtable,
     query_interface : Proc(IActiveScriptGarbageCollector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptGarbageCollector*, UInt32),
     release : Proc(IActiveScriptGarbageCollector*, UInt32),
@@ -24178,7 +24178,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptGarbageCollector, lpVtbl : IActiveScriptGarbageCollectorVtbl* do
+  record IActiveScriptGarbageCollector, lpVtbl : IActiveScriptGarbageCollectorVtable* do
     GUID = LibC::GUID.new(0x6aa2c4a0_u32, 0x2b53_u16, 0x11d4_u16, StaticArray[0xa2_u8, 0xa0_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xd3_u8, 0x50_u8, 0x90_u8])
     def query_interface(this : IActiveScriptGarbageCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24196,7 +24196,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptSIPInfoVtbl,
+  record IActiveScriptSIPInfoVtable,
     query_interface : Proc(IActiveScriptSIPInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptSIPInfo*, UInt32),
     release : Proc(IActiveScriptSIPInfo*, UInt32),
@@ -24204,7 +24204,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptSIPInfo, lpVtbl : IActiveScriptSIPInfoVtbl* do
+  record IActiveScriptSIPInfo, lpVtbl : IActiveScriptSIPInfoVtable* do
     GUID = LibC::GUID.new(0x764651d0_u32, 0x38de_u16, 0x11d4_u16, StaticArray[0xa2_u8, 0xa3_u8, 0x0_u8, 0x10_u8, 0x4b_u8, 0xd3_u8, 0x50_u8, 0x90_u8])
     def query_interface(this : IActiveScriptSIPInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24222,7 +24222,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptSiteTraceInfoVtbl,
+  record IActiveScriptSiteTraceInfoVtable,
     query_interface : Proc(IActiveScriptSiteTraceInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptSiteTraceInfo*, UInt32),
     release : Proc(IActiveScriptSiteTraceInfo*, UInt32),
@@ -24230,7 +24230,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptSiteTraceInfo, lpVtbl : IActiveScriptSiteTraceInfoVtbl* do
+  record IActiveScriptSiteTraceInfo, lpVtbl : IActiveScriptSiteTraceInfoVtable* do
     GUID = LibC::GUID.new(0x4b7272ae_u32, 0x1955_u16, 0x4bfe_u16, StaticArray[0x98_u8, 0xb0_u8, 0x78_u8, 0x6_u8, 0x21_u8, 0x88_u8, 0x85_u8, 0x69_u8])
     def query_interface(this : IActiveScriptSiteTraceInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24248,7 +24248,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptTraceInfoVtbl,
+  record IActiveScriptTraceInfoVtable,
     query_interface : Proc(IActiveScriptTraceInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptTraceInfo*, UInt32),
     release : Proc(IActiveScriptTraceInfo*, UInt32),
@@ -24257,7 +24257,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptTraceInfo, lpVtbl : IActiveScriptTraceInfoVtbl* do
+  record IActiveScriptTraceInfo, lpVtbl : IActiveScriptTraceInfoVtable* do
     GUID = LibC::GUID.new(0xc35456e7_u32, 0xbebf_u16, 0x4a1b_u16, StaticArray[0x86_u8, 0xa9_u8, 0x24_u8, 0xd5_u8, 0x6b_u8, 0xe8_u8, 0xb3_u8, 0x69_u8])
     def query_interface(this : IActiveScriptTraceInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24278,7 +24278,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptStringCompareVtbl,
+  record IActiveScriptStringCompareVtable,
     query_interface : Proc(IActiveScriptStringCompare*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptStringCompare*, UInt32),
     release : Proc(IActiveScriptStringCompare*, UInt32),
@@ -24286,7 +24286,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptStringCompare, lpVtbl : IActiveScriptStringCompareVtbl* do
+  record IActiveScriptStringCompare, lpVtbl : IActiveScriptStringCompareVtable* do
     GUID = LibC::GUID.new(0x58562769_u32, 0xed52_u16, 0x42f7_u16, StaticArray[0x84_u8, 0x3_u8, 0x49_u8, 0x63_u8, 0x51_u8, 0x4e_u8, 0x1f_u8, 0x11_u8])
     def query_interface(this : IActiveScriptStringCompare*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24304,7 +24304,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugPropertyVtbl,
+  record IDebugPropertyVtable,
     query_interface : Proc(IDebugProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugProperty*, UInt32),
     release : Proc(IDebugProperty*, UInt32),
@@ -24316,7 +24316,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugProperty, lpVtbl : IDebugPropertyVtbl* do
+  record IDebugProperty, lpVtbl : IDebugPropertyVtable* do
     GUID = LibC::GUID.new(0x51973c50_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24346,7 +24346,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IEnumDebugPropertyInfoVtbl,
+  record IEnumDebugPropertyInfoVtable,
     query_interface : Proc(IEnumDebugPropertyInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumDebugPropertyInfo*, UInt32),
     release : Proc(IEnumDebugPropertyInfo*, UInt32),
@@ -24358,7 +24358,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IEnumDebugPropertyInfo, lpVtbl : IEnumDebugPropertyInfoVtbl* do
+  record IEnumDebugPropertyInfo, lpVtbl : IEnumDebugPropertyInfoVtable* do
     GUID = LibC::GUID.new(0x51973c51_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IEnumDebugPropertyInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24388,7 +24388,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugExtendedPropertyVtbl,
+  record IDebugExtendedPropertyVtable,
     query_interface : Proc(IDebugExtendedProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugExtendedProperty*, UInt32),
     release : Proc(IDebugExtendedProperty*, UInt32),
@@ -24402,7 +24402,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugExtendedProperty, lpVtbl : IDebugExtendedPropertyVtbl* do
+  record IDebugExtendedProperty, lpVtbl : IDebugExtendedPropertyVtable* do
     GUID = LibC::GUID.new(0x51973c52_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugExtendedProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24438,7 +24438,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IEnumDebugExtendedPropertyInfoVtbl,
+  record IEnumDebugExtendedPropertyInfoVtable,
     query_interface : Proc(IEnumDebugExtendedPropertyInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumDebugExtendedPropertyInfo*, UInt32),
     release : Proc(IEnumDebugExtendedPropertyInfo*, UInt32),
@@ -24450,7 +24450,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IEnumDebugExtendedPropertyInfo, lpVtbl : IEnumDebugExtendedPropertyInfoVtbl* do
+  record IEnumDebugExtendedPropertyInfo, lpVtbl : IEnumDebugExtendedPropertyInfoVtable* do
     GUID = LibC::GUID.new(0x51973c53_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IEnumDebugExtendedPropertyInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24480,7 +24480,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IPerPropertyBrowsing2Vtbl,
+  record IPerPropertyBrowsing2Vtable,
     query_interface : Proc(IPerPropertyBrowsing2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPerPropertyBrowsing2*, UInt32),
     release : Proc(IPerPropertyBrowsing2*, UInt32),
@@ -24491,7 +24491,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IPerPropertyBrowsing2, lpVtbl : IPerPropertyBrowsing2Vtbl* do
+  record IPerPropertyBrowsing2, lpVtbl : IPerPropertyBrowsing2Vtable* do
     GUID = LibC::GUID.new(0x51973c54_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IPerPropertyBrowsing2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24518,7 +24518,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugPropertyEnumType_AllVtbl,
+  record IDebugPropertyEnumType_AllVtable,
     query_interface : Proc(IDebugPropertyEnumType_All*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugPropertyEnumType_All*, UInt32),
     release : Proc(IDebugPropertyEnumType_All*, UInt32),
@@ -24526,7 +24526,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugPropertyEnumType_All, lpVtbl : IDebugPropertyEnumType_AllVtbl* do
+  record IDebugPropertyEnumType_All, lpVtbl : IDebugPropertyEnumType_AllVtable* do
     GUID = LibC::GUID.new(0x51973c55_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugPropertyEnumType_All*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24544,7 +24544,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugPropertyEnumType_LocalsVtbl,
+  record IDebugPropertyEnumType_LocalsVtable,
     query_interface : Proc(IDebugPropertyEnumType_Locals*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugPropertyEnumType_Locals*, UInt32),
     release : Proc(IDebugPropertyEnumType_Locals*, UInt32),
@@ -24552,7 +24552,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugPropertyEnumType_Locals, lpVtbl : IDebugPropertyEnumType_LocalsVtbl* do
+  record IDebugPropertyEnumType_Locals, lpVtbl : IDebugPropertyEnumType_LocalsVtable* do
     GUID = LibC::GUID.new(0x51973c56_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugPropertyEnumType_Locals*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24570,7 +24570,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugPropertyEnumType_ArgumentsVtbl,
+  record IDebugPropertyEnumType_ArgumentsVtable,
     query_interface : Proc(IDebugPropertyEnumType_Arguments*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugPropertyEnumType_Arguments*, UInt32),
     release : Proc(IDebugPropertyEnumType_Arguments*, UInt32),
@@ -24578,7 +24578,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugPropertyEnumType_Arguments, lpVtbl : IDebugPropertyEnumType_ArgumentsVtbl* do
+  record IDebugPropertyEnumType_Arguments, lpVtbl : IDebugPropertyEnumType_ArgumentsVtable* do
     GUID = LibC::GUID.new(0x51973c57_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugPropertyEnumType_Arguments*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24596,7 +24596,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugPropertyEnumType_LocalsPlusArgsVtbl,
+  record IDebugPropertyEnumType_LocalsPlusArgsVtable,
     query_interface : Proc(IDebugPropertyEnumType_LocalsPlusArgs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugPropertyEnumType_LocalsPlusArgs*, UInt32),
     release : Proc(IDebugPropertyEnumType_LocalsPlusArgs*, UInt32),
@@ -24604,7 +24604,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugPropertyEnumType_LocalsPlusArgs, lpVtbl : IDebugPropertyEnumType_LocalsPlusArgsVtbl* do
+  record IDebugPropertyEnumType_LocalsPlusArgs, lpVtbl : IDebugPropertyEnumType_LocalsPlusArgsVtable* do
     GUID = LibC::GUID.new(0x51973c58_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugPropertyEnumType_LocalsPlusArgs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24622,7 +24622,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugPropertyEnumType_RegistersVtbl,
+  record IDebugPropertyEnumType_RegistersVtable,
     query_interface : Proc(IDebugPropertyEnumType_Registers*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugPropertyEnumType_Registers*, UInt32),
     release : Proc(IDebugPropertyEnumType_Registers*, UInt32),
@@ -24630,7 +24630,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugPropertyEnumType_Registers, lpVtbl : IDebugPropertyEnumType_RegistersVtbl* do
+  record IDebugPropertyEnumType_Registers, lpVtbl : IDebugPropertyEnumType_RegistersVtable* do
     GUID = LibC::GUID.new(0x51973c59_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugPropertyEnumType_Registers*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24648,7 +24648,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptDebug32Vtbl,
+  record IActiveScriptDebug32Vtable,
     query_interface : Proc(IActiveScriptDebug32*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptDebug32*, UInt32),
     release : Proc(IActiveScriptDebug32*, UInt32),
@@ -24658,7 +24658,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptDebug32, lpVtbl : IActiveScriptDebug32Vtbl* do
+  record IActiveScriptDebug32, lpVtbl : IActiveScriptDebug32Vtable* do
     GUID = LibC::GUID.new(0x51973c10_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IActiveScriptDebug32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24682,7 +24682,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptDebug64Vtbl,
+  record IActiveScriptDebug64Vtable,
     query_interface : Proc(IActiveScriptDebug64*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptDebug64*, UInt32),
     release : Proc(IActiveScriptDebug64*, UInt32),
@@ -24692,7 +24692,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptDebug64, lpVtbl : IActiveScriptDebug64Vtbl* do
+  record IActiveScriptDebug64, lpVtbl : IActiveScriptDebug64Vtable* do
     GUID = LibC::GUID.new(0xbc437e23_u32, 0xf5b8_u16, 0x47f4_u16, StaticArray[0xbb_u8, 0x79_u8, 0x7d_u8, 0x1c_u8, 0xe5_u8, 0x48_u8, 0x3b_u8, 0x86_u8])
     def query_interface(this : IActiveScriptDebug64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24716,7 +24716,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptSiteDebug32Vtbl,
+  record IActiveScriptSiteDebug32Vtable,
     query_interface : Proc(IActiveScriptSiteDebug32*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptSiteDebug32*, UInt32),
     release : Proc(IActiveScriptSiteDebug32*, UInt32),
@@ -24727,7 +24727,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptSiteDebug32, lpVtbl : IActiveScriptSiteDebug32Vtbl* do
+  record IActiveScriptSiteDebug32, lpVtbl : IActiveScriptSiteDebug32Vtable* do
     GUID = LibC::GUID.new(0x51973c11_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IActiveScriptSiteDebug32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24754,7 +24754,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptSiteDebug64Vtbl,
+  record IActiveScriptSiteDebug64Vtable,
     query_interface : Proc(IActiveScriptSiteDebug64*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptSiteDebug64*, UInt32),
     release : Proc(IActiveScriptSiteDebug64*, UInt32),
@@ -24765,7 +24765,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptSiteDebug64, lpVtbl : IActiveScriptSiteDebug64Vtbl* do
+  record IActiveScriptSiteDebug64, lpVtbl : IActiveScriptSiteDebug64Vtable* do
     GUID = LibC::GUID.new(0xd6b96b0a_u32, 0x7463_u16, 0x402c_u16, StaticArray[0x92_u8, 0xac_u8, 0x89_u8, 0x98_u8, 0x42_u8, 0x26_u8, 0x94_u8, 0x2f_u8])
     def query_interface(this : IActiveScriptSiteDebug64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24792,7 +24792,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptSiteDebugExVtbl,
+  record IActiveScriptSiteDebugExVtable,
     query_interface : Proc(IActiveScriptSiteDebugEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptSiteDebugEx*, UInt32),
     release : Proc(IActiveScriptSiteDebugEx*, UInt32),
@@ -24800,7 +24800,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptSiteDebugEx, lpVtbl : IActiveScriptSiteDebugExVtbl* do
+  record IActiveScriptSiteDebugEx, lpVtbl : IActiveScriptSiteDebugExVtable* do
     GUID = LibC::GUID.new(0xbb722ccb_u32, 0x6ad2_u16, 0x41c6_u16, StaticArray[0xb7_u8, 0x80_u8, 0xaf_u8, 0x9c_u8, 0x3_u8, 0xee_u8, 0x69_u8, 0xf5_u8])
     def query_interface(this : IActiveScriptSiteDebugEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24818,7 +24818,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptErrorDebugVtbl,
+  record IActiveScriptErrorDebugVtable,
     query_interface : Proc(IActiveScriptErrorDebug*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptErrorDebug*, UInt32),
     release : Proc(IActiveScriptErrorDebug*, UInt32),
@@ -24830,7 +24830,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptErrorDebug, lpVtbl : IActiveScriptErrorDebugVtbl* do
+  record IActiveScriptErrorDebug, lpVtbl : IActiveScriptErrorDebugVtable* do
     GUID = LibC::GUID.new(0x51973c12_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IActiveScriptErrorDebug*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24860,7 +24860,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugCodeContextVtbl,
+  record IDebugCodeContextVtable,
     query_interface : Proc(IDebugCodeContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugCodeContext*, UInt32),
     release : Proc(IDebugCodeContext*, UInt32),
@@ -24869,7 +24869,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugCodeContext, lpVtbl : IDebugCodeContextVtbl* do
+  record IDebugCodeContext, lpVtbl : IDebugCodeContextVtable* do
     GUID = LibC::GUID.new(0x51973c13_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugCodeContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24890,7 +24890,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugExpressionVtbl,
+  record IDebugExpressionVtable,
     query_interface : Proc(IDebugExpression*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugExpression*, UInt32),
     release : Proc(IDebugExpression*, UInt32),
@@ -24902,7 +24902,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugExpression, lpVtbl : IDebugExpressionVtbl* do
+  record IDebugExpression, lpVtbl : IDebugExpressionVtable* do
     GUID = LibC::GUID.new(0x51973c14_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugExpression*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24932,7 +24932,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugExpressionContextVtbl,
+  record IDebugExpressionContextVtable,
     query_interface : Proc(IDebugExpressionContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugExpressionContext*, UInt32),
     release : Proc(IDebugExpressionContext*, UInt32),
@@ -24941,7 +24941,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugExpressionContext, lpVtbl : IDebugExpressionContextVtbl* do
+  record IDebugExpressionContext, lpVtbl : IDebugExpressionContextVtable* do
     GUID = LibC::GUID.new(0x51973c15_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugExpressionContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24962,7 +24962,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugExpressionCallBackVtbl,
+  record IDebugExpressionCallBackVtable,
     query_interface : Proc(IDebugExpressionCallBack*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugExpressionCallBack*, UInt32),
     release : Proc(IDebugExpressionCallBack*, UInt32),
@@ -24970,7 +24970,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugExpressionCallBack, lpVtbl : IDebugExpressionCallBackVtbl* do
+  record IDebugExpressionCallBack, lpVtbl : IDebugExpressionCallBackVtable* do
     GUID = LibC::GUID.new(0x51973c16_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugExpressionCallBack*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -24988,7 +24988,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugStackFrameVtbl,
+  record IDebugStackFrameVtable,
     query_interface : Proc(IDebugStackFrame*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugStackFrame*, UInt32),
     release : Proc(IDebugStackFrame*, UInt32),
@@ -25000,7 +25000,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugStackFrame, lpVtbl : IDebugStackFrameVtbl* do
+  record IDebugStackFrame, lpVtbl : IDebugStackFrameVtable* do
     GUID = LibC::GUID.new(0x51973c17_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugStackFrame*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25030,7 +25030,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugStackFrameSnifferVtbl,
+  record IDebugStackFrameSnifferVtable,
     query_interface : Proc(IDebugStackFrameSniffer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugStackFrameSniffer*, UInt32),
     release : Proc(IDebugStackFrameSniffer*, UInt32),
@@ -25038,7 +25038,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugStackFrameSniffer, lpVtbl : IDebugStackFrameSnifferVtbl* do
+  record IDebugStackFrameSniffer, lpVtbl : IDebugStackFrameSnifferVtable* do
     GUID = LibC::GUID.new(0x51973c18_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugStackFrameSniffer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25056,7 +25056,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugStackFrameSnifferEx32Vtbl,
+  record IDebugStackFrameSnifferEx32Vtable,
     query_interface : Proc(IDebugStackFrameSnifferEx32*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugStackFrameSnifferEx32*, UInt32),
     release : Proc(IDebugStackFrameSnifferEx32*, UInt32),
@@ -25065,7 +25065,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugStackFrameSnifferEx32, lpVtbl : IDebugStackFrameSnifferEx32Vtbl* do
+  record IDebugStackFrameSnifferEx32, lpVtbl : IDebugStackFrameSnifferEx32Vtable* do
     GUID = LibC::GUID.new(0x51973c19_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugStackFrameSnifferEx32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25086,7 +25086,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugStackFrameSnifferEx64Vtbl,
+  record IDebugStackFrameSnifferEx64Vtable,
     query_interface : Proc(IDebugStackFrameSnifferEx64*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugStackFrameSnifferEx64*, UInt32),
     release : Proc(IDebugStackFrameSnifferEx64*, UInt32),
@@ -25095,7 +25095,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugStackFrameSnifferEx64, lpVtbl : IDebugStackFrameSnifferEx64Vtbl* do
+  record IDebugStackFrameSnifferEx64, lpVtbl : IDebugStackFrameSnifferEx64Vtable* do
     GUID = LibC::GUID.new(0x8cd12af4_u32, 0x49c1_u16, 0x4d52_u16, StaticArray[0x8d_u8, 0x8a_u8, 0xc1_u8, 0x46_u8, 0xf4_u8, 0x75_u8, 0x81_u8, 0xaa_u8])
     def query_interface(this : IDebugStackFrameSnifferEx64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25116,7 +25116,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugSyncOperationVtbl,
+  record IDebugSyncOperationVtable,
     query_interface : Proc(IDebugSyncOperation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugSyncOperation*, UInt32),
     release : Proc(IDebugSyncOperation*, UInt32),
@@ -25126,7 +25126,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugSyncOperation, lpVtbl : IDebugSyncOperationVtbl* do
+  record IDebugSyncOperation, lpVtbl : IDebugSyncOperationVtable* do
     GUID = LibC::GUID.new(0x51973c1a_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugSyncOperation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25150,7 +25150,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugAsyncOperationVtbl,
+  record IDebugAsyncOperationVtable,
     query_interface : Proc(IDebugAsyncOperation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugAsyncOperation*, UInt32),
     release : Proc(IDebugAsyncOperation*, UInt32),
@@ -25162,7 +25162,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugAsyncOperation, lpVtbl : IDebugAsyncOperationVtbl* do
+  record IDebugAsyncOperation, lpVtbl : IDebugAsyncOperationVtable* do
     GUID = LibC::GUID.new(0x51973c1b_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugAsyncOperation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25192,7 +25192,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugAsyncOperationCallBackVtbl,
+  record IDebugAsyncOperationCallBackVtable,
     query_interface : Proc(IDebugAsyncOperationCallBack*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugAsyncOperationCallBack*, UInt32),
     release : Proc(IDebugAsyncOperationCallBack*, UInt32),
@@ -25200,7 +25200,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugAsyncOperationCallBack, lpVtbl : IDebugAsyncOperationCallBackVtbl* do
+  record IDebugAsyncOperationCallBack, lpVtbl : IDebugAsyncOperationCallBackVtable* do
     GUID = LibC::GUID.new(0x51973c1c_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugAsyncOperationCallBack*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25218,7 +25218,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IEnumDebugCodeContextsVtbl,
+  record IEnumDebugCodeContextsVtable,
     query_interface : Proc(IEnumDebugCodeContexts*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumDebugCodeContexts*, UInt32),
     release : Proc(IEnumDebugCodeContexts*, UInt32),
@@ -25229,7 +25229,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IEnumDebugCodeContexts, lpVtbl : IEnumDebugCodeContextsVtbl* do
+  record IEnumDebugCodeContexts, lpVtbl : IEnumDebugCodeContextsVtable* do
     GUID = LibC::GUID.new(0x51973c1d_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IEnumDebugCodeContexts*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25256,7 +25256,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IEnumDebugStackFramesVtbl,
+  record IEnumDebugStackFramesVtable,
     query_interface : Proc(IEnumDebugStackFrames*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumDebugStackFrames*, UInt32),
     release : Proc(IEnumDebugStackFrames*, UInt32),
@@ -25267,7 +25267,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IEnumDebugStackFrames, lpVtbl : IEnumDebugStackFramesVtbl* do
+  record IEnumDebugStackFrames, lpVtbl : IEnumDebugStackFramesVtable* do
     GUID = LibC::GUID.new(0x51973c1e_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IEnumDebugStackFrames*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25294,7 +25294,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IEnumDebugStackFrames64Vtbl,
+  record IEnumDebugStackFrames64Vtable,
     query_interface : Proc(IEnumDebugStackFrames64*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumDebugStackFrames64*, UInt32),
     release : Proc(IEnumDebugStackFrames64*, UInt32),
@@ -25306,7 +25306,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IEnumDebugStackFrames64, lpVtbl : IEnumDebugStackFrames64Vtbl* do
+  record IEnumDebugStackFrames64, lpVtbl : IEnumDebugStackFrames64Vtable* do
     GUID = LibC::GUID.new(0xdc38853_u32, 0xc1b0_u16, 0x4176_u16, StaticArray[0xa9_u8, 0x84_u8, 0xb2_u8, 0x98_u8, 0x36_u8, 0x10_u8, 0x27_u8, 0xaf_u8])
     def query_interface(this : IEnumDebugStackFrames64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25336,7 +25336,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugDocumentInfoVtbl,
+  record IDebugDocumentInfoVtable,
     query_interface : Proc(IDebugDocumentInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugDocumentInfo*, UInt32),
     release : Proc(IDebugDocumentInfo*, UInt32),
@@ -25345,7 +25345,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugDocumentInfo, lpVtbl : IDebugDocumentInfoVtbl* do
+  record IDebugDocumentInfo, lpVtbl : IDebugDocumentInfoVtable* do
     GUID = LibC::GUID.new(0x51973c1f_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocumentInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25366,7 +25366,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugDocumentProviderVtbl,
+  record IDebugDocumentProviderVtable,
     query_interface : Proc(IDebugDocumentProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugDocumentProvider*, UInt32),
     release : Proc(IDebugDocumentProvider*, UInt32),
@@ -25376,7 +25376,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugDocumentProvider, lpVtbl : IDebugDocumentProviderVtbl* do
+  record IDebugDocumentProvider, lpVtbl : IDebugDocumentProviderVtable* do
     GUID = LibC::GUID.new(0x51973c20_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocumentProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25400,7 +25400,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugDocumentVtbl,
+  record IDebugDocumentVtable,
     query_interface : Proc(IDebugDocument*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugDocument*, UInt32),
     release : Proc(IDebugDocument*, UInt32),
@@ -25409,7 +25409,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugDocument, lpVtbl : IDebugDocumentVtbl* do
+  record IDebugDocument, lpVtbl : IDebugDocumentVtable* do
     GUID = LibC::GUID.new(0x51973c21_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25430,7 +25430,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugDocumentTextVtbl,
+  record IDebugDocumentTextVtable,
     query_interface : Proc(IDebugDocumentText*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugDocumentText*, UInt32),
     release : Proc(IDebugDocumentText*, UInt32),
@@ -25446,7 +25446,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugDocumentText, lpVtbl : IDebugDocumentTextVtbl* do
+  record IDebugDocumentText, lpVtbl : IDebugDocumentTextVtable* do
     GUID = LibC::GUID.new(0x51973c22_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocumentText*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25488,7 +25488,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugDocumentTextEventsVtbl,
+  record IDebugDocumentTextEventsVtable,
     query_interface : Proc(IDebugDocumentTextEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugDocumentTextEvents*, UInt32),
     release : Proc(IDebugDocumentTextEvents*, UInt32),
@@ -25501,7 +25501,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugDocumentTextEvents, lpVtbl : IDebugDocumentTextEventsVtbl* do
+  record IDebugDocumentTextEvents, lpVtbl : IDebugDocumentTextEventsVtable* do
     GUID = LibC::GUID.new(0x51973c23_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocumentTextEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25534,7 +25534,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugDocumentTextAuthorVtbl,
+  record IDebugDocumentTextAuthorVtable,
     query_interface : Proc(IDebugDocumentTextAuthor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugDocumentTextAuthor*, UInt32),
     release : Proc(IDebugDocumentTextAuthor*, UInt32),
@@ -25553,7 +25553,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugDocumentTextAuthor, lpVtbl : IDebugDocumentTextAuthorVtbl* do
+  record IDebugDocumentTextAuthor, lpVtbl : IDebugDocumentTextAuthorVtable* do
     GUID = LibC::GUID.new(0x51973c24_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocumentTextAuthor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25604,7 +25604,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugDocumentTextExternalAuthorVtbl,
+  record IDebugDocumentTextExternalAuthorVtable,
     query_interface : Proc(IDebugDocumentTextExternalAuthor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugDocumentTextExternalAuthor*, UInt32),
     release : Proc(IDebugDocumentTextExternalAuthor*, UInt32),
@@ -25614,7 +25614,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugDocumentTextExternalAuthor, lpVtbl : IDebugDocumentTextExternalAuthorVtbl* do
+  record IDebugDocumentTextExternalAuthor, lpVtbl : IDebugDocumentTextExternalAuthorVtable* do
     GUID = LibC::GUID.new(0x51973c25_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocumentTextExternalAuthor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25638,7 +25638,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugDocumentHelper32Vtbl,
+  record IDebugDocumentHelper32Vtable,
     query_interface : Proc(IDebugDocumentHelper32*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugDocumentHelper32*, UInt32),
     release : Proc(IDebugDocumentHelper32*, UInt32),
@@ -25663,7 +25663,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugDocumentHelper32, lpVtbl : IDebugDocumentHelper32Vtbl* do
+  record IDebugDocumentHelper32, lpVtbl : IDebugDocumentHelper32Vtable* do
     GUID = LibC::GUID.new(0x51973c26_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocumentHelper32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25732,7 +25732,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugDocumentHelper64Vtbl,
+  record IDebugDocumentHelper64Vtable,
     query_interface : Proc(IDebugDocumentHelper64*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugDocumentHelper64*, UInt32),
     release : Proc(IDebugDocumentHelper64*, UInt32),
@@ -25757,7 +25757,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugDocumentHelper64, lpVtbl : IDebugDocumentHelper64Vtbl* do
+  record IDebugDocumentHelper64, lpVtbl : IDebugDocumentHelper64Vtable* do
     GUID = LibC::GUID.new(0xc4c7363c_u32, 0x20fd_u16, 0x47f9_u16, StaticArray[0xbd_u8, 0x82_u8, 0x48_u8, 0x55_u8, 0xe0_u8, 0x15_u8, 0x8_u8, 0x71_u8])
     def query_interface(this : IDebugDocumentHelper64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25826,7 +25826,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugDocumentHostVtbl,
+  record IDebugDocumentHostVtable,
     query_interface : Proc(IDebugDocumentHost*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugDocumentHost*, UInt32),
     release : Proc(IDebugDocumentHost*, UInt32),
@@ -25839,7 +25839,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugDocumentHost, lpVtbl : IDebugDocumentHostVtbl* do
+  record IDebugDocumentHost, lpVtbl : IDebugDocumentHostVtable* do
     GUID = LibC::GUID.new(0x51973c27_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocumentHost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25872,7 +25872,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugDocumentContextVtbl,
+  record IDebugDocumentContextVtable,
     query_interface : Proc(IDebugDocumentContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugDocumentContext*, UInt32),
     release : Proc(IDebugDocumentContext*, UInt32),
@@ -25881,7 +25881,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugDocumentContext, lpVtbl : IDebugDocumentContextVtbl* do
+  record IDebugDocumentContext, lpVtbl : IDebugDocumentContextVtable* do
     GUID = LibC::GUID.new(0x51973c28_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugDocumentContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25902,7 +25902,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugSessionProviderVtbl,
+  record IDebugSessionProviderVtable,
     query_interface : Proc(IDebugSessionProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugSessionProvider*, UInt32),
     release : Proc(IDebugSessionProvider*, UInt32),
@@ -25910,7 +25910,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugSessionProvider, lpVtbl : IDebugSessionProviderVtbl* do
+  record IDebugSessionProvider, lpVtbl : IDebugSessionProviderVtable* do
     GUID = LibC::GUID.new(0x51973c29_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugSessionProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25928,7 +25928,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IApplicationDebuggerVtbl,
+  record IApplicationDebuggerVtable,
     query_interface : Proc(IApplicationDebugger*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IApplicationDebugger*, UInt32),
     release : Proc(IApplicationDebugger*, UInt32),
@@ -25941,7 +25941,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IApplicationDebugger, lpVtbl : IApplicationDebuggerVtbl* do
+  record IApplicationDebugger, lpVtbl : IApplicationDebuggerVtable* do
     GUID = LibC::GUID.new(0x51973c2a_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IApplicationDebugger*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -25974,7 +25974,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IApplicationDebuggerUIVtbl,
+  record IApplicationDebuggerUIVtable,
     query_interface : Proc(IApplicationDebuggerUI*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IApplicationDebuggerUI*, UInt32),
     release : Proc(IApplicationDebuggerUI*, UInt32),
@@ -25983,7 +25983,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IApplicationDebuggerUI, lpVtbl : IApplicationDebuggerUIVtbl* do
+  record IApplicationDebuggerUI, lpVtbl : IApplicationDebuggerUIVtable* do
     GUID = LibC::GUID.new(0x51973c2b_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IApplicationDebuggerUI*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26004,7 +26004,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IMachineDebugManagerVtbl,
+  record IMachineDebugManagerVtable,
     query_interface : Proc(IMachineDebugManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMachineDebugManager*, UInt32),
     release : Proc(IMachineDebugManager*, UInt32),
@@ -26014,7 +26014,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IMachineDebugManager, lpVtbl : IMachineDebugManagerVtbl* do
+  record IMachineDebugManager, lpVtbl : IMachineDebugManagerVtable* do
     GUID = LibC::GUID.new(0x51973c2c_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IMachineDebugManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26038,7 +26038,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IMachineDebugManagerCookieVtbl,
+  record IMachineDebugManagerCookieVtable,
     query_interface : Proc(IMachineDebugManagerCookie*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMachineDebugManagerCookie*, UInt32),
     release : Proc(IMachineDebugManagerCookie*, UInt32),
@@ -26048,7 +26048,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IMachineDebugManagerCookie, lpVtbl : IMachineDebugManagerCookieVtbl* do
+  record IMachineDebugManagerCookie, lpVtbl : IMachineDebugManagerCookieVtable* do
     GUID = LibC::GUID.new(0x51973c2d_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IMachineDebugManagerCookie*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26072,7 +26072,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IMachineDebugManagerEventsVtbl,
+  record IMachineDebugManagerEventsVtable,
     query_interface : Proc(IMachineDebugManagerEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMachineDebugManagerEvents*, UInt32),
     release : Proc(IMachineDebugManagerEvents*, UInt32),
@@ -26081,7 +26081,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IMachineDebugManagerEvents, lpVtbl : IMachineDebugManagerEventsVtbl* do
+  record IMachineDebugManagerEvents, lpVtbl : IMachineDebugManagerEventsVtable* do
     GUID = LibC::GUID.new(0x51973c2e_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IMachineDebugManagerEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26102,7 +26102,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IProcessDebugManager32Vtbl,
+  record IProcessDebugManager32Vtable,
     query_interface : Proc(IProcessDebugManager32*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProcessDebugManager32*, UInt32),
     release : Proc(IProcessDebugManager32*, UInt32),
@@ -26114,7 +26114,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IProcessDebugManager32, lpVtbl : IProcessDebugManager32Vtbl* do
+  record IProcessDebugManager32, lpVtbl : IProcessDebugManager32Vtable* do
     GUID = LibC::GUID.new(0x51973c2f_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IProcessDebugManager32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26144,7 +26144,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IProcessDebugManager64Vtbl,
+  record IProcessDebugManager64Vtable,
     query_interface : Proc(IProcessDebugManager64*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProcessDebugManager64*, UInt32),
     release : Proc(IProcessDebugManager64*, UInt32),
@@ -26156,7 +26156,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IProcessDebugManager64, lpVtbl : IProcessDebugManager64Vtbl* do
+  record IProcessDebugManager64, lpVtbl : IProcessDebugManager64Vtable* do
     GUID = LibC::GUID.new(0x56b9fc1c_u32, 0x63a9_u16, 0x4cc1_u16, StaticArray[0xac_u8, 0x21_u8, 0x8_u8, 0x7d_u8, 0x69_u8, 0xa1_u8, 0x7f_u8, 0xab_u8])
     def query_interface(this : IProcessDebugManager64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26186,7 +26186,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IRemoteDebugApplicationVtbl,
+  record IRemoteDebugApplicationVtable,
     query_interface : Proc(IRemoteDebugApplication*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRemoteDebugApplication*, UInt32),
     release : Proc(IRemoteDebugApplication*, UInt32),
@@ -26204,7 +26204,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IRemoteDebugApplication, lpVtbl : IRemoteDebugApplicationVtbl* do
+  record IRemoteDebugApplication, lpVtbl : IRemoteDebugApplicationVtable* do
     GUID = LibC::GUID.new(0x51973c30_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IRemoteDebugApplication*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26252,7 +26252,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugApplication32Vtbl,
+  record IDebugApplication32Vtable,
     query_interface : Proc(IDebugApplication32*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugApplication32*, UInt32),
     release : Proc(IDebugApplication32*, UInt32),
@@ -26290,7 +26290,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugApplication32, lpVtbl : IDebugApplication32Vtbl* do
+  record IDebugApplication32, lpVtbl : IDebugApplication32Vtable* do
     GUID = LibC::GUID.new(0x51973c32_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugApplication32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26398,7 +26398,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugApplication64Vtbl,
+  record IDebugApplication64Vtable,
     query_interface : Proc(IDebugApplication64*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugApplication64*, UInt32),
     release : Proc(IDebugApplication64*, UInt32),
@@ -26436,7 +26436,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugApplication64, lpVtbl : IDebugApplication64Vtbl* do
+  record IDebugApplication64, lpVtbl : IDebugApplication64Vtable* do
     GUID = LibC::GUID.new(0x4dedc754_u32, 0x4c7_u16, 0x4f10_u16, StaticArray[0x9e_u8, 0x60_u8, 0x16_u8, 0xa3_u8, 0x90_u8, 0xfe_u8, 0x6e_u8, 0x62_u8])
     def query_interface(this : IDebugApplication64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26544,7 +26544,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IRemoteDebugApplicationEventsVtbl,
+  record IRemoteDebugApplicationEventsVtable,
     query_interface : Proc(IRemoteDebugApplicationEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRemoteDebugApplicationEvents*, UInt32),
     release : Proc(IRemoteDebugApplicationEvents*, UInt32),
@@ -26561,7 +26561,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IRemoteDebugApplicationEvents, lpVtbl : IRemoteDebugApplicationEventsVtbl* do
+  record IRemoteDebugApplicationEvents, lpVtbl : IRemoteDebugApplicationEventsVtable* do
     GUID = LibC::GUID.new(0x51973c33_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IRemoteDebugApplicationEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26606,7 +26606,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugApplicationNodeVtbl,
+  record IDebugApplicationNodeVtable,
     query_interface : Proc(IDebugApplicationNode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugApplicationNode*, UInt32),
     release : Proc(IDebugApplicationNode*, UInt32),
@@ -26622,7 +26622,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugApplicationNode, lpVtbl : IDebugApplicationNodeVtbl* do
+  record IDebugApplicationNode, lpVtbl : IDebugApplicationNodeVtable* do
     GUID = LibC::GUID.new(0x51973c34_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugApplicationNode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26664,7 +26664,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugApplicationNodeEventsVtbl,
+  record IDebugApplicationNodeEventsVtable,
     query_interface : Proc(IDebugApplicationNodeEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugApplicationNodeEvents*, UInt32),
     release : Proc(IDebugApplicationNodeEvents*, UInt32),
@@ -26675,7 +26675,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugApplicationNodeEvents, lpVtbl : IDebugApplicationNodeEventsVtbl* do
+  record IDebugApplicationNodeEvents, lpVtbl : IDebugApplicationNodeEventsVtable* do
     GUID = LibC::GUID.new(0x51973c35_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugApplicationNodeEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26702,7 +26702,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record AsyncIDebugApplicationNodeEventsVtbl,
+  record AsyncIDebugApplicationNodeEventsVtable,
     query_interface : Proc(AsyncIDebugApplicationNodeEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(AsyncIDebugApplicationNodeEvents*, UInt32),
     release : Proc(AsyncIDebugApplicationNodeEvents*, UInt32),
@@ -26717,7 +26717,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record AsyncIDebugApplicationNodeEvents, lpVtbl : AsyncIDebugApplicationNodeEventsVtbl* do
+  record AsyncIDebugApplicationNodeEvents, lpVtbl : AsyncIDebugApplicationNodeEventsVtable* do
     GUID = LibC::GUID.new(0xa2e3aa3b_u32, 0xaa8d_u16, 0x4ebf_u16, StaticArray[0x84_u8, 0xcd_u8, 0x64_u8, 0x8b_u8, 0x73_u8, 0x7b_u8, 0x8c_u8, 0x13_u8])
     def query_interface(this : AsyncIDebugApplicationNodeEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26756,7 +26756,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugThreadCall32Vtbl,
+  record IDebugThreadCall32Vtable,
     query_interface : Proc(IDebugThreadCall32*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugThreadCall32*, UInt32),
     release : Proc(IDebugThreadCall32*, UInt32),
@@ -26764,7 +26764,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugThreadCall32, lpVtbl : IDebugThreadCall32Vtbl* do
+  record IDebugThreadCall32, lpVtbl : IDebugThreadCall32Vtable* do
     GUID = LibC::GUID.new(0x51973c36_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugThreadCall32*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26782,7 +26782,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugThreadCall64Vtbl,
+  record IDebugThreadCall64Vtable,
     query_interface : Proc(IDebugThreadCall64*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugThreadCall64*, UInt32),
     release : Proc(IDebugThreadCall64*, UInt32),
@@ -26790,7 +26790,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugThreadCall64, lpVtbl : IDebugThreadCall64Vtbl* do
+  record IDebugThreadCall64, lpVtbl : IDebugThreadCall64Vtable* do
     GUID = LibC::GUID.new(0xcb3fa335_u32, 0xe979_u16, 0x42fd_u16, StaticArray[0x9f_u8, 0xcf_u8, 0xa7_u8, 0x54_u8, 0x6a_u8, 0xf_u8, 0x39_u8, 0x5_u8])
     def query_interface(this : IDebugThreadCall64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26808,7 +26808,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IRemoteDebugApplicationThreadVtbl,
+  record IRemoteDebugApplicationThreadVtable,
     query_interface : Proc(IRemoteDebugApplicationThread*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRemoteDebugApplicationThread*, UInt32),
     release : Proc(IRemoteDebugApplicationThread*, UInt32),
@@ -26824,7 +26824,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IRemoteDebugApplicationThread, lpVtbl : IRemoteDebugApplicationThreadVtbl* do
+  record IRemoteDebugApplicationThread, lpVtbl : IRemoteDebugApplicationThreadVtable* do
     GUID = LibC::GUID.new(0x51973c37_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IRemoteDebugApplicationThread*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26866,7 +26866,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugApplicationThreadVtbl,
+  record IDebugApplicationThreadVtable,
     query_interface : Proc(IDebugApplicationThread*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugApplicationThread*, UInt32),
     release : Proc(IDebugApplicationThread*, UInt32),
@@ -26887,7 +26887,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugApplicationThread, lpVtbl : IDebugApplicationThreadVtbl* do
+  record IDebugApplicationThread, lpVtbl : IDebugApplicationThreadVtable* do
     GUID = LibC::GUID.new(0x51973c38_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugApplicationThread*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -26944,7 +26944,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugApplicationThread64Vtbl,
+  record IDebugApplicationThread64Vtable,
     query_interface : Proc(IDebugApplicationThread64*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugApplicationThread64*, UInt32),
     release : Proc(IDebugApplicationThread64*, UInt32),
@@ -26966,7 +26966,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugApplicationThread64, lpVtbl : IDebugApplicationThread64Vtbl* do
+  record IDebugApplicationThread64, lpVtbl : IDebugApplicationThread64Vtable* do
     GUID = LibC::GUID.new(0x9dac5886_u32, 0xdbad_u16, 0x456d_u16, StaticArray[0x9d_u8, 0xee_u8, 0x5d_u8, 0xec_u8, 0x39_u8, 0xab_u8, 0x3d_u8, 0xda_u8])
     def query_interface(this : IDebugApplicationThread64*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27026,7 +27026,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugCookieVtbl,
+  record IDebugCookieVtable,
     query_interface : Proc(IDebugCookie*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugCookie*, UInt32),
     release : Proc(IDebugCookie*, UInt32),
@@ -27034,7 +27034,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugCookie, lpVtbl : IDebugCookieVtbl* do
+  record IDebugCookie, lpVtbl : IDebugCookieVtable* do
     GUID = LibC::GUID.new(0x51973c39_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugCookie*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27052,7 +27052,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IEnumDebugApplicationNodesVtbl,
+  record IEnumDebugApplicationNodesVtable,
     query_interface : Proc(IEnumDebugApplicationNodes*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumDebugApplicationNodes*, UInt32),
     release : Proc(IEnumDebugApplicationNodes*, UInt32),
@@ -27063,7 +27063,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IEnumDebugApplicationNodes, lpVtbl : IEnumDebugApplicationNodesVtbl* do
+  record IEnumDebugApplicationNodes, lpVtbl : IEnumDebugApplicationNodesVtable* do
     GUID = LibC::GUID.new(0x51973c3a_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IEnumDebugApplicationNodes*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27090,7 +27090,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IEnumRemoteDebugApplicationsVtbl,
+  record IEnumRemoteDebugApplicationsVtable,
     query_interface : Proc(IEnumRemoteDebugApplications*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumRemoteDebugApplications*, UInt32),
     release : Proc(IEnumRemoteDebugApplications*, UInt32),
@@ -27101,7 +27101,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IEnumRemoteDebugApplications, lpVtbl : IEnumRemoteDebugApplicationsVtbl* do
+  record IEnumRemoteDebugApplications, lpVtbl : IEnumRemoteDebugApplicationsVtable* do
     GUID = LibC::GUID.new(0x51973c3b_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IEnumRemoteDebugApplications*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27128,7 +27128,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IEnumRemoteDebugApplicationThreadsVtbl,
+  record IEnumRemoteDebugApplicationThreadsVtable,
     query_interface : Proc(IEnumRemoteDebugApplicationThreads*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumRemoteDebugApplicationThreads*, UInt32),
     release : Proc(IEnumRemoteDebugApplicationThreads*, UInt32),
@@ -27139,7 +27139,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IEnumRemoteDebugApplicationThreads, lpVtbl : IEnumRemoteDebugApplicationThreadsVtbl* do
+  record IEnumRemoteDebugApplicationThreads, lpVtbl : IEnumRemoteDebugApplicationThreadsVtable* do
     GUID = LibC::GUID.new(0x51973c3c_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IEnumRemoteDebugApplicationThreads*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27166,17 +27166,17 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugFormatterVtbl,
+  record IDebugFormatterVtable,
     query_interface : Proc(IDebugFormatter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugFormatter*, UInt32),
     release : Proc(IDebugFormatter*, UInt32),
     get_string_for_variant : Proc(IDebugFormatter*, Win32cr::System::Com::VARIANT*, UInt32, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT),
     get_variant_for_string : Proc(IDebugFormatter*, Win32cr::Foundation::PWSTR, Win32cr::System::Com::VARIANT*, Win32cr::Foundation::HRESULT),
-    get_string_for_var_type : Proc(IDebugFormatter*, UInt16, Win32cr::System::Com::TYPEDESC*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
+    get_string_for_var_type : Proc(IDebugFormatter*, Win32cr::System::Com::VARENUM, Win32cr::System::Com::TYPEDESC*, Win32cr::Foundation::BSTR*, Win32cr::Foundation::HRESULT)
 
 
   @[Extern]
-  record IDebugFormatter, lpVtbl : IDebugFormatterVtbl* do
+  record IDebugFormatter, lpVtbl : IDebugFormatterVtable* do
     GUID = LibC::GUID.new(0x51973c05_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugFormatter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27193,14 +27193,14 @@ module Win32cr::System::Diagnostics::Debug
     def get_variant_for_string(this : IDebugFormatter*, pwstrValue : Win32cr::Foundation::PWSTR, pvar : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_variant_for_string.call(this, pwstrValue, pvar)
     end
-    def get_string_for_var_type(this : IDebugFormatter*, vt : UInt16, ptdescArrayType : Win32cr::System::Com::TYPEDESC*, pbstr : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    def get_string_for_var_type(this : IDebugFormatter*, vt : Win32cr::System::Com::VARENUM, ptdescArrayType : Win32cr::System::Com::TYPEDESC*, pbstr : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.get_string_for_var_type.call(this, vt, ptdescArrayType, pbstr)
     end
 
   end
 
   @[Extern]
-  record ISimpleConnectionPointVtbl,
+  record ISimpleConnectionPointVtable,
     query_interface : Proc(ISimpleConnectionPoint*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISimpleConnectionPoint*, UInt32),
     release : Proc(ISimpleConnectionPoint*, UInt32),
@@ -27211,7 +27211,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record ISimpleConnectionPoint, lpVtbl : ISimpleConnectionPointVtbl* do
+  record ISimpleConnectionPoint, lpVtbl : ISimpleConnectionPointVtable* do
     GUID = LibC::GUID.new(0x51973c3e_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : ISimpleConnectionPoint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27238,7 +27238,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugHelperVtbl,
+  record IDebugHelperVtable,
     query_interface : Proc(IDebugHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugHelper*, UInt32),
     release : Proc(IDebugHelper*, UInt32),
@@ -27248,7 +27248,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugHelper, lpVtbl : IDebugHelperVtbl* do
+  record IDebugHelper, lpVtbl : IDebugHelperVtable* do
     GUID = LibC::GUID.new(0x51973c3f_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IDebugHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27272,7 +27272,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IEnumDebugExpressionContextsVtbl,
+  record IEnumDebugExpressionContextsVtable,
     query_interface : Proc(IEnumDebugExpressionContexts*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumDebugExpressionContexts*, UInt32),
     release : Proc(IEnumDebugExpressionContexts*, UInt32),
@@ -27283,7 +27283,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IEnumDebugExpressionContexts, lpVtbl : IEnumDebugExpressionContextsVtbl* do
+  record IEnumDebugExpressionContexts, lpVtbl : IEnumDebugExpressionContextsVtable* do
     GUID = LibC::GUID.new(0x51973c40_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IEnumDebugExpressionContexts*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27310,7 +27310,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IProvideExpressionContextsVtbl,
+  record IProvideExpressionContextsVtable,
     query_interface : Proc(IProvideExpressionContexts*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProvideExpressionContexts*, UInt32),
     release : Proc(IProvideExpressionContexts*, UInt32),
@@ -27318,7 +27318,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IProvideExpressionContexts, lpVtbl : IProvideExpressionContextsVtbl* do
+  record IProvideExpressionContexts, lpVtbl : IProvideExpressionContextsVtable* do
     GUID = LibC::GUID.new(0x51973c41_u32, 0xcb0c_u16, 0x11d0_u16, StaticArray[0xb5_u8, 0xc9_u8, 0x0_u8, 0xa0_u8, 0x24_u8, 0x4a_u8, 0xe_u8, 0x7a_u8])
     def query_interface(this : IProvideExpressionContexts*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27336,7 +27336,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptProfilerControlVtbl,
+  record IActiveScriptProfilerControlVtable,
     query_interface : Proc(IActiveScriptProfilerControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptProfilerControl*, UInt32),
     release : Proc(IActiveScriptProfilerControl*, UInt32),
@@ -27346,7 +27346,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptProfilerControl, lpVtbl : IActiveScriptProfilerControlVtbl* do
+  record IActiveScriptProfilerControl, lpVtbl : IActiveScriptProfilerControlVtable* do
     GUID = LibC::GUID.new(0x784b5ff0_u32, 0x69b0_u16, 0x47d1_u16, StaticArray[0xa7_u8, 0xdc_u8, 0x25_u8, 0x18_u8, 0xf4_u8, 0x23_u8, 0xe_u8, 0x90_u8])
     def query_interface(this : IActiveScriptProfilerControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27370,7 +27370,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptProfilerControl2Vtbl,
+  record IActiveScriptProfilerControl2Vtable,
     query_interface : Proc(IActiveScriptProfilerControl2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptProfilerControl2*, UInt32),
     release : Proc(IActiveScriptProfilerControl2*, UInt32),
@@ -27382,7 +27382,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptProfilerControl2, lpVtbl : IActiveScriptProfilerControl2Vtbl* do
+  record IActiveScriptProfilerControl2, lpVtbl : IActiveScriptProfilerControl2Vtable* do
     GUID = LibC::GUID.new(0x47810165_u32, 0x498f_u16, 0x40be_u16, StaticArray[0x94_u8, 0xf1_u8, 0x65_u8, 0x35_u8, 0x57_u8, 0xe9_u8, 0xe7_u8, 0xda_u8])
     def query_interface(this : IActiveScriptProfilerControl2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27412,7 +27412,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptProfilerHeapEnumVtbl,
+  record IActiveScriptProfilerHeapEnumVtable,
     query_interface : Proc(IActiveScriptProfilerHeapEnum*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptProfilerHeapEnum*, UInt32),
     release : Proc(IActiveScriptProfilerHeapEnum*, UInt32),
@@ -27423,7 +27423,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptProfilerHeapEnum, lpVtbl : IActiveScriptProfilerHeapEnumVtbl* do
+  record IActiveScriptProfilerHeapEnum, lpVtbl : IActiveScriptProfilerHeapEnumVtable* do
     GUID = LibC::GUID.new(0x32e4694e_u32, 0xd37_u16, 0x419b_u16, StaticArray[0xb9_u8, 0x3d_u8, 0xfa_u8, 0x20_u8, 0xde_u8, 0xd6_u8, 0xe8_u8, 0xea_u8])
     def query_interface(this : IActiveScriptProfilerHeapEnum*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27450,7 +27450,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptProfilerControl3Vtbl,
+  record IActiveScriptProfilerControl3Vtable,
     query_interface : Proc(IActiveScriptProfilerControl3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptProfilerControl3*, UInt32),
     release : Proc(IActiveScriptProfilerControl3*, UInt32),
@@ -27463,7 +27463,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptProfilerControl3, lpVtbl : IActiveScriptProfilerControl3Vtbl* do
+  record IActiveScriptProfilerControl3, lpVtbl : IActiveScriptProfilerControl3Vtable* do
     GUID = LibC::GUID.new(0xb403015_u32, 0xf381_u16, 0x4023_u16, StaticArray[0xa5_u8, 0xd0_u8, 0x6f_u8, 0xed_u8, 0x7_u8, 0x6d_u8, 0xe7_u8, 0x16_u8])
     def query_interface(this : IActiveScriptProfilerControl3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27496,7 +27496,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptProfilerControl4Vtbl,
+  record IActiveScriptProfilerControl4Vtable,
     query_interface : Proc(IActiveScriptProfilerControl4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptProfilerControl4*, UInt32),
     release : Proc(IActiveScriptProfilerControl4*, UInt32),
@@ -27510,7 +27510,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptProfilerControl4, lpVtbl : IActiveScriptProfilerControl4Vtbl* do
+  record IActiveScriptProfilerControl4, lpVtbl : IActiveScriptProfilerControl4Vtable* do
     GUID = LibC::GUID.new(0x160f94fd_u32, 0x9dbc_u16, 0x40d4_u16, StaticArray[0x9e_u8, 0xac_u8, 0x2b_u8, 0x71_u8, 0xdb_u8, 0x31_u8, 0x32_u8, 0xf4_u8])
     def query_interface(this : IActiveScriptProfilerControl4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27546,7 +27546,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptProfilerControl5Vtbl,
+  record IActiveScriptProfilerControl5Vtable,
     query_interface : Proc(IActiveScriptProfilerControl5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptProfilerControl5*, UInt32),
     release : Proc(IActiveScriptProfilerControl5*, UInt32),
@@ -27561,7 +27561,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptProfilerControl5, lpVtbl : IActiveScriptProfilerControl5Vtbl* do
+  record IActiveScriptProfilerControl5, lpVtbl : IActiveScriptProfilerControl5Vtable* do
     GUID = LibC::GUID.new(0x1c01a2d1_u32, 0x8f0f_u16, 0x46a5_u16, StaticArray[0x97_u8, 0x20_u8, 0xd_u8, 0x7e_u8, 0xd2_u8, 0xc6_u8, 0x2f_u8, 0xa_u8])
     def query_interface(this : IActiveScriptProfilerControl5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27600,7 +27600,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptProfilerCallbackVtbl,
+  record IActiveScriptProfilerCallbackVtable,
     query_interface : Proc(IActiveScriptProfilerCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptProfilerCallback*, UInt32),
     release : Proc(IActiveScriptProfilerCallback*, UInt32),
@@ -27613,7 +27613,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptProfilerCallback, lpVtbl : IActiveScriptProfilerCallbackVtbl* do
+  record IActiveScriptProfilerCallback, lpVtbl : IActiveScriptProfilerCallbackVtable* do
     GUID = LibC::GUID.new(0x740eca23_u32, 0x7d9d_u16, 0x42e5_u16, StaticArray[0xba_u8, 0x9d_u8, 0xf8_u8, 0xb2_u8, 0x4b_u8, 0x1c_u8, 0x7a_u8, 0x9b_u8])
     def query_interface(this : IActiveScriptProfilerCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27646,7 +27646,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptProfilerCallback2Vtbl,
+  record IActiveScriptProfilerCallback2Vtable,
     query_interface : Proc(IActiveScriptProfilerCallback2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptProfilerCallback2*, UInt32),
     release : Proc(IActiveScriptProfilerCallback2*, UInt32),
@@ -27661,7 +27661,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptProfilerCallback2, lpVtbl : IActiveScriptProfilerCallback2Vtbl* do
+  record IActiveScriptProfilerCallback2, lpVtbl : IActiveScriptProfilerCallback2Vtable* do
     GUID = LibC::GUID.new(0x31b7f8ad_u32, 0xa637_u16, 0x409c_u16, StaticArray[0xb2_u8, 0x2f_u8, 0x4_u8, 0x9_u8, 0x95_u8, 0xb6_u8, 0x10_u8, 0x3d_u8])
     def query_interface(this : IActiveScriptProfilerCallback2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27700,7 +27700,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptProfilerCallback3Vtbl,
+  record IActiveScriptProfilerCallback3Vtable,
     query_interface : Proc(IActiveScriptProfilerCallback3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptProfilerCallback3*, UInt32),
     release : Proc(IActiveScriptProfilerCallback3*, UInt32),
@@ -27716,7 +27716,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptProfilerCallback3, lpVtbl : IActiveScriptProfilerCallback3Vtbl* do
+  record IActiveScriptProfilerCallback3, lpVtbl : IActiveScriptProfilerCallback3Vtable* do
     GUID = LibC::GUID.new(0x6ac5ad25_u32, 0x2037_u16, 0x4687_u16, StaticArray[0x91_u8, 0xdf_u8, 0xb5_u8, 0x99_u8, 0x79_u8, 0xd9_u8, 0x3d_u8, 0x73_u8])
     def query_interface(this : IActiveScriptProfilerCallback3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27758,7 +27758,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IScriptNodeVtbl,
+  record IScriptNodeVtable,
     query_interface : Proc(IScriptNode*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IScriptNode*, UInt32),
     release : Proc(IScriptNode*, UInt32),
@@ -27775,7 +27775,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IScriptNode, lpVtbl : IScriptNodeVtbl* do
+  record IScriptNode, lpVtbl : IScriptNodeVtable* do
     GUID = LibC::GUID.new(0xaee2a94_u32, 0xbcbb_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0x72_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xb0_u8, 0x85_u8])
     def query_interface(this : IScriptNode*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27820,7 +27820,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IScriptEntryVtbl,
+  record IScriptEntryVtable,
     query_interface : Proc(IScriptEntry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IScriptEntry*, UInt32),
     release : Proc(IScriptEntry*, UInt32),
@@ -27848,7 +27848,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IScriptEntry, lpVtbl : IScriptEntryVtbl* do
+  record IScriptEntry, lpVtbl : IScriptEntryVtable* do
     GUID = LibC::GUID.new(0xaee2a95_u32, 0xbcbb_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0x72_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xb0_u8, 0x85_u8])
     def query_interface(this : IScriptEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -27926,7 +27926,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IScriptScriptletVtbl,
+  record IScriptScriptletVtable,
     query_interface : Proc(IScriptScriptlet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IScriptScriptlet*, UInt32),
     release : Proc(IScriptScriptlet*, UInt32),
@@ -27960,7 +27960,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IScriptScriptlet, lpVtbl : IScriptScriptletVtbl* do
+  record IScriptScriptlet, lpVtbl : IScriptScriptletVtable* do
     GUID = LibC::GUID.new(0xaee2a96_u32, 0xbcbb_u16, 0x11d0_u16, StaticArray[0x8c_u8, 0x72_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xb0_u8, 0x85_u8])
     def query_interface(this : IScriptScriptlet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28056,7 +28056,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptAuthorVtbl,
+  record IActiveScriptAuthorVtable,
     query_interface : Proc(IActiveScriptAuthor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptAuthor*, UInt32),
     release : Proc(IActiveScriptAuthor*, UInt32),
@@ -28077,7 +28077,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptAuthor, lpVtbl : IActiveScriptAuthorVtbl* do
+  record IActiveScriptAuthor, lpVtbl : IActiveScriptAuthorVtable* do
     GUID = LibC::GUID.new(0x9c109da0_u32, 0x7006_u16, 0x11d1_u16, StaticArray[0xb3_u8, 0x6c_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0xe8_u8, 0xb2_u8])
     def query_interface(this : IActiveScriptAuthor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28134,7 +28134,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptAuthorProcedureVtbl,
+  record IActiveScriptAuthorProcedureVtable,
     query_interface : Proc(IActiveScriptAuthorProcedure*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptAuthorProcedure*, UInt32),
     release : Proc(IActiveScriptAuthorProcedure*, UInt32),
@@ -28142,7 +28142,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptAuthorProcedure, lpVtbl : IActiveScriptAuthorProcedureVtbl* do
+  record IActiveScriptAuthorProcedure, lpVtbl : IActiveScriptAuthorProcedureVtable* do
     GUID = LibC::GUID.new(0x7e2d4b70_u32, 0xbd9a_u16, 0x11d0_u16, StaticArray[0x93_u8, 0x36_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xd_u8, 0xca_u8, 0xa9_u8])
     def query_interface(this : IActiveScriptAuthorProcedure*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28160,7 +28160,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugApplicationNode100Vtbl,
+  record IDebugApplicationNode100Vtable,
     query_interface : Proc(IDebugApplicationNode100*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugApplicationNode100*, UInt32),
     release : Proc(IDebugApplicationNode100*, UInt32),
@@ -28170,7 +28170,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugApplicationNode100, lpVtbl : IDebugApplicationNode100Vtbl* do
+  record IDebugApplicationNode100, lpVtbl : IDebugApplicationNode100Vtable* do
     GUID = LibC::GUID.new(0x90a7734e_u32, 0x841b_u16, 0x4f77_u16, StaticArray[0x93_u8, 0x84_u8, 0xa2_u8, 0x89_u8, 0x1e_u8, 0x76_u8, 0xe7_u8, 0xe2_u8])
     def query_interface(this : IDebugApplicationNode100*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28194,7 +28194,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IWebAppDiagnosticsSetupVtbl,
+  record IWebAppDiagnosticsSetupVtable,
     query_interface : Proc(IWebAppDiagnosticsSetup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebAppDiagnosticsSetup*, UInt32),
     release : Proc(IWebAppDiagnosticsSetup*, UInt32),
@@ -28203,7 +28203,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IWebAppDiagnosticsSetup, lpVtbl : IWebAppDiagnosticsSetupVtbl* do
+  record IWebAppDiagnosticsSetup, lpVtbl : IWebAppDiagnosticsSetupVtable* do
     GUID = LibC::GUID.new(0x379bfbe1_u32, 0xc6c9_u16, 0x432a_u16, StaticArray[0x93_u8, 0xe1_u8, 0x6d_u8, 0x17_u8, 0x65_u8, 0x6c_u8, 0x53_u8, 0x8c_u8])
     def query_interface(this : IWebAppDiagnosticsSetup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28224,7 +28224,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IRemoteDebugApplication110Vtbl,
+  record IRemoteDebugApplication110Vtable,
     query_interface : Proc(IRemoteDebugApplication110*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRemoteDebugApplication110*, UInt32),
     release : Proc(IRemoteDebugApplication110*, UInt32),
@@ -28234,7 +28234,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IRemoteDebugApplication110, lpVtbl : IRemoteDebugApplication110Vtbl* do
+  record IRemoteDebugApplication110, lpVtbl : IRemoteDebugApplication110Vtable* do
     GUID = LibC::GUID.new(0xd5fe005b_u32, 0x2836_u16, 0x485e_u16, StaticArray[0xb1_u8, 0xf9_u8, 0x89_u8, 0xd9_u8, 0x1a_u8, 0xa2_u8, 0x4f_u8, 0xd4_u8])
     def query_interface(this : IRemoteDebugApplication110*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28258,7 +28258,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugApplication11032Vtbl,
+  record IDebugApplication11032Vtable,
     query_interface : Proc(IDebugApplication11032*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugApplication11032*, UInt32),
     release : Proc(IDebugApplication11032*, UInt32),
@@ -28271,7 +28271,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugApplication11032, lpVtbl : IDebugApplication11032Vtbl* do
+  record IDebugApplication11032, lpVtbl : IDebugApplication11032Vtable* do
     GUID = LibC::GUID.new(0xbdb3b5de_u32, 0x89f2_u16, 0x4e11_u16, StaticArray[0x84_u8, 0xa5_u8, 0x97_u8, 0x44_u8, 0x5f_u8, 0x94_u8, 0x1c_u8, 0x7d_u8])
     def query_interface(this : IDebugApplication11032*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28304,7 +28304,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugApplication11064Vtbl,
+  record IDebugApplication11064Vtable,
     query_interface : Proc(IDebugApplication11064*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugApplication11064*, UInt32),
     release : Proc(IDebugApplication11064*, UInt32),
@@ -28317,7 +28317,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugApplication11064, lpVtbl : IDebugApplication11064Vtbl* do
+  record IDebugApplication11064, lpVtbl : IDebugApplication11064Vtable* do
     GUID = LibC::GUID.new(0x2039d958_u32, 0x4eeb_u16, 0x496a_u16, StaticArray[0x87_u8, 0xbb_u8, 0x2e_u8, 0x52_u8, 0x1_u8, 0xea_u8, 0xde_u8, 0xef_u8])
     def query_interface(this : IDebugApplication11064*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28350,7 +28350,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IWebAppDiagnosticsObjectInitializationVtbl,
+  record IWebAppDiagnosticsObjectInitializationVtable,
     query_interface : Proc(IWebAppDiagnosticsObjectInitialization*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWebAppDiagnosticsObjectInitialization*, UInt32),
     release : Proc(IWebAppDiagnosticsObjectInitialization*, UInt32),
@@ -28358,7 +28358,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IWebAppDiagnosticsObjectInitialization, lpVtbl : IWebAppDiagnosticsObjectInitializationVtbl* do
+  record IWebAppDiagnosticsObjectInitialization, lpVtbl : IWebAppDiagnosticsObjectInitializationVtable* do
     GUID = LibC::GUID.new(0x16ff3a42_u32, 0xa5f5_u16, 0x432b_u16, StaticArray[0xb6_u8, 0x25_u8, 0x8e_u8, 0x8e_u8, 0x16_u8, 0xf5_u8, 0x7e_u8, 0x15_u8])
     def query_interface(this : IWebAppDiagnosticsObjectInitialization*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28376,7 +28376,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptWinRTErrorDebugVtbl,
+  record IActiveScriptWinRTErrorDebugVtable,
     query_interface : Proc(IActiveScriptWinRTErrorDebug*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptWinRTErrorDebug*, UInt32),
     release : Proc(IActiveScriptWinRTErrorDebug*, UInt32),
@@ -28389,7 +28389,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptWinRTErrorDebug, lpVtbl : IActiveScriptWinRTErrorDebugVtbl* do
+  record IActiveScriptWinRTErrorDebug, lpVtbl : IActiveScriptWinRTErrorDebugVtable* do
     GUID = LibC::GUID.new(0x73a3f82a_u32, 0xfe9_u16, 0x4b33_u16, StaticArray[0xba_u8, 0x3b_u8, 0xfe_u8, 0x9_u8, 0x5f_u8, 0x69_u8, 0x7e_u8, 0xa_u8])
     def query_interface(this : IActiveScriptWinRTErrorDebug*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28422,7 +28422,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IActiveScriptErrorDebug110Vtbl,
+  record IActiveScriptErrorDebug110Vtable,
     query_interface : Proc(IActiveScriptErrorDebug110*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IActiveScriptErrorDebug110*, UInt32),
     release : Proc(IActiveScriptErrorDebug110*, UInt32),
@@ -28430,7 +28430,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IActiveScriptErrorDebug110, lpVtbl : IActiveScriptErrorDebug110Vtbl* do
+  record IActiveScriptErrorDebug110, lpVtbl : IActiveScriptErrorDebug110Vtable* do
     GUID = LibC::GUID.new(0x516e42b6_u32, 0x89a8_u16, 0x4530_u16, StaticArray[0x93_u8, 0x7b_u8, 0x5f_u8, 0x7_u8, 0x8_u8, 0x43_u8, 0x14_u8, 0x42_u8])
     def query_interface(this : IActiveScriptErrorDebug110*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28448,7 +28448,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugApplicationThreadEvents110Vtbl,
+  record IDebugApplicationThreadEvents110Vtable,
     query_interface : Proc(IDebugApplicationThreadEvents110*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugApplicationThreadEvents110*, UInt32),
     release : Proc(IDebugApplicationThreadEvents110*, UInt32),
@@ -28459,7 +28459,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugApplicationThreadEvents110, lpVtbl : IDebugApplicationThreadEvents110Vtbl* do
+  record IDebugApplicationThreadEvents110, lpVtbl : IDebugApplicationThreadEvents110Vtable* do
     GUID = LibC::GUID.new(0x84e5e468_u32, 0xd5da_u16, 0x48a8_u16, StaticArray[0x83_u8, 0xf4_u8, 0x40_u8, 0x36_u8, 0x64_u8, 0x29_u8, 0x0_u8, 0x7b_u8])
     def query_interface(this : IDebugApplicationThreadEvents110*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28486,7 +28486,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugApplicationThread11032Vtbl,
+  record IDebugApplicationThread11032Vtable,
     query_interface : Proc(IDebugApplicationThread11032*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugApplicationThread11032*, UInt32),
     release : Proc(IDebugApplicationThread11032*, UInt32),
@@ -28497,7 +28497,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugApplicationThread11032, lpVtbl : IDebugApplicationThread11032Vtbl* do
+  record IDebugApplicationThread11032, lpVtbl : IDebugApplicationThread11032Vtable* do
     GUID = LibC::GUID.new(0x2194ac5c_u32, 0x6561_u16, 0x404a_u16, StaticArray[0xa2_u8, 0xe9_u8, 0xf5_u8, 0x7d_u8, 0x72_u8, 0xde_u8, 0x37_u8, 0x2_u8])
     def query_interface(this : IDebugApplicationThread11032*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28524,7 +28524,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugApplicationThread11064Vtbl,
+  record IDebugApplicationThread11064Vtable,
     query_interface : Proc(IDebugApplicationThread11064*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugApplicationThread11064*, UInt32),
     release : Proc(IDebugApplicationThread11064*, UInt32),
@@ -28535,7 +28535,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugApplicationThread11064, lpVtbl : IDebugApplicationThread11064Vtbl* do
+  record IDebugApplicationThread11064, lpVtbl : IDebugApplicationThread11064Vtable* do
     GUID = LibC::GUID.new(0x420aa4cc_u32, 0xefd8_u16, 0x4dac_u16, StaticArray[0x98_u8, 0x3b_u8, 0x47_u8, 0x12_u8, 0x78_u8, 0x26_u8, 0x91_u8, 0x7d_u8])
     def query_interface(this : IDebugApplicationThread11064*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28562,7 +28562,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IRemoteDebugCriticalErrorEvent110Vtbl,
+  record IRemoteDebugCriticalErrorEvent110Vtable,
     query_interface : Proc(IRemoteDebugCriticalErrorEvent110*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRemoteDebugCriticalErrorEvent110*, UInt32),
     release : Proc(IRemoteDebugCriticalErrorEvent110*, UInt32),
@@ -28570,7 +28570,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IRemoteDebugCriticalErrorEvent110, lpVtbl : IRemoteDebugCriticalErrorEvent110Vtbl* do
+  record IRemoteDebugCriticalErrorEvent110, lpVtbl : IRemoteDebugCriticalErrorEvent110Vtable* do
     GUID = LibC::GUID.new(0x2f69c611_u32, 0x6b14_u16, 0x47e8_u16, StaticArray[0x92_u8, 0x60_u8, 0x4b_u8, 0xb7_u8, 0xc5_u8, 0x2f_u8, 0x50_u8, 0x4b_u8])
     def query_interface(this : IRemoteDebugCriticalErrorEvent110*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28588,7 +28588,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IScriptInvocationContextVtbl,
+  record IScriptInvocationContextVtable,
     query_interface : Proc(IScriptInvocationContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IScriptInvocationContext*, UInt32),
     release : Proc(IScriptInvocationContext*, UInt32),
@@ -28598,7 +28598,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IScriptInvocationContext, lpVtbl : IScriptInvocationContextVtbl* do
+  record IScriptInvocationContext, lpVtbl : IScriptInvocationContextVtable* do
     GUID = LibC::GUID.new(0x5d7741b7_u32, 0xaf7e_u16, 0x4a2a_u16, StaticArray[0x85_u8, 0xe5_u8, 0xc7_u8, 0x7f_u8, 0x4d_u8, 0x6_u8, 0x59_u8, 0xfb_u8])
     def query_interface(this : IScriptInvocationContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28622,7 +28622,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IDebugStackFrame110Vtbl,
+  record IDebugStackFrame110Vtable,
     query_interface : Proc(IDebugStackFrame110*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDebugStackFrame110*, UInt32),
     release : Proc(IDebugStackFrame110*, UInt32),
@@ -28636,7 +28636,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IDebugStackFrame110, lpVtbl : IDebugStackFrame110Vtbl* do
+  record IDebugStackFrame110, lpVtbl : IDebugStackFrame110Vtable* do
     GUID = LibC::GUID.new(0x4b509611_u32, 0xb6ea_u16, 0x4b24_u16, StaticArray[0xad_u8, 0xcb_u8, 0xd0_u8, 0xcc_u8, 0xfd_u8, 0x1a_u8, 0x7e_u8, 0x33_u8])
     def query_interface(this : IDebugStackFrame110*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28672,7 +28672,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IRemoteDebugInfoEvent110Vtbl,
+  record IRemoteDebugInfoEvent110Vtable,
     query_interface : Proc(IRemoteDebugInfoEvent110*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRemoteDebugInfoEvent110*, UInt32),
     release : Proc(IRemoteDebugInfoEvent110*, UInt32),
@@ -28680,7 +28680,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IRemoteDebugInfoEvent110, lpVtbl : IRemoteDebugInfoEvent110Vtbl* do
+  record IRemoteDebugInfoEvent110, lpVtbl : IRemoteDebugInfoEvent110Vtable* do
     GUID = LibC::GUID.new(0x9ff56bb6_u32, 0xeb89_u16, 0x4c0f_u16, StaticArray[0x88_u8, 0x23_u8, 0xcc_u8, 0x2a_u8, 0x4c_u8, 0xb_u8, 0x7f_u8, 0x26_u8])
     def query_interface(this : IRemoteDebugInfoEvent110*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28698,7 +28698,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IJsDebugVtbl,
+  record IJsDebugVtable,
     query_interface : Proc(IJsDebug*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IJsDebug*, UInt32),
     release : Proc(IJsDebug*, UInt32),
@@ -28706,7 +28706,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IJsDebug, lpVtbl : IJsDebugVtbl* do
+  record IJsDebug, lpVtbl : IJsDebugVtable* do
     GUID = LibC::GUID.new(0xbe0e89da_u32, 0x2ac5_u16, 0x4c04_u16, StaticArray[0xac_u8, 0x5e_u8, 0x59_u8, 0x95_u8, 0x6a_u8, 0xae_u8, 0x36_u8, 0x13_u8])
     def query_interface(this : IJsDebug*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28724,7 +28724,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IJsDebugProcessVtbl,
+  record IJsDebugProcessVtable,
     query_interface : Proc(IJsDebugProcess*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IJsDebugProcess*, UInt32),
     release : Proc(IJsDebugProcess*, UInt32),
@@ -28735,7 +28735,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IJsDebugProcess, lpVtbl : IJsDebugProcessVtbl* do
+  record IJsDebugProcess, lpVtbl : IJsDebugProcessVtable* do
     GUID = LibC::GUID.new(0x3d587168_u32, 0x6a2d_u16, 0x4041_u16, StaticArray[0xbd_u8, 0x3b_u8, 0xd_u8, 0xe6_u8, 0x74_u8, 0x50_u8, 0x28_u8, 0x62_u8])
     def query_interface(this : IJsDebugProcess*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28762,7 +28762,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IJsDebugStackWalkerVtbl,
+  record IJsDebugStackWalkerVtable,
     query_interface : Proc(IJsDebugStackWalker*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IJsDebugStackWalker*, UInt32),
     release : Proc(IJsDebugStackWalker*, UInt32),
@@ -28770,7 +28770,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IJsDebugStackWalker, lpVtbl : IJsDebugStackWalkerVtbl* do
+  record IJsDebugStackWalker, lpVtbl : IJsDebugStackWalkerVtable* do
     GUID = LibC::GUID.new(0xdb24b094_u32, 0x73c4_u16, 0x456c_u16, StaticArray[0xa4_u8, 0xec_u8, 0xe9_u8, 0xe_u8, 0xa0_u8, 0xb_u8, 0xdf_u8, 0xe3_u8])
     def query_interface(this : IJsDebugStackWalker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28788,7 +28788,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IJsDebugFrameVtbl,
+  record IJsDebugFrameVtable,
     query_interface : Proc(IJsDebugFrame*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IJsDebugFrame*, UInt32),
     release : Proc(IJsDebugFrame*, UInt32),
@@ -28802,7 +28802,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IJsDebugFrame, lpVtbl : IJsDebugFrameVtbl* do
+  record IJsDebugFrame, lpVtbl : IJsDebugFrameVtable* do
     GUID = LibC::GUID.new(0xc9196637_u32, 0xab9d_u16, 0x44b2_u16, StaticArray[0xba_u8, 0xd2_u8, 0x13_u8, 0xb9_u8, 0x5b_u8, 0x3f_u8, 0x39_u8, 0xe_u8])
     def query_interface(this : IJsDebugFrame*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28838,7 +28838,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IJsDebugPropertyVtbl,
+  record IJsDebugPropertyVtable,
     query_interface : Proc(IJsDebugProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IJsDebugProperty*, UInt32),
     release : Proc(IJsDebugProperty*, UInt32),
@@ -28847,7 +28847,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IJsDebugProperty, lpVtbl : IJsDebugPropertyVtbl* do
+  record IJsDebugProperty, lpVtbl : IJsDebugPropertyVtable* do
     GUID = LibC::GUID.new(0xf8ffcf2b_u32, 0x3aa4_u16, 0x4320_u16, StaticArray[0x85_u8, 0xc3_u8, 0x52_u8, 0xa3_u8, 0x12_u8, 0xba_u8, 0x96_u8, 0x33_u8])
     def query_interface(this : IJsDebugProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28868,7 +28868,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IJsEnumDebugPropertyVtbl,
+  record IJsEnumDebugPropertyVtable,
     query_interface : Proc(IJsEnumDebugProperty*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IJsEnumDebugProperty*, UInt32),
     release : Proc(IJsEnumDebugProperty*, UInt32),
@@ -28877,7 +28877,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IJsEnumDebugProperty, lpVtbl : IJsEnumDebugPropertyVtbl* do
+  record IJsEnumDebugProperty, lpVtbl : IJsEnumDebugPropertyVtable* do
     GUID = LibC::GUID.new(0x4092432f_u32, 0x2f0f_u16, 0x4fe1_u16, StaticArray[0xb6_u8, 0x38_u8, 0x5b_u8, 0x74_u8, 0xa5_u8, 0x2c_u8, 0xdc_u8, 0xbe_u8])
     def query_interface(this : IJsEnumDebugProperty*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28898,7 +28898,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IJsDebugBreakPointVtbl,
+  record IJsDebugBreakPointVtable,
     query_interface : Proc(IJsDebugBreakPoint*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IJsDebugBreakPoint*, UInt32),
     release : Proc(IJsDebugBreakPoint*, UInt32),
@@ -28910,7 +28910,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IJsDebugBreakPoint, lpVtbl : IJsDebugBreakPointVtbl* do
+  record IJsDebugBreakPoint, lpVtbl : IJsDebugBreakPointVtable* do
     GUID = LibC::GUID.new(0xdf6773e3_u32, 0xed8d_u16, 0x488b_u16, StaticArray[0x8a_u8, 0x3e_u8, 0x58_u8, 0x12_u8, 0x57_u8, 0x7d_u8, 0x15_u8, 0x42_u8])
     def query_interface(this : IJsDebugBreakPoint*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28940,7 +28940,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IEnumJsStackFramesVtbl,
+  record IEnumJsStackFramesVtable,
     query_interface : Proc(IEnumJsStackFrames*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumJsStackFrames*, UInt32),
     release : Proc(IEnumJsStackFrames*, UInt32),
@@ -28949,7 +28949,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IEnumJsStackFrames, lpVtbl : IEnumJsStackFramesVtbl* do
+  record IEnumJsStackFrames, lpVtbl : IEnumJsStackFramesVtable* do
     GUID = LibC::GUID.new(0x5e7da34b_u32, 0xfb51_u16, 0x4791_u16, StaticArray[0xab_u8, 0xe7_u8, 0xcb_u8, 0x5b_u8, 0xdf_u8, 0x41_u8, 0x97_u8, 0x55_u8])
     def query_interface(this : IEnumJsStackFrames*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -28970,7 +28970,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IJsDebugDataTargetVtbl,
+  record IJsDebugDataTargetVtable,
     query_interface : Proc(IJsDebugDataTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IJsDebugDataTarget*, UInt32),
     release : Proc(IJsDebugDataTarget*, UInt32),
@@ -28986,7 +28986,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IJsDebugDataTarget, lpVtbl : IJsDebugDataTargetVtbl* do
+  record IJsDebugDataTarget, lpVtbl : IJsDebugDataTargetVtable* do
     GUID = LibC::GUID.new(0x53b28977_u32, 0x53a1_u16, 0x48e5_u16, StaticArray[0x90_u8, 0x0_u8, 0x5d_u8, 0xd_u8, 0xfa_u8, 0x89_u8, 0x39_u8, 0x31_u8])
     def query_interface(this : IJsDebugDataTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29028,7 +29028,7 @@ module Win32cr::System::Diagnostics::Debug
   end
 
   @[Extern]
-  record IObjectSafetyVtbl,
+  record IObjectSafetyVtable,
     query_interface : Proc(IObjectSafety*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IObjectSafety*, UInt32),
     release : Proc(IObjectSafety*, UInt32),
@@ -29037,7 +29037,7 @@ module Win32cr::System::Diagnostics::Debug
 
 
   @[Extern]
-  record IObjectSafety, lpVtbl : IObjectSafetyVtbl* do
+  record IObjectSafety, lpVtbl : IObjectSafetyVtable* do
     GUID = LibC::GUID.new(0xcb5bdc81_u32, 0x93c1_u16, 0x11cf_u16, StaticArray[0x8f_u8, 0x20_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0x2c_u8, 0xd0_u8, 0x64_u8])
     def query_interface(this : IObjectSafety*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -29059,60 +29059,84 @@ module Win32cr::System::Diagnostics::Debug
 
 {% if flag?(:arm) %}
   def rtlAddFunctionTable(function_table : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*, entry_count : UInt32, base_address : LibC::UIntPtrT) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.RtlAddFunctionTable(function_table, entry_count, base_address)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:arm) %}
   def rtlDeleteFunctionTable(function_table : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.RtlDeleteFunctionTable(function_table)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:arm) %}
   def rtlAddGrowableFunctionTable(dynamic_table : Void**, function_table : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*, entry_count : UInt32, maximum_entry_count : UInt32, range_base : LibC::UIntPtrT, range_end : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlAddGrowableFunctionTable(dynamic_table, function_table, entry_count, maximum_entry_count, range_base, range_end)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:arm) %}
   def rtlLookupFunctionEntry(control_pc : LibC::UIntPtrT, image_base : LibC::UIntPtrT*, history_table : Win32cr::System::Diagnostics::Debug::UNWIND_HISTORY_TABLE*) : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*
+    {% if !flag?(:docs) %}
     C.RtlLookupFunctionEntry(control_pc, image_base, history_table)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:arm) %}
   def rtlVirtualUnwind(handler_type : Win32cr::System::Diagnostics::Debug::RTL_VIRTUAL_UNWIND_HANDLER_TYPE, image_base : LibC::UIntPtrT, control_pc : LibC::UIntPtrT, function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_ARM64_RUNTIME_FUNCTION_ENTRY*, context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, handler_data : Void**, establisher_frame : LibC::UIntPtrT*, context_pointers : Win32cr::System::Diagnostics::Debug::KNONVOLATILE_CONTEXT_POINTERS_ARM64*) : Win32cr::System::Kernel::EXCEPTION_ROUTINE
+    {% if !flag?(:docs) %}
     C.RtlVirtualUnwind(handler_type, image_base, control_pc, function_entry, context_record, handler_data, establisher_frame, context_pointers)
+    {% end %}
   end
 {% end %}
 
   def debugConnect(remote_options : Win32cr::Foundation::PSTR, interface_id : LibC::GUID*, interface : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DebugConnect(remote_options, interface_id, interface)
+    {% end %}
   end
 
   def debugConnectWide(remote_options : Win32cr::Foundation::PWSTR, interface_id : LibC::GUID*, interface : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DebugConnectWide(remote_options, interface_id, interface)
+    {% end %}
   end
 
   def debugCreate(interface_id : LibC::GUID*, interface : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DebugCreate(interface_id, interface)
+    {% end %}
   end
 
   def debugCreateEx(interface_id : LibC::GUID*, dbg_eng_options : UInt32, interface : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DebugCreateEx(interface_id, dbg_eng_options, interface)
+    {% end %}
   end
 
   def createDataModelManager(debugHost : Void*, manager : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateDataModelManager(debugHost, manager)
+    {% end %}
   end
 
   def readProcessMemory(hProcess : Win32cr::Foundation::HANDLE, lpBaseAddress : Void*, lpBuffer : Void*, nSize : LibC::UIntPtrT, lpNumberOfBytesRead : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReadProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesRead)
+    {% end %}
   end
 
   def writeProcessMemory(hProcess : Win32cr::Foundation::HANDLE, lpBaseAddress : Void*, lpBuffer : Void*, nSize : LibC::UIntPtrT, lpNumberOfBytesWritten : LibC::UIntPtrT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WriteProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, lpNumberOfBytesWritten)
+    {% end %}
   end
 
   #def getThreadContext(hThread : Win32cr::Foundation::HANDLE, lpContext : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Win32cr::Foundation::BOOL
@@ -29120,23 +29144,33 @@ module Win32cr::System::Diagnostics::Debug
   #end
 
   def setThreadContext(hThread : Win32cr::Foundation::HANDLE, lpContext : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetThreadContext(hThread, lpContext)
+    {% end %}
   end
 
   def flushInstructionCache(hProcess : Win32cr::Foundation::HANDLE, lpBaseAddress : Void*, dwSize : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FlushInstructionCache(hProcess, lpBaseAddress, dwSize)
+    {% end %}
   end
 
   def wow64GetThreadContext(hThread : Win32cr::Foundation::HANDLE, lpContext : Win32cr::System::Diagnostics::Debug::WOW64_CONTEXT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Wow64GetThreadContext(hThread, lpContext)
+    {% end %}
   end
 
   def wow64SetThreadContext(hThread : Win32cr::Foundation::HANDLE, lpContext : Win32cr::System::Diagnostics::Debug::WOW64_CONTEXT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Wow64SetThreadContext(hThread, lpContext)
+    {% end %}
   end
 
   def rtlCaptureStackBackTrace(frames_to_skip : UInt32, frames_to_capture : UInt32, back_trace : Void**, back_trace_hash : UInt32*) : UInt16
+    {% if !flag?(:docs) %}
     C.RtlCaptureStackBackTrace(frames_to_skip, frames_to_capture, back_trace, back_trace_hash)
+    {% end %}
   end
 
   #def rtlCaptureContext(context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Void
@@ -29145,166 +29179,236 @@ module Win32cr::System::Diagnostics::Debug
 
 {% if flag?(:x86_64) %}
   def rtlCaptureContext2(context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Void
+    {% if !flag?(:docs) %}
     C.RtlCaptureContext2(context_record)
+    {% end %}
   end
 {% end %}
 
   def rtlUnwind(target_frame : Void*, target_ip : Void*, exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*, return_value : Void*) : Void
+    {% if !flag?(:docs) %}
     C.RtlUnwind(target_frame, target_ip, exception_record, return_value)
+    {% end %}
   end
 
 {% if flag?(:x86_64) %}
   def rtlAddFunctionTable(function_table : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*, entry_count : UInt32, base_address : UInt64) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.RtlAddFunctionTable(function_table, entry_count, base_address)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) %}
   def rtlDeleteFunctionTable(function_table : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.RtlDeleteFunctionTable(function_table)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def rtlInstallFunctionTableCallback(table_identifier : UInt64, base_address : UInt64, length : UInt32, callback : Win32cr::System::Diagnostics::Debug::PGET_RUNTIME_FUNCTION_CALLBACK, context : Void*, out_of_process_callback_dll : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOLEAN
+    {% if !flag?(:docs) %}
     C.RtlInstallFunctionTableCallback(table_identifier, base_address, length, callback, context, out_of_process_callback_dll)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) %}
   def rtlAddGrowableFunctionTable(dynamic_table : Void**, function_table : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*, entry_count : UInt32, maximum_entry_count : UInt32, range_base : LibC::UIntPtrT, range_end : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.RtlAddGrowableFunctionTable(dynamic_table, function_table, entry_count, maximum_entry_count, range_base, range_end)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def rtlGrowFunctionTable(dynamic_table : Void*, new_entry_count : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.RtlGrowFunctionTable(dynamic_table, new_entry_count)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def rtlDeleteGrowableFunctionTable(dynamic_table : Void*) : Void
+    {% if !flag?(:docs) %}
     C.RtlDeleteGrowableFunctionTable(dynamic_table)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) %}
   def rtlLookupFunctionEntry(control_pc : UInt64, image_base : UInt64*, history_table : Win32cr::System::Diagnostics::Debug::UNWIND_HISTORY_TABLE*) : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*
+    {% if !flag?(:docs) %}
     C.RtlLookupFunctionEntry(control_pc, image_base, history_table)
+    {% end %}
   end
 {% end %}
 
   def rtlRestoreContext(context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*) : Void
+    {% if !flag?(:docs) %}
     C.RtlRestoreContext(context_record, exception_record)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def rtlUnwindEx(target_frame : Void*, target_ip : Void*, exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*, return_value : Void*, context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, history_table : Win32cr::System::Diagnostics::Debug::UNWIND_HISTORY_TABLE*) : Void
+    {% if !flag?(:docs) %}
     C.RtlUnwindEx(target_frame, target_ip, exception_record, return_value, context_record, history_table)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) %}
   def rtlVirtualUnwind(handler_type : Win32cr::System::Diagnostics::Debug::RTL_VIRTUAL_UNWIND_HANDLER_TYPE, image_base : UInt64, control_pc : UInt64, function_entry : Win32cr::System::Diagnostics::Debug::IMAGE_RUNTIME_FUNCTION_ENTRY*, context_record : Win32cr::System::Diagnostics::Debug::CONTEXT*, handler_data : Void**, establisher_frame : UInt64*, context_pointers : Win32cr::System::Diagnostics::Debug::KNONVOLATILE_CONTEXT_POINTERS*) : Win32cr::System::Kernel::EXCEPTION_ROUTINE
+    {% if !flag?(:docs) %}
     C.RtlVirtualUnwind(handler_type, image_base, control_pc, function_entry, context_record, handler_data, establisher_frame, context_pointers)
+    {% end %}
   end
 {% end %}
 
   def rtlRaiseException(exception_record : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*) : Void
+    {% if !flag?(:docs) %}
     C.RtlRaiseException(exception_record)
+    {% end %}
   end
 
   def rtlPcToFileHeader(pc_value : Void*, base_of_image : Void**) : Void*
+    {% if !flag?(:docs) %}
     C.RtlPcToFileHeader(pc_value, base_of_image)
+    {% end %}
   end
 
-  def isDebuggerPresent : Win32cr::Foundation::BOOL
-    C.IsDebuggerPresent
-  end
+  #def isDebuggerPresent : Win32cr::Foundation::BOOL
+    #C.IsDebuggerPresent
+  #end
 
   def debugBreak : Void
+    {% if !flag?(:docs) %}
     C.DebugBreak
+    {% end %}
   end
 
   def outputDebugStringA(lpOutputString : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.OutputDebugStringA(lpOutputString)
+    {% end %}
   end
 
   def outputDebugStringW(lpOutputString : Win32cr::Foundation::PWSTR) : Void
+    {% if !flag?(:docs) %}
     C.OutputDebugStringW(lpOutputString)
+    {% end %}
   end
 
   def continueDebugEvent(dwProcessId : UInt32, dwThreadId : UInt32, dwContinueStatus : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ContinueDebugEvent(dwProcessId, dwThreadId, dwContinueStatus)
+    {% end %}
   end
 
   def waitForDebugEvent(lpDebugEvent : Win32cr::System::Diagnostics::Debug::DEBUG_EVENT*, dwMilliseconds : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WaitForDebugEvent(lpDebugEvent, dwMilliseconds)
+    {% end %}
   end
 
   def debugActiveProcess(dwProcessId : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DebugActiveProcess(dwProcessId)
+    {% end %}
   end
 
   def debugActiveProcessStop(dwProcessId : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DebugActiveProcessStop(dwProcessId)
+    {% end %}
   end
 
   def checkRemoteDebuggerPresent(hProcess : Win32cr::Foundation::HANDLE, pbDebuggerPresent : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CheckRemoteDebuggerPresent(hProcess, pbDebuggerPresent)
+    {% end %}
   end
 
   def waitForDebugEventEx(lpDebugEvent : Win32cr::System::Diagnostics::Debug::DEBUG_EVENT*, dwMilliseconds : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WaitForDebugEventEx(lpDebugEvent, dwMilliseconds)
+    {% end %}
   end
 
   def encodePointer(ptr : Void*) : Void*
+    {% if !flag?(:docs) %}
     C.EncodePointer(ptr)
+    {% end %}
   end
 
   def decodePointer(ptr : Void*) : Void*
+    {% if !flag?(:docs) %}
     C.DecodePointer(ptr)
+    {% end %}
   end
 
   def encodeSystemPointer(ptr : Void*) : Void*
+    {% if !flag?(:docs) %}
     C.EncodeSystemPointer(ptr)
+    {% end %}
   end
 
   def decodeSystemPointer(ptr : Void*) : Void*
+    {% if !flag?(:docs) %}
     C.DecodeSystemPointer(ptr)
+    {% end %}
   end
 
   def encodeRemotePointer(process_handle : Win32cr::Foundation::HANDLE, ptr : Void*, encoded_ptr : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.EncodeRemotePointer(process_handle, ptr, encoded_ptr)
+    {% end %}
   end
 
   def decodeRemotePointer(process_handle : Win32cr::Foundation::HANDLE, ptr : Void*, decoded_ptr : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DecodeRemotePointer(process_handle, ptr, decoded_ptr)
+    {% end %}
   end
 
   def beep(dwFreq : UInt32, dwDuration : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Beep(dwFreq, dwDuration)
+    {% end %}
   end
 
   def raiseException(dwExceptionCode : UInt32, dwExceptionFlags : UInt32, nNumberOfArguments : UInt32, lpArguments : LibC::UIntPtrT*) : Void
+    {% if !flag?(:docs) %}
     C.RaiseException(dwExceptionCode, dwExceptionFlags, nNumberOfArguments, lpArguments)
+    {% end %}
   end
 
   def unhandledExceptionFilter(exception_info : Win32cr::System::Diagnostics::Debug::EXCEPTION_POINTERS*) : Int32
+    {% if !flag?(:docs) %}
     C.UnhandledExceptionFilter(exception_info)
+    {% end %}
   end
 
   def setUnhandledExceptionFilter(lpTopLevelExceptionFilter : Win32cr::System::Diagnostics::Debug::LPTOP_LEVEL_EXCEPTION_FILTER) : Win32cr::System::Diagnostics::Debug::LPTOP_LEVEL_EXCEPTION_FILTER
+    {% if !flag?(:docs) %}
     C.SetUnhandledExceptionFilter(lpTopLevelExceptionFilter)
+    {% end %}
   end
 
   def getErrorMode : UInt32
+    {% if !flag?(:docs) %}
     C.GetErrorMode
+    {% end %}
   end
 
   def setErrorMode(uMode : Win32cr::System::Diagnostics::Debug::THREAD_ERROR_MODE) : UInt32
+    {% if !flag?(:docs) %}
     C.SetErrorMode(uMode)
+    {% end %}
   end
 
   #def addVectoredExceptionHandler(first : UInt32, handler : Win32cr::System::Diagnostics::Debug::PVECTORED_EXCEPTION_HANDLER) : Void*
@@ -29312,263 +29416,387 @@ module Win32cr::System::Diagnostics::Debug
   #end
 
   def removeVectoredExceptionHandler(handle : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveVectoredExceptionHandler(handle)
+    {% end %}
   end
 
   def addVectoredContinueHandler(first : UInt32, handler : Win32cr::System::Diagnostics::Debug::PVECTORED_EXCEPTION_HANDLER) : Void*
+    {% if !flag?(:docs) %}
     C.AddVectoredContinueHandler(first, handler)
+    {% end %}
   end
 
   def removeVectoredContinueHandler(handle : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.RemoveVectoredContinueHandler(handle)
+    {% end %}
   end
 
   def raiseFailFastException(pExceptionRecord : Win32cr::System::Diagnostics::Debug::EXCEPTION_RECORD*, pContextRecord : Win32cr::System::Diagnostics::Debug::CONTEXT*, dwFlags : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.RaiseFailFastException(pExceptionRecord, pContextRecord, dwFlags)
+    {% end %}
   end
 
   def fatalAppExitA(uAction : UInt32, lpMessageText : Win32cr::Foundation::PSTR) : Void
+    {% if !flag?(:docs) %}
     C.FatalAppExitA(uAction, lpMessageText)
+    {% end %}
   end
 
   def fatalAppExitW(uAction : UInt32, lpMessageText : Win32cr::Foundation::PWSTR) : Void
+    {% if !flag?(:docs) %}
     C.FatalAppExitW(uAction, lpMessageText)
+    {% end %}
   end
 
   def getThreadErrorMode : UInt32
+    {% if !flag?(:docs) %}
     C.GetThreadErrorMode
+    {% end %}
   end
 
   def setThreadErrorMode(dwNewMode : Win32cr::System::Diagnostics::Debug::THREAD_ERROR_MODE, lpOldMode : Win32cr::System::Diagnostics::Debug::THREAD_ERROR_MODE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetThreadErrorMode(dwNewMode, lpOldMode)
+    {% end %}
   end
 
   def terminateProcessOnMemoryExhaustion(failed_allocation_size : LibC::UIntPtrT) : Void
+    {% if !flag?(:docs) %}
     C.TerminateProcessOnMemoryExhaustion(failed_allocation_size)
+    {% end %}
   end
 
   def openThreadWaitChainSession(flags : Win32cr::System::Diagnostics::Debug::OPEN_THREAD_WAIT_CHAIN_SESSION_FLAGS, callback : Win32cr::System::Diagnostics::Debug::PWAITCHAINCALLBACK) : Void*
+    {% if !flag?(:docs) %}
     C.OpenThreadWaitChainSession(flags, callback)
+    {% end %}
   end
 
   def closeThreadWaitChainSession(wct_handle : Void*) : Void
+    {% if !flag?(:docs) %}
     C.CloseThreadWaitChainSession(wct_handle)
+    {% end %}
   end
 
   def getThreadWaitChain(wct_handle : Void*, context : LibC::UIntPtrT, flags : Win32cr::System::Diagnostics::Debug::WAIT_CHAIN_THREAD_OPTIONS, thread_id : UInt32, node_count : UInt32*, node_info_array : Win32cr::System::Diagnostics::Debug::WAITCHAIN_NODE_INFO*, is_cycle : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetThreadWaitChain(wct_handle, context, flags, thread_id, node_count, node_info_array, is_cycle)
+    {% end %}
   end
 
   def registerWaitChainCOMCallback(call_state_callback : Win32cr::System::Diagnostics::Debug::PCOGETCALLSTATE, activation_state_callback : Win32cr::System::Diagnostics::Debug::PCOGETACTIVATIONSTATE) : Void
+    {% if !flag?(:docs) %}
     C.RegisterWaitChainCOMCallback(call_state_callback, activation_state_callback)
+    {% end %}
   end
 
   def miniDumpWriteDump(hProcess : Win32cr::Foundation::HANDLE, process_id : UInt32, hFile : Win32cr::Foundation::HANDLE, dump_type : Win32cr::System::Diagnostics::Debug::MINIDUMP_TYPE, exception_param : Win32cr::System::Diagnostics::Debug::MINIDUMP_EXCEPTION_INFORMATION*, user_stream_param : Win32cr::System::Diagnostics::Debug::MINIDUMP_USER_STREAM_INFORMATION*, callback_param : Win32cr::System::Diagnostics::Debug::MINIDUMP_CALLBACK_INFORMATION*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MiniDumpWriteDump(hProcess, process_id, hFile, dump_type, exception_param, user_stream_param, callback_param)
+    {% end %}
   end
 
   def miniDumpReadDumpStream(base_of_dump : Void*, stream_number : UInt32, dir : Win32cr::System::Diagnostics::Debug::MINIDUMP_DIRECTORY**, stream_pointer : Void**, stream_size : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MiniDumpReadDumpStream(base_of_dump, stream_number, dir, stream_pointer, stream_size)
+    {% end %}
   end
 
   def bindImage(image_name : Win32cr::Foundation::PSTR, dll_path : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BindImage(image_name, dll_path, symbol_path)
+    {% end %}
   end
 
   def bindImageEx(flags : UInt32, image_name : Win32cr::Foundation::PSTR, dll_path : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, status_routine : Win32cr::System::Diagnostics::Debug::PIMAGEHLP_STATUS_ROUTINE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BindImageEx(flags, image_name, dll_path, symbol_path, status_routine)
+    {% end %}
   end
 
   def reBaseImage(current_image_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, fReBase : Win32cr::Foundation::BOOL, fRebaseSysfileOk : Win32cr::Foundation::BOOL, fGoingDown : Win32cr::Foundation::BOOL, check_image_size : UInt32, old_image_size : UInt32*, old_image_base : LibC::UIntPtrT*, new_image_size : UInt32*, new_image_base : LibC::UIntPtrT*, time_stamp : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReBaseImage(current_image_name, symbol_path, fReBase, fRebaseSysfileOk, fGoingDown, check_image_size, old_image_size, old_image_base, new_image_size, new_image_base, time_stamp)
+    {% end %}
   end
 
   def reBaseImage64(current_image_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, fReBase : Win32cr::Foundation::BOOL, fRebaseSysfileOk : Win32cr::Foundation::BOOL, fGoingDown : Win32cr::Foundation::BOOL, check_image_size : UInt32, old_image_size : UInt32*, old_image_base : UInt64*, new_image_size : UInt32*, new_image_base : UInt64*, time_stamp : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReBaseImage64(current_image_name, symbol_path, fReBase, fRebaseSysfileOk, fGoingDown, check_image_size, old_image_size, old_image_base, new_image_size, new_image_base, time_stamp)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def checkSumMappedFile(base_address : Void*, file_length : UInt32, header_sum : UInt32*, check_sum : UInt32*) : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS64*
+    {% if !flag?(:docs) %}
     C.CheckSumMappedFile(base_address, file_length, header_sum, check_sum)
+    {% end %}
   end
 {% end %}
 
   def mapFileAndCheckSumA(filename : Win32cr::Foundation::PSTR, header_sum : UInt32*, check_sum : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MapFileAndCheckSumA(filename, header_sum, check_sum)
+    {% end %}
   end
 
   def mapFileAndCheckSumW(filename : Win32cr::Foundation::PWSTR, header_sum : UInt32*, check_sum : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MapFileAndCheckSumW(filename, header_sum, check_sum)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def getImageConfigInformation(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*, image_config_information : Win32cr::System::Diagnostics::Debug::IMAGE_LOAD_CONFIG_DIRECTORY64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetImageConfigInformation(loaded_image, image_config_information)
+    {% end %}
   end
 {% end %}
 
   def getImageUnusedHeaderBytes(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*, size_unused_header_bytes : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetImageUnusedHeaderBytes(loaded_image, size_unused_header_bytes)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def setImageConfigInformation(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*, image_config_information : Win32cr::System::Diagnostics::Debug::IMAGE_LOAD_CONFIG_DIRECTORY64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetImageConfigInformation(loaded_image, image_config_information)
+    {% end %}
   end
 {% end %}
 
   def imageGetDigestStream(file_handle : Win32cr::Foundation::HANDLE, digest_level : UInt32, digest_function : Win32cr::System::Diagnostics::Debug::DIGEST_FUNCTION, digest_handle : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImageGetDigestStream(file_handle, digest_level, digest_function, digest_handle)
+    {% end %}
   end
 
   def imageAddCertificate(file_handle : Win32cr::Foundation::HANDLE, certificate : Win32cr::Security::WinTrust::WIN_CERTIFICATE*, index : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImageAddCertificate(file_handle, certificate, index)
+    {% end %}
   end
 
   def imageRemoveCertificate(file_handle : Win32cr::Foundation::HANDLE, index : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImageRemoveCertificate(file_handle, index)
+    {% end %}
   end
 
   def imageEnumerateCertificates(file_handle : Win32cr::Foundation::HANDLE, type_filter : UInt16, certificate_count : UInt32*, indices : UInt32*, index_count : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImageEnumerateCertificates(file_handle, type_filter, certificate_count, indices, index_count)
+    {% end %}
   end
 
   def imageGetCertificateData(file_handle : Win32cr::Foundation::HANDLE, certificate_index : UInt32, certificate : Win32cr::Security::WinTrust::WIN_CERTIFICATE*, required_length : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImageGetCertificateData(file_handle, certificate_index, certificate, required_length)
+    {% end %}
   end
 
   def imageGetCertificateHeader(file_handle : Win32cr::Foundation::HANDLE, certificate_index : UInt32, certificateheader : Win32cr::Security::WinTrust::WIN_CERTIFICATE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImageGetCertificateHeader(file_handle, certificate_index, certificateheader)
+    {% end %}
   end
 
   def imageLoad(dll_name : Win32cr::Foundation::PSTR, dll_path : Win32cr::Foundation::PSTR) : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*
+    {% if !flag?(:docs) %}
     C.ImageLoad(dll_name, dll_path)
+    {% end %}
   end
 
   def imageUnload(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ImageUnload(loaded_image)
+    {% end %}
   end
 
   def mapAndLoad(image_name : Win32cr::Foundation::PSTR, dll_path : Win32cr::Foundation::PSTR, loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*, dot_dll : Win32cr::Foundation::BOOL, read_only : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MapAndLoad(image_name, dll_path, loaded_image, dot_dll, read_only)
+    {% end %}
   end
 
   def unMapAndLoad(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnMapAndLoad(loaded_image)
+    {% end %}
   end
 
   def touchFileTimes(file_handle : Win32cr::Foundation::HANDLE, pSystemTime : Win32cr::Foundation::SYSTEMTIME*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TouchFileTimes(file_handle, pSystemTime)
+    {% end %}
   end
 
   def updateDebugInfoFile(image_file_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, debug_file_path : Win32cr::Foundation::PSTR, nt_headers : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UpdateDebugInfoFile(image_file_name, symbol_path, debug_file_path, nt_headers)
+    {% end %}
   end
 
   def updateDebugInfoFileEx(image_file_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, debug_file_path : Win32cr::Foundation::PSTR, nt_headers : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*, old_check_sum : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UpdateDebugInfoFileEx(image_file_name, symbol_path, debug_file_path, nt_headers, old_check_sum)
+    {% end %}
   end
 
   def symFindDebugInfoFile(hProcess : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PSTR, debug_file_path : Win32cr::Foundation::PSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_DEBUG_FILE_CALLBACK, caller_data : Void*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.SymFindDebugInfoFile(hProcess, file_name, debug_file_path, callback, caller_data)
+    {% end %}
   end
 
   def symFindDebugInfoFileW(hProcess : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PWSTR, debug_file_path : Win32cr::Foundation::PWSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_DEBUG_FILE_CALLBACKW, caller_data : Void*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.SymFindDebugInfoFileW(hProcess, file_name, debug_file_path, callback, caller_data)
+    {% end %}
   end
 
   def findDebugInfoFile(file_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, debug_file_path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.FindDebugInfoFile(file_name, symbol_path, debug_file_path)
+    {% end %}
   end
 
   def findDebugInfoFileEx(file_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, debug_file_path : Win32cr::Foundation::PSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_DEBUG_FILE_CALLBACK, caller_data : Void*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.FindDebugInfoFileEx(file_name, symbol_path, debug_file_path, callback, caller_data)
+    {% end %}
   end
 
   def findDebugInfoFileExW(file_name : Win32cr::Foundation::PWSTR, symbol_path : Win32cr::Foundation::PWSTR, debug_file_path : Win32cr::Foundation::PWSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_DEBUG_FILE_CALLBACKW, caller_data : Void*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.FindDebugInfoFileExW(file_name, symbol_path, debug_file_path, callback, caller_data)
+    {% end %}
   end
 
   def symFindFileInPath(hprocess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PSTR, file_name : Win32cr::Foundation::PSTR, id : Void*, two : UInt32, three : UInt32, flags : Win32cr::System::Diagnostics::Debug::SYM_FIND_ID_OPTION, found_file : Win32cr::Foundation::PSTR, callback : Win32cr::System::Diagnostics::Debug::PFINDFILEINPATHCALLBACK, context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymFindFileInPath(hprocess, search_path_a, file_name, id, two, three, flags, found_file, callback, context)
+    {% end %}
   end
 
   def symFindFileInPathW(hprocess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PWSTR, file_name : Win32cr::Foundation::PWSTR, id : Void*, two : UInt32, three : UInt32, flags : Win32cr::System::Diagnostics::Debug::SYM_FIND_ID_OPTION, found_file : Win32cr::Foundation::PWSTR, callback : Win32cr::System::Diagnostics::Debug::PFINDFILEINPATHCALLBACKW, context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymFindFileInPathW(hprocess, search_path_a, file_name, id, two, three, flags, found_file, callback, context)
+    {% end %}
   end
 
   def symFindExecutableImage(hProcess : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PSTR, image_file_path : Win32cr::Foundation::PSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_EXE_FILE_CALLBACK, caller_data : Void*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.SymFindExecutableImage(hProcess, file_name, image_file_path, callback, caller_data)
+    {% end %}
   end
 
   def symFindExecutableImageW(hProcess : Win32cr::Foundation::HANDLE, file_name : Win32cr::Foundation::PWSTR, image_file_path : Win32cr::Foundation::PWSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_EXE_FILE_CALLBACKW, caller_data : Void*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.SymFindExecutableImageW(hProcess, file_name, image_file_path, callback, caller_data)
+    {% end %}
   end
 
   def findExecutableImage(file_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, image_file_path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.FindExecutableImage(file_name, symbol_path, image_file_path)
+    {% end %}
   end
 
   def findExecutableImageEx(file_name : Win32cr::Foundation::PSTR, symbol_path : Win32cr::Foundation::PSTR, image_file_path : Win32cr::Foundation::PSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_EXE_FILE_CALLBACK, caller_data : Void*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.FindExecutableImageEx(file_name, symbol_path, image_file_path, callback, caller_data)
+    {% end %}
   end
 
   def findExecutableImageExW(file_name : Win32cr::Foundation::PWSTR, symbol_path : Win32cr::Foundation::PWSTR, image_file_path : Win32cr::Foundation::PWSTR, callback : Win32cr::System::Diagnostics::Debug::PFIND_EXE_FILE_CALLBACKW, caller_data : Void*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.FindExecutableImageExW(file_name, symbol_path, image_file_path, callback, caller_data)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def imageNtHeader(base : Void*) : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS64*
+    {% if !flag?(:docs) %}
     C.ImageNtHeader(base)
+    {% end %}
   end
 {% end %}
 
   def imageDirectoryEntryToDataEx(base : Void*, mapped_as_image : Win32cr::Foundation::BOOLEAN, directory_entry : Win32cr::System::Diagnostics::Debug::IMAGE_DIRECTORY_ENTRY, size : UInt32*, found_header : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER**) : Void*
+    {% if !flag?(:docs) %}
     C.ImageDirectoryEntryToDataEx(base, mapped_as_image, directory_entry, size, found_header)
+    {% end %}
   end
 
   def imageDirectoryEntryToData(base : Void*, mapped_as_image : Win32cr::Foundation::BOOLEAN, directory_entry : Win32cr::System::Diagnostics::Debug::IMAGE_DIRECTORY_ENTRY, size : UInt32*) : Void*
+    {% if !flag?(:docs) %}
     C.ImageDirectoryEntryToData(base, mapped_as_image, directory_entry, size)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def imageRvaToSection(nt_headers : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS64*, base : Void*, rva : UInt32) : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*
+    {% if !flag?(:docs) %}
     C.ImageRvaToSection(nt_headers, base, rva)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def imageRvaToVa(nt_headers : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS64*, base : Void*, rva : UInt32, last_rva_section : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER**) : Void*
+    {% if !flag?(:docs) %}
     C.ImageRvaToVa(nt_headers, base, rva, last_rva_section)
+    {% end %}
   end
 {% end %}
 
   def searchTreeForFile(root_path : Win32cr::Foundation::PSTR, input_path_name : Win32cr::Foundation::PSTR, output_path_buffer : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SearchTreeForFile(root_path, input_path_name, output_path_buffer)
+    {% end %}
   end
 
   def searchTreeForFileW(root_path : Win32cr::Foundation::PWSTR, input_path_name : Win32cr::Foundation::PWSTR, output_path_buffer : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SearchTreeForFileW(root_path, input_path_name, output_path_buffer)
+    {% end %}
   end
 
   def enumDirTree(hProcess : Win32cr::Foundation::HANDLE, root_path : Win32cr::Foundation::PSTR, input_path_name : Win32cr::Foundation::PSTR, output_path_buffer : Win32cr::Foundation::PSTR, cb : Win32cr::System::Diagnostics::Debug::PENUMDIRTREE_CALLBACK, data : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumDirTree(hProcess, root_path, input_path_name, output_path_buffer, cb, data)
+    {% end %}
   end
 
   def enumDirTreeW(hProcess : Win32cr::Foundation::HANDLE, root_path : Win32cr::Foundation::PWSTR, input_path_name : Win32cr::Foundation::PWSTR, output_path_buffer : Win32cr::Foundation::PWSTR, cb : Win32cr::System::Diagnostics::Debug::PENUMDIRTREE_CALLBACKW, data : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumDirTreeW(hProcess, root_path, input_path_name, output_path_buffer, cb, data)
+    {% end %}
   end
 
   def makeSureDirectoryPathExists(dir_path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MakeSureDirectoryPathExists(dir_path)
+    {% end %}
   end
 
   def unDecorateSymbolName(name : Win32cr::Foundation::PSTR, outputString : UInt8*, maxStringLength : UInt32, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.UnDecorateSymbolName(name, outputString, maxStringLength, flags)
+    {% end %}
   end
 
   def unDecorateSymbolNameW(name : Win32cr::Foundation::PWSTR, outputString : UInt16*, maxStringLength : UInt32, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.UnDecorateSymbolNameW(name, outputString, maxStringLength, flags)
+    {% end %}
   end
 
   #def stackWalk64(machine_type : UInt32, hProcess : Win32cr::Foundation::HANDLE, hThread : Win32cr::Foundation::HANDLE, stack_frame : Win32cr::System::Diagnostics::Debug::STACKFRAME64*, context_record : Void*, read_memory_routine : Win32cr::System::Diagnostics::Debug::PREAD_PROCESS_MEMORY_ROUTINE64, function_table_access_routine : Win32cr::System::Diagnostics::Debug::PFUNCTION_TABLE_ACCESS_ROUTINE64, get_module_base_routine : Win32cr::System::Diagnostics::Debug::PGET_MODULE_BASE_ROUTINE64, translate_address : Win32cr::System::Diagnostics::Debug::PTRANSLATE_ADDRESS_ROUTINE64) : Win32cr::Foundation::BOOL
@@ -29576,43 +29804,63 @@ module Win32cr::System::Diagnostics::Debug
   #end
 
   def stackWalkEx(machine_type : UInt32, hProcess : Win32cr::Foundation::HANDLE, hThread : Win32cr::Foundation::HANDLE, stack_frame : Win32cr::System::Diagnostics::Debug::STACKFRAME_EX*, context_record : Void*, read_memory_routine : Win32cr::System::Diagnostics::Debug::PREAD_PROCESS_MEMORY_ROUTINE64, function_table_access_routine : Win32cr::System::Diagnostics::Debug::PFUNCTION_TABLE_ACCESS_ROUTINE64, get_module_base_routine : Win32cr::System::Diagnostics::Debug::PGET_MODULE_BASE_ROUTINE64, translate_address : Win32cr::System::Diagnostics::Debug::PTRANSLATE_ADDRESS_ROUTINE64, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.StackWalkEx(machine_type, hProcess, hThread, stack_frame, context_record, read_memory_routine, function_table_access_routine, get_module_base_routine, translate_address, flags)
+    {% end %}
   end
 
   def imagehlpApiVersion : Win32cr::System::Diagnostics::Debug::API_VERSION*
+    {% if !flag?(:docs) %}
     C.ImagehlpApiVersion
+    {% end %}
   end
 
   def imagehlpApiVersionEx(app_version : Win32cr::System::Diagnostics::Debug::API_VERSION*) : Win32cr::System::Diagnostics::Debug::API_VERSION*
+    {% if !flag?(:docs) %}
     C.ImagehlpApiVersionEx(app_version)
+    {% end %}
   end
 
   def getTimestampForLoadedLibrary(module__ : Win32cr::Foundation::HINSTANCE) : UInt32
+    {% if !flag?(:docs) %}
     C.GetTimestampForLoadedLibrary(module__)
+    {% end %}
   end
 
   def symSetParentWindow(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymSetParentWindow(hwnd)
+    {% end %}
   end
 
   def symSetHomeDirectory(hProcess : Win32cr::Foundation::HANDLE, dir : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.SymSetHomeDirectory(hProcess, dir)
+    {% end %}
   end
 
   def symSetHomeDirectoryW(hProcess : Win32cr::Foundation::HANDLE, dir : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.SymSetHomeDirectoryW(hProcess, dir)
+    {% end %}
   end
 
   def symGetHomeDirectory(type__ : Win32cr::System::Diagnostics::Debug::IMAGEHLP_HD_TYPE, dir : UInt8*, size : LibC::UIntPtrT) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.SymGetHomeDirectory(type__, dir, size)
+    {% end %}
   end
 
   def symGetHomeDirectoryW(type__ : Win32cr::System::Diagnostics::Debug::IMAGEHLP_HD_TYPE, dir : UInt16*, size : LibC::UIntPtrT) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.SymGetHomeDirectoryW(type__, dir, size)
+    {% end %}
   end
 
   def symGetOmaps(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, omap_to : Win32cr::System::Diagnostics::Debug::OMAP**, cOmapTo : UInt64*, omap_from : Win32cr::System::Diagnostics::Debug::OMAP**, cOmapFrom : UInt64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetOmaps(hProcess, base_of_dll, omap_to, cOmapTo, omap_from, cOmapFrom)
+    {% end %}
   end
 
   #def symSetOptions(sym_options : UInt32) : UInt32
@@ -29628,71 +29876,105 @@ module Win32cr::System::Diagnostics::Debug
   #end
 
   def symGetExtendedOption(option : Win32cr::System::Diagnostics::Debug::IMAGEHLP_EXTENDED_OPTIONS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetExtendedOption(option)
+    {% end %}
   end
 
   def symSetExtendedOption(option : Win32cr::System::Diagnostics::Debug::IMAGEHLP_EXTENDED_OPTIONS, value : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymSetExtendedOption(option, value)
+    {% end %}
   end
 
   def symMatchString(string : Win32cr::Foundation::PSTR, expression : Win32cr::Foundation::PSTR, fCase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymMatchString(string, expression, fCase)
+    {% end %}
   end
 
   def symMatchStringA(string : Win32cr::Foundation::PSTR, expression : Win32cr::Foundation::PSTR, fCase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymMatchStringA(string, expression, fCase)
+    {% end %}
   end
 
   def symMatchStringW(string : Win32cr::Foundation::PWSTR, expression : Win32cr::Foundation::PWSTR, fCase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymMatchStringW(string, expression, fCase)
+    {% end %}
   end
 
   def symEnumSourceFiles(hProcess : Win32cr::Foundation::HANDLE, mod_base : UInt64, mask : Win32cr::Foundation::PSTR, cbSrcFiles : Win32cr::System::Diagnostics::Debug::PSYM_ENUMSOURCEFILES_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumSourceFiles(hProcess, mod_base, mask, cbSrcFiles, user_context)
+    {% end %}
   end
 
   def symEnumSourceFilesW(hProcess : Win32cr::Foundation::HANDLE, mod_base : UInt64, mask : Win32cr::Foundation::PWSTR, cbSrcFiles : Win32cr::System::Diagnostics::Debug::PSYM_ENUMSOURCEFILES_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumSourceFilesW(hProcess, mod_base, mask, cbSrcFiles, user_context)
+    {% end %}
   end
 
   def symEnumerateModules64(hProcess : Win32cr::Foundation::HANDLE, enum_modules_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMMODULES_CALLBACK64, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumerateModules64(hProcess, enum_modules_callback, user_context)
+    {% end %}
   end
 
   def symEnumerateModulesW64(hProcess : Win32cr::Foundation::HANDLE, enum_modules_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMMODULES_CALLBACKW64, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumerateModulesW64(hProcess, enum_modules_callback, user_context)
+    {% end %}
   end
 
   def enumerateLoadedModulesEx(hProcess : Win32cr::Foundation::HANDLE, enum_loaded_modules_callback : Win32cr::System::Diagnostics::Debug::PENUMLOADED_MODULES_CALLBACK64, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumerateLoadedModulesEx(hProcess, enum_loaded_modules_callback, user_context)
+    {% end %}
   end
 
   def enumerateLoadedModulesExW(hProcess : Win32cr::Foundation::HANDLE, enum_loaded_modules_callback : Win32cr::System::Diagnostics::Debug::PENUMLOADED_MODULES_CALLBACKW64, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumerateLoadedModulesExW(hProcess, enum_loaded_modules_callback, user_context)
+    {% end %}
   end
 
   def enumerateLoadedModules64(hProcess : Win32cr::Foundation::HANDLE, enum_loaded_modules_callback : Win32cr::System::Diagnostics::Debug::PENUMLOADED_MODULES_CALLBACK64, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumerateLoadedModules64(hProcess, enum_loaded_modules_callback, user_context)
+    {% end %}
   end
 
   def enumerateLoadedModulesW64(hProcess : Win32cr::Foundation::HANDLE, enum_loaded_modules_callback : Win32cr::System::Diagnostics::Debug::PENUMLOADED_MODULES_CALLBACKW64, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumerateLoadedModulesW64(hProcess, enum_loaded_modules_callback, user_context)
+    {% end %}
   end
 
   def symFunctionTableAccess64(hProcess : Win32cr::Foundation::HANDLE, addr_base : UInt64) : Void*
+    {% if !flag?(:docs) %}
     C.SymFunctionTableAccess64(hProcess, addr_base)
+    {% end %}
   end
 
   def symFunctionTableAccess64AccessRoutines(hProcess : Win32cr::Foundation::HANDLE, addr_base : UInt64, read_memory_routine : Win32cr::System::Diagnostics::Debug::PREAD_PROCESS_MEMORY_ROUTINE64, get_module_base_routine : Win32cr::System::Diagnostics::Debug::PGET_MODULE_BASE_ROUTINE64) : Void*
+    {% if !flag?(:docs) %}
     C.SymFunctionTableAccess64AccessRoutines(hProcess, addr_base, read_memory_routine, get_module_base_routine)
+    {% end %}
   end
 
   def symGetUnwindInfo(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, buffer : Void*, size : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetUnwindInfo(hProcess, address, buffer, size)
+    {% end %}
   end
 
   def symGetModuleInfo64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, module_info : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULE64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetModuleInfo64(hProcess, qwAddr, module_info)
+    {% end %}
   end
 
   #def symGetModuleInfoW64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, module_info : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULEW64*) : Win32cr::Foundation::BOOL
@@ -29704,15 +29986,21 @@ module Win32cr::System::Diagnostics::Debug
   #end
 
   def symEnumLines(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, obj : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR, enum_lines_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMLINES_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumLines(hProcess, base, obj, file, enum_lines_callback, user_context)
+    {% end %}
   end
 
   def symEnumLinesW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, obj : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR, enum_lines_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMLINES_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumLinesW(hProcess, base, obj, file, enum_lines_callback, user_context)
+    {% end %}
   end
 
   def symGetLineFromAddr64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, pdwDisplacement : UInt32*, line64 : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetLineFromAddr64(hProcess, qwAddr, pdwDisplacement, line64)
+    {% end %}
   end
 
   #def symGetLineFromAddrW64(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt64, pdwDisplacement : UInt32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINEW64*) : Win32cr::Foundation::BOOL
@@ -29720,131 +30008,195 @@ module Win32cr::System::Diagnostics::Debug
   #end
 
   def symGetLineFromInlineContext(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, inline_context : UInt32, qwModuleBaseAddress : UInt64, pdwDisplacement : UInt32*, line64 : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetLineFromInlineContext(hProcess, qwAddr, inline_context, qwModuleBaseAddress, pdwDisplacement, line64)
+    {% end %}
   end
 
   def symGetLineFromInlineContextW(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt64, inline_context : UInt32, qwModuleBaseAddress : UInt64, pdwDisplacement : UInt32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINEW64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetLineFromInlineContextW(hProcess, dwAddr, inline_context, qwModuleBaseAddress, pdwDisplacement, line)
+    {% end %}
   end
 
   def symEnumSourceLines(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, obj : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR, line : UInt32, flags : UInt32, enum_lines_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMLINES_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumSourceLines(hProcess, base, obj, file, line, flags, enum_lines_callback, user_context)
+    {% end %}
   end
 
   def symEnumSourceLinesW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, obj : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR, line : UInt32, flags : UInt32, enum_lines_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMLINES_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumSourceLinesW(hProcess, base, obj, file, line, flags, enum_lines_callback, user_context)
+    {% end %}
   end
 
   def symAddrIncludeInlineTrace(hProcess : Win32cr::Foundation::HANDLE, address : UInt64) : UInt32
+    {% if !flag?(:docs) %}
     C.SymAddrIncludeInlineTrace(hProcess, address)
+    {% end %}
   end
 
   def symCompareInlineTrace(hProcess : Win32cr::Foundation::HANDLE, address1 : UInt64, inline_context1 : UInt32, ret_address1 : UInt64, address2 : UInt64, ret_address2 : UInt64) : UInt32
+    {% if !flag?(:docs) %}
     C.SymCompareInlineTrace(hProcess, address1, inline_context1, ret_address1, address2, ret_address2)
+    {% end %}
   end
 
   def symQueryInlineTrace(hProcess : Win32cr::Foundation::HANDLE, start_address : UInt64, start_context : UInt32, start_ret_address : UInt64, cur_address : UInt64, cur_context : UInt32*, cur_frame_index : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymQueryInlineTrace(hProcess, start_address, start_context, start_ret_address, cur_address, cur_context, cur_frame_index)
+    {% end %}
   end
 
   def symGetLineFromName64(hProcess : Win32cr::Foundation::HANDLE, module_name : Win32cr::Foundation::PSTR, file_name : Win32cr::Foundation::PSTR, dwLineNumber : UInt32, plDisplacement : Int32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetLineFromName64(hProcess, module_name, file_name, dwLineNumber, plDisplacement, line)
+    {% end %}
   end
 
   def symGetLineFromNameW64(hProcess : Win32cr::Foundation::HANDLE, module_name : Win32cr::Foundation::PWSTR, file_name : Win32cr::Foundation::PWSTR, dwLineNumber : UInt32, plDisplacement : Int32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINEW64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetLineFromNameW64(hProcess, module_name, file_name, dwLineNumber, plDisplacement, line)
+    {% end %}
   end
 
   def symGetLineNext64(hProcess : Win32cr::Foundation::HANDLE, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetLineNext64(hProcess, line)
+    {% end %}
   end
 
   def symGetLineNextW64(hProcess : Win32cr::Foundation::HANDLE, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINEW64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetLineNextW64(hProcess, line)
+    {% end %}
   end
 
   def symGetLinePrev64(hProcess : Win32cr::Foundation::HANDLE, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetLinePrev64(hProcess, line)
+    {% end %}
   end
 
   def symGetLinePrevW64(hProcess : Win32cr::Foundation::HANDLE, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINEW64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetLinePrevW64(hProcess, line)
+    {% end %}
   end
 
   def symGetFileLineOffsets64(hProcess : Win32cr::Foundation::HANDLE, module_name : Win32cr::Foundation::PSTR, file_name : Win32cr::Foundation::PSTR, buffer : UInt64*, buffer_lines : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SymGetFileLineOffsets64(hProcess, module_name, file_name, buffer, buffer_lines)
+    {% end %}
   end
 
   def symMatchFileName(file_name : Win32cr::Foundation::PSTR, match : Win32cr::Foundation::PSTR, file_name_stop : Win32cr::Foundation::PSTR*, match_stop : Win32cr::Foundation::PSTR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymMatchFileName(file_name, match, file_name_stop, match_stop)
+    {% end %}
   end
 
   def symMatchFileNameW(file_name : Win32cr::Foundation::PWSTR, match : Win32cr::Foundation::PWSTR, file_name_stop : Win32cr::Foundation::PWSTR*, match_stop : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymMatchFileNameW(file_name, match, file_name_stop, match_stop)
+    {% end %}
   end
 
   def symGetSourceFile(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, params : Win32cr::Foundation::PSTR, file_spec : Win32cr::Foundation::PSTR, file_path : UInt8*, size : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSourceFile(hProcess, base, params, file_spec, file_path, size)
+    {% end %}
   end
 
   def symGetSourceFileW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, params : Win32cr::Foundation::PWSTR, file_spec : Win32cr::Foundation::PWSTR, file_path : UInt16*, size : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSourceFileW(hProcess, base, params, file_spec, file_path, size)
+    {% end %}
   end
 
   def symGetSourceFileToken(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PSTR, token : Void**, size : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSourceFileToken(hProcess, base, file_spec, token, size)
+    {% end %}
   end
 
   def symGetSourceFileTokenByTokenName(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PSTR, token_name : Win32cr::Foundation::PSTR, token_parameters : Win32cr::Foundation::PSTR, token : Void**, size : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSourceFileTokenByTokenName(hProcess, base, file_spec, token_name, token_parameters, token, size)
+    {% end %}
   end
 
   def symGetSourceFileChecksumW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PWSTR, pCheckSumType : UInt32*, pChecksum : UInt8*, checksumSize : UInt32, pActualBytesWritten : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSourceFileChecksumW(hProcess, base, file_spec, pCheckSumType, pChecksum, checksumSize, pActualBytesWritten)
+    {% end %}
   end
 
   def symGetSourceFileChecksum(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PSTR, pCheckSumType : UInt32*, pChecksum : UInt8*, checksumSize : UInt32, pActualBytesWritten : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSourceFileChecksum(hProcess, base, file_spec, pCheckSumType, pChecksum, checksumSize, pActualBytesWritten)
+    {% end %}
   end
 
   def symGetSourceFileTokenW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PWSTR, token : Void**, size : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSourceFileTokenW(hProcess, base, file_spec, token, size)
+    {% end %}
   end
 
   def symGetSourceFileTokenByTokenNameW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PWSTR, token_name : Win32cr::Foundation::PWSTR, token_parameters : Win32cr::Foundation::PWSTR, token : Void**, size : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSourceFileTokenByTokenNameW(hProcess, base, file_spec, token_name, token_parameters, token, size)
+    {% end %}
   end
 
   def symGetSourceFileFromToken(hProcess : Win32cr::Foundation::HANDLE, token : Void*, params : Win32cr::Foundation::PSTR, file_path : UInt8*, size : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSourceFileFromToken(hProcess, token, params, file_path, size)
+    {% end %}
   end
 
   def symGetSourceFileFromTokenByTokenName(hProcess : Win32cr::Foundation::HANDLE, token : Void*, token_name : Win32cr::Foundation::PSTR, params : Win32cr::Foundation::PSTR, file_path : UInt8*, size : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSourceFileFromTokenByTokenName(hProcess, token, token_name, params, file_path, size)
+    {% end %}
   end
 
   def symGetSourceFileFromTokenW(hProcess : Win32cr::Foundation::HANDLE, token : Void*, params : Win32cr::Foundation::PWSTR, file_path : UInt16*, size : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSourceFileFromTokenW(hProcess, token, params, file_path, size)
+    {% end %}
   end
 
   def symGetSourceFileFromTokenByTokenNameW(hProcess : Win32cr::Foundation::HANDLE, token : Void*, token_name : Win32cr::Foundation::PWSTR, params : Win32cr::Foundation::PWSTR, file_path : UInt16*, size : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSourceFileFromTokenByTokenNameW(hProcess, token, token_name, params, file_path, size)
+    {% end %}
   end
 
   def symGetSourceVarFromToken(hProcess : Win32cr::Foundation::HANDLE, token : Void*, params : Win32cr::Foundation::PSTR, var_name : Win32cr::Foundation::PSTR, value : UInt8*, size : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSourceVarFromToken(hProcess, token, params, var_name, value, size)
+    {% end %}
   end
 
   def symGetSourceVarFromTokenW(hProcess : Win32cr::Foundation::HANDLE, token : Void*, params : Win32cr::Foundation::PWSTR, var_name : Win32cr::Foundation::PWSTR, value : UInt16*, size : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSourceVarFromTokenW(hProcess, token, params, var_name, value, size)
+    {% end %}
   end
 
   def symEnumSourceFileTokens(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, callback : Win32cr::System::Diagnostics::Debug::PENUMSOURCEFILETOKENSCALLBACK) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumSourceFileTokens(hProcess, base, callback)
+    {% end %}
   end
 
   def symInitialize(hProcess : Win32cr::Foundation::HANDLE, user_search_path : Win32cr::Foundation::PSTR, fInvadeProcess : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymInitialize(hProcess, user_search_path, fInvadeProcess)
+    {% end %}
   end
 
   #def symInitializeW(hProcess : Win32cr::Foundation::HANDLE, user_search_path : Win32cr::Foundation::PWSTR, fInvadeProcess : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
@@ -29852,71 +30204,105 @@ module Win32cr::System::Diagnostics::Debug
   #end
 
   def symGetSearchPath(hProcess : Win32cr::Foundation::HANDLE, search_path_a : UInt8*, search_path_length : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSearchPath(hProcess, search_path_a, search_path_length)
+    {% end %}
   end
 
   def symGetSearchPathW(hProcess : Win32cr::Foundation::HANDLE, search_path_a : UInt16*, search_path_length : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSearchPathW(hProcess, search_path_a, search_path_length)
+    {% end %}
   end
 
   def symSetSearchPath(hProcess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymSetSearchPath(hProcess, search_path_a)
+    {% end %}
   end
 
   def symSetSearchPathW(hProcess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymSetSearchPathW(hProcess, search_path_a)
+    {% end %}
   end
 
   def symLoadModuleEx(hProcess : Win32cr::Foundation::HANDLE, hFile : Win32cr::Foundation::HANDLE, image_name : Win32cr::Foundation::PSTR, module_name : Win32cr::Foundation::PSTR, base_of_dll : UInt64, dll_size : UInt32, data : Win32cr::System::Diagnostics::Debug::MODLOAD_DATA*, flags : Win32cr::System::Diagnostics::Debug::SYM_LOAD_FLAGS) : UInt64
+    {% if !flag?(:docs) %}
     C.SymLoadModuleEx(hProcess, hFile, image_name, module_name, base_of_dll, dll_size, data, flags)
+    {% end %}
   end
 
   def symLoadModuleExW(hProcess : Win32cr::Foundation::HANDLE, hFile : Win32cr::Foundation::HANDLE, image_name : Win32cr::Foundation::PWSTR, module_name : Win32cr::Foundation::PWSTR, base_of_dll : UInt64, dll_size : UInt32, data : Win32cr::System::Diagnostics::Debug::MODLOAD_DATA*, flags : Win32cr::System::Diagnostics::Debug::SYM_LOAD_FLAGS) : UInt64
+    {% if !flag?(:docs) %}
     C.SymLoadModuleExW(hProcess, hFile, image_name, module_name, base_of_dll, dll_size, data, flags)
+    {% end %}
   end
 
   def symUnloadModule64(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymUnloadModule64(hProcess, base_of_dll)
+    {% end %}
   end
 
   def symUnDName64(sym : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64*, un_dec_name : UInt8*, un_dec_name_length : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymUnDName64(sym, un_dec_name, un_dec_name_length)
+    {% end %}
   end
 
   def symRegisterCallback64(hProcess : Win32cr::Foundation::HANDLE, callback_function : Win32cr::System::Diagnostics::Debug::PSYMBOL_REGISTERED_CALLBACK64, user_context : UInt64) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymRegisterCallback64(hProcess, callback_function, user_context)
+    {% end %}
   end
 
   def symRegisterCallbackW64(hProcess : Win32cr::Foundation::HANDLE, callback_function : Win32cr::System::Diagnostics::Debug::PSYMBOL_REGISTERED_CALLBACK64, user_context : UInt64) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymRegisterCallbackW64(hProcess, callback_function, user_context)
+    {% end %}
   end
 
   def symRegisterFunctionEntryCallback64(hProcess : Win32cr::Foundation::HANDLE, callback_function : Win32cr::System::Diagnostics::Debug::PSYMBOL_FUNCENTRY_CALLBACK64, user_context : UInt64) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymRegisterFunctionEntryCallback64(hProcess, callback_function, user_context)
+    {% end %}
   end
 
   def symSetContext(hProcess : Win32cr::Foundation::HANDLE, stack_frame : Win32cr::System::Diagnostics::Debug::IMAGEHLP_STACK_FRAME*, context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymSetContext(hProcess, stack_frame, context)
+    {% end %}
   end
 
   def symSetScopeFromAddr(hProcess : Win32cr::Foundation::HANDLE, address : UInt64) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymSetScopeFromAddr(hProcess, address)
+    {% end %}
   end
 
   def symSetScopeFromInlineContext(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, inline_context : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymSetScopeFromInlineContext(hProcess, address, inline_context)
+    {% end %}
   end
 
   def symSetScopeFromIndex(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymSetScopeFromIndex(hProcess, base_of_dll, index)
+    {% end %}
   end
 
   def symEnumProcesses(enum_processes_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMPROCESSES_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumProcesses(enum_processes_callback, user_context)
+    {% end %}
   end
 
   def symFromAddr(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, displacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymFromAddr(hProcess, address, displacement, symbol)
+    {% end %}
   end
 
   #def symFromAddrW(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, displacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
@@ -29924,343 +30310,513 @@ module Win32cr::System::Diagnostics::Debug
   #end
 
   def symFromInlineContext(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, inline_context : UInt32, displacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymFromInlineContext(hProcess, address, inline_context, displacement, symbol)
+    {% end %}
   end
 
   def symFromInlineContextW(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, inline_context : UInt32, displacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymFromInlineContextW(hProcess, address, inline_context, displacement, symbol)
+    {% end %}
   end
 
   def symFromToken(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, token : UInt32, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymFromToken(hProcess, base, token, symbol)
+    {% end %}
   end
 
   def symFromTokenW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, token : UInt32, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymFromTokenW(hProcess, base, token, symbol)
+    {% end %}
   end
 
   def symNext(hProcess : Win32cr::Foundation::HANDLE, si : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymNext(hProcess, si)
+    {% end %}
   end
 
   def symNextW(hProcess : Win32cr::Foundation::HANDLE, siw : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymNextW(hProcess, siw)
+    {% end %}
   end
 
   def symPrev(hProcess : Win32cr::Foundation::HANDLE, si : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymPrev(hProcess, si)
+    {% end %}
   end
 
   def symPrevW(hProcess : Win32cr::Foundation::HANDLE, siw : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymPrevW(hProcess, siw)
+    {% end %}
   end
 
   def symFromName(hProcess : Win32cr::Foundation::HANDLE, name : Win32cr::Foundation::PSTR, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymFromName(hProcess, name, symbol)
+    {% end %}
   end
 
   def symFromNameW(hProcess : Win32cr::Foundation::HANDLE, name : Win32cr::Foundation::PWSTR, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymFromNameW(hProcess, name, symbol)
+    {% end %}
   end
 
   def symEnumSymbols(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, mask : Win32cr::Foundation::PSTR, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumSymbols(hProcess, base_of_dll, mask, enum_symbols_callback, user_context)
+    {% end %}
   end
 
   def symEnumSymbolsEx(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, mask : Win32cr::Foundation::PSTR, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*, options : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumSymbolsEx(hProcess, base_of_dll, mask, enum_symbols_callback, user_context, options)
+    {% end %}
   end
 
   def symEnumSymbolsW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, mask : Win32cr::Foundation::PWSTR, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumSymbolsW(hProcess, base_of_dll, mask, enum_symbols_callback, user_context)
+    {% end %}
   end
 
   def symEnumSymbolsExW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, mask : Win32cr::Foundation::PWSTR, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACKW, user_context : Void*, options : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumSymbolsExW(hProcess, base_of_dll, mask, enum_symbols_callback, user_context, options)
+    {% end %}
   end
 
   def symEnumSymbolsForAddr(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumSymbolsForAddr(hProcess, address, enum_symbols_callback, user_context)
+    {% end %}
   end
 
   def symEnumSymbolsForAddrW(hProcess : Win32cr::Foundation::HANDLE, address : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumSymbolsForAddrW(hProcess, address, enum_symbols_callback, user_context)
+    {% end %}
   end
 
   def symSearch(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32, sym_tag : UInt32, mask : Win32cr::Foundation::PSTR, address : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*, options : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymSearch(hProcess, base_of_dll, index, sym_tag, mask, address, enum_symbols_callback, user_context, options)
+    {% end %}
   end
 
   def symSearchW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32, sym_tag : UInt32, mask : Win32cr::Foundation::PWSTR, address : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACKW, user_context : Void*, options : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymSearchW(hProcess, base_of_dll, index, sym_tag, mask, address, enum_symbols_callback, user_context, options)
+    {% end %}
   end
 
   def symGetScope(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetScope(hProcess, base_of_dll, index, symbol)
+    {% end %}
   end
 
   def symGetScopeW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetScopeW(hProcess, base_of_dll, index, symbol)
+    {% end %}
   end
 
   def symFromIndex(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymFromIndex(hProcess, base_of_dll, index, symbol)
+    {% end %}
   end
 
   def symFromIndexW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, index : UInt32, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymFromIndexW(hProcess, base_of_dll, index, symbol)
+    {% end %}
   end
 
   def symGetTypeInfo(hProcess : Win32cr::Foundation::HANDLE, mod_base : UInt64, type_id : UInt32, get_type : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL_TYPE_INFO, pInfo : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetTypeInfo(hProcess, mod_base, type_id, get_type, pInfo)
+    {% end %}
   end
 
   def symGetTypeInfoEx(hProcess : Win32cr::Foundation::HANDLE, mod_base : UInt64, params : Win32cr::System::Diagnostics::Debug::IMAGEHLP_GET_TYPE_INFO_PARAMS*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetTypeInfoEx(hProcess, mod_base, params)
+    {% end %}
   end
 
   def symEnumTypes(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumTypes(hProcess, base_of_dll, enum_symbols_callback, user_context)
+    {% end %}
   end
 
   def symEnumTypesW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumTypesW(hProcess, base_of_dll, enum_symbols_callback, user_context)
+    {% end %}
   end
 
   def symEnumTypesByName(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, mask : Win32cr::Foundation::PSTR, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumTypesByName(hProcess, base_of_dll, mask, enum_symbols_callback, user_context)
+    {% end %}
   end
 
   def symEnumTypesByNameW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, mask : Win32cr::Foundation::PWSTR, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumTypesByNameW(hProcess, base_of_dll, mask, enum_symbols_callback, user_context)
+    {% end %}
   end
 
   def symGetTypeFromName(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, name : Win32cr::Foundation::PSTR, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetTypeFromName(hProcess, base_of_dll, name, symbol)
+    {% end %}
   end
 
   def symGetTypeFromNameW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, name : Win32cr::Foundation::PWSTR, symbol : Win32cr::System::Diagnostics::Debug::SYMBOL_INFOW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetTypeFromNameW(hProcess, base_of_dll, name, symbol)
+    {% end %}
   end
 
   def symAddSymbol(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, name : Win32cr::Foundation::PSTR, address : UInt64, size : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymAddSymbol(hProcess, base_of_dll, name, address, size, flags)
+    {% end %}
   end
 
   def symAddSymbolW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, name : Win32cr::Foundation::PWSTR, address : UInt64, size : UInt32, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymAddSymbolW(hProcess, base_of_dll, name, address, size, flags)
+    {% end %}
   end
 
   def symDeleteSymbol(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, name : Win32cr::Foundation::PSTR, address : UInt64, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymDeleteSymbol(hProcess, base_of_dll, name, address, flags)
+    {% end %}
   end
 
   def symDeleteSymbolW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, name : Win32cr::Foundation::PWSTR, address : UInt64, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymDeleteSymbolW(hProcess, base_of_dll, name, address, flags)
+    {% end %}
   end
 
   def symRefreshModuleList(hProcess : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymRefreshModuleList(hProcess)
+    {% end %}
   end
 
   def symAddSourceStream(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, stream_file : Win32cr::Foundation::PSTR, buffer : UInt8*, size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymAddSourceStream(hProcess, base, stream_file, buffer, size)
+    {% end %}
   end
 
   def symAddSourceStreamA(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, stream_file : Win32cr::Foundation::PSTR, buffer : UInt8*, size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymAddSourceStreamA(hProcess, base, stream_file, buffer, size)
+    {% end %}
   end
 
   def symAddSourceStreamW(hProcess : Win32cr::Foundation::HANDLE, base : UInt64, file_spec : Win32cr::Foundation::PWSTR, buffer : UInt8*, size : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymAddSourceStreamW(hProcess, base, file_spec, buffer, size)
+    {% end %}
   end
 
   def symSrvIsStoreW(hProcess : Win32cr::Foundation::HANDLE, path : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymSrvIsStoreW(hProcess, path)
+    {% end %}
   end
 
   def symSrvIsStore(hProcess : Win32cr::Foundation::HANDLE, path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymSrvIsStore(hProcess, path)
+    {% end %}
   end
 
   def symSrvDeltaName(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PSTR, type__ : Win32cr::Foundation::PSTR, file1 : Win32cr::Foundation::PSTR, file2 : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.SymSrvDeltaName(hProcess, sym_path, type__, file1, file2)
+    {% end %}
   end
 
   def symSrvDeltaNameW(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PWSTR, type__ : Win32cr::Foundation::PWSTR, file1 : Win32cr::Foundation::PWSTR, file2 : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.SymSrvDeltaNameW(hProcess, sym_path, type__, file1, file2)
+    {% end %}
   end
 
   def symSrvGetSupplement(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PSTR, node : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.SymSrvGetSupplement(hProcess, sym_path, node, file)
+    {% end %}
   end
 
   def symSrvGetSupplementW(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PWSTR, node : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.SymSrvGetSupplementW(hProcess, sym_path, node, file)
+    {% end %}
   end
 
   def symSrvGetFileIndexes(file : Win32cr::Foundation::PSTR, id : LibC::GUID*, val1 : UInt32*, val2 : UInt32*, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymSrvGetFileIndexes(file, id, val1, val2, flags)
+    {% end %}
   end
 
   def symSrvGetFileIndexesW(file : Win32cr::Foundation::PWSTR, id : LibC::GUID*, val1 : UInt32*, val2 : UInt32*, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymSrvGetFileIndexesW(file, id, val1, val2, flags)
+    {% end %}
   end
 
   def symSrvGetFileIndexStringW(hProcess : Win32cr::Foundation::HANDLE, srv_path : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR, index : UInt16*, size : LibC::UIntPtrT, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymSrvGetFileIndexStringW(hProcess, srv_path, file, index, size, flags)
+    {% end %}
   end
 
   def symSrvGetFileIndexString(hProcess : Win32cr::Foundation::HANDLE, srv_path : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR, index : UInt8*, size : LibC::UIntPtrT, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymSrvGetFileIndexString(hProcess, srv_path, file, index, size, flags)
+    {% end %}
   end
 
   def symSrvGetFileIndexInfo(file : Win32cr::Foundation::PSTR, info : Win32cr::System::Diagnostics::Debug::SYMSRV_INDEX_INFO*, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymSrvGetFileIndexInfo(file, info, flags)
+    {% end %}
   end
 
   def symSrvGetFileIndexInfoW(file : Win32cr::Foundation::PWSTR, info : Win32cr::System::Diagnostics::Debug::SYMSRV_INDEX_INFOW*, flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymSrvGetFileIndexInfoW(file, info, flags)
+    {% end %}
   end
 
   def symSrvStoreSupplement(hProcess : Win32cr::Foundation::HANDLE, srv_path : Win32cr::Foundation::PSTR, node : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR, flags : UInt32) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.SymSrvStoreSupplement(hProcess, srv_path, node, file, flags)
+    {% end %}
   end
 
   def symSrvStoreSupplementW(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PWSTR, node : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR, flags : UInt32) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.SymSrvStoreSupplementW(hProcess, sym_path, node, file, flags)
+    {% end %}
   end
 
   def symSrvStoreFile(hProcess : Win32cr::Foundation::HANDLE, srv_path : Win32cr::Foundation::PSTR, file : Win32cr::Foundation::PSTR, flags : Win32cr::System::Diagnostics::Debug::SYM_SRV_STORE_FILE_FLAGS) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.SymSrvStoreFile(hProcess, srv_path, file, flags)
+    {% end %}
   end
 
   def symSrvStoreFileW(hProcess : Win32cr::Foundation::HANDLE, srv_path : Win32cr::Foundation::PWSTR, file : Win32cr::Foundation::PWSTR, flags : Win32cr::System::Diagnostics::Debug::SYM_SRV_STORE_FILE_FLAGS) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.SymSrvStoreFileW(hProcess, srv_path, file, flags)
+    {% end %}
   end
 
   def symGetSymbolFile(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PSTR, image_file : Win32cr::Foundation::PSTR, type__ : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SF_TYPE, symbol_file : UInt8*, cSymbolFile : LibC::UIntPtrT, dbg_file : UInt8*, cDbgFile : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSymbolFile(hProcess, sym_path, image_file, type__, symbol_file, cSymbolFile, dbg_file, cDbgFile)
+    {% end %}
   end
 
   def symGetSymbolFileW(hProcess : Win32cr::Foundation::HANDLE, sym_path : Win32cr::Foundation::PWSTR, image_file : Win32cr::Foundation::PWSTR, type__ : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SF_TYPE, symbol_file : UInt16*, cSymbolFile : LibC::UIntPtrT, dbg_file : UInt16*, cDbgFile : LibC::UIntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSymbolFileW(hProcess, sym_path, image_file, type__, symbol_file, cSymbolFile, dbg_file, cDbgFile)
+    {% end %}
   end
 
   def dbgHelpCreateUserDump(file_name : Win32cr::Foundation::PSTR, callback : Win32cr::System::Diagnostics::Debug::PDBGHELP_CREATE_USER_DUMP_CALLBACK, user_data : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DbgHelpCreateUserDump(file_name, callback, user_data)
+    {% end %}
   end
 
   def dbgHelpCreateUserDumpW(file_name : Win32cr::Foundation::PWSTR, callback : Win32cr::System::Diagnostics::Debug::PDBGHELP_CREATE_USER_DUMP_CALLBACK, user_data : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DbgHelpCreateUserDumpW(file_name, callback, user_data)
+    {% end %}
   end
 
   def symGetSymFromAddr64(hProcess : Win32cr::Foundation::HANDLE, qwAddr : UInt64, pdwDisplacement : UInt64*, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSymFromAddr64(hProcess, qwAddr, pdwDisplacement, symbol)
+    {% end %}
   end
 
   def symGetSymFromName64(hProcess : Win32cr::Foundation::HANDLE, name : Win32cr::Foundation::PSTR, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSymFromName64(hProcess, name, symbol)
+    {% end %}
   end
 
   def findFileInPath(hprocess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PSTR, file_name : Win32cr::Foundation::PSTR, id : Void*, two : UInt32, three : UInt32, flags : UInt32, file_path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FindFileInPath(hprocess, search_path_a, file_name, id, two, three, flags, file_path)
+    {% end %}
   end
 
   def findFileInSearchPath(hprocess : Win32cr::Foundation::HANDLE, search_path_a : Win32cr::Foundation::PSTR, file_name : Win32cr::Foundation::PSTR, one : UInt32, two : UInt32, three : UInt32, file_path : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FindFileInSearchPath(hprocess, search_path_a, file_name, one, two, three, file_path)
+    {% end %}
   end
 
   def symEnumSym(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMERATESYMBOLS_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumSym(hProcess, base_of_dll, enum_symbols_callback, user_context)
+    {% end %}
   end
 
   def symEnumerateSymbols64(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMSYMBOLS_CALLBACK64, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumerateSymbols64(hProcess, base_of_dll, enum_symbols_callback, user_context)
+    {% end %}
   end
 
   def symEnumerateSymbolsW64(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt64, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMSYMBOLS_CALLBACK64W, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumerateSymbolsW64(hProcess, base_of_dll, enum_symbols_callback, user_context)
+    {% end %}
   end
 
   def symLoadModule64(hProcess : Win32cr::Foundation::HANDLE, hFile : Win32cr::Foundation::HANDLE, image_name : Win32cr::Foundation::PSTR, module_name : Win32cr::Foundation::PSTR, base_of_dll : UInt64, size_of_dll : UInt32) : UInt64
+    {% if !flag?(:docs) %}
     C.SymLoadModule64(hProcess, hFile, image_name, module_name, base_of_dll, size_of_dll)
+    {% end %}
   end
 
   def symGetSymNext64(hProcess : Win32cr::Foundation::HANDLE, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSymNext64(hProcess, symbol)
+    {% end %}
   end
 
   def symGetSymPrev64(hProcess : Win32cr::Foundation::HANDLE, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSymPrev64(hProcess, symbol)
+    {% end %}
   end
 
   def setCheckUserInterruptShared(lpStartAddress : Win32cr::System::Diagnostics::Debug::LPCALL_BACK_USER_INTERRUPT_ROUTINE) : Void
+    {% if !flag?(:docs) %}
     C.SetCheckUserInterruptShared(lpStartAddress)
+    {% end %}
   end
 
   def getSymLoadError : UInt32
+    {% if !flag?(:docs) %}
     C.GetSymLoadError
+    {% end %}
   end
 
   def setSymLoadError(error : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.SetSymLoadError(error)
+    {% end %}
   end
 
   def reportSymbolLoadSummary(hProcess : Win32cr::Foundation::HANDLE, pLoadModule : Win32cr::Foundation::PWSTR, pSymbolData : Win32cr::System::Diagnostics::Debug::DBGHELP_DATA_REPORT_STRUCT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ReportSymbolLoadSummary(hProcess, pLoadModule, pSymbolData)
+    {% end %}
   end
 
   def removeInvalidModuleList(hProcess : Win32cr::Foundation::HANDLE) : Void
+    {% if !flag?(:docs) %}
     C.RemoveInvalidModuleList(hProcess)
+    {% end %}
   end
 
   def rangeMapCreate : Void*
+    {% if !flag?(:docs) %}
     C.RangeMapCreate
+    {% end %}
   end
 
   def rangeMapFree(rmap_handle : Void*) : Void
+    {% if !flag?(:docs) %}
     C.RangeMapFree(rmap_handle)
+    {% end %}
   end
 
   def rangeMapAddPeImageSections(rmap_handle : Void*, image_name : Win32cr::Foundation::PWSTR, mapped_image : Void*, mapping_bytes : UInt32, image_base : UInt64, user_tag : UInt64, mapping_flags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RangeMapAddPeImageSections(rmap_handle, image_name, mapped_image, mapping_bytes, image_base, user_tag, mapping_flags)
+    {% end %}
   end
 
   def rangeMapRemove(rmap_handle : Void*, user_tag : UInt64) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RangeMapRemove(rmap_handle, user_tag)
+    {% end %}
   end
 
   def rangeMapRead(rmap_handle : Void*, offset : UInt64, buffer : Void*, request_bytes : UInt32, flags : UInt32, done_bytes : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RangeMapRead(rmap_handle, offset, buffer, request_bytes, flags, done_bytes)
+    {% end %}
   end
 
   def rangeMapWrite(rmap_handle : Void*, offset : UInt64, buffer : Void*, request_bytes : UInt32, flags : UInt32, done_bytes : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RangeMapWrite(rmap_handle, offset, buffer, request_bytes, flags, done_bytes)
+    {% end %}
   end
 
   def messageBeep(uType : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MessageBeep(uType)
+    {% end %}
   end
 
   def fatalExit(exit_code : Int32) : Void
+    {% if !flag?(:docs) %}
     C.FatalExit(exit_code)
+    {% end %}
   end
 
   def getThreadSelectorEntry(hThread : Win32cr::Foundation::HANDLE, dwSelector : UInt32, lpSelectorEntry : Win32cr::System::Diagnostics::Debug::LDT_ENTRY*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetThreadSelectorEntry(hThread, dwSelector, lpSelectorEntry)
+    {% end %}
   end
 
   def wow64GetThreadSelectorEntry(hThread : Win32cr::Foundation::HANDLE, dwSelector : UInt32, lpSelectorEntry : Win32cr::System::Diagnostics::Debug::WOW64_LDT_ENTRY*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Wow64GetThreadSelectorEntry(hThread, dwSelector, lpSelectorEntry)
+    {% end %}
   end
 
   def debugSetProcessKillOnExit(kill_on_exit : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DebugSetProcessKillOnExit(kill_on_exit)
+    {% end %}
   end
 
   def debugBreakProcess(process : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DebugBreakProcess(process)
+    {% end %}
   end
 
   #def formatMessageA(dwFlags : Win32cr::System::Diagnostics::Debug::FORMAT_MESSAGE_OPTIONS, lpSource : Void*, dwMessageId : UInt32, dwLanguageId : UInt32, lpBuffer : Win32cr::Foundation::PSTR, nSize : UInt32, arguments : Int8**) : UInt32
@@ -30272,217 +30828,290 @@ module Win32cr::System::Diagnostics::Debug
   #end
 
   def copyContext(destination : Win32cr::System::Diagnostics::Debug::CONTEXT*, context_flags : UInt32, source : Win32cr::System::Diagnostics::Debug::CONTEXT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CopyContext(destination, context_flags, source)
+    {% end %}
   end
 
   def initializeContext(buffer : Void*, context_flags : UInt32, context : Win32cr::System::Diagnostics::Debug::CONTEXT**, context_length : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitializeContext(buffer, context_flags, context, context_length)
+    {% end %}
   end
 
   def initializeContext2(buffer : Void*, context_flags : UInt32, context : Win32cr::System::Diagnostics::Debug::CONTEXT**, context_length : UInt32*, x_state_compaction_mask : UInt64) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InitializeContext2(buffer, context_flags, context, context_length, x_state_compaction_mask)
+    {% end %}
   end
 
 {% if flag?(:i386) || flag?(:x86_64) %}
   def getEnabledXStateFeatures : UInt64
+    {% if !flag?(:docs) %}
     C.GetEnabledXStateFeatures
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) || flag?(:x86_64) %}
   def getXStateFeaturesMask(context : Win32cr::System::Diagnostics::Debug::CONTEXT*, feature_mask : UInt64*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetXStateFeaturesMask(context, feature_mask)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) || flag?(:x86_64) %}
   def locateXStateFeature(context : Win32cr::System::Diagnostics::Debug::CONTEXT*, feature_id : UInt32, length : UInt32*) : Void*
+    {% if !flag?(:docs) %}
     C.LocateXStateFeature(context, feature_id, length)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) || flag?(:x86_64) %}
   def setXStateFeaturesMask(context : Win32cr::System::Diagnostics::Debug::CONTEXT*, feature_mask : UInt64) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetXStateFeaturesMask(context, feature_mask)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def checkSumMappedFile(base_address : Void*, file_length : UInt32, header_sum : UInt32*, check_sum : UInt32*) : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*
+    {% if !flag?(:docs) %}
     C.CheckSumMappedFile(base_address, file_length, header_sum, check_sum)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def getImageConfigInformation(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*, image_config_information : Win32cr::System::Diagnostics::Debug::IMAGE_LOAD_CONFIG_DIRECTORY32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetImageConfigInformation(loaded_image, image_config_information)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def setImageConfigInformation(loaded_image : Win32cr::System::Diagnostics::Debug::LOADED_IMAGE*, image_config_information : Win32cr::System::Diagnostics::Debug::IMAGE_LOAD_CONFIG_DIRECTORY32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetImageConfigInformation(loaded_image, image_config_information)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def imageNtHeader(base : Void*) : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*
+    {% if !flag?(:docs) %}
     C.ImageNtHeader(base)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def imageRvaToSection(nt_headers : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*, base : Void*, rva : UInt32) : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER*
+    {% if !flag?(:docs) %}
     C.ImageRvaToSection(nt_headers, base, rva)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def imageRvaToVa(nt_headers : Win32cr::System::Diagnostics::Debug::IMAGE_NT_HEADERS32*, base : Void*, rva : UInt32, last_rva_section : Win32cr::System::Diagnostics::Debug::IMAGE_SECTION_HEADER**) : Void*
+    {% if !flag?(:docs) %}
     C.ImageRvaToVa(nt_headers, base, rva, last_rva_section)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def stackWalk(machine_type : UInt32, hProcess : Win32cr::Foundation::HANDLE, hThread : Win32cr::Foundation::HANDLE, stack_frame : Win32cr::System::Diagnostics::Debug::STACKFRAME*, context_record : Void*, read_memory_routine : Win32cr::System::Diagnostics::Debug::PREAD_PROCESS_MEMORY_ROUTINE, function_table_access_routine : Win32cr::System::Diagnostics::Debug::PFUNCTION_TABLE_ACCESS_ROUTINE, get_module_base_routine : Win32cr::System::Diagnostics::Debug::PGET_MODULE_BASE_ROUTINE, translate_address : Win32cr::System::Diagnostics::Debug::PTRANSLATE_ADDRESS_ROUTINE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.StackWalk(machine_type, hProcess, hThread, stack_frame, context_record, read_memory_routine, function_table_access_routine, get_module_base_routine, translate_address)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symEnumerateModules(hProcess : Win32cr::Foundation::HANDLE, enum_modules_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMMODULES_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumerateModules(hProcess, enum_modules_callback, user_context)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def enumerateLoadedModules(hProcess : Win32cr::Foundation::HANDLE, enum_loaded_modules_callback : Win32cr::System::Diagnostics::Debug::PENUMLOADED_MODULES_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumerateLoadedModules(hProcess, enum_loaded_modules_callback, user_context)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symFunctionTableAccess(hProcess : Win32cr::Foundation::HANDLE, addr_base : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.SymFunctionTableAccess(hProcess, addr_base)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symGetModuleInfo(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt32, module_info : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetModuleInfo(hProcess, dwAddr, module_info)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symGetModuleInfoW(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt32, module_info : Win32cr::System::Diagnostics::Debug::IMAGEHLP_MODULEW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetModuleInfoW(hProcess, dwAddr, module_info)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symGetModuleBase(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SymGetModuleBase(hProcess, dwAddr)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symGetLineFromAddr(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt32, pdwDisplacement : UInt32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetLineFromAddr(hProcess, dwAddr, pdwDisplacement, line)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symGetLineFromName(hProcess : Win32cr::Foundation::HANDLE, module_name : Win32cr::Foundation::PSTR, file_name : Win32cr::Foundation::PSTR, dwLineNumber : UInt32, plDisplacement : Int32*, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetLineFromName(hProcess, module_name, file_name, dwLineNumber, plDisplacement, line)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symGetLineNext(hProcess : Win32cr::Foundation::HANDLE, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetLineNext(hProcess, line)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symGetLinePrev(hProcess : Win32cr::Foundation::HANDLE, line : Win32cr::System::Diagnostics::Debug::IMAGEHLP_LINE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetLinePrev(hProcess, line)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symUnloadModule(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymUnloadModule(hProcess, base_of_dll)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symUnDName(sym : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL*, un_dec_name : UInt8*, un_dec_name_length : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymUnDName(sym, un_dec_name, un_dec_name_length)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symRegisterCallback(hProcess : Win32cr::Foundation::HANDLE, callback_function : Win32cr::System::Diagnostics::Debug::PSYMBOL_REGISTERED_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymRegisterCallback(hProcess, callback_function, user_context)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symRegisterFunctionEntryCallback(hProcess : Win32cr::Foundation::HANDLE, callback_function : Win32cr::System::Diagnostics::Debug::PSYMBOL_FUNCENTRY_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymRegisterFunctionEntryCallback(hProcess, callback_function, user_context)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symGetSymFromAddr(hProcess : Win32cr::Foundation::HANDLE, dwAddr : UInt32, pdwDisplacement : UInt32*, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSymFromAddr(hProcess, dwAddr, pdwDisplacement, symbol)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symGetSymFromName(hProcess : Win32cr::Foundation::HANDLE, name : Win32cr::Foundation::PSTR, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSymFromName(hProcess, name, symbol)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symEnumerateSymbols(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt32, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMSYMBOLS_CALLBACK, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumerateSymbols(hProcess, base_of_dll, enum_symbols_callback, user_context)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symEnumerateSymbolsW(hProcess : Win32cr::Foundation::HANDLE, base_of_dll : UInt32, enum_symbols_callback : Win32cr::System::Diagnostics::Debug::PSYM_ENUMSYMBOLS_CALLBACKW, user_context : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymEnumerateSymbolsW(hProcess, base_of_dll, enum_symbols_callback, user_context)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symLoadModule(hProcess : Win32cr::Foundation::HANDLE, hFile : Win32cr::Foundation::HANDLE, image_name : Win32cr::Foundation::PSTR, module_name : Win32cr::Foundation::PSTR, base_of_dll : UInt32, size_of_dll : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SymLoadModule(hProcess, hFile, image_name, module_name, base_of_dll, size_of_dll)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symGetSymNext(hProcess : Win32cr::Foundation::HANDLE, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSymNext(hProcess, symbol)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def symGetSymPrev(hProcess : Win32cr::Foundation::HANDLE, symbol : Win32cr::System::Diagnostics::Debug::IMAGEHLP_SYMBOL*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SymGetSymPrev(hProcess, symbol)
+    {% end %}
   end
 {% end %}
 
-  @[Link("kernel32")]
-  @[Link("ntdll")]
-  @[Link("dbgeng")]
-  @[Link("dbgmodel")]
-  @[Link("advapi32")]
-  @[Link("dbghelp")]
-  @[Link("imagehlp")]
-  @[Link("user32")]
+  @[Link("kernel32.dll")]
+  @[Link("ntdll.dll")]
+  @[Link("dbgeng.dll")]
+  @[Link("dbgmodel.dll")]
+  @[Link("api-ms-win-core-util-l1-1-1.dll")]
+  @[Link("api-ms-win-core-errorhandling-l1-1-3.dll")]
+  @[Link("advapi32.dll")]
+  @[Link("dbghelp.dll")]
+  @[Link("imagehlp.dll")]
+  @[Link("user32.dll")]
+  {% if !flag?(:docs) %}
   lib C
     {% if flag?(:arm) %}
     # :nodoc:
@@ -30615,8 +31244,9 @@ module Win32cr::System::Diagnostics::Debug
     # :nodoc:
     fun RtlPcToFileHeader(pc_value : Void*, base_of_image : Void**) : Void*
 
+    # Commented out due to being part of LibC
     # :nodoc:
-    fun IsDebuggerPresent : Win32cr::Foundation::BOOL
+    #fun IsDebuggerPresent : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun DebugBreak : Void
@@ -31589,4 +32219,5 @@ module Win32cr::System::Diagnostics::Debug
     {% end %}
 
   end
+  {% end %}
 end

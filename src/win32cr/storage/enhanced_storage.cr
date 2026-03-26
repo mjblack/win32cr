@@ -1428,7 +1428,7 @@ module Win32cr::Storage::EnhancedStorage
   end
 
   @[Extern]
-  record IEnumEnhancedStorageACTVtbl,
+  record IEnumEnhancedStorageACTVtable,
     query_interface : Proc(IEnumEnhancedStorageACT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumEnhancedStorageACT*, UInt32),
     release : Proc(IEnumEnhancedStorageACT*, UInt32),
@@ -1437,7 +1437,7 @@ module Win32cr::Storage::EnhancedStorage
 
 
   @[Extern]
-  record IEnumEnhancedStorageACT, lpVtbl : IEnumEnhancedStorageACTVtbl* do
+  record IEnumEnhancedStorageACT, lpVtbl : IEnumEnhancedStorageACTVtable* do
     GUID = LibC::GUID.new(0x9b224bd_u32, 0x1335_u16, 0x4631_u16, StaticArray[0xa7_u8, 0xff_u8, 0xcf_u8, 0xd3_u8, 0xa9_u8, 0x26_u8, 0x46_u8, 0xd7_u8])
     def query_interface(this : IEnumEnhancedStorageACT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1458,7 +1458,7 @@ module Win32cr::Storage::EnhancedStorage
   end
 
   @[Extern]
-  record IEnhancedStorageACTVtbl,
+  record IEnhancedStorageACTVtable,
     query_interface : Proc(IEnhancedStorageACT*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnhancedStorageACT*, UInt32),
     release : Proc(IEnhancedStorageACT*, UInt32),
@@ -1471,7 +1471,7 @@ module Win32cr::Storage::EnhancedStorage
 
 
   @[Extern]
-  record IEnhancedStorageACT, lpVtbl : IEnhancedStorageACTVtbl* do
+  record IEnhancedStorageACT, lpVtbl : IEnhancedStorageACTVtable* do
     GUID = LibC::GUID.new(0x6e7781f4_u32, 0xe0f2_u16, 0x4239_u16, StaticArray[0xb9_u8, 0x76_u8, 0xa0_u8, 0x1a_u8, 0xba_u8, 0xb5_u8, 0x29_u8, 0x30_u8])
     def query_interface(this : IEnhancedStorageACT*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1504,7 +1504,7 @@ module Win32cr::Storage::EnhancedStorage
   end
 
   @[Extern]
-  record IEnhancedStorageACT2Vtbl,
+  record IEnhancedStorageACT2Vtable,
     query_interface : Proc(IEnhancedStorageACT2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnhancedStorageACT2*, UInt32),
     release : Proc(IEnhancedStorageACT2*, UInt32),
@@ -1519,7 +1519,7 @@ module Win32cr::Storage::EnhancedStorage
 
 
   @[Extern]
-  record IEnhancedStorageACT2, lpVtbl : IEnhancedStorageACT2Vtbl* do
+  record IEnhancedStorageACT2, lpVtbl : IEnhancedStorageACT2Vtable* do
     GUID = LibC::GUID.new(0x4da57d2e_u32, 0x8eb3_u16, 0x41f6_u16, StaticArray[0xa0_u8, 0x7e_u8, 0x98_u8, 0xb5_u8, 0x2b_u8, 0x88_u8, 0x24_u8, 0x2b_u8])
     def query_interface(this : IEnhancedStorageACT2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1558,7 +1558,7 @@ module Win32cr::Storage::EnhancedStorage
   end
 
   @[Extern]
-  record IEnhancedStorageACT3Vtbl,
+  record IEnhancedStorageACT3Vtable,
     query_interface : Proc(IEnhancedStorageACT3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnhancedStorageACT3*, UInt32),
     release : Proc(IEnhancedStorageACT3*, UInt32),
@@ -1576,7 +1576,7 @@ module Win32cr::Storage::EnhancedStorage
 
 
   @[Extern]
-  record IEnhancedStorageACT3, lpVtbl : IEnhancedStorageACT3Vtbl* do
+  record IEnhancedStorageACT3, lpVtbl : IEnhancedStorageACT3Vtable* do
     GUID = LibC::GUID.new(0x22150a1_u32, 0x113d_u16, 0x11df_u16, StaticArray[0xbb_u8, 0x61_u8, 0x0_u8, 0x1a_u8, 0xa0_u8, 0x1b_u8, 0xbc_u8, 0x58_u8])
     def query_interface(this : IEnhancedStorageACT3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1624,7 +1624,7 @@ module Win32cr::Storage::EnhancedStorage
   end
 
   @[Extern]
-  record IEnhancedStorageSiloVtbl,
+  record IEnhancedStorageSiloVtable,
     query_interface : Proc(IEnhancedStorageSilo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnhancedStorageSilo*, UInt32),
     release : Proc(IEnhancedStorageSilo*, UInt32),
@@ -1636,7 +1636,7 @@ module Win32cr::Storage::EnhancedStorage
 
 
   @[Extern]
-  record IEnhancedStorageSilo, lpVtbl : IEnhancedStorageSiloVtbl* do
+  record IEnhancedStorageSilo, lpVtbl : IEnhancedStorageSiloVtable* do
     GUID = LibC::GUID.new(0x5aef78c6_u32, 0x2242_u16, 0x4703_u16, StaticArray[0xbf_u8, 0x49_u8, 0x44_u8, 0xb2_u8, 0x93_u8, 0x57_u8, 0xa3_u8, 0x59_u8])
     def query_interface(this : IEnhancedStorageSilo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1666,7 +1666,7 @@ module Win32cr::Storage::EnhancedStorage
   end
 
   @[Extern]
-  record IEnhancedStorageSiloActionVtbl,
+  record IEnhancedStorageSiloActionVtable,
     query_interface : Proc(IEnhancedStorageSiloAction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnhancedStorageSiloAction*, UInt32),
     release : Proc(IEnhancedStorageSiloAction*, UInt32),
@@ -1676,7 +1676,7 @@ module Win32cr::Storage::EnhancedStorage
 
 
   @[Extern]
-  record IEnhancedStorageSiloAction, lpVtbl : IEnhancedStorageSiloActionVtbl* do
+  record IEnhancedStorageSiloAction, lpVtbl : IEnhancedStorageSiloActionVtable* do
     GUID = LibC::GUID.new(0xb6f7f311_u32, 0x206f_u16, 0x4ff8_u16, StaticArray[0x9c_u8, 0x4b_u8, 0x27_u8, 0xef_u8, 0xee_u8, 0x77_u8, 0xa8_u8, 0x6f_u8])
     def query_interface(this : IEnhancedStorageSiloAction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

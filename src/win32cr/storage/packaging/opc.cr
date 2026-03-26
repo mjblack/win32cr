@@ -168,7 +168,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcUriVtbl,
+  record IOpcUriVtable,
     query_interface : Proc(IOpcUri*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcUri*, UInt32),
     release : Proc(IOpcUri*, UInt32),
@@ -203,7 +203,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcUri, lpVtbl : IOpcUriVtbl* do
+  record IOpcUri, lpVtbl : IOpcUriVtable* do
     GUID = LibC::GUID.new(0xbc9c1b9b_u32, 0xd62c_u16, 0x49eb_u16, StaticArray[0xae_u8, 0xf0_u8, 0x3b_u8, 0x4e_u8, 0xb_u8, 0x28_u8, 0xeb_u8, 0xed_u8])
     def query_interface(this : IOpcUri*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -302,7 +302,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcPartUriVtbl,
+  record IOpcPartUriVtable,
     query_interface : Proc(IOpcPartUri*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcPartUri*, UInt32),
     release : Proc(IOpcPartUri*, UInt32),
@@ -340,7 +340,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcPartUri, lpVtbl : IOpcPartUriVtbl* do
+  record IOpcPartUri, lpVtbl : IOpcPartUriVtable* do
     GUID = LibC::GUID.new(0x7d3babe7_u32, 0x88b2_u16, 0x46ba_u16, StaticArray[0x85_u8, 0xcb_u8, 0x42_u8, 0x3_u8, 0xcb_u8, 0x1_u8, 0x6c_u8, 0x87_u8])
     def query_interface(this : IOpcPartUri*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -448,7 +448,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcPackageVtbl,
+  record IOpcPackageVtable,
     query_interface : Proc(IOpcPackage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcPackage*, UInt32),
     release : Proc(IOpcPackage*, UInt32),
@@ -457,7 +457,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcPackage, lpVtbl : IOpcPackageVtbl* do
+  record IOpcPackage, lpVtbl : IOpcPackageVtable* do
     GUID = LibC::GUID.new(0x42195949_u32, 0x3b79_u16, 0x4fc8_u16, StaticArray[0x89_u8, 0xc6_u8, 0xfc_u8, 0x7f_u8, 0xb9_u8, 0x79_u8, 0xee_u8, 0x70_u8])
     def query_interface(this : IOpcPackage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -478,7 +478,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcPartVtbl,
+  record IOpcPartVtable,
     query_interface : Proc(IOpcPart*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcPart*, UInt32),
     release : Proc(IOpcPart*, UInt32),
@@ -490,7 +490,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcPart, lpVtbl : IOpcPartVtbl* do
+  record IOpcPart, lpVtbl : IOpcPartVtable* do
     GUID = LibC::GUID.new(0x42195949_u32, 0x3b79_u16, 0x4fc8_u16, StaticArray[0x89_u8, 0xc6_u8, 0xfc_u8, 0x7f_u8, 0xb9_u8, 0x79_u8, 0xee_u8, 0x71_u8])
     def query_interface(this : IOpcPart*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -520,7 +520,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcRelationshipVtbl,
+  record IOpcRelationshipVtable,
     query_interface : Proc(IOpcRelationship*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcRelationship*, UInt32),
     release : Proc(IOpcRelationship*, UInt32),
@@ -532,7 +532,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcRelationship, lpVtbl : IOpcRelationshipVtbl* do
+  record IOpcRelationship, lpVtbl : IOpcRelationshipVtable* do
     GUID = LibC::GUID.new(0x42195949_u32, 0x3b79_u16, 0x4fc8_u16, StaticArray[0x89_u8, 0xc6_u8, 0xfc_u8, 0x7f_u8, 0xb9_u8, 0x79_u8, 0xee_u8, 0x72_u8])
     def query_interface(this : IOpcRelationship*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -562,7 +562,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcPartSetVtbl,
+  record IOpcPartSetVtable,
     query_interface : Proc(IOpcPartSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcPartSet*, UInt32),
     release : Proc(IOpcPartSet*, UInt32),
@@ -574,7 +574,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcPartSet, lpVtbl : IOpcPartSetVtbl* do
+  record IOpcPartSet, lpVtbl : IOpcPartSetVtable* do
     GUID = LibC::GUID.new(0x42195949_u32, 0x3b79_u16, 0x4fc8_u16, StaticArray[0x89_u8, 0xc6_u8, 0xfc_u8, 0x7f_u8, 0xb9_u8, 0x79_u8, 0xee_u8, 0x73_u8])
     def query_interface(this : IOpcPartSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -604,7 +604,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcRelationshipSetVtbl,
+  record IOpcRelationshipSetVtable,
     query_interface : Proc(IOpcRelationshipSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcRelationshipSet*, UInt32),
     release : Proc(IOpcRelationshipSet*, UInt32),
@@ -618,7 +618,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcRelationshipSet, lpVtbl : IOpcRelationshipSetVtbl* do
+  record IOpcRelationshipSet, lpVtbl : IOpcRelationshipSetVtable* do
     GUID = LibC::GUID.new(0x42195949_u32, 0x3b79_u16, 0x4fc8_u16, StaticArray[0x89_u8, 0xc6_u8, 0xfc_u8, 0x7f_u8, 0xb9_u8, 0x79_u8, 0xee_u8, 0x74_u8])
     def query_interface(this : IOpcRelationshipSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -654,7 +654,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcPartEnumeratorVtbl,
+  record IOpcPartEnumeratorVtable,
     query_interface : Proc(IOpcPartEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcPartEnumerator*, UInt32),
     release : Proc(IOpcPartEnumerator*, UInt32),
@@ -665,7 +665,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcPartEnumerator, lpVtbl : IOpcPartEnumeratorVtbl* do
+  record IOpcPartEnumerator, lpVtbl : IOpcPartEnumeratorVtable* do
     GUID = LibC::GUID.new(0x42195949_u32, 0x3b79_u16, 0x4fc8_u16, StaticArray[0x89_u8, 0xc6_u8, 0xfc_u8, 0x7f_u8, 0xb9_u8, 0x79_u8, 0xee_u8, 0x75_u8])
     def query_interface(this : IOpcPartEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -692,7 +692,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcRelationshipEnumeratorVtbl,
+  record IOpcRelationshipEnumeratorVtable,
     query_interface : Proc(IOpcRelationshipEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcRelationshipEnumerator*, UInt32),
     release : Proc(IOpcRelationshipEnumerator*, UInt32),
@@ -703,7 +703,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcRelationshipEnumerator, lpVtbl : IOpcRelationshipEnumeratorVtbl* do
+  record IOpcRelationshipEnumerator, lpVtbl : IOpcRelationshipEnumeratorVtable* do
     GUID = LibC::GUID.new(0x42195949_u32, 0x3b79_u16, 0x4fc8_u16, StaticArray[0x89_u8, 0xc6_u8, 0xfc_u8, 0x7f_u8, 0xb9_u8, 0x79_u8, 0xee_u8, 0x76_u8])
     def query_interface(this : IOpcRelationshipEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -730,7 +730,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcSignaturePartReferenceVtbl,
+  record IOpcSignaturePartReferenceVtable,
     query_interface : Proc(IOpcSignaturePartReference*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcSignaturePartReference*, UInt32),
     release : Proc(IOpcSignaturePartReference*, UInt32),
@@ -742,7 +742,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcSignaturePartReference, lpVtbl : IOpcSignaturePartReferenceVtbl* do
+  record IOpcSignaturePartReference, lpVtbl : IOpcSignaturePartReferenceVtable* do
     GUID = LibC::GUID.new(0xe24231ca_u32, 0x59f4_u16, 0x484e_u16, StaticArray[0xb6_u8, 0x4b_u8, 0x36_u8, 0xee_u8, 0xda_u8, 0x36_u8, 0x7_u8, 0x2c_u8])
     def query_interface(this : IOpcSignaturePartReference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -772,7 +772,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcSignatureRelationshipReferenceVtbl,
+  record IOpcSignatureRelationshipReferenceVtable,
     query_interface : Proc(IOpcSignatureRelationshipReference*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcSignatureRelationshipReference*, UInt32),
     release : Proc(IOpcSignatureRelationshipReference*, UInt32),
@@ -785,7 +785,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcSignatureRelationshipReference, lpVtbl : IOpcSignatureRelationshipReferenceVtbl* do
+  record IOpcSignatureRelationshipReference, lpVtbl : IOpcSignatureRelationshipReferenceVtable* do
     GUID = LibC::GUID.new(0x57babac6_u32, 0x9d4a_u16, 0x4e50_u16, StaticArray[0x8b_u8, 0x86_u8, 0xe5_u8, 0xd4_u8, 0x5_u8, 0x1e_u8, 0xae_u8, 0x7c_u8])
     def query_interface(this : IOpcSignatureRelationshipReference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -818,7 +818,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcRelationshipSelectorVtbl,
+  record IOpcRelationshipSelectorVtable,
     query_interface : Proc(IOpcRelationshipSelector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcRelationshipSelector*, UInt32),
     release : Proc(IOpcRelationshipSelector*, UInt32),
@@ -827,7 +827,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcRelationshipSelector, lpVtbl : IOpcRelationshipSelectorVtbl* do
+  record IOpcRelationshipSelector, lpVtbl : IOpcRelationshipSelectorVtable* do
     GUID = LibC::GUID.new(0xf8f26c7f_u32, 0xb28f_u16, 0x4899_u16, StaticArray[0x84_u8, 0xc8_u8, 0x5d_u8, 0x56_u8, 0x39_u8, 0xed_u8, 0xe7_u8, 0x5f_u8])
     def query_interface(this : IOpcRelationshipSelector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -848,7 +848,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcSignatureReferenceVtbl,
+  record IOpcSignatureReferenceVtable,
     query_interface : Proc(IOpcSignatureReference*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcSignatureReference*, UInt32),
     release : Proc(IOpcSignatureReference*, UInt32),
@@ -861,7 +861,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcSignatureReference, lpVtbl : IOpcSignatureReferenceVtbl* do
+  record IOpcSignatureReference, lpVtbl : IOpcSignatureReferenceVtable* do
     GUID = LibC::GUID.new(0x1b47005e_u32, 0x3011_u16, 0x4edc_u16, StaticArray[0xbe_u8, 0x6f_u8, 0xf_u8, 0x65_u8, 0xe5_u8, 0xab_u8, 0x3_u8, 0x42_u8])
     def query_interface(this : IOpcSignatureReference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -894,7 +894,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcSignatureCustomObjectVtbl,
+  record IOpcSignatureCustomObjectVtable,
     query_interface : Proc(IOpcSignatureCustomObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcSignatureCustomObject*, UInt32),
     release : Proc(IOpcSignatureCustomObject*, UInt32),
@@ -902,7 +902,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcSignatureCustomObject, lpVtbl : IOpcSignatureCustomObjectVtbl* do
+  record IOpcSignatureCustomObject, lpVtbl : IOpcSignatureCustomObjectVtable* do
     GUID = LibC::GUID.new(0x5d77a19e_u32, 0x62c1_u16, 0x44e7_u16, StaticArray[0xbe_u8, 0xcd_u8, 0x45_u8, 0xda_u8, 0x5a_u8, 0xe5_u8, 0x1a_u8, 0x56_u8])
     def query_interface(this : IOpcSignatureCustomObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -920,7 +920,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcDigitalSignatureVtbl,
+  record IOpcDigitalSignatureVtable,
     query_interface : Proc(IOpcDigitalSignature*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcDigitalSignature*, UInt32),
     release : Proc(IOpcDigitalSignature*, UInt32),
@@ -942,7 +942,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcDigitalSignature, lpVtbl : IOpcDigitalSignatureVtbl* do
+  record IOpcDigitalSignature, lpVtbl : IOpcDigitalSignatureVtable* do
     GUID = LibC::GUID.new(0x52ab21dd_u32, 0x1cd0_u16, 0x4949_u16, StaticArray[0xbc_u8, 0x80_u8, 0xc_u8, 0x12_u8, 0x32_u8, 0xd0_u8, 0xc_u8, 0xb4_u8])
     def query_interface(this : IOpcDigitalSignature*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1002,7 +1002,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcSigningOptionsVtbl,
+  record IOpcSigningOptionsVtable,
     query_interface : Proc(IOpcSigningOptions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcSigningOptions*, UInt32),
     release : Proc(IOpcSigningOptions*, UInt32),
@@ -1026,7 +1026,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcSigningOptions, lpVtbl : IOpcSigningOptionsVtbl* do
+  record IOpcSigningOptions, lpVtbl : IOpcSigningOptionsVtable* do
     GUID = LibC::GUID.new(0x50d2d6a5_u32, 0x7aeb_u16, 0x46c0_u16, StaticArray[0xb2_u8, 0x41_u8, 0x43_u8, 0xab_u8, 0xe_u8, 0x9b_u8, 0x40_u8, 0x7e_u8])
     def query_interface(this : IOpcSigningOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1092,7 +1092,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcDigitalSignatureManagerVtbl,
+  record IOpcDigitalSignatureManagerVtable,
     query_interface : Proc(IOpcDigitalSignatureManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcDigitalSignatureManager*, UInt32),
     release : Proc(IOpcDigitalSignatureManager*, UInt32),
@@ -1107,7 +1107,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcDigitalSignatureManager, lpVtbl : IOpcDigitalSignatureManagerVtbl* do
+  record IOpcDigitalSignatureManager, lpVtbl : IOpcDigitalSignatureManagerVtable* do
     GUID = LibC::GUID.new(0xd5e62a0b_u32, 0x696d_u16, 0x462f_u16, StaticArray[0x94_u8, 0xdf_u8, 0x72_u8, 0xe3_u8, 0x3c_u8, 0xef_u8, 0x26_u8, 0x59_u8])
     def query_interface(this : IOpcDigitalSignatureManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1146,7 +1146,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcSignaturePartReferenceEnumeratorVtbl,
+  record IOpcSignaturePartReferenceEnumeratorVtable,
     query_interface : Proc(IOpcSignaturePartReferenceEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcSignaturePartReferenceEnumerator*, UInt32),
     release : Proc(IOpcSignaturePartReferenceEnumerator*, UInt32),
@@ -1157,7 +1157,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcSignaturePartReferenceEnumerator, lpVtbl : IOpcSignaturePartReferenceEnumeratorVtbl* do
+  record IOpcSignaturePartReferenceEnumerator, lpVtbl : IOpcSignaturePartReferenceEnumeratorVtable* do
     GUID = LibC::GUID.new(0x80eb1561_u32, 0x8c77_u16, 0x49cf_u16, StaticArray[0x82_u8, 0x66_u8, 0x45_u8, 0x9b_u8, 0x35_u8, 0x6e_u8, 0xe9_u8, 0x9a_u8])
     def query_interface(this : IOpcSignaturePartReferenceEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1184,7 +1184,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcSignatureRelationshipReferenceEnumeratorVtbl,
+  record IOpcSignatureRelationshipReferenceEnumeratorVtable,
     query_interface : Proc(IOpcSignatureRelationshipReferenceEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcSignatureRelationshipReferenceEnumerator*, UInt32),
     release : Proc(IOpcSignatureRelationshipReferenceEnumerator*, UInt32),
@@ -1195,7 +1195,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcSignatureRelationshipReferenceEnumerator, lpVtbl : IOpcSignatureRelationshipReferenceEnumeratorVtbl* do
+  record IOpcSignatureRelationshipReferenceEnumerator, lpVtbl : IOpcSignatureRelationshipReferenceEnumeratorVtable* do
     GUID = LibC::GUID.new(0x773ba3e4_u32, 0xf021_u16, 0x48e4_u16, StaticArray[0xaa_u8, 0x4_u8, 0x98_u8, 0x16_u8, 0xdb_u8, 0x5d_u8, 0x34_u8, 0x95_u8])
     def query_interface(this : IOpcSignatureRelationshipReferenceEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1222,7 +1222,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcRelationshipSelectorEnumeratorVtbl,
+  record IOpcRelationshipSelectorEnumeratorVtable,
     query_interface : Proc(IOpcRelationshipSelectorEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcRelationshipSelectorEnumerator*, UInt32),
     release : Proc(IOpcRelationshipSelectorEnumerator*, UInt32),
@@ -1233,7 +1233,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcRelationshipSelectorEnumerator, lpVtbl : IOpcRelationshipSelectorEnumeratorVtbl* do
+  record IOpcRelationshipSelectorEnumerator, lpVtbl : IOpcRelationshipSelectorEnumeratorVtable* do
     GUID = LibC::GUID.new(0x5e50a181_u32, 0xa91b_u16, 0x48ac_u16, StaticArray[0x88_u8, 0xd2_u8, 0xbc_u8, 0xa3_u8, 0xd8_u8, 0xf8_u8, 0xc0_u8, 0xb1_u8])
     def query_interface(this : IOpcRelationshipSelectorEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1260,7 +1260,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcSignatureReferenceEnumeratorVtbl,
+  record IOpcSignatureReferenceEnumeratorVtable,
     query_interface : Proc(IOpcSignatureReferenceEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcSignatureReferenceEnumerator*, UInt32),
     release : Proc(IOpcSignatureReferenceEnumerator*, UInt32),
@@ -1271,7 +1271,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcSignatureReferenceEnumerator, lpVtbl : IOpcSignatureReferenceEnumeratorVtbl* do
+  record IOpcSignatureReferenceEnumerator, lpVtbl : IOpcSignatureReferenceEnumeratorVtable* do
     GUID = LibC::GUID.new(0xcfa59a45_u32, 0x28b1_u16, 0x4868_u16, StaticArray[0x96_u8, 0x9e_u8, 0xfa_u8, 0x80_u8, 0x97_u8, 0xfd_u8, 0xc1_u8, 0x2a_u8])
     def query_interface(this : IOpcSignatureReferenceEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1298,7 +1298,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcSignatureCustomObjectEnumeratorVtbl,
+  record IOpcSignatureCustomObjectEnumeratorVtable,
     query_interface : Proc(IOpcSignatureCustomObjectEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcSignatureCustomObjectEnumerator*, UInt32),
     release : Proc(IOpcSignatureCustomObjectEnumerator*, UInt32),
@@ -1309,7 +1309,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcSignatureCustomObjectEnumerator, lpVtbl : IOpcSignatureCustomObjectEnumeratorVtbl* do
+  record IOpcSignatureCustomObjectEnumerator, lpVtbl : IOpcSignatureCustomObjectEnumeratorVtable* do
     GUID = LibC::GUID.new(0x5ee4fe1d_u32, 0xe1b0_u16, 0x4683_u16, StaticArray[0x80_u8, 0x79_u8, 0x7e_u8, 0xa0_u8, 0xfc_u8, 0xf8_u8, 0xb_u8, 0x4c_u8])
     def query_interface(this : IOpcSignatureCustomObjectEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1336,7 +1336,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcCertificateEnumeratorVtbl,
+  record IOpcCertificateEnumeratorVtable,
     query_interface : Proc(IOpcCertificateEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcCertificateEnumerator*, UInt32),
     release : Proc(IOpcCertificateEnumerator*, UInt32),
@@ -1347,7 +1347,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcCertificateEnumerator, lpVtbl : IOpcCertificateEnumeratorVtbl* do
+  record IOpcCertificateEnumerator, lpVtbl : IOpcCertificateEnumeratorVtable* do
     GUID = LibC::GUID.new(0x85131937_u32, 0x8f24_u16, 0x421f_u16, StaticArray[0xb4_u8, 0x39_u8, 0x59_u8, 0xab_u8, 0x24_u8, 0xd1_u8, 0x40_u8, 0xb8_u8])
     def query_interface(this : IOpcCertificateEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1374,7 +1374,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcDigitalSignatureEnumeratorVtbl,
+  record IOpcDigitalSignatureEnumeratorVtable,
     query_interface : Proc(IOpcDigitalSignatureEnumerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcDigitalSignatureEnumerator*, UInt32),
     release : Proc(IOpcDigitalSignatureEnumerator*, UInt32),
@@ -1385,7 +1385,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcDigitalSignatureEnumerator, lpVtbl : IOpcDigitalSignatureEnumeratorVtbl* do
+  record IOpcDigitalSignatureEnumerator, lpVtbl : IOpcDigitalSignatureEnumeratorVtable* do
     GUID = LibC::GUID.new(0x967b6882_u32, 0xba3_u16, 0x4358_u16, StaticArray[0xb9_u8, 0xe7_u8, 0xb6_u8, 0x4c_u8, 0x75_u8, 0x6_u8, 0x3c_u8, 0x5e_u8])
     def query_interface(this : IOpcDigitalSignatureEnumerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1412,7 +1412,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcSignaturePartReferenceSetVtbl,
+  record IOpcSignaturePartReferenceSetVtable,
     query_interface : Proc(IOpcSignaturePartReferenceSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcSignaturePartReferenceSet*, UInt32),
     release : Proc(IOpcSignaturePartReferenceSet*, UInt32),
@@ -1422,7 +1422,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcSignaturePartReferenceSet, lpVtbl : IOpcSignaturePartReferenceSetVtbl* do
+  record IOpcSignaturePartReferenceSet, lpVtbl : IOpcSignaturePartReferenceSetVtable* do
     GUID = LibC::GUID.new(0x6c9fe28c_u32, 0xecd9_u16, 0x4b22_u16, StaticArray[0x9d_u8, 0x36_u8, 0x7f_u8, 0xdd_u8, 0xe6_u8, 0x70_u8, 0xfe_u8, 0xc0_u8])
     def query_interface(this : IOpcSignaturePartReferenceSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1446,7 +1446,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcSignatureRelationshipReferenceSetVtbl,
+  record IOpcSignatureRelationshipReferenceSetVtable,
     query_interface : Proc(IOpcSignatureRelationshipReferenceSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcSignatureRelationshipReferenceSet*, UInt32),
     release : Proc(IOpcSignatureRelationshipReferenceSet*, UInt32),
@@ -1457,7 +1457,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcSignatureRelationshipReferenceSet, lpVtbl : IOpcSignatureRelationshipReferenceSetVtbl* do
+  record IOpcSignatureRelationshipReferenceSet, lpVtbl : IOpcSignatureRelationshipReferenceSetVtable* do
     GUID = LibC::GUID.new(0x9f863ca5_u32, 0x3631_u16, 0x404c_u16, StaticArray[0x82_u8, 0x8d_u8, 0x80_u8, 0x7e_u8, 0x7_u8, 0x15_u8, 0x6_u8, 0x9b_u8])
     def query_interface(this : IOpcSignatureRelationshipReferenceSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1484,7 +1484,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcRelationshipSelectorSetVtbl,
+  record IOpcRelationshipSelectorSetVtable,
     query_interface : Proc(IOpcRelationshipSelectorSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcRelationshipSelectorSet*, UInt32),
     release : Proc(IOpcRelationshipSelectorSet*, UInt32),
@@ -1494,7 +1494,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcRelationshipSelectorSet, lpVtbl : IOpcRelationshipSelectorSetVtbl* do
+  record IOpcRelationshipSelectorSet, lpVtbl : IOpcRelationshipSelectorSetVtable* do
     GUID = LibC::GUID.new(0x6e34c269_u32, 0xa4d3_u16, 0x47c0_u16, StaticArray[0xb5_u8, 0xc4_u8, 0x87_u8, 0xff_u8, 0x2b_u8, 0x3b_u8, 0x61_u8, 0x36_u8])
     def query_interface(this : IOpcRelationshipSelectorSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1518,7 +1518,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcSignatureReferenceSetVtbl,
+  record IOpcSignatureReferenceSetVtable,
     query_interface : Proc(IOpcSignatureReferenceSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcSignatureReferenceSet*, UInt32),
     release : Proc(IOpcSignatureReferenceSet*, UInt32),
@@ -1528,7 +1528,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcSignatureReferenceSet, lpVtbl : IOpcSignatureReferenceSetVtbl* do
+  record IOpcSignatureReferenceSet, lpVtbl : IOpcSignatureReferenceSetVtable* do
     GUID = LibC::GUID.new(0xf3b02d31_u32, 0xab12_u16, 0x42dd_u16, StaticArray[0x9e_u8, 0x2f_u8, 0x2b_u8, 0x16_u8, 0x76_u8, 0x1c_u8, 0x3c_u8, 0x1e_u8])
     def query_interface(this : IOpcSignatureReferenceSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1552,7 +1552,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcSignatureCustomObjectSetVtbl,
+  record IOpcSignatureCustomObjectSetVtable,
     query_interface : Proc(IOpcSignatureCustomObjectSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcSignatureCustomObjectSet*, UInt32),
     release : Proc(IOpcSignatureCustomObjectSet*, UInt32),
@@ -1562,7 +1562,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcSignatureCustomObjectSet, lpVtbl : IOpcSignatureCustomObjectSetVtbl* do
+  record IOpcSignatureCustomObjectSet, lpVtbl : IOpcSignatureCustomObjectSetVtable* do
     GUID = LibC::GUID.new(0x8f792ac5_u32, 0x7947_u16, 0x4e11_u16, StaticArray[0xbc_u8, 0x3d_u8, 0x26_u8, 0x59_u8, 0xff_u8, 0x4_u8, 0x6a_u8, 0xe1_u8])
     def query_interface(this : IOpcSignatureCustomObjectSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1586,7 +1586,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcCertificateSetVtbl,
+  record IOpcCertificateSetVtable,
     query_interface : Proc(IOpcCertificateSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcCertificateSet*, UInt32),
     release : Proc(IOpcCertificateSet*, UInt32),
@@ -1596,7 +1596,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcCertificateSet, lpVtbl : IOpcCertificateSetVtbl* do
+  record IOpcCertificateSet, lpVtbl : IOpcCertificateSetVtable* do
     GUID = LibC::GUID.new(0x56ea4325_u32, 0x8e2d_u16, 0x4167_u16, StaticArray[0xb1_u8, 0xa4_u8, 0xe4_u8, 0x86_u8, 0xd2_u8, 0x4c_u8, 0x8f_u8, 0xa7_u8])
     def query_interface(this : IOpcCertificateSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1620,7 +1620,7 @@ module Win32cr::Storage::Packaging::Opc
   end
 
   @[Extern]
-  record IOpcFactoryVtbl,
+  record IOpcFactoryVtable,
     query_interface : Proc(IOpcFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpcFactory*, UInt32),
     release : Proc(IOpcFactory*, UInt32),
@@ -1634,7 +1634,7 @@ module Win32cr::Storage::Packaging::Opc
 
 
   @[Extern]
-  record IOpcFactory, lpVtbl : IOpcFactoryVtbl* do
+  record IOpcFactory, lpVtbl : IOpcFactoryVtable* do
     GUID = LibC::GUID.new(0x6d0b4446_u32, 0xcd73_u16, 0x4ab3_u16, StaticArray[0x94_u8, 0xf4_u8, 0x8c_u8, 0xcd_u8, 0xf6_u8, 0x11_u8, 0x61_u8, 0x54_u8])
     def query_interface(this : IOpcFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

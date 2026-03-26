@@ -240,126 +240,187 @@ module Win32cr::UI::InteractionContext
   end
 
   def createInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateInteractionContext(interactionContext)
+    {% end %}
   end
 
   def destroyInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DestroyInteractionContext(interactionContext)
+    {% end %}
   end
 
   def registerOutputCallbackInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, outputCallback : Win32cr::UI::InteractionContext::INTERACTION_CONTEXT_OUTPUT_CALLBACK, clientData : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RegisterOutputCallbackInteractionContext(interactionContext, outputCallback, clientData)
+    {% end %}
   end
 
   def registerOutputCallbackInteractionContext2(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, outputCallback : Win32cr::UI::InteractionContext::INTERACTION_CONTEXT_OUTPUT_CALLBACK2, clientData : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RegisterOutputCallbackInteractionContext2(interactionContext, outputCallback, clientData)
+    {% end %}
   end
 
   def setInteractionConfigurationInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, configurationCount : UInt32, configuration : Win32cr::UI::InteractionContext::INTERACTION_CONTEXT_CONFIGURATION*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetInteractionConfigurationInteractionContext(interactionContext, configurationCount, configuration)
+    {% end %}
   end
 
   def getInteractionConfigurationInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, configurationCount : UInt32, configuration : Win32cr::UI::InteractionContext::INTERACTION_CONTEXT_CONFIGURATION*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetInteractionConfigurationInteractionContext(interactionContext, configurationCount, configuration)
+    {% end %}
   end
 
   def setPropertyInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, contextProperty : Win32cr::UI::InteractionContext::INTERACTION_CONTEXT_PROPERTY, value : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetPropertyInteractionContext(interactionContext, contextProperty, value)
+    {% end %}
   end
 
   def getPropertyInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, contextProperty : Win32cr::UI::InteractionContext::INTERACTION_CONTEXT_PROPERTY, value : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetPropertyInteractionContext(interactionContext, contextProperty, value)
+    {% end %}
   end
 
   def setInertiaParameterInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, inertiaParameter : Win32cr::UI::InteractionContext::INERTIA_PARAMETER, value : Float32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetInertiaParameterInteractionContext(interactionContext, inertiaParameter, value)
+    {% end %}
   end
 
   def getInertiaParameterInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, inertiaParameter : Win32cr::UI::InteractionContext::INERTIA_PARAMETER, value : Float32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetInertiaParameterInteractionContext(interactionContext, inertiaParameter, value)
+    {% end %}
   end
 
   def setCrossSlideParametersInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, parameterCount : UInt32, crossSlideParameters : Win32cr::UI::InteractionContext::CROSS_SLIDE_PARAMETER*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetCrossSlideParametersInteractionContext(interactionContext, parameterCount, crossSlideParameters)
+    {% end %}
   end
 
   def getCrossSlideParameterInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, threshold : Win32cr::UI::InteractionContext::CROSS_SLIDE_THRESHOLD, distance : Float32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetCrossSlideParameterInteractionContext(interactionContext, threshold, distance)
+    {% end %}
   end
 
   def setTapParameterInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, parameter : Win32cr::UI::InteractionContext::TAP_PARAMETER, value : Float32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetTapParameterInteractionContext(interactionContext, parameter, value)
+    {% end %}
   end
 
   def getTapParameterInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, parameter : Win32cr::UI::InteractionContext::TAP_PARAMETER, value : Float32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetTapParameterInteractionContext(interactionContext, parameter, value)
+    {% end %}
   end
 
   def setHoldParameterInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, parameter : Win32cr::UI::InteractionContext::HOLD_PARAMETER, value : Float32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetHoldParameterInteractionContext(interactionContext, parameter, value)
+    {% end %}
   end
 
   def getHoldParameterInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, parameter : Win32cr::UI::InteractionContext::HOLD_PARAMETER, value : Float32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetHoldParameterInteractionContext(interactionContext, parameter, value)
+    {% end %}
   end
 
   def setTranslationParameterInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, parameter : Win32cr::UI::InteractionContext::TRANSLATION_PARAMETER, value : Float32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetTranslationParameterInteractionContext(interactionContext, parameter, value)
+    {% end %}
   end
 
   def getTranslationParameterInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, parameter : Win32cr::UI::InteractionContext::TRANSLATION_PARAMETER, value : Float32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetTranslationParameterInteractionContext(interactionContext, parameter, value)
+    {% end %}
   end
 
   def setMouseWheelParameterInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, parameter : Win32cr::UI::InteractionContext::MOUSE_WHEEL_PARAMETER, value : Float32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetMouseWheelParameterInteractionContext(interactionContext, parameter, value)
+    {% end %}
   end
 
   def getMouseWheelParameterInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, parameter : Win32cr::UI::InteractionContext::MOUSE_WHEEL_PARAMETER, value : Float32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetMouseWheelParameterInteractionContext(interactionContext, parameter, value)
+    {% end %}
   end
 
   def resetInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ResetInteractionContext(interactionContext)
+    {% end %}
   end
 
   def getStateInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, pointerInfo : Win32cr::UI::Input::Pointer::POINTER_INFO*, state : Win32cr::UI::InteractionContext::INTERACTION_STATE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetStateInteractionContext(interactionContext, pointerInfo, state)
+    {% end %}
   end
 
   def addPointerInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, pointerId : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AddPointerInteractionContext(interactionContext, pointerId)
+    {% end %}
   end
 
   def removePointerInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, pointerId : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RemovePointerInteractionContext(interactionContext, pointerId)
+    {% end %}
   end
 
   def processPointerFramesInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, entriesCount : UInt32, pointerCount : UInt32, pointerInfo : Win32cr::UI::Input::Pointer::POINTER_INFO*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ProcessPointerFramesInteractionContext(interactionContext, entriesCount, pointerCount, pointerInfo)
+    {% end %}
   end
 
   def bufferPointerPacketsInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, entriesCount : UInt32, pointerInfo : Win32cr::UI::Input::Pointer::POINTER_INFO*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.BufferPointerPacketsInteractionContext(interactionContext, entriesCount, pointerInfo)
+    {% end %}
   end
 
   def processBufferedPacketsInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ProcessBufferedPacketsInteractionContext(interactionContext)
+    {% end %}
   end
 
   def processInertiaInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ProcessInertiaInteractionContext(interactionContext)
+    {% end %}
   end
 
   def stopInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.StopInteractionContext(interactionContext)
+    {% end %}
   end
 
   def setPivotInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, x : Float32, y : Float32, radius : Float32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetPivotInteractionContext(interactionContext, x, y, radius)
+    {% end %}
   end
 
-  @[Link("ninput")]
+  @[Link("ninput.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun CreateInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT*) : Win32cr::Foundation::HRESULT
@@ -452,4 +513,5 @@ module Win32cr::UI::InteractionContext
     fun SetPivotInteractionContext(interactionContext : Win32cr::UI::InteractionContext::HINTERACTIONCONTEXT, x : Float32, y : Float32, radius : Float32) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

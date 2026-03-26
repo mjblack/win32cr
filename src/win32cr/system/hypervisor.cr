@@ -2285,6 +2285,16 @@ module Win32cr::System::Hypervisor
       end
 
 
+      # Nested Type Table_e__Struct_
+      @[Extern]
+      struct Table_e__Struct_
+    property limit : UInt16
+    property base : UInt64
+    def initialize(@limit : UInt16, @base : UInt64)
+    end
+      end
+
+
       # Nested Type Segment_e__Struct_
       @[Extern]
       struct Segment_e__Struct_
@@ -2312,16 +2322,6 @@ module Win32cr::System::Hypervisor
         end
 
     def initialize(@base : UInt64, @limit : UInt32, @selector : UInt16, @anonymous : Anonymous_e__Union_)
-    end
-      end
-
-
-      # Nested Type Table_e__Struct_
-      @[Extern]
-      struct Table_e__Struct_
-    property limit : UInt16
-    property base : UInt64
-    def initialize(@limit : UInt16, @base : UInt64)
     end
       end
 
@@ -2362,509 +2362,760 @@ module Win32cr::System::Hypervisor
   end
 
   def wHvGetCapability(capability_code : Win32cr::System::Hypervisor::WHV_CAPABILITY_CODE, capability_buffer : Void*, capability_buffer_size_in_bytes : UInt32, written_size_in_bytes : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvGetCapability(capability_code, capability_buffer, capability_buffer_size_in_bytes, written_size_in_bytes)
+    {% end %}
   end
 
   def wHvCreatePartition(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvCreatePartition(partition)
+    {% end %}
   end
 
   def wHvSetupPartition(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvSetupPartition(partition)
+    {% end %}
   end
 
   def wHvResetPartition(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvResetPartition(partition)
+    {% end %}
   end
 
   def wHvDeletePartition(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvDeletePartition(partition)
+    {% end %}
   end
 
   def wHvGetPartitionProperty(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, property_code : Win32cr::System::Hypervisor::WHV_PARTITION_PROPERTY_CODE, property_buffer : Void*, property_buffer_size_in_bytes : UInt32, written_size_in_bytes : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvGetPartitionProperty(partition, property_code, property_buffer, property_buffer_size_in_bytes, written_size_in_bytes)
+    {% end %}
   end
 
   def wHvSetPartitionProperty(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, property_code : Win32cr::System::Hypervisor::WHV_PARTITION_PROPERTY_CODE, property_buffer : Void*, property_buffer_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvSetPartitionProperty(partition, property_code, property_buffer, property_buffer_size_in_bytes)
+    {% end %}
   end
 
   def wHvSuspendPartitionTime(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvSuspendPartitionTime(partition)
+    {% end %}
   end
 
   def wHvResumePartitionTime(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvResumePartitionTime(partition)
+    {% end %}
   end
 
   def wHvMapGpaRange(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, source_address : Void*, guest_address : UInt64, size_in_bytes : UInt64, flags : Win32cr::System::Hypervisor::WHV_MAP_GPA_RANGE_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvMapGpaRange(partition, source_address, guest_address, size_in_bytes, flags)
+    {% end %}
   end
 
   def wHvMapGpaRange2(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, process : Win32cr::Foundation::HANDLE, source_address : Void*, guest_address : UInt64, size_in_bytes : UInt64, flags : Win32cr::System::Hypervisor::WHV_MAP_GPA_RANGE_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvMapGpaRange2(partition, process, source_address, guest_address, size_in_bytes, flags)
+    {% end %}
   end
 
   def wHvUnmapGpaRange(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, guest_address : UInt64, size_in_bytes : UInt64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvUnmapGpaRange(partition, guest_address, size_in_bytes)
+    {% end %}
   end
 
   def wHvTranslateGva(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, gva : UInt64, translate_flags : Win32cr::System::Hypervisor::WHV_TRANSLATE_GVA_FLAGS, translation_result : Win32cr::System::Hypervisor::WHV_TRANSLATE_GVA_RESULT*, gpa : UInt64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvTranslateGva(partition, vp_index, gva, translate_flags, translation_result, gpa)
+    {% end %}
   end
 
   def wHvCreateVirtualProcessor(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, flags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvCreateVirtualProcessor(partition, vp_index, flags)
+    {% end %}
   end
 
   def wHvCreateVirtualProcessor2(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, properties : Win32cr::System::Hypervisor::WHV_VIRTUAL_PROCESSOR_PROPERTY*, property_count : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvCreateVirtualProcessor2(partition, vp_index, properties, property_count)
+    {% end %}
   end
 
   def wHvDeleteVirtualProcessor(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvDeleteVirtualProcessor(partition, vp_index)
+    {% end %}
   end
 
   def wHvRunVirtualProcessor(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, exit_context : Void*, exit_context_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvRunVirtualProcessor(partition, vp_index, exit_context, exit_context_size_in_bytes)
+    {% end %}
   end
 
   def wHvCancelRunVirtualProcessor(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, flags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvCancelRunVirtualProcessor(partition, vp_index, flags)
+    {% end %}
   end
 
   def wHvGetVirtualProcessorRegisters(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, register_names : Win32cr::System::Hypervisor::WHV_REGISTER_NAME*, register_count : UInt32, register_values : Win32cr::System::Hypervisor::WHV_REGISTER_VALUE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvGetVirtualProcessorRegisters(partition, vp_index, register_names, register_count, register_values)
+    {% end %}
   end
 
   def wHvSetVirtualProcessorRegisters(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, register_names : Win32cr::System::Hypervisor::WHV_REGISTER_NAME*, register_count : UInt32, register_values : Win32cr::System::Hypervisor::WHV_REGISTER_VALUE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvSetVirtualProcessorRegisters(partition, vp_index, register_names, register_count, register_values)
+    {% end %}
   end
 
   def wHvGetVirtualProcessorInterruptControllerState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, state : Void*, state_size : UInt32, written_size : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvGetVirtualProcessorInterruptControllerState(partition, vp_index, state, state_size, written_size)
+    {% end %}
   end
 
   def wHvSetVirtualProcessorInterruptControllerState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, state : Void*, state_size : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvSetVirtualProcessorInterruptControllerState(partition, vp_index, state, state_size)
+    {% end %}
   end
 
   def wHvRequestInterrupt(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, interrupt : Win32cr::System::Hypervisor::WHV_INTERRUPT_CONTROL*, interrupt_control_size : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvRequestInterrupt(partition, interrupt, interrupt_control_size)
+    {% end %}
   end
 
   def wHvGetVirtualProcessorXsaveState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, buffer : Void*, buffer_size_in_bytes : UInt32, bytes_written : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvGetVirtualProcessorXsaveState(partition, vp_index, buffer, buffer_size_in_bytes, bytes_written)
+    {% end %}
   end
 
   def wHvSetVirtualProcessorXsaveState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, buffer : Void*, buffer_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvSetVirtualProcessorXsaveState(partition, vp_index, buffer, buffer_size_in_bytes)
+    {% end %}
   end
 
   def wHvQueryGpaRangeDirtyBitmap(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, guest_address : UInt64, range_size_in_bytes : UInt64, bitmap : UInt64*, bitmap_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvQueryGpaRangeDirtyBitmap(partition, guest_address, range_size_in_bytes, bitmap, bitmap_size_in_bytes)
+    {% end %}
   end
 
   def wHvGetPartitionCounters(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, counter_set : Win32cr::System::Hypervisor::WHV_PARTITION_COUNTER_SET, buffer : Void*, buffer_size_in_bytes : UInt32, bytes_written : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvGetPartitionCounters(partition, counter_set, buffer, buffer_size_in_bytes, bytes_written)
+    {% end %}
   end
 
   def wHvGetVirtualProcessorCounters(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, counter_set : Win32cr::System::Hypervisor::WHV_PROCESSOR_COUNTER_SET, buffer : Void*, buffer_size_in_bytes : UInt32, bytes_written : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvGetVirtualProcessorCounters(partition, vp_index, counter_set, buffer, buffer_size_in_bytes, bytes_written)
+    {% end %}
   end
 
   def wHvGetVirtualProcessorInterruptControllerState2(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, state : Void*, state_size : UInt32, written_size : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvGetVirtualProcessorInterruptControllerState2(partition, vp_index, state, state_size, written_size)
+    {% end %}
   end
 
   def wHvSetVirtualProcessorInterruptControllerState2(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, state : Void*, state_size : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvSetVirtualProcessorInterruptControllerState2(partition, vp_index, state, state_size)
+    {% end %}
   end
 
   def wHvRegisterPartitionDoorbellEvent(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, match_data : Win32cr::System::Hypervisor::WHV_DOORBELL_MATCH_DATA*, event_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvRegisterPartitionDoorbellEvent(partition, match_data, event_handle)
+    {% end %}
   end
 
   def wHvUnregisterPartitionDoorbellEvent(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, match_data : Win32cr::System::Hypervisor::WHV_DOORBELL_MATCH_DATA*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvUnregisterPartitionDoorbellEvent(partition, match_data)
+    {% end %}
   end
 
   def wHvAdviseGpaRange(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, gpa_ranges : Win32cr::System::Hypervisor::WHV_MEMORY_RANGE_ENTRY*, gpa_ranges_count : UInt32, advice : Win32cr::System::Hypervisor::WHV_ADVISE_GPA_RANGE_CODE, advice_buffer : Void*, advice_buffer_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvAdviseGpaRange(partition, gpa_ranges, gpa_ranges_count, advice, advice_buffer, advice_buffer_size_in_bytes)
+    {% end %}
   end
 
   def wHvReadGpaRange(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, guest_address : UInt64, controls : Win32cr::System::Hypervisor::WHV_ACCESS_GPA_CONTROLS, data : Void*, data_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvReadGpaRange(partition, vp_index, guest_address, controls, data, data_size_in_bytes)
+    {% end %}
   end
 
   def wHvWriteGpaRange(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, guest_address : UInt64, controls : Win32cr::System::Hypervisor::WHV_ACCESS_GPA_CONTROLS, data : Void*, data_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvWriteGpaRange(partition, vp_index, guest_address, controls, data, data_size_in_bytes)
+    {% end %}
   end
 
   def wHvSignalVirtualProcessorSynicEvent(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, synic_event : Win32cr::System::Hypervisor::WHV_SYNIC_EVENT_PARAMETERS, newly_signaled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvSignalVirtualProcessorSynicEvent(partition, synic_event, newly_signaled)
+    {% end %}
   end
 
   def wHvGetVirtualProcessorState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, state_type : Win32cr::System::Hypervisor::WHV_VIRTUAL_PROCESSOR_STATE_TYPE, buffer : Void*, buffer_size_in_bytes : UInt32, bytes_written : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvGetVirtualProcessorState(partition, vp_index, state_type, buffer, buffer_size_in_bytes, bytes_written)
+    {% end %}
   end
 
   def wHvSetVirtualProcessorState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, state_type : Win32cr::System::Hypervisor::WHV_VIRTUAL_PROCESSOR_STATE_TYPE, buffer : Void*, buffer_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvSetVirtualProcessorState(partition, vp_index, state_type, buffer, buffer_size_in_bytes)
+    {% end %}
   end
 
   def wHvAllocateVpciResource(provider_id : LibC::GUID*, flags : Win32cr::System::Hypervisor::WHV_ALLOCATE_VPCI_RESOURCE_FLAGS, resource_descriptor : Void*, resource_descriptor_size_in_bytes : UInt32, vpci_resource : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvAllocateVpciResource(provider_id, flags, resource_descriptor, resource_descriptor_size_in_bytes, vpci_resource)
+    {% end %}
   end
 
   def wHvCreateVpciDevice(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, vpci_resource : Win32cr::Foundation::HANDLE, flags : Win32cr::System::Hypervisor::WHV_CREATE_VPCI_DEVICE_FLAGS, notification_event_handle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvCreateVpciDevice(partition, logical_device_id, vpci_resource, flags, notification_event_handle)
+    {% end %}
   end
 
   def wHvDeleteVpciDevice(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvDeleteVpciDevice(partition, logical_device_id)
+    {% end %}
   end
 
   def wHvGetVpciDeviceProperty(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, property_code : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_PROPERTY_CODE, property_buffer : Void*, property_buffer_size_in_bytes : UInt32, written_size_in_bytes : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvGetVpciDeviceProperty(partition, logical_device_id, property_code, property_buffer, property_buffer_size_in_bytes, written_size_in_bytes)
+    {% end %}
   end
 
   def wHvGetVpciDeviceNotification(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, notification : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_NOTIFICATION*, notification_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvGetVpciDeviceNotification(partition, logical_device_id, notification, notification_size_in_bytes)
+    {% end %}
   end
 
   def wHvMapVpciDeviceMmioRanges(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, mapping_count : UInt32*, mappings : Win32cr::System::Hypervisor::WHV_VPCI_MMIO_MAPPING**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvMapVpciDeviceMmioRanges(partition, logical_device_id, mapping_count, mappings)
+    {% end %}
   end
 
   def wHvUnmapVpciDeviceMmioRanges(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvUnmapVpciDeviceMmioRanges(partition, logical_device_id)
+    {% end %}
   end
 
   def wHvSetVpciDevicePowerState(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, power_state : Win32cr::System::Power::DEVICE_POWER_STATE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvSetVpciDevicePowerState(partition, logical_device_id, power_state)
+    {% end %}
   end
 
   def wHvReadVpciDeviceRegister(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, register : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_REGISTER*, data : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvReadVpciDeviceRegister(partition, logical_device_id, register, data)
+    {% end %}
   end
 
   def wHvWriteVpciDeviceRegister(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, register : Win32cr::System::Hypervisor::WHV_VPCI_DEVICE_REGISTER*, data : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvWriteVpciDeviceRegister(partition, logical_device_id, register, data)
+    {% end %}
   end
 
   def wHvMapVpciDeviceInterrupt(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, index : UInt32, message_count : UInt32, target : Win32cr::System::Hypervisor::WHV_VPCI_INTERRUPT_TARGET*, msi_address : UInt64*, msi_data : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvMapVpciDeviceInterrupt(partition, logical_device_id, index, message_count, target, msi_address, msi_data)
+    {% end %}
   end
 
   def wHvUnmapVpciDeviceInterrupt(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, index : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvUnmapVpciDeviceInterrupt(partition, logical_device_id, index)
+    {% end %}
   end
 
   def wHvRetargetVpciDeviceInterrupt(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, msi_address : UInt64, msi_data : UInt32, target : Win32cr::System::Hypervisor::WHV_VPCI_INTERRUPT_TARGET*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvRetargetVpciDeviceInterrupt(partition, logical_device_id, msi_address, msi_data, target)
+    {% end %}
   end
 
   def wHvRequestVpciDeviceInterrupt(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, msi_address : UInt64, msi_data : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvRequestVpciDeviceInterrupt(partition, logical_device_id, msi_address, msi_data)
+    {% end %}
   end
 
   def wHvGetVpciDeviceInterruptTarget(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, logical_device_id : UInt64, index : UInt32, multi_message_number : UInt32, target : Win32cr::System::Hypervisor::WHV_VPCI_INTERRUPT_TARGET*, target_size_in_bytes : UInt32, bytes_written : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvGetVpciDeviceInterruptTarget(partition, logical_device_id, index, multi_message_number, target, target_size_in_bytes, bytes_written)
+    {% end %}
   end
 
   def wHvCreateTrigger(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, parameters : Win32cr::System::Hypervisor::WHV_TRIGGER_PARAMETERS*, trigger_handle : Void**, event_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvCreateTrigger(partition, parameters, trigger_handle, event_handle)
+    {% end %}
   end
 
   def wHvUpdateTriggerParameters(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, parameters : Win32cr::System::Hypervisor::WHV_TRIGGER_PARAMETERS*, trigger_handle : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvUpdateTriggerParameters(partition, parameters, trigger_handle)
+    {% end %}
   end
 
   def wHvDeleteTrigger(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, trigger_handle : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvDeleteTrigger(partition, trigger_handle)
+    {% end %}
   end
 
   def wHvCreateNotificationPort(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, parameters : Win32cr::System::Hypervisor::WHV_NOTIFICATION_PORT_PARAMETERS*, event_handle : Win32cr::Foundation::HANDLE, port_handle : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvCreateNotificationPort(partition, parameters, event_handle, port_handle)
+    {% end %}
   end
 
   def wHvSetNotificationPortProperty(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, port_handle : Void*, property_code : Win32cr::System::Hypervisor::WHV_NOTIFICATION_PORT_PROPERTY_CODE, property_value : UInt64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvSetNotificationPortProperty(partition, port_handle, property_code, property_value)
+    {% end %}
   end
 
   def wHvDeleteNotificationPort(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, port_handle : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvDeleteNotificationPort(partition, port_handle)
+    {% end %}
   end
 
   def wHvPostVirtualProcessorSynicMessage(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, sint_index : UInt32, message : Void*, message_size_in_bytes : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvPostVirtualProcessorSynicMessage(partition, vp_index, sint_index, message, message_size_in_bytes)
+    {% end %}
   end
 
   def wHvGetVirtualProcessorCpuidOutput(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, vp_index : UInt32, eax : UInt32, ecx : UInt32, cpuid_output : Win32cr::System::Hypervisor::WHV_CPUID_OUTPUT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvGetVirtualProcessorCpuidOutput(partition, vp_index, eax, ecx, cpuid_output)
+    {% end %}
   end
 
   def wHvGetInterruptTargetVpSet(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, destination : UInt64, destination_mode : Win32cr::System::Hypervisor::WHV_INTERRUPT_DESTINATION_MODE, target_vps : UInt32*, vp_count : UInt32, target_vp_count : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvGetInterruptTargetVpSet(partition, destination, destination_mode, target_vps, vp_count, target_vp_count)
+    {% end %}
   end
 
   def wHvStartPartitionMigration(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE, migration_handle : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvStartPartitionMigration(partition, migration_handle)
+    {% end %}
   end
 
   def wHvCancelPartitionMigration(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvCancelPartitionMigration(partition)
+    {% end %}
   end
 
   def wHvCompletePartitionMigration(partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvCompletePartitionMigration(partition)
+    {% end %}
   end
 
   def wHvAcceptPartitionMigration(migration_handle : Win32cr::Foundation::HANDLE, partition : Win32cr::System::Hypervisor::WHV_PARTITION_HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvAcceptPartitionMigration(migration_handle, partition)
+    {% end %}
   end
 
   def wHvEmulatorCreateEmulator(callbacks : Win32cr::System::Hypervisor::WHV_EMULATOR_CALLBACKS*, emulator : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvEmulatorCreateEmulator(callbacks, emulator)
+    {% end %}
   end
 
   def wHvEmulatorDestroyEmulator(emulator : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvEmulatorDestroyEmulator(emulator)
+    {% end %}
   end
 
   def wHvEmulatorTryIoEmulation(emulator : Void*, context : Void*, vp_context : Win32cr::System::Hypervisor::WHV_VP_EXIT_CONTEXT*, io_instruction_context : Win32cr::System::Hypervisor::WHV_X64_IO_PORT_ACCESS_CONTEXT*, emulator_return_status : Win32cr::System::Hypervisor::WHV_EMULATOR_STATUS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvEmulatorTryIoEmulation(emulator, context, vp_context, io_instruction_context, emulator_return_status)
+    {% end %}
   end
 
   def wHvEmulatorTryMmioEmulation(emulator : Void*, context : Void*, vp_context : Win32cr::System::Hypervisor::WHV_VP_EXIT_CONTEXT*, mmio_instruction_context : Win32cr::System::Hypervisor::WHV_MEMORY_ACCESS_CONTEXT*, emulator_return_status : Win32cr::System::Hypervisor::WHV_EMULATOR_STATUS*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WHvEmulatorTryMmioEmulation(emulator, context, vp_context, mmio_instruction_context, emulator_return_status)
+    {% end %}
   end
 
   def hdvInitializeDeviceHost(computeSystem : Win32cr::System::HostComputeSystem::HCS_SYSTEM, deviceHostHandle : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HdvInitializeDeviceHost(computeSystem, deviceHostHandle)
+    {% end %}
   end
 
   def hdvTeardownDeviceHost(deviceHostHandle : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HdvTeardownDeviceHost(deviceHostHandle)
+    {% end %}
   end
 
   def hdvCreateDeviceInstance(deviceHostHandle : Void*, deviceType : Win32cr::System::Hypervisor::HDV_DEVICE_TYPE, deviceClassId : LibC::GUID*, deviceInstanceId : LibC::GUID*, deviceInterface : Void*, deviceContext : Void*, deviceHandle : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HdvCreateDeviceInstance(deviceHostHandle, deviceType, deviceClassId, deviceInstanceId, deviceInterface, deviceContext, deviceHandle)
+    {% end %}
   end
 
   def hdvReadGuestMemory(requestor : Void*, guestPhysicalAddress : UInt64, byteCount : UInt32, buffer : UInt8*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HdvReadGuestMemory(requestor, guestPhysicalAddress, byteCount, buffer)
+    {% end %}
   end
 
   def hdvWriteGuestMemory(requestor : Void*, guestPhysicalAddress : UInt64, byteCount : UInt32, buffer : UInt8*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HdvWriteGuestMemory(requestor, guestPhysicalAddress, byteCount, buffer)
+    {% end %}
   end
 
   def hdvCreateGuestMemoryAperture(requestor : Void*, guestPhysicalAddress : UInt64, byteCount : UInt32, writeProtected : Win32cr::Foundation::BOOL, mappedAddress : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HdvCreateGuestMemoryAperture(requestor, guestPhysicalAddress, byteCount, writeProtected, mappedAddress)
+    {% end %}
   end
 
   def hdvDestroyGuestMemoryAperture(requestor : Void*, mappedAddress : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HdvDestroyGuestMemoryAperture(requestor, mappedAddress)
+    {% end %}
   end
 
   def hdvDeliverGuestInterrupt(requestor : Void*, msiAddress : UInt64, msiData : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HdvDeliverGuestInterrupt(requestor, msiAddress, msiData)
+    {% end %}
   end
 
   def hdvRegisterDoorbell(requestor : Void*, bar_index : Win32cr::System::Hypervisor::HDV_PCI_BAR_SELECTOR, bar_offset : UInt64, trigger_value : UInt64, flags : UInt64, doorbell_event : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HdvRegisterDoorbell(requestor, bar_index, bar_offset, trigger_value, flags, doorbell_event)
+    {% end %}
   end
 
   def hdvUnregisterDoorbell(requestor : Void*, bar_index : Win32cr::System::Hypervisor::HDV_PCI_BAR_SELECTOR, bar_offset : UInt64, trigger_value : UInt64, flags : UInt64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HdvUnregisterDoorbell(requestor, bar_index, bar_offset, trigger_value, flags)
+    {% end %}
   end
 
   def hdvCreateSectionBackedMmioRange(requestor : Void*, barIndex : Win32cr::System::Hypervisor::HDV_PCI_BAR_SELECTOR, offsetInPages : UInt64, lengthInPages : UInt64, mapping_flags : Win32cr::System::Hypervisor::HDV_MMIO_MAPPING_FLAGS, sectionHandle : Win32cr::Foundation::HANDLE, sectionOffsetInPages : UInt64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HdvCreateSectionBackedMmioRange(requestor, barIndex, offsetInPages, lengthInPages, mapping_flags, sectionHandle, sectionOffsetInPages)
+    {% end %}
   end
 
   def hdvDestroySectionBackedMmioRange(requestor : Void*, barIndex : Win32cr::System::Hypervisor::HDV_PCI_BAR_SELECTOR, offsetInPages : UInt64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.HdvDestroySectionBackedMmioRange(requestor, barIndex, offsetInPages)
+    {% end %}
   end
 
   def locateSavedStateFiles(vmName : Win32cr::Foundation::PWSTR, snapshotName : Win32cr::Foundation::PWSTR, binPath : Win32cr::Foundation::PWSTR*, vsvPath : Win32cr::Foundation::PWSTR*, vmrsPath : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.LocateSavedStateFiles(vmName, snapshotName, binPath, vsvPath, vmrsPath)
+    {% end %}
   end
 
   def loadSavedStateFile(vmrsFile : Win32cr::Foundation::PWSTR, vmSavedStateDumpHandle : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.LoadSavedStateFile(vmrsFile, vmSavedStateDumpHandle)
+    {% end %}
   end
 
   def applyPendingSavedStateFileReplayLog(vmrsFile : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ApplyPendingSavedStateFileReplayLog(vmrsFile)
+    {% end %}
   end
 
   def loadSavedStateFiles(binFile : Win32cr::Foundation::PWSTR, vsvFile : Win32cr::Foundation::PWSTR, vmSavedStateDumpHandle : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.LoadSavedStateFiles(binFile, vsvFile, vmSavedStateDumpHandle)
+    {% end %}
   end
 
   def releaseSavedStateFiles(vmSavedStateDumpHandle : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ReleaseSavedStateFiles(vmSavedStateDumpHandle)
+    {% end %}
   end
 
   def getGuestEnabledVirtualTrustLevels(vmSavedStateDumpHandle : Void*, virtualTrustLevels : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetGuestEnabledVirtualTrustLevels(vmSavedStateDumpHandle, virtualTrustLevels)
+    {% end %}
   end
 
   def getGuestOsInfo(vmSavedStateDumpHandle : Void*, virtualTrustLevel : UInt8, guestOsInfo : Win32cr::System::Hypervisor::GUEST_OS_INFO*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetGuestOsInfo(vmSavedStateDumpHandle, virtualTrustLevel, guestOsInfo)
+    {% end %}
   end
 
   def getVpCount(vmSavedStateDumpHandle : Void*, vpCount : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetVpCount(vmSavedStateDumpHandle, vpCount)
+    {% end %}
   end
 
   def getArchitecture(vmSavedStateDumpHandle : Void*, vpId : UInt32, architecture : Win32cr::System::Hypervisor::VIRTUAL_PROCESSOR_ARCH*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetArchitecture(vmSavedStateDumpHandle, vpId, architecture)
+    {% end %}
   end
 
   def forceArchitecture(vmSavedStateDumpHandle : Void*, vpId : UInt32, architecture : Win32cr::System::Hypervisor::VIRTUAL_PROCESSOR_ARCH) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ForceArchitecture(vmSavedStateDumpHandle, vpId, architecture)
+    {% end %}
   end
 
   def getActiveVirtualTrustLevel(vmSavedStateDumpHandle : Void*, vpId : UInt32, virtualTrustLevel : UInt8*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetActiveVirtualTrustLevel(vmSavedStateDumpHandle, vpId, virtualTrustLevel)
+    {% end %}
   end
 
   def getEnabledVirtualTrustLevels(vmSavedStateDumpHandle : Void*, vpId : UInt32, virtualTrustLevels : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetEnabledVirtualTrustLevels(vmSavedStateDumpHandle, vpId, virtualTrustLevels)
+    {% end %}
   end
 
   def forceActiveVirtualTrustLevel(vmSavedStateDumpHandle : Void*, vpId : UInt32, virtualTrustLevel : UInt8) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ForceActiveVirtualTrustLevel(vmSavedStateDumpHandle, vpId, virtualTrustLevel)
+    {% end %}
   end
 
   def isActiveVirtualTrustLevelEnabled(vmSavedStateDumpHandle : Void*, vpId : UInt32, activeVirtualTrustLevelEnabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.IsActiveVirtualTrustLevelEnabled(vmSavedStateDumpHandle, vpId, activeVirtualTrustLevelEnabled)
+    {% end %}
   end
 
   def isNestedVirtualizationEnabled(vmSavedStateDumpHandle : Void*, enabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.IsNestedVirtualizationEnabled(vmSavedStateDumpHandle, enabled)
+    {% end %}
   end
 
   def getNestedVirtualizationMode(vmSavedStateDumpHandle : Void*, vpId : UInt32, enabled : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetNestedVirtualizationMode(vmSavedStateDumpHandle, vpId, enabled)
+    {% end %}
   end
 
   def forceNestedHostMode(vmSavedStateDumpHandle : Void*, vpId : UInt32, hostMode : Win32cr::Foundation::BOOL, oldMode : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ForceNestedHostMode(vmSavedStateDumpHandle, vpId, hostMode, oldMode)
+    {% end %}
   end
 
   def inKernelSpace(vmSavedStateDumpHandle : Void*, vpId : UInt32, inKernelSpace : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.InKernelSpace(vmSavedStateDumpHandle, vpId, inKernelSpace)
+    {% end %}
   end
 
   def getRegisterValue(vmSavedStateDumpHandle : Void*, vpId : UInt32, registerId : UInt32, registerValue : Win32cr::System::Hypervisor::VIRTUAL_PROCESSOR_REGISTER*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetRegisterValue(vmSavedStateDumpHandle, vpId, registerId, registerValue)
+    {% end %}
   end
 
   def getPagingMode(vmSavedStateDumpHandle : Void*, vpId : UInt32, pagingMode : Win32cr::System::Hypervisor::PAGING_MODE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetPagingMode(vmSavedStateDumpHandle, vpId, pagingMode)
+    {% end %}
   end
 
   def forcePagingMode(vmSavedStateDumpHandle : Void*, vpId : UInt32, pagingMode : Win32cr::System::Hypervisor::PAGING_MODE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ForcePagingMode(vmSavedStateDumpHandle, vpId, pagingMode)
+    {% end %}
   end
 
   def readGuestPhysicalAddress(vmSavedStateDumpHandle : Void*, physicalAddress : UInt64, buffer : Void*, bufferSize : UInt32, bytesRead : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ReadGuestPhysicalAddress(vmSavedStateDumpHandle, physicalAddress, buffer, bufferSize, bytesRead)
+    {% end %}
   end
 
   def guestVirtualAddressToPhysicalAddress(vmSavedStateDumpHandle : Void*, vpId : UInt32, virtualAddress : UInt64, physicalAddress : UInt64*, unmappedRegionSize : UInt64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GuestVirtualAddressToPhysicalAddress(vmSavedStateDumpHandle, vpId, virtualAddress, physicalAddress, unmappedRegionSize)
+    {% end %}
   end
 
   def getGuestPhysicalMemoryChunks(vmSavedStateDumpHandle : Void*, memoryChunkPageSize : UInt64*, memoryChunks : Win32cr::System::Hypervisor::GPA_MEMORY_CHUNK*, memoryChunkCount : UInt64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetGuestPhysicalMemoryChunks(vmSavedStateDumpHandle, memoryChunkPageSize, memoryChunks, memoryChunkCount)
+    {% end %}
   end
 
   def guestPhysicalAddressToRawSavedMemoryOffset(vmSavedStateDumpHandle : Void*, physicalAddress : UInt64, rawSavedMemoryOffset : UInt64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GuestPhysicalAddressToRawSavedMemoryOffset(vmSavedStateDumpHandle, physicalAddress, rawSavedMemoryOffset)
+    {% end %}
   end
 
   def readGuestRawSavedMemory(vmSavedStateDumpHandle : Void*, rawSavedMemoryOffset : UInt64, buffer : Void*, bufferSize : UInt32, bytesRead : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ReadGuestRawSavedMemory(vmSavedStateDumpHandle, rawSavedMemoryOffset, buffer, bufferSize, bytesRead)
+    {% end %}
   end
 
   def getGuestRawSavedMemorySize(vmSavedStateDumpHandle : Void*, guestRawSavedMemorySize : UInt64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetGuestRawSavedMemorySize(vmSavedStateDumpHandle, guestRawSavedMemorySize)
+    {% end %}
   end
 
   def setMemoryBlockCacheLimit(vmSavedStateDumpHandle : Void*, memoryBlockCacheLimit : UInt64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetMemoryBlockCacheLimit(vmSavedStateDumpHandle, memoryBlockCacheLimit)
+    {% end %}
   end
 
   def getMemoryBlockCacheLimit(vmSavedStateDumpHandle : Void*, memoryBlockCacheLimit : UInt64*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetMemoryBlockCacheLimit(vmSavedStateDumpHandle, memoryBlockCacheLimit)
+    {% end %}
   end
 
   def applyGuestMemoryFix(vmSavedStateDumpHandle : Void*, vpId : UInt32, virtualAddress : UInt64, fixBuffer : Void*, fixBufferSize : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ApplyGuestMemoryFix(vmSavedStateDumpHandle, vpId, virtualAddress, fixBuffer, fixBufferSize)
+    {% end %}
   end
 
   def loadSavedStateSymbolProvider(vmSavedStateDumpHandle : Void*, userSymbols : Win32cr::Foundation::PWSTR, force : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.LoadSavedStateSymbolProvider(vmSavedStateDumpHandle, userSymbols, force)
+    {% end %}
   end
 
   def releaseSavedStateSymbolProvider(vmSavedStateDumpHandle : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ReleaseSavedStateSymbolProvider(vmSavedStateDumpHandle)
+    {% end %}
   end
 
   def getSavedStateSymbolProviderHandle(vmSavedStateDumpHandle : Void*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.GetSavedStateSymbolProviderHandle(vmSavedStateDumpHandle)
+    {% end %}
   end
 
   def setSavedStateSymbolProviderDebugInfoCallback(vmSavedStateDumpHandle : Void*, callback : Win32cr::System::Hypervisor::GUEST_SYMBOLS_PROVIDER_DEBUG_INFO_CALLBACK) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetSavedStateSymbolProviderDebugInfoCallback(vmSavedStateDumpHandle, callback)
+    {% end %}
   end
 
   def loadSavedStateModuleSymbols(vmSavedStateDumpHandle : Void*, imageName : Win32cr::Foundation::PSTR, moduleName : Win32cr::Foundation::PSTR, baseAddress : UInt64, sizeOfBase : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.LoadSavedStateModuleSymbols(vmSavedStateDumpHandle, imageName, moduleName, baseAddress, sizeOfBase)
+    {% end %}
   end
 
   def loadSavedStateModuleSymbolsEx(vmSavedStateDumpHandle : Void*, imageName : Win32cr::Foundation::PSTR, imageTimestamp : UInt32, moduleName : Win32cr::Foundation::PSTR, baseAddress : UInt64, sizeOfBase : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.LoadSavedStateModuleSymbolsEx(vmSavedStateDumpHandle, imageName, imageTimestamp, moduleName, baseAddress, sizeOfBase)
+    {% end %}
   end
 
   def resolveSavedStateGlobalVariableAddress(vmSavedStateDumpHandle : Void*, vpId : UInt32, globalName : Win32cr::Foundation::PSTR, virtualAddress : UInt64*, size : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ResolveSavedStateGlobalVariableAddress(vmSavedStateDumpHandle, vpId, globalName, virtualAddress, size)
+    {% end %}
   end
 
   def readSavedStateGlobalVariable(vmSavedStateDumpHandle : Void*, vpId : UInt32, globalName : Win32cr::Foundation::PSTR, buffer : Void*, bufferSize : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ReadSavedStateGlobalVariable(vmSavedStateDumpHandle, vpId, globalName, buffer, bufferSize)
+    {% end %}
   end
 
   def getSavedStateSymbolTypeSize(vmSavedStateDumpHandle : Void*, vpId : UInt32, typeName : Win32cr::Foundation::PSTR, size : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetSavedStateSymbolTypeSize(vmSavedStateDumpHandle, vpId, typeName, size)
+    {% end %}
   end
 
   def findSavedStateSymbolFieldInType(vmSavedStateDumpHandle : Void*, vpId : UInt32, typeName : Win32cr::Foundation::PSTR, fieldName : Win32cr::Foundation::PWSTR, offset : UInt32*, found : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FindSavedStateSymbolFieldInType(vmSavedStateDumpHandle, vpId, typeName, fieldName, offset, found)
+    {% end %}
   end
 
   def getSavedStateSymbolFieldInfo(vmSavedStateDumpHandle : Void*, vpId : UInt32, typeName : Win32cr::Foundation::PSTR, typeFieldInfoMap : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetSavedStateSymbolFieldInfo(vmSavedStateDumpHandle, vpId, typeName, typeFieldInfoMap)
+    {% end %}
   end
 
   def scanMemoryForDosImages(vmSavedStateDumpHandle : Void*, vpId : UInt32, startAddress : UInt64, endAddress : UInt64, callbackContext : Void*, foundImageCallback : Win32cr::System::Hypervisor::FOUND_IMAGE_CALLBACK, standaloneAddress : UInt64*, standaloneAddressCount : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScanMemoryForDosImages(vmSavedStateDumpHandle, vpId, startAddress, endAddress, callbackContext, foundImageCallback, standaloneAddress, standaloneAddressCount)
+    {% end %}
   end
 
   def callStackUnwind(vmSavedStateDumpHandle : Void*, vpId : UInt32, imageInfo : Win32cr::System::Hypervisor::MODULE_INFO*, imageInfoCount : UInt32, frameCount : UInt32, callStack : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CallStackUnwind(vmSavedStateDumpHandle, vpId, imageInfo, imageInfoCount, frameCount, callStack)
+    {% end %}
   end
 
-  @[Link("winhvplatform")]
-  @[Link("winhvemulation")]
-  @[Link("vmdevicehost")]
-  @[Link("vmsavedstatedumpprovider")]
+  @[Link("winhvplatform.dll")]
+  @[Link("winhvemulation.dll")]
+  @[Link("vmdevicehost.dll")]
+  @[Link("vmsavedstatedumpprovider.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WHvGetCapability(capability_code : Win32cr::System::Hypervisor::WHV_CAPABILITY_CODE, capability_buffer : Void*, capability_buffer_size_in_bytes : UInt32, written_size_in_bytes : UInt32*) : Win32cr::Foundation::HRESULT
@@ -3242,4 +3493,5 @@ module Win32cr::System::Hypervisor
     fun CallStackUnwind(vmSavedStateDumpHandle : Void*, vpId : UInt32, imageInfo : Win32cr::System::Hypervisor::MODULE_INFO*, imageInfoCount : UInt32, frameCount : UInt32, callStack : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

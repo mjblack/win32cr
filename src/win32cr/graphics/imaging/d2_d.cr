@@ -8,7 +8,7 @@ module Win32cr::Graphics::Imaging::D2D
 
 
   @[Extern]
-  record IWICImageEncoderVtbl,
+  record IWICImageEncoderVtable,
     query_interface : Proc(IWICImageEncoder*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICImageEncoder*, UInt32),
     release : Proc(IWICImageEncoder*, UInt32),
@@ -18,7 +18,7 @@ module Win32cr::Graphics::Imaging::D2D
 
 
   @[Extern]
-  record IWICImageEncoder, lpVtbl : IWICImageEncoderVtbl* do
+  record IWICImageEncoder, lpVtbl : IWICImageEncoderVtable* do
     GUID = LibC::GUID.new(0x4c75bf8_u32, 0x3ce1_u16, 0x473b_u16, StaticArray[0xac_u8, 0xc5_u8, 0x3c_u8, 0xc4_u8, 0xf5_u8, 0xe9_u8, 0x49_u8, 0x99_u8])
     def query_interface(this : IWICImageEncoder*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -42,7 +42,7 @@ module Win32cr::Graphics::Imaging::D2D
   end
 
   @[Extern]
-  record IWICImagingFactory2Vtbl,
+  record IWICImagingFactory2Vtable,
     query_interface : Proc(IWICImagingFactory2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWICImagingFactory2*, UInt32),
     release : Proc(IWICImagingFactory2*, UInt32),
@@ -75,7 +75,7 @@ module Win32cr::Graphics::Imaging::D2D
 
 
   @[Extern]
-  record IWICImagingFactory2, lpVtbl : IWICImagingFactory2Vtbl* do
+  record IWICImagingFactory2, lpVtbl : IWICImagingFactory2Vtable* do
     GUID = LibC::GUID.new(0x7b816b45_u32, 0x1996_u16, 0x4476_u16, StaticArray[0xb1_u8, 0x32_u8, 0xde_u8, 0x9e_u8, 0x24_u8, 0x7c_u8, 0x8a_u8, 0xf0_u8])
     def query_interface(this : IWICImagingFactory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

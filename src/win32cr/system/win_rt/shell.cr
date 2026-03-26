@@ -12,7 +12,7 @@ module Win32cr::System::WinRT::Shell
   end
 
   @[Extern]
-  record IDDEInitializerVtbl,
+  record IDDEInitializerVtable,
     query_interface : Proc(IDDEInitializer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDDEInitializer*, UInt32),
     release : Proc(IDDEInitializer*, UInt32),
@@ -20,7 +20,7 @@ module Win32cr::System::WinRT::Shell
 
 
   @[Extern]
-  record IDDEInitializer, lpVtbl : IDDEInitializerVtbl* do
+  record IDDEInitializer, lpVtbl : IDDEInitializerVtable* do
     GUID = LibC::GUID.new(0x30dc931f_u32, 0x33fc_u16, 0x4ffd_u16, StaticArray[0xa1_u8, 0x68_u8, 0x94_u8, 0x22_u8, 0x58_u8, 0xcf_u8, 0x3c_u8, 0xa4_u8])
     def query_interface(this : IDDEInitializer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

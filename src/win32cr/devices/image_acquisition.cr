@@ -1491,7 +1491,7 @@ module Win32cr::Devices::ImageAcquisition
   @[Extern]
   struct WIA_PROPERTY_INFO
     property lAccessFlags : UInt32
-    property vt : UInt16
+    property vt : Win32cr::System::Com::VARENUM
     property valid_val : ValidVal_e__Union_
 
     # Nested Type ValidVal_e__Union_
@@ -1506,50 +1506,6 @@ module Win32cr::Devices::ImageAcquisition
     property flag : Flag_e__Struct_
     property none : None_e__Struct_
 
-      # Nested Type Flag_e__Struct_
-      @[Extern]
-      struct Flag_e__Struct_
-    property nom : Int32
-    property valid_bits : Int32
-    def initialize(@nom : Int32, @valid_bits : Int32)
-    end
-      end
-
-
-      # Nested Type ListGuid_e__Struct_
-      @[Extern]
-      struct ListGuid_e__Struct_
-    property cNumList : Int32
-    property nom : LibC::GUID
-    property pList : LibC::GUID*
-    def initialize(@cNumList : Int32, @nom : LibC::GUID, @pList : LibC::GUID*)
-    end
-      end
-
-
-      # Nested Type List_e__Struct_
-      @[Extern]
-      struct List_e__Struct_
-    property cNumList : Int32
-    property nom : Int32
-    property pList : UInt8*
-    def initialize(@cNumList : Int32, @nom : Int32, @pList : UInt8*)
-    end
-      end
-
-
-      # Nested Type Range_e__Struct_
-      @[Extern]
-      struct Range_e__Struct_
-    property min : Int32
-    property nom : Int32
-    property max : Int32
-    property inc : Int32
-    def initialize(@min : Int32, @nom : Int32, @max : Int32, @inc : Int32)
-    end
-      end
-
-
       # Nested Type None_e__Struct_
       @[Extern]
       struct None_e__Struct_
@@ -1559,13 +1515,12 @@ module Win32cr::Devices::ImageAcquisition
       end
 
 
-      # Nested Type ListFloat_e__Struct_
+      # Nested Type Flag_e__Struct_
       @[Extern]
-      struct ListFloat_e__Struct_
-    property cNumList : Int32
-    property nom : Float64
-    property pList : UInt8*
-    def initialize(@cNumList : Int32, @nom : Float64, @pList : UInt8*)
+      struct Flag_e__Struct_
+    property nom : Int32
+    property valid_bits : Int32
+    def initialize(@nom : Int32, @valid_bits : Int32)
     end
       end
 
@@ -1581,6 +1536,39 @@ module Win32cr::Devices::ImageAcquisition
       end
 
 
+      # Nested Type ListGuid_e__Struct_
+      @[Extern]
+      struct ListGuid_e__Struct_
+    property cNumList : Int32
+    property nom : LibC::GUID
+    property pList : LibC::GUID*
+    def initialize(@cNumList : Int32, @nom : LibC::GUID, @pList : LibC::GUID*)
+    end
+      end
+
+
+      # Nested Type ListFloat_e__Struct_
+      @[Extern]
+      struct ListFloat_e__Struct_
+    property cNumList : Int32
+    property nom : Float64
+    property pList : UInt8*
+    def initialize(@cNumList : Int32, @nom : Float64, @pList : UInt8*)
+    end
+      end
+
+
+      # Nested Type List_e__Struct_
+      @[Extern]
+      struct List_e__Struct_
+    property cNumList : Int32
+    property nom : Int32
+    property pList : UInt8*
+    def initialize(@cNumList : Int32, @nom : Int32, @pList : UInt8*)
+    end
+      end
+
+
       # Nested Type RangeFloat_e__Struct_
       @[Extern]
       struct RangeFloat_e__Struct_
@@ -1592,11 +1580,23 @@ module Win32cr::Devices::ImageAcquisition
     end
       end
 
+
+      # Nested Type Range_e__Struct_
+      @[Extern]
+      struct Range_e__Struct_
+    property min : Int32
+    property nom : Int32
+    property max : Int32
+    property inc : Int32
+    def initialize(@min : Int32, @nom : Int32, @max : Int32, @inc : Int32)
+    end
+      end
+
     def initialize(@range : Range_e__Struct_, @range_float : RangeFloat_e__Struct_, @list : List_e__Struct_, @list_float : ListFloat_e__Struct_, @list_guid : ListGuid_e__Struct_, @list_b_str : ListBStr_e__Struct_, @flag : Flag_e__Struct_, @none : None_e__Struct_)
     end
     end
 
-    def initialize(@lAccessFlags : UInt32, @vt : UInt16, @valid_val : ValidVal_e__Union_)
+    def initialize(@lAccessFlags : UInt32, @vt : Win32cr::System::Com::VARENUM, @valid_val : ValidVal_e__Union_)
     end
   end
 
@@ -1616,9 +1616,9 @@ module Win32cr::Devices::ImageAcquisition
     property old : Old_e__Union_
     property current : Current_e__Union_
 
-    # Nested Type Old_e__Union_
+    # Nested Type Current_e__Union_
     @[Extern(union: true)]
-    struct Old_e__Union_
+    struct Current_e__Union_
     property lVal : Int32
     property fltVal : Float32
     property bstrVal : Win32cr::Foundation::BSTR
@@ -1628,9 +1628,9 @@ module Win32cr::Devices::ImageAcquisition
     end
 
 
-    # Nested Type Current_e__Union_
+    # Nested Type Old_e__Union_
     @[Extern(union: true)]
-    struct Current_e__Union_
+    struct Old_e__Union_
     property lVal : Int32
     property fltVal : Float32
     property bstrVal : Win32cr::Foundation::BSTR
@@ -1797,7 +1797,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaDevMgrVtbl,
+  record IWiaDevMgrVtable,
     query_interface : Proc(IWiaDevMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaDevMgr*, UInt32),
     release : Proc(IWiaDevMgr*, UInt32),
@@ -1813,7 +1813,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaDevMgr, lpVtbl : IWiaDevMgrVtbl* do
+  record IWiaDevMgr, lpVtbl : IWiaDevMgrVtable* do
     GUID = LibC::GUID.new(0x5eb2502a_u32, 0x8cf1_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x92_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x1e_u8, 0xd8_u8, 0x11_u8])
     def query_interface(this : IWiaDevMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1855,7 +1855,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IEnumWIA_DEV_INFOVtbl,
+  record IEnumWIA_DEV_INFOVtable,
     query_interface : Proc(IEnumWIA_DEV_INFO*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumWIA_DEV_INFO*, UInt32),
     release : Proc(IEnumWIA_DEV_INFO*, UInt32),
@@ -1867,7 +1867,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IEnumWIA_DEV_INFO, lpVtbl : IEnumWIA_DEV_INFOVtbl* do
+  record IEnumWIA_DEV_INFO, lpVtbl : IEnumWIA_DEV_INFOVtable* do
     GUID = LibC::GUID.new(0x5e38b83c_u32, 0x8cf1_u16, 0x11d1_u16, StaticArray[0xbf_u8, 0x92_u8, 0x0_u8, 0x60_u8, 0x8_u8, 0x1e_u8, 0xd8_u8, 0x11_u8])
     def query_interface(this : IEnumWIA_DEV_INFO*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1897,7 +1897,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaEventCallbackVtbl,
+  record IWiaEventCallbackVtable,
     query_interface : Proc(IWiaEventCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaEventCallback*, UInt32),
     release : Proc(IWiaEventCallback*, UInt32),
@@ -1905,7 +1905,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaEventCallback, lpVtbl : IWiaEventCallbackVtbl* do
+  record IWiaEventCallback, lpVtbl : IWiaEventCallbackVtable* do
     GUID = LibC::GUID.new(0xae6287b0_u32, 0x84_u16, 0x11d2_u16, StaticArray[0x97_u8, 0x3b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x6_u8, 0x8f_u8, 0x2e_u8])
     def query_interface(this : IWiaEventCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1923,7 +1923,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaDataCallbackVtbl,
+  record IWiaDataCallbackVtable,
     query_interface : Proc(IWiaDataCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaDataCallback*, UInt32),
     release : Proc(IWiaDataCallback*, UInt32),
@@ -1931,7 +1931,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaDataCallback, lpVtbl : IWiaDataCallbackVtbl* do
+  record IWiaDataCallback, lpVtbl : IWiaDataCallbackVtable* do
     GUID = LibC::GUID.new(0xa558a866_u32, 0xa5b0_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x8f_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xdc_u8, 0x3c_u8])
     def query_interface(this : IWiaDataCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1949,7 +1949,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaDataTransferVtbl,
+  record IWiaDataTransferVtable,
     query_interface : Proc(IWiaDataTransfer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaDataTransfer*, UInt32),
     release : Proc(IWiaDataTransfer*, UInt32),
@@ -1961,7 +1961,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaDataTransfer, lpVtbl : IWiaDataTransferVtbl* do
+  record IWiaDataTransfer, lpVtbl : IWiaDataTransferVtable* do
     GUID = LibC::GUID.new(0xa6cef998_u32, 0xa5b0_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x8f_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xdc_u8, 0x3c_u8])
     def query_interface(this : IWiaDataTransfer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1991,7 +1991,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaItemVtbl,
+  record IWiaItemVtable,
     query_interface : Proc(IWiaItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaItem*, UInt32),
     release : Proc(IWiaItem*, UInt32),
@@ -2013,7 +2013,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaItem, lpVtbl : IWiaItemVtbl* do
+  record IWiaItem, lpVtbl : IWiaItemVtable* do
     GUID = LibC::GUID.new(0x4db1ad10_u32, 0x3391_u16, 0x11d2_u16, StaticArray[0x9a_u8, 0x33_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x61_u8, 0x45_u8])
     def query_interface(this : IWiaItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2073,7 +2073,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaPropertyStorageVtbl,
+  record IWiaPropertyStorageVtable,
     query_interface : Proc(IWiaPropertyStorage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaPropertyStorage*, UInt32),
     release : Proc(IWiaPropertyStorage*, UInt32),
@@ -2096,7 +2096,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaPropertyStorage, lpVtbl : IWiaPropertyStorageVtbl* do
+  record IWiaPropertyStorage, lpVtbl : IWiaPropertyStorageVtable* do
     GUID = LibC::GUID.new(0x98b5e8a0_u32, 0x29cc_u16, 0x491a_u16, StaticArray[0xaa_u8, 0xc0_u8, 0xe6_u8, 0xdb_u8, 0x4f_u8, 0xdc_u8, 0xce_u8, 0xb6_u8])
     def query_interface(this : IWiaPropertyStorage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2159,7 +2159,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IEnumWiaItemVtbl,
+  record IEnumWiaItemVtable,
     query_interface : Proc(IEnumWiaItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumWiaItem*, UInt32),
     release : Proc(IEnumWiaItem*, UInt32),
@@ -2171,7 +2171,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IEnumWiaItem, lpVtbl : IEnumWiaItemVtbl* do
+  record IEnumWiaItem, lpVtbl : IEnumWiaItemVtable* do
     GUID = LibC::GUID.new(0x5e8383fc_u32, 0x3391_u16, 0x11d2_u16, StaticArray[0x9a_u8, 0x33_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x61_u8, 0x45_u8])
     def query_interface(this : IEnumWiaItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2201,7 +2201,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IEnumWIA_DEV_CAPSVtbl,
+  record IEnumWIA_DEV_CAPSVtable,
     query_interface : Proc(IEnumWIA_DEV_CAPS*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumWIA_DEV_CAPS*, UInt32),
     release : Proc(IEnumWIA_DEV_CAPS*, UInt32),
@@ -2213,7 +2213,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IEnumWIA_DEV_CAPS, lpVtbl : IEnumWIA_DEV_CAPSVtbl* do
+  record IEnumWIA_DEV_CAPS, lpVtbl : IEnumWIA_DEV_CAPSVtable* do
     GUID = LibC::GUID.new(0x1fcc4287_u32, 0xaca6_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x93_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xdc_u8, 0x3c_u8])
     def query_interface(this : IEnumWIA_DEV_CAPS*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2243,7 +2243,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IEnumWIA_FORMAT_INFOVtbl,
+  record IEnumWIA_FORMAT_INFOVtable,
     query_interface : Proc(IEnumWIA_FORMAT_INFO*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumWIA_FORMAT_INFO*, UInt32),
     release : Proc(IEnumWIA_FORMAT_INFO*, UInt32),
@@ -2255,7 +2255,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IEnumWIA_FORMAT_INFO, lpVtbl : IEnumWIA_FORMAT_INFOVtbl* do
+  record IEnumWIA_FORMAT_INFO, lpVtbl : IEnumWIA_FORMAT_INFOVtable* do
     GUID = LibC::GUID.new(0x81befc5b_u32, 0x656d_u16, 0x44f1_u16, StaticArray[0xb2_u8, 0x4c_u8, 0xd4_u8, 0x1d_u8, 0x51_u8, 0xb4_u8, 0xdc_u8, 0x81_u8])
     def query_interface(this : IEnumWIA_FORMAT_INFO*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2285,7 +2285,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaLogVtbl,
+  record IWiaLogVtable,
     query_interface : Proc(IWiaLog*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaLog*, UInt32),
     release : Proc(IWiaLog*, UInt32),
@@ -2295,7 +2295,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaLog, lpVtbl : IWiaLogVtbl* do
+  record IWiaLog, lpVtbl : IWiaLogVtable* do
     GUID = LibC::GUID.new(0xa00c10b6_u32, 0x82a1_u16, 0x452f_u16, StaticArray[0x8b_u8, 0x6c_u8, 0x86_u8, 0x6_u8, 0x2a_u8, 0xad_u8, 0x68_u8, 0x90_u8])
     def query_interface(this : IWiaLog*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2319,7 +2319,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaLogExVtbl,
+  record IWiaLogExVtable,
     query_interface : Proc(IWiaLogEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaLogEx*, UInt32),
     release : Proc(IWiaLogEx*, UInt32),
@@ -2331,7 +2331,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaLogEx, lpVtbl : IWiaLogExVtbl* do
+  record IWiaLogEx, lpVtbl : IWiaLogExVtable* do
     GUID = LibC::GUID.new(0xaf1f22ac_u32, 0x7a40_u16, 0x4787_u16, StaticArray[0xb4_u8, 0x21_u8, 0xae_u8, 0xb4_u8, 0x7a_u8, 0x1f_u8, 0xbd_u8, 0xb_u8])
     def query_interface(this : IWiaLogEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2361,7 +2361,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaNotifyDevMgrVtbl,
+  record IWiaNotifyDevMgrVtable,
     query_interface : Proc(IWiaNotifyDevMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaNotifyDevMgr*, UInt32),
     release : Proc(IWiaNotifyDevMgr*, UInt32),
@@ -2369,7 +2369,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaNotifyDevMgr, lpVtbl : IWiaNotifyDevMgrVtbl* do
+  record IWiaNotifyDevMgr, lpVtbl : IWiaNotifyDevMgrVtable* do
     GUID = LibC::GUID.new(0x70681ea0_u32, 0xe7bf_u16, 0x4291_u16, StaticArray[0x9f_u8, 0xb1_u8, 0x4e_u8, 0x88_u8, 0x13_u8, 0xa3_u8, 0xf7_u8, 0x8e_u8])
     def query_interface(this : IWiaNotifyDevMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2387,7 +2387,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaItemExtrasVtbl,
+  record IWiaItemExtrasVtable,
     query_interface : Proc(IWiaItemExtras*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaItemExtras*, UInt32),
     release : Proc(IWiaItemExtras*, UInt32),
@@ -2397,7 +2397,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaItemExtras, lpVtbl : IWiaItemExtrasVtbl* do
+  record IWiaItemExtras, lpVtbl : IWiaItemExtrasVtable* do
     GUID = LibC::GUID.new(0x6291ef2c_u32, 0x36ef_u16, 0x4532_u16, StaticArray[0x87_u8, 0x6a_u8, 0x8e_u8, 0x13_u8, 0x25_u8, 0x93_u8, 0x77_u8, 0x8d_u8])
     def query_interface(this : IWiaItemExtras*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2421,7 +2421,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaAppErrorHandlerVtbl,
+  record IWiaAppErrorHandlerVtable,
     query_interface : Proc(IWiaAppErrorHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaAppErrorHandler*, UInt32),
     release : Proc(IWiaAppErrorHandler*, UInt32),
@@ -2430,7 +2430,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaAppErrorHandler, lpVtbl : IWiaAppErrorHandlerVtbl* do
+  record IWiaAppErrorHandler, lpVtbl : IWiaAppErrorHandlerVtable* do
     GUID = LibC::GUID.new(0x6c16186c_u32, 0xd0a6_u16, 0x400c_u16, StaticArray[0x80_u8, 0xf4_u8, 0xd2_u8, 0x69_u8, 0x86_u8, 0xa0_u8, 0xe7_u8, 0x34_u8])
     def query_interface(this : IWiaAppErrorHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2451,7 +2451,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaErrorHandlerVtbl,
+  record IWiaErrorHandlerVtable,
     query_interface : Proc(IWiaErrorHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaErrorHandler*, UInt32),
     release : Proc(IWiaErrorHandler*, UInt32),
@@ -2460,7 +2460,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaErrorHandler, lpVtbl : IWiaErrorHandlerVtbl* do
+  record IWiaErrorHandler, lpVtbl : IWiaErrorHandlerVtable* do
     GUID = LibC::GUID.new(0xe4a51b1_u32, 0xbc1f_u16, 0x443d_u16, StaticArray[0xa8_u8, 0x35_u8, 0x72_u8, 0xe8_u8, 0x90_u8, 0x75_u8, 0x9e_u8, 0xf3_u8])
     def query_interface(this : IWiaErrorHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2481,7 +2481,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaTransferVtbl,
+  record IWiaTransferVtable,
     query_interface : Proc(IWiaTransfer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaTransfer*, UInt32),
     release : Proc(IWiaTransfer*, UInt32),
@@ -2492,7 +2492,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaTransfer, lpVtbl : IWiaTransferVtbl* do
+  record IWiaTransfer, lpVtbl : IWiaTransferVtable* do
     GUID = LibC::GUID.new(0xc39d6942_u32, 0x2f4e_u16, 0x4d04_u16, StaticArray[0x92_u8, 0xfe_u8, 0x4e_u8, 0xf4_u8, 0xd3_u8, 0xa1_u8, 0xde_u8, 0x5a_u8])
     def query_interface(this : IWiaTransfer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2519,7 +2519,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaTransferCallbackVtbl,
+  record IWiaTransferCallbackVtable,
     query_interface : Proc(IWiaTransferCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaTransferCallback*, UInt32),
     release : Proc(IWiaTransferCallback*, UInt32),
@@ -2528,7 +2528,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaTransferCallback, lpVtbl : IWiaTransferCallbackVtbl* do
+  record IWiaTransferCallback, lpVtbl : IWiaTransferCallbackVtable* do
     GUID = LibC::GUID.new(0x27d4eaaf_u32, 0x28a6_u16, 0x4ca5_u16, StaticArray[0x9a_u8, 0xab_u8, 0xe6_u8, 0x78_u8, 0x16_u8, 0x8b_u8, 0x95_u8, 0x27_u8])
     def query_interface(this : IWiaTransferCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2549,7 +2549,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaSegmentationFilterVtbl,
+  record IWiaSegmentationFilterVtable,
     query_interface : Proc(IWiaSegmentationFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaSegmentationFilter*, UInt32),
     release : Proc(IWiaSegmentationFilter*, UInt32),
@@ -2557,7 +2557,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaSegmentationFilter, lpVtbl : IWiaSegmentationFilterVtbl* do
+  record IWiaSegmentationFilter, lpVtbl : IWiaSegmentationFilterVtable* do
     GUID = LibC::GUID.new(0xec46a697_u32, 0xac04_u16, 0x4447_u16, StaticArray[0x8f_u8, 0x65_u8, 0xff_u8, 0x63_u8, 0xd5_u8, 0x15_u8, 0x4b_u8, 0x21_u8])
     def query_interface(this : IWiaSegmentationFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2575,7 +2575,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaImageFilterVtbl,
+  record IWiaImageFilterVtable,
     query_interface : Proc(IWiaImageFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaImageFilter*, UInt32),
     release : Proc(IWiaImageFilter*, UInt32),
@@ -2586,7 +2586,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaImageFilter, lpVtbl : IWiaImageFilterVtbl* do
+  record IWiaImageFilter, lpVtbl : IWiaImageFilterVtable* do
     GUID = LibC::GUID.new(0xa8a79ffa_u32, 0x450b_u16, 0x41f1_u16, StaticArray[0x8f_u8, 0x87_u8, 0x84_u8, 0x9c_u8, 0xcd_u8, 0x94_u8, 0xeb_u8, 0xf6_u8])
     def query_interface(this : IWiaImageFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2613,7 +2613,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaPreviewVtbl,
+  record IWiaPreviewVtable,
     query_interface : Proc(IWiaPreview*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaPreview*, UInt32),
     release : Proc(IWiaPreview*, UInt32),
@@ -2624,7 +2624,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaPreview, lpVtbl : IWiaPreviewVtbl* do
+  record IWiaPreview, lpVtbl : IWiaPreviewVtable* do
     GUID = LibC::GUID.new(0x95c2b4fd_u32, 0x33f2_u16, 0x4d86_u16, StaticArray[0xad_u8, 0x40_u8, 0x94_u8, 0x31_u8, 0xf0_u8, 0xdf_u8, 0x8_u8, 0xf7_u8])
     def query_interface(this : IWiaPreview*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2651,7 +2651,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IEnumWiaItem2Vtbl,
+  record IEnumWiaItem2Vtable,
     query_interface : Proc(IEnumWiaItem2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumWiaItem2*, UInt32),
     release : Proc(IEnumWiaItem2*, UInt32),
@@ -2663,7 +2663,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IEnumWiaItem2, lpVtbl : IEnumWiaItem2Vtbl* do
+  record IEnumWiaItem2, lpVtbl : IEnumWiaItem2Vtable* do
     GUID = LibC::GUID.new(0x59970af4_u32, 0xcd0d_u16, 0x44d9_u16, StaticArray[0xab_u8, 0x24_u8, 0x52_u8, 0x29_u8, 0x56_u8, 0x30_u8, 0xe5_u8, 0x82_u8])
     def query_interface(this : IEnumWiaItem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2693,7 +2693,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaItem2Vtbl,
+  record IWiaItem2Vtable,
     query_interface : Proc(IWiaItem2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaItem2*, UInt32),
     release : Proc(IWiaItem2*, UInt32),
@@ -2716,7 +2716,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaItem2, lpVtbl : IWiaItem2Vtbl* do
+  record IWiaItem2, lpVtbl : IWiaItem2Vtable* do
     GUID = LibC::GUID.new(0x6cba0075_u32, 0x1287_u16, 0x407d_u16, StaticArray[0x9b_u8, 0x77_u8, 0xcf_u8, 0xe_u8, 0x3_u8, 0x4_u8, 0x35_u8, 0xcc_u8])
     def query_interface(this : IWiaItem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2779,7 +2779,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaDevMgr2Vtbl,
+  record IWiaDevMgr2Vtable,
     query_interface : Proc(IWiaDevMgr2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaDevMgr2*, UInt32),
     release : Proc(IWiaDevMgr2*, UInt32),
@@ -2794,7 +2794,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaDevMgr2, lpVtbl : IWiaDevMgr2Vtbl* do
+  record IWiaDevMgr2, lpVtbl : IWiaDevMgr2Vtable* do
     GUID = LibC::GUID.new(0x79c07cf1_u32, 0xcbdd_u16, 0x41ee_u16, StaticArray[0x8e_u8, 0xc3_u8, 0xf0_u8, 0x0_u8, 0x80_u8, 0xca_u8, 0xda_u8, 0x7a_u8])
     def query_interface(this : IWiaDevMgr2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2833,7 +2833,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaMiniDrvVtbl,
+  record IWiaMiniDrvVtable,
     query_interface : Proc(IWiaMiniDrv*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaMiniDrv*, UInt32),
     release : Proc(IWiaMiniDrv*, UInt32),
@@ -2857,7 +2857,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaMiniDrv, lpVtbl : IWiaMiniDrvVtbl* do
+  record IWiaMiniDrv, lpVtbl : IWiaMiniDrvVtable* do
     GUID = LibC::GUID.new(0xd8cdee14_u32, 0x3c6c_u16, 0x11d2_u16, StaticArray[0x9a_u8, 0x35_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x61_u8, 0x45_u8])
     def query_interface(this : IWiaMiniDrv*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2923,7 +2923,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaMiniDrvCallBackVtbl,
+  record IWiaMiniDrvCallBackVtable,
     query_interface : Proc(IWiaMiniDrvCallBack*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaMiniDrvCallBack*, UInt32),
     release : Proc(IWiaMiniDrvCallBack*, UInt32),
@@ -2931,7 +2931,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaMiniDrvCallBack, lpVtbl : IWiaMiniDrvCallBackVtbl* do
+  record IWiaMiniDrvCallBack, lpVtbl : IWiaMiniDrvCallBackVtable* do
     GUID = LibC::GUID.new(0x33a57d5a_u32, 0x3de8_u16, 0x11d2_u16, StaticArray[0x9a_u8, 0x36_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xa3_u8, 0x61_u8, 0x45_u8])
     def query_interface(this : IWiaMiniDrvCallBack*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2949,7 +2949,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaMiniDrvTransferCallbackVtbl,
+  record IWiaMiniDrvTransferCallbackVtable,
     query_interface : Proc(IWiaMiniDrvTransferCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaMiniDrvTransferCallback*, UInt32),
     release : Proc(IWiaMiniDrvTransferCallback*, UInt32),
@@ -2958,7 +2958,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaMiniDrvTransferCallback, lpVtbl : IWiaMiniDrvTransferCallbackVtbl* do
+  record IWiaMiniDrvTransferCallback, lpVtbl : IWiaMiniDrvTransferCallbackVtable* do
     GUID = LibC::GUID.new(0xa9d2ee89_u32, 0x2ce5_u16, 0x4ff0_u16, StaticArray[0x8a_u8, 0xdb_u8, 0xc9_u8, 0x61_u8, 0xd1_u8, 0xd7_u8, 0x74_u8, 0xca_u8])
     def query_interface(this : IWiaMiniDrvTransferCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2979,7 +2979,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaDrvItemVtbl,
+  record IWiaDrvItemVtable,
     query_interface : Proc(IWiaDrvItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaDrvItem*, UInt32),
     release : Proc(IWiaDrvItem*, UInt32),
@@ -2999,7 +2999,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaDrvItem, lpVtbl : IWiaDrvItemVtbl* do
+  record IWiaDrvItem, lpVtbl : IWiaDrvItemVtable* do
     GUID = LibC::GUID.new(0x1f02b5c5_u32, 0xb00c_u16, 0x11d2_u16, StaticArray[0xa0_u8, 0x94_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x72_u8, 0xdc_u8, 0x3c_u8])
     def query_interface(this : IWiaDrvItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3053,7 +3053,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaVideoVtbl,
+  record IWiaVideoVtable,
     query_interface : Proc(IWiaVideo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaVideo*, UInt32),
     release : Proc(IWiaVideo*, UInt32),
@@ -3073,7 +3073,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaVideo, lpVtbl : IWiaVideoVtbl* do
+  record IWiaVideo, lpVtbl : IWiaVideoVtable* do
     GUID = LibC::GUID.new(0xd52920aa_u32, 0xdb88_u16, 0x41f0_u16, StaticArray[0x94_u8, 0x6c_u8, 0xe0_u8, 0xd_u8, 0xc0_u8, 0xa1_u8, 0x9c_u8, 0xfa_u8])
     def query_interface(this : IWiaVideo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3127,7 +3127,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaUIExtension2Vtbl,
+  record IWiaUIExtension2Vtable,
     query_interface : Proc(IWiaUIExtension2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaUIExtension2*, UInt32),
     release : Proc(IWiaUIExtension2*, UInt32),
@@ -3136,7 +3136,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaUIExtension2, lpVtbl : IWiaUIExtension2Vtbl* do
+  record IWiaUIExtension2, lpVtbl : IWiaUIExtension2Vtable* do
     GUID = LibC::GUID.new(0x305600d7_u32, 0x5088_u16, 0x46d7_u16, StaticArray[0x9a_u8, 0x15_u8, 0xb7_u8, 0x7b_u8, 0x9_u8, 0xcd_u8, 0xba_u8, 0x7a_u8])
     def query_interface(this : IWiaUIExtension2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3157,7 +3157,7 @@ module Win32cr::Devices::ImageAcquisition
   end
 
   @[Extern]
-  record IWiaUIExtensionVtbl,
+  record IWiaUIExtensionVtable,
     query_interface : Proc(IWiaUIExtension*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWiaUIExtension*, UInt32),
     release : Proc(IWiaUIExtension*, UInt32),
@@ -3167,7 +3167,7 @@ module Win32cr::Devices::ImageAcquisition
 
 
   @[Extern]
-  record IWiaUIExtension, lpVtbl : IWiaUIExtensionVtbl* do
+  record IWiaUIExtension, lpVtbl : IWiaUIExtensionVtable* do
     GUID = LibC::GUID.new(0xda319113_u32, 0x50ee_u16, 0x4c80_u16, StaticArray[0xb4_u8, 0x60_u8, 0x57_u8, 0xd0_u8, 0x5_u8, 0xd4_u8, 0x4a_u8, 0x2c_u8])
     def query_interface(this : IWiaUIExtension*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

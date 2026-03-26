@@ -1763,7 +1763,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IRicheditWindowlessAccessibilityVtbl,
+  record IRicheditWindowlessAccessibilityVtable,
     query_interface : Proc(IRicheditWindowlessAccessibility*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRicheditWindowlessAccessibility*, UInt32),
     release : Proc(IRicheditWindowlessAccessibility*, UInt32),
@@ -1771,7 +1771,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IRicheditWindowlessAccessibility, lpVtbl : IRicheditWindowlessAccessibilityVtbl* do
+  record IRicheditWindowlessAccessibility, lpVtbl : IRicheditWindowlessAccessibilityVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IRicheditWindowlessAccessibility*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1789,7 +1789,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IRichEditUiaInformationVtbl,
+  record IRichEditUiaInformationVtable,
     query_interface : Proc(IRichEditUiaInformation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRichEditUiaInformation*, UInt32),
     release : Proc(IRichEditUiaInformation*, UInt32),
@@ -1798,7 +1798,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IRichEditUiaInformation, lpVtbl : IRichEditUiaInformationVtbl* do
+  record IRichEditUiaInformation, lpVtbl : IRichEditUiaInformationVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def query_interface(this : IRichEditUiaInformation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1819,7 +1819,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IAccessibleVtbl,
+  record IAccessibleVtable,
     query_interface : Proc(IAccessible*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAccessible*, UInt32),
     release : Proc(IAccessible*, UInt32),
@@ -1851,7 +1851,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IAccessible, lpVtbl : IAccessibleVtbl* do
+  record IAccessible, lpVtbl : IAccessibleVtable* do
     GUID = LibC::GUID.new(0x618736e0_u32, 0x3c3d_u16, 0x11cf_u16, StaticArray[0x81_u8, 0xc_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x38_u8, 0x9b_u8, 0x71_u8])
     def query_interface(this : IAccessible*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1941,7 +1941,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IAccessibleHandlerVtbl,
+  record IAccessibleHandlerVtable,
     query_interface : Proc(IAccessibleHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAccessibleHandler*, UInt32),
     release : Proc(IAccessibleHandler*, UInt32),
@@ -1949,7 +1949,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IAccessibleHandler, lpVtbl : IAccessibleHandlerVtbl* do
+  record IAccessibleHandler, lpVtbl : IAccessibleHandlerVtable* do
     GUID = LibC::GUID.new(0x3022430_u32, 0xabc4_u16, 0x11d0_u16, StaticArray[0xbd_u8, 0xe2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x1a_u8, 0x19_u8, 0x53_u8])
     def query_interface(this : IAccessibleHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1967,7 +1967,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IAccessibleWindowlessSiteVtbl,
+  record IAccessibleWindowlessSiteVtable,
     query_interface : Proc(IAccessibleWindowlessSite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAccessibleWindowlessSite*, UInt32),
     release : Proc(IAccessibleWindowlessSite*, UInt32),
@@ -1978,7 +1978,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IAccessibleWindowlessSite, lpVtbl : IAccessibleWindowlessSiteVtbl* do
+  record IAccessibleWindowlessSite, lpVtbl : IAccessibleWindowlessSiteVtable* do
     GUID = LibC::GUID.new(0xbf3abd9c_u32, 0x76da_u16, 0x4389_u16, StaticArray[0x9e_u8, 0xb6_u8, 0x14_u8, 0x27_u8, 0xd2_u8, 0x5a_u8, 0xba_u8, 0xb7_u8])
     def query_interface(this : IAccessibleWindowlessSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2005,7 +2005,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IAccIdentityVtbl,
+  record IAccIdentityVtable,
     query_interface : Proc(IAccIdentity*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAccIdentity*, UInt32),
     release : Proc(IAccIdentity*, UInt32),
@@ -2013,7 +2013,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IAccIdentity, lpVtbl : IAccIdentityVtbl* do
+  record IAccIdentity, lpVtbl : IAccIdentityVtable* do
     GUID = LibC::GUID.new(0x7852b78d_u32, 0x1cfd_u16, 0x41c1_u16, StaticArray[0xa6_u8, 0x15_u8, 0x9c_u8, 0xc_u8, 0x85_u8, 0x96_u8, 0xb_u8, 0x5f_u8])
     def query_interface(this : IAccIdentity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2031,7 +2031,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IAccPropServerVtbl,
+  record IAccPropServerVtable,
     query_interface : Proc(IAccPropServer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAccPropServer*, UInt32),
     release : Proc(IAccPropServer*, UInt32),
@@ -2039,7 +2039,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IAccPropServer, lpVtbl : IAccPropServerVtbl* do
+  record IAccPropServer, lpVtbl : IAccPropServerVtable* do
     GUID = LibC::GUID.new(0x76c0dbbb_u32, 0x15e0_u16, 0x4e7b_u16, StaticArray[0xb6_u8, 0x1b_u8, 0x20_u8, 0xee_u8, 0xea_u8, 0x20_u8, 0x1_u8, 0xe0_u8])
     def query_interface(this : IAccPropServer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2057,7 +2057,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IAccPropServicesVtbl,
+  record IAccPropServicesVtable,
     query_interface : Proc(IAccPropServices*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAccPropServices*, UInt32),
     release : Proc(IAccPropServices*, UInt32),
@@ -2079,7 +2079,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IAccPropServices, lpVtbl : IAccPropServicesVtbl* do
+  record IAccPropServices, lpVtbl : IAccPropServicesVtable* do
     GUID = LibC::GUID.new(0x6e26e776_u32, 0x4f0_u16, 0x495d_u16, StaticArray[0x80_u8, 0xe4_u8, 0x33_u8, 0x30_u8, 0x35_u8, 0x2e_u8, 0x31_u8, 0x69_u8])
     def query_interface(this : IAccPropServices*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2139,7 +2139,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IRawElementProviderSimpleVtbl,
+  record IRawElementProviderSimpleVtable,
     query_interface : Proc(IRawElementProviderSimple*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRawElementProviderSimple*, UInt32),
     release : Proc(IRawElementProviderSimple*, UInt32),
@@ -2150,7 +2150,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IRawElementProviderSimple, lpVtbl : IRawElementProviderSimpleVtbl* do
+  record IRawElementProviderSimple, lpVtbl : IRawElementProviderSimpleVtable* do
     GUID = LibC::GUID.new(0xd6dd68d1_u32, 0x86fd_u16, 0x4332_u16, StaticArray[0x86_u8, 0x66_u8, 0x9a_u8, 0xbe_u8, 0xde_u8, 0xa2_u8, 0xd2_u8, 0x4c_u8])
     def query_interface(this : IRawElementProviderSimple*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2177,7 +2177,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IAccessibleExVtbl,
+  record IAccessibleExVtable,
     query_interface : Proc(IAccessibleEx*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAccessibleEx*, UInt32),
     release : Proc(IAccessibleEx*, UInt32),
@@ -2188,7 +2188,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IAccessibleEx, lpVtbl : IAccessibleExVtbl* do
+  record IAccessibleEx, lpVtbl : IAccessibleExVtable* do
     GUID = LibC::GUID.new(0xf8b80ada_u32, 0x2c44_u16, 0x48d0_u16, StaticArray[0x89_u8, 0xbe_u8, 0x5f_u8, 0xf2_u8, 0x3c_u8, 0x9c_u8, 0xd8_u8, 0x75_u8])
     def query_interface(this : IAccessibleEx*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2215,7 +2215,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IRawElementProviderSimple2Vtbl,
+  record IRawElementProviderSimple2Vtable,
     query_interface : Proc(IRawElementProviderSimple2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRawElementProviderSimple2*, UInt32),
     release : Proc(IRawElementProviderSimple2*, UInt32),
@@ -2227,7 +2227,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IRawElementProviderSimple2, lpVtbl : IRawElementProviderSimple2Vtbl* do
+  record IRawElementProviderSimple2, lpVtbl : IRawElementProviderSimple2Vtable* do
     GUID = LibC::GUID.new(0xa0a839a9_u32, 0x8da1_u16, 0x4a82_u16, StaticArray[0x80_u8, 0x6a_u8, 0x8e_u8, 0xd_u8, 0x44_u8, 0xe7_u8, 0x9f_u8, 0x56_u8])
     def query_interface(this : IRawElementProviderSimple2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2257,7 +2257,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IRawElementProviderSimple3Vtbl,
+  record IRawElementProviderSimple3Vtable,
     query_interface : Proc(IRawElementProviderSimple3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRawElementProviderSimple3*, UInt32),
     release : Proc(IRawElementProviderSimple3*, UInt32),
@@ -2270,7 +2270,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IRawElementProviderSimple3, lpVtbl : IRawElementProviderSimple3Vtbl* do
+  record IRawElementProviderSimple3, lpVtbl : IRawElementProviderSimple3Vtable* do
     GUID = LibC::GUID.new(0xfcf5d820_u32, 0xd7ec_u16, 0x4613_u16, StaticArray[0xbd_u8, 0xf6_u8, 0x42_u8, 0xa8_u8, 0x4c_u8, 0xe7_u8, 0xda_u8, 0xaf_u8])
     def query_interface(this : IRawElementProviderSimple3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2303,7 +2303,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IRawElementProviderFragmentRootVtbl,
+  record IRawElementProviderFragmentRootVtable,
     query_interface : Proc(IRawElementProviderFragmentRoot*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRawElementProviderFragmentRoot*, UInt32),
     release : Proc(IRawElementProviderFragmentRoot*, UInt32),
@@ -2312,7 +2312,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IRawElementProviderFragmentRoot, lpVtbl : IRawElementProviderFragmentRootVtbl* do
+  record IRawElementProviderFragmentRoot, lpVtbl : IRawElementProviderFragmentRootVtable* do
     GUID = LibC::GUID.new(0x620ce2a5_u32, 0xab8f_u16, 0x40a9_u16, StaticArray[0x86_u8, 0xcb_u8, 0xde_u8, 0x3c_u8, 0x75_u8, 0x59_u8, 0x9b_u8, 0x58_u8])
     def query_interface(this : IRawElementProviderFragmentRoot*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2333,7 +2333,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IRawElementProviderFragmentVtbl,
+  record IRawElementProviderFragmentVtable,
     query_interface : Proc(IRawElementProviderFragment*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRawElementProviderFragment*, UInt32),
     release : Proc(IRawElementProviderFragment*, UInt32),
@@ -2346,7 +2346,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IRawElementProviderFragment, lpVtbl : IRawElementProviderFragmentVtbl* do
+  record IRawElementProviderFragment, lpVtbl : IRawElementProviderFragmentVtable* do
     GUID = LibC::GUID.new(0xf7063da8_u32, 0x8359_u16, 0x439c_u16, StaticArray[0x92_u8, 0x97_u8, 0xbb_u8, 0xc5_u8, 0x29_u8, 0x9a_u8, 0x7d_u8, 0x87_u8])
     def query_interface(this : IRawElementProviderFragment*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2379,7 +2379,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IRawElementProviderAdviseEventsVtbl,
+  record IRawElementProviderAdviseEventsVtable,
     query_interface : Proc(IRawElementProviderAdviseEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRawElementProviderAdviseEvents*, UInt32),
     release : Proc(IRawElementProviderAdviseEvents*, UInt32),
@@ -2388,7 +2388,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IRawElementProviderAdviseEvents, lpVtbl : IRawElementProviderAdviseEventsVtbl* do
+  record IRawElementProviderAdviseEvents, lpVtbl : IRawElementProviderAdviseEventsVtable* do
     GUID = LibC::GUID.new(0xa407b27b_u32, 0xf6d_u16, 0x4427_u16, StaticArray[0x92_u8, 0x92_u8, 0x47_u8, 0x3c_u8, 0x7b_u8, 0xf9_u8, 0x32_u8, 0x58_u8])
     def query_interface(this : IRawElementProviderAdviseEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2409,7 +2409,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IRawElementProviderHwndOverrideVtbl,
+  record IRawElementProviderHwndOverrideVtable,
     query_interface : Proc(IRawElementProviderHwndOverride*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRawElementProviderHwndOverride*, UInt32),
     release : Proc(IRawElementProviderHwndOverride*, UInt32),
@@ -2417,7 +2417,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IRawElementProviderHwndOverride, lpVtbl : IRawElementProviderHwndOverrideVtbl* do
+  record IRawElementProviderHwndOverride, lpVtbl : IRawElementProviderHwndOverrideVtable* do
     GUID = LibC::GUID.new(0x1d5df27c_u32, 0x8947_u16, 0x4425_u16, StaticArray[0xb8_u8, 0xd9_u8, 0x79_u8, 0x78_u8, 0x7b_u8, 0xb4_u8, 0x60_u8, 0xb8_u8])
     def query_interface(this : IRawElementProviderHwndOverride*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2435,7 +2435,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IProxyProviderWinEventSinkVtbl,
+  record IProxyProviderWinEventSinkVtable,
     query_interface : Proc(IProxyProviderWinEventSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProxyProviderWinEventSink*, UInt32),
     release : Proc(IProxyProviderWinEventSink*, UInt32),
@@ -2445,7 +2445,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IProxyProviderWinEventSink, lpVtbl : IProxyProviderWinEventSinkVtbl* do
+  record IProxyProviderWinEventSink, lpVtbl : IProxyProviderWinEventSinkVtable* do
     GUID = LibC::GUID.new(0x4fd82b78_u32, 0xa43e_u16, 0x46ac_u16, StaticArray[0x98_u8, 0x3_u8, 0xa_u8, 0x69_u8, 0x69_u8, 0xc7_u8, 0xc1_u8, 0x83_u8])
     def query_interface(this : IProxyProviderWinEventSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2469,7 +2469,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IProxyProviderWinEventHandlerVtbl,
+  record IProxyProviderWinEventHandlerVtable,
     query_interface : Proc(IProxyProviderWinEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProxyProviderWinEventHandler*, UInt32),
     release : Proc(IProxyProviderWinEventHandler*, UInt32),
@@ -2477,7 +2477,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IProxyProviderWinEventHandler, lpVtbl : IProxyProviderWinEventHandlerVtbl* do
+  record IProxyProviderWinEventHandler, lpVtbl : IProxyProviderWinEventHandlerVtable* do
     GUID = LibC::GUID.new(0x89592ad4_u32, 0xf4e0_u16, 0x43d5_u16, StaticArray[0xa3_u8, 0xb6_u8, 0xba_u8, 0xd7_u8, 0xe1_u8, 0x11_u8, 0xb4_u8, 0x35_u8])
     def query_interface(this : IProxyProviderWinEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2495,7 +2495,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IRawElementProviderWindowlessSiteVtbl,
+  record IRawElementProviderWindowlessSiteVtable,
     query_interface : Proc(IRawElementProviderWindowlessSite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRawElementProviderWindowlessSite*, UInt32),
     release : Proc(IRawElementProviderWindowlessSite*, UInt32),
@@ -2504,7 +2504,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IRawElementProviderWindowlessSite, lpVtbl : IRawElementProviderWindowlessSiteVtbl* do
+  record IRawElementProviderWindowlessSite, lpVtbl : IRawElementProviderWindowlessSiteVtable* do
     GUID = LibC::GUID.new(0xa2a93cc_u32, 0xbfad_u16, 0x42ac_u16, StaticArray[0x9b_u8, 0x2e_u8, 0x9_u8, 0x91_u8, 0xfb_u8, 0xd_u8, 0x3e_u8, 0xa0_u8])
     def query_interface(this : IRawElementProviderWindowlessSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2525,7 +2525,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IAccessibleHostingElementProvidersVtbl,
+  record IAccessibleHostingElementProvidersVtable,
     query_interface : Proc(IAccessibleHostingElementProviders*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAccessibleHostingElementProviders*, UInt32),
     release : Proc(IAccessibleHostingElementProviders*, UInt32),
@@ -2534,7 +2534,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IAccessibleHostingElementProviders, lpVtbl : IAccessibleHostingElementProvidersVtbl* do
+  record IAccessibleHostingElementProviders, lpVtbl : IAccessibleHostingElementProvidersVtable* do
     GUID = LibC::GUID.new(0x33ac331b_u32, 0x943e_u16, 0x4020_u16, StaticArray[0xb2_u8, 0x95_u8, 0xdb_u8, 0x37_u8, 0x78_u8, 0x49_u8, 0x74_u8, 0xa3_u8])
     def query_interface(this : IAccessibleHostingElementProviders*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2555,7 +2555,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IRawElementProviderHostingAccessiblesVtbl,
+  record IRawElementProviderHostingAccessiblesVtable,
     query_interface : Proc(IRawElementProviderHostingAccessibles*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRawElementProviderHostingAccessibles*, UInt32),
     release : Proc(IRawElementProviderHostingAccessibles*, UInt32),
@@ -2563,7 +2563,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IRawElementProviderHostingAccessibles, lpVtbl : IRawElementProviderHostingAccessiblesVtbl* do
+  record IRawElementProviderHostingAccessibles, lpVtbl : IRawElementProviderHostingAccessiblesVtable* do
     GUID = LibC::GUID.new(0x24be0b07_u32, 0xd37d_u16, 0x487a_u16, StaticArray[0x98_u8, 0xcf_u8, 0xa1_u8, 0x3e_u8, 0xd4_u8, 0x65_u8, 0xe9_u8, 0xb3_u8])
     def query_interface(this : IRawElementProviderHostingAccessibles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2581,7 +2581,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IDockProviderVtbl,
+  record IDockProviderVtable,
     query_interface : Proc(IDockProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDockProvider*, UInt32),
     release : Proc(IDockProvider*, UInt32),
@@ -2590,7 +2590,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IDockProvider, lpVtbl : IDockProviderVtbl* do
+  record IDockProvider, lpVtbl : IDockProviderVtable* do
     GUID = LibC::GUID.new(0x159bc72c_u32, 0x4ad3_u16, 0x485e_u16, StaticArray[0x96_u8, 0x37_u8, 0xd7_u8, 0x5_u8, 0x2e_u8, 0xdf_u8, 0x1_u8, 0x46_u8])
     def query_interface(this : IDockProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2611,7 +2611,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IExpandCollapseProviderVtbl,
+  record IExpandCollapseProviderVtable,
     query_interface : Proc(IExpandCollapseProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IExpandCollapseProvider*, UInt32),
     release : Proc(IExpandCollapseProvider*, UInt32),
@@ -2621,7 +2621,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IExpandCollapseProvider, lpVtbl : IExpandCollapseProviderVtbl* do
+  record IExpandCollapseProvider, lpVtbl : IExpandCollapseProviderVtable* do
     GUID = LibC::GUID.new(0xd847d3a5_u32, 0xcab0_u16, 0x4a98_u16, StaticArray[0x8c_u8, 0x32_u8, 0xec_u8, 0xb4_u8, 0x5c_u8, 0x59_u8, 0xad_u8, 0x24_u8])
     def query_interface(this : IExpandCollapseProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2645,7 +2645,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IGridProviderVtbl,
+  record IGridProviderVtable,
     query_interface : Proc(IGridProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGridProvider*, UInt32),
     release : Proc(IGridProvider*, UInt32),
@@ -2655,7 +2655,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IGridProvider, lpVtbl : IGridProviderVtbl* do
+  record IGridProvider, lpVtbl : IGridProviderVtable* do
     GUID = LibC::GUID.new(0xb17d6187_u32, 0x907_u16, 0x464b_u16, StaticArray[0xa1_u8, 0x68_u8, 0xe_u8, 0xf1_u8, 0x7a_u8, 0x15_u8, 0x72_u8, 0xb1_u8])
     def query_interface(this : IGridProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2679,7 +2679,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IGridItemProviderVtbl,
+  record IGridItemProviderVtable,
     query_interface : Proc(IGridItemProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGridItemProvider*, UInt32),
     release : Proc(IGridItemProvider*, UInt32),
@@ -2691,7 +2691,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IGridItemProvider, lpVtbl : IGridItemProviderVtbl* do
+  record IGridItemProvider, lpVtbl : IGridItemProviderVtable* do
     GUID = LibC::GUID.new(0xd02541f1_u32, 0xfb81_u16, 0x4d64_u16, StaticArray[0xae_u8, 0x32_u8, 0xf5_u8, 0x20_u8, 0xf8_u8, 0xa6_u8, 0xdb_u8, 0xd1_u8])
     def query_interface(this : IGridItemProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2721,7 +2721,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IInvokeProviderVtbl,
+  record IInvokeProviderVtable,
     query_interface : Proc(IInvokeProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInvokeProvider*, UInt32),
     release : Proc(IInvokeProvider*, UInt32),
@@ -2729,7 +2729,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IInvokeProvider, lpVtbl : IInvokeProviderVtbl* do
+  record IInvokeProvider, lpVtbl : IInvokeProviderVtable* do
     GUID = LibC::GUID.new(0x54fcb24b_u32, 0xe18e_u16, 0x47a2_u16, StaticArray[0xb4_u8, 0xd3_u8, 0xec_u8, 0xcb_u8, 0xe7_u8, 0x75_u8, 0x99_u8, 0xa2_u8])
     def query_interface(this : IInvokeProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2747,7 +2747,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IMultipleViewProviderVtbl,
+  record IMultipleViewProviderVtable,
     query_interface : Proc(IMultipleViewProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMultipleViewProvider*, UInt32),
     release : Proc(IMultipleViewProvider*, UInt32),
@@ -2758,7 +2758,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IMultipleViewProvider, lpVtbl : IMultipleViewProviderVtbl* do
+  record IMultipleViewProvider, lpVtbl : IMultipleViewProviderVtable* do
     GUID = LibC::GUID.new(0x6278cab1_u32, 0xb556_u16, 0x4a1a_u16, StaticArray[0xb4_u8, 0xe0_u8, 0x41_u8, 0x8a_u8, 0xcc_u8, 0x52_u8, 0x32_u8, 0x1_u8])
     def query_interface(this : IMultipleViewProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2785,7 +2785,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IRangeValueProviderVtbl,
+  record IRangeValueProviderVtable,
     query_interface : Proc(IRangeValueProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRangeValueProvider*, UInt32),
     release : Proc(IRangeValueProvider*, UInt32),
@@ -2799,7 +2799,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IRangeValueProvider, lpVtbl : IRangeValueProviderVtbl* do
+  record IRangeValueProvider, lpVtbl : IRangeValueProviderVtable* do
     GUID = LibC::GUID.new(0x36dc7aef_u32, 0x33e6_u16, 0x4691_u16, StaticArray[0xaf_u8, 0xe1_u8, 0x2b_u8, 0xe7_u8, 0x27_u8, 0x4b_u8, 0x3d_u8, 0x33_u8])
     def query_interface(this : IRangeValueProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2835,7 +2835,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IScrollItemProviderVtbl,
+  record IScrollItemProviderVtable,
     query_interface : Proc(IScrollItemProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IScrollItemProvider*, UInt32),
     release : Proc(IScrollItemProvider*, UInt32),
@@ -2843,7 +2843,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IScrollItemProvider, lpVtbl : IScrollItemProviderVtbl* do
+  record IScrollItemProvider, lpVtbl : IScrollItemProviderVtable* do
     GUID = LibC::GUID.new(0x2360c714_u32, 0x4bf1_u16, 0x4b26_u16, StaticArray[0xba_u8, 0x65_u8, 0x9b_u8, 0x21_u8, 0x31_u8, 0x61_u8, 0x27_u8, 0xeb_u8])
     def query_interface(this : IScrollItemProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2861,7 +2861,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record ISelectionProviderVtbl,
+  record ISelectionProviderVtable,
     query_interface : Proc(ISelectionProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISelectionProvider*, UInt32),
     release : Proc(ISelectionProvider*, UInt32),
@@ -2871,7 +2871,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record ISelectionProvider, lpVtbl : ISelectionProviderVtbl* do
+  record ISelectionProvider, lpVtbl : ISelectionProviderVtable* do
     GUID = LibC::GUID.new(0xfb8b03af_u32, 0x3bdf_u16, 0x48d4_u16, StaticArray[0xbd_u8, 0x36_u8, 0x1a_u8, 0x65_u8, 0x79_u8, 0x3b_u8, 0xe1_u8, 0x68_u8])
     def query_interface(this : ISelectionProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2895,7 +2895,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record ISelectionProvider2Vtbl,
+  record ISelectionProvider2Vtable,
     query_interface : Proc(ISelectionProvider2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISelectionProvider2*, UInt32),
     release : Proc(ISelectionProvider2*, UInt32),
@@ -2909,7 +2909,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record ISelectionProvider2, lpVtbl : ISelectionProvider2Vtbl* do
+  record ISelectionProvider2, lpVtbl : ISelectionProvider2Vtable* do
     GUID = LibC::GUID.new(0x14f68475_u32, 0xee1c_u16, 0x44f6_u16, StaticArray[0xa8_u8, 0x69_u8, 0xd2_u8, 0x39_u8, 0x38_u8, 0x1f_u8, 0xf_u8, 0xe7_u8])
     def query_interface(this : ISelectionProvider2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2945,7 +2945,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IScrollProviderVtbl,
+  record IScrollProviderVtable,
     query_interface : Proc(IScrollProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IScrollProvider*, UInt32),
     release : Proc(IScrollProvider*, UInt32),
@@ -2960,7 +2960,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IScrollProvider, lpVtbl : IScrollProviderVtbl* do
+  record IScrollProvider, lpVtbl : IScrollProviderVtable* do
     GUID = LibC::GUID.new(0xb38b8077_u32, 0x1fc3_u16, 0x42a5_u16, StaticArray[0x8c_u8, 0xae_u8, 0xd4_u8, 0xc_u8, 0x22_u8, 0x15_u8, 0x5_u8, 0x5a_u8])
     def query_interface(this : IScrollProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2999,7 +2999,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record ISelectionItemProviderVtbl,
+  record ISelectionItemProviderVtable,
     query_interface : Proc(ISelectionItemProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISelectionItemProvider*, UInt32),
     release : Proc(ISelectionItemProvider*, UInt32),
@@ -3011,7 +3011,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record ISelectionItemProvider, lpVtbl : ISelectionItemProviderVtbl* do
+  record ISelectionItemProvider, lpVtbl : ISelectionItemProviderVtable* do
     GUID = LibC::GUID.new(0x2acad808_u32, 0xb2d4_u16, 0x452d_u16, StaticArray[0xa4_u8, 0x7_u8, 0x91_u8, 0xff_u8, 0x1a_u8, 0xd1_u8, 0x67_u8, 0xb2_u8])
     def query_interface(this : ISelectionItemProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3041,7 +3041,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record ISynchronizedInputProviderVtbl,
+  record ISynchronizedInputProviderVtable,
     query_interface : Proc(ISynchronizedInputProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISynchronizedInputProvider*, UInt32),
     release : Proc(ISynchronizedInputProvider*, UInt32),
@@ -3050,7 +3050,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record ISynchronizedInputProvider, lpVtbl : ISynchronizedInputProviderVtbl* do
+  record ISynchronizedInputProvider, lpVtbl : ISynchronizedInputProviderVtable* do
     GUID = LibC::GUID.new(0x29db1a06_u32, 0x2ce_u16, 0x4cf7_u16, StaticArray[0x9b_u8, 0x42_u8, 0x56_u8, 0x5d_u8, 0x4f_u8, 0xab_u8, 0x20_u8, 0xee_u8])
     def query_interface(this : ISynchronizedInputProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3071,7 +3071,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record ITableProviderVtbl,
+  record ITableProviderVtable,
     query_interface : Proc(ITableProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITableProvider*, UInt32),
     release : Proc(ITableProvider*, UInt32),
@@ -3081,7 +3081,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record ITableProvider, lpVtbl : ITableProviderVtbl* do
+  record ITableProvider, lpVtbl : ITableProviderVtable* do
     GUID = LibC::GUID.new(0x9c860395_u32, 0x97b3_u16, 0x490a_u16, StaticArray[0xb5_u8, 0x2a_u8, 0x85_u8, 0x8c_u8, 0xc2_u8, 0x2a_u8, 0xf1_u8, 0x66_u8])
     def query_interface(this : ITableProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3105,7 +3105,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record ITableItemProviderVtbl,
+  record ITableItemProviderVtable,
     query_interface : Proc(ITableItemProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITableItemProvider*, UInt32),
     release : Proc(ITableItemProvider*, UInt32),
@@ -3114,7 +3114,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record ITableItemProvider, lpVtbl : ITableItemProviderVtbl* do
+  record ITableItemProvider, lpVtbl : ITableItemProviderVtable* do
     GUID = LibC::GUID.new(0xb9734fa6_u32, 0x771f_u16, 0x4d78_u16, StaticArray[0x9c_u8, 0x90_u8, 0x25_u8, 0x17_u8, 0x99_u8, 0x93_u8, 0x49_u8, 0xcd_u8])
     def query_interface(this : ITableItemProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3135,7 +3135,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IToggleProviderVtbl,
+  record IToggleProviderVtable,
     query_interface : Proc(IToggleProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IToggleProvider*, UInt32),
     release : Proc(IToggleProvider*, UInt32),
@@ -3144,7 +3144,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IToggleProvider, lpVtbl : IToggleProviderVtbl* do
+  record IToggleProvider, lpVtbl : IToggleProviderVtable* do
     GUID = LibC::GUID.new(0x56d00bd0_u32, 0xc4f4_u16, 0x433c_u16, StaticArray[0xa8_u8, 0x36_u8, 0x1a_u8, 0x52_u8, 0xa5_u8, 0x7e_u8, 0x8_u8, 0x92_u8])
     def query_interface(this : IToggleProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3165,7 +3165,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record ITransformProviderVtbl,
+  record ITransformProviderVtable,
     query_interface : Proc(ITransformProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITransformProvider*, UInt32),
     release : Proc(ITransformProvider*, UInt32),
@@ -3178,7 +3178,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record ITransformProvider, lpVtbl : ITransformProviderVtbl* do
+  record ITransformProvider, lpVtbl : ITransformProviderVtable* do
     GUID = LibC::GUID.new(0x6829ddc4_u32, 0x4f91_u16, 0x4ffa_u16, StaticArray[0xb8_u8, 0x6f_u8, 0xbd_u8, 0x3e_u8, 0x29_u8, 0x87_u8, 0xcb_u8, 0x4c_u8])
     def query_interface(this : ITransformProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3211,7 +3211,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IValueProviderVtbl,
+  record IValueProviderVtable,
     query_interface : Proc(IValueProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IValueProvider*, UInt32),
     release : Proc(IValueProvider*, UInt32),
@@ -3221,7 +3221,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IValueProvider, lpVtbl : IValueProviderVtbl* do
+  record IValueProvider, lpVtbl : IValueProviderVtable* do
     GUID = LibC::GUID.new(0xc7935180_u32, 0x6fb3_u16, 0x4201_u16, StaticArray[0xb1_u8, 0x74_u8, 0x7d_u8, 0xf7_u8, 0x3a_u8, 0xdb_u8, 0xf6_u8, 0x4a_u8])
     def query_interface(this : IValueProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3245,7 +3245,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IWindowProviderVtbl,
+  record IWindowProviderVtable,
     query_interface : Proc(IWindowProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWindowProvider*, UInt32),
     release : Proc(IWindowProvider*, UInt32),
@@ -3261,7 +3261,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IWindowProvider, lpVtbl : IWindowProviderVtbl* do
+  record IWindowProvider, lpVtbl : IWindowProviderVtable* do
     GUID = LibC::GUID.new(0x987df77b_u32, 0xdb06_u16, 0x4d77_u16, StaticArray[0x8f_u8, 0x8a_u8, 0x86_u8, 0xa9_u8, 0xc3_u8, 0xbb_u8, 0x90_u8, 0xb9_u8])
     def query_interface(this : IWindowProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3303,7 +3303,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record ILegacyIAccessibleProviderVtbl,
+  record ILegacyIAccessibleProviderVtable,
     query_interface : Proc(ILegacyIAccessibleProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILegacyIAccessibleProvider*, UInt32),
     release : Proc(ILegacyIAccessibleProvider*, UInt32),
@@ -3324,7 +3324,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record ILegacyIAccessibleProvider, lpVtbl : ILegacyIAccessibleProviderVtbl* do
+  record ILegacyIAccessibleProvider, lpVtbl : ILegacyIAccessibleProviderVtable* do
     GUID = LibC::GUID.new(0xe44c3566_u32, 0x915d_u16, 0x4070_u16, StaticArray[0x99_u8, 0xc6_u8, 0x4_u8, 0x7b_u8, 0xff_u8, 0x5a_u8, 0x8_u8, 0xf5_u8])
     def query_interface(this : ILegacyIAccessibleProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3381,7 +3381,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IItemContainerProviderVtbl,
+  record IItemContainerProviderVtable,
     query_interface : Proc(IItemContainerProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IItemContainerProvider*, UInt32),
     release : Proc(IItemContainerProvider*, UInt32),
@@ -3389,7 +3389,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IItemContainerProvider, lpVtbl : IItemContainerProviderVtbl* do
+  record IItemContainerProvider, lpVtbl : IItemContainerProviderVtable* do
     GUID = LibC::GUID.new(0xe747770b_u32, 0x39ce_u16, 0x4382_u16, StaticArray[0xab_u8, 0x30_u8, 0xd8_u8, 0xfb_u8, 0x3f_u8, 0x33_u8, 0x6f_u8, 0x24_u8])
     def query_interface(this : IItemContainerProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3407,7 +3407,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IVirtualizedItemProviderVtbl,
+  record IVirtualizedItemProviderVtable,
     query_interface : Proc(IVirtualizedItemProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVirtualizedItemProvider*, UInt32),
     release : Proc(IVirtualizedItemProvider*, UInt32),
@@ -3415,7 +3415,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IVirtualizedItemProvider, lpVtbl : IVirtualizedItemProviderVtbl* do
+  record IVirtualizedItemProvider, lpVtbl : IVirtualizedItemProviderVtable* do
     GUID = LibC::GUID.new(0xcb98b665_u32, 0x2d35_u16, 0x4fac_u16, StaticArray[0xad_u8, 0x35_u8, 0xf3_u8, 0xc6_u8, 0xd_u8, 0xc_u8, 0xb_u8, 0x8b_u8])
     def query_interface(this : IVirtualizedItemProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3433,7 +3433,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IObjectModelProviderVtbl,
+  record IObjectModelProviderVtable,
     query_interface : Proc(IObjectModelProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IObjectModelProvider*, UInt32),
     release : Proc(IObjectModelProvider*, UInt32),
@@ -3441,7 +3441,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IObjectModelProvider, lpVtbl : IObjectModelProviderVtbl* do
+  record IObjectModelProvider, lpVtbl : IObjectModelProviderVtable* do
     GUID = LibC::GUID.new(0x3ad86ebd_u32, 0xf5ef_u16, 0x483d_u16, StaticArray[0xbb_u8, 0x18_u8, 0xb1_u8, 0x4_u8, 0x2a_u8, 0x47_u8, 0x5d_u8, 0x64_u8])
     def query_interface(this : IObjectModelProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3459,7 +3459,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IAnnotationProviderVtbl,
+  record IAnnotationProviderVtable,
     query_interface : Proc(IAnnotationProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAnnotationProvider*, UInt32),
     release : Proc(IAnnotationProvider*, UInt32),
@@ -3471,7 +3471,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IAnnotationProvider, lpVtbl : IAnnotationProviderVtbl* do
+  record IAnnotationProvider, lpVtbl : IAnnotationProviderVtable* do
     GUID = LibC::GUID.new(0xf95c7e80_u32, 0xbd63_u16, 0x4601_u16, StaticArray[0x97_u8, 0x82_u8, 0x44_u8, 0x5e_u8, 0xbf_u8, 0xf0_u8, 0x11_u8, 0xfc_u8])
     def query_interface(this : IAnnotationProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3501,7 +3501,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IStylesProviderVtbl,
+  record IStylesProviderVtable,
     query_interface : Proc(IStylesProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStylesProvider*, UInt32),
     release : Proc(IStylesProvider*, UInt32),
@@ -3515,7 +3515,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IStylesProvider, lpVtbl : IStylesProviderVtbl* do
+  record IStylesProvider, lpVtbl : IStylesProviderVtable* do
     GUID = LibC::GUID.new(0x19b6b649_u32, 0xf5d7_u16, 0x4a6d_u16, StaticArray[0xbd_u8, 0xcb_u8, 0x12_u8, 0x92_u8, 0x52_u8, 0xbe_u8, 0x58_u8, 0x8a_u8])
     def query_interface(this : IStylesProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3551,7 +3551,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record ISpreadsheetProviderVtbl,
+  record ISpreadsheetProviderVtable,
     query_interface : Proc(ISpreadsheetProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISpreadsheetProvider*, UInt32),
     release : Proc(ISpreadsheetProvider*, UInt32),
@@ -3559,7 +3559,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record ISpreadsheetProvider, lpVtbl : ISpreadsheetProviderVtbl* do
+  record ISpreadsheetProvider, lpVtbl : ISpreadsheetProviderVtable* do
     GUID = LibC::GUID.new(0x6f6b5d35_u32, 0x5525_u16, 0x4f80_u16, StaticArray[0xb7_u8, 0x58_u8, 0x85_u8, 0x47_u8, 0x38_u8, 0x32_u8, 0xff_u8, 0xc7_u8])
     def query_interface(this : ISpreadsheetProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3577,7 +3577,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record ISpreadsheetItemProviderVtbl,
+  record ISpreadsheetItemProviderVtable,
     query_interface : Proc(ISpreadsheetItemProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISpreadsheetItemProvider*, UInt32),
     release : Proc(ISpreadsheetItemProvider*, UInt32),
@@ -3587,7 +3587,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record ISpreadsheetItemProvider, lpVtbl : ISpreadsheetItemProviderVtbl* do
+  record ISpreadsheetItemProvider, lpVtbl : ISpreadsheetItemProviderVtable* do
     GUID = LibC::GUID.new(0xeaed4660_u32, 0x7b3d_u16, 0x4879_u16, StaticArray[0xa2_u8, 0xe6_u8, 0x36_u8, 0x5c_u8, 0xe6_u8, 0x3_u8, 0xf3_u8, 0xd0_u8])
     def query_interface(this : ISpreadsheetItemProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3611,7 +3611,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record ITransformProvider2Vtbl,
+  record ITransformProvider2Vtable,
     query_interface : Proc(ITransformProvider2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITransformProvider2*, UInt32),
     release : Proc(ITransformProvider2*, UInt32),
@@ -3630,7 +3630,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record ITransformProvider2, lpVtbl : ITransformProvider2Vtbl* do
+  record ITransformProvider2, lpVtbl : ITransformProvider2Vtable* do
     GUID = LibC::GUID.new(0x4758742f_u32, 0x7ac2_u16, 0x460c_u16, StaticArray[0xbc_u8, 0x48_u8, 0x9_u8, 0xfc_u8, 0x9_u8, 0x30_u8, 0x8a_u8, 0x93_u8])
     def query_interface(this : ITransformProvider2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3681,7 +3681,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IDragProviderVtbl,
+  record IDragProviderVtable,
     query_interface : Proc(IDragProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDragProvider*, UInt32),
     release : Proc(IDragProvider*, UInt32),
@@ -3692,7 +3692,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IDragProvider, lpVtbl : IDragProviderVtbl* do
+  record IDragProvider, lpVtbl : IDragProviderVtable* do
     GUID = LibC::GUID.new(0x6aa7bbbb_u32, 0x7ff9_u16, 0x497d_u16, StaticArray[0x90_u8, 0x4f_u8, 0xd2_u8, 0xb_u8, 0x89_u8, 0x79_u8, 0x29_u8, 0xd8_u8])
     def query_interface(this : IDragProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3719,7 +3719,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IDropTargetProviderVtbl,
+  record IDropTargetProviderVtable,
     query_interface : Proc(IDropTargetProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDropTargetProvider*, UInt32),
     release : Proc(IDropTargetProvider*, UInt32),
@@ -3728,7 +3728,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IDropTargetProvider, lpVtbl : IDropTargetProviderVtbl* do
+  record IDropTargetProvider, lpVtbl : IDropTargetProviderVtable* do
     GUID = LibC::GUID.new(0xbae82bfd_u32, 0x358a_u16, 0x481c_u16, StaticArray[0x85_u8, 0xa0_u8, 0xd8_u8, 0xb4_u8, 0xd9_u8, 0xa_u8, 0x5d_u8, 0x61_u8])
     def query_interface(this : IDropTargetProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3749,7 +3749,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record ITextRangeProviderVtbl,
+  record ITextRangeProviderVtable,
     query_interface : Proc(ITextRangeProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextRangeProvider*, UInt32),
     release : Proc(ITextRangeProvider*, UInt32),
@@ -3774,7 +3774,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record ITextRangeProvider, lpVtbl : ITextRangeProviderVtbl* do
+  record ITextRangeProvider, lpVtbl : ITextRangeProviderVtable* do
     GUID = LibC::GUID.new(0x5347ad7b_u32, 0xc355_u16, 0x46f8_u16, StaticArray[0xaf_u8, 0xf5_u8, 0x90_u8, 0x90_u8, 0x33_u8, 0x58_u8, 0x2f_u8, 0x63_u8])
     def query_interface(this : ITextRangeProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3843,7 +3843,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record ITextProviderVtbl,
+  record ITextProviderVtable,
     query_interface : Proc(ITextProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextProvider*, UInt32),
     release : Proc(ITextProvider*, UInt32),
@@ -3856,7 +3856,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record ITextProvider, lpVtbl : ITextProviderVtbl* do
+  record ITextProvider, lpVtbl : ITextProviderVtable* do
     GUID = LibC::GUID.new(0x3589c92c_u32, 0x63f3_u16, 0x4367_u16, StaticArray[0x99_u8, 0xbb_u8, 0xad_u8, 0xa6_u8, 0x53_u8, 0xb7_u8, 0x7c_u8, 0xf2_u8])
     def query_interface(this : ITextProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3889,7 +3889,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record ITextProvider2Vtbl,
+  record ITextProvider2Vtable,
     query_interface : Proc(ITextProvider2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextProvider2*, UInt32),
     release : Proc(ITextProvider2*, UInt32),
@@ -3904,7 +3904,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record ITextProvider2, lpVtbl : ITextProvider2Vtbl* do
+  record ITextProvider2, lpVtbl : ITextProvider2Vtable* do
     GUID = LibC::GUID.new(0xdc5e6ed_u32, 0x3e16_u16, 0x4bf1_u16, StaticArray[0x8f_u8, 0x9a_u8, 0xa9_u8, 0x79_u8, 0x87_u8, 0x8b_u8, 0xc1_u8, 0x95_u8])
     def query_interface(this : ITextProvider2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3943,7 +3943,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record ITextEditProviderVtbl,
+  record ITextEditProviderVtable,
     query_interface : Proc(ITextEditProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextEditProvider*, UInt32),
     release : Proc(ITextEditProvider*, UInt32),
@@ -3958,7 +3958,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record ITextEditProvider, lpVtbl : ITextEditProviderVtbl* do
+  record ITextEditProvider, lpVtbl : ITextEditProviderVtable* do
     GUID = LibC::GUID.new(0xea3605b4_u32, 0x3a05_u16, 0x400e_u16, StaticArray[0xb5_u8, 0xf9_u8, 0x4e_u8, 0x91_u8, 0xb4_u8, 0xf_u8, 0x61_u8, 0x76_u8])
     def query_interface(this : ITextEditProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3997,7 +3997,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record ITextRangeProvider2Vtbl,
+  record ITextRangeProvider2Vtable,
     query_interface : Proc(ITextRangeProvider2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextRangeProvider2*, UInt32),
     release : Proc(ITextRangeProvider2*, UInt32),
@@ -4023,7 +4023,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record ITextRangeProvider2, lpVtbl : ITextRangeProvider2Vtbl* do
+  record ITextRangeProvider2, lpVtbl : ITextRangeProvider2Vtable* do
     GUID = LibC::GUID.new(0x9bbce42c_u32, 0x1921_u16, 0x4f18_u16, StaticArray[0x89_u8, 0xca_u8, 0xdb_u8, 0xa1_u8, 0x91_u8, 0xa_u8, 0x3_u8, 0x86_u8])
     def query_interface(this : ITextRangeProvider2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4095,7 +4095,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record ITextChildProviderVtbl,
+  record ITextChildProviderVtable,
     query_interface : Proc(ITextChildProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITextChildProvider*, UInt32),
     release : Proc(ITextChildProvider*, UInt32),
@@ -4104,7 +4104,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record ITextChildProvider, lpVtbl : ITextChildProviderVtbl* do
+  record ITextChildProvider, lpVtbl : ITextChildProviderVtable* do
     GUID = LibC::GUID.new(0x4c2de2b9_u32, 0xc88f_u16, 0x4f88_u16, StaticArray[0xa1_u8, 0x11_u8, 0xf1_u8, 0xd3_u8, 0x36_u8, 0xb7_u8, 0xd1_u8, 0xa9_u8])
     def query_interface(this : ITextChildProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4125,7 +4125,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record ICustomNavigationProviderVtbl,
+  record ICustomNavigationProviderVtable,
     query_interface : Proc(ICustomNavigationProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICustomNavigationProvider*, UInt32),
     release : Proc(ICustomNavigationProvider*, UInt32),
@@ -4133,7 +4133,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record ICustomNavigationProvider, lpVtbl : ICustomNavigationProviderVtbl* do
+  record ICustomNavigationProvider, lpVtbl : ICustomNavigationProviderVtable* do
     GUID = LibC::GUID.new(0x2062a28a_u32, 0x8c07_u16, 0x4b94_u16, StaticArray[0x8e_u8, 0x12_u8, 0x70_u8, 0x37_u8, 0xc6_u8, 0x22_u8, 0xae_u8, 0xb8_u8])
     def query_interface(this : ICustomNavigationProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4151,7 +4151,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationPatternInstanceVtbl,
+  record IUIAutomationPatternInstanceVtable,
     query_interface : Proc(IUIAutomationPatternInstance*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationPatternInstance*, UInt32),
     release : Proc(IUIAutomationPatternInstance*, UInt32),
@@ -4160,7 +4160,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationPatternInstance, lpVtbl : IUIAutomationPatternInstanceVtbl* do
+  record IUIAutomationPatternInstance, lpVtbl : IUIAutomationPatternInstanceVtable* do
     GUID = LibC::GUID.new(0xc03a7fe4_u32, 0x9431_u16, 0x409f_u16, StaticArray[0xbe_u8, 0xd8_u8, 0xae_u8, 0x7c_u8, 0x22_u8, 0x99_u8, 0xbc_u8, 0x8d_u8])
     def query_interface(this : IUIAutomationPatternInstance*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4181,7 +4181,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationPatternHandlerVtbl,
+  record IUIAutomationPatternHandlerVtable,
     query_interface : Proc(IUIAutomationPatternHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationPatternHandler*, UInt32),
     release : Proc(IUIAutomationPatternHandler*, UInt32),
@@ -4190,7 +4190,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationPatternHandler, lpVtbl : IUIAutomationPatternHandlerVtbl* do
+  record IUIAutomationPatternHandler, lpVtbl : IUIAutomationPatternHandlerVtable* do
     GUID = LibC::GUID.new(0xd97022f3_u32, 0xa947_u16, 0x465e_u16, StaticArray[0x8b_u8, 0x2a_u8, 0xac_u8, 0x43_u8, 0x15_u8, 0xfa_u8, 0x54_u8, 0xe8_u8])
     def query_interface(this : IUIAutomationPatternHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4211,7 +4211,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationRegistrarVtbl,
+  record IUIAutomationRegistrarVtable,
     query_interface : Proc(IUIAutomationRegistrar*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationRegistrar*, UInt32),
     release : Proc(IUIAutomationRegistrar*, UInt32),
@@ -4221,7 +4221,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationRegistrar, lpVtbl : IUIAutomationRegistrarVtbl* do
+  record IUIAutomationRegistrar, lpVtbl : IUIAutomationRegistrarVtable* do
     GUID = LibC::GUID.new(0x8609c4ec_u32, 0x4a1a_u16, 0x4d88_u16, StaticArray[0xa3_u8, 0x57_u8, 0x5a_u8, 0x66_u8, 0xe0_u8, 0x60_u8, 0xe1_u8, 0xcf_u8])
     def query_interface(this : IUIAutomationRegistrar*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4245,7 +4245,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationElementVtbl,
+  record IUIAutomationElementVtable,
     query_interface : Proc(IUIAutomationElement*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationElement*, UInt32),
     release : Proc(IUIAutomationElement*, UInt32),
@@ -4334,7 +4334,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationElement, lpVtbl : IUIAutomationElementVtbl* do
+  record IUIAutomationElement, lpVtbl : IUIAutomationElementVtable* do
     GUID = LibC::GUID.new(0xd22108aa_u32, 0x8ac5_u16, 0x49a5_u16, StaticArray[0x83_u8, 0x7b_u8, 0x37_u8, 0xbb_u8, 0xb3_u8, 0xd7_u8, 0x59_u8, 0x1e_u8])
     def query_interface(this : IUIAutomationElement*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4595,7 +4595,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationElementArrayVtbl,
+  record IUIAutomationElementArrayVtable,
     query_interface : Proc(IUIAutomationElementArray*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationElementArray*, UInt32),
     release : Proc(IUIAutomationElementArray*, UInt32),
@@ -4604,7 +4604,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationElementArray, lpVtbl : IUIAutomationElementArrayVtbl* do
+  record IUIAutomationElementArray, lpVtbl : IUIAutomationElementArrayVtable* do
     GUID = LibC::GUID.new(0x14314595_u32, 0xb4bc_u16, 0x4055_u16, StaticArray[0x95_u8, 0xf2_u8, 0x58_u8, 0xf2_u8, 0xe4_u8, 0x2c_u8, 0x98_u8, 0x55_u8])
     def query_interface(this : IUIAutomationElementArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4625,14 +4625,14 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationConditionVtbl,
+  record IUIAutomationConditionVtable,
     query_interface : Proc(IUIAutomationCondition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationCondition*, UInt32),
     release : Proc(IUIAutomationCondition*, UInt32)
 
 
   @[Extern]
-  record IUIAutomationCondition, lpVtbl : IUIAutomationConditionVtbl* do
+  record IUIAutomationCondition, lpVtbl : IUIAutomationConditionVtable* do
     GUID = LibC::GUID.new(0x352ffba8_u32, 0x973_u16, 0x437c_u16, StaticArray[0xa6_u8, 0x1f_u8, 0xf6_u8, 0x4c_u8, 0xaf_u8, 0xd8_u8, 0x1d_u8, 0xf9_u8])
     def query_interface(this : IUIAutomationCondition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4647,7 +4647,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationBoolConditionVtbl,
+  record IUIAutomationBoolConditionVtable,
     query_interface : Proc(IUIAutomationBoolCondition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationBoolCondition*, UInt32),
     release : Proc(IUIAutomationBoolCondition*, UInt32),
@@ -4655,7 +4655,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationBoolCondition, lpVtbl : IUIAutomationBoolConditionVtbl* do
+  record IUIAutomationBoolCondition, lpVtbl : IUIAutomationBoolConditionVtable* do
     GUID = LibC::GUID.new(0x1b4e1f2e_u32, 0x75eb_u16, 0x4d0b_u16, StaticArray[0x89_u8, 0x52_u8, 0x5a_u8, 0x69_u8, 0x98_u8, 0x8e_u8, 0x23_u8, 0x7_u8])
     def query_interface(this : IUIAutomationBoolCondition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4673,7 +4673,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationPropertyConditionVtbl,
+  record IUIAutomationPropertyConditionVtable,
     query_interface : Proc(IUIAutomationPropertyCondition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationPropertyCondition*, UInt32),
     release : Proc(IUIAutomationPropertyCondition*, UInt32),
@@ -4683,7 +4683,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationPropertyCondition, lpVtbl : IUIAutomationPropertyConditionVtbl* do
+  record IUIAutomationPropertyCondition, lpVtbl : IUIAutomationPropertyConditionVtable* do
     GUID = LibC::GUID.new(0x99ebf2cb_u32, 0x5578_u16, 0x4267_u16, StaticArray[0x9a_u8, 0xd4_u8, 0xaf_u8, 0xd6_u8, 0xea_u8, 0x77_u8, 0xe9_u8, 0x4b_u8])
     def query_interface(this : IUIAutomationPropertyCondition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4707,7 +4707,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationAndConditionVtbl,
+  record IUIAutomationAndConditionVtable,
     query_interface : Proc(IUIAutomationAndCondition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationAndCondition*, UInt32),
     release : Proc(IUIAutomationAndCondition*, UInt32),
@@ -4717,7 +4717,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationAndCondition, lpVtbl : IUIAutomationAndConditionVtbl* do
+  record IUIAutomationAndCondition, lpVtbl : IUIAutomationAndConditionVtable* do
     GUID = LibC::GUID.new(0xa7d0af36_u32, 0xb912_u16, 0x45fe_u16, StaticArray[0x98_u8, 0x55_u8, 0x9_u8, 0x1d_u8, 0xdc_u8, 0x17_u8, 0x4a_u8, 0xec_u8])
     def query_interface(this : IUIAutomationAndCondition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4741,7 +4741,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationOrConditionVtbl,
+  record IUIAutomationOrConditionVtable,
     query_interface : Proc(IUIAutomationOrCondition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationOrCondition*, UInt32),
     release : Proc(IUIAutomationOrCondition*, UInt32),
@@ -4751,7 +4751,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationOrCondition, lpVtbl : IUIAutomationOrConditionVtbl* do
+  record IUIAutomationOrCondition, lpVtbl : IUIAutomationOrConditionVtable* do
     GUID = LibC::GUID.new(0x8753f032_u32, 0x3db1_u16, 0x47b5_u16, StaticArray[0xa1_u8, 0xfc_u8, 0x6e_u8, 0x34_u8, 0xa2_u8, 0x66_u8, 0xc7_u8, 0x12_u8])
     def query_interface(this : IUIAutomationOrCondition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4775,7 +4775,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationNotConditionVtbl,
+  record IUIAutomationNotConditionVtable,
     query_interface : Proc(IUIAutomationNotCondition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationNotCondition*, UInt32),
     release : Proc(IUIAutomationNotCondition*, UInt32),
@@ -4783,7 +4783,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationNotCondition, lpVtbl : IUIAutomationNotConditionVtbl* do
+  record IUIAutomationNotCondition, lpVtbl : IUIAutomationNotConditionVtable* do
     GUID = LibC::GUID.new(0xf528b657_u32, 0x847b_u16, 0x498c_u16, StaticArray[0x88_u8, 0x96_u8, 0xd5_u8, 0x2b_u8, 0x56_u8, 0x54_u8, 0x7_u8, 0xa1_u8])
     def query_interface(this : IUIAutomationNotCondition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4801,7 +4801,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationCacheRequestVtbl,
+  record IUIAutomationCacheRequestVtable,
     query_interface : Proc(IUIAutomationCacheRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationCacheRequest*, UInt32),
     release : Proc(IUIAutomationCacheRequest*, UInt32),
@@ -4817,7 +4817,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationCacheRequest, lpVtbl : IUIAutomationCacheRequestVtbl* do
+  record IUIAutomationCacheRequest, lpVtbl : IUIAutomationCacheRequestVtable* do
     GUID = LibC::GUID.new(0xb32a92b5_u32, 0xbc25_u16, 0x4078_u16, StaticArray[0x9c_u8, 0x8_u8, 0xd7_u8, 0xee_u8, 0x95_u8, 0xc4_u8, 0x8e_u8, 0x3_u8])
     def query_interface(this : IUIAutomationCacheRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4859,7 +4859,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationTreeWalkerVtbl,
+  record IUIAutomationTreeWalkerVtable,
     query_interface : Proc(IUIAutomationTreeWalker*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationTreeWalker*, UInt32),
     release : Proc(IUIAutomationTreeWalker*, UInt32),
@@ -4879,7 +4879,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationTreeWalker, lpVtbl : IUIAutomationTreeWalkerVtbl* do
+  record IUIAutomationTreeWalker, lpVtbl : IUIAutomationTreeWalkerVtable* do
     GUID = LibC::GUID.new(0x4042c624_u32, 0x389c_u16, 0x4afc_u16, StaticArray[0xa6_u8, 0x30_u8, 0x9d_u8, 0xf8_u8, 0x54_u8, 0xa5_u8, 0x41_u8, 0xfc_u8])
     def query_interface(this : IUIAutomationTreeWalker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4933,7 +4933,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationEventHandlerVtbl,
+  record IUIAutomationEventHandlerVtable,
     query_interface : Proc(IUIAutomationEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationEventHandler*, UInt32),
     release : Proc(IUIAutomationEventHandler*, UInt32),
@@ -4941,7 +4941,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationEventHandler, lpVtbl : IUIAutomationEventHandlerVtbl* do
+  record IUIAutomationEventHandler, lpVtbl : IUIAutomationEventHandlerVtable* do
     GUID = LibC::GUID.new(0x146c3c17_u32, 0xf12e_u16, 0x4e22_u16, StaticArray[0x8c_u8, 0x27_u8, 0xf8_u8, 0x94_u8, 0xb9_u8, 0xb7_u8, 0x9c_u8, 0x69_u8])
     def query_interface(this : IUIAutomationEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4959,7 +4959,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationPropertyChangedEventHandlerVtbl,
+  record IUIAutomationPropertyChangedEventHandlerVtable,
     query_interface : Proc(IUIAutomationPropertyChangedEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationPropertyChangedEventHandler*, UInt32),
     release : Proc(IUIAutomationPropertyChangedEventHandler*, UInt32),
@@ -4967,7 +4967,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationPropertyChangedEventHandler, lpVtbl : IUIAutomationPropertyChangedEventHandlerVtbl* do
+  record IUIAutomationPropertyChangedEventHandler, lpVtbl : IUIAutomationPropertyChangedEventHandlerVtable* do
     GUID = LibC::GUID.new(0x40cd37d4_u32, 0xc756_u16, 0x4b0c_u16, StaticArray[0x8c_u8, 0x6f_u8, 0xbd_u8, 0xdf_u8, 0xee_u8, 0xb1_u8, 0x3b_u8, 0x50_u8])
     def query_interface(this : IUIAutomationPropertyChangedEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4985,7 +4985,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationStructureChangedEventHandlerVtbl,
+  record IUIAutomationStructureChangedEventHandlerVtable,
     query_interface : Proc(IUIAutomationStructureChangedEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationStructureChangedEventHandler*, UInt32),
     release : Proc(IUIAutomationStructureChangedEventHandler*, UInt32),
@@ -4993,7 +4993,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationStructureChangedEventHandler, lpVtbl : IUIAutomationStructureChangedEventHandlerVtbl* do
+  record IUIAutomationStructureChangedEventHandler, lpVtbl : IUIAutomationStructureChangedEventHandlerVtable* do
     GUID = LibC::GUID.new(0xe81d1b4e_u32, 0x11c5_u16, 0x42f8_u16, StaticArray[0x97_u8, 0x54_u8, 0xe7_u8, 0x3_u8, 0x6c_u8, 0x79_u8, 0xf0_u8, 0x54_u8])
     def query_interface(this : IUIAutomationStructureChangedEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5011,7 +5011,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationFocusChangedEventHandlerVtbl,
+  record IUIAutomationFocusChangedEventHandlerVtable,
     query_interface : Proc(IUIAutomationFocusChangedEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationFocusChangedEventHandler*, UInt32),
     release : Proc(IUIAutomationFocusChangedEventHandler*, UInt32),
@@ -5019,7 +5019,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationFocusChangedEventHandler, lpVtbl : IUIAutomationFocusChangedEventHandlerVtbl* do
+  record IUIAutomationFocusChangedEventHandler, lpVtbl : IUIAutomationFocusChangedEventHandlerVtable* do
     GUID = LibC::GUID.new(0xc270f6b5_u32, 0x5c69_u16, 0x4290_u16, StaticArray[0x97_u8, 0x45_u8, 0x7a_u8, 0x7f_u8, 0x97_u8, 0x16_u8, 0x94_u8, 0x68_u8])
     def query_interface(this : IUIAutomationFocusChangedEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5037,7 +5037,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationTextEditTextChangedEventHandlerVtbl,
+  record IUIAutomationTextEditTextChangedEventHandlerVtable,
     query_interface : Proc(IUIAutomationTextEditTextChangedEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationTextEditTextChangedEventHandler*, UInt32),
     release : Proc(IUIAutomationTextEditTextChangedEventHandler*, UInt32),
@@ -5045,7 +5045,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationTextEditTextChangedEventHandler, lpVtbl : IUIAutomationTextEditTextChangedEventHandlerVtbl* do
+  record IUIAutomationTextEditTextChangedEventHandler, lpVtbl : IUIAutomationTextEditTextChangedEventHandlerVtable* do
     GUID = LibC::GUID.new(0x92faa680_u32, 0xe704_u16, 0x4156_u16, StaticArray[0x93_u8, 0x1a_u8, 0xe3_u8, 0x2d_u8, 0x5b_u8, 0xb3_u8, 0x8f_u8, 0x3f_u8])
     def query_interface(this : IUIAutomationTextEditTextChangedEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5063,7 +5063,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationChangesEventHandlerVtbl,
+  record IUIAutomationChangesEventHandlerVtable,
     query_interface : Proc(IUIAutomationChangesEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationChangesEventHandler*, UInt32),
     release : Proc(IUIAutomationChangesEventHandler*, UInt32),
@@ -5071,7 +5071,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationChangesEventHandler, lpVtbl : IUIAutomationChangesEventHandlerVtbl* do
+  record IUIAutomationChangesEventHandler, lpVtbl : IUIAutomationChangesEventHandlerVtable* do
     GUID = LibC::GUID.new(0x58edca55_u32, 0x2c3e_u16, 0x4980_u16, StaticArray[0xb1_u8, 0xb9_u8, 0x56_u8, 0xc1_u8, 0x7f_u8, 0x27_u8, 0xa2_u8, 0xa0_u8])
     def query_interface(this : IUIAutomationChangesEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5089,7 +5089,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationNotificationEventHandlerVtbl,
+  record IUIAutomationNotificationEventHandlerVtable,
     query_interface : Proc(IUIAutomationNotificationEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationNotificationEventHandler*, UInt32),
     release : Proc(IUIAutomationNotificationEventHandler*, UInt32),
@@ -5097,7 +5097,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationNotificationEventHandler, lpVtbl : IUIAutomationNotificationEventHandlerVtbl* do
+  record IUIAutomationNotificationEventHandler, lpVtbl : IUIAutomationNotificationEventHandlerVtable* do
     GUID = LibC::GUID.new(0xc7cb2637_u32, 0xe6c2_u16, 0x4d0c_u16, StaticArray[0x85_u8, 0xde_u8, 0x49_u8, 0x48_u8, 0xc0_u8, 0x21_u8, 0x75_u8, 0xc7_u8])
     def query_interface(this : IUIAutomationNotificationEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5115,7 +5115,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationInvokePatternVtbl,
+  record IUIAutomationInvokePatternVtable,
     query_interface : Proc(IUIAutomationInvokePattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationInvokePattern*, UInt32),
     release : Proc(IUIAutomationInvokePattern*, UInt32),
@@ -5123,7 +5123,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationInvokePattern, lpVtbl : IUIAutomationInvokePatternVtbl* do
+  record IUIAutomationInvokePattern, lpVtbl : IUIAutomationInvokePatternVtable* do
     GUID = LibC::GUID.new(0xfb377fbe_u32, 0x8ea6_u16, 0x46d5_u16, StaticArray[0x9c_u8, 0x73_u8, 0x64_u8, 0x99_u8, 0x64_u8, 0x2d_u8, 0x30_u8, 0x59_u8])
     def query_interface(this : IUIAutomationInvokePattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5141,7 +5141,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationDockPatternVtbl,
+  record IUIAutomationDockPatternVtable,
     query_interface : Proc(IUIAutomationDockPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationDockPattern*, UInt32),
     release : Proc(IUIAutomationDockPattern*, UInt32),
@@ -5151,7 +5151,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationDockPattern, lpVtbl : IUIAutomationDockPatternVtbl* do
+  record IUIAutomationDockPattern, lpVtbl : IUIAutomationDockPatternVtable* do
     GUID = LibC::GUID.new(0xfde5ef97_u32, 0x1464_u16, 0x48f6_u16, StaticArray[0x90_u8, 0xbf_u8, 0x43_u8, 0xd0_u8, 0x94_u8, 0x8e_u8, 0x86_u8, 0xec_u8])
     def query_interface(this : IUIAutomationDockPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5175,7 +5175,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationExpandCollapsePatternVtbl,
+  record IUIAutomationExpandCollapsePatternVtable,
     query_interface : Proc(IUIAutomationExpandCollapsePattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationExpandCollapsePattern*, UInt32),
     release : Proc(IUIAutomationExpandCollapsePattern*, UInt32),
@@ -5186,7 +5186,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationExpandCollapsePattern, lpVtbl : IUIAutomationExpandCollapsePatternVtbl* do
+  record IUIAutomationExpandCollapsePattern, lpVtbl : IUIAutomationExpandCollapsePatternVtable* do
     GUID = LibC::GUID.new(0x619be086_u32, 0x1f4e_u16, 0x4ee4_u16, StaticArray[0xba_u8, 0xfa_u8, 0x21_u8, 0x1_u8, 0x28_u8, 0x73_u8, 0x87_u8, 0x30_u8])
     def query_interface(this : IUIAutomationExpandCollapsePattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5213,7 +5213,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationGridPatternVtbl,
+  record IUIAutomationGridPatternVtable,
     query_interface : Proc(IUIAutomationGridPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationGridPattern*, UInt32),
     release : Proc(IUIAutomationGridPattern*, UInt32),
@@ -5225,7 +5225,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationGridPattern, lpVtbl : IUIAutomationGridPatternVtbl* do
+  record IUIAutomationGridPattern, lpVtbl : IUIAutomationGridPatternVtable* do
     GUID = LibC::GUID.new(0x414c3cdc_u32, 0x856b_u16, 0x4f5b_u16, StaticArray[0x85_u8, 0x38_u8, 0x31_u8, 0x31_u8, 0xc6_u8, 0x30_u8, 0x25_u8, 0x50_u8])
     def query_interface(this : IUIAutomationGridPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5255,7 +5255,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationGridItemPatternVtbl,
+  record IUIAutomationGridItemPatternVtable,
     query_interface : Proc(IUIAutomationGridItemPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationGridItemPattern*, UInt32),
     release : Proc(IUIAutomationGridItemPattern*, UInt32),
@@ -5272,7 +5272,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationGridItemPattern, lpVtbl : IUIAutomationGridItemPatternVtbl* do
+  record IUIAutomationGridItemPattern, lpVtbl : IUIAutomationGridItemPatternVtable* do
     GUID = LibC::GUID.new(0x78f8ef57_u32, 0x66c3_u16, 0x4e09_u16, StaticArray[0xbd_u8, 0x7c_u8, 0xe7_u8, 0x9b_u8, 0x20_u8, 0x4_u8, 0x89_u8, 0x4d_u8])
     def query_interface(this : IUIAutomationGridItemPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5317,7 +5317,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationMultipleViewPatternVtbl,
+  record IUIAutomationMultipleViewPatternVtable,
     query_interface : Proc(IUIAutomationMultipleViewPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationMultipleViewPattern*, UInt32),
     release : Proc(IUIAutomationMultipleViewPattern*, UInt32),
@@ -5330,7 +5330,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationMultipleViewPattern, lpVtbl : IUIAutomationMultipleViewPatternVtbl* do
+  record IUIAutomationMultipleViewPattern, lpVtbl : IUIAutomationMultipleViewPatternVtable* do
     GUID = LibC::GUID.new(0x8d253c91_u32, 0x1dc5_u16, 0x4bb5_u16, StaticArray[0xb1_u8, 0x8f_u8, 0xad_u8, 0xe1_u8, 0x6f_u8, 0xa4_u8, 0x95_u8, 0xe8_u8])
     def query_interface(this : IUIAutomationMultipleViewPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5363,7 +5363,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationObjectModelPatternVtbl,
+  record IUIAutomationObjectModelPatternVtable,
     query_interface : Proc(IUIAutomationObjectModelPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationObjectModelPattern*, UInt32),
     release : Proc(IUIAutomationObjectModelPattern*, UInt32),
@@ -5371,7 +5371,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationObjectModelPattern, lpVtbl : IUIAutomationObjectModelPatternVtbl* do
+  record IUIAutomationObjectModelPattern, lpVtbl : IUIAutomationObjectModelPatternVtable* do
     GUID = LibC::GUID.new(0x71c284b3_u32, 0xc14d_u16, 0x4d14_u16, StaticArray[0x98_u8, 0x1e_u8, 0x19_u8, 0x75_u8, 0x1b_u8, 0xd_u8, 0x75_u8, 0x6d_u8])
     def query_interface(this : IUIAutomationObjectModelPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5389,7 +5389,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationRangeValuePatternVtbl,
+  record IUIAutomationRangeValuePatternVtable,
     query_interface : Proc(IUIAutomationRangeValuePattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationRangeValuePattern*, UInt32),
     release : Proc(IUIAutomationRangeValuePattern*, UInt32),
@@ -5409,7 +5409,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationRangeValuePattern, lpVtbl : IUIAutomationRangeValuePatternVtbl* do
+  record IUIAutomationRangeValuePattern, lpVtbl : IUIAutomationRangeValuePatternVtable* do
     GUID = LibC::GUID.new(0x59213f4f_u32, 0x7346_u16, 0x49e5_u16, StaticArray[0xb1_u8, 0x20_u8, 0x80_u8, 0x55_u8, 0x59_u8, 0x87_u8, 0xa1_u8, 0x48_u8])
     def query_interface(this : IUIAutomationRangeValuePattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5463,7 +5463,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationScrollPatternVtbl,
+  record IUIAutomationScrollPatternVtable,
     query_interface : Proc(IUIAutomationScrollPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationScrollPattern*, UInt32),
     release : Proc(IUIAutomationScrollPattern*, UInt32),
@@ -5484,7 +5484,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationScrollPattern, lpVtbl : IUIAutomationScrollPatternVtbl* do
+  record IUIAutomationScrollPattern, lpVtbl : IUIAutomationScrollPatternVtable* do
     GUID = LibC::GUID.new(0x88f4d42a_u32, 0xe881_u16, 0x459d_u16, StaticArray[0xa7_u8, 0x7c_u8, 0x73_u8, 0xbb_u8, 0xbb_u8, 0x7e_u8, 0x2_u8, 0xdc_u8])
     def query_interface(this : IUIAutomationScrollPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5541,7 +5541,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationScrollItemPatternVtbl,
+  record IUIAutomationScrollItemPatternVtable,
     query_interface : Proc(IUIAutomationScrollItemPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationScrollItemPattern*, UInt32),
     release : Proc(IUIAutomationScrollItemPattern*, UInt32),
@@ -5549,7 +5549,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationScrollItemPattern, lpVtbl : IUIAutomationScrollItemPatternVtbl* do
+  record IUIAutomationScrollItemPattern, lpVtbl : IUIAutomationScrollItemPatternVtable* do
     GUID = LibC::GUID.new(0xb488300f_u32, 0xd015_u16, 0x4f19_u16, StaticArray[0x9c_u8, 0x29_u8, 0xbb_u8, 0x59_u8, 0x5e_u8, 0x36_u8, 0x45_u8, 0xef_u8])
     def query_interface(this : IUIAutomationScrollItemPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5567,7 +5567,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationSelectionPatternVtbl,
+  record IUIAutomationSelectionPatternVtable,
     query_interface : Proc(IUIAutomationSelectionPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationSelectionPattern*, UInt32),
     release : Proc(IUIAutomationSelectionPattern*, UInt32),
@@ -5580,7 +5580,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationSelectionPattern, lpVtbl : IUIAutomationSelectionPatternVtbl* do
+  record IUIAutomationSelectionPattern, lpVtbl : IUIAutomationSelectionPatternVtable* do
     GUID = LibC::GUID.new(0x5ed5202e_u32, 0xb2ac_u16, 0x47a6_u16, StaticArray[0xb6_u8, 0x38_u8, 0x4b_u8, 0xb_u8, 0xf1_u8, 0x40_u8, 0xd7_u8, 0x8e_u8])
     def query_interface(this : IUIAutomationSelectionPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5613,7 +5613,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationSelectionPattern2Vtbl,
+  record IUIAutomationSelectionPattern2Vtable,
     query_interface : Proc(IUIAutomationSelectionPattern2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationSelectionPattern2*, UInt32),
     release : Proc(IUIAutomationSelectionPattern2*, UInt32),
@@ -5634,7 +5634,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationSelectionPattern2, lpVtbl : IUIAutomationSelectionPattern2Vtbl* do
+  record IUIAutomationSelectionPattern2, lpVtbl : IUIAutomationSelectionPattern2Vtable* do
     GUID = LibC::GUID.new(0x532bfae_u32, 0xc011_u16, 0x4e32_u16, StaticArray[0xa3_u8, 0x43_u8, 0x6d_u8, 0x64_u8, 0x2d_u8, 0x79_u8, 0x85_u8, 0x55_u8])
     def query_interface(this : IUIAutomationSelectionPattern2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5691,7 +5691,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationSelectionItemPatternVtbl,
+  record IUIAutomationSelectionItemPatternVtable,
     query_interface : Proc(IUIAutomationSelectionItemPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationSelectionItemPattern*, UInt32),
     release : Proc(IUIAutomationSelectionItemPattern*, UInt32),
@@ -5705,7 +5705,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationSelectionItemPattern, lpVtbl : IUIAutomationSelectionItemPatternVtbl* do
+  record IUIAutomationSelectionItemPattern, lpVtbl : IUIAutomationSelectionItemPatternVtable* do
     GUID = LibC::GUID.new(0xa8efa66a_u32, 0xfda_u16, 0x421a_u16, StaticArray[0x91_u8, 0x94_u8, 0x38_u8, 0x2_u8, 0x1f_u8, 0x35_u8, 0x78_u8, 0xea_u8])
     def query_interface(this : IUIAutomationSelectionItemPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5741,7 +5741,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationSynchronizedInputPatternVtbl,
+  record IUIAutomationSynchronizedInputPatternVtable,
     query_interface : Proc(IUIAutomationSynchronizedInputPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationSynchronizedInputPattern*, UInt32),
     release : Proc(IUIAutomationSynchronizedInputPattern*, UInt32),
@@ -5750,7 +5750,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationSynchronizedInputPattern, lpVtbl : IUIAutomationSynchronizedInputPatternVtbl* do
+  record IUIAutomationSynchronizedInputPattern, lpVtbl : IUIAutomationSynchronizedInputPatternVtable* do
     GUID = LibC::GUID.new(0x2233be0b_u32, 0xafb7_u16, 0x448b_u16, StaticArray[0x9f_u8, 0xda_u8, 0x3b_u8, 0x37_u8, 0x8a_u8, 0xa5_u8, 0xea_u8, 0xe1_u8])
     def query_interface(this : IUIAutomationSynchronizedInputPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5771,7 +5771,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationTablePatternVtbl,
+  record IUIAutomationTablePatternVtable,
     query_interface : Proc(IUIAutomationTablePattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationTablePattern*, UInt32),
     release : Proc(IUIAutomationTablePattern*, UInt32),
@@ -5784,7 +5784,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationTablePattern, lpVtbl : IUIAutomationTablePatternVtbl* do
+  record IUIAutomationTablePattern, lpVtbl : IUIAutomationTablePatternVtable* do
     GUID = LibC::GUID.new(0x620e691c_u32, 0xea96_u16, 0x4710_u16, StaticArray[0xa8_u8, 0x50_u8, 0x75_u8, 0x4b_u8, 0x24_u8, 0xce_u8, 0x24_u8, 0x17_u8])
     def query_interface(this : IUIAutomationTablePattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5817,7 +5817,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationTableItemPatternVtbl,
+  record IUIAutomationTableItemPatternVtable,
     query_interface : Proc(IUIAutomationTableItemPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationTableItemPattern*, UInt32),
     release : Proc(IUIAutomationTableItemPattern*, UInt32),
@@ -5828,7 +5828,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationTableItemPattern, lpVtbl : IUIAutomationTableItemPatternVtbl* do
+  record IUIAutomationTableItemPattern, lpVtbl : IUIAutomationTableItemPatternVtable* do
     GUID = LibC::GUID.new(0xb964eb3_u32, 0xef2e_u16, 0x4464_u16, StaticArray[0x9c_u8, 0x79_u8, 0x61_u8, 0xd6_u8, 0x17_u8, 0x37_u8, 0xa2_u8, 0x7e_u8])
     def query_interface(this : IUIAutomationTableItemPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5855,7 +5855,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationTogglePatternVtbl,
+  record IUIAutomationTogglePatternVtable,
     query_interface : Proc(IUIAutomationTogglePattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationTogglePattern*, UInt32),
     release : Proc(IUIAutomationTogglePattern*, UInt32),
@@ -5865,7 +5865,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationTogglePattern, lpVtbl : IUIAutomationTogglePatternVtbl* do
+  record IUIAutomationTogglePattern, lpVtbl : IUIAutomationTogglePatternVtable* do
     GUID = LibC::GUID.new(0x94cf8058_u32, 0x9b8d_u16, 0x4ab9_u16, StaticArray[0x8b_u8, 0xfd_u8, 0x4c_u8, 0xd0_u8, 0xa3_u8, 0x3c_u8, 0x8c_u8, 0x70_u8])
     def query_interface(this : IUIAutomationTogglePattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5889,7 +5889,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationTransformPatternVtbl,
+  record IUIAutomationTransformPatternVtable,
     query_interface : Proc(IUIAutomationTransformPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationTransformPattern*, UInt32),
     release : Proc(IUIAutomationTransformPattern*, UInt32),
@@ -5905,7 +5905,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationTransformPattern, lpVtbl : IUIAutomationTransformPatternVtbl* do
+  record IUIAutomationTransformPattern, lpVtbl : IUIAutomationTransformPatternVtable* do
     GUID = LibC::GUID.new(0xa9b55844_u32, 0xa55d_u16, 0x4ef0_u16, StaticArray[0x92_u8, 0x6d_u8, 0x56_u8, 0x9c_u8, 0x16_u8, 0xff_u8, 0x89_u8, 0xbb_u8])
     def query_interface(this : IUIAutomationTransformPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5947,7 +5947,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationValuePatternVtbl,
+  record IUIAutomationValuePatternVtable,
     query_interface : Proc(IUIAutomationValuePattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationValuePattern*, UInt32),
     release : Proc(IUIAutomationValuePattern*, UInt32),
@@ -5959,7 +5959,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationValuePattern, lpVtbl : IUIAutomationValuePatternVtbl* do
+  record IUIAutomationValuePattern, lpVtbl : IUIAutomationValuePatternVtable* do
     GUID = LibC::GUID.new(0xa94cd8b1_u32, 0x844_u16, 0x4cd6_u16, StaticArray[0x9d_u8, 0x2d_u8, 0x64_u8, 0x5_u8, 0x37_u8, 0xab_u8, 0x39_u8, 0xe9_u8])
     def query_interface(this : IUIAutomationValuePattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5989,7 +5989,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationWindowPatternVtbl,
+  record IUIAutomationWindowPatternVtable,
     query_interface : Proc(IUIAutomationWindowPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationWindowPattern*, UInt32),
     release : Proc(IUIAutomationWindowPattern*, UInt32),
@@ -6011,7 +6011,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationWindowPattern, lpVtbl : IUIAutomationWindowPatternVtbl* do
+  record IUIAutomationWindowPattern, lpVtbl : IUIAutomationWindowPatternVtable* do
     GUID = LibC::GUID.new(0xfaef453_u32, 0x9208_u16, 0x43ef_u16, StaticArray[0xbb_u8, 0xb2_u8, 0x3b_u8, 0x48_u8, 0x51_u8, 0x77_u8, 0x86_u8, 0x4f_u8])
     def query_interface(this : IUIAutomationWindowPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6071,7 +6071,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationTextRangeVtbl,
+  record IUIAutomationTextRangeVtable,
     query_interface : Proc(IUIAutomationTextRange*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationTextRange*, UInt32),
     release : Proc(IUIAutomationTextRange*, UInt32),
@@ -6096,7 +6096,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationTextRange, lpVtbl : IUIAutomationTextRangeVtbl* do
+  record IUIAutomationTextRange, lpVtbl : IUIAutomationTextRangeVtable* do
     GUID = LibC::GUID.new(0xa543cc6a_u32, 0xf4ae_u16, 0x494b_u16, StaticArray[0x82_u8, 0x39_u8, 0xc8_u8, 0x14_u8, 0x48_u8, 0x11_u8, 0x87_u8, 0xa8_u8])
     def query_interface(this : IUIAutomationTextRange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6165,7 +6165,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationTextRange2Vtbl,
+  record IUIAutomationTextRange2Vtable,
     query_interface : Proc(IUIAutomationTextRange2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationTextRange2*, UInt32),
     release : Proc(IUIAutomationTextRange2*, UInt32),
@@ -6191,7 +6191,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationTextRange2, lpVtbl : IUIAutomationTextRange2Vtbl* do
+  record IUIAutomationTextRange2, lpVtbl : IUIAutomationTextRange2Vtable* do
     GUID = LibC::GUID.new(0xbb9b40e0_u32, 0x5e04_u16, 0x46bd_u16, StaticArray[0x9b_u8, 0xe0_u8, 0x4b_u8, 0x60_u8, 0x1b_u8, 0x9a_u8, 0xfa_u8, 0xd4_u8])
     def query_interface(this : IUIAutomationTextRange2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6263,7 +6263,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationTextRange3Vtbl,
+  record IUIAutomationTextRange3Vtable,
     query_interface : Proc(IUIAutomationTextRange3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationTextRange3*, UInt32),
     release : Proc(IUIAutomationTextRange3*, UInt32),
@@ -6292,7 +6292,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationTextRange3, lpVtbl : IUIAutomationTextRange3Vtbl* do
+  record IUIAutomationTextRange3, lpVtbl : IUIAutomationTextRange3Vtable* do
     GUID = LibC::GUID.new(0x6a315d69_u32, 0x5512_u16, 0x4c2e_u16, StaticArray[0x85_u8, 0xf0_u8, 0x53_u8, 0xfc_u8, 0xe6_u8, 0xdd_u8, 0x4b_u8, 0xc2_u8])
     def query_interface(this : IUIAutomationTextRange3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6373,7 +6373,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationTextRangeArrayVtbl,
+  record IUIAutomationTextRangeArrayVtable,
     query_interface : Proc(IUIAutomationTextRangeArray*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationTextRangeArray*, UInt32),
     release : Proc(IUIAutomationTextRangeArray*, UInt32),
@@ -6382,7 +6382,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationTextRangeArray, lpVtbl : IUIAutomationTextRangeArrayVtbl* do
+  record IUIAutomationTextRangeArray, lpVtbl : IUIAutomationTextRangeArrayVtable* do
     GUID = LibC::GUID.new(0xce4ae76a_u32, 0xe717_u16, 0x4c98_u16, StaticArray[0x81_u8, 0xea_u8, 0x47_u8, 0x37_u8, 0x1d_u8, 0x2_u8, 0x8e_u8, 0xb6_u8])
     def query_interface(this : IUIAutomationTextRangeArray*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6403,7 +6403,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationTextPatternVtbl,
+  record IUIAutomationTextPatternVtable,
     query_interface : Proc(IUIAutomationTextPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationTextPattern*, UInt32),
     release : Proc(IUIAutomationTextPattern*, UInt32),
@@ -6416,7 +6416,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationTextPattern, lpVtbl : IUIAutomationTextPatternVtbl* do
+  record IUIAutomationTextPattern, lpVtbl : IUIAutomationTextPatternVtable* do
     GUID = LibC::GUID.new(0x32eba289_u32, 0x3583_u16, 0x42c9_u16, StaticArray[0x9c_u8, 0x59_u8, 0x3b_u8, 0x6d_u8, 0x9a_u8, 0x1e_u8, 0x9b_u8, 0x6a_u8])
     def query_interface(this : IUIAutomationTextPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6449,7 +6449,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationTextPattern2Vtbl,
+  record IUIAutomationTextPattern2Vtable,
     query_interface : Proc(IUIAutomationTextPattern2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationTextPattern2*, UInt32),
     release : Proc(IUIAutomationTextPattern2*, UInt32),
@@ -6464,7 +6464,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationTextPattern2, lpVtbl : IUIAutomationTextPattern2Vtbl* do
+  record IUIAutomationTextPattern2, lpVtbl : IUIAutomationTextPattern2Vtable* do
     GUID = LibC::GUID.new(0x506a921a_u32, 0xfcc9_u16, 0x409f_u16, StaticArray[0xb2_u8, 0x3b_u8, 0x37_u8, 0xeb_u8, 0x74_u8, 0x10_u8, 0x68_u8, 0x72_u8])
     def query_interface(this : IUIAutomationTextPattern2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6503,7 +6503,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationTextEditPatternVtbl,
+  record IUIAutomationTextEditPatternVtable,
     query_interface : Proc(IUIAutomationTextEditPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationTextEditPattern*, UInt32),
     release : Proc(IUIAutomationTextEditPattern*, UInt32),
@@ -6518,7 +6518,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationTextEditPattern, lpVtbl : IUIAutomationTextEditPatternVtbl* do
+  record IUIAutomationTextEditPattern, lpVtbl : IUIAutomationTextEditPatternVtable* do
     GUID = LibC::GUID.new(0x17e21576_u32, 0x996c_u16, 0x4870_u16, StaticArray[0x99_u8, 0xd9_u8, 0xbf_u8, 0xf3_u8, 0x23_u8, 0x38_u8, 0xc_u8, 0x6_u8])
     def query_interface(this : IUIAutomationTextEditPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6557,7 +6557,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationCustomNavigationPatternVtbl,
+  record IUIAutomationCustomNavigationPatternVtable,
     query_interface : Proc(IUIAutomationCustomNavigationPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationCustomNavigationPattern*, UInt32),
     release : Proc(IUIAutomationCustomNavigationPattern*, UInt32),
@@ -6565,7 +6565,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationCustomNavigationPattern, lpVtbl : IUIAutomationCustomNavigationPatternVtbl* do
+  record IUIAutomationCustomNavigationPattern, lpVtbl : IUIAutomationCustomNavigationPatternVtable* do
     GUID = LibC::GUID.new(0x1ea217a_u32, 0x1766_u16, 0x47ed_u16, StaticArray[0xa6_u8, 0xcc_u8, 0xac_u8, 0xf4_u8, 0x92_u8, 0x85_u8, 0x4b_u8, 0x1f_u8])
     def query_interface(this : IUIAutomationCustomNavigationPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6583,7 +6583,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationActiveTextPositionChangedEventHandlerVtbl,
+  record IUIAutomationActiveTextPositionChangedEventHandlerVtable,
     query_interface : Proc(IUIAutomationActiveTextPositionChangedEventHandler*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationActiveTextPositionChangedEventHandler*, UInt32),
     release : Proc(IUIAutomationActiveTextPositionChangedEventHandler*, UInt32),
@@ -6591,7 +6591,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationActiveTextPositionChangedEventHandler, lpVtbl : IUIAutomationActiveTextPositionChangedEventHandlerVtbl* do
+  record IUIAutomationActiveTextPositionChangedEventHandler, lpVtbl : IUIAutomationActiveTextPositionChangedEventHandlerVtable* do
     GUID = LibC::GUID.new(0xf97933b0_u32, 0x8dae_u16, 0x4496_u16, StaticArray[0x89_u8, 0x97_u8, 0x5b_u8, 0xa0_u8, 0x15_u8, 0xfe_u8, 0xd_u8, 0x82_u8])
     def query_interface(this : IUIAutomationActiveTextPositionChangedEventHandler*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6609,7 +6609,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationLegacyIAccessiblePatternVtbl,
+  record IUIAutomationLegacyIAccessiblePatternVtable,
     query_interface : Proc(IUIAutomationLegacyIAccessiblePattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt32),
     release : Proc(IUIAutomationLegacyIAccessiblePattern*, UInt32),
@@ -6640,7 +6640,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationLegacyIAccessiblePattern, lpVtbl : IUIAutomationLegacyIAccessiblePatternVtbl* do
+  record IUIAutomationLegacyIAccessiblePattern, lpVtbl : IUIAutomationLegacyIAccessiblePatternVtable* do
     GUID = LibC::GUID.new(0x828055ad_u32, 0x355b_u16, 0x4435_u16, StaticArray[0x86_u8, 0xd5_u8, 0x3b_u8, 0x51_u8, 0xc1_u8, 0x4a_u8, 0x9b_u8, 0x1b_u8])
     def query_interface(this : IUIAutomationLegacyIAccessiblePattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6727,7 +6727,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationItemContainerPatternVtbl,
+  record IUIAutomationItemContainerPatternVtable,
     query_interface : Proc(IUIAutomationItemContainerPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationItemContainerPattern*, UInt32),
     release : Proc(IUIAutomationItemContainerPattern*, UInt32),
@@ -6735,7 +6735,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationItemContainerPattern, lpVtbl : IUIAutomationItemContainerPatternVtbl* do
+  record IUIAutomationItemContainerPattern, lpVtbl : IUIAutomationItemContainerPatternVtable* do
     GUID = LibC::GUID.new(0xc690fdb2_u32, 0x27a8_u16, 0x423c_u16, StaticArray[0x81_u8, 0x2d_u8, 0x42_u8, 0x97_u8, 0x73_u8, 0xc9_u8, 0x8_u8, 0x4e_u8])
     def query_interface(this : IUIAutomationItemContainerPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6753,7 +6753,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationVirtualizedItemPatternVtbl,
+  record IUIAutomationVirtualizedItemPatternVtable,
     query_interface : Proc(IUIAutomationVirtualizedItemPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationVirtualizedItemPattern*, UInt32),
     release : Proc(IUIAutomationVirtualizedItemPattern*, UInt32),
@@ -6761,7 +6761,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationVirtualizedItemPattern, lpVtbl : IUIAutomationVirtualizedItemPatternVtbl* do
+  record IUIAutomationVirtualizedItemPattern, lpVtbl : IUIAutomationVirtualizedItemPatternVtable* do
     GUID = LibC::GUID.new(0x6ba3d7a6_u32, 0x4cf_u16, 0x4f11_u16, StaticArray[0x87_u8, 0x93_u8, 0xa8_u8, 0xd1_u8, 0xcd_u8, 0xe9_u8, 0x96_u8, 0x9f_u8])
     def query_interface(this : IUIAutomationVirtualizedItemPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6779,7 +6779,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationAnnotationPatternVtbl,
+  record IUIAutomationAnnotationPatternVtable,
     query_interface : Proc(IUIAutomationAnnotationPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationAnnotationPattern*, UInt32),
     release : Proc(IUIAutomationAnnotationPattern*, UInt32),
@@ -6796,7 +6796,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationAnnotationPattern, lpVtbl : IUIAutomationAnnotationPatternVtbl* do
+  record IUIAutomationAnnotationPattern, lpVtbl : IUIAutomationAnnotationPatternVtable* do
     GUID = LibC::GUID.new(0x9a175b21_u32, 0x339e_u16, 0x41b1_u16, StaticArray[0x8e_u8, 0x8b_u8, 0x62_u8, 0x3f_u8, 0x6b_u8, 0x68_u8, 0x10_u8, 0x98_u8])
     def query_interface(this : IUIAutomationAnnotationPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6841,7 +6841,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationStylesPatternVtbl,
+  record IUIAutomationStylesPatternVtable,
     query_interface : Proc(IUIAutomationStylesPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationStylesPattern*, UInt32),
     release : Proc(IUIAutomationStylesPattern*, UInt32),
@@ -6864,7 +6864,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationStylesPattern, lpVtbl : IUIAutomationStylesPatternVtbl* do
+  record IUIAutomationStylesPattern, lpVtbl : IUIAutomationStylesPatternVtable* do
     GUID = LibC::GUID.new(0x85b5f0a2_u32, 0xbd79_u16, 0x484a_u16, StaticArray[0xad_u8, 0x2b_u8, 0x38_u8, 0x8c_u8, 0x98_u8, 0x38_u8, 0xd5_u8, 0xfb_u8])
     def query_interface(this : IUIAutomationStylesPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6927,7 +6927,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationSpreadsheetPatternVtbl,
+  record IUIAutomationSpreadsheetPatternVtable,
     query_interface : Proc(IUIAutomationSpreadsheetPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationSpreadsheetPattern*, UInt32),
     release : Proc(IUIAutomationSpreadsheetPattern*, UInt32),
@@ -6935,7 +6935,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationSpreadsheetPattern, lpVtbl : IUIAutomationSpreadsheetPatternVtbl* do
+  record IUIAutomationSpreadsheetPattern, lpVtbl : IUIAutomationSpreadsheetPatternVtable* do
     GUID = LibC::GUID.new(0x7517a7c8_u32, 0xfaae_u16, 0x4de9_u16, StaticArray[0x9f_u8, 0x8_u8, 0x29_u8, 0xb9_u8, 0x1e_u8, 0x85_u8, 0x95_u8, 0xc1_u8])
     def query_interface(this : IUIAutomationSpreadsheetPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6953,7 +6953,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationSpreadsheetItemPatternVtbl,
+  record IUIAutomationSpreadsheetItemPatternVtable,
     query_interface : Proc(IUIAutomationSpreadsheetItemPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationSpreadsheetItemPattern*, UInt32),
     release : Proc(IUIAutomationSpreadsheetItemPattern*, UInt32),
@@ -6966,7 +6966,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationSpreadsheetItemPattern, lpVtbl : IUIAutomationSpreadsheetItemPatternVtbl* do
+  record IUIAutomationSpreadsheetItemPattern, lpVtbl : IUIAutomationSpreadsheetItemPatternVtable* do
     GUID = LibC::GUID.new(0x7d4fb86c_u32, 0x8d34_u16, 0x40e1_u16, StaticArray[0x8e_u8, 0x83_u8, 0x62_u8, 0xc1_u8, 0x52_u8, 0x4_u8, 0xe3_u8, 0x35_u8])
     def query_interface(this : IUIAutomationSpreadsheetItemPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6999,7 +6999,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationTransformPattern2Vtbl,
+  record IUIAutomationTransformPattern2Vtable,
     query_interface : Proc(IUIAutomationTransformPattern2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationTransformPattern2*, UInt32),
     release : Proc(IUIAutomationTransformPattern2*, UInt32),
@@ -7025,7 +7025,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationTransformPattern2, lpVtbl : IUIAutomationTransformPattern2Vtbl* do
+  record IUIAutomationTransformPattern2, lpVtbl : IUIAutomationTransformPattern2Vtable* do
     GUID = LibC::GUID.new(0x6d74d017_u32, 0x6ecb_u16, 0x4381_u16, StaticArray[0xb3_u8, 0x8b_u8, 0x3c_u8, 0x17_u8, 0xa4_u8, 0x8f_u8, 0xf1_u8, 0xc2_u8])
     def query_interface(this : IUIAutomationTransformPattern2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7097,7 +7097,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationTextChildPatternVtbl,
+  record IUIAutomationTextChildPatternVtable,
     query_interface : Proc(IUIAutomationTextChildPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationTextChildPattern*, UInt32),
     release : Proc(IUIAutomationTextChildPattern*, UInt32),
@@ -7106,7 +7106,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationTextChildPattern, lpVtbl : IUIAutomationTextChildPatternVtbl* do
+  record IUIAutomationTextChildPattern, lpVtbl : IUIAutomationTextChildPatternVtable* do
     GUID = LibC::GUID.new(0x6552b038_u32, 0xae05_u16, 0x40c8_u16, StaticArray[0xab_u8, 0xfd_u8, 0xaa_u8, 0x8_u8, 0x35_u8, 0x2a_u8, 0xab_u8, 0x86_u8])
     def query_interface(this : IUIAutomationTextChildPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7127,7 +7127,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationDragPatternVtbl,
+  record IUIAutomationDragPatternVtable,
     query_interface : Proc(IUIAutomationDragPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationDragPattern*, UInt32),
     release : Proc(IUIAutomationDragPattern*, UInt32),
@@ -7142,7 +7142,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationDragPattern, lpVtbl : IUIAutomationDragPatternVtbl* do
+  record IUIAutomationDragPattern, lpVtbl : IUIAutomationDragPatternVtable* do
     GUID = LibC::GUID.new(0x1dc7b570_u32, 0x1f54_u16, 0x4bad_u16, StaticArray[0xbc_u8, 0xda_u8, 0xd3_u8, 0x6a_u8, 0x72_u8, 0x2f_u8, 0xb7_u8, 0xbd_u8])
     def query_interface(this : IUIAutomationDragPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7181,7 +7181,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationDropTargetPatternVtbl,
+  record IUIAutomationDropTargetPatternVtable,
     query_interface : Proc(IUIAutomationDropTargetPattern*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationDropTargetPattern*, UInt32),
     release : Proc(IUIAutomationDropTargetPattern*, UInt32),
@@ -7192,7 +7192,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationDropTargetPattern, lpVtbl : IUIAutomationDropTargetPatternVtbl* do
+  record IUIAutomationDropTargetPattern, lpVtbl : IUIAutomationDropTargetPatternVtable* do
     GUID = LibC::GUID.new(0x69a095f7_u32, 0xeee4_u16, 0x430e_u16, StaticArray[0xa4_u8, 0x6b_u8, 0xfb_u8, 0x73_u8, 0xb1_u8, 0xae_u8, 0x39_u8, 0xa5_u8])
     def query_interface(this : IUIAutomationDropTargetPattern*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7219,7 +7219,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationElement2Vtbl,
+  record IUIAutomationElement2Vtable,
     query_interface : Proc(IUIAutomationElement2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationElement2*, UInt32),
     release : Proc(IUIAutomationElement2*, UInt32),
@@ -7314,7 +7314,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationElement2, lpVtbl : IUIAutomationElement2Vtbl* do
+  record IUIAutomationElement2, lpVtbl : IUIAutomationElement2Vtable* do
     GUID = LibC::GUID.new(0x6749c683_u32, 0xf70d_u16, 0x4487_u16, StaticArray[0xa6_u8, 0x98_u8, 0x5f_u8, 0x79_u8, 0xd5_u8, 0x52_u8, 0x90_u8, 0xd6_u8])
     def query_interface(this : IUIAutomationElement2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7593,7 +7593,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationElement3Vtbl,
+  record IUIAutomationElement3Vtable,
     query_interface : Proc(IUIAutomationElement3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationElement3*, UInt32),
     release : Proc(IUIAutomationElement3*, UInt32),
@@ -7691,7 +7691,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationElement3, lpVtbl : IUIAutomationElement3Vtbl* do
+  record IUIAutomationElement3, lpVtbl : IUIAutomationElement3Vtable* do
     GUID = LibC::GUID.new(0x8471df34_u32, 0xaee0_u16, 0x4a01_u16, StaticArray[0xa7_u8, 0xde_u8, 0x7d_u8, 0xb9_u8, 0xaf_u8, 0x12_u8, 0xc2_u8, 0x96_u8])
     def query_interface(this : IUIAutomationElement3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7979,7 +7979,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationElement4Vtbl,
+  record IUIAutomationElement4Vtable,
     query_interface : Proc(IUIAutomationElement4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationElement4*, UInt32),
     release : Proc(IUIAutomationElement4*, UInt32),
@@ -8087,7 +8087,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationElement4, lpVtbl : IUIAutomationElement4Vtbl* do
+  record IUIAutomationElement4, lpVtbl : IUIAutomationElement4Vtable* do
     GUID = LibC::GUID.new(0x3b6e233c_u32, 0x52fb_u16, 0x4063_u16, StaticArray[0xa4_u8, 0xc9_u8, 0x77_u8, 0xc0_u8, 0x75_u8, 0xc2_u8, 0xa0_u8, 0x6b_u8])
     def query_interface(this : IUIAutomationElement4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8405,7 +8405,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationElement5Vtbl,
+  record IUIAutomationElement5Vtable,
     query_interface : Proc(IUIAutomationElement5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationElement5*, UInt32),
     release : Proc(IUIAutomationElement5*, UInt32),
@@ -8517,7 +8517,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationElement5, lpVtbl : IUIAutomationElement5Vtbl* do
+  record IUIAutomationElement5, lpVtbl : IUIAutomationElement5Vtable* do
     GUID = LibC::GUID.new(0x98141c1d_u32, 0xd0e_u16, 0x4175_u16, StaticArray[0xbb_u8, 0xe2_u8, 0x6b_u8, 0xff_u8, 0x45_u8, 0x58_u8, 0x42_u8, 0xa7_u8])
     def query_interface(this : IUIAutomationElement5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8847,7 +8847,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationElement6Vtbl,
+  record IUIAutomationElement6Vtable,
     query_interface : Proc(IUIAutomationElement6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationElement6*, UInt32),
     release : Proc(IUIAutomationElement6*, UInt32),
@@ -8961,7 +8961,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationElement6, lpVtbl : IUIAutomationElement6Vtbl* do
+  record IUIAutomationElement6, lpVtbl : IUIAutomationElement6Vtable* do
     GUID = LibC::GUID.new(0x4780d450_u32, 0x8bca_u16, 0x4977_u16, StaticArray[0xaf_u8, 0xa5_u8, 0xa4_u8, 0xa5_u8, 0x17_u8, 0xf5_u8, 0x55_u8, 0xe3_u8])
     def query_interface(this : IUIAutomationElement6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9297,7 +9297,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationElement7Vtbl,
+  record IUIAutomationElement7Vtable,
     query_interface : Proc(IUIAutomationElement7*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationElement7*, UInt32),
     release : Proc(IUIAutomationElement7*, UInt32),
@@ -9416,7 +9416,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationElement7, lpVtbl : IUIAutomationElement7Vtbl* do
+  record IUIAutomationElement7, lpVtbl : IUIAutomationElement7Vtable* do
     GUID = LibC::GUID.new(0x204e8572_u32, 0xcfc3_u16, 0x4c11_u16, StaticArray[0xb0_u8, 0xc8_u8, 0x7d_u8, 0xa7_u8, 0x42_u8, 0x7_u8, 0x50_u8, 0xb7_u8])
     def query_interface(this : IUIAutomationElement7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9767,7 +9767,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationElement8Vtbl,
+  record IUIAutomationElement8Vtable,
     query_interface : Proc(IUIAutomationElement8*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationElement8*, UInt32),
     release : Proc(IUIAutomationElement8*, UInt32),
@@ -9888,7 +9888,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationElement8, lpVtbl : IUIAutomationElement8Vtbl* do
+  record IUIAutomationElement8, lpVtbl : IUIAutomationElement8Vtable* do
     GUID = LibC::GUID.new(0x8c60217d_u32, 0x5411_u16, 0x4cde_u16, StaticArray[0xbc_u8, 0xc0_u8, 0x1c_u8, 0xed_u8, 0xa2_u8, 0x23_u8, 0x83_u8, 0xc_u8])
     def query_interface(this : IUIAutomationElement8*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10245,7 +10245,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationElement9Vtbl,
+  record IUIAutomationElement9Vtable,
     query_interface : Proc(IUIAutomationElement9*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationElement9*, UInt32),
     release : Proc(IUIAutomationElement9*, UInt32),
@@ -10368,7 +10368,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationElement9, lpVtbl : IUIAutomationElement9Vtbl* do
+  record IUIAutomationElement9, lpVtbl : IUIAutomationElement9Vtable* do
     GUID = LibC::GUID.new(0x39325fac_u32, 0x39d_u16, 0x440e_u16, StaticArray[0xa3_u8, 0xa3_u8, 0x5e_u8, 0xb8_u8, 0x1a_u8, 0x5c_u8, 0xec_u8, 0xc3_u8])
     def query_interface(this : IUIAutomationElement9*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10731,7 +10731,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationProxyFactoryVtbl,
+  record IUIAutomationProxyFactoryVtable,
     query_interface : Proc(IUIAutomationProxyFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationProxyFactory*, UInt32),
     release : Proc(IUIAutomationProxyFactory*, UInt32),
@@ -10740,7 +10740,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationProxyFactory, lpVtbl : IUIAutomationProxyFactoryVtbl* do
+  record IUIAutomationProxyFactory, lpVtbl : IUIAutomationProxyFactoryVtable* do
     GUID = LibC::GUID.new(0x85b94ecd_u32, 0x849d_u16, 0x42b6_u16, StaticArray[0xb9_u8, 0x4d_u8, 0xd6_u8, 0xdb_u8, 0x23_u8, 0xfd_u8, 0xf5_u8, 0xa4_u8])
     def query_interface(this : IUIAutomationProxyFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10761,7 +10761,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationProxyFactoryEntryVtbl,
+  record IUIAutomationProxyFactoryEntryVtable,
     query_interface : Proc(IUIAutomationProxyFactoryEntry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationProxyFactoryEntry*, UInt32),
     release : Proc(IUIAutomationProxyFactoryEntry*, UInt32),
@@ -10781,7 +10781,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationProxyFactoryEntry, lpVtbl : IUIAutomationProxyFactoryEntryVtbl* do
+  record IUIAutomationProxyFactoryEntry, lpVtbl : IUIAutomationProxyFactoryEntryVtable* do
     GUID = LibC::GUID.new(0xd50e472e_u32, 0xb64b_u16, 0x490c_u16, StaticArray[0xbc_u8, 0xa1_u8, 0xd3_u8, 0x6_u8, 0x96_u8, 0xf9_u8, 0xf2_u8, 0x89_u8])
     def query_interface(this : IUIAutomationProxyFactoryEntry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10835,7 +10835,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationProxyFactoryMappingVtbl,
+  record IUIAutomationProxyFactoryMappingVtable,
     query_interface : Proc(IUIAutomationProxyFactoryMapping*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationProxyFactoryMapping*, UInt32),
     release : Proc(IUIAutomationProxyFactoryMapping*, UInt32),
@@ -10851,7 +10851,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationProxyFactoryMapping, lpVtbl : IUIAutomationProxyFactoryMappingVtbl* do
+  record IUIAutomationProxyFactoryMapping, lpVtbl : IUIAutomationProxyFactoryMappingVtable* do
     GUID = LibC::GUID.new(0x9e31e18_u32, 0x872d_u16, 0x4873_u16, StaticArray[0x93_u8, 0xd1_u8, 0x1e_u8, 0x54_u8, 0x1e_u8, 0xc1_u8, 0x33_u8, 0xfd_u8])
     def query_interface(this : IUIAutomationProxyFactoryMapping*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10893,7 +10893,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationEventHandlerGroupVtbl,
+  record IUIAutomationEventHandlerGroupVtable,
     query_interface : Proc(IUIAutomationEventHandlerGroup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomationEventHandlerGroup*, UInt32),
     release : Proc(IUIAutomationEventHandlerGroup*, UInt32),
@@ -10907,7 +10907,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomationEventHandlerGroup, lpVtbl : IUIAutomationEventHandlerGroupVtbl* do
+  record IUIAutomationEventHandlerGroup, lpVtbl : IUIAutomationEventHandlerGroupVtable* do
     GUID = LibC::GUID.new(0xc9ee12f2_u32, 0xc13b_u16, 0x4408_u16, StaticArray[0x99_u8, 0x7c_u8, 0x63_u8, 0x99_u8, 0x14_u8, 0x37_u8, 0x7f_u8, 0x4e_u8])
     def query_interface(this : IUIAutomationEventHandlerGroup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10943,7 +10943,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomationVtbl,
+  record IUIAutomationVtable,
     query_interface : Proc(IUIAutomation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomation*, UInt32),
     release : Proc(IUIAutomation*, UInt32),
@@ -11005,7 +11005,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomation, lpVtbl : IUIAutomationVtbl* do
+  record IUIAutomation, lpVtbl : IUIAutomationVtable* do
     GUID = LibC::GUID.new(0x30cbe57d_u32, 0xd9d0_u16, 0x452a_u16, StaticArray[0xab_u8, 0x13_u8, 0x7a_u8, 0xc5_u8, 0xac_u8, 0x48_u8, 0x25_u8, 0xee_u8])
     def query_interface(this : IUIAutomation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11185,7 +11185,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomation2Vtbl,
+  record IUIAutomation2Vtable,
     query_interface : Proc(IUIAutomation2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomation2*, UInt32),
     release : Proc(IUIAutomation2*, UInt32),
@@ -11253,7 +11253,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomation2, lpVtbl : IUIAutomation2Vtbl* do
+  record IUIAutomation2, lpVtbl : IUIAutomation2Vtable* do
     GUID = LibC::GUID.new(0x34723aff_u32, 0xc9d_u16, 0x49d0_u16, StaticArray[0x98_u8, 0x96_u8, 0x7a_u8, 0xb5_u8, 0x2d_u8, 0xf8_u8, 0xcd_u8, 0x8a_u8])
     def query_interface(this : IUIAutomation2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11451,7 +11451,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomation3Vtbl,
+  record IUIAutomation3Vtable,
     query_interface : Proc(IUIAutomation3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomation3*, UInt32),
     release : Proc(IUIAutomation3*, UInt32),
@@ -11521,7 +11521,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomation3, lpVtbl : IUIAutomation3Vtbl* do
+  record IUIAutomation3, lpVtbl : IUIAutomation3Vtable* do
     GUID = LibC::GUID.new(0x73d768da_u32, 0x9b51_u16, 0x4b89_u16, StaticArray[0x93_u8, 0x6e_u8, 0xc2_u8, 0x9_u8, 0x29_u8, 0x9_u8, 0x73_u8, 0xe7_u8])
     def query_interface(this : IUIAutomation3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11725,7 +11725,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomation4Vtbl,
+  record IUIAutomation4Vtable,
     query_interface : Proc(IUIAutomation4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomation4*, UInt32),
     release : Proc(IUIAutomation4*, UInt32),
@@ -11797,7 +11797,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomation4, lpVtbl : IUIAutomation4Vtbl* do
+  record IUIAutomation4, lpVtbl : IUIAutomation4Vtable* do
     GUID = LibC::GUID.new(0x1189c02a_u32, 0x5f8_u16, 0x4319_u16, StaticArray[0x8e_u8, 0x21_u8, 0xe8_u8, 0x17_u8, 0xe3_u8, 0xdb_u8, 0x28_u8, 0x60_u8])
     def query_interface(this : IUIAutomation4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12007,7 +12007,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomation5Vtbl,
+  record IUIAutomation5Vtable,
     query_interface : Proc(IUIAutomation5*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomation5*, UInt32),
     release : Proc(IUIAutomation5*, UInt32),
@@ -12081,7 +12081,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomation5, lpVtbl : IUIAutomation5Vtbl* do
+  record IUIAutomation5, lpVtbl : IUIAutomation5Vtable* do
     GUID = LibC::GUID.new(0x25f700c8_u32, 0xd816_u16, 0x4057_u16, StaticArray[0xa9_u8, 0xdc_u8, 0x3c_u8, 0xbd_u8, 0xee_u8, 0x77_u8, 0xe2_u8, 0x56_u8])
     def query_interface(this : IUIAutomation5*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12297,7 +12297,7 @@ module Win32cr::UI::Accessibility
   end
 
   @[Extern]
-  record IUIAutomation6Vtbl,
+  record IUIAutomation6Vtable,
     query_interface : Proc(IUIAutomation6*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUIAutomation6*, UInt32),
     release : Proc(IUIAutomation6*, UInt32),
@@ -12380,7 +12380,7 @@ module Win32cr::UI::Accessibility
 
 
   @[Extern]
-  record IUIAutomation6, lpVtbl : IUIAutomation6Vtbl* do
+  record IUIAutomation6, lpVtbl : IUIAutomation6Vtable* do
     GUID = LibC::GUID.new(0xaae072da_u32, 0x29e3_u16, 0x413d_u16, StaticArray[0x87_u8, 0xa7_u8, 0x19_u8, 0x2d_u8, 0xbf_u8, 0x81_u8, 0xed_u8, 0x10_u8])
     def query_interface(this : IUIAutomation6*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12623,500 +12623,747 @@ module Win32cr::UI::Accessibility
   end
 
   def lresultFromObject(riid : LibC::GUID*, wParam : Win32cr::Foundation::WPARAM, punk : Void*) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.LresultFromObject(riid, wParam, punk)
+    {% end %}
   end
 
   def objectFromLresult(lResult : Win32cr::Foundation::LRESULT, riid : LibC::GUID*, wParam : Win32cr::Foundation::WPARAM, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ObjectFromLresult(lResult, riid, wParam, ppvObject)
+    {% end %}
   end
 
   def windowFromAccessibleObject(param0 : Void*, phwnd : Win32cr::Foundation::HWND*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowFromAccessibleObject(param0, phwnd)
+    {% end %}
   end
 
   def accessibleObjectFromWindow(hwnd : Win32cr::Foundation::HWND, dwId : UInt32, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AccessibleObjectFromWindow(hwnd, dwId, riid, ppvObject)
+    {% end %}
   end
 
   def accessibleObjectFromEvent(hwnd : Win32cr::Foundation::HWND, dwId : UInt32, dwChildId : UInt32, ppacc : Void**, pvarChild : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AccessibleObjectFromEvent(hwnd, dwId, dwChildId, ppacc, pvarChild)
+    {% end %}
   end
 
   def accessibleObjectFromPoint(ptScreen : Win32cr::Foundation::POINT, ppacc : Void**, pvarChild : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AccessibleObjectFromPoint(ptScreen, ppacc, pvarChild)
+    {% end %}
   end
 
   def accessibleChildren(paccContainer : Void*, iChildStart : Int32, cChildren : Int32, rgvarChildren : Win32cr::System::Com::VARIANT*, pcObtained : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AccessibleChildren(paccContainer, iChildStart, cChildren, rgvarChildren, pcObtained)
+    {% end %}
   end
 
   def getRoleTextA(lRole : UInt32, lpszRole : UInt8*, cchRoleMax : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetRoleTextA(lRole, lpszRole, cchRoleMax)
+    {% end %}
   end
 
   def getRoleTextW(lRole : UInt32, lpszRole : UInt16*, cchRoleMax : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetRoleTextW(lRole, lpszRole, cchRoleMax)
+    {% end %}
   end
 
   def getStateTextA(lStateBit : UInt32, lpszState : UInt8*, cchState : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetStateTextA(lStateBit, lpszState, cchState)
+    {% end %}
   end
 
   def getStateTextW(lStateBit : UInt32, lpszState : UInt16*, cchState : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetStateTextW(lStateBit, lpszState, cchState)
+    {% end %}
   end
 
   def getOleaccVersionInfo(pVer : UInt32*, pBuild : UInt32*) : Void
+    {% if !flag?(:docs) %}
     C.GetOleaccVersionInfo(pVer, pBuild)
+    {% end %}
   end
 
   def createStdAccessibleObject(hwnd : Win32cr::Foundation::HWND, idObject : Int32, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateStdAccessibleObject(hwnd, idObject, riid, ppvObject)
+    {% end %}
   end
 
   def createStdAccessibleProxyA(hwnd : Win32cr::Foundation::HWND, pClassName : Win32cr::Foundation::PSTR, idObject : Int32, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateStdAccessibleProxyA(hwnd, pClassName, idObject, riid, ppvObject)
+    {% end %}
   end
 
   def createStdAccessibleProxyW(hwnd : Win32cr::Foundation::HWND, pClassName : Win32cr::Foundation::PWSTR, idObject : Int32, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateStdAccessibleProxyW(hwnd, pClassName, idObject, riid, ppvObject)
+    {% end %}
   end
 
   def accSetRunningUtilityState(hwndApp : Win32cr::Foundation::HWND, dwUtilityStateMask : UInt32, dwUtilityState : Win32cr::UI::Accessibility::ACC_UTILITY_STATE_FLAGS) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AccSetRunningUtilityState(hwndApp, dwUtilityStateMask, dwUtilityState)
+    {% end %}
   end
 
   def accNotifyTouchInteraction(hwndApp : Win32cr::Foundation::HWND, hwndTarget : Win32cr::Foundation::HWND, ptTarget : Win32cr::Foundation::POINT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.AccNotifyTouchInteraction(hwndApp, hwndTarget, ptTarget)
+    {% end %}
   end
 
   def uiaGetErrorDescription(pDescription : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UiaGetErrorDescription(pDescription)
+    {% end %}
   end
 
   def uiaHUiaNodeFromVariant(pvar : Win32cr::System::Com::VARIANT*, phnode : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaHUiaNodeFromVariant(pvar, phnode)
+    {% end %}
   end
 
   def uiaHPatternObjectFromVariant(pvar : Win32cr::System::Com::VARIANT*, phobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaHPatternObjectFromVariant(pvar, phobj)
+    {% end %}
   end
 
   def uiaHTextRangeFromVariant(pvar : Win32cr::System::Com::VARIANT*, phtextrange : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaHTextRangeFromVariant(pvar, phtextrange)
+    {% end %}
   end
 
   def uiaNodeRelease(hnode : Win32cr::UI::Accessibility::HUIANODE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UiaNodeRelease(hnode)
+    {% end %}
   end
 
   def uiaGetPropertyValue(hnode : Win32cr::UI::Accessibility::HUIANODE, propertyId : Int32, pValue : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaGetPropertyValue(hnode, propertyId, pValue)
+    {% end %}
   end
 
   def uiaGetPatternProvider(hnode : Win32cr::UI::Accessibility::HUIANODE, patternId : Int32, phobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaGetPatternProvider(hnode, patternId, phobj)
+    {% end %}
   end
 
   def uiaGetRuntimeId(hnode : Win32cr::UI::Accessibility::HUIANODE, pruntimeId : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaGetRuntimeId(hnode, pruntimeId)
+    {% end %}
   end
 
   def uiaSetFocus(hnode : Win32cr::UI::Accessibility::HUIANODE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaSetFocus(hnode)
+    {% end %}
   end
 
   def uiaNavigate(hnode : Win32cr::UI::Accessibility::HUIANODE, direction : Win32cr::UI::Accessibility::NavigateDirection, pCondition : Win32cr::UI::Accessibility::UiaCondition*, pRequest : Win32cr::UI::Accessibility::UiaCacheRequest*, ppRequestedData : Win32cr::System::Com::SAFEARRAY**, ppTreeStructure : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaNavigate(hnode, direction, pCondition, pRequest, ppRequestedData, ppTreeStructure)
+    {% end %}
   end
 
   def uiaGetUpdatedCache(hnode : Win32cr::UI::Accessibility::HUIANODE, pRequest : Win32cr::UI::Accessibility::UiaCacheRequest*, normalizeState : Win32cr::UI::Accessibility::NormalizeState, pNormalizeCondition : Win32cr::UI::Accessibility::UiaCondition*, ppRequestedData : Win32cr::System::Com::SAFEARRAY**, ppTreeStructure : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaGetUpdatedCache(hnode, pRequest, normalizeState, pNormalizeCondition, ppRequestedData, ppTreeStructure)
+    {% end %}
   end
 
   def uiaFind(hnode : Win32cr::UI::Accessibility::HUIANODE, pParams : Win32cr::UI::Accessibility::UiaFindParams*, pRequest : Win32cr::UI::Accessibility::UiaCacheRequest*, ppRequestedData : Win32cr::System::Com::SAFEARRAY**, ppOffsets : Win32cr::System::Com::SAFEARRAY**, ppTreeStructures : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaFind(hnode, pParams, pRequest, ppRequestedData, ppOffsets, ppTreeStructures)
+    {% end %}
   end
 
   def uiaNodeFromPoint(x : Float64, y : Float64, pRequest : Win32cr::UI::Accessibility::UiaCacheRequest*, ppRequestedData : Win32cr::System::Com::SAFEARRAY**, ppTreeStructure : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaNodeFromPoint(x, y, pRequest, ppRequestedData, ppTreeStructure)
+    {% end %}
   end
 
   def uiaNodeFromFocus(pRequest : Win32cr::UI::Accessibility::UiaCacheRequest*, ppRequestedData : Win32cr::System::Com::SAFEARRAY**, ppTreeStructure : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaNodeFromFocus(pRequest, ppRequestedData, ppTreeStructure)
+    {% end %}
   end
 
   def uiaNodeFromHandle(hwnd : Win32cr::Foundation::HWND, phnode : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaNodeFromHandle(hwnd, phnode)
+    {% end %}
   end
 
   def uiaNodeFromProvider(pProvider : Void*, phnode : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaNodeFromProvider(pProvider, phnode)
+    {% end %}
   end
 
   def uiaGetRootNode(phnode : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaGetRootNode(phnode)
+    {% end %}
   end
 
   def uiaRegisterProviderCallback(pCallback : Win32cr::UI::Accessibility::UiaProviderCallback*) : Void
+    {% if !flag?(:docs) %}
     C.UiaRegisterProviderCallback(pCallback)
+    {% end %}
   end
 
   def uiaLookupId(type__ : Win32cr::UI::Accessibility::AutomationIdentifierType, pGuid : LibC::GUID*) : Int32
+    {% if !flag?(:docs) %}
     C.UiaLookupId(type__, pGuid)
+    {% end %}
   end
 
   def uiaGetReservedNotSupportedValue(punkNotSupportedValue : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaGetReservedNotSupportedValue(punkNotSupportedValue)
+    {% end %}
   end
 
   def uiaGetReservedMixedAttributeValue(punkMixedAttributeValue : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaGetReservedMixedAttributeValue(punkMixedAttributeValue)
+    {% end %}
   end
 
   def uiaClientsAreListening : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UiaClientsAreListening
+    {% end %}
   end
 
   def uiaRaiseAutomationPropertyChangedEvent(pProvider : Void*, id : Int32, oldValue : Win32cr::System::Com::VARIANT, newValue : Win32cr::System::Com::VARIANT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaRaiseAutomationPropertyChangedEvent(pProvider, id, oldValue, newValue)
+    {% end %}
   end
 
   def uiaRaiseAutomationEvent(pProvider : Void*, id : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaRaiseAutomationEvent(pProvider, id)
+    {% end %}
   end
 
   def uiaRaiseStructureChangedEvent(pProvider : Void*, structureChangeType : Win32cr::UI::Accessibility::StructureChangeType, pRuntimeId : Int32*, cRuntimeIdLen : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaRaiseStructureChangedEvent(pProvider, structureChangeType, pRuntimeId, cRuntimeIdLen)
+    {% end %}
   end
 
   def uiaRaiseAsyncContentLoadedEvent(pProvider : Void*, asyncContentLoadedState : Win32cr::UI::Accessibility::AsyncContentLoadedState, percentComplete : Float64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaRaiseAsyncContentLoadedEvent(pProvider, asyncContentLoadedState, percentComplete)
+    {% end %}
   end
 
   def uiaRaiseTextEditTextChangedEvent(pProvider : Void*, textEditChangeType : Win32cr::UI::Accessibility::TextEditChangeType, pChangedData : Win32cr::System::Com::SAFEARRAY*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaRaiseTextEditTextChangedEvent(pProvider, textEditChangeType, pChangedData)
+    {% end %}
   end
 
   def uiaRaiseChangesEvent(pProvider : Void*, eventIdCount : Int32, pUiaChanges : Win32cr::UI::Accessibility::UiaChangeInfo*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaRaiseChangesEvent(pProvider, eventIdCount, pUiaChanges)
+    {% end %}
   end
 
   def uiaRaiseNotificationEvent(provider : Void*, notificationKind : Win32cr::UI::Accessibility::NotificationKind, notificationProcessing : Win32cr::UI::Accessibility::NotificationProcessing, displayString : Win32cr::Foundation::BSTR, activityId : Win32cr::Foundation::BSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaRaiseNotificationEvent(provider, notificationKind, notificationProcessing, displayString, activityId)
+    {% end %}
   end
 
   def uiaRaiseActiveTextPositionChangedEvent(provider : Void*, textRange : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaRaiseActiveTextPositionChangedEvent(provider, textRange)
+    {% end %}
   end
 
   def uiaAddEvent(hnode : Win32cr::UI::Accessibility::HUIANODE, eventId : Int32, pCallback : Win32cr::UI::Accessibility::UiaEventCallback*, scope : Win32cr::UI::Accessibility::TreeScope, pProperties : Int32*, cProperties : Int32, pRequest : Win32cr::UI::Accessibility::UiaCacheRequest*, phEvent : Win32cr::UI::Accessibility::HUIAEVENT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaAddEvent(hnode, eventId, pCallback, scope, pProperties, cProperties, pRequest, phEvent)
+    {% end %}
   end
 
   def uiaRemoveEvent(hEvent : Win32cr::UI::Accessibility::HUIAEVENT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaRemoveEvent(hEvent)
+    {% end %}
   end
 
   def uiaEventAddWindow(hEvent : Win32cr::UI::Accessibility::HUIAEVENT, hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaEventAddWindow(hEvent, hwnd)
+    {% end %}
   end
 
   def uiaEventRemoveWindow(hEvent : Win32cr::UI::Accessibility::HUIAEVENT, hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaEventRemoveWindow(hEvent, hwnd)
+    {% end %}
   end
 
   def dockPatternSetDockPosition(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, dockPosition : Win32cr::UI::Accessibility::DockPosition) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DockPattern_SetDockPosition(hobj, dockPosition)
+    {% end %}
   end
 
   def expandCollapsePatternCollapse(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ExpandCollapsePattern_Collapse(hobj)
+    {% end %}
   end
 
   def expandCollapsePatternExpand(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ExpandCollapsePattern_Expand(hobj)
+    {% end %}
   end
 
   def gridPatternGetItem(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, row : Int32, column : Int32, pResult : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GridPattern_GetItem(hobj, row, column, pResult)
+    {% end %}
   end
 
   def invokePatternInvoke(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.InvokePattern_Invoke(hobj)
+    {% end %}
   end
 
   def multipleViewPatternGetViewName(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, viewId : Int32, ppStr : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MultipleViewPattern_GetViewName(hobj, viewId, ppStr)
+    {% end %}
   end
 
   def multipleViewPatternSetCurrentView(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, viewId : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.MultipleViewPattern_SetCurrentView(hobj, viewId)
+    {% end %}
   end
 
   def rangeValuePatternSetValue(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, val : Float64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RangeValuePattern_SetValue(hobj, val)
+    {% end %}
   end
 
   def scrollItemPatternScrollIntoView(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScrollItemPattern_ScrollIntoView(hobj)
+    {% end %}
   end
 
   def scrollPatternScroll(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, horizontalAmount : Win32cr::UI::Accessibility::ScrollAmount, verticalAmount : Win32cr::UI::Accessibility::ScrollAmount) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScrollPattern_Scroll(hobj, horizontalAmount, verticalAmount)
+    {% end %}
   end
 
   def scrollPatternSetScrollPercent(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, horizontalPercent : Float64, verticalPercent : Float64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ScrollPattern_SetScrollPercent(hobj, horizontalPercent, verticalPercent)
+    {% end %}
   end
 
   def selectionItemPatternAddToSelection(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SelectionItemPattern_AddToSelection(hobj)
+    {% end %}
   end
 
   def selectionItemPatternRemoveFromSelection(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SelectionItemPattern_RemoveFromSelection(hobj)
+    {% end %}
   end
 
   def selectionItemPatternSelect(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SelectionItemPattern_Select(hobj)
+    {% end %}
   end
 
   def togglePatternToggle(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TogglePattern_Toggle(hobj)
+    {% end %}
   end
 
   def transformPatternMove(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, x : Float64, y : Float64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TransformPattern_Move(hobj, x, y)
+    {% end %}
   end
 
   def transformPatternResize(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, width : Float64, height : Float64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TransformPattern_Resize(hobj, width, height)
+    {% end %}
   end
 
   def transformPatternRotate(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, degrees : Float64) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TransformPattern_Rotate(hobj, degrees)
+    {% end %}
   end
 
   def valuePatternSetValue(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, pVal : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ValuePattern_SetValue(hobj, pVal)
+    {% end %}
   end
 
   def windowPatternClose(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowPattern_Close(hobj)
+    {% end %}
   end
 
   def windowPatternSetWindowVisualState(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, state : Win32cr::UI::Accessibility::WindowVisualState) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowPattern_SetWindowVisualState(hobj, state)
+    {% end %}
   end
 
   def windowPatternWaitForInputIdle(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, milliseconds : Int32, pResult : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WindowPattern_WaitForInputIdle(hobj, milliseconds, pResult)
+    {% end %}
   end
 
   def textPatternGetSelection(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, pRetVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextPattern_GetSelection(hobj, pRetVal)
+    {% end %}
   end
 
   def textPatternGetVisibleRanges(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, pRetVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextPattern_GetVisibleRanges(hobj, pRetVal)
+    {% end %}
   end
 
   def textPatternRangeFromChild(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, hnodeChild : Win32cr::UI::Accessibility::HUIANODE, pRetVal : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextPattern_RangeFromChild(hobj, hnodeChild, pRetVal)
+    {% end %}
   end
 
   def textPatternRangeFromPoint(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, point : Win32cr::UI::Accessibility::UiaPoint, pRetVal : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextPattern_RangeFromPoint(hobj, point, pRetVal)
+    {% end %}
   end
 
   def textPatternGetDocumentRange(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, pRetVal : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextPattern_get_DocumentRange(hobj, pRetVal)
+    {% end %}
   end
 
   def textPatternGetSupportedTextSelection(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, pRetVal : Win32cr::UI::Accessibility::SupportedTextSelection*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextPattern_get_SupportedTextSelection(hobj, pRetVal)
+    {% end %}
   end
 
   def textRangeClone(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, pRetVal : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextRange_Clone(hobj, pRetVal)
+    {% end %}
   end
 
   def textRangeCompare(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, range : Win32cr::UI::Accessibility::HUIATEXTRANGE, pRetVal : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextRange_Compare(hobj, range, pRetVal)
+    {% end %}
   end
 
   def textRangeCompareEndpoints(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, endpoint : Win32cr::UI::Accessibility::TextPatternRangeEndpoint, targetRange : Win32cr::UI::Accessibility::HUIATEXTRANGE, targetEndpoint : Win32cr::UI::Accessibility::TextPatternRangeEndpoint, pRetVal : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextRange_CompareEndpoints(hobj, endpoint, targetRange, targetEndpoint, pRetVal)
+    {% end %}
   end
 
   def textRangeExpandToEnclosingUnit(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, unit : Win32cr::UI::Accessibility::TextUnit) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextRange_ExpandToEnclosingUnit(hobj, unit)
+    {% end %}
   end
 
   def textRangeGetAttributeValue(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, attributeId : Int32, pRetVal : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextRange_GetAttributeValue(hobj, attributeId, pRetVal)
+    {% end %}
   end
 
   def textRangeFindAttribute(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, attributeId : Int32, val : Win32cr::System::Com::VARIANT, backward : Win32cr::Foundation::BOOL, pRetVal : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextRange_FindAttribute(hobj, attributeId, val, backward, pRetVal)
+    {% end %}
   end
 
   def textRangeFindText(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, text : Win32cr::Foundation::BSTR, backward : Win32cr::Foundation::BOOL, ignoreCase : Win32cr::Foundation::BOOL, pRetVal : Win32cr::UI::Accessibility::HUIATEXTRANGE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextRange_FindText(hobj, text, backward, ignoreCase, pRetVal)
+    {% end %}
   end
 
   def textRangeGetBoundingRectangles(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, pRetVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextRange_GetBoundingRectangles(hobj, pRetVal)
+    {% end %}
   end
 
   def textRangeGetEnclosingElement(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, pRetVal : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextRange_GetEnclosingElement(hobj, pRetVal)
+    {% end %}
   end
 
   def textRangeGetText(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, maxLength : Int32, pRetVal : Win32cr::Foundation::BSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextRange_GetText(hobj, maxLength, pRetVal)
+    {% end %}
   end
 
   def textRangeMove(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, unit : Win32cr::UI::Accessibility::TextUnit, count : Int32, pRetVal : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextRange_Move(hobj, unit, count, pRetVal)
+    {% end %}
   end
 
   def textRangeMoveEndpointByUnit(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, endpoint : Win32cr::UI::Accessibility::TextPatternRangeEndpoint, unit : Win32cr::UI::Accessibility::TextUnit, count : Int32, pRetVal : Int32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextRange_MoveEndpointByUnit(hobj, endpoint, unit, count, pRetVal)
+    {% end %}
   end
 
   def textRangeMoveEndpointByRange(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, endpoint : Win32cr::UI::Accessibility::TextPatternRangeEndpoint, targetRange : Win32cr::UI::Accessibility::HUIATEXTRANGE, targetEndpoint : Win32cr::UI::Accessibility::TextPatternRangeEndpoint) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextRange_MoveEndpointByRange(hobj, endpoint, targetRange, targetEndpoint)
+    {% end %}
   end
 
   def textRangeSelect(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextRange_Select(hobj)
+    {% end %}
   end
 
   def textRangeAddToSelection(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextRange_AddToSelection(hobj)
+    {% end %}
   end
 
   def textRangeRemoveFromSelection(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextRange_RemoveFromSelection(hobj)
+    {% end %}
   end
 
   def textRangeScrollIntoView(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, alignToTop : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextRange_ScrollIntoView(hobj, alignToTop)
+    {% end %}
   end
 
   def textRangeGetChildren(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE, pRetVal : Win32cr::System::Com::SAFEARRAY**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.TextRange_GetChildren(hobj, pRetVal)
+    {% end %}
   end
 
   def itemContainerPatternFindItemByProperty(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, hnodeStartAfter : Win32cr::UI::Accessibility::HUIANODE, propertyId : Int32, value : Win32cr::System::Com::VARIANT, pFound : Win32cr::UI::Accessibility::HUIANODE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ItemContainerPattern_FindItemByProperty(hobj, hnodeStartAfter, propertyId, value, pFound)
+    {% end %}
   end
 
   def legacyIAccessiblePatternSelect(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, flagsSelect : Int32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.LegacyIAccessiblePattern_Select(hobj, flagsSelect)
+    {% end %}
   end
 
   def legacyIAccessiblePatternDoDefaultAction(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.LegacyIAccessiblePattern_DoDefaultAction(hobj)
+    {% end %}
   end
 
   def legacyIAccessiblePatternSetValue(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, szValue : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.LegacyIAccessiblePattern_SetValue(hobj, szValue)
+    {% end %}
   end
 
   def legacyIAccessiblePatternGetIAccessible(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, pAccessible : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.LegacyIAccessiblePattern_GetIAccessible(hobj, pAccessible)
+    {% end %}
   end
 
   def synchronizedInputPatternStartListening(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT, inputType : Win32cr::UI::Accessibility::SynchronizedInputType) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SynchronizedInputPattern_StartListening(hobj, inputType)
+    {% end %}
   end
 
   def synchronizedInputPatternCancel(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SynchronizedInputPattern_Cancel(hobj)
+    {% end %}
   end
 
   def virtualizedItemPatternRealize(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.VirtualizedItemPattern_Realize(hobj)
+    {% end %}
   end
 
   def uiaPatternRelease(hobj : Win32cr::UI::Accessibility::HUIAPATTERNOBJECT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UiaPatternRelease(hobj)
+    {% end %}
   end
 
   def uiaTextRangeRelease(hobj : Win32cr::UI::Accessibility::HUIATEXTRANGE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UiaTextRangeRelease(hobj)
+    {% end %}
   end
 
   def uiaReturnRawElementProvider(hwnd : Win32cr::Foundation::HWND, wParam : Win32cr::Foundation::WPARAM, lParam : Win32cr::Foundation::LPARAM, el : Void*) : Win32cr::Foundation::LRESULT
+    {% if !flag?(:docs) %}
     C.UiaReturnRawElementProvider(hwnd, wParam, lParam, el)
+    {% end %}
   end
 
   def uiaHostProviderFromHwnd(hwnd : Win32cr::Foundation::HWND, ppProvider : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaHostProviderFromHwnd(hwnd, ppProvider)
+    {% end %}
   end
 
   def uiaProviderForNonClient(hwnd : Win32cr::Foundation::HWND, idObject : Int32, idChild : Int32, ppProvider : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaProviderForNonClient(hwnd, idObject, idChild, ppProvider)
+    {% end %}
   end
 
   def uiaIAccessibleFromProvider(pProvider : Void*, dwFlags : UInt32, ppAccessible : Void**, pvarChild : Win32cr::System::Com::VARIANT*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaIAccessibleFromProvider(pProvider, dwFlags, ppAccessible, pvarChild)
+    {% end %}
   end
 
   def uiaProviderFromIAccessible(pAccessible : Void*, idChild : Int32, dwFlags : UInt32, ppProvider : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaProviderFromIAccessible(pAccessible, idChild, dwFlags, ppProvider)
+    {% end %}
   end
 
   def uiaDisconnectAllProviders : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaDisconnectAllProviders
+    {% end %}
   end
 
   def uiaDisconnectProvider(pProvider : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UiaDisconnectProvider(pProvider)
+    {% end %}
   end
 
   def uiaHasServerSideProvider(hwnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UiaHasServerSideProvider(hwnd)
+    {% end %}
   end
 
   def registerPointerInputTarget(hwnd : Win32cr::Foundation::HWND, pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RegisterPointerInputTarget(hwnd, pointerType)
+    {% end %}
   end
 
   def unregisterPointerInputTarget(hwnd : Win32cr::Foundation::HWND, pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnregisterPointerInputTarget(hwnd, pointerType)
+    {% end %}
   end
 
   def registerPointerInputTargetEx(hwnd : Win32cr::Foundation::HWND, pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE, fObserve : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RegisterPointerInputTargetEx(hwnd, pointerType, fObserve)
+    {% end %}
   end
 
   def unregisterPointerInputTargetEx(hwnd : Win32cr::Foundation::HWND, pointerType : Win32cr::UI::WindowsAndMessaging::POINTER_INPUT_TYPE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnregisterPointerInputTargetEx(hwnd, pointerType)
+    {% end %}
   end
 
   def notifyWinEvent(event : UInt32, hwnd : Win32cr::Foundation::HWND, idObject : Int32, idChild : Int32) : Void
+    {% if !flag?(:docs) %}
     C.NotifyWinEvent(event, hwnd, idObject, idChild)
+    {% end %}
   end
 
   def setWinEventHook(eventMin : UInt32, eventMax : UInt32, hmodWinEventProc : Win32cr::Foundation::HINSTANCE, pfnWinEventProc : Win32cr::UI::Accessibility::WINEVENTPROC, idProcess : UInt32, idThread : UInt32, dwFlags : UInt32) : Win32cr::UI::Accessibility::HWINEVENTHOOK
+    {% if !flag?(:docs) %}
     C.SetWinEventHook(eventMin, eventMax, hmodWinEventProc, pfnWinEventProc, idProcess, idThread, dwFlags)
+    {% end %}
   end
 
   def isWinEventHookInstalled(event : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsWinEventHookInstalled(event)
+    {% end %}
   end
 
   def unhookWinEvent(hWinEventHook : Win32cr::UI::Accessibility::HWINEVENTHOOK) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnhookWinEvent(hWinEventHook)
+    {% end %}
   end
 
-  @[Link("oleacc")]
-  @[Link("uiautomationcore")]
-  @[Link("user32")]
+  @[Link("oleacc.dll")]
+  @[Link("uiautomationcore.dll")]
+  @[Link("user32.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun LresultFromObject(riid : LibC::GUID*, wParam : Win32cr::Foundation::WPARAM, punk : Void*) : Win32cr::Foundation::LRESULT
@@ -13488,4 +13735,5 @@ module Win32cr::UI::Accessibility
     fun UnhookWinEvent(hWinEventHook : Win32cr::UI::Accessibility::HWINEVENTHOOK) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

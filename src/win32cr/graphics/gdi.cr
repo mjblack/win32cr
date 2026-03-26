@@ -245,16 +245,6 @@ module Win32cr::Graphics::Gdi
   LCS_GM_ABS_COLORIMETRIC = 8_i32
   CM_OUT_OF_GAMUT = 255_u32
   CM_IN_GAMUT = 0_u32
-  BI_RGB = 0_i32
-  BI_RLE8 = 1_i32
-  BI_RLE4 = 2_i32
-  BI_BITFIELDS = 3_i32
-  BI_JPEG = 4_i32
-  BI_PNG = 5_i32
-  TMPF_FIXED_PITCH = 1_u32
-  TMPF_VECTOR = 2_u32
-  TMPF_DEVICE = 8_u32
-  TMPF_TRUETYPE = 4_u32
   NTM_REGULAR = 64_i32
   NTM_BOLD = 32_i32
   NTM_ITALIC = 1_i32
@@ -272,26 +262,6 @@ module Win32cr::Graphics::Gdi
   FIXED_PITCH = 1_u32
   VARIABLE_PITCH = 2_u32
   MONO_FONT = 8_u32
-  ANSI_CHARSET = 0_u32
-  DEFAULT_CHARSET = 1_u32
-  SYMBOL_CHARSET = 2_u32
-  SHIFTJIS_CHARSET = 128_u32
-  HANGEUL_CHARSET = 129_u32
-  HANGUL_CHARSET = 129_u32
-  GB2312_CHARSET = 134_u32
-  CHINESEBIG5_CHARSET = 136_u32
-  OEM_CHARSET = 255_u32
-  JOHAB_CHARSET = 130_u32
-  HEBREW_CHARSET = 177_u32
-  ARABIC_CHARSET = 178_u32
-  GREEK_CHARSET = 161_u32
-  TURKISH_CHARSET = 162_u32
-  VIETNAMESE_CHARSET = 163_u32
-  THAI_CHARSET = 222_u32
-  EASTEUROPE_CHARSET = 238_u32
-  RUSSIAN_CHARSET = 204_u32
-  MAC_CHARSET = 77_u32
-  BALTIC_CHARSET = 186_u32
   FS_LATIN1 = 1_i32
   FS_LATIN2 = 2_i32
   FS_CYRILLIC = 4_i32
@@ -308,21 +278,6 @@ module Win32cr::Graphics::Gdi
   FS_CHINESETRAD = 1048576_i32
   FS_JOHAB = 2097152_i32
   FS_SYMBOL = -2147483648_i32
-  FW_DONTCARE = 0_u32
-  FW_THIN = 100_u32
-  FW_EXTRALIGHT = 200_u32
-  FW_LIGHT = 300_u32
-  FW_NORMAL = 400_u32
-  FW_MEDIUM = 500_u32
-  FW_SEMIBOLD = 600_u32
-  FW_BOLD = 700_u32
-  FW_EXTRABOLD = 800_u32
-  FW_HEAVY = 900_u32
-  FW_ULTRALIGHT = 200_u32
-  FW_REGULAR = 400_u32
-  FW_DEMIBOLD = 600_u32
-  FW_ULTRABOLD = 800_u32
-  FW_BLACK = 900_u32
   PANOSE_COUNT = 10_u32
   PAN_FAMILYTYPE_INDEX = 0_u32
   PAN_SERIFSTYLE_INDEX = 1_u32
@@ -449,17 +404,6 @@ module Win32cr::Graphics::Gdi
   RELATIVE = 2_u32
   STOCK_LAST = 19_u32
   CLR_INVALID = 4294967295_u32
-  BS_SOLID = 0_u32
-  BS_NULL = 1_u32
-  BS_HOLLOW = 1_u32
-  BS_HATCHED = 2_u32
-  BS_PATTERN = 3_u32
-  BS_INDEXED = 4_u32
-  BS_DIBPATTERN = 5_u32
-  BS_DIBPATTERNPT = 6_u32
-  BS_PATTERN8X8 = 7_u32
-  BS_DIBPATTERN8X8 = 8_u32
-  BS_MONOPATTERN = 9_u32
   HS_API_MAX = 12_u32
   DT_PLOTTER = 0_u32
   DT_RASDISPLAY = 1_u32
@@ -899,129 +843,6 @@ module Win32cr::Graphics::Gdi
   FONTMAPPER_MAX = 10_u32
   ENHMETA_SIGNATURE = 1179469088_u32
   ENHMETA_STOCK_OBJECT = 2147483648_u32
-  EMR_HEADER = 1_u32
-  EMR_POLYBEZIER = 2_u32
-  EMR_POLYGON = 3_u32
-  EMR_POLYLINE = 4_u32
-  EMR_POLYBEZIERTO = 5_u32
-  EMR_POLYLINETO = 6_u32
-  EMR_POLYPOLYLINE = 7_u32
-  EMR_POLYPOLYGON = 8_u32
-  EMR_SETWINDOWEXTEX = 9_u32
-  EMR_SETWINDOWORGEX = 10_u32
-  EMR_SETVIEWPORTEXTEX = 11_u32
-  EMR_SETVIEWPORTORGEX = 12_u32
-  EMR_SETBRUSHORGEX = 13_u32
-  EMR_EOF = 14_u32
-  EMR_SETPIXELV = 15_u32
-  EMR_SETMAPPERFLAGS = 16_u32
-  EMR_SETMAPMODE = 17_u32
-  EMR_SETBKMODE = 18_u32
-  EMR_SETPOLYFILLMODE = 19_u32
-  EMR_SETROP2 = 20_u32
-  EMR_SETSTRETCHBLTMODE = 21_u32
-  EMR_SETTEXTALIGN = 22_u32
-  EMR_SETCOLORADJUSTMENT = 23_u32
-  EMR_SETTEXTCOLOR = 24_u32
-  EMR_SETBKCOLOR = 25_u32
-  EMR_OFFSETCLIPRGN = 26_u32
-  EMR_MOVETOEX = 27_u32
-  EMR_SETMETARGN = 28_u32
-  EMR_EXCLUDECLIPRECT = 29_u32
-  EMR_INTERSECTCLIPRECT = 30_u32
-  EMR_SCALEVIEWPORTEXTEX = 31_u32
-  EMR_SCALEWINDOWEXTEX = 32_u32
-  EMR_SAVEDC = 33_u32
-  EMR_RESTOREDC = 34_u32
-  EMR_SETWORLDTRANSFORM = 35_u32
-  EMR_MODIFYWORLDTRANSFORM = 36_u32
-  EMR_SELECTOBJECT = 37_u32
-  EMR_CREATEPEN = 38_u32
-  EMR_CREATEBRUSHINDIRECT = 39_u32
-  EMR_DELETEOBJECT = 40_u32
-  EMR_ANGLEARC = 41_u32
-  EMR_ELLIPSE = 42_u32
-  EMR_RECTANGLE = 43_u32
-  EMR_ROUNDRECT = 44_u32
-  EMR_ARC = 45_u32
-  EMR_CHORD = 46_u32
-  EMR_PIE = 47_u32
-  EMR_SELECTPALETTE = 48_u32
-  EMR_CREATEPALETTE = 49_u32
-  EMR_SETPALETTEENTRIES = 50_u32
-  EMR_RESIZEPALETTE = 51_u32
-  EMR_REALIZEPALETTE = 52_u32
-  EMR_EXTFLOODFILL = 53_u32
-  EMR_LINETO = 54_u32
-  EMR_ARCTO = 55_u32
-  EMR_POLYDRAW = 56_u32
-  EMR_SETARCDIRECTION = 57_u32
-  EMR_SETMITERLIMIT = 58_u32
-  EMR_BEGINPATH = 59_u32
-  EMR_ENDPATH = 60_u32
-  EMR_CLOSEFIGURE = 61_u32
-  EMR_FILLPATH = 62_u32
-  EMR_STROKEANDFILLPATH = 63_u32
-  EMR_STROKEPATH = 64_u32
-  EMR_FLATTENPATH = 65_u32
-  EMR_WIDENPATH = 66_u32
-  EMR_SELECTCLIPPATH = 67_u32
-  EMR_ABORTPATH = 68_u32
-  EMR_GDICOMMENT = 70_u32
-  EMR_FILLRGN = 71_u32
-  EMR_FRAMERGN = 72_u32
-  EMR_INVERTRGN = 73_u32
-  EMR_PAINTRGN = 74_u32
-  EMR_EXTSELECTCLIPRGN = 75_u32
-  EMR_BITBLT = 76_u32
-  EMR_STRETCHBLT = 77_u32
-  EMR_MASKBLT = 78_u32
-  EMR_PLGBLT = 79_u32
-  EMR_SETDIBITSTODEVICE = 80_u32
-  EMR_STRETCHDIBITS = 81_u32
-  EMR_EXTCREATEFONTINDIRECTW = 82_u32
-  EMR_EXTTEXTOUTA = 83_u32
-  EMR_EXTTEXTOUTW = 84_u32
-  EMR_POLYBEZIER16 = 85_u32
-  EMR_POLYGON16 = 86_u32
-  EMR_POLYLINE16 = 87_u32
-  EMR_POLYBEZIERTO16 = 88_u32
-  EMR_POLYLINETO16 = 89_u32
-  EMR_POLYPOLYLINE16 = 90_u32
-  EMR_POLYPOLYGON16 = 91_u32
-  EMR_POLYDRAW16 = 92_u32
-  EMR_CREATEMONOBRUSH = 93_u32
-  EMR_CREATEDIBPATTERNBRUSHPT = 94_u32
-  EMR_EXTCREATEPEN = 95_u32
-  EMR_POLYTEXTOUTA = 96_u32
-  EMR_POLYTEXTOUTW = 97_u32
-  EMR_SETICMMODE = 98_u32
-  EMR_CREATECOLORSPACE = 99_u32
-  EMR_SETCOLORSPACE = 100_u32
-  EMR_DELETECOLORSPACE = 101_u32
-  EMR_GLSRECORD = 102_u32
-  EMR_GLSBOUNDEDRECORD = 103_u32
-  EMR_PIXELFORMAT = 104_u32
-  EMR_RESERVED_105 = 105_u32
-  EMR_RESERVED_106 = 106_u32
-  EMR_RESERVED_107 = 107_u32
-  EMR_RESERVED_108 = 108_u32
-  EMR_RESERVED_109 = 109_u32
-  EMR_RESERVED_110 = 110_u32
-  EMR_COLORCORRECTPALETTE = 111_u32
-  EMR_SETICMPROFILEA = 112_u32
-  EMR_SETICMPROFILEW = 113_u32
-  EMR_ALPHABLEND = 114_u32
-  EMR_SETLAYOUT = 115_u32
-  EMR_TRANSPARENTBLT = 116_u32
-  EMR_RESERVED_117 = 117_u32
-  EMR_GRADIENTFILL = 118_u32
-  EMR_RESERVED_119 = 119_u32
-  EMR_RESERVED_120 = 120_u32
-  EMR_COLORMATCHTOTARGETW = 121_u32
-  EMR_CREATECOLORSPACEW = 122_u32
-  EMR_MIN = 1_u32
-  EMR_MAX = 122_u32
   SETICMPROFILE_EMBEDED = 1_u32
   CREATECOLORSPACE_EMBEDED = 1_u32
   COLORMATCHTOTARGET_EMBEDED = 1_u32
@@ -1412,6 +1233,7 @@ module Win32cr::Graphics::Gdi
     ENUM_CURRENT_SETTINGS = 4294967295_u32
     ENUM_REGISTRY_SETTINGS = 4294967294_u32
   end
+  @[Flags]
   enum TEXT_ALIGN_OPTIONS : UInt32
     TA_NOUPDATECP = 0_u32
     TA_UPDATECP = 1_u32
@@ -1639,6 +1461,45 @@ module Win32cr::Graphics::Gdi
     OUT_TT_ONLY_PRECIS = 7_u32
     OUT_TT_PRECIS = 4_u32
   end
+  enum FONT_WEIGHT : UInt32
+    FW_DONTCARE = 0_u32
+    FW_THIN = 100_u32
+    FW_EXTRALIGHT = 200_u32
+    FW_LIGHT = 300_u32
+    FW_NORMAL = 400_u32
+    FW_MEDIUM = 500_u32
+    FW_SEMIBOLD = 600_u32
+    FW_BOLD = 700_u32
+    FW_EXTRABOLD = 800_u32
+    FW_HEAVY = 900_u32
+    FW_ULTRALIGHT = 200_u32
+    FW_REGULAR = 400_u32
+    FW_DEMIBOLD = 600_u32
+    FW_ULTRABOLD = 800_u32
+    FW_BLACK = 900_u32
+  end
+  enum FONT_CHARSET : UInt32
+    ANSI_CHARSET = 0_u32
+    DEFAULT_CHARSET = 1_u32
+    SYMBOL_CHARSET = 2_u32
+    SHIFTJIS_CHARSET = 128_u32
+    HANGEUL_CHARSET = 129_u32
+    HANGUL_CHARSET = 129_u32
+    GB2312_CHARSET = 134_u32
+    CHINESEBIG5_CHARSET = 136_u32
+    OEM_CHARSET = 255_u32
+    JOHAB_CHARSET = 130_u32
+    HEBREW_CHARSET = 177_u32
+    ARABIC_CHARSET = 178_u32
+    GREEK_CHARSET = 161_u32
+    TURKISH_CHARSET = 162_u32
+    VIETNAMESE_CHARSET = 163_u32
+    THAI_CHARSET = 222_u32
+    EASTEUROPE_CHARSET = 238_u32
+    RUSSIAN_CHARSET = 204_u32
+    MAC_CHARSET = 77_u32
+    BALTIC_CHARSET = 186_u32
+  end
   enum ARC_DIRECTION : UInt32
     AD_COUNTERCLOCKWISE = 1_u32
     AD_CLOCKWISE = 2_u32
@@ -1806,6 +1667,159 @@ module Win32cr::Graphics::Gdi
     SIMPLEREGION = 2_i32
     COMPLEXREGION = 3_i32
   end
+  enum BRUSH_STYLE : UInt32
+    BS_SOLID = 0_u32
+    BS_NULL = 1_u32
+    BS_HOLLOW = 1_u32
+    BS_HATCHED = 2_u32
+    BS_PATTERN = 3_u32
+    BS_INDEXED = 4_u32
+    BS_DIBPATTERN = 5_u32
+    BS_DIBPATTERNPT = 6_u32
+    BS_PATTERN8X8 = 7_u32
+    BS_DIBPATTERN8X8 = 8_u32
+    BS_MONOPATTERN = 9_u32
+  end
+  @[Flags]
+  enum TMPF_FLAGS : UInt8
+    TMPF_FIXED_PITCH = 1_u8
+    TMPF_VECTOR = 2_u8
+    TMPF_DEVICE = 8_u8
+    TMPF_TRUETYPE = 4_u8
+  end
+  enum BI_COMPRESSION
+    BI_RGB = 0_i32
+    BI_RLE8 = 1_i32
+    BI_RLE4 = 2_i32
+    BI_BITFIELDS = 3_i32
+    BI_JPEG = 4_i32
+    BI_PNG = 5_i32
+  end
+  enum ENHANCED_METAFILE_RECORD_TYPE : UInt32
+    EMR_HEADER = 1_u32
+    EMR_POLYBEZIER = 2_u32
+    EMR_POLYGON = 3_u32
+    EMR_POLYLINE = 4_u32
+    EMR_POLYBEZIERTO = 5_u32
+    EMR_POLYLINETO = 6_u32
+    EMR_POLYPOLYLINE = 7_u32
+    EMR_POLYPOLYGON = 8_u32
+    EMR_SETWINDOWEXTEX = 9_u32
+    EMR_SETWINDOWORGEX = 10_u32
+    EMR_SETVIEWPORTEXTEX = 11_u32
+    EMR_SETVIEWPORTORGEX = 12_u32
+    EMR_SETBRUSHORGEX = 13_u32
+    EMR_EOF = 14_u32
+    EMR_SETPIXELV = 15_u32
+    EMR_SETMAPPERFLAGS = 16_u32
+    EMR_SETMAPMODE = 17_u32
+    EMR_SETBKMODE = 18_u32
+    EMR_SETPOLYFILLMODE = 19_u32
+    EMR_SETROP2 = 20_u32
+    EMR_SETSTRETCHBLTMODE = 21_u32
+    EMR_SETTEXTALIGN = 22_u32
+    EMR_SETCOLORADJUSTMENT = 23_u32
+    EMR_SETTEXTCOLOR = 24_u32
+    EMR_SETBKCOLOR = 25_u32
+    EMR_OFFSETCLIPRGN = 26_u32
+    EMR_MOVETOEX = 27_u32
+    EMR_SETMETARGN = 28_u32
+    EMR_EXCLUDECLIPRECT = 29_u32
+    EMR_INTERSECTCLIPRECT = 30_u32
+    EMR_SCALEVIEWPORTEXTEX = 31_u32
+    EMR_SCALEWINDOWEXTEX = 32_u32
+    EMR_SAVEDC = 33_u32
+    EMR_RESTOREDC = 34_u32
+    EMR_SETWORLDTRANSFORM = 35_u32
+    EMR_MODIFYWORLDTRANSFORM = 36_u32
+    EMR_SELECTOBJECT = 37_u32
+    EMR_CREATEPEN = 38_u32
+    EMR_CREATEBRUSHINDIRECT = 39_u32
+    EMR_DELETEOBJECT = 40_u32
+    EMR_ANGLEARC = 41_u32
+    EMR_ELLIPSE = 42_u32
+    EMR_RECTANGLE = 43_u32
+    EMR_ROUNDRECT = 44_u32
+    EMR_ARC = 45_u32
+    EMR_CHORD = 46_u32
+    EMR_PIE = 47_u32
+    EMR_SELECTPALETTE = 48_u32
+    EMR_CREATEPALETTE = 49_u32
+    EMR_SETPALETTEENTRIES = 50_u32
+    EMR_RESIZEPALETTE = 51_u32
+    EMR_REALIZEPALETTE = 52_u32
+    EMR_EXTFLOODFILL = 53_u32
+    EMR_LINETO = 54_u32
+    EMR_ARCTO = 55_u32
+    EMR_POLYDRAW = 56_u32
+    EMR_SETARCDIRECTION = 57_u32
+    EMR_SETMITERLIMIT = 58_u32
+    EMR_BEGINPATH = 59_u32
+    EMR_ENDPATH = 60_u32
+    EMR_CLOSEFIGURE = 61_u32
+    EMR_FILLPATH = 62_u32
+    EMR_STROKEANDFILLPATH = 63_u32
+    EMR_STROKEPATH = 64_u32
+    EMR_FLATTENPATH = 65_u32
+    EMR_WIDENPATH = 66_u32
+    EMR_SELECTCLIPPATH = 67_u32
+    EMR_ABORTPATH = 68_u32
+    EMR_GDICOMMENT = 70_u32
+    EMR_FILLRGN = 71_u32
+    EMR_FRAMERGN = 72_u32
+    EMR_INVERTRGN = 73_u32
+    EMR_PAINTRGN = 74_u32
+    EMR_EXTSELECTCLIPRGN = 75_u32
+    EMR_BITBLT = 76_u32
+    EMR_STRETCHBLT = 77_u32
+    EMR_MASKBLT = 78_u32
+    EMR_PLGBLT = 79_u32
+    EMR_SETDIBITSTODEVICE = 80_u32
+    EMR_STRETCHDIBITS = 81_u32
+    EMR_EXTCREATEFONTINDIRECTW = 82_u32
+    EMR_EXTTEXTOUTA = 83_u32
+    EMR_EXTTEXTOUTW = 84_u32
+    EMR_POLYBEZIER16 = 85_u32
+    EMR_POLYGON16 = 86_u32
+    EMR_POLYLINE16 = 87_u32
+    EMR_POLYBEZIERTO16 = 88_u32
+    EMR_POLYLINETO16 = 89_u32
+    EMR_POLYPOLYLINE16 = 90_u32
+    EMR_POLYPOLYGON16 = 91_u32
+    EMR_POLYDRAW16 = 92_u32
+    EMR_CREATEMONOBRUSH = 93_u32
+    EMR_CREATEDIBPATTERNBRUSHPT = 94_u32
+    EMR_EXTCREATEPEN = 95_u32
+    EMR_POLYTEXTOUTA = 96_u32
+    EMR_POLYTEXTOUTW = 97_u32
+    EMR_SETICMMODE = 98_u32
+    EMR_CREATECOLORSPACE = 99_u32
+    EMR_SETCOLORSPACE = 100_u32
+    EMR_DELETECOLORSPACE = 101_u32
+    EMR_GLSRECORD = 102_u32
+    EMR_GLSBOUNDEDRECORD = 103_u32
+    EMR_PIXELFORMAT = 104_u32
+    EMR_RESERVED_105 = 105_u32
+    EMR_RESERVED_106 = 106_u32
+    EMR_RESERVED_107 = 107_u32
+    EMR_RESERVED_108 = 108_u32
+    EMR_RESERVED_109 = 109_u32
+    EMR_RESERVED_110 = 110_u32
+    EMR_COLORCORRECTPALETTE = 111_u32
+    EMR_SETICMPROFILEA = 112_u32
+    EMR_SETICMPROFILEW = 113_u32
+    EMR_ALPHABLEND = 114_u32
+    EMR_SETLAYOUT = 115_u32
+    EMR_TRANSPARENTBLT = 116_u32
+    EMR_RESERVED_117 = 117_u32
+    EMR_GRADIENTFILL = 118_u32
+    EMR_RESERVED_119 = 119_u32
+    EMR_RESERVED_120 = 120_u32
+    EMR_COLORMATCHTOTARGETW = 121_u32
+    EMR_CREATECOLORSPACEW = 122_u32
+    EMR_MIN = 1_u32
+    EMR_MAX = 122_u32
+  end
   enum DISPLAYCONFIG_COLOR_ENCODING
     DISPLAYCONFIG_COLOR_ENCODING_RGB = 0_i32
     DISPLAYCONFIG_COLOR_ENCODING_YCBCR444 = 1_i32
@@ -1911,13 +1925,13 @@ module Win32cr::Graphics::Gdi
     property biHeight : Int32
     property biPlanes : UInt16
     property biBitCount : UInt16
-    property biCompression : UInt32
+    property biCompression : Win32cr::Graphics::Gdi::BI_COMPRESSION
     property biSizeImage : UInt32
     property biXPelsPerMeter : Int32
     property biYPelsPerMeter : Int32
     property biClrUsed : UInt32
     property biClrImportant : UInt32
-    def initialize(@biSize : UInt32, @biWidth : Int32, @biHeight : Int32, @biPlanes : UInt16, @biBitCount : UInt16, @biCompression : UInt32, @biSizeImage : UInt32, @biXPelsPerMeter : Int32, @biYPelsPerMeter : Int32, @biClrUsed : UInt32, @biClrImportant : UInt32)
+    def initialize(@biSize : UInt32, @biWidth : Int32, @biHeight : Int32, @biPlanes : UInt16, @biBitCount : UInt16, @biCompression : Win32cr::Graphics::Gdi::BI_COMPRESSION, @biSizeImage : UInt32, @biXPelsPerMeter : Int32, @biYPelsPerMeter : Int32, @biClrUsed : UInt32, @biClrImportant : UInt32)
     end
   end
 
@@ -1928,7 +1942,7 @@ module Win32cr::Graphics::Gdi
     property bV4Height : Int32
     property bV4Planes : UInt16
     property bV4BitCount : UInt16
-    property bV4V4Compression : UInt32
+    property bV4V4Compression : Win32cr::Graphics::Gdi::BI_COMPRESSION
     property bV4SizeImage : UInt32
     property bV4XPelsPerMeter : Int32
     property bV4YPelsPerMeter : Int32
@@ -1943,7 +1957,7 @@ module Win32cr::Graphics::Gdi
     property bV4GammaRed : UInt32
     property bV4GammaGreen : UInt32
     property bV4GammaBlue : UInt32
-    def initialize(@bV4Size : UInt32, @bV4Width : Int32, @bV4Height : Int32, @bV4Planes : UInt16, @bV4BitCount : UInt16, @bV4V4Compression : UInt32, @bV4SizeImage : UInt32, @bV4XPelsPerMeter : Int32, @bV4YPelsPerMeter : Int32, @bV4ClrUsed : UInt32, @bV4ClrImportant : UInt32, @bV4RedMask : UInt32, @bV4GreenMask : UInt32, @bV4BlueMask : UInt32, @bV4AlphaMask : UInt32, @bV4CSType : UInt32, @bV4Endpoints : Win32cr::Graphics::Gdi::CIEXYZTRIPLE, @bV4GammaRed : UInt32, @bV4GammaGreen : UInt32, @bV4GammaBlue : UInt32)
+    def initialize(@bV4Size : UInt32, @bV4Width : Int32, @bV4Height : Int32, @bV4Planes : UInt16, @bV4BitCount : UInt16, @bV4V4Compression : Win32cr::Graphics::Gdi::BI_COMPRESSION, @bV4SizeImage : UInt32, @bV4XPelsPerMeter : Int32, @bV4YPelsPerMeter : Int32, @bV4ClrUsed : UInt32, @bV4ClrImportant : UInt32, @bV4RedMask : UInt32, @bV4GreenMask : UInt32, @bV4BlueMask : UInt32, @bV4AlphaMask : UInt32, @bV4CSType : UInt32, @bV4Endpoints : Win32cr::Graphics::Gdi::CIEXYZTRIPLE, @bV4GammaRed : UInt32, @bV4GammaGreen : UInt32, @bV4GammaBlue : UInt32)
     end
   end
 
@@ -1954,7 +1968,7 @@ module Win32cr::Graphics::Gdi
     property bV5Height : Int32
     property bV5Planes : UInt16
     property bV5BitCount : UInt16
-    property bV5Compression : UInt32
+    property bV5Compression : Win32cr::Graphics::Gdi::BI_COMPRESSION
     property bV5SizeImage : UInt32
     property bV5XPelsPerMeter : Int32
     property bV5YPelsPerMeter : Int32
@@ -1973,7 +1987,7 @@ module Win32cr::Graphics::Gdi
     property bV5ProfileData : UInt32
     property bV5ProfileSize : UInt32
     property bV5Reserved : UInt32
-    def initialize(@bV5Size : UInt32, @bV5Width : Int32, @bV5Height : Int32, @bV5Planes : UInt16, @bV5BitCount : UInt16, @bV5Compression : UInt32, @bV5SizeImage : UInt32, @bV5XPelsPerMeter : Int32, @bV5YPelsPerMeter : Int32, @bV5ClrUsed : UInt32, @bV5ClrImportant : UInt32, @bV5RedMask : UInt32, @bV5GreenMask : UInt32, @bV5BlueMask : UInt32, @bV5AlphaMask : UInt32, @bV5CSType : UInt32, @bV5Endpoints : Win32cr::Graphics::Gdi::CIEXYZTRIPLE, @bV5GammaRed : UInt32, @bV5GammaGreen : UInt32, @bV5GammaBlue : UInt32, @bV5Intent : UInt32, @bV5ProfileData : UInt32, @bV5ProfileSize : UInt32, @bV5Reserved : UInt32)
+    def initialize(@bV5Size : UInt32, @bV5Width : Int32, @bV5Height : Int32, @bV5Planes : UInt16, @bV5BitCount : UInt16, @bV5Compression : Win32cr::Graphics::Gdi::BI_COMPRESSION, @bV5SizeImage : UInt32, @bV5XPelsPerMeter : Int32, @bV5YPelsPerMeter : Int32, @bV5ClrUsed : UInt32, @bV5ClrImportant : UInt32, @bV5RedMask : UInt32, @bV5GreenMask : UInt32, @bV5BlueMask : UInt32, @bV5AlphaMask : UInt32, @bV5CSType : UInt32, @bV5Endpoints : Win32cr::Graphics::Gdi::CIEXYZTRIPLE, @bV5GammaRed : UInt32, @bV5GammaGreen : UInt32, @bV5GammaBlue : UInt32, @bV5Intent : UInt32, @bV5ProfileData : UInt32, @bV5ProfileSize : UInt32, @bV5Reserved : UInt32)
     end
   end
 
@@ -2087,9 +2101,9 @@ module Win32cr::Graphics::Gdi
     property tmItalic : UInt8
     property tmUnderlined : UInt8
     property tmStruckOut : UInt8
-    property tmPitchAndFamily : UInt8
+    property tmPitchAndFamily : Win32cr::Graphics::Gdi::TMPF_FLAGS
     property tmCharSet : UInt8
-    def initialize(@tmHeight : Int32, @tmAscent : Int32, @tmDescent : Int32, @tmInternalLeading : Int32, @tmExternalLeading : Int32, @tmAveCharWidth : Int32, @tmMaxCharWidth : Int32, @tmWeight : Int32, @tmOverhang : Int32, @tmDigitizedAspectX : Int32, @tmDigitizedAspectY : Int32, @tmFirstChar : UInt8, @tmLastChar : UInt8, @tmDefaultChar : UInt8, @tmBreakChar : UInt8, @tmItalic : UInt8, @tmUnderlined : UInt8, @tmStruckOut : UInt8, @tmPitchAndFamily : UInt8, @tmCharSet : UInt8)
+    def initialize(@tmHeight : Int32, @tmAscent : Int32, @tmDescent : Int32, @tmInternalLeading : Int32, @tmExternalLeading : Int32, @tmAveCharWidth : Int32, @tmMaxCharWidth : Int32, @tmWeight : Int32, @tmOverhang : Int32, @tmDigitizedAspectX : Int32, @tmDigitizedAspectY : Int32, @tmFirstChar : UInt8, @tmLastChar : UInt8, @tmDefaultChar : UInt8, @tmBreakChar : UInt8, @tmItalic : UInt8, @tmUnderlined : UInt8, @tmStruckOut : UInt8, @tmPitchAndFamily : Win32cr::Graphics::Gdi::TMPF_FLAGS, @tmCharSet : UInt8)
     end
   end
 
@@ -2113,9 +2127,9 @@ module Win32cr::Graphics::Gdi
     property tmItalic : UInt8
     property tmUnderlined : UInt8
     property tmStruckOut : UInt8
-    property tmPitchAndFamily : UInt8
+    property tmPitchAndFamily : Win32cr::Graphics::Gdi::TMPF_FLAGS
     property tmCharSet : UInt8
-    def initialize(@tmHeight : Int32, @tmAscent : Int32, @tmDescent : Int32, @tmInternalLeading : Int32, @tmExternalLeading : Int32, @tmAveCharWidth : Int32, @tmMaxCharWidth : Int32, @tmWeight : Int32, @tmOverhang : Int32, @tmDigitizedAspectX : Int32, @tmDigitizedAspectY : Int32, @tmFirstChar : UInt16, @tmLastChar : UInt16, @tmDefaultChar : UInt16, @tmBreakChar : UInt16, @tmItalic : UInt8, @tmUnderlined : UInt8, @tmStruckOut : UInt8, @tmPitchAndFamily : UInt8, @tmCharSet : UInt8)
+    def initialize(@tmHeight : Int32, @tmAscent : Int32, @tmDescent : Int32, @tmInternalLeading : Int32, @tmExternalLeading : Int32, @tmAveCharWidth : Int32, @tmMaxCharWidth : Int32, @tmWeight : Int32, @tmOverhang : Int32, @tmDigitizedAspectX : Int32, @tmDigitizedAspectY : Int32, @tmFirstChar : UInt16, @tmLastChar : UInt16, @tmDefaultChar : UInt16, @tmBreakChar : UInt16, @tmItalic : UInt8, @tmUnderlined : UInt8, @tmStruckOut : UInt8, @tmPitchAndFamily : Win32cr::Graphics::Gdi::TMPF_FLAGS, @tmCharSet : UInt8)
     end
   end
 
@@ -2139,13 +2153,13 @@ module Win32cr::Graphics::Gdi
     property tmItalic : UInt8
     property tmUnderlined : UInt8
     property tmStruckOut : UInt8
-    property tmPitchAndFamily : UInt8
+    property tmPitchAndFamily : Win32cr::Graphics::Gdi::TMPF_FLAGS
     property tmCharSet : UInt8
     property ntmFlags : UInt32
     property ntmSizeEM : UInt32
     property ntmCellHeight : UInt32
     property ntmAvgWidth : UInt32
-    def initialize(@tmHeight : Int32, @tmAscent : Int32, @tmDescent : Int32, @tmInternalLeading : Int32, @tmExternalLeading : Int32, @tmAveCharWidth : Int32, @tmMaxCharWidth : Int32, @tmWeight : Int32, @tmOverhang : Int32, @tmDigitizedAspectX : Int32, @tmDigitizedAspectY : Int32, @tmFirstChar : UInt8, @tmLastChar : UInt8, @tmDefaultChar : UInt8, @tmBreakChar : UInt8, @tmItalic : UInt8, @tmUnderlined : UInt8, @tmStruckOut : UInt8, @tmPitchAndFamily : UInt8, @tmCharSet : UInt8, @ntmFlags : UInt32, @ntmSizeEM : UInt32, @ntmCellHeight : UInt32, @ntmAvgWidth : UInt32)
+    def initialize(@tmHeight : Int32, @tmAscent : Int32, @tmDescent : Int32, @tmInternalLeading : Int32, @tmExternalLeading : Int32, @tmAveCharWidth : Int32, @tmMaxCharWidth : Int32, @tmWeight : Int32, @tmOverhang : Int32, @tmDigitizedAspectX : Int32, @tmDigitizedAspectY : Int32, @tmFirstChar : UInt8, @tmLastChar : UInt8, @tmDefaultChar : UInt8, @tmBreakChar : UInt8, @tmItalic : UInt8, @tmUnderlined : UInt8, @tmStruckOut : UInt8, @tmPitchAndFamily : Win32cr::Graphics::Gdi::TMPF_FLAGS, @tmCharSet : UInt8, @ntmFlags : UInt32, @ntmSizeEM : UInt32, @ntmCellHeight : UInt32, @ntmAvgWidth : UInt32)
     end
   end
 
@@ -2169,13 +2183,13 @@ module Win32cr::Graphics::Gdi
     property tmItalic : UInt8
     property tmUnderlined : UInt8
     property tmStruckOut : UInt8
-    property tmPitchAndFamily : UInt8
+    property tmPitchAndFamily : Win32cr::Graphics::Gdi::TMPF_FLAGS
     property tmCharSet : UInt8
     property ntmFlags : UInt32
     property ntmSizeEM : UInt32
     property ntmCellHeight : UInt32
     property ntmAvgWidth : UInt32
-    def initialize(@tmHeight : Int32, @tmAscent : Int32, @tmDescent : Int32, @tmInternalLeading : Int32, @tmExternalLeading : Int32, @tmAveCharWidth : Int32, @tmMaxCharWidth : Int32, @tmWeight : Int32, @tmOverhang : Int32, @tmDigitizedAspectX : Int32, @tmDigitizedAspectY : Int32, @tmFirstChar : UInt16, @tmLastChar : UInt16, @tmDefaultChar : UInt16, @tmBreakChar : UInt16, @tmItalic : UInt8, @tmUnderlined : UInt8, @tmStruckOut : UInt8, @tmPitchAndFamily : UInt8, @tmCharSet : UInt8, @ntmFlags : UInt32, @ntmSizeEM : UInt32, @ntmCellHeight : UInt32, @ntmAvgWidth : UInt32)
+    def initialize(@tmHeight : Int32, @tmAscent : Int32, @tmDescent : Int32, @tmInternalLeading : Int32, @tmExternalLeading : Int32, @tmAveCharWidth : Int32, @tmMaxCharWidth : Int32, @tmWeight : Int32, @tmOverhang : Int32, @tmDigitizedAspectX : Int32, @tmDigitizedAspectY : Int32, @tmFirstChar : UInt16, @tmLastChar : UInt16, @tmDefaultChar : UInt16, @tmBreakChar : UInt16, @tmItalic : UInt8, @tmUnderlined : UInt8, @tmStruckOut : UInt8, @tmPitchAndFamily : Win32cr::Graphics::Gdi::TMPF_FLAGS, @tmCharSet : UInt8, @ntmFlags : UInt32, @ntmSizeEM : UInt32, @ntmCellHeight : UInt32, @ntmAvgWidth : UInt32)
     end
   end
 
@@ -2192,54 +2206,54 @@ module Win32cr::Graphics::Gdi
 
   @[Extern]
   struct LOGBRUSH
-    property lbStyle : UInt32
-    property lbColor : UInt32
+    property lbStyle : Win32cr::Graphics::Gdi::BRUSH_STYLE
+    property lbColor : Win32cr::Foundation::COLORREF
     property lbHatch : LibC::UIntPtrT
-    def initialize(@lbStyle : UInt32, @lbColor : UInt32, @lbHatch : LibC::UIntPtrT)
+    def initialize(@lbStyle : Win32cr::Graphics::Gdi::BRUSH_STYLE, @lbColor : Win32cr::Foundation::COLORREF, @lbHatch : LibC::UIntPtrT)
     end
   end
 
   @[Extern]
   struct LOGBRUSH32
-    property lbStyle : UInt32
-    property lbColor : UInt32
+    property lbStyle : Win32cr::Graphics::Gdi::BRUSH_STYLE
+    property lbColor : Win32cr::Foundation::COLORREF
     property lbHatch : UInt32
-    def initialize(@lbStyle : UInt32, @lbColor : UInt32, @lbHatch : UInt32)
+    def initialize(@lbStyle : Win32cr::Graphics::Gdi::BRUSH_STYLE, @lbColor : Win32cr::Foundation::COLORREF, @lbHatch : UInt32)
     end
   end
 
   @[Extern]
   struct LOGPEN
-    property lopnStyle : UInt32
+    property lopnStyle : Win32cr::Graphics::Gdi::PEN_STYLE
     property lopnWidth : Win32cr::Foundation::POINT
-    property lopnColor : UInt32
-    def initialize(@lopnStyle : UInt32, @lopnWidth : Win32cr::Foundation::POINT, @lopnColor : UInt32)
+    property lopnColor : Win32cr::Foundation::COLORREF
+    def initialize(@lopnStyle : Win32cr::Graphics::Gdi::PEN_STYLE, @lopnWidth : Win32cr::Foundation::POINT, @lopnColor : Win32cr::Foundation::COLORREF)
     end
   end
 
   @[Extern]
   struct EXTLOGPEN
-    property elpPenStyle : UInt32
+    property elpPenStyle : Win32cr::Graphics::Gdi::PEN_STYLE
     property elpWidth : UInt32
     property elpBrushStyle : UInt32
-    property elpColor : UInt32
+    property elpColor : Win32cr::Foundation::COLORREF
     property elpHatch : LibC::UIntPtrT
     property elpNumEntries : UInt32
     property elpStyleEntry : UInt32*
-    def initialize(@elpPenStyle : UInt32, @elpWidth : UInt32, @elpBrushStyle : UInt32, @elpColor : UInt32, @elpHatch : LibC::UIntPtrT, @elpNumEntries : UInt32, @elpStyleEntry : UInt32*)
+    def initialize(@elpPenStyle : Win32cr::Graphics::Gdi::PEN_STYLE, @elpWidth : UInt32, @elpBrushStyle : UInt32, @elpColor : Win32cr::Foundation::COLORREF, @elpHatch : LibC::UIntPtrT, @elpNumEntries : UInt32, @elpStyleEntry : UInt32*)
     end
   end
 
   @[Extern]
   struct EXTLOGPEN32
-    property elpPenStyle : UInt32
+    property elpPenStyle : Win32cr::Graphics::Gdi::PEN_STYLE
     property elpWidth : UInt32
     property elpBrushStyle : UInt32
-    property elpColor : UInt32
+    property elpColor : Win32cr::Foundation::COLORREF
     property elpHatch : UInt32
     property elpNumEntries : UInt32
     property elpStyleEntry : UInt32*
-    def initialize(@elpPenStyle : UInt32, @elpWidth : UInt32, @elpBrushStyle : UInt32, @elpColor : UInt32, @elpHatch : UInt32, @elpNumEntries : UInt32, @elpStyleEntry : UInt32*)
+    def initialize(@elpPenStyle : Win32cr::Graphics::Gdi::PEN_STYLE, @elpWidth : UInt32, @elpBrushStyle : UInt32, @elpColor : Win32cr::Foundation::COLORREF, @elpHatch : UInt32, @elpNumEntries : UInt32, @elpStyleEntry : UInt32*)
     end
   end
 
@@ -2268,17 +2282,17 @@ module Win32cr::Graphics::Gdi
     property lfWidth : Int32
     property lfEscapement : Int32
     property lfOrientation : Int32
-    property lfWeight : Int32
+    property lfWeight : Win32cr::Graphics::Gdi::FONT_WEIGHT
     property lfItalic : UInt8
     property lfUnderline : UInt8
     property lfStrikeOut : UInt8
     property lfCharSet : UInt8
-    property lfOutPrecision : UInt8
-    property lfClipPrecision : UInt8
-    property lfQuality : UInt8
-    property lfPitchAndFamily : UInt8
+    property lfOutPrecision : Win32cr::Graphics::Gdi::FONT_OUTPUT_PRECISION
+    property lfClipPrecision : Win32cr::Graphics::Gdi::FONT_CLIP_PRECISION
+    property lfQuality : Win32cr::Graphics::Gdi::FONT_QUALITY
+    property lfPitchAndFamily : Win32cr::Graphics::Gdi::FONT_PITCH_AND_FAMILY
     property lfFaceName : Win32cr::Foundation::CHAR[32]
-    def initialize(@lfHeight : Int32, @lfWidth : Int32, @lfEscapement : Int32, @lfOrientation : Int32, @lfWeight : Int32, @lfItalic : UInt8, @lfUnderline : UInt8, @lfStrikeOut : UInt8, @lfCharSet : UInt8, @lfOutPrecision : UInt8, @lfClipPrecision : UInt8, @lfQuality : UInt8, @lfPitchAndFamily : UInt8, @lfFaceName : Win32cr::Foundation::CHAR[32])
+    def initialize(@lfHeight : Int32, @lfWidth : Int32, @lfEscapement : Int32, @lfOrientation : Int32, @lfWeight : Win32cr::Graphics::Gdi::FONT_WEIGHT, @lfItalic : UInt8, @lfUnderline : UInt8, @lfStrikeOut : UInt8, @lfCharSet : UInt8, @lfOutPrecision : Win32cr::Graphics::Gdi::FONT_OUTPUT_PRECISION, @lfClipPrecision : Win32cr::Graphics::Gdi::FONT_CLIP_PRECISION, @lfQuality : Win32cr::Graphics::Gdi::FONT_QUALITY, @lfPitchAndFamily : Win32cr::Graphics::Gdi::FONT_PITCH_AND_FAMILY, @lfFaceName : Win32cr::Foundation::CHAR[32])
     end
   end
 
@@ -2288,17 +2302,17 @@ module Win32cr::Graphics::Gdi
     property lfWidth : Int32
     property lfEscapement : Int32
     property lfOrientation : Int32
-    property lfWeight : Int32
+    property lfWeight : Win32cr::Graphics::Gdi::FONT_WEIGHT
     property lfItalic : UInt8
     property lfUnderline : UInt8
     property lfStrikeOut : UInt8
-    property lfCharSet : UInt8
-    property lfOutPrecision : UInt8
-    property lfClipPrecision : UInt8
-    property lfQuality : UInt8
-    property lfPitchAndFamily : UInt8
+    property lfCharSet : Win32cr::Graphics::Gdi::FONT_CHARSET
+    property lfOutPrecision : Win32cr::Graphics::Gdi::FONT_OUTPUT_PRECISION
+    property lfClipPrecision : Win32cr::Graphics::Gdi::FONT_CLIP_PRECISION
+    property lfQuality : Win32cr::Graphics::Gdi::FONT_QUALITY
+    property lfPitchAndFamily : Win32cr::Graphics::Gdi::FONT_PITCH_AND_FAMILY
     property lfFaceName : UInt16[32]
-    def initialize(@lfHeight : Int32, @lfWidth : Int32, @lfEscapement : Int32, @lfOrientation : Int32, @lfWeight : Int32, @lfItalic : UInt8, @lfUnderline : UInt8, @lfStrikeOut : UInt8, @lfCharSet : UInt8, @lfOutPrecision : UInt8, @lfClipPrecision : UInt8, @lfQuality : UInt8, @lfPitchAndFamily : UInt8, @lfFaceName : UInt16[32])
+    def initialize(@lfHeight : Int32, @lfWidth : Int32, @lfEscapement : Int32, @lfOrientation : Int32, @lfWeight : Win32cr::Graphics::Gdi::FONT_WEIGHT, @lfItalic : UInt8, @lfUnderline : UInt8, @lfStrikeOut : UInt8, @lfCharSet : Win32cr::Graphics::Gdi::FONT_CHARSET, @lfOutPrecision : Win32cr::Graphics::Gdi::FONT_OUTPUT_PRECISION, @lfClipPrecision : Win32cr::Graphics::Gdi::FONT_CLIP_PRECISION, @lfQuality : Win32cr::Graphics::Gdi::FONT_QUALITY, @lfPitchAndFamily : Win32cr::Graphics::Gdi::FONT_PITCH_AND_FAMILY, @lfFaceName : UInt16[32])
     end
   end
 
@@ -2418,6 +2432,16 @@ module Win32cr::Graphics::Gdi
     property dmPanningWidth : UInt32
     property dmPanningHeight : UInt32
 
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property dmDisplayFlags : UInt32
+    property dmNup : UInt32
+    def initialize(@dmDisplayFlags : UInt32, @dmNup : UInt32)
+    end
+    end
+
+
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
@@ -2451,16 +2475,6 @@ module Win32cr::Graphics::Gdi
       end
 
     def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_)
-    end
-    end
-
-
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property dmDisplayFlags : UInt32
-    property dmNup : UInt32
-    def initialize(@dmDisplayFlags : UInt32, @dmNup : UInt32)
     end
     end
 
@@ -2498,11 +2512,32 @@ module Win32cr::Graphics::Gdi
     property dmPanningWidth : UInt32
     property dmPanningHeight : UInt32
 
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property dmDisplayFlags : UInt32
+    property dmNup : UInt32
+    def initialize(@dmDisplayFlags : UInt32, @dmNup : UInt32)
+    end
+    end
+
+
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
     property anonymous1 : Anonymous1_e__Struct_
     property anonymous2 : Anonymous2_e__Struct_
+
+      # Nested Type Anonymous2_e__Struct_
+      @[Extern]
+      struct Anonymous2_e__Struct_
+    property dmPosition : Win32cr::Foundation::POINTL
+    property dmDisplayOrientation : UInt32
+    property dmDisplayFixedOutput : UInt32
+    def initialize(@dmPosition : Win32cr::Foundation::POINTL, @dmDisplayOrientation : UInt32, @dmDisplayFixedOutput : UInt32)
+    end
+      end
+
 
       # Nested Type Anonymous1_e__Struct_
       @[Extern]
@@ -2519,28 +2554,7 @@ module Win32cr::Graphics::Gdi
     end
       end
 
-
-      # Nested Type Anonymous2_e__Struct_
-      @[Extern]
-      struct Anonymous2_e__Struct_
-    property dmPosition : Win32cr::Foundation::POINTL
-    property dmDisplayOrientation : UInt32
-    property dmDisplayFixedOutput : UInt32
-    def initialize(@dmPosition : Win32cr::Foundation::POINTL, @dmDisplayOrientation : UInt32, @dmDisplayFixedOutput : UInt32)
-    end
-      end
-
     def initialize(@anonymous1 : Anonymous1_e__Struct_, @anonymous2 : Anonymous2_e__Struct_)
-    end
-    end
-
-
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property dmDisplayFlags : UInt32
-    property dmNup : UInt32
-    def initialize(@dmDisplayFlags : UInt32, @dmNup : UInt32)
     end
     end
 
@@ -3032,8 +3046,8 @@ module Win32cr::Graphics::Gdi
   @[Extern]
   struct EMRSETTEXTCOLOR
     property emr : Win32cr::Graphics::Gdi::EMR
-    property crColor : UInt32
-    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @crColor : UInt32)
+    property crColor : Win32cr::Foundation::COLORREF
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @crColor : Win32cr::Foundation::COLORREF)
     end
   end
 
@@ -3171,8 +3185,8 @@ module Win32cr::Graphics::Gdi
   struct EMRMODIFYWORLDTRANSFORM
     property emr : Win32cr::Graphics::Gdi::EMR
     property xform : Win32cr::Graphics::Gdi::XFORM
-    property iMode : UInt32
-    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @xform : Win32cr::Graphics::Gdi::XFORM, @iMode : UInt32)
+    property iMode : Win32cr::Graphics::Gdi::MODIFY_WORLD_TRANSFORM_MODE
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @xform : Win32cr::Graphics::Gdi::XFORM, @iMode : Win32cr::Graphics::Gdi::MODIFY_WORLD_TRANSFORM_MODE)
     end
   end
 
@@ -3180,8 +3194,8 @@ module Win32cr::Graphics::Gdi
   struct EMRSETPIXELV
     property emr : Win32cr::Graphics::Gdi::EMR
     property ptlPixel : Win32cr::Foundation::POINTL
-    property crColor : UInt32
-    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ptlPixel : Win32cr::Foundation::POINTL, @crColor : UInt32)
+    property crColor : Win32cr::Foundation::COLORREF
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ptlPixel : Win32cr::Foundation::POINTL, @crColor : Win32cr::Foundation::COLORREF)
     end
   end
 
@@ -3189,9 +3203,9 @@ module Win32cr::Graphics::Gdi
   struct EMREXTFLOODFILL
     property emr : Win32cr::Graphics::Gdi::EMR
     property ptlStart : Win32cr::Foundation::POINTL
-    property crColor : UInt32
+    property crColor : Win32cr::Foundation::COLORREF
     property iMode : UInt32
-    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ptlStart : Win32cr::Foundation::POINTL, @crColor : UInt32, @iMode : UInt32)
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @ptlStart : Win32cr::Foundation::POINTL, @crColor : Win32cr::Foundation::COLORREF, @iMode : UInt32)
     end
   end
 
@@ -3336,9 +3350,9 @@ module Win32cr::Graphics::Gdi
   struct EMREXTSELECTCLIPRGN
     property emr : Win32cr::Graphics::Gdi::EMR
     property cbRgnData : UInt32
-    property iMode : UInt32
+    property iMode : Win32cr::Graphics::Gdi::RGN_COMBINE_MODE
     property rgn_data : UInt8*
-    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @cbRgnData : UInt32, @iMode : UInt32, @rgn_data : UInt8*)
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @cbRgnData : UInt32, @iMode : Win32cr::Graphics::Gdi::RGN_COMBINE_MODE, @rgn_data : UInt8*)
     end
   end
 
@@ -3379,13 +3393,13 @@ module Win32cr::Graphics::Gdi
     property xSrc : Int32
     property ySrc : Int32
     property xformSrc : Win32cr::Graphics::Gdi::XFORM
-    property crBkColorSrc : UInt32
+    property crBkColorSrc : Win32cr::Foundation::COLORREF
     property iUsageSrc : UInt32
     property offBmiSrc : UInt32
     property cbBmiSrc : UInt32
     property offBitsSrc : UInt32
     property cbBitsSrc : UInt32
-    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @xDest : Int32, @yDest : Int32, @cxDest : Int32, @cyDest : Int32, @dwRop : UInt32, @xSrc : Int32, @ySrc : Int32, @xformSrc : Win32cr::Graphics::Gdi::XFORM, @crBkColorSrc : UInt32, @iUsageSrc : UInt32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32)
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @xDest : Int32, @yDest : Int32, @cxDest : Int32, @cyDest : Int32, @dwRop : UInt32, @xSrc : Int32, @ySrc : Int32, @xformSrc : Win32cr::Graphics::Gdi::XFORM, @crBkColorSrc : Win32cr::Foundation::COLORREF, @iUsageSrc : UInt32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32)
     end
   end
 
@@ -3401,7 +3415,7 @@ module Win32cr::Graphics::Gdi
     property xSrc : Int32
     property ySrc : Int32
     property xformSrc : Win32cr::Graphics::Gdi::XFORM
-    property crBkColorSrc : UInt32
+    property crBkColorSrc : Win32cr::Foundation::COLORREF
     property iUsageSrc : UInt32
     property offBmiSrc : UInt32
     property cbBmiSrc : UInt32
@@ -3409,7 +3423,7 @@ module Win32cr::Graphics::Gdi
     property cbBitsSrc : UInt32
     property cxSrc : Int32
     property cySrc : Int32
-    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @xDest : Int32, @yDest : Int32, @cxDest : Int32, @cyDest : Int32, @dwRop : UInt32, @xSrc : Int32, @ySrc : Int32, @xformSrc : Win32cr::Graphics::Gdi::XFORM, @crBkColorSrc : UInt32, @iUsageSrc : UInt32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32, @cxSrc : Int32, @cySrc : Int32)
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @xDest : Int32, @yDest : Int32, @cxDest : Int32, @cyDest : Int32, @dwRop : UInt32, @xSrc : Int32, @ySrc : Int32, @xformSrc : Win32cr::Graphics::Gdi::XFORM, @crBkColorSrc : Win32cr::Foundation::COLORREF, @iUsageSrc : UInt32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32, @cxSrc : Int32, @cySrc : Int32)
     end
   end
 
@@ -3425,7 +3439,7 @@ module Win32cr::Graphics::Gdi
     property xSrc : Int32
     property ySrc : Int32
     property xformSrc : Win32cr::Graphics::Gdi::XFORM
-    property crBkColorSrc : UInt32
+    property crBkColorSrc : Win32cr::Foundation::COLORREF
     property iUsageSrc : UInt32
     property offBmiSrc : UInt32
     property cbBmiSrc : UInt32
@@ -3438,7 +3452,7 @@ module Win32cr::Graphics::Gdi
     property cbBmiMask : UInt32
     property offBitsMask : UInt32
     property cbBitsMask : UInt32
-    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @xDest : Int32, @yDest : Int32, @cxDest : Int32, @cyDest : Int32, @dwRop : UInt32, @xSrc : Int32, @ySrc : Int32, @xformSrc : Win32cr::Graphics::Gdi::XFORM, @crBkColorSrc : UInt32, @iUsageSrc : UInt32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32, @xMask : Int32, @yMask : Int32, @iUsageMask : UInt32, @offBmiMask : UInt32, @cbBmiMask : UInt32, @offBitsMask : UInt32, @cbBitsMask : UInt32)
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @xDest : Int32, @yDest : Int32, @cxDest : Int32, @cyDest : Int32, @dwRop : UInt32, @xSrc : Int32, @ySrc : Int32, @xformSrc : Win32cr::Graphics::Gdi::XFORM, @crBkColorSrc : Win32cr::Foundation::COLORREF, @iUsageSrc : UInt32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32, @xMask : Int32, @yMask : Int32, @iUsageMask : UInt32, @offBmiMask : UInt32, @cbBmiMask : UInt32, @offBitsMask : UInt32, @cbBitsMask : UInt32)
     end
   end
 
@@ -3452,7 +3466,7 @@ module Win32cr::Graphics::Gdi
     property cxSrc : Int32
     property cySrc : Int32
     property xformSrc : Win32cr::Graphics::Gdi::XFORM
-    property crBkColorSrc : UInt32
+    property crBkColorSrc : Win32cr::Foundation::COLORREF
     property iUsageSrc : UInt32
     property offBmiSrc : UInt32
     property cbBmiSrc : UInt32
@@ -3465,7 +3479,7 @@ module Win32cr::Graphics::Gdi
     property cbBmiMask : UInt32
     property offBitsMask : UInt32
     property cbBitsMask : UInt32
-    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @aptlDest : Win32cr::Foundation::POINTL[3], @xSrc : Int32, @ySrc : Int32, @cxSrc : Int32, @cySrc : Int32, @xformSrc : Win32cr::Graphics::Gdi::XFORM, @crBkColorSrc : UInt32, @iUsageSrc : UInt32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32, @xMask : Int32, @yMask : Int32, @iUsageMask : UInt32, @offBmiMask : UInt32, @cbBmiMask : UInt32, @offBitsMask : UInt32, @cbBitsMask : UInt32)
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @aptlDest : Win32cr::Foundation::POINTL[3], @xSrc : Int32, @ySrc : Int32, @cxSrc : Int32, @cySrc : Int32, @xformSrc : Win32cr::Graphics::Gdi::XFORM, @crBkColorSrc : Win32cr::Foundation::COLORREF, @iUsageSrc : UInt32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32, @xMask : Int32, @yMask : Int32, @iUsageMask : UInt32, @offBmiMask : UInt32, @cbBmiMask : UInt32, @offBitsMask : UInt32, @cbBitsMask : UInt32)
     end
   end
 
@@ -3691,7 +3705,7 @@ module Win32cr::Graphics::Gdi
     property xSrc : Int32
     property ySrc : Int32
     property xformSrc : Win32cr::Graphics::Gdi::XFORM
-    property crBkColorSrc : UInt32
+    property crBkColorSrc : Win32cr::Foundation::COLORREF
     property iUsageSrc : UInt32
     property offBmiSrc : UInt32
     property cbBmiSrc : UInt32
@@ -3699,7 +3713,7 @@ module Win32cr::Graphics::Gdi
     property cbBitsSrc : UInt32
     property cxSrc : Int32
     property cySrc : Int32
-    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @xDest : Int32, @yDest : Int32, @cxDest : Int32, @cyDest : Int32, @dwRop : UInt32, @xSrc : Int32, @ySrc : Int32, @xformSrc : Win32cr::Graphics::Gdi::XFORM, @crBkColorSrc : UInt32, @iUsageSrc : UInt32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32, @cxSrc : Int32, @cySrc : Int32)
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @xDest : Int32, @yDest : Int32, @cxDest : Int32, @cyDest : Int32, @dwRop : UInt32, @xSrc : Int32, @ySrc : Int32, @xformSrc : Win32cr::Graphics::Gdi::XFORM, @crBkColorSrc : Win32cr::Foundation::COLORREF, @iUsageSrc : UInt32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32, @cxSrc : Int32, @cySrc : Int32)
     end
   end
 
@@ -3727,7 +3741,7 @@ module Win32cr::Graphics::Gdi
     property xSrc : Int32
     property ySrc : Int32
     property xformSrc : Win32cr::Graphics::Gdi::XFORM
-    property crBkColorSrc : UInt32
+    property crBkColorSrc : Win32cr::Foundation::COLORREF
     property iUsageSrc : UInt32
     property offBmiSrc : UInt32
     property cbBmiSrc : UInt32
@@ -3735,7 +3749,7 @@ module Win32cr::Graphics::Gdi
     property cbBitsSrc : UInt32
     property cxSrc : Int32
     property cySrc : Int32
-    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @xDest : Int32, @yDest : Int32, @cxDest : Int32, @cyDest : Int32, @dwRop : UInt32, @xSrc : Int32, @ySrc : Int32, @xformSrc : Win32cr::Graphics::Gdi::XFORM, @crBkColorSrc : UInt32, @iUsageSrc : UInt32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32, @cxSrc : Int32, @cySrc : Int32)
+    def initialize(@emr : Win32cr::Graphics::Gdi::EMR, @rclBounds : Win32cr::Foundation::RECTL, @xDest : Int32, @yDest : Int32, @cxDest : Int32, @cyDest : Int32, @dwRop : UInt32, @xSrc : Int32, @ySrc : Int32, @xformSrc : Win32cr::Graphics::Gdi::XFORM, @crBkColorSrc : Win32cr::Foundation::COLORREF, @iUsageSrc : UInt32, @offBmiSrc : UInt32, @cbBmiSrc : UInt32, @offBitsSrc : UInt32, @cbBitsSrc : UInt32, @cxSrc : Int32, @cySrc : Int32)
     end
   end
 
@@ -3825,1587 +3839,2376 @@ module Win32cr::Graphics::Gdi
   end
 
   def getObjectA(h : Win32cr::Graphics::Gdi::HGDIOBJ, c : Int32, pv : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.GetObjectA(h, c, pv)
+    {% end %}
   end
 
   def addFontResourceA(param0 : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.AddFontResourceA(param0)
+    {% end %}
   end
 
   def addFontResourceW(param0 : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.AddFontResourceW(param0)
+    {% end %}
   end
 
   def animatePalette(hPal : Win32cr::Graphics::Gdi::HPALETTE, iStartIndex : UInt32, cEntries : UInt32, ppe : Win32cr::Graphics::Gdi::PALETTEENTRY*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AnimatePalette(hPal, iStartIndex, cEntries, ppe)
+    {% end %}
   end
 
   def arc(hdc : Win32cr::Graphics::Gdi::HDC, x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, x3 : Int32, y3 : Int32, x4 : Int32, y4 : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Arc(hdc, x1, y1, x2, y2, x3, y3, x4, y4)
+    {% end %}
   end
 
   def bitBlt(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, cx : Int32, cy : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, x1 : Int32, y1 : Int32, rop : Win32cr::Graphics::Gdi::ROP_CODE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BitBlt(hdc, x, y, cx, cy, hdcSrc, x1, y1, rop)
+    {% end %}
   end
 
   def cancelDC(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CancelDC(hdc)
+    {% end %}
   end
 
   def chord(hdc : Win32cr::Graphics::Gdi::HDC, x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, x3 : Int32, y3 : Int32, x4 : Int32, y4 : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Chord(hdc, x1, y1, x2, y2, x3, y3, x4, y4)
+    {% end %}
   end
 
   def closeMetaFile(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::HMETAFILE
+    {% if !flag?(:docs) %}
     C.CloseMetaFile(hdc)
+    {% end %}
   end
 
   def combineRgn(hrgnDst : Win32cr::Graphics::Gdi::HRGN, hrgnSrc1 : Win32cr::Graphics::Gdi::HRGN, hrgnSrc2 : Win32cr::Graphics::Gdi::HRGN, iMode : Win32cr::Graphics::Gdi::RGN_COMBINE_MODE) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    {% if !flag?(:docs) %}
     C.CombineRgn(hrgnDst, hrgnSrc1, hrgnSrc2, iMode)
+    {% end %}
   end
 
   def copyMetaFileA(param0 : Win32cr::Graphics::Gdi::HMETAFILE, param1 : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HMETAFILE
+    {% if !flag?(:docs) %}
     C.CopyMetaFileA(param0, param1)
+    {% end %}
   end
 
   def copyMetaFileW(param0 : Win32cr::Graphics::Gdi::HMETAFILE, param1 : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HMETAFILE
+    {% if !flag?(:docs) %}
     C.CopyMetaFileW(param0, param1)
+    {% end %}
   end
 
   def createBitmap(nWidth : Int32, nHeight : Int32, nPlanes : UInt32, nBitCount : UInt32, lpBits : Void*) : Win32cr::Graphics::Gdi::HBITMAP
+    {% if !flag?(:docs) %}
     C.CreateBitmap(nWidth, nHeight, nPlanes, nBitCount, lpBits)
+    {% end %}
   end
 
   def createBitmapIndirect(pbm : Win32cr::Graphics::Gdi::BITMAP*) : Win32cr::Graphics::Gdi::HBITMAP
+    {% if !flag?(:docs) %}
     C.CreateBitmapIndirect(pbm)
+    {% end %}
   end
 
   def createBrushIndirect(plbrush : Win32cr::Graphics::Gdi::LOGBRUSH*) : Win32cr::Graphics::Gdi::HBRUSH
+    {% if !flag?(:docs) %}
     C.CreateBrushIndirect(plbrush)
+    {% end %}
   end
 
   def createCompatibleBitmap(hdc : Win32cr::Graphics::Gdi::HDC, cx : Int32, cy : Int32) : Win32cr::Graphics::Gdi::HBITMAP
+    {% if !flag?(:docs) %}
     C.CreateCompatibleBitmap(hdc, cx, cy)
+    {% end %}
   end
 
   def createDiscardableBitmap(hdc : Win32cr::Graphics::Gdi::HDC, cx : Int32, cy : Int32) : Win32cr::Graphics::Gdi::HBITMAP
+    {% if !flag?(:docs) %}
     C.CreateDiscardableBitmap(hdc, cx, cy)
+    {% end %}
   end
 
   def createCompatibleDC(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::CreatedHDC
+    {% if !flag?(:docs) %}
     C.CreateCompatibleDC(hdc)
+    {% end %}
   end
 
   def createDCA(pwszDriver : Win32cr::Foundation::PSTR, pwszDevice : Win32cr::Foundation::PSTR, pszPort : Win32cr::Foundation::PSTR, pdm : Win32cr::Graphics::Gdi::DEVMODEA*) : Win32cr::Graphics::Gdi::CreatedHDC
+    {% if !flag?(:docs) %}
     C.CreateDCA(pwszDriver, pwszDevice, pszPort, pdm)
+    {% end %}
   end
 
   def createDCW(pwszDriver : Win32cr::Foundation::PWSTR, pwszDevice : Win32cr::Foundation::PWSTR, pszPort : Win32cr::Foundation::PWSTR, pdm : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Graphics::Gdi::CreatedHDC
+    {% if !flag?(:docs) %}
     C.CreateDCW(pwszDriver, pwszDevice, pszPort, pdm)
+    {% end %}
   end
 
   def createDIBitmap(hdc : Win32cr::Graphics::Gdi::HDC, pbmih : Win32cr::Graphics::Gdi::BITMAPINFOHEADER*, flInit : UInt32, pjBits : Void*, pbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, iUsage : Win32cr::Graphics::Gdi::DIB_USAGE) : Win32cr::Graphics::Gdi::HBITMAP
+    {% if !flag?(:docs) %}
     C.CreateDIBitmap(hdc, pbmih, flInit, pjBits, pbmi, iUsage)
+    {% end %}
   end
 
   def createDIBPatternBrush(h : LibC::IntPtrT, iUsage : Win32cr::Graphics::Gdi::DIB_USAGE) : Win32cr::Graphics::Gdi::HBRUSH
+    {% if !flag?(:docs) %}
     C.CreateDIBPatternBrush(h, iUsage)
+    {% end %}
   end
 
   def createDIBPatternBrushPt(lpPackedDIB : Void*, iUsage : Win32cr::Graphics::Gdi::DIB_USAGE) : Win32cr::Graphics::Gdi::HBRUSH
+    {% if !flag?(:docs) %}
     C.CreateDIBPatternBrushPt(lpPackedDIB, iUsage)
+    {% end %}
   end
 
   def createEllipticRgn(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32) : Win32cr::Graphics::Gdi::HRGN
+    {% if !flag?(:docs) %}
     C.CreateEllipticRgn(x1, y1, x2, y2)
+    {% end %}
   end
 
   def createEllipticRgnIndirect(lprect : Win32cr::Foundation::RECT*) : Win32cr::Graphics::Gdi::HRGN
+    {% if !flag?(:docs) %}
     C.CreateEllipticRgnIndirect(lprect)
+    {% end %}
   end
 
   def createFontIndirectA(lplf : Win32cr::Graphics::Gdi::LOGFONTA*) : Win32cr::Graphics::Gdi::HFONT
+    {% if !flag?(:docs) %}
     C.CreateFontIndirectA(lplf)
+    {% end %}
   end
 
   def createFontIndirectW(lplf : Win32cr::Graphics::Gdi::LOGFONTW*) : Win32cr::Graphics::Gdi::HFONT
+    {% if !flag?(:docs) %}
     C.CreateFontIndirectW(lplf)
+    {% end %}
   end
 
   def createFontA(cHeight : Int32, cWidth : Int32, cEscapement : Int32, cOrientation : Int32, cWeight : Int32, bItalic : UInt32, bUnderline : UInt32, bStrikeOut : UInt32, iCharSet : UInt32, iOutPrecision : Win32cr::Graphics::Gdi::FONT_OUTPUT_PRECISION, iClipPrecision : Win32cr::Graphics::Gdi::FONT_CLIP_PRECISION, iQuality : Win32cr::Graphics::Gdi::FONT_QUALITY, iPitchAndFamily : Win32cr::Graphics::Gdi::FONT_PITCH_AND_FAMILY, pszFaceName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HFONT
+    {% if !flag?(:docs) %}
     C.CreateFontA(cHeight, cWidth, cEscapement, cOrientation, cWeight, bItalic, bUnderline, bStrikeOut, iCharSet, iOutPrecision, iClipPrecision, iQuality, iPitchAndFamily, pszFaceName)
+    {% end %}
   end
 
   def createFontW(cHeight : Int32, cWidth : Int32, cEscapement : Int32, cOrientation : Int32, cWeight : Int32, bItalic : UInt32, bUnderline : UInt32, bStrikeOut : UInt32, iCharSet : UInt32, iOutPrecision : Win32cr::Graphics::Gdi::FONT_OUTPUT_PRECISION, iClipPrecision : Win32cr::Graphics::Gdi::FONT_CLIP_PRECISION, iQuality : Win32cr::Graphics::Gdi::FONT_QUALITY, iPitchAndFamily : Win32cr::Graphics::Gdi::FONT_PITCH_AND_FAMILY, pszFaceName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HFONT
+    {% if !flag?(:docs) %}
     C.CreateFontW(cHeight, cWidth, cEscapement, cOrientation, cWeight, bItalic, bUnderline, bStrikeOut, iCharSet, iOutPrecision, iClipPrecision, iQuality, iPitchAndFamily, pszFaceName)
+    {% end %}
   end
 
-  def createHatchBrush(iHatch : Win32cr::Graphics::Gdi::HATCH_BRUSH_STYLE, color : UInt32) : Win32cr::Graphics::Gdi::HBRUSH
+  def createHatchBrush(iHatch : Win32cr::Graphics::Gdi::HATCH_BRUSH_STYLE, color : Win32cr::Foundation::COLORREF) : Win32cr::Graphics::Gdi::HBRUSH
+    {% if !flag?(:docs) %}
     C.CreateHatchBrush(iHatch, color)
+    {% end %}
   end
 
   def createICA(pszDriver : Win32cr::Foundation::PSTR, pszDevice : Win32cr::Foundation::PSTR, pszPort : Win32cr::Foundation::PSTR, pdm : Win32cr::Graphics::Gdi::DEVMODEA*) : Win32cr::Graphics::Gdi::CreatedHDC
+    {% if !flag?(:docs) %}
     C.CreateICA(pszDriver, pszDevice, pszPort, pdm)
+    {% end %}
   end
 
   def createICW(pszDriver : Win32cr::Foundation::PWSTR, pszDevice : Win32cr::Foundation::PWSTR, pszPort : Win32cr::Foundation::PWSTR, pdm : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Graphics::Gdi::CreatedHDC
+    {% if !flag?(:docs) %}
     C.CreateICW(pszDriver, pszDevice, pszPort, pdm)
+    {% end %}
   end
 
   def createMetaFileA(pszFile : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HdcMetdataFileHandle
+    {% if !flag?(:docs) %}
     C.CreateMetaFileA(pszFile)
+    {% end %}
   end
 
   def createMetaFileW(pszFile : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HdcMetdataFileHandle
+    {% if !flag?(:docs) %}
     C.CreateMetaFileW(pszFile)
+    {% end %}
   end
 
   def createPalette(plpal : Win32cr::Graphics::Gdi::LOGPALETTE*) : Win32cr::Graphics::Gdi::HPALETTE
+    {% if !flag?(:docs) %}
     C.CreatePalette(plpal)
+    {% end %}
   end
 
-  def createPen(iStyle : Win32cr::Graphics::Gdi::PEN_STYLE, cWidth : Int32, color : UInt32) : Win32cr::Graphics::Gdi::HPEN
+  def createPen(iStyle : Win32cr::Graphics::Gdi::PEN_STYLE, cWidth : Int32, color : Win32cr::Foundation::COLORREF) : Win32cr::Graphics::Gdi::HPEN
+    {% if !flag?(:docs) %}
     C.CreatePen(iStyle, cWidth, color)
+    {% end %}
   end
 
   def createPenIndirect(plpen : Win32cr::Graphics::Gdi::LOGPEN*) : Win32cr::Graphics::Gdi::HPEN
+    {% if !flag?(:docs) %}
     C.CreatePenIndirect(plpen)
+    {% end %}
   end
 
   def createPolyPolygonRgn(pptl : Win32cr::Foundation::POINT*, pc : Int32*, cPoly : Int32, iMode : Win32cr::Graphics::Gdi::CREATE_POLYGON_RGN_MODE) : Win32cr::Graphics::Gdi::HRGN
+    {% if !flag?(:docs) %}
     C.CreatePolyPolygonRgn(pptl, pc, cPoly, iMode)
+    {% end %}
   end
 
   def createPatternBrush(hbm : Win32cr::Graphics::Gdi::HBITMAP) : Win32cr::Graphics::Gdi::HBRUSH
+    {% if !flag?(:docs) %}
     C.CreatePatternBrush(hbm)
+    {% end %}
   end
 
   def createRectRgn(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32) : Win32cr::Graphics::Gdi::HRGN
+    {% if !flag?(:docs) %}
     C.CreateRectRgn(x1, y1, x2, y2)
+    {% end %}
   end
 
   def createRectRgnIndirect(lprect : Win32cr::Foundation::RECT*) : Win32cr::Graphics::Gdi::HRGN
+    {% if !flag?(:docs) %}
     C.CreateRectRgnIndirect(lprect)
+    {% end %}
   end
 
   def createRoundRectRgn(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32, w : Int32, h : Int32) : Win32cr::Graphics::Gdi::HRGN
+    {% if !flag?(:docs) %}
     C.CreateRoundRectRgn(x1, y1, x2, y2, w, h)
+    {% end %}
   end
 
   def createScalableFontResourceA(fdwHidden : UInt32, lpszFont : Win32cr::Foundation::PSTR, lpszFile : Win32cr::Foundation::PSTR, lpszPath : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateScalableFontResourceA(fdwHidden, lpszFont, lpszFile, lpszPath)
+    {% end %}
   end
 
   def createScalableFontResourceW(fdwHidden : UInt32, lpszFont : Win32cr::Foundation::PWSTR, lpszFile : Win32cr::Foundation::PWSTR, lpszPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CreateScalableFontResourceW(fdwHidden, lpszFont, lpszFile, lpszPath)
+    {% end %}
   end
 
-  def createSolidBrush(color : UInt32) : Win32cr::Graphics::Gdi::HBRUSH
+  def createSolidBrush(color : Win32cr::Foundation::COLORREF) : Win32cr::Graphics::Gdi::HBRUSH
+    {% if !flag?(:docs) %}
     C.CreateSolidBrush(color)
+    {% end %}
   end
 
   def deleteDC(hdc : Win32cr::Graphics::Gdi::CreatedHDC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteDC(hdc)
+    {% end %}
   end
 
   def deleteMetaFile(hmf : Win32cr::Graphics::Gdi::HMETAFILE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteMetaFile(hmf)
+    {% end %}
   end
 
   def deleteObject(ho : Win32cr::Graphics::Gdi::HGDIOBJ) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteObject(ho)
+    {% end %}
   end
 
   def drawEscape(hdc : Win32cr::Graphics::Gdi::HDC, iEscape : Int32, cjIn : Int32, lpIn : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.DrawEscape(hdc, iEscape, cjIn, lpIn)
+    {% end %}
   end
 
   def ellipse(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Ellipse(hdc, left, top, right, bottom)
+    {% end %}
   end
 
   def enumFontFamiliesExA(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Graphics::Gdi::LOGFONTA*, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCA, lParam : Win32cr::Foundation::LPARAM, dwFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.EnumFontFamiliesExA(hdc, lpLogfont, lpProc, lParam, dwFlags)
+    {% end %}
   end
 
   def enumFontFamiliesExW(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Graphics::Gdi::LOGFONTW*, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCW, lParam : Win32cr::Foundation::LPARAM, dwFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.EnumFontFamiliesExW(hdc, lpLogfont, lpProc, lParam, dwFlags)
+    {% end %}
   end
 
   def enumFontFamiliesA(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Foundation::PSTR, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCA, lParam : Win32cr::Foundation::LPARAM) : Int32
+    {% if !flag?(:docs) %}
     C.EnumFontFamiliesA(hdc, lpLogfont, lpProc, lParam)
+    {% end %}
   end
 
   def enumFontFamiliesW(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Foundation::PWSTR, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCW, lParam : Win32cr::Foundation::LPARAM) : Int32
+    {% if !flag?(:docs) %}
     C.EnumFontFamiliesW(hdc, lpLogfont, lpProc, lParam)
+    {% end %}
   end
 
   def enumFontsA(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Foundation::PSTR, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCA, lParam : Win32cr::Foundation::LPARAM) : Int32
+    {% if !flag?(:docs) %}
     C.EnumFontsA(hdc, lpLogfont, lpProc, lParam)
+    {% end %}
   end
 
   def enumFontsW(hdc : Win32cr::Graphics::Gdi::HDC, lpLogfont : Win32cr::Foundation::PWSTR, lpProc : Win32cr::Graphics::Gdi::FONTENUMPROCW, lParam : Win32cr::Foundation::LPARAM) : Int32
+    {% if !flag?(:docs) %}
     C.EnumFontsW(hdc, lpLogfont, lpProc, lParam)
+    {% end %}
   end
 
   def enumObjects(hdc : Win32cr::Graphics::Gdi::HDC, nType : Win32cr::Graphics::Gdi::OBJ_TYPE, lpFunc : Win32cr::Graphics::Gdi::GOBJENUMPROC, lParam : Win32cr::Foundation::LPARAM) : Int32
+    {% if !flag?(:docs) %}
     C.EnumObjects(hdc, nType, lpFunc, lParam)
+    {% end %}
   end
 
   def equalRgn(hrgn1 : Win32cr::Graphics::Gdi::HRGN, hrgn2 : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EqualRgn(hrgn1, hrgn2)
+    {% end %}
   end
 
   def excludeClipRect(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    {% if !flag?(:docs) %}
     C.ExcludeClipRect(hdc, left, top, right, bottom)
+    {% end %}
   end
 
   def extCreateRegion(lpx : Win32cr::Graphics::Gdi::XFORM*, nCount : UInt32, lpData : Win32cr::Graphics::Gdi::RGNDATA*) : Win32cr::Graphics::Gdi::HRGN
+    {% if !flag?(:docs) %}
     C.ExtCreateRegion(lpx, nCount, lpData)
+    {% end %}
   end
 
-  def extFloodFill(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32, type__ : Win32cr::Graphics::Gdi::EXT_FLOOD_FILL_TYPE) : Win32cr::Foundation::BOOL
+  def extFloodFill(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : Win32cr::Foundation::COLORREF, type__ : Win32cr::Graphics::Gdi::EXT_FLOOD_FILL_TYPE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ExtFloodFill(hdc, x, y, color, type__)
+    {% end %}
   end
 
   def fillRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN, hbr : Win32cr::Graphics::Gdi::HBRUSH) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FillRgn(hdc, hrgn, hbr)
+    {% end %}
   end
 
-  def floodFill(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32) : Win32cr::Foundation::BOOL
+  def floodFill(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : Win32cr::Foundation::COLORREF) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FloodFill(hdc, x, y, color)
+    {% end %}
   end
 
   def frameRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN, hbr : Win32cr::Graphics::Gdi::HBRUSH, w : Int32, h : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FrameRgn(hdc, hrgn, hbr, w, h)
+    {% end %}
   end
 
-  def getROP2(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+  def getROP2(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::R2_MODE
+    {% if !flag?(:docs) %}
     C.GetROP2(hdc)
+    {% end %}
   end
 
   def getAspectRatioFilterEx(hdc : Win32cr::Graphics::Gdi::HDC, lpsize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetAspectRatioFilterEx(hdc, lpsize)
+    {% end %}
   end
 
-  def getBkColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+  def getBkColor(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::COLORREF
+    {% if !flag?(:docs) %}
     C.GetBkColor(hdc)
+    {% end %}
   end
 
-  def getDCBrushColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+  def getDCBrushColor(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::COLORREF
+    {% if !flag?(:docs) %}
     C.GetDCBrushColor(hdc)
+    {% end %}
   end
 
-  def getDCPenColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+  def getDCPenColor(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::COLORREF
+    {% if !flag?(:docs) %}
     C.GetDCPenColor(hdc)
+    {% end %}
   end
 
-  def getBkMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+  def getBkMode(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::BACKGROUND_MODE
+    {% if !flag?(:docs) %}
     C.GetBkMode(hdc)
+    {% end %}
   end
 
   def getBitmapBits(hbit : Win32cr::Graphics::Gdi::HBITMAP, cb : Int32, lpvBits : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.GetBitmapBits(hbit, cb, lpvBits)
+    {% end %}
   end
 
   def getBitmapDimensionEx(hbit : Win32cr::Graphics::Gdi::HBITMAP, lpsize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetBitmapDimensionEx(hbit, lpsize)
+    {% end %}
   end
 
   def getBoundsRect(hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetBoundsRect(hdc, lprect, flags)
+    {% end %}
   end
 
   def getBrushOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetBrushOrgEx(hdc, lppt)
+    {% end %}
   end
 
   def getCharWidthA(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCharWidthA(hdc, iFirst, iLast, lpBuffer)
+    {% end %}
   end
 
   def getCharWidthW(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCharWidthW(hdc, iFirst, iLast, lpBuffer)
+    {% end %}
   end
 
   def getCharWidth32A(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCharWidth32A(hdc, iFirst, iLast, lpBuffer)
+    {% end %}
   end
 
   def getCharWidth32W(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCharWidth32W(hdc, iFirst, iLast, lpBuffer)
+    {% end %}
   end
 
   def getCharWidthFloatA(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Float32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCharWidthFloatA(hdc, iFirst, iLast, lpBuffer)
+    {% end %}
   end
 
   def getCharWidthFloatW(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpBuffer : Float32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCharWidthFloatW(hdc, iFirst, iLast, lpBuffer)
+    {% end %}
   end
 
   def getCharABCWidthsA(hdc : Win32cr::Graphics::Gdi::HDC, wFirst : UInt32, wLast : UInt32, lpABC : Win32cr::Graphics::Gdi::ABC*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCharABCWidthsA(hdc, wFirst, wLast, lpABC)
+    {% end %}
   end
 
   def getCharABCWidthsW(hdc : Win32cr::Graphics::Gdi::HDC, wFirst : UInt32, wLast : UInt32, lpABC : Win32cr::Graphics::Gdi::ABC*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCharABCWidthsW(hdc, wFirst, wLast, lpABC)
+    {% end %}
   end
 
   def getCharABCWidthsFloatA(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpABC : Win32cr::Graphics::Gdi::ABCFLOAT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCharABCWidthsFloatA(hdc, iFirst, iLast, lpABC)
+    {% end %}
   end
 
   def getCharABCWidthsFloatW(hdc : Win32cr::Graphics::Gdi::HDC, iFirst : UInt32, iLast : UInt32, lpABC : Win32cr::Graphics::Gdi::ABCFLOAT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCharABCWidthsFloatW(hdc, iFirst, iLast, lpABC)
+    {% end %}
   end
 
   def getClipBox(hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    {% if !flag?(:docs) %}
     C.GetClipBox(hdc, lprect)
+    {% end %}
   end
 
   def getClipRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Int32
+    {% if !flag?(:docs) %}
     C.GetClipRgn(hdc, hrgn)
+    {% end %}
   end
 
   def getMetaRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Int32
+    {% if !flag?(:docs) %}
     C.GetMetaRgn(hdc, hrgn)
+    {% end %}
   end
 
   def getCurrentObject(hdc : Win32cr::Graphics::Gdi::HDC, type__ : Win32cr::Graphics::Gdi::OBJ_TYPE) : Win32cr::Graphics::Gdi::HGDIOBJ
+    {% if !flag?(:docs) %}
     C.GetCurrentObject(hdc, type__)
+    {% end %}
   end
 
   def getCurrentPositionEx(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCurrentPositionEx(hdc, lppt)
+    {% end %}
   end
 
   def getDeviceCaps(hdc : Win32cr::Graphics::Gdi::HDC, index : Win32cr::Graphics::Gdi::GET_DEVICE_CAPS_INDEX) : Int32
+    {% if !flag?(:docs) %}
     C.GetDeviceCaps(hdc, index)
+    {% end %}
   end
 
   def getDIBits(hdc : Win32cr::Graphics::Gdi::HDC, hbm : Win32cr::Graphics::Gdi::HBITMAP, start : UInt32, cLines : UInt32, lpvBits : Void*, lpbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, usage : Win32cr::Graphics::Gdi::DIB_USAGE) : Int32
+    {% if !flag?(:docs) %}
     C.GetDIBits(hdc, hbm, start, cLines, lpvBits, lpbmi, usage)
+    {% end %}
   end
 
   def getFontData(hdc : Win32cr::Graphics::Gdi::HDC, dwTable : UInt32, dwOffset : UInt32, pvBuffer : Void*, cjBuffer : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetFontData(hdc, dwTable, dwOffset, pvBuffer, cjBuffer)
+    {% end %}
   end
 
   def getGlyphOutlineA(hdc : Win32cr::Graphics::Gdi::HDC, uChar : UInt32, fuFormat : Win32cr::Graphics::Gdi::GET_GLYPH_OUTLINE_FORMAT, lpgm : Win32cr::Graphics::Gdi::GLYPHMETRICS*, cjBuffer : UInt32, pvBuffer : Void*, lpmat2 : Win32cr::Graphics::Gdi::MAT2*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetGlyphOutlineA(hdc, uChar, fuFormat, lpgm, cjBuffer, pvBuffer, lpmat2)
+    {% end %}
   end
 
   def getGlyphOutlineW(hdc : Win32cr::Graphics::Gdi::HDC, uChar : UInt32, fuFormat : Win32cr::Graphics::Gdi::GET_GLYPH_OUTLINE_FORMAT, lpgm : Win32cr::Graphics::Gdi::GLYPHMETRICS*, cjBuffer : UInt32, pvBuffer : Void*, lpmat2 : Win32cr::Graphics::Gdi::MAT2*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetGlyphOutlineW(hdc, uChar, fuFormat, lpgm, cjBuffer, pvBuffer, lpmat2)
+    {% end %}
   end
 
   def getGraphicsMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    {% if !flag?(:docs) %}
     C.GetGraphicsMode(hdc)
+    {% end %}
   end
 
-  def getMapMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+  def getMapMode(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::HDC_MAP_MODE
+    {% if !flag?(:docs) %}
     C.GetMapMode(hdc)
+    {% end %}
   end
 
   def getMetaFileBitsEx(hMF : Win32cr::Graphics::Gdi::HMETAFILE, cbBuffer : UInt32, lpData : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetMetaFileBitsEx(hMF, cbBuffer, lpData)
+    {% end %}
   end
 
   def getMetaFileA(lpName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HMETAFILE
+    {% if !flag?(:docs) %}
     C.GetMetaFileA(lpName)
+    {% end %}
   end
 
   def getMetaFileW(lpName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HMETAFILE
+    {% if !flag?(:docs) %}
     C.GetMetaFileW(lpName)
+    {% end %}
   end
 
-  def getNearestColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
+  def getNearestColor(hdc : Win32cr::Graphics::Gdi::HDC, color : Win32cr::Foundation::COLORREF) : Win32cr::Foundation::COLORREF
+    {% if !flag?(:docs) %}
     C.GetNearestColor(hdc, color)
+    {% end %}
   end
 
-  def getNearestPaletteIndex(h : Win32cr::Graphics::Gdi::HPALETTE, color : UInt32) : UInt32
+  def getNearestPaletteIndex(h : Win32cr::Graphics::Gdi::HPALETTE, color : Win32cr::Foundation::COLORREF) : UInt32
+    {% if !flag?(:docs) %}
     C.GetNearestPaletteIndex(h, color)
+    {% end %}
   end
 
   def getObjectType(h : Win32cr::Graphics::Gdi::HGDIOBJ) : UInt32
+    {% if !flag?(:docs) %}
     C.GetObjectType(h)
+    {% end %}
   end
 
   def getOutlineTextMetricsA(hdc : Win32cr::Graphics::Gdi::HDC, cjCopy : UInt32, potm : Win32cr::Graphics::Gdi::OUTLINETEXTMETRICA*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetOutlineTextMetricsA(hdc, cjCopy, potm)
+    {% end %}
   end
 
   def getOutlineTextMetricsW(hdc : Win32cr::Graphics::Gdi::HDC, cjCopy : UInt32, potm : Win32cr::Graphics::Gdi::OUTLINETEXTMETRICW*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetOutlineTextMetricsW(hdc, cjCopy, potm)
+    {% end %}
   end
 
   def getPaletteEntries(hpal : Win32cr::Graphics::Gdi::HPALETTE, iStart : UInt32, cEntries : UInt32, pPalEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetPaletteEntries(hpal, iStart, cEntries, pPalEntries)
+    {% end %}
   end
 
-  def getPixel(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : UInt32
+  def getPixel(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : Win32cr::Foundation::COLORREF
+    {% if !flag?(:docs) %}
     C.GetPixel(hdc, x, y)
+    {% end %}
   end
 
   def getPolyFillMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    {% if !flag?(:docs) %}
     C.GetPolyFillMode(hdc)
+    {% end %}
   end
 
   def getRasterizerCaps(lpraststat : Win32cr::Graphics::Gdi::RASTERIZER_STATUS*, cjBytes : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetRasterizerCaps(lpraststat, cjBytes)
+    {% end %}
   end
 
   def getRandomRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN, i : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetRandomRgn(hdc, hrgn, i)
+    {% end %}
   end
 
   def getRegionData(hrgn : Win32cr::Graphics::Gdi::HRGN, nCount : UInt32, lpRgnData : Win32cr::Graphics::Gdi::RGNDATA*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetRegionData(hrgn, nCount, lpRgnData)
+    {% end %}
   end
 
   def getRgnBox(hrgn : Win32cr::Graphics::Gdi::HRGN, lprc : Win32cr::Foundation::RECT*) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    {% if !flag?(:docs) %}
     C.GetRgnBox(hrgn, lprc)
+    {% end %}
   end
 
   def getStockObject(i : Win32cr::Graphics::Gdi::GET_STOCK_OBJECT_FLAGS) : Win32cr::Graphics::Gdi::HGDIOBJ
+    {% if !flag?(:docs) %}
     C.GetStockObject(i)
+    {% end %}
   end
 
   def getStretchBltMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    {% if !flag?(:docs) %}
     C.GetStretchBltMode(hdc)
+    {% end %}
   end
 
   def getSystemPaletteEntries(hdc : Win32cr::Graphics::Gdi::HDC, iStart : UInt32, cEntries : UInt32, pPalEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemPaletteEntries(hdc, iStart, cEntries, pPalEntries)
+    {% end %}
   end
 
   def getSystemPaletteUse(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+    {% if !flag?(:docs) %}
     C.GetSystemPaletteUse(hdc)
+    {% end %}
   end
 
   def getTextCharacterExtra(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    {% if !flag?(:docs) %}
     C.GetTextCharacterExtra(hdc)
+    {% end %}
   end
 
-  def getTextAlign(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+  def getTextAlign(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::TEXT_ALIGN_OPTIONS
+    {% if !flag?(:docs) %}
     C.GetTextAlign(hdc)
+    {% end %}
   end
 
-  def getTextColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+  def getTextColor(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::COLORREF
+    {% if !flag?(:docs) %}
     C.GetTextColor(hdc)
+    {% end %}
   end
 
   def getTextExtentPointA(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt8*, c : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetTextExtentPointA(hdc, lpString, c, lpsz)
+    {% end %}
   end
 
   def getTextExtentPointW(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt16*, c : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetTextExtentPointW(hdc, lpString, c, lpsz)
+    {% end %}
   end
 
   def getTextExtentPoint32A(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt8*, c : Int32, psizl : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetTextExtentPoint32A(hdc, lpString, c, psizl)
+    {% end %}
   end
 
   def getTextExtentPoint32W(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt16*, c : Int32, psizl : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetTextExtentPoint32W(hdc, lpString, c, psizl)
+    {% end %}
   end
 
   def getTextExtentExPointA(hdc : Win32cr::Graphics::Gdi::HDC, lpszString : UInt8*, cchString : Int32, nMaxExtent : Int32, lpnFit : Int32*, lpnDx : Int32*, lpSize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetTextExtentExPointA(hdc, lpszString, cchString, nMaxExtent, lpnFit, lpnDx, lpSize)
+    {% end %}
   end
 
   def getTextExtentExPointW(hdc : Win32cr::Graphics::Gdi::HDC, lpszString : UInt16*, cchString : Int32, nMaxExtent : Int32, lpnFit : Int32*, lpnDx : Int32*, lpSize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetTextExtentExPointW(hdc, lpszString, cchString, nMaxExtent, lpnFit, lpnDx, lpSize)
+    {% end %}
   end
 
   def getFontLanguageInfo(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+    {% if !flag?(:docs) %}
     C.GetFontLanguageInfo(hdc)
+    {% end %}
   end
 
   def getCharacterPlacementA(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt8*, nCount : Int32, nMexExtent : Int32, lpResults : Win32cr::Graphics::Gdi::GCP_RESULTSA*, dwFlags : Win32cr::Graphics::Gdi::GET_CHARACTER_PLACEMENT_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.GetCharacterPlacementA(hdc, lpString, nCount, nMexExtent, lpResults, dwFlags)
+    {% end %}
   end
 
   def getCharacterPlacementW(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt16*, nCount : Int32, nMexExtent : Int32, lpResults : Win32cr::Graphics::Gdi::GCP_RESULTSW*, dwFlags : Win32cr::Graphics::Gdi::GET_CHARACTER_PLACEMENT_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.GetCharacterPlacementW(hdc, lpString, nCount, nMexExtent, lpResults, dwFlags)
+    {% end %}
   end
 
   def getFontUnicodeRanges(hdc : Win32cr::Graphics::Gdi::HDC, lpgs : Win32cr::Graphics::Gdi::GLYPHSET*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetFontUnicodeRanges(hdc, lpgs)
+    {% end %}
   end
 
   def getGlyphIndicesA(hdc : Win32cr::Graphics::Gdi::HDC, lpstr : UInt8*, c : Int32, pgi : UInt16*, fl : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetGlyphIndicesA(hdc, lpstr, c, pgi, fl)
+    {% end %}
   end
 
   def getGlyphIndicesW(hdc : Win32cr::Graphics::Gdi::HDC, lpstr : UInt16*, c : Int32, pgi : UInt16*, fl : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GetGlyphIndicesW(hdc, lpstr, c, pgi, fl)
+    {% end %}
   end
 
   def getTextExtentPointI(hdc : Win32cr::Graphics::Gdi::HDC, pgiIn : UInt16*, cgi : Int32, psize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetTextExtentPointI(hdc, pgiIn, cgi, psize)
+    {% end %}
   end
 
   def getTextExtentExPointI(hdc : Win32cr::Graphics::Gdi::HDC, lpwszString : UInt16*, cwchString : Int32, nMaxExtent : Int32, lpnFit : Int32*, lpnDx : Int32*, lpSize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetTextExtentExPointI(hdc, lpwszString, cwchString, nMaxExtent, lpnFit, lpnDx, lpSize)
+    {% end %}
   end
 
   def getCharWidthI(hdc : Win32cr::Graphics::Gdi::HDC, giFirst : UInt32, cgi : UInt32, pgi : UInt16*, piWidths : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCharWidthI(hdc, giFirst, cgi, pgi, piWidths)
+    {% end %}
   end
 
   def getCharABCWidthsI(hdc : Win32cr::Graphics::Gdi::HDC, giFirst : UInt32, cgi : UInt32, pgi : UInt16*, pabc : Win32cr::Graphics::Gdi::ABC*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetCharABCWidthsI(hdc, giFirst, cgi, pgi, pabc)
+    {% end %}
   end
 
   def addFontResourceExA(name : Win32cr::Foundation::PSTR, fl : Win32cr::Graphics::Gdi::FONT_RESOURCE_CHARACTERISTICS, res : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.AddFontResourceExA(name, fl, res)
+    {% end %}
   end
 
   def addFontResourceExW(name : Win32cr::Foundation::PWSTR, fl : Win32cr::Graphics::Gdi::FONT_RESOURCE_CHARACTERISTICS, res : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.AddFontResourceExW(name, fl, res)
+    {% end %}
   end
 
   def removeFontResourceExA(name : Win32cr::Foundation::PSTR, fl : UInt32, pdv : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RemoveFontResourceExA(name, fl, pdv)
+    {% end %}
   end
 
   def removeFontResourceExW(name : Win32cr::Foundation::PWSTR, fl : UInt32, pdv : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RemoveFontResourceExW(name, fl, pdv)
+    {% end %}
   end
 
   def addFontMemResourceEx(pFileView : Void*, cjSize : UInt32, pvResrved : Void*, pNumFonts : UInt32*) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.AddFontMemResourceEx(pFileView, cjSize, pvResrved, pNumFonts)
+    {% end %}
   end
 
   def removeFontMemResourceEx(h : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RemoveFontMemResourceEx(h)
+    {% end %}
   end
 
   def createFontIndirectExA(param0 : Win32cr::Graphics::Gdi::ENUMLOGFONTEXDVA*) : Win32cr::Graphics::Gdi::HFONT
+    {% if !flag?(:docs) %}
     C.CreateFontIndirectExA(param0)
+    {% end %}
   end
 
   def createFontIndirectExW(param0 : Win32cr::Graphics::Gdi::ENUMLOGFONTEXDVW*) : Win32cr::Graphics::Gdi::HFONT
+    {% if !flag?(:docs) %}
     C.CreateFontIndirectExW(param0)
+    {% end %}
   end
 
   def getViewportExtEx(hdc : Win32cr::Graphics::Gdi::HDC, lpsize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetViewportExtEx(hdc, lpsize)
+    {% end %}
   end
 
   def getViewportOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, lppoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetViewportOrgEx(hdc, lppoint)
+    {% end %}
   end
 
   def getWindowExtEx(hdc : Win32cr::Graphics::Gdi::HDC, lpsize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetWindowExtEx(hdc, lpsize)
+    {% end %}
   end
 
   def getWindowOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, lppoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetWindowOrgEx(hdc, lppoint)
+    {% end %}
   end
 
   def intersectClipRect(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    {% if !flag?(:docs) %}
     C.IntersectClipRect(hdc, left, top, right, bottom)
+    {% end %}
   end
 
   def invertRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InvertRgn(hdc, hrgn)
+    {% end %}
   end
 
   def lineDDA(xStart : Int32, yStart : Int32, xEnd : Int32, yEnd : Int32, lpProc : Win32cr::Graphics::Gdi::LINEDDAPROC, data : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LineDDA(xStart, yStart, xEnd, yEnd, lpProc, data)
+    {% end %}
   end
 
   def lineTo(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LineTo(hdc, x, y)
+    {% end %}
   end
 
   def maskBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, xDest : Int32, yDest : Int32, width : Int32, height : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xSrc : Int32, ySrc : Int32, hbmMask : Win32cr::Graphics::Gdi::HBITMAP, xMask : Int32, yMask : Int32, rop : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MaskBlt(hdcDest, xDest, yDest, width, height, hdcSrc, xSrc, ySrc, hbmMask, xMask, yMask, rop)
+    {% end %}
   end
 
   def plgBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, lpPoint : Win32cr::Foundation::POINT*, hdcSrc : Win32cr::Graphics::Gdi::HDC, xSrc : Int32, ySrc : Int32, width : Int32, height : Int32, hbmMask : Win32cr::Graphics::Gdi::HBITMAP, xMask : Int32, yMask : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PlgBlt(hdcDest, lpPoint, hdcSrc, xSrc, ySrc, width, height, hbmMask, xMask, yMask)
+    {% end %}
   end
 
   def offsetClipRgn(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    {% if !flag?(:docs) %}
     C.OffsetClipRgn(hdc, x, y)
+    {% end %}
   end
 
   def offsetRgn(hrgn : Win32cr::Graphics::Gdi::HRGN, x : Int32, y : Int32) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    {% if !flag?(:docs) %}
     C.OffsetRgn(hrgn, x, y)
+    {% end %}
   end
 
   def patBlt(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, w : Int32, h : Int32, rop : Win32cr::Graphics::Gdi::ROP_CODE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PatBlt(hdc, x, y, w, h, rop)
+    {% end %}
   end
 
   def pie(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32, xr1 : Int32, yr1 : Int32, xr2 : Int32, yr2 : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Pie(hdc, left, top, right, bottom, xr1, yr1, xr2, yr2)
+    {% end %}
   end
 
   def playMetaFile(hdc : Win32cr::Graphics::Gdi::HDC, hmf : Win32cr::Graphics::Gdi::HMETAFILE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PlayMetaFile(hdc, hmf)
+    {% end %}
   end
 
   def paintRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PaintRgn(hdc, hrgn)
+    {% end %}
   end
 
   def polyPolygon(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, asz : Int32*, csz : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PolyPolygon(hdc, apt, asz, csz)
+    {% end %}
   end
 
   def ptInRegion(hrgn : Win32cr::Graphics::Gdi::HRGN, x : Int32, y : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PtInRegion(hrgn, x, y)
+    {% end %}
   end
 
   def ptVisible(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PtVisible(hdc, x, y)
+    {% end %}
   end
 
   def rectInRegion(hrgn : Win32cr::Graphics::Gdi::HRGN, lprect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RectInRegion(hrgn, lprect)
+    {% end %}
   end
 
   def rectVisible(hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RectVisible(hdc, lprect)
+    {% end %}
   end
 
   def rectangle(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Rectangle(hdc, left, top, right, bottom)
+    {% end %}
   end
 
   def restoreDC(hdc : Win32cr::Graphics::Gdi::HDC, nSavedDC : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RestoreDC(hdc, nSavedDC)
+    {% end %}
   end
 
   def resetDCA(hdc : Win32cr::Graphics::Gdi::HDC, lpdm : Win32cr::Graphics::Gdi::DEVMODEA*) : Win32cr::Graphics::Gdi::HDC
+    {% if !flag?(:docs) %}
     C.ResetDCA(hdc, lpdm)
+    {% end %}
   end
 
   def resetDCW(hdc : Win32cr::Graphics::Gdi::HDC, lpdm : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Graphics::Gdi::HDC
+    {% if !flag?(:docs) %}
     C.ResetDCW(hdc, lpdm)
+    {% end %}
   end
 
   def realizePalette(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+    {% if !flag?(:docs) %}
     C.RealizePalette(hdc)
+    {% end %}
   end
 
   def removeFontResourceA(lpFileName : Win32cr::Foundation::PSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RemoveFontResourceA(lpFileName)
+    {% end %}
   end
 
   def removeFontResourceW(lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RemoveFontResourceW(lpFileName)
+    {% end %}
   end
 
   def roundRect(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32, width : Int32, height : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RoundRect(hdc, left, top, right, bottom, width, height)
+    {% end %}
   end
 
   def resizePalette(hpal : Win32cr::Graphics::Gdi::HPALETTE, n : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ResizePalette(hpal, n)
+    {% end %}
   end
 
   def saveDC(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    {% if !flag?(:docs) %}
     C.SaveDC(hdc)
+    {% end %}
   end
 
   def selectClipRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    {% if !flag?(:docs) %}
     C.SelectClipRgn(hdc, hrgn)
+    {% end %}
   end
 
   def extSelectClipRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN, mode : Win32cr::Graphics::Gdi::RGN_COMBINE_MODE) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    {% if !flag?(:docs) %}
     C.ExtSelectClipRgn(hdc, hrgn, mode)
+    {% end %}
   end
 
   def setMetaRgn(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    {% if !flag?(:docs) %}
     C.SetMetaRgn(hdc)
+    {% end %}
   end
 
   def selectObject(hdc : Win32cr::Graphics::Gdi::HDC, h : Win32cr::Graphics::Gdi::HGDIOBJ) : Win32cr::Graphics::Gdi::HGDIOBJ
+    {% if !flag?(:docs) %}
     C.SelectObject(hdc, h)
+    {% end %}
   end
 
   def selectPalette(hdc : Win32cr::Graphics::Gdi::HDC, hPal : Win32cr::Graphics::Gdi::HPALETTE, bForceBkgd : Win32cr::Foundation::BOOL) : Win32cr::Graphics::Gdi::HPALETTE
+    {% if !flag?(:docs) %}
     C.SelectPalette(hdc, hPal, bForceBkgd)
+    {% end %}
   end
 
-  def setBkColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
+  def setBkColor(hdc : Win32cr::Graphics::Gdi::HDC, color : Win32cr::Foundation::COLORREF) : Win32cr::Foundation::COLORREF
+    {% if !flag?(:docs) %}
     C.SetBkColor(hdc, color)
+    {% end %}
   end
 
-  def setDCBrushColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
+  def setDCBrushColor(hdc : Win32cr::Graphics::Gdi::HDC, color : Win32cr::Foundation::COLORREF) : Win32cr::Foundation::COLORREF
+    {% if !flag?(:docs) %}
     C.SetDCBrushColor(hdc, color)
+    {% end %}
   end
 
-  def setDCPenColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
+  def setDCPenColor(hdc : Win32cr::Graphics::Gdi::HDC, color : Win32cr::Foundation::COLORREF) : Win32cr::Foundation::COLORREF
+    {% if !flag?(:docs) %}
     C.SetDCPenColor(hdc, color)
+    {% end %}
   end
 
   def setBkMode(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::Graphics::Gdi::BACKGROUND_MODE) : Int32
+    {% if !flag?(:docs) %}
     C.SetBkMode(hdc, mode)
+    {% end %}
   end
 
   def setBitmapBits(hbm : Win32cr::Graphics::Gdi::HBITMAP, cb : UInt32, pvBits : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.SetBitmapBits(hbm, cb, pvBits)
+    {% end %}
   end
 
   def setBoundsRect(hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*, flags : Win32cr::Graphics::Gdi::SET_BOUNDS_RECT_FLAGS) : UInt32
+    {% if !flag?(:docs) %}
     C.SetBoundsRect(hdc, lprect, flags)
+    {% end %}
   end
 
   def setDIBits(hdc : Win32cr::Graphics::Gdi::HDC, hbm : Win32cr::Graphics::Gdi::HBITMAP, start : UInt32, cLines : UInt32, lpBits : Void*, lpbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, color_use : Win32cr::Graphics::Gdi::DIB_USAGE) : Int32
+    {% if !flag?(:docs) %}
     C.SetDIBits(hdc, hbm, start, cLines, lpBits, lpbmi, color_use)
+    {% end %}
   end
 
   def setDIBitsToDevice(hdc : Win32cr::Graphics::Gdi::HDC, xDest : Int32, yDest : Int32, w : UInt32, h : UInt32, xSrc : Int32, ySrc : Int32, start_scan : UInt32, cLines : UInt32, lpvBits : Void*, lpbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, color_use : Win32cr::Graphics::Gdi::DIB_USAGE) : Int32
+    {% if !flag?(:docs) %}
     C.SetDIBitsToDevice(hdc, xDest, yDest, w, h, xSrc, ySrc, start_scan, cLines, lpvBits, lpbmi, color_use)
+    {% end %}
   end
 
   def setMapperFlags(hdc : Win32cr::Graphics::Gdi::HDC, flags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.SetMapperFlags(hdc, flags)
+    {% end %}
   end
 
   def setGraphicsMode(hdc : Win32cr::Graphics::Gdi::HDC, iMode : Win32cr::Graphics::Gdi::GRAPHICS_MODE) : Int32
+    {% if !flag?(:docs) %}
     C.SetGraphicsMode(hdc, iMode)
+    {% end %}
   end
 
   def setMapMode(hdc : Win32cr::Graphics::Gdi::HDC, iMode : Win32cr::Graphics::Gdi::HDC_MAP_MODE) : Int32
+    {% if !flag?(:docs) %}
     C.SetMapMode(hdc, iMode)
+    {% end %}
   end
 
   def setLayout(hdc : Win32cr::Graphics::Gdi::HDC, l : Win32cr::Graphics::Gdi::DC_LAYOUT) : UInt32
+    {% if !flag?(:docs) %}
     C.SetLayout(hdc, l)
+    {% end %}
   end
 
   def getLayout(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+    {% if !flag?(:docs) %}
     C.GetLayout(hdc)
+    {% end %}
   end
 
   def setMetaFileBitsEx(cbBuffer : UInt32, lpData : UInt8*) : Win32cr::Graphics::Gdi::HMETAFILE
+    {% if !flag?(:docs) %}
     C.SetMetaFileBitsEx(cbBuffer, lpData)
+    {% end %}
   end
 
   def setPaletteEntries(hpal : Win32cr::Graphics::Gdi::HPALETTE, iStart : UInt32, cEntries : UInt32, pPalEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*) : UInt32
+    {% if !flag?(:docs) %}
     C.SetPaletteEntries(hpal, iStart, cEntries, pPalEntries)
+    {% end %}
   end
 
-  def setPixel(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32) : UInt32
+  def setPixel(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : Win32cr::Foundation::COLORREF) : Win32cr::Foundation::COLORREF
+    {% if !flag?(:docs) %}
     C.SetPixel(hdc, x, y, color)
+    {% end %}
   end
 
-  def setPixelV(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32) : Win32cr::Foundation::BOOL
+  def setPixelV(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : Win32cr::Foundation::COLORREF) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetPixelV(hdc, x, y, color)
+    {% end %}
   end
 
   def setPolyFillMode(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::Graphics::Gdi::CREATE_POLYGON_RGN_MODE) : Int32
+    {% if !flag?(:docs) %}
     C.SetPolyFillMode(hdc, mode)
+    {% end %}
   end
 
   def stretchBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, xDest : Int32, yDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xSrc : Int32, ySrc : Int32, wSrc : Int32, hSrc : Int32, rop : Win32cr::Graphics::Gdi::ROP_CODE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.StretchBlt(hdcDest, xDest, yDest, wDest, hDest, hdcSrc, xSrc, ySrc, wSrc, hSrc, rop)
+    {% end %}
   end
 
   def setRectRgn(hrgn : Win32cr::Graphics::Gdi::HRGN, left : Int32, top : Int32, right : Int32, bottom : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetRectRgn(hrgn, left, top, right, bottom)
+    {% end %}
   end
 
   def stretchDIBits(hdc : Win32cr::Graphics::Gdi::HDC, xDest : Int32, yDest : Int32, dest_width : Int32, dest_height : Int32, xSrc : Int32, ySrc : Int32, src_width : Int32, src_height : Int32, lpBits : Void*, lpbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, iUsage : Win32cr::Graphics::Gdi::DIB_USAGE, rop : Win32cr::Graphics::Gdi::ROP_CODE) : Int32
+    {% if !flag?(:docs) %}
     C.StretchDIBits(hdc, xDest, yDest, dest_width, dest_height, xSrc, ySrc, src_width, src_height, lpBits, lpbmi, iUsage, rop)
+    {% end %}
   end
 
   def setROP2(hdc : Win32cr::Graphics::Gdi::HDC, rop2 : Win32cr::Graphics::Gdi::R2_MODE) : Int32
+    {% if !flag?(:docs) %}
     C.SetROP2(hdc, rop2)
+    {% end %}
   end
 
   def setStretchBltMode(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::Graphics::Gdi::STRETCH_BLT_MODE) : Int32
+    {% if !flag?(:docs) %}
     C.SetStretchBltMode(hdc, mode)
+    {% end %}
   end
 
   def setSystemPaletteUse(hdc : Win32cr::Graphics::Gdi::HDC, use : Win32cr::Graphics::Gdi::SYSTEM_PALETTE_USE) : UInt32
+    {% if !flag?(:docs) %}
     C.SetSystemPaletteUse(hdc, use)
+    {% end %}
   end
 
   def setTextCharacterExtra(hdc : Win32cr::Graphics::Gdi::HDC, extra : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.SetTextCharacterExtra(hdc, extra)
+    {% end %}
   end
 
-  def setTextColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
+  def setTextColor(hdc : Win32cr::Graphics::Gdi::HDC, color : Win32cr::Foundation::COLORREF) : Win32cr::Foundation::COLORREF
+    {% if !flag?(:docs) %}
     C.SetTextColor(hdc, color)
+    {% end %}
   end
 
   def setTextAlign(hdc : Win32cr::Graphics::Gdi::HDC, align : Win32cr::Graphics::Gdi::TEXT_ALIGN_OPTIONS) : UInt32
+    {% if !flag?(:docs) %}
     C.SetTextAlign(hdc, align)
+    {% end %}
   end
 
   def setTextJustification(hdc : Win32cr::Graphics::Gdi::HDC, extra : Int32, count : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetTextJustification(hdc, extra, count)
+    {% end %}
   end
 
   def updateColors(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UpdateColors(hdc)
+    {% end %}
   end
 
   def alphaBlend(hdcDest : Win32cr::Graphics::Gdi::HDC, xoriginDest : Int32, yoriginDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xoriginSrc : Int32, yoriginSrc : Int32, wSrc : Int32, hSrc : Int32, ftn : Win32cr::Graphics::Gdi::BLENDFUNCTION) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AlphaBlend(hdcDest, xoriginDest, yoriginDest, wDest, hDest, hdcSrc, xoriginSrc, yoriginSrc, wSrc, hSrc, ftn)
+    {% end %}
   end
 
   def transparentBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, xoriginDest : Int32, yoriginDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xoriginSrc : Int32, yoriginSrc : Int32, wSrc : Int32, hSrc : Int32, crTransparent : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TransparentBlt(hdcDest, xoriginDest, yoriginDest, wDest, hDest, hdcSrc, xoriginSrc, yoriginSrc, wSrc, hSrc, crTransparent)
+    {% end %}
   end
 
   def gradientFill(hdc : Win32cr::Graphics::Gdi::HDC, pVertex : Win32cr::Graphics::Gdi::TRIVERTEX*, nVertex : UInt32, pMesh : Void*, nMesh : UInt32, ulMode : Win32cr::Graphics::Gdi::GRADIENT_FILL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GradientFill(hdc, pVertex, nVertex, pMesh, nMesh, ulMode)
+    {% end %}
   end
 
   def gdiAlphaBlend(hdcDest : Win32cr::Graphics::Gdi::HDC, xoriginDest : Int32, yoriginDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xoriginSrc : Int32, yoriginSrc : Int32, wSrc : Int32, hSrc : Int32, ftn : Win32cr::Graphics::Gdi::BLENDFUNCTION) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GdiAlphaBlend(hdcDest, xoriginDest, yoriginDest, wDest, hDest, hdcSrc, xoriginSrc, yoriginSrc, wSrc, hSrc, ftn)
+    {% end %}
   end
 
   def gdiTransparentBlt(hdcDest : Win32cr::Graphics::Gdi::HDC, xoriginDest : Int32, yoriginDest : Int32, wDest : Int32, hDest : Int32, hdcSrc : Win32cr::Graphics::Gdi::HDC, xoriginSrc : Int32, yoriginSrc : Int32, wSrc : Int32, hSrc : Int32, crTransparent : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GdiTransparentBlt(hdcDest, xoriginDest, yoriginDest, wDest, hDest, hdcSrc, xoriginSrc, yoriginSrc, wSrc, hSrc, crTransparent)
+    {% end %}
   end
 
   def gdiGradientFill(hdc : Win32cr::Graphics::Gdi::HDC, pVertex : Win32cr::Graphics::Gdi::TRIVERTEX*, nVertex : UInt32, pMesh : Void*, nCount : UInt32, ulMode : Win32cr::Graphics::Gdi::GRADIENT_FILL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GdiGradientFill(hdc, pVertex, nVertex, pMesh, nCount, ulMode)
+    {% end %}
   end
 
   def playMetaFileRecord(hdc : Win32cr::Graphics::Gdi::HDC, lpHandleTable : Win32cr::Graphics::Gdi::HANDLETABLE*, lpMR : Win32cr::Graphics::Gdi::METARECORD*, noObjs : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PlayMetaFileRecord(hdc, lpHandleTable, lpMR, noObjs)
+    {% end %}
   end
 
   def enumMetaFile(hdc : Win32cr::Graphics::Gdi::HDC, hmf : Win32cr::Graphics::Gdi::HMETAFILE, proc : Win32cr::Graphics::Gdi::MFENUMPROC, param3 : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumMetaFile(hdc, hmf, proc, param3)
+    {% end %}
   end
 
   def closeEnhMetaFile(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::HENHMETAFILE
+    {% if !flag?(:docs) %}
     C.CloseEnhMetaFile(hdc)
+    {% end %}
   end
 
   def copyEnhMetaFileA(hEnh : Win32cr::Graphics::Gdi::HENHMETAFILE, lpFileName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HENHMETAFILE
+    {% if !flag?(:docs) %}
     C.CopyEnhMetaFileA(hEnh, lpFileName)
+    {% end %}
   end
 
   def copyEnhMetaFileW(hEnh : Win32cr::Graphics::Gdi::HENHMETAFILE, lpFileName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HENHMETAFILE
+    {% if !flag?(:docs) %}
     C.CopyEnhMetaFileW(hEnh, lpFileName)
+    {% end %}
   end
 
   def createEnhMetaFileA(hdc : Win32cr::Graphics::Gdi::HDC, lpFilename : Win32cr::Foundation::PSTR, lprc : Win32cr::Foundation::RECT*, lpDesc : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HdcMetdataEnhFileHandle
+    {% if !flag?(:docs) %}
     C.CreateEnhMetaFileA(hdc, lpFilename, lprc, lpDesc)
+    {% end %}
   end
 
   def createEnhMetaFileW(hdc : Win32cr::Graphics::Gdi::HDC, lpFilename : Win32cr::Foundation::PWSTR, lprc : Win32cr::Foundation::RECT*, lpDesc : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HdcMetdataEnhFileHandle
+    {% if !flag?(:docs) %}
     C.CreateEnhMetaFileW(hdc, lpFilename, lprc, lpDesc)
+    {% end %}
   end
 
   def deleteEnhMetaFile(hmf : Win32cr::Graphics::Gdi::HENHMETAFILE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DeleteEnhMetaFile(hmf)
+    {% end %}
   end
 
   def enumEnhMetaFile(hdc : Win32cr::Graphics::Gdi::HDC, hmf : Win32cr::Graphics::Gdi::HENHMETAFILE, proc : Win32cr::Graphics::Gdi::ENHMFENUMPROC, param3 : Void*, lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumEnhMetaFile(hdc, hmf, proc, param3, lpRect)
+    {% end %}
   end
 
   def getEnhMetaFileA(lpName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HENHMETAFILE
+    {% if !flag?(:docs) %}
     C.GetEnhMetaFileA(lpName)
+    {% end %}
   end
 
   def getEnhMetaFileW(lpName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HENHMETAFILE
+    {% if !flag?(:docs) %}
     C.GetEnhMetaFileW(lpName)
+    {% end %}
   end
 
   def getEnhMetaFileBits(hEMF : Win32cr::Graphics::Gdi::HENHMETAFILE, nSize : UInt32, lpData : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetEnhMetaFileBits(hEMF, nSize, lpData)
+    {% end %}
   end
 
   def getEnhMetaFileDescriptionA(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, cchBuffer : UInt32, lpDescription : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetEnhMetaFileDescriptionA(hemf, cchBuffer, lpDescription)
+    {% end %}
   end
 
   def getEnhMetaFileDescriptionW(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, cchBuffer : UInt32, lpDescription : UInt16*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetEnhMetaFileDescriptionW(hemf, cchBuffer, lpDescription)
+    {% end %}
   end
 
   def getEnhMetaFileHeader(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, nSize : UInt32, lpEnhMetaHeader : Win32cr::Graphics::Gdi::ENHMETAHEADER*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetEnhMetaFileHeader(hemf, nSize, lpEnhMetaHeader)
+    {% end %}
   end
 
   def getEnhMetaFilePaletteEntries(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, nNumEntries : UInt32, lpPaletteEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetEnhMetaFilePaletteEntries(hemf, nNumEntries, lpPaletteEntries)
+    {% end %}
   end
 
   def getWinMetaFileBits(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, cbData16 : UInt32, pData16 : UInt8*, iMapMode : Int32, hdcRef : Win32cr::Graphics::Gdi::HDC) : UInt32
+    {% if !flag?(:docs) %}
     C.GetWinMetaFileBits(hemf, cbData16, pData16, iMapMode, hdcRef)
+    {% end %}
   end
 
   def playEnhMetaFile(hdc : Win32cr::Graphics::Gdi::HDC, hmf : Win32cr::Graphics::Gdi::HENHMETAFILE, lprect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PlayEnhMetaFile(hdc, hmf, lprect)
+    {% end %}
   end
 
   def playEnhMetaFileRecord(hdc : Win32cr::Graphics::Gdi::HDC, pht : Win32cr::Graphics::Gdi::HANDLETABLE*, pmr : Win32cr::Graphics::Gdi::ENHMETARECORD*, cht : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PlayEnhMetaFileRecord(hdc, pht, pmr, cht)
+    {% end %}
   end
 
   def setEnhMetaFileBits(nSize : UInt32, pb : UInt8*) : Win32cr::Graphics::Gdi::HENHMETAFILE
+    {% if !flag?(:docs) %}
     C.SetEnhMetaFileBits(nSize, pb)
+    {% end %}
   end
 
   def gdiComment(hdc : Win32cr::Graphics::Gdi::HDC, nSize : UInt32, lpData : UInt8*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GdiComment(hdc, nSize, lpData)
+    {% end %}
   end
 
   def getTextMetricsA(hdc : Win32cr::Graphics::Gdi::HDC, lptm : Win32cr::Graphics::Gdi::TEXTMETRICA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetTextMetricsA(hdc, lptm)
+    {% end %}
   end
 
   def getTextMetricsW(hdc : Win32cr::Graphics::Gdi::HDC, lptm : Win32cr::Graphics::Gdi::TEXTMETRICW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetTextMetricsW(hdc, lptm)
+    {% end %}
   end
 
   def angleArc(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, r : UInt32, start_angle : Float32, sweep_angle : Float32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AngleArc(hdc, x, y, r, start_angle, sweep_angle)
+    {% end %}
   end
 
   def polyPolyline(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, asz : UInt32*, csz : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PolyPolyline(hdc, apt, asz, csz)
+    {% end %}
   end
 
   def getWorldTransform(hdc : Win32cr::Graphics::Gdi::HDC, lpxf : Win32cr::Graphics::Gdi::XFORM*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetWorldTransform(hdc, lpxf)
+    {% end %}
   end
 
   def setWorldTransform(hdc : Win32cr::Graphics::Gdi::HDC, lpxf : Win32cr::Graphics::Gdi::XFORM*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetWorldTransform(hdc, lpxf)
+    {% end %}
   end
 
   def modifyWorldTransform(hdc : Win32cr::Graphics::Gdi::HDC, lpxf : Win32cr::Graphics::Gdi::XFORM*, mode : Win32cr::Graphics::Gdi::MODIFY_WORLD_TRANSFORM_MODE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ModifyWorldTransform(hdc, lpxf, mode)
+    {% end %}
   end
 
   def combineTransform(lpxfOut : Win32cr::Graphics::Gdi::XFORM*, lpxf1 : Win32cr::Graphics::Gdi::XFORM*, lpxf2 : Win32cr::Graphics::Gdi::XFORM*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CombineTransform(lpxfOut, lpxf1, lpxf2)
+    {% end %}
   end
 
   def createDIBSection(hdc : Win32cr::Graphics::Gdi::HDC, pbmi : Win32cr::Graphics::Gdi::BITMAPINFO*, usage : Win32cr::Graphics::Gdi::DIB_USAGE, ppvBits : Void**, hSection : Win32cr::Foundation::HANDLE, offset : UInt32) : Win32cr::Graphics::Gdi::HBITMAP
+    {% if !flag?(:docs) %}
     C.CreateDIBSection(hdc, pbmi, usage, ppvBits, hSection, offset)
+    {% end %}
   end
 
   def getDIBColorTable(hdc : Win32cr::Graphics::Gdi::HDC, iStart : UInt32, cEntries : UInt32, prgbq : Win32cr::Graphics::Gdi::RGBQUAD*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetDIBColorTable(hdc, iStart, cEntries, prgbq)
+    {% end %}
   end
 
   def setDIBColorTable(hdc : Win32cr::Graphics::Gdi::HDC, iStart : UInt32, cEntries : UInt32, prgbq : Win32cr::Graphics::Gdi::RGBQUAD*) : UInt32
+    {% if !flag?(:docs) %}
     C.SetDIBColorTable(hdc, iStart, cEntries, prgbq)
+    {% end %}
   end
 
   def setColorAdjustment(hdc : Win32cr::Graphics::Gdi::HDC, lpca : Win32cr::Graphics::Gdi::COLORADJUSTMENT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetColorAdjustment(hdc, lpca)
+    {% end %}
   end
 
   def getColorAdjustment(hdc : Win32cr::Graphics::Gdi::HDC, lpca : Win32cr::Graphics::Gdi::COLORADJUSTMENT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetColorAdjustment(hdc, lpca)
+    {% end %}
   end
 
   def createHalftonePalette(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::HPALETTE
+    {% if !flag?(:docs) %}
     C.CreateHalftonePalette(hdc)
+    {% end %}
   end
 
   def abortPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.AbortPath(hdc)
+    {% end %}
   end
 
   def arcTo(hdc : Win32cr::Graphics::Gdi::HDC, left : Int32, top : Int32, right : Int32, bottom : Int32, xr1 : Int32, yr1 : Int32, xr2 : Int32, yr2 : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ArcTo(hdc, left, top, right, bottom, xr1, yr1, xr2, yr2)
+    {% end %}
   end
 
   def beginPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.BeginPath(hdc)
+    {% end %}
   end
 
   def closeFigure(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CloseFigure(hdc)
+    {% end %}
   end
 
   def endPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EndPath(hdc)
+    {% end %}
   end
 
   def fillPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FillPath(hdc)
+    {% end %}
   end
 
   def flattenPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FlattenPath(hdc)
+    {% end %}
   end
 
   def getPath(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, aj : UInt8*, cpt : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.GetPath(hdc, apt, aj, cpt)
+    {% end %}
   end
 
   def pathToRegion(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::HRGN
+    {% if !flag?(:docs) %}
     C.PathToRegion(hdc)
+    {% end %}
   end
 
   def polyDraw(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, aj : UInt8*, cpt : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PolyDraw(hdc, apt, aj, cpt)
+    {% end %}
   end
 
   def selectClipPath(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::Graphics::Gdi::RGN_COMBINE_MODE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SelectClipPath(hdc, mode)
+    {% end %}
   end
 
   def setArcDirection(hdc : Win32cr::Graphics::Gdi::HDC, dir : Win32cr::Graphics::Gdi::ARC_DIRECTION) : Int32
+    {% if !flag?(:docs) %}
     C.SetArcDirection(hdc, dir)
+    {% end %}
   end
 
   def setMiterLimit(hdc : Win32cr::Graphics::Gdi::HDC, limit : Float32, old : Float32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetMiterLimit(hdc, limit, old)
+    {% end %}
   end
 
   def strokeAndFillPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.StrokeAndFillPath(hdc)
+    {% end %}
   end
 
   def strokePath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.StrokePath(hdc)
+    {% end %}
   end
 
   def widenPath(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.WidenPath(hdc)
+    {% end %}
   end
 
   def extCreatePen(iPenStyle : Win32cr::Graphics::Gdi::PEN_STYLE, cWidth : UInt32, plbrush : Win32cr::Graphics::Gdi::LOGBRUSH*, cStyle : UInt32, pstyle : UInt32*) : Win32cr::Graphics::Gdi::HPEN
+    {% if !flag?(:docs) %}
     C.ExtCreatePen(iPenStyle, cWidth, plbrush, cStyle, pstyle)
+    {% end %}
   end
 
   def getMiterLimit(hdc : Win32cr::Graphics::Gdi::HDC, plimit : Float32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetMiterLimit(hdc, plimit)
+    {% end %}
   end
 
   def getArcDirection(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    {% if !flag?(:docs) %}
     C.GetArcDirection(hdc)
+    {% end %}
   end
 
   def getObjectW(h : Win32cr::Graphics::Gdi::HGDIOBJ, c : Int32, pv : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.GetObjectW(h, c, pv)
+    {% end %}
   end
 
   def moveToEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MoveToEx(hdc, x, y, lppt)
+    {% end %}
   end
 
   def textOutA(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpString : UInt8*, c : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TextOutA(hdc, x, y, lpString, c)
+    {% end %}
   end
 
   def textOutW(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpString : UInt16*, c : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.TextOutW(hdc, x, y, lpString, c)
+    {% end %}
   end
 
   def extTextOutA(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, options : Win32cr::Graphics::Gdi::ETO_OPTIONS, lprect : Win32cr::Foundation::RECT*, lpString : UInt8*, c : UInt32, lpDx : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ExtTextOutA(hdc, x, y, options, lprect, lpString, c, lpDx)
+    {% end %}
   end
 
   def extTextOutW(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, options : Win32cr::Graphics::Gdi::ETO_OPTIONS, lprect : Win32cr::Foundation::RECT*, lpString : UInt16*, c : UInt32, lpDx : Int32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ExtTextOutW(hdc, x, y, options, lprect, lpString, c, lpDx)
+    {% end %}
   end
 
   def polyTextOutA(hdc : Win32cr::Graphics::Gdi::HDC, ppt : Win32cr::Graphics::Gdi::POLYTEXTA*, nstrings : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PolyTextOutA(hdc, ppt, nstrings)
+    {% end %}
   end
 
   def polyTextOutW(hdc : Win32cr::Graphics::Gdi::HDC, ppt : Win32cr::Graphics::Gdi::POLYTEXTW*, nstrings : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PolyTextOutW(hdc, ppt, nstrings)
+    {% end %}
   end
 
   def createPolygonRgn(pptl : Win32cr::Foundation::POINT*, cPoint : Int32, iMode : Win32cr::Graphics::Gdi::CREATE_POLYGON_RGN_MODE) : Win32cr::Graphics::Gdi::HRGN
+    {% if !flag?(:docs) %}
     C.CreatePolygonRgn(pptl, cPoint, iMode)
+    {% end %}
   end
 
   def dPtoLP(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*, c : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DPtoLP(hdc, lppt, c)
+    {% end %}
   end
 
   def lPtoDP(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*, c : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LPtoDP(hdc, lppt, c)
+    {% end %}
   end
 
   def polygon(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Polygon(hdc, apt, cpt)
+    {% end %}
   end
 
   def polyline(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.Polyline(hdc, apt, cpt)
+    {% end %}
   end
 
   def polyBezier(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PolyBezier(hdc, apt, cpt)
+    {% end %}
   end
 
   def polyBezierTo(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PolyBezierTo(hdc, apt, cpt)
+    {% end %}
   end
 
   def polylineTo(hdc : Win32cr::Graphics::Gdi::HDC, apt : Win32cr::Foundation::POINT*, cpt : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PolylineTo(hdc, apt, cpt)
+    {% end %}
   end
 
   def setViewportExtEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetViewportExtEx(hdc, x, y, lpsz)
+    {% end %}
   end
 
   def setViewportOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetViewportOrgEx(hdc, x, y, lppt)
+    {% end %}
   end
 
   def setWindowExtEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetWindowExtEx(hdc, x, y, lpsz)
+    {% end %}
   end
 
   def setWindowOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetWindowOrgEx(hdc, x, y, lppt)
+    {% end %}
   end
 
   def offsetViewportOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.OffsetViewportOrgEx(hdc, x, y, lppt)
+    {% end %}
   end
 
   def offsetWindowOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.OffsetWindowOrgEx(hdc, x, y, lppt)
+    {% end %}
   end
 
   def scaleViewportExtEx(hdc : Win32cr::Graphics::Gdi::HDC, xn : Int32, dx : Int32, yn : Int32, yd : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ScaleViewportExtEx(hdc, xn, dx, yn, yd, lpsz)
+    {% end %}
   end
 
   def scaleWindowExtEx(hdc : Win32cr::Graphics::Gdi::HDC, xn : Int32, xd : Int32, yn : Int32, yd : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ScaleWindowExtEx(hdc, xn, xd, yn, yd, lpsz)
+    {% end %}
   end
 
   def setBitmapDimensionEx(hbm : Win32cr::Graphics::Gdi::HBITMAP, w : Int32, h : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetBitmapDimensionEx(hbm, w, h, lpsz)
+    {% end %}
   end
 
   def setBrushOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetBrushOrgEx(hdc, x, y, lppt)
+    {% end %}
   end
 
   def getTextFaceA(hdc : Win32cr::Graphics::Gdi::HDC, c : Int32, lpName : UInt8*) : Int32
+    {% if !flag?(:docs) %}
     C.GetTextFaceA(hdc, c, lpName)
+    {% end %}
   end
 
   def getTextFaceW(hdc : Win32cr::Graphics::Gdi::HDC, c : Int32, lpName : UInt16*) : Int32
+    {% if !flag?(:docs) %}
     C.GetTextFaceW(hdc, c, lpName)
+    {% end %}
   end
 
   def getKerningPairsA(hdc : Win32cr::Graphics::Gdi::HDC, nPairs : UInt32, lpKernPair : Win32cr::Graphics::Gdi::KERNINGPAIR*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetKerningPairsA(hdc, nPairs, lpKernPair)
+    {% end %}
   end
 
   def getKerningPairsW(hdc : Win32cr::Graphics::Gdi::HDC, nPairs : UInt32, lpKernPair : Win32cr::Graphics::Gdi::KERNINGPAIR*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetKerningPairsW(hdc, nPairs, lpKernPair)
+    {% end %}
   end
 
   def getDCOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, lppt : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetDCOrgEx(hdc, lppt)
+    {% end %}
   end
 
   def fixBrushOrgEx(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, ptl : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FixBrushOrgEx(hdc, x, y, ptl)
+    {% end %}
   end
 
   def unrealizeObject(h : Win32cr::Graphics::Gdi::HGDIOBJ) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnrealizeObject(h)
+    {% end %}
   end
 
   def gdiFlush : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GdiFlush
+    {% end %}
   end
 
   def gdiSetBatchLimit(dw : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.GdiSetBatchLimit(dw)
+    {% end %}
   end
 
   def gdiGetBatchLimit : UInt32
+    {% if !flag?(:docs) %}
     C.GdiGetBatchLimit
+    {% end %}
   end
 
   def wglSwapMultipleBuffers(param0 : UInt32, param1 : Win32cr::Graphics::Gdi::WGLSWAP*) : UInt32
+    {% if !flag?(:docs) %}
     C.wglSwapMultipleBuffers(param0, param1)
+    {% end %}
   end
 
   def createFontPackage(puchSrcBuffer : UInt8*, ulSrcBufferSize : UInt32, ppuchFontPackageBuffer : UInt8**, pulFontPackageBufferSize : UInt32*, pulBytesWritten : UInt32*, usFlag : UInt16, usTTCIndex : UInt16, usSubsetFormat : UInt16, usSubsetLanguage : UInt16, usSubsetPlatform : Win32cr::Graphics::Gdi::CREATE_FONT_PACKAGE_SUBSET_PLATFORM, usSubsetEncoding : Win32cr::Graphics::Gdi::CREATE_FONT_PACKAGE_SUBSET_ENCODING, pusSubsetKeepList : UInt16*, usSubsetListCount : UInt16, lpfnAllocate : Win32cr::Graphics::Gdi::CFP_ALLOCPROC, lpfnReAllocate : Win32cr::Graphics::Gdi::CFP_REALLOCPROC, lpfnFree : Win32cr::Graphics::Gdi::CFP_FREEPROC, lpvReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.CreateFontPackage(puchSrcBuffer, ulSrcBufferSize, ppuchFontPackageBuffer, pulFontPackageBufferSize, pulBytesWritten, usFlag, usTTCIndex, usSubsetFormat, usSubsetLanguage, usSubsetPlatform, usSubsetEncoding, pusSubsetKeepList, usSubsetListCount, lpfnAllocate, lpfnReAllocate, lpfnFree, lpvReserved)
+    {% end %}
   end
 
   def mergeFontPackage(puchMergeFontBuffer : UInt8*, ulMergeFontBufferSize : UInt32, puchFontPackageBuffer : UInt8*, ulFontPackageBufferSize : UInt32, ppuchDestBuffer : UInt8**, pulDestBufferSize : UInt32*, pulBytesWritten : UInt32*, usMode : UInt16, lpfnAllocate : Win32cr::Graphics::Gdi::CFP_ALLOCPROC, lpfnReAllocate : Win32cr::Graphics::Gdi::CFP_REALLOCPROC, lpfnFree : Win32cr::Graphics::Gdi::CFP_FREEPROC, lpvReserved : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.MergeFontPackage(puchMergeFontBuffer, ulMergeFontBufferSize, puchFontPackageBuffer, ulFontPackageBufferSize, ppuchDestBuffer, pulDestBufferSize, pulBytesWritten, usMode, lpfnAllocate, lpfnReAllocate, lpfnFree, lpvReserved)
+    {% end %}
   end
 
   def tTEmbedFont(hDC : Win32cr::Graphics::Gdi::HDC, ulFlags : Win32cr::Graphics::Gdi::TTEMBED_FLAGS, ulCharSet : Win32cr::Graphics::Gdi::EMBED_FONT_CHARSET, pulPrivStatus : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*, pulStatus : UInt32*, lpfnWriteToStream : Win32cr::Graphics::Gdi::WRITEEMBEDPROC, lpvWriteStream : Void*, pusCharCodeSet : UInt16*, usCharCodeCount : UInt16, usLanguage : UInt16, pTTEmbedInfo : Win32cr::Graphics::Gdi::TTEMBEDINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.TTEmbedFont(hDC, ulFlags, ulCharSet, pulPrivStatus, pulStatus, lpfnWriteToStream, lpvWriteStream, pusCharCodeSet, usCharCodeCount, usLanguage, pTTEmbedInfo)
+    {% end %}
   end
 
   def tTEmbedFontFromFileA(hDC : Win32cr::Graphics::Gdi::HDC, szFontFileName : Win32cr::Foundation::PSTR, usTTCIndex : UInt16, ulFlags : Win32cr::Graphics::Gdi::TTEMBED_FLAGS, ulCharSet : Win32cr::Graphics::Gdi::EMBED_FONT_CHARSET, pulPrivStatus : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*, pulStatus : UInt32*, lpfnWriteToStream : Win32cr::Graphics::Gdi::WRITEEMBEDPROC, lpvWriteStream : Void*, pusCharCodeSet : UInt16*, usCharCodeCount : UInt16, usLanguage : UInt16, pTTEmbedInfo : Win32cr::Graphics::Gdi::TTEMBEDINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.TTEmbedFontFromFileA(hDC, szFontFileName, usTTCIndex, ulFlags, ulCharSet, pulPrivStatus, pulStatus, lpfnWriteToStream, lpvWriteStream, pusCharCodeSet, usCharCodeCount, usLanguage, pTTEmbedInfo)
+    {% end %}
   end
 
   def tTLoadEmbeddedFont(phFontReference : Win32cr::Foundation::HANDLE*, ulFlags : UInt32, pulPrivStatus : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*, ulPrivs : Win32cr::Graphics::Gdi::FONT_LICENSE_PRIVS, pulStatus : Win32cr::Graphics::Gdi::TTLOAD_EMBEDDED_FONT_STATUS*, lpfnReadFromStream : Win32cr::Graphics::Gdi::READEMBEDPROC, lpvReadStream : Void*, szWinFamilyName : Win32cr::Foundation::PWSTR, szMacFamilyName : Win32cr::Foundation::PSTR, pTTLoadInfo : Win32cr::Graphics::Gdi::TTLOADINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.TTLoadEmbeddedFont(phFontReference, ulFlags, pulPrivStatus, ulPrivs, pulStatus, lpfnReadFromStream, lpvReadStream, szWinFamilyName, szMacFamilyName, pTTLoadInfo)
+    {% end %}
   end
 
   def tTGetEmbeddedFontInfo(ulFlags : Win32cr::Graphics::Gdi::TTEMBED_FLAGS, pulPrivStatus : UInt32*, ulPrivs : Win32cr::Graphics::Gdi::FONT_LICENSE_PRIVS, pulStatus : UInt32*, lpfnReadFromStream : Win32cr::Graphics::Gdi::READEMBEDPROC, lpvReadStream : Void*, pTTLoadInfo : Win32cr::Graphics::Gdi::TTLOADINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.TTGetEmbeddedFontInfo(ulFlags, pulPrivStatus, ulPrivs, pulStatus, lpfnReadFromStream, lpvReadStream, pTTLoadInfo)
+    {% end %}
   end
 
   def tTDeleteEmbeddedFont(hFontReference : Win32cr::Foundation::HANDLE, ulFlags : UInt32, pulStatus : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.TTDeleteEmbeddedFont(hFontReference, ulFlags, pulStatus)
+    {% end %}
   end
 
   def tTGetEmbeddingType(hDC : Win32cr::Graphics::Gdi::HDC, pulEmbedType : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*) : Int32
+    {% if !flag?(:docs) %}
     C.TTGetEmbeddingType(hDC, pulEmbedType)
+    {% end %}
   end
 
   def tTCharToUnicode(hDC : Win32cr::Graphics::Gdi::HDC, pucCharCodes : UInt8*, ulCharCodeSize : UInt32, pusShortCodes : UInt16*, ulShortCodeSize : UInt32, ulFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.TTCharToUnicode(hDC, pucCharCodes, ulCharCodeSize, pusShortCodes, ulShortCodeSize, ulFlags)
+    {% end %}
   end
 
   def tTRunValidationTests(hDC : Win32cr::Graphics::Gdi::HDC, pTestParam : Win32cr::Graphics::Gdi::TTVALIDATIONTESTSPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.TTRunValidationTests(hDC, pTestParam)
+    {% end %}
   end
 
   def tTIsEmbeddingEnabled(hDC : Win32cr::Graphics::Gdi::HDC, pbEnabled : Win32cr::Foundation::BOOL*) : Int32
+    {% if !flag?(:docs) %}
     C.TTIsEmbeddingEnabled(hDC, pbEnabled)
+    {% end %}
   end
 
   def tTIsEmbeddingEnabledForFacename(lpszFacename : Win32cr::Foundation::PSTR, pbEnabled : Win32cr::Foundation::BOOL*) : Int32
+    {% if !flag?(:docs) %}
     C.TTIsEmbeddingEnabledForFacename(lpszFacename, pbEnabled)
+    {% end %}
   end
 
   def tTEnableEmbeddingForFacename(lpszFacename : Win32cr::Foundation::PSTR, bEnable : Win32cr::Foundation::BOOL) : Int32
+    {% if !flag?(:docs) %}
     C.TTEnableEmbeddingForFacename(lpszFacename, bEnable)
+    {% end %}
   end
 
   def tTEmbedFontEx(hDC : Win32cr::Graphics::Gdi::HDC, ulFlags : Win32cr::Graphics::Gdi::TTEMBED_FLAGS, ulCharSet : Win32cr::Graphics::Gdi::EMBED_FONT_CHARSET, pulPrivStatus : Win32cr::Graphics::Gdi::EMBEDDED_FONT_PRIV_STATUS*, pulStatus : UInt32*, lpfnWriteToStream : Win32cr::Graphics::Gdi::WRITEEMBEDPROC, lpvWriteStream : Void*, pulCharCodeSet : UInt32*, usCharCodeCount : UInt16, usLanguage : UInt16, pTTEmbedInfo : Win32cr::Graphics::Gdi::TTEMBEDINFO*) : Int32
+    {% if !flag?(:docs) %}
     C.TTEmbedFontEx(hDC, ulFlags, ulCharSet, pulPrivStatus, pulStatus, lpfnWriteToStream, lpvWriteStream, pulCharCodeSet, usCharCodeCount, usLanguage, pTTEmbedInfo)
+    {% end %}
   end
 
   def tTRunValidationTestsEx(hDC : Win32cr::Graphics::Gdi::HDC, pTestParam : Win32cr::Graphics::Gdi::TTVALIDATIONTESTSPARAMSEX*) : Int32
+    {% if !flag?(:docs) %}
     C.TTRunValidationTestsEx(hDC, pTestParam)
+    {% end %}
   end
 
   def tTGetNewFontName(phFontReference : Win32cr::Foundation::HANDLE*, wzWinFamilyName : UInt16*, cchMaxWinName : Int32, szMacFamilyName : UInt8*, cchMaxMacName : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.TTGetNewFontName(phFontReference, wzWinFamilyName, cchMaxWinName, szMacFamilyName, cchMaxMacName)
+    {% end %}
   end
 
   def drawEdge(hdc : Win32cr::Graphics::Gdi::HDC, qrc : Win32cr::Foundation::RECT*, edge : Win32cr::Graphics::Gdi::DRAWEDGE_FLAGS, grfFlags : Win32cr::Graphics::Gdi::DRAW_EDGE_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawEdge(hdc, qrc, edge, grfFlags)
+    {% end %}
   end
 
   def drawFrameControl(param0 : Win32cr::Graphics::Gdi::HDC, param1 : Win32cr::Foundation::RECT*, param2 : Win32cr::Graphics::Gdi::DFC_TYPE, param3 : Win32cr::Graphics::Gdi::DFCS_STATE) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawFrameControl(param0, param1, param2, param3)
+    {% end %}
   end
 
   def drawCaption(hwnd : Win32cr::Foundation::HWND, hdc : Win32cr::Graphics::Gdi::HDC, lprect : Win32cr::Foundation::RECT*, flags : Win32cr::Graphics::Gdi::DRAW_CAPTION_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawCaption(hwnd, hdc, lprect, flags)
+    {% end %}
   end
 
   def drawAnimatedRects(hwnd : Win32cr::Foundation::HWND, idAni : Int32, lprcFrom : Win32cr::Foundation::RECT*, lprcTo : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawAnimatedRects(hwnd, idAni, lprcFrom, lprcTo)
+    {% end %}
   end
 
   def drawTextA(hdc : Win32cr::Graphics::Gdi::HDC, lpchText : UInt8*, cchText : Int32, lprc : Win32cr::Foundation::RECT*, format : Win32cr::Graphics::Gdi::DRAW_TEXT_FORMAT) : Int32
+    {% if !flag?(:docs) %}
     C.DrawTextA(hdc, lpchText, cchText, lprc, format)
+    {% end %}
   end
 
   def drawTextW(hdc : Win32cr::Graphics::Gdi::HDC, lpchText : UInt16*, cchText : Int32, lprc : Win32cr::Foundation::RECT*, format : Win32cr::Graphics::Gdi::DRAW_TEXT_FORMAT) : Int32
+    {% if !flag?(:docs) %}
     C.DrawTextW(hdc, lpchText, cchText, lprc, format)
+    {% end %}
   end
 
   def drawTextExA(hdc : Win32cr::Graphics::Gdi::HDC, lpchText : UInt8*, cchText : Int32, lprc : Win32cr::Foundation::RECT*, format : Win32cr::Graphics::Gdi::DRAW_TEXT_FORMAT, lpdtp : Win32cr::Graphics::Gdi::DRAWTEXTPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.DrawTextExA(hdc, lpchText, cchText, lprc, format, lpdtp)
+    {% end %}
   end
 
   def drawTextExW(hdc : Win32cr::Graphics::Gdi::HDC, lpchText : UInt16*, cchText : Int32, lprc : Win32cr::Foundation::RECT*, format : Win32cr::Graphics::Gdi::DRAW_TEXT_FORMAT, lpdtp : Win32cr::Graphics::Gdi::DRAWTEXTPARAMS*) : Int32
+    {% if !flag?(:docs) %}
     C.DrawTextExW(hdc, lpchText, cchText, lprc, format, lpdtp)
+    {% end %}
   end
 
   def grayStringA(hDC : Win32cr::Graphics::Gdi::HDC, hBrush : Win32cr::Graphics::Gdi::HBRUSH, lpOutputFunc : Win32cr::Graphics::Gdi::GRAYSTRINGPROC, lpData : Win32cr::Foundation::LPARAM, nCount : Int32, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GrayStringA(hDC, hBrush, lpOutputFunc, lpData, nCount, x, y, nWidth, nHeight)
+    {% end %}
   end
 
   def grayStringW(hDC : Win32cr::Graphics::Gdi::HDC, hBrush : Win32cr::Graphics::Gdi::HBRUSH, lpOutputFunc : Win32cr::Graphics::Gdi::GRAYSTRINGPROC, lpData : Win32cr::Foundation::LPARAM, nCount : Int32, x : Int32, y : Int32, nWidth : Int32, nHeight : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GrayStringW(hDC, hBrush, lpOutputFunc, lpData, nCount, x, y, nWidth, nHeight)
+    {% end %}
   end
 
   def drawStateA(hdc : Win32cr::Graphics::Gdi::HDC, hbrFore : Win32cr::Graphics::Gdi::HBRUSH, qfnCallBack : Win32cr::Graphics::Gdi::DRAWSTATEPROC, lData : Win32cr::Foundation::LPARAM, wData : Win32cr::Foundation::WPARAM, x : Int32, y : Int32, cx : Int32, cy : Int32, uFlags : Win32cr::Graphics::Gdi::DRAWSTATE_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawStateA(hdc, hbrFore, qfnCallBack, lData, wData, x, y, cx, cy, uFlags)
+    {% end %}
   end
 
   def drawStateW(hdc : Win32cr::Graphics::Gdi::HDC, hbrFore : Win32cr::Graphics::Gdi::HBRUSH, qfnCallBack : Win32cr::Graphics::Gdi::DRAWSTATEPROC, lData : Win32cr::Foundation::LPARAM, wData : Win32cr::Foundation::WPARAM, x : Int32, y : Int32, cx : Int32, cy : Int32, uFlags : Win32cr::Graphics::Gdi::DRAWSTATE_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawStateW(hdc, hbrFore, qfnCallBack, lData, wData, x, y, cx, cy, uFlags)
+    {% end %}
   end
 
   def tabbedTextOutA(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpString : UInt8*, chCount : Int32, nTabPositions : Int32, lpnTabStopPositions : Int32*, nTabOrigin : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.TabbedTextOutA(hdc, x, y, lpString, chCount, nTabPositions, lpnTabStopPositions, nTabOrigin)
+    {% end %}
   end
 
   def tabbedTextOutW(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, lpString : UInt16*, chCount : Int32, nTabPositions : Int32, lpnTabStopPositions : Int32*, nTabOrigin : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.TabbedTextOutW(hdc, x, y, lpString, chCount, nTabPositions, lpnTabStopPositions, nTabOrigin)
+    {% end %}
   end
 
   def getTabbedTextExtentA(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt8*, chCount : Int32, nTabPositions : Int32, lpnTabStopPositions : Int32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetTabbedTextExtentA(hdc, lpString, chCount, nTabPositions, lpnTabStopPositions)
+    {% end %}
   end
 
   def getTabbedTextExtentW(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt16*, chCount : Int32, nTabPositions : Int32, lpnTabStopPositions : Int32*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetTabbedTextExtentW(hdc, lpString, chCount, nTabPositions, lpnTabStopPositions)
+    {% end %}
   end
 
   def updateWindow(hWnd : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UpdateWindow(hWnd)
+    {% end %}
   end
 
   def paintDesktop(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PaintDesktop(hdc)
+    {% end %}
   end
 
   def windowFromDC(hDC : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::HWND
+    {% if !flag?(:docs) %}
     C.WindowFromDC(hDC)
+    {% end %}
   end
 
   def getDC(hWnd : Win32cr::Foundation::HWND) : Win32cr::Graphics::Gdi::HDC
+    {% if !flag?(:docs) %}
     C.GetDC(hWnd)
+    {% end %}
   end
 
   def getDCEx(hWnd : Win32cr::Foundation::HWND, hrgnClip : Win32cr::Graphics::Gdi::HRGN, flags : Win32cr::Graphics::Gdi::GET_DCX_FLAGS) : Win32cr::Graphics::Gdi::HDC
+    {% if !flag?(:docs) %}
     C.GetDCEx(hWnd, hrgnClip, flags)
+    {% end %}
   end
 
   def getWindowDC(hWnd : Win32cr::Foundation::HWND) : Win32cr::Graphics::Gdi::HDC
+    {% if !flag?(:docs) %}
     C.GetWindowDC(hWnd)
+    {% end %}
   end
 
   def releaseDC(hWnd : Win32cr::Foundation::HWND, hDC : Win32cr::Graphics::Gdi::HDC) : Int32
+    {% if !flag?(:docs) %}
     C.ReleaseDC(hWnd, hDC)
+    {% end %}
   end
 
   def beginPaint(hWnd : Win32cr::Foundation::HWND, lpPaint : Win32cr::Graphics::Gdi::PAINTSTRUCT*) : Win32cr::Graphics::Gdi::HDC
+    {% if !flag?(:docs) %}
     C.BeginPaint(hWnd, lpPaint)
+    {% end %}
   end
 
   def endPaint(hWnd : Win32cr::Foundation::HWND, lpPaint : Win32cr::Graphics::Gdi::PAINTSTRUCT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EndPaint(hWnd, lpPaint)
+    {% end %}
   end
 
   def getUpdateRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*, bErase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetUpdateRect(hWnd, lpRect, bErase)
+    {% end %}
   end
 
-  def getUpdateRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN, bErase : Win32cr::Foundation::BOOL) : Int32
+  def getUpdateRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN, bErase : Win32cr::Foundation::BOOL) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    {% if !flag?(:docs) %}
     C.GetUpdateRgn(hWnd, hRgn, bErase)
+    {% end %}
   end
 
   def setWindowRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN, bRedraw : Win32cr::Foundation::BOOL) : Int32
+    {% if !flag?(:docs) %}
     C.SetWindowRgn(hWnd, hRgn, bRedraw)
+    {% end %}
   end
 
-  def getWindowRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN) : Int32
+  def getWindowRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    {% if !flag?(:docs) %}
     C.GetWindowRgn(hWnd, hRgn)
+    {% end %}
   end
 
-  def getWindowRgnBox(hWnd : Win32cr::Foundation::HWND, lprc : Win32cr::Foundation::RECT*) : Int32
+  def getWindowRgnBox(hWnd : Win32cr::Foundation::HWND, lprc : Win32cr::Foundation::RECT*) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
+    {% if !flag?(:docs) %}
     C.GetWindowRgnBox(hWnd, lprc)
+    {% end %}
   end
 
   def excludeUpdateRgn(hDC : Win32cr::Graphics::Gdi::HDC, hWnd : Win32cr::Foundation::HWND) : Int32
+    {% if !flag?(:docs) %}
     C.ExcludeUpdateRgn(hDC, hWnd)
+    {% end %}
   end
 
   def invalidateRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*, bErase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InvalidateRect(hWnd, lpRect, bErase)
+    {% end %}
   end
 
   def validateRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ValidateRect(hWnd, lpRect)
+    {% end %}
   end
 
   def invalidateRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN, bErase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InvalidateRgn(hWnd, hRgn, bErase)
+    {% end %}
   end
 
   def validateRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ValidateRgn(hWnd, hRgn)
+    {% end %}
   end
 
   def redrawWindow(hWnd : Win32cr::Foundation::HWND, lprcUpdate : Win32cr::Foundation::RECT*, hrgnUpdate : Win32cr::Graphics::Gdi::HRGN, flags : Win32cr::Graphics::Gdi::REDRAW_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RedrawWindow(hWnd, lprcUpdate, hrgnUpdate, flags)
+    {% end %}
   end
 
   def lockWindowUpdate(hWndLock : Win32cr::Foundation::HWND) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.LockWindowUpdate(hWndLock)
+    {% end %}
   end
 
   def clientToScreen(hWnd : Win32cr::Foundation::HWND, lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ClientToScreen(hWnd, lpPoint)
+    {% end %}
   end
 
   def screenToClient(hWnd : Win32cr::Foundation::HWND, lpPoint : Win32cr::Foundation::POINT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ScreenToClient(hWnd, lpPoint)
+    {% end %}
   end
 
   def mapWindowPoints(hWndFrom : Win32cr::Foundation::HWND, hWndTo : Win32cr::Foundation::HWND, lpPoints : Win32cr::Foundation::POINT*, cPoints : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.MapWindowPoints(hWndFrom, hWndTo, lpPoints, cPoints)
+    {% end %}
   end
 
   def getSysColorBrush(nIndex : Int32) : Win32cr::Graphics::Gdi::HBRUSH
+    {% if !flag?(:docs) %}
     C.GetSysColorBrush(nIndex)
+    {% end %}
   end
 
   def drawFocusRect(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.DrawFocusRect(hDC, lprc)
+    {% end %}
   end
 
   def fillRect(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*, hbr : Win32cr::Graphics::Gdi::HBRUSH) : Int32
+    {% if !flag?(:docs) %}
     C.FillRect(hDC, lprc, hbr)
+    {% end %}
   end
 
   def frameRect(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*, hbr : Win32cr::Graphics::Gdi::HBRUSH) : Int32
+    {% if !flag?(:docs) %}
     C.FrameRect(hDC, lprc, hbr)
+    {% end %}
   end
 
   def invertRect(hDC : Win32cr::Graphics::Gdi::HDC, lprc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InvertRect(hDC, lprc)
+    {% end %}
   end
 
   def setRect(lprc : Win32cr::Foundation::RECT*, xLeft : Int32, yTop : Int32, xRight : Int32, yBottom : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetRect(lprc, xLeft, yTop, xRight, yBottom)
+    {% end %}
   end
 
   def setRectEmpty(lprc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetRectEmpty(lprc)
+    {% end %}
   end
 
   def copyRect(lprcDst : Win32cr::Foundation::RECT*, lprcSrc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.CopyRect(lprcDst, lprcSrc)
+    {% end %}
   end
 
   def inflateRect(lprc : Win32cr::Foundation::RECT*, dx : Int32, dy : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.InflateRect(lprc, dx, dy)
+    {% end %}
   end
 
   def intersectRect(lprcDst : Win32cr::Foundation::RECT*, lprcSrc1 : Win32cr::Foundation::RECT*, lprcSrc2 : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IntersectRect(lprcDst, lprcSrc1, lprcSrc2)
+    {% end %}
   end
 
   def unionRect(lprcDst : Win32cr::Foundation::RECT*, lprcSrc1 : Win32cr::Foundation::RECT*, lprcSrc2 : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.UnionRect(lprcDst, lprcSrc1, lprcSrc2)
+    {% end %}
   end
 
   def subtractRect(lprcDst : Win32cr::Foundation::RECT*, lprcSrc1 : Win32cr::Foundation::RECT*, lprcSrc2 : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SubtractRect(lprcDst, lprcSrc1, lprcSrc2)
+    {% end %}
   end
 
   def offsetRect(lprc : Win32cr::Foundation::RECT*, dx : Int32, dy : Int32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.OffsetRect(lprc, dx, dy)
+    {% end %}
   end
 
   def isRectEmpty(lprc : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.IsRectEmpty(lprc)
+    {% end %}
   end
 
   def equalRect(lprc1 : Win32cr::Foundation::RECT*, lprc2 : Win32cr::Foundation::RECT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EqualRect(lprc1, lprc2)
+    {% end %}
   end
 
   def ptInRect(lprc : Win32cr::Foundation::RECT*, pt : Win32cr::Foundation::POINT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PtInRect(lprc, pt)
+    {% end %}
   end
 
   def loadBitmapA(hInstance : Win32cr::Foundation::HINSTANCE, lpBitmapName : Win32cr::Foundation::PSTR) : Win32cr::Graphics::Gdi::HBITMAP
+    {% if !flag?(:docs) %}
     C.LoadBitmapA(hInstance, lpBitmapName)
+    {% end %}
   end
 
   def loadBitmapW(hInstance : Win32cr::Foundation::HINSTANCE, lpBitmapName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HBITMAP
+    {% if !flag?(:docs) %}
     C.LoadBitmapW(hInstance, lpBitmapName)
+    {% end %}
   end
 
   def changeDisplaySettingsA(lpDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, dwFlags : Win32cr::Graphics::Gdi::CDS_TYPE) : Win32cr::Graphics::Gdi::DISP_CHANGE
+    {% if !flag?(:docs) %}
     C.ChangeDisplaySettingsA(lpDevMode, dwFlags)
+    {% end %}
   end
 
   def changeDisplaySettingsW(lpDevMode : Win32cr::Graphics::Gdi::DEVMODEW*, dwFlags : Win32cr::Graphics::Gdi::CDS_TYPE) : Win32cr::Graphics::Gdi::DISP_CHANGE
+    {% if !flag?(:docs) %}
     C.ChangeDisplaySettingsW(lpDevMode, dwFlags)
+    {% end %}
   end
 
   def changeDisplaySettingsExA(lpszDeviceName : Win32cr::Foundation::PSTR, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, hwnd : Win32cr::Foundation::HWND, dwflags : Win32cr::Graphics::Gdi::CDS_TYPE, lParam : Void*) : Win32cr::Graphics::Gdi::DISP_CHANGE
+    {% if !flag?(:docs) %}
     C.ChangeDisplaySettingsExA(lpszDeviceName, lpDevMode, hwnd, dwflags, lParam)
+    {% end %}
   end
 
   def changeDisplaySettingsExW(lpszDeviceName : Win32cr::Foundation::PWSTR, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEW*, hwnd : Win32cr::Foundation::HWND, dwflags : Win32cr::Graphics::Gdi::CDS_TYPE, lParam : Void*) : Win32cr::Graphics::Gdi::DISP_CHANGE
+    {% if !flag?(:docs) %}
     C.ChangeDisplaySettingsExW(lpszDeviceName, lpDevMode, hwnd, dwflags, lParam)
+    {% end %}
   end
 
   def enumDisplaySettingsA(lpszDeviceName : Win32cr::Foundation::PSTR, iModeNum : Win32cr::Graphics::Gdi::ENUM_DISPLAY_SETTINGS_MODE, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumDisplaySettingsA(lpszDeviceName, iModeNum, lpDevMode)
+    {% end %}
   end
 
   def enumDisplaySettingsW(lpszDeviceName : Win32cr::Foundation::PWSTR, iModeNum : Win32cr::Graphics::Gdi::ENUM_DISPLAY_SETTINGS_MODE, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumDisplaySettingsW(lpszDeviceName, iModeNum, lpDevMode)
+    {% end %}
   end
 
   def enumDisplaySettingsExA(lpszDeviceName : Win32cr::Foundation::PSTR, iModeNum : Win32cr::Graphics::Gdi::ENUM_DISPLAY_SETTINGS_MODE, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEA*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumDisplaySettingsExA(lpszDeviceName, iModeNum, lpDevMode, dwFlags)
+    {% end %}
   end
 
   def enumDisplaySettingsExW(lpszDeviceName : Win32cr::Foundation::PWSTR, iModeNum : Win32cr::Graphics::Gdi::ENUM_DISPLAY_SETTINGS_MODE, lpDevMode : Win32cr::Graphics::Gdi::DEVMODEW*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumDisplaySettingsExW(lpszDeviceName, iModeNum, lpDevMode, dwFlags)
+    {% end %}
   end
 
   def enumDisplayDevicesA(lpDevice : Win32cr::Foundation::PSTR, iDevNum : UInt32, lpDisplayDevice : Win32cr::Graphics::Gdi::DISPLAY_DEVICEA*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumDisplayDevicesA(lpDevice, iDevNum, lpDisplayDevice, dwFlags)
+    {% end %}
   end
 
   def enumDisplayDevicesW(lpDevice : Win32cr::Foundation::PWSTR, iDevNum : UInt32, lpDisplayDevice : Win32cr::Graphics::Gdi::DISPLAY_DEVICEW*, dwFlags : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumDisplayDevicesW(lpDevice, iDevNum, lpDisplayDevice, dwFlags)
+    {% end %}
   end
 
   def monitorFromPoint(pt : Win32cr::Foundation::POINT, dwFlags : Win32cr::Graphics::Gdi::MONITOR_FROM_FLAGS) : Win32cr::Graphics::Gdi::HMONITOR
+    {% if !flag?(:docs) %}
     C.MonitorFromPoint(pt, dwFlags)
+    {% end %}
   end
 
   def monitorFromRect(lprc : Win32cr::Foundation::RECT*, dwFlags : Win32cr::Graphics::Gdi::MONITOR_FROM_FLAGS) : Win32cr::Graphics::Gdi::HMONITOR
+    {% if !flag?(:docs) %}
     C.MonitorFromRect(lprc, dwFlags)
+    {% end %}
   end
 
   def monitorFromWindow(hwnd : Win32cr::Foundation::HWND, dwFlags : Win32cr::Graphics::Gdi::MONITOR_FROM_FLAGS) : Win32cr::Graphics::Gdi::HMONITOR
+    {% if !flag?(:docs) %}
     C.MonitorFromWindow(hwnd, dwFlags)
+    {% end %}
   end
 
   def getMonitorInfoA(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, lpmi : Win32cr::Graphics::Gdi::MONITORINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetMonitorInfoA(hMonitor, lpmi)
+    {% end %}
   end
 
   def getMonitorInfoW(hMonitor : Win32cr::Graphics::Gdi::HMONITOR, lpmi : Win32cr::Graphics::Gdi::MONITORINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetMonitorInfoW(hMonitor, lpmi)
+    {% end %}
   end
 
   def enumDisplayMonitors(hdc : Win32cr::Graphics::Gdi::HDC, lprcClip : Win32cr::Foundation::RECT*, lpfnEnum : Win32cr::Graphics::Gdi::MONITORENUMPROC, dwData : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.EnumDisplayMonitors(hdc, lprcClip, lpfnEnum, dwData)
+    {% end %}
   end
 
-  @[Link("gdi32")]
-  @[Link("msimg32")]
-  @[Link("opengl32")]
-  @[Link("fontsub")]
-  @[Link("t2embed")]
-  @[Link("user32")]
+  @[Link("gdi32.dll")]
+  @[Link("msimg32.dll")]
+  @[Link("opengl32.dll")]
+  @[Link("fontsub.dll")]
+  @[Link("t2embed.dll")]
+  @[Link("user32.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun GetObjectA(h : Win32cr::Graphics::Gdi::HGDIOBJ, c : Int32, pv : Void*) : Int32
@@ -5495,7 +6298,7 @@ module Win32cr::Graphics::Gdi
     fun CreateFontW(cHeight : Int32, cWidth : Int32, cEscapement : Int32, cOrientation : Int32, cWeight : Int32, bItalic : UInt32, bUnderline : UInt32, bStrikeOut : UInt32, iCharSet : UInt32, iOutPrecision : Win32cr::Graphics::Gdi::FONT_OUTPUT_PRECISION, iClipPrecision : Win32cr::Graphics::Gdi::FONT_CLIP_PRECISION, iQuality : Win32cr::Graphics::Gdi::FONT_QUALITY, iPitchAndFamily : Win32cr::Graphics::Gdi::FONT_PITCH_AND_FAMILY, pszFaceName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HFONT
 
     # :nodoc:
-    fun CreateHatchBrush(iHatch : Win32cr::Graphics::Gdi::HATCH_BRUSH_STYLE, color : UInt32) : Win32cr::Graphics::Gdi::HBRUSH
+    fun CreateHatchBrush(iHatch : Win32cr::Graphics::Gdi::HATCH_BRUSH_STYLE, color : Win32cr::Foundation::COLORREF) : Win32cr::Graphics::Gdi::HBRUSH
 
     # :nodoc:
     fun CreateICA(pszDriver : Win32cr::Foundation::PSTR, pszDevice : Win32cr::Foundation::PSTR, pszPort : Win32cr::Foundation::PSTR, pdm : Win32cr::Graphics::Gdi::DEVMODEA*) : Win32cr::Graphics::Gdi::CreatedHDC
@@ -5513,7 +6316,7 @@ module Win32cr::Graphics::Gdi
     fun CreatePalette(plpal : Win32cr::Graphics::Gdi::LOGPALETTE*) : Win32cr::Graphics::Gdi::HPALETTE
 
     # :nodoc:
-    fun CreatePen(iStyle : Win32cr::Graphics::Gdi::PEN_STYLE, cWidth : Int32, color : UInt32) : Win32cr::Graphics::Gdi::HPEN
+    fun CreatePen(iStyle : Win32cr::Graphics::Gdi::PEN_STYLE, cWidth : Int32, color : Win32cr::Foundation::COLORREF) : Win32cr::Graphics::Gdi::HPEN
 
     # :nodoc:
     fun CreatePenIndirect(plpen : Win32cr::Graphics::Gdi::LOGPEN*) : Win32cr::Graphics::Gdi::HPEN
@@ -5540,7 +6343,7 @@ module Win32cr::Graphics::Gdi
     fun CreateScalableFontResourceW(fdwHidden : UInt32, lpszFont : Win32cr::Foundation::PWSTR, lpszFile : Win32cr::Foundation::PWSTR, lpszPath : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun CreateSolidBrush(color : UInt32) : Win32cr::Graphics::Gdi::HBRUSH
+    fun CreateSolidBrush(color : Win32cr::Foundation::COLORREF) : Win32cr::Graphics::Gdi::HBRUSH
 
     # :nodoc:
     fun DeleteDC(hdc : Win32cr::Graphics::Gdi::CreatedHDC) : Win32cr::Foundation::BOOL
@@ -5588,34 +6391,34 @@ module Win32cr::Graphics::Gdi
     fun ExtCreateRegion(lpx : Win32cr::Graphics::Gdi::XFORM*, nCount : UInt32, lpData : Win32cr::Graphics::Gdi::RGNDATA*) : Win32cr::Graphics::Gdi::HRGN
 
     # :nodoc:
-    fun ExtFloodFill(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32, type__ : Win32cr::Graphics::Gdi::EXT_FLOOD_FILL_TYPE) : Win32cr::Foundation::BOOL
+    fun ExtFloodFill(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : Win32cr::Foundation::COLORREF, type__ : Win32cr::Graphics::Gdi::EXT_FLOOD_FILL_TYPE) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun FillRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN, hbr : Win32cr::Graphics::Gdi::HBRUSH) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun FloodFill(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32) : Win32cr::Foundation::BOOL
+    fun FloodFill(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : Win32cr::Foundation::COLORREF) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun FrameRgn(hdc : Win32cr::Graphics::Gdi::HDC, hrgn : Win32cr::Graphics::Gdi::HRGN, hbr : Win32cr::Graphics::Gdi::HBRUSH, w : Int32, h : Int32) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetROP2(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    fun GetROP2(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::R2_MODE
 
     # :nodoc:
     fun GetAspectRatioFilterEx(hdc : Win32cr::Graphics::Gdi::HDC, lpsize : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetBkColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+    fun GetBkColor(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::COLORREF
 
     # :nodoc:
-    fun GetDCBrushColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+    fun GetDCBrushColor(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::COLORREF
 
     # :nodoc:
-    fun GetDCPenColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+    fun GetDCPenColor(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::COLORREF
 
     # :nodoc:
-    fun GetBkMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    fun GetBkMode(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::BACKGROUND_MODE
 
     # :nodoc:
     fun GetBitmapBits(hbit : Win32cr::Graphics::Gdi::HBITMAP, cb : Int32, lpvBits : Void*) : Int32
@@ -5693,7 +6496,7 @@ module Win32cr::Graphics::Gdi
     fun GetGraphicsMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
     # :nodoc:
-    fun GetMapMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    fun GetMapMode(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::HDC_MAP_MODE
 
     # :nodoc:
     fun GetMetaFileBitsEx(hMF : Win32cr::Graphics::Gdi::HMETAFILE, cbBuffer : UInt32, lpData : Void*) : UInt32
@@ -5705,10 +6508,10 @@ module Win32cr::Graphics::Gdi
     fun GetMetaFileW(lpName : Win32cr::Foundation::PWSTR) : Win32cr::Graphics::Gdi::HMETAFILE
 
     # :nodoc:
-    fun GetNearestColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
+    fun GetNearestColor(hdc : Win32cr::Graphics::Gdi::HDC, color : Win32cr::Foundation::COLORREF) : Win32cr::Foundation::COLORREF
 
     # :nodoc:
-    fun GetNearestPaletteIndex(h : Win32cr::Graphics::Gdi::HPALETTE, color : UInt32) : UInt32
+    fun GetNearestPaletteIndex(h : Win32cr::Graphics::Gdi::HPALETTE, color : Win32cr::Foundation::COLORREF) : UInt32
 
     # :nodoc:
     fun GetObjectType(h : Win32cr::Graphics::Gdi::HGDIOBJ) : UInt32
@@ -5723,7 +6526,7 @@ module Win32cr::Graphics::Gdi
     fun GetPaletteEntries(hpal : Win32cr::Graphics::Gdi::HPALETTE, iStart : UInt32, cEntries : UInt32, pPalEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*) : UInt32
 
     # :nodoc:
-    fun GetPixel(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : UInt32
+    fun GetPixel(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32) : Win32cr::Foundation::COLORREF
 
     # :nodoc:
     fun GetPolyFillMode(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
@@ -5756,10 +6559,10 @@ module Win32cr::Graphics::Gdi
     fun GetTextCharacterExtra(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
 
     # :nodoc:
-    fun GetTextAlign(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+    fun GetTextAlign(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::Gdi::TEXT_ALIGN_OPTIONS
 
     # :nodoc:
-    fun GetTextColor(hdc : Win32cr::Graphics::Gdi::HDC) : UInt32
+    fun GetTextColor(hdc : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::COLORREF
 
     # :nodoc:
     fun GetTextExtentPointA(hdc : Win32cr::Graphics::Gdi::HDC, lpString : UInt8*, c : Int32, lpsz : Win32cr::Foundation::SIZE*) : Win32cr::Foundation::BOOL
@@ -5942,13 +6745,13 @@ module Win32cr::Graphics::Gdi
     fun SelectPalette(hdc : Win32cr::Graphics::Gdi::HDC, hPal : Win32cr::Graphics::Gdi::HPALETTE, bForceBkgd : Win32cr::Foundation::BOOL) : Win32cr::Graphics::Gdi::HPALETTE
 
     # :nodoc:
-    fun SetBkColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
+    fun SetBkColor(hdc : Win32cr::Graphics::Gdi::HDC, color : Win32cr::Foundation::COLORREF) : Win32cr::Foundation::COLORREF
 
     # :nodoc:
-    fun SetDCBrushColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
+    fun SetDCBrushColor(hdc : Win32cr::Graphics::Gdi::HDC, color : Win32cr::Foundation::COLORREF) : Win32cr::Foundation::COLORREF
 
     # :nodoc:
-    fun SetDCPenColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
+    fun SetDCPenColor(hdc : Win32cr::Graphics::Gdi::HDC, color : Win32cr::Foundation::COLORREF) : Win32cr::Foundation::COLORREF
 
     # :nodoc:
     fun SetBkMode(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::Graphics::Gdi::BACKGROUND_MODE) : Int32
@@ -5987,10 +6790,10 @@ module Win32cr::Graphics::Gdi
     fun SetPaletteEntries(hpal : Win32cr::Graphics::Gdi::HPALETTE, iStart : UInt32, cEntries : UInt32, pPalEntries : Win32cr::Graphics::Gdi::PALETTEENTRY*) : UInt32
 
     # :nodoc:
-    fun SetPixel(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32) : UInt32
+    fun SetPixel(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : Win32cr::Foundation::COLORREF) : Win32cr::Foundation::COLORREF
 
     # :nodoc:
-    fun SetPixelV(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : UInt32) : Win32cr::Foundation::BOOL
+    fun SetPixelV(hdc : Win32cr::Graphics::Gdi::HDC, x : Int32, y : Int32, color : Win32cr::Foundation::COLORREF) : Win32cr::Foundation::BOOL
 
     # :nodoc:
     fun SetPolyFillMode(hdc : Win32cr::Graphics::Gdi::HDC, mode : Win32cr::Graphics::Gdi::CREATE_POLYGON_RGN_MODE) : Int32
@@ -6017,7 +6820,7 @@ module Win32cr::Graphics::Gdi
     fun SetTextCharacterExtra(hdc : Win32cr::Graphics::Gdi::HDC, extra : Int32) : Int32
 
     # :nodoc:
-    fun SetTextColor(hdc : Win32cr::Graphics::Gdi::HDC, color : UInt32) : UInt32
+    fun SetTextColor(hdc : Win32cr::Graphics::Gdi::HDC, color : Win32cr::Foundation::COLORREF) : Win32cr::Foundation::COLORREF
 
     # :nodoc:
     fun SetTextAlign(hdc : Win32cr::Graphics::Gdi::HDC, align : Win32cr::Graphics::Gdi::TEXT_ALIGN_OPTIONS) : UInt32
@@ -6446,16 +7249,16 @@ module Win32cr::Graphics::Gdi
     fun GetUpdateRect(hWnd : Win32cr::Foundation::HWND, lpRect : Win32cr::Foundation::RECT*, bErase : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun GetUpdateRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN, bErase : Win32cr::Foundation::BOOL) : Int32
+    fun GetUpdateRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN, bErase : Win32cr::Foundation::BOOL) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
 
     # :nodoc:
     fun SetWindowRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN, bRedraw : Win32cr::Foundation::BOOL) : Int32
 
     # :nodoc:
-    fun GetWindowRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN) : Int32
+    fun GetWindowRgn(hWnd : Win32cr::Foundation::HWND, hRgn : Win32cr::Graphics::Gdi::HRGN) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
 
     # :nodoc:
-    fun GetWindowRgnBox(hWnd : Win32cr::Foundation::HWND, lprc : Win32cr::Foundation::RECT*) : Int32
+    fun GetWindowRgnBox(hWnd : Win32cr::Foundation::HWND, lprc : Win32cr::Foundation::RECT*) : Win32cr::Graphics::Gdi::GDI_REGION_TYPE
 
     # :nodoc:
     fun ExcludeUpdateRgn(hDC : Win32cr::Graphics::Gdi::HDC, hWnd : Win32cr::Foundation::HWND) : Int32
@@ -6590,4 +7393,5 @@ module Win32cr::Graphics::Gdi
     fun EnumDisplayMonitors(hdc : Win32cr::Graphics::Gdi::HDC, lprcClip : Win32cr::Foundation::RECT*, lpfnEnum : Win32cr::Graphics::Gdi::MONITORENUMPROC, dwData : Win32cr::Foundation::LPARAM) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

@@ -3126,1117 +3126,1672 @@ module Win32cr::NetworkManagement::Rras
   end
 
   def rasDialA(param0 : Win32cr::NetworkManagement::Rras::RASDIALEXTENSIONS*, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSA*, param3 : UInt32, param4 : Void*, param5 : Win32cr::NetworkManagement::Rras::HRASCONN*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasDialA(param0, param1, param2, param3, param4, param5)
+    {% end %}
   end
 
   def rasDialW(param0 : Win32cr::NetworkManagement::Rras::RASDIALEXTENSIONS*, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSW*, param3 : UInt32, param4 : Void*, param5 : Win32cr::NetworkManagement::Rras::HRASCONN*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasDialW(param0, param1, param2, param3, param4, param5)
+    {% end %}
   end
 
   def rasEnumConnectionsA(param0 : Win32cr::NetworkManagement::Rras::RASCONNA*, param1 : UInt32*, param2 : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasEnumConnectionsA(param0, param1, param2)
+    {% end %}
   end
 
   def rasEnumConnectionsW(param0 : Win32cr::NetworkManagement::Rras::RASCONNW*, param1 : UInt32*, param2 : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasEnumConnectionsW(param0, param1, param2)
+    {% end %}
   end
 
   def rasEnumEntriesA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASENTRYNAMEA*, param3 : UInt32*, param4 : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasEnumEntriesA(param0, param1, param2, param3, param4)
+    {% end %}
   end
 
   def rasEnumEntriesW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::NetworkManagement::Rras::RASENTRYNAMEW*, param3 : UInt32*, param4 : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasEnumEntriesW(param0, param1, param2, param3, param4)
+    {% end %}
   end
 
   def rasGetConnectStatusA(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : Win32cr::NetworkManagement::Rras::RASCONNSTATUSA*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetConnectStatusA(param0, param1)
+    {% end %}
   end
 
   def rasGetConnectStatusW(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : Win32cr::NetworkManagement::Rras::RASCONNSTATUSW*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetConnectStatusW(param0, param1)
+    {% end %}
   end
 
   def rasGetErrorStringA(resource_id : UInt32, lpszString : UInt8*, in_buf_size : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetErrorStringA(resource_id, lpszString, in_buf_size)
+    {% end %}
   end
 
   def rasGetErrorStringW(resource_id : UInt32, lpszString : UInt16*, in_buf_size : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetErrorStringW(resource_id, lpszString, in_buf_size)
+    {% end %}
   end
 
   def rasHangUpA(param0 : Win32cr::NetworkManagement::Rras::HRASCONN) : UInt32
+    {% if !flag?(:docs) %}
     C.RasHangUpA(param0)
+    {% end %}
   end
 
   def rasHangUpW(param0 : Win32cr::NetworkManagement::Rras::HRASCONN) : UInt32
+    {% if !flag?(:docs) %}
     C.RasHangUpW(param0)
+    {% end %}
   end
 
   def rasGetProjectionInfoA(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : Win32cr::NetworkManagement::Rras::RASPROJECTION, param2 : Void*, param3 : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetProjectionInfoA(param0, param1, param2, param3)
+    {% end %}
   end
 
   def rasGetProjectionInfoW(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : Win32cr::NetworkManagement::Rras::RASPROJECTION, param2 : Void*, param3 : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetProjectionInfoW(param0, param1, param2, param3)
+    {% end %}
   end
 
   def rasCreatePhonebookEntryA(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RasCreatePhonebookEntryA(param0, param1)
+    {% end %}
   end
 
   def rasCreatePhonebookEntryW(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RasCreatePhonebookEntryW(param0, param1)
+    {% end %}
   end
 
   def rasEditPhonebookEntryA(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RasEditPhonebookEntryA(param0, param1, param2)
+    {% end %}
   end
 
   def rasEditPhonebookEntryW(param0 : Win32cr::Foundation::HWND, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RasEditPhonebookEntryW(param0, param1, param2)
+    {% end %}
   end
 
   def rasSetEntryDialParamsA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSA*, param2 : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.RasSetEntryDialParamsA(param0, param1, param2)
+    {% end %}
   end
 
   def rasSetEntryDialParamsW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSW*, param2 : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.RasSetEntryDialParamsW(param0, param1, param2)
+    {% end %}
   end
 
   def rasGetEntryDialParamsA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSA*, param2 : Int32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetEntryDialParamsA(param0, param1, param2)
+    {% end %}
   end
 
   def rasGetEntryDialParamsW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSW*, param2 : Int32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetEntryDialParamsW(param0, param1, param2)
+    {% end %}
   end
 
   def rasEnumDevicesA(param0 : Win32cr::NetworkManagement::Rras::RASDEVINFOA*, param1 : UInt32*, param2 : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasEnumDevicesA(param0, param1, param2)
+    {% end %}
   end
 
   def rasEnumDevicesW(param0 : Win32cr::NetworkManagement::Rras::RASDEVINFOW*, param1 : UInt32*, param2 : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasEnumDevicesW(param0, param1, param2)
+    {% end %}
   end
 
   def rasGetCountryInfoA(param0 : Win32cr::NetworkManagement::Rras::RASCTRYINFO*, param1 : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetCountryInfoA(param0, param1)
+    {% end %}
   end
 
   def rasGetCountryInfoW(param0 : Win32cr::NetworkManagement::Rras::RASCTRYINFO*, param1 : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetCountryInfoW(param0, param1)
+    {% end %}
   end
 
   def rasGetEntryPropertiesA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASENTRYA*, param3 : UInt32*, param4 : UInt8*, param5 : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetEntryPropertiesA(param0, param1, param2, param3, param4, param5)
+    {% end %}
   end
 
   def rasGetEntryPropertiesW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::NetworkManagement::Rras::RASENTRYW*, param3 : UInt32*, param4 : UInt8*, param5 : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetEntryPropertiesW(param0, param1, param2, param3, param4, param5)
+    {% end %}
   end
 
   def rasSetEntryPropertiesA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASENTRYA*, param3 : UInt32, param4 : UInt8*, param5 : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasSetEntryPropertiesA(param0, param1, param2, param3, param4, param5)
+    {% end %}
   end
 
   def rasSetEntryPropertiesW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::NetworkManagement::Rras::RASENTRYW*, param3 : UInt32, param4 : UInt8*, param5 : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasSetEntryPropertiesW(param0, param1, param2, param3, param4, param5)
+    {% end %}
   end
 
   def rasRenameEntryA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RasRenameEntryA(param0, param1, param2)
+    {% end %}
   end
 
   def rasRenameEntryW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RasRenameEntryW(param0, param1, param2)
+    {% end %}
   end
 
   def rasDeleteEntryA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RasDeleteEntryA(param0, param1)
+    {% end %}
   end
 
   def rasDeleteEntryW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RasDeleteEntryW(param0, param1)
+    {% end %}
   end
 
   def rasValidateEntryNameA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RasValidateEntryNameA(param0, param1)
+    {% end %}
   end
 
   def rasValidateEntryNameW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RasValidateEntryNameW(param0, param1)
+    {% end %}
   end
 
   def rasConnectionNotificationA(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : Win32cr::Foundation::HANDLE, param2 : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasConnectionNotificationA(param0, param1, param2)
+    {% end %}
   end
 
   def rasConnectionNotificationW(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : Win32cr::Foundation::HANDLE, param2 : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasConnectionNotificationW(param0, param1, param2)
+    {% end %}
   end
 
   def rasGetSubEntryHandleA(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : UInt32, param2 : Win32cr::NetworkManagement::Rras::HRASCONN*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetSubEntryHandleA(param0, param1, param2)
+    {% end %}
   end
 
   def rasGetSubEntryHandleW(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : UInt32, param2 : Win32cr::NetworkManagement::Rras::HRASCONN*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetSubEntryHandleW(param0, param1, param2)
+    {% end %}
   end
 
   def rasGetCredentialsA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASCREDENTIALSA*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetCredentialsA(param0, param1, param2)
+    {% end %}
   end
 
   def rasGetCredentialsW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::NetworkManagement::Rras::RASCREDENTIALSW*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetCredentialsW(param0, param1, param2)
+    {% end %}
   end
 
   def rasSetCredentialsA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASCREDENTIALSA*, param3 : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.RasSetCredentialsA(param0, param1, param2, param3)
+    {% end %}
   end
 
   def rasSetCredentialsW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::NetworkManagement::Rras::RASCREDENTIALSW*, param3 : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.RasSetCredentialsW(param0, param1, param2, param3)
+    {% end %}
   end
 
   def rasGetSubEntryPropertiesA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : UInt32, param3 : Win32cr::NetworkManagement::Rras::RASSUBENTRYA*, param4 : UInt32*, param5 : UInt8*, param6 : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetSubEntryPropertiesA(param0, param1, param2, param3, param4, param5, param6)
+    {% end %}
   end
 
   def rasGetSubEntryPropertiesW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : UInt32, param3 : Win32cr::NetworkManagement::Rras::RASSUBENTRYW*, param4 : UInt32*, param5 : UInt8*, param6 : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetSubEntryPropertiesW(param0, param1, param2, param3, param4, param5, param6)
+    {% end %}
   end
 
   def rasSetSubEntryPropertiesA(param0 : Win32cr::Foundation::PSTR, param1 : Win32cr::Foundation::PSTR, param2 : UInt32, param3 : Win32cr::NetworkManagement::Rras::RASSUBENTRYA*, param4 : UInt32, param5 : UInt8*, param6 : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasSetSubEntryPropertiesA(param0, param1, param2, param3, param4, param5, param6)
+    {% end %}
   end
 
   def rasSetSubEntryPropertiesW(param0 : Win32cr::Foundation::PWSTR, param1 : Win32cr::Foundation::PWSTR, param2 : UInt32, param3 : Win32cr::NetworkManagement::Rras::RASSUBENTRYW*, param4 : UInt32, param5 : UInt8*, param6 : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasSetSubEntryPropertiesW(param0, param1, param2, param3, param4, param5, param6)
+    {% end %}
   end
 
   def rasGetAutodialAddressA(param0 : Win32cr::Foundation::PSTR, param1 : UInt32*, param2 : Win32cr::NetworkManagement::Rras::RASAUTODIALENTRYA*, param3 : UInt32*, param4 : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetAutodialAddressA(param0, param1, param2, param3, param4)
+    {% end %}
   end
 
   def rasGetAutodialAddressW(param0 : Win32cr::Foundation::PWSTR, param1 : UInt32*, param2 : Win32cr::NetworkManagement::Rras::RASAUTODIALENTRYW*, param3 : UInt32*, param4 : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetAutodialAddressW(param0, param1, param2, param3, param4)
+    {% end %}
   end
 
   def rasSetAutodialAddressA(param0 : Win32cr::Foundation::PSTR, param1 : UInt32, param2 : Win32cr::NetworkManagement::Rras::RASAUTODIALENTRYA*, param3 : UInt32, param4 : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasSetAutodialAddressA(param0, param1, param2, param3, param4)
+    {% end %}
   end
 
   def rasSetAutodialAddressW(param0 : Win32cr::Foundation::PWSTR, param1 : UInt32, param2 : Win32cr::NetworkManagement::Rras::RASAUTODIALENTRYW*, param3 : UInt32, param4 : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasSetAutodialAddressW(param0, param1, param2, param3, param4)
+    {% end %}
   end
 
   def rasEnumAutodialAddressesA(lppRasAutodialAddresses : Win32cr::Foundation::PSTR*, lpdwcbRasAutodialAddresses : UInt32*, lpdwcRasAutodialAddresses : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasEnumAutodialAddressesA(lppRasAutodialAddresses, lpdwcbRasAutodialAddresses, lpdwcRasAutodialAddresses)
+    {% end %}
   end
 
   def rasEnumAutodialAddressesW(lppRasAutodialAddresses : Win32cr::Foundation::PWSTR*, lpdwcbRasAutodialAddresses : UInt32*, lpdwcRasAutodialAddresses : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasEnumAutodialAddressesW(lppRasAutodialAddresses, lpdwcbRasAutodialAddresses, lpdwcRasAutodialAddresses)
+    {% end %}
   end
 
   def rasGetAutodialEnableA(param0 : UInt32, param1 : Int32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetAutodialEnableA(param0, param1)
+    {% end %}
   end
 
   def rasGetAutodialEnableW(param0 : UInt32, param1 : Int32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetAutodialEnableW(param0, param1)
+    {% end %}
   end
 
   def rasSetAutodialEnableA(param0 : UInt32, param1 : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.RasSetAutodialEnableA(param0, param1)
+    {% end %}
   end
 
   def rasSetAutodialEnableW(param0 : UInt32, param1 : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.RasSetAutodialEnableW(param0, param1)
+    {% end %}
   end
 
   def rasGetAutodialParamA(param0 : UInt32, param1 : Void*, param2 : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetAutodialParamA(param0, param1, param2)
+    {% end %}
   end
 
   def rasGetAutodialParamW(param0 : UInt32, param1 : Void*, param2 : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetAutodialParamW(param0, param1, param2)
+    {% end %}
   end
 
   def rasSetAutodialParamA(param0 : UInt32, param1 : Void*, param2 : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasSetAutodialParamA(param0, param1, param2)
+    {% end %}
   end
 
   def rasSetAutodialParamW(param0 : UInt32, param1 : Void*, param2 : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasSetAutodialParamW(param0, param1, param2)
+    {% end %}
   end
 
   def rasGetPCscf(lpszPCscf : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetPCscf(lpszPCscf)
+    {% end %}
   end
 
   def rasInvokeEapUI(param0 : Win32cr::NetworkManagement::Rras::HRASCONN, param1 : UInt32, param2 : Win32cr::NetworkManagement::Rras::RASDIALEXTENSIONS*, param3 : Win32cr::Foundation::HWND) : UInt32
+    {% if !flag?(:docs) %}
     C.RasInvokeEapUI(param0, param1, param2, param3)
+    {% end %}
   end
 
   def rasGetLinkStatistics(hRasConn : Win32cr::NetworkManagement::Rras::HRASCONN, dwSubEntry : UInt32, lpStatistics : Win32cr::NetworkManagement::Rras::RAS_STATS*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetLinkStatistics(hRasConn, dwSubEntry, lpStatistics)
+    {% end %}
   end
 
   def rasGetConnectionStatistics(hRasConn : Win32cr::NetworkManagement::Rras::HRASCONN, lpStatistics : Win32cr::NetworkManagement::Rras::RAS_STATS*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetConnectionStatistics(hRasConn, lpStatistics)
+    {% end %}
   end
 
   def rasClearLinkStatistics(hRasConn : Win32cr::NetworkManagement::Rras::HRASCONN, dwSubEntry : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasClearLinkStatistics(hRasConn, dwSubEntry)
+    {% end %}
   end
 
   def rasClearConnectionStatistics(hRasConn : Win32cr::NetworkManagement::Rras::HRASCONN) : UInt32
+    {% if !flag?(:docs) %}
     C.RasClearConnectionStatistics(hRasConn)
+    {% end %}
   end
 
   def rasGetEapUserDataA(hToken : Win32cr::Foundation::HANDLE, pszPhonebook : Win32cr::Foundation::PSTR, pszEntry : Win32cr::Foundation::PSTR, pbEapData : UInt8*, pdwSizeofEapData : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetEapUserDataA(hToken, pszPhonebook, pszEntry, pbEapData, pdwSizeofEapData)
+    {% end %}
   end
 
   def rasGetEapUserDataW(hToken : Win32cr::Foundation::HANDLE, pszPhonebook : Win32cr::Foundation::PWSTR, pszEntry : Win32cr::Foundation::PWSTR, pbEapData : UInt8*, pdwSizeofEapData : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetEapUserDataW(hToken, pszPhonebook, pszEntry, pbEapData, pdwSizeofEapData)
+    {% end %}
   end
 
   def rasSetEapUserDataA(hToken : Win32cr::Foundation::HANDLE, pszPhonebook : Win32cr::Foundation::PSTR, pszEntry : Win32cr::Foundation::PSTR, pbEapData : UInt8*, dwSizeofEapData : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasSetEapUserDataA(hToken, pszPhonebook, pszEntry, pbEapData, dwSizeofEapData)
+    {% end %}
   end
 
   def rasSetEapUserDataW(hToken : Win32cr::Foundation::HANDLE, pszPhonebook : Win32cr::Foundation::PWSTR, pszEntry : Win32cr::Foundation::PWSTR, pbEapData : UInt8*, dwSizeofEapData : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasSetEapUserDataW(hToken, pszPhonebook, pszEntry, pbEapData, dwSizeofEapData)
+    {% end %}
   end
 
   def rasGetCustomAuthDataA(pszPhonebook : Win32cr::Foundation::PSTR, pszEntry : Win32cr::Foundation::PSTR, pbCustomAuthData : UInt8*, pdwSizeofCustomAuthData : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetCustomAuthDataA(pszPhonebook, pszEntry, pbCustomAuthData, pdwSizeofCustomAuthData)
+    {% end %}
   end
 
   def rasGetCustomAuthDataW(pszPhonebook : Win32cr::Foundation::PWSTR, pszEntry : Win32cr::Foundation::PWSTR, pbCustomAuthData : UInt8*, pdwSizeofCustomAuthData : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetCustomAuthDataW(pszPhonebook, pszEntry, pbCustomAuthData, pdwSizeofCustomAuthData)
+    {% end %}
   end
 
   def rasSetCustomAuthDataA(pszPhonebook : Win32cr::Foundation::PSTR, pszEntry : Win32cr::Foundation::PSTR, pbCustomAuthData : UInt8*, dwSizeofCustomAuthData : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasSetCustomAuthDataA(pszPhonebook, pszEntry, pbCustomAuthData, dwSizeofCustomAuthData)
+    {% end %}
   end
 
   def rasSetCustomAuthDataW(pszPhonebook : Win32cr::Foundation::PWSTR, pszEntry : Win32cr::Foundation::PWSTR, pbCustomAuthData : UInt8*, dwSizeofCustomAuthData : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasSetCustomAuthDataW(pszPhonebook, pszEntry, pbCustomAuthData, dwSizeofCustomAuthData)
+    {% end %}
   end
 
   def rasGetEapUserIdentityW(pszPhonebook : Win32cr::Foundation::PWSTR, pszEntry : Win32cr::Foundation::PWSTR, dwFlags : UInt32, hwnd : Win32cr::Foundation::HWND, ppRasEapUserIdentity : Win32cr::NetworkManagement::Rras::RASEAPUSERIDENTITYW**) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetEapUserIdentityW(pszPhonebook, pszEntry, dwFlags, hwnd, ppRasEapUserIdentity)
+    {% end %}
   end
 
   def rasGetEapUserIdentityA(pszPhonebook : Win32cr::Foundation::PSTR, pszEntry : Win32cr::Foundation::PSTR, dwFlags : UInt32, hwnd : Win32cr::Foundation::HWND, ppRasEapUserIdentity : Win32cr::NetworkManagement::Rras::RASEAPUSERIDENTITYA**) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetEapUserIdentityA(pszPhonebook, pszEntry, dwFlags, hwnd, ppRasEapUserIdentity)
+    {% end %}
   end
 
   def rasFreeEapUserIdentityW(pRasEapUserIdentity : Win32cr::NetworkManagement::Rras::RASEAPUSERIDENTITYW*) : Void
+    {% if !flag?(:docs) %}
     C.RasFreeEapUserIdentityW(pRasEapUserIdentity)
+    {% end %}
   end
 
   def rasFreeEapUserIdentityA(pRasEapUserIdentity : Win32cr::NetworkManagement::Rras::RASEAPUSERIDENTITYA*) : Void
+    {% if !flag?(:docs) %}
     C.RasFreeEapUserIdentityA(pRasEapUserIdentity)
+    {% end %}
   end
 
   def rasDeleteSubEntryA(pszPhonebook : Win32cr::Foundation::PSTR, pszEntry : Win32cr::Foundation::PSTR, dwSubentryId : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasDeleteSubEntryA(pszPhonebook, pszEntry, dwSubentryId)
+    {% end %}
   end
 
   def rasDeleteSubEntryW(pszPhonebook : Win32cr::Foundation::PWSTR, pszEntry : Win32cr::Foundation::PWSTR, dwSubEntryId : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RasDeleteSubEntryW(pszPhonebook, pszEntry, dwSubEntryId)
+    {% end %}
   end
 
   def rasUpdateConnection(hrasconn : Win32cr::NetworkManagement::Rras::HRASCONN, lprasupdateconn : Win32cr::NetworkManagement::Rras::RASUPDATECONN*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasUpdateConnection(hrasconn, lprasupdateconn)
+    {% end %}
   end
 
   def rasGetProjectionInfoEx(hrasconn : Win32cr::NetworkManagement::Rras::HRASCONN, pRasProjection : Win32cr::NetworkManagement::Rras::RAS_PROJECTION_INFO*, lpdwSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RasGetProjectionInfoEx(hrasconn, pRasProjection, lpdwSize)
+    {% end %}
   end
 
   def rasPhonebookDlgA(lpszPhonebook : Win32cr::Foundation::PSTR, lpszEntry : Win32cr::Foundation::PSTR, lpInfo : Win32cr::NetworkManagement::Rras::RASPBDLGA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RasPhonebookDlgA(lpszPhonebook, lpszEntry, lpInfo)
+    {% end %}
   end
 
   def rasPhonebookDlgW(lpszPhonebook : Win32cr::Foundation::PWSTR, lpszEntry : Win32cr::Foundation::PWSTR, lpInfo : Win32cr::NetworkManagement::Rras::RASPBDLGW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RasPhonebookDlgW(lpszPhonebook, lpszEntry, lpInfo)
+    {% end %}
   end
 
   def rasEntryDlgA(lpszPhonebook : Win32cr::Foundation::PSTR, lpszEntry : Win32cr::Foundation::PSTR, lpInfo : Win32cr::NetworkManagement::Rras::RASENTRYDLGA*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RasEntryDlgA(lpszPhonebook, lpszEntry, lpInfo)
+    {% end %}
   end
 
   def rasEntryDlgW(lpszPhonebook : Win32cr::Foundation::PWSTR, lpszEntry : Win32cr::Foundation::PWSTR, lpInfo : Win32cr::NetworkManagement::Rras::RASENTRYDLGW*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RasEntryDlgW(lpszPhonebook, lpszEntry, lpInfo)
+    {% end %}
   end
 
   def rasDialDlgA(lpszPhonebook : Win32cr::Foundation::PSTR, lpszEntry : Win32cr::Foundation::PSTR, lpszPhoneNumber : Win32cr::Foundation::PSTR, lpInfo : Win32cr::NetworkManagement::Rras::RASDIALDLG*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RasDialDlgA(lpszPhonebook, lpszEntry, lpszPhoneNumber, lpInfo)
+    {% end %}
   end
 
   def rasDialDlgW(lpszPhonebook : Win32cr::Foundation::PWSTR, lpszEntry : Win32cr::Foundation::PWSTR, lpszPhoneNumber : Win32cr::Foundation::PWSTR, lpInfo : Win32cr::NetworkManagement::Rras::RASDIALDLG*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.RasDialDlgW(lpszPhonebook, lpszEntry, lpszPhoneNumber, lpInfo)
+    {% end %}
   end
 
   def mprAdminConnectionEnumEx(hRasServer : LibC::IntPtrT, pObjectHeader : Win32cr::NetworkManagement::Rras::MPRAPI_OBJECT_HEADER*, dwPreferedMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, ppRasConn : Win32cr::NetworkManagement::Rras::RAS_CONNECTION_EX**, lpdwResumeHandle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminConnectionEnumEx(hRasServer, pObjectHeader, dwPreferedMaxLen, lpdwEntriesRead, lpdwTotalEntries, ppRasConn, lpdwResumeHandle)
+    {% end %}
   end
 
   def mprAdminConnectionGetInfoEx(hRasServer : LibC::IntPtrT, hRasConnection : Win32cr::Foundation::HANDLE, pRasConnection : Win32cr::NetworkManagement::Rras::RAS_CONNECTION_EX*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminConnectionGetInfoEx(hRasServer, hRasConnection, pRasConnection)
+    {% end %}
   end
 
   def mprAdminServerGetInfoEx(hMprServer : LibC::IntPtrT, pServerInfo : Win32cr::NetworkManagement::Rras::MPR_SERVER_EX1*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminServerGetInfoEx(hMprServer, pServerInfo)
+    {% end %}
   end
 
   def mprAdminServerSetInfoEx(hMprServer : LibC::IntPtrT, pServerInfo : Win32cr::NetworkManagement::Rras::MPR_SERVER_SET_CONFIG_EX1*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminServerSetInfoEx(hMprServer, pServerInfo)
+    {% end %}
   end
 
   def mprConfigServerGetInfoEx(hMprConfig : Win32cr::Foundation::HANDLE, pServerInfo : Win32cr::NetworkManagement::Rras::MPR_SERVER_EX1*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigServerGetInfoEx(hMprConfig, pServerInfo)
+    {% end %}
   end
 
   def mprConfigServerSetInfoEx(hMprConfig : Win32cr::Foundation::HANDLE, pSetServerConfig : Win32cr::NetworkManagement::Rras::MPR_SERVER_SET_CONFIG_EX1*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigServerSetInfoEx(hMprConfig, pSetServerConfig)
+    {% end %}
   end
 
   def mprAdminUpdateConnection(hRasServer : LibC::IntPtrT, hRasConnection : Win32cr::Foundation::HANDLE, pRasUpdateConnection : Win32cr::NetworkManagement::Rras::RAS_UPDATE_CONNECTION*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminUpdateConnection(hRasServer, hRasConnection, pRasUpdateConnection)
+    {% end %}
   end
 
   def mprAdminIsServiceInitialized(lpwsServerName : Win32cr::Foundation::PWSTR, fIsServiceInitialized : Win32cr::Foundation::BOOL*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminIsServiceInitialized(lpwsServerName, fIsServiceInitialized)
+    {% end %}
   end
 
   def mprAdminInterfaceSetCustomInfoEx(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, pCustomInfo : Win32cr::NetworkManagement::Rras::MPR_IF_CUSTOMINFOEX2*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceSetCustomInfoEx(hMprServer, hInterface, pCustomInfo)
+    {% end %}
   end
 
   def mprAdminInterfaceGetCustomInfoEx(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, pCustomInfo : Win32cr::NetworkManagement::Rras::MPR_IF_CUSTOMINFOEX2*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceGetCustomInfoEx(hMprServer, hInterface, pCustomInfo)
+    {% end %}
   end
 
   def mprConfigInterfaceGetCustomInfoEx(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, pCustomInfo : Win32cr::NetworkManagement::Rras::MPR_IF_CUSTOMINFOEX2*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigInterfaceGetCustomInfoEx(hMprConfig, hRouterInterface, pCustomInfo)
+    {% end %}
   end
 
   def mprConfigInterfaceSetCustomInfoEx(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, pCustomInfo : Win32cr::NetworkManagement::Rras::MPR_IF_CUSTOMINFOEX2*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigInterfaceSetCustomInfoEx(hMprConfig, hRouterInterface, pCustomInfo)
+    {% end %}
   end
 
   def mprAdminConnectionEnum(hRasServer : LibC::IntPtrT, dwLevel : UInt32, lplpbBuffer : UInt8**, dwPrefMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, lpdwResumeHandle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminConnectionEnum(hRasServer, dwLevel, lplpbBuffer, dwPrefMaxLen, lpdwEntriesRead, lpdwTotalEntries, lpdwResumeHandle)
+    {% end %}
   end
 
   def mprAdminPortEnum(hRasServer : LibC::IntPtrT, dwLevel : UInt32, hRasConnection : Win32cr::Foundation::HANDLE, lplpbBuffer : UInt8**, dwPrefMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, lpdwResumeHandle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminPortEnum(hRasServer, dwLevel, hRasConnection, lplpbBuffer, dwPrefMaxLen, lpdwEntriesRead, lpdwTotalEntries, lpdwResumeHandle)
+    {% end %}
   end
 
   def mprAdminConnectionGetInfo(hRasServer : LibC::IntPtrT, dwLevel : UInt32, hRasConnection : Win32cr::Foundation::HANDLE, lplpbBuffer : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminConnectionGetInfo(hRasServer, dwLevel, hRasConnection, lplpbBuffer)
+    {% end %}
   end
 
   def mprAdminPortGetInfo(hRasServer : LibC::IntPtrT, dwLevel : UInt32, hPort : Win32cr::Foundation::HANDLE, lplpbBuffer : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminPortGetInfo(hRasServer, dwLevel, hPort, lplpbBuffer)
+    {% end %}
   end
 
   def mprAdminConnectionClearStats(hRasServer : LibC::IntPtrT, hRasConnection : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminConnectionClearStats(hRasServer, hRasConnection)
+    {% end %}
   end
 
   def mprAdminPortClearStats(hRasServer : LibC::IntPtrT, hPort : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminPortClearStats(hRasServer, hPort)
+    {% end %}
   end
 
   def mprAdminPortReset(hRasServer : LibC::IntPtrT, hPort : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminPortReset(hRasServer, hPort)
+    {% end %}
   end
 
   def mprAdminPortDisconnect(hRasServer : LibC::IntPtrT, hPort : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminPortDisconnect(hRasServer, hPort)
+    {% end %}
   end
 
   def mprAdminConnectionRemoveQuarantine(hRasServer : Win32cr::Foundation::HANDLE, hRasConnection : Win32cr::Foundation::HANDLE, fIsIpAddress : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminConnectionRemoveQuarantine(hRasServer, hRasConnection, fIsIpAddress)
+    {% end %}
   end
 
   def mprAdminUserGetInfo(lpszServer : Win32cr::Foundation::PWSTR, lpszUser : Win32cr::Foundation::PWSTR, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminUserGetInfo(lpszServer, lpszUser, dwLevel, lpbBuffer)
+    {% end %}
   end
 
   def mprAdminUserSetInfo(lpszServer : Win32cr::Foundation::PWSTR, lpszUser : Win32cr::Foundation::PWSTR, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminUserSetInfo(lpszServer, lpszUser, dwLevel, lpbBuffer)
+    {% end %}
   end
 
   def mprAdminSendUserMessage(hMprServer : LibC::IntPtrT, hConnection : Win32cr::Foundation::HANDLE, lpwszMessage : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminSendUserMessage(hMprServer, hConnection, lpwszMessage)
+    {% end %}
   end
 
   def mprAdminGetPDCServer(lpszDomain : Win32cr::Foundation::PWSTR, lpszServer : Win32cr::Foundation::PWSTR, lpszPDCServer : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminGetPDCServer(lpszDomain, lpszServer, lpszPDCServer)
+    {% end %}
   end
 
   def mprAdminIsServiceRunning(lpwsServerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.MprAdminIsServiceRunning(lpwsServerName)
+    {% end %}
   end
 
   def mprAdminServerConnect(lpwsServerName : Win32cr::Foundation::PWSTR, phMprServer : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminServerConnect(lpwsServerName, phMprServer)
+    {% end %}
   end
 
   def mprAdminServerDisconnect(hMprServer : LibC::IntPtrT) : Void
+    {% if !flag?(:docs) %}
     C.MprAdminServerDisconnect(hMprServer)
+    {% end %}
   end
 
   def mprAdminServerGetCredentials(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lplpbBuffer : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminServerGetCredentials(hMprServer, dwLevel, lplpbBuffer)
+    {% end %}
   end
 
   def mprAdminServerSetCredentials(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminServerSetCredentials(hMprServer, dwLevel, lpbBuffer)
+    {% end %}
   end
 
   def mprAdminBufferFree(pBuffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminBufferFree(pBuffer)
+    {% end %}
   end
 
   def mprAdminGetErrorString(dwError : UInt32, lplpwsErrorString : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminGetErrorString(dwError, lplpwsErrorString)
+    {% end %}
   end
 
   def mprAdminServerGetInfo(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lplpbBuffer : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminServerGetInfo(hMprServer, dwLevel, lplpbBuffer)
+    {% end %}
   end
 
   def mprAdminServerSetInfo(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminServerSetInfo(hMprServer, dwLevel, lpbBuffer)
+    {% end %}
   end
 
   def mprAdminEstablishDomainRasServer(pszDomain : Win32cr::Foundation::PWSTR, pszMachine : Win32cr::Foundation::PWSTR, bEnable : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminEstablishDomainRasServer(pszDomain, pszMachine, bEnable)
+    {% end %}
   end
 
   def mprAdminIsDomainRasServer(pszDomain : Win32cr::Foundation::PWSTR, pszMachine : Win32cr::Foundation::PWSTR, pbIsRasServer : Win32cr::Foundation::BOOL*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminIsDomainRasServer(pszDomain, pszMachine, pbIsRasServer)
+    {% end %}
   end
 
   def mprAdminTransportCreate(hMprServer : LibC::IntPtrT, dwTransportId : UInt32, lpwsTransportName : Win32cr::Foundation::PWSTR, pGlobalInfo : UInt8*, dwGlobalInfoSize : UInt32, pClientInterfaceInfo : UInt8*, dwClientInterfaceInfoSize : UInt32, lpwsDLLPath : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminTransportCreate(hMprServer, dwTransportId, lpwsTransportName, pGlobalInfo, dwGlobalInfoSize, pClientInterfaceInfo, dwClientInterfaceInfoSize, lpwsDLLPath)
+    {% end %}
   end
 
   def mprAdminTransportSetInfo(hMprServer : LibC::IntPtrT, dwTransportId : UInt32, pGlobalInfo : UInt8*, dwGlobalInfoSize : UInt32, pClientInterfaceInfo : UInt8*, dwClientInterfaceInfoSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminTransportSetInfo(hMprServer, dwTransportId, pGlobalInfo, dwGlobalInfoSize, pClientInterfaceInfo, dwClientInterfaceInfoSize)
+    {% end %}
   end
 
   def mprAdminTransportGetInfo(hMprServer : LibC::IntPtrT, dwTransportId : UInt32, ppGlobalInfo : UInt8**, lpdwGlobalInfoSize : UInt32*, ppClientInterfaceInfo : UInt8**, lpdwClientInterfaceInfoSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminTransportGetInfo(hMprServer, dwTransportId, ppGlobalInfo, lpdwGlobalInfoSize, ppClientInterfaceInfo, lpdwClientInterfaceInfoSize)
+    {% end %}
   end
 
   def mprAdminDeviceEnum(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lplpbBuffer : UInt8**, lpdwTotalEntries : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminDeviceEnum(hMprServer, dwLevel, lplpbBuffer, lpdwTotalEntries)
+    {% end %}
   end
 
   def mprAdminInterfaceGetHandle(hMprServer : LibC::IntPtrT, lpwsInterfaceName : Win32cr::Foundation::PWSTR, phInterface : Win32cr::Foundation::HANDLE*, fIncludeClientInterfaces : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceGetHandle(hMprServer, lpwsInterfaceName, phInterface, fIncludeClientInterfaces)
+    {% end %}
   end
 
   def mprAdminInterfaceCreate(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lpbBuffer : UInt8*, phInterface : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceCreate(hMprServer, dwLevel, lpbBuffer, phInterface)
+    {% end %}
   end
 
   def mprAdminInterfaceGetInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpbBuffer : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceGetInfo(hMprServer, hInterface, dwLevel, lplpbBuffer)
+    {% end %}
   end
 
   def mprAdminInterfaceSetInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceSetInfo(hMprServer, hInterface, dwLevel, lpbBuffer)
+    {% end %}
   end
 
   def mprAdminInterfaceDelete(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceDelete(hMprServer, hInterface)
+    {% end %}
   end
 
   def mprAdminInterfaceDeviceGetInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwIndex : UInt32, dwLevel : UInt32, lplpBuffer : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceDeviceGetInfo(hMprServer, hInterface, dwIndex, dwLevel, lplpBuffer)
+    {% end %}
   end
 
   def mprAdminInterfaceDeviceSetInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwIndex : UInt32, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceDeviceSetInfo(hMprServer, hInterface, dwIndex, dwLevel, lpbBuffer)
+    {% end %}
   end
 
   def mprAdminInterfaceTransportRemove(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwTransportId : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceTransportRemove(hMprServer, hInterface, dwTransportId)
+    {% end %}
   end
 
   def mprAdminInterfaceTransportAdd(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, pInterfaceInfo : UInt8*, dwInterfaceInfoSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceTransportAdd(hMprServer, hInterface, dwTransportId, pInterfaceInfo, dwInterfaceInfoSize)
+    {% end %}
   end
 
   def mprAdminInterfaceTransportGetInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, ppInterfaceInfo : UInt8**, lpdwInterfaceInfoSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceTransportGetInfo(hMprServer, hInterface, dwTransportId, ppInterfaceInfo, lpdwInterfaceInfoSize)
+    {% end %}
   end
 
   def mprAdminInterfaceTransportSetInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, pInterfaceInfo : UInt8*, dwInterfaceInfoSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceTransportSetInfo(hMprServer, hInterface, dwTransportId, pInterfaceInfo, dwInterfaceInfoSize)
+    {% end %}
   end
 
   def mprAdminInterfaceEnum(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lplpbBuffer : UInt8**, dwPrefMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, lpdwResumeHandle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceEnum(hMprServer, dwLevel, lplpbBuffer, dwPrefMaxLen, lpdwEntriesRead, lpdwTotalEntries, lpdwResumeHandle)
+    {% end %}
   end
 
   def mprAdminInterfaceSetCredentials(lpwsServer : Win32cr::Foundation::PWSTR, lpwsInterfaceName : Win32cr::Foundation::PWSTR, lpwsUserName : Win32cr::Foundation::PWSTR, lpwsDomainName : Win32cr::Foundation::PWSTR, lpwsPassword : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceSetCredentials(lpwsServer, lpwsInterfaceName, lpwsUserName, lpwsDomainName, lpwsPassword)
+    {% end %}
   end
 
   def mprAdminInterfaceGetCredentials(lpwsServer : Win32cr::Foundation::PWSTR, lpwsInterfaceName : Win32cr::Foundation::PWSTR, lpwsUserName : Win32cr::Foundation::PWSTR, lpwsPassword : Win32cr::Foundation::PWSTR, lpwsDomainName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceGetCredentials(lpwsServer, lpwsInterfaceName, lpwsUserName, lpwsPassword, lpwsDomainName)
+    {% end %}
   end
 
   def mprAdminInterfaceSetCredentialsEx(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceSetCredentialsEx(hMprServer, hInterface, dwLevel, lpbBuffer)
+    {% end %}
   end
 
   def mprAdminInterfaceGetCredentialsEx(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpbBuffer : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceGetCredentialsEx(hMprServer, hInterface, dwLevel, lplpbBuffer)
+    {% end %}
   end
 
   def mprAdminInterfaceConnect(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, hEvent : Win32cr::Foundation::HANDLE, fSynchronous : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceConnect(hMprServer, hInterface, hEvent, fSynchronous)
+    {% end %}
   end
 
   def mprAdminInterfaceDisconnect(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceDisconnect(hMprServer, hInterface)
+    {% end %}
   end
 
   def mprAdminInterfaceUpdateRoutes(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwProtocolId : UInt32, hEvent : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceUpdateRoutes(hMprServer, hInterface, dwProtocolId, hEvent)
+    {% end %}
   end
 
   def mprAdminInterfaceQueryUpdateResult(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE, dwProtocolId : UInt32, lpdwUpdateResult : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceQueryUpdateResult(hMprServer, hInterface, dwProtocolId, lpdwUpdateResult)
+    {% end %}
   end
 
   def mprAdminInterfaceUpdatePhonebookInfo(hMprServer : LibC::IntPtrT, hInterface : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminInterfaceUpdatePhonebookInfo(hMprServer, hInterface)
+    {% end %}
   end
 
   def mprAdminRegisterConnectionNotification(hMprServer : LibC::IntPtrT, hEventNotification : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminRegisterConnectionNotification(hMprServer, hEventNotification)
+    {% end %}
   end
 
   def mprAdminDeregisterConnectionNotification(hMprServer : LibC::IntPtrT, hEventNotification : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminDeregisterConnectionNotification(hMprServer, hEventNotification)
+    {% end %}
   end
 
   def mprAdminMIBServerConnect(lpwsServerName : Win32cr::Foundation::PWSTR, phMibServer : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminMIBServerConnect(lpwsServerName, phMibServer)
+    {% end %}
   end
 
   def mprAdminMIBServerDisconnect(hMibServer : LibC::IntPtrT) : Void
+    {% if !flag?(:docs) %}
     C.MprAdminMIBServerDisconnect(hMibServer)
+    {% end %}
   end
 
   def mprAdminMIBEntryCreate(hMibServer : LibC::IntPtrT, dwPid : UInt32, dwRoutingPid : UInt32, lpEntry : Void*, dwEntrySize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminMIBEntryCreate(hMibServer, dwPid, dwRoutingPid, lpEntry, dwEntrySize)
+    {% end %}
   end
 
   def mprAdminMIBEntryDelete(hMibServer : LibC::IntPtrT, dwProtocolId : UInt32, dwRoutingPid : UInt32, lpEntry : Void*, dwEntrySize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminMIBEntryDelete(hMibServer, dwProtocolId, dwRoutingPid, lpEntry, dwEntrySize)
+    {% end %}
   end
 
   def mprAdminMIBEntrySet(hMibServer : LibC::IntPtrT, dwProtocolId : UInt32, dwRoutingPid : UInt32, lpEntry : Void*, dwEntrySize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminMIBEntrySet(hMibServer, dwProtocolId, dwRoutingPid, lpEntry, dwEntrySize)
+    {% end %}
   end
 
   def mprAdminMIBEntryGet(hMibServer : LibC::IntPtrT, dwProtocolId : UInt32, dwRoutingPid : UInt32, lpInEntry : Void*, dwInEntrySize : UInt32, lplpOutEntry : Void**, lpOutEntrySize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminMIBEntryGet(hMibServer, dwProtocolId, dwRoutingPid, lpInEntry, dwInEntrySize, lplpOutEntry, lpOutEntrySize)
+    {% end %}
   end
 
   def mprAdminMIBEntryGetFirst(hMibServer : LibC::IntPtrT, dwProtocolId : UInt32, dwRoutingPid : UInt32, lpInEntry : Void*, dwInEntrySize : UInt32, lplpOutEntry : Void**, lpOutEntrySize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminMIBEntryGetFirst(hMibServer, dwProtocolId, dwRoutingPid, lpInEntry, dwInEntrySize, lplpOutEntry, lpOutEntrySize)
+    {% end %}
   end
 
   def mprAdminMIBEntryGetNext(hMibServer : LibC::IntPtrT, dwProtocolId : UInt32, dwRoutingPid : UInt32, lpInEntry : Void*, dwInEntrySize : UInt32, lplpOutEntry : Void**, lpOutEntrySize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminMIBEntryGetNext(hMibServer, dwProtocolId, dwRoutingPid, lpInEntry, dwInEntrySize, lplpOutEntry, lpOutEntrySize)
+    {% end %}
   end
 
   def mprAdminMIBBufferFree(pBuffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprAdminMIBBufferFree(pBuffer)
+    {% end %}
   end
 
   def mprConfigServerInstall(dwLevel : UInt32, pBuffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigServerInstall(dwLevel, pBuffer)
+    {% end %}
   end
 
   def mprConfigServerConnect(lpwsServerName : Win32cr::Foundation::PWSTR, phMprConfig : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigServerConnect(lpwsServerName, phMprConfig)
+    {% end %}
   end
 
   def mprConfigServerDisconnect(hMprConfig : Win32cr::Foundation::HANDLE) : Void
+    {% if !flag?(:docs) %}
     C.MprConfigServerDisconnect(hMprConfig)
+    {% end %}
   end
 
   def mprConfigServerRefresh(hMprConfig : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigServerRefresh(hMprConfig)
+    {% end %}
   end
 
   def mprConfigBufferFree(pBuffer : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigBufferFree(pBuffer)
+    {% end %}
   end
 
   def mprConfigServerGetInfo(hMprConfig : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpbBuffer : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigServerGetInfo(hMprConfig, dwLevel, lplpbBuffer)
+    {% end %}
   end
 
   def mprConfigServerSetInfo(hMprServer : LibC::IntPtrT, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigServerSetInfo(hMprServer, dwLevel, lpbBuffer)
+    {% end %}
   end
 
   def mprConfigServerBackup(hMprConfig : Win32cr::Foundation::HANDLE, lpwsPath : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigServerBackup(hMprConfig, lpwsPath)
+    {% end %}
   end
 
   def mprConfigServerRestore(hMprConfig : Win32cr::Foundation::HANDLE, lpwsPath : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigServerRestore(hMprConfig, lpwsPath)
+    {% end %}
   end
 
   def mprConfigTransportCreate(hMprConfig : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, lpwsTransportName : Win32cr::Foundation::PWSTR, pGlobalInfo : UInt8*, dwGlobalInfoSize : UInt32, pClientInterfaceInfo : UInt8*, dwClientInterfaceInfoSize : UInt32, lpwsDLLPath : Win32cr::Foundation::PWSTR, phRouterTransport : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigTransportCreate(hMprConfig, dwTransportId, lpwsTransportName, pGlobalInfo, dwGlobalInfoSize, pClientInterfaceInfo, dwClientInterfaceInfoSize, lpwsDLLPath, phRouterTransport)
+    {% end %}
   end
 
   def mprConfigTransportDelete(hMprConfig : Win32cr::Foundation::HANDLE, hRouterTransport : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigTransportDelete(hMprConfig, hRouterTransport)
+    {% end %}
   end
 
   def mprConfigTransportGetHandle(hMprConfig : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, phRouterTransport : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigTransportGetHandle(hMprConfig, dwTransportId, phRouterTransport)
+    {% end %}
   end
 
   def mprConfigTransportSetInfo(hMprConfig : Win32cr::Foundation::HANDLE, hRouterTransport : Win32cr::Foundation::HANDLE, pGlobalInfo : UInt8*, dwGlobalInfoSize : UInt32, pClientInterfaceInfo : UInt8*, dwClientInterfaceInfoSize : UInt32, lpwsDLLPath : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigTransportSetInfo(hMprConfig, hRouterTransport, pGlobalInfo, dwGlobalInfoSize, pClientInterfaceInfo, dwClientInterfaceInfoSize, lpwsDLLPath)
+    {% end %}
   end
 
   def mprConfigTransportGetInfo(hMprConfig : Win32cr::Foundation::HANDLE, hRouterTransport : Win32cr::Foundation::HANDLE, ppGlobalInfo : UInt8**, lpdwGlobalInfoSize : UInt32*, ppClientInterfaceInfo : UInt8**, lpdwClientInterfaceInfoSize : UInt32*, lplpwsDLLPath : Win32cr::Foundation::PWSTR*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigTransportGetInfo(hMprConfig, hRouterTransport, ppGlobalInfo, lpdwGlobalInfoSize, ppClientInterfaceInfo, lpdwClientInterfaceInfoSize, lplpwsDLLPath)
+    {% end %}
   end
 
   def mprConfigTransportEnum(hMprConfig : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpBuffer : UInt8**, dwPrefMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, lpdwResumeHandle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigTransportEnum(hMprConfig, dwLevel, lplpBuffer, dwPrefMaxLen, lpdwEntriesRead, lpdwTotalEntries, lpdwResumeHandle)
+    {% end %}
   end
 
   def mprConfigInterfaceCreate(hMprConfig : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lpbBuffer : UInt8*, phRouterInterface : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigInterfaceCreate(hMprConfig, dwLevel, lpbBuffer, phRouterInterface)
+    {% end %}
   end
 
   def mprConfigInterfaceDelete(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigInterfaceDelete(hMprConfig, hRouterInterface)
+    {% end %}
   end
 
   def mprConfigInterfaceGetHandle(hMprConfig : Win32cr::Foundation::HANDLE, lpwsInterfaceName : Win32cr::Foundation::PWSTR, phRouterInterface : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigInterfaceGetHandle(hMprConfig, lpwsInterfaceName, phRouterInterface)
+    {% end %}
   end
 
   def mprConfigInterfaceGetInfo(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpBuffer : UInt8**, lpdwBufferSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigInterfaceGetInfo(hMprConfig, hRouterInterface, dwLevel, lplpBuffer, lpdwBufferSize)
+    {% end %}
   end
 
   def mprConfigInterfaceSetInfo(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lpbBuffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigInterfaceSetInfo(hMprConfig, hRouterInterface, dwLevel, lpbBuffer)
+    {% end %}
   end
 
   def mprConfigInterfaceEnum(hMprConfig : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpBuffer : UInt8**, dwPrefMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, lpdwResumeHandle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigInterfaceEnum(hMprConfig, dwLevel, lplpBuffer, dwPrefMaxLen, lpdwEntriesRead, lpdwTotalEntries, lpdwResumeHandle)
+    {% end %}
   end
 
   def mprConfigInterfaceTransportAdd(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, lpwsTransportName : Win32cr::Foundation::PWSTR, pInterfaceInfo : UInt8*, dwInterfaceInfoSize : UInt32, phRouterIfTransport : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigInterfaceTransportAdd(hMprConfig, hRouterInterface, dwTransportId, lpwsTransportName, pInterfaceInfo, dwInterfaceInfoSize, phRouterIfTransport)
+    {% end %}
   end
 
   def mprConfigInterfaceTransportRemove(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, hRouterIfTransport : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigInterfaceTransportRemove(hMprConfig, hRouterInterface, hRouterIfTransport)
+    {% end %}
   end
 
   def mprConfigInterfaceTransportGetHandle(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, dwTransportId : UInt32, phRouterIfTransport : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigInterfaceTransportGetHandle(hMprConfig, hRouterInterface, dwTransportId, phRouterIfTransport)
+    {% end %}
   end
 
   def mprConfigInterfaceTransportGetInfo(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, hRouterIfTransport : Win32cr::Foundation::HANDLE, ppInterfaceInfo : UInt8**, lpdwInterfaceInfoSize : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigInterfaceTransportGetInfo(hMprConfig, hRouterInterface, hRouterIfTransport, ppInterfaceInfo, lpdwInterfaceInfoSize)
+    {% end %}
   end
 
   def mprConfigInterfaceTransportSetInfo(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, hRouterIfTransport : Win32cr::Foundation::HANDLE, pInterfaceInfo : UInt8*, dwInterfaceInfoSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigInterfaceTransportSetInfo(hMprConfig, hRouterInterface, hRouterIfTransport, pInterfaceInfo, dwInterfaceInfoSize)
+    {% end %}
   end
 
   def mprConfigInterfaceTransportEnum(hMprConfig : Win32cr::Foundation::HANDLE, hRouterInterface : Win32cr::Foundation::HANDLE, dwLevel : UInt32, lplpBuffer : UInt8**, dwPrefMaxLen : UInt32, lpdwEntriesRead : UInt32*, lpdwTotalEntries : UInt32*, lpdwResumeHandle : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigInterfaceTransportEnum(hMprConfig, hRouterInterface, dwLevel, lplpBuffer, dwPrefMaxLen, lpdwEntriesRead, lpdwTotalEntries, lpdwResumeHandle)
+    {% end %}
   end
 
   def mprConfigGetFriendlyName(hMprConfig : Win32cr::Foundation::HANDLE, pszGuidName : Win32cr::Foundation::PWSTR, pszBuffer : Win32cr::Foundation::PWSTR, dwBufferSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigGetFriendlyName(hMprConfig, pszGuidName, pszBuffer, dwBufferSize)
+    {% end %}
   end
 
   def mprConfigGetGuidName(hMprConfig : Win32cr::Foundation::HANDLE, pszFriendlyName : Win32cr::Foundation::PWSTR, pszBuffer : Win32cr::Foundation::PWSTR, dwBufferSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigGetGuidName(hMprConfig, pszFriendlyName, pszBuffer, dwBufferSize)
+    {% end %}
   end
 
   def mprConfigFilterGetInfo(hMprConfig : Win32cr::Foundation::HANDLE, dwLevel : UInt32, dwTransportId : UInt32, lpBuffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigFilterGetInfo(hMprConfig, dwLevel, dwTransportId, lpBuffer)
+    {% end %}
   end
 
   def mprConfigFilterSetInfo(hMprConfig : Win32cr::Foundation::HANDLE, dwLevel : UInt32, dwTransportId : UInt32, lpBuffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprConfigFilterSetInfo(hMprConfig, dwLevel, dwTransportId, lpBuffer)
+    {% end %}
   end
 
   def mprInfoCreate(dwVersion : UInt32, lplpNewHeader : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.MprInfoCreate(dwVersion, lplpNewHeader)
+    {% end %}
   end
 
   def mprInfoDelete(lpHeader : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprInfoDelete(lpHeader)
+    {% end %}
   end
 
   def mprInfoRemoveAll(lpHeader : Void*, lplpNewHeader : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.MprInfoRemoveAll(lpHeader, lplpNewHeader)
+    {% end %}
   end
 
   def mprInfoDuplicate(lpHeader : Void*, lplpNewHeader : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.MprInfoDuplicate(lpHeader, lplpNewHeader)
+    {% end %}
   end
 
   def mprInfoBlockAdd(lpHeader : Void*, dwInfoType : UInt32, dwItemSize : UInt32, dwItemCount : UInt32, lpItemData : UInt8*, lplpNewHeader : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.MprInfoBlockAdd(lpHeader, dwInfoType, dwItemSize, dwItemCount, lpItemData, lplpNewHeader)
+    {% end %}
   end
 
   def mprInfoBlockRemove(lpHeader : Void*, dwInfoType : UInt32, lplpNewHeader : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.MprInfoBlockRemove(lpHeader, dwInfoType, lplpNewHeader)
+    {% end %}
   end
 
   def mprInfoBlockSet(lpHeader : Void*, dwInfoType : UInt32, dwItemSize : UInt32, dwItemCount : UInt32, lpItemData : UInt8*, lplpNewHeader : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.MprInfoBlockSet(lpHeader, dwInfoType, dwItemSize, dwItemCount, lpItemData, lplpNewHeader)
+    {% end %}
   end
 
   def mprInfoBlockFind(lpHeader : Void*, dwInfoType : UInt32, lpdwItemSize : UInt32*, lpdwItemCount : UInt32*, lplpItemData : UInt8**) : UInt32
+    {% if !flag?(:docs) %}
     C.MprInfoBlockFind(lpHeader, dwInfoType, lpdwItemSize, lpdwItemCount, lplpItemData)
+    {% end %}
   end
 
   def mprInfoBlockQuerySize(lpHeader : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.MprInfoBlockQuerySize(lpHeader)
+    {% end %}
   end
 
   def mgmRegisterMProtocol(prpiInfo : Win32cr::NetworkManagement::Rras::ROUTING_PROTOCOL_CONFIG*, dwProtocolId : UInt32, dwComponentId : UInt32, phProtocol : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MgmRegisterMProtocol(prpiInfo, dwProtocolId, dwComponentId, phProtocol)
+    {% end %}
   end
 
   def mgmDeRegisterMProtocol(hProtocol : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MgmDeRegisterMProtocol(hProtocol)
+    {% end %}
   end
 
   def mgmTakeInterfaceOwnership(hProtocol : Win32cr::Foundation::HANDLE, dwIfIndex : UInt32, dwIfNextHopAddr : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MgmTakeInterfaceOwnership(hProtocol, dwIfIndex, dwIfNextHopAddr)
+    {% end %}
   end
 
   def mgmReleaseInterfaceOwnership(hProtocol : Win32cr::Foundation::HANDLE, dwIfIndex : UInt32, dwIfNextHopAddr : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MgmReleaseInterfaceOwnership(hProtocol, dwIfIndex, dwIfNextHopAddr)
+    {% end %}
   end
 
   def mgmGetProtocolOnInterface(dwIfIndex : UInt32, dwIfNextHopAddr : UInt32, pdwIfProtocolId : UInt32*, pdwIfComponentId : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MgmGetProtocolOnInterface(dwIfIndex, dwIfNextHopAddr, pdwIfProtocolId, pdwIfComponentId)
+    {% end %}
   end
 
   def mgmAddGroupMembershipEntry(hProtocol : Win32cr::Foundation::HANDLE, dwSourceAddr : UInt32, dwSourceMask : UInt32, dwGroupAddr : UInt32, dwGroupMask : UInt32, dwIfIndex : UInt32, dwIfNextHopIPAddr : UInt32, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MgmAddGroupMembershipEntry(hProtocol, dwSourceAddr, dwSourceMask, dwGroupAddr, dwGroupMask, dwIfIndex, dwIfNextHopIPAddr, dwFlags)
+    {% end %}
   end
 
   def mgmDeleteGroupMembershipEntry(hProtocol : Win32cr::Foundation::HANDLE, dwSourceAddr : UInt32, dwSourceMask : UInt32, dwGroupAddr : UInt32, dwGroupMask : UInt32, dwIfIndex : UInt32, dwIfNextHopIPAddr : UInt32, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MgmDeleteGroupMembershipEntry(hProtocol, dwSourceAddr, dwSourceMask, dwGroupAddr, dwGroupMask, dwIfIndex, dwIfNextHopIPAddr, dwFlags)
+    {% end %}
   end
 
   def mgmGetMfe(pimm : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE*, pdwBufferSize : UInt32*, pbBuffer : UInt8*) : UInt32
+    {% if !flag?(:docs) %}
     C.MgmGetMfe(pimm, pdwBufferSize, pbBuffer)
+    {% end %}
   end
 
   def mgmGetFirstMfe(pdwBufferSize : UInt32*, pbBuffer : UInt8*, pdwNumEntries : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MgmGetFirstMfe(pdwBufferSize, pbBuffer, pdwNumEntries)
+    {% end %}
   end
 
   def mgmGetNextMfe(pimmStart : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE*, pdwBufferSize : UInt32*, pbBuffer : UInt8*, pdwNumEntries : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MgmGetNextMfe(pimmStart, pdwBufferSize, pbBuffer, pdwNumEntries)
+    {% end %}
   end
 
   def mgmGetMfeStats(pimm : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE*, pdwBufferSize : UInt32*, pbBuffer : UInt8*, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MgmGetMfeStats(pimm, pdwBufferSize, pbBuffer, dwFlags)
+    {% end %}
   end
 
   def mgmGetFirstMfeStats(pdwBufferSize : UInt32*, pbBuffer : UInt8*, pdwNumEntries : UInt32*, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MgmGetFirstMfeStats(pdwBufferSize, pbBuffer, pdwNumEntries, dwFlags)
+    {% end %}
   end
 
   def mgmGetNextMfeStats(pimmStart : Win32cr::NetworkManagement::IpHelper::MIB_IPMCAST_MFE*, pdwBufferSize : UInt32*, pbBuffer : UInt8*, pdwNumEntries : UInt32*, dwFlags : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.MgmGetNextMfeStats(pimmStart, pdwBufferSize, pbBuffer, pdwNumEntries, dwFlags)
+    {% end %}
   end
 
   def mgmGroupEnumerationStart(hProtocol : Win32cr::Foundation::HANDLE, metEnumType : Win32cr::NetworkManagement::Rras::MGM_ENUM_TYPES, phEnumHandle : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.MgmGroupEnumerationStart(hProtocol, metEnumType, phEnumHandle)
+    {% end %}
   end
 
   def mgmGroupEnumerationGetNext(hEnum : Win32cr::Foundation::HANDLE, pdwBufferSize : UInt32*, pbBuffer : UInt8*, pdwNumEntries : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.MgmGroupEnumerationGetNext(hEnum, pdwBufferSize, pbBuffer, pdwNumEntries)
+    {% end %}
   end
 
   def mgmGroupEnumerationEnd(hEnum : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.MgmGroupEnumerationEnd(hEnum)
+    {% end %}
   end
 
   def rtmConvertNetAddressToIpv6AddressAndLength(pNetAddress : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, pAddress : Win32cr::Networking::WinSock::IN6_ADDR*, pLength : UInt32*, dwAddressSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmConvertNetAddressToIpv6AddressAndLength(pNetAddress, pAddress, pLength, dwAddressSize)
+    {% end %}
   end
 
   def rtmConvertIpv6AddressAndLengthToNetAddress(pNetAddress : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, address : Win32cr::Networking::WinSock::IN6_ADDR, dwLength : UInt32, dwAddressSize : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmConvertIpv6AddressAndLengthToNetAddress(pNetAddress, address, dwLength, dwAddressSize)
+    {% end %}
   end
 
   def rtmRegisterEntity(rtm_entity_info : Win32cr::NetworkManagement::Rras::RTM_ENTITY_INFO*, export_methods : Win32cr::NetworkManagement::Rras::RTM_ENTITY_EXPORT_METHODS*, event_callback : Win32cr::NetworkManagement::Rras::RTM_EVENT_CALLBACK, reserve_opaque_pointer : Win32cr::Foundation::BOOL, rtm_reg_profile : Win32cr::NetworkManagement::Rras::RTM_REGN_PROFILE*, rtm_reg_handle : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmRegisterEntity(rtm_entity_info, export_methods, event_callback, reserve_opaque_pointer, rtm_reg_profile, rtm_reg_handle)
+    {% end %}
   end
 
   def rtmDeregisterEntity(rtm_reg_handle : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmDeregisterEntity(rtm_reg_handle)
+    {% end %}
   end
 
   def rtmGetRegisteredEntities(rtm_reg_handle : LibC::IntPtrT, num_entities : UInt32*, entity_handles : LibC::IntPtrT*, entity_infos : Win32cr::NetworkManagement::Rras::RTM_ENTITY_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetRegisteredEntities(rtm_reg_handle, num_entities, entity_handles, entity_infos)
+    {% end %}
   end
 
   def rtmReleaseEntities(rtm_reg_handle : LibC::IntPtrT, num_entities : UInt32, entity_handles : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmReleaseEntities(rtm_reg_handle, num_entities, entity_handles)
+    {% end %}
   end
 
   def rtmLockDestination(rtm_reg_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, exclusive : Win32cr::Foundation::BOOL, lock_dest : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmLockDestination(rtm_reg_handle, dest_handle, exclusive, lock_dest)
+    {% end %}
   end
 
   def rtmGetOpaqueInformationPointer(rtm_reg_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, opaque_info_pointer : Void**) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetOpaqueInformationPointer(rtm_reg_handle, dest_handle, opaque_info_pointer)
+    {% end %}
   end
 
   def rtmGetEntityMethods(rtm_reg_handle : LibC::IntPtrT, entity_handle : LibC::IntPtrT, num_methods : UInt32*, expt_methods : Win32cr::NetworkManagement::Rras::RTM_ENTITY_EXPORT_METHOD*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetEntityMethods(rtm_reg_handle, entity_handle, num_methods, expt_methods)
+    {% end %}
   end
 
   def rtmInvokeMethod(rtm_reg_handle : LibC::IntPtrT, entity_handle : LibC::IntPtrT, input : Win32cr::NetworkManagement::Rras::RTM_ENTITY_METHOD_INPUT*, output_size : UInt32*, output : Win32cr::NetworkManagement::Rras::RTM_ENTITY_METHOD_OUTPUT*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmInvokeMethod(rtm_reg_handle, entity_handle, input, output_size, output)
+    {% end %}
   end
 
   def rtmBlockMethods(rtm_reg_handle : LibC::IntPtrT, target_handle : Win32cr::Foundation::HANDLE, target_type : UInt8, blocking_flag : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmBlockMethods(rtm_reg_handle, target_handle, target_type, blocking_flag)
+    {% end %}
   end
 
   def rtmGetEntityInfo(rtm_reg_handle : LibC::IntPtrT, entity_handle : LibC::IntPtrT, entity_info : Win32cr::NetworkManagement::Rras::RTM_ENTITY_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetEntityInfo(rtm_reg_handle, entity_handle, entity_info)
+    {% end %}
   end
 
   def rtmGetDestInfo(rtm_reg_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, protocol_id : UInt32, target_views : UInt32, dest_info : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetDestInfo(rtm_reg_handle, dest_handle, protocol_id, target_views, dest_info)
+    {% end %}
   end
 
   def rtmGetRouteInfo(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT, route_info : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO*, dest_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetRouteInfo(rtm_reg_handle, route_handle, route_info, dest_address)
+    {% end %}
   end
 
   def rtmGetNextHopInfo(rtm_reg_handle : LibC::IntPtrT, next_hop_handle : LibC::IntPtrT, next_hop_info : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetNextHopInfo(rtm_reg_handle, next_hop_handle, next_hop_info)
+    {% end %}
   end
 
   def rtmReleaseEntityInfo(rtm_reg_handle : LibC::IntPtrT, entity_info : Win32cr::NetworkManagement::Rras::RTM_ENTITY_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmReleaseEntityInfo(rtm_reg_handle, entity_info)
+    {% end %}
   end
 
   def rtmReleaseDestInfo(rtm_reg_handle : LibC::IntPtrT, dest_info : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmReleaseDestInfo(rtm_reg_handle, dest_info)
+    {% end %}
   end
 
   def rtmReleaseRouteInfo(rtm_reg_handle : LibC::IntPtrT, route_info : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmReleaseRouteInfo(rtm_reg_handle, route_info)
+    {% end %}
   end
 
   def rtmReleaseNextHopInfo(rtm_reg_handle : LibC::IntPtrT, next_hop_info : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmReleaseNextHopInfo(rtm_reg_handle, next_hop_info)
+    {% end %}
   end
 
   def rtmAddRouteToDest(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT*, dest_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, route_info : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO*, time_to_live : UInt32, route_list_handle : LibC::IntPtrT, notify_type : UInt32, notify_handle : LibC::IntPtrT, change_flags : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmAddRouteToDest(rtm_reg_handle, route_handle, dest_address, route_info, time_to_live, route_list_handle, notify_type, notify_handle, change_flags)
+    {% end %}
   end
 
   def rtmDeleteRouteToDest(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT, change_flags : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmDeleteRouteToDest(rtm_reg_handle, route_handle, change_flags)
+    {% end %}
   end
 
   def rtmHoldDestination(rtm_reg_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, target_views : UInt32, hold_time : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmHoldDestination(rtm_reg_handle, dest_handle, target_views, hold_time)
+    {% end %}
   end
 
   def rtmGetRoutePointer(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT, route_pointer : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO**) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetRoutePointer(rtm_reg_handle, route_handle, route_pointer)
+    {% end %}
   end
 
   def rtmLockRoute(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT, exclusive : Win32cr::Foundation::BOOL, lock_route : Win32cr::Foundation::BOOL, route_pointer : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO**) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmLockRoute(rtm_reg_handle, route_handle, exclusive, lock_route, route_pointer)
+    {% end %}
   end
 
   def rtmUpdateAndUnlockRoute(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT, time_to_live : UInt32, route_list_handle : LibC::IntPtrT, notify_type : UInt32, notify_handle : LibC::IntPtrT, change_flags : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmUpdateAndUnlockRoute(rtm_reg_handle, route_handle, time_to_live, route_list_handle, notify_type, notify_handle, change_flags)
+    {% end %}
   end
 
   def rtmGetExactMatchDestination(rtm_reg_handle : LibC::IntPtrT, dest_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, protocol_id : UInt32, target_views : UInt32, dest_info : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetExactMatchDestination(rtm_reg_handle, dest_address, protocol_id, target_views, dest_info)
+    {% end %}
   end
 
   def rtmGetMostSpecificDestination(rtm_reg_handle : LibC::IntPtrT, dest_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, protocol_id : UInt32, target_views : UInt32, dest_info : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetMostSpecificDestination(rtm_reg_handle, dest_address, protocol_id, target_views, dest_info)
+    {% end %}
   end
 
   def rtmGetLessSpecificDestination(rtm_reg_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, protocol_id : UInt32, target_views : UInt32, dest_info : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetLessSpecificDestination(rtm_reg_handle, dest_handle, protocol_id, target_views, dest_info)
+    {% end %}
   end
 
   def rtmGetExactMatchRoute(rtm_reg_handle : LibC::IntPtrT, dest_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, matching_flags : UInt32, route_info : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO*, interface_index : UInt32, target_views : UInt32, route_handle : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetExactMatchRoute(rtm_reg_handle, dest_address, matching_flags, route_info, interface_index, target_views, route_handle)
+    {% end %}
   end
 
   def rtmIsBestRoute(rtm_reg_handle : LibC::IntPtrT, route_handle : LibC::IntPtrT, best_in_views : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmIsBestRoute(rtm_reg_handle, route_handle, best_in_views)
+    {% end %}
   end
 
   def rtmAddNextHop(rtm_reg_handle : LibC::IntPtrT, next_hop_info : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO*, next_hop_handle : LibC::IntPtrT*, change_flags : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmAddNextHop(rtm_reg_handle, next_hop_info, next_hop_handle, change_flags)
+    {% end %}
   end
 
   def rtmFindNextHop(rtm_reg_handle : LibC::IntPtrT, next_hop_info : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO*, next_hop_handle : LibC::IntPtrT*, next_hop_pointer : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO**) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmFindNextHop(rtm_reg_handle, next_hop_info, next_hop_handle, next_hop_pointer)
+    {% end %}
   end
 
   def rtmDeleteNextHop(rtm_reg_handle : LibC::IntPtrT, next_hop_handle : LibC::IntPtrT, next_hop_info : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmDeleteNextHop(rtm_reg_handle, next_hop_handle, next_hop_info)
+    {% end %}
   end
 
   def rtmGetNextHopPointer(rtm_reg_handle : LibC::IntPtrT, next_hop_handle : LibC::IntPtrT, next_hop_pointer : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO**) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetNextHopPointer(rtm_reg_handle, next_hop_handle, next_hop_pointer)
+    {% end %}
   end
 
   def rtmLockNextHop(rtm_reg_handle : LibC::IntPtrT, next_hop_handle : LibC::IntPtrT, exclusive : Win32cr::Foundation::BOOL, lock_next_hop : Win32cr::Foundation::BOOL, next_hop_pointer : Win32cr::NetworkManagement::Rras::RTM_NEXTHOP_INFO**) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmLockNextHop(rtm_reg_handle, next_hop_handle, exclusive, lock_next_hop, next_hop_pointer)
+    {% end %}
   end
 
   def rtmCreateDestEnum(rtm_reg_handle : LibC::IntPtrT, target_views : UInt32, enum_flags : UInt32, net_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, protocol_id : UInt32, rtm_enum_handle : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmCreateDestEnum(rtm_reg_handle, target_views, enum_flags, net_address, protocol_id, rtm_enum_handle)
+    {% end %}
   end
 
   def rtmGetEnumDests(rtm_reg_handle : LibC::IntPtrT, enum_handle : LibC::IntPtrT, num_dests : UInt32*, dest_infos : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetEnumDests(rtm_reg_handle, enum_handle, num_dests, dest_infos)
+    {% end %}
   end
 
   def rtmReleaseDests(rtm_reg_handle : LibC::IntPtrT, num_dests : UInt32, dest_infos : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmReleaseDests(rtm_reg_handle, num_dests, dest_infos)
+    {% end %}
   end
 
   def rtmCreateRouteEnum(rtm_reg_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, target_views : UInt32, enum_flags : UInt32, start_dest : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, matching_flags : UInt32, criteria_route : Win32cr::NetworkManagement::Rras::RTM_ROUTE_INFO*, criteria_interface : UInt32, rtm_enum_handle : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmCreateRouteEnum(rtm_reg_handle, dest_handle, target_views, enum_flags, start_dest, matching_flags, criteria_route, criteria_interface, rtm_enum_handle)
+    {% end %}
   end
 
   def rtmGetEnumRoutes(rtm_reg_handle : LibC::IntPtrT, enum_handle : LibC::IntPtrT, num_routes : UInt32*, route_handles : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetEnumRoutes(rtm_reg_handle, enum_handle, num_routes, route_handles)
+    {% end %}
   end
 
   def rtmReleaseRoutes(rtm_reg_handle : LibC::IntPtrT, num_routes : UInt32, route_handles : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmReleaseRoutes(rtm_reg_handle, num_routes, route_handles)
+    {% end %}
   end
 
   def rtmCreateNextHopEnum(rtm_reg_handle : LibC::IntPtrT, enum_flags : UInt32, net_address : Win32cr::NetworkManagement::Rras::RTM_NET_ADDRESS*, rtm_enum_handle : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmCreateNextHopEnum(rtm_reg_handle, enum_flags, net_address, rtm_enum_handle)
+    {% end %}
   end
 
   def rtmGetEnumNextHops(rtm_reg_handle : LibC::IntPtrT, enum_handle : LibC::IntPtrT, num_next_hops : UInt32*, next_hop_handles : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetEnumNextHops(rtm_reg_handle, enum_handle, num_next_hops, next_hop_handles)
+    {% end %}
   end
 
   def rtmReleaseNextHops(rtm_reg_handle : LibC::IntPtrT, num_next_hops : UInt32, next_hop_handles : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmReleaseNextHops(rtm_reg_handle, num_next_hops, next_hop_handles)
+    {% end %}
   end
 
   def rtmDeleteEnumHandle(rtm_reg_handle : LibC::IntPtrT, enum_handle : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmDeleteEnumHandle(rtm_reg_handle, enum_handle)
+    {% end %}
   end
 
   def rtmRegisterForChangeNotification(rtm_reg_handle : LibC::IntPtrT, target_views : UInt32, notify_flags : UInt32, notify_context : Void*, notify_handle : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmRegisterForChangeNotification(rtm_reg_handle, target_views, notify_flags, notify_context, notify_handle)
+    {% end %}
   end
 
   def rtmGetChangedDests(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT, num_dests : UInt32*, changed_dests : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetChangedDests(rtm_reg_handle, notify_handle, num_dests, changed_dests)
+    {% end %}
   end
 
   def rtmReleaseChangedDests(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT, num_dests : UInt32, changed_dests : Win32cr::NetworkManagement::Rras::RTM_DEST_INFO*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmReleaseChangedDests(rtm_reg_handle, notify_handle, num_dests, changed_dests)
+    {% end %}
   end
 
   def rtmIgnoreChangedDests(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT, num_dests : UInt32, changed_dests : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmIgnoreChangedDests(rtm_reg_handle, notify_handle, num_dests, changed_dests)
+    {% end %}
   end
 
   def rtmGetChangeStatus(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, change_status : Win32cr::Foundation::BOOL*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetChangeStatus(rtm_reg_handle, notify_handle, dest_handle, change_status)
+    {% end %}
   end
 
   def rtmMarkDestForChangeNotification(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, mark_dest : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmMarkDestForChangeNotification(rtm_reg_handle, notify_handle, dest_handle, mark_dest)
+    {% end %}
   end
 
   def rtmIsMarkedForChangeNotification(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT, dest_handle : LibC::IntPtrT, dest_marked : Win32cr::Foundation::BOOL*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmIsMarkedForChangeNotification(rtm_reg_handle, notify_handle, dest_handle, dest_marked)
+    {% end %}
   end
 
   def rtmDeregisterFromChangeNotification(rtm_reg_handle : LibC::IntPtrT, notify_handle : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmDeregisterFromChangeNotification(rtm_reg_handle, notify_handle)
+    {% end %}
   end
 
   def rtmCreateRouteList(rtm_reg_handle : LibC::IntPtrT, route_list_handle : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmCreateRouteList(rtm_reg_handle, route_list_handle)
+    {% end %}
   end
 
   def rtmInsertInRouteList(rtm_reg_handle : LibC::IntPtrT, route_list_handle : LibC::IntPtrT, num_routes : UInt32, route_handles : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmInsertInRouteList(rtm_reg_handle, route_list_handle, num_routes, route_handles)
+    {% end %}
   end
 
   def rtmCreateRouteListEnum(rtm_reg_handle : LibC::IntPtrT, route_list_handle : LibC::IntPtrT, rtm_enum_handle : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmCreateRouteListEnum(rtm_reg_handle, route_list_handle, rtm_enum_handle)
+    {% end %}
   end
 
   def rtmGetListEnumRoutes(rtm_reg_handle : LibC::IntPtrT, enum_handle : LibC::IntPtrT, num_routes : UInt32*, route_handles : LibC::IntPtrT*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmGetListEnumRoutes(rtm_reg_handle, enum_handle, num_routes, route_handles)
+    {% end %}
   end
 
   def rtmDeleteRouteList(rtm_reg_handle : LibC::IntPtrT, route_list_handle : LibC::IntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmDeleteRouteList(rtm_reg_handle, route_list_handle)
+    {% end %}
   end
 
   def rtmReferenceHandles(rtm_reg_handle : LibC::IntPtrT, num_handles : UInt32, rtm_handles : Win32cr::Foundation::HANDLE*) : UInt32
+    {% if !flag?(:docs) %}
     C.RtmReferenceHandles(rtm_reg_handle, num_handles, rtm_handles)
+    {% end %}
   end
 
-  @[Link("rasapi32")]
-  @[Link("rasdlg")]
-  @[Link("mprapi")]
-  @[Link("rtm")]
+  @[Link("rasapi32.dll")]
+  @[Link("rasdlg.dll")]
+  @[Link("mprapi.dll")]
+  @[Link("rtm.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun RasDialA(param0 : Win32cr::NetworkManagement::Rras::RASDIALEXTENSIONS*, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::NetworkManagement::Rras::RASDIALPARAMSA*, param3 : UInt32, param4 : Void*, param5 : Win32cr::NetworkManagement::Rras::HRASCONN*) : UInt32
@@ -5070,4 +5625,5 @@ module Win32cr::NetworkManagement::Rras
     fun RtmReferenceHandles(rtm_reg_handle : LibC::IntPtrT, num_handles : UInt32, rtm_handles : Win32cr::Foundation::HANDLE*) : UInt32
 
   end
+  {% end %}
 end

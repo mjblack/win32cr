@@ -886,1680 +886,2493 @@ module Win32cr::Graphics::OpenGL
     property cAuxBuffers : UInt8
     property iLayerPlane : UInt8
     property bReserved : UInt8
-    property crTransparent : UInt32
-    def initialize(@nSize : UInt16, @nVersion : UInt16, @dwFlags : UInt32, @iPixelType : UInt8, @cColorBits : UInt8, @cRedBits : UInt8, @cRedShift : UInt8, @cGreenBits : UInt8, @cGreenShift : UInt8, @cBlueBits : UInt8, @cBlueShift : UInt8, @cAlphaBits : UInt8, @cAlphaShift : UInt8, @cAccumBits : UInt8, @cAccumRedBits : UInt8, @cAccumGreenBits : UInt8, @cAccumBlueBits : UInt8, @cAccumAlphaBits : UInt8, @cDepthBits : UInt8, @cStencilBits : UInt8, @cAuxBuffers : UInt8, @iLayerPlane : UInt8, @bReserved : UInt8, @crTransparent : UInt32)
+    property crTransparent : Win32cr::Foundation::COLORREF
+    def initialize(@nSize : UInt16, @nVersion : UInt16, @dwFlags : UInt32, @iPixelType : UInt8, @cColorBits : UInt8, @cRedBits : UInt8, @cRedShift : UInt8, @cGreenBits : UInt8, @cGreenShift : UInt8, @cBlueBits : UInt8, @cBlueShift : UInt8, @cAlphaBits : UInt8, @cAlphaShift : UInt8, @cAccumBits : UInt8, @cAccumRedBits : UInt8, @cAccumGreenBits : UInt8, @cAccumBlueBits : UInt8, @cAccumAlphaBits : UInt8, @cDepthBits : UInt8, @cStencilBits : UInt8, @cAuxBuffers : UInt8, @iLayerPlane : UInt8, @bReserved : UInt8, @crTransparent : Win32cr::Foundation::COLORREF)
     end
   end
 
-  @[Extern]
-  struct GLUnurbs
-    def initialize()
-    end
-  end
+  alias GLUnurbs = Void
 
-  @[Extern]
-  struct GLUquadric
-    def initialize()
-    end
-  end
+  alias GLUquadric = Void
 
-  @[Extern]
-  struct GLUtesselator
-    def initialize()
-    end
-  end
+  alias GLUtesselator = Void
 
   def choosePixelFormat(hdc : Win32cr::Graphics::Gdi::HDC, ppfd : Win32cr::Graphics::OpenGL::PIXELFORMATDESCRIPTOR*) : Int32
+    {% if !flag?(:docs) %}
     C.ChoosePixelFormat(hdc, ppfd)
+    {% end %}
   end
 
   def describePixelFormat(hdc : Win32cr::Graphics::Gdi::HDC, iPixelFormat : Win32cr::Graphics::OpenGL::PFD_PIXEL_TYPE, nBytes : UInt32, ppfd : Win32cr::Graphics::OpenGL::PIXELFORMATDESCRIPTOR*) : Int32
+    {% if !flag?(:docs) %}
     C.DescribePixelFormat(hdc, iPixelFormat, nBytes, ppfd)
+    {% end %}
   end
 
   def getPixelFormat(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    {% if !flag?(:docs) %}
     C.GetPixelFormat(hdc)
+    {% end %}
   end
 
   def setPixelFormat(hdc : Win32cr::Graphics::Gdi::HDC, format : Int32, ppfd : Win32cr::Graphics::OpenGL::PIXELFORMATDESCRIPTOR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SetPixelFormat(hdc, format, ppfd)
+    {% end %}
   end
 
   def getEnhMetaFilePixelFormat(hemf : Win32cr::Graphics::Gdi::HENHMETAFILE, cbBuffer : UInt32, ppfd : Win32cr::Graphics::OpenGL::PIXELFORMATDESCRIPTOR*) : UInt32
+    {% if !flag?(:docs) %}
     C.GetEnhMetaFilePixelFormat(hemf, cbBuffer, ppfd)
+    {% end %}
   end
 
   def wglCopyContext(param0 : Win32cr::Graphics::OpenGL::HGLRC, param1 : Win32cr::Graphics::OpenGL::HGLRC, param2 : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.wglCopyContext(param0, param1, param2)
+    {% end %}
   end
 
   def wglCreateContext(param0 : Win32cr::Graphics::Gdi::HDC) : Win32cr::Graphics::OpenGL::HGLRC
+    {% if !flag?(:docs) %}
     C.wglCreateContext(param0)
+    {% end %}
   end
 
   def wglCreateLayerContext(param0 : Win32cr::Graphics::Gdi::HDC, param1 : Int32) : Win32cr::Graphics::OpenGL::HGLRC
+    {% if !flag?(:docs) %}
     C.wglCreateLayerContext(param0, param1)
+    {% end %}
   end
 
   def wglDeleteContext(param0 : Win32cr::Graphics::OpenGL::HGLRC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.wglDeleteContext(param0)
+    {% end %}
   end
 
   def wglGetCurrentContext : Win32cr::Graphics::OpenGL::HGLRC
+    {% if !flag?(:docs) %}
     C.wglGetCurrentContext
+    {% end %}
   end
 
   def wglGetCurrentDC : Win32cr::Graphics::Gdi::HDC
+    {% if !flag?(:docs) %}
     C.wglGetCurrentDC
+    {% end %}
   end
 
   def wglGetProcAddress(param0 : Win32cr::Foundation::PSTR) : Win32cr::Foundation::PROC
+    {% if !flag?(:docs) %}
     C.wglGetProcAddress(param0)
+    {% end %}
   end
 
   def wglMakeCurrent(param0 : Win32cr::Graphics::Gdi::HDC, param1 : Win32cr::Graphics::OpenGL::HGLRC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.wglMakeCurrent(param0, param1)
+    {% end %}
   end
 
   def wglShareLists(param0 : Win32cr::Graphics::OpenGL::HGLRC, param1 : Win32cr::Graphics::OpenGL::HGLRC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.wglShareLists(param0, param1)
+    {% end %}
   end
 
   def wglUseFontBitmapsA(param0 : Win32cr::Graphics::Gdi::HDC, param1 : UInt32, param2 : UInt32, param3 : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.wglUseFontBitmapsA(param0, param1, param2, param3)
+    {% end %}
   end
 
   def wglUseFontBitmapsW(param0 : Win32cr::Graphics::Gdi::HDC, param1 : UInt32, param2 : UInt32, param3 : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.wglUseFontBitmapsW(param0, param1, param2, param3)
+    {% end %}
   end
 
   def swapBuffers(param0 : Win32cr::Graphics::Gdi::HDC) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.SwapBuffers(param0)
+    {% end %}
   end
 
   def wglUseFontOutlinesA(param0 : Win32cr::Graphics::Gdi::HDC, param1 : UInt32, param2 : UInt32, param3 : UInt32, param4 : Float32, param5 : Float32, param6 : Int32, param7 : Win32cr::Graphics::OpenGL::GLYPHMETRICSFLOAT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.wglUseFontOutlinesA(param0, param1, param2, param3, param4, param5, param6, param7)
+    {% end %}
   end
 
   def wglUseFontOutlinesW(param0 : Win32cr::Graphics::Gdi::HDC, param1 : UInt32, param2 : UInt32, param3 : UInt32, param4 : Float32, param5 : Float32, param6 : Int32, param7 : Win32cr::Graphics::OpenGL::GLYPHMETRICSFLOAT*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.wglUseFontOutlinesW(param0, param1, param2, param3, param4, param5, param6, param7)
+    {% end %}
   end
 
   def wglDescribeLayerPlane(param0 : Win32cr::Graphics::Gdi::HDC, param1 : Int32, param2 : Int32, param3 : UInt32, param4 : Win32cr::Graphics::OpenGL::LAYERPLANEDESCRIPTOR*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.wglDescribeLayerPlane(param0, param1, param2, param3, param4)
+    {% end %}
   end
 
-  def wglSetLayerPaletteEntries(param0 : Win32cr::Graphics::Gdi::HDC, param1 : Int32, param2 : Int32, param3 : Int32, param4 : UInt32*) : Int32
+  def wglSetLayerPaletteEntries(param0 : Win32cr::Graphics::Gdi::HDC, param1 : Int32, param2 : Int32, param3 : Int32, param4 : Win32cr::Foundation::COLORREF*) : Int32
+    {% if !flag?(:docs) %}
     C.wglSetLayerPaletteEntries(param0, param1, param2, param3, param4)
+    {% end %}
   end
 
-  def wglGetLayerPaletteEntries(param0 : Win32cr::Graphics::Gdi::HDC, param1 : Int32, param2 : Int32, param3 : Int32, param4 : UInt32*) : Int32
+  def wglGetLayerPaletteEntries(param0 : Win32cr::Graphics::Gdi::HDC, param1 : Int32, param2 : Int32, param3 : Int32, param4 : Win32cr::Foundation::COLORREF*) : Int32
+    {% if !flag?(:docs) %}
     C.wglGetLayerPaletteEntries(param0, param1, param2, param3, param4)
+    {% end %}
   end
 
   def wglRealizeLayerPalette(param0 : Win32cr::Graphics::Gdi::HDC, param1 : Int32, param2 : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.wglRealizeLayerPalette(param0, param1, param2)
+    {% end %}
   end
 
   def wglSwapLayerBuffers(param0 : Win32cr::Graphics::Gdi::HDC, param1 : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.wglSwapLayerBuffers(param0, param1)
+    {% end %}
   end
 
   def glAccum(op : UInt32, value : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glAccum(op, value)
+    {% end %}
   end
 
   def glAlphaFunc(func : UInt32, ref : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glAlphaFunc(func, ref)
+    {% end %}
   end
 
   def glAreTexturesResident(n : Int32, textures : UInt32*, residences : UInt8*) : UInt8
+    {% if !flag?(:docs) %}
     C.glAreTexturesResident(n, textures, residences)
+    {% end %}
   end
 
   def glArrayElement(i : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glArrayElement(i)
+    {% end %}
   end
 
   def glBegin(mode : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glBegin(mode)
+    {% end %}
   end
 
   def glBindTexture(target : UInt32, texture : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glBindTexture(target, texture)
+    {% end %}
   end
 
   def glBitmap(width : Int32, height : Int32, xorig : Float32, yorig : Float32, xmove : Float32, ymove : Float32, bitmap : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.glBitmap(width, height, xorig, yorig, xmove, ymove, bitmap)
+    {% end %}
   end
 
   def glBlendFunc(sfactor : UInt32, dfactor : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glBlendFunc(sfactor, dfactor)
+    {% end %}
   end
 
   def glCallList(list : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glCallList(list)
+    {% end %}
   end
 
   def glCallLists(n : Int32, type__ : UInt32, lists : Void*) : Void
+    {% if !flag?(:docs) %}
     C.glCallLists(n, type__, lists)
+    {% end %}
   end
 
   def glClear(mask : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glClear(mask)
+    {% end %}
   end
 
   def glClearAccum(red : Float32, green : Float32, blue : Float32, alpha : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glClearAccum(red, green, blue, alpha)
+    {% end %}
   end
 
   def glClearColor(red : Float32, green : Float32, blue : Float32, alpha : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glClearColor(red, green, blue, alpha)
+    {% end %}
   end
 
   def glClearDepth(depth : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glClearDepth(depth)
+    {% end %}
   end
 
   def glClearIndex(c : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glClearIndex(c)
+    {% end %}
   end
 
   def glClearStencil(s : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glClearStencil(s)
+    {% end %}
   end
 
   def glClipPlane(plane : UInt32, equation : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glClipPlane(plane, equation)
+    {% end %}
   end
 
   def glColor3b(red : Int8, green : Int8, blue : Int8) : Void
+    {% if !flag?(:docs) %}
     C.glColor3b(red, green, blue)
+    {% end %}
   end
 
   def glColor3bv(v : Int8*) : Void
+    {% if !flag?(:docs) %}
     C.glColor3bv(v)
+    {% end %}
   end
 
   def glColor3d(red : Float64, green : Float64, blue : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glColor3d(red, green, blue)
+    {% end %}
   end
 
   def glColor3dv(v : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glColor3dv(v)
+    {% end %}
   end
 
   def glColor3f(red : Float32, green : Float32, blue : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glColor3f(red, green, blue)
+    {% end %}
   end
 
   def glColor3fv(v : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glColor3fv(v)
+    {% end %}
   end
 
   def glColor3i(red : Int32, green : Int32, blue : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glColor3i(red, green, blue)
+    {% end %}
   end
 
   def glColor3iv(v : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glColor3iv(v)
+    {% end %}
   end
 
   def glColor3s(red : Int16, green : Int16, blue : Int16) : Void
+    {% if !flag?(:docs) %}
     C.glColor3s(red, green, blue)
+    {% end %}
   end
 
   def glColor3sv(v : Int16*) : Void
+    {% if !flag?(:docs) %}
     C.glColor3sv(v)
+    {% end %}
   end
 
   def glColor3ub(red : UInt8, green : UInt8, blue : UInt8) : Void
+    {% if !flag?(:docs) %}
     C.glColor3ub(red, green, blue)
+    {% end %}
   end
 
   def glColor3ubv(v : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.glColor3ubv(v)
+    {% end %}
   end
 
   def glColor3ui(red : UInt32, green : UInt32, blue : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glColor3ui(red, green, blue)
+    {% end %}
   end
 
   def glColor3uiv(v : UInt32*) : Void
+    {% if !flag?(:docs) %}
     C.glColor3uiv(v)
+    {% end %}
   end
 
   def glColor3us(red : UInt16, green : UInt16, blue : UInt16) : Void
+    {% if !flag?(:docs) %}
     C.glColor3us(red, green, blue)
+    {% end %}
   end
 
   def glColor3usv(v : UInt16*) : Void
+    {% if !flag?(:docs) %}
     C.glColor3usv(v)
+    {% end %}
   end
 
   def glColor4b(red : Int8, green : Int8, blue : Int8, alpha : Int8) : Void
+    {% if !flag?(:docs) %}
     C.glColor4b(red, green, blue, alpha)
+    {% end %}
   end
 
   def glColor4bv(v : Int8*) : Void
+    {% if !flag?(:docs) %}
     C.glColor4bv(v)
+    {% end %}
   end
 
   def glColor4d(red : Float64, green : Float64, blue : Float64, alpha : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glColor4d(red, green, blue, alpha)
+    {% end %}
   end
 
   def glColor4dv(v : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glColor4dv(v)
+    {% end %}
   end
 
   def glColor4f(red : Float32, green : Float32, blue : Float32, alpha : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glColor4f(red, green, blue, alpha)
+    {% end %}
   end
 
   def glColor4fv(v : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glColor4fv(v)
+    {% end %}
   end
 
   def glColor4i(red : Int32, green : Int32, blue : Int32, alpha : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glColor4i(red, green, blue, alpha)
+    {% end %}
   end
 
   def glColor4iv(v : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glColor4iv(v)
+    {% end %}
   end
 
   def glColor4s(red : Int16, green : Int16, blue : Int16, alpha : Int16) : Void
+    {% if !flag?(:docs) %}
     C.glColor4s(red, green, blue, alpha)
+    {% end %}
   end
 
   def glColor4sv(v : Int16*) : Void
+    {% if !flag?(:docs) %}
     C.glColor4sv(v)
+    {% end %}
   end
 
   def glColor4ub(red : UInt8, green : UInt8, blue : UInt8, alpha : UInt8) : Void
+    {% if !flag?(:docs) %}
     C.glColor4ub(red, green, blue, alpha)
+    {% end %}
   end
 
   def glColor4ubv(v : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.glColor4ubv(v)
+    {% end %}
   end
 
   def glColor4ui(red : UInt32, green : UInt32, blue : UInt32, alpha : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glColor4ui(red, green, blue, alpha)
+    {% end %}
   end
 
   def glColor4uiv(v : UInt32*) : Void
+    {% if !flag?(:docs) %}
     C.glColor4uiv(v)
+    {% end %}
   end
 
   def glColor4us(red : UInt16, green : UInt16, blue : UInt16, alpha : UInt16) : Void
+    {% if !flag?(:docs) %}
     C.glColor4us(red, green, blue, alpha)
+    {% end %}
   end
 
   def glColor4usv(v : UInt16*) : Void
+    {% if !flag?(:docs) %}
     C.glColor4usv(v)
+    {% end %}
   end
 
   def glColorMask(red : UInt8, green : UInt8, blue : UInt8, alpha : UInt8) : Void
+    {% if !flag?(:docs) %}
     C.glColorMask(red, green, blue, alpha)
+    {% end %}
   end
 
   def glColorMaterial(face : UInt32, mode : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glColorMaterial(face, mode)
+    {% end %}
   end
 
   def glColorPointer(size : Int32, type__ : UInt32, stride : Int32, pointer : Void*) : Void
+    {% if !flag?(:docs) %}
     C.glColorPointer(size, type__, stride, pointer)
+    {% end %}
   end
 
   def glCopyPixels(x : Int32, y : Int32, width : Int32, height : Int32, type__ : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glCopyPixels(x, y, width, height, type__)
+    {% end %}
   end
 
   def glCopyTexImage1D(target : UInt32, level : Int32, internalFormat : UInt32, x : Int32, y : Int32, width : Int32, border : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glCopyTexImage1D(target, level, internalFormat, x, y, width, border)
+    {% end %}
   end
 
   def glCopyTexImage2D(target : UInt32, level : Int32, internalFormat : UInt32, x : Int32, y : Int32, width : Int32, height : Int32, border : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glCopyTexImage2D(target, level, internalFormat, x, y, width, height, border)
+    {% end %}
   end
 
   def glCopyTexSubImage1D(target : UInt32, level : Int32, xoffset : Int32, x : Int32, y : Int32, width : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glCopyTexSubImage1D(target, level, xoffset, x, y, width)
+    {% end %}
   end
 
   def glCopyTexSubImage2D(target : UInt32, level : Int32, xoffset : Int32, yoffset : Int32, x : Int32, y : Int32, width : Int32, height : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height)
+    {% end %}
   end
 
   def glCullFace(mode : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glCullFace(mode)
+    {% end %}
   end
 
   def glDeleteLists(list : UInt32, range : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glDeleteLists(list, range)
+    {% end %}
   end
 
   def glDeleteTextures(n : Int32, textures : UInt32*) : Void
+    {% if !flag?(:docs) %}
     C.glDeleteTextures(n, textures)
+    {% end %}
   end
 
   def glDepthFunc(func : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glDepthFunc(func)
+    {% end %}
   end
 
   def glDepthMask(flag : UInt8) : Void
+    {% if !flag?(:docs) %}
     C.glDepthMask(flag)
+    {% end %}
   end
 
   def glDepthRange(zNear : Float64, zFar : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glDepthRange(zNear, zFar)
+    {% end %}
   end
 
   def glDisable(cap : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glDisable(cap)
+    {% end %}
   end
 
   def glDisableClientState(array : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glDisableClientState(array)
+    {% end %}
   end
 
   def glDrawArrays(mode : UInt32, first : Int32, count : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glDrawArrays(mode, first, count)
+    {% end %}
   end
 
   def glDrawBuffer(mode : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glDrawBuffer(mode)
+    {% end %}
   end
 
   def glDrawElements(mode : UInt32, count : Int32, type__ : UInt32, indices : Void*) : Void
+    {% if !flag?(:docs) %}
     C.glDrawElements(mode, count, type__, indices)
+    {% end %}
   end
 
   def glDrawPixels(width : Int32, height : Int32, format : UInt32, type__ : UInt32, pixels : Void*) : Void
+    {% if !flag?(:docs) %}
     C.glDrawPixels(width, height, format, type__, pixels)
+    {% end %}
   end
 
   def glEdgeFlag(flag : UInt8) : Void
+    {% if !flag?(:docs) %}
     C.glEdgeFlag(flag)
+    {% end %}
   end
 
   def glEdgeFlagPointer(stride : Int32, pointer : Void*) : Void
+    {% if !flag?(:docs) %}
     C.glEdgeFlagPointer(stride, pointer)
+    {% end %}
   end
 
   def glEdgeFlagv(flag : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.glEdgeFlagv(flag)
+    {% end %}
   end
 
   def glEnable(cap : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glEnable(cap)
+    {% end %}
   end
 
   def glEnableClientState(array : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glEnableClientState(array)
+    {% end %}
   end
 
   def glEnd : Void
+    {% if !flag?(:docs) %}
     C.glEnd
+    {% end %}
   end
 
   def glEndList : Void
+    {% if !flag?(:docs) %}
     C.glEndList
+    {% end %}
   end
 
   def glEvalCoord1d(u : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glEvalCoord1d(u)
+    {% end %}
   end
 
   def glEvalCoord1dv(u : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glEvalCoord1dv(u)
+    {% end %}
   end
 
   def glEvalCoord1f(u : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glEvalCoord1f(u)
+    {% end %}
   end
 
   def glEvalCoord1fv(u : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glEvalCoord1fv(u)
+    {% end %}
   end
 
   def glEvalCoord2d(u : Float64, v : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glEvalCoord2d(u, v)
+    {% end %}
   end
 
   def glEvalCoord2dv(u : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glEvalCoord2dv(u)
+    {% end %}
   end
 
   def glEvalCoord2f(u : Float32, v : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glEvalCoord2f(u, v)
+    {% end %}
   end
 
   def glEvalCoord2fv(u : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glEvalCoord2fv(u)
+    {% end %}
   end
 
   def glEvalMesh1(mode : UInt32, i1 : Int32, i2 : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glEvalMesh1(mode, i1, i2)
+    {% end %}
   end
 
   def glEvalMesh2(mode : UInt32, i1 : Int32, i2 : Int32, j1 : Int32, j2 : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glEvalMesh2(mode, i1, i2, j1, j2)
+    {% end %}
   end
 
   def glEvalPoint1(i : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glEvalPoint1(i)
+    {% end %}
   end
 
   def glEvalPoint2(i : Int32, j : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glEvalPoint2(i, j)
+    {% end %}
   end
 
   def glFeedbackBuffer(size : Int32, type__ : UInt32, buffer : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glFeedbackBuffer(size, type__, buffer)
+    {% end %}
   end
 
   def glFinish : Void
+    {% if !flag?(:docs) %}
     C.glFinish
+    {% end %}
   end
 
   def glFlush : Void
+    {% if !flag?(:docs) %}
     C.glFlush
+    {% end %}
   end
 
   def glFogf(pname : UInt32, param1 : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glFogf(pname, param1)
+    {% end %}
   end
 
   def glFogfv(pname : UInt32, params : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glFogfv(pname, params)
+    {% end %}
   end
 
   def glFogi(pname : UInt32, param1 : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glFogi(pname, param1)
+    {% end %}
   end
 
   def glFogiv(pname : UInt32, params : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glFogiv(pname, params)
+    {% end %}
   end
 
   def glFrontFace(mode : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glFrontFace(mode)
+    {% end %}
   end
 
   def glFrustum(left : Float64, right : Float64, bottom : Float64, top : Float64, zNear : Float64, zFar : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glFrustum(left, right, bottom, top, zNear, zFar)
+    {% end %}
   end
 
   def glGenLists(range : Int32) : UInt32
+    {% if !flag?(:docs) %}
     C.glGenLists(range)
+    {% end %}
   end
 
   def glGenTextures(n : Int32, textures : UInt32*) : Void
+    {% if !flag?(:docs) %}
     C.glGenTextures(n, textures)
+    {% end %}
   end
 
   def glGetBooleanv(pname : UInt32, params : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.glGetBooleanv(pname, params)
+    {% end %}
   end
 
   def glGetClipPlane(plane : UInt32, equation : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glGetClipPlane(plane, equation)
+    {% end %}
   end
 
   def glGetDoublev(pname : UInt32, params : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glGetDoublev(pname, params)
+    {% end %}
   end
 
   def glGetError : UInt32
+    {% if !flag?(:docs) %}
     C.glGetError
+    {% end %}
   end
 
   def glGetFloatv(pname : UInt32, params : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glGetFloatv(pname, params)
+    {% end %}
   end
 
   def glGetIntegerv(pname : UInt32, params : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glGetIntegerv(pname, params)
+    {% end %}
   end
 
   def glGetLightfv(light : UInt32, pname : UInt32, params : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glGetLightfv(light, pname, params)
+    {% end %}
   end
 
   def glGetLightiv(light : UInt32, pname : UInt32, params : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glGetLightiv(light, pname, params)
+    {% end %}
   end
 
   def glGetMapdv(target : UInt32, query : UInt32, v : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glGetMapdv(target, query, v)
+    {% end %}
   end
 
   def glGetMapfv(target : UInt32, query : UInt32, v : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glGetMapfv(target, query, v)
+    {% end %}
   end
 
   def glGetMapiv(target : UInt32, query : UInt32, v : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glGetMapiv(target, query, v)
+    {% end %}
   end
 
   def glGetMaterialfv(face : UInt32, pname : UInt32, params : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glGetMaterialfv(face, pname, params)
+    {% end %}
   end
 
   def glGetMaterialiv(face : UInt32, pname : UInt32, params : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glGetMaterialiv(face, pname, params)
+    {% end %}
   end
 
   def glGetPixelMapfv(map : UInt32, values : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glGetPixelMapfv(map, values)
+    {% end %}
   end
 
   def glGetPixelMapuiv(map : UInt32, values : UInt32*) : Void
+    {% if !flag?(:docs) %}
     C.glGetPixelMapuiv(map, values)
+    {% end %}
   end
 
   def glGetPixelMapusv(map : UInt32, values : UInt16*) : Void
+    {% if !flag?(:docs) %}
     C.glGetPixelMapusv(map, values)
+    {% end %}
   end
 
   def glGetPointerv(pname : UInt32, params : Void**) : Void
+    {% if !flag?(:docs) %}
     C.glGetPointerv(pname, params)
+    {% end %}
   end
 
   def glGetPolygonStipple(mask : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.glGetPolygonStipple(mask)
+    {% end %}
   end
 
   def glGetString(name : UInt32) : UInt8*
+    {% if !flag?(:docs) %}
     C.glGetString(name)
+    {% end %}
   end
 
   def glGetTexEnvfv(target : UInt32, pname : UInt32, params : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glGetTexEnvfv(target, pname, params)
+    {% end %}
   end
 
   def glGetTexEnviv(target : UInt32, pname : UInt32, params : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glGetTexEnviv(target, pname, params)
+    {% end %}
   end
 
   def glGetTexGendv(coord : UInt32, pname : UInt32, params : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glGetTexGendv(coord, pname, params)
+    {% end %}
   end
 
   def glGetTexGenfv(coord : UInt32, pname : UInt32, params : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glGetTexGenfv(coord, pname, params)
+    {% end %}
   end
 
   def glGetTexGeniv(coord : UInt32, pname : UInt32, params : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glGetTexGeniv(coord, pname, params)
+    {% end %}
   end
 
   def glGetTexImage(target : UInt32, level : Int32, format : UInt32, type__ : UInt32, pixels : Void*) : Void
+    {% if !flag?(:docs) %}
     C.glGetTexImage(target, level, format, type__, pixels)
+    {% end %}
   end
 
   def glGetTexLevelParameterfv(target : UInt32, level : Int32, pname : UInt32, params : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glGetTexLevelParameterfv(target, level, pname, params)
+    {% end %}
   end
 
   def glGetTexLevelParameteriv(target : UInt32, level : Int32, pname : UInt32, params : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glGetTexLevelParameteriv(target, level, pname, params)
+    {% end %}
   end
 
   def glGetTexParameterfv(target : UInt32, pname : UInt32, params : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glGetTexParameterfv(target, pname, params)
+    {% end %}
   end
 
   def glGetTexParameteriv(target : UInt32, pname : UInt32, params : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glGetTexParameteriv(target, pname, params)
+    {% end %}
   end
 
   def glHint(target : UInt32, mode : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glHint(target, mode)
+    {% end %}
   end
 
   def glIndexMask(mask : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glIndexMask(mask)
+    {% end %}
   end
 
   def glIndexPointer(type__ : UInt32, stride : Int32, pointer : Void*) : Void
+    {% if !flag?(:docs) %}
     C.glIndexPointer(type__, stride, pointer)
+    {% end %}
   end
 
   def glIndexd(c : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glIndexd(c)
+    {% end %}
   end
 
   def glIndexdv(c : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glIndexdv(c)
+    {% end %}
   end
 
   def glIndexf(c : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glIndexf(c)
+    {% end %}
   end
 
   def glIndexfv(c : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glIndexfv(c)
+    {% end %}
   end
 
   def glIndexi(c : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glIndexi(c)
+    {% end %}
   end
 
   def glIndexiv(c : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glIndexiv(c)
+    {% end %}
   end
 
   def glIndexs(c : Int16) : Void
+    {% if !flag?(:docs) %}
     C.glIndexs(c)
+    {% end %}
   end
 
   def glIndexsv(c : Int16*) : Void
+    {% if !flag?(:docs) %}
     C.glIndexsv(c)
+    {% end %}
   end
 
   def glIndexub(c : UInt8) : Void
+    {% if !flag?(:docs) %}
     C.glIndexub(c)
+    {% end %}
   end
 
   def glIndexubv(c : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.glIndexubv(c)
+    {% end %}
   end
 
   def glInitNames : Void
+    {% if !flag?(:docs) %}
     C.glInitNames
+    {% end %}
   end
 
   def glInterleavedArrays(format : UInt32, stride : Int32, pointer : Void*) : Void
+    {% if !flag?(:docs) %}
     C.glInterleavedArrays(format, stride, pointer)
+    {% end %}
   end
 
   def glIsEnabled(cap : UInt32) : UInt8
+    {% if !flag?(:docs) %}
     C.glIsEnabled(cap)
+    {% end %}
   end
 
   def glIsList(list : UInt32) : UInt8
+    {% if !flag?(:docs) %}
     C.glIsList(list)
+    {% end %}
   end
 
   def glIsTexture(texture : UInt32) : UInt8
+    {% if !flag?(:docs) %}
     C.glIsTexture(texture)
+    {% end %}
   end
 
   def glLightModelf(pname : UInt32, param1 : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glLightModelf(pname, param1)
+    {% end %}
   end
 
   def glLightModelfv(pname : UInt32, params : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glLightModelfv(pname, params)
+    {% end %}
   end
 
   def glLightModeli(pname : UInt32, param1 : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glLightModeli(pname, param1)
+    {% end %}
   end
 
   def glLightModeliv(pname : UInt32, params : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glLightModeliv(pname, params)
+    {% end %}
   end
 
   def glLightf(light : UInt32, pname : UInt32, param2 : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glLightf(light, pname, param2)
+    {% end %}
   end
 
   def glLightfv(light : UInt32, pname : UInt32, params : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glLightfv(light, pname, params)
+    {% end %}
   end
 
   def glLighti(light : UInt32, pname : UInt32, param2 : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glLighti(light, pname, param2)
+    {% end %}
   end
 
   def glLightiv(light : UInt32, pname : UInt32, params : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glLightiv(light, pname, params)
+    {% end %}
   end
 
   def glLineStipple(factor : Int32, pattern : UInt16) : Void
+    {% if !flag?(:docs) %}
     C.glLineStipple(factor, pattern)
+    {% end %}
   end
 
   def glLineWidth(width : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glLineWidth(width)
+    {% end %}
   end
 
   def glListBase(base : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glListBase(base)
+    {% end %}
   end
 
   def glLoadIdentity : Void
+    {% if !flag?(:docs) %}
     C.glLoadIdentity
+    {% end %}
   end
 
   def glLoadMatrixd(m : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glLoadMatrixd(m)
+    {% end %}
   end
 
   def glLoadMatrixf(m : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glLoadMatrixf(m)
+    {% end %}
   end
 
   def glLoadName(name : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glLoadName(name)
+    {% end %}
   end
 
   def glLogicOp(opcode : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glLogicOp(opcode)
+    {% end %}
   end
 
   def glMap1d(target : UInt32, u1 : Float64, u2 : Float64, stride : Int32, order : Int32, points : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glMap1d(target, u1, u2, stride, order, points)
+    {% end %}
   end
 
   def glMap1f(target : UInt32, u1 : Float32, u2 : Float32, stride : Int32, order : Int32, points : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glMap1f(target, u1, u2, stride, order, points)
+    {% end %}
   end
 
   def glMap2d(target : UInt32, u1 : Float64, u2 : Float64, ustride : Int32, uorder : Int32, v1 : Float64, v2 : Float64, vstride : Int32, vorder : Int32, points : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glMap2d(target, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points)
+    {% end %}
   end
 
   def glMap2f(target : UInt32, u1 : Float32, u2 : Float32, ustride : Int32, uorder : Int32, v1 : Float32, v2 : Float32, vstride : Int32, vorder : Int32, points : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glMap2f(target, u1, u2, ustride, uorder, v1, v2, vstride, vorder, points)
+    {% end %}
   end
 
   def glMapGrid1d(un : Int32, u1 : Float64, u2 : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glMapGrid1d(un, u1, u2)
+    {% end %}
   end
 
   def glMapGrid1f(un : Int32, u1 : Float32, u2 : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glMapGrid1f(un, u1, u2)
+    {% end %}
   end
 
   def glMapGrid2d(un : Int32, u1 : Float64, u2 : Float64, vn : Int32, v1 : Float64, v2 : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glMapGrid2d(un, u1, u2, vn, v1, v2)
+    {% end %}
   end
 
   def glMapGrid2f(un : Int32, u1 : Float32, u2 : Float32, vn : Int32, v1 : Float32, v2 : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glMapGrid2f(un, u1, u2, vn, v1, v2)
+    {% end %}
   end
 
   def glMaterialf(face : UInt32, pname : UInt32, param2 : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glMaterialf(face, pname, param2)
+    {% end %}
   end
 
   def glMaterialfv(face : UInt32, pname : UInt32, params : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glMaterialfv(face, pname, params)
+    {% end %}
   end
 
   def glMateriali(face : UInt32, pname : UInt32, param2 : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glMateriali(face, pname, param2)
+    {% end %}
   end
 
   def glMaterialiv(face : UInt32, pname : UInt32, params : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glMaterialiv(face, pname, params)
+    {% end %}
   end
 
   def glMatrixMode(mode : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glMatrixMode(mode)
+    {% end %}
   end
 
   def glMultMatrixd(m : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glMultMatrixd(m)
+    {% end %}
   end
 
   def glMultMatrixf(m : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glMultMatrixf(m)
+    {% end %}
   end
 
   def glNewList(list : UInt32, mode : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glNewList(list, mode)
+    {% end %}
   end
 
   def glNormal3b(nx : Int8, ny : Int8, nz : Int8) : Void
+    {% if !flag?(:docs) %}
     C.glNormal3b(nx, ny, nz)
+    {% end %}
   end
 
   def glNormal3bv(v : Int8*) : Void
+    {% if !flag?(:docs) %}
     C.glNormal3bv(v)
+    {% end %}
   end
 
   def glNormal3d(nx : Float64, ny : Float64, nz : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glNormal3d(nx, ny, nz)
+    {% end %}
   end
 
   def glNormal3dv(v : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glNormal3dv(v)
+    {% end %}
   end
 
   def glNormal3f(nx : Float32, ny : Float32, nz : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glNormal3f(nx, ny, nz)
+    {% end %}
   end
 
   def glNormal3fv(v : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glNormal3fv(v)
+    {% end %}
   end
 
   def glNormal3i(nx : Int32, ny : Int32, nz : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glNormal3i(nx, ny, nz)
+    {% end %}
   end
 
   def glNormal3iv(v : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glNormal3iv(v)
+    {% end %}
   end
 
   def glNormal3s(nx : Int16, ny : Int16, nz : Int16) : Void
+    {% if !flag?(:docs) %}
     C.glNormal3s(nx, ny, nz)
+    {% end %}
   end
 
   def glNormal3sv(v : Int16*) : Void
+    {% if !flag?(:docs) %}
     C.glNormal3sv(v)
+    {% end %}
   end
 
   def glNormalPointer(type__ : UInt32, stride : Int32, pointer : Void*) : Void
+    {% if !flag?(:docs) %}
     C.glNormalPointer(type__, stride, pointer)
+    {% end %}
   end
 
   def glOrtho(left : Float64, right : Float64, bottom : Float64, top : Float64, zNear : Float64, zFar : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glOrtho(left, right, bottom, top, zNear, zFar)
+    {% end %}
   end
 
   def glPassThrough(token : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glPassThrough(token)
+    {% end %}
   end
 
   def glPixelMapfv(map : UInt32, mapsize : Int32, values : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glPixelMapfv(map, mapsize, values)
+    {% end %}
   end
 
   def glPixelMapuiv(map : UInt32, mapsize : Int32, values : UInt32*) : Void
+    {% if !flag?(:docs) %}
     C.glPixelMapuiv(map, mapsize, values)
+    {% end %}
   end
 
   def glPixelMapusv(map : UInt32, mapsize : Int32, values : UInt16*) : Void
+    {% if !flag?(:docs) %}
     C.glPixelMapusv(map, mapsize, values)
+    {% end %}
   end
 
   def glPixelStoref(pname : UInt32, param1 : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glPixelStoref(pname, param1)
+    {% end %}
   end
 
   def glPixelStorei(pname : UInt32, param1 : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glPixelStorei(pname, param1)
+    {% end %}
   end
 
   def glPixelTransferf(pname : UInt32, param1 : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glPixelTransferf(pname, param1)
+    {% end %}
   end
 
   def glPixelTransferi(pname : UInt32, param1 : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glPixelTransferi(pname, param1)
+    {% end %}
   end
 
   def glPixelZoom(xfactor : Float32, yfactor : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glPixelZoom(xfactor, yfactor)
+    {% end %}
   end
 
   def glPointSize(size : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glPointSize(size)
+    {% end %}
   end
 
   def glPolygonMode(face : UInt32, mode : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glPolygonMode(face, mode)
+    {% end %}
   end
 
   def glPolygonOffset(factor : Float32, units : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glPolygonOffset(factor, units)
+    {% end %}
   end
 
   def glPolygonStipple(mask : UInt8*) : Void
+    {% if !flag?(:docs) %}
     C.glPolygonStipple(mask)
+    {% end %}
   end
 
   def glPopAttrib : Void
+    {% if !flag?(:docs) %}
     C.glPopAttrib
+    {% end %}
   end
 
   def glPopClientAttrib : Void
+    {% if !flag?(:docs) %}
     C.glPopClientAttrib
+    {% end %}
   end
 
   def glPopMatrix : Void
+    {% if !flag?(:docs) %}
     C.glPopMatrix
+    {% end %}
   end
 
   def glPopName : Void
+    {% if !flag?(:docs) %}
     C.glPopName
+    {% end %}
   end
 
   def glPrioritizeTextures(n : Int32, textures : UInt32*, priorities : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glPrioritizeTextures(n, textures, priorities)
+    {% end %}
   end
 
   def glPushAttrib(mask : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glPushAttrib(mask)
+    {% end %}
   end
 
   def glPushClientAttrib(mask : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glPushClientAttrib(mask)
+    {% end %}
   end
 
   def glPushMatrix : Void
+    {% if !flag?(:docs) %}
     C.glPushMatrix
+    {% end %}
   end
 
   def glPushName(name : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glPushName(name)
+    {% end %}
   end
 
   def glRasterPos2d(x : Float64, y : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos2d(x, y)
+    {% end %}
   end
 
   def glRasterPos2dv(v : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos2dv(v)
+    {% end %}
   end
 
   def glRasterPos2f(x : Float32, y : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos2f(x, y)
+    {% end %}
   end
 
   def glRasterPos2fv(v : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos2fv(v)
+    {% end %}
   end
 
   def glRasterPos2i(x : Int32, y : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos2i(x, y)
+    {% end %}
   end
 
   def glRasterPos2iv(v : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos2iv(v)
+    {% end %}
   end
 
   def glRasterPos2s(x : Int16, y : Int16) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos2s(x, y)
+    {% end %}
   end
 
   def glRasterPos2sv(v : Int16*) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos2sv(v)
+    {% end %}
   end
 
   def glRasterPos3d(x : Float64, y : Float64, z : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos3d(x, y, z)
+    {% end %}
   end
 
   def glRasterPos3dv(v : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos3dv(v)
+    {% end %}
   end
 
   def glRasterPos3f(x : Float32, y : Float32, z : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos3f(x, y, z)
+    {% end %}
   end
 
   def glRasterPos3fv(v : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos3fv(v)
+    {% end %}
   end
 
   def glRasterPos3i(x : Int32, y : Int32, z : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos3i(x, y, z)
+    {% end %}
   end
 
   def glRasterPos3iv(v : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos3iv(v)
+    {% end %}
   end
 
   def glRasterPos3s(x : Int16, y : Int16, z : Int16) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos3s(x, y, z)
+    {% end %}
   end
 
   def glRasterPos3sv(v : Int16*) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos3sv(v)
+    {% end %}
   end
 
   def glRasterPos4d(x : Float64, y : Float64, z : Float64, w : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos4d(x, y, z, w)
+    {% end %}
   end
 
   def glRasterPos4dv(v : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos4dv(v)
+    {% end %}
   end
 
   def glRasterPos4f(x : Float32, y : Float32, z : Float32, w : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos4f(x, y, z, w)
+    {% end %}
   end
 
   def glRasterPos4fv(v : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos4fv(v)
+    {% end %}
   end
 
   def glRasterPos4i(x : Int32, y : Int32, z : Int32, w : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos4i(x, y, z, w)
+    {% end %}
   end
 
   def glRasterPos4iv(v : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos4iv(v)
+    {% end %}
   end
 
   def glRasterPos4s(x : Int16, y : Int16, z : Int16, w : Int16) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos4s(x, y, z, w)
+    {% end %}
   end
 
   def glRasterPos4sv(v : Int16*) : Void
+    {% if !flag?(:docs) %}
     C.glRasterPos4sv(v)
+    {% end %}
   end
 
   def glReadBuffer(mode : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glReadBuffer(mode)
+    {% end %}
   end
 
   def glReadPixels(x : Int32, y : Int32, width : Int32, height : Int32, format : UInt32, type__ : UInt32, pixels : Void*) : Void
+    {% if !flag?(:docs) %}
     C.glReadPixels(x, y, width, height, format, type__, pixels)
+    {% end %}
   end
 
   def glRectd(x1 : Float64, y1 : Float64, x2 : Float64, y2 : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glRectd(x1, y1, x2, y2)
+    {% end %}
   end
 
   def glRectdv(v1 : Float64*, v2 : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glRectdv(v1, v2)
+    {% end %}
   end
 
   def glRectf(x1 : Float32, y1 : Float32, x2 : Float32, y2 : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glRectf(x1, y1, x2, y2)
+    {% end %}
   end
 
   def glRectfv(v1 : Float32*, v2 : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glRectfv(v1, v2)
+    {% end %}
   end
 
   def glRecti(x1 : Int32, y1 : Int32, x2 : Int32, y2 : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glRecti(x1, y1, x2, y2)
+    {% end %}
   end
 
   def glRectiv(v1 : Int32*, v2 : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glRectiv(v1, v2)
+    {% end %}
   end
 
   def glRects(x1 : Int16, y1 : Int16, x2 : Int16, y2 : Int16) : Void
+    {% if !flag?(:docs) %}
     C.glRects(x1, y1, x2, y2)
+    {% end %}
   end
 
   def glRectsv(v1 : Int16*, v2 : Int16*) : Void
+    {% if !flag?(:docs) %}
     C.glRectsv(v1, v2)
+    {% end %}
   end
 
   def glRenderMode(mode : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.glRenderMode(mode)
+    {% end %}
   end
 
   def glRotated(angle : Float64, x : Float64, y : Float64, z : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glRotated(angle, x, y, z)
+    {% end %}
   end
 
   def glRotatef(angle : Float32, x : Float32, y : Float32, z : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glRotatef(angle, x, y, z)
+    {% end %}
   end
 
   def glScaled(x : Float64, y : Float64, z : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glScaled(x, y, z)
+    {% end %}
   end
 
   def glScalef(x : Float32, y : Float32, z : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glScalef(x, y, z)
+    {% end %}
   end
 
   def glScissor(x : Int32, y : Int32, width : Int32, height : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glScissor(x, y, width, height)
+    {% end %}
   end
 
   def glSelectBuffer(size : Int32, buffer : UInt32*) : Void
+    {% if !flag?(:docs) %}
     C.glSelectBuffer(size, buffer)
+    {% end %}
   end
 
   def glShadeModel(mode : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glShadeModel(mode)
+    {% end %}
   end
 
   def glStencilFunc(func : UInt32, ref : Int32, mask : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glStencilFunc(func, ref, mask)
+    {% end %}
   end
 
   def glStencilMask(mask : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glStencilMask(mask)
+    {% end %}
   end
 
   def glStencilOp(fail : UInt32, zfail : UInt32, zpass : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.glStencilOp(fail, zfail, zpass)
+    {% end %}
   end
 
   def glTexCoord1d(s : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord1d(s)
+    {% end %}
   end
 
   def glTexCoord1dv(v : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord1dv(v)
+    {% end %}
   end
 
   def glTexCoord1f(s : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord1f(s)
+    {% end %}
   end
 
   def glTexCoord1fv(v : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord1fv(v)
+    {% end %}
   end
 
   def glTexCoord1i(s : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord1i(s)
+    {% end %}
   end
 
   def glTexCoord1iv(v : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord1iv(v)
+    {% end %}
   end
 
   def glTexCoord1s(s : Int16) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord1s(s)
+    {% end %}
   end
 
   def glTexCoord1sv(v : Int16*) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord1sv(v)
+    {% end %}
   end
 
   def glTexCoord2d(s : Float64, t : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord2d(s, t)
+    {% end %}
   end
 
   def glTexCoord2dv(v : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord2dv(v)
+    {% end %}
   end
 
   def glTexCoord2f(s : Float32, t : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord2f(s, t)
+    {% end %}
   end
 
   def glTexCoord2fv(v : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord2fv(v)
+    {% end %}
   end
 
   def glTexCoord2i(s : Int32, t : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord2i(s, t)
+    {% end %}
   end
 
   def glTexCoord2iv(v : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord2iv(v)
+    {% end %}
   end
 
   def glTexCoord2s(s : Int16, t : Int16) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord2s(s, t)
+    {% end %}
   end
 
   def glTexCoord2sv(v : Int16*) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord2sv(v)
+    {% end %}
   end
 
   def glTexCoord3d(s : Float64, t : Float64, r : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord3d(s, t, r)
+    {% end %}
   end
 
   def glTexCoord3dv(v : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord3dv(v)
+    {% end %}
   end
 
   def glTexCoord3f(s : Float32, t : Float32, r : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord3f(s, t, r)
+    {% end %}
   end
 
   def glTexCoord3fv(v : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord3fv(v)
+    {% end %}
   end
 
   def glTexCoord3i(s : Int32, t : Int32, r : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord3i(s, t, r)
+    {% end %}
   end
 
   def glTexCoord3iv(v : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord3iv(v)
+    {% end %}
   end
 
   def glTexCoord3s(s : Int16, t : Int16, r : Int16) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord3s(s, t, r)
+    {% end %}
   end
 
   def glTexCoord3sv(v : Int16*) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord3sv(v)
+    {% end %}
   end
 
   def glTexCoord4d(s : Float64, t : Float64, r : Float64, q : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord4d(s, t, r, q)
+    {% end %}
   end
 
   def glTexCoord4dv(v : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord4dv(v)
+    {% end %}
   end
 
   def glTexCoord4f(s : Float32, t : Float32, r : Float32, q : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord4f(s, t, r, q)
+    {% end %}
   end
 
   def glTexCoord4fv(v : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord4fv(v)
+    {% end %}
   end
 
   def glTexCoord4i(s : Int32, t : Int32, r : Int32, q : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord4i(s, t, r, q)
+    {% end %}
   end
 
   def glTexCoord4iv(v : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord4iv(v)
+    {% end %}
   end
 
   def glTexCoord4s(s : Int16, t : Int16, r : Int16, q : Int16) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord4s(s, t, r, q)
+    {% end %}
   end
 
   def glTexCoord4sv(v : Int16*) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoord4sv(v)
+    {% end %}
   end
 
   def glTexCoordPointer(size : Int32, type__ : UInt32, stride : Int32, pointer : Void*) : Void
+    {% if !flag?(:docs) %}
     C.glTexCoordPointer(size, type__, stride, pointer)
+    {% end %}
   end
 
   def glTexEnvf(target : UInt32, pname : UInt32, param2 : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glTexEnvf(target, pname, param2)
+    {% end %}
   end
 
   def glTexEnvfv(target : UInt32, pname : UInt32, params : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glTexEnvfv(target, pname, params)
+    {% end %}
   end
 
   def glTexEnvi(target : UInt32, pname : UInt32, param2 : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glTexEnvi(target, pname, param2)
+    {% end %}
   end
 
   def glTexEnviv(target : UInt32, pname : UInt32, params : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glTexEnviv(target, pname, params)
+    {% end %}
   end
 
   def glTexGend(coord : UInt32, pname : UInt32, param2 : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glTexGend(coord, pname, param2)
+    {% end %}
   end
 
   def glTexGendv(coord : UInt32, pname : UInt32, params : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glTexGendv(coord, pname, params)
+    {% end %}
   end
 
   def glTexGenf(coord : UInt32, pname : UInt32, param2 : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glTexGenf(coord, pname, param2)
+    {% end %}
   end
 
   def glTexGenfv(coord : UInt32, pname : UInt32, params : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glTexGenfv(coord, pname, params)
+    {% end %}
   end
 
   def glTexGeni(coord : UInt32, pname : UInt32, param2 : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glTexGeni(coord, pname, param2)
+    {% end %}
   end
 
   def glTexGeniv(coord : UInt32, pname : UInt32, params : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glTexGeniv(coord, pname, params)
+    {% end %}
   end
 
   def glTexImage1D(target : UInt32, level : Int32, internalformat : Int32, width : Int32, border : Int32, format : UInt32, type__ : UInt32, pixels : Void*) : Void
+    {% if !flag?(:docs) %}
     C.glTexImage1D(target, level, internalformat, width, border, format, type__, pixels)
+    {% end %}
   end
 
   def glTexImage2D(target : UInt32, level : Int32, internalformat : Int32, width : Int32, height : Int32, border : Int32, format : UInt32, type__ : UInt32, pixels : Void*) : Void
+    {% if !flag?(:docs) %}
     C.glTexImage2D(target, level, internalformat, width, height, border, format, type__, pixels)
+    {% end %}
   end
 
   def glTexParameterf(target : UInt32, pname : UInt32, param2 : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glTexParameterf(target, pname, param2)
+    {% end %}
   end
 
   def glTexParameterfv(target : UInt32, pname : UInt32, params : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glTexParameterfv(target, pname, params)
+    {% end %}
   end
 
   def glTexParameteri(target : UInt32, pname : UInt32, param2 : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glTexParameteri(target, pname, param2)
+    {% end %}
   end
 
   def glTexParameteriv(target : UInt32, pname : UInt32, params : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glTexParameteriv(target, pname, params)
+    {% end %}
   end
 
   def glTexSubImage1D(target : UInt32, level : Int32, xoffset : Int32, width : Int32, format : UInt32, type__ : UInt32, pixels : Void*) : Void
+    {% if !flag?(:docs) %}
     C.glTexSubImage1D(target, level, xoffset, width, format, type__, pixels)
+    {% end %}
   end
 
   def glTexSubImage2D(target : UInt32, level : Int32, xoffset : Int32, yoffset : Int32, width : Int32, height : Int32, format : UInt32, type__ : UInt32, pixels : Void*) : Void
+    {% if !flag?(:docs) %}
     C.glTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type__, pixels)
+    {% end %}
   end
 
   def glTranslated(x : Float64, y : Float64, z : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glTranslated(x, y, z)
+    {% end %}
   end
 
   def glTranslatef(x : Float32, y : Float32, z : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glTranslatef(x, y, z)
+    {% end %}
   end
 
   def glVertex2d(x : Float64, y : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glVertex2d(x, y)
+    {% end %}
   end
 
   def glVertex2dv(v : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glVertex2dv(v)
+    {% end %}
   end
 
   def glVertex2f(x : Float32, y : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glVertex2f(x, y)
+    {% end %}
   end
 
   def glVertex2fv(v : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glVertex2fv(v)
+    {% end %}
   end
 
   def glVertex2i(x : Int32, y : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glVertex2i(x, y)
+    {% end %}
   end
 
   def glVertex2iv(v : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glVertex2iv(v)
+    {% end %}
   end
 
   def glVertex2s(x : Int16, y : Int16) : Void
+    {% if !flag?(:docs) %}
     C.glVertex2s(x, y)
+    {% end %}
   end
 
   def glVertex2sv(v : Int16*) : Void
+    {% if !flag?(:docs) %}
     C.glVertex2sv(v)
+    {% end %}
   end
 
   def glVertex3d(x : Float64, y : Float64, z : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glVertex3d(x, y, z)
+    {% end %}
   end
 
   def glVertex3dv(v : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glVertex3dv(v)
+    {% end %}
   end
 
   def glVertex3f(x : Float32, y : Float32, z : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glVertex3f(x, y, z)
+    {% end %}
   end
 
   def glVertex3fv(v : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glVertex3fv(v)
+    {% end %}
   end
 
   def glVertex3i(x : Int32, y : Int32, z : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glVertex3i(x, y, z)
+    {% end %}
   end
 
   def glVertex3iv(v : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glVertex3iv(v)
+    {% end %}
   end
 
   def glVertex3s(x : Int16, y : Int16, z : Int16) : Void
+    {% if !flag?(:docs) %}
     C.glVertex3s(x, y, z)
+    {% end %}
   end
 
   def glVertex3sv(v : Int16*) : Void
+    {% if !flag?(:docs) %}
     C.glVertex3sv(v)
+    {% end %}
   end
 
   def glVertex4d(x : Float64, y : Float64, z : Float64, w : Float64) : Void
+    {% if !flag?(:docs) %}
     C.glVertex4d(x, y, z, w)
+    {% end %}
   end
 
   def glVertex4dv(v : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.glVertex4dv(v)
+    {% end %}
   end
 
   def glVertex4f(x : Float32, y : Float32, z : Float32, w : Float32) : Void
+    {% if !flag?(:docs) %}
     C.glVertex4f(x, y, z, w)
+    {% end %}
   end
 
   def glVertex4fv(v : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.glVertex4fv(v)
+    {% end %}
   end
 
   def glVertex4i(x : Int32, y : Int32, z : Int32, w : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glVertex4i(x, y, z, w)
+    {% end %}
   end
 
   def glVertex4iv(v : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.glVertex4iv(v)
+    {% end %}
   end
 
   def glVertex4s(x : Int16, y : Int16, z : Int16, w : Int16) : Void
+    {% if !flag?(:docs) %}
     C.glVertex4s(x, y, z, w)
+    {% end %}
   end
 
   def glVertex4sv(v : Int16*) : Void
+    {% if !flag?(:docs) %}
     C.glVertex4sv(v)
+    {% end %}
   end
 
   def glVertexPointer(size : Int32, type__ : UInt32, stride : Int32, pointer : Void*) : Void
+    {% if !flag?(:docs) %}
     C.glVertexPointer(size, type__, stride, pointer)
+    {% end %}
   end
 
   def glViewport(x : Int32, y : Int32, width : Int32, height : Int32) : Void
+    {% if !flag?(:docs) %}
     C.glViewport(x, y, width, height)
+    {% end %}
   end
 
   def gluErrorString(errCode : UInt32) : UInt8*
+    {% if !flag?(:docs) %}
     C.gluErrorString(errCode)
+    {% end %}
   end
 
   def gluErrorUnicodeStringEXT(errCode : UInt32) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.gluErrorUnicodeStringEXT(errCode)
+    {% end %}
   end
 
   def gluGetString(name : UInt32) : UInt8*
+    {% if !flag?(:docs) %}
     C.gluGetString(name)
+    {% end %}
   end
 
   def gluOrtho2D(left : Float64, right : Float64, bottom : Float64, top : Float64) : Void
+    {% if !flag?(:docs) %}
     C.gluOrtho2D(left, right, bottom, top)
+    {% end %}
   end
 
   def gluPerspective(fovy : Float64, aspect : Float64, zNear : Float64, zFar : Float64) : Void
+    {% if !flag?(:docs) %}
     C.gluPerspective(fovy, aspect, zNear, zFar)
+    {% end %}
   end
 
   def gluPickMatrix(x : Float64, y : Float64, width : Float64, height : Float64, viewport : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.gluPickMatrix(x, y, width, height, viewport)
+    {% end %}
   end
 
   def gluLookAt(eyex : Float64, eyey : Float64, eyez : Float64, centerx : Float64, centery : Float64, centerz : Float64, upx : Float64, upy : Float64, upz : Float64) : Void
+    {% if !flag?(:docs) %}
     C.gluLookAt(eyex, eyey, eyez, centerx, centery, centerz, upx, upy, upz)
+    {% end %}
   end
 
   def gluProject(objx : Float64, objy : Float64, objz : Float64, modelMatrix : Float64*, projMatrix : Float64*, viewport : Int32*, winx : Float64*, winy : Float64*, winz : Float64*) : Int32
+    {% if !flag?(:docs) %}
     C.gluProject(objx, objy, objz, modelMatrix, projMatrix, viewport, winx, winy, winz)
+    {% end %}
   end
 
   def gluUnProject(winx : Float64, winy : Float64, winz : Float64, modelMatrix : Float64*, projMatrix : Float64*, viewport : Int32*, objx : Float64*, objy : Float64*, objz : Float64*) : Int32
+    {% if !flag?(:docs) %}
     C.gluUnProject(winx, winy, winz, modelMatrix, projMatrix, viewport, objx, objy, objz)
+    {% end %}
   end
 
   def gluScaleImage(format : UInt32, widthin : Int32, heightin : Int32, typein : UInt32, datain : Void*, widthout : Int32, heightout : Int32, typeout : UInt32, dataout : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.gluScaleImage(format, widthin, heightin, typein, datain, widthout, heightout, typeout, dataout)
+    {% end %}
   end
 
   def gluBuild1DMipmaps(target : UInt32, components : Int32, width : Int32, format : UInt32, type__ : UInt32, data : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.gluBuild1DMipmaps(target, components, width, format, type__, data)
+    {% end %}
   end
 
   def gluBuild2DMipmaps(target : UInt32, components : Int32, width : Int32, height : Int32, format : UInt32, type__ : UInt32, data : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.gluBuild2DMipmaps(target, components, width, height, format, type__, data)
+    {% end %}
   end
 
   def gluNewQuadric : Win32cr::Graphics::OpenGL::GLUquadric*
+    {% if !flag?(:docs) %}
     C.gluNewQuadric
+    {% end %}
   end
 
   def gluDeleteQuadric(state : Win32cr::Graphics::OpenGL::GLUquadric*) : Void
+    {% if !flag?(:docs) %}
     C.gluDeleteQuadric(state)
+    {% end %}
   end
 
   def gluQuadricNormals(quadObject : Win32cr::Graphics::OpenGL::GLUquadric*, normals : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.gluQuadricNormals(quadObject, normals)
+    {% end %}
   end
 
   def gluQuadricTexture(quadObject : Win32cr::Graphics::OpenGL::GLUquadric*, textureCoords : UInt8) : Void
+    {% if !flag?(:docs) %}
     C.gluQuadricTexture(quadObject, textureCoords)
+    {% end %}
   end
 
   def gluQuadricOrientation(quadObject : Win32cr::Graphics::OpenGL::GLUquadric*, orientation : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.gluQuadricOrientation(quadObject, orientation)
+    {% end %}
   end
 
   def gluQuadricDrawStyle(quadObject : Win32cr::Graphics::OpenGL::GLUquadric*, drawStyle : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.gluQuadricDrawStyle(quadObject, drawStyle)
+    {% end %}
   end
 
   def gluCylinder(qobj : Win32cr::Graphics::OpenGL::GLUquadric*, baseRadius : Float64, topRadius : Float64, height : Float64, slices : Int32, stacks : Int32) : Void
+    {% if !flag?(:docs) %}
     C.gluCylinder(qobj, baseRadius, topRadius, height, slices, stacks)
+    {% end %}
   end
 
   def gluDisk(qobj : Win32cr::Graphics::OpenGL::GLUquadric*, innerRadius : Float64, outerRadius : Float64, slices : Int32, loops : Int32) : Void
+    {% if !flag?(:docs) %}
     C.gluDisk(qobj, innerRadius, outerRadius, slices, loops)
+    {% end %}
   end
 
   def gluPartialDisk(qobj : Win32cr::Graphics::OpenGL::GLUquadric*, innerRadius : Float64, outerRadius : Float64, slices : Int32, loops : Int32, startAngle : Float64, sweepAngle : Float64) : Void
+    {% if !flag?(:docs) %}
     C.gluPartialDisk(qobj, innerRadius, outerRadius, slices, loops, startAngle, sweepAngle)
+    {% end %}
   end
 
   def gluSphere(qobj : Win32cr::Graphics::OpenGL::GLUquadric*, radius : Float64, slices : Int32, stacks : Int32) : Void
+    {% if !flag?(:docs) %}
     C.gluSphere(qobj, radius, slices, stacks)
+    {% end %}
   end
 
   def gluQuadricCallback(qobj : Win32cr::Graphics::OpenGL::GLUquadric*, which : UInt32, fn : LibC::IntPtrT) : Void
+    {% if !flag?(:docs) %}
     C.gluQuadricCallback(qobj, which, fn)
+    {% end %}
   end
 
   def gluNewTess : Win32cr::Graphics::OpenGL::GLUtesselator*
+    {% if !flag?(:docs) %}
     C.gluNewTess
+    {% end %}
   end
 
   def gluDeleteTess(tess : Win32cr::Graphics::OpenGL::GLUtesselator*) : Void
+    {% if !flag?(:docs) %}
     C.gluDeleteTess(tess)
+    {% end %}
   end
 
   def gluTessBeginPolygon(tess : Win32cr::Graphics::OpenGL::GLUtesselator*, polygon_data : Void*) : Void
+    {% if !flag?(:docs) %}
     C.gluTessBeginPolygon(tess, polygon_data)
+    {% end %}
   end
 
   def gluTessBeginContour(tess : Win32cr::Graphics::OpenGL::GLUtesselator*) : Void
+    {% if !flag?(:docs) %}
     C.gluTessBeginContour(tess)
+    {% end %}
   end
 
   def gluTessVertex(tess : Win32cr::Graphics::OpenGL::GLUtesselator*, coords : Float64*, data : Void*) : Void
+    {% if !flag?(:docs) %}
     C.gluTessVertex(tess, coords, data)
+    {% end %}
   end
 
   def gluTessEndContour(tess : Win32cr::Graphics::OpenGL::GLUtesselator*) : Void
+    {% if !flag?(:docs) %}
     C.gluTessEndContour(tess)
+    {% end %}
   end
 
   def gluTessEndPolygon(tess : Win32cr::Graphics::OpenGL::GLUtesselator*) : Void
+    {% if !flag?(:docs) %}
     C.gluTessEndPolygon(tess)
+    {% end %}
   end
 
   def gluTessProperty(tess : Win32cr::Graphics::OpenGL::GLUtesselator*, which : UInt32, value : Float64) : Void
+    {% if !flag?(:docs) %}
     C.gluTessProperty(tess, which, value)
+    {% end %}
   end
 
   def gluTessNormal(tess : Win32cr::Graphics::OpenGL::GLUtesselator*, x : Float64, y : Float64, z : Float64) : Void
+    {% if !flag?(:docs) %}
     C.gluTessNormal(tess, x, y, z)
+    {% end %}
   end
 
   def gluTessCallback(tess : Win32cr::Graphics::OpenGL::GLUtesselator*, which : UInt32, fn : LibC::IntPtrT) : Void
+    {% if !flag?(:docs) %}
     C.gluTessCallback(tess, which, fn)
+    {% end %}
   end
 
   def gluGetTessProperty(tess : Win32cr::Graphics::OpenGL::GLUtesselator*, which : UInt32, value : Float64*) : Void
+    {% if !flag?(:docs) %}
     C.gluGetTessProperty(tess, which, value)
+    {% end %}
   end
 
   def gluNewNurbsRenderer : Win32cr::Graphics::OpenGL::GLUnurbs*
+    {% if !flag?(:docs) %}
     C.gluNewNurbsRenderer
+    {% end %}
   end
 
   def gluDeleteNurbsRenderer(nobj : Win32cr::Graphics::OpenGL::GLUnurbs*) : Void
+    {% if !flag?(:docs) %}
     C.gluDeleteNurbsRenderer(nobj)
+    {% end %}
   end
 
   def gluBeginSurface(nobj : Win32cr::Graphics::OpenGL::GLUnurbs*) : Void
+    {% if !flag?(:docs) %}
     C.gluBeginSurface(nobj)
+    {% end %}
   end
 
   def gluBeginCurve(nobj : Win32cr::Graphics::OpenGL::GLUnurbs*) : Void
+    {% if !flag?(:docs) %}
     C.gluBeginCurve(nobj)
+    {% end %}
   end
 
   def gluEndCurve(nobj : Win32cr::Graphics::OpenGL::GLUnurbs*) : Void
+    {% if !flag?(:docs) %}
     C.gluEndCurve(nobj)
+    {% end %}
   end
 
   def gluEndSurface(nobj : Win32cr::Graphics::OpenGL::GLUnurbs*) : Void
+    {% if !flag?(:docs) %}
     C.gluEndSurface(nobj)
+    {% end %}
   end
 
   def gluBeginTrim(nobj : Win32cr::Graphics::OpenGL::GLUnurbs*) : Void
+    {% if !flag?(:docs) %}
     C.gluBeginTrim(nobj)
+    {% end %}
   end
 
   def gluEndTrim(nobj : Win32cr::Graphics::OpenGL::GLUnurbs*) : Void
+    {% if !flag?(:docs) %}
     C.gluEndTrim(nobj)
+    {% end %}
   end
 
   def gluPwlCurve(nobj : Win32cr::Graphics::OpenGL::GLUnurbs*, count : Int32, array : Float32*, stride : Int32, type__ : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.gluPwlCurve(nobj, count, array, stride, type__)
+    {% end %}
   end
 
   def gluNurbsCurve(nobj : Win32cr::Graphics::OpenGL::GLUnurbs*, nknots : Int32, knot : Float32*, stride : Int32, ctlarray : Float32*, order : Int32, type__ : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.gluNurbsCurve(nobj, nknots, knot, stride, ctlarray, order, type__)
+    {% end %}
   end
 
   def gluNurbsSurface(nobj : Win32cr::Graphics::OpenGL::GLUnurbs*, sknot_count : Int32, sknot : Float32*, tknot_count : Int32, tknot : Float32*, s_stride : Int32, t_stride : Int32, ctlarray : Float32*, sorder : Int32, torder : Int32, type__ : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.gluNurbsSurface(nobj, sknot_count, sknot, tknot_count, tknot, s_stride, t_stride, ctlarray, sorder, torder, type__)
+    {% end %}
   end
 
   def gluLoadSamplingMatrices(nobj : Win32cr::Graphics::OpenGL::GLUnurbs*, modelMatrix : Float32*, projMatrix : Float32*, viewport : Int32*) : Void
+    {% if !flag?(:docs) %}
     C.gluLoadSamplingMatrices(nobj, modelMatrix, projMatrix, viewport)
+    {% end %}
   end
 
   def gluNurbsProperty(nobj : Win32cr::Graphics::OpenGL::GLUnurbs*, property : UInt32, value : Float32) : Void
+    {% if !flag?(:docs) %}
     C.gluNurbsProperty(nobj, property, value)
+    {% end %}
   end
 
   def gluGetNurbsProperty(nobj : Win32cr::Graphics::OpenGL::GLUnurbs*, property : UInt32, value : Float32*) : Void
+    {% if !flag?(:docs) %}
     C.gluGetNurbsProperty(nobj, property, value)
+    {% end %}
   end
 
   def gluNurbsCallback(nobj : Win32cr::Graphics::OpenGL::GLUnurbs*, which : UInt32, fn : LibC::IntPtrT) : Void
+    {% if !flag?(:docs) %}
     C.gluNurbsCallback(nobj, which, fn)
+    {% end %}
   end
 
   def gluBeginPolygon(tess : Win32cr::Graphics::OpenGL::GLUtesselator*) : Void
+    {% if !flag?(:docs) %}
     C.gluBeginPolygon(tess)
+    {% end %}
   end
 
   def gluNextContour(tess : Win32cr::Graphics::OpenGL::GLUtesselator*, type__ : UInt32) : Void
+    {% if !flag?(:docs) %}
     C.gluNextContour(tess, type__)
+    {% end %}
   end
 
   def gluEndPolygon(tess : Win32cr::Graphics::OpenGL::GLUtesselator*) : Void
+    {% if !flag?(:docs) %}
     C.gluEndPolygon(tess)
+    {% end %}
   end
 
-  @[Link("gdi32")]
-  @[Link("opengl32")]
-  @[Link("glu32")]
+  @[Link("gdi32.dll")]
+  @[Link("opengl32.dll")]
+  @[Link("glu32.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun ChoosePixelFormat(hdc : Win32cr::Graphics::Gdi::HDC, ppfd : Win32cr::Graphics::OpenGL::PIXELFORMATDESCRIPTOR*) : Int32
@@ -2622,10 +3435,10 @@ module Win32cr::Graphics::OpenGL
     fun wglDescribeLayerPlane(param0 : Win32cr::Graphics::Gdi::HDC, param1 : Int32, param2 : Int32, param3 : UInt32, param4 : Win32cr::Graphics::OpenGL::LAYERPLANEDESCRIPTOR*) : Win32cr::Foundation::BOOL
 
     # :nodoc:
-    fun wglSetLayerPaletteEntries(param0 : Win32cr::Graphics::Gdi::HDC, param1 : Int32, param2 : Int32, param3 : Int32, param4 : UInt32*) : Int32
+    fun wglSetLayerPaletteEntries(param0 : Win32cr::Graphics::Gdi::HDC, param1 : Int32, param2 : Int32, param3 : Int32, param4 : Win32cr::Foundation::COLORREF*) : Int32
 
     # :nodoc:
-    fun wglGetLayerPaletteEntries(param0 : Win32cr::Graphics::Gdi::HDC, param1 : Int32, param2 : Int32, param3 : Int32, param4 : UInt32*) : Int32
+    fun wglGetLayerPaletteEntries(param0 : Win32cr::Graphics::Gdi::HDC, param1 : Int32, param2 : Int32, param3 : Int32, param4 : Win32cr::Foundation::COLORREF*) : Int32
 
     # :nodoc:
     fun wglRealizeLayerPalette(param0 : Win32cr::Graphics::Gdi::HDC, param1 : Int32, param2 : Win32cr::Foundation::BOOL) : Win32cr::Foundation::BOOL
@@ -3798,4 +4611,5 @@ module Win32cr::Graphics::OpenGL
     fun gluEndPolygon(tess : Win32cr::Graphics::OpenGL::GLUtesselator*) : Void
 
   end
+  {% end %}
 end

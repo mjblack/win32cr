@@ -5,57 +5,8 @@ module Win32cr::UI::Input::XboxController
   XINPUT_DLL_A = "xinput1_4.dll"
   XINPUT_DLL_W = "xinput1_4.dll"
   XINPUT_DLL = "xinput1_4.dll"
-  XINPUT_DEVTYPE_GAMEPAD = 1_u32
-  XINPUT_DEVSUBTYPE_GAMEPAD = 1_u32
-  XINPUT_DEVSUBTYPE_UNKNOWN = 0_u32
-  XINPUT_DEVSUBTYPE_WHEEL = 2_u32
-  XINPUT_DEVSUBTYPE_ARCADE_STICK = 3_u32
-  XINPUT_DEVSUBTYPE_FLIGHT_STICK = 4_u32
-  XINPUT_DEVSUBTYPE_DANCE_PAD = 5_u32
-  XINPUT_DEVSUBTYPE_GUITAR = 6_u32
-  XINPUT_DEVSUBTYPE_GUITAR_ALTERNATE = 7_u32
-  XINPUT_DEVSUBTYPE_DRUM_KIT = 8_u32
-  XINPUT_DEVSUBTYPE_GUITAR_BASS = 11_u32
-  XINPUT_DEVSUBTYPE_ARCADE_PAD = 19_u32
-  XINPUT_CAPS_VOICE_SUPPORTED = 4_u32
-  XINPUT_CAPS_FFB_SUPPORTED = 1_u32
-  XINPUT_CAPS_WIRELESS = 2_u32
-  XINPUT_CAPS_PMD_SUPPORTED = 8_u32
-  XINPUT_CAPS_NO_NAVIGATION = 16_u32
-  XINPUT_GAMEPAD_DPAD_UP = 1_u32
-  XINPUT_GAMEPAD_DPAD_DOWN = 2_u32
-  XINPUT_GAMEPAD_DPAD_LEFT = 4_u32
-  XINPUT_GAMEPAD_DPAD_RIGHT = 8_u32
-  XINPUT_GAMEPAD_START = 16_u32
-  XINPUT_GAMEPAD_BACK = 32_u32
-  XINPUT_GAMEPAD_LEFT_THUMB = 64_u32
-  XINPUT_GAMEPAD_RIGHT_THUMB = 128_u32
-  XINPUT_GAMEPAD_LEFT_SHOULDER = 256_u32
-  XINPUT_GAMEPAD_RIGHT_SHOULDER = 512_u32
-  XINPUT_GAMEPAD_A = 4096_u32
-  XINPUT_GAMEPAD_B = 8192_u32
-  XINPUT_GAMEPAD_X = 16384_u32
-  XINPUT_GAMEPAD_Y = 32768_u32
-  XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE = 7849_u32
-  XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE = 8689_u32
-  XINPUT_GAMEPAD_TRIGGER_THRESHOLD = 30_u32
-  XINPUT_FLAG_GAMEPAD = 1_u32
-  BATTERY_DEVTYPE_GAMEPAD = 0_u32
-  BATTERY_DEVTYPE_HEADSET = 1_u32
-  BATTERY_TYPE_DISCONNECTED = 0_u32
-  BATTERY_TYPE_WIRED = 1_u32
-  BATTERY_TYPE_ALKALINE = 2_u32
-  BATTERY_TYPE_NIMH = 3_u32
-  BATTERY_TYPE_UNKNOWN = 255_u32
-  BATTERY_LEVEL_EMPTY = 0_u32
-  BATTERY_LEVEL_LOW = 1_u32
-  BATTERY_LEVEL_MEDIUM = 2_u32
-  BATTERY_LEVEL_FULL = 3_u32
   XUSER_MAX_COUNT = 4_u32
   XUSER_INDEX_ANY = 255_u32
-  XINPUT_KEYSTROKE_KEYDOWN = 1_u32
-  XINPUT_KEYSTROKE_KEYUP = 2_u32
-  XINPUT_KEYSTROKE_REPEAT = 4_u32
 
   enum XINPUT_VIRTUAL_KEY : UInt16
     VK_PAD_A = 22528_u16
@@ -91,17 +42,89 @@ module Win32cr::UI::Input::XboxController
     VK_PAD_RTHUMB_DOWNRIGHT = 22582_u16
     VK_PAD_RTHUMB_DOWNLEFT = 22583_u16
   end
+  enum BATTERY_TYPE : UInt32
+    BATTERY_TYPE_DISCONNECTED = 0_u32
+    BATTERY_TYPE_WIRED = 1_u32
+    BATTERY_TYPE_ALKALINE = 2_u32
+    BATTERY_TYPE_NIMH = 3_u32
+    BATTERY_TYPE_UNKNOWN = 255_u32
+  end
+  enum BATTERY_LEVEL : UInt32
+    BATTERY_LEVEL_EMPTY = 0_u32
+    BATTERY_LEVEL_LOW = 1_u32
+    BATTERY_LEVEL_MEDIUM = 2_u32
+    BATTERY_LEVEL_FULL = 3_u32
+  end
+  enum BATTERY_DEVTYPE : UInt32
+    BATTERY_DEVTYPE_GAMEPAD = 0_u32
+    BATTERY_DEVTYPE_HEADSET = 1_u32
+  end
+  enum XINPUT_DEVTYPE : UInt32
+    XINPUT_DEVTYPE_GAMEPAD = 1_u32
+  end
+  enum XINPUT_DEVSUBTYPE : UInt32
+    XINPUT_DEVSUBTYPE_GAMEPAD = 1_u32
+    XINPUT_DEVSUBTYPE_UNKNOWN = 0_u32
+    XINPUT_DEVSUBTYPE_WHEEL = 2_u32
+    XINPUT_DEVSUBTYPE_ARCADE_STICK = 3_u32
+    XINPUT_DEVSUBTYPE_FLIGHT_STICK = 4_u32
+    XINPUT_DEVSUBTYPE_DANCE_PAD = 5_u32
+    XINPUT_DEVSUBTYPE_GUITAR = 6_u32
+    XINPUT_DEVSUBTYPE_GUITAR_ALTERNATE = 7_u32
+    XINPUT_DEVSUBTYPE_DRUM_KIT = 8_u32
+    XINPUT_DEVSUBTYPE_GUITAR_BASS = 11_u32
+    XINPUT_DEVSUBTYPE_ARCADE_PAD = 19_u32
+  end
+  @[Flags]
+  enum XINPUT_CAPABILITIES_FLAGS : UInt16
+    XINPUT_CAPS_VOICE_SUPPORTED = 4_u16
+    XINPUT_CAPS_FFB_SUPPORTED = 1_u16
+    XINPUT_CAPS_WIRELESS = 2_u16
+    XINPUT_CAPS_PMD_SUPPORTED = 8_u16
+    XINPUT_CAPS_NO_NAVIGATION = 16_u16
+  end
+  @[Flags]
+  enum XINPUT_GAMEPAD_BUTTON_FLAGS : UInt16
+    XINPUT_GAMEPAD_DPAD_UP = 1_u16
+    XINPUT_GAMEPAD_DPAD_DOWN = 2_u16
+    XINPUT_GAMEPAD_DPAD_LEFT = 4_u16
+    XINPUT_GAMEPAD_DPAD_RIGHT = 8_u16
+    XINPUT_GAMEPAD_START = 16_u16
+    XINPUT_GAMEPAD_BACK = 32_u16
+    XINPUT_GAMEPAD_LEFT_THUMB = 64_u16
+    XINPUT_GAMEPAD_RIGHT_THUMB = 128_u16
+    XINPUT_GAMEPAD_LEFT_SHOULDER = 256_u16
+    XINPUT_GAMEPAD_RIGHT_SHOULDER = 512_u16
+    XINPUT_GAMEPAD_A = 4096_u16
+    XINPUT_GAMEPAD_B = 8192_u16
+    XINPUT_GAMEPAD_X = 16384_u16
+    XINPUT_GAMEPAD_Y = 32768_u16
+    XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE = 7849_u16
+    XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE = 8689_u16
+    XINPUT_GAMEPAD_TRIGGER_THRESHOLD = 30_u16
+  end
+  @[Flags]
+  enum XINPUT_KEYSTROKE_FLAGS : UInt16
+    XINPUT_KEYSTROKE_KEYDOWN = 1_u16
+    XINPUT_KEYSTROKE_KEYUP = 2_u16
+    XINPUT_KEYSTROKE_REPEAT = 4_u16
+  end
+  @[Flags]
+  enum XINPUT_FLAG : UInt32
+    XINPUT_FLAG_ALL = 0_u32
+    XINPUT_FLAG_GAMEPAD = 1_u32
+  end
 
   @[Extern]
   struct XINPUT_GAMEPAD
-    property wButtons : UInt16
+    property wButtons : Win32cr::UI::Input::XboxController::XINPUT_GAMEPAD_BUTTON_FLAGS
     property bLeftTrigger : UInt8
     property bRightTrigger : UInt8
     property sThumbLX : Int16
     property sThumbLY : Int16
     property sThumbRX : Int16
     property sThumbRY : Int16
-    def initialize(@wButtons : UInt16, @bLeftTrigger : UInt8, @bRightTrigger : UInt8, @sThumbLX : Int16, @sThumbLY : Int16, @sThumbRX : Int16, @sThumbRY : Int16)
+    def initialize(@wButtons : Win32cr::UI::Input::XboxController::XINPUT_GAMEPAD_BUTTON_FLAGS, @bLeftTrigger : UInt8, @bRightTrigger : UInt8, @sThumbLX : Int16, @sThumbLY : Int16, @sThumbRX : Int16, @sThumbRY : Int16)
     end
   end
 
@@ -123,20 +146,20 @@ module Win32cr::UI::Input::XboxController
 
   @[Extern]
   struct XINPUT_CAPABILITIES
-    property type__ : UInt8
-    property sub_type : UInt8
-    property flags : UInt16
+    property type__ : Win32cr::UI::Input::XboxController::XINPUT_DEVTYPE
+    property sub_type : Win32cr::UI::Input::XboxController::XINPUT_DEVSUBTYPE
+    property flags : Win32cr::UI::Input::XboxController::XINPUT_CAPABILITIES_FLAGS
     property gamepad : Win32cr::UI::Input::XboxController::XINPUT_GAMEPAD
     property vibration : Win32cr::UI::Input::XboxController::XINPUT_VIBRATION
-    def initialize(@type__ : UInt8, @sub_type : UInt8, @flags : UInt16, @gamepad : Win32cr::UI::Input::XboxController::XINPUT_GAMEPAD, @vibration : Win32cr::UI::Input::XboxController::XINPUT_VIBRATION)
+    def initialize(@type__ : Win32cr::UI::Input::XboxController::XINPUT_DEVTYPE, @sub_type : Win32cr::UI::Input::XboxController::XINPUT_DEVSUBTYPE, @flags : Win32cr::UI::Input::XboxController::XINPUT_CAPABILITIES_FLAGS, @gamepad : Win32cr::UI::Input::XboxController::XINPUT_GAMEPAD, @vibration : Win32cr::UI::Input::XboxController::XINPUT_VIBRATION)
     end
   end
 
   @[Extern]
   struct XINPUT_BATTERY_INFORMATION
-    property battery_type : UInt8
-    property battery_level : UInt8
-    def initialize(@battery_type : UInt8, @battery_level : UInt8)
+    property battery_type : Win32cr::UI::Input::XboxController::BATTERY_TYPE
+    property battery_level : Win32cr::UI::Input::XboxController::BATTERY_LEVEL
+    def initialize(@battery_type : Win32cr::UI::Input::XboxController::BATTERY_TYPE, @battery_level : Win32cr::UI::Input::XboxController::BATTERY_LEVEL)
     end
   end
 
@@ -144,42 +167,57 @@ module Win32cr::UI::Input::XboxController
   struct XINPUT_KEYSTROKE
     property virtual_key : Win32cr::UI::Input::XboxController::XINPUT_VIRTUAL_KEY
     property unicode : UInt16
-    property flags : UInt16
+    property flags : Win32cr::UI::Input::XboxController::XINPUT_KEYSTROKE_FLAGS
     property user_index : UInt8
     property hid_code : UInt8
-    def initialize(@virtual_key : Win32cr::UI::Input::XboxController::XINPUT_VIRTUAL_KEY, @unicode : UInt16, @flags : UInt16, @user_index : UInt8, @hid_code : UInt8)
+    def initialize(@virtual_key : Win32cr::UI::Input::XboxController::XINPUT_VIRTUAL_KEY, @unicode : UInt16, @flags : Win32cr::UI::Input::XboxController::XINPUT_KEYSTROKE_FLAGS, @user_index : UInt8, @hid_code : UInt8)
     end
   end
 
   def xInputGetState(dwUserIndex : UInt32, pState : Win32cr::UI::Input::XboxController::XINPUT_STATE*) : UInt32
+    {% if !flag?(:docs) %}
     C.XInputGetState(dwUserIndex, pState)
+    {% end %}
   end
 
   def xInputSetState(dwUserIndex : UInt32, pVibration : Win32cr::UI::Input::XboxController::XINPUT_VIBRATION*) : UInt32
+    {% if !flag?(:docs) %}
     C.XInputSetState(dwUserIndex, pVibration)
+    {% end %}
   end
 
-  def xInputGetCapabilities(dwUserIndex : UInt32, dwFlags : UInt32, pCapabilities : Win32cr::UI::Input::XboxController::XINPUT_CAPABILITIES*) : UInt32
+  def xInputGetCapabilities(dwUserIndex : UInt32, dwFlags : Win32cr::UI::Input::XboxController::XINPUT_FLAG, pCapabilities : Win32cr::UI::Input::XboxController::XINPUT_CAPABILITIES*) : UInt32
+    {% if !flag?(:docs) %}
     C.XInputGetCapabilities(dwUserIndex, dwFlags, pCapabilities)
+    {% end %}
   end
 
   def xInputEnable(enable : Win32cr::Foundation::BOOL) : Void
+    {% if !flag?(:docs) %}
     C.XInputEnable(enable)
+    {% end %}
   end
 
   def xInputGetAudioDeviceIds(dwUserIndex : UInt32, pRenderDeviceId : UInt16*, pRenderCount : UInt32*, pCaptureDeviceId : UInt16*, pCaptureCount : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.XInputGetAudioDeviceIds(dwUserIndex, pRenderDeviceId, pRenderCount, pCaptureDeviceId, pCaptureCount)
+    {% end %}
   end
 
-  def xInputGetBatteryInformation(dwUserIndex : UInt32, devType : UInt8, pBatteryInformation : Win32cr::UI::Input::XboxController::XINPUT_BATTERY_INFORMATION*) : UInt32
+  def xInputGetBatteryInformation(dwUserIndex : UInt32, devType : Win32cr::UI::Input::XboxController::BATTERY_DEVTYPE, pBatteryInformation : Win32cr::UI::Input::XboxController::XINPUT_BATTERY_INFORMATION*) : UInt32
+    {% if !flag?(:docs) %}
     C.XInputGetBatteryInformation(dwUserIndex, devType, pBatteryInformation)
+    {% end %}
   end
 
   def xInputGetKeystroke(dwUserIndex : UInt32, dwReserved : UInt32, pKeystroke : Win32cr::UI::Input::XboxController::XINPUT_KEYSTROKE*) : UInt32
+    {% if !flag?(:docs) %}
     C.XInputGetKeystroke(dwUserIndex, dwReserved, pKeystroke)
+    {% end %}
   end
 
-  @[Link("xinputuap")]
+  @[Link("xinputuap.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun XInputGetState(dwUserIndex : UInt32, pState : Win32cr::UI::Input::XboxController::XINPUT_STATE*) : UInt32
@@ -188,7 +226,7 @@ module Win32cr::UI::Input::XboxController
     fun XInputSetState(dwUserIndex : UInt32, pVibration : Win32cr::UI::Input::XboxController::XINPUT_VIBRATION*) : UInt32
 
     # :nodoc:
-    fun XInputGetCapabilities(dwUserIndex : UInt32, dwFlags : UInt32, pCapabilities : Win32cr::UI::Input::XboxController::XINPUT_CAPABILITIES*) : UInt32
+    fun XInputGetCapabilities(dwUserIndex : UInt32, dwFlags : Win32cr::UI::Input::XboxController::XINPUT_FLAG, pCapabilities : Win32cr::UI::Input::XboxController::XINPUT_CAPABILITIES*) : UInt32
 
     # :nodoc:
     fun XInputEnable(enable : Win32cr::Foundation::BOOL) : Void
@@ -197,10 +235,11 @@ module Win32cr::UI::Input::XboxController
     fun XInputGetAudioDeviceIds(dwUserIndex : UInt32, pRenderDeviceId : UInt16*, pRenderCount : UInt32*, pCaptureDeviceId : UInt16*, pCaptureCount : UInt32*) : UInt32
 
     # :nodoc:
-    fun XInputGetBatteryInformation(dwUserIndex : UInt32, devType : UInt8, pBatteryInformation : Win32cr::UI::Input::XboxController::XINPUT_BATTERY_INFORMATION*) : UInt32
+    fun XInputGetBatteryInformation(dwUserIndex : UInt32, devType : Win32cr::UI::Input::XboxController::BATTERY_DEVTYPE, pBatteryInformation : Win32cr::UI::Input::XboxController::XINPUT_BATTERY_INFORMATION*) : UInt32
 
     # :nodoc:
     fun XInputGetKeystroke(dwUserIndex : UInt32, dwReserved : UInt32, pKeystroke : Win32cr::UI::Input::XboxController::XINPUT_KEYSTROKE*) : UInt32
 
   end
+  {% end %}
 end

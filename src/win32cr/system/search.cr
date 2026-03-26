@@ -4632,11 +4632,7 @@ module Win32cr::System::Search
     LOCKMODE_SHARED = 2_i32
   end
 
-  @[Extern]
-  struct IRowsetExactScroll
-    def initialize()
-    end
-  end
+  alias IRowsetExactScroll = Void
 
   @[Extern]
   struct TEXT_SOURCE
@@ -4867,9 +4863,9 @@ module Win32cr::System::Search
     property pwszDescription : Win32cr::Foundation::PWSTR
     property dwPropertyID : UInt32
     property dwFlags : UInt32
-    property vtType : UInt16
+    property vtType : Win32cr::System::Com::VARENUM
     property vValues : Win32cr::System::Com::VARIANT
-    def initialize(@pwszDescription : Win32cr::Foundation::PWSTR, @dwPropertyID : UInt32, @dwFlags : UInt32, @vtType : UInt16, @vValues : Win32cr::System::Com::VARIANT)
+    def initialize(@pwszDescription : Win32cr::Foundation::PWSTR, @dwPropertyID : UInt32, @dwFlags : UInt32, @vtType : Win32cr::System::Com::VARENUM, @vValues : Win32cr::System::Com::VARIANT)
     end
   end
   {% end %}
@@ -5204,9 +5200,9 @@ module Win32cr::System::Search
   @[Extern]
   struct KAGREQDIAG
     property ulDiagFlags : UInt32
-    property vt : UInt16
+    property vt : Win32cr::System::Com::VARENUM
     property sDiagField : Int16
-    def initialize(@ulDiagFlags : UInt32, @vt : UInt16, @sDiagField : Int16)
+    def initialize(@ulDiagFlags : UInt32, @vt : Win32cr::System::Com::VARENUM, @sDiagField : Int16)
     end
   end
 
@@ -5554,22 +5550,22 @@ module Win32cr::System::Search
     property anonymous2 : Anonymous2_e__Union_
     property ret_code : Int16
 
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property wszArg : Win32cr::Foundation::PWSTR
-    property szArg : Win32cr::Foundation::PSTR
-    def initialize(@wszArg : Win32cr::Foundation::PWSTR, @szArg : Win32cr::Foundation::PSTR)
-    end
-    end
-
-
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
     struct Anonymous2_e__Union_
     property wszCorrelation : Win32cr::Foundation::PWSTR
     property szCorrelation : Win32cr::Foundation::PSTR
     def initialize(@wszCorrelation : Win32cr::Foundation::PWSTR, @szCorrelation : Win32cr::Foundation::PSTR)
+    end
+    end
+
+
+    # Nested Type Anonymous1_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous1_e__Union_
+    property wszArg : Win32cr::Foundation::PWSTR
+    property szArg : Win32cr::Foundation::PSTR
+    def initialize(@wszArg : Win32cr::Foundation::PWSTR, @szArg : Win32cr::Foundation::PSTR)
     end
     end
 
@@ -5604,6 +5600,16 @@ module Win32cr::System::Search
     property unknown_type : UnknownType_
     property blob_type : BLOBType_
 
+      # Nested Type BLOBType_
+      @[Extern]
+      struct BLOBType_
+    property dbobj : Win32cr::System::Search::DBOBJECT
+    property pUnk : Void*
+    def initialize(@dbobj : Win32cr::System::Search::DBOBJECT, @pUnk : Void*)
+    end
+      end
+
+
       # Nested Type UnknownType_
       @[Extern]
       struct UnknownType_
@@ -5611,6 +5617,18 @@ module Win32cr::System::Search
     property rgMetadata : UInt8[16]
     property pUnknownData : UInt8*
     def initialize(@dwActualLength : UInt32, @rgMetadata : UInt8[16], @pUnknownData : UInt8*)
+    end
+      end
+
+
+      # Nested Type BinaryVal_
+      @[Extern]
+      struct BinaryVal_
+    property sActualLength : Int16
+    property sMaxLength : Int16
+    property prgbBinaryVal : UInt8*
+    property dwReserved : UInt32
+    def initialize(@sActualLength : Int16, @sMaxLength : Int16, @prgbBinaryVal : UInt8*, @dwReserved : UInt32)
     end
       end
 
@@ -5629,16 +5647,6 @@ module Win32cr::System::Search
       end
 
 
-      # Nested Type BLOBType_
-      @[Extern]
-      struct BLOBType_
-    property dbobj : Win32cr::System::Search::DBOBJECT
-    property pUnk : Void*
-    def initialize(@dbobj : Win32cr::System::Search::DBOBJECT, @pUnk : Void*)
-    end
-      end
-
-
       # Nested Type NCharVal_
       @[Extern]
       struct NCharVal_
@@ -5649,18 +5657,6 @@ module Win32cr::System::Search
     property dwReserved : UInt32
     property pwchReserved : Win32cr::Foundation::PWSTR
     def initialize(@sActualLength : Int16, @sMaxLength : Int16, @pwchNCharVal : Win32cr::Foundation::PWSTR, @rgbReserved : UInt8[5], @dwReserved : UInt32, @pwchReserved : Win32cr::Foundation::PWSTR)
-    end
-      end
-
-
-      # Nested Type BinaryVal_
-      @[Extern]
-      struct BinaryVal_
-    property sActualLength : Int16
-    property sMaxLength : Int16
-    property prgbBinaryVal : UInt8*
-    property dwReserved : UInt32
-    def initialize(@sActualLength : Int16, @sMaxLength : Int16, @prgbBinaryVal : UInt8*, @dwReserved : UInt32)
     end
       end
 
@@ -5856,9 +5852,9 @@ module Win32cr::System::Search
     property pwszDescription : Win32cr::Foundation::PWSTR
     property dwPropertyID : UInt32
     property dwFlags : UInt32
-    property vtType : UInt16
+    property vtType : Win32cr::System::Com::VARENUM
     property vValues : Win32cr::System::Com::VARIANT
-    def initialize(@pwszDescription : Win32cr::Foundation::PWSTR, @dwPropertyID : UInt32, @dwFlags : UInt32, @vtType : UInt16, @vValues : Win32cr::System::Com::VARIANT)
+    def initialize(@pwszDescription : Win32cr::Foundation::PWSTR, @dwPropertyID : UInt32, @dwFlags : UInt32, @vtType : Win32cr::System::Com::VARENUM, @vValues : Win32cr::System::Com::VARIANT)
     end
   end
   {% end %}
@@ -6066,7 +6062,7 @@ module Win32cr::System::Search
   {% end %}
 
   @[Extern]
-  record IWordSinkVtbl,
+  record IWordSinkVtable,
     query_interface : Proc(IWordSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWordSink*, UInt32),
     release : Proc(IWordSink*, UInt32),
@@ -6078,7 +6074,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IWordSink, lpVtbl : IWordSinkVtbl* do
+  record IWordSink, lpVtbl : IWordSinkVtable* do
     GUID = LibC::GUID.new(0xcc907054_u32, 0xc058_u16, 0x101a_u16, StaticArray[0xb5_u8, 0x54_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x33_u8, 0xb0_u8, 0xe6_u8])
     def query_interface(this : IWordSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6108,7 +6104,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IWordBreakerVtbl,
+  record IWordBreakerVtable,
     query_interface : Proc(IWordBreaker*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWordBreaker*, UInt32),
     release : Proc(IWordBreaker*, UInt32),
@@ -6119,7 +6115,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IWordBreaker, lpVtbl : IWordBreakerVtbl* do
+  record IWordBreaker, lpVtbl : IWordBreakerVtable* do
     GUID = LibC::GUID.new(0xd53552c8_u32, 0x77e3_u16, 0x101a_u16, StaticArray[0xb5_u8, 0x52_u8, 0x8_u8, 0x0_u8, 0x2b_u8, 0x33_u8, 0xb0_u8, 0xe6_u8])
     def query_interface(this : IWordBreaker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6146,7 +6142,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IWordFormSinkVtbl,
+  record IWordFormSinkVtable,
     query_interface : Proc(IWordFormSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWordFormSink*, UInt32),
     release : Proc(IWordFormSink*, UInt32),
@@ -6155,7 +6151,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IWordFormSink, lpVtbl : IWordFormSinkVtbl* do
+  record IWordFormSink, lpVtbl : IWordFormSinkVtable* do
     GUID = LibC::GUID.new(0xfe77c330_u32, 0x7f42_u16, 0x11ce_u16, StaticArray[0xbe_u8, 0x57_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x51_u8, 0xfe_u8, 0x20_u8])
     def query_interface(this : IWordFormSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6176,7 +6172,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IStemmerVtbl,
+  record IStemmerVtable,
     query_interface : Proc(IStemmer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStemmer*, UInt32),
     release : Proc(IStemmer*, UInt32),
@@ -6186,7 +6182,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IStemmer, lpVtbl : IStemmerVtbl* do
+  record IStemmer, lpVtbl : IStemmerVtable* do
     GUID = LibC::GUID.new(0xefbaf140_u32, 0x7f42_u16, 0x11ce_u16, StaticArray[0xbe_u8, 0x57_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x51_u8, 0xfe_u8, 0x20_u8])
     def query_interface(this : IStemmer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6210,7 +6206,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISimpleCommandCreatorVtbl,
+  record ISimpleCommandCreatorVtable,
     query_interface : Proc(ISimpleCommandCreator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISimpleCommandCreator*, UInt32),
     release : Proc(ISimpleCommandCreator*, UInt32),
@@ -6220,7 +6216,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISimpleCommandCreator, lpVtbl : ISimpleCommandCreatorVtbl* do
+  record ISimpleCommandCreator, lpVtbl : ISimpleCommandCreatorVtable* do
     GUID = LibC::GUID.new(0x5e341ab7_u32, 0x2d0_u16, 0x11d1_u16, StaticArray[0x90_u8, 0xc_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x6_u8, 0x37_u8, 0x96_u8])
     def query_interface(this : ISimpleCommandCreator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6244,7 +6240,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IColumnMapperVtbl,
+  record IColumnMapperVtable,
     query_interface : Proc(IColumnMapper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IColumnMapper*, UInt32),
     release : Proc(IColumnMapper*, UInt32),
@@ -6255,7 +6251,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IColumnMapper, lpVtbl : IColumnMapperVtbl* do
+  record IColumnMapper, lpVtbl : IColumnMapperVtable* do
     GUID = LibC::GUID.new(0xb63e37a_u32, 0x9ccc_u16, 0x11d0_u16, StaticArray[0xbc_u8, 0xdb_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xcc_u8, 0xce_u8, 0x4_u8])
     def query_interface(this : IColumnMapper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6282,7 +6278,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IColumnMapperCreatorVtbl,
+  record IColumnMapperCreatorVtable,
     query_interface : Proc(IColumnMapperCreator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IColumnMapperCreator*, UInt32),
     release : Proc(IColumnMapperCreator*, UInt32),
@@ -6290,7 +6286,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IColumnMapperCreator, lpVtbl : IColumnMapperCreatorVtbl* do
+  record IColumnMapperCreator, lpVtbl : IColumnMapperCreatorVtable* do
     GUID = LibC::GUID.new(0xb63e37b_u32, 0x9ccc_u16, 0x11d0_u16, StaticArray[0xbc_u8, 0xdb_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xcc_u8, 0xce_u8, 0x4_u8])
     def query_interface(this : IColumnMapperCreator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6308,7 +6304,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ILoadFilterVtbl,
+  record ILoadFilterVtable,
     query_interface : Proc(ILoadFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILoadFilter*, UInt32),
     release : Proc(ILoadFilter*, UInt32),
@@ -6318,7 +6314,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ILoadFilter, lpVtbl : ILoadFilterVtbl* do
+  record ILoadFilter, lpVtbl : ILoadFilterVtable* do
     GUID = LibC::GUID.new(0xc7310722_u32, 0xac80_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xf3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xef_u8, 0x4f_u8])
     def query_interface(this : ILoadFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6342,7 +6338,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ILoadFilterWithPrivateComActivationVtbl,
+  record ILoadFilterWithPrivateComActivationVtable,
     query_interface : Proc(ILoadFilterWithPrivateComActivation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILoadFilterWithPrivateComActivation*, UInt32),
     release : Proc(ILoadFilterWithPrivateComActivation*, UInt32),
@@ -6353,7 +6349,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ILoadFilterWithPrivateComActivation, lpVtbl : ILoadFilterWithPrivateComActivationVtbl* do
+  record ILoadFilterWithPrivateComActivation, lpVtbl : ILoadFilterWithPrivateComActivationVtable* do
     GUID = LibC::GUID.new(0x40bdbd34_u32, 0x780b_u16, 0x48d3_u16, StaticArray[0x9b_u8, 0xb6_u8, 0x12_u8, 0xeb_u8, 0xd4_u8, 0xad_u8, 0x2e_u8, 0x75_u8])
     def query_interface(this : ILoadFilterWithPrivateComActivation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6380,7 +6376,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRichChunkVtbl,
+  record IRichChunkVtable,
     query_interface : Proc(IRichChunk*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRichChunk*, UInt32),
     release : Proc(IRichChunk*, UInt32),
@@ -6388,7 +6384,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRichChunk, lpVtbl : IRichChunkVtbl* do
+  record IRichChunk, lpVtbl : IRichChunkVtable* do
     GUID = LibC::GUID.new(0x4fdef69c_u32, 0xdbc9_u16, 0x454e_u16, StaticArray[0x99_u8, 0x10_u8, 0xb3_u8, 0x4f_u8, 0x3c_u8, 0x64_u8, 0xb5_u8, 0x10_u8])
     def query_interface(this : IRichChunk*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6406,7 +6402,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IConditionVtbl,
+  record IConditionVtable,
     query_interface : Proc(ICondition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICondition*, UInt32),
     release : Proc(ICondition*, UInt32),
@@ -6425,7 +6421,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ICondition, lpVtbl : IConditionVtbl* do
+  record ICondition, lpVtbl : IConditionVtable* do
     GUID = LibC::GUID.new(0xfc988d4_u32, 0xc935_u16, 0x4b97_u16, StaticArray[0xa9_u8, 0x73_u8, 0x46_u8, 0x28_u8, 0x2e_u8, 0xa1_u8, 0x75_u8, 0xc8_u8])
     def query_interface(this : ICondition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6476,7 +6472,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ICondition2Vtbl,
+  record ICondition2Vtable,
     query_interface : Proc(ICondition2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICondition2*, UInt32),
     release : Proc(ICondition2*, UInt32),
@@ -6497,7 +6493,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ICondition2, lpVtbl : ICondition2Vtbl* do
+  record ICondition2, lpVtbl : ICondition2Vtable* do
     GUID = LibC::GUID.new(0xdb8851d_u32, 0x2e5b_u16, 0x47eb_u16, StaticArray[0x92_u8, 0x8_u8, 0xd2_u8, 0x8c_u8, 0x32_u8, 0x5a_u8, 0x1_u8, 0xd7_u8])
     def query_interface(this : ICondition2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6554,7 +6550,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IAccessorVtbl,
+  record IAccessorVtable,
     query_interface : Proc(IAccessor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAccessor*, UInt32),
     release : Proc(IAccessor*, UInt32),
@@ -6565,7 +6561,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IAccessor, lpVtbl : IAccessorVtbl* do
+  record IAccessor, lpVtbl : IAccessorVtable* do
     GUID = LibC::GUID.new(0xc733a8c_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IAccessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6592,7 +6588,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetVtbl,
+  record IRowsetVtable,
     query_interface : Proc(IRowset*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowset*, UInt32),
     release : Proc(IRowset*, UInt32),
@@ -6604,7 +6600,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowset, lpVtbl : IRowsetVtbl* do
+  record IRowset, lpVtbl : IRowsetVtable* do
     GUID = LibC::GUID.new(0xc733a7c_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowset*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6634,7 +6630,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetInfoVtbl,
+  record IRowsetInfoVtable,
     query_interface : Proc(IRowsetInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetInfo*, UInt32),
     release : Proc(IRowsetInfo*, UInt32),
@@ -6644,7 +6640,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetInfo, lpVtbl : IRowsetInfoVtbl* do
+  record IRowsetInfo, lpVtbl : IRowsetInfoVtable* do
     GUID = LibC::GUID.new(0xc733a55_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6668,7 +6664,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetLocateVtbl,
+  record IRowsetLocateVtable,
     query_interface : Proc(IRowsetLocate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetLocate*, UInt32),
     release : Proc(IRowsetLocate*, UInt32),
@@ -6684,7 +6680,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetLocate, lpVtbl : IRowsetLocateVtbl* do
+  record IRowsetLocate, lpVtbl : IRowsetLocateVtable* do
     GUID = LibC::GUID.new(0xc733a7d_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetLocate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6726,7 +6722,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetResynchVtbl,
+  record IRowsetResynchVtable,
     query_interface : Proc(IRowsetResynch*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetResynch*, UInt32),
     release : Proc(IRowsetResynch*, UInt32),
@@ -6735,7 +6731,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetResynch, lpVtbl : IRowsetResynchVtbl* do
+  record IRowsetResynch, lpVtbl : IRowsetResynchVtable* do
     GUID = LibC::GUID.new(0xc733a84_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetResynch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6756,7 +6752,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetScrollVtbl,
+  record IRowsetScrollVtable,
     query_interface : Proc(IRowsetScroll*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetScroll*, UInt32),
     release : Proc(IRowsetScroll*, UInt32),
@@ -6774,7 +6770,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetScroll, lpVtbl : IRowsetScrollVtbl* do
+  record IRowsetScroll, lpVtbl : IRowsetScrollVtable* do
     GUID = LibC::GUID.new(0xc733a7e_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetScroll*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6822,7 +6818,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IChapteredRowsetVtbl,
+  record IChapteredRowsetVtable,
     query_interface : Proc(IChapteredRowset*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IChapteredRowset*, UInt32),
     release : Proc(IChapteredRowset*, UInt32),
@@ -6831,7 +6827,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IChapteredRowset, lpVtbl : IChapteredRowsetVtbl* do
+  record IChapteredRowset, lpVtbl : IChapteredRowsetVtable* do
     GUID = LibC::GUID.new(0xc733a93_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IChapteredRowset*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6852,7 +6848,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetFindVtbl,
+  record IRowsetFindVtable,
     query_interface : Proc(IRowsetFind*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetFind*, UInt32),
     release : Proc(IRowsetFind*, UInt32),
@@ -6860,7 +6856,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetFind, lpVtbl : IRowsetFindVtbl* do
+  record IRowsetFind, lpVtbl : IRowsetFindVtable* do
     GUID = LibC::GUID.new(0xc733a9d_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetFind*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6878,7 +6874,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowPositionVtbl,
+  record IRowPositionVtable,
     query_interface : Proc(IRowPosition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowPosition*, UInt32),
     release : Proc(IRowPosition*, UInt32),
@@ -6890,7 +6886,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowPosition, lpVtbl : IRowPositionVtbl* do
+  record IRowPosition, lpVtbl : IRowPositionVtable* do
     GUID = LibC::GUID.new(0xc733a94_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowPosition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6920,7 +6916,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowPositionChangeVtbl,
+  record IRowPositionChangeVtable,
     query_interface : Proc(IRowPositionChange*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowPositionChange*, UInt32),
     release : Proc(IRowPositionChange*, UInt32),
@@ -6928,7 +6924,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowPositionChange, lpVtbl : IRowPositionChangeVtbl* do
+  record IRowPositionChange, lpVtbl : IRowPositionChangeVtable* do
     GUID = LibC::GUID.new(0x997a571_u32, 0x126e_u16, 0x11d0_u16, StaticArray[0x9f_u8, 0x8a_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa0_u8, 0x63_u8, 0x1e_u8])
     def query_interface(this : IRowPositionChange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6946,7 +6942,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IViewRowsetVtbl,
+  record IViewRowsetVtable,
     query_interface : Proc(IViewRowset*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IViewRowset*, UInt32),
     release : Proc(IViewRowset*, UInt32),
@@ -6955,7 +6951,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IViewRowset, lpVtbl : IViewRowsetVtbl* do
+  record IViewRowset, lpVtbl : IViewRowsetVtable* do
     GUID = LibC::GUID.new(0xc733a97_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IViewRowset*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6976,7 +6972,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IViewChapterVtbl,
+  record IViewChapterVtable,
     query_interface : Proc(IViewChapter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IViewChapter*, UInt32),
     release : Proc(IViewChapter*, UInt32),
@@ -6985,7 +6981,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IViewChapter, lpVtbl : IViewChapterVtbl* do
+  record IViewChapter, lpVtbl : IViewChapterVtable* do
     GUID = LibC::GUID.new(0xc733a98_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IViewChapter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7006,7 +7002,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IViewSortVtbl,
+  record IViewSortVtable,
     query_interface : Proc(IViewSort*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IViewSort*, UInt32),
     release : Proc(IViewSort*, UInt32),
@@ -7015,7 +7011,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IViewSort, lpVtbl : IViewSortVtbl* do
+  record IViewSort, lpVtbl : IViewSortVtable* do
     GUID = LibC::GUID.new(0xc733a9a_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IViewSort*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7036,7 +7032,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IViewFilterVtbl,
+  record IViewFilterVtable,
     query_interface : Proc(IViewFilter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IViewFilter*, UInt32),
     release : Proc(IViewFilter*, UInt32),
@@ -7046,7 +7042,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IViewFilter, lpVtbl : IViewFilterVtbl* do
+  record IViewFilter, lpVtbl : IViewFilterVtable* do
     GUID = LibC::GUID.new(0xc733a9b_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IViewFilter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7070,7 +7066,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetViewVtbl,
+  record IRowsetViewVtable,
     query_interface : Proc(IRowsetView*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetView*, UInt32),
     release : Proc(IRowsetView*, UInt32),
@@ -7079,7 +7075,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetView, lpVtbl : IRowsetViewVtbl* do
+  record IRowsetView, lpVtbl : IRowsetViewVtable* do
     GUID = LibC::GUID.new(0xc733a99_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetView*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7100,7 +7096,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetChangeVtbl,
+  record IRowsetChangeVtable,
     query_interface : Proc(IRowsetChange*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetChange*, UInt32),
     release : Proc(IRowsetChange*, UInt32),
@@ -7110,7 +7106,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetChange, lpVtbl : IRowsetChangeVtbl* do
+  record IRowsetChange, lpVtbl : IRowsetChangeVtable* do
     GUID = LibC::GUID.new(0xc733a05_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetChange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7134,7 +7130,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetUpdateVtbl,
+  record IRowsetUpdateVtable,
     query_interface : Proc(IRowsetUpdate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetUpdate*, UInt32),
     release : Proc(IRowsetUpdate*, UInt32),
@@ -7149,7 +7145,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetUpdate, lpVtbl : IRowsetUpdateVtbl* do
+  record IRowsetUpdate, lpVtbl : IRowsetUpdateVtable* do
     GUID = LibC::GUID.new(0xc733a6d_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetUpdate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7188,7 +7184,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetIdentityVtbl,
+  record IRowsetIdentityVtable,
     query_interface : Proc(IRowsetIdentity*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetIdentity*, UInt32),
     release : Proc(IRowsetIdentity*, UInt32),
@@ -7196,7 +7192,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetIdentity, lpVtbl : IRowsetIdentityVtbl* do
+  record IRowsetIdentity, lpVtbl : IRowsetIdentityVtable* do
     GUID = LibC::GUID.new(0xc733a09_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetIdentity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7214,7 +7210,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetNotifyVtbl,
+  record IRowsetNotifyVtable,
     query_interface : Proc(IRowsetNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetNotify*, UInt32),
     release : Proc(IRowsetNotify*, UInt32),
@@ -7224,7 +7220,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetNotify, lpVtbl : IRowsetNotifyVtbl* do
+  record IRowsetNotify, lpVtbl : IRowsetNotifyVtable* do
     GUID = LibC::GUID.new(0xc733a83_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7248,7 +7244,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetIndexVtbl,
+  record IRowsetIndexVtable,
     query_interface : Proc(IRowsetIndex*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetIndex*, UInt32),
     release : Proc(IRowsetIndex*, UInt32),
@@ -7258,7 +7254,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetIndex, lpVtbl : IRowsetIndexVtbl* do
+  record IRowsetIndex, lpVtbl : IRowsetIndexVtable* do
     GUID = LibC::GUID.new(0xc733a82_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetIndex*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7282,7 +7278,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ICommandVtbl,
+  record ICommandVtable,
     query_interface : Proc(ICommand*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICommand*, UInt32),
     release : Proc(ICommand*, UInt32),
@@ -7292,7 +7288,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ICommand, lpVtbl : ICommandVtbl* do
+  record ICommand, lpVtbl : ICommandVtable* do
     GUID = LibC::GUID.new(0xc733a63_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ICommand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7316,7 +7312,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IMultipleResultsVtbl,
+  record IMultipleResultsVtable,
     query_interface : Proc(IMultipleResults*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMultipleResults*, UInt32),
     release : Proc(IMultipleResults*, UInt32),
@@ -7324,7 +7320,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IMultipleResults, lpVtbl : IMultipleResultsVtbl* do
+  record IMultipleResults, lpVtbl : IMultipleResultsVtable* do
     GUID = LibC::GUID.new(0xc733a90_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IMultipleResults*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7342,7 +7338,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IConvertTypeVtbl,
+  record IConvertTypeVtable,
     query_interface : Proc(IConvertType*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IConvertType*, UInt32),
     release : Proc(IConvertType*, UInt32),
@@ -7350,7 +7346,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IConvertType, lpVtbl : IConvertTypeVtbl* do
+  record IConvertType, lpVtbl : IConvertTypeVtable* do
     GUID = LibC::GUID.new(0xc733a88_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IConvertType*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7368,7 +7364,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ICommandPrepareVtbl,
+  record ICommandPrepareVtable,
     query_interface : Proc(ICommandPrepare*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICommandPrepare*, UInt32),
     release : Proc(ICommandPrepare*, UInt32),
@@ -7377,7 +7373,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ICommandPrepare, lpVtbl : ICommandPrepareVtbl* do
+  record ICommandPrepare, lpVtbl : ICommandPrepareVtable* do
     GUID = LibC::GUID.new(0xc733a26_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ICommandPrepare*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7398,7 +7394,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ICommandPropertiesVtbl,
+  record ICommandPropertiesVtable,
     query_interface : Proc(ICommandProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICommandProperties*, UInt32),
     release : Proc(ICommandProperties*, UInt32),
@@ -7407,7 +7403,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ICommandProperties, lpVtbl : ICommandPropertiesVtbl* do
+  record ICommandProperties, lpVtbl : ICommandPropertiesVtable* do
     GUID = LibC::GUID.new(0xc733a79_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ICommandProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7428,7 +7424,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ICommandTextVtbl,
+  record ICommandTextVtable,
     query_interface : Proc(ICommandText*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICommandText*, UInt32),
     release : Proc(ICommandText*, UInt32),
@@ -7440,7 +7436,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ICommandText, lpVtbl : ICommandTextVtbl* do
+  record ICommandText, lpVtbl : ICommandTextVtable* do
     GUID = LibC::GUID.new(0xc733a27_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ICommandText*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7470,7 +7466,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ICommandWithParametersVtbl,
+  record ICommandWithParametersVtable,
     query_interface : Proc(ICommandWithParameters*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICommandWithParameters*, UInt32),
     release : Proc(ICommandWithParameters*, UInt32),
@@ -7480,7 +7476,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ICommandWithParameters, lpVtbl : ICommandWithParametersVtbl* do
+  record ICommandWithParameters, lpVtbl : ICommandWithParametersVtable* do
     GUID = LibC::GUID.new(0xc733a64_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ICommandWithParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7504,7 +7500,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IColumnsRowsetVtbl,
+  record IColumnsRowsetVtable,
     query_interface : Proc(IColumnsRowset*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IColumnsRowset*, UInt32),
     release : Proc(IColumnsRowset*, UInt32),
@@ -7513,7 +7509,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IColumnsRowset, lpVtbl : IColumnsRowsetVtbl* do
+  record IColumnsRowset, lpVtbl : IColumnsRowsetVtable* do
     GUID = LibC::GUID.new(0xc733a10_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IColumnsRowset*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7534,7 +7530,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IColumnsInfoVtbl,
+  record IColumnsInfoVtable,
     query_interface : Proc(IColumnsInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IColumnsInfo*, UInt32),
     release : Proc(IColumnsInfo*, UInt32),
@@ -7543,7 +7539,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IColumnsInfo, lpVtbl : IColumnsInfoVtbl* do
+  record IColumnsInfo, lpVtbl : IColumnsInfoVtable* do
     GUID = LibC::GUID.new(0xc733a11_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IColumnsInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7564,7 +7560,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IDBCreateCommandVtbl,
+  record IDBCreateCommandVtable,
     query_interface : Proc(IDBCreateCommand*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDBCreateCommand*, UInt32),
     release : Proc(IDBCreateCommand*, UInt32),
@@ -7572,7 +7568,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IDBCreateCommand, lpVtbl : IDBCreateCommandVtbl* do
+  record IDBCreateCommand, lpVtbl : IDBCreateCommandVtable* do
     GUID = LibC::GUID.new(0xc733a1d_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IDBCreateCommand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7590,7 +7586,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IDBCreateSessionVtbl,
+  record IDBCreateSessionVtable,
     query_interface : Proc(IDBCreateSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDBCreateSession*, UInt32),
     release : Proc(IDBCreateSession*, UInt32),
@@ -7598,7 +7594,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IDBCreateSession, lpVtbl : IDBCreateSessionVtbl* do
+  record IDBCreateSession, lpVtbl : IDBCreateSessionVtable* do
     GUID = LibC::GUID.new(0xc733a5d_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IDBCreateSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7616,7 +7612,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISourcesRowsetVtbl,
+  record ISourcesRowsetVtable,
     query_interface : Proc(ISourcesRowset*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISourcesRowset*, UInt32),
     release : Proc(ISourcesRowset*, UInt32),
@@ -7624,7 +7620,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISourcesRowset, lpVtbl : ISourcesRowsetVtbl* do
+  record ISourcesRowset, lpVtbl : ISourcesRowsetVtable* do
     GUID = LibC::GUID.new(0xc733a1e_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ISourcesRowset*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7642,7 +7638,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IDBPropertiesVtbl,
+  record IDBPropertiesVtable,
     query_interface : Proc(IDBProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDBProperties*, UInt32),
     release : Proc(IDBProperties*, UInt32),
@@ -7652,7 +7648,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IDBProperties, lpVtbl : IDBPropertiesVtbl* do
+  record IDBProperties, lpVtbl : IDBPropertiesVtable* do
     GUID = LibC::GUID.new(0xc733a8a_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IDBProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7676,7 +7672,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IDBInitializeVtbl,
+  record IDBInitializeVtable,
     query_interface : Proc(IDBInitialize*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDBInitialize*, UInt32),
     release : Proc(IDBInitialize*, UInt32),
@@ -7685,7 +7681,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IDBInitialize, lpVtbl : IDBInitializeVtbl* do
+  record IDBInitialize, lpVtbl : IDBInitializeVtable* do
     GUID = LibC::GUID.new(0xc733a8b_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IDBInitialize*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7706,7 +7702,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IDBInfoVtbl,
+  record IDBInfoVtable,
     query_interface : Proc(IDBInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDBInfo*, UInt32),
     release : Proc(IDBInfo*, UInt32),
@@ -7715,7 +7711,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IDBInfo, lpVtbl : IDBInfoVtbl* do
+  record IDBInfo, lpVtbl : IDBInfoVtable* do
     GUID = LibC::GUID.new(0xc733a89_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IDBInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7736,7 +7732,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IDBDataSourceAdminVtbl,
+  record IDBDataSourceAdminVtable,
     query_interface : Proc(IDBDataSourceAdmin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDBDataSourceAdmin*, UInt32),
     release : Proc(IDBDataSourceAdmin*, UInt32),
@@ -7747,7 +7743,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IDBDataSourceAdmin, lpVtbl : IDBDataSourceAdminVtbl* do
+  record IDBDataSourceAdmin, lpVtbl : IDBDataSourceAdminVtable* do
     GUID = LibC::GUID.new(0xc733a7a_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IDBDataSourceAdmin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7774,7 +7770,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IDBAsynchNotifyVtbl,
+  record IDBAsynchNotifyVtable,
     query_interface : Proc(IDBAsynchNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDBAsynchNotify*, UInt32),
     release : Proc(IDBAsynchNotify*, UInt32),
@@ -7784,7 +7780,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IDBAsynchNotify, lpVtbl : IDBAsynchNotifyVtbl* do
+  record IDBAsynchNotify, lpVtbl : IDBAsynchNotifyVtable* do
     GUID = LibC::GUID.new(0xc733a96_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IDBAsynchNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7808,7 +7804,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IDBAsynchStatusVtbl,
+  record IDBAsynchStatusVtable,
     query_interface : Proc(IDBAsynchStatus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDBAsynchStatus*, UInt32),
     release : Proc(IDBAsynchStatus*, UInt32),
@@ -7817,7 +7813,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IDBAsynchStatus, lpVtbl : IDBAsynchStatusVtbl* do
+  record IDBAsynchStatus, lpVtbl : IDBAsynchStatusVtable* do
     GUID = LibC::GUID.new(0xc733a95_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IDBAsynchStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7838,7 +7834,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISessionPropertiesVtbl,
+  record ISessionPropertiesVtable,
     query_interface : Proc(ISessionProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISessionProperties*, UInt32),
     release : Proc(ISessionProperties*, UInt32),
@@ -7847,7 +7843,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISessionProperties, lpVtbl : ISessionPropertiesVtbl* do
+  record ISessionProperties, lpVtbl : ISessionPropertiesVtable* do
     GUID = LibC::GUID.new(0xc733a85_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ISessionProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7868,7 +7864,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IIndexDefinitionVtbl,
+  record IIndexDefinitionVtable,
     query_interface : Proc(IIndexDefinition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIndexDefinition*, UInt32),
     release : Proc(IIndexDefinition*, UInt32),
@@ -7877,7 +7873,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IIndexDefinition, lpVtbl : IIndexDefinitionVtbl* do
+  record IIndexDefinition, lpVtbl : IIndexDefinitionVtable* do
     GUID = LibC::GUID.new(0xc733a68_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IIndexDefinition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7898,7 +7894,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ITableDefinitionVtbl,
+  record ITableDefinitionVtable,
     query_interface : Proc(ITableDefinition*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITableDefinition*, UInt32),
     release : Proc(ITableDefinition*, UInt32),
@@ -7909,7 +7905,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ITableDefinition, lpVtbl : ITableDefinitionVtbl* do
+  record ITableDefinition, lpVtbl : ITableDefinitionVtable* do
     GUID = LibC::GUID.new(0xc733a86_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ITableDefinition*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7936,7 +7932,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IOpenRowsetVtbl,
+  record IOpenRowsetVtable,
     query_interface : Proc(IOpenRowset*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpenRowset*, UInt32),
     release : Proc(IOpenRowset*, UInt32),
@@ -7944,7 +7940,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IOpenRowset, lpVtbl : IOpenRowsetVtbl* do
+  record IOpenRowset, lpVtbl : IOpenRowsetVtable* do
     GUID = LibC::GUID.new(0xc733a69_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IOpenRowset*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7962,7 +7958,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IDBSchemaRowsetVtbl,
+  record IDBSchemaRowsetVtable,
     query_interface : Proc(IDBSchemaRowset*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDBSchemaRowset*, UInt32),
     release : Proc(IDBSchemaRowset*, UInt32),
@@ -7971,7 +7967,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IDBSchemaRowset, lpVtbl : IDBSchemaRowsetVtbl* do
+  record IDBSchemaRowset, lpVtbl : IDBSchemaRowsetVtable* do
     GUID = LibC::GUID.new(0xc733a7b_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IDBSchemaRowset*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7992,7 +7988,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IMDDatasetVtbl,
+  record IMDDatasetVtable,
     query_interface : Proc(IMDDataset*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDDataset*, UInt32),
     release : Proc(IMDDataset*, UInt32),
@@ -8004,7 +8000,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IMDDataset, lpVtbl : IMDDatasetVtbl* do
+  record IMDDataset, lpVtbl : IMDDatasetVtable* do
     GUID = LibC::GUID.new(0xa07cccd1_u32, 0x8148_u16, 0x11d0_u16, StaticArray[0x87_u8, 0xbb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x39_u8, 0x42_u8])
     def query_interface(this : IMDDataset*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8034,7 +8030,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IMDFindVtbl,
+  record IMDFindVtable,
     query_interface : Proc(IMDFind*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDFind*, UInt32),
     release : Proc(IMDFind*, UInt32),
@@ -8043,7 +8039,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IMDFind, lpVtbl : IMDFindVtbl* do
+  record IMDFind, lpVtbl : IMDFindVtable* do
     GUID = LibC::GUID.new(0xa07cccd2_u32, 0x8148_u16, 0x11d0_u16, StaticArray[0x87_u8, 0xbb_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc3_u8, 0x39_u8, 0x42_u8])
     def query_interface(this : IMDFind*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8064,7 +8060,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IMDRangeRowsetVtbl,
+  record IMDRangeRowsetVtable,
     query_interface : Proc(IMDRangeRowset*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMDRangeRowset*, UInt32),
     release : Proc(IMDRangeRowset*, UInt32),
@@ -8072,7 +8068,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IMDRangeRowset, lpVtbl : IMDRangeRowsetVtbl* do
+  record IMDRangeRowset, lpVtbl : IMDRangeRowsetVtable* do
     GUID = LibC::GUID.new(0xc733aa0_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IMDRangeRowset*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8090,7 +8086,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IAlterTableVtbl,
+  record IAlterTableVtable,
     query_interface : Proc(IAlterTable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAlterTable*, UInt32),
     release : Proc(IAlterTable*, UInt32),
@@ -8099,7 +8095,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IAlterTable, lpVtbl : IAlterTableVtbl* do
+  record IAlterTable, lpVtbl : IAlterTableVtable* do
     GUID = LibC::GUID.new(0xc733aa5_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IAlterTable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8120,7 +8116,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IAlterIndexVtbl,
+  record IAlterIndexVtable,
     query_interface : Proc(IAlterIndex*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAlterIndex*, UInt32),
     release : Proc(IAlterIndex*, UInt32),
@@ -8128,7 +8124,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IAlterIndex, lpVtbl : IAlterIndexVtbl* do
+  record IAlterIndex, lpVtbl : IAlterIndexVtable* do
     GUID = LibC::GUID.new(0xc733aa6_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IAlterIndex*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8146,7 +8142,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetChapterMemberVtbl,
+  record IRowsetChapterMemberVtable,
     query_interface : Proc(IRowsetChapterMember*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetChapterMember*, UInt32),
     release : Proc(IRowsetChapterMember*, UInt32),
@@ -8154,7 +8150,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetChapterMember, lpVtbl : IRowsetChapterMemberVtbl* do
+  record IRowsetChapterMember, lpVtbl : IRowsetChapterMemberVtable* do
     GUID = LibC::GUID.new(0xc733aa8_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetChapterMember*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8172,7 +8168,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ICommandPersistVtbl,
+  record ICommandPersistVtable,
     query_interface : Proc(ICommandPersist*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICommandPersist*, UInt32),
     release : Proc(ICommandPersist*, UInt32),
@@ -8183,7 +8179,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ICommandPersist, lpVtbl : ICommandPersistVtbl* do
+  record ICommandPersist, lpVtbl : ICommandPersistVtable* do
     GUID = LibC::GUID.new(0xc733aa7_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ICommandPersist*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8210,7 +8206,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetRefreshVtbl,
+  record IRowsetRefreshVtable,
     query_interface : Proc(IRowsetRefresh*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetRefresh*, UInt32),
     release : Proc(IRowsetRefresh*, UInt32),
@@ -8219,7 +8215,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetRefresh, lpVtbl : IRowsetRefreshVtbl* do
+  record IRowsetRefresh, lpVtbl : IRowsetRefreshVtable* do
     GUID = LibC::GUID.new(0xc733aa9_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetRefresh*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8240,7 +8236,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IParentRowsetVtbl,
+  record IParentRowsetVtable,
     query_interface : Proc(IParentRowset*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IParentRowset*, UInt32),
     release : Proc(IParentRowset*, UInt32),
@@ -8248,7 +8244,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IParentRowset, lpVtbl : IParentRowsetVtbl* do
+  record IParentRowset, lpVtbl : IParentRowsetVtable* do
     GUID = LibC::GUID.new(0xc733aaa_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IParentRowset*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8266,7 +8262,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IErrorRecordsVtbl,
+  record IErrorRecordsVtable,
     query_interface : Proc(IErrorRecords*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IErrorRecords*, UInt32),
     release : Proc(IErrorRecords*, UInt32),
@@ -8279,7 +8275,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IErrorRecords, lpVtbl : IErrorRecordsVtbl* do
+  record IErrorRecords, lpVtbl : IErrorRecordsVtable* do
     GUID = LibC::GUID.new(0xc733a67_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IErrorRecords*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8312,7 +8308,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IErrorLookupVtbl,
+  record IErrorLookupVtable,
     query_interface : Proc(IErrorLookup*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IErrorLookup*, UInt32),
     release : Proc(IErrorLookup*, UInt32),
@@ -8322,7 +8318,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IErrorLookup, lpVtbl : IErrorLookupVtbl* do
+  record IErrorLookup, lpVtbl : IErrorLookupVtable* do
     GUID = LibC::GUID.new(0xc733a66_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IErrorLookup*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8346,7 +8342,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISQLErrorInfoVtbl,
+  record ISQLErrorInfoVtable,
     query_interface : Proc(ISQLErrorInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISQLErrorInfo*, UInt32),
     release : Proc(ISQLErrorInfo*, UInt32),
@@ -8354,7 +8350,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISQLErrorInfo, lpVtbl : ISQLErrorInfoVtbl* do
+  record ISQLErrorInfo, lpVtbl : ISQLErrorInfoVtable* do
     GUID = LibC::GUID.new(0xc733a74_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ISQLErrorInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8372,7 +8368,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IGetDataSourceVtbl,
+  record IGetDataSourceVtable,
     query_interface : Proc(IGetDataSource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGetDataSource*, UInt32),
     release : Proc(IGetDataSource*, UInt32),
@@ -8380,7 +8376,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IGetDataSource, lpVtbl : IGetDataSourceVtbl* do
+  record IGetDataSource, lpVtbl : IGetDataSourceVtable* do
     GUID = LibC::GUID.new(0xc733a75_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IGetDataSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8398,7 +8394,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ITransactionLocalVtbl,
+  record ITransactionLocalVtable,
     query_interface : Proc(ITransactionLocal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITransactionLocal*, UInt32),
     release : Proc(ITransactionLocal*, UInt32),
@@ -8410,7 +8406,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ITransactionLocal, lpVtbl : ITransactionLocalVtbl* do
+  record ITransactionLocal, lpVtbl : ITransactionLocalVtable* do
     GUID = LibC::GUID.new(0xc733a5f_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ITransactionLocal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8440,7 +8436,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ITransactionJoinVtbl,
+  record ITransactionJoinVtable,
     query_interface : Proc(ITransactionJoin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITransactionJoin*, UInt32),
     release : Proc(ITransactionJoin*, UInt32),
@@ -8449,7 +8445,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ITransactionJoin, lpVtbl : ITransactionJoinVtbl* do
+  record ITransactionJoin, lpVtbl : ITransactionJoinVtable* do
     GUID = LibC::GUID.new(0xc733a5e_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ITransactionJoin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8470,7 +8466,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ITransactionObjectVtbl,
+  record ITransactionObjectVtable,
     query_interface : Proc(ITransactionObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITransactionObject*, UInt32),
     release : Proc(ITransactionObject*, UInt32),
@@ -8478,7 +8474,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ITransactionObject, lpVtbl : ITransactionObjectVtbl* do
+  record ITransactionObject, lpVtbl : ITransactionObjectVtable* do
     GUID = LibC::GUID.new(0xc733a60_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ITransactionObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8496,7 +8492,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ITrusteeAdminVtbl,
+  record ITrusteeAdminVtable,
     query_interface : Proc(ITrusteeAdmin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITrusteeAdmin*, UInt32),
     release : Proc(ITrusteeAdmin*, UInt32),
@@ -8508,7 +8504,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ITrusteeAdmin, lpVtbl : ITrusteeAdminVtbl* do
+  record ITrusteeAdmin, lpVtbl : ITrusteeAdminVtable* do
     GUID = LibC::GUID.new(0xc733aa1_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ITrusteeAdmin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8538,7 +8534,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ITrusteeGroupAdminVtbl,
+  record ITrusteeGroupAdminVtable,
     query_interface : Proc(ITrusteeGroupAdmin*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITrusteeGroupAdmin*, UInt32),
     release : Proc(ITrusteeGroupAdmin*, UInt32),
@@ -8550,7 +8546,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ITrusteeGroupAdmin, lpVtbl : ITrusteeGroupAdminVtbl* do
+  record ITrusteeGroupAdmin, lpVtbl : ITrusteeGroupAdminVtable* do
     GUID = LibC::GUID.new(0xc733aa2_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ITrusteeGroupAdmin*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8580,7 +8576,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IObjectAccessControlVtbl,
+  record IObjectAccessControlVtable,
     query_interface : Proc(IObjectAccessControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IObjectAccessControl*, UInt32),
     release : Proc(IObjectAccessControl*, UInt32),
@@ -8592,7 +8588,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IObjectAccessControl, lpVtbl : IObjectAccessControlVtbl* do
+  record IObjectAccessControl, lpVtbl : IObjectAccessControlVtable* do
     GUID = LibC::GUID.new(0xc733aa3_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IObjectAccessControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8622,7 +8618,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISecurityInfoVtbl,
+  record ISecurityInfoVtable,
     query_interface : Proc(ISecurityInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISecurityInfo*, UInt32),
     release : Proc(ISecurityInfo*, UInt32),
@@ -8632,7 +8628,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISecurityInfo, lpVtbl : ISecurityInfoVtbl* do
+  record ISecurityInfo, lpVtbl : ISecurityInfoVtable* do
     GUID = LibC::GUID.new(0xc733aa4_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ISecurityInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8656,7 +8652,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ITableCreationVtbl,
+  record ITableCreationVtable,
     query_interface : Proc(ITableCreation*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITableCreation*, UInt32),
     release : Proc(ITableCreation*, UInt32),
@@ -8668,7 +8664,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ITableCreation, lpVtbl : ITableCreationVtbl* do
+  record ITableCreation, lpVtbl : ITableCreationVtable* do
     GUID = LibC::GUID.new(0xc733abc_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ITableCreation*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8698,7 +8694,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ITableDefinitionWithConstraintsVtbl,
+  record ITableDefinitionWithConstraintsVtable,
     query_interface : Proc(ITableDefinitionWithConstraints*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITableDefinitionWithConstraints*, UInt32),
     release : Proc(ITableDefinitionWithConstraints*, UInt32),
@@ -8713,7 +8709,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ITableDefinitionWithConstraints, lpVtbl : ITableDefinitionWithConstraintsVtbl* do
+  record ITableDefinitionWithConstraints, lpVtbl : ITableDefinitionWithConstraintsVtable* do
     GUID = LibC::GUID.new(0xc733aab_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ITableDefinitionWithConstraints*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8752,7 +8748,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowVtbl,
+  record IRowVtable,
     query_interface : Proc(IRow*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRow*, UInt32),
     release : Proc(IRow*, UInt32),
@@ -8762,7 +8758,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRow, lpVtbl : IRowVtbl* do
+  record IRow, lpVtbl : IRowVtable* do
     GUID = LibC::GUID.new(0xc733ab4_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8786,7 +8782,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowChangeVtbl,
+  record IRowChangeVtable,
     query_interface : Proc(IRowChange*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowChange*, UInt32),
     release : Proc(IRowChange*, UInt32),
@@ -8794,7 +8790,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowChange, lpVtbl : IRowChangeVtbl* do
+  record IRowChange, lpVtbl : IRowChangeVtable* do
     GUID = LibC::GUID.new(0xc733ab5_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowChange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8812,7 +8808,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowSchemaChangeVtbl,
+  record IRowSchemaChangeVtable,
     query_interface : Proc(IRowSchemaChange*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowSchemaChange*, UInt32),
     release : Proc(IRowSchemaChange*, UInt32),
@@ -8822,7 +8818,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowSchemaChange, lpVtbl : IRowSchemaChangeVtbl* do
+  record IRowSchemaChange, lpVtbl : IRowSchemaChangeVtable* do
     GUID = LibC::GUID.new(0xc733aae_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowSchemaChange*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8846,7 +8842,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IGetRowVtbl,
+  record IGetRowVtable,
     query_interface : Proc(IGetRow*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGetRow*, UInt32),
     release : Proc(IGetRow*, UInt32),
@@ -8855,7 +8851,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IGetRow, lpVtbl : IGetRowVtbl* do
+  record IGetRow, lpVtbl : IGetRowVtable* do
     GUID = LibC::GUID.new(0xc733aaf_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IGetRow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8876,7 +8872,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IBindResourceVtbl,
+  record IBindResourceVtable,
     query_interface : Proc(IBindResource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBindResource*, UInt32),
     release : Proc(IBindResource*, UInt32),
@@ -8884,7 +8880,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IBindResource, lpVtbl : IBindResourceVtbl* do
+  record IBindResource, lpVtbl : IBindResourceVtable* do
     GUID = LibC::GUID.new(0xc733ab1_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IBindResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8902,7 +8898,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IScopedOperationsVtbl,
+  record IScopedOperationsVtable,
     query_interface : Proc(IScopedOperations*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IScopedOperations*, UInt32),
     release : Proc(IScopedOperations*, UInt32),
@@ -8914,7 +8910,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IScopedOperations, lpVtbl : IScopedOperationsVtbl* do
+  record IScopedOperations, lpVtbl : IScopedOperationsVtable* do
     GUID = LibC::GUID.new(0xc733ab0_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IScopedOperations*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8944,7 +8940,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ICreateRowVtbl,
+  record ICreateRowVtable,
     query_interface : Proc(ICreateRow*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICreateRow*, UInt32),
     release : Proc(ICreateRow*, UInt32),
@@ -8952,7 +8948,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ICreateRow, lpVtbl : ICreateRowVtbl* do
+  record ICreateRow, lpVtbl : ICreateRowVtable* do
     GUID = LibC::GUID.new(0xc733ab2_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ICreateRow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -8970,7 +8966,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IDBBinderPropertiesVtbl,
+  record IDBBinderPropertiesVtable,
     query_interface : Proc(IDBBinderProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDBBinderProperties*, UInt32),
     release : Proc(IDBBinderProperties*, UInt32),
@@ -8981,7 +8977,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IDBBinderProperties, lpVtbl : IDBBinderPropertiesVtbl* do
+  record IDBBinderProperties, lpVtbl : IDBBinderPropertiesVtable* do
     GUID = LibC::GUID.new(0xc733ab3_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IDBBinderProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9008,7 +9004,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IColumnsInfo2Vtbl,
+  record IColumnsInfo2Vtable,
     query_interface : Proc(IColumnsInfo2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IColumnsInfo2*, UInt32),
     release : Proc(IColumnsInfo2*, UInt32),
@@ -9018,7 +9014,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IColumnsInfo2, lpVtbl : IColumnsInfo2Vtbl* do
+  record IColumnsInfo2, lpVtbl : IColumnsInfo2Vtable* do
     GUID = LibC::GUID.new(0xc733ab8_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IColumnsInfo2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9042,7 +9038,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRegisterProviderVtbl,
+  record IRegisterProviderVtable,
     query_interface : Proc(IRegisterProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRegisterProvider*, UInt32),
     release : Proc(IRegisterProvider*, UInt32),
@@ -9052,7 +9048,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRegisterProvider, lpVtbl : IRegisterProviderVtbl* do
+  record IRegisterProvider, lpVtbl : IRegisterProviderVtable* do
     GUID = LibC::GUID.new(0xc733ab9_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRegisterProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9076,7 +9072,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IGetSessionVtbl,
+  record IGetSessionVtable,
     query_interface : Proc(IGetSession*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGetSession*, UInt32),
     release : Proc(IGetSession*, UInt32),
@@ -9084,7 +9080,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IGetSession, lpVtbl : IGetSessionVtbl* do
+  record IGetSession, lpVtbl : IGetSessionVtable* do
     GUID = LibC::GUID.new(0xc733aba_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IGetSession*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9102,7 +9098,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IGetSourceRowVtbl,
+  record IGetSourceRowVtable,
     query_interface : Proc(IGetSourceRow*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IGetSourceRow*, UInt32),
     release : Proc(IGetSourceRow*, UInt32),
@@ -9110,7 +9106,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IGetSourceRow, lpVtbl : IGetSourceRowVtbl* do
+  record IGetSourceRow, lpVtbl : IGetSourceRowVtable* do
     GUID = LibC::GUID.new(0xc733abb_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IGetSourceRow*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9128,7 +9124,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetCurrentIndexVtbl,
+  record IRowsetCurrentIndexVtable,
     query_interface : Proc(IRowsetCurrentIndex*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetCurrentIndex*, UInt32),
     release : Proc(IRowsetCurrentIndex*, UInt32),
@@ -9140,7 +9136,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetCurrentIndex, lpVtbl : IRowsetCurrentIndexVtbl* do
+  record IRowsetCurrentIndex, lpVtbl : IRowsetCurrentIndexVtable* do
     GUID = LibC::GUID.new(0xc733abd_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetCurrentIndex*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9170,7 +9166,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ICommandStreamVtbl,
+  record ICommandStreamVtable,
     query_interface : Proc(ICommandStream*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICommandStream*, UInt32),
     release : Proc(ICommandStream*, UInt32),
@@ -9179,7 +9175,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ICommandStream, lpVtbl : ICommandStreamVtbl* do
+  record ICommandStream, lpVtbl : ICommandStreamVtable* do
     GUID = LibC::GUID.new(0xc733abf_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ICommandStream*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9200,7 +9196,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetBookmarkVtbl,
+  record IRowsetBookmarkVtable,
     query_interface : Proc(IRowsetBookmark*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetBookmark*, UInt32),
     release : Proc(IRowsetBookmark*, UInt32),
@@ -9208,7 +9204,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetBookmark, lpVtbl : IRowsetBookmarkVtbl* do
+  record IRowsetBookmark, lpVtbl : IRowsetBookmarkVtable* do
     GUID = LibC::GUID.new(0xc733ac2_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetBookmark*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9226,7 +9222,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IQueryParserVtbl,
+  record IQueryParserVtable,
     query_interface : Proc(IQueryParser*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IQueryParser*, UInt32),
     release : Proc(IQueryParser*, UInt32),
@@ -9241,7 +9237,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IQueryParser, lpVtbl : IQueryParserVtbl* do
+  record IQueryParser, lpVtbl : IQueryParserVtable* do
     GUID = LibC::GUID.new(0x2ebdee67_u32, 0x3505_u16, 0x43f8_u16, StaticArray[0x99_u8, 0x46_u8, 0xea_u8, 0x44_u8, 0xab_u8, 0xc8_u8, 0xe5_u8, 0xb0_u8])
     def query_interface(this : IQueryParser*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9280,7 +9276,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IConditionFactoryVtbl,
+  record IConditionFactoryVtable,
     query_interface : Proc(IConditionFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IConditionFactory*, UInt32),
     release : Proc(IConditionFactory*, UInt32),
@@ -9291,7 +9287,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IConditionFactory, lpVtbl : IConditionFactoryVtbl* do
+  record IConditionFactory, lpVtbl : IConditionFactoryVtable* do
     GUID = LibC::GUID.new(0xa5efe073_u32, 0xb16f_u16, 0x474f_u16, StaticArray[0x9f_u8, 0x3e_u8, 0x9f_u8, 0x8b_u8, 0x49_u8, 0x7a_u8, 0x3e_u8, 0x8_u8])
     def query_interface(this : IConditionFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9318,7 +9314,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IQuerySolutionVtbl,
+  record IQuerySolutionVtable,
     query_interface : Proc(IQuerySolution*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IQuerySolution*, UInt32),
     release : Proc(IQuerySolution*, UInt32),
@@ -9332,7 +9328,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IQuerySolution, lpVtbl : IQuerySolutionVtbl* do
+  record IQuerySolution, lpVtbl : IQuerySolutionVtable* do
     GUID = LibC::GUID.new(0xd6ebc66b_u32, 0x8921_u16, 0x4193_u16, StaticArray[0xaf_u8, 0xdd_u8, 0xa1_u8, 0x78_u8, 0x9f_u8, 0xb7_u8, 0xff_u8, 0x57_u8])
     def query_interface(this : IQuerySolution*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9368,7 +9364,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IConditionFactory2Vtbl,
+  record IConditionFactory2Vtable,
     query_interface : Proc(IConditionFactory2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IConditionFactory2*, UInt32),
     release : Proc(IConditionFactory2*, UInt32),
@@ -9388,7 +9384,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IConditionFactory2, lpVtbl : IConditionFactory2Vtbl* do
+  record IConditionFactory2, lpVtbl : IConditionFactory2Vtable* do
     GUID = LibC::GUID.new(0x71d222e1_u32, 0x432f_u16, 0x429e_u16, StaticArray[0x8c_u8, 0x13_u8, 0xb6_u8, 0xda_u8, 0xfd_u8, 0xe5_u8, 0x7_u8, 0x7a_u8])
     def query_interface(this : IConditionFactory2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9442,7 +9438,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IConditionGeneratorVtbl,
+  record IConditionGeneratorVtable,
     query_interface : Proc(IConditionGenerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IConditionGenerator*, UInt32),
     release : Proc(IConditionGenerator*, UInt32),
@@ -9453,7 +9449,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IConditionGenerator, lpVtbl : IConditionGeneratorVtbl* do
+  record IConditionGenerator, lpVtbl : IConditionGeneratorVtable* do
     GUID = LibC::GUID.new(0x92d2cc58_u32, 0x4386_u16, 0x45a3_u16, StaticArray[0xb9_u8, 0x8c_u8, 0x7e_u8, 0xc_u8, 0xe6_u8, 0x4a_u8, 0x41_u8, 0x17_u8])
     def query_interface(this : IConditionGenerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9480,7 +9476,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IIntervalVtbl,
+  record IIntervalVtable,
     query_interface : Proc(IInterval*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IInterval*, UInt32),
     release : Proc(IInterval*, UInt32),
@@ -9488,7 +9484,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IInterval, lpVtbl : IIntervalVtbl* do
+  record IInterval, lpVtbl : IIntervalVtable* do
     GUID = LibC::GUID.new(0x6bf0a714_u32, 0x3c18_u16, 0x430b_u16, StaticArray[0x8b_u8, 0x5d_u8, 0x83_u8, 0xb1_u8, 0xc2_u8, 0x34_u8, 0xd3_u8, 0xdb_u8])
     def query_interface(this : IInterval*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9506,7 +9502,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IMetaDataVtbl,
+  record IMetaDataVtable,
     query_interface : Proc(IMetaData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IMetaData*, UInt32),
     release : Proc(IMetaData*, UInt32),
@@ -9514,7 +9510,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IMetaData, lpVtbl : IMetaDataVtbl* do
+  record IMetaData, lpVtbl : IMetaDataVtable* do
     GUID = LibC::GUID.new(0x780102b0_u32, 0xc43b_u16, 0x4876_u16, StaticArray[0xbc_u8, 0x7b_u8, 0x5e_u8, 0x9b_u8, 0xa5_u8, 0xc8_u8, 0x87_u8, 0x94_u8])
     def query_interface(this : IMetaData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9532,7 +9528,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IEntityVtbl,
+  record IEntityVtable,
     query_interface : Proc(IEntity*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEntity*, UInt32),
     release : Proc(IEntity*, UInt32),
@@ -9547,7 +9543,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IEntity, lpVtbl : IEntityVtbl* do
+  record IEntity, lpVtbl : IEntityVtable* do
     GUID = LibC::GUID.new(0x24264891_u32, 0xe80b_u16, 0x4fd3_u16, StaticArray[0xb7_u8, 0xce_u8, 0x4f_u8, 0xf2_u8, 0xfa_u8, 0xe8_u8, 0x93_u8, 0x1f_u8])
     def query_interface(this : IEntity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9586,7 +9582,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRelationshipVtbl,
+  record IRelationshipVtable,
     query_interface : Proc(IRelationship*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRelationship*, UInt32),
     release : Proc(IRelationship*, UInt32),
@@ -9598,7 +9594,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRelationship, lpVtbl : IRelationshipVtbl* do
+  record IRelationship, lpVtbl : IRelationshipVtable* do
     GUID = LibC::GUID.new(0x2769280b_u32, 0x5108_u16, 0x498c_u16, StaticArray[0x9c_u8, 0x7f_u8, 0xa5_u8, 0x12_u8, 0x39_u8, 0xb6_u8, 0x31_u8, 0x47_u8])
     def query_interface(this : IRelationship*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9628,7 +9624,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record INamedEntityVtbl,
+  record INamedEntityVtable,
     query_interface : Proc(INamedEntity*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INamedEntity*, UInt32),
     release : Proc(INamedEntity*, UInt32),
@@ -9637,7 +9633,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record INamedEntity, lpVtbl : INamedEntityVtbl* do
+  record INamedEntity, lpVtbl : INamedEntityVtable* do
     GUID = LibC::GUID.new(0xabdbd0b1_u32, 0x7d54_u16, 0x49fb_u16, StaticArray[0xab_u8, 0x5c_u8, 0xbf_u8, 0xf4_u8, 0x13_u8, 0x0_u8, 0x4_u8, 0xcd_u8])
     def query_interface(this : INamedEntity*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9658,7 +9654,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISchemaProviderVtbl,
+  record ISchemaProviderVtable,
     query_interface : Proc(ISchemaProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaProvider*, UInt32),
     release : Proc(ISchemaProvider*, UInt32),
@@ -9672,7 +9668,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISchemaProvider, lpVtbl : ISchemaProviderVtbl* do
+  record ISchemaProvider, lpVtbl : ISchemaProviderVtable* do
     GUID = LibC::GUID.new(0x8cf89bcb_u32, 0x394c_u16, 0x49b2_u16, StaticArray[0xae_u8, 0x28_u8, 0xa5_u8, 0x9d_u8, 0xd4_u8, 0xed_u8, 0x7f_u8, 0x68_u8])
     def query_interface(this : ISchemaProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9708,7 +9704,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ITokenCollectionVtbl,
+  record ITokenCollectionVtable,
     query_interface : Proc(ITokenCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITokenCollection*, UInt32),
     release : Proc(ITokenCollection*, UInt32),
@@ -9717,7 +9713,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ITokenCollection, lpVtbl : ITokenCollectionVtbl* do
+  record ITokenCollection, lpVtbl : ITokenCollectionVtable* do
     GUID = LibC::GUID.new(0x22d8b4f2_u32, 0xf577_u16, 0x4adb_u16, StaticArray[0xa3_u8, 0x35_u8, 0xc2_u8, 0xae_u8, 0x88_u8, 0x41_u8, 0x6f_u8, 0xab_u8])
     def query_interface(this : ITokenCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9738,7 +9734,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record INamedEntityCollectorVtbl,
+  record INamedEntityCollectorVtable,
     query_interface : Proc(INamedEntityCollector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(INamedEntityCollector*, UInt32),
     release : Proc(INamedEntityCollector*, UInt32),
@@ -9746,7 +9742,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record INamedEntityCollector, lpVtbl : INamedEntityCollectorVtbl* do
+  record INamedEntityCollector, lpVtbl : INamedEntityCollectorVtable* do
     GUID = LibC::GUID.new(0xaf2440f6_u32, 0x8afc_u16, 0x47d0_u16, StaticArray[0x9a_u8, 0x7f_u8, 0x39_u8, 0x6a_u8, 0xa_u8, 0xcf_u8, 0xb4_u8, 0x3d_u8])
     def query_interface(this : INamedEntityCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9764,7 +9760,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISchemaLocalizerSupportVtbl,
+  record ISchemaLocalizerSupportVtable,
     query_interface : Proc(ISchemaLocalizerSupport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaLocalizerSupport*, UInt32),
     release : Proc(ISchemaLocalizerSupport*, UInt32),
@@ -9772,7 +9768,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISchemaLocalizerSupport, lpVtbl : ISchemaLocalizerSupportVtbl* do
+  record ISchemaLocalizerSupport, lpVtbl : ISchemaLocalizerSupportVtable* do
     GUID = LibC::GUID.new(0xca3fdca2_u32, 0xbfbe_u16, 0x4eed_u16, StaticArray[0x90_u8, 0xd7_u8, 0xc_u8, 0xae_u8, 0xf0_u8, 0xa1_u8, 0xbd_u8, 0xa1_u8])
     def query_interface(this : ISchemaLocalizerSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9790,7 +9786,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IQueryParserManagerVtbl,
+  record IQueryParserManagerVtable,
     query_interface : Proc(IQueryParserManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IQueryParserManager*, UInt32),
     release : Proc(IQueryParserManager*, UInt32),
@@ -9800,7 +9796,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IQueryParserManager, lpVtbl : IQueryParserManagerVtbl* do
+  record IQueryParserManager, lpVtbl : IQueryParserManagerVtable* do
     GUID = LibC::GUID.new(0xa879e3c4_u32, 0xaf77_u16, 0x44fb_u16, StaticArray[0x8f_u8, 0x37_u8, 0xeb_u8, 0xd1_u8, 0x48_u8, 0x7c_u8, 0xf9_u8, 0x20_u8])
     def query_interface(this : IQueryParserManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9824,7 +9820,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IUrlAccessorVtbl,
+  record IUrlAccessorVtable,
     query_interface : Proc(IUrlAccessor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUrlAccessor*, UInt32),
     release : Proc(IUrlAccessor*, UInt32),
@@ -9844,7 +9840,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IUrlAccessor, lpVtbl : IUrlAccessorVtbl* do
+  record IUrlAccessor, lpVtbl : IUrlAccessorVtable* do
     GUID = LibC::GUID.new(0xb63e318_u32, 0x9ccc_u16, 0x11d0_u16, StaticArray[0xbc_u8, 0xdb_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xcc_u8, 0xce_u8, 0x4_u8])
     def query_interface(this : IUrlAccessor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9898,7 +9894,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IUrlAccessor2Vtbl,
+  record IUrlAccessor2Vtable,
     query_interface : Proc(IUrlAccessor2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUrlAccessor2*, UInt32),
     release : Proc(IUrlAccessor2*, UInt32),
@@ -9921,7 +9917,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IUrlAccessor2, lpVtbl : IUrlAccessor2Vtbl* do
+  record IUrlAccessor2, lpVtbl : IUrlAccessor2Vtable* do
     GUID = LibC::GUID.new(0xc7310734_u32, 0xac80_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xf3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xef_u8, 0x4f_u8])
     def query_interface(this : IUrlAccessor2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -9984,7 +9980,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IUrlAccessor3Vtbl,
+  record IUrlAccessor3Vtable,
     query_interface : Proc(IUrlAccessor3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUrlAccessor3*, UInt32),
     release : Proc(IUrlAccessor3*, UInt32),
@@ -10008,7 +10004,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IUrlAccessor3, lpVtbl : IUrlAccessor3Vtbl* do
+  record IUrlAccessor3, lpVtbl : IUrlAccessor3Vtable* do
     GUID = LibC::GUID.new(0x6fbc7005_u32, 0x455_u16, 0x4874_u16, StaticArray[0xb8_u8, 0xff_u8, 0x74_u8, 0x39_u8, 0x45_u8, 0x2_u8, 0x41_u8, 0xa3_u8])
     def query_interface(this : IUrlAccessor3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10074,7 +10070,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IUrlAccessor4Vtbl,
+  record IUrlAccessor4Vtable,
     query_interface : Proc(IUrlAccessor4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUrlAccessor4*, UInt32),
     release : Proc(IUrlAccessor4*, UInt32),
@@ -10100,7 +10096,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IUrlAccessor4, lpVtbl : IUrlAccessor4Vtbl* do
+  record IUrlAccessor4, lpVtbl : IUrlAccessor4Vtable* do
     GUID = LibC::GUID.new(0x5cc51041_u32, 0xc8d2_u16, 0x41d7_u16, StaticArray[0xbc_u8, 0xa3_u8, 0x9e_u8, 0x9e_u8, 0x28_u8, 0x62_u8, 0x97_u8, 0xdc_u8])
     def query_interface(this : IUrlAccessor4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10172,7 +10168,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IOpLockStatusVtbl,
+  record IOpLockStatusVtable,
     query_interface : Proc(IOpLockStatus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IOpLockStatus*, UInt32),
     release : Proc(IOpLockStatus*, UInt32),
@@ -10182,7 +10178,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IOpLockStatus, lpVtbl : IOpLockStatusVtbl* do
+  record IOpLockStatus, lpVtbl : IOpLockStatusVtable* do
     GUID = LibC::GUID.new(0xc731065d_u32, 0xac80_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xf3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xef_u8, 0x4f_u8])
     def query_interface(this : IOpLockStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10206,7 +10202,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISearchProtocolThreadContextVtbl,
+  record ISearchProtocolThreadContextVtable,
     query_interface : Proc(ISearchProtocolThreadContext*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchProtocolThreadContext*, UInt32),
     release : Proc(ISearchProtocolThreadContext*, UInt32),
@@ -10216,7 +10212,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISearchProtocolThreadContext, lpVtbl : ISearchProtocolThreadContextVtbl* do
+  record ISearchProtocolThreadContext, lpVtbl : ISearchProtocolThreadContextVtable* do
     GUID = LibC::GUID.new(0xc73106e1_u32, 0xac80_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xf3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xef_u8, 0x4f_u8])
     def query_interface(this : ISearchProtocolThreadContext*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10240,7 +10236,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISearchProtocolVtbl,
+  record ISearchProtocolVtable,
     query_interface : Proc(ISearchProtocol*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchProtocol*, UInt32),
     release : Proc(ISearchProtocol*, UInt32),
@@ -10251,7 +10247,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISearchProtocol, lpVtbl : ISearchProtocolVtbl* do
+  record ISearchProtocol, lpVtbl : ISearchProtocolVtable* do
     GUID = LibC::GUID.new(0xc73106ba_u32, 0xac80_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xf3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xef_u8, 0x4f_u8])
     def query_interface(this : ISearchProtocol*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10278,7 +10274,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISearchProtocol2Vtbl,
+  record ISearchProtocol2Vtable,
     query_interface : Proc(ISearchProtocol2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchProtocol2*, UInt32),
     release : Proc(ISearchProtocol2*, UInt32),
@@ -10290,7 +10286,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISearchProtocol2, lpVtbl : ISearchProtocol2Vtbl* do
+  record ISearchProtocol2, lpVtbl : ISearchProtocol2Vtable* do
     GUID = LibC::GUID.new(0x7789f0b2_u32, 0xb5b2_u16, 0x4722_u16, StaticArray[0x8b_u8, 0x65_u8, 0x5d_u8, 0xbd_u8, 0x15_u8, 0x6_u8, 0x97_u8, 0xa9_u8])
     def query_interface(this : ISearchProtocol2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10320,7 +10316,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IProtocolHandlerSiteVtbl,
+  record IProtocolHandlerSiteVtable,
     query_interface : Proc(IProtocolHandlerSite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProtocolHandlerSite*, UInt32),
     release : Proc(IProtocolHandlerSite*, UInt32),
@@ -10328,7 +10324,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IProtocolHandlerSite, lpVtbl : IProtocolHandlerSiteVtbl* do
+  record IProtocolHandlerSite, lpVtbl : IProtocolHandlerSiteVtable* do
     GUID = LibC::GUID.new(0xb63e385_u32, 0x9ccc_u16, 0x11d0_u16, StaticArray[0xbc_u8, 0xdb_u8, 0x0_u8, 0x80_u8, 0x5f_u8, 0xcc_u8, 0xce_u8, 0x4_u8])
     def query_interface(this : IProtocolHandlerSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10346,7 +10342,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISearchRootVtbl,
+  record ISearchRootVtable,
     query_interface : Proc(ISearchRoot*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchRoot*, UInt32),
     release : Proc(ISearchRoot*, UInt32),
@@ -10375,7 +10371,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISearchRoot, lpVtbl : ISearchRootVtbl* do
+  record ISearchRoot, lpVtbl : ISearchRootVtable* do
     GUID = LibC::GUID.new(0x4c18ccf_u32, 0x1f57_u16, 0x4cbd_u16, StaticArray[0x88_u8, 0xcc_u8, 0x39_u8, 0x0_u8, 0xf5_u8, 0x19_u8, 0x5c_u8, 0xe3_u8])
     def query_interface(this : ISearchRoot*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10456,7 +10452,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IEnumSearchRootsVtbl,
+  record IEnumSearchRootsVtable,
     query_interface : Proc(IEnumSearchRoots*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumSearchRoots*, UInt32),
     release : Proc(IEnumSearchRoots*, UInt32),
@@ -10467,7 +10463,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IEnumSearchRoots, lpVtbl : IEnumSearchRootsVtbl* do
+  record IEnumSearchRoots, lpVtbl : IEnumSearchRootsVtable* do
     GUID = LibC::GUID.new(0xab310581_u32, 0xac80_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xf3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xef_u8, 0x52_u8])
     def query_interface(this : IEnumSearchRoots*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10494,7 +10490,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISearchScopeRuleVtbl,
+  record ISearchScopeRuleVtable,
     query_interface : Proc(ISearchScopeRule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchScopeRule*, UInt32),
     release : Proc(ISearchScopeRule*, UInt32),
@@ -10505,7 +10501,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISearchScopeRule, lpVtbl : ISearchScopeRuleVtbl* do
+  record ISearchScopeRule, lpVtbl : ISearchScopeRuleVtable* do
     GUID = LibC::GUID.new(0xab310581_u32, 0xac80_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xf3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xef_u8, 0x53_u8])
     def query_interface(this : ISearchScopeRule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10532,7 +10528,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IEnumSearchScopeRulesVtbl,
+  record IEnumSearchScopeRulesVtable,
     query_interface : Proc(IEnumSearchScopeRules*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumSearchScopeRules*, UInt32),
     release : Proc(IEnumSearchScopeRules*, UInt32),
@@ -10543,7 +10539,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IEnumSearchScopeRules, lpVtbl : IEnumSearchScopeRulesVtbl* do
+  record IEnumSearchScopeRules, lpVtbl : IEnumSearchScopeRulesVtable* do
     GUID = LibC::GUID.new(0xab310581_u32, 0xac80_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xf3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xef_u8, 0x54_u8])
     def query_interface(this : IEnumSearchScopeRules*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10570,7 +10566,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISearchCrawlScopeManagerVtbl,
+  record ISearchCrawlScopeManagerVtable,
     query_interface : Proc(ISearchCrawlScopeManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchCrawlScopeManager*, UInt32),
     release : Proc(ISearchCrawlScopeManager*, UInt32),
@@ -10593,7 +10589,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISearchCrawlScopeManager, lpVtbl : ISearchCrawlScopeManagerVtbl* do
+  record ISearchCrawlScopeManager, lpVtbl : ISearchCrawlScopeManagerVtable* do
     GUID = LibC::GUID.new(0xab310581_u32, 0xac80_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xf3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xef_u8, 0x55_u8])
     def query_interface(this : ISearchCrawlScopeManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10656,7 +10652,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISearchCrawlScopeManager2Vtbl,
+  record ISearchCrawlScopeManager2Vtable,
     query_interface : Proc(ISearchCrawlScopeManager2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchCrawlScopeManager2*, UInt32),
     release : Proc(ISearchCrawlScopeManager2*, UInt32),
@@ -10680,7 +10676,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISearchCrawlScopeManager2, lpVtbl : ISearchCrawlScopeManager2Vtbl* do
+  record ISearchCrawlScopeManager2, lpVtbl : ISearchCrawlScopeManager2Vtable* do
     GUID = LibC::GUID.new(0x6292f7ad_u32, 0x4e19_u16, 0x4717_u16, StaticArray[0xa5_u8, 0x34_u8, 0x8f_u8, 0xc2_u8, 0x2b_u8, 0xcd_u8, 0x5c_u8, 0xcd_u8])
     def query_interface(this : ISearchCrawlScopeManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10746,7 +10742,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISearchItemsChangedSinkVtbl,
+  record ISearchItemsChangedSinkVtable,
     query_interface : Proc(ISearchItemsChangedSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchItemsChangedSink*, UInt32),
     release : Proc(ISearchItemsChangedSink*, UInt32),
@@ -10756,7 +10752,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISearchItemsChangedSink, lpVtbl : ISearchItemsChangedSinkVtbl* do
+  record ISearchItemsChangedSink, lpVtbl : ISearchItemsChangedSinkVtable* do
     GUID = LibC::GUID.new(0xab310581_u32, 0xac80_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xf3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xef_u8, 0x58_u8])
     def query_interface(this : ISearchItemsChangedSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10780,7 +10776,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISearchPersistentItemsChangedSinkVtbl,
+  record ISearchPersistentItemsChangedSinkVtable,
     query_interface : Proc(ISearchPersistentItemsChangedSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchPersistentItemsChangedSink*, UInt32),
     release : Proc(ISearchPersistentItemsChangedSink*, UInt32),
@@ -10790,7 +10786,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISearchPersistentItemsChangedSink, lpVtbl : ISearchPersistentItemsChangedSinkVtbl* do
+  record ISearchPersistentItemsChangedSink, lpVtbl : ISearchPersistentItemsChangedSinkVtable* do
     GUID = LibC::GUID.new(0xa2ffdf9b_u32, 0x4758_u16, 0x4f84_u16, StaticArray[0xb7_u8, 0x29_u8, 0xdf_u8, 0x81_u8, 0xa1_u8, 0xa0_u8, 0x61_u8, 0x2f_u8])
     def query_interface(this : ISearchPersistentItemsChangedSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10814,7 +10810,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISearchViewChangedSinkVtbl,
+  record ISearchViewChangedSinkVtable,
     query_interface : Proc(ISearchViewChangedSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchViewChangedSink*, UInt32),
     release : Proc(ISearchViewChangedSink*, UInt32),
@@ -10822,7 +10818,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISearchViewChangedSink, lpVtbl : ISearchViewChangedSinkVtbl* do
+  record ISearchViewChangedSink, lpVtbl : ISearchViewChangedSinkVtable* do
     GUID = LibC::GUID.new(0xab310581_u32, 0xac80_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xf3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xef_u8, 0x65_u8])
     def query_interface(this : ISearchViewChangedSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10840,7 +10836,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISearchNotifyInlineSiteVtbl,
+  record ISearchNotifyInlineSiteVtable,
     query_interface : Proc(ISearchNotifyInlineSite*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchNotifyInlineSite*, UInt32),
     release : Proc(ISearchNotifyInlineSite*, UInt32),
@@ -10849,7 +10845,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISearchNotifyInlineSite, lpVtbl : ISearchNotifyInlineSiteVtbl* do
+  record ISearchNotifyInlineSite, lpVtbl : ISearchNotifyInlineSiteVtable* do
     GUID = LibC::GUID.new(0xb5702e61_u32, 0xe75c_u16, 0x4b64_u16, StaticArray[0x82_u8, 0xa1_u8, 0x6c_u8, 0xb4_u8, 0xf8_u8, 0x32_u8, 0xfc_u8, 0xcf_u8])
     def query_interface(this : ISearchNotifyInlineSite*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10870,7 +10866,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISearchCatalogManagerVtbl,
+  record ISearchCatalogManagerVtable,
     query_interface : Proc(ISearchCatalogManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchCatalogManager*, UInt32),
     release : Proc(ISearchCatalogManager*, UInt32),
@@ -10903,7 +10899,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISearchCatalogManager, lpVtbl : ISearchCatalogManagerVtbl* do
+  record ISearchCatalogManager, lpVtbl : ISearchCatalogManagerVtable* do
     GUID = LibC::GUID.new(0xab310581_u32, 0xac80_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xf3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xef_u8, 0x50_u8])
     def query_interface(this : ISearchCatalogManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -10996,7 +10992,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISearchCatalogManager2Vtbl,
+  record ISearchCatalogManager2Vtable,
     query_interface : Proc(ISearchCatalogManager2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchCatalogManager2*, UInt32),
     release : Proc(ISearchCatalogManager2*, UInt32),
@@ -11030,7 +11026,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISearchCatalogManager2, lpVtbl : ISearchCatalogManager2Vtbl* do
+  record ISearchCatalogManager2, lpVtbl : ISearchCatalogManager2Vtable* do
     GUID = LibC::GUID.new(0x7ac3286d_u32, 0x4d1d_u16, 0x4817_u16, StaticArray[0x84_u8, 0xfc_u8, 0xc1_u8, 0xc8_u8, 0x5e_u8, 0x3a_u8, 0xf0_u8, 0xd9_u8])
     def query_interface(this : ISearchCatalogManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11126,7 +11122,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISearchQueryHelperVtbl,
+  record ISearchQueryHelperVtable,
     query_interface : Proc(ISearchQueryHelper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchQueryHelper*, UInt32),
     release : Proc(ISearchQueryHelper*, UInt32),
@@ -11154,7 +11150,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISearchQueryHelper, lpVtbl : ISearchQueryHelperVtbl* do
+  record ISearchQueryHelper, lpVtbl : ISearchQueryHelperVtable* do
     GUID = LibC::GUID.new(0xab310581_u32, 0xac80_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xf3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xef_u8, 0x63_u8])
     def query_interface(this : ISearchQueryHelper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11232,7 +11228,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetPrioritizationVtbl,
+  record IRowsetPrioritizationVtable,
     query_interface : Proc(IRowsetPrioritization*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetPrioritization*, UInt32),
     release : Proc(IRowsetPrioritization*, UInt32),
@@ -11242,7 +11238,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetPrioritization, lpVtbl : IRowsetPrioritizationVtbl* do
+  record IRowsetPrioritization, lpVtbl : IRowsetPrioritizationVtable* do
     GUID = LibC::GUID.new(0x42811652_u32, 0x79d_u16, 0x481b_u16, StaticArray[0x87_u8, 0xa2_u8, 0x9_u8, 0xa6_u8, 0x9e_u8, 0xcc_u8, 0x5f_u8, 0x44_u8])
     def query_interface(this : IRowsetPrioritization*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11266,7 +11262,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetEventsVtbl,
+  record IRowsetEventsVtable,
     query_interface : Proc(IRowsetEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetEvents*, UInt32),
     release : Proc(IRowsetEvents*, UInt32),
@@ -11277,7 +11273,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetEvents, lpVtbl : IRowsetEventsVtbl* do
+  record IRowsetEvents, lpVtbl : IRowsetEventsVtable* do
     GUID = LibC::GUID.new(0x1551aea5_u32, 0x5d66_u16, 0x4b11_u16, StaticArray[0x86_u8, 0xf5_u8, 0xd5_u8, 0x63_u8, 0x4c_u8, 0xb2_u8, 0x11_u8, 0xb9_u8])
     def query_interface(this : IRowsetEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11304,7 +11300,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISearchManagerVtbl,
+  record ISearchManagerVtable,
     query_interface : Proc(ISearchManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchManager*, UInt32),
     release : Proc(ISearchManager*, UInt32),
@@ -11324,7 +11320,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISearchManager, lpVtbl : ISearchManagerVtbl* do
+  record ISearchManager, lpVtbl : ISearchManagerVtable* do
     GUID = LibC::GUID.new(0xab310581_u32, 0xac80_u16, 0x11d1_u16, StaticArray[0x8d_u8, 0xf3_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0xef_u8, 0x69_u8])
     def query_interface(this : ISearchManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11378,7 +11374,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISearchManager2Vtbl,
+  record ISearchManager2Vtable,
     query_interface : Proc(ISearchManager2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchManager2*, UInt32),
     release : Proc(ISearchManager2*, UInt32),
@@ -11400,7 +11396,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISearchManager2, lpVtbl : ISearchManager2Vtbl* do
+  record ISearchManager2, lpVtbl : ISearchManager2Vtable* do
     GUID = LibC::GUID.new(0xdbab3f73_u32, 0xdb19_u16, 0x4a79_u16, StaticArray[0xbf_u8, 0xc0_u8, 0xa6_u8, 0x1a_u8, 0x93_u8, 0x88_u8, 0x6d_u8, 0xdf_u8])
     def query_interface(this : ISearchManager2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11460,7 +11456,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISearchLanguageSupportVtbl,
+  record ISearchLanguageSupportVtable,
     query_interface : Proc(ISearchLanguageSupport*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchLanguageSupport*, UInt32),
     release : Proc(ISearchLanguageSupport*, UInt32),
@@ -11472,7 +11468,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISearchLanguageSupport, lpVtbl : ISearchLanguageSupportVtbl* do
+  record ISearchLanguageSupport, lpVtbl : ISearchLanguageSupportVtable* do
     GUID = LibC::GUID.new(0x24c3cbaa_u32, 0xebc1_u16, 0x491a_u16, StaticArray[0x9e_u8, 0xf1_u8, 0x9f_u8, 0x6d_u8, 0x8d_u8, 0xeb_u8, 0x1b_u8, 0x8f_u8])
     def query_interface(this : ISearchLanguageSupport*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11502,7 +11498,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IEnumItemPropertiesVtbl,
+  record IEnumItemPropertiesVtable,
     query_interface : Proc(IEnumItemProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumItemProperties*, UInt32),
     release : Proc(IEnumItemProperties*, UInt32),
@@ -11514,7 +11510,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IEnumItemProperties, lpVtbl : IEnumItemPropertiesVtbl* do
+  record IEnumItemProperties, lpVtbl : IEnumItemPropertiesVtable* do
     GUID = LibC::GUID.new(0xf72c8d96_u32, 0x6dbd_u16, 0x11d1_u16, StaticArray[0xa1_u8, 0xe8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xfb_u8, 0xe1_u8])
     def query_interface(this : IEnumItemProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11544,7 +11540,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISubscriptionItemVtbl,
+  record ISubscriptionItemVtable,
     query_interface : Proc(ISubscriptionItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISubscriptionItem*, UInt32),
     release : Proc(ISubscriptionItem*, UInt32),
@@ -11558,7 +11554,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISubscriptionItem, lpVtbl : ISubscriptionItemVtbl* do
+  record ISubscriptionItem, lpVtbl : ISubscriptionItemVtable* do
     GUID = LibC::GUID.new(0xa97559f8_u32, 0x6c4a_u16, 0x11d1_u16, StaticArray[0xa1_u8, 0xe8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xfb_u8, 0xe1_u8])
     def query_interface(this : ISubscriptionItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11594,7 +11590,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IEnumSubscriptionVtbl,
+  record IEnumSubscriptionVtable,
     query_interface : Proc(IEnumSubscription*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IEnumSubscription*, UInt32),
     release : Proc(IEnumSubscription*, UInt32),
@@ -11606,7 +11602,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IEnumSubscription, lpVtbl : IEnumSubscriptionVtbl* do
+  record IEnumSubscription, lpVtbl : IEnumSubscriptionVtable* do
     GUID = LibC::GUID.new(0xf72c8d97_u32, 0x6dbd_u16, 0x11d1_u16, StaticArray[0xa1_u8, 0xe8_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xfb_u8, 0xe1_u8])
     def query_interface(this : IEnumSubscription*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11636,7 +11632,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISubscriptionMgrVtbl,
+  record ISubscriptionMgrVtable,
     query_interface : Proc(ISubscriptionMgr*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISubscriptionMgr*, UInt32),
     release : Proc(ISubscriptionMgr*, UInt32),
@@ -11651,7 +11647,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISubscriptionMgr, lpVtbl : ISubscriptionMgrVtbl* do
+  record ISubscriptionMgr, lpVtbl : ISubscriptionMgrVtable* do
     GUID = LibC::GUID.new(0x85fb2c0_u32, 0xdf8_u16, 0x11d1_u16, StaticArray[0x8f_u8, 0x4b_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x5_u8, 0x41_u8, 0x3f_u8])
     def query_interface(this : ISubscriptionMgr*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11690,7 +11686,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISubscriptionMgr2Vtbl,
+  record ISubscriptionMgr2Vtable,
     query_interface : Proc(ISubscriptionMgr2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISubscriptionMgr2*, UInt32),
     release : Proc(ISubscriptionMgr2*, UInt32),
@@ -11712,7 +11708,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISubscriptionMgr2, lpVtbl : ISubscriptionMgr2Vtbl* do
+  record ISubscriptionMgr2, lpVtbl : ISubscriptionMgr2Vtable* do
     GUID = LibC::GUID.new(0x614bc270_u32, 0xaedf_u16, 0x11d1_u16, StaticArray[0xa1_u8, 0xf9_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xfb_u8, 0xe1_u8])
     def query_interface(this : ISubscriptionMgr2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11772,7 +11768,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IDataConvertVtbl,
+  record IDataConvertVtable,
     query_interface : Proc(IDataConvert*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataConvert*, UInt32),
     release : Proc(IDataConvert*, UInt32),
@@ -11782,7 +11778,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IDataConvert, lpVtbl : IDataConvertVtbl* do
+  record IDataConvert, lpVtbl : IDataConvertVtable* do
     GUID = LibC::GUID.new(0xc733a8d_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IDataConvert*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11806,7 +11802,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IDCInfoVtbl,
+  record IDCInfoVtable,
     query_interface : Proc(IDCInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDCInfo*, UInt32),
     release : Proc(IDCInfo*, UInt32),
@@ -11815,7 +11811,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IDCInfo, lpVtbl : IDCInfoVtbl* do
+  record IDCInfo, lpVtbl : IDCInfoVtable* do
     GUID = LibC::GUID.new(0xc733a9c_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IDCInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11836,7 +11832,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record DataSourceListenerVtbl,
+  record DataSourceListenerVtable,
     query_interface : Proc(DataSourceListener*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DataSourceListener*, UInt32),
     release : Proc(DataSourceListener*, UInt32),
@@ -11846,7 +11842,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record DataSourceListener, lpVtbl : DataSourceListenerVtbl* do
+  record DataSourceListener, lpVtbl : DataSourceListenerVtable* do
     GUID = LibC::GUID.new(0x7c0ffab2_u32, 0xcd84_u16, 0x11d0_u16, StaticArray[0x94_u8, 0x9a_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x10_u8, 0xed_u8])
     def query_interface(this : DataSourceListener*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11870,7 +11866,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record DataSourceVtbl,
+  record DataSourceVtable,
     query_interface : Proc(DataSource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DataSource*, UInt32),
     release : Proc(DataSource*, UInt32),
@@ -11882,7 +11878,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record DataSource, lpVtbl : DataSourceVtbl* do
+  record DataSource, lpVtbl : DataSourceVtable* do
     GUID = LibC::GUID.new(0x7c0ffab3_u32, 0xcd84_u16, 0x11d0_u16, StaticArray[0x94_u8, 0x9a_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x11_u8, 0x10_u8, 0xed_u8])
     def query_interface(this : DataSource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11912,7 +11908,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record OLEDBSimpleProviderListenerVtbl,
+  record OLEDBSimpleProviderListenerVtable,
     query_interface : Proc(OLEDBSimpleProviderListener*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(OLEDBSimpleProviderListener*, UInt32),
     release : Proc(OLEDBSimpleProviderListener*, UInt32),
@@ -11927,7 +11923,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record OLEDBSimpleProviderListener, lpVtbl : OLEDBSimpleProviderListenerVtbl* do
+  record OLEDBSimpleProviderListener, lpVtbl : OLEDBSimpleProviderListenerVtable* do
     GUID = LibC::GUID.new(0xe0e270c1_u32, 0xc0be_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xe4_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0x63_u8, 0x41_u8])
     def query_interface(this : OLEDBSimpleProviderListener*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -11966,7 +11962,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record OLEDBSimpleProviderVtbl,
+  record OLEDBSimpleProviderVtable,
     query_interface : Proc(OLEDBSimpleProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(OLEDBSimpleProvider*, UInt32),
     release : Proc(OLEDBSimpleProvider*, UInt32),
@@ -11987,7 +11983,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record OLEDBSimpleProvider, lpVtbl : OLEDBSimpleProviderVtbl* do
+  record OLEDBSimpleProvider, lpVtbl : OLEDBSimpleProviderVtable* do
     GUID = LibC::GUID.new(0xe0e270c0_u32, 0xc0be_u16, 0x11d0_u16, StaticArray[0x8f_u8, 0xe4_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0xa_u8, 0x63_u8, 0x41_u8])
     def query_interface(this : OLEDBSimpleProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12044,7 +12040,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record DataSourceObjectVtbl,
+  record DataSourceObjectVtable,
     query_interface : Proc(DataSourceObject*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DataSourceObject*, UInt32),
     release : Proc(DataSourceObject*, UInt32),
@@ -12055,7 +12051,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record DataSourceObject, lpVtbl : DataSourceObjectVtbl* do
+  record DataSourceObject, lpVtbl : DataSourceObjectVtable* do
     GUID = LibC::GUID.new(0xae9a4e4_u32, 0x18d4_u16, 0x11d1_u16, StaticArray[0xb3_u8, 0xb3_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xc1_u8, 0xa9_u8, 0x24_u8])
     def query_interface(this : DataSourceObject*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12082,7 +12078,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IServiceVtbl,
+  record IServiceVtable,
     query_interface : Proc(IService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IService*, UInt32),
     release : Proc(IService*, UInt32),
@@ -12090,7 +12086,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IService, lpVtbl : IServiceVtbl* do
+  record IService, lpVtbl : IServiceVtable* do
     GUID = LibC::GUID.new(0x6210e88_u32, 0x1f5_u16, 0x11d1_u16, StaticArray[0xb5_u8, 0x12_u8, 0x0_u8, 0x80_u8, 0xc7_u8, 0x81_u8, 0xc3_u8, 0x84_u8])
     def query_interface(this : IService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12108,7 +12104,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IDBPromptInitializeVtbl,
+  record IDBPromptInitializeVtable,
     query_interface : Proc(IDBPromptInitialize*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDBPromptInitialize*, UInt32),
     release : Proc(IDBPromptInitialize*, UInt32),
@@ -12117,7 +12113,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IDBPromptInitialize, lpVtbl : IDBPromptInitializeVtbl* do
+  record IDBPromptInitialize, lpVtbl : IDBPromptInitializeVtable* do
     GUID = LibC::GUID.new(0x2206ccb0_u32, 0x19c1_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xe0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xa8_u8, 0x29_u8])
     def query_interface(this : IDBPromptInitialize*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12138,7 +12134,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IDataInitializeVtbl,
+  record IDataInitializeVtable,
     query_interface : Proc(IDataInitialize*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataInitialize*, UInt32),
     release : Proc(IDataInitialize*, UInt32),
@@ -12151,7 +12147,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IDataInitialize, lpVtbl : IDataInitializeVtbl* do
+  record IDataInitialize, lpVtbl : IDataInitializeVtable* do
     GUID = LibC::GUID.new(0x2206ccb1_u32, 0x19c1_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xe0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xa8_u8, 0x29_u8])
     def query_interface(this : IDataInitialize*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12184,7 +12180,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IDataSourceLocatorVtbl,
+  record IDataSourceLocatorVtable,
     query_interface : Proc(IDataSourceLocator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataSourceLocator*, UInt32),
     release : Proc(IDataSourceLocator*, UInt32),
@@ -12199,7 +12195,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IDataSourceLocator, lpVtbl : IDataSourceLocatorVtbl* do
+  record IDataSourceLocator, lpVtbl : IDataSourceLocatorVtable* do
     GUID = LibC::GUID.new(0x2206ccb2_u32, 0x19c1_u16, 0x11d1_u16, StaticArray[0x89_u8, 0xe0_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd7_u8, 0xa8_u8, 0x29_u8])
     def query_interface(this : IDataSourceLocator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12238,7 +12234,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetChangeExtInfoVtbl,
+  record IRowsetChangeExtInfoVtable,
     query_interface : Proc(IRowsetChangeExtInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetChangeExtInfo*, UInt32),
     release : Proc(IRowsetChangeExtInfo*, UInt32),
@@ -12247,7 +12243,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetChangeExtInfo, lpVtbl : IRowsetChangeExtInfoVtbl* do
+  record IRowsetChangeExtInfo, lpVtbl : IRowsetChangeExtInfoVtable* do
     GUID = LibC::GUID.new(0xc733a8f_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetChangeExtInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12268,7 +12264,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISQLRequestDiagFieldsVtbl,
+  record ISQLRequestDiagFieldsVtable,
     query_interface : Proc(ISQLRequestDiagFields*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISQLRequestDiagFields*, UInt32),
     release : Proc(ISQLRequestDiagFields*, UInt32),
@@ -12276,7 +12272,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISQLRequestDiagFields, lpVtbl : ISQLRequestDiagFieldsVtbl* do
+  record ISQLRequestDiagFields, lpVtbl : ISQLRequestDiagFieldsVtable* do
     GUID = LibC::GUID.new(0x228972f0_u32, 0xb5ff_u16, 0x11d0_u16, StaticArray[0x8a_u8, 0x80_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd6_u8, 0x11_u8, 0xcd_u8])
     def query_interface(this : ISQLRequestDiagFields*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12294,7 +12290,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISQLGetDiagFieldVtbl,
+  record ISQLGetDiagFieldVtable,
     query_interface : Proc(ISQLGetDiagField*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISQLGetDiagField*, UInt32),
     release : Proc(ISQLGetDiagField*, UInt32),
@@ -12302,7 +12298,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISQLGetDiagField, lpVtbl : ISQLGetDiagFieldVtbl* do
+  record ISQLGetDiagField, lpVtbl : ISQLGetDiagFieldVtable* do
     GUID = LibC::GUID.new(0x228972f1_u32, 0xb5ff_u16, 0x11d0_u16, StaticArray[0x8a_u8, 0x80_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd6_u8, 0x11_u8, 0xcd_u8])
     def query_interface(this : ISQLGetDiagField*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12320,7 +12316,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetNextRowsetVtbl,
+  record IRowsetNextRowsetVtable,
     query_interface : Proc(IRowsetNextRowset*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetNextRowset*, UInt32),
     release : Proc(IRowsetNextRowset*, UInt32),
@@ -12328,7 +12324,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetNextRowset, lpVtbl : IRowsetNextRowsetVtbl* do
+  record IRowsetNextRowset, lpVtbl : IRowsetNextRowsetVtable* do
     GUID = LibC::GUID.new(0xc733a72_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetNextRowset*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12346,7 +12342,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetNewRowAfterVtbl,
+  record IRowsetNewRowAfterVtable,
     query_interface : Proc(IRowsetNewRowAfter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetNewRowAfter*, UInt32),
     release : Proc(IRowsetNewRowAfter*, UInt32),
@@ -12354,7 +12350,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetNewRowAfter, lpVtbl : IRowsetNewRowAfterVtbl* do
+  record IRowsetNewRowAfter, lpVtbl : IRowsetNewRowAfterVtable* do
     GUID = LibC::GUID.new(0xc733a71_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetNewRowAfter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12372,7 +12368,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetWithParametersVtbl,
+  record IRowsetWithParametersVtable,
     query_interface : Proc(IRowsetWithParameters*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetWithParameters*, UInt32),
     release : Proc(IRowsetWithParameters*, UInt32),
@@ -12381,7 +12377,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetWithParameters, lpVtbl : IRowsetWithParametersVtbl* do
+  record IRowsetWithParameters, lpVtbl : IRowsetWithParametersVtable* do
     GUID = LibC::GUID.new(0xc733a6e_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetWithParameters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12402,7 +12398,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetAsynchVtbl,
+  record IRowsetAsynchVtable,
     query_interface : Proc(IRowsetAsynch*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetAsynch*, UInt32),
     release : Proc(IRowsetAsynch*, UInt32),
@@ -12411,7 +12407,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetAsynch, lpVtbl : IRowsetAsynchVtbl* do
+  record IRowsetAsynch, lpVtbl : IRowsetAsynchVtable* do
     GUID = LibC::GUID.new(0xc733a0f_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetAsynch*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12432,7 +12428,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetKeysVtbl,
+  record IRowsetKeysVtable,
     query_interface : Proc(IRowsetKeys*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetKeys*, UInt32),
     release : Proc(IRowsetKeys*, UInt32),
@@ -12440,7 +12436,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetKeys, lpVtbl : IRowsetKeysVtbl* do
+  record IRowsetKeys, lpVtbl : IRowsetKeysVtable* do
     GUID = LibC::GUID.new(0xc733a12_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetKeys*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12458,7 +12454,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetWatchAllVtbl,
+  record IRowsetWatchAllVtable,
     query_interface : Proc(IRowsetWatchAll*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetWatchAll*, UInt32),
     release : Proc(IRowsetWatchAll*, UInt32),
@@ -12468,7 +12464,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetWatchAll, lpVtbl : IRowsetWatchAllVtbl* do
+  record IRowsetWatchAll, lpVtbl : IRowsetWatchAllVtable* do
     GUID = LibC::GUID.new(0xc733a73_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetWatchAll*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12492,7 +12488,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetWatchNotifyVtbl,
+  record IRowsetWatchNotifyVtable,
     query_interface : Proc(IRowsetWatchNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetWatchNotify*, UInt32),
     release : Proc(IRowsetWatchNotify*, UInt32),
@@ -12500,7 +12496,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetWatchNotify, lpVtbl : IRowsetWatchNotifyVtbl* do
+  record IRowsetWatchNotify, lpVtbl : IRowsetWatchNotifyVtable* do
     GUID = LibC::GUID.new(0xc733a44_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetWatchNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12518,7 +12514,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetWatchRegionVtbl,
+  record IRowsetWatchRegionVtable,
     query_interface : Proc(IRowsetWatchRegion*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetWatchRegion*, UInt32),
     release : Proc(IRowsetWatchRegion*, UInt32),
@@ -12534,7 +12530,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetWatchRegion, lpVtbl : IRowsetWatchRegionVtbl* do
+  record IRowsetWatchRegion, lpVtbl : IRowsetWatchRegionVtable* do
     GUID = LibC::GUID.new(0xc733a45_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetWatchRegion*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12576,7 +12572,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetCopyRowsVtbl,
+  record IRowsetCopyRowsVtable,
     query_interface : Proc(IRowsetCopyRows*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetCopyRows*, UInt32),
     release : Proc(IRowsetCopyRows*, UInt32),
@@ -12587,7 +12583,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetCopyRows, lpVtbl : IRowsetCopyRowsVtbl* do
+  record IRowsetCopyRows, lpVtbl : IRowsetCopyRowsVtable* do
     GUID = LibC::GUID.new(0xc733a6b_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IRowsetCopyRows*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12614,7 +12610,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IReadDataVtbl,
+  record IReadDataVtable,
     query_interface : Proc(IReadData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IReadData*, UInt32),
     release : Proc(IReadData*, UInt32),
@@ -12623,7 +12619,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IReadData, lpVtbl : IReadDataVtbl* do
+  record IReadData, lpVtbl : IReadDataVtable* do
     GUID = LibC::GUID.new(0xc733a6a_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IReadData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12644,7 +12640,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ICommandCostVtbl,
+  record ICommandCostVtable,
     query_interface : Proc(ICommandCost*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICommandCost*, UInt32),
     release : Proc(ICommandCost*, UInt32),
@@ -12657,7 +12653,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ICommandCost, lpVtbl : ICommandCostVtbl* do
+  record ICommandCost, lpVtbl : ICommandCostVtable* do
     GUID = LibC::GUID.new(0xc733a4e_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ICommandCost*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12690,7 +12686,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ICommandValidateVtbl,
+  record ICommandValidateVtable,
     query_interface : Proc(ICommandValidate*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICommandValidate*, UInt32),
     release : Proc(ICommandValidate*, UInt32),
@@ -12699,7 +12695,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ICommandValidate, lpVtbl : ICommandValidateVtbl* do
+  record ICommandValidate, lpVtbl : ICommandValidateVtable* do
     GUID = LibC::GUID.new(0xc733a18_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ICommandValidate*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12720,7 +12716,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ITableRenameVtbl,
+  record ITableRenameVtable,
     query_interface : Proc(ITableRename*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITableRename*, UInt32),
     release : Proc(ITableRename*, UInt32),
@@ -12729,7 +12725,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ITableRename, lpVtbl : ITableRenameVtbl* do
+  record ITableRename, lpVtbl : ITableRenameVtable* do
     GUID = LibC::GUID.new(0xc733a77_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : ITableRename*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12750,7 +12746,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IDBSchemaCommandVtbl,
+  record IDBSchemaCommandVtable,
     query_interface : Proc(IDBSchemaCommand*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDBSchemaCommand*, UInt32),
     release : Proc(IDBSchemaCommand*, UInt32),
@@ -12759,7 +12755,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IDBSchemaCommand, lpVtbl : IDBSchemaCommandVtbl* do
+  record IDBSchemaCommand, lpVtbl : IDBSchemaCommandVtable* do
     GUID = LibC::GUID.new(0xc733a50_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IDBSchemaCommand*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12780,7 +12776,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IProvideMonikerVtbl,
+  record IProvideMonikerVtable,
     query_interface : Proc(IProvideMoniker*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IProvideMoniker*, UInt32),
     release : Proc(IProvideMoniker*, UInt32),
@@ -12788,7 +12784,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IProvideMoniker, lpVtbl : IProvideMonikerVtbl* do
+  record IProvideMoniker, lpVtbl : IProvideMonikerVtable* do
     GUID = LibC::GUID.new(0xc733a4d_u32, 0x2a1c_u16, 0x11ce_u16, StaticArray[0xad_u8, 0xe5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x44_u8, 0x77_u8, 0x3d_u8])
     def query_interface(this : IProvideMoniker*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12806,7 +12802,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISearchQueryHitsVtbl,
+  record ISearchQueryHitsVtable,
     query_interface : Proc(ISearchQueryHits*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISearchQueryHits*, UInt32),
     release : Proc(ISearchQueryHits*, UInt32),
@@ -12816,7 +12812,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISearchQueryHits, lpVtbl : ISearchQueryHitsVtbl* do
+  record ISearchQueryHits, lpVtbl : ISearchQueryHitsVtable* do
     GUID = LibC::GUID.new(0xed8ce7e0_u32, 0x106c_u16, 0x11ce_u16, StaticArray[0x84_u8, 0xe2_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x4b_u8, 0x99_u8, 0x86_u8])
     def query_interface(this : ISearchQueryHits*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12840,7 +12836,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetQueryStatusVtbl,
+  record IRowsetQueryStatusVtable,
     query_interface : Proc(IRowsetQueryStatus*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetQueryStatus*, UInt32),
     release : Proc(IRowsetQueryStatus*, UInt32),
@@ -12849,7 +12845,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetQueryStatus, lpVtbl : IRowsetQueryStatusVtbl* do
+  record IRowsetQueryStatus, lpVtbl : IRowsetQueryStatusVtable* do
     GUID = LibC::GUID.new(0xa7ac77ed_u32, 0xf8d7_u16, 0x11ce_u16, StaticArray[0xa7_u8, 0x98_u8, 0x0_u8, 0x20_u8, 0xf8_u8, 0x0_u8, 0x80_u8, 0x24_u8])
     def query_interface(this : IRowsetQueryStatus*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12870,7 +12866,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IUMSInitializeVtbl,
+  record IUMSInitializeVtable,
     query_interface : Proc(IUMSInitialize*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IUMSInitialize*, UInt32),
     release : Proc(IUMSInitialize*, UInt32),
@@ -12878,7 +12874,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IUMSInitialize, lpVtbl : IUMSInitializeVtbl* do
+  record IUMSInitialize, lpVtbl : IUMSInitializeVtable* do
     GUID = LibC::GUID.new(0x5cf4ca14_u32, 0xef21_u16, 0x11d0_u16, StaticArray[0x97_u8, 0xe7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xad_u8, 0x98_u8])
     def query_interface(this : IUMSInitialize*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12896,7 +12892,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IUMSVtbl,
+  record IUMSVtable,
     sql_ums_suspend : Proc(IUMS*, UInt32, Void),
     sql_ums_yield : Proc(IUMS*, UInt32, Void),
     sql_ums_switch_premptive : Proc(IUMS*, Void),
@@ -12905,7 +12901,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IUMS, lpVtbl : IUMSVtbl* do
+  record IUMS, lpVtbl : IUMSVtable* do
     GUID = LibC::GUID.new(0x0_u32, 0x0_u16, 0x0_u16, StaticArray[0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8, 0x0_u8])
     def sql_ums_suspend(this : IUMS*, ticks : UInt32) : Void
       @lpVtbl.try &.value.sql_ums_suspend.call(this, ticks)
@@ -12926,7 +12922,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISQLServerErrorInfoVtbl,
+  record ISQLServerErrorInfoVtable,
     query_interface : Proc(ISQLServerErrorInfo*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISQLServerErrorInfo*, UInt32),
     release : Proc(ISQLServerErrorInfo*, UInt32),
@@ -12934,7 +12930,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISQLServerErrorInfo, lpVtbl : ISQLServerErrorInfoVtbl* do
+  record ISQLServerErrorInfo, lpVtbl : ISQLServerErrorInfoVtable* do
     GUID = LibC::GUID.new(0x5cf4ca12_u32, 0xef21_u16, 0x11d0_u16, StaticArray[0x97_u8, 0xe7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xad_u8, 0x98_u8])
     def query_interface(this : ISQLServerErrorInfo*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12952,7 +12948,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record IRowsetFastLoadVtbl,
+  record IRowsetFastLoadVtable,
     query_interface : Proc(IRowsetFastLoad*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IRowsetFastLoad*, UInt32),
     release : Proc(IRowsetFastLoad*, UInt32),
@@ -12961,7 +12957,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record IRowsetFastLoad, lpVtbl : IRowsetFastLoadVtbl* do
+  record IRowsetFastLoad, lpVtbl : IRowsetFastLoadVtable* do
     GUID = LibC::GUID.new(0x5cf4ca13_u32, 0xef21_u16, 0x11d0_u16, StaticArray[0x97_u8, 0xe7_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0xad_u8, 0x98_u8])
     def query_interface(this : IRowsetFastLoad*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -12982,7 +12978,7 @@ module Win32cr::System::Search
   end
 
   @[Extern]
-  record ISchemaLockVtbl,
+  record ISchemaLockVtable,
     query_interface : Proc(ISchemaLock*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchemaLock*, UInt32),
     release : Proc(ISchemaLock*, UInt32),
@@ -12991,7 +12987,7 @@ module Win32cr::System::Search
 
 
   @[Extern]
-  record ISchemaLock, lpVtbl : ISchemaLockVtbl* do
+  record ISchemaLock, lpVtbl : ISchemaLockVtable* do
     GUID = LibC::GUID.new(0x4c2389fb_u32, 0x2511_u16, 0x11d4_u16, StaticArray[0xb2_u8, 0x58_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0x79_u8, 0x71_u8, 0xce_u8])
     def query_interface(this : ISchemaLock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -13012,971 +13008,1394 @@ module Win32cr::System::Search
   end
 
   def sQLAllocConnect(environment_handle : Void*, connection_handle : Void**) : Int16
+    {% if !flag?(:docs) %}
     C.SQLAllocConnect(environment_handle, connection_handle)
+    {% end %}
   end
 
   def sQLAllocEnv(environment_handle : Void**) : Int16
+    {% if !flag?(:docs) %}
     C.SQLAllocEnv(environment_handle)
+    {% end %}
   end
 
   def sQLAllocHandle(handle_type : Int16, input_handle : Void*, output_handle : Void**) : Int16
+    {% if !flag?(:docs) %}
     C.SQLAllocHandle(handle_type, input_handle, output_handle)
+    {% end %}
   end
 
   def sQLAllocStmt(connection_handle : Void*, statement_handle : Void**) : Int16
+    {% if !flag?(:docs) %}
     C.SQLAllocStmt(connection_handle, statement_handle)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLBindCol(statement_handle : Void*, column_number : UInt16, target_type : Int16, target_value : Void*, buffer_length : Int64, str_len_or_ind : Int64*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLBindCol(statement_handle, column_number, target_type, target_value, buffer_length, str_len_or_ind)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLBindParam(statement_handle : Void*, parameter_number : UInt16, value_type : Int16, parameter_type : Int16, length_precision : UInt64, parameter_scale : Int16, parameter_value : Void*, str_len_or_ind : Int64*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLBindParam(statement_handle, parameter_number, value_type, parameter_type, length_precision, parameter_scale, parameter_value, str_len_or_ind)
+    {% end %}
   end
 {% end %}
 
   def sQLCancel(statement_handle : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLCancel(statement_handle)
+    {% end %}
   end
 
   def sQLCancelHandle(handle_type : Int16, input_handle : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLCancelHandle(handle_type, input_handle)
+    {% end %}
   end
 
   def sQLCloseCursor(statement_handle : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLCloseCursor(statement_handle)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLColAttribute(statement_handle : Void*, column_number : UInt16, field_identifier : UInt16, character_attribute : Void*, buffer_length : Int16, string_length : Int16*, numeric_attribute : Int64*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLColAttribute(statement_handle, column_number, field_identifier, character_attribute, buffer_length, string_length, numeric_attribute)
+    {% end %}
   end
 {% end %}
 
   def sQLColumns(statement_handle : Void*, catalog_name : UInt8*, name_length1 : Int16, schema_name : UInt8*, name_length2 : Int16, table_name : UInt8*, name_length3 : Int16, column_name : UInt8*, name_length4 : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLColumns(statement_handle, catalog_name, name_length1, schema_name, name_length2, table_name, name_length3, column_name, name_length4)
+    {% end %}
   end
 
   def sQLCompleteAsync(handle_type : Int16, handle : Void*, async_ret_code_ptr : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLCompleteAsync(handle_type, handle, async_ret_code_ptr)
+    {% end %}
   end
 
   def sQLConnect(connection_handle : Void*, server_name : UInt8*, name_length1 : Int16, user_name : UInt8*, name_length2 : Int16, authentication : UInt8*, name_length3 : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLConnect(connection_handle, server_name, name_length1, user_name, name_length2, authentication, name_length3)
+    {% end %}
   end
 
   def sQLCopyDesc(source_desc_handle : Void*, target_desc_handle : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLCopyDesc(source_desc_handle, target_desc_handle)
+    {% end %}
   end
 
   def sQLDataSources(environment_handle : Void*, direction : UInt16, server_name : UInt8*, buffer_length1 : Int16, name_length1_ptr : Int16*, description : UInt8*, buffer_length2 : Int16, name_length2_ptr : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLDataSources(environment_handle, direction, server_name, buffer_length1, name_length1_ptr, description, buffer_length2, name_length2_ptr)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLDescribeCol(statement_handle : Void*, column_number : UInt16, column_name : UInt8*, buffer_length : Int16, name_length : Int16*, data_type : Int16*, column_size : UInt64*, decimal_digits : Int16*, nullable : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLDescribeCol(statement_handle, column_number, column_name, buffer_length, name_length, data_type, column_size, decimal_digits, nullable)
+    {% end %}
   end
 {% end %}
 
   def sQLDisconnect(connection_handle : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLDisconnect(connection_handle)
+    {% end %}
   end
 
   def sQLEndTran(handle_type : Int16, handle : Void*, completion_type : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLEndTran(handle_type, handle, completion_type)
+    {% end %}
   end
 
   def sQLError(environment_handle : Void*, connection_handle : Void*, statement_handle : Void*, sqlstate : UInt8*, native_error : Int32*, message_text : UInt8*, buffer_length : Int16, text_length : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLError(environment_handle, connection_handle, statement_handle, sqlstate, native_error, message_text, buffer_length, text_length)
+    {% end %}
   end
 
   def sQLExecDirect(statement_handle : Void*, statement_text : UInt8*, text_length : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLExecDirect(statement_handle, statement_text, text_length)
+    {% end %}
   end
 
   def sQLExecute(statement_handle : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLExecute(statement_handle)
+    {% end %}
   end
 
   def sQLFetch(statement_handle : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLFetch(statement_handle)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLFetchScroll(statement_handle : Void*, fetch_orientation : Int16, fetch_offset : Int64) : Int16
+    {% if !flag?(:docs) %}
     C.SQLFetchScroll(statement_handle, fetch_orientation, fetch_offset)
+    {% end %}
   end
 {% end %}
 
   def sQLFreeConnect(connection_handle : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLFreeConnect(connection_handle)
+    {% end %}
   end
 
   def sQLFreeEnv(environment_handle : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLFreeEnv(environment_handle)
+    {% end %}
   end
 
   def sQLFreeHandle(handle_type : Int16, handle : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLFreeHandle(handle_type, handle)
+    {% end %}
   end
 
   def sQLFreeStmt(statement_handle : Void*, option : UInt16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLFreeStmt(statement_handle, option)
+    {% end %}
   end
 
   def sQLGetConnectAttr(connection_handle : Void*, attribute : Int32, value : Void*, buffer_length : Int32, string_length_ptr : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetConnectAttr(connection_handle, attribute, value, buffer_length, string_length_ptr)
+    {% end %}
   end
 
   def sQLGetConnectOption(connection_handle : Void*, option : UInt16, value : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetConnectOption(connection_handle, option, value)
+    {% end %}
   end
 
   def sQLGetCursorName(statement_handle : Void*, cursor_name : UInt8*, buffer_length : Int16, name_length_ptr : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetCursorName(statement_handle, cursor_name, buffer_length, name_length_ptr)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLGetData(statement_handle : Void*, column_number : UInt16, target_type : Int16, target_value : Void*, buffer_length : Int64, str_len_or_ind_ptr : Int64*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetData(statement_handle, column_number, target_type, target_value, buffer_length, str_len_or_ind_ptr)
+    {% end %}
   end
 {% end %}
 
   def sQLGetDescField(descriptor_handle : Void*, rec_number : Int16, field_identifier : Int16, value : Void*, buffer_length : Int32, string_length : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetDescField(descriptor_handle, rec_number, field_identifier, value, buffer_length, string_length)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLGetDescRec(descriptor_handle : Void*, rec_number : Int16, name : UInt8*, buffer_length : Int16, string_length_ptr : Int16*, type_ptr : Int16*, sub_type_ptr : Int16*, length_ptr : Int64*, precision_ptr : Int16*, scale_ptr : Int16*, nullable_ptr : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetDescRec(descriptor_handle, rec_number, name, buffer_length, string_length_ptr, type_ptr, sub_type_ptr, length_ptr, precision_ptr, scale_ptr, nullable_ptr)
+    {% end %}
   end
 {% end %}
 
   def sQLGetDiagField(handle_type : Int16, handle : Void*, rec_number : Int16, diag_identifier : Int16, diag_info : Void*, buffer_length : Int16, string_length : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetDiagField(handle_type, handle, rec_number, diag_identifier, diag_info, buffer_length, string_length)
+    {% end %}
   end
 
   def sQLGetDiagRec(handle_type : Int16, handle : Void*, rec_number : Int16, sqlstate : UInt8*, native_error : Int32*, message_text : UInt8*, buffer_length : Int16, text_length : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetDiagRec(handle_type, handle, rec_number, sqlstate, native_error, message_text, buffer_length, text_length)
+    {% end %}
   end
 
   def sQLGetEnvAttr(environment_handle : Void*, attribute : Int32, value : Void*, buffer_length : Int32, string_length : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetEnvAttr(environment_handle, attribute, value, buffer_length, string_length)
+    {% end %}
   end
 
   def sQLGetFunctions(connection_handle : Void*, function_id : UInt16, supported : UInt16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetFunctions(connection_handle, function_id, supported)
+    {% end %}
   end
 
   def sQLGetInfo(connection_handle : Void*, info_type : UInt16, info_value : Void*, buffer_length : Int16, string_length_ptr : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetInfo(connection_handle, info_type, info_value, buffer_length, string_length_ptr)
+    {% end %}
   end
 
   def sQLGetStmtAttr(statement_handle : Void*, attribute : Int32, value : Void*, buffer_length : Int32, string_length : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetStmtAttr(statement_handle, attribute, value, buffer_length, string_length)
+    {% end %}
   end
 
   def sQLGetStmtOption(statement_handle : Void*, option : UInt16, value : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetStmtOption(statement_handle, option, value)
+    {% end %}
   end
 
   def sQLGetTypeInfo(statement_handle : Void*, data_type : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetTypeInfo(statement_handle, data_type)
+    {% end %}
   end
 
   def sQLNumResultCols(statement_handle : Void*, column_count : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLNumResultCols(statement_handle, column_count)
+    {% end %}
   end
 
   def sQLParamData(statement_handle : Void*, value : Void**) : Int16
+    {% if !flag?(:docs) %}
     C.SQLParamData(statement_handle, value)
+    {% end %}
   end
 
   def sQLPrepare(statement_handle : Void*, statement_text : UInt8*, text_length : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLPrepare(statement_handle, statement_text, text_length)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLPutData(statement_handle : Void*, data : Void*, str_len_or_ind : Int64) : Int16
+    {% if !flag?(:docs) %}
     C.SQLPutData(statement_handle, data, str_len_or_ind)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLRowCount(statement_handle : Void*, row_count : Int64*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLRowCount(statement_handle, row_count)
+    {% end %}
   end
 {% end %}
 
   def sQLSetConnectAttr(connection_handle : Void*, attribute : Int32, value : Void*, string_length : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetConnectAttr(connection_handle, attribute, value, string_length)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLSetConnectOption(connection_handle : Void*, option : UInt16, value : UInt64) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetConnectOption(connection_handle, option, value)
+    {% end %}
   end
 {% end %}
 
   def sQLSetCursorName(statement_handle : Void*, cursor_name : UInt8*, name_length : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetCursorName(statement_handle, cursor_name, name_length)
+    {% end %}
   end
 
   def sQLSetDescField(descriptor_handle : Void*, rec_number : Int16, field_identifier : Int16, value : Void*, buffer_length : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetDescField(descriptor_handle, rec_number, field_identifier, value, buffer_length)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLSetDescRec(descriptor_handle : Void*, rec_number : Int16, type__ : Int16, sub_type : Int16, length : Int64, precision : Int16, scale : Int16, data : Void*, string_length : Int64*, indicator : Int64*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetDescRec(descriptor_handle, rec_number, type__, sub_type, length, precision, scale, data, string_length, indicator)
+    {% end %}
   end
 {% end %}
 
   def sQLSetEnvAttr(environment_handle : Void*, attribute : Int32, value : Void*, string_length : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetEnvAttr(environment_handle, attribute, value, string_length)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLSetParam(statement_handle : Void*, parameter_number : UInt16, value_type : Int16, parameter_type : Int16, length_precision : UInt64, parameter_scale : Int16, parameter_value : Void*, str_len_or_ind : Int64*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetParam(statement_handle, parameter_number, value_type, parameter_type, length_precision, parameter_scale, parameter_value, str_len_or_ind)
+    {% end %}
   end
 {% end %}
 
   def sQLSetStmtAttr(statement_handle : Void*, attribute : Int32, value : Void*, string_length : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetStmtAttr(statement_handle, attribute, value, string_length)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLSetStmtOption(statement_handle : Void*, option : UInt16, value : UInt64) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetStmtOption(statement_handle, option, value)
+    {% end %}
   end
 {% end %}
 
   def sQLSpecialColumns(statement_handle : Void*, identifier_type : UInt16, catalog_name : UInt8*, name_length1 : Int16, schema_name : UInt8*, name_length2 : Int16, table_name : UInt8*, name_length3 : Int16, scope : UInt16, nullable : UInt16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSpecialColumns(statement_handle, identifier_type, catalog_name, name_length1, schema_name, name_length2, table_name, name_length3, scope, nullable)
+    {% end %}
   end
 
   def sQLStatistics(statement_handle : Void*, catalog_name : UInt8*, name_length1 : Int16, schema_name : UInt8*, name_length2 : Int16, table_name : UInt8*, name_length3 : Int16, unique : UInt16, reserved : UInt16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLStatistics(statement_handle, catalog_name, name_length1, schema_name, name_length2, table_name, name_length3, unique, reserved)
+    {% end %}
   end
 
   def sQLTables(statement_handle : Void*, catalog_name : UInt8*, name_length1 : Int16, schema_name : UInt8*, name_length2 : Int16, table_name : UInt8*, name_length3 : Int16, table_type : UInt8*, name_length4 : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLTables(statement_handle, catalog_name, name_length1, schema_name, name_length2, table_name, name_length3, table_type, name_length4)
+    {% end %}
   end
 
   def sQLTransact(environment_handle : Void*, connection_handle : Void*, completion_type : UInt16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLTransact(environment_handle, connection_handle, completion_type)
+    {% end %}
   end
 
   def bcpBatch(param0 : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.bcp_batch(param0)
+    {% end %}
   end
 
   def bcpBind(param0 : Void*, param1 : UInt8*, param2 : Int32, param3 : Int32, param4 : UInt8*, param5 : Int32, param6 : Int32, param7 : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.bcp_bind(param0, param1, param2, param3, param4, param5, param6, param7)
+    {% end %}
   end
 
   def bcpColfmt(param0 : Void*, param1 : Int32, param2 : UInt8, param3 : Int32, param4 : Int32, param5 : UInt8*, param6 : Int32, param7 : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.bcp_colfmt(param0, param1, param2, param3, param4, param5, param6, param7)
+    {% end %}
   end
 
   def bcpCollen(param0 : Void*, param1 : Int32, param2 : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.bcp_collen(param0, param1, param2)
+    {% end %}
   end
 
   def bcpColptr(param0 : Void*, param1 : UInt8*, param2 : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.bcp_colptr(param0, param1, param2)
+    {% end %}
   end
 
   def bcpColumns(param0 : Void*, param1 : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.bcp_columns(param0, param1)
+    {% end %}
   end
 
   def bcpControl(param0 : Void*, param1 : Int32, param2 : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.bcp_control(param0, param1, param2)
+    {% end %}
   end
 
   def bcpDone(param0 : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.bcp_done(param0)
+    {% end %}
   end
 
   def bcpExec(param0 : Void*, param1 : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.bcp_exec(param0, param1)
+    {% end %}
   end
 
   def bcpGetcolfmt(param0 : Void*, param1 : Int32, param2 : Int32, param3 : Void*, param4 : Int32, param5 : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.bcp_getcolfmt(param0, param1, param2, param3, param4, param5)
+    {% end %}
   end
 
   def bcpInitA(param0 : Void*, param1 : Win32cr::Foundation::PSTR, param2 : Win32cr::Foundation::PSTR, param3 : Win32cr::Foundation::PSTR, param4 : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.bcp_initA(param0, param1, param2, param3, param4)
+    {% end %}
   end
 
   def bcpInitW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR, param2 : Win32cr::Foundation::PWSTR, param3 : Win32cr::Foundation::PWSTR, param4 : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.bcp_initW(param0, param1, param2, param3, param4)
+    {% end %}
   end
 
   def bcpMoretext(param0 : Void*, param1 : Int32, param2 : UInt8*) : Int16
+    {% if !flag?(:docs) %}
     C.bcp_moretext(param0, param1, param2)
+    {% end %}
   end
 
   def bcpReadfmtA(param0 : Void*, param1 : Win32cr::Foundation::PSTR) : Int16
+    {% if !flag?(:docs) %}
     C.bcp_readfmtA(param0, param1)
+    {% end %}
   end
 
   def bcpReadfmtW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR) : Int16
+    {% if !flag?(:docs) %}
     C.bcp_readfmtW(param0, param1)
+    {% end %}
   end
 
   def bcpSendrow(param0 : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.bcp_sendrow(param0)
+    {% end %}
   end
 
   def bcpSetcolfmt(param0 : Void*, param1 : Int32, param2 : Int32, param3 : Void*, param4 : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.bcp_setcolfmt(param0, param1, param2, param3, param4)
+    {% end %}
   end
 
   def bcpWritefmtA(param0 : Void*, param1 : Win32cr::Foundation::PSTR) : Int16
+    {% if !flag?(:docs) %}
     C.bcp_writefmtA(param0, param1)
+    {% end %}
   end
 
   def bcpWritefmtW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR) : Int16
+    {% if !flag?(:docs) %}
     C.bcp_writefmtW(param0, param1)
+    {% end %}
   end
 
   def dbprtypeA(param0 : Int32) : Win32cr::Foundation::PSTR
+    {% if !flag?(:docs) %}
     C.dbprtypeA(param0)
+    {% end %}
   end
 
   def dbprtypeW(param0 : Int32) : Win32cr::Foundation::PWSTR
+    {% if !flag?(:docs) %}
     C.dbprtypeW(param0)
+    {% end %}
   end
 
   def sQLLinkedServers(param0 : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLLinkedServers(param0)
+    {% end %}
   end
 
   def sQLLinkedCatalogsA(param0 : Void*, param1 : Win32cr::Foundation::PSTR, param2 : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLLinkedCatalogsA(param0, param1, param2)
+    {% end %}
   end
 
   def sQLLinkedCatalogsW(param0 : Void*, param1 : Win32cr::Foundation::PWSTR, param2 : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLLinkedCatalogsW(param0, param1, param2)
+    {% end %}
   end
 
   def sQLInitEnumServers(pwchServerName : Win32cr::Foundation::PWSTR, pwchInstanceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HANDLE
+    {% if !flag?(:docs) %}
     C.SQLInitEnumServers(pwchServerName, pwchInstanceName)
+    {% end %}
   end
 
   def sQLGetNextEnumeration(hEnumHandle : Win32cr::Foundation::HANDLE, prgEnumData : UInt8*, piEnumLength : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetNextEnumeration(hEnumHandle, prgEnumData, piEnumLength)
+    {% end %}
   end
 
   def sQLCloseEnumServers(hEnumHandle : Win32cr::Foundation::HANDLE) : Int16
+    {% if !flag?(:docs) %}
     C.SQLCloseEnumServers(hEnumHandle)
+    {% end %}
   end
 
   def sQLDriverConnect(hdbc : Void*, hwnd : LibC::IntPtrT, szConnStrIn : UInt8*, cchConnStrIn : Int16, szConnStrOut : UInt8*, cchConnStrOutMax : Int16, pcchConnStrOut : Int16*, fDriverCompletion : UInt16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLDriverConnect(hdbc, hwnd, szConnStrIn, cchConnStrIn, szConnStrOut, cchConnStrOutMax, pcchConnStrOut, fDriverCompletion)
+    {% end %}
   end
 
   def sQLBrowseConnect(hdbc : Void*, szConnStrIn : UInt8*, cchConnStrIn : Int16, szConnStrOut : UInt8*, cchConnStrOutMax : Int16, pcchConnStrOut : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLBrowseConnect(hdbc, szConnStrIn, cchConnStrIn, szConnStrOut, cchConnStrOutMax, pcchConnStrOut)
+    {% end %}
   end
 
   def sQLBulkOperations(statement_handle : Void*, operation : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLBulkOperations(statement_handle, operation)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLColAttributes(hstmt : Void*, icol : UInt16, fDescType : UInt16, rgbDesc : Void*, cbDescMax : Int16, pcbDesc : Int16*, pfDesc : Int64*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLColAttributes(hstmt, icol, fDescType, rgbDesc, cbDescMax, pcbDesc, pfDesc)
+    {% end %}
   end
 {% end %}
 
   def sQLColumnPrivileges(hstmt : Void*, szCatalogName : UInt8*, cchCatalogName : Int16, szSchemaName : UInt8*, cchSchemaName : Int16, szTableName : UInt8*, cchTableName : Int16, szColumnName : UInt8*, cchColumnName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLColumnPrivileges(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, szColumnName, cchColumnName)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLDescribeParam(hstmt : Void*, ipar : UInt16, pfSqlType : Int16*, pcbParamDef : UInt64*, pibScale : Int16*, pfNullable : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLDescribeParam(hstmt, ipar, pfSqlType, pcbParamDef, pibScale, pfNullable)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLExtendedFetch(hstmt : Void*, fFetchType : UInt16, irow : Int64, pcrow : UInt64*, rgfRowStatus : UInt16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLExtendedFetch(hstmt, fFetchType, irow, pcrow, rgfRowStatus)
+    {% end %}
   end
 {% end %}
 
   def sQLForeignKeys(hstmt : Void*, szPkCatalogName : UInt8*, cchPkCatalogName : Int16, szPkSchemaName : UInt8*, cchPkSchemaName : Int16, szPkTableName : UInt8*, cchPkTableName : Int16, szFkCatalogName : UInt8*, cchFkCatalogName : Int16, szFkSchemaName : UInt8*, cchFkSchemaName : Int16, szFkTableName : UInt8*, cchFkTableName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLForeignKeys(hstmt, szPkCatalogName, cchPkCatalogName, szPkSchemaName, cchPkSchemaName, szPkTableName, cchPkTableName, szFkCatalogName, cchFkCatalogName, szFkSchemaName, cchFkSchemaName, szFkTableName, cchFkTableName)
+    {% end %}
   end
 
   def sQLMoreResults(hstmt : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLMoreResults(hstmt)
+    {% end %}
   end
 
   def sQLNativeSql(hdbc : Void*, szSqlStrIn : UInt8*, cchSqlStrIn : Int32, szSqlStr : UInt8*, cchSqlStrMax : Int32, pcbSqlStr : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLNativeSql(hdbc, szSqlStrIn, cchSqlStrIn, szSqlStr, cchSqlStrMax, pcbSqlStr)
+    {% end %}
   end
 
   def sQLNumParams(hstmt : Void*, pcpar : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLNumParams(hstmt, pcpar)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLParamOptions(hstmt : Void*, crow : UInt64, pirow : UInt64*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLParamOptions(hstmt, crow, pirow)
+    {% end %}
   end
 {% end %}
 
   def sQLPrimaryKeys(hstmt : Void*, szCatalogName : UInt8*, cchCatalogName : Int16, szSchemaName : UInt8*, cchSchemaName : Int16, szTableName : UInt8*, cchTableName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLPrimaryKeys(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName)
+    {% end %}
   end
 
   def sQLProcedureColumns(hstmt : Void*, szCatalogName : UInt8*, cchCatalogName : Int16, szSchemaName : UInt8*, cchSchemaName : Int16, szProcName : UInt8*, cchProcName : Int16, szColumnName : UInt8*, cchColumnName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLProcedureColumns(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szProcName, cchProcName, szColumnName, cchColumnName)
+    {% end %}
   end
 
   def sQLProcedures(hstmt : Void*, szCatalogName : UInt8*, cchCatalogName : Int16, szSchemaName : UInt8*, cchSchemaName : Int16, szProcName : UInt8*, cchProcName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLProcedures(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szProcName, cchProcName)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLSetPos(hstmt : Void*, irow : UInt64, fOption : UInt16, fLock : UInt16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetPos(hstmt, irow, fOption, fLock)
+    {% end %}
   end
 {% end %}
 
   def sQLTablePrivileges(hstmt : Void*, szCatalogName : UInt8*, cchCatalogName : Int16, szSchemaName : UInt8*, cchSchemaName : Int16, szTableName : UInt8*, cchTableName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLTablePrivileges(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName)
+    {% end %}
   end
 
   def sQLDrivers(henv : Void*, fDirection : UInt16, szDriverDesc : UInt8*, cchDriverDescMax : Int16, pcchDriverDesc : Int16*, szDriverAttributes : UInt8*, cchDrvrAttrMax : Int16, pcchDrvrAttr : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLDrivers(henv, fDirection, szDriverDesc, cchDriverDescMax, pcchDriverDesc, szDriverAttributes, cchDrvrAttrMax, pcchDrvrAttr)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLBindParameter(hstmt : Void*, ipar : UInt16, fParamType : Int16, fCType : Int16, fSqlType : Int16, cbColDef : UInt64, ibScale : Int16, rgbValue : Void*, cbValueMax : Int64, pcbValue : Int64*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLBindParameter(hstmt, ipar, fParamType, fCType, fSqlType, cbColDef, ibScale, rgbValue, cbValueMax, pcbValue)
+    {% end %}
   end
 {% end %}
 
   def sQLAllocHandleStd(fHandleType : Int16, hInput : Void*, phOutput : Void**) : Int16
+    {% if !flag?(:docs) %}
     C.SQLAllocHandleStd(fHandleType, hInput, phOutput)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLSetScrollOptions(hstmt : Void*, fConcurrency : UInt16, crowKeyset : Int64, crowRowset : UInt16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetScrollOptions(hstmt, fConcurrency, crowKeyset, crowRowset)
+    {% end %}
   end
 {% end %}
 
   def oDBCSetTryWaitValue(dwValue : UInt32) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.ODBCSetTryWaitValue(dwValue)
+    {% end %}
   end
 
   def oDBCGetTryWaitValue : UInt32
+    {% if !flag?(:docs) %}
     C.ODBCGetTryWaitValue
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLColAttributeW(hstmt : Void*, iCol : UInt16, iField : UInt16, pCharAttr : Void*, cbDescMax : Int16, pcbCharAttr : Int16*, pNumAttr : Int64*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLColAttributeW(hstmt, iCol, iField, pCharAttr, cbDescMax, pcbCharAttr, pNumAttr)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLColAttributesW(hstmt : Void*, icol : UInt16, fDescType : UInt16, rgbDesc : Void*, cbDescMax : Int16, pcbDesc : Int16*, pfDesc : Int64*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLColAttributesW(hstmt, icol, fDescType, rgbDesc, cbDescMax, pcbDesc, pfDesc)
+    {% end %}
   end
 {% end %}
 
   def sQLConnectW(hdbc : Void*, szDSN : UInt16*, cchDSN : Int16, szUID : UInt16*, cchUID : Int16, szAuthStr : UInt16*, cchAuthStr : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLConnectW(hdbc, szDSN, cchDSN, szUID, cchUID, szAuthStr, cchAuthStr)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLDescribeColW(hstmt : Void*, icol : UInt16, szColName : UInt16*, cchColNameMax : Int16, pcchColName : Int16*, pfSqlType : Int16*, pcbColDef : UInt64*, pibScale : Int16*, pfNullable : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLDescribeColW(hstmt, icol, szColName, cchColNameMax, pcchColName, pfSqlType, pcbColDef, pibScale, pfNullable)
+    {% end %}
   end
 {% end %}
 
   def sQLErrorW(henv : Void*, hdbc : Void*, hstmt : Void*, wszSqlState : UInt16*, pfNativeError : Int32*, wszErrorMsg : UInt16*, cchErrorMsgMax : Int16, pcchErrorMsg : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLErrorW(henv, hdbc, hstmt, wszSqlState, pfNativeError, wszErrorMsg, cchErrorMsgMax, pcchErrorMsg)
+    {% end %}
   end
 
   def sQLExecDirectW(hstmt : Void*, szSqlStr : UInt16*, text_length : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLExecDirectW(hstmt, szSqlStr, text_length)
+    {% end %}
   end
 
   def sQLGetConnectAttrW(hdbc : Void*, fAttribute : Int32, rgbValue : Void*, cbValueMax : Int32, pcbValue : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetConnectAttrW(hdbc, fAttribute, rgbValue, cbValueMax, pcbValue)
+    {% end %}
   end
 
   def sQLGetCursorNameW(hstmt : Void*, szCursor : UInt16*, cchCursorMax : Int16, pcchCursor : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetCursorNameW(hstmt, szCursor, cchCursorMax, pcchCursor)
+    {% end %}
   end
 
   def sQLSetDescFieldW(descriptor_handle : Void*, rec_number : Int16, field_identifier : Int16, value : Void*, buffer_length : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetDescFieldW(descriptor_handle, rec_number, field_identifier, value, buffer_length)
+    {% end %}
   end
 
   def sQLGetDescFieldW(hdesc : Void*, iRecord : Int16, iField : Int16, rgbValue : Void*, cbBufferLength : Int32, string_length : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetDescFieldW(hdesc, iRecord, iField, rgbValue, cbBufferLength, string_length)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLGetDescRecW(hdesc : Void*, iRecord : Int16, szName : UInt16*, cchNameMax : Int16, pcchName : Int16*, pfType : Int16*, pfSubType : Int16*, pLength : Int64*, pPrecision : Int16*, pScale : Int16*, pNullable : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetDescRecW(hdesc, iRecord, szName, cchNameMax, pcchName, pfType, pfSubType, pLength, pPrecision, pScale, pNullable)
+    {% end %}
   end
 {% end %}
 
   def sQLGetDiagFieldW(fHandleType : Int16, handle : Void*, iRecord : Int16, fDiagField : Int16, rgbDiagInfo : Void*, cbBufferLength : Int16, pcbStringLength : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetDiagFieldW(fHandleType, handle, iRecord, fDiagField, rgbDiagInfo, cbBufferLength, pcbStringLength)
+    {% end %}
   end
 
   def sQLGetDiagRecW(fHandleType : Int16, handle : Void*, iRecord : Int16, szSqlState : UInt16*, pfNativeError : Int32*, szErrorMsg : UInt16*, cchErrorMsgMax : Int16, pcchErrorMsg : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetDiagRecW(fHandleType, handle, iRecord, szSqlState, pfNativeError, szErrorMsg, cchErrorMsgMax, pcchErrorMsg)
+    {% end %}
   end
 
   def sQLPrepareW(hstmt : Void*, szSqlStr : UInt16*, cchSqlStr : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLPrepareW(hstmt, szSqlStr, cchSqlStr)
+    {% end %}
   end
 
   def sQLSetConnectAttrW(hdbc : Void*, fAttribute : Int32, rgbValue : Void*, cbValue : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetConnectAttrW(hdbc, fAttribute, rgbValue, cbValue)
+    {% end %}
   end
 
   def sQLSetCursorNameW(hstmt : Void*, szCursor : UInt16*, cchCursor : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetCursorNameW(hstmt, szCursor, cchCursor)
+    {% end %}
   end
 
   def sQLColumnsW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16, szColumnName : UInt16*, cchColumnName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLColumnsW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, szColumnName, cchColumnName)
+    {% end %}
   end
 
   def sQLGetConnectOptionW(hdbc : Void*, fOption : UInt16, pvParam : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetConnectOptionW(hdbc, fOption, pvParam)
+    {% end %}
   end
 
   def sQLGetInfoW(hdbc : Void*, fInfoType : UInt16, rgbInfoValue : Void*, cbInfoValueMax : Int16, pcbInfoValue : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetInfoW(hdbc, fInfoType, rgbInfoValue, cbInfoValueMax, pcbInfoValue)
+    {% end %}
   end
 
   def sQLGetTypeInfoW(statement_handle : Void*, data_type : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetTypeInfoW(statement_handle, data_type)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLSetConnectOptionW(hdbc : Void*, fOption : UInt16, vParam : UInt64) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetConnectOptionW(hdbc, fOption, vParam)
+    {% end %}
   end
 {% end %}
 
   def sQLSpecialColumnsW(hstmt : Void*, fColType : UInt16, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16, fScope : UInt16, fNullable : UInt16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSpecialColumnsW(hstmt, fColType, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, fScope, fNullable)
+    {% end %}
   end
 
   def sQLStatisticsW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16, fUnique : UInt16, fAccuracy : UInt16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLStatisticsW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, fUnique, fAccuracy)
+    {% end %}
   end
 
   def sQLTablesW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16, szTableType : UInt16*, cchTableType : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLTablesW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, szTableType, cchTableType)
+    {% end %}
   end
 
   def sQLDataSourcesW(henv : Void*, fDirection : UInt16, szDSN : UInt16*, cchDSNMax : Int16, pcchDSN : Int16*, wszDescription : UInt16*, cchDescriptionMax : Int16, pcchDescription : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLDataSourcesW(henv, fDirection, szDSN, cchDSNMax, pcchDSN, wszDescription, cchDescriptionMax, pcchDescription)
+    {% end %}
   end
 
   def sQLDriverConnectW(hdbc : Void*, hwnd : LibC::IntPtrT, szConnStrIn : UInt16*, cchConnStrIn : Int16, szConnStrOut : UInt16*, cchConnStrOutMax : Int16, pcchConnStrOut : Int16*, fDriverCompletion : UInt16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLDriverConnectW(hdbc, hwnd, szConnStrIn, cchConnStrIn, szConnStrOut, cchConnStrOutMax, pcchConnStrOut, fDriverCompletion)
+    {% end %}
   end
 
   def sQLBrowseConnectW(hdbc : Void*, szConnStrIn : UInt16*, cchConnStrIn : Int16, szConnStrOut : UInt16*, cchConnStrOutMax : Int16, pcchConnStrOut : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLBrowseConnectW(hdbc, szConnStrIn, cchConnStrIn, szConnStrOut, cchConnStrOutMax, pcchConnStrOut)
+    {% end %}
   end
 
   def sQLColumnPrivilegesW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16, szColumnName : UInt16*, cchColumnName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLColumnPrivilegesW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName, szColumnName, cchColumnName)
+    {% end %}
   end
 
   def sQLGetStmtAttrW(hstmt : Void*, fAttribute : Int32, rgbValue : Void*, cbValueMax : Int32, pcbValue : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetStmtAttrW(hstmt, fAttribute, rgbValue, cbValueMax, pcbValue)
+    {% end %}
   end
 
   def sQLSetStmtAttrW(hstmt : Void*, fAttribute : Int32, rgbValue : Void*, cbValueMax : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetStmtAttrW(hstmt, fAttribute, rgbValue, cbValueMax)
+    {% end %}
   end
 
   def sQLForeignKeysW(hstmt : Void*, szPkCatalogName : UInt16*, cchPkCatalogName : Int16, szPkSchemaName : UInt16*, cchPkSchemaName : Int16, szPkTableName : UInt16*, cchPkTableName : Int16, szFkCatalogName : UInt16*, cchFkCatalogName : Int16, szFkSchemaName : UInt16*, cchFkSchemaName : Int16, szFkTableName : UInt16*, cchFkTableName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLForeignKeysW(hstmt, szPkCatalogName, cchPkCatalogName, szPkSchemaName, cchPkSchemaName, szPkTableName, cchPkTableName, szFkCatalogName, cchFkCatalogName, szFkSchemaName, cchFkSchemaName, szFkTableName, cchFkTableName)
+    {% end %}
   end
 
   def sQLNativeSqlW(hdbc : Void*, szSqlStrIn : UInt16*, cchSqlStrIn : Int32, szSqlStr : UInt16*, cchSqlStrMax : Int32, pcchSqlStr : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLNativeSqlW(hdbc, szSqlStrIn, cchSqlStrIn, szSqlStr, cchSqlStrMax, pcchSqlStr)
+    {% end %}
   end
 
   def sQLPrimaryKeysW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLPrimaryKeysW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName)
+    {% end %}
   end
 
   def sQLProcedureColumnsW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szProcName : UInt16*, cchProcName : Int16, szColumnName : UInt16*, cchColumnName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLProcedureColumnsW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szProcName, cchProcName, szColumnName, cchColumnName)
+    {% end %}
   end
 
   def sQLProceduresW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szProcName : UInt16*, cchProcName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLProceduresW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szProcName, cchProcName)
+    {% end %}
   end
 
   def sQLTablePrivilegesW(hstmt : Void*, szCatalogName : UInt16*, cchCatalogName : Int16, szSchemaName : UInt16*, cchSchemaName : Int16, szTableName : UInt16*, cchTableName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLTablePrivilegesW(hstmt, szCatalogName, cchCatalogName, szSchemaName, cchSchemaName, szTableName, cchTableName)
+    {% end %}
   end
 
   def sQLDriversW(henv : Void*, fDirection : UInt16, szDriverDesc : UInt16*, cchDriverDescMax : Int16, pcchDriverDesc : Int16*, szDriverAttributes : UInt16*, cchDrvrAttrMax : Int16, pcchDrvrAttr : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLDriversW(henv, fDirection, szDriverDesc, cchDriverDescMax, pcchDriverDesc, szDriverAttributes, cchDrvrAttrMax, pcchDrvrAttr)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLColAttributeA(hstmt : Void*, iCol : Int16, iField : Int16, pCharAttr : Void*, cbCharAttrMax : Int16, pcbCharAttr : Int16*, pNumAttr : Int64*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLColAttributeA(hstmt, iCol, iField, pCharAttr, cbCharAttrMax, pcbCharAttr, pNumAttr)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLColAttributesA(hstmt : Void*, icol : UInt16, fDescType : UInt16, rgbDesc : Void*, cbDescMax : Int16, pcbDesc : Int16*, pfDesc : Int64*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLColAttributesA(hstmt, icol, fDescType, rgbDesc, cbDescMax, pcbDesc, pfDesc)
+    {% end %}
   end
 {% end %}
 
   def sQLConnectA(hdbc : Void*, szDSN : UInt8*, cbDSN : Int16, szUID : UInt8*, cbUID : Int16, szAuthStr : UInt8*, cbAuthStr : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLConnectA(hdbc, szDSN, cbDSN, szUID, cbUID, szAuthStr, cbAuthStr)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLDescribeColA(hstmt : Void*, icol : UInt16, szColName : UInt8*, cbColNameMax : Int16, pcbColName : Int16*, pfSqlType : Int16*, pcbColDef : UInt64*, pibScale : Int16*, pfNullable : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLDescribeColA(hstmt, icol, szColName, cbColNameMax, pcbColName, pfSqlType, pcbColDef, pibScale, pfNullable)
+    {% end %}
   end
 {% end %}
 
   def sQLErrorA(henv : Void*, hdbc : Void*, hstmt : Void*, szSqlState : UInt8*, pfNativeError : Int32*, szErrorMsg : UInt8*, cbErrorMsgMax : Int16, pcbErrorMsg : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLErrorA(henv, hdbc, hstmt, szSqlState, pfNativeError, szErrorMsg, cbErrorMsgMax, pcbErrorMsg)
+    {% end %}
   end
 
   def sQLExecDirectA(hstmt : Void*, szSqlStr : UInt8*, cbSqlStr : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLExecDirectA(hstmt, szSqlStr, cbSqlStr)
+    {% end %}
   end
 
   def sQLGetConnectAttrA(hdbc : Void*, fAttribute : Int32, rgbValue : Void*, cbValueMax : Int32, pcbValue : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetConnectAttrA(hdbc, fAttribute, rgbValue, cbValueMax, pcbValue)
+    {% end %}
   end
 
   def sQLGetCursorNameA(hstmt : Void*, szCursor : UInt8*, cbCursorMax : Int16, pcbCursor : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetCursorNameA(hstmt, szCursor, cbCursorMax, pcbCursor)
+    {% end %}
   end
 
   def sQLGetDescFieldA(hdesc : Void*, iRecord : Int16, iField : Int16, rgbValue : Void*, cbBufferLength : Int32, string_length : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetDescFieldA(hdesc, iRecord, iField, rgbValue, cbBufferLength, string_length)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLGetDescRecA(hdesc : Void*, iRecord : Int16, szName : UInt8*, cbNameMax : Int16, pcbName : Int16*, pfType : Int16*, pfSubType : Int16*, pLength : Int64*, pPrecision : Int16*, pScale : Int16*, pNullable : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetDescRecA(hdesc, iRecord, szName, cbNameMax, pcbName, pfType, pfSubType, pLength, pPrecision, pScale, pNullable)
+    {% end %}
   end
 {% end %}
 
   def sQLGetDiagFieldA(fHandleType : Int16, handle : Void*, iRecord : Int16, fDiagField : Int16, rgbDiagInfo : Void*, cbDiagInfoMax : Int16, pcbDiagInfo : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetDiagFieldA(fHandleType, handle, iRecord, fDiagField, rgbDiagInfo, cbDiagInfoMax, pcbDiagInfo)
+    {% end %}
   end
 
   def sQLGetDiagRecA(fHandleType : Int16, handle : Void*, iRecord : Int16, szSqlState : UInt8*, pfNativeError : Int32*, szErrorMsg : UInt8*, cbErrorMsgMax : Int16, pcbErrorMsg : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetDiagRecA(fHandleType, handle, iRecord, szSqlState, pfNativeError, szErrorMsg, cbErrorMsgMax, pcbErrorMsg)
+    {% end %}
   end
 
   def sQLGetStmtAttrA(hstmt : Void*, fAttribute : Int32, rgbValue : Void*, cbValueMax : Int32, pcbValue : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetStmtAttrA(hstmt, fAttribute, rgbValue, cbValueMax, pcbValue)
+    {% end %}
   end
 
   def sQLGetTypeInfoA(statement_handle : Void*, data_type : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetTypeInfoA(statement_handle, data_type)
+    {% end %}
   end
 
   def sQLPrepareA(hstmt : Void*, szSqlStr : UInt8*, cbSqlStr : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLPrepareA(hstmt, szSqlStr, cbSqlStr)
+    {% end %}
   end
 
   def sQLSetConnectAttrA(hdbc : Void*, fAttribute : Int32, rgbValue : Void*, cbValue : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetConnectAttrA(hdbc, fAttribute, rgbValue, cbValue)
+    {% end %}
   end
 
   def sQLSetCursorNameA(hstmt : Void*, szCursor : UInt8*, cbCursor : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetCursorNameA(hstmt, szCursor, cbCursor)
+    {% end %}
   end
 
   def sQLColumnsA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16, szColumnName : UInt8*, cbColumnName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLColumnsA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName, szColumnName, cbColumnName)
+    {% end %}
   end
 
   def sQLGetConnectOptionA(hdbc : Void*, fOption : UInt16, pvParam : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetConnectOptionA(hdbc, fOption, pvParam)
+    {% end %}
   end
 
   def sQLGetInfoA(hdbc : Void*, fInfoType : UInt16, rgbInfoValue : Void*, cbInfoValueMax : Int16, pcbInfoValue : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetInfoA(hdbc, fInfoType, rgbInfoValue, cbInfoValueMax, pcbInfoValue)
+    {% end %}
   end
 
 {% if flag?(:x86_64) || flag?(:arm) %}
   def sQLSetConnectOptionA(hdbc : Void*, fOption : UInt16, vParam : UInt64) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetConnectOptionA(hdbc, fOption, vParam)
+    {% end %}
   end
 {% end %}
 
   def sQLSpecialColumnsA(hstmt : Void*, fColType : UInt16, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16, fScope : UInt16, fNullable : UInt16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSpecialColumnsA(hstmt, fColType, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName, fScope, fNullable)
+    {% end %}
   end
 
   def sQLStatisticsA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16, fUnique : UInt16, fAccuracy : UInt16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLStatisticsA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName, fUnique, fAccuracy)
+    {% end %}
   end
 
   def sQLTablesA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16, szTableType : UInt8*, cbTableType : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLTablesA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName, szTableType, cbTableType)
+    {% end %}
   end
 
   def sQLDataSourcesA(henv : Void*, fDirection : UInt16, szDSN : UInt8*, cbDSNMax : Int16, pcbDSN : Int16*, szDescription : UInt8*, cbDescriptionMax : Int16, pcbDescription : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLDataSourcesA(henv, fDirection, szDSN, cbDSNMax, pcbDSN, szDescription, cbDescriptionMax, pcbDescription)
+    {% end %}
   end
 
   def sQLDriverConnectA(hdbc : Void*, hwnd : LibC::IntPtrT, szConnStrIn : UInt8*, cbConnStrIn : Int16, szConnStrOut : UInt8*, cbConnStrOutMax : Int16, pcbConnStrOut : Int16*, fDriverCompletion : UInt16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLDriverConnectA(hdbc, hwnd, szConnStrIn, cbConnStrIn, szConnStrOut, cbConnStrOutMax, pcbConnStrOut, fDriverCompletion)
+    {% end %}
   end
 
   def sQLBrowseConnectA(hdbc : Void*, szConnStrIn : UInt8*, cbConnStrIn : Int16, szConnStrOut : UInt8*, cbConnStrOutMax : Int16, pcbConnStrOut : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLBrowseConnectA(hdbc, szConnStrIn, cbConnStrIn, szConnStrOut, cbConnStrOutMax, pcbConnStrOut)
+    {% end %}
   end
 
   def sQLColumnPrivilegesA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16, szColumnName : UInt8*, cbColumnName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLColumnPrivilegesA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName, szColumnName, cbColumnName)
+    {% end %}
   end
 
   def sQLForeignKeysA(hstmt : Void*, szPkCatalogName : UInt8*, cbPkCatalogName : Int16, szPkSchemaName : UInt8*, cbPkSchemaName : Int16, szPkTableName : UInt8*, cbPkTableName : Int16, szFkCatalogName : UInt8*, cbFkCatalogName : Int16, szFkSchemaName : UInt8*, cbFkSchemaName : Int16, szFkTableName : UInt8*, cbFkTableName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLForeignKeysA(hstmt, szPkCatalogName, cbPkCatalogName, szPkSchemaName, cbPkSchemaName, szPkTableName, cbPkTableName, szFkCatalogName, cbFkCatalogName, szFkSchemaName, cbFkSchemaName, szFkTableName, cbFkTableName)
+    {% end %}
   end
 
   def sQLNativeSqlA(hdbc : Void*, szSqlStrIn : UInt8*, cbSqlStrIn : Int32, szSqlStr : UInt8*, cbSqlStrMax : Int32, pcbSqlStr : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLNativeSqlA(hdbc, szSqlStrIn, cbSqlStrIn, szSqlStr, cbSqlStrMax, pcbSqlStr)
+    {% end %}
   end
 
   def sQLPrimaryKeysA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLPrimaryKeysA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName)
+    {% end %}
   end
 
   def sQLProcedureColumnsA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szProcName : UInt8*, cbProcName : Int16, szColumnName : UInt8*, cbColumnName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLProcedureColumnsA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szProcName, cbProcName, szColumnName, cbColumnName)
+    {% end %}
   end
 
   def sQLProceduresA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szProcName : UInt8*, cbProcName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLProceduresA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szProcName, cbProcName)
+    {% end %}
   end
 
   def sQLTablePrivilegesA(hstmt : Void*, szCatalogName : UInt8*, cbCatalogName : Int16, szSchemaName : UInt8*, cbSchemaName : Int16, szTableName : UInt8*, cbTableName : Int16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLTablePrivilegesA(hstmt, szCatalogName, cbCatalogName, szSchemaName, cbSchemaName, szTableName, cbTableName)
+    {% end %}
   end
 
   def sQLDriversA(henv : Void*, fDirection : UInt16, szDriverDesc : UInt8*, cbDriverDescMax : Int16, pcbDriverDesc : Int16*, szDriverAttributes : UInt8*, cbDrvrAttrMax : Int16, pcbDrvrAttr : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLDriversA(henv, fDirection, szDriverDesc, cbDriverDescMax, pcbDriverDesc, szDriverAttributes, cbDrvrAttrMax, pcbDrvrAttr)
+    {% end %}
   end
 
 {% if flag?(:i386) %}
   def sQLBindCol(statement_handle : Void*, column_number : UInt16, target_type : Int16, target_value : Void*, buffer_length : Int32, str_len_or_ind : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLBindCol(statement_handle, column_number, target_type, target_value, buffer_length, str_len_or_ind)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLBindParam(statement_handle : Void*, parameter_number : UInt16, value_type : Int16, parameter_type : Int16, length_precision : UInt32, parameter_scale : Int16, parameter_value : Void*, str_len_or_ind : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLBindParam(statement_handle, parameter_number, value_type, parameter_type, length_precision, parameter_scale, parameter_value, str_len_or_ind)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLColAttribute(statement_handle : Void*, column_number : UInt16, field_identifier : UInt16, character_attribute : Void*, buffer_length : Int16, string_length : Int16*, numeric_attribute : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLColAttribute(statement_handle, column_number, field_identifier, character_attribute, buffer_length, string_length, numeric_attribute)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLDescribeCol(statement_handle : Void*, column_number : UInt16, column_name : UInt8*, buffer_length : Int16, name_length : Int16*, data_type : Int16*, column_size : UInt32*, decimal_digits : Int16*, nullable : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLDescribeCol(statement_handle, column_number, column_name, buffer_length, name_length, data_type, column_size, decimal_digits, nullable)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLFetchScroll(statement_handle : Void*, fetch_orientation : Int16, fetch_offset : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLFetchScroll(statement_handle, fetch_orientation, fetch_offset)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLGetData(statement_handle : Void*, column_number : UInt16, target_type : Int16, target_value : Void*, buffer_length : Int32, str_len_or_ind_ptr : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetData(statement_handle, column_number, target_type, target_value, buffer_length, str_len_or_ind_ptr)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLGetDescRec(descriptor_handle : Void*, rec_number : Int16, name : UInt8*, buffer_length : Int16, string_length_ptr : Int16*, type_ptr : Int16*, sub_type_ptr : Int16*, length_ptr : Int32*, precision_ptr : Int16*, scale_ptr : Int16*, nullable_ptr : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetDescRec(descriptor_handle, rec_number, name, buffer_length, string_length_ptr, type_ptr, sub_type_ptr, length_ptr, precision_ptr, scale_ptr, nullable_ptr)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLPutData(statement_handle : Void*, data : Void*, str_len_or_ind : Int32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLPutData(statement_handle, data, str_len_or_ind)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLRowCount(statement_handle : Void*, row_count : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLRowCount(statement_handle, row_count)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLSetConnectOption(connection_handle : Void*, option : UInt16, value : UInt32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetConnectOption(connection_handle, option, value)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLSetDescRec(descriptor_handle : Void*, rec_number : Int16, type__ : Int16, sub_type : Int16, length : Int32, precision : Int16, scale : Int16, data : Void*, string_length : Int32*, indicator : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetDescRec(descriptor_handle, rec_number, type__, sub_type, length, precision, scale, data, string_length, indicator)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLSetParam(statement_handle : Void*, parameter_number : UInt16, value_type : Int16, parameter_type : Int16, length_precision : UInt32, parameter_scale : Int16, parameter_value : Void*, str_len_or_ind : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetParam(statement_handle, parameter_number, value_type, parameter_type, length_precision, parameter_scale, parameter_value, str_len_or_ind)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLSetStmtOption(statement_handle : Void*, option : UInt16, value : UInt32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetStmtOption(statement_handle, option, value)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLColAttributes(hstmt : Void*, icol : UInt16, fDescType : UInt16, rgbDesc : Void*, cbDescMax : Int16, pcbDesc : Int16*, pfDesc : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLColAttributes(hstmt, icol, fDescType, rgbDesc, cbDescMax, pcbDesc, pfDesc)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLDescribeParam(hstmt : Void*, ipar : UInt16, pfSqlType : Int16*, pcbParamDef : UInt32*, pibScale : Int16*, pfNullable : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLDescribeParam(hstmt, ipar, pfSqlType, pcbParamDef, pibScale, pfNullable)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLExtendedFetch(hstmt : Void*, fFetchType : UInt16, irow : Int32, pcrow : UInt32*, rgfRowStatus : UInt16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLExtendedFetch(hstmt, fFetchType, irow, pcrow, rgfRowStatus)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLParamOptions(hstmt : Void*, crow : UInt32, pirow : UInt32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLParamOptions(hstmt, crow, pirow)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLSetPos(hstmt : Void*, irow : UInt16, fOption : UInt16, fLock : UInt16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetPos(hstmt, irow, fOption, fLock)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLBindParameter(hstmt : Void*, ipar : UInt16, fParamType : Int16, fCType : Int16, fSqlType : Int16, cbColDef : UInt32, ibScale : Int16, rgbValue : Void*, cbValueMax : Int32, pcbValue : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLBindParameter(hstmt, ipar, fParamType, fCType, fSqlType, cbColDef, ibScale, rgbValue, cbValueMax, pcbValue)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLSetScrollOptions(hstmt : Void*, fConcurrency : UInt16, crowKeyset : Int32, crowRowset : UInt16) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetScrollOptions(hstmt, fConcurrency, crowKeyset, crowRowset)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLColAttributeW(hstmt : Void*, iCol : UInt16, iField : UInt16, pCharAttr : Void*, cbDescMax : Int16, pcbCharAttr : Int16*, pNumAttr : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLColAttributeW(hstmt, iCol, iField, pCharAttr, cbDescMax, pcbCharAttr, pNumAttr)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLColAttributesW(hstmt : Void*, icol : UInt16, fDescType : UInt16, rgbDesc : Void*, cbDescMax : Int16, pcbDesc : Int16*, pfDesc : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLColAttributesW(hstmt, icol, fDescType, rgbDesc, cbDescMax, pcbDesc, pfDesc)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLDescribeColW(hstmt : Void*, icol : UInt16, szColName : UInt16*, cchColNameMax : Int16, pcchColName : Int16*, pfSqlType : Int16*, pcbColDef : UInt32*, pibScale : Int16*, pfNullable : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLDescribeColW(hstmt, icol, szColName, cchColNameMax, pcchColName, pfSqlType, pcbColDef, pibScale, pfNullable)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLGetDescRecW(hdesc : Void*, iRecord : Int16, szName : UInt16*, cchNameMax : Int16, pcchName : Int16*, pfType : Int16*, pfSubType : Int16*, pLength : Int32*, pPrecision : Int16*, pScale : Int16*, pNullable : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetDescRecW(hdesc, iRecord, szName, cchNameMax, pcchName, pfType, pfSubType, pLength, pPrecision, pScale, pNullable)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLSetConnectOptionW(hdbc : Void*, fOption : UInt16, vParam : UInt32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetConnectOptionW(hdbc, fOption, vParam)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLColAttributeA(hstmt : Void*, iCol : Int16, iField : Int16, pCharAttr : Void*, cbCharAttrMax : Int16, pcbCharAttr : Int16*, pNumAttr : Void*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLColAttributeA(hstmt, iCol, iField, pCharAttr, cbCharAttrMax, pcbCharAttr, pNumAttr)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLColAttributesA(hstmt : Void*, icol : UInt16, fDescType : UInt16, rgbDesc : Void*, cbDescMax : Int16, pcbDesc : Int16*, pfDesc : Int32*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLColAttributesA(hstmt, icol, fDescType, rgbDesc, cbDescMax, pcbDesc, pfDesc)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLDescribeColA(hstmt : Void*, icol : UInt16, szColName : UInt8*, cbColNameMax : Int16, pcbColName : Int16*, pfSqlType : Int16*, pcbColDef : UInt32*, pibScale : Int16*, pfNullable : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLDescribeColA(hstmt, icol, szColName, cbColNameMax, pcbColName, pfSqlType, pcbColDef, pibScale, pfNullable)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLGetDescRecA(hdesc : Void*, iRecord : Int16, szName : UInt8*, cbNameMax : Int16, pcbName : Int16*, pfType : Int16*, pfSubType : Int16*, pLength : Int32*, pPrecision : Int16*, pScale : Int16*, pNullable : Int16*) : Int16
+    {% if !flag?(:docs) %}
     C.SQLGetDescRecA(hdesc, iRecord, szName, cbNameMax, pcbName, pfType, pfSubType, pLength, pPrecision, pScale, pNullable)
+    {% end %}
   end
 {% end %}
 
 {% if flag?(:i386) %}
   def sQLSetConnectOptionA(hdbc : Void*, fOption : UInt16, vParam : UInt32) : Int16
+    {% if !flag?(:docs) %}
     C.SQLSetConnectOptionA(hdbc, fOption, vParam)
+    {% end %}
   end
 {% end %}
 
-  @[Link("odbc32")]
-  @[Link("odbcbcp")]
+  @[Link("odbc32.dll")]
+  @[Link("odbcbcp.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun SQLAllocConnect(environment_handle : Void*, connection_handle : Void**) : Int16
@@ -14732,4 +15151,5 @@ module Win32cr::System::Search
     {% end %}
 
   end
+  {% end %}
 end

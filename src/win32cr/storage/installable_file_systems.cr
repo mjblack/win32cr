@@ -169,6 +169,16 @@ module Win32cr::Storage::InstallableFileSystems
     property mini_filter : MiniFilter_e__Struct_
     property legacy_filter : LegacyFilter_e__Struct_
 
+      # Nested Type LegacyFilter_e__Struct_
+      @[Extern]
+      struct LegacyFilter_e__Struct_
+    property filter_name_length : UInt16
+    property filter_name_buffer_offset : UInt16
+    def initialize(@filter_name_length : UInt16, @filter_name_buffer_offset : UInt16)
+    end
+      end
+
+
       # Nested Type MiniFilter_e__Struct_
       @[Extern]
       struct MiniFilter_e__Struct_
@@ -179,16 +189,6 @@ module Win32cr::Storage::InstallableFileSystems
     property filter_altitude_length : UInt16
     property filter_altitude_buffer_offset : UInt16
     def initialize(@frame_id : UInt32, @number_of_instances : UInt32, @filter_name_length : UInt16, @filter_name_buffer_offset : UInt16, @filter_altitude_length : UInt16, @filter_altitude_buffer_offset : UInt16)
-    end
-      end
-
-
-      # Nested Type LegacyFilter_e__Struct_
-      @[Extern]
-      struct LegacyFilter_e__Struct_
-    property filter_name_length : UInt16
-    property filter_name_buffer_offset : UInt16
-    def initialize(@filter_name_length : UInt16, @filter_name_buffer_offset : UInt16)
     end
       end
 
@@ -212,6 +212,19 @@ module Win32cr::Storage::InstallableFileSystems
     property mini_filter : MiniFilter_e__Struct_
     property legacy_filter : LegacyFilter_e__Struct_
 
+      # Nested Type LegacyFilter_e__Struct_
+      @[Extern]
+      struct LegacyFilter_e__Struct_
+    property flags : UInt32
+    property filter_name_length : UInt16
+    property filter_name_buffer_offset : UInt16
+    property filter_altitude_length : UInt16
+    property filter_altitude_buffer_offset : UInt16
+    def initialize(@flags : UInt32, @filter_name_length : UInt16, @filter_name_buffer_offset : UInt16, @filter_altitude_length : UInt16, @filter_altitude_buffer_offset : UInt16)
+    end
+      end
+
+
       # Nested Type MiniFilter_e__Struct_
       @[Extern]
       struct MiniFilter_e__Struct_
@@ -223,19 +236,6 @@ module Win32cr::Storage::InstallableFileSystems
     property filter_altitude_length : UInt16
     property filter_altitude_buffer_offset : UInt16
     def initialize(@flags : UInt32, @frame_id : UInt32, @number_of_instances : UInt32, @filter_name_length : UInt16, @filter_name_buffer_offset : UInt16, @filter_altitude_length : UInt16, @filter_altitude_buffer_offset : UInt16)
-    end
-      end
-
-
-      # Nested Type LegacyFilter_e__Struct_
-      @[Extern]
-      struct LegacyFilter_e__Struct_
-    property flags : UInt32
-    property filter_name_length : UInt16
-    property filter_name_buffer_offset : UInt16
-    property filter_altitude_length : UInt16
-    property filter_altitude_buffer_offset : UInt16
-    def initialize(@flags : UInt32, @filter_name_length : UInt16, @filter_name_buffer_offset : UInt16, @filter_altitude_length : UInt16, @filter_altitude_buffer_offset : UInt16)
     end
       end
 
@@ -314,6 +314,22 @@ module Win32cr::Storage::InstallableFileSystems
     property mini_filter : MiniFilter_e__Struct_
     property legacy_filter : LegacyFilter_e__Struct_
 
+      # Nested Type LegacyFilter_e__Struct_
+      @[Extern]
+      struct LegacyFilter_e__Struct_
+    property flags : UInt32
+    property altitude_length : UInt16
+    property altitude_buffer_offset : UInt16
+    property volume_name_length : UInt16
+    property volume_name_buffer_offset : UInt16
+    property filter_name_length : UInt16
+    property filter_name_buffer_offset : UInt16
+    property supported_features : UInt32
+    def initialize(@flags : UInt32, @altitude_length : UInt16, @altitude_buffer_offset : UInt16, @volume_name_length : UInt16, @volume_name_buffer_offset : UInt16, @filter_name_length : UInt16, @filter_name_buffer_offset : UInt16, @supported_features : UInt32)
+    end
+      end
+
+
       # Nested Type MiniFilter_e__Struct_
       @[Extern]
       struct MiniFilter_e__Struct_
@@ -330,22 +346,6 @@ module Win32cr::Storage::InstallableFileSystems
     property filter_name_buffer_offset : UInt16
     property supported_features : UInt32
     def initialize(@flags : UInt32, @frame_id : UInt32, @volume_file_system_type : Win32cr::Storage::InstallableFileSystems::FLT_FILESYSTEM_TYPE, @instance_name_length : UInt16, @instance_name_buffer_offset : UInt16, @altitude_length : UInt16, @altitude_buffer_offset : UInt16, @volume_name_length : UInt16, @volume_name_buffer_offset : UInt16, @filter_name_length : UInt16, @filter_name_buffer_offset : UInt16, @supported_features : UInt32)
-    end
-      end
-
-
-      # Nested Type LegacyFilter_e__Struct_
-      @[Extern]
-      struct LegacyFilter_e__Struct_
-    property flags : UInt32
-    property altitude_length : UInt16
-    property altitude_buffer_offset : UInt16
-    property volume_name_length : UInt16
-    property volume_name_buffer_offset : UInt16
-    property filter_name_length : UInt16
-    property filter_name_buffer_offset : UInt16
-    property supported_features : UInt32
-    def initialize(@flags : UInt32, @altitude_length : UInt16, @altitude_buffer_offset : UInt16, @volume_name_length : UInt16, @volume_name_buffer_offset : UInt16, @filter_name_length : UInt16, @filter_name_buffer_offset : UInt16, @supported_features : UInt32)
     end
       end
 
@@ -374,118 +374,175 @@ module Win32cr::Storage::InstallableFileSystems
   end
 
   def filterLoad(lpFilterName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterLoad(lpFilterName)
+    {% end %}
   end
 
   def filterUnload(lpFilterName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterUnload(lpFilterName)
+    {% end %}
   end
 
   def filterCreate(lpFilterName : Win32cr::Foundation::PWSTR, hFilter : Win32cr::Storage::InstallableFileSystems::HFILTER*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterCreate(lpFilterName, hFilter)
+    {% end %}
   end
 
   def filterClose(hFilter : Win32cr::Storage::InstallableFileSystems::HFILTER) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterClose(hFilter)
+    {% end %}
   end
 
   def filterInstanceCreate(lpFilterName : Win32cr::Foundation::PWSTR, lpVolumeName : Win32cr::Foundation::PWSTR, lpInstanceName : Win32cr::Foundation::PWSTR, hInstance : Win32cr::Storage::InstallableFileSystems::HFILTER_INSTANCE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterInstanceCreate(lpFilterName, lpVolumeName, lpInstanceName, hInstance)
+    {% end %}
   end
 
   def filterInstanceClose(hInstance : Win32cr::Storage::InstallableFileSystems::HFILTER_INSTANCE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterInstanceClose(hInstance)
+    {% end %}
   end
 
   def filterAttach(lpFilterName : Win32cr::Foundation::PWSTR, lpVolumeName : Win32cr::Foundation::PWSTR, lpInstanceName : Win32cr::Foundation::PWSTR, dwCreatedInstanceNameLength : UInt32, lpCreatedInstanceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterAttach(lpFilterName, lpVolumeName, lpInstanceName, dwCreatedInstanceNameLength, lpCreatedInstanceName)
+    {% end %}
   end
 
   def filterAttachAtAltitude(lpFilterName : Win32cr::Foundation::PWSTR, lpVolumeName : Win32cr::Foundation::PWSTR, lpAltitude : Win32cr::Foundation::PWSTR, lpInstanceName : Win32cr::Foundation::PWSTR, dwCreatedInstanceNameLength : UInt32, lpCreatedInstanceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterAttachAtAltitude(lpFilterName, lpVolumeName, lpAltitude, lpInstanceName, dwCreatedInstanceNameLength, lpCreatedInstanceName)
+    {% end %}
   end
 
   def filterDetach(lpFilterName : Win32cr::Foundation::PWSTR, lpVolumeName : Win32cr::Foundation::PWSTR, lpInstanceName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterDetach(lpFilterName, lpVolumeName, lpInstanceName)
+    {% end %}
   end
 
   def filterFindFirst(dwInformationClass : Win32cr::Storage::InstallableFileSystems::FILTER_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*, lpFilterFind : Win32cr::Storage::InstallableFileSystems::FilterFindHandle*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterFindFirst(dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned, lpFilterFind)
+    {% end %}
   end
 
   def filterFindNext(hFilterFind : Win32cr::Foundation::HANDLE, dwInformationClass : Win32cr::Storage::InstallableFileSystems::FILTER_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterFindNext(hFilterFind, dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned)
+    {% end %}
   end
 
   def filterFindClose(hFilterFind : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterFindClose(hFilterFind)
+    {% end %}
   end
 
   def filterVolumeFindFirst(dwInformationClass : Win32cr::Storage::InstallableFileSystems::FILTER_VOLUME_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*, lpVolumeFind : Win32cr::Storage::InstallableFileSystems::FilterVolumeFindHandle*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterVolumeFindFirst(dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned, lpVolumeFind)
+    {% end %}
   end
 
   def filterVolumeFindNext(hVolumeFind : Win32cr::Foundation::HANDLE, dwInformationClass : Win32cr::Storage::InstallableFileSystems::FILTER_VOLUME_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterVolumeFindNext(hVolumeFind, dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned)
+    {% end %}
   end
 
   def filterVolumeFindClose(hVolumeFind : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterVolumeFindClose(hVolumeFind)
+    {% end %}
   end
 
   def filterInstanceFindFirst(lpFilterName : Win32cr::Foundation::PWSTR, dwInformationClass : Win32cr::Storage::InstallableFileSystems::INSTANCE_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*, lpFilterInstanceFind : Win32cr::Storage::InstallableFileSystems::FilterInstanceFindHandle*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterInstanceFindFirst(lpFilterName, dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned, lpFilterInstanceFind)
+    {% end %}
   end
 
   def filterInstanceFindNext(hFilterInstanceFind : Win32cr::Foundation::HANDLE, dwInformationClass : Win32cr::Storage::InstallableFileSystems::INSTANCE_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterInstanceFindNext(hFilterInstanceFind, dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned)
+    {% end %}
   end
 
   def filterInstanceFindClose(hFilterInstanceFind : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterInstanceFindClose(hFilterInstanceFind)
+    {% end %}
   end
 
   def filterVolumeInstanceFindFirst(lpVolumeName : Win32cr::Foundation::PWSTR, dwInformationClass : Win32cr::Storage::InstallableFileSystems::INSTANCE_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*, lpVolumeInstanceFind : Win32cr::Storage::InstallableFileSystems::FilterVolumeInstanceFindHandle*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterVolumeInstanceFindFirst(lpVolumeName, dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned, lpVolumeInstanceFind)
+    {% end %}
   end
 
   def filterVolumeInstanceFindNext(hVolumeInstanceFind : Win32cr::Foundation::HANDLE, dwInformationClass : Win32cr::Storage::InstallableFileSystems::INSTANCE_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterVolumeInstanceFindNext(hVolumeInstanceFind, dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned)
+    {% end %}
   end
 
   def filterVolumeInstanceFindClose(hVolumeInstanceFind : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterVolumeInstanceFindClose(hVolumeInstanceFind)
+    {% end %}
   end
 
   def filterGetInformation(hFilter : Win32cr::Storage::InstallableFileSystems::HFILTER, dwInformationClass : Win32cr::Storage::InstallableFileSystems::FILTER_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterGetInformation(hFilter, dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned)
+    {% end %}
   end
 
   def filterInstanceGetInformation(hInstance : Win32cr::Storage::InstallableFileSystems::HFILTER_INSTANCE, dwInformationClass : Win32cr::Storage::InstallableFileSystems::INSTANCE_INFORMATION_CLASS, lpBuffer : Void*, dwBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterInstanceGetInformation(hInstance, dwInformationClass, lpBuffer, dwBufferSize, lpBytesReturned)
+    {% end %}
   end
 
   def filterConnectCommunicationPort(lpPortName : Win32cr::Foundation::PWSTR, dwOptions : UInt32, lpContext : Void*, wSizeOfContext : UInt16, lpSecurityAttributes : Win32cr::Security::SECURITY_ATTRIBUTES*, hPort : Win32cr::Foundation::HANDLE*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterConnectCommunicationPort(lpPortName, dwOptions, lpContext, wSizeOfContext, lpSecurityAttributes, hPort)
+    {% end %}
   end
 
   def filterSendMessage(hPort : Win32cr::Foundation::HANDLE, lpInBuffer : Void*, dwInBufferSize : UInt32, lpOutBuffer : Void*, dwOutBufferSize : UInt32, lpBytesReturned : UInt32*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterSendMessage(hPort, lpInBuffer, dwInBufferSize, lpOutBuffer, dwOutBufferSize, lpBytesReturned)
+    {% end %}
   end
 
   def filterGetMessage(hPort : Win32cr::Foundation::HANDLE, lpMessageBuffer : Win32cr::Storage::InstallableFileSystems::FILTER_MESSAGE_HEADER*, dwMessageBufferSize : UInt32, lpOverlapped : Win32cr::System::IO::OVERLAPPED*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterGetMessage(hPort, lpMessageBuffer, dwMessageBufferSize, lpOverlapped)
+    {% end %}
   end
 
   def filterReplyMessage(hPort : Win32cr::Foundation::HANDLE, lpReplyBuffer : Win32cr::Storage::InstallableFileSystems::FILTER_REPLY_HEADER*, dwReplyBufferSize : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterReplyMessage(hPort, lpReplyBuffer, dwReplyBufferSize)
+    {% end %}
   end
 
   def filterGetDosName(lpVolumeName : Win32cr::Foundation::PWSTR, lpDosName : UInt16*, dwDosNameBufferSize : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.FilterGetDosName(lpVolumeName, lpDosName, dwDosNameBufferSize)
+    {% end %}
   end
 
-  @[Link("fltlib")]
+  @[Link("fltlib.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun FilterLoad(lpFilterName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
@@ -572,4 +629,5 @@ module Win32cr::Storage::InstallableFileSystems
     fun FilterGetDosName(lpVolumeName : Win32cr::Foundation::PWSTR, lpDosName : UInt16*, dwDosNameBufferSize : UInt32) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

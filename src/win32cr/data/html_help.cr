@@ -314,11 +314,11 @@ module Win32cr::Data::HtmlHelp
     property idString : UInt32
     property pszText : Int8*
     property pt : Win32cr::Foundation::POINT
-    property clrForeground : UInt32
-    property clrBackground : UInt32
+    property clrForeground : Win32cr::Foundation::COLORREF
+    property clrBackground : Win32cr::Foundation::COLORREF
     property rcMargins : Win32cr::Foundation::RECT
     property pszFont : Int8*
-    def initialize(@cbStruct : Int32, @hinst : Win32cr::Foundation::HINSTANCE, @idString : UInt32, @pszText : Int8*, @pt : Win32cr::Foundation::POINT, @clrForeground : UInt32, @clrBackground : UInt32, @rcMargins : Win32cr::Foundation::RECT, @pszFont : Int8*)
+    def initialize(@cbStruct : Int32, @hinst : Win32cr::Foundation::HINSTANCE, @idString : UInt32, @pszText : Int8*, @pt : Win32cr::Foundation::POINT, @clrForeground : Win32cr::Foundation::COLORREF, @clrBackground : Win32cr::Foundation::COLORREF, @rcMargins : Win32cr::Foundation::RECT, @pszFont : Int8*)
     end
   end
 
@@ -461,23 +461,11 @@ module Win32cr::Data::HtmlHelp
     end
   end
 
-  @[Extern]
-  struct IITGroup
-    def initialize()
-    end
-  end
+  alias IITGroup = Void
 
-  @[Extern]
-  struct IITQuery
-    def initialize()
-    end
-  end
+  alias IITQuery = Void
 
-  @[Extern]
-  struct IITStopWordList
-    def initialize()
-    end
-  end
+  alias IITStopWordList = Void
 
   @[Extern]
   struct ROWSTATUS
@@ -498,7 +486,7 @@ module Win32cr::Data::HtmlHelp
   end
 
   @[Extern]
-  record IITPropListVtbl,
+  record IITPropListVtable,
     query_interface : Proc(IITPropList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IITPropList*, UInt32),
     release : Proc(IITPropList*, UInt32),
@@ -529,7 +517,7 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  record IITPropList, lpVtbl : IITPropListVtbl* do
+  record IITPropList, lpVtbl : IITPropListVtable* do
     GUID = LibC::GUID.new(0x1f403bb1_u32, 0x9997_u16, 0x11d0_u16, StaticArray[0xa8_u8, 0x50_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6c_u8, 0x7d_u8, 0x1_u8])
     def query_interface(this : IITPropList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -616,7 +604,7 @@ module Win32cr::Data::HtmlHelp
   end
 
   @[Extern]
-  record IITDatabaseVtbl,
+  record IITDatabaseVtable,
     query_interface : Proc(IITDatabase*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IITDatabase*, UInt32),
     release : Proc(IITDatabase*, UInt32),
@@ -628,7 +616,7 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  record IITDatabase, lpVtbl : IITDatabaseVtbl* do
+  record IITDatabase, lpVtbl : IITDatabaseVtable* do
     GUID = LibC::GUID.new(0x8fa0d5a2_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
     def query_interface(this : IITDatabase*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -658,7 +646,7 @@ module Win32cr::Data::HtmlHelp
   end
 
   @[Extern]
-  record IITWordWheelVtbl,
+  record IITWordWheelVtable,
     query_interface : Proc(IITWordWheel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IITWordWheel*, UInt32),
     release : Proc(IITWordWheel*, UInt32),
@@ -678,7 +666,7 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  record IITWordWheel, lpVtbl : IITWordWheelVtbl* do
+  record IITWordWheel, lpVtbl : IITWordWheelVtable* do
     GUID = LibC::GUID.new(0x8fa0d5a4_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
     def query_interface(this : IITWordWheel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -732,7 +720,7 @@ module Win32cr::Data::HtmlHelp
   end
 
   @[Extern]
-  record IStemSinkVtbl,
+  record IStemSinkVtable,
     query_interface : Proc(IStemSink*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStemSink*, UInt32),
     release : Proc(IStemSink*, UInt32),
@@ -741,7 +729,7 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  record IStemSink, lpVtbl : IStemSinkVtbl* do
+  record IStemSink, lpVtbl : IStemSinkVtable* do
     GUID = LibC::GUID.new(0xfe77c330_u32, 0x7f42_u16, 0x11ce_u16, StaticArray[0xbe_u8, 0x57_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x51_u8, 0xfe_u8, 0x20_u8])
     def query_interface(this : IStemSink*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -762,7 +750,7 @@ module Win32cr::Data::HtmlHelp
   end
 
   @[Extern]
-  record IStemmerConfigVtbl,
+  record IStemmerConfigVtable,
     query_interface : Proc(IStemmerConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IStemmerConfig*, UInt32),
     release : Proc(IStemmerConfig*, UInt32),
@@ -774,7 +762,7 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  record IStemmerConfig, lpVtbl : IStemmerConfigVtbl* do
+  record IStemmerConfig, lpVtbl : IStemmerConfigVtable* do
     GUID = LibC::GUID.new(0x8fa0d5a7_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
     def query_interface(this : IStemmerConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -804,7 +792,7 @@ module Win32cr::Data::HtmlHelp
   end
 
   @[Extern]
-  record IWordBreakerConfigVtbl,
+  record IWordBreakerConfigVtable,
     query_interface : Proc(IWordBreakerConfig*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWordBreakerConfig*, UInt32),
     release : Proc(IWordBreakerConfig*, UInt32),
@@ -820,7 +808,7 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  record IWordBreakerConfig, lpVtbl : IWordBreakerConfigVtbl* do
+  record IWordBreakerConfig, lpVtbl : IWordBreakerConfigVtable* do
     GUID = LibC::GUID.new(0x8fa0d5a6_u32, 0xdedf_u16, 0x11d0_u16, StaticArray[0x9a_u8, 0x61_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xb6_u8, 0x8b_u8, 0xf7_u8])
     def query_interface(this : IWordBreakerConfig*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -862,7 +850,7 @@ module Win32cr::Data::HtmlHelp
   end
 
   @[Extern]
-  record IITResultSetVtbl,
+  record IITResultSetVtable,
     query_interface : Proc(IITResultSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IITResultSet*, UInt32),
     release : Proc(IITResultSet*, UInt32),
@@ -899,7 +887,7 @@ module Win32cr::Data::HtmlHelp
 
 
   @[Extern]
-  record IITResultSet, lpVtbl : IITResultSetVtbl* do
+  record IITResultSet, lpVtbl : IITResultSetVtable* do
     GUID = LibC::GUID.new(0x3bb91d41_u32, 0x998b_u16, 0x11d0_u16, StaticArray[0xa8_u8, 0x50_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0x6c_u8, 0x7d_u8, 0x1_u8])
     def query_interface(this : IITResultSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

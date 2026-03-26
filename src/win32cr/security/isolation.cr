@@ -18,7 +18,7 @@ module Win32cr::Security::Isolation
   end
 
   @[Extern]
-  record IIsolatedAppLauncherVtbl,
+  record IIsolatedAppLauncherVtable,
     query_interface : Proc(IIsolatedAppLauncher*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IIsolatedAppLauncher*, UInt32),
     release : Proc(IIsolatedAppLauncher*, UInt32),
@@ -26,7 +26,7 @@ module Win32cr::Security::Isolation
 
 
   @[Extern]
-  record IIsolatedAppLauncher, lpVtbl : IIsolatedAppLauncherVtbl* do
+  record IIsolatedAppLauncher, lpVtbl : IIsolatedAppLauncherVtable* do
     GUID = LibC::GUID.new(0xf686878f_u32, 0x7b42_u16, 0x4cc4_u16, StaticArray[0x96_u8, 0xfb_u8, 0xf4_u8, 0xf3_u8, 0xb6_u8, 0xe3_u8, 0xd2_u8, 0x4d_u8])
     def query_interface(this : IIsolatedAppLauncher*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -44,48 +44,71 @@ module Win32cr::Security::Isolation
   end
 
   def getAppContainerNamedObjectPath(token : Win32cr::Foundation::HANDLE, app_container_sid : Win32cr::Foundation::PSID, object_path_length : UInt32, object_path : UInt16*, return_length : UInt32*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.GetAppContainerNamedObjectPath(token, app_container_sid, object_path_length, object_path, return_length)
+    {% end %}
   end
 
   def isProcessInWDAGContainer(reserved : Void*, isProcessInWDAGContainer : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.IsProcessInWDAGContainer(reserved, isProcessInWDAGContainer)
+    {% end %}
   end
 
   def isProcessInIsolatedContainer(isProcessInIsolatedContainer : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.IsProcessInIsolatedContainer(isProcessInIsolatedContainer)
+    {% end %}
   end
 
   def isProcessInIsolatedWindowsEnvironment(isProcessInIsolatedWindowsEnvironment : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.IsProcessInIsolatedWindowsEnvironment(isProcessInIsolatedWindowsEnvironment)
+    {% end %}
   end
 
   def createAppContainerProfile(pszAppContainerName : Win32cr::Foundation::PWSTR, pszDisplayName : Win32cr::Foundation::PWSTR, pszDescription : Win32cr::Foundation::PWSTR, pCapabilities : Win32cr::Security::SID_AND_ATTRIBUTES*, dwCapabilityCount : UInt32, ppSidAppContainerSid : Win32cr::Foundation::PSID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.CreateAppContainerProfile(pszAppContainerName, pszDisplayName, pszDescription, pCapabilities, dwCapabilityCount, ppSidAppContainerSid)
+    {% end %}
   end
 
   def deleteAppContainerProfile(pszAppContainerName : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DeleteAppContainerProfile(pszAppContainerName)
+    {% end %}
   end
 
   def getAppContainerRegistryLocation(desiredAccess : UInt32, phAppContainerKey : Win32cr::System::Registry::HKEY*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetAppContainerRegistryLocation(desiredAccess, phAppContainerKey)
+    {% end %}
   end
 
   def getAppContainerFolderPath(pszAppContainerSid : Win32cr::Foundation::PWSTR, ppszPath : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetAppContainerFolderPath(pszAppContainerSid, ppszPath)
+    {% end %}
   end
 
   def deriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName(psidAppContainerSid : Win32cr::Foundation::PSID, pszRestrictedAppContainerName : Win32cr::Foundation::PWSTR, ppsidRestrictedAppContainerSid : Win32cr::Foundation::PSID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DeriveRestrictedAppContainerSidFromAppContainerSidAndRestrictedName(psidAppContainerSid, pszRestrictedAppContainerName, ppsidRestrictedAppContainerSid)
+    {% end %}
   end
 
   def deriveAppContainerSidFromAppContainerName(pszAppContainerName : Win32cr::Foundation::PWSTR, ppsidAppContainerSid : Win32cr::Foundation::PSID*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DeriveAppContainerSidFromAppContainerName(pszAppContainerName, ppsidAppContainerSid)
+    {% end %}
   end
 
-  @[Link("kernel32")]
-  @[Link("isolatedwindowsenvironmentutils")]
-  @[Link("userenv")]
+  @[Link("kernel32.dll")]
+  @[Link("api-ms-win-security-isolatedcontainer-l1-1-1.dll")]
+  @[Link("api-ms-win-security-isolatedcontainer-l1-1-0.dll")]
+  @[Link("isolatedwindowsenvironmentutils.dll")]
+  @[Link("userenv.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun GetAppContainerNamedObjectPath(token : Win32cr::Foundation::HANDLE, app_container_sid : Win32cr::Foundation::PSID, object_path_length : UInt32, object_path : UInt16*, return_length : UInt32*) : Win32cr::Foundation::BOOL
@@ -118,4 +141,5 @@ module Win32cr::Security::Isolation
     fun DeriveAppContainerSidFromAppContainerName(pszAppContainerName : Win32cr::Foundation::PWSTR, ppsidAppContainerSid : Win32cr::Foundation::PSID*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

@@ -12,14 +12,19 @@ module Win32cr::Security::LicenseProtection
   end
 
   def registerLicenseKeyWithExpiration(licenseKey : Win32cr::Foundation::PWSTR, validityInDays : UInt32, status : Win32cr::Security::LicenseProtection::LicenseProtectionStatus*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RegisterLicenseKeyWithExpiration(licenseKey, validityInDays, status)
+    {% end %}
   end
 
   def validateLicenseKeyProtection(licenseKey : Win32cr::Foundation::PWSTR, notValidBefore : Win32cr::Foundation::FILETIME*, notValidAfter : Win32cr::Foundation::FILETIME*, status : Win32cr::Security::LicenseProtection::LicenseProtectionStatus*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ValidateLicenseKeyProtection(licenseKey, notValidBefore, notValidAfter, status)
+    {% end %}
   end
 
-  @[Link("licenseprotection")]
+  @[Link("licenseprotection.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun RegisterLicenseKeyWithExpiration(licenseKey : Win32cr::Foundation::PWSTR, validityInDays : UInt32, status : Win32cr::Security::LicenseProtection::LicenseProtectionStatus*) : Win32cr::Foundation::HRESULT
@@ -28,4 +33,5 @@ module Win32cr::Security::LicenseProtection
     fun ValidateLicenseKeyProtection(licenseKey : Win32cr::Foundation::PWSTR, notValidBefore : Win32cr::Foundation::FILETIME*, notValidAfter : Win32cr::Foundation::FILETIME*, status : Win32cr::Security::LicenseProtection::LicenseProtectionStatus*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

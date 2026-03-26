@@ -951,22 +951,6 @@ module Win32cr::System::Performance
     property anonymous1 : Anonymous1_e__Struct_
     property anonymous2 : Anonymous2_e__Struct_
 
-      # Nested Type Anonymous1_e__Struct_
-      @[Extern]
-      struct Anonymous1_e__Struct_
-    property pdl_auto_name_interval : UInt32
-    property pdl_auto_name_units : UInt32
-    property pdl_command_filename : Win32cr::Foundation::PSTR
-    property pdl_counter_list : Win32cr::Foundation::PSTR
-    property pdl_auto_name_format : UInt32
-    property pdl_sample_interval : UInt32
-    property pdl_log_start_time : Win32cr::Foundation::FILETIME
-    property pdl_log_end_time : Win32cr::Foundation::FILETIME
-    def initialize(@pdl_auto_name_interval : UInt32, @pdl_auto_name_units : UInt32, @pdl_command_filename : Win32cr::Foundation::PSTR, @pdl_counter_list : Win32cr::Foundation::PSTR, @pdl_auto_name_format : UInt32, @pdl_sample_interval : UInt32, @pdl_log_start_time : Win32cr::Foundation::FILETIME, @pdl_log_end_time : Win32cr::Foundation::FILETIME)
-    end
-      end
-
-
       # Nested Type Anonymous2_e__Struct_
       @[Extern]
       struct Anonymous2_e__Struct_
@@ -981,6 +965,22 @@ module Win32cr::System::Performance
     property tl_log_handle : UInt32
     property tl_log_file_name : Win32cr::Foundation::PSTR
     def initialize(@tl_number_of_buffers : UInt32, @tl_minimum_buffers : UInt32, @tl_maximum_buffers : UInt32, @tl_free_buffers : UInt32, @tl_buffer_size : UInt32, @tl_events_lost : UInt32, @tl_logger_thread_id : UInt32, @tl_buffers_written : UInt32, @tl_log_handle : UInt32, @tl_log_file_name : Win32cr::Foundation::PSTR)
+    end
+      end
+
+
+      # Nested Type Anonymous1_e__Struct_
+      @[Extern]
+      struct Anonymous1_e__Struct_
+    property pdl_auto_name_interval : UInt32
+    property pdl_auto_name_units : UInt32
+    property pdl_command_filename : Win32cr::Foundation::PSTR
+    property pdl_counter_list : Win32cr::Foundation::PSTR
+    property pdl_auto_name_format : UInt32
+    property pdl_sample_interval : UInt32
+    property pdl_log_start_time : Win32cr::Foundation::FILETIME
+    property pdl_log_end_time : Win32cr::Foundation::FILETIME
+    def initialize(@pdl_auto_name_interval : UInt32, @pdl_auto_name_units : UInt32, @pdl_command_filename : Win32cr::Foundation::PSTR, @pdl_counter_list : Win32cr::Foundation::PSTR, @pdl_auto_name_format : UInt32, @pdl_sample_interval : UInt32, @pdl_log_start_time : Win32cr::Foundation::FILETIME, @pdl_log_end_time : Win32cr::Foundation::FILETIME)
     end
       end
 
@@ -1010,22 +1010,6 @@ module Win32cr::System::Performance
     property anonymous1 : Anonymous1_e__Struct_
     property anonymous2 : Anonymous2_e__Struct_
 
-      # Nested Type Anonymous1_e__Struct_
-      @[Extern]
-      struct Anonymous1_e__Struct_
-    property pdl_auto_name_interval : UInt32
-    property pdl_auto_name_units : UInt32
-    property pdl_command_filename : Win32cr::Foundation::PWSTR
-    property pdl_counter_list : Win32cr::Foundation::PWSTR
-    property pdl_auto_name_format : UInt32
-    property pdl_sample_interval : UInt32
-    property pdl_log_start_time : Win32cr::Foundation::FILETIME
-    property pdl_log_end_time : Win32cr::Foundation::FILETIME
-    def initialize(@pdl_auto_name_interval : UInt32, @pdl_auto_name_units : UInt32, @pdl_command_filename : Win32cr::Foundation::PWSTR, @pdl_counter_list : Win32cr::Foundation::PWSTR, @pdl_auto_name_format : UInt32, @pdl_sample_interval : UInt32, @pdl_log_start_time : Win32cr::Foundation::FILETIME, @pdl_log_end_time : Win32cr::Foundation::FILETIME)
-    end
-      end
-
-
       # Nested Type Anonymous2_e__Struct_
       @[Extern]
       struct Anonymous2_e__Struct_
@@ -1040,6 +1024,22 @@ module Win32cr::System::Performance
     property tl_log_handle : UInt32
     property tl_log_file_name : Win32cr::Foundation::PWSTR
     def initialize(@tl_number_of_buffers : UInt32, @tl_minimum_buffers : UInt32, @tl_maximum_buffers : UInt32, @tl_free_buffers : UInt32, @tl_buffer_size : UInt32, @tl_events_lost : UInt32, @tl_logger_thread_id : UInt32, @tl_buffers_written : UInt32, @tl_log_handle : UInt32, @tl_log_file_name : Win32cr::Foundation::PWSTR)
+    end
+      end
+
+
+      # Nested Type Anonymous1_e__Struct_
+      @[Extern]
+      struct Anonymous1_e__Struct_
+    property pdl_auto_name_interval : UInt32
+    property pdl_auto_name_units : UInt32
+    property pdl_command_filename : Win32cr::Foundation::PWSTR
+    property pdl_counter_list : Win32cr::Foundation::PWSTR
+    property pdl_auto_name_format : UInt32
+    property pdl_sample_interval : UInt32
+    property pdl_log_start_time : Win32cr::Foundation::FILETIME
+    property pdl_log_end_time : Win32cr::Foundation::FILETIME
+    def initialize(@pdl_auto_name_interval : UInt32, @pdl_auto_name_units : UInt32, @pdl_command_filename : Win32cr::Foundation::PWSTR, @pdl_counter_list : Win32cr::Foundation::PWSTR, @pdl_auto_name_format : UInt32, @pdl_sample_interval : UInt32, @pdl_log_start_time : Win32cr::Foundation::FILETIME, @pdl_log_end_time : Win32cr::Foundation::FILETIME)
     end
       end
 
@@ -1156,7 +1156,7 @@ module Win32cr::System::Performance
   {% end %}
 
   @[Extern]
-  record IDataCollectorSetVtbl,
+  record IDataCollectorSetVtable,
     query_interface : Proc(IDataCollectorSet*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataCollectorSet*, UInt32),
     release : Proc(IDataCollectorSet*, UInt32),
@@ -1227,7 +1227,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record IDataCollectorSet, lpVtbl : IDataCollectorSetVtbl* do
+  record IDataCollectorSet, lpVtbl : IDataCollectorSetVtable* do
     GUID = LibC::GUID.new(0x3837520_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IDataCollectorSet*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1434,7 +1434,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record IDataManagerVtbl,
+  record IDataManagerVtable,
     query_interface : Proc(IDataManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataManager*, UInt32),
     release : Proc(IDataManager*, UInt32),
@@ -1470,7 +1470,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record IDataManager, lpVtbl : IDataManagerVtbl* do
+  record IDataManager, lpVtbl : IDataManagerVtable* do
     GUID = LibC::GUID.new(0x3837541_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IDataManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1572,7 +1572,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record IFolderActionVtbl,
+  record IFolderActionVtable,
     query_interface : Proc(IFolderAction*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFolderAction*, UInt32),
     release : Proc(IFolderAction*, UInt32),
@@ -1591,7 +1591,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record IFolderAction, lpVtbl : IFolderActionVtbl* do
+  record IFolderAction, lpVtbl : IFolderActionVtable* do
     GUID = LibC::GUID.new(0x3837543_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IFolderAction*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1642,7 +1642,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record IFolderActionCollectionVtbl,
+  record IFolderActionCollectionVtable,
     query_interface : Proc(IFolderActionCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IFolderActionCollection*, UInt32),
     release : Proc(IFolderActionCollection*, UInt32),
@@ -1661,7 +1661,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record IFolderActionCollection, lpVtbl : IFolderActionCollectionVtbl* do
+  record IFolderActionCollection, lpVtbl : IFolderActionCollectionVtable* do
     GUID = LibC::GUID.new(0x3837544_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IFolderActionCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1712,7 +1712,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record IDataCollectorVtbl,
+  record IDataCollectorVtable,
     query_interface : Proc(IDataCollector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataCollector*, UInt32),
     release : Proc(IDataCollector*, UInt32),
@@ -1748,7 +1748,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record IDataCollector, lpVtbl : IDataCollectorVtbl* do
+  record IDataCollector, lpVtbl : IDataCollectorVtable* do
     GUID = LibC::GUID.new(0x38374ff_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IDataCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1850,7 +1850,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record IPerformanceCounterDataCollectorVtbl,
+  record IPerformanceCounterDataCollectorVtable,
     query_interface : Proc(IPerformanceCounterDataCollector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPerformanceCounterDataCollector*, UInt32),
     release : Proc(IPerformanceCounterDataCollector*, UInt32),
@@ -1896,7 +1896,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record IPerformanceCounterDataCollector, lpVtbl : IPerformanceCounterDataCollectorVtbl* do
+  record IPerformanceCounterDataCollector, lpVtbl : IPerformanceCounterDataCollectorVtable* do
     GUID = LibC::GUID.new(0x3837506_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IPerformanceCounterDataCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2028,7 +2028,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record ITraceDataCollectorVtbl,
+  record ITraceDataCollectorVtable,
     query_interface : Proc(ITraceDataCollector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITraceDataCollector*, UInt32),
     release : Proc(ITraceDataCollector*, UInt32),
@@ -2104,7 +2104,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record ITraceDataCollector, lpVtbl : ITraceDataCollectorVtbl* do
+  record ITraceDataCollector, lpVtbl : ITraceDataCollectorVtable* do
     GUID = LibC::GUID.new(0x383750b_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : ITraceDataCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2326,7 +2326,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record IConfigurationDataCollectorVtbl,
+  record IConfigurationDataCollectorVtable,
     query_interface : Proc(IConfigurationDataCollector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IConfigurationDataCollector*, UInt32),
     release : Proc(IConfigurationDataCollector*, UInt32),
@@ -2380,7 +2380,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record IConfigurationDataCollector, lpVtbl : IConfigurationDataCollectorVtbl* do
+  record IConfigurationDataCollector, lpVtbl : IConfigurationDataCollectorVtable* do
     GUID = LibC::GUID.new(0x3837514_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IConfigurationDataCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2536,7 +2536,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record IAlertDataCollectorVtbl,
+  record IAlertDataCollectorVtable,
     query_interface : Proc(IAlertDataCollector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IAlertDataCollector*, UInt32),
     release : Proc(IAlertDataCollector*, UInt32),
@@ -2588,7 +2588,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record IAlertDataCollector, lpVtbl : IAlertDataCollectorVtbl* do
+  record IAlertDataCollector, lpVtbl : IAlertDataCollectorVtable* do
     GUID = LibC::GUID.new(0x3837516_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IAlertDataCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2738,7 +2738,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record IApiTracingDataCollectorVtbl,
+  record IApiTracingDataCollectorVtable,
     query_interface : Proc(IApiTracingDataCollector*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IApiTracingDataCollector*, UInt32),
     release : Proc(IApiTracingDataCollector*, UInt32),
@@ -2788,7 +2788,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record IApiTracingDataCollector, lpVtbl : IApiTracingDataCollectorVtbl* do
+  record IApiTracingDataCollector, lpVtbl : IApiTracingDataCollectorVtable* do
     GUID = LibC::GUID.new(0x383751a_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IApiTracingDataCollector*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2932,7 +2932,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record IDataCollectorCollectionVtbl,
+  record IDataCollectorCollectionVtable,
     query_interface : Proc(IDataCollectorCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataCollectorCollection*, UInt32),
     release : Proc(IDataCollectorCollection*, UInt32),
@@ -2952,7 +2952,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record IDataCollectorCollection, lpVtbl : IDataCollectorCollectionVtbl* do
+  record IDataCollectorCollection, lpVtbl : IDataCollectorCollectionVtable* do
     GUID = LibC::GUID.new(0x3837502_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IDataCollectorCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3006,7 +3006,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record IDataCollectorSetCollectionVtbl,
+  record IDataCollectorSetCollectionVtable,
     query_interface : Proc(IDataCollectorSetCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDataCollectorSetCollection*, UInt32),
     release : Proc(IDataCollectorSetCollection*, UInt32),
@@ -3025,7 +3025,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record IDataCollectorSetCollection, lpVtbl : IDataCollectorSetCollectionVtbl* do
+  record IDataCollectorSetCollection, lpVtbl : IDataCollectorSetCollectionVtable* do
     GUID = LibC::GUID.new(0x3837524_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IDataCollectorSetCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3076,7 +3076,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record ITraceDataProviderVtbl,
+  record ITraceDataProviderVtable,
     query_interface : Proc(ITraceDataProvider*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITraceDataProvider*, UInt32),
     release : Proc(ITraceDataProvider*, UInt32),
@@ -3106,7 +3106,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record ITraceDataProvider, lpVtbl : ITraceDataProviderVtbl* do
+  record ITraceDataProvider, lpVtbl : ITraceDataProviderVtable* do
     GUID = LibC::GUID.new(0x3837512_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : ITraceDataProvider*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3190,7 +3190,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record ITraceDataProviderCollectionVtbl,
+  record ITraceDataProviderCollectionVtable,
     query_interface : Proc(ITraceDataProviderCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ITraceDataProviderCollection*, UInt32),
     release : Proc(ITraceDataProviderCollection*, UInt32),
@@ -3211,7 +3211,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record ITraceDataProviderCollection, lpVtbl : ITraceDataProviderCollectionVtbl* do
+  record ITraceDataProviderCollection, lpVtbl : ITraceDataProviderCollectionVtable* do
     GUID = LibC::GUID.new(0x3837510_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : ITraceDataProviderCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3268,7 +3268,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record IScheduleVtbl,
+  record IScheduleVtable,
     query_interface : Proc(ISchedule*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISchedule*, UInt32),
     release : Proc(ISchedule*, UInt32),
@@ -3287,7 +3287,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record ISchedule, lpVtbl : IScheduleVtbl* do
+  record ISchedule, lpVtbl : IScheduleVtable* do
     GUID = LibC::GUID.new(0x383753a_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : ISchedule*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3338,7 +3338,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record IScheduleCollectionVtbl,
+  record IScheduleCollectionVtable,
     query_interface : Proc(IScheduleCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IScheduleCollection*, UInt32),
     release : Proc(IScheduleCollection*, UInt32),
@@ -3357,7 +3357,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record IScheduleCollection, lpVtbl : IScheduleCollectionVtbl* do
+  record IScheduleCollection, lpVtbl : IScheduleCollectionVtable* do
     GUID = LibC::GUID.new(0x383753d_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IScheduleCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3408,7 +3408,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record IValueMapItemVtbl,
+  record IValueMapItemVtable,
     query_interface : Proc(IValueMapItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IValueMapItem*, UInt32),
     release : Proc(IValueMapItem*, UInt32),
@@ -3429,7 +3429,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record IValueMapItem, lpVtbl : IValueMapItemVtbl* do
+  record IValueMapItem, lpVtbl : IValueMapItemVtable* do
     GUID = LibC::GUID.new(0x3837533_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IValueMapItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3486,7 +3486,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record IValueMapVtbl,
+  record IValueMapVtable,
     query_interface : Proc(IValueMap*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IValueMap*, UInt32),
     release : Proc(IValueMap*, UInt32),
@@ -3511,7 +3511,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record IValueMap, lpVtbl : IValueMapVtbl* do
+  record IValueMap, lpVtbl : IValueMapVtable* do
     GUID = LibC::GUID.new(0x3837534_u32, 0x98b_u16, 0x11d8_u16, StaticArray[0x94_u8, 0x14_u8, 0x50_u8, 0x50_u8, 0x54_u8, 0x50_u8, 0x30_u8, 0x30_u8])
     def query_interface(this : IValueMap*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3580,7 +3580,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record ICounterItemVtbl,
+  record ICounterItemVtable,
     query_interface : Proc(ICounterItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICounterItem*, UInt32),
     release : Proc(ICounterItem*, UInt32),
@@ -3599,7 +3599,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record ICounterItem, lpVtbl : ICounterItemVtbl* do
+  record ICounterItem, lpVtbl : ICounterItemVtable* do
     GUID = LibC::GUID.new(0x771a9520_u32, 0xee28_u16, 0x11ce_u16, StaticArray[0x94_u8, 0x1e_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
     def query_interface(this : ICounterItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3650,7 +3650,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record ICounterItem2Vtbl,
+  record ICounterItem2Vtable,
     query_interface : Proc(ICounterItem2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICounterItem2*, UInt32),
     release : Proc(ICounterItem2*, UInt32),
@@ -3674,7 +3674,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record ICounterItem2, lpVtbl : ICounterItem2Vtbl* do
+  record ICounterItem2, lpVtbl : ICounterItem2Vtable* do
     GUID = LibC::GUID.new(0xeefcd4e1_u32, 0xea1c_u16, 0x4435_u16, StaticArray[0xb7_u8, 0xf4_u8, 0xe3_u8, 0x41_u8, 0xba_u8, 0x3_u8, 0xb4_u8, 0xf9_u8])
     def query_interface(this : ICounterItem2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3740,7 +3740,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record ICounterItemUnion_Vtbl,
+  record ICounterItemUnion_Vtable,
     query_interface : Proc(ICounterItemUnion_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICounterItemUnion_*, UInt32),
     release : Proc(ICounterItemUnion_*, UInt32),
@@ -3764,7 +3764,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record ICounterItemUnion_, lpVtbl : ICounterItemUnion_Vtbl* do
+  record ICounterItemUnion_, lpVtbl : ICounterItemUnion_Vtable* do
     GUID = LibC::GUID.new(0xde1a6b74_u32, 0x9182_u16, 0x4c41_u16, StaticArray[0x8e_u8, 0x2c_u8, 0x24_u8, 0xc2_u8, 0xcd_u8, 0x30_u8, 0xee_u8, 0x83_u8])
     def query_interface(this : ICounterItemUnion_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3830,7 +3830,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record DICounterItemVtbl,
+  record DICounterItemVtable,
     query_interface : Proc(DICounterItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DICounterItem*, UInt32),
     release : Proc(DICounterItem*, UInt32),
@@ -3841,7 +3841,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record DICounterItem, lpVtbl : DICounterItemVtbl* do
+  record DICounterItem, lpVtbl : DICounterItemVtable* do
     GUID = LibC::GUID.new(0xc08c4ff2_u32, 0xe2e_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2c_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
     def query_interface(this : DICounterItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3868,7 +3868,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record ICountersVtbl,
+  record ICountersVtable,
     query_interface : Proc(ICounters*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICounters*, UInt32),
     release : Proc(ICounters*, UInt32),
@@ -3884,7 +3884,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record ICounters, lpVtbl : ICountersVtbl* do
+  record ICounters, lpVtbl : ICountersVtable* do
     GUID = LibC::GUID.new(0x79167962_u32, 0x28fc_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x2f_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
     def query_interface(this : ICounters*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3926,7 +3926,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record ILogFileItemVtbl,
+  record ILogFileItemVtable,
     query_interface : Proc(ILogFileItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILogFileItem*, UInt32),
     release : Proc(ILogFileItem*, UInt32),
@@ -3934,7 +3934,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record ILogFileItem, lpVtbl : ILogFileItemVtbl* do
+  record ILogFileItem, lpVtbl : ILogFileItemVtable* do
     GUID = LibC::GUID.new(0xd6b518dd_u32, 0x5c7_u16, 0x418a_u16, StaticArray[0x89_u8, 0xe6_u8, 0x4f_u8, 0x9c_u8, 0xe8_u8, 0xc6_u8, 0x84_u8, 0x1e_u8])
     def query_interface(this : ILogFileItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3952,7 +3952,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record DILogFileItemVtbl,
+  record DILogFileItemVtable,
     query_interface : Proc(DILogFileItem*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DILogFileItem*, UInt32),
     release : Proc(DILogFileItem*, UInt32),
@@ -3963,7 +3963,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record DILogFileItem, lpVtbl : DILogFileItemVtbl* do
+  record DILogFileItem, lpVtbl : DILogFileItemVtable* do
     GUID = LibC::GUID.new(0x8d093ffc_u32, 0xf777_u16, 0x4917_u16, StaticArray[0x82_u8, 0xd1_u8, 0x83_u8, 0x3f_u8, 0xbc_u8, 0x54_u8, 0xc5_u8, 0x8f_u8])
     def query_interface(this : DILogFileItem*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3990,7 +3990,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record ILogFilesVtbl,
+  record ILogFilesVtable,
     query_interface : Proc(ILogFiles*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ILogFiles*, UInt32),
     release : Proc(ILogFiles*, UInt32),
@@ -4006,7 +4006,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record ILogFiles, lpVtbl : ILogFilesVtbl* do
+  record ILogFiles, lpVtbl : ILogFilesVtable* do
     GUID = LibC::GUID.new(0x6a2a97e6_u32, 0x6851_u16, 0x41ea_u16, StaticArray[0x87_u8, 0xad_u8, 0x2a_u8, 0x82_u8, 0x25_u8, 0x33_u8, 0x58_u8, 0x65_u8])
     def query_interface(this : ILogFiles*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4048,7 +4048,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record ISystemMonitorVtbl,
+  record ISystemMonitorVtable,
     query_interface : Proc(ISystemMonitor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISystemMonitor*, UInt32),
     release : Proc(ISystemMonitor*, UInt32),
@@ -4131,7 +4131,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record ISystemMonitor, lpVtbl : ISystemMonitorVtbl* do
+  record ISystemMonitor, lpVtbl : ISystemMonitorVtable* do
     GUID = LibC::GUID.new(0x194eb241_u32, 0xc32c_u16, 0x11cf_u16, StaticArray[0x93_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xdd_u8, 0xea_u8])
     def query_interface(this : ISystemMonitor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4374,7 +4374,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record ISystemMonitor2Vtbl,
+  record ISystemMonitor2Vtable,
     query_interface : Proc(ISystemMonitor2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISystemMonitor2*, UInt32),
     release : Proc(ISystemMonitor2*, UInt32),
@@ -4477,7 +4477,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record ISystemMonitor2, lpVtbl : ISystemMonitor2Vtbl* do
+  record ISystemMonitor2, lpVtbl : ISystemMonitor2Vtable* do
     GUID = LibC::GUID.new(0x8e3206a_u32, 0x5fd2_u16, 0x4fde_u16, StaticArray[0xa8_u8, 0xa5_u8, 0x8c_u8, 0xb3_u8, 0xb6_u8, 0x3d_u8, 0x26_u8, 0x77_u8])
     def query_interface(this : ISystemMonitor2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4780,7 +4780,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record ISystemMonitorUnion_Vtbl,
+  record ISystemMonitorUnion_Vtable,
     query_interface : Proc(ISystemMonitorUnion_*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISystemMonitorUnion_*, UInt32),
     release : Proc(ISystemMonitorUnion_*, UInt32),
@@ -4883,7 +4883,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record ISystemMonitorUnion_, lpVtbl : ISystemMonitorUnion_Vtbl* do
+  record ISystemMonitorUnion_, lpVtbl : ISystemMonitorUnion_Vtable* do
     GUID = LibC::GUID.new(0xc8a77338_u32, 0x265f_u16, 0x4de5_u16, StaticArray[0xaa_u8, 0x25_u8, 0xc7_u8, 0xda_u8, 0x1c_u8, 0xe5_u8, 0xa8_u8, 0xf4_u8])
     def query_interface(this : ISystemMonitorUnion_*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5186,7 +5186,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record DISystemMonitorVtbl,
+  record DISystemMonitorVtable,
     query_interface : Proc(DISystemMonitor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DISystemMonitor*, UInt32),
     release : Proc(DISystemMonitor*, UInt32),
@@ -5197,7 +5197,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record DISystemMonitor, lpVtbl : DISystemMonitorVtbl* do
+  record DISystemMonitor, lpVtbl : DISystemMonitorVtable* do
     GUID = LibC::GUID.new(0x13d73d81_u32, 0xc32e_u16, 0x11cf_u16, StaticArray[0x93_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xdd_u8, 0xea_u8])
     def query_interface(this : DISystemMonitor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5224,7 +5224,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record DISystemMonitorInternalVtbl,
+  record DISystemMonitorInternalVtable,
     query_interface : Proc(DISystemMonitorInternal*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DISystemMonitorInternal*, UInt32),
     release : Proc(DISystemMonitorInternal*, UInt32),
@@ -5235,7 +5235,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record DISystemMonitorInternal, lpVtbl : DISystemMonitorInternalVtbl* do
+  record DISystemMonitorInternal, lpVtbl : DISystemMonitorInternalVtable* do
     GUID = LibC::GUID.new(0x194eb242_u32, 0xc32c_u16, 0x11cf_u16, StaticArray[0x93_u8, 0x98_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xa3_u8, 0xdd_u8, 0xea_u8])
     def query_interface(this : DISystemMonitorInternal*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5262,7 +5262,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record ISystemMonitorEventsVtbl,
+  record ISystemMonitorEventsVtable,
     query_interface : Proc(ISystemMonitorEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISystemMonitorEvents*, UInt32),
     release : Proc(ISystemMonitorEvents*, UInt32),
@@ -5274,7 +5274,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record ISystemMonitorEvents, lpVtbl : ISystemMonitorEventsVtbl* do
+  record ISystemMonitorEvents, lpVtbl : ISystemMonitorEventsVtable* do
     GUID = LibC::GUID.new(0xee660ea0_u32, 0x4abd_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x3a_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
     def query_interface(this : ISystemMonitorEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5304,7 +5304,7 @@ module Win32cr::System::Performance
   end
 
   @[Extern]
-  record DISystemMonitorEventsVtbl,
+  record DISystemMonitorEventsVtable,
     query_interface : Proc(DISystemMonitorEvents*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(DISystemMonitorEvents*, UInt32),
     release : Proc(DISystemMonitorEvents*, UInt32),
@@ -5315,7 +5315,7 @@ module Win32cr::System::Performance
 
 
   @[Extern]
-  record DISystemMonitorEvents, lpVtbl : DISystemMonitorEventsVtbl* do
+  record DISystemMonitorEvents, lpVtbl : DISystemMonitorEventsVtable* do
     GUID = LibC::GUID.new(0x84979930_u32, 0x4ab3_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x3a_u8, 0x0_u8, 0x80_u8, 0x29_u8, 0x0_u8, 0x43_u8, 0x47_u8])
     def query_interface(this : DISystemMonitorEvents*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5350,541 +5350,808 @@ module Win32cr::System::Performance
   #end
 
   def installPerfDllW(szComputerName : Win32cr::Foundation::PWSTR, lpIniFile : Win32cr::Foundation::PWSTR, dwFlags : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.InstallPerfDllW(szComputerName, lpIniFile, dwFlags)
+    {% end %}
   end
 
   def installPerfDllA(szComputerName : Win32cr::Foundation::PSTR, lpIniFile : Win32cr::Foundation::PSTR, dwFlags : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.InstallPerfDllA(szComputerName, lpIniFile, dwFlags)
+    {% end %}
   end
 
   def loadPerfCounterTextStringsA(lpCommandLine : Win32cr::Foundation::PSTR, bQuietModeArg : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.LoadPerfCounterTextStringsA(lpCommandLine, bQuietModeArg)
+    {% end %}
   end
 
   def loadPerfCounterTextStringsW(lpCommandLine : Win32cr::Foundation::PWSTR, bQuietModeArg : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.LoadPerfCounterTextStringsW(lpCommandLine, bQuietModeArg)
+    {% end %}
   end
 
   def unloadPerfCounterTextStringsW(lpCommandLine : Win32cr::Foundation::PWSTR, bQuietModeArg : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.UnloadPerfCounterTextStringsW(lpCommandLine, bQuietModeArg)
+    {% end %}
   end
 
   def unloadPerfCounterTextStringsA(lpCommandLine : Win32cr::Foundation::PSTR, bQuietModeArg : Win32cr::Foundation::BOOL) : UInt32
+    {% if !flag?(:docs) %}
     C.UnloadPerfCounterTextStringsA(lpCommandLine, bQuietModeArg)
+    {% end %}
   end
 
   def updatePerfNameFilesA(szNewCtrFilePath : Win32cr::Foundation::PSTR, szNewHlpFilePath : Win32cr::Foundation::PSTR, szLanguageID : Win32cr::Foundation::PSTR, dwFlags : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.UpdatePerfNameFilesA(szNewCtrFilePath, szNewHlpFilePath, szLanguageID, dwFlags)
+    {% end %}
   end
 
   def updatePerfNameFilesW(szNewCtrFilePath : Win32cr::Foundation::PWSTR, szNewHlpFilePath : Win32cr::Foundation::PWSTR, szLanguageID : Win32cr::Foundation::PWSTR, dwFlags : LibC::UIntPtrT) : UInt32
+    {% if !flag?(:docs) %}
     C.UpdatePerfNameFilesW(szNewCtrFilePath, szNewHlpFilePath, szLanguageID, dwFlags)
+    {% end %}
   end
 
   def setServiceAsTrustedA(szReserved : Win32cr::Foundation::PSTR, szServiceName : Win32cr::Foundation::PSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.SetServiceAsTrustedA(szReserved, szServiceName)
+    {% end %}
   end
 
   def setServiceAsTrustedW(szReserved : Win32cr::Foundation::PWSTR, szServiceName : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.SetServiceAsTrustedW(szReserved, szServiceName)
+    {% end %}
   end
 
   def backupPerfRegistryToFileW(szFileName : Win32cr::Foundation::PWSTR, szCommentString : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.BackupPerfRegistryToFileW(szFileName, szCommentString)
+    {% end %}
   end
 
   def restorePerfRegistryFromFileW(szFileName : Win32cr::Foundation::PWSTR, szLangId : Win32cr::Foundation::PWSTR) : UInt32
+    {% if !flag?(:docs) %}
     C.RestorePerfRegistryFromFileW(szFileName, szLangId)
+    {% end %}
   end
 
   def perfStartProvider(provider_guid : LibC::GUID*, control_callback : Win32cr::System::Performance::PERFLIBREQUEST, phProvider : Win32cr::System::Performance::PerfProviderHandle*) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfStartProvider(provider_guid, control_callback, phProvider)
+    {% end %}
   end
 
   def perfStartProviderEx(provider_guid : LibC::GUID*, provider_context : Win32cr::System::Performance::PERF_PROVIDER_CONTEXT*, provider : Win32cr::System::Performance::PerfProviderHandle*) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfStartProviderEx(provider_guid, provider_context, provider)
+    {% end %}
   end
 
   def perfStopProvider(provider_handle : Win32cr::System::Performance::PerfProviderHandle) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfStopProvider(provider_handle)
+    {% end %}
   end
 
   def perfSetCounterSetInfo(provider_handle : Win32cr::Foundation::HANDLE, template : Win32cr::System::Performance::PERF_COUNTERSET_INFO*, template_size : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfSetCounterSetInfo(provider_handle, template, template_size)
+    {% end %}
   end
 
   def perfCreateInstance(provider_handle : Win32cr::System::Performance::PerfProviderHandle, counter_set_guid : LibC::GUID*, name : Win32cr::Foundation::PWSTR, id : UInt32) : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*
+    {% if !flag?(:docs) %}
     C.PerfCreateInstance(provider_handle, counter_set_guid, name, id)
+    {% end %}
   end
 
   def perfDeleteInstance(provider : Win32cr::System::Performance::PerfProviderHandle, instance_block : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfDeleteInstance(provider, instance_block)
+    {% end %}
   end
 
   def perfQueryInstance(provider_handle : Win32cr::Foundation::HANDLE, counter_set_guid : LibC::GUID*, name : Win32cr::Foundation::PWSTR, id : UInt32) : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*
+    {% if !flag?(:docs) %}
     C.PerfQueryInstance(provider_handle, counter_set_guid, name, id)
+    {% end %}
   end
 
   def perfSetCounterRefValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, address : Void*) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfSetCounterRefValue(provider, instance, counter_id, address)
+    {% end %}
   end
 
   def perfSetULongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfSetULongCounterValue(provider, instance, counter_id, value)
+    {% end %}
   end
 
   def perfSetULongLongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt64) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfSetULongLongCounterValue(provider, instance, counter_id, value)
+    {% end %}
   end
 
   def perfIncrementULongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfIncrementULongCounterValue(provider, instance, counter_id, value)
+    {% end %}
   end
 
   def perfIncrementULongLongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt64) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfIncrementULongLongCounterValue(provider, instance, counter_id, value)
+    {% end %}
   end
 
   def perfDecrementULongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfDecrementULongCounterValue(provider, instance, counter_id, value)
+    {% end %}
   end
 
   def perfDecrementULongLongCounterValue(provider : Win32cr::Foundation::HANDLE, instance : Win32cr::System::Performance::PERF_COUNTERSET_INSTANCE*, counter_id : UInt32, value : UInt64) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfDecrementULongLongCounterValue(provider, instance, counter_id, value)
+    {% end %}
   end
 
   def perfEnumerateCounterSet(szMachine : Win32cr::Foundation::PWSTR, pCounterSetIds : LibC::GUID*, cCounterSetIds : UInt32, pcCounterSetIdsActual : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfEnumerateCounterSet(szMachine, pCounterSetIds, cCounterSetIds, pcCounterSetIdsActual)
+    {% end %}
   end
 
   def perfEnumerateCounterSetInstances(szMachine : Win32cr::Foundation::PWSTR, pCounterSetId : LibC::GUID*, pInstances : Win32cr::System::Performance::PERF_INSTANCE_HEADER*, cbInstances : UInt32, pcbInstancesActual : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfEnumerateCounterSetInstances(szMachine, pCounterSetId, pInstances, cbInstances, pcbInstancesActual)
+    {% end %}
   end
 
   def perfQueryCounterSetRegistrationInfo(szMachine : Win32cr::Foundation::PWSTR, pCounterSetId : LibC::GUID*, requestCode : Win32cr::System::Performance::PerfRegInfoType, requestLangId : UInt32, pbRegInfo : UInt8*, cbRegInfo : UInt32, pcbRegInfoActual : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfQueryCounterSetRegistrationInfo(szMachine, pCounterSetId, requestCode, requestLangId, pbRegInfo, cbRegInfo, pcbRegInfoActual)
+    {% end %}
   end
 
   def perfOpenQueryHandle(szMachine : Win32cr::Foundation::PWSTR, phQuery : Win32cr::System::Performance::PerfQueryHandle*) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfOpenQueryHandle(szMachine, phQuery)
+    {% end %}
   end
 
   def perfCloseQueryHandle(hQuery : Win32cr::Foundation::HANDLE) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfCloseQueryHandle(hQuery)
+    {% end %}
   end
 
   def perfQueryCounterInfo(hQuery : Win32cr::System::Performance::PerfQueryHandle, pCounters : Win32cr::System::Performance::PERF_COUNTER_IDENTIFIER*, cbCounters : UInt32, pcbCountersActual : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfQueryCounterInfo(hQuery, pCounters, cbCounters, pcbCountersActual)
+    {% end %}
   end
 
   def perfQueryCounterData(hQuery : Win32cr::System::Performance::PerfQueryHandle, pCounterBlock : Win32cr::System::Performance::PERF_DATA_HEADER*, cbCounterBlock : UInt32, pcbCounterBlockActual : UInt32*) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfQueryCounterData(hQuery, pCounterBlock, cbCounterBlock, pcbCounterBlockActual)
+    {% end %}
   end
 
   def perfAddCounters(hQuery : Win32cr::System::Performance::PerfQueryHandle, pCounters : Win32cr::System::Performance::PERF_COUNTER_IDENTIFIER*, cbCounters : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfAddCounters(hQuery, pCounters, cbCounters)
+    {% end %}
   end
 
   def perfDeleteCounters(hQuery : Win32cr::System::Performance::PerfQueryHandle, pCounters : Win32cr::System::Performance::PERF_COUNTER_IDENTIFIER*, cbCounters : UInt32) : UInt32
+    {% if !flag?(:docs) %}
     C.PerfDeleteCounters(hQuery, pCounters, cbCounters)
+    {% end %}
   end
 
   def pdhGetDllVersion(lpdwVersion : Win32cr::System::Performance::PDH_DLL_VERSION*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetDllVersion(lpdwVersion)
+    {% end %}
   end
 
   def pdhOpenQueryW(szDataSource : Win32cr::Foundation::PWSTR, dwUserData : LibC::UIntPtrT, phQuery : LibC::IntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhOpenQueryW(szDataSource, dwUserData, phQuery)
+    {% end %}
   end
 
   def pdhOpenQueryA(szDataSource : Win32cr::Foundation::PSTR, dwUserData : LibC::UIntPtrT, phQuery : LibC::IntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhOpenQueryA(szDataSource, dwUserData, phQuery)
+    {% end %}
   end
 
   def pdhAddCounterW(hQuery : LibC::IntPtrT, szFullCounterPath : Win32cr::Foundation::PWSTR, dwUserData : LibC::UIntPtrT, phCounter : LibC::IntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhAddCounterW(hQuery, szFullCounterPath, dwUserData, phCounter)
+    {% end %}
   end
 
   def pdhAddCounterA(hQuery : LibC::IntPtrT, szFullCounterPath : Win32cr::Foundation::PSTR, dwUserData : LibC::UIntPtrT, phCounter : LibC::IntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhAddCounterA(hQuery, szFullCounterPath, dwUserData, phCounter)
+    {% end %}
   end
 
   def pdhAddEnglishCounterW(hQuery : LibC::IntPtrT, szFullCounterPath : Win32cr::Foundation::PWSTR, dwUserData : LibC::UIntPtrT, phCounter : LibC::IntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhAddEnglishCounterW(hQuery, szFullCounterPath, dwUserData, phCounter)
+    {% end %}
   end
 
   def pdhAddEnglishCounterA(hQuery : LibC::IntPtrT, szFullCounterPath : Win32cr::Foundation::PSTR, dwUserData : LibC::UIntPtrT, phCounter : LibC::IntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhAddEnglishCounterA(hQuery, szFullCounterPath, dwUserData, phCounter)
+    {% end %}
   end
 
   def pdhCollectQueryDataWithTime(hQuery : LibC::IntPtrT, pllTimeStamp : Int64*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhCollectQueryDataWithTime(hQuery, pllTimeStamp)
+    {% end %}
   end
 
   def pdhValidatePathExW(hDataSource : LibC::IntPtrT, szFullPathBuffer : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.PdhValidatePathExW(hDataSource, szFullPathBuffer)
+    {% end %}
   end
 
   def pdhValidatePathExA(hDataSource : LibC::IntPtrT, szFullPathBuffer : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.PdhValidatePathExA(hDataSource, szFullPathBuffer)
+    {% end %}
   end
 
   def pdhRemoveCounter(hCounter : LibC::IntPtrT) : Int32
+    {% if !flag?(:docs) %}
     C.PdhRemoveCounter(hCounter)
+    {% end %}
   end
 
   def pdhCollectQueryData(hQuery : LibC::IntPtrT) : Int32
+    {% if !flag?(:docs) %}
     C.PdhCollectQueryData(hQuery)
+    {% end %}
   end
 
   def pdhCloseQuery(hQuery : LibC::IntPtrT) : Int32
+    {% if !flag?(:docs) %}
     C.PdhCloseQuery(hQuery)
+    {% end %}
   end
 
   def pdhGetFormattedCounterValue(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, lpdwType : UInt32*, pValue : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetFormattedCounterValue(hCounter, dwFormat, lpdwType, pValue)
+    {% end %}
   end
 
   def pdhGetFormattedCounterArrayA(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, lpdwBufferSize : UInt32*, lpdwItemCount : UInt32*, item_buffer : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE_ITEM_A*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetFormattedCounterArrayA(hCounter, dwFormat, lpdwBufferSize, lpdwItemCount, item_buffer)
+    {% end %}
   end
 
   def pdhGetFormattedCounterArrayW(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, lpdwBufferSize : UInt32*, lpdwItemCount : UInt32*, item_buffer : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE_ITEM_W*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetFormattedCounterArrayW(hCounter, dwFormat, lpdwBufferSize, lpdwItemCount, item_buffer)
+    {% end %}
   end
 
   def pdhGetRawCounterValue(hCounter : LibC::IntPtrT, lpdwType : UInt32*, pValue : Win32cr::System::Performance::PDH_RAW_COUNTER*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetRawCounterValue(hCounter, lpdwType, pValue)
+    {% end %}
   end
 
   def pdhGetRawCounterArrayA(hCounter : LibC::IntPtrT, lpdwBufferSize : UInt32*, lpdwItemCount : UInt32*, item_buffer : Win32cr::System::Performance::PDH_RAW_COUNTER_ITEM_A*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetRawCounterArrayA(hCounter, lpdwBufferSize, lpdwItemCount, item_buffer)
+    {% end %}
   end
 
   def pdhGetRawCounterArrayW(hCounter : LibC::IntPtrT, lpdwBufferSize : UInt32*, lpdwItemCount : UInt32*, item_buffer : Win32cr::System::Performance::PDH_RAW_COUNTER_ITEM_W*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetRawCounterArrayW(hCounter, lpdwBufferSize, lpdwItemCount, item_buffer)
+    {% end %}
   end
 
   def pdhCalculateCounterFromRawValue(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, rawValue1 : Win32cr::System::Performance::PDH_RAW_COUNTER*, rawValue2 : Win32cr::System::Performance::PDH_RAW_COUNTER*, fmtValue : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhCalculateCounterFromRawValue(hCounter, dwFormat, rawValue1, rawValue2, fmtValue)
+    {% end %}
   end
 
   def pdhComputeCounterStatistics(hCounter : LibC::IntPtrT, dwFormat : Win32cr::System::Performance::PDH_FMT, dwFirstEntry : UInt32, dwNumEntries : UInt32, lpRawValueArray : Win32cr::System::Performance::PDH_RAW_COUNTER*, data : Win32cr::System::Performance::PDH_STATISTICS*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhComputeCounterStatistics(hCounter, dwFormat, dwFirstEntry, dwNumEntries, lpRawValueArray, data)
+    {% end %}
   end
 
   def pdhGetCounterInfoW(hCounter : LibC::IntPtrT, bRetrieveExplainText : Win32cr::Foundation::BOOLEAN, pdwBufferSize : UInt32*, lpBuffer : Win32cr::System::Performance::PDH_COUNTER_INFO_W*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetCounterInfoW(hCounter, bRetrieveExplainText, pdwBufferSize, lpBuffer)
+    {% end %}
   end
 
   def pdhGetCounterInfoA(hCounter : LibC::IntPtrT, bRetrieveExplainText : Win32cr::Foundation::BOOLEAN, pdwBufferSize : UInt32*, lpBuffer : Win32cr::System::Performance::PDH_COUNTER_INFO_A*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetCounterInfoA(hCounter, bRetrieveExplainText, pdwBufferSize, lpBuffer)
+    {% end %}
   end
 
   def pdhSetCounterScaleFactor(hCounter : LibC::IntPtrT, lFactor : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.PdhSetCounterScaleFactor(hCounter, lFactor)
+    {% end %}
   end
 
   def pdhConnectMachineW(szMachineName : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.PdhConnectMachineW(szMachineName)
+    {% end %}
   end
 
   def pdhConnectMachineA(szMachineName : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.PdhConnectMachineA(szMachineName)
+    {% end %}
   end
 
   def pdhEnumMachinesW(szDataSource : Win32cr::Foundation::PWSTR, mszMachineList : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhEnumMachinesW(szDataSource, mszMachineList, pcchBufferSize)
+    {% end %}
   end
 
   def pdhEnumMachinesA(szDataSource : Win32cr::Foundation::PSTR, mszMachineList : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhEnumMachinesA(szDataSource, mszMachineList, pcchBufferSize)
+    {% end %}
   end
 
   def pdhEnumObjectsW(szDataSource : Win32cr::Foundation::PWSTR, szMachineName : Win32cr::Foundation::PWSTR, mszObjectList : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, bRefresh : Win32cr::Foundation::BOOL) : Int32
+    {% if !flag?(:docs) %}
     C.PdhEnumObjectsW(szDataSource, szMachineName, mszObjectList, pcchBufferSize, dwDetailLevel, bRefresh)
+    {% end %}
   end
 
   def pdhEnumObjectsA(szDataSource : Win32cr::Foundation::PSTR, szMachineName : Win32cr::Foundation::PSTR, mszObjectList : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, bRefresh : Win32cr::Foundation::BOOL) : Int32
+    {% if !flag?(:docs) %}
     C.PdhEnumObjectsA(szDataSource, szMachineName, mszObjectList, pcchBufferSize, dwDetailLevel, bRefresh)
+    {% end %}
   end
 
   def pdhEnumObjectItemsW(szDataSource : Win32cr::Foundation::PWSTR, szMachineName : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, mszCounterList : Win32cr::Foundation::PWSTR, pcchCounterListLength : UInt32*, mszInstanceList : Win32cr::Foundation::PWSTR, pcchInstanceListLength : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, dwFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.PdhEnumObjectItemsW(szDataSource, szMachineName, szObjectName, mszCounterList, pcchCounterListLength, mszInstanceList, pcchInstanceListLength, dwDetailLevel, dwFlags)
+    {% end %}
   end
 
   def pdhEnumObjectItemsA(szDataSource : Win32cr::Foundation::PSTR, szMachineName : Win32cr::Foundation::PSTR, szObjectName : Win32cr::Foundation::PSTR, mszCounterList : Win32cr::Foundation::PSTR, pcchCounterListLength : UInt32*, mszInstanceList : Win32cr::Foundation::PSTR, pcchInstanceListLength : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, dwFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.PdhEnumObjectItemsA(szDataSource, szMachineName, szObjectName, mszCounterList, pcchCounterListLength, mszInstanceList, pcchInstanceListLength, dwDetailLevel, dwFlags)
+    {% end %}
   end
 
   def pdhMakeCounterPathW(pCounterPathElements : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_W*, szFullPathBuffer : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*, dwFlags : Win32cr::System::Performance::PDH_PATH_FLAGS) : Int32
+    {% if !flag?(:docs) %}
     C.PdhMakeCounterPathW(pCounterPathElements, szFullPathBuffer, pcchBufferSize, dwFlags)
+    {% end %}
   end
 
   def pdhMakeCounterPathA(pCounterPathElements : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_A*, szFullPathBuffer : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*, dwFlags : Win32cr::System::Performance::PDH_PATH_FLAGS) : Int32
+    {% if !flag?(:docs) %}
     C.PdhMakeCounterPathA(pCounterPathElements, szFullPathBuffer, pcchBufferSize, dwFlags)
+    {% end %}
   end
 
   def pdhParseCounterPathW(szFullPathBuffer : Win32cr::Foundation::PWSTR, pCounterPathElements : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_W*, pdwBufferSize : UInt32*, dwFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.PdhParseCounterPathW(szFullPathBuffer, pCounterPathElements, pdwBufferSize, dwFlags)
+    {% end %}
   end
 
   def pdhParseCounterPathA(szFullPathBuffer : Win32cr::Foundation::PSTR, pCounterPathElements : Win32cr::System::Performance::PDH_COUNTER_PATH_ELEMENTS_A*, pdwBufferSize : UInt32*, dwFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.PdhParseCounterPathA(szFullPathBuffer, pCounterPathElements, pdwBufferSize, dwFlags)
+    {% end %}
   end
 
   def pdhParseInstanceNameW(szInstanceString : Win32cr::Foundation::PWSTR, szInstanceName : Win32cr::Foundation::PWSTR, pcchInstanceNameLength : UInt32*, szParentName : Win32cr::Foundation::PWSTR, pcchParentNameLength : UInt32*, lpIndex : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhParseInstanceNameW(szInstanceString, szInstanceName, pcchInstanceNameLength, szParentName, pcchParentNameLength, lpIndex)
+    {% end %}
   end
 
   def pdhParseInstanceNameA(szInstanceString : Win32cr::Foundation::PSTR, szInstanceName : Win32cr::Foundation::PSTR, pcchInstanceNameLength : UInt32*, szParentName : Win32cr::Foundation::PSTR, pcchParentNameLength : UInt32*, lpIndex : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhParseInstanceNameA(szInstanceString, szInstanceName, pcchInstanceNameLength, szParentName, pcchParentNameLength, lpIndex)
+    {% end %}
   end
 
   def pdhValidatePathW(szFullPathBuffer : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.PdhValidatePathW(szFullPathBuffer)
+    {% end %}
   end
 
   def pdhValidatePathA(szFullPathBuffer : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.PdhValidatePathA(szFullPathBuffer)
+    {% end %}
   end
 
   def pdhGetDefaultPerfObjectW(szDataSource : Win32cr::Foundation::PWSTR, szMachineName : Win32cr::Foundation::PWSTR, szDefaultObjectName : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetDefaultPerfObjectW(szDataSource, szMachineName, szDefaultObjectName, pcchBufferSize)
+    {% end %}
   end
 
   def pdhGetDefaultPerfObjectA(szDataSource : Win32cr::Foundation::PSTR, szMachineName : Win32cr::Foundation::PSTR, szDefaultObjectName : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetDefaultPerfObjectA(szDataSource, szMachineName, szDefaultObjectName, pcchBufferSize)
+    {% end %}
   end
 
   def pdhGetDefaultPerfCounterW(szDataSource : Win32cr::Foundation::PWSTR, szMachineName : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szDefaultCounterName : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetDefaultPerfCounterW(szDataSource, szMachineName, szObjectName, szDefaultCounterName, pcchBufferSize)
+    {% end %}
   end
 
   def pdhGetDefaultPerfCounterA(szDataSource : Win32cr::Foundation::PSTR, szMachineName : Win32cr::Foundation::PSTR, szObjectName : Win32cr::Foundation::PSTR, szDefaultCounterName : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetDefaultPerfCounterA(szDataSource, szMachineName, szObjectName, szDefaultCounterName, pcchBufferSize)
+    {% end %}
   end
 
   def pdhBrowseCountersW(pBrowseDlgData : Win32cr::System::Performance::PDH_BROWSE_DLG_CONFIG_W*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhBrowseCountersW(pBrowseDlgData)
+    {% end %}
   end
 
   def pdhBrowseCountersA(pBrowseDlgData : Win32cr::System::Performance::PDH_BROWSE_DLG_CONFIG_A*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhBrowseCountersA(pBrowseDlgData)
+    {% end %}
   end
 
   def pdhExpandCounterPathW(szWildCardPath : Win32cr::Foundation::PWSTR, mszExpandedPathList : Win32cr::Foundation::PWSTR, pcchPathListLength : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhExpandCounterPathW(szWildCardPath, mszExpandedPathList, pcchPathListLength)
+    {% end %}
   end
 
   def pdhExpandCounterPathA(szWildCardPath : Win32cr::Foundation::PSTR, mszExpandedPathList : Win32cr::Foundation::PSTR, pcchPathListLength : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhExpandCounterPathA(szWildCardPath, mszExpandedPathList, pcchPathListLength)
+    {% end %}
   end
 
   def pdhLookupPerfNameByIndexW(szMachineName : Win32cr::Foundation::PWSTR, dwNameIndex : UInt32, szNameBuffer : Win32cr::Foundation::PWSTR, pcchNameBufferSize : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhLookupPerfNameByIndexW(szMachineName, dwNameIndex, szNameBuffer, pcchNameBufferSize)
+    {% end %}
   end
 
   def pdhLookupPerfNameByIndexA(szMachineName : Win32cr::Foundation::PSTR, dwNameIndex : UInt32, szNameBuffer : Win32cr::Foundation::PSTR, pcchNameBufferSize : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhLookupPerfNameByIndexA(szMachineName, dwNameIndex, szNameBuffer, pcchNameBufferSize)
+    {% end %}
   end
 
   def pdhLookupPerfIndexByNameW(szMachineName : Win32cr::Foundation::PWSTR, szNameBuffer : Win32cr::Foundation::PWSTR, pdwIndex : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhLookupPerfIndexByNameW(szMachineName, szNameBuffer, pdwIndex)
+    {% end %}
   end
 
   def pdhLookupPerfIndexByNameA(szMachineName : Win32cr::Foundation::PSTR, szNameBuffer : Win32cr::Foundation::PSTR, pdwIndex : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhLookupPerfIndexByNameA(szMachineName, szNameBuffer, pdwIndex)
+    {% end %}
   end
 
   def pdhExpandWildCardPathA(szDataSource : Win32cr::Foundation::PSTR, szWildCardPath : Win32cr::Foundation::PSTR, mszExpandedPathList : Win32cr::Foundation::PSTR, pcchPathListLength : UInt32*, dwFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.PdhExpandWildCardPathA(szDataSource, szWildCardPath, mszExpandedPathList, pcchPathListLength, dwFlags)
+    {% end %}
   end
 
   def pdhExpandWildCardPathW(szDataSource : Win32cr::Foundation::PWSTR, szWildCardPath : Win32cr::Foundation::PWSTR, mszExpandedPathList : Win32cr::Foundation::PWSTR, pcchPathListLength : UInt32*, dwFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.PdhExpandWildCardPathW(szDataSource, szWildCardPath, mszExpandedPathList, pcchPathListLength, dwFlags)
+    {% end %}
   end
 
   def pdhOpenLogW(szLogFileName : Win32cr::Foundation::PWSTR, dwAccessFlags : Win32cr::System::Performance::PDH_LOG, lpdwLogType : Win32cr::System::Performance::PDH_LOG_TYPE*, hQuery : LibC::IntPtrT, dwMaxSize : UInt32, szUserCaption : Win32cr::Foundation::PWSTR, phLog : LibC::IntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhOpenLogW(szLogFileName, dwAccessFlags, lpdwLogType, hQuery, dwMaxSize, szUserCaption, phLog)
+    {% end %}
   end
 
   def pdhOpenLogA(szLogFileName : Win32cr::Foundation::PSTR, dwAccessFlags : Win32cr::System::Performance::PDH_LOG, lpdwLogType : Win32cr::System::Performance::PDH_LOG_TYPE*, hQuery : LibC::IntPtrT, dwMaxSize : UInt32, szUserCaption : Win32cr::Foundation::PSTR, phLog : LibC::IntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhOpenLogA(szLogFileName, dwAccessFlags, lpdwLogType, hQuery, dwMaxSize, szUserCaption, phLog)
+    {% end %}
   end
 
   def pdhUpdateLogW(hLog : LibC::IntPtrT, szUserString : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.PdhUpdateLogW(hLog, szUserString)
+    {% end %}
   end
 
   def pdhUpdateLogA(hLog : LibC::IntPtrT, szUserString : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.PdhUpdateLogA(hLog, szUserString)
+    {% end %}
   end
 
   def pdhUpdateLogFileCatalog(hLog : LibC::IntPtrT) : Int32
+    {% if !flag?(:docs) %}
     C.PdhUpdateLogFileCatalog(hLog)
+    {% end %}
   end
 
   def pdhGetLogFileSize(hLog : LibC::IntPtrT, llSize : Int64*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetLogFileSize(hLog, llSize)
+    {% end %}
   end
 
   def pdhCloseLog(hLog : LibC::IntPtrT, dwFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.PdhCloseLog(hLog, dwFlags)
+    {% end %}
   end
 
   def pdhSelectDataSourceW(hWndOwner : Win32cr::Foundation::HWND, dwFlags : Win32cr::System::Performance::PDH_SELECT_DATA_SOURCE_FLAGS, szDataSource : Win32cr::Foundation::PWSTR, pcchBufferLength : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhSelectDataSourceW(hWndOwner, dwFlags, szDataSource, pcchBufferLength)
+    {% end %}
   end
 
   def pdhSelectDataSourceA(hWndOwner : Win32cr::Foundation::HWND, dwFlags : Win32cr::System::Performance::PDH_SELECT_DATA_SOURCE_FLAGS, szDataSource : Win32cr::Foundation::PSTR, pcchBufferLength : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhSelectDataSourceA(hWndOwner, dwFlags, szDataSource, pcchBufferLength)
+    {% end %}
   end
 
   def pdhIsRealTimeQuery(hQuery : LibC::IntPtrT) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PdhIsRealTimeQuery(hQuery)
+    {% end %}
   end
 
   def pdhSetQueryTimeRange(hQuery : LibC::IntPtrT, pInfo : Win32cr::System::Performance::PDH_TIME_INFO*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhSetQueryTimeRange(hQuery, pInfo)
+    {% end %}
   end
 
   def pdhGetDataSourceTimeRangeW(szDataSource : Win32cr::Foundation::PWSTR, pdwNumEntries : UInt32*, pInfo : Win32cr::System::Performance::PDH_TIME_INFO*, pdwBufferSize : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetDataSourceTimeRangeW(szDataSource, pdwNumEntries, pInfo, pdwBufferSize)
+    {% end %}
   end
 
   def pdhGetDataSourceTimeRangeA(szDataSource : Win32cr::Foundation::PSTR, pdwNumEntries : UInt32*, pInfo : Win32cr::System::Performance::PDH_TIME_INFO*, pdwBufferSize : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetDataSourceTimeRangeA(szDataSource, pdwNumEntries, pInfo, pdwBufferSize)
+    {% end %}
   end
 
   def pdhCollectQueryDataEx(hQuery : LibC::IntPtrT, dwIntervalTime : UInt32, hNewDataEvent : Win32cr::Foundation::HANDLE) : Int32
+    {% if !flag?(:docs) %}
     C.PdhCollectQueryDataEx(hQuery, dwIntervalTime, hNewDataEvent)
+    {% end %}
   end
 
   def pdhFormatFromRawValue(dwCounterType : UInt32, dwFormat : Win32cr::System::Performance::PDH_FMT, pTimeBase : Int64*, pRawValue1 : Win32cr::System::Performance::PDH_RAW_COUNTER*, pRawValue2 : Win32cr::System::Performance::PDH_RAW_COUNTER*, pFmtValue : Win32cr::System::Performance::PDH_FMT_COUNTERVALUE*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhFormatFromRawValue(dwCounterType, dwFormat, pTimeBase, pRawValue1, pRawValue2, pFmtValue)
+    {% end %}
   end
 
   def pdhGetCounterTimeBase(hCounter : LibC::IntPtrT, pTimeBase : Int64*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetCounterTimeBase(hCounter, pTimeBase)
+    {% end %}
   end
 
   def pdhReadRawLogRecord(hLog : LibC::IntPtrT, ftRecord : Win32cr::Foundation::FILETIME, pRawLogRecord : Win32cr::System::Performance::PDH_RAW_LOG_RECORD*, pdwBufferLength : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhReadRawLogRecord(hLog, ftRecord, pRawLogRecord, pdwBufferLength)
+    {% end %}
   end
 
   def pdhSetDefaultRealTimeDataSource(dwDataSourceId : Win32cr::System::Performance::REAL_TIME_DATA_SOURCE_ID_FLAGS) : Int32
+    {% if !flag?(:docs) %}
     C.PdhSetDefaultRealTimeDataSource(dwDataSourceId)
+    {% end %}
   end
 
   def pdhBindInputDataSourceW(phDataSource : LibC::IntPtrT*, log_file_name_list : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.PdhBindInputDataSourceW(phDataSource, log_file_name_list)
+    {% end %}
   end
 
   def pdhBindInputDataSourceA(phDataSource : LibC::IntPtrT*, log_file_name_list : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.PdhBindInputDataSourceA(phDataSource, log_file_name_list)
+    {% end %}
   end
 
   def pdhOpenQueryH(hDataSource : LibC::IntPtrT, dwUserData : LibC::UIntPtrT, phQuery : LibC::IntPtrT*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhOpenQueryH(hDataSource, dwUserData, phQuery)
+    {% end %}
   end
 
   def pdhEnumMachinesHW(hDataSource : LibC::IntPtrT, mszMachineList : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhEnumMachinesHW(hDataSource, mszMachineList, pcchBufferSize)
+    {% end %}
   end
 
   def pdhEnumMachinesHA(hDataSource : LibC::IntPtrT, mszMachineList : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhEnumMachinesHA(hDataSource, mszMachineList, pcchBufferSize)
+    {% end %}
   end
 
   def pdhEnumObjectsHW(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PWSTR, mszObjectList : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, bRefresh : Win32cr::Foundation::BOOL) : Int32
+    {% if !flag?(:docs) %}
     C.PdhEnumObjectsHW(hDataSource, szMachineName, mszObjectList, pcchBufferSize, dwDetailLevel, bRefresh)
+    {% end %}
   end
 
   def pdhEnumObjectsHA(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PSTR, mszObjectList : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, bRefresh : Win32cr::Foundation::BOOL) : Int32
+    {% if !flag?(:docs) %}
     C.PdhEnumObjectsHA(hDataSource, szMachineName, mszObjectList, pcchBufferSize, dwDetailLevel, bRefresh)
+    {% end %}
   end
 
   def pdhEnumObjectItemsHW(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, mszCounterList : Win32cr::Foundation::PWSTR, pcchCounterListLength : UInt32*, mszInstanceList : Win32cr::Foundation::PWSTR, pcchInstanceListLength : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, dwFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.PdhEnumObjectItemsHW(hDataSource, szMachineName, szObjectName, mszCounterList, pcchCounterListLength, mszInstanceList, pcchInstanceListLength, dwDetailLevel, dwFlags)
+    {% end %}
   end
 
   def pdhEnumObjectItemsHA(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PSTR, szObjectName : Win32cr::Foundation::PSTR, mszCounterList : Win32cr::Foundation::PSTR, pcchCounterListLength : UInt32*, mszInstanceList : Win32cr::Foundation::PSTR, pcchInstanceListLength : UInt32*, dwDetailLevel : Win32cr::System::Performance::PERF_DETAIL, dwFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.PdhEnumObjectItemsHA(hDataSource, szMachineName, szObjectName, mszCounterList, pcchCounterListLength, mszInstanceList, pcchInstanceListLength, dwDetailLevel, dwFlags)
+    {% end %}
   end
 
   def pdhExpandWildCardPathHW(hDataSource : LibC::IntPtrT, szWildCardPath : Win32cr::Foundation::PWSTR, mszExpandedPathList : Win32cr::Foundation::PWSTR, pcchPathListLength : UInt32*, dwFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.PdhExpandWildCardPathHW(hDataSource, szWildCardPath, mszExpandedPathList, pcchPathListLength, dwFlags)
+    {% end %}
   end
 
   def pdhExpandWildCardPathHA(hDataSource : LibC::IntPtrT, szWildCardPath : Win32cr::Foundation::PSTR, mszExpandedPathList : Win32cr::Foundation::PSTR, pcchPathListLength : UInt32*, dwFlags : UInt32) : Int32
+    {% if !flag?(:docs) %}
     C.PdhExpandWildCardPathHA(hDataSource, szWildCardPath, mszExpandedPathList, pcchPathListLength, dwFlags)
+    {% end %}
   end
 
   def pdhGetDataSourceTimeRangeH(hDataSource : LibC::IntPtrT, pdwNumEntries : UInt32*, pInfo : Win32cr::System::Performance::PDH_TIME_INFO*, pdwBufferSize : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetDataSourceTimeRangeH(hDataSource, pdwNumEntries, pInfo, pdwBufferSize)
+    {% end %}
   end
 
   def pdhGetDefaultPerfObjectHW(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PWSTR, szDefaultObjectName : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetDefaultPerfObjectHW(hDataSource, szMachineName, szDefaultObjectName, pcchBufferSize)
+    {% end %}
   end
 
   def pdhGetDefaultPerfObjectHA(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PSTR, szDefaultObjectName : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetDefaultPerfObjectHA(hDataSource, szMachineName, szDefaultObjectName, pcchBufferSize)
+    {% end %}
   end
 
   def pdhGetDefaultPerfCounterHW(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PWSTR, szObjectName : Win32cr::Foundation::PWSTR, szDefaultCounterName : Win32cr::Foundation::PWSTR, pcchBufferSize : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetDefaultPerfCounterHW(hDataSource, szMachineName, szObjectName, szDefaultCounterName, pcchBufferSize)
+    {% end %}
   end
 
   def pdhGetDefaultPerfCounterHA(hDataSource : LibC::IntPtrT, szMachineName : Win32cr::Foundation::PSTR, szObjectName : Win32cr::Foundation::PSTR, szDefaultCounterName : Win32cr::Foundation::PSTR, pcchBufferSize : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetDefaultPerfCounterHA(hDataSource, szMachineName, szObjectName, szDefaultCounterName, pcchBufferSize)
+    {% end %}
   end
 
   def pdhBrowseCountersHW(pBrowseDlgData : Win32cr::System::Performance::PDH_BROWSE_DLG_CONFIG_HW*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhBrowseCountersHW(pBrowseDlgData)
+    {% end %}
   end
 
   def pdhBrowseCountersHA(pBrowseDlgData : Win32cr::System::Performance::PDH_BROWSE_DLG_CONFIG_HA*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhBrowseCountersHA(pBrowseDlgData)
+    {% end %}
   end
 
   def pdhVerifySQLDBW(szDataSource : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.PdhVerifySQLDBW(szDataSource)
+    {% end %}
   end
 
   def pdhVerifySQLDBA(szDataSource : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.PdhVerifySQLDBA(szDataSource)
+    {% end %}
   end
 
   def pdhCreateSQLTablesW(szDataSource : Win32cr::Foundation::PWSTR) : Int32
+    {% if !flag?(:docs) %}
     C.PdhCreateSQLTablesW(szDataSource)
+    {% end %}
   end
 
   def pdhCreateSQLTablesA(szDataSource : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.PdhCreateSQLTablesA(szDataSource)
+    {% end %}
   end
 
   def pdhEnumLogSetNamesW(szDataSource : Win32cr::Foundation::PWSTR, mszDataSetNameList : Win32cr::Foundation::PWSTR, pcchBufferLength : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhEnumLogSetNamesW(szDataSource, mszDataSetNameList, pcchBufferLength)
+    {% end %}
   end
 
   def pdhEnumLogSetNamesA(szDataSource : Win32cr::Foundation::PSTR, mszDataSetNameList : Win32cr::Foundation::PSTR, pcchBufferLength : UInt32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhEnumLogSetNamesA(szDataSource, mszDataSetNameList, pcchBufferLength)
+    {% end %}
   end
 
   def pdhGetLogSetGUID(hLog : LibC::IntPtrT, pGuid : LibC::GUID*, pRunId : Int32*) : Int32
+    {% if !flag?(:docs) %}
     C.PdhGetLogSetGUID(hLog, pGuid, pRunId)
+    {% end %}
   end
 
   def pdhSetLogSetRunID(hLog : LibC::IntPtrT, run_id : Int32) : Int32
+    {% if !flag?(:docs) %}
     C.PdhSetLogSetRunID(hLog, run_id)
+    {% end %}
   end
 
-  @[Link("kernel32")]
-  @[Link("loadperf")]
-  @[Link("advapi32")]
-  @[Link("pdh")]
+  @[Link("kernel32.dll")]
+  @[Link("loadperf.dll")]
+  @[Link("advapi32.dll")]
+  @[Link("pdh.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # Commented out due to being part of LibC
     # :nodoc:
@@ -6294,4 +6561,5 @@ module Win32cr::System::Performance
     fun PdhSetLogSetRunID(hLog : LibC::IntPtrT, run_id : Int32) : Int32
 
   end
+  {% end %}
 end

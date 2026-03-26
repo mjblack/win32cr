@@ -93,79 +93,116 @@ module Win32cr::Management::MobileDeviceManagementRegistration
   end
 
   def getDeviceRegistrationInfo(device_information_class : Win32cr::Management::MobileDeviceManagementRegistration::REGISTRATION_INFORMATION_CLASS, ppDeviceRegistrationInfo : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetDeviceRegistrationInfo(device_information_class, ppDeviceRegistrationInfo)
+    {% end %}
   end
 
   def isDeviceRegisteredWithManagement(pfIsDeviceRegisteredWithManagement : Win32cr::Foundation::BOOL*, cchUPN : UInt32, pszUPN : UInt16*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.IsDeviceRegisteredWithManagement(pfIsDeviceRegisteredWithManagement, cchUPN, pszUPN)
+    {% end %}
   end
 
   def isManagementRegistrationAllowed(pfIsManagementRegistrationAllowed : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.IsManagementRegistrationAllowed(pfIsManagementRegistrationAllowed)
+    {% end %}
   end
 
   def isMdmUxWithoutAadAllowed(isEnrollmentAllowed : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.IsMdmUxWithoutAadAllowed(isEnrollmentAllowed)
+    {% end %}
   end
 
   def setManagedExternally(is_managed_externally : Win32cr::Foundation::BOOL) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetManagedExternally(is_managed_externally)
+    {% end %}
   end
 
   def discoverManagementService(pszUPN : Win32cr::Foundation::PWSTR, ppMgmtInfo : Win32cr::Management::MobileDeviceManagementRegistration::MANAGEMENT_SERVICE_INFO**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DiscoverManagementService(pszUPN, ppMgmtInfo)
+    {% end %}
   end
 
   def registerDeviceWithManagementUsingAADCredentials(user_token : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RegisterDeviceWithManagementUsingAADCredentials(user_token)
+    {% end %}
   end
 
   def registerDeviceWithManagementUsingAADDeviceCredentials : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RegisterDeviceWithManagementUsingAADDeviceCredentials
+    {% end %}
   end
 
   def registerDeviceWithManagementUsingAADDeviceCredentials2(mdm_application_id : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RegisterDeviceWithManagementUsingAADDeviceCredentials2(mdm_application_id)
+    {% end %}
   end
 
   def registerDeviceWithManagement(pszUPN : Win32cr::Foundation::PWSTR, ppszMDMServiceUri : Win32cr::Foundation::PWSTR, ppzsAccessToken : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RegisterDeviceWithManagement(pszUPN, ppszMDMServiceUri, ppzsAccessToken)
+    {% end %}
   end
 
   def unregisterDeviceWithManagement(enrollmentID : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UnregisterDeviceWithManagement(enrollmentID)
+    {% end %}
   end
 
   def getDeviceManagementConfigInfo(providerID : Win32cr::Foundation::PWSTR, configStringBufferLength : UInt32*, configString : UInt16*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetDeviceManagementConfigInfo(providerID, configStringBufferLength, configString)
+    {% end %}
   end
 
   def setDeviceManagementConfigInfo(providerID : Win32cr::Foundation::PWSTR, configString : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.SetDeviceManagementConfigInfo(providerID, configString)
+    {% end %}
   end
 
   def getManagementAppHyperlink(cchHyperlink : UInt32, pszHyperlink : UInt16*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.GetManagementAppHyperlink(cchHyperlink, pszHyperlink)
+    {% end %}
   end
 
   def discoverManagementServiceEx(pszUPN : Win32cr::Foundation::PWSTR, pszDiscoveryServiceCandidate : Win32cr::Foundation::PWSTR, ppMgmtInfo : Win32cr::Management::MobileDeviceManagementRegistration::MANAGEMENT_SERVICE_INFO**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DiscoverManagementServiceEx(pszUPN, pszDiscoveryServiceCandidate, ppMgmtInfo)
+    {% end %}
   end
 
   def registerDeviceWithLocalManagement(alreadyRegistered : Win32cr::Foundation::BOOL*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.RegisterDeviceWithLocalManagement(alreadyRegistered)
+    {% end %}
   end
 
   def applyLocalManagementSyncML(syncMLRequest : Win32cr::Foundation::PWSTR, syncMLResult : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.ApplyLocalManagementSyncML(syncMLRequest, syncMLResult)
+    {% end %}
   end
 
   def unregisterDeviceWithLocalManagement : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.UnregisterDeviceWithLocalManagement
+    {% end %}
   end
 
-  @[Link("mdmregistration")]
-  @[Link("mdmlocalmanagement")]
+  @[Link("mdmregistration.dll")]
+  @[Link("mdmlocalmanagement.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun GetDeviceRegistrationInfo(device_information_class : Win32cr::Management::MobileDeviceManagementRegistration::REGISTRATION_INFORMATION_CLASS, ppDeviceRegistrationInfo : Void**) : Win32cr::Foundation::HRESULT
@@ -222,4 +259,5 @@ module Win32cr::Management::MobileDeviceManagementRegistration
     fun UnregisterDeviceWithLocalManagement : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

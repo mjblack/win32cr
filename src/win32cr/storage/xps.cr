@@ -431,6 +431,16 @@ module Win32cr::Storage::Xps
     property scRGB : Scrgb_e__struct_
     property context : Context_e__struct_
 
+      # Nested Type Context_e__struct_
+      @[Extern]
+      struct Context_e__struct_
+    property channelCount : UInt8
+    property channels : Float32[9]
+    def initialize(@channelCount : UInt8, @channels : Float32[9])
+    end
+      end
+
+
       # Nested Type Scrgb_e__struct_
       @[Extern]
       struct Scrgb_e__struct_
@@ -454,16 +464,6 @@ module Win32cr::Storage::Xps
     end
       end
 
-
-      # Nested Type Context_e__struct_
-      @[Extern]
-      struct Context_e__struct_
-    property channelCount : UInt8
-    property channels : Float32[9]
-    def initialize(@channelCount : UInt8, @channels : Float32[9])
-    end
-      end
-
     def initialize(@sRGB : Srgb_e__struct_, @scRGB : Scrgb_e__struct_, @context : Context_e__struct_)
     end
     end
@@ -473,7 +473,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMShareableVtbl,
+  record IXpsOMShareableVtable,
     query_interface : Proc(IXpsOMShareable*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMShareable*, UInt32),
     release : Proc(IXpsOMShareable*, UInt32),
@@ -482,7 +482,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMShareable, lpVtbl : IXpsOMShareableVtbl* do
+  record IXpsOMShareable, lpVtbl : IXpsOMShareableVtable* do
     GUID = LibC::GUID.new(0x7137398f_u32, 0x2fc1_u16, 0x454d_u16, StaticArray[0x8c_u8, 0x6a_u8, 0x2c_u8, 0x31_u8, 0x15_u8, 0xa1_u8, 0x6e_u8, 0xce_u8])
     def query_interface(this : IXpsOMShareable*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -503,7 +503,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMVisualVtbl,
+  record IXpsOMVisualVtable,
     query_interface : Proc(IXpsOMVisual*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMVisual*, UInt32),
     release : Proc(IXpsOMVisual*, UInt32),
@@ -537,7 +537,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMVisual, lpVtbl : IXpsOMVisualVtbl* do
+  record IXpsOMVisual, lpVtbl : IXpsOMVisualVtable* do
     GUID = LibC::GUID.new(0xbc3e7333_u32, 0xfb0b_u16, 0x4af3_u16, StaticArray[0xa8_u8, 0x19_u8, 0xb_u8, 0x4e_u8, 0xaa_u8, 0xd0_u8, 0xd2_u8, 0xfd_u8])
     def query_interface(this : IXpsOMVisual*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -633,7 +633,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMPartVtbl,
+  record IXpsOMPartVtable,
     query_interface : Proc(IXpsOMPart*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMPart*, UInt32),
     release : Proc(IXpsOMPart*, UInt32),
@@ -642,7 +642,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMPart, lpVtbl : IXpsOMPartVtbl* do
+  record IXpsOMPart, lpVtbl : IXpsOMPartVtable* do
     GUID = LibC::GUID.new(0x74eb2f0b_u32, 0xa91e_u16, 0x4486_u16, StaticArray[0xaf_u8, 0xac_u8, 0xf_u8, 0xab_u8, 0xec_u8, 0xa3_u8, 0xdf_u8, 0xc6_u8])
     def query_interface(this : IXpsOMPart*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -663,7 +663,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMGlyphsEditorVtbl,
+  record IXpsOMGlyphsEditorVtable,
     query_interface : Proc(IXpsOMGlyphsEditor*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMGlyphsEditor*, UInt32),
     release : Proc(IXpsOMGlyphsEditor*, UInt32),
@@ -688,7 +688,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMGlyphsEditor, lpVtbl : IXpsOMGlyphsEditorVtbl* do
+  record IXpsOMGlyphsEditor, lpVtbl : IXpsOMGlyphsEditorVtable* do
     GUID = LibC::GUID.new(0xa5ab8616_u32, 0x5b16_u16, 0x4b9f_u16, StaticArray[0x96_u8, 0x29_u8, 0x89_u8, 0xb3_u8, 0x23_u8, 0xed_u8, 0x79_u8, 0x9_u8])
     def query_interface(this : IXpsOMGlyphsEditor*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -757,7 +757,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMGlyphsVtbl,
+  record IXpsOMGlyphsVtable,
     query_interface : Proc(IXpsOMGlyphs*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMGlyphs*, UInt32),
     release : Proc(IXpsOMGlyphs*, UInt32),
@@ -818,7 +818,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMGlyphs, lpVtbl : IXpsOMGlyphsVtbl* do
+  record IXpsOMGlyphs, lpVtbl : IXpsOMGlyphsVtable* do
     GUID = LibC::GUID.new(0x819b3199_u32, 0xa5a_u16, 0x4b64_u16, StaticArray[0xbe_u8, 0xc7_u8, 0xa9_u8, 0xe1_u8, 0x7e_u8, 0x78_u8, 0xd_u8, 0xe2_u8])
     def query_interface(this : IXpsOMGlyphs*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -995,7 +995,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMDashCollectionVtbl,
+  record IXpsOMDashCollectionVtable,
     query_interface : Proc(IXpsOMDashCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMDashCollection*, UInt32),
     release : Proc(IXpsOMDashCollection*, UInt32),
@@ -1008,7 +1008,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMDashCollection, lpVtbl : IXpsOMDashCollectionVtbl* do
+  record IXpsOMDashCollection, lpVtbl : IXpsOMDashCollectionVtable* do
     GUID = LibC::GUID.new(0x81613f4_u32, 0x74eb_u16, 0x48f2_u16, StaticArray[0x83_u8, 0xb3_u8, 0x37_u8, 0xa9_u8, 0xce_u8, 0x2d_u8, 0x7d_u8, 0xc6_u8])
     def query_interface(this : IXpsOMDashCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1041,7 +1041,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMMatrixTransformVtbl,
+  record IXpsOMMatrixTransformVtable,
     query_interface : Proc(IXpsOMMatrixTransform*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMMatrixTransform*, UInt32),
     release : Proc(IXpsOMMatrixTransform*, UInt32),
@@ -1053,7 +1053,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMMatrixTransform, lpVtbl : IXpsOMMatrixTransformVtbl* do
+  record IXpsOMMatrixTransform, lpVtbl : IXpsOMMatrixTransformVtable* do
     GUID = LibC::GUID.new(0xb77330ff_u32, 0xbb37_u16, 0x4501_u16, StaticArray[0xa9_u8, 0x3e_u8, 0xf1_u8, 0xb1_u8, 0xe5_u8, 0xb_u8, 0xfc_u8, 0x46_u8])
     def query_interface(this : IXpsOMMatrixTransform*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1083,7 +1083,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMGeometryVtbl,
+  record IXpsOMGeometryVtable,
     query_interface : Proc(IXpsOMGeometry*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMGeometry*, UInt32),
     release : Proc(IXpsOMGeometry*, UInt32),
@@ -1101,7 +1101,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMGeometry, lpVtbl : IXpsOMGeometryVtbl* do
+  record IXpsOMGeometry, lpVtbl : IXpsOMGeometryVtable* do
     GUID = LibC::GUID.new(0x64fcf3d7_u32, 0x4d58_u16, 0x44ba_u16, StaticArray[0xad_u8, 0x73_u8, 0xa1_u8, 0x3a_u8, 0xf6_u8, 0x49_u8, 0x20_u8, 0x72_u8])
     def query_interface(this : IXpsOMGeometry*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1149,7 +1149,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMGeometryFigureVtbl,
+  record IXpsOMGeometryFigureVtable,
     query_interface : Proc(IXpsOMGeometryFigure*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMGeometryFigure*, UInt32),
     release : Proc(IXpsOMGeometryFigure*, UInt32),
@@ -1171,7 +1171,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMGeometryFigure, lpVtbl : IXpsOMGeometryFigureVtbl* do
+  record IXpsOMGeometryFigure, lpVtbl : IXpsOMGeometryFigureVtable* do
     GUID = LibC::GUID.new(0xd410dc83_u32, 0x908c_u16, 0x443e_u16, StaticArray[0x89_u8, 0x47_u8, 0xb1_u8, 0x79_u8, 0x5d_u8, 0x3c_u8, 0x16_u8, 0x5a_u8])
     def query_interface(this : IXpsOMGeometryFigure*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1231,7 +1231,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMGeometryFigureCollectionVtbl,
+  record IXpsOMGeometryFigureCollectionVtable,
     query_interface : Proc(IXpsOMGeometryFigureCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMGeometryFigureCollection*, UInt32),
     release : Proc(IXpsOMGeometryFigureCollection*, UInt32),
@@ -1244,7 +1244,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMGeometryFigureCollection, lpVtbl : IXpsOMGeometryFigureCollectionVtbl* do
+  record IXpsOMGeometryFigureCollection, lpVtbl : IXpsOMGeometryFigureCollectionVtable* do
     GUID = LibC::GUID.new(0xfd48c3f3_u32, 0xa58e_u16, 0x4b5a_u16, StaticArray[0x88_u8, 0x26_u8, 0x1d_u8, 0xe5_u8, 0x4a_u8, 0xbe_u8, 0x72_u8, 0xb2_u8])
     def query_interface(this : IXpsOMGeometryFigureCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1277,7 +1277,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMPathVtbl,
+  record IXpsOMPathVtable,
     query_interface : Proc(IXpsOMPath*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMPath*, UInt32),
     release : Proc(IXpsOMPath*, UInt32),
@@ -1348,7 +1348,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMPath, lpVtbl : IXpsOMPathVtbl* do
+  record IXpsOMPath, lpVtbl : IXpsOMPathVtable* do
     GUID = LibC::GUID.new(0x37d38bb6_u32, 0x3ee9_u16, 0x4110_u16, StaticArray[0x93_u8, 0x12_u8, 0x14_u8, 0xb1_u8, 0x94_u8, 0x16_u8, 0x33_u8, 0x37_u8])
     def query_interface(this : IXpsOMPath*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1555,7 +1555,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMBrushVtbl,
+  record IXpsOMBrushVtable,
     query_interface : Proc(IXpsOMBrush*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMBrush*, UInt32),
     release : Proc(IXpsOMBrush*, UInt32),
@@ -1566,7 +1566,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMBrush, lpVtbl : IXpsOMBrushVtbl* do
+  record IXpsOMBrush, lpVtbl : IXpsOMBrushVtable* do
     GUID = LibC::GUID.new(0x56a3f80c_u32, 0xea4c_u16, 0x4187_u16, StaticArray[0xa5_u8, 0x7b_u8, 0xa2_u8, 0xa4_u8, 0x73_u8, 0xb2_u8, 0xb4_u8, 0x2b_u8])
     def query_interface(this : IXpsOMBrush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1593,7 +1593,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMGradientStopCollectionVtbl,
+  record IXpsOMGradientStopCollectionVtable,
     query_interface : Proc(IXpsOMGradientStopCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMGradientStopCollection*, UInt32),
     release : Proc(IXpsOMGradientStopCollection*, UInt32),
@@ -1606,7 +1606,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMGradientStopCollection, lpVtbl : IXpsOMGradientStopCollectionVtbl* do
+  record IXpsOMGradientStopCollection, lpVtbl : IXpsOMGradientStopCollectionVtable* do
     GUID = LibC::GUID.new(0xc9174c3a_u32, 0x3cd3_u16, 0x4319_u16, StaticArray[0xbd_u8, 0xa4_u8, 0x11_u8, 0xa3_u8, 0x93_u8, 0x92_u8, 0xce_u8, 0xef_u8])
     def query_interface(this : IXpsOMGradientStopCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1639,7 +1639,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMSolidColorBrushVtbl,
+  record IXpsOMSolidColorBrushVtable,
     query_interface : Proc(IXpsOMSolidColorBrush*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMSolidColorBrush*, UInt32),
     release : Proc(IXpsOMSolidColorBrush*, UInt32),
@@ -1653,7 +1653,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMSolidColorBrush, lpVtbl : IXpsOMSolidColorBrushVtbl* do
+  record IXpsOMSolidColorBrush, lpVtbl : IXpsOMSolidColorBrushVtable* do
     GUID = LibC::GUID.new(0xa06f9f05_u32, 0x3be9_u16, 0x4763_u16, StaticArray[0x98_u8, 0xa8_u8, 0x9_u8, 0x4f_u8, 0xc6_u8, 0x72_u8, 0xe4_u8, 0x88_u8])
     def query_interface(this : IXpsOMSolidColorBrush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1689,7 +1689,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMTileBrushVtbl,
+  record IXpsOMTileBrushVtable,
     query_interface : Proc(IXpsOMTileBrush*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMTileBrush*, UInt32),
     release : Proc(IXpsOMTileBrush*, UInt32),
@@ -1711,7 +1711,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMTileBrush, lpVtbl : IXpsOMTileBrushVtbl* do
+  record IXpsOMTileBrush, lpVtbl : IXpsOMTileBrushVtable* do
     GUID = LibC::GUID.new(0xfc2328d_u32, 0xd722_u16, 0x4a54_u16, StaticArray[0xb2_u8, 0xec_u8, 0xbe_u8, 0x90_u8, 0x21_u8, 0x8a_u8, 0x78_u8, 0x9e_u8])
     def query_interface(this : IXpsOMTileBrush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1771,7 +1771,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMVisualBrushVtbl,
+  record IXpsOMVisualBrushVtable,
     query_interface : Proc(IXpsOMVisualBrush*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMVisualBrush*, UInt32),
     release : Proc(IXpsOMVisualBrush*, UInt32),
@@ -1799,7 +1799,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMVisualBrush, lpVtbl : IXpsOMVisualBrushVtbl* do
+  record IXpsOMVisualBrush, lpVtbl : IXpsOMVisualBrushVtable* do
     GUID = LibC::GUID.new(0x97e294af_u32, 0x5b37_u16, 0x46b4_u16, StaticArray[0x80_u8, 0x57_u8, 0x87_u8, 0x4d_u8, 0x2f_u8, 0x64_u8, 0x11_u8, 0x9b_u8])
     def query_interface(this : IXpsOMVisualBrush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1877,7 +1877,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMImageBrushVtbl,
+  record IXpsOMImageBrushVtable,
     query_interface : Proc(IXpsOMImageBrush*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMImageBrush*, UInt32),
     release : Proc(IXpsOMImageBrush*, UInt32),
@@ -1904,7 +1904,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMImageBrush, lpVtbl : IXpsOMImageBrushVtbl* do
+  record IXpsOMImageBrush, lpVtbl : IXpsOMImageBrushVtable* do
     GUID = LibC::GUID.new(0x3df0b466_u32, 0xd382_u16, 0x49ef_u16, StaticArray[0x85_u8, 0x50_u8, 0xdd_u8, 0x94_u8, 0xc8_u8, 0x2_u8, 0x42_u8, 0xe4_u8])
     def query_interface(this : IXpsOMImageBrush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -1979,7 +1979,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMGradientStopVtbl,
+  record IXpsOMGradientStopVtable,
     query_interface : Proc(IXpsOMGradientStop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMGradientStop*, UInt32),
     release : Proc(IXpsOMGradientStop*, UInt32),
@@ -1992,7 +1992,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMGradientStop, lpVtbl : IXpsOMGradientStopVtbl* do
+  record IXpsOMGradientStop, lpVtbl : IXpsOMGradientStopVtable* do
     GUID = LibC::GUID.new(0x5cf4f5cc_u32, 0x3969_u16, 0x49b5_u16, StaticArray[0xa7_u8, 0xa_u8, 0x55_u8, 0x50_u8, 0xb6_u8, 0x18_u8, 0xfe_u8, 0x49_u8])
     def query_interface(this : IXpsOMGradientStop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2025,7 +2025,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMGradientBrushVtbl,
+  record IXpsOMGradientBrushVtable,
     query_interface : Proc(IXpsOMGradientBrush*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMGradientBrush*, UInt32),
     release : Proc(IXpsOMGradientBrush*, UInt32),
@@ -2046,7 +2046,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMGradientBrush, lpVtbl : IXpsOMGradientBrushVtbl* do
+  record IXpsOMGradientBrush, lpVtbl : IXpsOMGradientBrushVtable* do
     GUID = LibC::GUID.new(0xedb59622_u32, 0x61a2_u16, 0x42c3_u16, StaticArray[0xba_u8, 0xce_u8, 0xac_u8, 0xf2_u8, 0x28_u8, 0x6c_u8, 0x6_u8, 0xbf_u8])
     def query_interface(this : IXpsOMGradientBrush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2103,7 +2103,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMLinearGradientBrushVtbl,
+  record IXpsOMLinearGradientBrushVtable,
     query_interface : Proc(IXpsOMLinearGradientBrush*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMLinearGradientBrush*, UInt32),
     release : Proc(IXpsOMLinearGradientBrush*, UInt32),
@@ -2129,7 +2129,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMLinearGradientBrush, lpVtbl : IXpsOMLinearGradientBrushVtbl* do
+  record IXpsOMLinearGradientBrush, lpVtbl : IXpsOMLinearGradientBrushVtable* do
     GUID = LibC::GUID.new(0x5e279f_u32, 0xc30d_u16, 0x40ff_u16, StaticArray[0x93_u8, 0xec_u8, 0x19_u8, 0x50_u8, 0xd3_u8, 0xc5_u8, 0x28_u8, 0xdb_u8])
     def query_interface(this : IXpsOMLinearGradientBrush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2201,7 +2201,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMRadialGradientBrushVtbl,
+  record IXpsOMRadialGradientBrushVtable,
     query_interface : Proc(IXpsOMRadialGradientBrush*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMRadialGradientBrush*, UInt32),
     release : Proc(IXpsOMRadialGradientBrush*, UInt32),
@@ -2229,7 +2229,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMRadialGradientBrush, lpVtbl : IXpsOMRadialGradientBrushVtbl* do
+  record IXpsOMRadialGradientBrush, lpVtbl : IXpsOMRadialGradientBrushVtable* do
     GUID = LibC::GUID.new(0x75f207e5_u32, 0x8bf_u16, 0x413c_u16, StaticArray[0x96_u8, 0xb1_u8, 0xb8_u8, 0x2b_u8, 0x40_u8, 0x64_u8, 0x17_u8, 0x6b_u8])
     def query_interface(this : IXpsOMRadialGradientBrush*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2307,7 +2307,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMResourceVtbl,
+  record IXpsOMResourceVtable,
     query_interface : Proc(IXpsOMResource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMResource*, UInt32),
     release : Proc(IXpsOMResource*, UInt32),
@@ -2316,7 +2316,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMResource, lpVtbl : IXpsOMResourceVtbl* do
+  record IXpsOMResource, lpVtbl : IXpsOMResourceVtable* do
     GUID = LibC::GUID.new(0xda2ac0a2_u32, 0x73a2_u16, 0x4975_u16, StaticArray[0xad_u8, 0x14_u8, 0x74_u8, 0x9_u8, 0x7c_u8, 0x3f_u8, 0xf3_u8, 0xa5_u8])
     def query_interface(this : IXpsOMResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2337,7 +2337,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMPartResourcesVtbl,
+  record IXpsOMPartResourcesVtable,
     query_interface : Proc(IXpsOMPartResources*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMPartResources*, UInt32),
     release : Proc(IXpsOMPartResources*, UInt32),
@@ -2348,7 +2348,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMPartResources, lpVtbl : IXpsOMPartResourcesVtbl* do
+  record IXpsOMPartResources, lpVtbl : IXpsOMPartResourcesVtable* do
     GUID = LibC::GUID.new(0xf4cf7729_u32, 0x4864_u16, 0x4275_u16, StaticArray[0x99_u8, 0xb3_u8, 0xa8_u8, 0x71_u8, 0x71_u8, 0x63_u8, 0xec_u8, 0xaf_u8])
     def query_interface(this : IXpsOMPartResources*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2375,7 +2375,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMDictionaryVtbl,
+  record IXpsOMDictionaryVtable,
     query_interface : Proc(IXpsOMDictionary*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMDictionary*, UInt32),
     release : Proc(IXpsOMDictionary*, UInt32),
@@ -2392,7 +2392,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMDictionary, lpVtbl : IXpsOMDictionaryVtbl* do
+  record IXpsOMDictionary, lpVtbl : IXpsOMDictionaryVtable* do
     GUID = LibC::GUID.new(0x897c86b8_u32, 0x8eaf_u16, 0x4ae3_u16, StaticArray[0xbd_u8, 0xde_u8, 0x56_u8, 0x41_u8, 0x9f_u8, 0xcf_u8, 0x42_u8, 0x36_u8])
     def query_interface(this : IXpsOMDictionary*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2437,7 +2437,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMFontResourceVtbl,
+  record IXpsOMFontResourceVtable,
     query_interface : Proc(IXpsOMFontResource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMFontResource*, UInt32),
     release : Proc(IXpsOMFontResource*, UInt32),
@@ -2449,7 +2449,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMFontResource, lpVtbl : IXpsOMFontResourceVtbl* do
+  record IXpsOMFontResource, lpVtbl : IXpsOMFontResourceVtable* do
     GUID = LibC::GUID.new(0xa8c45708_u32, 0x47d9_u16, 0x4af4_u16, StaticArray[0x8d_u8, 0x20_u8, 0x33_u8, 0xb4_u8, 0x8c_u8, 0x9b_u8, 0x84_u8, 0x85_u8])
     def query_interface(this : IXpsOMFontResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2479,7 +2479,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMFontResourceCollectionVtbl,
+  record IXpsOMFontResourceCollectionVtable,
     query_interface : Proc(IXpsOMFontResourceCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMFontResourceCollection*, UInt32),
     release : Proc(IXpsOMFontResourceCollection*, UInt32),
@@ -2493,7 +2493,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMFontResourceCollection, lpVtbl : IXpsOMFontResourceCollectionVtbl* do
+  record IXpsOMFontResourceCollection, lpVtbl : IXpsOMFontResourceCollectionVtable* do
     GUID = LibC::GUID.new(0x70b4a6bb_u32, 0x88d4_u16, 0x4fa8_u16, StaticArray[0xaa_u8, 0xf9_u8, 0x6d_u8, 0x9c_u8, 0x59_u8, 0x6f_u8, 0xdb_u8, 0xad_u8])
     def query_interface(this : IXpsOMFontResourceCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2529,7 +2529,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMImageResourceVtbl,
+  record IXpsOMImageResourceVtable,
     query_interface : Proc(IXpsOMImageResource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMImageResource*, UInt32),
     release : Proc(IXpsOMImageResource*, UInt32),
@@ -2541,7 +2541,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMImageResource, lpVtbl : IXpsOMImageResourceVtbl* do
+  record IXpsOMImageResource, lpVtbl : IXpsOMImageResourceVtable* do
     GUID = LibC::GUID.new(0x3db8417d_u32, 0xae50_u16, 0x485e_u16, StaticArray[0x9a_u8, 0x44_u8, 0xd7_u8, 0x75_u8, 0x8f_u8, 0x78_u8, 0xa2_u8, 0x3f_u8])
     def query_interface(this : IXpsOMImageResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2571,7 +2571,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMImageResourceCollectionVtbl,
+  record IXpsOMImageResourceCollectionVtable,
     query_interface : Proc(IXpsOMImageResourceCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMImageResourceCollection*, UInt32),
     release : Proc(IXpsOMImageResourceCollection*, UInt32),
@@ -2585,7 +2585,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMImageResourceCollection, lpVtbl : IXpsOMImageResourceCollectionVtbl* do
+  record IXpsOMImageResourceCollection, lpVtbl : IXpsOMImageResourceCollectionVtable* do
     GUID = LibC::GUID.new(0x7a4a1a71_u32, 0x9cde_u16, 0x4b71_u16, StaticArray[0xb3_u8, 0x3f_u8, 0x62_u8, 0xde_u8, 0x84_u8, 0x3e_u8, 0xab_u8, 0xfe_u8])
     def query_interface(this : IXpsOMImageResourceCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2621,7 +2621,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMColorProfileResourceVtbl,
+  record IXpsOMColorProfileResourceVtable,
     query_interface : Proc(IXpsOMColorProfileResource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMColorProfileResource*, UInt32),
     release : Proc(IXpsOMColorProfileResource*, UInt32),
@@ -2632,7 +2632,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMColorProfileResource, lpVtbl : IXpsOMColorProfileResourceVtbl* do
+  record IXpsOMColorProfileResource, lpVtbl : IXpsOMColorProfileResourceVtable* do
     GUID = LibC::GUID.new(0x67bd7d69_u32, 0x1eef_u16, 0x4bb1_u16, StaticArray[0xb5_u8, 0xe7_u8, 0x6f_u8, 0x4f_u8, 0x87_u8, 0xbe_u8, 0x8a_u8, 0xbe_u8])
     def query_interface(this : IXpsOMColorProfileResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2659,7 +2659,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMColorProfileResourceCollectionVtbl,
+  record IXpsOMColorProfileResourceCollectionVtable,
     query_interface : Proc(IXpsOMColorProfileResourceCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMColorProfileResourceCollection*, UInt32),
     release : Proc(IXpsOMColorProfileResourceCollection*, UInt32),
@@ -2673,7 +2673,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMColorProfileResourceCollection, lpVtbl : IXpsOMColorProfileResourceCollectionVtbl* do
+  record IXpsOMColorProfileResourceCollection, lpVtbl : IXpsOMColorProfileResourceCollectionVtable* do
     GUID = LibC::GUID.new(0x12759630_u32, 0x5fba_u16, 0x4283_u16, StaticArray[0x8f_u8, 0x7d_u8, 0xcc_u8, 0xa8_u8, 0x49_u8, 0x80_u8, 0x9e_u8, 0xdb_u8])
     def query_interface(this : IXpsOMColorProfileResourceCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2709,7 +2709,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMPrintTicketResourceVtbl,
+  record IXpsOMPrintTicketResourceVtable,
     query_interface : Proc(IXpsOMPrintTicketResource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMPrintTicketResource*, UInt32),
     release : Proc(IXpsOMPrintTicketResource*, UInt32),
@@ -2720,7 +2720,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMPrintTicketResource, lpVtbl : IXpsOMPrintTicketResourceVtbl* do
+  record IXpsOMPrintTicketResource, lpVtbl : IXpsOMPrintTicketResourceVtable* do
     GUID = LibC::GUID.new(0xe7ff32d2_u32, 0x34aa_u16, 0x499b_u16, StaticArray[0xbb_u8, 0xe9_u8, 0x9c_u8, 0xd4_u8, 0xee_u8, 0x6c_u8, 0x59_u8, 0xf7_u8])
     def query_interface(this : IXpsOMPrintTicketResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2747,7 +2747,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMRemoteDictionaryResourceVtbl,
+  record IXpsOMRemoteDictionaryResourceVtable,
     query_interface : Proc(IXpsOMRemoteDictionaryResource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMRemoteDictionaryResource*, UInt32),
     release : Proc(IXpsOMRemoteDictionaryResource*, UInt32),
@@ -2758,7 +2758,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMRemoteDictionaryResource, lpVtbl : IXpsOMRemoteDictionaryResourceVtbl* do
+  record IXpsOMRemoteDictionaryResource, lpVtbl : IXpsOMRemoteDictionaryResourceVtable* do
     GUID = LibC::GUID.new(0xc9bd7cd4_u32, 0xe16a_u16, 0x4bf8_u16, StaticArray[0x8c_u8, 0x84_u8, 0xc9_u8, 0x50_u8, 0xaf_u8, 0x7a_u8, 0x30_u8, 0x61_u8])
     def query_interface(this : IXpsOMRemoteDictionaryResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2785,7 +2785,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMRemoteDictionaryResourceCollectionVtbl,
+  record IXpsOMRemoteDictionaryResourceCollectionVtable,
     query_interface : Proc(IXpsOMRemoteDictionaryResourceCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMRemoteDictionaryResourceCollection*, UInt32),
     release : Proc(IXpsOMRemoteDictionaryResourceCollection*, UInt32),
@@ -2799,7 +2799,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMRemoteDictionaryResourceCollection, lpVtbl : IXpsOMRemoteDictionaryResourceCollectionVtbl* do
+  record IXpsOMRemoteDictionaryResourceCollection, lpVtbl : IXpsOMRemoteDictionaryResourceCollectionVtable* do
     GUID = LibC::GUID.new(0x5c38db61_u32, 0x7fec_u16, 0x464a_u16, StaticArray[0x87_u8, 0xbd_u8, 0x41_u8, 0xe3_u8, 0xbe_u8, 0xf0_u8, 0x18_u8, 0xbe_u8])
     def query_interface(this : IXpsOMRemoteDictionaryResourceCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2835,7 +2835,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMSignatureBlockResourceCollectionVtbl,
+  record IXpsOMSignatureBlockResourceCollectionVtable,
     query_interface : Proc(IXpsOMSignatureBlockResourceCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMSignatureBlockResourceCollection*, UInt32),
     release : Proc(IXpsOMSignatureBlockResourceCollection*, UInt32),
@@ -2849,7 +2849,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMSignatureBlockResourceCollection, lpVtbl : IXpsOMSignatureBlockResourceCollectionVtbl* do
+  record IXpsOMSignatureBlockResourceCollection, lpVtbl : IXpsOMSignatureBlockResourceCollectionVtable* do
     GUID = LibC::GUID.new(0xab8f5d8e_u32, 0x351b_u16, 0x4d33_u16, StaticArray[0xaa_u8, 0xed_u8, 0xfa_u8, 0x56_u8, 0xf0_u8, 0x2_u8, 0x29_u8, 0x31_u8])
     def query_interface(this : IXpsOMSignatureBlockResourceCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2885,7 +2885,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMDocumentStructureResourceVtbl,
+  record IXpsOMDocumentStructureResourceVtable,
     query_interface : Proc(IXpsOMDocumentStructureResource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMDocumentStructureResource*, UInt32),
     release : Proc(IXpsOMDocumentStructureResource*, UInt32),
@@ -2897,7 +2897,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMDocumentStructureResource, lpVtbl : IXpsOMDocumentStructureResourceVtbl* do
+  record IXpsOMDocumentStructureResource, lpVtbl : IXpsOMDocumentStructureResourceVtable* do
     GUID = LibC::GUID.new(0x85febc8a_u32, 0x6b63_u16, 0x48a9_u16, StaticArray[0xaf_u8, 0x7_u8, 0x70_u8, 0x64_u8, 0xe4_u8, 0xec_u8, 0xff_u8, 0x30_u8])
     def query_interface(this : IXpsOMDocumentStructureResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2927,7 +2927,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMStoryFragmentsResourceVtbl,
+  record IXpsOMStoryFragmentsResourceVtable,
     query_interface : Proc(IXpsOMStoryFragmentsResource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMStoryFragmentsResource*, UInt32),
     release : Proc(IXpsOMStoryFragmentsResource*, UInt32),
@@ -2939,7 +2939,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMStoryFragmentsResource, lpVtbl : IXpsOMStoryFragmentsResourceVtbl* do
+  record IXpsOMStoryFragmentsResource, lpVtbl : IXpsOMStoryFragmentsResourceVtable* do
     GUID = LibC::GUID.new(0xc2b3ca09_u32, 0x473_u16, 0x4282_u16, StaticArray[0x87_u8, 0xae_u8, 0x17_u8, 0x80_u8, 0x86_u8, 0x32_u8, 0x23_u8, 0xf0_u8])
     def query_interface(this : IXpsOMStoryFragmentsResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -2969,7 +2969,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMSignatureBlockResourceVtbl,
+  record IXpsOMSignatureBlockResourceVtable,
     query_interface : Proc(IXpsOMSignatureBlockResource*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMSignatureBlockResource*, UInt32),
     release : Proc(IXpsOMSignatureBlockResource*, UInt32),
@@ -2981,7 +2981,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMSignatureBlockResource, lpVtbl : IXpsOMSignatureBlockResourceVtbl* do
+  record IXpsOMSignatureBlockResource, lpVtbl : IXpsOMSignatureBlockResourceVtable* do
     GUID = LibC::GUID.new(0x4776ad35_u32, 0x2e04_u16, 0x4357_u16, StaticArray[0x87_u8, 0x43_u8, 0xeb_u8, 0xf6_u8, 0xc1_u8, 0x71_u8, 0xa9_u8, 0x5_u8])
     def query_interface(this : IXpsOMSignatureBlockResource*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3011,7 +3011,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMVisualCollectionVtbl,
+  record IXpsOMVisualCollectionVtable,
     query_interface : Proc(IXpsOMVisualCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMVisualCollection*, UInt32),
     release : Proc(IXpsOMVisualCollection*, UInt32),
@@ -3024,7 +3024,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMVisualCollection, lpVtbl : IXpsOMVisualCollectionVtbl* do
+  record IXpsOMVisualCollection, lpVtbl : IXpsOMVisualCollectionVtable* do
     GUID = LibC::GUID.new(0x94d8abde_u32, 0xab91_u16, 0x46a8_u16, StaticArray[0x82_u8, 0xb7_u8, 0xf5_u8, 0xb0_u8, 0x5e_u8, 0xf0_u8, 0x1a_u8, 0x96_u8])
     def query_interface(this : IXpsOMVisualCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3057,7 +3057,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMCanvasVtbl,
+  record IXpsOMCanvasVtable,
     query_interface : Proc(IXpsOMCanvas*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMCanvas*, UInt32),
     release : Proc(IXpsOMCanvas*, UInt32),
@@ -3104,7 +3104,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMCanvas, lpVtbl : IXpsOMCanvasVtbl* do
+  record IXpsOMCanvas, lpVtbl : IXpsOMCanvasVtable* do
     GUID = LibC::GUID.new(0x221d1452_u32, 0x331e_u16, 0x47c6_u16, StaticArray[0x87_u8, 0xe9_u8, 0x6c_u8, 0xce_u8, 0xfb_u8, 0x9b_u8, 0x5b_u8, 0xa3_u8])
     def query_interface(this : IXpsOMCanvas*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3239,7 +3239,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMPageVtbl,
+  record IXpsOMPageVtable,
     query_interface : Proc(IXpsOMPage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMPage*, UInt32),
     release : Proc(IXpsOMPage*, UInt32),
@@ -3270,7 +3270,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMPage, lpVtbl : IXpsOMPageVtbl* do
+  record IXpsOMPage, lpVtbl : IXpsOMPageVtable* do
     GUID = LibC::GUID.new(0xd3e18888_u32, 0xf120_u16, 0x4fee_u16, StaticArray[0x8c_u8, 0x68_u8, 0x35_u8, 0x29_u8, 0x6e_u8, 0xae_u8, 0x91_u8, 0xd4_u8])
     def query_interface(this : IXpsOMPage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3357,7 +3357,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMPageReferenceVtbl,
+  record IXpsOMPageReferenceVtable,
     query_interface : Proc(IXpsOMPageReference*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMPageReference*, UInt32),
     release : Proc(IXpsOMPageReference*, UInt32),
@@ -3381,7 +3381,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMPageReference, lpVtbl : IXpsOMPageReferenceVtbl* do
+  record IXpsOMPageReference, lpVtbl : IXpsOMPageReferenceVtable* do
     GUID = LibC::GUID.new(0xed360180_u32, 0x6f92_u16, 0x4998_u16, StaticArray[0x89_u8, 0xd_u8, 0x2f_u8, 0x20_u8, 0x85_u8, 0x31_u8, 0xa0_u8, 0xa0_u8])
     def query_interface(this : IXpsOMPageReference*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3447,7 +3447,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMPageReferenceCollectionVtbl,
+  record IXpsOMPageReferenceCollectionVtable,
     query_interface : Proc(IXpsOMPageReferenceCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMPageReferenceCollection*, UInt32),
     release : Proc(IXpsOMPageReferenceCollection*, UInt32),
@@ -3460,7 +3460,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMPageReferenceCollection, lpVtbl : IXpsOMPageReferenceCollectionVtbl* do
+  record IXpsOMPageReferenceCollection, lpVtbl : IXpsOMPageReferenceCollectionVtable* do
     GUID = LibC::GUID.new(0xca16ba4d_u32, 0xe7b9_u16, 0x45c5_u16, StaticArray[0x95_u8, 0x8b_u8, 0xf9_u8, 0x80_u8, 0x22_u8, 0x47_u8, 0x37_u8, 0x45_u8])
     def query_interface(this : IXpsOMPageReferenceCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3493,7 +3493,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMDocumentVtbl,
+  record IXpsOMDocumentVtable,
     query_interface : Proc(IXpsOMDocument*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMDocument*, UInt32),
     release : Proc(IXpsOMDocument*, UInt32),
@@ -3510,7 +3510,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMDocument, lpVtbl : IXpsOMDocumentVtbl* do
+  record IXpsOMDocument, lpVtbl : IXpsOMDocumentVtable* do
     GUID = LibC::GUID.new(0x2c2c94cb_u32, 0xac5f_u16, 0x4254_u16, StaticArray[0x8e_u8, 0xe9_u8, 0x23_u8, 0x94_u8, 0x83_u8, 0x9_u8, 0xd9_u8, 0xf0_u8])
     def query_interface(this : IXpsOMDocument*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3555,7 +3555,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMDocumentCollectionVtbl,
+  record IXpsOMDocumentCollectionVtable,
     query_interface : Proc(IXpsOMDocumentCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMDocumentCollection*, UInt32),
     release : Proc(IXpsOMDocumentCollection*, UInt32),
@@ -3568,7 +3568,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMDocumentCollection, lpVtbl : IXpsOMDocumentCollectionVtbl* do
+  record IXpsOMDocumentCollection, lpVtbl : IXpsOMDocumentCollectionVtable* do
     GUID = LibC::GUID.new(0xd1c87f0d_u32, 0xe947_u16, 0x4754_u16, StaticArray[0x8a_u8, 0x25_u8, 0x97_u8, 0x14_u8, 0x78_u8, 0xf7_u8, 0xe8_u8, 0x3e_u8])
     def query_interface(this : IXpsOMDocumentCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3601,7 +3601,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMDocumentSequenceVtbl,
+  record IXpsOMDocumentSequenceVtable,
     query_interface : Proc(IXpsOMDocumentSequence*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMDocumentSequence*, UInt32),
     release : Proc(IXpsOMDocumentSequence*, UInt32),
@@ -3614,7 +3614,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMDocumentSequence, lpVtbl : IXpsOMDocumentSequenceVtbl* do
+  record IXpsOMDocumentSequence, lpVtbl : IXpsOMDocumentSequenceVtable* do
     GUID = LibC::GUID.new(0x56492eb4_u32, 0xd8d5_u16, 0x425e_u16, StaticArray[0x82_u8, 0x56_u8, 0x4c_u8, 0x2b_u8, 0x64_u8, 0xad_u8, 0x2_u8, 0x64_u8])
     def query_interface(this : IXpsOMDocumentSequence*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3647,7 +3647,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMCorePropertiesVtbl,
+  record IXpsOMCorePropertiesVtable,
     query_interface : Proc(IXpsOMCoreProperties*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMCoreProperties*, UInt32),
     release : Proc(IXpsOMCoreProperties*, UInt32),
@@ -3690,7 +3690,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMCoreProperties, lpVtbl : IXpsOMCorePropertiesVtbl* do
+  record IXpsOMCoreProperties, lpVtbl : IXpsOMCorePropertiesVtable* do
     GUID = LibC::GUID.new(0x3340fe8f_u32, 0x4027_u16, 0x4aa1_u16, StaticArray[0x8f_u8, 0x5f_u8, 0xd3_u8, 0x5a_u8, 0xe4_u8, 0x5f_u8, 0xe5_u8, 0x97_u8])
     def query_interface(this : IXpsOMCoreProperties*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3813,7 +3813,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMPackageVtbl,
+  record IXpsOMPackageVtable,
     query_interface : Proc(IXpsOMPackage*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMPackage*, UInt32),
     release : Proc(IXpsOMPackage*, UInt32),
@@ -3830,7 +3830,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMPackage, lpVtbl : IXpsOMPackageVtbl* do
+  record IXpsOMPackage, lpVtbl : IXpsOMPackageVtable* do
     GUID = LibC::GUID.new(0x18c3df65_u32, 0x81e1_u16, 0x4674_u16, StaticArray[0x91_u8, 0xdc_u8, 0xfc_u8, 0x45_u8, 0x2f_u8, 0x5a_u8, 0x41_u8, 0x6f_u8])
     def query_interface(this : IXpsOMPackage*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -3875,7 +3875,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMObjectFactoryVtbl,
+  record IXpsOMObjectFactoryVtable,
     query_interface : Proc(IXpsOMObjectFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMObjectFactory*, UInt32),
     release : Proc(IXpsOMObjectFactory*, UInt32),
@@ -3919,7 +3919,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMObjectFactory, lpVtbl : IXpsOMObjectFactoryVtbl* do
+  record IXpsOMObjectFactory, lpVtbl : IXpsOMObjectFactoryVtable* do
     GUID = LibC::GUID.new(0xf9b2a685_u32, 0xa50d_u16, 0x4fc2_u16, StaticArray[0xb7_u8, 0x64_u8, 0xb5_u8, 0x6e_u8, 0x9_u8, 0x3e_u8, 0xa0_u8, 0xca_u8])
     def query_interface(this : IXpsOMObjectFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4045,7 +4045,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMNameCollectionVtbl,
+  record IXpsOMNameCollectionVtable,
     query_interface : Proc(IXpsOMNameCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMNameCollection*, UInt32),
     release : Proc(IXpsOMNameCollection*, UInt32),
@@ -4054,7 +4054,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMNameCollection, lpVtbl : IXpsOMNameCollectionVtbl* do
+  record IXpsOMNameCollection, lpVtbl : IXpsOMNameCollectionVtable* do
     GUID = LibC::GUID.new(0x4bddf8ec_u32, 0xc915_u16, 0x421b_u16, StaticArray[0xa1_u8, 0x66_u8, 0xd1_u8, 0x73_u8, 0xd2_u8, 0x56_u8, 0x53_u8, 0xd2_u8])
     def query_interface(this : IXpsOMNameCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4075,7 +4075,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMPartUriCollectionVtbl,
+  record IXpsOMPartUriCollectionVtable,
     query_interface : Proc(IXpsOMPartUriCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMPartUriCollection*, UInt32),
     release : Proc(IXpsOMPartUriCollection*, UInt32),
@@ -4088,7 +4088,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMPartUriCollection, lpVtbl : IXpsOMPartUriCollectionVtbl* do
+  record IXpsOMPartUriCollection, lpVtbl : IXpsOMPartUriCollectionVtable* do
     GUID = LibC::GUID.new(0x57c650d4_u32, 0x67c_u16, 0x4893_u16, StaticArray[0x8c_u8, 0x33_u8, 0xf6_u8, 0x2a_u8, 0x6_u8, 0x33_u8, 0x73_u8, 0xf_u8])
     def query_interface(this : IXpsOMPartUriCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4121,7 +4121,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMPackageWriterVtbl,
+  record IXpsOMPackageWriterVtable,
     query_interface : Proc(IXpsOMPackageWriter*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMPackageWriter*, UInt32),
     release : Proc(IXpsOMPackageWriter*, UInt32),
@@ -4133,7 +4133,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMPackageWriter, lpVtbl : IXpsOMPackageWriterVtbl* do
+  record IXpsOMPackageWriter, lpVtbl : IXpsOMPackageWriterVtable* do
     GUID = LibC::GUID.new(0x4e2aa182_u32, 0xa443_u16, 0x42c6_u16, StaticArray[0xb4_u8, 0x1b_u8, 0x4f_u8, 0x8e_u8, 0x9d_u8, 0xe7_u8, 0x3f_u8, 0xf9_u8])
     def query_interface(this : IXpsOMPackageWriter*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4163,7 +4163,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMPackageTargetVtbl,
+  record IXpsOMPackageTargetVtable,
     query_interface : Proc(IXpsOMPackageTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMPackageTarget*, UInt32),
     release : Proc(IXpsOMPackageTarget*, UInt32),
@@ -4171,7 +4171,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMPackageTarget, lpVtbl : IXpsOMPackageTargetVtbl* do
+  record IXpsOMPackageTarget, lpVtbl : IXpsOMPackageTargetVtable* do
     GUID = LibC::GUID.new(0x219a9db0_u32, 0x4959_u16, 0x47d0_u16, StaticArray[0x80_u8, 0x34_u8, 0xb1_u8, 0xce_u8, 0x84_u8, 0xf4_u8, 0x1a_u8, 0x4d_u8])
     def query_interface(this : IXpsOMPackageTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4189,7 +4189,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMThumbnailGeneratorVtbl,
+  record IXpsOMThumbnailGeneratorVtable,
     query_interface : Proc(IXpsOMThumbnailGenerator*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMThumbnailGenerator*, UInt32),
     release : Proc(IXpsOMThumbnailGenerator*, UInt32),
@@ -4197,7 +4197,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMThumbnailGenerator, lpVtbl : IXpsOMThumbnailGeneratorVtbl* do
+  record IXpsOMThumbnailGenerator, lpVtbl : IXpsOMThumbnailGeneratorVtable* do
     GUID = LibC::GUID.new(0x15b873d5_u32, 0x1971_u16, 0x41e8_u16, StaticArray[0x83_u8, 0xa3_u8, 0x65_u8, 0x78_u8, 0x40_u8, 0x30_u8, 0x64_u8, 0xc7_u8])
     def query_interface(this : IXpsOMThumbnailGenerator*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4215,7 +4215,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMObjectFactory1Vtbl,
+  record IXpsOMObjectFactory1Vtable,
     query_interface : Proc(IXpsOMObjectFactory1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMObjectFactory1*, UInt32),
     release : Proc(IXpsOMObjectFactory1*, UInt32),
@@ -4271,7 +4271,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMObjectFactory1, lpVtbl : IXpsOMObjectFactory1Vtbl* do
+  record IXpsOMObjectFactory1, lpVtbl : IXpsOMObjectFactory1Vtable* do
     GUID = LibC::GUID.new(0xa91b617_u32, 0xd612_u16, 0x4181_u16, StaticArray[0xbf_u8, 0x7c_u8, 0xbe_u8, 0x58_u8, 0x24_u8, 0xe9_u8, 0xcc_u8, 0x8f_u8])
     def query_interface(this : IXpsOMObjectFactory1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4433,7 +4433,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMPackage1Vtbl,
+  record IXpsOMPackage1Vtable,
     query_interface : Proc(IXpsOMPackage1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMPackage1*, UInt32),
     release : Proc(IXpsOMPackage1*, UInt32),
@@ -4453,7 +4453,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMPackage1, lpVtbl : IXpsOMPackage1Vtbl* do
+  record IXpsOMPackage1, lpVtbl : IXpsOMPackage1Vtable* do
     GUID = LibC::GUID.new(0x95a9435e_u32, 0x12bb_u16, 0x461b_u16, StaticArray[0x8e_u8, 0x7f_u8, 0xc6_u8, 0xad_u8, 0xb0_u8, 0x4c_u8, 0xd9_u8, 0x6a_u8])
     def query_interface(this : IXpsOMPackage1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4507,7 +4507,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMPage1Vtbl,
+  record IXpsOMPage1Vtable,
     query_interface : Proc(IXpsOMPage1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMPage1*, UInt32),
     release : Proc(IXpsOMPage1*, UInt32),
@@ -4540,7 +4540,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMPage1, lpVtbl : IXpsOMPage1Vtbl* do
+  record IXpsOMPage1, lpVtbl : IXpsOMPage1Vtable* do
     GUID = LibC::GUID.new(0x305b60ef_u32, 0x6892_u16, 0x4dda_u16, StaticArray[0x9c_u8, 0xbb_u8, 0x3a_u8, 0xa6_u8, 0x59_u8, 0x74_u8, 0x50_u8, 0x8a_u8])
     def query_interface(this : IXpsOMPage1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4633,7 +4633,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsDocumentPackageTargetVtbl,
+  record IXpsDocumentPackageTargetVtable,
     query_interface : Proc(IXpsDocumentPackageTarget*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsDocumentPackageTarget*, UInt32),
     release : Proc(IXpsDocumentPackageTarget*, UInt32),
@@ -4643,7 +4643,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsDocumentPackageTarget, lpVtbl : IXpsDocumentPackageTargetVtbl* do
+  record IXpsDocumentPackageTarget, lpVtbl : IXpsDocumentPackageTargetVtable* do
     GUID = LibC::GUID.new(0x3b0b6d38_u32, 0x53ad_u16, 0x41da_u16, StaticArray[0xb2_u8, 0x12_u8, 0xd3_u8, 0x76_u8, 0x37_u8, 0xa6_u8, 0x71_u8, 0x4e_u8])
     def query_interface(this : IXpsDocumentPackageTarget*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4667,7 +4667,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMRemoteDictionaryResource1Vtbl,
+  record IXpsOMRemoteDictionaryResource1Vtable,
     query_interface : Proc(IXpsOMRemoteDictionaryResource1*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMRemoteDictionaryResource1*, UInt32),
     release : Proc(IXpsOMRemoteDictionaryResource1*, UInt32),
@@ -4680,7 +4680,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMRemoteDictionaryResource1, lpVtbl : IXpsOMRemoteDictionaryResource1Vtbl* do
+  record IXpsOMRemoteDictionaryResource1, lpVtbl : IXpsOMRemoteDictionaryResource1Vtable* do
     GUID = LibC::GUID.new(0xbf8fc1d4_u32, 0x9d46_u16, 0x4141_u16, StaticArray[0xba_u8, 0x5f_u8, 0x94_u8, 0xbb_u8, 0x92_u8, 0x50_u8, 0xd0_u8, 0x41_u8])
     def query_interface(this : IXpsOMRemoteDictionaryResource1*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4713,7 +4713,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsOMPackageWriter3DVtbl,
+  record IXpsOMPackageWriter3DVtable,
     query_interface : Proc(IXpsOMPackageWriter3D*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsOMPackageWriter3D*, UInt32),
     release : Proc(IXpsOMPackageWriter3D*, UInt32),
@@ -4727,7 +4727,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsOMPackageWriter3D, lpVtbl : IXpsOMPackageWriter3DVtbl* do
+  record IXpsOMPackageWriter3D, lpVtbl : IXpsOMPackageWriter3DVtable* do
     GUID = LibC::GUID.new(0xe8a45033_u32, 0x640e_u16, 0x43fa_u16, StaticArray[0x9b_u8, 0xdf_u8, 0xfd_u8, 0xde_u8, 0xaa_u8, 0x31_u8, 0xc6_u8, 0xa0_u8])
     def query_interface(this : IXpsOMPackageWriter3D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4763,7 +4763,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsDocumentPackageTarget3DVtbl,
+  record IXpsDocumentPackageTarget3DVtable,
     query_interface : Proc(IXpsDocumentPackageTarget3D*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsDocumentPackageTarget3D*, UInt32),
     release : Proc(IXpsDocumentPackageTarget3D*, UInt32),
@@ -4772,7 +4772,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsDocumentPackageTarget3D, lpVtbl : IXpsDocumentPackageTarget3DVtbl* do
+  record IXpsDocumentPackageTarget3D, lpVtbl : IXpsDocumentPackageTarget3DVtable* do
     GUID = LibC::GUID.new(0x60ba71b8_u32, 0x3101_u16, 0x4984_u16, StaticArray[0x91_u8, 0x99_u8, 0xf4_u8, 0xea_u8, 0x77_u8, 0x5f_u8, 0xf0_u8, 0x1d_u8])
     def query_interface(this : IXpsDocumentPackageTarget3D*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4793,7 +4793,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsSigningOptionsVtbl,
+  record IXpsSigningOptionsVtable,
     query_interface : Proc(IXpsSigningOptions*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsSigningOptions*, UInt32),
     release : Proc(IXpsSigningOptions*, UInt32),
@@ -4817,7 +4817,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsSigningOptions, lpVtbl : IXpsSigningOptionsVtbl* do
+  record IXpsSigningOptions, lpVtbl : IXpsSigningOptionsVtable* do
     GUID = LibC::GUID.new(0x7718eae4_u32, 0x3215_u16, 0x49be_u16, StaticArray[0xaf_u8, 0x5b_u8, 0x59_u8, 0x4f_u8, 0xef_u8, 0x7f_u8, 0xcf_u8, 0xa6_u8])
     def query_interface(this : IXpsSigningOptions*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4883,7 +4883,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsSignatureCollectionVtbl,
+  record IXpsSignatureCollectionVtable,
     query_interface : Proc(IXpsSignatureCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsSignatureCollection*, UInt32),
     release : Proc(IXpsSignatureCollection*, UInt32),
@@ -4893,7 +4893,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsSignatureCollection, lpVtbl : IXpsSignatureCollectionVtbl* do
+  record IXpsSignatureCollection, lpVtbl : IXpsSignatureCollectionVtable* do
     GUID = LibC::GUID.new(0xa2d1d95d_u32, 0xadd2_u16, 0x4dff_u16, StaticArray[0xab_u8, 0x27_u8, 0x6b_u8, 0x9c_u8, 0x64_u8, 0x5f_u8, 0xf3_u8, 0x22_u8])
     def query_interface(this : IXpsSignatureCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4917,7 +4917,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsSignatureVtbl,
+  record IXpsSignatureVtable,
     query_interface : Proc(IXpsSignature*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsSignature*, UInt32),
     release : Proc(IXpsSignature*, UInt32),
@@ -4936,7 +4936,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsSignature, lpVtbl : IXpsSignatureVtbl* do
+  record IXpsSignature, lpVtbl : IXpsSignatureVtable* do
     GUID = LibC::GUID.new(0x6ae4c93e_u32, 0x1ade_u16, 0x42fb_u16, StaticArray[0x89_u8, 0x8b_u8, 0x3a_u8, 0x56_u8, 0x58_u8, 0x28_u8, 0x48_u8, 0x57_u8])
     def query_interface(this : IXpsSignature*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -4987,7 +4987,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsSignatureBlockCollectionVtbl,
+  record IXpsSignatureBlockCollectionVtable,
     query_interface : Proc(IXpsSignatureBlockCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsSignatureBlockCollection*, UInt32),
     release : Proc(IXpsSignatureBlockCollection*, UInt32),
@@ -4997,7 +4997,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsSignatureBlockCollection, lpVtbl : IXpsSignatureBlockCollectionVtbl* do
+  record IXpsSignatureBlockCollection, lpVtbl : IXpsSignatureBlockCollectionVtable* do
     GUID = LibC::GUID.new(0x23397050_u32, 0xfe99_u16, 0x467a_u16, StaticArray[0x8d_u8, 0xce_u8, 0x92_u8, 0x37_u8, 0xf0_u8, 0x74_u8, 0xff_u8, 0xe4_u8])
     def query_interface(this : IXpsSignatureBlockCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5021,7 +5021,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsSignatureBlockVtbl,
+  record IXpsSignatureBlockVtable,
     query_interface : Proc(IXpsSignatureBlock*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsSignatureBlock*, UInt32),
     release : Proc(IXpsSignatureBlock*, UInt32),
@@ -5033,7 +5033,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsSignatureBlock, lpVtbl : IXpsSignatureBlockVtbl* do
+  record IXpsSignatureBlock, lpVtbl : IXpsSignatureBlockVtable* do
     GUID = LibC::GUID.new(0x151fac09_u32, 0xb97_u16, 0x4ac6_u16, StaticArray[0xa3_u8, 0x23_u8, 0x5e_u8, 0x42_u8, 0x97_u8, 0xd4_u8, 0x32_u8, 0x2b_u8])
     def query_interface(this : IXpsSignatureBlock*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5063,7 +5063,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsSignatureRequestCollectionVtbl,
+  record IXpsSignatureRequestCollectionVtable,
     query_interface : Proc(IXpsSignatureRequestCollection*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsSignatureRequestCollection*, UInt32),
     release : Proc(IXpsSignatureRequestCollection*, UInt32),
@@ -5073,7 +5073,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsSignatureRequestCollection, lpVtbl : IXpsSignatureRequestCollectionVtbl* do
+  record IXpsSignatureRequestCollection, lpVtbl : IXpsSignatureRequestCollectionVtable* do
     GUID = LibC::GUID.new(0xf0253e68_u32, 0x9f19_u16, 0x412e_u16, StaticArray[0x9b_u8, 0x4f_u8, 0x54_u8, 0xd3_u8, 0xb0_u8, 0xac_u8, 0x6c_u8, 0xd9_u8])
     def query_interface(this : IXpsSignatureRequestCollection*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5097,7 +5097,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsSignatureRequestVtbl,
+  record IXpsSignatureRequestVtable,
     query_interface : Proc(IXpsSignatureRequest*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsSignatureRequest*, UInt32),
     release : Proc(IXpsSignatureRequest*, UInt32),
@@ -5116,7 +5116,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsSignatureRequest, lpVtbl : IXpsSignatureRequestVtbl* do
+  record IXpsSignatureRequest, lpVtbl : IXpsSignatureRequestVtable* do
     GUID = LibC::GUID.new(0xac58950b_u32, 0x7208_u16, 0x4b2d_u16, StaticArray[0xb2_u8, 0xc4_u8, 0x95_u8, 0x10_u8, 0x83_u8, 0xd3_u8, 0xb8_u8, 0xeb_u8])
     def query_interface(this : IXpsSignatureRequest*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5167,7 +5167,7 @@ module Win32cr::Storage::Xps
   end
 
   @[Extern]
-  record IXpsSignatureManagerVtbl,
+  record IXpsSignatureManagerVtable,
     query_interface : Proc(IXpsSignatureManager*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXpsSignatureManager*, UInt32),
     release : Proc(IXpsSignatureManager*, UInt32),
@@ -5185,7 +5185,7 @@ module Win32cr::Storage::Xps
 
 
   @[Extern]
-  record IXpsSignatureManager, lpVtbl : IXpsSignatureManagerVtbl* do
+  record IXpsSignatureManager, lpVtbl : IXpsSignatureManagerVtable* do
     GUID = LibC::GUID.new(0xd3e8d338_u32, 0xfdc4_u16, 0x4afc_u16, StaticArray[0x80_u8, 0xb5_u8, 0xd5_u8, 0x32_u8, 0xa1_u8, 0x78_u8, 0x2e_u8, 0xe1_u8])
     def query_interface(this : IXpsSignatureManager*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5233,56 +5233,81 @@ module Win32cr::Storage::Xps
   end
 
   def deviceCapabilitiesA(pDevice : Win32cr::Foundation::PSTR, pPort : Win32cr::Foundation::PSTR, fwCapability : Win32cr::Storage::Xps::DEVICE_CAPABILITIES, pOutput : Win32cr::Foundation::PSTR, pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*) : Int32
+    {% if !flag?(:docs) %}
     C.DeviceCapabilitiesA(pDevice, pPort, fwCapability, pOutput, pDevMode)
+    {% end %}
   end
 
   def deviceCapabilitiesW(pDevice : Win32cr::Foundation::PWSTR, pPort : Win32cr::Foundation::PWSTR, fwCapability : Win32cr::Storage::Xps::DEVICE_CAPABILITIES, pOutput : Win32cr::Foundation::PWSTR, pDevMode : Win32cr::Graphics::Gdi::DEVMODEW*) : Int32
+    {% if !flag?(:docs) %}
     C.DeviceCapabilitiesW(pDevice, pPort, fwCapability, pOutput, pDevMode)
+    {% end %}
   end
 
   def escape(hdc : Win32cr::Graphics::Gdi::HDC, iEscape : Int32, cjIn : Int32, pvIn : Win32cr::Foundation::PSTR, pvOut : Void*) : Int32
+    {% if !flag?(:docs) %}
     C.Escape(hdc, iEscape, cjIn, pvIn, pvOut)
+    {% end %}
   end
 
   def extEscape(hdc : Win32cr::Graphics::Gdi::HDC, iEscape : Int32, cjInput : Int32, lpInData : Win32cr::Foundation::PSTR, cjOutput : Int32, lpOutData : Win32cr::Foundation::PSTR) : Int32
+    {% if !flag?(:docs) %}
     C.ExtEscape(hdc, iEscape, cjInput, lpInData, cjOutput, lpOutData)
+    {% end %}
   end
 
   def startDocA(hdc : Win32cr::Graphics::Gdi::HDC, lpdi : Win32cr::Storage::Xps::DOCINFOA*) : Int32
+    {% if !flag?(:docs) %}
     C.StartDocA(hdc, lpdi)
+    {% end %}
   end
 
   def startDocW(hdc : Win32cr::Graphics::Gdi::HDC, lpdi : Win32cr::Storage::Xps::DOCINFOW*) : Int32
+    {% if !flag?(:docs) %}
     C.StartDocW(hdc, lpdi)
+    {% end %}
   end
 
   def endDoc(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    {% if !flag?(:docs) %}
     C.EndDoc(hdc)
+    {% end %}
   end
 
   def startPage(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    {% if !flag?(:docs) %}
     C.StartPage(hdc)
+    {% end %}
   end
 
   def endPage(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    {% if !flag?(:docs) %}
     C.EndPage(hdc)
+    {% end %}
   end
 
   def abortDoc(hdc : Win32cr::Graphics::Gdi::HDC) : Int32
+    {% if !flag?(:docs) %}
     C.AbortDoc(hdc)
+    {% end %}
   end
 
   def setAbortProc(hdc : Win32cr::Graphics::Gdi::HDC, proc : Win32cr::Storage::Xps::ABORTPROC) : Int32
+    {% if !flag?(:docs) %}
     C.SetAbortProc(hdc, proc)
+    {% end %}
   end
 
   def printWindow(hwnd : Win32cr::Foundation::HWND, hdcBlt : Win32cr::Graphics::Gdi::HDC, nFlags : Win32cr::Storage::Xps::PRINT_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.PrintWindow(hwnd, hdcBlt, nFlags)
+    {% end %}
   end
 
   @[Link("winspool.drv")]
-  @[Link("gdi32")]
-  @[Link("user32")]
+  @[Link("gdi32.dll")]
+  @[Link("user32.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun DeviceCapabilitiesA(pDevice : Win32cr::Foundation::PSTR, pPort : Win32cr::Foundation::PSTR, fwCapability : Win32cr::Storage::Xps::DEVICE_CAPABILITIES, pOutput : Win32cr::Foundation::PSTR, pDevMode : Win32cr::Graphics::Gdi::DEVMODEA*) : Int32
@@ -5321,4 +5346,5 @@ module Win32cr::Storage::Xps
     fun PrintWindow(hwnd : Win32cr::Foundation::HWND, hdcBlt : Win32cr::Graphics::Gdi::HDC, nFlags : Win32cr::Storage::Xps::PRINT_WINDOW_FLAGS) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end

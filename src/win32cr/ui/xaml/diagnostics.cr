@@ -140,7 +140,7 @@ module Win32cr::UI::Xaml::Diagnostics
   end
 
   @[Extern]
-  record IVisualTreeServiceCallbackVtbl,
+  record IVisualTreeServiceCallbackVtable,
     query_interface : Proc(IVisualTreeServiceCallback*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVisualTreeServiceCallback*, UInt32),
     release : Proc(IVisualTreeServiceCallback*, UInt32),
@@ -148,7 +148,7 @@ module Win32cr::UI::Xaml::Diagnostics
 
 
   @[Extern]
-  record IVisualTreeServiceCallback, lpVtbl : IVisualTreeServiceCallbackVtbl* do
+  record IVisualTreeServiceCallback, lpVtbl : IVisualTreeServiceCallbackVtable* do
     GUID = LibC::GUID.new(0xaa7a8931_u32, 0x80e4_u16, 0x4fec_u16, StaticArray[0x8f_u8, 0x3b_u8, 0x55_u8, 0x3f_u8, 0x87_u8, 0xb4_u8, 0x96_u8, 0x6e_u8])
     def query_interface(this : IVisualTreeServiceCallback*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -166,7 +166,7 @@ module Win32cr::UI::Xaml::Diagnostics
   end
 
   @[Extern]
-  record IVisualTreeServiceCallback2Vtbl,
+  record IVisualTreeServiceCallback2Vtable,
     query_interface : Proc(IVisualTreeServiceCallback2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVisualTreeServiceCallback2*, UInt32),
     release : Proc(IVisualTreeServiceCallback2*, UInt32),
@@ -175,7 +175,7 @@ module Win32cr::UI::Xaml::Diagnostics
 
 
   @[Extern]
-  record IVisualTreeServiceCallback2, lpVtbl : IVisualTreeServiceCallback2Vtbl* do
+  record IVisualTreeServiceCallback2, lpVtbl : IVisualTreeServiceCallback2Vtable* do
     GUID = LibC::GUID.new(0xbad9eb88_u32, 0xae77_u16, 0x4397_u16, StaticArray[0xb9_u8, 0x48_u8, 0x5f_u8, 0xa2_u8, 0xdb_u8, 0xa_u8, 0x19_u8, 0xea_u8])
     def query_interface(this : IVisualTreeServiceCallback2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -196,7 +196,7 @@ module Win32cr::UI::Xaml::Diagnostics
   end
 
   @[Extern]
-  record IVisualTreeServiceVtbl,
+  record IVisualTreeServiceVtable,
     query_interface : Proc(IVisualTreeService*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVisualTreeService*, UInt32),
     release : Proc(IVisualTreeService*, UInt32),
@@ -215,7 +215,7 @@ module Win32cr::UI::Xaml::Diagnostics
 
 
   @[Extern]
-  record IVisualTreeService, lpVtbl : IVisualTreeServiceVtbl* do
+  record IVisualTreeService, lpVtbl : IVisualTreeServiceVtable* do
     GUID = LibC::GUID.new(0xa593b11a_u32, 0xd17f_u16, 0x48bb_u16, StaticArray[0x8f_u8, 0x66_u8, 0x83_u8, 0x91_u8, 0x7_u8, 0x31_u8, 0xc8_u8, 0xa5_u8])
     def query_interface(this : IVisualTreeService*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -266,7 +266,7 @@ module Win32cr::UI::Xaml::Diagnostics
   end
 
   @[Extern]
-  record IXamlDiagnosticsVtbl,
+  record IXamlDiagnosticsVtable,
     query_interface : Proc(IXamlDiagnostics*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IXamlDiagnostics*, UInt32),
     release : Proc(IXamlDiagnostics*, UInt32),
@@ -281,7 +281,7 @@ module Win32cr::UI::Xaml::Diagnostics
 
 
   @[Extern]
-  record IXamlDiagnostics, lpVtbl : IXamlDiagnosticsVtbl* do
+  record IXamlDiagnostics, lpVtbl : IXamlDiagnosticsVtable* do
     GUID = LibC::GUID.new(0x18c9e2b6_u32, 0x3f43_u16, 0x4116_u16, StaticArray[0x9f_u8, 0x2b_u8, 0xff_u8, 0x93_u8, 0x5d_u8, 0x77_u8, 0x70_u8, 0xd2_u8])
     def query_interface(this : IXamlDiagnostics*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -320,7 +320,7 @@ module Win32cr::UI::Xaml::Diagnostics
   end
 
   @[Extern]
-  record IBitmapDataVtbl,
+  record IBitmapDataVtable,
     query_interface : Proc(IBitmapData*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IBitmapData*, UInt32),
     release : Proc(IBitmapData*, UInt32),
@@ -331,7 +331,7 @@ module Win32cr::UI::Xaml::Diagnostics
 
 
   @[Extern]
-  record IBitmapData, lpVtbl : IBitmapDataVtbl* do
+  record IBitmapData, lpVtbl : IBitmapDataVtable* do
     GUID = LibC::GUID.new(0xd1a34ef2_u32, 0xcad8_u16, 0x4635_u16, StaticArray[0xa3_u8, 0xd2_u8, 0xfc_u8, 0xda_u8, 0x8d_u8, 0x3f_u8, 0x3c_u8, 0xaf_u8])
     def query_interface(this : IBitmapData*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -358,7 +358,7 @@ module Win32cr::UI::Xaml::Diagnostics
   end
 
   @[Extern]
-  record IVisualTreeService2Vtbl,
+  record IVisualTreeService2Vtable,
     query_interface : Proc(IVisualTreeService2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVisualTreeService2*, UInt32),
     release : Proc(IVisualTreeService2*, UInt32),
@@ -381,7 +381,7 @@ module Win32cr::UI::Xaml::Diagnostics
 
 
   @[Extern]
-  record IVisualTreeService2, lpVtbl : IVisualTreeService2Vtbl* do
+  record IVisualTreeService2, lpVtbl : IVisualTreeService2Vtable* do
     GUID = LibC::GUID.new(0x130f5136_u32, 0xec43_u16, 0x4f61_u16, StaticArray[0x89_u8, 0xc7_u8, 0x98_u8, 0x1_u8, 0xa3_u8, 0x6d_u8, 0x2e_u8, 0x95_u8])
     def query_interface(this : IVisualTreeService2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -444,7 +444,7 @@ module Win32cr::UI::Xaml::Diagnostics
   end
 
   @[Extern]
-  record IVisualTreeService3Vtbl,
+  record IVisualTreeService3Vtable,
     query_interface : Proc(IVisualTreeService3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVisualTreeService3*, UInt32),
     release : Proc(IVisualTreeService3*, UInt32),
@@ -471,7 +471,7 @@ module Win32cr::UI::Xaml::Diagnostics
 
 
   @[Extern]
-  record IVisualTreeService3, lpVtbl : IVisualTreeService3Vtbl* do
+  record IVisualTreeService3, lpVtbl : IVisualTreeService3Vtable* do
     GUID = LibC::GUID.new(0xe79c6e0_u32, 0x85a0_u16, 0x4be8_u16, StaticArray[0xb4_u8, 0x1a_u8, 0x65_u8, 0x5c_u8, 0xf1_u8, 0xfd_u8, 0x19_u8, 0xbd_u8])
     def query_interface(this : IVisualTreeService3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -546,14 +546,19 @@ module Win32cr::UI::Xaml::Diagnostics
   end
 
   def initializeXamlDiagnostic(endPointName : Win32cr::Foundation::PWSTR, pid : UInt32, wszDllXamlDiagnostics : Win32cr::Foundation::PWSTR, wszTAPDllName : Win32cr::Foundation::PWSTR, tapClsid : LibC::GUID) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.InitializeXamlDiagnostic(endPointName, pid, wszDllXamlDiagnostics, wszTAPDllName, tapClsid)
+    {% end %}
   end
 
   def initializeXamlDiagnosticsEx(endPointName : Win32cr::Foundation::PWSTR, pid : UInt32, wszDllXamlDiagnostics : Win32cr::Foundation::PWSTR, wszTAPDllName : Win32cr::Foundation::PWSTR, tapClsid : LibC::GUID, wszInitializationData : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.InitializeXamlDiagnosticsEx(endPointName, pid, wszDllXamlDiagnostics, wszTAPDllName, tapClsid, wszInitializationData)
+    {% end %}
   end
 
-  @[Link("windows.ui.xaml")]
+  @[Link("windows.ui.xaml.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun InitializeXamlDiagnostic(endPointName : Win32cr::Foundation::PWSTR, pid : UInt32, wszDllXamlDiagnostics : Win32cr::Foundation::PWSTR, wszTAPDllName : Win32cr::Foundation::PWSTR, tapClsid : LibC::GUID) : Win32cr::Foundation::HRESULT
@@ -562,4 +567,5 @@ module Win32cr::UI::Xaml::Diagnostics
     fun InitializeXamlDiagnosticsEx(endPointName : Win32cr::Foundation::PWSTR, pid : UInt32, wszDllXamlDiagnostics : Win32cr::Foundation::PWSTR, wszTAPDllName : Win32cr::Foundation::PWSTR, tapClsid : LibC::GUID, wszInitializationData : Win32cr::Foundation::PWSTR) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

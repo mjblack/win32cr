@@ -24,7 +24,7 @@ module Win32cr::Graphics::Direct3D9on12
   end
 
   @[Extern]
-  record IDirect3DDevice9On12Vtbl,
+  record IDirect3DDevice9On12Vtable,
     query_interface : Proc(IDirect3DDevice9On12*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirect3DDevice9On12*, UInt32),
     release : Proc(IDirect3DDevice9On12*, UInt32),
@@ -34,7 +34,7 @@ module Win32cr::Graphics::Direct3D9on12
 
 
   @[Extern]
-  record IDirect3DDevice9On12, lpVtbl : IDirect3DDevice9On12Vtbl* do
+  record IDirect3DDevice9On12, lpVtbl : IDirect3DDevice9On12Vtable* do
     GUID = LibC::GUID.new(0xe7fda234_u32, 0xb589_u16, 0x4049_u16, StaticArray[0x94_u8, 0xd_u8, 0x88_u8, 0x78_u8, 0x97_u8, 0x75_u8, 0x31_u8, 0xc8_u8])
     def query_interface(this : IDirect3DDevice9On12*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -58,14 +58,19 @@ module Win32cr::Graphics::Direct3D9on12
   end
 
   def direct3DCreate9On12Ex(sdk_version : UInt32, pOverrideList : Win32cr::Graphics::Direct3D9on12::D3D9ON12_ARGS*, num_override_entries : UInt32, ppOutputInterface : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.Direct3DCreate9On12Ex(sdk_version, pOverrideList, num_override_entries, ppOutputInterface)
+    {% end %}
   end
 
   def direct3DCreate9On12(sdk_version : UInt32, pOverrideList : Win32cr::Graphics::Direct3D9on12::D3D9ON12_ARGS*, num_override_entries : UInt32) : Void*
+    {% if !flag?(:docs) %}
     C.Direct3DCreate9On12(sdk_version, pOverrideList, num_override_entries)
+    {% end %}
   end
 
-  @[Link("d3d9")]
+  @[Link("d3d9.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun Direct3DCreate9On12Ex(sdk_version : UInt32, pOverrideList : Win32cr::Graphics::Direct3D9on12::D3D9ON12_ARGS*, num_override_entries : UInt32, ppOutputInterface : Void**) : Win32cr::Foundation::HRESULT
@@ -74,4 +79,5 @@ module Win32cr::Graphics::Direct3D9on12
     fun Direct3DCreate9On12(sdk_version : UInt32, pOverrideList : Win32cr::Graphics::Direct3D9on12::D3D9ON12_ARGS*, num_override_entries : UInt32) : Void*
 
   end
+  {% end %}
 end

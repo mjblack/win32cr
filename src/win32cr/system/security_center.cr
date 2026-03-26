@@ -49,7 +49,7 @@ module Win32cr::System::SecurityCenter
   end
 
   @[Extern]
-  record IWscProductVtbl,
+  record IWscProductVtable,
     query_interface : Proc(IWscProduct*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWscProduct*, UInt32),
     release : Proc(IWscProduct*, UInt32),
@@ -67,7 +67,7 @@ module Win32cr::System::SecurityCenter
 
 
   @[Extern]
-  record IWscProduct, lpVtbl : IWscProductVtbl* do
+  record IWscProduct, lpVtbl : IWscProductVtable* do
     GUID = LibC::GUID.new(0x8c38232e_u32, 0x3a45_u16, 0x4a27_u16, StaticArray[0x92_u8, 0xb0_u8, 0x1a_u8, 0x16_u8, 0xa9_u8, 0x75_u8, 0xf6_u8, 0x69_u8])
     def query_interface(this : IWscProduct*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -115,7 +115,7 @@ module Win32cr::System::SecurityCenter
   end
 
   @[Extern]
-  record IWscProduct2Vtbl,
+  record IWscProduct2Vtable,
     query_interface : Proc(IWscProduct2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWscProduct2*, UInt32),
     release : Proc(IWscProduct2*, UInt32),
@@ -139,7 +139,7 @@ module Win32cr::System::SecurityCenter
 
 
   @[Extern]
-  record IWscProduct2, lpVtbl : IWscProduct2Vtbl* do
+  record IWscProduct2, lpVtbl : IWscProduct2Vtable* do
     GUID = LibC::GUID.new(0xf896ca54_u32, 0xfe09_u16, 0x4403_u16, StaticArray[0x86_u8, 0xd4_u8, 0x23_u8, 0xcb_u8, 0x48_u8, 0x8d_u8, 0x81_u8, 0xd8_u8])
     def query_interface(this : IWscProduct2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -205,7 +205,7 @@ module Win32cr::System::SecurityCenter
   end
 
   @[Extern]
-  record IWscProduct3Vtbl,
+  record IWscProduct3Vtable,
     query_interface : Proc(IWscProduct3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWscProduct3*, UInt32),
     release : Proc(IWscProduct3*, UInt32),
@@ -230,7 +230,7 @@ module Win32cr::System::SecurityCenter
 
 
   @[Extern]
-  record IWscProduct3, lpVtbl : IWscProduct3Vtbl* do
+  record IWscProduct3, lpVtbl : IWscProduct3Vtable* do
     GUID = LibC::GUID.new(0x55536524_u32, 0xd1d1_u16, 0x4726_u16, StaticArray[0x8c_u8, 0x7c_u8, 0x4_u8, 0x99_u8, 0x6a_u8, 0x19_u8, 0x4_u8, 0xe7_u8])
     def query_interface(this : IWscProduct3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -299,7 +299,7 @@ module Win32cr::System::SecurityCenter
   end
 
   @[Extern]
-  record IWSCProductListVtbl,
+  record IWSCProductListVtable,
     query_interface : Proc(IWSCProductList*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSCProductList*, UInt32),
     release : Proc(IWSCProductList*, UInt32),
@@ -313,7 +313,7 @@ module Win32cr::System::SecurityCenter
 
 
   @[Extern]
-  record IWSCProductList, lpVtbl : IWSCProductListVtbl* do
+  record IWSCProductList, lpVtbl : IWSCProductListVtable* do
     GUID = LibC::GUID.new(0x722a338c_u32, 0x6e8e_u16, 0x4e72_u16, StaticArray[0xac_u8, 0x27_u8, 0x14_u8, 0x17_u8, 0xfb_u8, 0xc_u8, 0x81_u8, 0xc2_u8])
     def query_interface(this : IWSCProductList*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -349,7 +349,7 @@ module Win32cr::System::SecurityCenter
   end
 
   @[Extern]
-  record IWSCDefaultProductVtbl,
+  record IWSCDefaultProductVtable,
     query_interface : Proc(IWSCDefaultProduct*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IWSCDefaultProduct*, UInt32),
     release : Proc(IWSCDefaultProduct*, UInt32),
@@ -361,7 +361,7 @@ module Win32cr::System::SecurityCenter
 
 
   @[Extern]
-  record IWSCDefaultProduct, lpVtbl : IWSCDefaultProductVtbl* do
+  record IWSCDefaultProduct, lpVtbl : IWSCDefaultProductVtable* do
     GUID = LibC::GUID.new(0x476d69c_u32, 0xf21a_u16, 0x11e5_u16, StaticArray[0x9c_u8, 0xe9_u8, 0x5e_u8, 0x55_u8, 0x17_u8, 0x50_u8, 0x7c_u8, 0x66_u8])
     def query_interface(this : IWSCDefaultProduct*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -391,30 +391,43 @@ module Win32cr::System::SecurityCenter
   end
 
   def wscRegisterForChanges(reserved : Void*, phCallbackRegistration : Win32cr::Foundation::HANDLE*, lpCallbackAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, pContext : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WscRegisterForChanges(reserved, phCallbackRegistration, lpCallbackAddress, pContext)
+    {% end %}
   end
 
   def wscUnRegisterChanges(hRegistrationHandle : Win32cr::Foundation::HANDLE) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WscUnRegisterChanges(hRegistrationHandle)
+    {% end %}
   end
 
   def wscRegisterForUserNotifications : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WscRegisterForUserNotifications
+    {% end %}
   end
 
   def wscGetSecurityProviderHealth(providers : UInt32, pHealth : Win32cr::System::SecurityCenter::WSC_SECURITY_PROVIDER_HEALTH*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WscGetSecurityProviderHealth(providers, pHealth)
+    {% end %}
   end
 
   def wscQueryAntiMalwareUri : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WscQueryAntiMalwareUri
+    {% end %}
   end
 
   def wscGetAntiMalwareUri(ppszUri : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.WscGetAntiMalwareUri(ppszUri)
+    {% end %}
   end
 
-  @[Link("wscapi")]
+  @[Link("wscapi.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun WscRegisterForChanges(reserved : Void*, phCallbackRegistration : Win32cr::Foundation::HANDLE*, lpCallbackAddress : Win32cr::System::Threading::LPTHREAD_START_ROUTINE, pContext : Void*) : Win32cr::Foundation::HRESULT
@@ -435,4 +448,5 @@ module Win32cr::System::SecurityCenter
     fun WscGetAntiMalwareUri(ppszUri : Win32cr::Foundation::PWSTR*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

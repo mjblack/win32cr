@@ -1264,11 +1264,7 @@ module Win32cr::Graphics::DirectDraw
   DXAPI_HALVERSION = 1_u32
 
 
-  @[Extern]
-  struct DDFXROP_
-    def initialize()
-    end
-  end
+  alias DDFXROP_ = Void
 
   @[Extern]
   struct DDARGB
@@ -1324,12 +1320,34 @@ module Win32cr::Graphics::DirectDraw
     property ddckDestColorkey : Win32cr::Graphics::DirectDraw::DDCOLORKEY
     property ddckSrcColorkey : Win32cr::Graphics::DirectDraw::DDCOLORKEY
 
+    # Nested Type Anonymous5_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous5_e__Union_
+    property dwFillColor : UInt32
+    property dwFillDepth : UInt32
+    property dwFillPixel : UInt32
+    property lpDDSPattern : Void*
+    def initialize(@dwFillColor : UInt32, @dwFillDepth : UInt32, @dwFillPixel : UInt32, @lpDDSPattern : Void*)
+    end
+    end
+
+
     # Nested Type Anonymous4_e__Union_
     @[Extern(union: true)]
     struct Anonymous4_e__Union_
     property dwAlphaSrcConst : UInt32
     property lpDDSAlphaSrc : Void*
     def initialize(@dwAlphaSrcConst : UInt32, @lpDDSAlphaSrc : Void*)
+    end
+    end
+
+
+    # Nested Type Anonymous3_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous3_e__Union_
+    property dwAlphaDestConst : UInt32
+    property lpDDSAlphaDest : Void*
+    def initialize(@dwAlphaDestConst : UInt32, @lpDDSAlphaDest : Void*)
     end
     end
 
@@ -1344,34 +1362,12 @@ module Win32cr::Graphics::DirectDraw
     end
 
 
-    # Nested Type Anonymous5_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous5_e__Union_
-    property dwFillColor : UInt32
-    property dwFillDepth : UInt32
-    property dwFillPixel : UInt32
-    property lpDDSPattern : Void*
-    def initialize(@dwFillColor : UInt32, @dwFillDepth : UInt32, @dwFillPixel : UInt32, @lpDDSPattern : Void*)
-    end
-    end
-
-
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
     property dwZDestConst : UInt32
     property lpDDSZBufferDest : Void*
     def initialize(@dwZDestConst : UInt32, @lpDDSZBufferDest : Void*)
-    end
-    end
-
-
-    # Nested Type Anonymous3_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous3_e__Union_
-    property dwAlphaDestConst : UInt32
-    property lpDDSAlphaDest : Void*
-    def initialize(@dwAlphaDestConst : UInt32, @lpDDSAlphaDest : Void*)
     end
     end
 
@@ -1743,6 +1739,18 @@ module Win32cr::Graphics::DirectDraw
     end
 
 
+    # Nested Type Anonymous4_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous4_e__Union_
+    property dwBBitMask : UInt32
+    property dwVBitMask : UInt32
+    property dwStencilBitMask : UInt32
+    property dwBumpLuminanceBitMask : UInt32
+    def initialize(@dwBBitMask : UInt32, @dwVBitMask : UInt32, @dwStencilBitMask : UInt32, @dwBumpLuminanceBitMask : UInt32)
+    end
+    end
+
+
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
     struct Anonymous3_e__Union_
@@ -1766,6 +1774,20 @@ module Win32cr::Graphics::DirectDraw
     end
 
 
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property dwRBitMask : UInt32
+    property dwYBitMask : UInt32
+    property dwStencilBitDepth : UInt32
+    property dwLuminanceBitMask : UInt32
+    property dwBumpDuBitMask : UInt32
+    property dwOperations : UInt32
+    def initialize(@dwRBitMask : UInt32, @dwYBitMask : UInt32, @dwStencilBitDepth : UInt32, @dwLuminanceBitMask : UInt32, @dwBumpDuBitMask : UInt32, @dwOperations : UInt32)
+    end
+    end
+
+
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
@@ -1777,32 +1799,6 @@ module Win32cr::Graphics::DirectDraw
     property dwBumpBitCount : UInt32
     property dwPrivateFormatBitCount : UInt32
     def initialize(@dwRGBBitCount : UInt32, @dwYUVBitCount : UInt32, @dwZBufferBitDepth : UInt32, @dwAlphaBitDepth : UInt32, @dwLuminanceBitCount : UInt32, @dwBumpBitCount : UInt32, @dwPrivateFormatBitCount : UInt32)
-    end
-    end
-
-
-    # Nested Type Anonymous4_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous4_e__Union_
-    property dwBBitMask : UInt32
-    property dwVBitMask : UInt32
-    property dwStencilBitMask : UInt32
-    property dwBumpLuminanceBitMask : UInt32
-    def initialize(@dwBBitMask : UInt32, @dwVBitMask : UInt32, @dwStencilBitMask : UInt32, @dwBumpLuminanceBitMask : UInt32)
-    end
-    end
-
-
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property dwRBitMask : UInt32
-    property dwYBitMask : UInt32
-    property dwStencilBitDepth : UInt32
-    property dwLuminanceBitMask : UInt32
-    property dwBumpDuBitMask : UInt32
-    property dwOperations : UInt32
-    def initialize(@dwRBitMask : UInt32, @dwYBitMask : UInt32, @dwStencilBitDepth : UInt32, @dwLuminanceBitMask : UInt32, @dwBumpDuBitMask : UInt32, @dwOperations : UInt32)
     end
     end
 
@@ -1960,22 +1956,22 @@ module Win32cr::Graphics::DirectDraw
     property ddsCaps : Win32cr::Graphics::DirectDraw::DDSCAPS2
     property dwTextureStage : UInt32
 
+    # Nested Type Anonymous5_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous5_e__Union_
+    property ddpfPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
+    property dwFVF : UInt32
+    def initialize(@ddpfPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT, @dwFVF : UInt32)
+    end
+    end
+
+
     # Nested Type Anonymous4_e__Union_
     @[Extern(union: true)]
     struct Anonymous4_e__Union_
     property ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY
     property dwEmptyFaceColor : UInt32
     def initialize(@ddckCKDestOverlay : Win32cr::Graphics::DirectDraw::DDCOLORKEY, @dwEmptyFaceColor : UInt32)
-    end
-    end
-
-
-    # Nested Type Anonymous2_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous2_e__Union_
-    property dwBackBufferCount : UInt32
-    property dwDepth : UInt32
-    def initialize(@dwBackBufferCount : UInt32, @dwDepth : UInt32)
     end
     end
 
@@ -1991,22 +1987,22 @@ module Win32cr::Graphics::DirectDraw
     end
 
 
+    # Nested Type Anonymous2_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous2_e__Union_
+    property dwBackBufferCount : UInt32
+    property dwDepth : UInt32
+    def initialize(@dwBackBufferCount : UInt32, @dwDepth : UInt32)
+    end
+    end
+
+
     # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
     struct Anonymous1_e__Union_
     property lPitch : Int32
     property dwLinearSize : UInt32
     def initialize(@lPitch : Int32, @dwLinearSize : UInt32)
-    end
-    end
-
-
-    # Nested Type Anonymous5_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous5_e__Union_
-    property ddpfPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
-    property dwFVF : UInt32
-    def initialize(@ddpfPixelFormat : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT, @dwFVF : UInt32)
     end
     end
 
@@ -2042,23 +2038,11 @@ module Win32cr::Graphics::DirectDraw
     end
   end
 
-  @[Extern]
-  struct IDDVideoPortContainerVtbl
-    def initialize()
-    end
-  end
+  alias IDDVideoPortContainerVtbl = Void
 
-  @[Extern]
-  struct IDirectDrawVideoPortVtbl
-    def initialize()
-    end
-  end
+  alias IDirectDrawVideoPortVtbl = Void
 
-  @[Extern]
-  struct IDirectDrawVideoPortNotifyVtbl
-    def initialize()
-    end
-  end
+  alias IDirectDrawVideoPortNotifyVtbl = Void
 
   @[Extern]
   struct DDVIDEOPORTCONNECT
@@ -2188,18 +2172,6 @@ module Win32cr::Graphics::DirectDraw
     property linear : Linear_e__Struct_
     property rectangular : Rectangular_e__Struct_
 
-      # Nested Type Linear_e__Struct_
-      @[Extern]
-      struct Linear_e__Struct_
-    property dwStartAlignment : UInt32
-    property dwPitchAlignment : UInt32
-    property dwFlags : UInt32
-    property dwReserved2 : UInt32
-    def initialize(@dwStartAlignment : UInt32, @dwPitchAlignment : UInt32, @dwFlags : UInt32, @dwReserved2 : UInt32)
-    end
-      end
-
-
       # Nested Type Rectangular_e__Struct_
       @[Extern]
       struct Rectangular_e__Struct_
@@ -2208,6 +2180,18 @@ module Win32cr::Graphics::DirectDraw
     property dwFlags : UInt32
     property dwReserved2 : UInt32
     def initialize(@dwXAlignment : UInt32, @dwYAlignment : UInt32, @dwFlags : UInt32, @dwReserved2 : UInt32)
+    end
+      end
+
+
+      # Nested Type Linear_e__Struct_
+      @[Extern]
+      struct Linear_e__Struct_
+    property dwStartAlignment : UInt32
+    property dwPitchAlignment : UInt32
+    property dwFlags : UInt32
+    property dwReserved2 : UInt32
+    def initialize(@dwStartAlignment : UInt32, @dwPitchAlignment : UInt32, @dwFlags : UInt32, @dwReserved2 : UInt32)
     end
       end
 
@@ -2329,95 +2313,35 @@ module Win32cr::Graphics::DirectDraw
     end
   end
 
-  @[Extern]
-  struct IDirectDrawClipperVtbl
-    def initialize()
-    end
-  end
+  alias IDirectDrawClipperVtbl = Void
 
-  @[Extern]
-  struct IDirectDrawPaletteVtbl
-    def initialize()
-    end
-  end
+  alias IDirectDrawPaletteVtbl = Void
 
-  @[Extern]
-  struct IDirectDrawSurfaceVtbl
-    def initialize()
-    end
-  end
+  alias IDirectDrawSurfaceVtbl = Void
 
-  @[Extern]
-  struct IDirectDrawSurface2Vtbl
-    def initialize()
-    end
-  end
+  alias IDirectDrawSurface2Vtbl = Void
 
-  @[Extern]
-  struct IDirectDrawSurface3Vtbl
-    def initialize()
-    end
-  end
+  alias IDirectDrawSurface3Vtbl = Void
 
-  @[Extern]
-  struct IDirectDrawSurface4Vtbl
-    def initialize()
-    end
-  end
+  alias IDirectDrawSurface4Vtbl = Void
 
-  @[Extern]
-  struct IDirectDrawSurface7Vtbl
-    def initialize()
-    end
-  end
+  alias IDirectDrawSurface7Vtbl = Void
 
-  @[Extern]
-  struct IDirectDrawColorControlVtbl
-    def initialize()
-    end
-  end
+  alias IDirectDrawColorControlVtbl = Void
 
-  @[Extern]
-  struct IDirectDrawVtbl
-    def initialize()
-    end
-  end
+  alias IDirectDrawVtbl = Void
 
-  @[Extern]
-  struct IDirectDraw2Vtbl
-    def initialize()
-    end
-  end
+  alias IDirectDraw2Vtbl = Void
 
-  @[Extern]
-  struct IDirectDraw4Vtbl
-    def initialize()
-    end
-  end
+  alias IDirectDraw4Vtbl = Void
 
-  @[Extern]
-  struct IDirectDraw7Vtbl
-    def initialize()
-    end
-  end
+  alias IDirectDraw7Vtbl = Void
 
-  @[Extern]
-  struct IDirectDrawKernelVtbl
-    def initialize()
-    end
-  end
+  alias IDirectDrawKernelVtbl = Void
 
-  @[Extern]
-  struct IDirectDrawSurfaceKernelVtbl
-    def initialize()
-    end
-  end
+  alias IDirectDrawSurfaceKernelVtbl = Void
 
-  @[Extern]
-  struct IDirectDrawGammaControlVtbl
-    def initialize()
-    end
-  end
+  alias IDirectDrawGammaControlVtbl = Void
 
   @[Extern]
   struct DD32BITDRIVERDATA
@@ -2446,22 +2370,22 @@ module Win32cr::Graphics::DirectDraw
     property ddsCapsAlt : Win32cr::Graphics::DirectDraw::DDSCAPS
     property anonymous2 : Anonymous2_e__Union_
 
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property fpEnd : LibC::UIntPtrT
-    property dwWidth : UInt32
-    def initialize(@fpEnd : LibC::UIntPtrT, @dwWidth : UInt32)
-    end
-    end
-
-
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
     struct Anonymous2_e__Union_
     property lpHeap : Win32cr::Graphics::DirectDraw::VMEMHEAP*
     property dwHeight : UInt32
     def initialize(@lpHeap : Win32cr::Graphics::DirectDraw::VMEMHEAP*, @dwHeight : UInt32)
+    end
+    end
+
+
+    # Nested Type Anonymous1_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous1_e__Union_
+    property fpEnd : LibC::UIntPtrT
+    property dwWidth : UInt32
+    def initialize(@fpEnd : LibC::UIntPtrT, @dwWidth : UInt32)
     end
     end
 
@@ -2853,23 +2777,22 @@ module Win32cr::Graphics::DirectDraw
     property dwReserved1 : LibC::UIntPtrT
     property ddpfSurface : Win32cr::Graphics::DirectDraw::DDPIXELFORMAT
 
+    # Nested Type Anonymous4_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous4_e__Union_
+    property lPitch : Int32
+    property dwLinearSize : UInt32
+    def initialize(@lPitch : Int32, @dwLinearSize : UInt32)
+    end
+    end
+
+
     # Nested Type Anonymous3_e__Union_
     @[Extern(union: true)]
     struct Anonymous3_e__Union_
     property lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*
     property lpDDHandle : Void*
     def initialize(@lpDD : Win32cr::Graphics::DirectDraw::DDRAWI_DIRECTDRAW_GBL*, @lpDDHandle : Void*)
-    end
-    end
-
-
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property lpRectList : Win32cr::Graphics::DirectDraw::ACCESSRECTLIST*
-    property dwBlockSizeY : UInt32
-    property lSlicePitch : Int32
-    def initialize(@lpRectList : Win32cr::Graphics::DirectDraw::ACCESSRECTLIST*, @dwBlockSizeY : UInt32, @lSlicePitch : Int32)
     end
     end
 
@@ -2884,12 +2807,13 @@ module Win32cr::Graphics::DirectDraw
     end
 
 
-    # Nested Type Anonymous4_e__Union_
+    # Nested Type Anonymous1_e__Union_
     @[Extern(union: true)]
-    struct Anonymous4_e__Union_
-    property lPitch : Int32
-    property dwLinearSize : UInt32
-    def initialize(@lPitch : Int32, @dwLinearSize : UInt32)
+    struct Anonymous1_e__Union_
+    property lpRectList : Win32cr::Graphics::DirectDraw::ACCESSRECTLIST*
+    property dwBlockSizeY : UInt32
+    property lSlicePitch : Int32
+    def initialize(@lpRectList : Win32cr::Graphics::DirectDraw::ACCESSRECTLIST*, @dwBlockSizeY : UInt32, @lSlicePitch : Int32)
     end
     end
 
@@ -4121,23 +4045,11 @@ module Win32cr::Graphics::DirectDraw
     end
   end
 
-  @[Extern]
-  struct DD_DESTROYDRIVERDATA_
-    def initialize()
-    end
-  end
+  alias DD_DESTROYDRIVERDATA_ = Void
 
-  @[Extern]
-  struct DD_SETMODEDATA_
-    def initialize()
-    end
-  end
+  alias DD_SETMODEDATA_ = Void
 
-  @[Extern]
-  struct DD_GETVPORTAUTOFLIPSURFACEDATA_
-    def initialize()
-    end
-  end
+  alias DD_GETVPORTAUTOFLIPSURFACEDATA_ = Void
 
   @[Extern]
   struct VIDEOMEMORY
@@ -4148,22 +4060,22 @@ module Win32cr::Graphics::DirectDraw
     property ddsCapsAlt : Win32cr::Graphics::DirectDraw::DDSCAPS
     property anonymous2 : Anonymous2_e__Union_
 
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property fpEnd : LibC::UIntPtrT
-    property dwWidth : UInt32
-    def initialize(@fpEnd : LibC::UIntPtrT, @dwWidth : UInt32)
-    end
-    end
-
-
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
     struct Anonymous2_e__Union_
     property lpHeap : Win32cr::Graphics::DirectDraw::VMEMHEAP*
     property dwHeight : UInt32
     def initialize(@lpHeap : Win32cr::Graphics::DirectDraw::VMEMHEAP*, @dwHeight : UInt32)
+    end
+    end
+
+
+    # Nested Type Anonymous1_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous1_e__Union_
+    property fpEnd : LibC::UIntPtrT
+    property dwWidth : UInt32
+    def initialize(@fpEnd : LibC::UIntPtrT, @dwWidth : UInt32)
     end
     end
 
@@ -4412,16 +4324,6 @@ module Win32cr::Graphics::DirectDraw
     end
 
 
-    # Nested Type Anonymous1_e__Union_
-    @[Extern(union: true)]
-    struct Anonymous1_e__Union_
-    property dwBlockSizeY : UInt32
-    property lSlicePitch : Int32
-    def initialize(@dwBlockSizeY : UInt32, @lSlicePitch : Int32)
-    end
-    end
-
-
     # Nested Type Anonymous2_e__Union_
     @[Extern(union: true)]
     struct Anonymous2_e__Union_
@@ -4429,6 +4331,16 @@ module Win32cr::Graphics::DirectDraw
     property dwBlockSizeX : UInt32
     property dwUserMemSize : UInt32
     def initialize(@lpVidMemHeap : Win32cr::Graphics::DirectDraw::VIDEOMEMORY*, @dwBlockSizeX : UInt32, @dwUserMemSize : UInt32)
+    end
+    end
+
+
+    # Nested Type Anonymous1_e__Union_
+    @[Extern(union: true)]
+    struct Anonymous1_e__Union_
+    property dwBlockSizeY : UInt32
+    property lSlicePitch : Int32
+    def initialize(@dwBlockSizeY : UInt32, @lSlicePitch : Int32)
     end
     end
 
@@ -5447,11 +5359,7 @@ module Win32cr::Graphics::DirectDraw
     property byte_offset : UInt32
 
     # Nested Type EPROCESS_
-    @[Extern]
-    struct EPROCESS_
-    def initialize()
-    end
-    end
+    alias EPROCESS_ = Void
 
     def initialize(@mdl_next : Win32cr::Graphics::DirectDraw::MDL*, @mdl_size : Int16, @mdl_flags : Int16, @process : EPROCESS_*, @lpMappedSystemVa : UInt32*, @lpStartVa : UInt32*, @byte_count : UInt32, @byte_offset : UInt32)
     end
@@ -5684,7 +5592,7 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawVtbl,
+  record IDirectDrawVtable,
     query_interface : Proc(IDirectDraw*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDraw*, UInt32),
     release : Proc(IDirectDraw*, UInt32),
@@ -5711,7 +5619,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDraw, lpVtbl : IDirectDrawVtbl* do
+  record IDirectDraw, lpVtbl : IDirectDrawVtable* do
     GUID = LibC::GUID.new(0x6c14db80_u32, 0xa733_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectDraw*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5786,7 +5694,7 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDraw2Vtbl,
+  record IDirectDraw2Vtable,
     query_interface : Proc(IDirectDraw2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDraw2*, UInt32),
     release : Proc(IDirectDraw2*, UInt32),
@@ -5814,7 +5722,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDraw2, lpVtbl : IDirectDraw2Vtbl* do
+  record IDirectDraw2, lpVtbl : IDirectDraw2Vtable* do
     GUID = LibC::GUID.new(0xb3a6f3e0_u32, 0x2b43_u16, 0x11cf_u16, StaticArray[0xa2_u8, 0xde_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb9_u8, 0x33_u8, 0x56_u8])
     def query_interface(this : IDirectDraw2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -5892,7 +5800,7 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDraw4Vtbl,
+  record IDirectDraw4Vtable,
     query_interface : Proc(IDirectDraw4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDraw4*, UInt32),
     release : Proc(IDirectDraw4*, UInt32),
@@ -5924,7 +5832,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDraw4, lpVtbl : IDirectDraw4Vtbl* do
+  record IDirectDraw4, lpVtbl : IDirectDraw4Vtable* do
     GUID = LibC::GUID.new(0x9c59509a_u32, 0x39bd_u16, 0x11d1_u16, StaticArray[0x8c_u8, 0x4a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xd9_u8, 0x30_u8, 0xc5_u8])
     def query_interface(this : IDirectDraw4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6014,7 +5922,7 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDraw7Vtbl,
+  record IDirectDraw7Vtable,
     query_interface : Proc(IDirectDraw7*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDraw7*, UInt32),
     release : Proc(IDirectDraw7*, UInt32),
@@ -6048,7 +5956,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDraw7, lpVtbl : IDirectDraw7Vtbl* do
+  record IDirectDraw7, lpVtbl : IDirectDraw7Vtable* do
     GUID = LibC::GUID.new(0x15e65ec0_u32, 0x3b9c_u16, 0x11d2_u16, StaticArray[0xb9_u8, 0x2f_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x97_u8, 0xea_u8, 0x5b_u8])
     def query_interface(this : IDirectDraw7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6144,7 +6052,7 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawPaletteVtbl,
+  record IDirectDrawPaletteVtable,
     query_interface : Proc(IDirectDrawPalette*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawPalette*, UInt32),
     release : Proc(IDirectDrawPalette*, UInt32),
@@ -6155,7 +6063,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawPalette, lpVtbl : IDirectDrawPaletteVtbl* do
+  record IDirectDrawPalette, lpVtbl : IDirectDrawPaletteVtable* do
     GUID = LibC::GUID.new(0x6c14db84_u32, 0xa733_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectDrawPalette*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6182,7 +6090,7 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawClipperVtbl,
+  record IDirectDrawClipperVtable,
     query_interface : Proc(IDirectDrawClipper*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawClipper*, UInt32),
     release : Proc(IDirectDrawClipper*, UInt32),
@@ -6195,7 +6103,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawClipper, lpVtbl : IDirectDrawClipperVtbl* do
+  record IDirectDrawClipper, lpVtbl : IDirectDrawClipperVtable* do
     GUID = LibC::GUID.new(0x6c14db85_u32, 0xa733_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectDrawClipper*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6228,7 +6136,7 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawSurfaceVtbl,
+  record IDirectDrawSurfaceVtable,
     query_interface : Proc(IDirectDrawSurface*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawSurface*, UInt32),
     release : Proc(IDirectDrawSurface*, UInt32),
@@ -6268,7 +6176,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawSurface, lpVtbl : IDirectDrawSurfaceVtbl* do
+  record IDirectDrawSurface, lpVtbl : IDirectDrawSurfaceVtable* do
     GUID = LibC::GUID.new(0x6c14db81_u32, 0xa733_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDirectDrawSurface*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6382,7 +6290,7 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawSurface2Vtbl,
+  record IDirectDrawSurface2Vtable,
     query_interface : Proc(IDirectDrawSurface2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawSurface2*, UInt32),
     release : Proc(IDirectDrawSurface2*, UInt32),
@@ -6425,7 +6333,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawSurface2, lpVtbl : IDirectDrawSurface2Vtbl* do
+  record IDirectDrawSurface2, lpVtbl : IDirectDrawSurface2Vtable* do
     GUID = LibC::GUID.new(0x57805885_u32, 0x6eec_u16, 0x11cf_u16, StaticArray[0x94_u8, 0x41_u8, 0xa8_u8, 0x23_u8, 0x3_u8, 0xc1_u8, 0xe_u8, 0x27_u8])
     def query_interface(this : IDirectDrawSurface2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6548,7 +6456,7 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawSurface3Vtbl,
+  record IDirectDrawSurface3Vtable,
     query_interface : Proc(IDirectDrawSurface3*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawSurface3*, UInt32),
     release : Proc(IDirectDrawSurface3*, UInt32),
@@ -6592,7 +6500,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawSurface3, lpVtbl : IDirectDrawSurface3Vtbl* do
+  record IDirectDrawSurface3, lpVtbl : IDirectDrawSurface3Vtable* do
     GUID = LibC::GUID.new(0xda044e00_u32, 0x69b2_u16, 0x11d0_u16, StaticArray[0xa1_u8, 0xd5_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb8_u8, 0xdf_u8, 0xbb_u8])
     def query_interface(this : IDirectDrawSurface3*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6718,7 +6626,7 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawSurface4Vtbl,
+  record IDirectDrawSurface4Vtable,
     query_interface : Proc(IDirectDrawSurface4*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawSurface4*, UInt32),
     release : Proc(IDirectDrawSurface4*, UInt32),
@@ -6767,7 +6675,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawSurface4, lpVtbl : IDirectDrawSurface4Vtbl* do
+  record IDirectDrawSurface4, lpVtbl : IDirectDrawSurface4Vtable* do
     GUID = LibC::GUID.new(0xb2b8630_u32, 0xad35_u16, 0x11d0_u16, StaticArray[0x8e_u8, 0xa6_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x97_u8, 0xea_u8, 0x5b_u8])
     def query_interface(this : IDirectDrawSurface4*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -6908,7 +6816,7 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawSurface7Vtbl,
+  record IDirectDrawSurface7Vtable,
     query_interface : Proc(IDirectDrawSurface7*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawSurface7*, UInt32),
     release : Proc(IDirectDrawSurface7*, UInt32),
@@ -6961,7 +6869,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawSurface7, lpVtbl : IDirectDrawSurface7Vtbl* do
+  record IDirectDrawSurface7, lpVtbl : IDirectDrawSurface7Vtable* do
     GUID = LibC::GUID.new(0x6675a80_u32, 0x3b9b_u16, 0x11d2_u16, StaticArray[0xb9_u8, 0x2f_u8, 0x0_u8, 0x60_u8, 0x97_u8, 0x97_u8, 0xea_u8, 0x5b_u8])
     def query_interface(this : IDirectDrawSurface7*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7114,7 +7022,7 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawColorControlVtbl,
+  record IDirectDrawColorControlVtable,
     query_interface : Proc(IDirectDrawColorControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawColorControl*, UInt32),
     release : Proc(IDirectDrawColorControl*, UInt32),
@@ -7123,7 +7031,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawColorControl, lpVtbl : IDirectDrawColorControlVtbl* do
+  record IDirectDrawColorControl, lpVtbl : IDirectDrawColorControlVtable* do
     GUID = LibC::GUID.new(0x4b9f0ee0_u32, 0xd7e_u16, 0x11d0_u16, StaticArray[0x9b_u8, 0x6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xa3_u8, 0xb8_u8])
     def query_interface(this : IDirectDrawColorControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7144,7 +7052,7 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawGammaControlVtbl,
+  record IDirectDrawGammaControlVtable,
     query_interface : Proc(IDirectDrawGammaControl*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawGammaControl*, UInt32),
     release : Proc(IDirectDrawGammaControl*, UInt32),
@@ -7153,7 +7061,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawGammaControl, lpVtbl : IDirectDrawGammaControlVtbl* do
+  record IDirectDrawGammaControl, lpVtbl : IDirectDrawGammaControlVtable* do
     GUID = LibC::GUID.new(0x69c11c3e_u32, 0xb46b_u16, 0x11d1_u16, StaticArray[0xad_u8, 0x7a_u8, 0x0_u8, 0xc0_u8, 0x4f_u8, 0xc2_u8, 0x9b_u8, 0x4e_u8])
     def query_interface(this : IDirectDrawGammaControl*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7174,7 +7082,7 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDDVideoPortContainerVtbl,
+  record IDDVideoPortContainerVtable,
     query_interface : Proc(IDDVideoPortContainer*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDDVideoPortContainer*, UInt32),
     release : Proc(IDDVideoPortContainer*, UInt32),
@@ -7185,7 +7093,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDDVideoPortContainer, lpVtbl : IDDVideoPortContainerVtbl* do
+  record IDDVideoPortContainer, lpVtbl : IDDVideoPortContainerVtable* do
     GUID = LibC::GUID.new(0x6c142760_u32, 0xa733_u16, 0x11ce_u16, StaticArray[0xa5_u8, 0x21_u8, 0x0_u8, 0x20_u8, 0xaf_u8, 0xb_u8, 0xe5_u8, 0x60_u8])
     def query_interface(this : IDDVideoPortContainer*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7212,7 +7120,7 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawVideoPortVtbl,
+  record IDirectDrawVideoPortVtable,
     query_interface : Proc(IDirectDrawVideoPort*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawVideoPort*, UInt32),
     release : Proc(IDirectDrawVideoPort*, UInt32),
@@ -7233,7 +7141,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawVideoPort, lpVtbl : IDirectDrawVideoPortVtbl* do
+  record IDirectDrawVideoPort, lpVtbl : IDirectDrawVideoPortVtable* do
     GUID = LibC::GUID.new(0xb36d93e0_u32, 0x2b43_u16, 0x11cf_u16, StaticArray[0xa2_u8, 0xde_u8, 0x0_u8, 0xaa_u8, 0x0_u8, 0xb9_u8, 0x33_u8, 0x56_u8])
     def query_interface(this : IDirectDrawVideoPort*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7290,7 +7198,7 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawVideoPortNotifyVtbl,
+  record IDirectDrawVideoPortNotifyVtable,
     query_interface : Proc(IDirectDrawVideoPortNotify*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawVideoPortNotify*, UInt32),
     release : Proc(IDirectDrawVideoPortNotify*, UInt32),
@@ -7299,7 +7207,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawVideoPortNotify, lpVtbl : IDirectDrawVideoPortNotifyVtbl* do
+  record IDirectDrawVideoPortNotify, lpVtbl : IDirectDrawVideoPortNotifyVtable* do
     GUID = LibC::GUID.new(0xa655fb94_u32, 0x589_u16, 0x4e57_u16, StaticArray[0xb3_u8, 0x33_u8, 0x56_u8, 0x7a_u8, 0x89_u8, 0x46_u8, 0x8c_u8, 0x88_u8])
     def query_interface(this : IDirectDrawVideoPortNotify*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7320,7 +7228,7 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawKernelVtbl,
+  record IDirectDrawKernelVtable,
     query_interface : Proc(IDirectDrawKernel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawKernel*, UInt32),
     release : Proc(IDirectDrawKernel*, UInt32),
@@ -7330,7 +7238,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawKernel, lpVtbl : IDirectDrawKernelVtbl* do
+  record IDirectDrawKernel, lpVtbl : IDirectDrawKernelVtable* do
     GUID = LibC::GUID.new(0x8d56c120_u32, 0x6a08_u16, 0x11d0_u16, StaticArray[0x9b_u8, 0x6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xa3_u8, 0xb8_u8])
     def query_interface(this : IDirectDrawKernel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7354,7 +7262,7 @@ module Win32cr::Graphics::DirectDraw
   end
 
   @[Extern]
-  record IDirectDrawSurfaceKernelVtbl,
+  record IDirectDrawSurfaceKernelVtable,
     query_interface : Proc(IDirectDrawSurfaceKernel*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDirectDrawSurfaceKernel*, UInt32),
     release : Proc(IDirectDrawSurfaceKernel*, UInt32),
@@ -7363,7 +7271,7 @@ module Win32cr::Graphics::DirectDraw
 
 
   @[Extern]
-  record IDirectDrawSurfaceKernel, lpVtbl : IDirectDrawSurfaceKernelVtbl* do
+  record IDirectDrawSurfaceKernel, lpVtbl : IDirectDrawSurfaceKernelVtable* do
     GUID = LibC::GUID.new(0x60755da0_u32, 0x6a40_u16, 0x11d0_u16, StaticArray[0x9b_u8, 0x6_u8, 0x0_u8, 0xa0_u8, 0xc9_u8, 0x3_u8, 0xa3_u8, 0xb8_u8])
     def query_interface(this : IDirectDrawSurfaceKernel*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -7384,34 +7292,49 @@ module Win32cr::Graphics::DirectDraw
   end
 
   def directDrawEnumerateW(lpCallback : Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKW, lpContext : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectDrawEnumerateW(lpCallback, lpContext)
+    {% end %}
   end
 
   def directDrawEnumerateA(lpCallback : Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKA, lpContext : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectDrawEnumerateA(lpCallback, lpContext)
+    {% end %}
   end
 
   def directDrawEnumerateExW(lpCallback : Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKEXW, lpContext : Void*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectDrawEnumerateExW(lpCallback, lpContext, dwFlags)
+    {% end %}
   end
 
   def directDrawEnumerateExA(lpCallback : Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKEXA, lpContext : Void*, dwFlags : UInt32) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectDrawEnumerateExA(lpCallback, lpContext, dwFlags)
+    {% end %}
   end
 
   def directDrawCreate(lpGUID : LibC::GUID*, lplpDD : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectDrawCreate(lpGUID, lplpDD, pUnkOuter)
+    {% end %}
   end
 
   def directDrawCreateEx(lpGuid : LibC::GUID*, lplpDD : Void**, iid : LibC::GUID*, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectDrawCreateEx(lpGuid, lplpDD, iid, pUnkOuter)
+    {% end %}
   end
 
   def directDrawCreateClipper(dwFlags : UInt32, lplpDDClipper : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.DirectDrawCreateClipper(dwFlags, lplpDDClipper, pUnkOuter)
+    {% end %}
   end
 
-  @[Link("ddraw")]
+  @[Link("ddraw.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun DirectDrawEnumerateW(lpCallback : Win32cr::Graphics::DirectDraw::LPDDENUMCALLBACKW, lpContext : Void*) : Win32cr::Foundation::HRESULT
@@ -7435,4 +7358,5 @@ module Win32cr::Graphics::DirectDraw
     fun DirectDrawCreateClipper(dwFlags : UInt32, lplpDDClipper : Void**, pUnkOuter : Void*) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

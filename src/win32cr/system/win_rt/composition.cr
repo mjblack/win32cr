@@ -8,7 +8,7 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  record ICompositionDrawingSurfaceInteropVtbl,
+  record ICompositionDrawingSurfaceInteropVtable,
     query_interface : Proc(ICompositionDrawingSurfaceInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICompositionDrawingSurfaceInterop*, UInt32),
     release : Proc(ICompositionDrawingSurfaceInterop*, UInt32),
@@ -21,7 +21,7 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  record ICompositionDrawingSurfaceInterop, lpVtbl : ICompositionDrawingSurfaceInteropVtbl* do
+  record ICompositionDrawingSurfaceInterop, lpVtbl : ICompositionDrawingSurfaceInteropVtable* do
     GUID = LibC::GUID.new(0xfd04e6e3_u32, 0xfe0c_u16, 0x4c3c_u16, StaticArray[0xab_u8, 0x19_u8, 0xa0_u8, 0x76_u8, 0x1_u8, 0xa5_u8, 0x76_u8, 0xee_u8])
     def query_interface(this : ICompositionDrawingSurfaceInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -54,7 +54,7 @@ module Win32cr::System::WinRT::Composition
   end
 
   @[Extern]
-  record ICompositionDrawingSurfaceInterop2Vtbl,
+  record ICompositionDrawingSurfaceInterop2Vtable,
     query_interface : Proc(ICompositionDrawingSurfaceInterop2*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICompositionDrawingSurfaceInterop2*, UInt32),
     release : Proc(ICompositionDrawingSurfaceInterop2*, UInt32),
@@ -68,7 +68,7 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  record ICompositionDrawingSurfaceInterop2, lpVtbl : ICompositionDrawingSurfaceInterop2Vtbl* do
+  record ICompositionDrawingSurfaceInterop2, lpVtbl : ICompositionDrawingSurfaceInterop2Vtable* do
     GUID = LibC::GUID.new(0x41e64aae_u32, 0x98c0_u16, 0x4239_u16, StaticArray[0x8e_u8, 0x95_u8, 0xa3_u8, 0x30_u8, 0xdd_u8, 0x6a_u8, 0xa1_u8, 0x8b_u8])
     def query_interface(this : ICompositionDrawingSurfaceInterop2*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -104,7 +104,7 @@ module Win32cr::System::WinRT::Composition
   end
 
   @[Extern]
-  record ICompositionGraphicsDeviceInteropVtbl,
+  record ICompositionGraphicsDeviceInteropVtable,
     query_interface : Proc(ICompositionGraphicsDeviceInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICompositionGraphicsDeviceInterop*, UInt32),
     release : Proc(ICompositionGraphicsDeviceInterop*, UInt32),
@@ -113,7 +113,7 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  record ICompositionGraphicsDeviceInterop, lpVtbl : ICompositionGraphicsDeviceInteropVtbl* do
+  record ICompositionGraphicsDeviceInterop, lpVtbl : ICompositionGraphicsDeviceInteropVtable* do
     GUID = LibC::GUID.new(0xa116ff71_u32, 0xf8bf_u16, 0x4c8a_u16, StaticArray[0x9c_u8, 0x98_u8, 0x70_u8, 0x77_u8, 0x9a_u8, 0x32_u8, 0xa9_u8, 0xc8_u8])
     def query_interface(this : ICompositionGraphicsDeviceInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -134,7 +134,7 @@ module Win32cr::System::WinRT::Composition
   end
 
   @[Extern]
-  record ICompositorInteropVtbl,
+  record ICompositorInteropVtable,
     query_interface : Proc(ICompositorInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICompositorInterop*, UInt32),
     release : Proc(ICompositorInterop*, UInt32),
@@ -144,7 +144,7 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  record ICompositorInterop, lpVtbl : ICompositorInteropVtbl* do
+  record ICompositorInterop, lpVtbl : ICompositorInteropVtable* do
     GUID = LibC::GUID.new(0x25297d5c_u32, 0x3ad4_u16, 0x4c9c_u16, StaticArray[0xb5_u8, 0xcf_u8, 0xe3_u8, 0x6a_u8, 0x38_u8, 0x51_u8, 0x23_u8, 0x30_u8])
     def query_interface(this : ICompositorInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -168,7 +168,7 @@ module Win32cr::System::WinRT::Composition
   end
 
   @[Extern]
-  record ISwapChainInteropVtbl,
+  record ISwapChainInteropVtable,
     query_interface : Proc(ISwapChainInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ISwapChainInterop*, UInt32),
     release : Proc(ISwapChainInterop*, UInt32),
@@ -176,7 +176,7 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  record ISwapChainInterop, lpVtbl : ISwapChainInteropVtbl* do
+  record ISwapChainInterop, lpVtbl : ISwapChainInteropVtable* do
     GUID = LibC::GUID.new(0x26f496a0_u32, 0x7f38_u16, 0x45fb_u16, StaticArray[0x88_u8, 0xf7_u8, 0xfa_u8, 0xaa_u8, 0xbe_u8, 0x67_u8, 0xdd_u8, 0x59_u8])
     def query_interface(this : ISwapChainInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -194,7 +194,7 @@ module Win32cr::System::WinRT::Composition
   end
 
   @[Extern]
-  record IVisualInteractionSourceInteropVtbl,
+  record IVisualInteractionSourceInteropVtable,
     query_interface : Proc(IVisualInteractionSourceInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IVisualInteractionSourceInterop*, UInt32),
     release : Proc(IVisualInteractionSourceInterop*, UInt32),
@@ -202,7 +202,7 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  record IVisualInteractionSourceInterop, lpVtbl : IVisualInteractionSourceInteropVtbl* do
+  record IVisualInteractionSourceInterop, lpVtbl : IVisualInteractionSourceInteropVtable* do
     GUID = LibC::GUID.new(0x11f62cd1_u32, 0x2f9d_u16, 0x42d3_u16, StaticArray[0xb0_u8, 0x5f_u8, 0xd6_u8, 0x79_u8, 0xd_u8, 0x9e_u8, 0x9f_u8, 0x8e_u8])
     def query_interface(this : IVisualInteractionSourceInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -220,7 +220,7 @@ module Win32cr::System::WinRT::Composition
   end
 
   @[Extern]
-  record ICompositionCapabilitiesInteropFactoryVtbl,
+  record ICompositionCapabilitiesInteropFactoryVtable,
     query_interface : Proc(ICompositionCapabilitiesInteropFactory*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICompositionCapabilitiesInteropFactory*, UInt32),
     release : Proc(ICompositionCapabilitiesInteropFactory*, UInt32),
@@ -231,7 +231,7 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  record ICompositionCapabilitiesInteropFactory, lpVtbl : ICompositionCapabilitiesInteropFactoryVtbl* do
+  record ICompositionCapabilitiesInteropFactory, lpVtbl : ICompositionCapabilitiesInteropFactoryVtable* do
     GUID = LibC::GUID.new(0x2c9db356_u32, 0xe70d_u16, 0x4642_u16, StaticArray[0x82_u8, 0x98_u8, 0xbc_u8, 0x4a_u8, 0xa5_u8, 0xb4_u8, 0x86_u8, 0x5c_u8])
     def query_interface(this : ICompositionCapabilitiesInteropFactory*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -258,7 +258,7 @@ module Win32cr::System::WinRT::Composition
   end
 
   @[Extern]
-  record ICompositorDesktopInteropVtbl,
+  record ICompositorDesktopInteropVtable,
     query_interface : Proc(ICompositorDesktopInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(ICompositorDesktopInterop*, UInt32),
     release : Proc(ICompositorDesktopInterop*, UInt32),
@@ -267,7 +267,7 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  record ICompositorDesktopInterop, lpVtbl : ICompositorDesktopInteropVtbl* do
+  record ICompositorDesktopInterop, lpVtbl : ICompositorDesktopInteropVtable* do
     GUID = LibC::GUID.new(0x29e691fa_u32, 0x4567_u16, 0x4dca_u16, StaticArray[0xb3_u8, 0x19_u8, 0xd0_u8, 0xf2_u8, 0x7_u8, 0xeb_u8, 0x68_u8, 0x7_u8])
     def query_interface(this : ICompositorDesktopInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -288,7 +288,7 @@ module Win32cr::System::WinRT::Composition
   end
 
   @[Extern]
-  record IDesktopWindowTargetInteropVtbl,
+  record IDesktopWindowTargetInteropVtable,
     query_interface : Proc(IDesktopWindowTargetInterop*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IDesktopWindowTargetInterop*, UInt32),
     release : Proc(IDesktopWindowTargetInterop*, UInt32),
@@ -296,7 +296,7 @@ module Win32cr::System::WinRT::Composition
 
 
   @[Extern]
-  record IDesktopWindowTargetInterop, lpVtbl : IDesktopWindowTargetInteropVtbl* do
+  record IDesktopWindowTargetInterop, lpVtbl : IDesktopWindowTargetInteropVtable* do
     GUID = LibC::GUID.new(0x35dbf59e_u32, 0xe3f9_u16, 0x45b0_u16, StaticArray[0x81_u8, 0xe7_u8, 0xfe_u8, 0x75_u8, 0xf4_u8, 0x14_u8, 0x5d_u8, 0xc9_u8])
     def query_interface(this : IDesktopWindowTargetInterop*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)

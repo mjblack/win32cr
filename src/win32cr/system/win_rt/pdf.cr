@@ -22,7 +22,7 @@ module Win32cr::System::WinRT::Pdf
   end
 
   @[Extern]
-  record IPdfRendererNativeVtbl,
+  record IPdfRendererNativeVtable,
     query_interface : Proc(IPdfRendererNative*, LibC::GUID*, Void**, Win32cr::Foundation::HRESULT),
     add_ref : Proc(IPdfRendererNative*, UInt32),
     release : Proc(IPdfRendererNative*, UInt32),
@@ -31,7 +31,7 @@ module Win32cr::System::WinRT::Pdf
 
 
   @[Extern]
-  record IPdfRendererNative, lpVtbl : IPdfRendererNativeVtbl* do
+  record IPdfRendererNative, lpVtbl : IPdfRendererNativeVtable* do
     GUID = LibC::GUID.new(0x7d9dcd91_u32, 0xd277_u16, 0x4947_u16, StaticArray[0x85_u8, 0x27_u8, 0x7_u8, 0xa0_u8, 0xda_u8, 0xed_u8, 0xa9_u8, 0x4a_u8])
     def query_interface(this : IPdfRendererNative*, riid : LibC::GUID*, ppvObject : Void**) : Win32cr::Foundation::HRESULT
       @lpVtbl.try &.value.query_interface.call(this, riid, ppvObject)
@@ -52,13 +52,17 @@ module Win32cr::System::WinRT::Pdf
   end
 
   def pdfCreateRenderer(pDevice : Void*, ppRenderer : Void**) : Win32cr::Foundation::HRESULT
+    {% if !flag?(:docs) %}
     C.PdfCreateRenderer(pDevice, ppRenderer)
+    {% end %}
   end
 
-  @[Link("windows.data.pdf")]
+  @[Link("windows.data.pdf.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun PdfCreateRenderer(pDevice : Void*, ppRenderer : Void**) : Win32cr::Foundation::HRESULT
 
   end
+  {% end %}
 end

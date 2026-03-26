@@ -193,6 +193,17 @@ module Win32cr::Storage::Cabinets
       end
 
 
+      # Nested Type Folder_e__struct_
+      @[Extern]
+      struct Folder_e__struct_
+    property pFolderReserve : Void*
+    property cbFolderReserve : UInt16
+    property iFolder : UInt16
+    def initialize(@pFolderReserve : Void*, @cbFolderReserve : UInt16, @iFolder : UInt16)
+    end
+      end
+
+
       # Nested Type Cabinet_e__struct_
       @[Extern]
       struct Cabinet_e__struct_
@@ -201,17 +212,6 @@ module Win32cr::Storage::Cabinets
     property setID : UInt16
     property iCabinet : Int32
     def initialize(@pHeaderReserve : Void*, @cbHeaderReserve : UInt16, @setID : UInt16, @iCabinet : Int32)
-    end
-      end
-
-
-      # Nested Type Folder_e__struct_
-      @[Extern]
-      struct Folder_e__struct_
-    property pFolderReserve : Void*
-    property cbFolderReserve : UInt16
-    property iFolder : UInt16
-    def initialize(@pFolderReserve : Void*, @cbFolderReserve : UInt16, @iFolder : UInt16)
     end
       end
 
@@ -263,46 +263,67 @@ module Win32cr::Storage::Cabinets
   {% end %}
 
   def fCICreate(perf : Win32cr::Storage::Cabinets::ERF*, pfnfcifp : Win32cr::Storage::Cabinets::PFNFCIFILEPLACED, pfna : Win32cr::Storage::Cabinets::PFNFCIALLOC, pfnf : Win32cr::Storage::Cabinets::PFNFCIFREE, pfnopen : Win32cr::Storage::Cabinets::PFNFCIOPEN, pfnread : Win32cr::Storage::Cabinets::PFNFCIREAD, pfnwrite : Win32cr::Storage::Cabinets::PFNFCIWRITE, pfnclose : Win32cr::Storage::Cabinets::PFNFCICLOSE, pfnseek : Win32cr::Storage::Cabinets::PFNFCISEEK, pfndelete : Win32cr::Storage::Cabinets::PFNFCIDELETE, pfnfcigtf : Win32cr::Storage::Cabinets::PFNFCIGETTEMPFILE, pccab : Win32cr::Storage::Cabinets::CCAB*, pv : Void*) : Void*
+    {% if !flag?(:docs) %}
     C.FCICreate(perf, pfnfcifp, pfna, pfnf, pfnopen, pfnread, pfnwrite, pfnclose, pfnseek, pfndelete, pfnfcigtf, pccab, pv)
+    {% end %}
   end
 
   def fCIAddFile(hfci : Void*, pszSourceFile : Win32cr::Foundation::PSTR, pszFileName : Win32cr::Foundation::PSTR, fExecute : Win32cr::Foundation::BOOL, pfnfcignc : Win32cr::Storage::Cabinets::PFNFCIGETNEXTCABINET, pfnfcis : Win32cr::Storage::Cabinets::PFNFCISTATUS, pfnfcigoi : Win32cr::Storage::Cabinets::PFNFCIGETOPENINFO, typeCompress : UInt16) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FCIAddFile(hfci, pszSourceFile, pszFileName, fExecute, pfnfcignc, pfnfcis, pfnfcigoi, typeCompress)
+    {% end %}
   end
 
   def fCIFlushCabinet(hfci : Void*, fGetNextCab : Win32cr::Foundation::BOOL, pfnfcignc : Win32cr::Storage::Cabinets::PFNFCIGETNEXTCABINET, pfnfcis : Win32cr::Storage::Cabinets::PFNFCISTATUS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FCIFlushCabinet(hfci, fGetNextCab, pfnfcignc, pfnfcis)
+    {% end %}
   end
 
   def fCIFlushFolder(hfci : Void*, pfnfcignc : Win32cr::Storage::Cabinets::PFNFCIGETNEXTCABINET, pfnfcis : Win32cr::Storage::Cabinets::PFNFCISTATUS) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FCIFlushFolder(hfci, pfnfcignc, pfnfcis)
+    {% end %}
   end
 
   def fCIDestroy(hfci : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FCIDestroy(hfci)
+    {% end %}
   end
 
   def fDICreate(pfnalloc : Win32cr::Storage::Cabinets::PFNALLOC, pfnfree : Win32cr::Storage::Cabinets::PFNFREE, pfnopen : Win32cr::Storage::Cabinets::PFNOPEN, pfnread : Win32cr::Storage::Cabinets::PFNREAD, pfnwrite : Win32cr::Storage::Cabinets::PFNWRITE, pfnclose : Win32cr::Storage::Cabinets::PFNCLOSE, pfnseek : Win32cr::Storage::Cabinets::PFNSEEK, cpuType : Win32cr::Storage::Cabinets::FDICREATE_CPU_TYPE, perf : Win32cr::Storage::Cabinets::ERF*) : Void*
+    {% if !flag?(:docs) %}
     C.FDICreate(pfnalloc, pfnfree, pfnopen, pfnread, pfnwrite, pfnclose, pfnseek, cpuType, perf)
+    {% end %}
   end
 
   def fDIIsCabinet(hfdi : Void*, hf : LibC::IntPtrT, pfdici : Win32cr::Storage::Cabinets::FDICABINETINFO*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FDIIsCabinet(hfdi, hf, pfdici)
+    {% end %}
   end
 
   def fDICopy(hfdi : Void*, pszCabinet : Win32cr::Foundation::PSTR, pszCabPath : Win32cr::Foundation::PSTR, flags : Int32, pfnfdin : Win32cr::Storage::Cabinets::PFNFDINOTIFY, pfnfdid : Win32cr::Storage::Cabinets::PFNFDIDECRYPT, pvUser : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FDICopy(hfdi, pszCabinet, pszCabPath, flags, pfnfdin, pfnfdid, pvUser)
+    {% end %}
   end
 
   def fDIDestroy(hfdi : Void*) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FDIDestroy(hfdi)
+    {% end %}
   end
 
   def fDITruncateCabinet(hfdi : Void*, pszCabinetName : Win32cr::Foundation::PSTR, iFolderToDelete : UInt16) : Win32cr::Foundation::BOOL
+    {% if !flag?(:docs) %}
     C.FDITruncateCabinet(hfdi, pszCabinetName, iFolderToDelete)
+    {% end %}
   end
 
-  @[Link("cabinet")]
+  @[Link("cabinet.dll")]
+  {% if !flag?(:docs) %}
   lib C
     # :nodoc:
     fun FCICreate(perf : Win32cr::Storage::Cabinets::ERF*, pfnfcifp : Win32cr::Storage::Cabinets::PFNFCIFILEPLACED, pfna : Win32cr::Storage::Cabinets::PFNFCIALLOC, pfnf : Win32cr::Storage::Cabinets::PFNFCIFREE, pfnopen : Win32cr::Storage::Cabinets::PFNFCIOPEN, pfnread : Win32cr::Storage::Cabinets::PFNFCIREAD, pfnwrite : Win32cr::Storage::Cabinets::PFNFCIWRITE, pfnclose : Win32cr::Storage::Cabinets::PFNFCICLOSE, pfnseek : Win32cr::Storage::Cabinets::PFNFCISEEK, pfndelete : Win32cr::Storage::Cabinets::PFNFCIDELETE, pfnfcigtf : Win32cr::Storage::Cabinets::PFNFCIGETTEMPFILE, pccab : Win32cr::Storage::Cabinets::CCAB*, pv : Void*) : Void*
@@ -335,4 +356,5 @@ module Win32cr::Storage::Cabinets
     fun FDITruncateCabinet(hfdi : Void*, pszCabinetName : Win32cr::Foundation::PSTR, iFolderToDelete : UInt16) : Win32cr::Foundation::BOOL
 
   end
+  {% end %}
 end
