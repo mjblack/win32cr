@@ -1,55 +1,49 @@
-$WINMD_PARAMS = ""
+# Regenerates src/win32cr from Windows.Win32.winmd.
+#
+# 1. Builds winmd.exe from the installed winmd shard (lib/winmd) if needed.
+# 2. Fetches the Windows.Win32.winmd version pinned by that shard
+#    (lib/winmd/winmd.version) into winmd/.
+# 3. Runs `winmd generate --source-format winmd` with the override files in
+#    this directory (data_type_aliases.json, dll_exceptions.json,
+#    fun_exceptions.json, overrides.json).
+#
+# Environment:
+#   WINMD_CACHE=1   reuse an already fetched winmd\Windows.Win32.winmd
+#   WINMD_DEBUG=1   pass --debug to winmd generate
+$ErrorActionPreference = "Stop"
+$winmdFile = Join-Path $PWD "winmd\Windows.Win32.winmd"
 
-function DownloadJSON {
-    mkdir json
-    git clone -v --depth 1 https://github.com/marlersoft/win32json .\json\win32json
-}
-
-function CleanUpJSON {
-    Remove-Item -Path json -Force -Recurse
-}
-
-function PrepJSON {
-    if ($env:JSON_CACHE) {
-        if (!(Test-Path -Path .\json\win32json)) { DownloadJSON }
-    } else {
-        if (Test-Path -Path .\json\win32json) { CleanUpJSON }
-        DownloadJSON
-    }
-}
 function PrepSrcDir {
     if (Test-Path -Path .\src\win32cr.cr) { Remove-Item -Path src/win32cr.cr }
     if (Test-Path -Path .\src\win32cr) { Remove-Item -Path src/win32cr -Force -Recurse }
 }
 
-function CleanUp {
-    if (!($env:JSON_CACHE)) {
-        CleanUpJSON
-    }
-}
-
-function Run {
-    if ($env:WINMD_DEBUG) {
-        $WINMD_PARAMS = $WINMD_PARAMS + "-d"
-    }
-
-    if ($env:WINMD_TRACE) {
-        $WINMD_PARAMS = $WINMD_PARAMS + " -t"
-    }
-    mkdir src/win32cr
-    Start-Process -Wait -NoNewWindow -FilePath .\bin\winmd.exe -ArgumentList "generate","${WINMD_PARAMS}","json\\win32json\\api","."
-}
-
 function BuildWinMD {
-
     if (!(Test-Path .\bin\winmd.exe)) {
         & .\scripts\build_winmd.ps1
     }
 }
 
+function FetchWinMD {
+    if ($env:WINMD_CACHE -and (Test-Path $winmdFile)) {
+        Write-Host "Using cached $winmdFile"
+        return
+    }
+    if (!(Test-Path .\lib\winmd\scripts\fetch-winmd.ps1)) {
+        throw "winmd shard not installed; run 'shards install' first"
+    }
+    & .\lib\winmd\scripts\fetch-winmd.ps1 -OutputPath $winmdFile
+}
+
+function Run {
+    $params = @("generate", "--source-format", "winmd", "--associated-enums")
+    if ($env:WINMD_DEBUG) { $params += "--debug" }
+    $params += @($winmdFile, ".")
+    & .\bin\winmd.exe @params
+    if ($LASTEXITCODE -ne 0) { throw "winmd generate failed" }
+}
 
 PrepSrcDir
-PrepJSON
 BuildWinMD
+FetchWinMD
 Run
-CleanUp
